@@ -1,0 +1,2 @@
+# content-source is in .gitignore but should be accessible to Cursor
+!/content-source/
