@@ -13,7 +13,8 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 | **06–08** | Voz y copy | Guía de voz, diccionario de términos, UI copy sheet. El copy depende de identidad; la navegación los usa después. |
 | **09** | Experiencia del visitante | User journey. Cómo se recorre el sitio y cómo la persona llega a la práctica. |
 | **10–11** | Navegación y URLs | Arquitectura de información/navegación y árbol de URLs. Dependen de pantallas, copy y recorridos. |
-| **12–15** | Implementación técnica | Theme, assets, inventario de contenido, orden de implementación. Convierten la arquitectura en código. |
+| **12–14** | Implementación técnica | Theme, assets, inventario de contenido, orden de implementación. Convierten la arquitectura en código. |
+| **15** | Criterios contemporáneos | Tendencias UX/UI aplicadas al sistema. Filtro estratégico para validación de diseño e implementación. |
 
 ---
 
@@ -27,17 +28,18 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 
 1. `02-identidad-corporativa`
 2. `03-wordpress-content-model`
-4. `04-mapa-pantallas`
-5. `05-arquitectura-informacion-navegacion`
-6. `06-guia-voz-microcopy-ux`
-7. `07-voice-dictionary`
-8. `08-ui-copy-sheet`
-9. `09-user-journey`
-10. `10-arbol-urls-final`
-11. `11-theme-file-structure`
-12. `12-assets-strategy`
-13. `13-content-source-inventario`
-14. `14-orden-implementacion`
+3. `04-mapa-pantallas`
+4. `05-arquitectura-informacion-navegacion`
+5. `06-guia-voz-microcopy-ux`
+6. `07-voice-dictionary`
+7. `08-ui-copy-sheet`
+8. `09-user-journey`
+9. `10-arbol-urls-final`
+10. `11-theme-file-structure`
+11. `12-assets-strategy`
+12. `13-content-source-inventario`
+13. `14-orden-implementacion`
+14. `15-tendencias-ux-ui-sistema-editorial`
 
 ---
 

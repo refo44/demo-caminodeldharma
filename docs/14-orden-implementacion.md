@@ -9,6 +9,7 @@ Secuencia acordada para llevar el sitio a la web. **No saltar etapas.**
 1. **Completar identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf` → actualizar `02-identidad-corporativa.md`
 2. **Wireframes (opcional):** Bocetos de pantallas según `04-mapa-pantallas`
 3. **Validar documentación:** Revisar que todos los docs estén alineados
+4. **Consultar tendencias UX/UI:** `15-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
 
 ---
 
@@ -20,6 +21,7 @@ Secuencia acordada para llevar el sitio a la web. **No saltar etapas.**
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
 2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `08-ui-copy-sheet`, `02-identidad-corporativa`
 3. Assets desde `content-source/` copiados a `public/assets/`
+4. **Validar contra checklist** de `15-tendencias-ux-ui-sistema-editorial` (sección 8) antes de dar por cerrada la fase
 
 ---
 
