@@ -145,4 +145,14 @@ Si un enlace no empuja hacia:
 
 ---
 
-**Versión:** 1.0
+## Cierre y aplicación
+
+Este documento es la **guía estructural definitiva** de navegación y arquitectura de información del sitio. Se aplica tal como está definido, sin reinterpretaciones.
+
+**Tres capas del sistema:** modelo de contenido (03) → mapa de pantallas (04) → red de enlaces vivos (este documento). Quedan coherentes entre sí.
+
+**Siguiente paso en WordPress:** crear el menú con los ítems definidos; implementar lógica condicional para mostrar/ocultar Eventos según existencia de evento vigente; asignar en cada plantilla los enlaces primarios y secundarios indicados en las secciones 3–8.
+
+---
+
+**Versión:** 1.1
