@@ -1,6 +1,9 @@
 # Camino del Dharma — Orden de implementación
 
-Secuencia acordada para llevar el sitio a la web. **No saltar etapas.**
+**Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
+**Versión 1.1**
+
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `08-ui-copy-sheet`, `10-arbol-urls-final`, `11-theme-file-structure`, `12-assets-strategy`, `13-content-source-inventario`, `15-tendencias-ux-ui-sistema-editorial`
 
 ---
 
@@ -20,15 +23,15 @@ Secuencia acordada para llevar el sitio a la web. **No saltar etapas.**
    - CSS3 (tokens de identidad, roles semánticos)
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
 2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `08-ui-copy-sheet`, `02-identidad-corporativa`
-3. Assets desde `content-source/` copiados a `public/assets/`
-4. **Validar contra checklist** de `15-tendencias-ux-ui-sistema-editorial` (sección 8) antes de dar por cerrada la fase
+3. Assets desde `content-source/` copiados a `public/assets/` (regla en `12-assets-strategy`, inventario en `13-content-source-inventario`)
+4. **Validar contra checklist** de `15-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 
 ---
 
 ## Fase 3: WordPress
 
-1. **Convertir** la maqueta en theme de WordPress
-2. Ajustar a `03-wordpress-content-model` y `10-arbol-urls-final`
+1. **Convertir** la maqueta en theme de WordPress según `11-theme-file-structure` (plantillas, parts, URL → plantilla)
+2. Ajustar a `03-wordpress-content-model` y `10-arbol-urls-final`; assets dentro del theme según `12-assets-strategy`
 3. Implementar CPT `event` si se requieren eventos dinámicos
 4. **Subir** al servidor y configurar contenido/hosting
 
@@ -63,4 +66,10 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 
 ---
 
-**Versión:** 1.0
+## Cierre
+
+Este documento define el **orden oficial de implementación**: documentación y diseño → maqueta estática validada → theme WordPress. No escribir código de theme ni desplegar hasta que la maqueta esté validada. Prioridad de páginas y checklist pre-lanzamiento están alineados con mapa de pantallas (04), arquitectura (05) y contenido (03).
+
+---
+
+**Versión:** 1.1

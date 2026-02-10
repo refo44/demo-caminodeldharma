@@ -1,8 +1,11 @@
 # Camino del Dharma — Inventario de contenido fuente
 
-Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.
+**Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.**  
+**Versión 1.1**
 
-**Importante:** `content-source/` **solo existe en local** (no se despliega). Para la maqueta estática y el sitio final, copiar el material necesario en `public/assets/` o dentro del theme.
+**Referenciado por:** `12-assets-strategy` (estrategia de uso y migración de assets)
+
+**Importante:** `content-source/` **solo existe en local** (no se despliega). Para la maqueta estática y el sitio final, copiar el material necesario en `public/assets/` o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en `public/` para evitar pérdida de calidad y sobrescrituras accidentales.
 
 ---
 
@@ -10,7 +13,8 @@ Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.
 
 | Carpeta / Archivo | Contenido |
 |-------------------|-----------|
-| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx` | Contenido principal de la web |
+| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx` | Contenido principal de la web (canónico) |
+| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.md` | Versión markdown del Contenido_Web (derivada, no canónica) |
 | `Pagina web Camino del Dharma/Lluvia de ideas para la página web de la comunidad.docx` | Ideas adicionales (eventos, accesibilidad, donaciones, etc.) |
 | `Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf` | Manual de marca (paleta, tipografía, logos) |
 | `Pagina web Camino del Dharma/Link videos subidos en Youtube.docx` | URLs de videos en YouTube |
@@ -18,9 +22,11 @@ Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.
 
 ---
 
-## 2. FOTOS PAGINA WEB — Mapeo por pestaña
+## 2. FOTOS PAGINA WEB — Mapeo por sección
 
-| Pestaña | Contenido | Uso en el sitio |
+Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su uso por sección del sitio (04, 05).
+
+| Pestaña (carpeta) | Contenido | Uso en el sitio |
 |---------|-----------|-----------------|
 | **Raíz** | logo 1.png | Logo, favicon |
 | **Pestaña 1** | DSC01580.JPG, estatua-buda-montanas-flores-loto…, Kuan-Yin. 4.jpg, e8e40a6a… | Inicio, hero, ambiente |
@@ -71,4 +77,10 @@ Revisar la página de Paramitas como referencia de estructura y navegación si e
 
 ---
 
-**Versión:** 1.0
+## Cierre
+
+Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio y con la estrategia de assets (12). No se despliega; los assets se copian al theme o a `public/assets/` según 12.
+
+---
+
+**Versión:** 1.1

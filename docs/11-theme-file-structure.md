@@ -1,7 +1,7 @@
 # Camino del Dharma — Theme File Structure
 
 **Estructura de archivos del theme WordPress**  
-**Versión 1.0**
+**Versión 1.1**
 
 Define la arquitectura de archivos del theme: qué plantillas existen y qué partes se reutilizan.
 
@@ -86,7 +86,8 @@ theme-camino-del-dharma/
 | `/comunidad/` | `page-comunidad.php` |
 | `/linaje/` | `page-linaje.php` |
 | `/practica/` | `page-practica.php` |
-| `/eventos/` | `page-eventos.php` |
+| `/eventos/` | `page-eventos.php` o `archive-event.php` |
+| `/eventos/{slug}/` | `single-event.php` (si CPT event) |
 | `/contacto/` | `page-contacto.php` |
 | Cualquier otra | `404.php` |
 
@@ -100,4 +101,10 @@ theme-camino-del-dharma/
 
 ---
 
-**Versión:** 1.0
+## Cierre
+
+Este documento define la **estructura oficial de archivos del theme**: plantillas, partes reutilizables y mapeo URL → plantilla. Está alineado con el árbol de URLs (10), mapa de pantallas (04), modelo de contenido (03) y arquitectura de navegación (05).
+
+---
+
+**Versión:** 1.1

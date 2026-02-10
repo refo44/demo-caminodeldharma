@@ -123,4 +123,10 @@ Un recorrido es correcto si:
 
 ---
 
-**Versión del documento:** 1.0
+## Cierre
+
+Este documento es la **guía de validación de recorridos** del sitio. Está alineado con mapa de pantallas, modelo de contenido, arquitectura de navegación, guía de voz y diccionario léxico. No define diseño ni copy; valida que cada persona pueda moverse sin perderse, con la práctica como centro.
+
+---
+
+**Versión del documento:** 1.1

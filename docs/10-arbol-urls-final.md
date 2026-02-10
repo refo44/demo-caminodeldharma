@@ -74,4 +74,10 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 
 ---
 
-**Versión:** 1.0
+## Cierre
+
+Este documento es la **geografía oficial de rutas** del sitio. Si una URL no está aquí, no existe. Está alineado con mapa de pantallas, modelo de contenido y arquitectura de navegación. Puede considerarse estable como referencia técnica para la estructura de URLs en WordPress.
+
+---
+
+**Versión:** 1.1
