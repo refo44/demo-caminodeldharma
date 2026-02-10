@@ -1,6 +1,6 @@
 # Camino del Dharma — WordPress Content Model
 
-**Versión 1.0**
+**Versión 2.0**
 
 Modelo de contenido para la web de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas.
 
@@ -143,8 +143,6 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 ## 8. Principio rector
 
 Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el primer contacto con la práctica buddhista**. No hay capas de marketing ni funnels. Solo acogida y claridad.
-
----
 
 ---
 
