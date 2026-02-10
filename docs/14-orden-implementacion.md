@@ -10,7 +10,7 @@
 ## Fase 1: Documentación y diseño
 
 1. **Completar identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf` → actualizar `02-identidad-corporativa.md`
-2. **Wireframes (opcional):** Bocetos de pantallas según `04-mapa-pantallas`
+2. **Wireframes (opcional):** Bocetos de pantallas según `04-mapa-pantallas` — en papel, Figma o directamente en HTML
 3. **Validar documentación:** Revisar que todos los docs estén alineados
 4. **Consultar tendencias UX/UI:** `15-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
 
@@ -33,7 +33,7 @@
 1. **Convertir** la maqueta en theme de WordPress según `11-theme-file-structure` (plantillas, parts, URL → plantilla)
 2. Ajustar a `03-wordpress-content-model` y `10-arbol-urls-final`; assets dentro del theme según `12-assets-strategy`
 3. Implementar CPT `event` si se requieren eventos dinámicos
-4. **Subir** al servidor y configurar contenido/hosting
+4. **Subir** al servidor: staging (opcional) y producción; configurar contenido y hosting
 
 ---
 

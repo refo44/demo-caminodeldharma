@@ -1,6 +1,9 @@
 # Camino del Dharma — Tendencias UX/UI aplicadas al sistema editorial
 
-Este documento define qué tendencias contemporáneas fortalecen el sitio de la Comunidad Buddhista Camino del Dharma y cuáles deben evitarse para proteger la calma, la claridad y la acogida.
+**Qué tendencias adoptar y cuáles evitar para proteger calma, claridad y acogida.**  
+**Versión 1.1**
+
+Este documento actúa como **filtro** (no como driver): refuerza lectura, accesibilidad y performance; evita personalización, ruido visual y comportamiento invasivo. Referencia obligatoria para validar la maqueta estática (véase `14-orden-implementacion`, Fase 2).
 
 **Sobre artículos tipo "tendencias 2026":**  
 Suelen mezclar tendencias reales (tokens, performance, accesibilidad) y empuje comercial. Para Camino del Dharma conviene quedarse con lo **estructural** y filtrar todo lo que compite con la orientación y la práctica.
@@ -23,13 +26,13 @@ El diseño contemporáneo se mueve en dos direcciones:
 
 Camino del Dharma pertenece deliberadamente al segundo grupo.
 
-La prioridad es: **calma, claridad, coherencia** (Contenido_Web), **tipografía legible**, **espacios amplios**, **ritmo visual pausado**, performance.
+La prioridad es: **calma, claridad, coherencia** (Contenido_Web), **tipografía legible**, **espacios amplios**, **ritmo visual pausado**, performance y **coherencia visual a largo plazo**.
 
 ---
 
 ## 2. Filosofía de diseño: minimalismo como estructura, no como estética
 
-Para Camino del Dharma el minimalismo no es estilo ni moda: es una **disciplina de edición visual** para proteger el contenido y la experiencia. El sitio no necesita *verse* minimalista; necesita **comportarse como un espacio de acogida**: estructura limpia, navegación simple, tipografía dominante, mucho aire, cero espectáculo. Sensación objetivo: calma, orientación, sala de práctica (no producto digital).
+Para Camino del Dharma el minimalismo no es estilo ni moda: es una **disciplina de edición visual** para proteger el contenido y la experiencia. El sitio no necesita *verse* minimalista; necesita **comportarse como un espacio de acogida**: estructura limpia, navegación simple, tipografía dominante, mucho aire, cero espectáculo. El ritmo visual es parte del espacio contemplativo. Sensación objetivo: calma, orientación, sala de práctica (no producto digital).
 
 ---
 
@@ -53,8 +56,8 @@ Todo lo demás es ruido.
 | Página | Objetivo |
 |--------|----------|
 | Inicio | Orientar al visitante |
-| Comunidad | Contextualizar quiénes somos |
-| Linaje | Explicar la tradición |
+| La comunidad | Contextualizar quiénes somos |
+| El linaje | Explicar la tradición |
 | Práctica | Acercar a la meditación y actividades |
 | Contacto | Facilitar el primer contacto |
 
@@ -222,5 +225,11 @@ El diseño no exige más efectos. Exige más intención.
 
 ---
 
-**Versión:** 1.0  
-**Referencias:** `02-identidad-corporativa`, `05-arquitectura-informacion-navegacion`, `14-orden-implementacion`, content-source (Contenido_Web, Lluvia de ideas)
+## Cierre
+
+Este documento es el **filtro oficial de tendencias UX/UI** del proyecto: adopta lo que mejora lectura, claridad, accesibilidad y performance; evita lo que compite con la orientación y la calma. Está alineado con identidad (02), mapa de pantallas (04), arquitectura de navegación (05), theme (11) y orden de implementación (14). El checklist §8 se usa en Fase 2 de 14 antes de pasar a WordPress.
+
+---
+
+**Versión:** 1.1  
+**Referencias:** `02-identidad-corporativa`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `11-theme-file-structure`, `14-orden-implementacion`, content-source (Contenido_Web, Lluvia de ideas)
