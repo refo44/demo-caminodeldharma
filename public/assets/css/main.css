@@ -100,6 +100,25 @@ body {
   line-height: var(--line-height-body);
   color: var(--text);
   background-color: var(--bg);
+  position: relative;
+}
+
+/* Logo as subtle background texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../images/logo.png");
+  background-repeat: repeat;
+  background-size: 140px auto;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 img {
@@ -469,13 +488,13 @@ a:focus-visible {
 }
 
 .hero .btn-primary {
-  background-color: var(--text-on-dark);
-  color: var(--brand-1);
+  background-color: var(--brand-1);
+  color: #ffffff;
 }
 
 .hero .btn-primary:hover {
-  background-color: var(--brand-3);
-  color: var(--brand-1);
+  background-color: var(--brand-2);
+  color: #ffffff;
 }
 
 /* --- Buttons --- */
