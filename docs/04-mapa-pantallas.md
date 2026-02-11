@@ -22,7 +22,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Página | Condición |
 |--------|------------|
-| Eventos especiales | **Visible solo cuando hay evento vigente** |
+| Eventos especiales | La ruta `/eventos/` **existe siempre**. Si no hay eventos vigentes → mensaje amable; si hay eventos → listado. El ítem en menú se muestra u oculta según haya evento vigente. |
 
 ---
 
@@ -38,20 +38,16 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Estado | Descripción |
 |--------|-------------|
-| Sin eventos vigentes | La página de Eventos oculta o muestra mensaje amable |
-| Sin resultados | Búsqueda o filtros (si aplica) |
+| Sin eventos vigentes | En `/eventos/`: mensaje amable (la página existe; el contenido varía) |
 | 404 | Página no existe |
 
 ---
 
-## Footer (en todas las páginas)
+## Elementos globales (componentes, no pantallas)
 
-- Comunidad Buddhista Camino del Dharma
-- Personería Jurídica Especial – Ministerio del Interior de Colombia
-- Contacto | Redes sociales
-- Pausa Profunda (proyecto vinculado)
-- Información de donaciones
-- WhatsApp, correo
+**Header:** logo + navegación (menú principal). Presente en todas las páginas.
+
+**Footer:** presente en todas las páginas. Contenido: Comunidad Buddhista Camino del Dharma, Personería Jurídica Especial – Ministerio del Interior de Colombia, Contacto | Redes sociales, Pausa Profunda (proyecto vinculado), información de donaciones, WhatsApp, correo.
 
 ---
 
@@ -59,13 +55,13 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Páginas principales (estáticas):** 1. Inicio · 2. La comunidad · 3. El linaje · 4. Práctica y actividades · 5. Contacto
 
-**Página condicional:** 6. Eventos especiales — solo se muestra cuando existe al menos un evento vigente.
+**Página condicional:** 6. Eventos especiales — la ruta `/eventos/` existe siempre; contenido: listado si hay eventos vigentes, mensaje amable si no.
 
 **Vistas de contenido:** 7. Evento individual — solo si se habilita vista detalle por evento.
 
-**Estados:** Sin eventos vigentes (la página de Eventos oculta o mensaje amable) · Sin resultados (búsqueda/filtros si se agregan) · 404
+**Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
-**Elemento global:** Footer en todas las páginas (identidad, contacto, redes, donaciones, WhatsApp, Pausa Profunda).
+**Elementos globales (componentes):** Header (logo + navegación), Footer (identidad, contacto, redes, donaciones, WhatsApp, Pausa Profunda). No son pantallas; se repiten en todas las vistas.
 
 ---
 
@@ -81,7 +77,20 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Eventos especiales | `archive-event.php` o `page-eventos.php` (condicional) |
 | Evento individual | `single-event.php` (si se activa) |
 | 404 | `404.php` |
-| Footer global | `parts/footer.php` o `footer.php` |
+| Header global | `parts/header.php` (incluye navigation) |
+| Footer global | `parts/footer.php` |
+
+---
+
+## Lo que el sitio NO tiene
+
+- No blog
+- No buscador
+- No área privada
+- No registro de usuarios
+- No sistema de cursos
+
+Ayuda a acotar el alcance y evitar scope creep.
 
 ---
 
@@ -89,10 +98,8 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 La única lógica dinámica del sitio:
 
-- **Si existe al menos un evento con estado vigente** → se muestra la página Eventos especiales (y el ítem en menú).
-- **Si no existe** → se oculta del menú o se reemplaza por un mensaje neutro en la ruta de eventos.
-
-Todo lo demás es contenido estable. No hay jerarquías profundas ni flujos de marketing.
+- **Ruta `/eventos/`:** existe siempre. Si hay al menos un evento vigente → listado (y ítem en menú). Si no hay → mensaje amable en la misma ruta (ítem en menú oculto o neutro).
+- Todo lo demás es contenido estable. No hay jerarquías profundas ni flujos de marketing.
 
 ---
 

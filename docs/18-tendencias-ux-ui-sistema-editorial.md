@@ -80,6 +80,8 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 
 **Contenido_Web:** "Diseño sobrio, con amplios espacios en blanco, tipografías legibles y un ritmo visual pausado."
 
+**Responsive (criterio UX, no norma técnica):** Priorizar lectura en móvil; evitar layouts complejos en pantallas pequeñas; evitar sobrecarga visual. Este doc actúa como filtro para validar decisiones. El sistema de layout y breakpoints se define en `20-layout-principles` y su implementación en `14-css-architecture`.
+
 ### 2.4 Anti-patrones
 
 | Riesgo | Regla para este proyecto |

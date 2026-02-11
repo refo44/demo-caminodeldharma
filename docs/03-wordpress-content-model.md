@@ -72,6 +72,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 - Formulario: Nombre, Correo, Mensaje
 - Botón: Enviar
+- El formulario debe incluir protección anti-spam básica (captcha o plugin simple).
 
 ---
 
@@ -89,11 +90,15 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | event_status | select | vigente / finalizado / cancelado |
 | event_signup_payment | boolean o url | Indica si hay pago/contribución; el pago siempre es externo (redirección vía event_signup_url) |
 
+**Prioridad a campos nativos:** Se prioriza usar campos nativos de WordPress cuando sea posible: **Title** → nombre del evento, **Content** → descripción, **Featured image** → imagen principal. Los campos custom (`event_date`, `event_place`, `event_modality`, `event_status`, `event_signup_url`, etc.) complementan lo que el core no ofrece.
+
 **Sin pagos internos:** El sitio no procesa pagos, no tiene checkout ni lógica financiera. Si un evento requiere inscripción económica, se usa `event_signup_url` para redirigir a la plataforma externa correspondiente.
 
 **Regla de visibilidad:** Solo eventos con `event_status = vigente` aparecen en la sección Eventos del sitio y en la ruta `/eventos/` (template Eventos). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
 **Definición de «vigente»:** `event_status` es la fuente de verdad (manual). Opcionalmente, si `event_date` es anterior a hoy, el sistema puede sugerir marcar como «finalizado» para evitar eventos antiguos visibles por error.
+
+**Eventos finalizados:** Pueden mantenerse accesibles vía `single-event.php` para memoria histórica, pero no aparecen en listados principales (archive, sección Eventos del sitio).
 
 **Cronograma de eventos (Lluvia de ideas):** Listado/archive en `/eventos/`. Por defecto: **listado cronológico con agrupación por mes**. Vista de calendario solo si hay masa crítica de eventos en el tiempo.
 
@@ -101,7 +106,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 ## 3.1. Sangha (Custom Post Type, si se implementa)
 
-CPT opcional según crecimiento de la comunidad; no forzar implementación desde el inicio.
+CPT opcional según crecimiento de la comunidad. **No implementar en fase inicial salvo necesidad real;** evita scope creep.
 
 Campos mínimos recomendados:
 
@@ -181,6 +186,8 @@ Sin reemplazar lo definido en `19-accesibilidad-estandares`, este modelo exige d
 - **Imágenes:** Siempre rellenar texto alternativo (`alt`). Si la imagen es decorativa, usar `alt=""`.
 - **Videos informativos:** Si el video transmite información (conferencias, enseñanzas, indicaciones), debe disponer de subtítulos o transcripción.
 
+**Estructura editorial (SEO mínimo):** Cada página debe tener un H1 único y jerarquía H2/H3 clara. No saltar niveles (p. ej. H1 → H3).
+
 Detalle y criterios ampliados en `19-accesibilidad-estandares`.
 
 ---
@@ -211,7 +218,7 @@ Otras ideas (estilo sobrio, paleta, accesibilidad, animación camino, Paramitas,
 
 ## Cierre
 
-Este documento define el **modelo de contenido oficial** del sitio: post types (nativos y custom), campos por página, eventos condicionales, testimonios (bloque o CPT), sangha (esquema mínimo si se implementa), videos (embed), integraciones externas y requisitos mínimos de accesibilidad del contenido. Está alineado con el plan (01), mapa de pantallas (04), árbol de URLs (10) y estructura del theme (11). Las rutas oficiales están en 10; las plantillas en 11.
+Este documento define el **modelo de contenido oficial** del sitio: post types (nativos y custom), campos por página, eventos condicionales, testimonios (bloque o CPT), sangha (esquema mínimo si se implementa), videos (embed), integraciones externas y requisitos mínimos de accesibilidad del contenido. Está alineado con el plan (01), mapa de pantallas (04), árbol de URLs (11) y estructura del theme (12). Las rutas oficiales están en 11; las plantillas en 12.
 
 ---
 

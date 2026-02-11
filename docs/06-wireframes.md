@@ -4,7 +4,9 @@
 
 Define la arquitectura visible de cada pantalla: bloques en orden vertical, jerarquía y función editorial. No define diseño visual ni componentes concretos; eso queda en 12 (theme) y 14 (CSS).
 
-**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `02-identidad-corporativa`, `09-ui-copy-sheet`, `18-tendencias-ux-ui-sistema-editorial`. **Contenido canónico:** estructura y orden de bloques alineados con `content-source/.../Contenido_Web_Camino_del_Dharma` (Páginas 1–6 y Footer).
+Los bloques definidos aquí se organizan dentro de un **grid editorial flexible** descrito en `20-layout-principles` (Principios de layout). En los wireframes se indica dónde hay 2 columnas, texto + imagen o ancho completo; la implementación del grid es responsabilidad de 14 (CSS). El grid no redefine el orden de bloques; solo organiza su disposición cuando se presentan en columnas.
+
+**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `02-identidad-corporativa`, `09-ui-copy-sheet`, `18-tendencias-ux-ui-sistema-editorial`, `20-layout-principles` (grid). **Contenido canónico:** estructura y orden de bloques alineados con `content-source/.../Contenido_Web_Camino_del_Dharma` (Páginas 1–6 y Footer).
 
 **Regla (18):** El objetivo de cada página debe ser evidente. Experiencia contemplativa: ritmo pausado, cero animaciones decorativas en área de lectura.
 
@@ -19,8 +21,8 @@ Bloques en orden vertical:
 - **Cabecera** (logo, menú 4–6 ítems)
 - **Hero** (mensaje de acogida, CTA “Practica con nosotros”; posible imagen)
 - **Comunidad** (breve: quiénes somos, enlace a La comunidad; según Contenido_Web “Un poco de nuestra comunidad”)
-- **Linaje breve** (micro-bloque opcional: “Nuestro linaje”, 2 líneas, enlace a /linaje/; refuerza la raíz espiritual)
 - **Cómo practicamos** (Estudio consciente, Práctica vivencial, Vida cotidiana; según Contenido_Web)
+- **Linaje breve** (micro-bloque opcional según espacio editorial: “Nuestro linaje”, 2 líneas, enlace a /linaje/; refuerza la raíz espiritual)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
 - **Caminos de participación** (Iniciarse, Profundizar, Practicar en comunidad; según Contenido_Web)
 - **Eventos** (si hay evento vigente: próximo evento + enlace a Eventos; si no: no mostrar bloque o mensaje amable)
@@ -140,6 +142,8 @@ Bloques:
 
 ## Reglas transversales
 
+- **Progresión:** La lectura de cada página debe llevar naturalmente hacia la práctica o el contacto. Refuerza la intención del sistema.
+- **Bloques estructurales:** Cabecera y Pie (presentes en todas las pantallas; enmarcan la vista). **Bloques editoriales:** el resto (Hero, Comunidad, contenido por página); su orden define la jerarquía de lectura.
 - **Pie:** presente en todas las pantallas (identidad, Personería, Contacto | redes, Pausa Profunda, redes sociales, contacto directo WhatsApp/correo, sostener la comunidad/donaciones; según Contenido_Web “Footer en todas las páginas”). Definido en 04.
 - **Cabecera:** consistente; menú alineado con 05 (4–6 ítems, Eventos condicional).
 - **Sin:** carruseles innecesarios, “lo más visto”, bloques de marketing. Experiencia sobria y orientada (01, 18).

@@ -22,7 +22,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | La comunidad | `/comunidad/` |
 | El linaje | `/linaje/` |
 | Práctica y actividades | `/practica/` |
-| Eventos especiales | `/eventos/` *(visible solo si hay evento vigente)* |
+| Eventos especiales | `/eventos/` *(la ruta existe siempre; contenido: listado o mensaje amable; ítem en menú condicional)* |
 | Contacto | `/contacto/` |
 
 ---
@@ -62,8 +62,8 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 
 | Estado | Dónde ocurre |
 |--------|--------------|
-| Sin eventos vigentes | En /eventos/ se muestra mensaje amable; el ítem Eventos en el menú puede ocultarse. |
-| 404 | Cualquier URL fuera del árbol |
+| Sin eventos vigentes | En `/eventos/` se muestra mensaje amable; el ítem Eventos en el menú puede ocultarse. |
+| 404 | Cualquier URL fuera del árbol. No existe ruta pública `/404/`; WordPress sirve la plantilla `404.php` para rutas no definidas aquí. Referencia interna de diseño: estado 404, no URL del árbol. |
 
 ---
 
@@ -85,7 +85,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 
 ## Cierre
 
-Este documento es la **geografía oficial de rutas** del sitio. Si una URL no está aquí, no existe. Alineado con 03 (modelo de contenido), 04 (mapa de pantallas), 05 (navegación) y 11 (plantillas). Referencia técnica estable para la estructura de URLs en WordPress.
+Este documento es la **geografía oficial de rutas** del sitio. Si una URL no está aquí, no existe. Alineado con 03 (modelo de contenido), 04 (mapa de pantallas), 05 (navegación) y 12 (plantillas). Referencia técnica estable para la estructura de URLs en WordPress.
 
 ---
 

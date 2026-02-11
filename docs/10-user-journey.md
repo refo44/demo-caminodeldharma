@@ -112,9 +112,9 @@ Ninguna página es un callejón sin salida.
 
 ## 8. Regla de validación (Lluvia de ideas)
 
-> "Animación con un camino indicando las opciones que tiene la comunidad: formación budista y otra de únicamente meditación. Un llevar de la mano a las personas externas."
+La idea de la Lluvia de ideas —"llevar de la mano" a la persona hacia formación o meditación— se interpreta como **orientación clara**, no como animación visual. El proyecto evita animaciones decorativas (06, 18); la “mano” es la estructura del sitio: menú, bloques y CTAs que guían sin perderse.
 
-Un recorrido es correcto si:
+**Un recorrido es correcto si:**
 
 1. La persona puede entender la comunidad en menos de tres clics.
 2. Siempre hay un "siguiente" o un "volver".
