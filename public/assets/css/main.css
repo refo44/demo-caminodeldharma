@@ -1,0 +1,718 @@
+/*
+  Camino del Dharma — Main stylesheet
+  Single entry point. Order: variables → base → layout → components → pages → utilities → states
+  Refs: 02-identidad-corporativa, 14-css-architecture, 19-accesibilidad-estandares, 20-layout-principles
+*/
+
+/* ==========================================================================
+   1. Variables ( :root )
+   ========================================================================== */
+:root {
+  /* Brand (manual de marca — 4 colors only) */
+  --brand-1: #8c2b3d;
+  --brand-2: #b27474;
+  --brand-3: #d1aeab;
+  --brand-4: #3e424b;
+
+  /* Semantic roles — fondos principales: brand-1/2/3; texto: brand-4 o blanco sobre fondo oscuro */
+  --bg: #ffffff;
+  --text: var(--brand-4);
+  --text-muted: var(--brand-2);
+  --surface: var(--brand-3);
+  --border: var(--brand-3);
+  --link: var(--brand-1);
+  --link-hover: var(--brand-2);
+  --primary: var(--brand-1);
+  --primary-hover: var(--brand-2);
+  --header-bg: var(--brand-1);
+  --footer-bg: var(--brand-2);
+  --text-on-dark: #ffffff;
+
+  /* Typography */
+  --font-display: "MarloweEscapade", serif;
+  --font-heading: "Downtown DEMO Regular", "MarloweEscapade", serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Grid & rhythm */
+  --container-max: 70rem;
+  --read-max: 65ch;
+  --gutter: 1.5rem;
+  --section-gap: 3rem;
+  --grid-gap: 1.5rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --line-height-body: 1.6;
+  --line-height-tight: 1.35;
+
+  /* Breakpoints (for reference; use in media queries) */
+  /* Mobile: default. Tablet: 768px. Desktop: 1024px. Large: 1280px */
+}
+
+/* ==========================================================================
+   2. Base / reset mínimo
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--line-height-body);
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   3. Layout
+   ========================================================================== */
+.layout-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.read-width {
+  max-width: var(--read-max);
+}
+
+.page-main {
+  padding-block: var(--space-xl);
+}
+
+.section-gap {
+  margin-bottom: var(--section-gap);
+}
+
+.section-gap:last-child {
+  margin-bottom: 0;
+}
+
+/* Grid for multi-column blocks (e.g. Cómo practicamos, Caminos) */
+.grid-auto {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 768px) {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-auto.grid-three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   4. Components
+   ========================================================================== */
+
+/* --- Skip link --- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--gutter);
+  z-index: 100;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--primary);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--bg);
+  outline-offset: 2px;
+}
+
+/* --- Site header --- */
+.site-header {
+  position: relative;
+  background-color: var(--header-bg);
+  color: var(--text-on-dark);
+}
+
+.site-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus-visible {
+  color: var(--text-on-dark);
+  opacity: 0.9;
+}
+
+.site-header .layout-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+}
+
+.site-logo {
+  display: block;
+  height: 2.5rem;
+  width: auto;
+}
+
+.site-logo img {
+  height: 100%;
+  width: auto;
+}
+
+/* --- Navigation --- */
+.nav-main {
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--text-on-dark);
+  border-radius: 4px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+  outline: 2px solid var(--text-on-dark);
+  outline-offset: 2px;
+}
+
+.nav-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.nav-menu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.nav-menu.is-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--header-bg);
+  padding: var(--space-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    gap: var(--space-sm);
+  }
+}
+
+.nav-menu a {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  min-height: 44px;
+  line-height: 44px;
+  padding-block: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* --- Figures and media (20: tipografía primero; imagen apoya) --- */
+.section-figure {
+  margin: 0 0 var(--space-lg);
+}
+
+.section-figure img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.section-figure figcaption {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+.hero-figure {
+  margin: 0 auto var(--space-lg);
+  max-width: 50rem;
+}
+
+.hero-figure img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* --- Video block (15: preload metadata, no autoplay) --- */
+.media-block {
+  margin-bottom: var(--section-gap);
+}
+
+.media-block video {
+  width: 100%;
+  max-width: 50rem;
+  border-radius: 4px;
+  background: var(--brand-4);
+}
+
+.media-block .video-caption {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+.embed-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin-bottom: var(--space-md);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--brand-4);
+}
+
+.embed-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Gallery grid --- */
+.gallery-grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- Hero --- */
+.hero {
+  padding-block: var(--space-xl);
+  text-align: center;
+  background-color: var(--brand-1);
+  color: var(--text-on-dark);
+}
+
+.hero .hero-title,
+.hero .hero-lead {
+  color: var(--text-on-dark);
+}
+
+.hero .hero-lead {
+  opacity: 0.95;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-md);
+}
+
+.hero-lead {
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-lg);
+}
+
+.hero .btn-primary {
+  background-color: var(--text-on-dark);
+  color: var(--brand-1);
+}
+
+.hero .btn-primary:hover {
+  background-color: var(--brand-3);
+  color: var(--brand-1);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--bg);
+}
+
+/* --- Meditation block --- */
+.meditation-block {
+  background-color: var(--brand-3);
+  padding: var(--space-lg);
+  border-radius: 4px;
+  margin-bottom: var(--section-gap);
+  color: var(--text);
+}
+
+.meditation-block .read-width {
+  margin-inline: auto;
+}
+
+.meditation-block h2 {
+  margin-top: 0;
+  color: var(--text);
+}
+
+.meditation-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+}
+
+.meditation-block li {
+  margin-bottom: var(--space-xs);
+}
+
+/* --- Founder block (divisor suave) --- */
+.founder-block {
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-lg);
+}
+
+.founder-block .pausa-link {
+  font-size: 0.9375rem;
+  margin-top: var(--space-md);
+}
+
+.founder-block .pausa-link a {
+  font-weight: 600;
+}
+
+/* --- Cards (caminos, cómo practicamos) --- */
+.card {
+  padding: var(--space-lg);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}
+
+/* --- Footer --- */
+.site-footer {
+  background-color: var(--footer-bg);
+  color: var(--text-on-dark);
+  padding-block: var(--space-xl);
+  margin-top: var(--section-gap);
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-footer a:hover {
+  color: var(--text-on-dark);
+  opacity: 0.9;
+}
+
+.site-footer h3 {
+  color: var(--text-on-dark);
+}
+
+.site-footer .layout-container {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .site-footer .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-xl);
+  }
+}
+
+.footer-org {
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.footer-section h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-sm);
+  color: var(--text-on-dark);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: var(--space-xs);
+}
+
+.footer-donate table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.footer-donate th,
+.footer-donate td {
+  text-align: left;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.footer-donate th {
+  font-weight: 600;
+  width: 40%;
+}
+
+/* --- Forms --- */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+}
+
+.form-group textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   5. Page-specific (minimal)
+   ========================================================================== */
+.page-contact .read-width {
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   6. Utilities
+   ========================================================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center-block {
+  margin-inline: auto;
+}
+
+.mt-0 { margin-top: 0; }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. States and accessibility
+   ========================================================================== */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Typography scale for headings */
+h1, h2, h3 {
+  line-height: var(--line-height-tight);
+  color: var(--text);
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin: 0 0 var(--space-md);
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  margin: 0 0 var(--space-md);
+}
+
+h3 {
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-sm);
+}
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}

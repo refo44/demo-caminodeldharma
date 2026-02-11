@@ -25,18 +25,18 @@
 
 ## 2. FOTOS PAGINA WEB — Mapeo por sección
 
-Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su uso por sección del sitio (04, 05).
+Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos están renombrados en **kebab-case y semánticos** para producción.
 
-| Pestaña (carpeta) | Contenido | Uso en el sitio |
+| Pestaña (carpeta) | Archivos (nombres actuales) | Uso en el sitio |
 |---------|-----------|-----------------|
-| **Raíz** | logo 1.png | Logo, favicon |
-| **Pestaña 1** | DSC01580.JPG, estatua-buda-montanas-flores-loto…, Kuan-Yin. 4.jpg, e8e40a6a… | Inicio, hero, ambiente |
-| **Pestaña 2** | Foto desarrollo camino del dharma, Foto quienes somos, Imagen Budismo Chan, Imagen Budismo Tierra Pura, Imagen Shakyamuni | Comunidad, Linaje |
-| **Pestaña 3** | Foto 1 Biografía Fundador.jpg | Biografía del fundador |
-| **Pestaña 5** | ¿Qué es Meditar_.mp4, Conectar con nuestro planeta.mp4, Redes de Compasión_.mp4, Link videos subidos en Youtube.docx | Videos, meditación, YouTube |
-| **Pestaña 6** | 419541416_… | Contacto |
-| **Pestaña 7** | ~40 imágenes (DSC_*, IMG_*, WhatsApp Image…) | Galería comunitaria |
-| **Pestaña 8** | diwali-festival-lights-tradition.jpg, IMG_20191201_150120.jpg | Celebraciones (Vesak, Diwali) |
+| **Raíz** | `logo-camino-del-dharma.png` | Logo, favicon |
+| **Pestaña 1** | `hero-estatua-buda-montanas.jpg`, `inicio-encuentro-comunidad.jpg`, `inicio-kuan-yin.jpg`, `inicio-ambiente.jpg` | Inicio, hero, ambiente |
+| **Pestaña 2** | `comunidad-desarrollo-camino-dharma.jpg`, `comunidad-quienes-somos.jpg`, `linaje-budismo-chan.jpg`, `linaje-budismo-tierra-pura.jpg`, `linaje-shakyamuni-origen-buddhismo.jpg` | Comunidad, Linaje |
+| **Pestaña 3** | `foto-biografia-fundador.jpg` | Biografía del fundador |
+| **Pestaña 5** | `video-que-es-meditar.mp4`, `video-conectar-nuestro-planeta.mp4`, `video-redes-compasion.mp4`, Link videos subidos en Youtube.docx | Videos, meditación, YouTube |
+| **Pestaña 6** | `contacto-comunidad.jpg` | Contacto |
+| **Pestaña 7** | `galeria-01.jpg` … `galeria-35.jpg`, `galeria-36.jpeg` … `galeria-43.jpeg` (43 archivos) | Galería comunitaria |
+| **Pestaña 8** | `celebracion-diwali.jpg`, `celebracion-vesak-2019.jpg` | Celebraciones (Vesak, Diwali) |
 
 ---
 
@@ -64,7 +64,7 @@ Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su us
 ## 5. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
-2. **Renombrar imágenes:** Usar nombres en kebab-case y semánticos para producción (ej. `foto-biografia-fundador.jpg`, `hero-templo-montanas.jpg`, `galeria-retiro-sangha-2023.jpg`)
+2. **Imágenes:** Ya renombradas en content-source a kebab-case semántico (véase §2). Al copiar a `public/` o al theme, usar estos mismos nombres.
 3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
 
 ---
