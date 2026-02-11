@@ -3,7 +3,7 @@
 **Qué tendencias adoptar y cuáles evitar para proteger calma, claridad y acogida.**  
 **Versión 1.1**
 
-Este documento actúa como **filtro** (no como driver): refuerza lectura, accesibilidad y performance; evita personalización, ruido visual y comportamiento invasivo. Referencia obligatoria para validar la maqueta estática (véase `14-orden-implementacion`, Fase 2).
+Este documento actúa como **filtro** (no como driver): refuerza lectura, accesibilidad y performance; evita personalización, ruido visual y comportamiento invasivo. Referencia obligatoria para validar la maqueta estática (véase `17-orden-implementacion`, Fase 2).
 
 **Sobre artículos tipo "tendencias 2026":**  
 Suelen mezclar tendencias reales (tokens, performance, accesibilidad) y empuje comercial. Para Camino del Dharma conviene quedarse con lo **estructural** y filtrar todo lo que compite con la orientación y la práctica.
@@ -232,4 +232,4 @@ Este documento es el **filtro oficial de tendencias UX/UI** del proyecto: adopta
 ---
 
 **Versión:** 1.1  
-**Referencias:** `02-identidad-corporativa`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `11-theme-file-structure`, `14-orden-implementacion`, content-source (Contenido_Web, Lluvia de ideas)
+**Referencias:** `02-identidad-corporativa`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `12-theme-file-structure`, `17-orden-implementacion`, content-source (Contenido_Web, Lluvia de ideas)

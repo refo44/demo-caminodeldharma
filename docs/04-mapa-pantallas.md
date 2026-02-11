@@ -1,8 +1,8 @@
 # Camino del Dharma — Mapa de pantallas
 
-Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que construir. Fuente única para «qué vistas construir»; el contenido de cada una está en 03; la estructura del theme en 11.
+Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que construir. Fuente única para «qué vistas construir»; el contenido de cada una está en 03; la estructura del theme en 12.
 
-**Depende de / referencia:** `01-plataforma-comunidad-plan`, `03-wordpress-content-model`, `05-arquitectura-informacion-navegacion`
+**Depende de / referencia:** `01-plataforma-comunidad-plan`, `03-wordpress-content-model`, `05-arquitectura-informacion-navegacion`. **Estructura de bloques por pantalla:** `06-wireframes`
 
 ---
 
@@ -99,7 +99,7 @@ Todo lo demás es contenido estable. No hay jerarquías profundas ni flujos de m
 ## Siguiente paso (orden sugerido)
 
 1. Definir estructura del menú principal (`05-arquitectura-informacion-navegacion`).
-2. Bajar a estructura real del theme (plantillas + naming en `11-theme-file-structure`).
+2. Bajar a estructura real del theme (plantillas + naming en `12-theme-file-structure`).
 3. Implementar lógica de visibilidad de «Eventos especiales» en WordPress (query por `event_status = vigente`).
 
 ---

@@ -201,7 +201,7 @@ Se presenta como participación.
 ## Accesibilidad (capa transversal)
 
 No es una funcionalidad adicional.  
-Es una condición estructural del sistema. Definida operativamente en `16-accesibilidad-estandares`.
+Es una condición estructural del sistema. Definida operativamente en `19-accesibilidad-estandares`.
 
 > **Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información completa del tema)."
 

@@ -7,7 +7,7 @@ Define estrategia, principios, reglas de diseño, HTML semántico, ARIA, conteni
 
 **Decisión arquitectónica:** Este documento consolida todos los estándares de accesibilidad del proyecto en una sola fuente normativa. No se crearán documentos separados (NFR, testing, content guidelines) salvo que el sistema crezca en complejidad (p. ej. múltiples equipos, design system grande, producto tipo SaaS). Cualquier PR que toque UI debe validar el checklist de implementación (§10) y el testing (§11) antes de merge.
 
-**Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `14-orden-implementacion`, `15-tendencias-ux-ui-sistema-editorial`
+**Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`
 
 ---
 
@@ -15,7 +15,7 @@ Define estrategia, principios, reglas de diseño, HTML semántico, ARIA, conteni
 
 - **Compromiso del sitio:** Que cualquier persona pueda leer, orientarse y comprender el contenido sin fricción. Centrado en claridad, calma y legibilidad.
 - **Referencia:** WCAG 2.1 Level AA (mínimo) o WCAG 2.2 Level AA (recomendado). [WCAG 2.1](https://www.w3.org/TR/WCAG21/) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
-- **Filosofía:** Accesibilidad como parte del diseño y del contenido, no como capa posterior. Integrado con identidad (02), UX/UI (15) y orden de implementación (14).
+- **Filosofía:** Accesibilidad como parte del diseño y del contenido, no como capa posterior. Integrado con identidad (02), UX/UI (17) y orden de implementación (16).
 
 **Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información completa del tema)."
 
@@ -62,12 +62,12 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 ## 6. Reglas de diseño accesible
 
-- **Tipografía legible:** Tamaños cómodos, jerarquía clara (H1–H3), según manual de marca (02) y tendencias UX (15).
-- **Contraste:** Mínimo AA (texto e imágenes de texto). Verificar combinaciones críticas (texto sobre fondos brand-3, brand-2). Componentes de interfaz: contraste no textual ≥ 3:1 cuando aplique.
+- **Tipografía legible:** Tamaños cómodos, jerarquía clara (H1–H3), según manual de marca (02) y tendencias UX (17).
+- **Contraste:** Mínimo AA (texto e imágenes de texto): texto normal 4.5:1, texto grande 3:1. Verificar combinaciones críticas (texto sobre fondos brand-3, brand-2). Componentes de interfaz: contraste no textual ≥ 3:1 cuando aplique.
 - **Targets:** Áreas clicables suficientes para puntero/táctil; en móvil, botones y enlaces cómodos.
 - **Ritmo visual:** Espacio en blanco, ancho de línea de lectura (p. ej. 60–70ch), sin saturación.
 - **Color:** No depender solo del color para transmitir significado (WCAG 1.4.1).
-- **Lenguaje:** Claro y directo (alineado con `06-guia-voz-microcopy-ux`). Evitar jerga innecesaria.
+- **Lenguaje:** Claro y directo (alineado con `07-guia-voz-microcopy-ux`). Evitar jerga innecesaria.
 
 ### Reglas mínimas (alto impacto, bajo costo)
 
@@ -95,7 +95,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 ### Principio base
 
-1. **HTML semántico primero.** Usar elementos nativos (`button`, `a`, `input`, `select`, `dialog`, `nav`, `main`, `header`, `footer`, `section`, `h1`–`h6`) como primera opción.
+1. **HTML semántico primero.** Usar elementos nativos (`button`, `a`, `input`, `select`, `dialog`, `nav`, `main`, `header`, `footer`, `section`, `h1`–`h6`) como primera opción. Landmarks: `<main>`, `<nav>`, `<header>`, `<footer>` para estructura navegable por lectores de pantalla.
 2. **ARIA solo** para completar semántica, estado o relación cuando el HTML no alcance (componentes dinámicos, UI custom, estados que cambian sin recarga).
 3. **No usar ARIA para “arreglar” markup malo.** Si existe un elemento nativo que resuelve el caso, se usa el nativo.
 
@@ -149,7 +149,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 - **Headings:** H1–H3 ordenados; un H1 por página; jerarquía lógica.
 - **Alt text:** En todas las imágenes informativas; descriptivo y conciso. Decorativas: `alt=""` o implementación que permita ignorarlas.
 - **Texto en imágenes:** No usar texto incrustado en imágenes como único medio para información esencial, salvo que sea decorativo o exista alternativa equivalente (p. ej. texto en HTML).
-- **Enlaces:** Texto descriptivo (evitar "aquí", "más info" sin contexto). Si el enlace abre en nueva pestaña, avisarlo en el texto o con indicación accesible (p. ej. ícono + texto "se abre en nueva ventana" o `target="_blank"` con advertencia para lectores de pantalla).
+- **Enlaces:** Texto descriptivo (evitar "aquí", "más info" sin contexto). Abrir en nueva pestaña (`target="_blank"`) solo cuando sea necesario; si se usa, avisarlo en el texto o con indicación accesible (p. ej. ícono + texto "se abre en nueva ventana").
 - **Lenguaje:** Claro y directo; alineado con guía de voz (06).
 - **Medios:** Subtítulos o transcripción cuando el contenido sea informativo (video/audio). No depender solo del audio para información esencial.
 
@@ -167,7 +167,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 - [ ] Sin animaciones agresivas; respeto a `prefers-reduced-motion`.
 - [ ] Sin contenido que parpadee o destelle (riesgo neurológico).
 - [ ] Contraste AA en texto, enlaces y botones.
-- [ ] Página con título descriptivo; landmarks y headings correctos.
+- [ ] `<title>` único por página, descriptivo; no repetir "Inicio" genérico. Landmarks y headings correctos.
 
 ---
 
@@ -183,10 +183,11 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 ## 12. Relación con el resto del sistema
 
-- **15-tendencias-ux-ui-sistema-editorial:** Incluye contraste AA, `prefers-reduced-motion`, `:focus-visible`, headings correctos, labels en formularios. Este doc (16) es el estándar formal de accesibilidad y extiende esa base con ARIA, contenido editorial y checklist.
+- **18-tendencias-ux-ui-sistema-editorial:** Incluye contraste AA, `prefers-reduced-motion`, `:focus-visible`, headings correctos, labels en formularios. Este doc (19) es el estándar formal de accesibilidad y extiende esa base con ARIA, contenido editorial y checklist.
 - **02-identidad-corporativa:** Paleta y contraste; verificar AA con los colores de marca.
-- **14-orden-implementacion:** El checklist (§10) y el testing (§11) se integran en la validación pre-lanzamiento (Fase 2 y checklist final).
-- **06-guia-voz-microcopy-ux:** Relacionado con lenguaje claro y tono; las reglas de contenido accesible (§9) se alinean con la voz del sitio.
+- **14-css-architecture:** Aplica en la capa de estilos: focus visible, contraste, tamaño táctil, `prefers-reduced-motion`; detalle en ese documento; criterio normativo aquí (19).
+- **17-orden-implementacion:** El checklist (§10) y el testing (§11) se integran en la validación pre-lanzamiento (Fase 2 y checklist final).
+- **07-guia-voz-microcopy-ux:** Relacionado con lenguaje claro y tono; las reglas de contenido accesible (§9) se alinean con la voz del sitio.
 
 ---
 
@@ -197,4 +198,4 @@ Este documento es el **estándar único de accesibilidad** del proyecto: estrate
 ---
 
 **Versión:** 1.1  
-**Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `14-orden-implementacion`, `15-tendencias-ux-ui-sistema-editorial`, Lluvia de ideas (Sandra). Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
+**Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`, Lluvia de ideas (Sandra). Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).

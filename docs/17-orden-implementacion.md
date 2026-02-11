@@ -3,16 +3,16 @@
 **Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
 **Versión 1.1**
 
-**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `08-ui-copy-sheet`, `10-arbol-urls-final`, `11-theme-file-structure`, `12-assets-strategy`, `13-content-source-inventario`, `15-tendencias-ux-ui-sistema-editorial`
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`
 
 ---
 
 ## Fase 1: Documentación y diseño
 
 1. **Completar identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf` → actualizar `02-identidad-corporativa.md`
-2. **Wireframes (opcional):** Bocetos de pantallas según `04-mapa-pantallas` — en papel, Figma o directamente en HTML
+2. **Wireframes:** Estructura de bloques por pantalla según `06-wireframes` (y `04-mapa-pantallas`); en papel, Figma o HTML
 3. **Validar documentación:** Revisar que todos los docs estén alineados
-4. **Consultar tendencias UX/UI:** `15-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
+4. **Consultar tendencias UX/UI:** `18-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
 
 ---
 
@@ -22,16 +22,16 @@
    - HTML5 semántico
    - CSS3 (tokens de identidad, roles semánticos)
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
-2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `08-ui-copy-sheet`, `02-identidad-corporativa`
-3. Assets desde `content-source/` copiados a `public/assets/` (regla en `12-assets-strategy`, inventario en `13-content-source-inventario`)
-4. **Validar contra checklist** de `15-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
+2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `09-ui-copy-sheet`, `02-identidad-corporativa`
+3. Assets desde `content-source/` copiados a `public/assets/` (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`)
+4. **Validar contra checklist** de `18-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 
 ---
 
 ## Fase 3: WordPress
 
-1. **Convertir** la maqueta en theme de WordPress según `11-theme-file-structure` (plantillas, parts, URL → plantilla)
-2. Ajustar a `03-wordpress-content-model` y `10-arbol-urls-final`; assets dentro del theme según `12-assets-strategy`
+1. **Convertir** la maqueta en theme de WordPress según `12-theme-file-structure` (plantillas, parts, URL → plantilla)
+2. Ajustar a `03-wordpress-content-model` y `11-arbol-urls-final`; assets dentro del theme según `15-assets-strategy`
 3. Implementar CPT `event` si se requieren eventos dinámicos
 4. **Subir** al servidor: staging (opcional) y producción; configurar contenido y hosting
 

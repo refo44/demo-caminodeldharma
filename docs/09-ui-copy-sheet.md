@@ -4,7 +4,7 @@
 
 Fuente única de verdad para botones, menús, mensajes, formularios y estados. Criterios de voz en 06; términos permitidos/prohibidos en 07.
 
-**Depende de:** `06-guia-voz-microcopy-ux`, `07-voice-dictionary`. **Referencia:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`
+**Depende de:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`. **Referencia:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`
 
 **Regla central:** El sitio no vende. Invita a practicar.
 
@@ -114,7 +114,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 **Avisos:** "Abre en nueva pestaña" para enlaces externos.
 
-Criterios completos en `16-accesibilidad-estandares`.
+Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 

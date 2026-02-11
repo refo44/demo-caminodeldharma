@@ -3,7 +3,7 @@
 **Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.**  
 **Versión 1.1**
 
-**Referenciado por:** `12-assets-strategy` (estrategia de uso y migración de assets)
+**Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
 **Importante:** `content-source/` **solo existe en local** (no se despliega). Para la maqueta estática y el sitio final, copiar el material necesario en `public/assets/` o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en `public/` para evitar pérdida de calidad y sobrescrituras accidentales.
 

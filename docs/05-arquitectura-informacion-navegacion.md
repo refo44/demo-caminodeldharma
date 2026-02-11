@@ -5,7 +5,7 @@
 
 Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben existir.
 
-**Referencia:** `04-mapa-pantallas`, `08-ui-copy-sheet`, `09-user-journey`
+**Referencia:** `04-mapa-pantallas`, `06-wireframes`, `09-ui-copy-sheet`, `10-user-journey`
 
 ---
 
@@ -127,8 +127,9 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 |--------|---------|
 | "Volver al inicio" | Inicio |
 | "Explorar la comunidad" | Comunidad |
+| "Practicar con nosotros" | Contacto o Práctica |
 
-**Nunca** dejar una pantalla sin salida.
+**Nunca** dejar una pantalla sin salida (alineado con 06-wireframes §8).
 
 ---
 

@@ -2,9 +2,9 @@
 
 **Léxico del sistema**
 
-Define qué palabras existen dentro del territorio de la comunidad y cuáles no pueden existir jamás. La voz y el tono se definen en `06-guia-voz-microcopy-ux`.
+Define qué palabras existen dentro del territorio de la comunidad y cuáles no pueden existir jamás. La voz y el tono se definen en `07-guia-voz-microcopy-ux`.
 
-**Depende de:** `06-guia-voz-microcopy-ux`
+**Depende de:** `07-guia-voz-microcopy-ux`
 
 ---
 
@@ -121,6 +121,6 @@ El sitio no vende. El sitio acoge.
 
 ---
 
-**Referencia:** `08-ui-copy-sheet` (textos concretos por pantalla).
+**Referencia:** `09-ui-copy-sheet` (textos concretos por pantalla).
 
 **Versión:** 1.0

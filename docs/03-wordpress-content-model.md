@@ -1,10 +1,8 @@
 # Camino del Dharma — WordPress Content Model
 
-**Versión 2.0**
+Modelo de contenido oficial para la implementación WordPress del sitio de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas. Contenido canónico: seguir estrictamente `content-source/.../Contenido_Web_Camino_del_Dharma` (docx/md); inventario en 13.
 
-Modelo de contenido oficial para la implementación WordPress del sitio de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas.
-
-**Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `04-mapa-pantallas`
+**Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `04-mapa-pantallas`. **Referencia:** `09-ui-copy-sheet` (textos de interfaz), `11-arbol-urls-final` (rutas), `12-theme-file-structure` (plantillas)
 
 ---
 
@@ -29,6 +27,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | Formulario de contacto | Página Contacto |
 | **Videos** | Embed YouTube/Vimeo en páginas y bloques (conferencias, enseñanzas, indicaciones para meditar) |
 | **Cómo hacer parte / formación** | Página o sección: espacios de formación, alcance y propósito de cada uno (Lluvia de ideas). |
+
+**Edición editorial:** El contenido textual principal (comunidad, linaje, práctica, narrativas) se gestiona directamente en el editor Gutenberg; no se crean campos personalizados para textos espirituales o narrativos.
 
 ---
 
@@ -84,9 +84,12 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | event_place | text | Lugar |
 | event_modality | select | presencial / virtual / híbrido |
 | event_description | WYSIWYG | Descripción, sentido, a quién va dirigido |
-| event_signup_url | url | Enlace inscripción |
+| featured_image | image | Imagen del evento (listados, portada del evento) |
+| event_signup_url | url | Enlace a inscripción (formulario externo, WhatsApp, plataforma o pasarela externa) |
 | event_status | select | vigente / finalizado / cancelado |
-| event_signup_payment | url o boolean | Inscripción/pagos por la web (Lluvia de ideas: gestión de eventos) |
+| event_signup_payment | boolean o url | Indica si hay pago/contribución; el pago siempre es externo (redirección vía event_signup_url) |
+
+**Sin pagos internos:** El sitio no procesa pagos, no tiene checkout ni lógica financiera. Si un evento requiere inscripción económica, se usa `event_signup_url` para redirigir a la plataforma externa correspondiente.
 
 **Regla de visibilidad:** Solo eventos con `event_status = vigente` aparecen en la sección Eventos del sitio y en la ruta `/eventos/` (template Eventos). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
@@ -97,6 +100,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ---
 
 ## 3.1. Sangha (Custom Post Type, si se implementa)
+
+CPT opcional según crecimiento de la comunidad; no forzar implementación desde el inicio.
 
 Campos mínimos recomendados:
 
@@ -139,10 +144,13 @@ Valores posibles: Retiro, Taller, Celebración (Vesak, etc.), Conferencia, Encue
 - `page-contacto.php`: Contacto
 - `single-event.php`: Evento individual (si aplica)
 - `page.php`: Fallback para páginas
+- `404.php`: Página no encontrada (estado; copy en 08)
 
 ---
 
 ## 6. Videos (YouTube / Vimeo)
+
+Los videos acompañan la enseñanza; no constituyen el contenido central del sitio (evitar que el sitio derive hacia una videoteca).
 
 - **Embed:** Las páginas y bloques deben permitir incrustar videos por URL (YouTube, Vimeo).
 - **Uso:** Conferencias, enseñanzas del maestro, indicaciones para meditar, canal de YouTube conectado a la página.
@@ -168,12 +176,12 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 
 ## 8. Requisitos de accesibilidad del contenido en WordPress
 
-Sin reemplazar lo definido en `16-accesibilidad-estandares`, este modelo exige dos reglas mínimas que afectan al contenido editado en WordPress:
+Sin reemplazar lo definido en `19-accesibilidad-estandares`, este modelo exige dos reglas mínimas que afectan al contenido editado en WordPress:
 
 - **Imágenes:** Siempre rellenar texto alternativo (`alt`). Si la imagen es decorativa, usar `alt=""`.
 - **Videos informativos:** Si el video transmite información (conferencias, enseñanzas, indicaciones), debe disponer de subtítulos o transcripción.
 
-Detalle y criterios ampliados en `16-accesibilidad-estandares`.
+Detalle y criterios ampliados en `19-accesibilidad-estandares`.
 
 ---
 
@@ -197,7 +205,7 @@ Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el p
 | Manual de marca | `02-identidad-corporativa` |
 | Link WhatsApp | §7 Integraciones |
 
-Otras ideas (estilo sobrio, paleta, accesibilidad, animación camino, Paramitas, El buda responde) están en `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `05-arquitectura-informacion-navegacion`, `15-tendencias-ux-ui-sistema-editorial`, `16-accesibilidad-estandares`.
+Otras ideas (estilo sobrio, paleta, accesibilidad, animación camino, Paramitas, El buda responde) están en `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `05-arquitectura-informacion-navegacion`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`.
 
 ---
 

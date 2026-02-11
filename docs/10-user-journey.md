@@ -4,7 +4,7 @@ Describe cómo se mueve una persona real dentro del sitio. No es un flujo de con
 
 Sirve para validar: arquitectura de información, navegación, microcopy, jerarquía de pantallas.
 
-**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `06-guia-voz-microcopy-ux`, `08-ui-copy-sheet`
+**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `07-guia-voz-microcopy-ux`, `09-ui-copy-sheet`, `19-accesibilidad-estandares`
 
 ---
 
@@ -20,7 +20,7 @@ Sirve para validar: arquitectura de información, navegación, microcopy, jerarq
 - → Contacto o WhatsApp
 - → Primer contacto
 
-La persona nunca aterriza en un menú primero. Siempre ve una invitación clara.
+La mayoría de las personas llega primero al Inicio, donde ve una invitación clara; quienes entran por enlace directo o menú encuentran siempre menú y footer para orientarse.
 
 ---
 
@@ -123,9 +123,27 @@ Un recorrido es correcto si:
 
 ---
 
+## 9. Accesibilidad del recorrido
+
+El recorrido descrito en este documento debe ser posible para cualquier persona, independientemente de sus capacidades físicas, sensoriales o cognitivas.
+
+La accesibilidad no define caminos alternos. Garantiza que el mismo recorrido pueda ser transitado por:
+
+- Personas con discapacidad visual
+- Personas con baja visión
+- Personas que navegan con teclado
+- Personas con dificultades auditivas
+- Personas con carga cognitiva alta
+
+Cada pantalla, acción y contenido debe poder ser comprendido y navegado sin barreras.
+
+Los criterios técnicos y editoriales se definen en `19-accesibilidad-estandares`.
+
+---
+
 ## Cierre
 
-Este documento es la **guía de validación de recorridos** del sitio. Alineado con 04 (mapa de pantallas), 03 (modelo de contenido), 05 (navegación), 06 (voz) y 07 (léxico). No define diseño ni copy; valida que cada persona pueda moverse sin perderse, con la práctica como centro.
+Este documento es la **guía de validación de recorridos** del sitio. Alineado con 04 (mapa de pantallas), 03 (modelo de contenido), 05 (navegación), 07 (voz), 08 (léxico), 09 (copy) y 19 (accesibilidad). No define diseño ni copy; valida que cada persona pueda moverse sin perderse, con la práctica como centro.
 
 ---
 
