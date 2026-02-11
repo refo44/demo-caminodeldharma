@@ -5,6 +5,28 @@
 */
 
 /* ==========================================================================
+   0. Fonts (autohosted in assets/fonts; font-display: swap)
+   ========================================================================== */
+@font-face {
+  font-family: "Downtown DEMO Regular";
+  src: url("../fonts/downtown-demo-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* MarloweEscapade: add marlowe-escapade.woff2 from manual de marca or licensed source (see assets/fonts/README) */
+@font-face {
+  font-family: "MarloweEscapade";
+  src: url("../fonts/marlowe-escapade.woff2") format("woff2"),
+       url("../fonts/marlowe-escapade.woff") format("woff"),
+       url("../fonts/marlowe-escapade.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
    1. Variables ( :root )
    ========================================================================== */
 :root {
