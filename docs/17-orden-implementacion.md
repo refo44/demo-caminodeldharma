@@ -151,7 +151,7 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 - [ ] Botón WhatsApp operativo
 - [ ] Enlaces externos (Pausa Profunda, redes) verificados
 - [ ] Datos bancarios correctos en footer
-- [ ] Accesibilidad: estándares 16 aplicados (contraste, alt, teclado, focus, formularios)
+- [ ] Accesibilidad: estándares 19 aplicados (contraste, alt, teclado, focus, formularios)
 
 ---
 

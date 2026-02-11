@@ -2,7 +2,7 @@
 
 **Repertorio de microcopy, navegación y sistema**
 
-Fuente única de verdad para botones, menús, mensajes, formularios y estados. Criterios de voz en 06; términos permitidos/prohibidos en 07.
+Fuente única de verdad para botones, menús, mensajes, formularios y estados. Criterios de voz en `07-guia-voz-microcopy-ux`; términos permitidos/prohibidos en `08-voice-dictionary`.
 
 **Depende de:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`. **Referencia:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`
 

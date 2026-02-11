@@ -15,7 +15,7 @@ Define estrategia, principios, reglas de diseño, HTML semántico, ARIA, conteni
 
 - **Compromiso del sitio:** Que cualquier persona pueda leer, orientarse y comprender el contenido sin fricción. Centrado en claridad, calma y legibilidad.
 - **Referencia:** WCAG 2.1 Level AA (mínimo) o WCAG 2.2 Level AA (recomendado). [WCAG 2.1](https://www.w3.org/TR/WCAG21/) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
-- **Filosofía:** Accesibilidad como parte del diseño y del contenido, no como capa posterior. Integrado con identidad (02), UX/UI (17) y orden de implementación (16).
+- **Filosofía:** Accesibilidad como parte del diseño y del contenido, no como capa posterior. Integrado con identidad (02), UX/UI (18) y orden de implementación (17).
 
 **Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (información experta específica para el proyecto)."
 

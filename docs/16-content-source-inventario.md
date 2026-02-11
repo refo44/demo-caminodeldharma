@@ -64,7 +64,7 @@ Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su us
 ## 5. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
-2. **Renombrar imágenes:** Considerar nombres en kebab-case para producción (ej. `foto-biografia-fundador.jpg`)
+2. **Renombrar imágenes:** Usar nombres en kebab-case y semánticos para producción (ej. `foto-biografia-fundador.jpg`, `hero-templo-montanas.jpg`, `galeria-retiro-sangha-2023.jpg`)
 3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
 
 ---
@@ -79,7 +79,7 @@ Revisar la página de Paramitas como referencia de estructura y navegación si e
 
 ## Cierre
 
-Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio y con la estrategia de assets (12). No se despliega; los assets se copian al theme o a `public/assets/` según 12.
+Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio, con la estrategia de assets (15) y con la estructura del theme (12). No se despliega; los assets se copian al theme o a `public/assets/` según 12.
 
 ---
 

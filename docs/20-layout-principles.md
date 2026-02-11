@@ -79,14 +79,14 @@ El grid no es visible; su función es sostener el orden y la calma del sitio.
 
 ## 7. Resumen ejecutivo
 
-| Principio           | Regla corta                                                 |
-| ------------------- | ----------------------------------------------------------- |
-| Ancho de lectura    | 60–70ch; contenedor centrado; hero puede ancho completo     |
-| Ritmo vertical      | Escala única; generoso; consistente entre páginas           |
-| Uso del blanco      | Blanco activo; pausa narrativa; no rellenar                 |
-| Tipografía / imagen | Tipografía primero; sin competencia; sin dramatismo         |
-| Grid                | Un sistema; contenedor → lectura; no grid por página        |
-| Responsive          | Simplificar, no rediseñar; mismo territorio, menos ancho    |
+| Principio           | Regla corta                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| Ancho de lectura    | 60–70ch; contenedor centrado; hero puede usar ancho completo |
+| Ritmo vertical      | Escala única; generoso; consistente entre páginas            |
+| Uso del blanco      | Blanco activo; pausa narrativa; no rellenar                  |
+| Tipografía / imagen | Tipografía primero; sin competencia; sin dramatismo          |
+| Grid                | Un sistema; contenedor → lectura; no grid por página         |
+| Responsive          | Simplificar, no rediseñar; mismo territorio, menos ancho     |
 
 ### Invariantes
 

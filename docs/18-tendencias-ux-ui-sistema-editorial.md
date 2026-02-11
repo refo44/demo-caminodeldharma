@@ -131,8 +131,8 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 
 **Checklist (maqueta estática):**
 
-- 1 CSS principal.
-- JS mínimo con `defer`.
+- 1 CSS principal (un solo `main.css`).
+- JS mínimo, cargado en footer; `defer` solo cuando no rompa el orden de ejecución ni la accesibilidad.
 - Imágenes optimizadas y con `width`/`height`.
 - `loading="lazy"` donde aplique.
 - Fuentes auto-hospedadas cuando sea posible.
@@ -140,8 +140,8 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 
 **Equivalente en WordPress:**
 
-- Un único `style.css` o `theme.json` + estilos del theme.
-- Scripts encolados solo si son necesarios; `defer` por defecto.
+- Un único entry CSS del theme (`assets/css/main.css`) más `theme.json` para tokens.
+- Scripts encolados solo si son necesarios; carga en footer y `defer` opcional mediante filtro (solo para scripts no críticos).
 - Imágenes optimizadas desde el CMS; `width`/`height` en markup.
 - Evitar plugins que inyecten CSS/JS masivo.
 
@@ -149,7 +149,7 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 
 ## 5. Accesibilidad (regla fija)
 
-**Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información completa del tema)."
+**Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (información experta específica para el proyecto)."
 
 **Aplicación concreta:**
 
@@ -206,9 +206,9 @@ Solo donde **confirman una acción**.
 
 | Concepto | En el theme |
 |----------|------------|
-| Tokens y roles | `theme.json`: paleta y tipografías bloqueadas; `style.css` con `--brand-*` y roles. |
-| Un CSS principal | `style.css` del theme; evitar múltiples hojas de plugins. |
-| JS mínimo | Enqueue solo scripts necesarios; `defer`. |
+| Tokens y roles | `theme.json`: paleta y tipografías bloqueadas; `assets/css/main.css` con `--brand-*` y roles en `:root`. |
+| Un CSS principal | `assets/css/main.css` encolado desde `functions.php`; evitar múltiples hojas de plugins. |
+| JS mínimo | Enqueue solo scripts necesarios; carga en footer y `defer` opcional mediante filtro. |
 | Imágenes | Responsive/optimizadas; `width`/`height` en markup. |
 | Accesibilidad | Contraste y focus en CSS; headings y landmarks en templates. |
 
@@ -229,7 +229,7 @@ El diseño no exige más efectos. Exige más intención.
 
 ## Cierre
 
-Este documento es el **filtro oficial de tendencias UX/UI** del proyecto: adopta lo que mejora lectura, claridad, accesibilidad y performance; evita lo que compite con la orientación y la calma. Está alineado con identidad (02), mapa de pantallas (04), arquitectura de navegación (05), theme (11) y orden de implementación (14). El checklist §8 se usa en Fase 2 de 14 antes de pasar a WordPress.
+Este documento es el **filtro oficial de tendencias UX/UI** del proyecto: adopta lo que mejora lectura, claridad, accesibilidad y performance; evita lo que compite con la orientación y la calma. Está alineado con identidad (02), mapa de pantallas (04), arquitectura de navegación (05), estructura del theme (12) y orden de implementación (17). El checklist §8 se usa en Fase 2 de 17 antes de pasar a WordPress.
 
 ---
 
