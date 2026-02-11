@@ -1,21 +1,38 @@
 # Fuentes — Camino del Dharma
 
-Según **Identidad CAMINO DEL DHARMA** (manual de marca) y `docs/02-identidad-corporativa.md`.
+Referencia: **Identidad CAMINO DEL DHARMA** (manual de marca) y `docs/02-identidad-corporativa.md`.
 
-## Incluidas en el repo
+## Estructura
 
-- **downtown-demo-regular.ttf** — Downtown v1.01 por Nelson Fraga & Roman Tunik.  
-  Uso: títulos y headings. Licencia: 100% Free (DaFont). Atribución recomendada (CC BY 4.0 en algunas fuentes).
+```
+fonts/
+├── README.md
+├── downtown/
+│   └── downtown-demo-regular.ttf    # Headings
+├── marlowe-escapade/
+│   ├── marlowe-escapade.woff2       # Display / logo (preferido)
+│   ├── marlowe-escapade.woff
+│   └── marlowe-escapade.ttf
+└── licenses/
+    └── OnlineWebFonts-CC-BY-4.0.txt # Atribución MarloweEscapade e iconos
+```
 
-## Añadir manualmente (manual de marca)
+- **Una carpeta por familia:** cada fuente en su propio directorio, con nombres de archivo claros (sin espacios ni hashes).
+- **Licencias:** textos de atribución en `licenses/`; el sitio muestra el crédito en el footer.
 
-- **MarloweEscapade** — Fuente de display del logo (FaceType/MyFonts, comercial).  
-  Si tienes el archivo del manual de marca o licencia, colócalo aquí como:
-  - `marlowe-escapade.woff2` (recomendado para web), o
-  - `marlowe-escapade.woff` o `marlowe-escapade.ttf`  
-  El CSS ya tiene la regla `@font-face`; al añadir el archivo se cargará automáticamente.
+## Fuentes
+
+| Familia           | Uso en el sitio        | Origen / licencia                    |
+|-------------------|------------------------|--------------------------------------|
+| Downtown          | `--font-heading` (h1, h2, h3) | DaFont, 100% Free; atribución recomendada |
+| MarloweEscapade   | `--font-display` (nombre del sitio en header) | OnlineWebFonts, CC BY 4.0; crédito en footer |
 
 ## Uso en CSS
 
-- `--font-heading`: Downtown DEMO Regular (y MarloweEscapade como fallback si está disponible).
-- `--font-display`: MarloweEscapade (fallback a serif si no está el archivo).
+En `assets/css/main.css`:
+
+- `--font-heading`: "Downtown DEMO Regular", "MarloweEscapade", serif
+- `--font-display`: "MarloweEscapade", serif
+- `--font-body`: system-ui, sans-serif
+
+Las rutas `@font-face` apuntan a `fonts/<familia>/<archivo>`. No cambiar nombres de carpeta ni de archivo sin actualizar `main.css`.

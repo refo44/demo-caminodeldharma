@@ -9,18 +9,18 @@
    ========================================================================== */
 @font-face {
   font-family: "Downtown DEMO Regular";
-  src: url("../fonts/downtown-demo-regular.ttf") format("truetype");
+  src: url("../fonts/downtown/downtown-demo-regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-/* MarloweEscapade: add marlowe-escapade.woff2 from manual de marca or licensed source (see assets/fonts/README) */
+/* MarloweEscapade — OnlineWebFonts (CC BY 4.0); credit in footer */
 @font-face {
   font-family: "MarloweEscapade";
-  src: url("../fonts/marlowe-escapade.woff2") format("woff2"),
-       url("../fonts/marlowe-escapade.woff") format("woff"),
-       url("../fonts/marlowe-escapade.ttf") format("truetype");
+  src: url("../fonts/marlowe-escapade/marlowe-escapade.woff2") format("woff2"),
+       url("../fonts/marlowe-escapade/marlowe-escapade.woff") format("woff"),
+       url("../fonts/marlowe-escapade/marlowe-escapade.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,7 @@
   --brand-4: #3e424b;
 
   /* Semantic roles — fondos principales: brand-1/2/3; texto: brand-4 o blanco sobre fondo oscuro */
-  --bg: #ffffff;
+  --bg: var(--brand-3);
   --text: var(--brand-4);
   --text-muted: var(--brand-2);
   --surface: var(--brand-3);
@@ -94,6 +94,7 @@ html {
 
 body {
   margin: 0;
+  padding-top: 6rem; /* space for fixed header (logo + padding) */
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: var(--line-height-body);
@@ -138,6 +139,7 @@ a:focus-visible {
 
 .page-main {
   padding-block: var(--space-xl);
+  scroll-margin-top: 6rem; /* avoid fixed header covering focus target */
 }
 
 .section-gap {
@@ -178,7 +180,7 @@ a:focus-visible {
   z-index: 100;
   padding: var(--space-sm) var(--space-md);
   background: var(--primary);
-  color: var(--bg);
+  color: var(--text-on-dark);
   font-weight: 600;
   text-decoration: none;
   border-radius: 0 0 4px 0;
@@ -187,13 +189,18 @@ a:focus-visible {
 
 .skip-link:focus {
   top: 0;
-  outline: 2px solid var(--bg);
+  z-index: 1001; /* above fixed header */
+  outline: 2px solid var(--text-on-dark);
   outline-offset: 2px;
 }
 
 /* --- Site header --- */
 .site-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   background-color: var(--header-bg);
   color: var(--text-on-dark);
 }
@@ -211,22 +218,41 @@ a:focus-visible {
 
 .site-header .layout-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-md);
+  gap: var(--space-xl);
   padding-block: var(--space-md);
 }
 
 .site-logo {
-  display: block;
-  height: 2.5rem;
-  width: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 3rem;
 }
 
 .site-logo img {
   height: 100%;
   width: auto;
+}
+
+.site-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .site-logo {
+    height: 3.25rem;
+  }
+
+  .site-name {
+    font-size: 1.625rem;
+  }
 }
 
 /* --- Navigation --- */
@@ -294,18 +320,16 @@ a:focus-visible {
     position: static;
     box-shadow: none;
     padding: 0;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
 }
 
 .nav-menu a {
-  display: block;
-  padding: var(--space-sm) var(--space-md);
-  min-height: 44px;
-  line-height: 44px;
-  padding-block: 0;
   display: flex;
   align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  min-height: 44px;
+  padding-block: 0;
 }
 
 /* --- Figures and media (20: tipografía primero; imagen apoya) --- */
@@ -479,7 +503,7 @@ a:focus-visible {
 
 .btn-primary {
   background-color: var(--primary);
-  color: var(--bg);
+  color: var(--text-on-dark);
 }
 
 .btn-primary:hover {
@@ -487,7 +511,7 @@ a:focus-visible {
 }
 
 .btn-primary:focus-visible {
-  outline-color: var(--bg);
+  outline-color: var(--text-on-dark);
 }
 
 /* --- Meditation block --- */
@@ -581,6 +605,19 @@ a:focus-visible {
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: var(--space-xl);
   }
+}
+
+.footer-credits {
+  margin-top: var(--space-xl);
+  padding-inline: var(--gutter);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}
+
+.footer-credits a {
+  text-decoration: underline;
 }
 
 .footer-org {
