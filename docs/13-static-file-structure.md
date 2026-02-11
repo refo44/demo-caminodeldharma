@@ -33,6 +33,7 @@ demo-caminodeldharma/          (o nombre del repo)
         ├── images/
         └── favicon/
 ```
+El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia.
 
 ---
 
@@ -45,6 +46,8 @@ demo-caminodeldharma/          (o nombre del repo)
 | **theme-camino-del-dharma/** | Theme WordPress. Los archivos estáticos (CSS, JS, imágenes, fuentes) viven en `assets/` dentro del theme. WordPress los sirve desde la URL del theme. Solo los assets dentro de `theme-camino-del-dharma/assets/` son accesibles públicamente desde el sitio. |
 | **Maqueta estática (si existe)** | Si se usa carpeta `public/` o `dist/` para HTML/CSS previo al theme, no sustituye la estructura del theme; se alinea con 12 y 13. Es opcional y no obligatoria para este proyecto. |
 
+**Versionado:** `content-source/` se versiona (trazabilidad editorial). Archivos temporales de build (`public/`, `dist/` si son salida de build) no deben versionarse.
+
 ---
 
 ## 3. Flujo de assets estáticos
@@ -52,7 +55,7 @@ demo-caminodeldharma/          (o nombre del repo)
 1. **Contenido y referencia:** `content-source/` (inventario en 16).
 2. **Decisión de uso:** 15-assets-strategy (qué existe, formatos, tamaños).
 3. **Estructura técnica:** 12-theme-file-structure (dónde va cada tipo de archivo en el theme).
-4. **Copia/migración:** Assets necesarios se copian al theme (p. ej. `assets/images/`, `assets/fonts/`) o se referencian por URL (YouTube). Nunca enlazar a `content-source/` desde el sitio.
+4. **Copia/migración:** Assets necesarios se copian al theme (p. ej. `assets/images/`, `assets/fonts/`) o se referencian por URL (YouTube). Nunca enlazar a `content-source/` desde el sitio. Los assets copiados al theme deben estar optimizados (peso, formato web).
 
 ---
 
