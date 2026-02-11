@@ -1,8 +1,8 @@
 # Camino del Dharma — Mapa de pantallas
 
-Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que construir.
+Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que construir. Fuente única para «qué vistas construir»; el contenido de cada una está en 03; la estructura del theme en 11.
 
-**Referencia:** `03-wordpress-content-model`, `05-arquitectura-informacion-navegacion`
+**Depende de / referencia:** `01-plataforma-comunidad-plan`, `03-wordpress-content-model`, `05-arquitectura-informacion-navegacion`
 
 ---
 
@@ -38,7 +38,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Estado | Descripción |
 |--------|-------------|
-| Sin eventos vigentes | Página 5 oculta o muestra mensaje amable |
+| Sin eventos vigentes | La página de Eventos oculta o muestra mensaje amable |
 | Sin resultados | Búsqueda o filtros (si aplica) |
 | 404 | Página no existe |
 
@@ -63,7 +63,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Vistas de contenido:** 7. Evento individual — solo si se habilita vista detalle por evento.
 
-**Estados:** Sin eventos vigentes (página 6 oculta o mensaje amable) · Sin resultados (búsqueda/filtros si se agregan) · 404
+**Estados:** Sin eventos vigentes (la página de Eventos oculta o mensaje amable) · Sin resultados (búsqueda/filtros si se agregan) · 404
 
 **Elemento global:** Footer en todas las páginas (identidad, contacto, redes, donaciones, WhatsApp, Pausa Profunda).
 
@@ -104,4 +104,4 @@ Todo lo demás es contenido estable. No hay jerarquías profundas ni flujos de m
 
 ---
 
-**Versión:** 1.1
+**Versión:** 2.0

@@ -1,10 +1,10 @@
 # Camino del Dharma — Guía de voz, microcopy y escritura UX
 
-**Versión 1.0**
-
-Define cómo habla el sitio web de la Comunidad Buddhista Camino del Dharma. No define las enseñanzas buddhistas. Define la voz del sistema que contiene la comunidad.
+Define cómo habla el sitio web de la Comunidad Buddhista Camino del Dharma. No define las enseñanzas buddhistas; define la voz del sistema que contiene la comunidad.
 
 El objetivo: que todo el sitio suene como **un espacio de acogida**, no como una landing, una tienda ni una plataforma.
+
+**Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`
 
 ---
 
@@ -119,9 +119,10 @@ No se usan códigos ni tecnicismos visibles.
 | Sección | Tono |
 |---------|------|
 | Inicio | Acogedor, presente, claro |
-| Comunidad | Cercano, reflexivo |
-| Linaje | Sereno, informativo |
-| Práctica | Práctico, orientador |
+| La comunidad | Cercano, reflexivo |
+| El linaje | Sereno, informativo |
+| Práctica y actividades | Práctico, orientador |
+| Eventos (cuando visible) | Claro, informativo, invitación a participar |
 | Contacto | Cortés, simple |
 
 ---
@@ -141,4 +142,4 @@ Debe sonar como: **Un espacio de acogida, serio y vivo.**
 
 ---
 
-**Versión del documento:** 1.0
+**Versión:** 1.0

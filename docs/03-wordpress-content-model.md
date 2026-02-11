@@ -2,7 +2,7 @@
 
 **Versión 2.0**
 
-Modelo de contenido para la web de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas.
+Modelo de contenido oficial para la implementación WordPress del sitio de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas.
 
 **Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `04-mapa-pantallas`
 
@@ -10,14 +10,14 @@ Modelo de contenido para la web de la Comunidad Buddhista Camino del Dharma. Bas
 
 ## 1. Esquema general
 
-### Custom Post Types
+### Post Types
 
-| CPT (key) | Label ES | Slug | Uso principal |
-|-----------|----------|------|---------------|
-| page | Páginas | por página | Inicio, Comunidad, Linaje, Práctica, Eventos, Contacto |
-| event | Eventos | /eventos/ | Eventos especiales vigentes (retiros, talleres, Vesak, etc.) |
-| sangha | Sanghas | /sanghas/ | Contacto por sangha (Lluvia de ideas: conectar con cada sangha) |
-| testimonial | Testimonios | /testimonios/ o bloque | Incluir testimonios (Lluvia de ideas) |
+| Key | Label ES | Tipo | Slug | Uso principal |
+|-----|----------|------|------|---------------|
+| page | Páginas | Nativo | según cada página | Inicio, Comunidad, Linaje, Práctica, Eventos, Contacto |
+| event | Eventos | Custom | /eventos/ | Eventos especiales vigentes (retiros, talleres, Vesak, etc.) |
+| sangha | Sanghas | Custom | /sanghas/ | Contacto por sangha (Lluvia de ideas: conectar con cada sangha). Ver §3.1. |
+| testimonial | Testimonios | Custom o bloque | /testimonios/ o bloque | Por defecto: bloque en página; si CPT, ver §3.2. |
 
 ### Contenido fijo vs. dinámico
 
@@ -28,7 +28,7 @@ Modelo de contenido para la web de la Comunidad Buddhista Camino del Dharma. Bas
 | Meditación semanal | Bloque fijo en Inicio y Práctica (Lunes 7:30 p.m., Zoom) |
 | Formulario de contacto | Página Contacto |
 | **Videos** | Embed YouTube/Vimeo en páginas y bloques (conferencias, enseñanzas, indicaciones para meditar) |
-| **Cómo hacer parte / formación** | Página o sección: espacios de formación, alcance y propósito de cada uno (Lluvia de ideas) |
+| **Cómo hacer parte / formación** | Página o sección: espacios de formación, alcance y propósito de cada uno (Lluvia de ideas). |
 
 ---
 
@@ -82,15 +82,40 @@ Modelo de contenido para la web de la Comunidad Buddhista Camino del Dharma. Bas
 | event_name | text | Nombre del evento |
 | event_date | date | Fecha |
 | event_place | text | Lugar |
-| event_modality | text | Presencial / Virtual |
+| event_modality | select | presencial / virtual / híbrido |
 | event_description | WYSIWYG | Descripción, sentido, a quién va dirigido |
 | event_signup_url | url | Enlace inscripción |
 | event_status | select | vigente / finalizado / cancelado |
 | event_signup_payment | url o boolean | Inscripción/pagos por la web (Lluvia de ideas: gestión de eventos) |
 
-**Regla:** Solo eventos con `event_status = vigente` aparecen en la página 5.
+**Regla de visibilidad:** Solo eventos con `event_status = vigente` aparecen en la sección Eventos del sitio y en la ruta `/eventos/` (template Eventos). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
-**Cronograma de eventos (Lluvia de ideas):** Listado/archive de eventos con fechas; puede ser la misma vista `/eventos/` mostrando todos los eventos con filtro o vista de calendario.
+**Definición de «vigente»:** `event_status` es la fuente de verdad (manual). Opcionalmente, si `event_date` es anterior a hoy, el sistema puede sugerir marcar como «finalizado» para evitar eventos antiguos visibles por error.
+
+**Cronograma de eventos (Lluvia de ideas):** Listado/archive en `/eventos/`. Por defecto: **listado cronológico con agrupación por mes**. Vista de calendario solo si hay masa crítica de eventos en el tiempo.
+
+---
+
+## 3.1. Sangha (Custom Post Type, si se implementa)
+
+Campos mínimos recomendados:
+
+| Campo | Tipo | Uso |
+|-------|------|-----|
+| sangha_name | text | Nombre de la sangha |
+| sangha_city | text | Ciudad o zona |
+| sangha_contact_name | text | Nombre de contacto |
+| sangha_contact_whatsapp | text o url | WhatsApp o teléfono |
+| sangha_schedule | text | Horario o frecuencia (texto corto) |
+| sangha_map_url | url | Enlace a mapa (opcional) |
+
+---
+
+## 3.2. Testimonial: estándar del modelo
+
+**Por defecto (recomendado para este sitio):** No CPT. Bloque «Testimonios» editable en página Comunidad o Inicio; contenido gestionado en la propia página o en un bloque reutilizable.
+
+**Si se implementa CPT testimonial:** Definir campos mínimos (p. ej. testimonial_text, testimonial_author, testimonial_photo opcional); decidir si se publica como listado `/testimonios/` o solo se usa en bloques internos.
 
 ---
 
@@ -106,14 +131,14 @@ Valores posibles: Retiro, Taller, Celebración (Vesak, etc.), Conferencia, Encue
 
 ## 5. Plantillas mínimas
 
-- `front-page.php` — Inicio
-- `page-comunidad.php` — La comunidad
-- `page-linaje.php` — El linaje
-- `page-practica.php` — Práctica y actividades
-- `page-eventos.php` o `archive-event.php` — Eventos (condicional)
-- `page-contacto.php` — Contacto
-- `single-event.php` — Evento individual (si aplica)
-- `page.php` — Fallback para páginas
+- `front-page.php`: Inicio
+- `page-comunidad.php`: La comunidad
+- `page-linaje.php`: El linaje
+- `page-practica.php`: Práctica y actividades
+- `page-eventos.php` o `archive-event.php`: Eventos (condicional)
+- `page-contacto.php`: Contacto
+- `single-event.php`: Evento individual (si aplica)
+- `page.php`: Fallback para páginas
 
 ---
 
@@ -140,7 +165,18 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 
 ---
 
-## 8. Principio rector
+## 8. Requisitos de accesibilidad del contenido en WordPress
+
+Sin reemplazar lo definido en `16-accesibilidad-estandares`, este modelo exige dos reglas mínimas que afectan al contenido editado en WordPress:
+
+- **Imágenes:** Siempre rellenar texto alternativo (`alt`). Si la imagen es decorativa, usar `alt=""`.
+- **Videos informativos:** Si el video transmite información (conferencias, enseñanzas, indicaciones), debe disponer de subtítulos o transcripción.
+
+Detalle y criterios ampliados en `16-accesibilidad-estandares`.
+
+---
+
+## 9. Principio rector
 
 Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el primer contacto con la práctica buddhista**. No hay capas de marketing ni funnels. Solo acogida y claridad.
 
@@ -152,7 +188,7 @@ Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el p
 |------|--------|
 | Cronograma de eventos | event CPT + archive; listado con fechas |
 | Videos conferencias / YouTube | §6 Videos (embed) |
-| Testimonios | CPT testimonial o bloque |
+| Testimonios | §3.2 (bloque por defecto; CPT opcional) |
 | Botón donaciones | §7 Integraciones |
 | Gestión eventos (inscripción, pagos) | event_signup_url, event_signup_payment |
 | Sanghas con contacto | CPT sangha |
@@ -160,8 +196,14 @@ Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el p
 | Manual de marca | `02-identidad-corporativa` |
 | Link WhatsApp | §7 Integraciones |
 
-Otras ideas (estilo sobrio, paleta, accesibilidad, animación camino, Paramitas, El buda responde) están en `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `05-arquitectura-informacion-navegacion`, `15-tendencias-ux-ui-sistema-editorial`.
+Otras ideas (estilo sobrio, paleta, accesibilidad, animación camino, Paramitas, El buda responde) están en `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `05-arquitectura-informacion-navegacion`, `15-tendencias-ux-ui-sistema-editorial`, `16-accesibilidad-estandares`.
 
 ---
 
-**Versión del documento:** 2.0
+## Cierre
+
+Este documento define el **modelo de contenido oficial** del sitio: post types (nativos y custom), campos por página, eventos condicionales, testimonios (bloque o CPT), sangha (esquema mínimo si se implementa), videos (embed), integraciones externas y requisitos mínimos de accesibilidad del contenido. Está alineado con el plan (01), mapa de pantallas (04), árbol de URLs (10) y estructura del theme (11). Las rutas oficiales están en 10; las plantillas en 11.
+
+---
+
+**Versión:** 2.0

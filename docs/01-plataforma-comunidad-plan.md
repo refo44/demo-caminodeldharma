@@ -17,9 +17,9 @@ El problema que aborda este plan no es estético, sino estructural y orientativo
 
 **Fuentes canónicas obligatorias:**
 
-- `content-source/Contenido_Web_Camino_del_Dharma.docx`
-- `content-source/Lluvia de ideas para la página web de la comunidad.docx`
-- `content-source/Identidad CAMINO DEL DHARMA- (1).pdf` (manual de identidad visual)
+- `content-source/Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx`
+- `content-source/Pagina web Camino del Dharma/Lluvia de ideas para la página web de la comunidad.docx` (existe también versión `.md`)
+- `content-source/Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf` (manual de identidad visual)
 
 ---
 
@@ -133,7 +133,7 @@ Define el ritmo vivo del sitio.
 
 Permite:
 
-- Publicar y ocultar eventos (página 5 visible solo cuando hay evento vigente)
+- Publicar y ocultar eventos (página de Eventos visible solo cuando hay evento vigente; ver 04-mapa-pantallas)
 - Mantener cronograma activo
 - Actualizar meditación semanal (horario, modalidad)
 - Integrar videos formativos (conferencias, enseñanzas del maestro, indicaciones para meditar)
@@ -201,7 +201,7 @@ Se presenta como participación.
 ## Accesibilidad (capa transversal)
 
 No es una funcionalidad adicional.  
-Es una condición estructural del sistema.
+Es una condición estructural del sistema. Definida operativamente en `16-accesibilidad-estandares`.
 
 > **Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información completa del tema)."
 
@@ -308,10 +308,12 @@ Este tipo de documento es raro. Está más cerca de un manifiesto de diseño que
 
 ## Referencias (content-source)
 
+Todas bajo `content-source/Pagina web Camino del Dharma/`:
+
 | Fuente | Contenido |
 |--------|-----------|
-| Contenido_Web_Camino_del_Dharma.docx | Estructura 6 páginas, copy, footer, datos bancarios, orientación general |
-| Lluvia de ideas… | Cronograma, videos, testimonios, accesibilidad, El buda responde, donaciones, sanghas, Paramitas |
+| Contenido_Web_Camino_del_Dharma.docx (.md) | Estructura 6 páginas, copy, footer, datos bancarios, orientación general |
+| Lluvia de ideas para la página web de la comunidad.docx (.md) | Cronograma, videos, testimonios, accesibilidad, El buda responde, donaciones, sanghas, Paramitas |
 | Identidad CAMINO DEL DHARMA- (1).pdf | Paleta, tipografías, logo |
 
 ---

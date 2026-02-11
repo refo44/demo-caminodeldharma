@@ -1,11 +1,10 @@
 # Camino del Dharma — UI Copy Sheet
 
-**Repertorio de microcopy, navegación y sistema**  
-**Versión 1.0**
+**Repertorio de microcopy, navegación y sistema**
 
-Fuente única de verdad para botones, menús, mensajes, formularios y estados.
+Fuente única de verdad para botones, menús, mensajes, formularios y estados. Criterios de voz en 06; términos permitidos/prohibidos en 07.
 
-**Está alineado con:** `06-guia-voz-microcopy-ux`, `07-voice-dictionary`, `05-arquitectura-informacion-navegacion`
+**Depende de:** `06-guia-voz-microcopy-ux`, `07-voice-dictionary`. **Referencia:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`
 
 **Regla central:** El sitio no vende. Invita a practicar.
 
@@ -109,9 +108,11 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados.
 
 ## 8. Accesibilidad
 
-**Alt text:** Describir imágenes de forma clara (comunidad, buda, meditación, etc.)
+**Alt text:** Describir imágenes de forma clara (comunidad, buda, meditación, etc.). Imágenes decorativas: `alt=""`.
 
 **Avisos:** "Abre en nueva pestaña" para enlaces externos.
+
+Criterios completos en `16-accesibilidad-estandares`.
 
 ---
 

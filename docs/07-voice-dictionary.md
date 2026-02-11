@@ -1,11 +1,10 @@
-# Camino del Dharma — Voice Dictionary
+# Camino del Dharma — Diccionario de voz
 
-**Léxico del sistema**  
-**Versión 1.0**
+**Léxico del sistema**
 
-Define qué palabras existen dentro del territorio de la comunidad y cuáles no pueden existir jamás.
+Define qué palabras existen dentro del territorio de la comunidad y cuáles no pueden existir jamás. La voz y el tono se definen en `06-guia-voz-microcopy-ux`.
 
-La voz y el tono se definen en `06-guia-voz-microcopy-ux`.
+**Depende de:** `06-guia-voz-microcopy-ux`
 
 ---
 
@@ -52,7 +51,7 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 | Buddhismo | Dharma, Buddhismo, Chan, Tierra Pura, Mahāyāna |
 | Práctica | meditación, estudio consciente, recitación |
 | Personas | persona, practicante, maestro |
-| Actividad | encuentro, retiro, taller, celebración |
+| Actividad | encuentro, retiro, taller, celebración, conferencia |
 
 **Nunca usar:** producto, contenido, usuario, audiencia, cliente, lead, funnel, plataforma, dashboard, feed.
 
@@ -92,7 +91,7 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 | Situación | Texto |
 |-----------|-------|
 | Sin eventos | "No hay eventos programados en este momento." |
-| Error envío | "No fue posible enviar el mensaje." |
+| Error envío | "No fue posible enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp." |
 | 404 | "Esta página no existe." |
 
 **Nunca:** Error 404, No data, Loading, Oops, Algo salió mal.
@@ -122,5 +121,6 @@ El sitio no vende. El sitio acoge.
 
 ---
 
-**Referencia cruzada:** `06-guia-voz-microcopy-ux`, `08-ui-copy-sheet`  
+**Referencia:** `08-ui-copy-sheet` (textos concretos por pantalla).
+
 **Versión:** 1.0

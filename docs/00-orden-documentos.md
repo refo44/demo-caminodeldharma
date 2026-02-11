@@ -16,6 +16,7 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 | **10–11** | Navegación y URLs | Arquitectura de información/navegación y árbol de URLs. Dependen de pantallas, copy y recorridos. |
 | **12–14** | Implementación técnica | Theme, assets, inventario de contenido, orden de implementación. Convierten la arquitectura en código. |
 | **15** | Criterios contemporáneos | Tendencias UX/UI aplicadas al sistema. Filtro estratégico para validación de diseño e implementación. |
+| **16** | Accesibilidad | Estándares únicos de accesibilidad: estrategia, diseño, HTML semántico, ARIA, contenido editorial, checklist y testing. WCAG 2.1/2.2 AA. |
 
 ---
 
@@ -42,6 +43,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 13. `13-content-source-inventario`
 14. `14-orden-implementacion`
 15. `15-tendencias-ux-ui-sistema-editorial`
+16. `16-accesibilidad-estandares`
 
 ---
 
@@ -74,7 +76,7 @@ Cada ítem de la Lluvia de ideas está cubierto en al menos un documento.
 | El buda responde: avatar que responde preguntas (interactivo) | 01 (Capa 6) |
 | Incluir botón de donaciones | 01, 03, 05, 08 |
 | Gestión de eventos por la página (inscripción, pagos, cronograma) | 01, 03 |
-| Accesibilidad para personas con discapacidad visual (Sandra) | 01, 15 |
+| Accesibilidad para personas con discapacidad visual (Sandra) | 01, 15, 16 |
 | Apartado ¿Cómo hacer parte de la comunidad en términos de formación? | 01, 03, 04, 05 |
 | Explicar espacios de formación, alcance y propósito de cada uno | 01, 03 |
 | Animación con un camino: formación budista vs. solo meditación; llevar de la mano | 01, 09 |
