@@ -1,6 +1,6 @@
 # Camino del Dharma — Identidad corporativa
 
-**Versión 2.1**
+**Versión 2.2**
 
 Este documento define el sistema de identidad visual y tipográfica del sitio web de la Comunidad Buddhista Camino del Dharma. Los valores provienen estrictamente del manual de marca.
 
@@ -35,9 +35,9 @@ Solo existen cuatro colores definidos en el manual de marca. Estos cuatro colore
   --brand-1: #8c2b3d;   /* Rojo oscuro - acento principal */
   --brand-2: #b27474;   /* Rosa polvo - acento secundario */
   --brand-3: #d1aeab;   /* Mauve claro - superficies, bordes */
-  --brand-4: #3e424b;   /* Gris pizarra - texto, header, footer */
+  --brand-4: #3e424b;   /* Gris pizarra - texto */
 
-  --bg: #ffffff;        /* Fondo base por defecto; puede alternar con --brand-3 en superficies suaves */
+  --bg: var(--brand-3); /* Fondo base; superficies suaves */
   --text: var(--brand-4);
   --text-muted: var(--brand-2);
   --surface: var(--brand-3);
@@ -46,12 +46,12 @@ Solo existen cuatro colores definidos en el manual de marca. Estos cuatro colore
   --link-hover: var(--brand-2);
   --primary: var(--brand-1);
   --primary-hover: var(--brand-2);
-  --header-bg: var(--brand-4);
-  --footer-bg: var(--brand-4);
+  --header-bg: var(--brand-1);  /* Implementación: cabecera en rojo oscuro */
+  --footer-bg: var(--brand-2);  /* Implementación: pie en rosa polvo */
 }
 ```
 
-**Nota:** Verificar contraste AA para accesibilidad. El gris pizarra (#3e424b) sobre blanco cumple AA. Verificar contraste AA en combinaciones críticas (texto sobre fondos brand-3 y brand-2).
+**Nota:** Verificar contraste AA para accesibilidad. El gris pizarra (#3e424b) sobre blanco cumple AA. Verificar contraste AA en combinaciones críticas (texto sobre fondos brand-3 y brand-2). Header y footer usan brand-1 y brand-2 respectivamente para legibilidad del texto claro sobre fondo.
 
 ---
 
@@ -77,9 +77,11 @@ Solo dos familias definidas en el manual de marca.
 :root {
   --font-display: "MarloweEscapade", serif;
   --font-heading: "Downtown DEMO Regular", "MarloweEscapade", serif;
-  --font-body: /* Sans-serif neutra definida en implementación (p. ej. Inter, Source Sans, system-ui) */;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 ```
+
+**Implementación:** La fuente de cuerpo es **Inter** (SIL OFL), autohospedada en `assets/fonts/inter/` (woff2: 400 normal, 600 normal, 400 italic). Ver 15-assets-strategy y `public/assets/fonts/README.md`.
 
 ---
 
@@ -138,7 +140,7 @@ El sitio debe transmitir **calma, claridad y coherencia**.
 | Capa | Estado |
 |------|--------|
 | Paleta | Definida (4 colores) |
-| Tipografía | Definida (MarloweEscapade, Downtown DEMO Regular) |
+| Tipografía | Definida: display MarloweEscapade, headings Downtown DEMO Regular, body Inter (autohospedada) |
 | Logo | Disponible |
 | Manual de marca | PDF canónico |
 
@@ -150,5 +152,5 @@ Nada visual se decide fuera de este sistema. Los colores y fuentes del PDF son l
 
 ---
 
-**Versión del documento:** 2.1  
+**Versión del documento:** 2.2  
 **Fuente:** Identidad CAMINO DEL DHARMA- (1).pdf

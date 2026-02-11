@@ -12,7 +12,7 @@ Define dónde viven los archivos del proyecto que no son generados dinámicament
 
 ```
 demo-caminodeldharma/          (o nombre del repo)
-├── docs/                      Documentación del proyecto (01–19)
+├── docs/                      Documentación del proyecto (01–20)
 ├── content-source/            Fuentes de contenido; no se despliega (16)
 │   └── Pagina web Camino del Dharma/
 │       ├── Contenido_Web_Camino_del_Dharma.docx | .md
@@ -20,7 +20,15 @@ demo-caminodeldharma/          (o nombre del repo)
 │       ├── Link-videos-youtube.md | Link videos subidos en Youtube.docx
 │       ├── Identidad CAMINO DEL DHARMA- (1).pdf
 │       └── FOTOS PAGINA WEB/   Imágenes y videos por pestaña
-└── theme-camino-del-dharma/   Theme WordPress (12)
+├── public/                    Maqueta estática (Fase 2); no sustituye el theme
+│   ├── index.html, 404.html
+│   ├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/
+│   └── assets/
+│       ├── css/               main.css, normalize.css
+│       ├── js/                main.js
+│       ├── fonts/             Downtown, Inter, MarloweEscapade (15)
+│       └── images/            Imágenes por sección
+└── theme-camino-del-dharma/   Theme WordPress (12) — destino final Fase 3
     ├── style.css
     ├── theme.json
     ├── functions.php
@@ -33,7 +41,7 @@ demo-caminodeldharma/          (o nombre del repo)
         ├── images/
         └── favicon/
 ```
-El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia.
+El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia. En **Fase 2 (estático)** los assets y páginas viven en `public/`; en Fase 3 se alinean en el theme.
 
 ---
 
@@ -75,4 +83,4 @@ Este documento define la **geografía oficial** del repositorio: dónde viven do
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3

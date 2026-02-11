@@ -15,8 +15,8 @@ Define qué assets existen, dónde viven y cómo se usan. La geografía del proy
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Iconos**         | SVG inline o sprite. Sin icon fonts. Inline para iconos sueltos; sprite para iconos muy repetidos (no mezclar estrategias sin necesidad en la primera entrega).  |
 | **Biblioteca de iconos** | **Lucide.** Una sola biblioteca en todo el sitio; no mezclar. Lucide ofrece el mejor equilibrio para una comunidad espiritual: limpia, amplia, no comercial, no tecnológica, no llamativa; coherente con identidad sobria y acogedora (docs 01, 02, 06). |
-| **Fuentes**        | Según manual de marca. Autohospedadas en `assets/fonts/`, woff2.                                                                                                  |
-| **Tipografía**     | Definida (MarloweEscapade, Downtown DEMO Regular). Según 02; uso en 14.                                                                                           |
+| **Fuentes**        | Según manual de marca. Autohospedadas en `assets/fonts/` (woff2/ttf). Inter (cuerpo), Downtown (headings), MarloweEscapade (display).                               |
+| **Tipografía**     | Definida: MarloweEscapade (display), Downtown DEMO Regular (headings), Inter (body). Según 02; uso en 14.                                                        |
 | **Favicon**        | Set completo: `favicon.ico`, `favicon.svg`, `apple-touch-icon.png` (180×180), `favicon-32x32.png`, `favicon-16x16.png`, `site.webmanifest` con name/theme_color de 02. |
 | **SVG**            | Iconos en `assets/icons/` (inline o sprite). Favicon en `assets/favicon/favicon.svg`. Sin icon fonts.                                                             |
 | **PDF**            | En content-source: solo referencia (manual de marca, no se despliega). Si el sitio ofrece PDFs descargables, usar `assets/documents/` y enlazar desde el sitio.  |
@@ -36,7 +36,7 @@ assets/
 │   └── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
-├── fonts/          Tipografías autohospedadas (woff2)
+├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y public/assets/fonts/README.md.
 ├── favicon/        ico, svg, png, webmanifest
 ├── audio/          Archivos de audio (si aplica): meditación, enseñanzas
 └── documents/      PDFs públicos descargables (si aplica)
@@ -54,8 +54,8 @@ En WordPress, esta estructura va dentro del directorio del theme (`theme-camino-
 
 ### 3.1 Fuentes: carga y licencia
 
-- **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS deben mapear directamente a las fuentes definidas en 15 (según 02), no redefinirse arbitrariamente.
-- **Licencia:** **Obligatorio** antes de producción: validar licencia de tipografías (p. ej. Downtown DEMO Regular; las fuentes "DEMO" a veces no permiten uso en producción). Si la licencia no permite uso comercial o en producción, reemplazar por alternativa adecuada.
+- **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS mapean a: MarloweEscapade (display), Downtown DEMO Regular (headings), Inter (body). Inter está autohospedada en `assets/fonts/inter/` (woff2: 400, 600, 400 italic); licencia SIL OFL (02, fonts/README.md).
+- **Licencia:** **Obligatorio** antes de producción: validar licencia de tipografías (p. ej. Downtown DEMO Regular; las fuentes "DEMO" a veces no permiten uso en producción). Inter: SIL OFL. MarloweEscapade: CC BY 4.0 (crédito en footer). Si alguna licencia no permite uso comercial o en producción, reemplazar por alternativa adecuada.
 
 ---
 
@@ -131,4 +131,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.5

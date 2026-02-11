@@ -1,7 +1,7 @@
 # Camino del Dharma — Inventario de contenido fuente
 
 **Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.**  
-**Versión 1.1**
+**Versión 1.2**
 
 **Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
