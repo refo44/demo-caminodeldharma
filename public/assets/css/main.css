@@ -7,6 +7,31 @@
 /* ==========================================================================
    0. Fonts (autohosted in assets/fonts; font-display: swap)
    ========================================================================== */
+/* Inter — body text (Fontsource, SIL OFL) */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/inter-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Downtown DEMO Regular";
   src: url("../fonts/downtown/downtown-demo-regular.ttf") format("truetype");
@@ -53,7 +78,7 @@
   /* Typography */
   --font-display: "MarloweEscapade", serif;
   --font-heading: "Downtown DEMO Regular", "MarloweEscapade", serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 
   /* Grid & rhythm */
   --container-max: 70rem;
