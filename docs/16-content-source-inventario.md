@@ -63,10 +63,9 @@ Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su us
 
 ## 5. Acciones pendientes
 
-1. **Identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf`
-2. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
-3. **Renombrar imágenes:** Considerar nombres en kebab-case para producción (ej. `foto-biografia-fundador.jpg`)
-4. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
+1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
+2. **Renombrar imágenes:** Considerar nombres en kebab-case para producción (ej. `foto-biografia-fundador.jpg`)
+3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
 
 ---
 

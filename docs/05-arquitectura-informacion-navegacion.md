@@ -38,6 +38,8 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 **Alternativa:** Eventos como ítem condicional; solo visible cuando hay evento vigente.
 
+**Móvil (hamburguesa):** En pantallas pequeñas la navegación global puede colapsarse en un único botón de menú accesible (icon button). Este botón muestra u oculta los mismos enlaces definidos arriba; no se añaden rutas nuevas. Se implementa siguiendo el patrón de `19-accesibilidad-estandares` (icono con `aria-hidden="true"` y texto accesible visible o con `.visually-hidden`, más `aria-expanded`/`aria-controls` para el panel de navegación).
+
 ### Pie
 
 | Enlace | Destino |

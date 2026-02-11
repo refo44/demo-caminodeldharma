@@ -17,7 +17,7 @@ Define estrategia, principios, reglas de diseño, HTML semántico, ARIA, conteni
 - **Referencia:** WCAG 2.1 Level AA (mínimo) o WCAG 2.2 Level AA (recomendado). [WCAG 2.1](https://www.w3.org/TR/WCAG21/) · [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
 - **Filosofía:** Accesibilidad como parte del diseño y del contenido, no como capa posterior. Integrado con identidad (02), UX/UI (17) y orden de implementación (16).
 
-**Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información completa del tema)."
+**Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (información experta específica para el proyecto)."
 
 ---
 
@@ -64,7 +64,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 - **Tipografía legible:** Tamaños cómodos, jerarquía clara (H1–H3), según manual de marca (02) y tendencias UX (17).
 - **Contraste:** Mínimo AA (texto e imágenes de texto): texto normal 4.5:1, texto grande 3:1. Verificar combinaciones críticas (texto sobre fondos brand-3, brand-2). Componentes de interfaz: contraste no textual ≥ 3:1 cuando aplique.
-- **Targets:** Áreas clicables suficientes para puntero/táctil; en móvil, botones y enlaces cómodos.
+- **Targets:** Áreas clicables suficientes para puntero/táctil; en móvil, botones y enlaces cómodos. Recomendación WCAG 2.2: apuntar a ~24×24 CSS px mínimo para controles interactivos cuando sea posible, sin romper el diseño editorial; el objetivo de diseño preferido sigue siendo targets cómodos cercanos a 44×44 cuando el layout lo permita.
 - **Ritmo visual:** Espacio en blanco, ancho de línea de lectura (p. ej. 60–70ch), sin saturación.
 - **Color:** No depender solo del color para transmitir significado (WCAG 1.4.1).
 - **Lenguaje:** Claro y directo (alineado con `07-guia-voz-microcopy-ux`). Evitar jerga innecesaria.
@@ -76,6 +76,15 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 - **Orden de foco:** Orden de tabulación lógico y predecible; no solo "navegable por teclado", sino secuencia que preserve el significado.
 - **Focus visible:** No usar `outline: none` sin reemplazo (usar `:focus-visible` con estilo visible equivalente).
 - **Reflujo y zoom:** Contenido usable al 200 % de zoom y en viewport equivalente a 320 px de ancho sin pérdida de información ni funcionalidad (WCAG 1.4.10).
+- **Landmarks consistentes:** Una sola etiqueta `<main>` por página; `header`/`nav`/`main`/`footer` consistentes entre pantallas.
+- **Headings sin saltos:** No saltar de H1 a H3 por estilo; la jerarquía de H1–H3 sigue el contenido, no el diseño.
+- **Enlaces distinguibles:** Enlaces visualmente distinguibles del texto sin depender solo del color (subrayado o estilo equivalente).
+- **Hover/focus coherentes:** Hover y foco deben existir y ser consistentes; el foco no puede ser menos visible que el hover.
+- **Imágenes con texto:** Si una imagen contiene texto relevante, debe existir alternativa en HTML (caption o texto cercano).
+- **Autocomplete en formularios:** Usar atributos `autocomplete` cuando aplique (nombre, email, etc.) para mejorar usabilidad real.
+- **Mensajes de error claros:** Mensajes de error visibles, asociados al campo y que indiquen cómo corregir (no solo "campo inválido").
+- **Respeto a zoom/tamaño de texto:** No bloquear zoom ni escalado del navegador; evitar layouts que dependan de `vh` rígido en móvil.
+- **Contenido colapsable (menú móvil):** Los controles que abren o cierran navegación colapsable deben actualizar `aria-expanded` y mantener el contenido navegable por teclado cuando esté visible; el `<nav>` no se elimina del DOM, solo se oculta/muestra con atributos o CSS.
 
 ---
 
@@ -115,28 +124,40 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 - No usar `aria-hidden="true"` para ocultar contenido que debe ser accesible.
 - No usar `aria-label` cuando ya existe un label visible adecuado (se prefiere texto visible).
 - No inventar roles o combinaciones sin patrón conocido.
+- No usar `role="presentation"` ni `aria-hidden="true"` en contenedores que incluyan elementos enfocables.
+- No usar `tabindex` positivo (`tabindex="1"`, `2`, etc.); solo `0` y `-1` cuando haya una razón clara.
+- No preferir `aria-label` cuando se pueda incluir texto en el DOM (visible o con `.visually-hidden`).
+- No dejar SVG decorativos sin marcar: deben llevar `aria-hidden="true"` y `focusable="false"`.
 
 ### Reglas obligatorias
 
-- **Todo elemento interactivo** debe tener nombre accesible: texto visible, o `aria-label`, o `aria-labelledby`.
+- **Todo elemento interactivo** debe tener nombre accesible. Orden de preferencia:
+  1. Texto visible (preferido)
+  2. Texto oculto con clase `.visually-hidden` (cuando el diseño no permita texto visible)
+  3. `aria-labelledby` (cuando el nombre provenga de otro elemento)
+  4. `aria-label` (último recurso, solo si no hay alternativa)
 - **Estados dinámicos** deben reflejarse con atributos ARIA cuando aplique: `aria-expanded`, `aria-pressed`, `aria-selected`, `aria-current`, `aria-invalid`.
 - **Errores de formularios:** `aria-describedby` apuntando al bloque de error/ayuda; `aria-invalid="true"` cuando hay error.
+- **Contenido oculto accesible:** El contenido oculto visualmente que forma parte de la navegación o estructura accesible no debe eliminarse del DOM ni recrearse dinámicamente sin necesidad; se oculta o muestra con CSS o atributos, manteniendo su relación semántica.
+
+> Nota de implementación: la clase `.visually-hidden` (o la equivalente `screen-reader-text` de WordPress) se define en `14-css-architecture`. El proyecto usa una sola convención para texto solo visible a tecnologías de asistencia.
 
 ### Patrones mínimos por componente
 
 | Componente | Requisitos |
 |------------|------------|
-| **Icon button** (botón sin texto) | `aria-label` obligatorio (o `aria-labelledby`). El label describe la acción, no el ícono (ej.: "Abrir menú", "Cerrar búsqueda"). |
+| **Icon button** (botón sin texto visible) | Proveer nombre accesible con texto en el DOM. Orden preferido: (1) `<span class="visually-hidden">…</span>`, (2) `aria-labelledby`, (3) `aria-label` solo si no hay alternativa. El icono/SVG debe ir con `aria-hidden="true"` y `focusable="false"`. |
 | **Enlaces** | Texto del enlace descriptivo. Evitar "aquí", "ver más", "clic". |
 | **Modal / Dialog** | Si es custom: `role="dialog"` (o `alertdialog` si interrumpe); `aria-modal="true"`; `aria-labelledby` obligatorio; `aria-describedby` si hay texto explicativo. Focus al abrir dentro del modal; focus trap; retorno del foco al cerrar. Si se usa `<dialog>` nativo, validar igual el comportamiento de foco y cierre por teclado (Esc). |
 | **Dropdown / Menú** | Si es menú de navegación simple, preferir `nav` + enlaces y no convertirlo en "menú ARIA" si no hace falta. Si es dropdown interactivo: trigger con `aria-expanded` dinámico y `aria-controls` al panel. Teclado: Enter/Space abre, Esc cierra, flechas navegan si aplica. |
 | **Tabs** | `role="tablist"`, `role="tab"`, `role="tabpanel"`; `aria-selected` y `tabindex` correctos; `aria-controls` y `aria-labelledby` consistentes. |
 | **Alertas / mensajes dinámicos** | `aria-live="polite"` para info; `aria-live="assertive"` para errores críticos. Solo cambios relevantes. |
-| **Formularios** | Label asociado al control; placeholder no sustituye label. Error: `aria-invalid="true"` y `aria-describedby="id-del-error"`. Campos requeridos: indicación visible y `aria-required="true"` si aplica. |
+| **Formularios** | Label asociado al control; placeholder no sustituye label. El texto de error debe insertarse en el DOM (no solo cambiar estilos). Error: `aria-invalid="true"` y `aria-describedby="id-del-error"`. Campos requeridos: indicación visible y `aria-required="true"` si aplica. |
 
 ### Checklist de PR (ARIA)
 
-- [ ] Todo icon button tiene `aria-label` o `aria-labelledby`.
+- [ ] Todo icon button tiene nombre accesible usando texto en el DOM (`.visually-hidden`) o `aria-labelledby`; `aria-label` solo si no hay alternativa.
+- [ ] Iconos decorativos dentro de controles tienen `aria-hidden="true"`.
 - [ ] Controles con panel tienen `aria-expanded` y `aria-controls`.
 - [ ] Errores de formulario usan `aria-invalid` y `aria-describedby`.
 - [ ] No hay roles redundantes ni ARIA sustituyendo HTML nativo.
@@ -148,8 +169,9 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 - **Headings:** H1–H3 ordenados; un H1 por página; jerarquía lógica.
 - **Alt text:** En todas las imágenes informativas; descriptivo y conciso. Decorativas: `alt=""` o implementación que permita ignorarlas.
+- **Decorativo (definición):** Se considera decorativo todo elemento visual que no aporta información ni funcionalidad adicional (iconos que acompañan texto ya claro, separadores, ornamentos).
 - **Texto en imágenes:** No usar texto incrustado en imágenes como único medio para información esencial, salvo que sea decorativo o exista alternativa equivalente (p. ej. texto en HTML).
-- **Enlaces:** Texto descriptivo (evitar "aquí", "más info" sin contexto). Abrir en nueva pestaña (`target="_blank"`) solo cuando sea necesario; si se usa, avisarlo en el texto o con indicación accesible (p. ej. ícono + texto "se abre en nueva ventana").
+- **Enlaces:** Texto descriptivo (evitar "aquí", "más info" sin contexto). Abrir en nueva pestaña (`target="_blank"`) solo cuando sea necesario; si se usa, **debe indicarse** con texto visible o texto oculto accesible (p. ej. ícono + texto "se abre en nueva ventana").
 - **Lenguaje:** Claro y directo; alineado con guía de voz (06).
 - **Medios:** Subtítulos o transcripción cuando el contenido sea informativo (video/audio). No depender solo del audio para información esencial.
 
@@ -173,9 +195,15 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 
 ## 11. Testing básico
 
+- **Mínimo obligatorio en PRs con UI:**
+  - **Teclado:** Tab/Shift+Tab recorren todos los interactivos visibles sin perder foco ni saltar secciones relevantes.
+  - **Focus visible:** El foco se ve claramente en enlaces, botones e inputs.
+  - **Lighthouse:** Sin fallas críticas de accesibilidad en la vista tocada.
+  - **Formularios (si se tocaron):** Label asociado, error visible y lectura correcta del error.
+
 - **Navegación solo con teclado:** Recorrer todo el sitio sin ratón; sin trampas de foco; orden de tabulación lógico.
 - **Revisión de contraste:** Herramientas automáticas o manual sobre combinaciones críticas.
-- **Screen reader (opcional):** Prueba puntual con lector de pantalla para flujos clave (navegación, formulario de contacto).
+- **Screen reader (opcional, recomendado en releases):** Prueba puntual con lector de pantalla para flujos clave (navegación, formulario de contacto).
 - **Validación automática:** Lighthouse y, como apoyo complementario, axe (extensión) o WAVE. No como único criterio.
 - **Páginas mínimas a testear:** Inicio (home), una página de contenido largo, página con formulario de contacto, página de eventos o listado (si aplica).
 
@@ -198,4 +226,4 @@ Este documento es el **estándar único de accesibilidad** del proyecto: estrate
 ---
 
 **Versión:** 1.1  
-**Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`, Lluvia de ideas (Sandra). Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
+**Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`, lluvia de ideas de accesibilidad del proyecto. Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).
