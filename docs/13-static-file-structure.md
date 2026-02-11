@@ -44,7 +44,7 @@ El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; e
 | **docs/** | Solo Markdown (y recursos referenciados). Orden por prefijo numérico (00–19). No se despliega al sitio. |
 | **content-source/** | Solo en local. No se enlaza desde el código. Assets para el sitio se copian al theme o a `public/` según 13 y 15. Puede ignorarse en producción (deploy), pero debe mantenerse versionado en el repo para trazabilidad editorial. |
 | **theme-camino-del-dharma/** | Theme WordPress. Los archivos estáticos (CSS, JS, imágenes, fuentes) viven en `assets/` dentro del theme. WordPress los sirve desde la URL del theme. Solo los assets dentro de `theme-camino-del-dharma/assets/` son accesibles públicamente desde el sitio. |
-| **Maqueta estática (si existe)** | Si se usa carpeta `public/` o `dist/` para HTML/CSS previo al theme, no sustituye la estructura del theme; se alinea con 12 y 13. Es opcional y no obligatoria para este proyecto. |
+| **Maqueta estática (si existe)** | Si se usa carpeta `public/` o `dist/` para HTML/CSS previo al theme, no sustituye la estructura del theme; se alinea con 12 y 13. Rutas estáticas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `404`. Es opcional y no obligatoria para este proyecto. |
 
 **Versionado:** `content-source/` se versiona (trazabilidad editorial). Archivos temporales de build (`public/`, `dist/` si son salida de build) no deben versionarse.
 
@@ -75,4 +75,4 @@ Este documento define la **geografía oficial** del repositorio: dónde viven do
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

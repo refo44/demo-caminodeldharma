@@ -23,6 +23,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | El linaje | `/linaje/` |
 | Práctica y actividades | `/practica/` |
 | Eventos especiales | `/eventos/` *(la ruta existe siempre; contenido: listado o mensaje amable; ítem en menú condicional)* |
+| Galería | `/galeria/` |
 | Contacto | `/contacto/` |
 
 ---
@@ -52,6 +53,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 /practica/
 /eventos/
 /eventos/{slug}/
+/galeria/
 /contacto/
 ```
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
@@ -77,6 +79,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | `/practica/` | page-practica.php |
 | `/eventos/` | page-eventos.php o archive-event.php |
 | `/eventos/{slug}/` | single-event.php |
+| `/galeria/` | page-galeria.php |
 | `/contacto/` | page-contacto.php |
 
 *(Si se implementa CPT sangha: `/sanghas/` → archive-sangha.php; `/sanghas/{slug}/` → single-sangha.php.)*
@@ -89,4 +92,4 @@ Este documento es la **geografía oficial de rutas** del sitio. Si una URL no es
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

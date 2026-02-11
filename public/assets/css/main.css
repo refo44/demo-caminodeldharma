@@ -396,11 +396,30 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+.gallery-row {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .gallery-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-row img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
 /* --- Hero --- */
 .hero {
   padding-block: var(--space-xl);
   text-align: center;
-  background-color: var(--brand-1);
+  background-color: var(--brand-2);
   color: var(--text-on-dark);
 }
 

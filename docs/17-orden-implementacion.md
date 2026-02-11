@@ -39,6 +39,7 @@ Estructura recomendada:
 - `/linaje/index.html`
 - `/practica/index.html`
 - `/eventos/index.html`
+- `/galeria/index.html`
 - `/contacto/index.html`
 - `/404.html`
 - `/assets/`
@@ -60,6 +61,7 @@ La maqueta define el layout definitivo. En Fase 3 solo se envolverá el HTML con
 | `/linaje/index.html`      | `page-linaje.php`                        |
 | `/practica/index.html`    | `page-practica.php`                      |
 | `/eventos/index.html`     | `archive-event.php` o `page-eventos.php` |
+| `/galeria/index.html`     | `page-galeria.php`                       |
 | `/contacto/index.html`    | `page-contacto.php`                      |
 | `/404.html`               | `404.php`                                |
 
@@ -133,7 +135,8 @@ Esto evita rediseños eternos.
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, talleres, retiros
 5. **El linaje** — Tradición, Chan, Tierra Pura
-6. **Eventos** — Condicional; implementar cuando haya eventos vigentes
+6. **Galería** — Página dedicada con grid de imágenes (43 fotos); en Inicio solo fila de 4 imágenes + enlace «Ver galería completa»
+7. **Eventos** — Condicional; implementar cuando haya eventos vigentes
 
 ---
 
@@ -161,4 +164,4 @@ Este documento define el **orden oficial de implementación**: documentación y 
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3

@@ -10,10 +10,11 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Página | Función |
 |--------|---------|
-| Inicio | Hero, comunidad, cómo practicamos, meditación semanal, caminos de participación |
+| Inicio | Hero, comunidad, cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
 | La comunidad | Quiénes somos, fundador, experiencia y propósito |
 | El linaje | Tradición viva, Mahāyāna, Chan y Tierra Pura |
 | Práctica y actividades | Meditación semanal, talleres, retiros, vida comunitaria |
+| Galería | Página dedicada con grid de todas las imágenes de la galería comunitaria (43 fotos) |
 | Contacto | Formulario Nombre, Correo, Mensaje |
 
 ---
@@ -53,11 +54,11 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 ## Conjunto total de pantallas a construir
 
-**Páginas principales (estáticas):** 1. Inicio · 2. La comunidad · 3. El linaje · 4. Práctica y actividades · 5. Contacto
+**Páginas principales (estáticas):** 1. Inicio · 2. La comunidad · 3. El linaje · 4. Práctica y actividades · 5. Galería · 6. Contacto
 
-**Página condicional:** 6. Eventos especiales — la ruta `/eventos/` existe siempre; contenido: listado si hay eventos vigentes, mensaje amable si no.
+**Página condicional:** 7. Eventos especiales — la ruta `/eventos/` existe siempre; contenido: listado si hay eventos vigentes, mensaje amable si no.
 
-**Vistas de contenido:** 7. Evento individual — solo si se habilita vista detalle por evento.
+**Vistas de contenido:** 8. Evento individual — solo si se habilita vista detalle por evento.
 
 **Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
@@ -73,6 +74,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | La comunidad | `page-comunidad.php` |
 | El linaje | `page-linaje.php` |
 | Práctica y actividades | `page-practica.php` |
+| Galería | `page-galeria.php` |
 | Contacto | `page-contacto.php` |
 | Eventos especiales | `archive-event.php` o `page-eventos.php` (condicional) |
 | Evento individual | `single-event.php` (si se activa) |
@@ -111,4 +113,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.0
+**Versión:** 2.1

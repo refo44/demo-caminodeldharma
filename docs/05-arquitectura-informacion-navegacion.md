@@ -34,6 +34,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 | El linaje | Linaje |
 | Práctica | Práctica |
 | Eventos | Eventos (si hay evento vigente) o se oculta |
+| Galería | Galería |
 | Contacto | Contacto |
 
 **Alternativa:** Eventos como ítem condicional; solo visible cuando hay evento vigente.
@@ -58,6 +59,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 |--------|---------|------|
 | "Practica con nosotros" | Contacto o WhatsApp | Primario |
 | "Participar" (meditación) | WhatsApp | Primario |
+| "Ver galería completa" | Galería | Secundario |
 | La comunidad | Comunidad | Secundario |
 | El linaje | Linaje | Secundario |
 | Práctica | Práctica | Secundario |
@@ -97,7 +99,16 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 ---
 
-## 7. Eventos (si visible)
+## 7. Galería
+
+| Enlace | Destino | Tipo |
+|--------|---------|------|
+| "Volver al inicio" | Inicio | Secundario |
+| Menú global | Inicio, Comunidad, Linaje, Práctica, Eventos, Contacto | Secundario |
+
+---
+
+## 8. Eventos (si visible)
 
 | Enlace | Destino | Tipo |
 |--------|---------|------|
@@ -107,7 +118,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 ---
 
-## 8. Contacto
+## 9. Contacto
 
 | Enlace | Destino | Tipo |
 |--------|---------|------|
@@ -116,7 +127,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 ---
 
-## 9. Estados
+## 10. Estados
 
 ### Sin eventos vigentes
 
@@ -135,7 +146,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 ---
 
-## 10. Regla final
+## 11. Regla final
 
 Si un enlace no empuja hacia:
 
@@ -154,8 +165,8 @@ Este documento es la **guía estructural definitiva** de navegación y arquitect
 
 **Tres capas del sistema:** modelo de contenido (03) → mapa de pantallas (04) → red de enlaces vivos (este documento). Quedan coherentes entre sí.
 
-**Siguiente paso en WordPress:** crear el menú con los ítems definidos; implementar lógica condicional para mostrar/ocultar Eventos según existencia de evento vigente; asignar en cada plantilla los enlaces primarios y secundarios indicados en las secciones 3–8.
+**Siguiente paso en WordPress:** crear el menú con los ítems definidos; implementar lógica condicional para mostrar/ocultar Eventos según existencia de evento vigente; asignar en cada plantilla los enlaces primarios y secundarios indicados en las secciones 3–9.
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2
