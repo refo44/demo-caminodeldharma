@@ -85,8 +85,8 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 
 ## 7. Videos
 
-- **Origen:** `FOTOS PAGINA WEB/Pestaña 5/` (MP4 + Link videos YouTube)
-- **Estrategia:** Integrar canal de YouTube; videos locales para sección de meditación.
+- **Origen:** `FOTOS PAGINA WEB/Pestaña 5/` (MP4 locales: ¿Qué es Meditar?, Conectar con nuestro planeta, Redes de Compasión) + **YouTube:** lista canónica en `content-source/.../Link-videos-youtube.md` (4 conferencias/enseñanzas; ver inventario 13).
+- **Estrategia:** Integrar canal de YouTube; videos locales para sección de meditación. Los 4 videos YouTube son la fuente oficial para embeds de enseñanzas (03 §6).
 - **Lluvia de ideas:** "Conectar el canal de youtube a la página", "Video sobre indicaciones para meditar".
 
 ---

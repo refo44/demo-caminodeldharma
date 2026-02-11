@@ -146,6 +146,7 @@ Valores posibles: Retiro, Taller, Celebración (Vesak, etc.), Conferencia, Encue
 
 - **Embed:** Las páginas y bloques deben permitir incrustar videos por URL (YouTube, Vimeo).
 - **Uso:** Conferencias, enseñanzas del maestro, indicaciones para meditar, canal de YouTube conectado a la página.
+- **Lista canónica de URLs:** `content-source/Pagina web Camino del Dharma/Link-videos-youtube.md` (4 videos: Encontrando la Plenitud…, La sabiduría del no hacer, ¿Cómo el Budismo puede ayudarnos…?, La Sabiduría del Buddhismo Chan). Misma lista en `Link videos subidos en Youtube.docx`. Implementación debe usar estas URLs para los embeds de conferencias/enseñanzas.
 - **Lluvia de ideas:** "Espacio para subir videos de las conferencias, conectar el canal de youtube a la página", "Video sobre indicaciones para meditar".
 
 Implementación: bloque o campo de tipo «video embed» (URL); editor no sube archivo de video, solo pega enlace.

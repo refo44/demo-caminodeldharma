@@ -13,11 +13,12 @@
 
 | Carpeta / Archivo | Contenido |
 |-------------------|-----------|
-| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx` | Contenido principal de la web (canónico) |
-| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.md` | Versión markdown del Contenido_Web (derivada, no canónica) |
+| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx` | Contenido principal de la web. **Seguir estrictamente.** |
+| `Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.md` | Mismo contenido que el .docx (misma fuente canónica). **Seguir estrictamente.** |
 | `Pagina web Camino del Dharma/Lluvia de ideas para la página web de la comunidad.docx` | Ideas adicionales (eventos, accesibilidad, donaciones, etc.) |
 | `Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf` | Manual de marca (paleta, tipografía, logos) |
-| `Pagina web Camino del Dharma/Link videos subidos en Youtube.docx` | URLs de videos en YouTube |
+| `Pagina web Camino del Dharma/Link videos subidos en Youtube.docx` | URLs de videos en YouTube (fuente original) |
+| `Pagina web Camino del Dharma/Link-videos-youtube.md` | Mismo contenido que el .docx: lista canónica de 4 videos YouTube (título + URL) |
 | `Pagina web Camino del Dharma/FOTOS PAGINA WEB/` | Imágenes, videos y logo por pestaña |
 
 ---
@@ -43,9 +44,9 @@ Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su us
 
 | Archivo | Contenido |
 |---------|-----------|
-| Contenido_Web_Camino_del_Dharma.docx | Estructura de 6 páginas, copy, footer, datos bancarios |
+| Contenido_Web_Camino_del_Dharma.docx / .md | Estructura de 6 páginas, copy, footer, datos bancarios. **Contenido canónico: debe seguirse estrictamente.** |
 | Lluvia de ideas… | Cronograma eventos, testimonios, accesibilidad, El buda responde, donaciones, sanghas |
-| Link videos subidos en Youtube.docx | Enlaces a videos en YouTube |
+| Link videos subidos en Youtube.docx / Link-videos-youtube.md | Enlaces a videos en YouTube (4 conferencias/enseñanzas; ver lista en .md) |
 
 ---
 
@@ -63,7 +64,7 @@ Las carpetas en `content-source` se llaman «Pestaña N»; la tabla indica su us
 ## 5. Acciones pendientes
 
 1. **Identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf`
-2. **Videos YouTube:** Extraer URLs de `Link videos subidos en Youtube.docx`
+2. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
 3. **Renombrar imágenes:** Considerar nombres en kebab-case para producción (ej. `foto-biografia-fundador.jpg`)
 4. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
 

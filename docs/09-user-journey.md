@@ -1,10 +1,10 @@
 # Camino del Dharma — User Journey
 
-**Versión 1.0**
-
-Describe cómo se mueve una persona real dentro del sitio. No es un flujo de conversión. Es una serie de recorridos de encuentro con la comunidad y la práctica.
+Describe cómo se mueve una persona real dentro del sitio. No es un flujo de conversión; es una serie de recorridos de encuentro con la comunidad y la práctica.
 
 Sirve para validar: arquitectura de información, navegación, microcopy, jerarquía de pantallas.
+
+**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `06-guia-voz-microcopy-ux`, `08-ui-copy-sheet`
 
 ---
 
@@ -104,7 +104,7 @@ La persona entiende el contexto antes de actuar.
 - Llega a una página desde Google o enlace
 - → Lee el contenido
 - → Ve menú y footer
-- → Navega a Inicio, Comunidad o Práctica
+- → Navega a Inicio, La comunidad o Práctica
 
 Ninguna página es un callejón sin salida.
 
@@ -125,8 +125,8 @@ Un recorrido es correcto si:
 
 ## Cierre
 
-Este documento es la **guía de validación de recorridos** del sitio. Está alineado con mapa de pantallas, modelo de contenido, arquitectura de navegación, guía de voz y diccionario léxico. No define diseño ni copy; valida que cada persona pueda moverse sin perderse, con la práctica como centro.
+Este documento es la **guía de validación de recorridos** del sitio. Alineado con 04 (mapa de pantallas), 03 (modelo de contenido), 05 (navegación), 06 (voz) y 07 (léxico). No define diseño ni copy; valida que cada persona pueda moverse sin perderse, con la práctica como centro.
 
 ---
 
-**Versión del documento:** 1.1
+**Versión:** 1.1

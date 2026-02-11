@@ -39,6 +39,8 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 - **Subtítulo:** Asume los desafíos de la vida cotidiana mediante la práctica buddhista.
 - **Botón:** Practica con nosotros
 
+*Tono:* El título es deliberadamente sobrio (sin "YA", sin exclamación). Si se prefiere un tono más neutro y contemplativo, alternativa: **"La práctica en la vida cotidiana."**
+
 ### Meditación semanal
 
 - **Título:** Meditación semanal en línea
