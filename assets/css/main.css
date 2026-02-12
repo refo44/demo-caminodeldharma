@@ -995,7 +995,16 @@ a:focus-visible {
   margin-bottom: 0;
 }
 
+.eventos-divider {
+  border: 0;
+  border-top: 1px solid var(--text-muted);
+  margin: var(--space-xl) 0;
+}
+
 .eventos-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 600;
@@ -1004,7 +1013,14 @@ a:focus-visible {
   color: var(--text-muted);
   margin: 0 0 var(--space-md);
   padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--text-muted);
+}
+
+.eventos-section-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: var(--primary);
 }
 
 .evento-card {
