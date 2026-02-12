@@ -1287,6 +1287,34 @@ a:focus-visible {
   width: 40%;
 }
 
+/* Donaciones page: table on light background */
+.donate-lead {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+}
+
+.donate-table {
+  width: 100%;
+  max-width: 24rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.donate-table th,
+.donate-table td {
+  text-align: left;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--text-muted);
+  color: var(--text);
+}
+
+.donate-table th {
+  font-weight: 600;
+  width: 40%;
+  color: var(--text-muted);
+}
+
 /* Credits block */
 .footer-credits {
   padding-top: var(--space-lg);
