@@ -12,7 +12,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 | Key | Label ES | Tipo | Slug | Uso principal |
 |-----|----------|------|------|---------------|
-| page | Páginas | Nativo | según cada página | Inicio, Comunidad, Linaje, Práctica, Eventos, Contacto |
+| page | Páginas | Nativo | según cada página | Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Contribuir (donaciones), Contacto, Blog |
 | event | Eventos | Custom | /eventos/ | Eventos especiales vigentes (retiros, talleres, Vesak, etc.) |
 | sangha | Sanghas | Custom | /sanghas/ | Contacto por sangha (Lluvia de ideas: conectar con cada sangha). Ver §3.1. |
 | testimonial | Testimonios | Custom o bloque | /testimonios/ o bloque | Por defecto: bloque en página; si CPT, ver §3.2. |
@@ -21,7 +21,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 | Tipo | Gestión |
 |------|---------|
-| Páginas estáticas | page (Inicio, Comunidad, Linaje, Práctica, Contacto) |
+| Páginas estáticas | page (Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Contribuir, Contacto, Blog) |
 | Eventos | event (visible solo cuando hay evento vigente); **cronograma** = listado/archive de eventos |
 | Meditación semanal | Bloque fijo en Inicio y Práctica (Lunes 7:30 p.m., Zoom) |
 | Formulario de contacto | Página Contacto |
@@ -66,7 +66,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ### Eventos (page o archive-event)
 
 - **Condicional:** visible solo cuando hay evento vigente
-- Campos: nombre, fecha, lugar, modalidad, descripción, botón Inscribirme
+- **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, botón Inscribirme. En la maqueta: etiqueta de tipo encima del título (Taller, Retiro, Conferencia, Encuentro); separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
+- Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme
 
 ### Contacto (page)
 
@@ -135,7 +136,9 @@ Campos mínimos recomendados:
 |-----|----------|------|----------|
 | event_type | Tipo de evento | Jerárquica | event |
 
-Valores posibles: Retiro, Taller, Celebración (Vesak, etc.), Conferencia, Encuentro nacional.
+**Valores (términos):** Taller, Retiro, Conferencia, Encuentro (etiqueta corta para «Encuentro nacional»), Celebración (Vesak, Diwali, etc.).
+
+En la maqueta estática estos valores se muestran como etiqueta encima del título de cada evento (clase `.evento-type`). En WordPress se asignan vía la taxonomía `event_type`; el theme debe mostrar el término como label en single y en listados.
 
 ---
 
@@ -146,7 +149,10 @@ Valores posibles: Retiro, Taller, Celebración (Vesak, etc.), Conferencia, Encue
 - `page-linaje.php`: El linaje
 - `page-practica.php`: Práctica y actividades
 - `page-eventos.php` o `archive-event.php`: Eventos (condicional)
+- `page-galeria.php`: Galería
+- `page-donaciones.php`: Contribuir (donaciones)
 - `page-contacto.php`: Contacto
+- `home.php` / `index.php`: Blog (según modelo)
 - `single-event.php`: Evento individual (si aplica)
 - `page.php`: Fallback para páginas
 - `404.php`: Página no encontrada (estado; copy en 08)
@@ -222,4 +228,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.0
+**Versión:** 2.1

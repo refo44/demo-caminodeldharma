@@ -87,10 +87,11 @@ Bloques:
 
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
-- Listado de eventos vigentes (título, fecha, lugar, extracto)
-- CTA “Inscribirme” o enlace a ficha por evento
-- Enlaces: Práctica, Contacto
+- **Por cada evento (tarjeta):** etiqueta de **tipo de evento** (Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
+- **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
+
+**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto.
 
 **Estado sin eventos:** ocultar ítem menú o mostrar página con mensaje amable (ej. “No hay eventos programados en este momento”) y salida a Inicio/Práctica (05 §9).
 
@@ -118,6 +119,7 @@ Bloques:
 Bloques:
 
 - Cabecera
+- Etiqueta tipo de evento (Taller, Retiro, Conferencia, Encuentro) si se muestra en listado
 - Imagen destacada del evento (si existe)
 - Título del evento
 - Fecha, lugar, descripción
@@ -156,4 +158,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

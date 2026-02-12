@@ -23,9 +23,13 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 ## 2. Navegación global
 
-**Regla de cantidad:** Menú de 4 a 6 ítems. Navegación simple e intuitiva.
+**Regla de cantidad:** Menú principal de 4–6 ítems; subnavegación con enlaces de contexto (Galería, Blog, Contribuir, Contacto). Navegación simple e intuitiva.
 
-### Cabecera
+### Cabecera (dos niveles)
+
+**Menú principal:** Inicio · La comunidad · El linaje · Práctica · Eventos (condicional si hay evento vigente).
+
+**Subnavegación (subnav):** Galería · Blog · Contribuir · Contacto.
 
 | Enlace | Destino |
 |--------|---------|
@@ -33,11 +37,11 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 | La comunidad | Comunidad |
 | El linaje | Linaje |
 | Práctica | Práctica |
-| Eventos | Eventos (si hay evento vigente) o se oculta |
+| Eventos | Eventos (si hay evento vigente; ítem condicional) |
 | Galería | Galería |
+| Blog | Blog |
+| Contribuir | Donaciones / Contribuir |
 | Contacto | Contacto |
-
-**Alternativa:** Eventos como ítem condicional; solo visible cuando hay evento vigente.
 
 **Móvil (hamburguesa):** En pantallas pequeñas la navegación global puede colapsarse en un único botón de menú accesible (icon button). Este botón muestra u oculta los mismos enlaces definidos arriba; no se añaden rutas nuevas. Se implementa siguiendo el patrón de `19-accesibilidad-estandares` (icono con `aria-hidden="true"` y texto accesible visible o con `.visually-hidden`, más `aria-expanded`/`aria-controls` para el panel de navegación).
 
@@ -104,17 +108,19 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 | Enlace | Destino | Tipo |
 |--------|---------|------|
 | "Volver al inicio" | Inicio | Secundario |
-| Menú global | Inicio, Comunidad, Linaje, Práctica, Eventos, Contacto | Secundario |
+| Menú global | Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Blog, Contribuir, Contacto | Secundario |
 
 ---
 
 ## 8. Eventos (si visible)
 
+En la página de Eventos, los enlaces «Práctica» y «Contacto» aparecen **una sola vez** (bloque común al final), no en cada tarjeta de evento.
+
 | Enlace | Destino | Tipo |
 |--------|---------|------|
 | "Inscribirme" | URL de inscripción | Primario |
-| Práctica | Práctica | Secundario |
-| Contacto | Contacto | Secundario |
+| Práctica | Práctica | Secundario (una vez en la página) |
+| Contacto | Contacto | Secundario (una vez en la página) |
 
 ---
 
@@ -169,4 +175,4 @@ Este documento es la **guía estructural definitiva** de navegación y arquitect
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3
