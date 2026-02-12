@@ -19,7 +19,7 @@ Define cómo se organiza el CSS del sitio: relación entre theme.json, variables
 
 No hay frameworks (Tailwind, Bootstrap). No hay preprocesadores obligatorios; si se usa uno, la salida es un único bundle encolado. Si `main.css` crece, se permiten parciales en `assets/css/` que se concatenan o importan, manteniendo un único entry point encolado (estilo ITCSS opcional).
 
-**Compatibilidad de rutas:** En Fase 2 (estático) el entry point equivalente vive en `public/assets/css/main.css`; en WordPress, en `theme/assets/css/main.css`. Misma arquitectura, dos ubicaciones.
+**Compatibilidad de rutas:** En Fase 2 (estático, p. ej. GitHub Pages) el entry point vive en `assets/css/main.css` en la raíz del repo; en WordPress, en `theme/assets/css/main.css`. Misma arquitectura, dos ubicaciones.
 
 ---
 

@@ -81,7 +81,7 @@ Solo dos familias definidas en el manual de marca.
 }
 ```
 
-**Implementación:** La fuente de cuerpo es **Inter** (SIL OFL), autohospedada en `assets/fonts/inter/` (woff2: 400 normal, 600 normal, 400 italic). Ver 15-assets-strategy y `public/assets/fonts/README.md`.
+**Implementación:** La fuente de cuerpo es **Inter** (SIL OFL), autohospedada en `assets/fonts/inter/` (woff2: 400 normal, 600 normal, 400 italic). Ver 15-assets-strategy y `assets/fonts/README.md`.
 
 ---
 

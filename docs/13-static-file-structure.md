@@ -20,15 +20,14 @@ demo-caminodeldharma/          (o nombre del repo)
 │       ├── Link-videos-youtube.md | Link videos subidos en Youtube.docx
 │       ├── Identidad CAMINO DEL DHARMA- (1).pdf
 │       └── FOTOS PAGINA WEB/   Imágenes y videos por pestaña
-├── public/                    Maqueta estática (Fase 2); no sustituye el theme
-│   ├── index.html, 404.html
-│   ├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/
-│   └── assets/
-│       ├── css/               main.css, normalize.css
-│       ├── js/                main.js
-│       ├── fonts/             Downtown, Inter, MarloweEscapade (15)
-│       └── images/            Imágenes por sección
-└── theme-camino-del-dharma/   Theme WordPress (12) — destino final Fase 3
+├── index.html, 404.html       Sitio estático (Fase 2 / GitHub Pages)
+├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/
+├── assets/
+│   ├── css/                  main.css, normalize.css
+│   ├── js/                   main.js
+│   ├── fonts/                Downtown, Inter, MarloweEscapade (15)
+│   └── images/               Imágenes por sección
+└── theme-camino-del-dharma/  Theme WordPress (12) — destino final Fase 3
     ├── style.css
     ├── theme.json
     ├── functions.php
@@ -41,7 +40,7 @@ demo-caminodeldharma/          (o nombre del repo)
         ├── images/
         └── favicon/
 ```
-El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia. En **Fase 2 (estático)** los assets y páginas viven en `public/`; en Fase 3 se alinean en el theme.
+El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia. En **Fase 2 (estático)**, para despliegue en GitHub Pages, el sitio vive en la **raíz del repo**: `index.html`, `404.html`, `assets/`, `comunidad/`, etc. En Fase 3 se alinean en el theme.
 
 ---
 
@@ -50,11 +49,11 @@ El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; e
 | Ubicación | Regla |
 |-----------|--------|
 | **docs/** | Solo Markdown (y recursos referenciados). Orden por prefijo numérico (00–19). No se despliega al sitio. |
-| **content-source/** | Solo en local. No se enlaza desde el código. Assets para el sitio se copian al theme o a `public/` según 13 y 15. Puede ignorarse en producción (deploy), pero debe mantenerse versionado en el repo para trazabilidad editorial. |
+| **content-source/** | Solo en local. No se enlaza desde el código. Assets para el sitio se copian al theme o a la raíz del repo (p. ej. `assets/`) según 13 y 15. Puede ignorarse en producción (deploy), pero debe mantenerse versionado en el repo para trazabilidad editorial. |
 | **theme-camino-del-dharma/** | Theme WordPress. Los archivos estáticos (CSS, JS, imágenes, fuentes) viven en `assets/` dentro del theme. WordPress los sirve desde la URL del theme. Solo los assets dentro de `theme-camino-del-dharma/assets/` son accesibles públicamente desde el sitio. |
-| **Maqueta estática (si existe)** | Si se usa carpeta `public/` o `dist/` para HTML/CSS previo al theme, no sustituye la estructura del theme; se alinea con 12 y 13. Rutas estáticas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `404`. Es opcional y no obligatoria para este proyecto. |
+| **Sitio estático (Fase 2)** | Para GitHub Pages el sitio está en la **raíz del repo**: `index.html`, `404.html`, `assets/`, `comunidad/`, `linaje/`, etc. Rutas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `404`. Se alinea con 12 y 13. |
 
-**Versionado:** `content-source/` se versiona (trazabilidad editorial). Archivos temporales de build (`public/`, `dist/` si son salida de build) no deben versionarse.
+**Versionado:** `content-source/` se versiona (trazabilidad editorial). El sitio estático en raíz (index.html, assets/, etc.) se versiona para GitHub Pages.
 
 ---
 

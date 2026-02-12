@@ -23,7 +23,7 @@
    - CSS3 (tokens de identidad, roles semánticos)
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
 2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `09-ui-copy-sheet`, `02-identidad-corporativa`
-3. Assets desde `content-source/` copiados a `public/assets/` (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`)
+3. Assets desde `content-source/` copiados a `assets/` en la raíz del repo (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`)
 4. **Validar contra checklist** de `18-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 5. **Validar responsive:** Comportamiento en móvil, tablet y desktop antes de pasar a WordPress
 

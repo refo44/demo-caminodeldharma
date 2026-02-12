@@ -36,7 +36,7 @@ assets/
 │   └── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
-├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y public/assets/fonts/README.md.
+├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
 ├── favicon/        ico, svg, png, webmanifest
 ├── audio/          Archivos de audio (si aplica): meditación, enseñanzas
 └── documents/      PDFs públicos descargables (si aplica)
@@ -121,7 +121,7 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 
 ## 10. Regla de migración
 
-`content-source/` **no se despliega**. Copiar assets necesarios al theme (`theme-camino-del-dharma/assets/`: images, fonts, icons, favicon, etc.). Si existe maqueta estática previa (`public/` o `dist/`), alinear con esta estructura; el destino final de producción es el theme. No enlazar nunca a `content-source/` desde el código. Detalle del flujo en 13.
+`content-source/` **no se despliega**. Copiar assets necesarios al theme (`theme-camino-del-dharma/assets/`) o a la raíz del repo para sitio estático (GitHub Pages: `assets/`, `index.html`, etc.). El destino final de producción puede ser el theme (Fase 3) o la raíz para Pages. No enlazar nunca a `content-source/` desde el código. Detalle del flujo en 13.
 
 ---
 

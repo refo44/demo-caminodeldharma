@@ -5,7 +5,7 @@
 
 **Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
-**Importante:** `content-source/` **solo existe en local** (no se despliega). Para la maqueta estática y el sitio final, copiar el material necesario en `public/assets/` o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en `public/` para evitar pérdida de calidad y sobrescrituras accidentales.
+**Importante:** `content-source/` **solo existe en local** (no se despliega). Para el sitio estático (GitHub Pages) o el sitio final, copiar el material necesario en `assets/` en la raíz del repo o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en la raíz para evitar pérdida de calidad y sobrescrituras accidentales.
 
 ---
 
@@ -64,7 +64,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 ## 5. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
-2. **Imágenes:** Ya renombradas en content-source a kebab-case semántico (véase §2). Al copiar a `public/` o al theme, usar estos mismos nombres.
+2. **Imágenes:** Ya renombradas en content-source a kebab-case semántico (véase §2). Al copiar a `assets/images/` (raíz del repo) o al theme, usar estos mismos nombres.
 3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
 
 ---
@@ -79,7 +79,7 @@ Revisar la página de Paramitas como referencia de estructura y navegación si e
 
 ## Cierre
 
-Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio, con la estrategia de assets (15) y con la estructura del theme (12). No se despliega; los assets se copian al theme o a `public/assets/` según 12.
+Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio, con la estrategia de assets (15) y con la estructura del theme (12). No se despliega; los assets se copian al theme o a `assets/` en la raíz del repo (GitHub Pages) según 12.
 
 ---
 
