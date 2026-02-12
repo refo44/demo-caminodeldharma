@@ -754,19 +754,30 @@ a:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 60vh;
+  min-height: auto;
   padding: var(--space-xl) var(--gutter);
   text-align: center;
   color: var(--text-on-dark);
   background-color: var(--brand-2);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.35)),
-    url("../images/inicio/hero-estatua-buda-montanas.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-figure {
+  margin: 0 auto var(--space-md);
+  max-width: 42rem;
+  max-height: 28vh;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.hero-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .hero .hero-title,
