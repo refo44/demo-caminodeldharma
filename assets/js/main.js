@@ -21,3 +21,33 @@
   }
   window.addEventListener('resize', closeMenuOnDesktop);
 })();
+
+/**
+ * Language switcher (UI only; content stays in Spanish in this version)
+ */
+(function () {
+  var STORAGE_KEY = 'caminodeldharma-lang';
+  var switcher = document.querySelector('.lang-switcher');
+  if (!switcher) return;
+
+  var buttons = switcher.querySelectorAll('.lang-btn');
+  var current = (typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEY)) || 'es';
+
+  function setActive(lang) {
+    current = lang;
+    if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, lang);
+    document.documentElement.lang = lang;
+    buttons.forEach(function (btn) {
+      var isCurrent = btn.getAttribute('data-lang') === lang;
+      btn.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+    });
+  }
+
+  setActive(current);
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setActive(btn.getAttribute('data-lang'));
+    });
+  });
+})();
