@@ -445,6 +445,29 @@ a:focus-visible {
   vertical-align: -0.35em;
 }
 
+/* Decorative large icons in body (styling only) */
+.deco-icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-lg) 0;
+  pointer-events: none;
+}
+
+.lucide-icon--deco {
+  width: 4rem;
+  height: 4rem;
+  opacity: 0.35;
+  stroke: var(--brand-1);
+}
+
+.lucide-icon--deco-lg {
+  width: 5rem;
+  height: 5rem;
+  opacity: 0.28;
+  stroke: var(--brand-1);
+}
+
 /* --- Figures and media (20: tipografía primero; imagen apoya) --- */
 .section-figure {
   margin: 0 0 var(--space-lg);
