@@ -647,6 +647,70 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+/* --- Linaje: vertical timeline --- */
+.linaje-timeline-wrap {
+  margin-top: var(--space-xl);
+}
+
+.linaje-timeline-intro {
+  margin-bottom: var(--space-lg);
+  color: var(--text-muted);
+}
+
+.linaje-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: var(--space-lg);
+  border-left: 2px solid var(--border);
+  position: relative;
+}
+
+.linaje-timeline-item {
+  position: relative;
+  padding-bottom: var(--space-xl);
+}
+
+.linaje-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.linaje-timeline-marker {
+  position: absolute;
+  left: calc(-1 * (var(--space-lg) + 6px));
+  top: 0.35em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.linaje-timeline-content {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: var(--space-md);
+}
+
+.linaje-timeline-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-sm);
+  color: var(--primary);
+}
+
+.linaje-timeline-content p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: var(--line-height-body);
+}
+
+.linaje-timeline-content p + p {
+  margin-top: var(--space-sm);
+}
+
 /* --- Hero --- */
 .hero {
   padding-block: var(--space-xl);
