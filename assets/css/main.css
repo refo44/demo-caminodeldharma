@@ -189,7 +189,7 @@ a:focus-visible {
 
 @media (max-width: 767px) {
   .page-main {
-    padding-top: var(--space-md);
+    padding-top: var(--space-sm);
   }
 }
 
