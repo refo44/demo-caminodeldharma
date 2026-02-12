@@ -52,6 +52,10 @@ En WordPress, esta estructura va dentro del directorio del theme (`theme-camino-
 - **SVG:** Solo para iconos y logo cuando exista versión vectorial.
 - El sitio es editorial; el rendimiento es accesibilidad. Mantener imágenes de contenido dentro de rangos razonables. En WordPress, usar `srcset` y tamaños responsivos nativos cuando aplique; evitar servir imágenes de hero de ancho completo a pantallas móviles.
 
+### 3.0 Script de optimización (sitio estático)
+
+En la raíz del repo, el script `scripts/optimize-images.sh` optimiza todas las imágenes en `assets/images/` para web (requiere ImageMagick: `brew install imagemagick`). Acciones: redimensionar a máximo 1600 px en el lado largo, calidad JPEG 85, eliminar metadatos. Ejecutar desde la raíz: `./scripts/optimize-images.sh`. Útil al añadir fotos nuevas o tras copiar desde content-source.
+
 ### 3.1 Fuentes: carga y licencia
 
 - **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS mapean a: MarloweEscapade (display), Downtown DEMO Regular (headings), Inter (body). Inter está autohospedada en `assets/fonts/inter/` (woff2: 400, 600, 400 italic); licencia SIL OFL (02, fonts/README.md).
