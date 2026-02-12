@@ -35,7 +35,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 | **Pestaña 3** | `foto-biografia-fundador.jpg` | Biografía del fundador |
 | **Pestaña 5** | `video-que-es-meditar.mp4`, `video-conectar-nuestro-planeta.mp4`, `video-redes-compasion.mp4`, Link videos subidos en Youtube.docx | Videos, meditación, YouTube |
 | **Pestaña 6** | `contacto-comunidad.jpg` | Contacto |
-| **Pestaña 7** | `galeria-01.jpg` … `galeria-35.jpg`, `galeria-36.jpeg` … `galeria-43.jpeg` (43 archivos) | **Inicio:** fila de 4 imágenes + enlace «Ver galería completa». **Página Galería** (`/galeria/`): grid con las 43 imágenes. |
+| **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): grid paginado con todas las imágenes. |
 | **Pestaña 8** | `celebracion-diwali.jpg`, `celebracion-vesak-2019.jpg` | Celebraciones (Vesak, Diwali) |
 
 ---
