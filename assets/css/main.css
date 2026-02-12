@@ -1013,6 +1013,43 @@ a:focus-visible {
   color: var(--text);
 }
 
+/* --- Recitación práctica de la comida (Práctica) --- */
+.recitation-section .recitation-source {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-sm);
+}
+
+.recitation-section .recitation-title {
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-md);
+}
+
+.recitation-section .recitation-text {
+  margin: 0 0 var(--space-lg);
+  padding-inline-start: var(--space-md);
+  border-inline-start: 3px solid var(--brand-2);
+  font-style: italic;
+  color: var(--text);
+}
+
+.recitation-section .recitation-text p {
+  margin: 0 0 var(--space-sm);
+}
+
+.recitation-section .recitation-text p:last-child {
+  margin-bottom: 0;
+}
+
+.recitation-section .recitation-download {
+  margin: 0;
+}
+
+.recitation-section .recitation-download .lucide-icon {
+  margin-inline-end: var(--space-xs);
+  vertical-align: middle;
+}
+
 .meditation-block .read-width {
   margin-inline: auto;
 }
