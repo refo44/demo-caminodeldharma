@@ -10,12 +10,15 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Página | Función |
 |--------|---------|
-| Inicio | Hero, comunidad, cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
+| Inicio | Título del sitio (site-title), hero, sección «Un poco de nuestra comunidad» (con sidebar CTA contribuir a la derecha en desktop), cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
 | La comunidad | Quiénes somos, fundador, experiencia y propósito |
 | El linaje | Tradición viva, Mahāyāna, Chan y Tierra Pura |
-| Práctica y actividades | Meditación semanal, talleres, retiros, vida comunitaria |
+| Práctica y actividades | Meditación semanal, recitación práctica de la comida (texto + descarga PDF), talleres, retiros, videos, vida comunitaria |
+| Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles e inscripción |
 | Galería | Página dedicada con grid paginado de la galería comunitaria (imágenes `galeria-01.jpg` … `galeria-N.jpg`; ver 16). |
+| Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
+| Blog | Listado de entradas; entradas individuales (opcional). |
 
 ---
 
@@ -46,7 +49,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 ## Elementos globales (componentes, no pantallas)
 
-**Header:** logo + navegación (menú principal). Presente en todas las páginas.
+**Header:** logo + nombre del sitio + navegación principal (Inicio, Comunidad, Linaje, Práctica, Eventos) + subnav (Galería, Blog, Contribuir, Contacto). Presente en todas las páginas.
 
 **Footer:** presente en todas las páginas. Contenido: Comunidad Buddhista Camino del Dharma, Personería Jurídica Especial – Ministerio del Interior de Colombia, Contacto | Redes sociales, Pausa Profunda (proyecto vinculado), información de donaciones, WhatsApp, correo.
 
@@ -54,7 +57,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 ## Conjunto total de pantallas a construir
 
-**Páginas principales (estáticas):** 1. Inicio · 2. La comunidad · 3. El linaje · 4. Práctica y actividades · 5. Galería · 6. Contacto
+**Páginas principales (estáticas):** 1. Inicio · 2. La comunidad · 3. El linaje · 4. Práctica y actividades · 5. Eventos · 6. Galería · 7. Contribuir (donaciones) · 8. Contacto · 9. Blog
 
 **Página condicional:** 7. Eventos especiales — la ruta `/eventos/` existe siempre; contenido: listado si hay eventos vigentes, mensaje amable si no.
 
@@ -75,8 +78,10 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | El linaje | `page-linaje.php` |
 | Práctica y actividades | `page-practica.php` |
 | Galería | `page-galeria.php` |
+| Contribuir (donaciones) | `page-donaciones.php` |
 | Contacto | `page-contacto.php` |
 | Eventos especiales | `archive-event.php` o `page-eventos.php` (condicional) |
+| Blog | `home.php` o `index.php` (según modelo) |
 | Evento individual | `single-event.php` (si se activa) |
 | 404 | `404.php` |
 | Header global | `parts/header.php` (incluye navigation) |
@@ -86,7 +91,6 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 ## Lo que el sitio NO tiene
 
-- No blog
 - No buscador
 - No área privada
 - No registro de usuarios
@@ -113,4 +117,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.2
+**Versión:** 2.3

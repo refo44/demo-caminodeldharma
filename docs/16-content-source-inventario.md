@@ -37,6 +37,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 | **Pestaña 6** | `contacto-comunidad.jpg` | Contacto |
 | **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): grid paginado con todas las imágenes. Tras añadir o renombrar fotos, actualizar el array `gallery-data` en `galeria/index.html` (o generar el JSON desde el listado del directorio). |
 | **Pestaña 8** | `celebracion-diwali.jpg`, `celebracion-vesak-2019.jpg` | Celebraciones (Vesak, Diwali) |
+| **Eventos** | En `assets/images/eventos/`: `evento-taller-pausa-profunda-feb-2026.jpeg`, `evento-6-encuentro-nacional.jpeg`, `evento-buddhismo-tiempos-cansancio.jpeg` | Carteles de eventos en `/eventos/` |
 
 ---
 
@@ -61,7 +62,17 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 
 ---
 
-## 5. Acciones pendientes
+## 5. Documentos descargables (PDF)
+
+| Archivo en `assets/documents/` | Uso |
+|--------------------------------|-----|
+| `recitacion-practica-comida.pdf` | Recitación práctica de la comida (página Práctica). Enlace «Descargar PDF». |
+
+Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-source/`. Ver 15.
+
+---
+
+## 6. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
 2. **Imágenes:** En producción, todas las imágenes en `assets/images/` deben estar en kebab-case y optimizadas para web. Galería: ejecutar `scripts/rename-gallery-to-kebab.sh` para unificar nombres a `galeria-01.jpg` … `galeria-N.jpg`; luego `scripts/optimize-images.sh` para peso (15 §3.0).
@@ -69,7 +80,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 
 ---
 
-## 6. Referencia: Paramitas
+## 7. Referencia: Paramitas
 
 **Lluvia de ideas:** "Tener en cuenta la organización de información de la página de Paramitas."
 
@@ -83,4 +94,4 @@ Este documento es el **inventario oficial** de `content-source/`: qué archivos 
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4

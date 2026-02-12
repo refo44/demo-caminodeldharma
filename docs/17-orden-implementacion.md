@@ -1,7 +1,7 @@
 # Camino del Dharma — Orden de implementación
 
 **Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
-**Versión 1.4**
+**Versión 1.5**
 
 **Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`
 
@@ -41,6 +41,8 @@ Estructura recomendada:
 - `/eventos/index.html`
 - `/galeria/index.html`
 - `/contacto/index.html`
+- `/donaciones/index.html`
+- `/blog/index.html` (y entradas en `/blog/{slug}/`)
 - `/404.html`
 - `/assets/`
 
@@ -63,6 +65,8 @@ La maqueta define el layout definitivo. En Fase 3 solo se envolverá el HTML con
 | `/eventos/index.html`     | `archive-event.php` o `page-eventos.php` |
 | `/galeria/index.html`     | `page-galeria.php`                       |
 | `/contacto/index.html`    | `page-contacto.php`                      |
+| `/donaciones/index.html`  | `page-donaciones.php`                    |
+| `/blog/index.html`        | `index.php` o `home.php` (según modelo)  |
 | `/404.html`               | `404.php`                                |
 
 ### 2.3 Reglas para la maqueta
@@ -75,6 +79,8 @@ La maqueta debe comportarse como el sitio real:
 - HTML semántico desde el inicio
 - Estructura de bloques igual a `06-wireframes`
 - Microcopy final desde `09-ui-copy-sheet`
+
+**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sidebar CTA contribuir en Inicio (junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
 
 ### 2.4 Simulación de estados dinámicos
 
