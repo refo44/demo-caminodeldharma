@@ -987,6 +987,23 @@ a:focus-visible {
 }
 
 /* --- Evento (página Eventos cuando hay evento vigente) --- */
+.eventos-section {
+  margin-bottom: var(--space-xl);
+}
+
+.eventos-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.eventos-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  margin: 0 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
 .evento-card {
   margin: 0;
 }
