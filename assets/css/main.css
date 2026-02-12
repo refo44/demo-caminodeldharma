@@ -358,13 +358,18 @@ a:focus-visible {
 }
 
 @media (min-width: 768px) {
-  .nav-menu {
+  .nav-menu,
+  .nav-menu.is-open {
     display: flex;
     flex-direction: row;
     position: static;
     box-shadow: none;
     padding: 0;
     gap: var(--space-xs);
+    left: auto;
+    right: auto;
+    top: auto;
+    background: transparent;
   }
 }
 

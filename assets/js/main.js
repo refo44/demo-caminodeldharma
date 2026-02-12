@@ -12,4 +12,12 @@
     var isOpen = menu.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
+
+  function closeMenuOnDesktop() {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+  window.addEventListener('resize', closeMenuOnDesktop);
 })();
