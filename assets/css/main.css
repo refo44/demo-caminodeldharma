@@ -1078,18 +1078,21 @@ a:focus-visible {
   margin-top: 0;
 }
 
-.evento-card--past .evento-cta a {
+.evento-card--past .evento-cta a,
+.evento-card--finalizado .evento-cta a {
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.evento-card--past .evento-cta .btn-primary {
+.evento-card--past .evento-cta .btn-primary,
+.evento-card--finalizado .evento-cta .btn-primary {
   background-color: var(--text-muted);
   color: var(--text-on-dark);
 }
 
-.evento-card--past .evento-cta .btn-primary:hover {
+.evento-card--past .evento-cta .btn-primary:hover,
+.evento-card--finalizado .evento-cta .btn-primary:hover {
   background-color: var(--text-muted);
   color: var(--text-on-dark);
 }
