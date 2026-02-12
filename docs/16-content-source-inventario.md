@@ -1,7 +1,7 @@
 # Camino del Dharma — Inventario de contenido fuente
 
 **Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.**  
-**Versión 1.2**
+**Versión 1.3**
 
 **Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
@@ -35,7 +35,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 | **Pestaña 3** | `foto-biografia-fundador.jpg` | Biografía del fundador |
 | **Pestaña 5** | `video-que-es-meditar.mp4`, `video-conectar-nuestro-planeta.mp4`, `video-redes-compasion.mp4`, Link videos subidos en Youtube.docx | Videos, meditación, YouTube |
 | **Pestaña 6** | `contacto-comunidad.jpg` | Contacto |
-| **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): grid paginado con todas las imágenes. |
+| **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): grid paginado con todas las imágenes. Tras añadir o renombrar fotos, actualizar el array `gallery-data` en `galeria/index.html` (o generar el JSON desde el listado del directorio). |
 | **Pestaña 8** | `celebracion-diwali.jpg`, `celebracion-vesak-2019.jpg` | Celebraciones (Vesak, Diwali) |
 
 ---
@@ -64,8 +64,8 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 ## 5. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
-2. **Imágenes:** Ya renombradas en content-source a kebab-case semántico (véase §2). Al copiar a `assets/images/` (raíz del repo) o al theme, usar estos mismos nombres.
-3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS
+2. **Imágenes:** En producción, todas las imágenes en `assets/images/` deben estar en kebab-case y optimizadas para web. Galería: ejecutar `scripts/rename-gallery-to-kebab.sh` para unificar nombres a `galeria-01.jpg` … `galeria-N.jpg`; luego `scripts/optimize-images.sh` para peso (15 §3.0).
+3. **Metadatos:** Asignar alt, title y caption a cada imagen al subir al CMS.
 
 ---
 
@@ -83,4 +83,4 @@ Este documento es el **inventario oficial** de `content-source/`: qué archivos 
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3

@@ -33,7 +33,8 @@ assets/
 ├── css/
 │   └── main.css    Estilos reales del theme (layout, lectura, componentes). Encolado en functions.php. Ver 12 §7.
 ├── js/
-│   └── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
+│   ├── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
+│   └── gallery.js  Paginación de la galería (solo en página Galería); carga bajo demanda por página.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
@@ -74,7 +75,7 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 | Pestaña 3 | Biografía fundador |
 | Pestaña 5 | Videos (meditación, YouTube) |
 | Pestaña 6 | Contacto |
-| Pestaña 7 | Galería comunitaria |
+| Pestaña 7 | Galería comunitaria (`galeria-01.jpg` … `galeria-N.jpg` en `assets/images/galeria/`; script `scripts/rename-gallery-to-kebab.sh`; 16). |
 | Pestaña 8 | Celebraciones (Vesak, Diwali) |
 
 ---
@@ -135,4 +136,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 1.5
+**Versión:** 1.6

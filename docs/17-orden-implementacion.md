@@ -1,7 +1,7 @@
 # Camino del Dharma — Orden de implementación
 
 **Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
-**Versión 1.2**
+**Versión 1.4**
 
 **Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`
 
@@ -23,7 +23,7 @@
    - CSS3 (tokens de identidad, roles semánticos)
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
 2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `09-ui-copy-sheet`, `02-identidad-corporativa`
-3. Assets desde `content-source/` copiados a `assets/` en la raíz del repo (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`)
+3. Assets desde `content-source/` copiados a `assets/` en la raíz del repo (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`). Imágenes optimizadas con `scripts/optimize-images.sh`; galería con nombres unificados vía `scripts/rename-gallery-to-kebab.sh`.
 4. **Validar contra checklist** de `18-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 5. **Validar responsive:** Comportamiento en móvil, tablet y desktop antes de pasar a WordPress
 
@@ -131,11 +131,11 @@ Esto evita rediseños eternos.
 ## Prioridad de páginas
 
 1. **Inicio** — Hero, meditación semanal, caminos de participación
-2. **Contacto** — Formulario + WhatsApp
+2. **Contacto** — Formulario + bloque Redes sociales (Facebook, Instagram) + WhatsApp
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, talleres, retiros
 5. **El linaje** — Tradición, Chan, Tierra Pura
-6. **Galería** — Página dedicada con grid de imágenes (43 fotos); en Inicio solo fila de 4 imágenes + enlace «Ver galería completa»
+6. **Galería** — Página dedicada con grid paginado (imágenes `galeria-01.jpg` … `galeria-N.jpg`; 12 por página); en Inicio fila de imágenes + enlace «Ver galería completa»
 7. **Eventos** — Condicional; implementar cuando haya eventos vigentes
 
 ---
@@ -164,4 +164,4 @@ Este documento define el **orden oficial de implementación**: documentación y 
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4
