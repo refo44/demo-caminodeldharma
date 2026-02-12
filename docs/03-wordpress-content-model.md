@@ -170,7 +170,7 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 
 | Recurso | Implementación |
 |---------|----------------|
-| Meditación semanal | Botón "Participar" → WhatsApp (3206627608) |
+| Meditación semanal | Botón "Participar" → WhatsApp (+57 320 662 7608) |
 | **WhatsApp** | Link en cabecera/footer (Lluvia de ideas: "Link para ir al whatsapp de Camino del Dharma") |
 | Formulario contacto | Envío a caminodeldharma1@gmail.com o plugin |
 | **Donaciones** | Botón + datos bancarios en footer (Banco Popular, cuenta 220065151425) — Lluvia de ideas: "Incluir botón de donaciones" |

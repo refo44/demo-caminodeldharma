@@ -103,7 +103,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 - **Pausa Profunda:** Abre en nueva pestaña
 - **Redes sociales:** Facebook, Instagram
-- **WhatsApp:** 3206627608
+- **WhatsApp:** +57 320 662 7608
 - **Correo:** caminodeldharma1@gmail.com
 
 ---
