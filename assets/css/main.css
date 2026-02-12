@@ -1154,6 +1154,13 @@ a:focus-visible {
   margin: var(--space-sm) 0 0;
 }
 
+.eventos-card-divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-xl) 0;
+  max-width: var(--read-max);
+}
+
 .eventos-divider {
   border: 0;
   border-top: 1px solid var(--text-muted);
@@ -1183,7 +1190,25 @@ a:focus-visible {
 }
 
 .evento-card {
-  margin: 0;
+  margin: 0 0 var(--section-gap);
+  padding: var(--space-xl);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.evento-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.evento-type {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-xs);
 }
 
 .evento-title {
@@ -1254,6 +1279,18 @@ a:focus-visible {
 .evento-links {
   margin-top: var(--space-lg);
   margin-bottom: 0;
+}
+
+.eventos-section-links {
+  margin: var(--space-lg) 0 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.eventos-section-links a {
+  color: var(--link);
 }
 
 .evento-badge {
