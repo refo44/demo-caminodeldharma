@@ -85,6 +85,7 @@
   --read-max: 65ch;
   --gutter: 1.5rem;
   --section-gap: 3rem;
+  --header-offset: 7rem; /* space below fixed header (body padding-top, scroll-margin) */
   --grid-gap: 1.5rem;
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -119,7 +120,7 @@ html {
 
 body {
   margin: 0;
-  padding-top: 6rem; /* space for fixed header (logo + padding) */
+  padding-top: var(--header-offset);
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: var(--line-height-body);
@@ -183,7 +184,7 @@ a:focus-visible {
 
 .page-main {
   padding-block: var(--space-xl);
-  scroll-margin-top: 6rem; /* avoid fixed header covering focus target */
+  scroll-margin-top: var(--header-offset);
 }
 
 .section-gap {
@@ -265,15 +266,16 @@ a:focus-visible {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-xl);
-  padding-block: var(--space-md);
+  gap: var(--space-lg);
+  padding-block: var(--space-sm);
 }
 
 .site-logo {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  height: 3rem;
+  height: 2.75rem;
+  margin-inline-end: var(--space-lg);
 }
 
 .site-logo img {
@@ -283,7 +285,7 @@ a:focus-visible {
 
 .site-name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -291,11 +293,11 @@ a:focus-visible {
 
 @media (min-width: 768px) {
   .site-logo {
-    height: 3.25rem;
+    height: 3rem;
   }
 
   .site-name {
-    font-size: 1.625rem;
+    font-size: 1.375rem;
   }
 }
 
@@ -337,17 +339,16 @@ a:focus-visible {
   }
 }
 
-.nav-menu {
+.nav-menus {
   display: none;
-  list-style: none;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   gap: 0;
 }
 
-.nav-menu.is-open {
+.nav-menus.is-open {
   display: flex;
-  flex-direction: column;
   position: absolute;
   top: 100%;
   left: 0;
@@ -358,27 +359,61 @@ a:focus-visible {
 }
 
 @media (min-width: 768px) {
-  .nav-menu,
-  .nav-menu.is-open {
+  .nav-menus,
+  .nav-menus.is-open {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: static;
     box-shadow: none;
     padding: 0;
-    gap: var(--space-xs);
-    left: auto;
-    right: auto;
-    top: auto;
+    gap: 2px var(--space-sm);
     background: transparent;
   }
 }
 
-.nav-menu a {
+.nav-menu,
+.nav-sub {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 2px var(--space-sm);
+  }
+
+  .nav-sub {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    padding-top: 2px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.875rem;
+  }
+}
+
+.nav-menu a,
+.nav-sub a {
   display: flex;
   align-items: center;
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   min-height: 44px;
   padding-block: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-menu a,
+  .nav-sub a {
+    min-height: 36px;
+    padding: var(--space-xs) var(--space-sm);
+  }
 }
 
 /* --- Language switcher (non-functional in this version) --- */
@@ -482,16 +517,6 @@ a:focus-visible {
   font-size: 0.9375rem;
   color: var(--text-muted);
   margin-top: var(--space-xs);
-}
-
-.hero-figure {
-  margin: 0 auto var(--space-lg);
-  max-width: 50rem;
-}
-
-.hero-figure img {
-  width: 100%;
-  border-radius: 4px;
 }
 
 /* --- Video block (15: preload metadata, no autoplay) --- */
@@ -712,16 +737,42 @@ a:focus-visible {
 }
 
 /* --- Hero --- */
-.hero {
-  padding-block: var(--space-xl);
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 600;
   text-align: center;
-  background-color: var(--brand-2);
+  margin: 0 0 var(--space-lg);
+  color: var(--brand-1);
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-tight);
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: var(--space-xl) var(--gutter);
+  text-align: center;
   color: var(--text-on-dark);
+  background-color: var(--brand-2);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.35)),
+    url("../images/inicio/hero-estatua-buda-montanas.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 .hero .hero-title,
 .hero .hero-lead {
   color: var(--text-on-dark);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .hero .hero-lead {
@@ -732,12 +783,12 @@ a:focus-visible {
   font-family: var(--font-heading);
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   line-height: var(--line-height-tight);
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--space-sm);
 }
 
 .hero-lead {
   font-size: 1.125rem;
-  margin: 0 0 var(--space-lg);
+  margin: 0 0 var(--space-md);
 }
 
 .hero .btn-primary {
@@ -1107,6 +1158,11 @@ a:focus-visible {
 
 .evento-badge--finalizado {
   color: var(--text-muted);
+}
+
+.evento-card--past .evento-figure img,
+.evento-card--finalizado .evento-figure img {
+  opacity: 0.5;
 }
 
 .evento-card--finalizado .evento-title,

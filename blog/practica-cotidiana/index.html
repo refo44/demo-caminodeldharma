@@ -17,23 +17,27 @@
         <span class="site-name">Camino del Dharma</span>
       </a>
       <nav class="nav-main" aria-label="Navegación principal">
-        <button type="button" id="nav-toggle" class="nav-toggle" aria-controls="nav-menu" aria-expanded="false">
+        <button type="button" id="nav-toggle" class="nav-toggle" aria-controls="nav-menus" aria-expanded="false">
           <span class="visually-hidden">Abrir menú</span>
           <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
-        <ul id="nav-menu" class="nav-menu">
-          <li><a href="../../">Inicio</a></li>
-          <li><a href="../../comunidad/">Comunidad</a></li>
-          <li><a href="../../linaje/">Linaje</a></li>
-          <li><a href="../../practica/">Práctica</a></li>
-          <li><a href="../../eventos/">Eventos</a></li>
-          <li><a href="../../galeria/">Galería</a></li>
-          <li><a href="../">Blog</a></li>
-          <li><a href="../../donaciones/">Contribuir</a></li>
-          <li><a href="../../contacto/">Contacto</a></li>
-        </ul>
+        <div id="nav-menus" class="nav-menus">
+          <ul class="nav-menu">
+            <li><a href="../../">Inicio</a></li>
+            <li><a href="../../comunidad/">Comunidad</a></li>
+            <li><a href="../../linaje/">Linaje</a></li>
+            <li><a href="../../practica/">Práctica</a></li>
+            <li><a href="../../eventos/">Eventos</a></li>
+          </ul>
+          <ul class="nav-sub">
+            <li><a href="../../galeria/">Galería</a></li>
+            <li><a href="../">Blog</a></li>
+            <li><a href="../../donaciones/">Contribuir</a></li>
+            <li><a href="../../contacto/">Contacto</a></li>
+          </ul>
+        </div>
       </nav>
       <div class="lang-switcher" aria-label="Idioma">
         <button type="button" class="lang-btn" data-lang="es" aria-current="true">ES</button>

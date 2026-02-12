@@ -4,7 +4,7 @@
  */
 (function () {
   var toggle = document.getElementById('nav-toggle');
-  var menu = document.getElementById('nav-menu');
+  var menu = document.getElementById('nav-menus');
   if (!toggle || !menu) return;
 
   toggle.setAttribute('aria-expanded', 'false');
