@@ -1073,8 +1073,25 @@ a:focus-visible {
   color: var(--text-muted);
 }
 
-.evento-card--finalizado .evento-title {
+.evento-card--finalizado .evento-title,
+.evento-card--past .evento-title {
   margin-top: 0;
+}
+
+.evento-card--past .evento-cta a {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.evento-card--past .evento-cta .btn-primary {
+  background-color: var(--text-muted);
+  color: var(--text-on-dark);
+}
+
+.evento-card--past .evento-cta .btn-primary:hover {
+  background-color: var(--text-muted);
+  color: var(--text-on-dark);
 }
 
 .evento-highlights {
