@@ -63,8 +63,8 @@
 
   function createChevronIcon(direction) {
     var path = direction === 'prev'
-      ? 'm15 18-6-6 6-6'
-      : 'm9 18 6-6-6-6';
+      ? 'M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z'
+      : 'M11 9a1 1 0 0 0 1-1V5.061a1 1 0 0 1 1.811-.75l6.836 6.836a1.207 1.207 0 0 1 0 1.707l-6.836 6.835a1 1 0 0 1-1.811-.75V16a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z';
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'lucide-icon gallery-pagination-icon');
     svg.setAttribute('viewBox', '0 0 24 24');
@@ -86,14 +86,7 @@
 
     var prevLabel = 'Anterior';
     var nextLabel = 'Siguiente';
-    if (currentPage <= 1) {
-      var prevSpan = document.createElement('span');
-      prevSpan.className = 'gallery-pagination-prev is-disabled';
-      prevSpan.setAttribute('aria-disabled', 'true');
-      prevSpan.setAttribute('aria-label', prevLabel);
-      prevSpan.appendChild(createChevronIcon('prev'));
-      frag.appendChild(prevSpan);
-    } else {
+    if (currentPage > 1) {
       var prevLink = document.createElement('a');
       prevLink.href = currentPage === 2 ? '?' : '?page=' + (currentPage - 1);
       prevLink.className = 'gallery-pagination-prev';
@@ -111,14 +104,7 @@
     info.textContent = 'Página ' + currentPage + ' de ' + total;
     frag.appendChild(info);
 
-    if (currentPage >= total) {
-      var nextSpan = document.createElement('span');
-      nextSpan.className = 'gallery-pagination-next is-disabled';
-      nextSpan.setAttribute('aria-disabled', 'true');
-      nextSpan.setAttribute('aria-label', nextLabel);
-      nextSpan.appendChild(createChevronIcon('next'));
-      frag.appendChild(nextSpan);
-    } else {
+    if (currentPage < total) {
       var nextLink = document.createElement('a');
       nextLink.href = '?page=' + (currentPage + 1);
       nextLink.className = 'gallery-pagination-next';
