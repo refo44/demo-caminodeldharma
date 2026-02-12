@@ -1006,6 +1006,24 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+.evento-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  padding: var(--space-xl);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+}
+
+.evento-placeholder img {
+  width: auto;
+  max-width: 160px;
+  height: auto;
+  opacity: 0.5;
+}
+
 .evento-lead {
   font-size: 1.125rem;
   margin-bottom: var(--space-md);
@@ -1041,6 +1059,41 @@ a:focus-visible {
 .evento-links {
   margin-top: var(--space-lg);
   margin-bottom: 0;
+}
+
+.evento-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-xs);
+}
+
+.evento-badge--finalizado {
+  color: var(--text-muted);
+}
+
+.evento-card--finalizado .evento-title {
+  margin-top: 0;
+}
+
+.evento-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+}
+
+.evento-highlights li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+
+.evento-highlights li::before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
 }
 
 /* --- Cards (caminos, cómo practicamos) --- */
