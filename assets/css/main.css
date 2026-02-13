@@ -543,6 +543,57 @@ a:focus-visible {
   margin-top: var(--space-xs);
 }
 
+.practica-videos-more {
+  margin-top: var(--space-lg);
+  margin-bottom: 0;
+}
+
+/* --- Home: videos preview (mirrors home-blog pattern) --- */
+.home-videos-intro {
+  margin-bottom: var(--space-lg);
+  color: var(--text-muted);
+}
+
+.home-videos-grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: 1fr;
+  margin: 0 0 var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .home-videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.home-videos-grid .media-block {
+  margin-bottom: 0;
+}
+
+.home-videos-more {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.home-videos-more a {
+  color: var(--link);
+}
+
+.practica-videos-more a {
+  color: var(--link);
+}
+
+.page-back {
+  margin-bottom: var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.page-back a {
+  color: var(--link);
+}
+
 .embed-wrap {
   position: relative;
   width: 100%;
@@ -819,11 +870,6 @@ a:focus-visible {
 }
 
 /* --- Home: blog preview (3 articles with thumbnails) --- */
-.home-blog h2 {
-  text-align: center;
-  margin-bottom: var(--space-lg);
-}
-
 .home-blog-grid {
   list-style: none;
   margin: 0 0 var(--space-md);
@@ -1147,6 +1193,24 @@ a:focus-visible {
   font-weight: 600;
 }
 
+a.eventos-calendar-day {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.eventos-calendar-day:hover,
+a.eventos-calendar-day:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+a.eventos-calendar-day.has-event:hover,
+a.eventos-calendar-day.has-event:focus {
+  background: var(--brand-1);
+  border-color: var(--brand-1);
+  color: var(--text-on-dark);
+}
+
 .eventos-calendar-legend {
   font-size: 0.8125rem;
   color: var(--text-muted);
@@ -1215,6 +1279,15 @@ a:focus-visible {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   margin: 0 0 var(--space-md);
+}
+
+.evento-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.evento-title a:hover {
+  color: var(--link);
 }
 
 .evento-figure {
@@ -1332,6 +1405,33 @@ a:focus-visible {
 .evento-card--finalizado .evento-cta .btn-primary:hover {
   background-color: var(--text-muted);
   color: var(--text-on-dark);
+}
+
+/* Single event (single-event.php / eventos/{slug}/) */
+.single-event .single-event-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin: 0 0 var(--space-lg);
+}
+
+.single-event-nav {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.single-event-nav a {
+  color: var(--link);
+}
+
+.single-event-nav p {
+  margin: 0 0 var(--space-sm);
+}
+
+.single-event-nav p:last-child {
+  margin-bottom: 0;
 }
 
 .evento-highlights {

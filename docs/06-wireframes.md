@@ -18,14 +18,16 @@ Los bloques definidos aquí se organizan dentro de un **grid editorial flexible*
 
 Bloques en orden vertical:
 
-- **Cabecera** (logo, menú 4–6 ítems)
+- **Cabecera** (logo, menú principal 4–6 ítems + subnav: Galería, Blog, Contribuir, Contacto; ver 05)
 - **Hero** (mensaje de acogida, CTA “Practica con nosotros”; posible imagen)
+- **Del blog** (opcional: fila de entradas destacadas + “Ver todas las entradas”; según implementación)
 - **Comunidad** (breve: quiénes somos, enlace a La comunidad; según Contenido_Web “Un poco de nuestra comunidad”)
 - **Cómo practicamos** (Estudio consciente, Práctica vivencial, Vida cotidiana; según Contenido_Web)
-- **Linaje breve** (micro-bloque opcional según espacio editorial: “Nuestro linaje”, 2 líneas, enlace a /linaje/; refuerza la raíz espiritual)
+- **Linaje breve** (micro-bloque opcional: “Nuestro linaje”, 2 líneas, enlace a /linaje/)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
 - **Caminos de participación** (Iniciarse, Profundizar, Practicar en comunidad; según Contenido_Web)
 - **Eventos** (si hay evento vigente: próximo evento + enlace a Eventos; si no: no mostrar bloque o mensaje amable)
+- **Galería** (fila de imágenes + enlace “Ver galería completa”; según 04)
 - **Contacto / Practica con nosotros** (CTA principal hacia Contacto o WhatsApp)
 - **Pie** (identidad, contacto, redes, donaciones, Pausa Profunda)
 
@@ -87,6 +89,7 @@ Bloques:
 
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
+- **Calendario estático** (un mes; días con evento marcados; según 04)
 - **Por cada evento (tarjeta):** etiqueta de **tipo de evento** (Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
@@ -158,4 +161,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3

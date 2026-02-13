@@ -53,6 +53,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 /comunidad/
 /linaje/
 /practica/
+/practica/videos/          (secundaria: no en navbar; acceso desde Práctica «Ver más videos»)
 /eventos/
 /eventos/{slug}/
 /galeria/

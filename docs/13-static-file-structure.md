@@ -21,7 +21,7 @@ demo-caminodeldharma/          (o nombre del repo)
 │       ├── Identidad CAMINO DEL DHARMA- (1).pdf
 │       └── FOTOS PAGINA WEB/   Imágenes y videos por pestaña
 ├── index.html, 404.html       Sitio estático (Fase 2 / GitHub Pages)
-├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/
+├── comunidad/, linaje/, practica/, practica/videos/, eventos/, eventos/{slug}/, galeria/, contacto/, donaciones/, blog/
 ├── assets/
 │   ├── css/                  main.css, normalize.css
 │   ├── js/                   main.js, gallery.js (paginación galería)
