@@ -543,6 +543,36 @@ a:focus-visible {
   margin-top: var(--space-xs);
 }
 
+/* Vimeo: help text as tooltip on hover */
+.media-block--vimeo {
+  position: relative;
+}
+
+.video-embed-help {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  font-size: 0.8125rem;
+  color: var(--text);
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.media-block--vimeo:hover .video-embed-help {
+  opacity: 1;
+  visibility: visible;
+}
+
 .practica-videos-more {
   margin-top: var(--space-lg);
   margin-bottom: 0;
