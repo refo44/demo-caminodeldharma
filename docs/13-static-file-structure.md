@@ -27,6 +27,7 @@ demo-caminodeldharma/          (o nombre del repo)
 │   ├── js/                   main.js, gallery.js (paginación galería)
 │   ├── fonts/                Downtown, Inter, MarloweEscapade (15)
 │   ├── images/               Imágenes por sección (eventos: assets/images/eventos/; galería: galeria-01.jpg … galeria-N.jpg; 16)
+│   ├── audio/                Audio local (p. ej. om-ami-dewa-hrih.mp3; 15, 16)
 │   └── documents/            PDFs descargables (p. ej. recitacion-practica-comida.pdf; 15, 16)
 ├── scripts/                  Scripts de mantenimiento (no se despliegan)
 │   ├── optimize-images.sh    Optimización de imágenes para web (15 §3.0)
@@ -86,4 +87,4 @@ Este documento define la **geografía oficial** del repositorio: dónde viven do
 
 ---
 
-**Versión:** 1.5
+**Versión:** 1.6

@@ -1,7 +1,7 @@
 # Camino del Dharma — Inventario de contenido fuente
 
 **Referencia rápida de qué hay en `content-source/` y cómo usarlo en el sitio.**  
-**Versión 1.3**
+**Versión 1.5**
 
 **Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
@@ -20,6 +20,7 @@
 | `Pagina web Camino del Dharma/Link videos subidos en Youtube.docx` | URLs de videos en YouTube (fuente original) |
 | `Pagina web Camino del Dharma/Link-videos-youtube.md` | Mismo contenido que el .docx: lista canónica de 4 videos YouTube (título + URL) |
 | `Pagina web Camino del Dharma/FOTOS PAGINA WEB/` | Imágenes, videos y logo por pestaña |
+| `Amitabha Mantra (A Mi De Wa Hrih).mp3` | Referencia local del audio del mantra OM AMI DEWA HRIH. Copiar a `assets/audio/om-ami-dewa-hrih.mp3`; no enlazar desde el sitio a `content-source/`. |
 
 ---
 
@@ -72,7 +73,17 @@ Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-
 
 ---
 
-## 6. Acciones pendientes
+## 6. Audio (mantras y práctica)
+
+| Origen en `content-source/` | Archivo en `assets/audio/` | Uso |
+|-----------------------------|----------------------------|-----|
+| `Amitabha Mantra (A Mi De Wa Hrih).mp3` | `om-ami-dewa-hrih.mp3` | Recitación del mantra OM AMI DEWA HRIH en la sección «Mantras para la práctica» (`/practica/`). Reproductor nativo `<audio controls>`. |
+
+Los archivos de audio se copian a `assets/audio/` en la raíz del repo (o al theme en Fase 3). Mantener el original en `content-source/` sin editar. Ver 15 §9.
+
+---
+
+## 7. Acciones pendientes
 
 1. **Videos YouTube:** URLs en `Link-videos-youtube.md` (y en .docx). Usar para embeds (03 §6).
 2. **Imágenes:** En producción, todas las imágenes en `assets/images/` deben estar en kebab-case y optimizadas para web. Galería: ejecutar `scripts/rename-gallery-to-kebab.sh` para unificar nombres a `galeria-01.jpg` … `galeria-N.jpg`; luego `scripts/optimize-images.sh` para peso (15 §3.0).
@@ -80,7 +91,7 @@ Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-
 
 ---
 
-## 7. Referencia: Paramitas
+## 8. Referencia: Paramitas
 
 **Lluvia de ideas:** "Tener en cuenta la organización de información de la página de Paramitas."
 
@@ -94,4 +105,4 @@ Este documento es el **inventario oficial** de `content-source/`: qué archivos 
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.5

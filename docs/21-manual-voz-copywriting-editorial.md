@@ -416,6 +416,7 @@ Evitar especialmente:
 - estudio
 - estudio consciente
 - recitación
+- mantra
 
 #### Personas
 

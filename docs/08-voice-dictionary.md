@@ -49,7 +49,7 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 |-----------|----------|
 | Comunidad | comunidad, práctica, sangha |
 | Buddhismo | Dharma, Buddhismo, Chan, Tierra Pura, Mahāyāna |
-| Práctica | meditación, estudio consciente, recitación |
+| Práctica | meditación, estudio consciente, recitación, mantra |
 | Personas | persona, practicante, maestro |
 | Actividad | encuentro, retiro, taller, celebración, conferencia |
 

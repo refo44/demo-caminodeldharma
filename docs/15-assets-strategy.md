@@ -119,8 +119,9 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 
 - **Ubicación:** `assets/audio/` (si el sitio incluye contenido sonoro).
 - **Formatos:** MP3 (compatibilidad amplia); Opus o WebM para streaming con menor peso. Ofrecer al menos un formato con buena compatibilidad.
-- **Uso posible:** Meditación guiada, indicaciones para meditar, enseñanzas en audio, podcasts. Si el contenido viene de YouTube u otra fuente externa, priorizar embed o enlace; usar archivos locales cuando se necesite reproducción directa en el sitio.
-- **Accesibilidad:** Usar `<audio controls>` (no ocultar controles). Incluir transcripción o descripción cuando sea contenido informativo.
+- **Uso posible:** Meditación guiada, indicaciones para meditar, enseñanzas en audio, podcasts, recitación de mantras. Si el contenido viene de YouTube u otra fuente externa, priorizar embed o enlace; usar archivos locales cuando se necesite reproducción directa en el sitio.
+- **Implementado en la maqueta:** `assets/audio/om-ami-dewa-hrih.mp3` — mantra OM AMI DEWA HRIH en `/practica/` (origen en `content-source/Amitabha Mantra (A Mi De Wa Hrih).mp3`; copiado con nombre kebab-case).
+- **Accesibilidad:** Usar `<audio controls>` (no ocultar controles). Incluir transcripción o descripción cuando sea contenido informativo. El texto del mantra y una breve explicación en HTML cubren la alternativa al audio.
 
 ---
 
@@ -136,4 +137,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 1.6
+**Versión:** 1.7

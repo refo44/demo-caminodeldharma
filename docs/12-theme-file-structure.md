@@ -62,6 +62,8 @@ Define la arquitectura de archivos del theme: qué plantillas existen y qué par
 | `parts/footer.php` | Pie, contacto, redes, donaciones |
 | `parts/navigation.php` | Menú principal |
 | `parts/meditation-block.php` | Bloque meditación semanal (reutilizable en Inicio y Práctica) |
+| `parts/recitation-block.php` | Bloque recitación práctica de la comida (opcional; reutilizable si se repite) |
+| `parts/mantra-block.php` | Bloque mantra individual con audio (opcional; repetible por mantra en Práctica) |
 
 Las partes reutilizables se integran mediante `get_template_part()` para mantener consistencia entre plantillas.
 

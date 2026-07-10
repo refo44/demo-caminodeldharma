@@ -57,10 +57,12 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 ### Práctica (page)
 
+- Aprende en la práctica (introducción)
 - Meditación semanal (bloque repetido)
-- Talleres vivenciales
-- Retiro de iniciación
-- Retiros de meditación
+- Recitación práctica de la comida (texto + PDF descargable)
+- Mantras para la práctica (extensible; por ahora OM AMI DEWA HRIH con audio local)
+- Caminos de profundización: talleres vivenciales, retiro de iniciación, retiros de meditación
+- Videos y enseñanzas (embeds + enlace a subpágina de videos)
 - Vida comunitaria (Encuentro nacional, Vesak, Conferencias)
 
 ### Eventos (page o archive-event)

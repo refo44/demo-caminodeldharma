@@ -57,7 +57,29 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 3. Formulario de contacto
+## 3. Práctica y actividades
+
+### Recitación práctica de la comida
+
+- **Título de sección:** Recitación práctica de la comida
+- **Fuente:** Recitaciones para la práctica — Comunidad Buddhista Camino del Dharma
+- **Subtítulo:** Práctica de la comida
+- **Botón:** Descargar PDF
+
+### Mantras para la práctica
+
+- **Título de sección:** Mantras para la práctica
+- **Mantra (implementado):** OM AMI DEWA HRIH
+- **Texto del mantra:** OM AMI DEWA HRIH
+- **Descripción:** Este es el mantra corto de Amitābha, el Buda de la Luz Infinita. En la tradición buddhista tibetana se recita como una práctica de familiarización y aspiración hacia la Tierra Pura.
+- **Leyenda del audio:** Recitación del mantra de Amitābha.
+- **Extensible:** la sección admite uno o más mantras; cada uno con texto y reproductor de audio local.
+
+*Nota:* No incluir enlaces externos de contexto teórico en esta sección.
+
+---
+
+## 4. Formulario de contacto
 
 - **Campos:** Nombre, Correo electrónico, Mensaje
 - **Botón:** Enviar
@@ -65,14 +87,14 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 4. Eventos
+## 5. Eventos
 
 - **Botón:** Inscribirme
 - **Sin eventos:** "No hay eventos programados en este momento."
 
 ---
 
-## 5. Donaciones
+## 6. Donaciones
 
 - **Título:** Sostener la comunidad
 - **Texto:** La Comunidad Buddhista Camino del Dharma se sostiene gracias a la práctica, la participación y la generosidad consciente…
@@ -88,7 +110,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 6. Estados y errores
+## 7. Estados y errores
 
 | Situación | Texto |
 |-----------|-------|
@@ -99,7 +121,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 7. Enlaces externos
+## 8. Enlaces externos
 
 - **Pausa Profunda:** Abre en nueva pestaña
 - **Redes sociales:** Facebook, Instagram
@@ -108,7 +130,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 8. Accesibilidad
+## 9. Accesibilidad
 
 **Alt text:** Describir imágenes de forma clara (comunidad, buda, meditación, etc.). Imágenes decorativas: `alt=""`.
 
@@ -118,4 +140,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.0
+**Versión:** 1.1

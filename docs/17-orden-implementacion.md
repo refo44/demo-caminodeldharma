@@ -80,7 +80,7 @@ La maqueta debe comportarse como el sitio real:
 - Estructura de bloques igual a `06-wireframes`
 - Microcopy final desde `09-ui-copy-sheet`
 
-**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sidebar CTA contribuir en Inicio (junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
+**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sección Mantras para la práctica en Práctica (OM AMI DEWA HRIH con reproductor de audio); sidebar CTA contribuir en Inicio (junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
 
 ### 2.4 Simulación de estados dinámicos
 
@@ -139,7 +139,7 @@ Esto evita rediseños eternos.
 1. **Inicio** — Hero, meditación semanal, caminos de participación
 2. **Contacto** — Formulario + bloque Redes sociales (Facebook, Instagram) + WhatsApp
 3. **La comunidad** — Quiénes somos, fundador
-4. **Práctica** — Meditación, talleres, retiros
+4. **Práctica** — Meditación, recitación comida, mantras (audio), talleres, retiros, videos
 5. **El linaje** — Tradición, Chan, Tierra Pura
 6. **Galería** — Página dedicada con grid paginado (imágenes `galeria-01.jpg` … `galeria-N.jpg`; 12 por página); en Inicio fila de imágenes + enlace «Ver galería completa»
 7. **Eventos** — Condicional; implementar cuando haya eventos vigentes
