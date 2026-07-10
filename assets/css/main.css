@@ -1132,6 +1132,31 @@ a:focus-visible {
   vertical-align: middle;
 }
 
+/* --- Mantras para la práctica (Práctica) --- */
+.mantra-section .mantra-text {
+  padding-inline-start: var(--space-md);
+  border-inline-start: 3px solid var(--brand-2);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.mantra-section .mantra-audio {
+  margin: var(--space-lg) 0 var(--space-md);
+}
+
+.mantra-section audio {
+  display: block;
+  width: 100%;
+  max-width: 32rem;
+}
+
+.mantra-section figcaption {
+  margin-top: var(--space-xs);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
 .meditation-block .read-width {
   margin-inline: auto;
 }
