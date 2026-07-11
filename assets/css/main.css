@@ -1269,28 +1269,75 @@ a:focus-visible {
 }
 
 /* --- Mantras para la práctica (Práctica) --- */
-.mantra-section .mantra-text {
-  padding-inline-start: var(--space-md);
-  border-inline-start: 3px solid var(--brand-2);
-  font-size: 1.125rem;
+.mantra-card {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.mantra-card h3,
+.mantra-card p,
+.mantra-card figure {
+  margin: 0;
+}
+
+.mantra-text {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+}
+
+.mantra-reading {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.85rem var(--space-sm);
+  border: 1px solid currentColor;
+  border-radius: 0.75rem;
+}
+
+.mantra-reading-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  line-height: 1.2;
+  opacity: 0.7;
+}
+
+.mantra-ruby {
+  overflow-wrap: anywhere;
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  line-height: 2.2;
   letter-spacing: 0.04em;
 }
 
-.mantra-section .mantra-audio {
-  margin: var(--space-lg) 0 var(--space-md);
+.mantra-ruby ruby {
+  ruby-align: center;
+  ruby-position: over;
 }
 
-.mantra-section audio {
+.mantra-ruby rt {
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 0.75;
+}
+
+.mantra-audio audio {
   display: block;
-  width: 100%;
-  max-width: 32rem;
+  width: min(100%, 32rem);
 }
 
-.mantra-section figcaption {
-  margin-top: var(--space-xs);
-  color: var(--text-muted);
-  font-size: 0.9375rem;
+.mantra-audio figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+@media (forced-colors: active) {
+  .mantra-reading {
+    border-color: CanvasText;
+  }
 }
 
 .meditation-block .read-width {
