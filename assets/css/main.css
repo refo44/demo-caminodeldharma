@@ -64,7 +64,7 @@
   /* Semantic roles — fondos principales: brand-1/2/3; texto: brand-4 o blanco sobre fondo oscuro */
   --bg: var(--brand-3);
   --text: var(--brand-4);
-  --text-muted: var(--brand-2);
+  --text-muted: var(--brand-4);
   --surface: var(--brand-3);
   --border: var(--brand-3);
   --link: var(--brand-1);
@@ -272,7 +272,7 @@ a:focus-visible {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--space-md);
   padding-block: var(--space-sm);
 }
 
@@ -281,7 +281,7 @@ a:focus-visible {
   align-items: center;
   gap: var(--space-sm);
   height: 2.75rem;
-  margin-inline-end: var(--space-lg);
+  margin-inline-end: var(--space-md);
 }
 
 .site-logo img {
@@ -339,7 +339,11 @@ a:focus-visible {
   height: 1.5rem;
 }
 
-@media (min-width: 768px) {
+/* Nav collapses to a hamburger through tablet widths: the 5-item main
+   menu + subnav + logo + language switcher don't fit in one row until
+   the "Large" tier (1280px, see the --container-max note above and
+   docs/14, docs/20 — single responsive system, no per-page grids). */
+@media (min-width: 1280px) {
   .nav-toggle {
     display: none;
   }
@@ -364,7 +368,7 @@ a:focus-visible {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .nav-menus,
   .nav-menus.is-open {
     display: flex;
@@ -387,11 +391,11 @@ a:focus-visible {
   gap: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .nav-menu {
     display: grid;
     grid-template-columns: repeat(5, auto);
-    gap: 2px var(--space-sm);
+    gap: 2px var(--space-xs);
   }
 
   .nav-sub {
@@ -414,11 +418,11 @@ a:focus-visible {
   padding-block: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .nav-menu a,
   .nav-sub a {
     min-height: 36px;
-    padding: var(--space-xs) var(--space-sm);
+    padding: var(--space-xs);
   }
 }
 
@@ -568,7 +572,8 @@ a:focus-visible {
   pointer-events: none;
 }
 
-.media-block--vimeo:hover .video-embed-help {
+.media-block--vimeo:hover .video-embed-help,
+.media-block--vimeo:focus-within .video-embed-help {
   opacity: 1;
   visibility: visible;
 }
@@ -661,7 +666,8 @@ a:focus-visible {
   }
 }
 
-.gallery-grid img {
+.gallery-grid img,
+.gallery-row img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
@@ -674,9 +680,9 @@ a:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: var(--space-m);
+  gap: var(--space-md);
   margin-top: var(--space-xl);
-  padding-block: var(--space-l);
+  padding-block: var(--space-lg);
 }
 
 .gallery-pagination-prev,
@@ -685,7 +691,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   min-width: 2.25rem;
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 4px;
   text-decoration: none;
   color: var(--text-muted);
@@ -694,7 +700,7 @@ a:focus-visible {
 
 .gallery-pagination-prev:hover,
 .gallery-pagination-next:hover {
-  color: var(--link-color);
+  color: var(--link);
   text-decoration: underline;
 }
 
@@ -706,7 +712,7 @@ a:focus-visible {
 }
 
 .gallery-pagination-info {
-  color: var(--text-muted, #666);
+  color: var(--text-muted);
   font-size: 0.9375rem;
 }
 
@@ -722,10 +728,10 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   min-width: 2.25rem;
-  padding: var(--space-xs) var(--space-s);
+  padding: var(--space-xs) var(--space-sm);
   border-radius: 4px;
   text-decoration: none;
-  color: var(--link-color);
+  color: var(--link);
   font-weight: 500;
 }
 
@@ -750,13 +756,6 @@ a:focus-visible {
   .gallery-row {
     grid-template-columns: repeat(4, 1fr);
   }
-}
-
-.gallery-row img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 4px;
 }
 
 /* --- Linaje: vertical timeline --- */
@@ -915,34 +914,41 @@ a:focus-visible {
   }
 }
 
-.home-blog-card {
+/* Shared article-card primitives (home preview + blog list share the same
+   card shell, thumbnail treatment and hover behavior; only layout differs) */
+.home-blog-card,
+.blog-list-item {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
 }
 
-.home-blog-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.home-blog-link:hover .home-blog-title,
-.home-blog-link:focus-visible .home-blog-title {
-  color: var(--link);
-}
-
-.home-blog-thumb {
+.home-blog-thumb,
+.blog-list-thumb {
   display: block;
   aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
-.home-blog-thumb img {
+.home-blog-thumb img,
+.blog-list-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.home-blog-link:hover .home-blog-title,
+.home-blog-link:focus-visible .home-blog-title,
+.blog-list-link:hover .blog-list-title,
+.blog-list-link:focus-visible .blog-list-title {
+  color: var(--link);
+}
+
+.home-blog-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .home-blog-title {
@@ -975,13 +981,6 @@ a:focus-visible {
   gap: var(--section-gap);
 }
 
-.blog-list-item {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
 .blog-list-link {
   display: grid;
   grid-template-columns: 1fr;
@@ -994,23 +993,6 @@ a:focus-visible {
   .blog-list-link {
     grid-template-columns: 280px 1fr;
   }
-}
-
-.blog-list-link:hover .blog-list-title,
-.blog-list-link:focus-visible .blog-list-title {
-  color: var(--link);
-}
-
-.blog-list-thumb {
-  display: block;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-
-.blog-list-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .blog-list-body {
@@ -1084,6 +1066,23 @@ a:focus-visible {
 
 .btn-primary:focus-visible {
   outline-color: var(--text-on-dark);
+}
+
+/* Secondary action: same shape/size as primary, lower visual weight.
+   Implements the primary/secondary link taxonomy from the IA doc. */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: var(--text-on-dark);
+}
+
+.btn-secondary:focus-visible {
+  outline-color: var(--primary);
 }
 
 /* --- Meditation block --- */
@@ -1221,6 +1220,11 @@ a:focus-visible {
   max-width: 20rem;
   margin-inline: auto;
   font-size: 0.875rem;
+}
+
+/* Row grouping for valid ARIA grid structure without breaking the CSS grid layout */
+.eventos-calendar-row {
+  display: contents;
 }
 
 .eventos-calendar-weekday {
@@ -1834,6 +1838,45 @@ select:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* --- Pressed / active feedback (functional, not decorative) --- */
+.btn:active {
+  filter: brightness(0.92);
+}
+
+a:active {
+  color: var(--link-hover);
+}
+
+.nav-toggle:active,
+.lang-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gallery-pagination-prev:active,
+.gallery-pagination-next:active,
+.gallery-pagination-num:active {
+  color: var(--link-hover);
+}
+
+a.eventos-calendar-day:active {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* --- Form validation state --- */
+.form-group.is-error input,
+.form-group.is-error textarea {
+  border-color: var(--brand-1);
+  border-width: 2px;
+}
+
+.form-error-message {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.875rem;
+  color: var(--brand-1);
 }
 
 /* Typography scale for headings */

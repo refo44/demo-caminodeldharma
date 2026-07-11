@@ -14,7 +14,7 @@
   });
 
   function closeMenuOnDesktop() {
-    if (window.matchMedia('(min-width: 768px)').matches) {
+    if (window.matchMedia('(min-width: 1280px)').matches) {
       menu.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
     }

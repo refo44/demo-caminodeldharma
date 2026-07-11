@@ -150,6 +150,13 @@
     renderGrid(p);
     renderPagination(p);
     grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Pagination controls are rebuilt on every page change, which would
+    // otherwise drop keyboard focus back to <body>. Restore it to the
+    // current-page marker so keyboard users keep their place.
+    var current = paginationEl.querySelector('.gallery-pagination-num.is-current');
+    if (current) {
+      current.focus();
+    }
   }
 
   function init() {
