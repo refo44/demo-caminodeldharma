@@ -110,7 +110,7 @@ El panel usa lenguaje funcional y sobrio. No incluye contadores, invitaciones pr
 
 Los eventos usan un mensaje editorial propio, no la combinación genérica título + URL. Orden estándar:
 
-1. Saludo breve: “Queridos amigos y amigas del Camino:”.
+1. Saludo breve: “Queridos amigos y amigas de Camino del Dharma:”.
 2. Invitación y nombre del evento.
 3. Propósito en uno o dos párrafos breves.
 4. Fecha, hora, lugar, aporte y modalidad según corresponda.
