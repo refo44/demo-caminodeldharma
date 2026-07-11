@@ -37,7 +37,7 @@ Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
    Contenedores, grid o flex para secciones (hero, columnas “cómo practicamos”, footer). Ancho de columna de lectura objetivo 60 a 70ch y ritmo vertical consistente. No usar layout dependiente del DOM profundo (p. ej. `.site-header nav ul li a span`). Espaciado generoso (coherente con la configuración de espaciado en theme.json, definido en 12).
 
 4. **Componentes**  
-   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-text`, `.mantra-audio`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
+   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-text`, `.mantra-audio`) y panel para compartir (`.share-trigger`, `.share-dialog`, `.share-option`, `.share-status`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
 
 5. **Páginas específicas (si hace falta)**  
    Ajustes por template (front-page, page-contacto). Mantener al mínimo; preferir componentes reutilizables.
@@ -122,4 +122,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4

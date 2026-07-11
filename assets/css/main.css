@@ -1085,6 +1085,128 @@ a:focus-visible {
   outline-color: var(--primary);
 }
 
+/* --- Share controls (event and blog items) --- */
+.share-actions {
+  margin: var(--space-md) 0 0;
+}
+
+.blog-list-item .share-actions {
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.share-trigger {
+  gap: var(--space-xs);
+}
+
+.share-trigger .lucide-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.share-dialog {
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: var(--space-lg);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--brand-2);
+  border-radius: 8px;
+  box-shadow: 0 1rem 3rem rgba(62, 66, 75, 0.28);
+}
+
+.share-dialog::backdrop {
+  background: rgba(62, 66, 75, 0.65);
+}
+
+.share-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.share-dialog-header h2 {
+  margin: 0;
+}
+
+.share-dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--brand-2);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.share-dialog-close:hover,
+.share-dialog-close:focus-visible {
+  color: var(--text-on-dark);
+  background: var(--primary);
+}
+
+.share-dialog-close:focus-visible,
+.share-option:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.share-dialog-close .lucide-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.share-dialog-content-title {
+  margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+}
+
+.share-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--brand-2);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.share-option:hover {
+  color: var(--text-on-dark);
+  background: var(--primary);
+}
+
+.share-status {
+  min-height: 1.5em;
+  margin: var(--space-md) 0 0;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .share-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* --- Meditation block --- */
 .meditation-block {
   background-color: var(--brand-3);

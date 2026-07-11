@@ -196,6 +196,8 @@ Sin reemplazar lo definido en `19-accesibilidad-estandares`, este modelo exige d
 
 **Estructura editorial (SEO mínimo):** Cada página debe tener un H1 único y jerarquía H2/H3 clara. No saltar niveles (p. ej. H1 → H3).
 
+**Metadatos sociales:** Entradas del blog y eventos compartibles deben generar en servidor URL canónica, Open Graph y Twitter Card con título, descripción e imagen propios. La fuente es `get_the_title()`, extracto editorial, `get_permalink()` e imagen destacada (o campo social específico). Si un plugin SEO genera estas etiquetas, debe ser la única fuente para evitar duplicados.
+
 Detalle y criterios ampliados en `19-accesibilidad-estandares`.
 
 ---

@@ -24,7 +24,7 @@ demo-caminodeldharma/          (o nombre del repo)
 ├── comunidad/, linaje/, practica/, practica/videos/, eventos/, eventos/{slug}/, galeria/, contacto/, donaciones/, blog/
 ├── assets/
 │   ├── css/                  main.css, normalize.css
-│   ├── js/                   main.js, gallery.js (paginación galería)
+│   ├── js/                   main.js, gallery.js (paginación galería), share.js (panel para compartir enlaces)
 │   ├── fonts/                Downtown, Inter, MarloweEscapade (15)
 │   ├── images/               Imágenes por sección (eventos: assets/images/eventos/; galería: galeria-01.jpg … galeria-N.jpg; 16)
 │   ├── audio/                Audio local (p. ej. om-ami-dewa-hrih.mp3; 15, 16)
@@ -87,4 +87,4 @@ Este documento define la **geografía oficial** del repositorio: dónde viven do
 
 ---
 
-**Versión:** 1.6
+**Versión:** 1.7

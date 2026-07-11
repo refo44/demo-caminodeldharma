@@ -34,7 +34,8 @@ assets/
 │   └── main.css    Estilos reales del theme (layout, lectura, componentes). Encolado en functions.php. Ver 12 §7.
 ├── js/
 │   ├── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
-│   └── gallery.js  Paginación de la galería (solo en página Galería); carga bajo demanda por página.
+│   ├── gallery.js  Paginación de la galería (solo en página Galería); carga bajo demanda por página.
+│   └── share.js    Panel accesible para compartir eventos/blog mediante intents y copia de enlace.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
@@ -50,6 +51,7 @@ En WordPress, esta estructura va dentro del directorio del theme (`theme-camino-
 ## 3. Formatos y optimización
 
 - **Imágenes:** Preferir WebP (JPG como fallback si hace falta). Evitar PNG salvo transparencias reales. Cuidar peso por imagen; tamaños típicos (hero, card, avatar, etc.) en 15 §4.
+- **Imágenes sociales:** Para vistas previas, usar una imagen raster pública mediante URL absoluta. Cuando exista una composición dedicada, usar aproximadamente 1200×630 px. El panel no genera imágenes para publicaciones ni historias de Instagram.
 - **SVG:** Solo para iconos y logo cuando exista versión vectorial.
 - El sitio es editorial; el rendimiento es accesibilidad. Mantener imágenes de contenido dentro de rangos razonables. En WordPress, usar `srcset` y tamaños responsivos nativos cuando aplique; evitar servir imágenes de hero de ancho completo a pantallas móviles.
 
@@ -137,4 +139,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 1.7
+**Versión:** 1.8

@@ -90,11 +90,25 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 ## 5. Eventos
 
 - **Botón:** Inscribirme
+- **Acción secundaria por evento próximo:** Compartir
 - **Sin eventos:** "No hay eventos programados en este momento."
 
 ---
 
-## 6. Donaciones
+## 6. Compartir eventos y entradas del blog
+
+- **Botón en cada elemento:** Compartir
+- **Título del panel:** Compartir
+- **Opciones:** WhatsApp, Facebook, X, Threads, Copiar enlace
+- **Cierre accesible:** Cerrar opciones para compartir
+- **Confirmación de copia:** Enlace copiado.
+- **Fallback de copia:** No fue posible copiar automáticamente. Copia este enlace: [URL]
+
+El panel usa lenguaje funcional y sobrio. No incluye contadores, invitaciones promocionales ni SDKs de seguimiento.
+
+---
+
+## 7. Donaciones
 
 - **Título:** Sostener la comunidad
 - **Texto:** La Comunidad Buddhista Camino del Dharma se sostiene gracias a la práctica, la participación y la generosidad consciente…
@@ -110,7 +124,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 7. Estados y errores
+## 8. Estados y errores
 
 | Situación | Texto |
 |-----------|-------|
@@ -121,7 +135,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 8. Enlaces externos
+## 9. Enlaces externos
 
 - **Pausa Profunda:** Abre en nueva pestaña
 - **Redes sociales:** Facebook, Instagram
@@ -130,7 +144,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ---
 
-## 9. Accesibilidad
+## 10. Accesibilidad
 
 **Alt text:** Describir imágenes de forma clara (comunidad, buda, meditación, etc.). Imágenes decorativas: `alt=""`.
 
@@ -140,4 +154,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

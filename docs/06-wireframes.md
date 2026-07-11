@@ -97,11 +97,13 @@ Bloques:
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
 - **Calendario estático** (un mes; días con evento marcados; según 04)
-- **Por cada evento (tarjeta):** etiqueta de **tipo de evento** (Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
+- **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”; acción secundaria “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
 
-**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto.
+**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`.
+
+**Compartir:** el panel propio ofrece WhatsApp, Facebook, X, Threads y copiar enlace. No genera imágenes para Instagram. Los eventos con página propia comparten su detalle; si todavía no existe un detalle, se comparte el ancla estable de su tarjeta en `/eventos/`.
 
 **Estado sin eventos:** ocultar ítem menú o mostrar página con mensaje amable (ej. “No hay eventos programados en este momento”) y salida a Inicio/Práctica (05 §9).
 

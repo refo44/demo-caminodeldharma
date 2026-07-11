@@ -153,6 +153,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 | **Tabs** | `role="tablist"`, `role="tab"`, `role="tabpanel"`; `aria-selected` y `tabindex` correctos; `aria-controls` y `aria-labelledby` consistentes. |
 | **Alertas / mensajes dinámicos** | `aria-live="polite"` para info; `aria-live="assertive"` para errores críticos. Solo cambios relevantes. |
 | **Formularios** | Label asociado al control; placeholder no sustituye label. El texto de error debe insertarse en el DOM (no solo cambiar estilos). Error: `aria-invalid="true"` y `aria-describedby="id-del-error"`. Campos requeridos: indicación visible y `aria-required="true"` si aplica. |
+| **Panel para compartir** | Usar `<dialog>` con título asociado, cierre por botón y Escape, foco contenido mientras está abierto y retorno al botón “Compartir”. Destinos externos son enlaces; copiar/generar imagen son botones. Confirmaciones y errores usan `aria-live="polite"`. |
 
 ### Checklist de PR (ARIA)
 
@@ -200,6 +201,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
   - **Focus visible:** El foco se ve claramente en enlaces, botones e inputs.
   - **Lighthouse:** Sin fallas críticas de accesibilidad en la vista tocada.
   - **Formularios (si se tocaron):** Label asociado, error visible y lectura correcta del error.
+  - **Compartir (si se tocó):** apertura/cierre por teclado, foco dentro del diálogo, retorno al disparador y anuncio de copia/descarga.
 
 - **Navegación solo con teclado:** Recorrer todo el sitio sin ratón; sin trampas de foco; orden de tabulación lógico.
 - **Revisión de contraste:** Herramientas automáticas o manual sobre combinaciones críticas.
