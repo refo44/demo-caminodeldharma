@@ -1284,13 +1284,6 @@ a:focus-visible {
   margin: 0;
 }
 
-.mantra-text {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: 0.05em;
-}
-
 .mantra-reading {
   width: fit-content;
   max-width: 100%;
@@ -1315,10 +1308,6 @@ a:focus-visible {
 .mantra-ruby ruby {
   ruby-align: center;
   ruby-position: over;
-}
-
-.mantra-ruby-base {
-  opacity: 0.78;
 }
 
 .mantra-ruby rt {
