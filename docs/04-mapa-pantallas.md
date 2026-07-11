@@ -16,11 +16,11 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Práctica y actividades | Aprende en la práctica, meditación semanal, recitación práctica de la comida (texto + descarga PDF), mantras para la práctica (OM AMI DEWA HRIH + audio), caminos de profundización (talleres, retiros), videos y enseñanzas, vida comunitaria |
 
 *Extensiones de maqueta en Práctica (no en Contenido_Web canónico):* recitación de la comida y mantras con audio.
-| Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles e inscripción; cada evento próximo incluye opciones para compartir |
+| Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles e inscripción; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
 | Galería | Página dedicada con grid paginado de la galería comunitaria (imágenes `galeria-01.jpg` … `galeria-N.jpg`; ver 16). |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
-| Blog | Listado de entradas con opciones para compartir por elemento; entradas individuales (opcional). |
+| Blog | Listado de entradas y detalles individuales con opciones para compartir. |
 
 ---
 

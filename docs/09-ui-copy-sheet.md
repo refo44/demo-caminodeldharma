@@ -97,7 +97,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ## 6. Compartir eventos y entradas del blog
 
-- **Botón en cada elemento:** Compartir
+- **Botón en cada elemento:** Compartir, tanto en el listado como en la página de detalle.
 - **Título del panel:** Compartir
 - **Opciones:** WhatsApp, Facebook, X, Threads, Copiar enlace
 - **Cierre accesible:** Cerrar opciones para compartir
