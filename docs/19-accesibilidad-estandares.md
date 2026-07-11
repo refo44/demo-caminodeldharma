@@ -72,7 +72,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 ### Reglas mínimas (alto impacto, bajo costo)
 
 - **Skip link:** Enlace "Saltar al contenido" visible al recibir foco (primer elemento interactivo o muy próximo).
-- **Idioma:** Atributo `lang` en `<html>`; consistencia de idioma en las páginas; `lang` en fragmentos en otro idioma si aplica.
+- **Idioma:** Atributo `lang` en `<html>`; consistencia de idioma en las páginas; `lang` en fragmentos en otro idioma si aplica. Las transliteraciones tibetanas en alfabeto latino usan `lang="bo-Latn"` y `translate="no"`. Como la pronunciación depende de las voces instaladas, se ofrece audio como referencia y no se intenta controlarla mediante `aria-label`.
 - **Orden de foco:** Orden de tabulación lógico y predecible; no solo "navegable por teclado", sino secuencia que preserve el significado.
 - **Focus visible:** No usar `outline: none` sin reemplazo (usar `:focus-visible` con estilo visible equivalente).
 - **Reflujo y zoom:** Contenido usable al 200 % de zoom y en viewport equivalente a 320 px de ancho sin pérdida de información ni funcionalidad (WCAG 1.4.10).
