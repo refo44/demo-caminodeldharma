@@ -110,17 +110,18 @@ El panel usa lenguaje funcional y sobrio. No incluye contadores, invitaciones pr
 
 Los eventos usan un mensaje editorial propio, no la combinación genérica título + URL. Orden estándar:
 
-1. Saludo breve: “Queridos amigos y amigas de Camino del Dharma:”.
+1. Apertura personal, válida para un contacto o un grupo: “Comparto esta invitación de Camino del Dharma:”.
 2. Invitación y nombre del evento.
 3. Propósito en uno o dos párrafos breves.
 4. Fecha, hora, lugar, aporte y modalidad según corresponda.
 5. Qué incluye, únicamente cuando sea relevante.
 6. Disponibilidad de cupos.
-7. Enlace de inscripción.
-8. Enlace oficial del evento en el sitio.
-9. Cierre breve relacionado con la práctica.
+7. Un único enlace oficial del evento, donde se encuentra la acción de inscripción.
+8. Cierre breve relacionado con la práctica.
 
 Se permiten únicamente emojis funcionales para facilitar el escaneo (`📅`, `🕘`, `📍`, `💰`). No se usan emojis decorativos en saludos, títulos, cupos ni cierres. Las inclusiones emplean viñetas (`•`). Los datos ausentes se omiten; no se muestran etiquetas vacías.
+
+**Vista previa en WhatsApp:** El mensaje contiene una sola URL y debe ser la página pública del evento. No se incluye la URL directa de Google Forms u otro formulario externo, porque WhatsApp podría usarla para generar la vista previa. La página del evento contiene el botón de inscripción.
 
 ---
 

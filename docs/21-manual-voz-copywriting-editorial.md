@@ -297,20 +297,21 @@ Empieza orientando.
 
 ### Mensajes de eventos para WhatsApp
 
-Estos mensajes combinan orientación práctica e invitación comunitaria. Deben poder comprenderse sin abrir el enlace.
+Estos mensajes combinan orientación práctica e invitación comunitaria. Deben poder comprenderse sin abrir el enlace y sonar naturales tanto si comparte un administrador como cualquier otra persona.
 
 Secuencia recomendada:
 
-1. Saludo comunitario breve.
+1. Apertura personal, válida para una conversación individual o grupal: `Comparto esta invitación de Camino del Dharma:`.
 2. Nombre y naturaleza del encuentro.
 3. Propósito expresado con claridad, sin prometer transformación.
 4. Datos prácticos escaneables: fecha, hora, lugar, aporte y modalidad.
 5. Inclusiones o condiciones relevantes.
-6. Enlace de inscripción.
-7. Enlace oficial para ampliar información.
-8. Cierre sereno y breve.
+6. Un único enlace oficial que centraliza información e inscripción.
+7. Cierre sereno y breve.
 
 Los emojis se reservan para identificar datos prácticos (`📅`, `🕘`, `📍`, `💰`). No se usan como decoración en saludos, títulos, cupos o cierres. Las listas internas usan viñetas. La urgencia solo se menciona cuando es factual, por ejemplo: `Cupos limitados`.
+
+La URL compartida debe ser la página del evento, no el formulario externo. Además de mantener el contexto editorial, esto permite que WhatsApp obtenga la vista previa desde los metadatos de Camino del Dharma.
 
 ---
 
