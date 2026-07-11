@@ -106,6 +106,22 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 El panel usa lenguaje funcional y sobrio. No incluye contadores, invitaciones promocionales ni SDKs de seguimiento.
 
+### Mensaje de evento para WhatsApp
+
+Los eventos usan un mensaje editorial propio, no la combinación genérica título + URL. Orden estándar:
+
+1. Saludo breve: “Queridos amigos y amigas del Camino:”.
+2. Invitación y nombre del evento.
+3. Propósito en uno o dos párrafos breves.
+4. Fecha, hora, lugar, aporte y modalidad según corresponda.
+5. Qué incluye, únicamente cuando sea relevante.
+6. Disponibilidad de cupos.
+7. Enlace de inscripción.
+8. Enlace oficial del evento en el sitio.
+9. Cierre breve relacionado con la práctica.
+
+Se permiten únicamente emojis funcionales para facilitar el escaneo (`📅`, `🕘`, `📍`, `💰`). No se usan emojis decorativos en saludos, títulos, cupos ni cierres. Las inclusiones emplean viñetas (`•`). Los datos ausentes se omiten; no se muestran etiquetas vacías.
+
 ---
 
 ## 7. Donaciones

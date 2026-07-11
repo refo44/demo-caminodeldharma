@@ -34,11 +34,28 @@
     return new URL(value, window.location.href).href;
   }
 
+  function getWhatsAppMessage(button, fallback) {
+    var templateId = button.getAttribute('data-share-whatsapp-template');
+    var template = templateId ? document.getElementById(templateId) : null;
+    if (!template) return fallback;
+
+    return template.content.textContent
+      .split('\n')
+      .map(function (line) { return line.trim(); })
+      .join('\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+  }
+
   function getShareData(button) {
+    var title = button.getAttribute('data-share-title');
+    var url = absoluteUrl(button.getAttribute('data-share-url'));
+
     return {
-      title: button.getAttribute('data-share-title'),
+      title: title,
       description: button.getAttribute('data-share-description'),
-      url: absoluteUrl(button.getAttribute('data-share-url'))
+      url: url,
+      whatsappMessage: getWhatsAppMessage(button, title + ' ' + url)
     };
   }
 
@@ -54,7 +71,7 @@
 
     var encodedTitle = encodeURIComponent(currentShare.title);
     var encodedUrl = encodeURIComponent(currentShare.url);
-    var encodedText = encodeURIComponent(currentShare.title + ' ' + currentShare.url);
+    var encodedText = encodeURIComponent(currentShare.whatsappMessage);
 
     setIntent('whatsapp', 'https://api.whatsapp.com/send?text=' + encodedText);
     setIntent('facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl);

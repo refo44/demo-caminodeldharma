@@ -101,7 +101,7 @@ Bloques:
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
 
-**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`.
+**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`. El mensaje editorial de WhatsApp vive en un `<template>` asociado mediante `data-share-whatsapp-template`; así conserva saltos de línea y datos específicos sin incrustar copy largo en JavaScript.
 
 **Compartir:** el panel propio ofrece WhatsApp, Facebook, X, Threads y copiar enlace. No genera imágenes para Instagram. Los eventos con página propia comparten su detalle; si todavía no existe un detalle, se comparte el ancla estable de su tarjeta en `/eventos/`.
 

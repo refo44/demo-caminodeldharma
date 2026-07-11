@@ -295,6 +295,23 @@ Ejemplo:
 El texto no empieza atrayendo.
 Empieza orientando.
 
+### Mensajes de eventos para WhatsApp
+
+Estos mensajes combinan orientación práctica e invitación comunitaria. Deben poder comprenderse sin abrir el enlace.
+
+Secuencia recomendada:
+
+1. Saludo comunitario breve.
+2. Nombre y naturaleza del encuentro.
+3. Propósito expresado con claridad, sin prometer transformación.
+4. Datos prácticos escaneables: fecha, hora, lugar, aporte y modalidad.
+5. Inclusiones o condiciones relevantes.
+6. Enlace de inscripción.
+7. Enlace oficial para ampliar información.
+8. Cierre sereno y breve.
+
+Los emojis se reservan para identificar datos prácticos (`📅`, `🕘`, `📍`, `💰`). No se usan como decoración en saludos, títulos, cupos o cierres. Las listas internas usan viñetas. La urgencia solo se menciona cuando es factual, por ejemplo: `Cupos limitados`.
+
 ---
 
 ## 12. Sistema de intención
