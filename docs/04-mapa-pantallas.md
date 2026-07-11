@@ -17,7 +17,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 *Extensiones de maqueta en Práctica (no en Contenido_Web canónico):* recitación de la comida y mantras con audio.
 | Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles e inscripción; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
-| Galería | Página dedicada con grid paginado de la galería comunitaria (imágenes `galeria-01.jpg` … `galeria-N.jpg`; ver 16). |
+| Galería | Página dedicada organizada en álbumes o secciones con título propio (por año, evento o actividad); cada álbum tiene grid y paginación independiente. |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
 | Blog | Listado de entradas sin acciones secundarias; cada detalle individual incluye opciones para compartir. |

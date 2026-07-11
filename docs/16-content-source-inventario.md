@@ -36,7 +36,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 | **Pestaña 3** | `foto-biografia-fundador.jpg` | Biografía del fundador |
 | **Pestaña 5** | `video-que-es-meditar.mp4`, `video-conectar-nuestro-planeta.mp4`, `video-redes-compasion.mp4`, Link videos subidos en Youtube.docx | Videos, meditación, YouTube |
 | **Pestaña 6** | `contacto-comunidad.jpg` | Contacto |
-| **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): grid paginado con todas las imágenes. Tras añadir o renombrar fotos, actualizar el array `gallery-data` en `galeria/index.html` (o generar el JSON desde el listado del directorio). |
+| **Pestaña 7** | En producción: `galeria-01.jpg` … `galeria-N.jpg` (kebab-case, sin espacios, orden numérico). Ver `scripts/rename-gallery-to-kebab.sh`. | **Página Galería** (`/galeria/`): álbumes titulados por año, evento o actividad, cada uno con grid y paginación independiente. `gallery-data` conserva el inventario y `gallery-albums-data` define la agrupación demostrativa; en el CMS, cada imagen deberá asociarse editorialmente a un álbum. |
 | **Pestaña 8** | `celebracion-diwali.jpg`, `celebracion-vesak-2019.jpg` | Celebraciones (Vesak, Diwali) |
 | **Eventos** | En `assets/images/eventos/`: `evento-taller-pausa-profunda-feb-2026.jpeg`, `evento-6-encuentro-nacional.jpeg`, `evento-buddhismo-tiempos-cansancio.jpeg` | Carteles de eventos en `/eventos/` |
 

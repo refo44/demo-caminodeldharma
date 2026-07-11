@@ -664,6 +664,25 @@ a:focus-visible {
 }
 
 /* --- Gallery grid --- */
+.gallery-albums {
+  display: grid;
+  gap: var(--section-gap);
+  margin-block: var(--section-gap);
+}
+
+.gallery-album {
+  scroll-margin-top: var(--header-offset);
+}
+
+.gallery-album + .gallery-album {
+  padding-top: var(--section-gap);
+  border-top: 1px solid var(--border);
+}
+
+.gallery-album h2 {
+  margin-top: 0;
+}
+
 .gallery-grid {
   display: grid;
   gap: var(--grid-gap);

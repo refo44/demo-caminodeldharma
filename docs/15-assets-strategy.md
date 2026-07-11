@@ -34,7 +34,7 @@ assets/
 │   └── main.css    Estilos reales del theme (layout, lectura, componentes). Encolado en functions.php. Ver 12 §7.
 ├── js/
 │   ├── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
-│   ├── gallery.js  Paginación de la galería (solo en página Galería); carga bajo demanda por página.
+│   ├── gallery.js  Álbumes de galería con paginación independiente y carga bajo demanda por página.
 │   └── share.js    Panel accesible para compartir eventos/blog mediante intents y copia de enlace.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)

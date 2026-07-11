@@ -1,65 +1,51 @@
 /**
- * Gallery pagination — only the current page's images are in the DOM and loaded.
- * Uses ?page=N in the URL so the current page is shareable and back/forward work.
+ * Album gallery pagination.
+ * Each album owns its grid, controls, status and shareable page query parameter.
  */
 (function () {
   var IMAGES_PER_PAGE = 12;
-  var grid = document.getElementById('gallery-grid');
-  var paginationEl = document.getElementById('gallery-pagination');
-  var dataEl = document.getElementById('gallery-data');
-  var statusEl = document.getElementById('gallery-status');
-  if (!grid || !paginationEl || !dataEl) return;
+  var albumsRoot = document.getElementById('gallery-albums');
+  var imagesDataElement = document.getElementById('gallery-data');
+  var albumsDataElement = document.getElementById('gallery-albums-data');
+  if (!albumsRoot || !imagesDataElement || !albumsDataElement) return;
 
-  var images = [];
+  var images;
+  var albumDefinitions;
+
   try {
-    images = JSON.parse(dataEl.textContent || '[]');
-  } catch (e) {
+    images = JSON.parse(imagesDataElement.textContent || '[]');
+    albumDefinitions = JSON.parse(albumsDataElement.textContent || '[]');
+  } catch (error) {
     return;
   }
 
-  function getPageFromUrl() {
+  function pageParameter(albumId) {
+    return albumId + '-page';
+  }
+
+  function totalPages(album) {
+    return Math.max(1, Math.ceil(album.images.length / IMAGES_PER_PAGE));
+  }
+
+  function pageFromUrl(album) {
     var params = new URLSearchParams(window.location.search);
-    var p = parseInt(params.get('page'), 10);
-    return isNaN(p) || p < 1 ? 1 : p;
+    var page = parseInt(params.get(pageParameter(album.id)), 10);
+    if (isNaN(page) || page < 1) return 1;
+    return Math.min(page, totalPages(album));
   }
 
-  function totalPages() {
-    return Math.max(1, Math.ceil(images.length / IMAGES_PER_PAGE));
-  }
-
-  function renderGrid(page) {
-    var start = (page - 1) * IMAGES_PER_PAGE;
-    var slice = images.slice(start, start + IMAGES_PER_PAGE);
-    grid.setAttribute('aria-busy', 'true');
-    grid.innerHTML = '';
-    slice.forEach(function (item) {
-      var img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.alt || '';
-      img.width = 400;
-      img.height = 400;
-      img.loading = 'lazy';
-      grid.appendChild(img);
-    });
-    grid.setAttribute('aria-busy', 'false');
-  }
-
-  function getUrlForPage(page) {
+  function urlForPage(album, page) {
     var url = new URL(window.location.href);
+    var parameter = pageParameter(album.id);
+
     if (page === 1) {
-      url.searchParams.delete('page');
+      url.searchParams.delete(parameter);
     } else {
-      url.searchParams.set('page', String(page));
+      url.searchParams.set(parameter, String(page));
     }
+
+    url.hash = album.id;
     return url.toString();
-  }
-
-  function pushState(page) {
-    window.history.pushState({ galleryPage: page }, '', getUrlForPage(page));
-  }
-
-  function replaceState(page) {
-    window.history.replaceState({ galleryPage: page }, '', getUrlForPage(page));
   }
 
   function createChevronIcon(direction) {
@@ -67,6 +53,8 @@
       ? 'M13 9a1 1 0 0 1-1-1V5.061a1 1 0 0 0-1.811-.75l-6.835 6.836a1.207 1.207 0 0 0 0 1.707l6.835 6.835a1 1 0 0 0 1.811-.75V16a1 1 0 0 1 1-1h6a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z'
       : 'M11 9a1 1 0 0 0 1-1V5.061a1 1 0 0 1 1.811-.75l6.836 6.836a1.207 1.207 0 0 1 0 1.707l-6.836 6.835a1 1 0 0 1-1.811-.75V16a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1z';
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    var pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
     svg.setAttribute('class', 'lucide-icon gallery-pagination-icon');
     svg.setAttribute('viewBox', '0 0 24 24');
     svg.setAttribute('fill', 'none');
@@ -75,110 +63,157 @@
     svg.setAttribute('stroke-linecap', 'round');
     svg.setAttribute('stroke-linejoin', 'round');
     svg.setAttribute('aria-hidden', 'true');
-    var pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    pathEl.setAttribute('d', path);
-    svg.appendChild(pathEl);
+    pathElement.setAttribute('d', path);
+    svg.appendChild(pathElement);
+
     return svg;
   }
 
-  function renderPagination(currentPage) {
-    var total = totalPages();
-    var frag = document.createDocumentFragment();
+  function createAlbum(definition) {
+    var albumImages = images.slice(definition.start, definition.end);
+    var section = document.createElement('section');
+    var heading = document.createElement('h2');
+    var grid = document.createElement('div');
+    var pagination = document.createElement('nav');
+    var status = document.createElement('p');
 
-    var prevLabel = 'Anterior';
-    var nextLabel = 'Siguiente';
-    if (currentPage > 1) {
-      var prevLink = document.createElement('a');
-      prevLink.href = currentPage === 2 ? '?' : '?page=' + (currentPage - 1);
-      prevLink.className = 'gallery-pagination-prev';
-      prevLink.setAttribute('aria-label', prevLabel);
-      prevLink.appendChild(createChevronIcon('prev'));
-      prevLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        goToPage(currentPage - 1);
+    section.id = definition.id;
+    section.className = 'gallery-album';
+    section.setAttribute('aria-labelledby', definition.id + '-heading');
+
+    heading.id = definition.id + '-heading';
+    heading.textContent = definition.title;
+
+    grid.className = 'gallery-grid';
+    grid.setAttribute('aria-busy', 'false');
+    grid.setAttribute('aria-label', 'Imágenes de ' + definition.title);
+
+    pagination.className = 'gallery-pagination';
+    pagination.setAttribute('aria-label', 'Paginación de ' + definition.title);
+
+    status.className = 'visually-hidden';
+    status.setAttribute('aria-live', 'polite');
+
+    section.appendChild(heading);
+    section.appendChild(grid);
+    section.appendChild(pagination);
+    section.appendChild(status);
+    albumsRoot.appendChild(section);
+
+    return {
+      id: definition.id,
+      title: definition.title,
+      images: albumImages,
+      section: section,
+      grid: grid,
+      pagination: pagination,
+      status: status
+    };
+  }
+
+  function renderGrid(album, page) {
+    var start = (page - 1) * IMAGES_PER_PAGE;
+    var pageImages = album.images.slice(start, start + IMAGES_PER_PAGE);
+    var fragment = document.createDocumentFragment();
+
+    album.grid.setAttribute('aria-busy', 'true');
+    pageImages.forEach(function (item) {
+      var image = document.createElement('img');
+      image.src = item.src;
+      image.alt = item.alt || '';
+      image.width = 400;
+      image.height = 400;
+      image.loading = 'lazy';
+      fragment.appendChild(image);
+    });
+    album.grid.replaceChildren(fragment);
+    album.grid.setAttribute('aria-busy', 'false');
+  }
+
+  function createPageLink(album, page, currentPage) {
+    var link = document.createElement('a');
+    link.href = urlForPage(album, page);
+    link.textContent = page;
+    link.className = 'gallery-pagination-num';
+
+    if (page === currentPage) {
+      link.classList.add('is-current');
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        goToPage(album, page);
       });
-      frag.appendChild(prevLink);
     }
 
+    return link;
+  }
+
+  function createDirectionLink(album, page, direction) {
+    var link = document.createElement('a');
+    link.href = urlForPage(album, page);
+    link.className = direction === 'prev'
+      ? 'gallery-pagination-prev'
+      : 'gallery-pagination-next';
+    link.setAttribute('aria-label', direction === 'prev' ? 'Anterior' : 'Siguiente');
+    link.appendChild(createChevronIcon(direction));
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      goToPage(album, page);
+    });
+    return link;
+  }
+
+  function renderPagination(album, currentPage) {
+    var total = totalPages(album);
+    var controls = document.createDocumentFragment();
     var info = document.createElement('span');
+    var pageLinks = document.createElement('div');
+
+    if (currentPage > 1) {
+      controls.appendChild(createDirectionLink(album, currentPage - 1, 'prev'));
+    }
+
     info.className = 'gallery-pagination-info';
     info.textContent = 'Página ' + currentPage + ' de ' + total;
-    frag.appendChild(info);
-
-    // The pagination markup is destroyed and rebuilt on every page change,
-    // so its own text isn't reliably announced. Mirror it into a status
-    // element that stays in the DOM so screen readers hear the update.
-    if (statusEl) {
-      statusEl.textContent = 'Página ' + currentPage + ' de ' + total + '.';
-    }
+    controls.appendChild(info);
 
     if (currentPage < total) {
-      var nextLink = document.createElement('a');
-      nextLink.href = '?page=' + (currentPage + 1);
-      nextLink.className = 'gallery-pagination-next';
-      nextLink.setAttribute('aria-label', nextLabel);
-      nextLink.appendChild(createChevronIcon('next'));
-      nextLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        goToPage(currentPage + 1);
-      });
-      frag.appendChild(nextLink);
+      controls.appendChild(createDirectionLink(album, currentPage + 1, 'next'));
     }
 
-    paginationEl.innerHTML = '';
-    paginationEl.appendChild(frag);
-
-    var pageLinks = document.createElement('div');
     pageLinks.className = 'gallery-pagination-pages';
-    for (var i = 1; i <= total; i++) {
-      var link = document.createElement('a');
-      link.href = i === 1 ? '?' : '?page=' + i;
-      link.textContent = i;
-      if (i === currentPage) {
-        link.className = 'gallery-pagination-num is-current';
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.className = 'gallery-pagination-num';
-        (function (p) {
-          link.addEventListener('click', function (e) {
-            e.preventDefault();
-            goToPage(p);
-          });
-        })(i);
-      }
-      pageLinks.appendChild(link);
+    for (var page = 1; page <= total; page += 1) {
+      pageLinks.appendChild(createPageLink(album, page, currentPage));
     }
-    paginationEl.appendChild(pageLinks);
+    controls.appendChild(pageLinks);
+
+    album.pagination.replaceChildren(controls);
+    album.status.textContent = album.title + ': página ' + currentPage + ' de ' + total + '.';
   }
 
-  function goToPage(page) {
-    var total = totalPages();
-    var p = Math.max(1, Math.min(page, total));
-    pushState(p);
-    renderGrid(p);
-    renderPagination(p);
-    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Pagination controls are rebuilt on every page change, which would
-    // otherwise drop keyboard focus back to <body>. Restore it to the
-    // current-page marker so keyboard users keep their place.
-    var current = paginationEl.querySelector('.gallery-pagination-num.is-current');
-    if (current) {
-      current.focus();
-    }
+  function goToPage(album, requestedPage) {
+    var page = Math.max(1, Math.min(requestedPage, totalPages(album)));
+    window.history.pushState({}, '', urlForPage(album, page));
+    renderGrid(album, page);
+    renderPagination(album, page);
+    album.section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    var currentPageLink = album.pagination.querySelector('.gallery-pagination-num.is-current');
+    if (currentPageLink) currentPageLink.focus();
   }
 
-  function init() {
-    var page = getPageFromUrl();
-    replaceState(page);
-    renderGrid(page);
-    renderPagination(page);
+  var albums = albumDefinitions.map(createAlbum);
+
+  function renderFromUrl() {
+    albums.forEach(function (album) {
+      var page = pageFromUrl(album);
+      renderGrid(album, page);
+      renderPagination(album, page);
+    });
   }
 
-  window.addEventListener('popstate', function (e) {
-    var page = (e.state && e.state.galleryPage) || getPageFromUrl();
-    renderGrid(page);
-    renderPagination(page);
-  });
-
-  init();
+  window.history.replaceState({}, '', window.location.href);
+  window.addEventListener('popstate', renderFromUrl);
+  renderFromUrl();
 })();

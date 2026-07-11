@@ -109,7 +109,27 @@ Bloques:
 
 ---
 
-## 6. Contacto
+## 6. Galería
+
+**Función:** organizar la memoria visual de la comunidad sin presentar todas las imágenes como una secuencia única.
+
+Bloques:
+
+- Cabecera
+- Título “Galería comunitaria” e introducción breve
+- Uno o más álbumes, cada uno como `<section>` con título propio
+- Grid de imágenes por álbum
+- Paginación independiente por álbum (12 imágenes por página)
+- Enlace “Volver al inicio”
+- Pie
+
+Los álbumes pueden responder a criterios editoriales distintos: año (`2026`), evento (`Encuentro nacional`) o actividad (`Retiros y práctica`). Cada álbum conserva una ancla estable y su página activa en la URL mediante un parámetro propio, por ejemplo `?encuentro-nacional-page=2#encuentro-nacional`.
+
+**Maqueta estática:** `#gallery-data` mantiene el inventario de imágenes y `#gallery-albums-data` define los álbumes demostrativos, sus títulos y rangos. `gallery.js` crea una sección `.gallery-album` por definición, con `.gallery-grid`, `.gallery-pagination` y una región de estado accesible independientes.
+
+---
+
+## 7. Contacto
 
 **Función:** formulario y puente directo. El formulario es un puente, no un proceso; mantiene el tono del sistema.
 
@@ -124,7 +144,7 @@ Bloques:
 
 ---
 
-## 7. Single evento (si se implementa)
+## 8. Single evento (si se implementa)
 
 **Función:** detalle de un evento.
 
@@ -141,7 +161,7 @@ Bloques:
 
 ---
 
-## 8. 404
+## 9. 404
 
 **Función:** salida amable sin callejón sin salida (05 §9).
 

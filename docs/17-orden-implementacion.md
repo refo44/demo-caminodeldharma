@@ -142,7 +142,7 @@ Esto evita rediseños eternos.
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, recitación comida, mantras (audio), talleres, retiros, videos
 5. **El linaje** — Tradición, Chan, Tierra Pura
-6. **Galería** — Página dedicada con grid paginado (imágenes `galeria-01.jpg` … `galeria-N.jpg`; 12 por página); en Inicio fila de imágenes + enlace «Ver galería completa»
+6. **Galería** — Página dedicada con álbumes titulados por año, evento o actividad; cada álbum tiene grid y paginación independiente de 12 imágenes por página. En Inicio se mantiene la fila de imágenes + enlace «Ver galería completa».
 7. **Eventos** — Condicional; implementar cuando haya eventos vigentes
 
 ---

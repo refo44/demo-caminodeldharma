@@ -154,6 +154,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 | **Alertas / mensajes dinámicos** | `aria-live="polite"` para info; `aria-live="assertive"` para errores críticos. Solo cambios relevantes. |
 | **Formularios** | Label asociado al control; placeholder no sustituye label. El texto de error debe insertarse en el DOM (no solo cambiar estilos). Error: `aria-invalid="true"` y `aria-describedby="id-del-error"`. Campos requeridos: indicación visible y `aria-required="true"` si aplica. |
 | **Panel para compartir** | Usar `<dialog>` con título asociado, cierre por botón y Escape, foco contenido mientras está abierto y retorno al botón “Compartir”. Destinos externos son enlaces; copiar/generar imagen son botones. Confirmaciones y errores usan `aria-live="polite"`. |
+| **Álbum de galería** | Cada álbum usa una `<section>` asociada a su título, un grid con nombre accesible y navegación de paginación propia. Al cambiar de página, actualizar una región `aria-live="polite"` y devolver el foco al indicador de página actual del mismo álbum. |
 
 ### Checklist de PR (ARIA)
 

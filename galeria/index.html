@@ -145,9 +145,14 @@
       {"src":"../assets/images/galeria/galeria-86.jpg","alt":"Una mujer sentada sola en el césped, escribiendo, con un cojín de meditación a su lado."}
     ]
     </script>
-    <div id="gallery-grid" class="gallery-grid section-gap" aria-busy="false"></div>
-    <nav class="gallery-pagination" aria-label="Paginación de la galería" id="gallery-pagination"></nav>
-    <p id="gallery-status" class="visually-hidden" aria-live="polite"></p>
+    <script type="application/json" id="gallery-albums-data">
+    [
+      {"id":"galeria-2026","title":"2026","start":0,"end":30},
+      {"id":"encuentro-nacional","title":"Encuentro nacional","start":30,"end":58},
+      {"id":"retiros-y-practica","title":"Retiros y práctica","start":58,"end":86}
+    ]
+    </script>
+    <div id="gallery-albums" class="gallery-albums"></div>
 
     <p><a href="../">Volver al inicio</a></p>
   </main>
