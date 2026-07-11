@@ -7,7 +7,8 @@ Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** 
 - HTML5 semántico
 - CSS3 (tokens, diseño responsivo)
 - JavaScript mínimo con `defer` (menú, galería, accesibilidad)
-- Sin proceso de build: archivos estáticos listos para servir
+- Stylelint como validación obligatoria del CSS
+- Sin proceso de build: archivos estáticos listos para servir; npm se usa únicamente para herramientas de desarrollo
 
 ## Cómo ver el sitio
 
@@ -18,6 +19,22 @@ npx serve .
 ```
 
 O desde la raíz del proyecto con el servidor de tu IDE (Live Server, etc.).
+
+## Validación del CSS
+
+Instalar las dependencias una vez:
+
+```bash
+npm install
+```
+
+Ejecutar Stylelint:
+
+```bash
+npm run lint:css
+```
+
+Este comando debe ejecutarse después de cualquier cambio en `assets/css/` y antes de cerrar una tarea, crear un commit o desplegar. La validación debe finalizar sin errores.
 
 ## Estructura del proyecto
 

@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "no-descending-specificity": null,
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(?:(?:--?)[a-z0-9]+)*$",
+      {
+        "message": "Expected class selector to use kebab-case or BEM modifiers"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "assets/css/normalize.css"
+      ],
+      "rules": {
+        "font-family-no-duplicate-names": null,
+        "property-no-vendor-prefix": null
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 # Camino del Dharma — Orden de implementación
 
 **Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
-**Versión 1.5**
+**Versión 1.6**
 
 **Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`
 
@@ -26,6 +26,7 @@
 3. Assets desde `content-source/` copiados a `assets/` en la raíz del repo (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`). Imágenes optimizadas con `scripts/optimize-images.sh`; galería con nombres unificados vía `scripts/rename-gallery-to-kebab.sh`.
 4. **Validar contra checklist** de `18-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 5. **Validar responsive:** Comportamiento en móvil, tablet y desktop antes de pasar a WordPress
+6. **Validar CSS:** Ejecutar `npm run lint:css` después de cada cambio en `assets/css/` y antes de cerrar una tarea, crear un commit o desplegar. No se acepta una entrega con errores de Stylelint.
 
 ### 2.1 Estructura HTML final (base para WordPress)
 
@@ -161,6 +162,7 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 - [ ] Enlaces externos (Pausa Profunda, redes) verificados
 - [ ] Datos bancarios correctos en footer
 - [ ] Accesibilidad: estándares 19 aplicados (contraste, alt, teclado, focus, formularios)
+- [ ] `npm run lint:css` finaliza sin errores
 
 ---
 
@@ -170,4 +172,4 @@ Este documento define el **orden oficial de implementación**: documentación y 
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.6

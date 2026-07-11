@@ -37,7 +37,7 @@ Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
    Contenedores, grid o flex para secciones (hero, columnas “cómo practicamos”, footer). Ancho de columna de lectura objetivo 60 a 70ch y ritmo vertical consistente. No usar layout dependiente del DOM profundo (p. ej. `.site-header nav ul li a span`). Espaciado generoso (coherente con la configuración de espaciado en theme.json, definido en 12).
 
 4. **Componentes**  
-   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-card`, `.mantra-text`, `.mantra-reading`, `.mantra-ruby`, `.mantra-audio`) y panel para compartir (`.share-trigger`, `.share-dialog`, `.share-option`, `.share-status`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
+   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-card`, `.mantra-text`, `.mantra-reading`, `.mantra-ruby`, `.mantra-language-data`, `.mantra-audio`) y panel para compartir (`.share-trigger`, `.share-dialog`, `.share-option`, `.share-status`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
 
 5. **Páginas específicas (si hace falta)**  
    Ajustes por template (front-page, page-contacto). Mantener al mínimo; preferir componentes reutilizables.
@@ -107,7 +107,29 @@ Detalle completo en `19-accesibilidad-estandares`.
 
 ---
 
-## 8. Reglas de no-hacer
+## 8. Validación obligatoria con Stylelint
+
+Stylelint es la validación oficial de calidad para todos los archivos en `assets/css/`. La configuración vive en `.stylelintrc.json` y las dependencias están declaradas en `package.json`.
+
+Instalación inicial:
+
+```bash
+npm install
+```
+
+Validación:
+
+```bash
+npm run lint:css
+```
+
+**Regla obligatoria:** ejecutar `npm run lint:css` después de cualquier modificación CSS y antes de cerrar una tarea, crear un commit o desplegar. El comando debe terminar sin errores.
+
+No se desactivan reglas para ocultar errores concretos. Toda excepción debe responder a una convención real del proyecto y quedar documentada en `.stylelintrc.json`. Las excepciones actuales de `normalize.css` conservan únicamente hacks de compatibilidad propios de ese archivo externo.
+
+---
+
+## 9. Reglas de no-hacer
 
 - No añadir estilos en `style.css` (solo cabecera).
 - No introducir frameworks CSS sin decisión explícita de proyecto.
@@ -122,4 +144,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.5
