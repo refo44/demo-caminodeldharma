@@ -20,7 +20,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Galería | Página dedicada con grid paginado de la galería comunitaria (imágenes `galeria-01.jpg` … `galeria-N.jpg`; ver 16). |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
-| Blog | Listado de entradas y detalles individuales con opciones para compartir. |
+| Blog | Listado de entradas sin acciones secundarias; cada detalle individual incluye opciones para compartir. |
 
 ---
 

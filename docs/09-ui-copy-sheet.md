@@ -97,7 +97,8 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ## 6. Compartir eventos y entradas del blog
 
-- **Botón en cada elemento:** Compartir, tanto en el listado como en la página de detalle.
+- **Eventos próximos:** Botón “Compartir” en el listado y en la página de detalle cuando exista.
+- **Blog:** Botón “Compartir” únicamente dentro de la página de detalle de cada entrada.
 - **Título del panel:** Compartir
 - **Opciones:** WhatsApp, Facebook, X, Threads, Copiar enlace
 - **Cierre accesible:** Cerrar opciones para compartir
