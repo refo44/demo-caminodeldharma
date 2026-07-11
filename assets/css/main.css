@@ -68,7 +68,7 @@
   --surface: var(--brand-3);
   --border: var(--brand-3);
   --link: var(--brand-1);
-  --link-hover: var(--brand-2);
+  --link-hover: var(--brand-4);
   --primary: var(--brand-1);
   --primary-hover: var(--brand-2);
   --header-bg: var(--brand-1);
@@ -416,6 +416,14 @@ a:focus-visible {
   padding: var(--space-xs) var(--space-sm);
   min-height: 44px;
   padding-block: 0;
+}
+
+/* Header background equals --primary, so the default focus-visible outline
+   (also --primary) is invisible here; override to match .nav-toggle/.lang-btn */
+.nav-menu a:focus-visible,
+.nav-sub a:focus-visible {
+  outline: 2px solid var(--text-on-dark);
+  outline-offset: 2px;
 }
 
 @media (min-width: 1280px) {
@@ -1109,7 +1117,7 @@ a:focus-visible {
   padding: var(--space-lg);
   color: var(--text);
   background: var(--bg);
-  border: 1px solid var(--brand-2);
+  border: 1px solid var(--primary);
   border-radius: 8px;
   box-shadow: 0 1rem 3rem rgba(62, 66, 75, 0.28);
 }
@@ -1140,7 +1148,7 @@ a:focus-visible {
   padding: 0;
   color: var(--text);
   background: transparent;
-  border: 1px solid var(--brand-2);
+  border: 1px solid var(--primary);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1185,7 +1193,7 @@ a:focus-visible {
   text-decoration: none;
   color: var(--primary);
   background: transparent;
-  border: 1px solid var(--brand-2);
+  border: 1px solid var(--primary);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -1374,21 +1382,29 @@ a:focus-visible {
   font-weight: 600;
 }
 
-a.eventos-calendar-day {
+/* The event day is a <span role="gridcell"> wrapping a real <a> (rather than
+   role="gridcell" on the link itself), so the link keeps its native role
+   while the grid structure stays valid for assistive tech. */
+.eventos-calendar-day a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
   text-decoration: none;
   color: inherit;
 }
 
-a.eventos-calendar-day:hover,
-a.eventos-calendar-day:focus {
+.eventos-calendar-day a:hover,
+.eventos-calendar-day a:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-a.eventos-calendar-day.has-event:hover,
-a.eventos-calendar-day.has-event:focus {
+.eventos-calendar-day.has-event a:hover,
+.eventos-calendar-day.has-event a:focus-visible {
   background: var(--brand-1);
-  border-color: var(--brand-1);
   color: var(--text-on-dark);
 }
 
@@ -1569,23 +1585,13 @@ a.eventos-calendar-day.has-event:focus {
   margin-top: 0;
 }
 
-.evento-card--past .evento-cta a,
-.evento-card--finalizado .evento-cta a {
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
+/* Finished events: the CTA is a non-interactive <span>, not a disabled
+   <a href>, so there's nothing left to click regardless of input method. */
 .evento-card--past .evento-cta .btn-primary,
 .evento-card--finalizado .evento-cta .btn-primary {
   background-color: var(--text-muted);
   color: var(--text-on-dark);
-}
-
-.evento-card--past .evento-cta .btn-primary:hover,
-.evento-card--finalizado .evento-cta .btn-primary:hover {
-  background-color: var(--text-muted);
-  color: var(--text-on-dark);
+  cursor: default;
 }
 
 /* Single event (single-event.php / eventos/{slug}/) */
@@ -1664,6 +1670,13 @@ a.eventos-calendar-day.has-event:focus {
 .site-footer a:hover {
   color: var(--text-on-dark);
   opacity: 0.9;
+}
+
+/* Footer background is brand-2; the default focus-visible outline (--primary)
+   only reaches ~2.2:1 against it. Override for the 3:1 non-text minimum. */
+.site-footer a:focus-visible {
+  outline: 2px solid var(--text-on-dark);
+  outline-offset: 2px;
 }
 
 .site-footer .layout-container {
@@ -1982,7 +1995,7 @@ a:active {
   color: var(--link-hover);
 }
 
-a.eventos-calendar-day:active {
+.eventos-calendar-day a:active {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }

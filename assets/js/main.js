@@ -8,15 +8,33 @@
   if (!toggle || !menu) return;
 
   toggle.setAttribute('aria-expanded', 'false');
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
   toggle.addEventListener('click', function () {
     var isOpen = menu.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!menu.classList.contains('is-open')) return;
+    if (menu.contains(event.target) || toggle.contains(event.target)) return;
+    closeMenu();
+  });
+
   function closeMenuOnDesktop() {
     if (window.matchMedia('(min-width: 1280px)').matches) {
-      menu.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+      closeMenu();
     }
   }
   window.addEventListener('resize', closeMenuOnDesktop);
@@ -36,7 +54,10 @@
   function setActive(lang) {
     current = lang;
     if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, lang);
-    document.documentElement.lang = lang;
+    // Content is Spanish-only in this version, so the real `lang` attribute
+    // (set server-side per page) must never be overwritten by a stored
+    // preference — doing so would mislabel Spanish text as English for
+    // screen readers on every subsequent page load.
     buttons.forEach(function (btn) {
       var isCurrent = btn.getAttribute('data-lang') === lang;
       btn.setAttribute('aria-current', isCurrent ? 'true' : 'false');

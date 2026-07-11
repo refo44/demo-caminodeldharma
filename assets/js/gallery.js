@@ -7,6 +7,7 @@
   var grid = document.getElementById('gallery-grid');
   var paginationEl = document.getElementById('gallery-pagination');
   var dataEl = document.getElementById('gallery-data');
+  var statusEl = document.getElementById('gallery-status');
   if (!grid || !paginationEl || !dataEl) return;
 
   var images = [];
@@ -103,6 +104,13 @@
     info.className = 'gallery-pagination-info';
     info.textContent = 'Página ' + currentPage + ' de ' + total;
     frag.appendChild(info);
+
+    // The pagination markup is destroyed and rebuilt on every page change,
+    // so its own text isn't reliably announced. Mirror it into a status
+    // element that stays in the DOM so screen readers hear the update.
+    if (statusEl) {
+      statusEl.textContent = 'Página ' + currentPage + ' de ' + total + '.';
+    }
 
     if (currentPage < total) {
       var nextLink = document.createElement('a');
