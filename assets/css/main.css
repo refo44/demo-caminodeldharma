@@ -61,18 +61,25 @@
   --brand-3: #d1aeab;
   --brand-4: #3e424b;
 
+  /* Accessibility tints — derived from brand-1/brand-2, added to reach WCAG AA
+     where the original brand colors fall short as text/background-with-text.
+     brand-1 and brand-2 themselves are never modified and keep every other
+     use (buttons, header, decorative accents) unchanged. */
+  --brand-1-deep: #7a2436; /* brand-1, darkened: ~4.85:1 as text on --bg (was 4.10:1) */
+  --brand-2-deep: #9d6666; /* brand-2, darkened: ~4.64:1 under white text (was 3.72:1) */
+
   /* Semantic roles — fondos principales: brand-1/2/3; texto: brand-4 o blanco sobre fondo oscuro */
   --bg: var(--brand-3);
   --text: var(--brand-4);
   --text-muted: var(--brand-4);
   --surface: var(--brand-3);
   --border: var(--brand-3);
-  --link: var(--brand-1);
+  --link: var(--brand-1-deep);
   --link-hover: var(--brand-4);
   --primary: var(--brand-1);
-  --primary-hover: var(--brand-2);
+  --primary-hover: var(--brand-2-deep);
   --header-bg: var(--brand-1);
-  --footer-bg: var(--brand-2);
+  --footer-bg: var(--brand-2-deep);
   --text-on-dark: #ffffff;
 
   /* Typography */
@@ -748,7 +755,7 @@ a:focus-visible {
 }
 
 .gallery-pagination-num.is-current {
-  background-color: var(--brand-2);
+  background-color: var(--brand-2-deep);
   color: var(--text-on-dark);
   text-decoration: none;
   pointer-events: none;
@@ -817,7 +824,7 @@ a:focus-visible {
   font-family: var(--font-heading);
   font-size: 1.125rem;
   margin: 0 0 var(--space-sm);
-  color: var(--primary);
+  color: var(--brand-1-deep);
 }
 
 .linaje-timeline-content p {
@@ -902,7 +909,7 @@ a:focus-visible {
 }
 
 .hero .btn-primary:hover {
-  background-color: var(--brand-2);
+  background-color: var(--brand-2-deep);
   color: #ffffff;
 }
 
@@ -1080,7 +1087,7 @@ a:focus-visible {
    Implements the primary/secondary link taxonomy from the IA doc. */
 .btn-secondary {
   background-color: transparent;
-  color: var(--primary);
+  color: var(--brand-1-deep);
   border: 1.5px solid var(--primary);
 }
 
@@ -1191,7 +1198,7 @@ a:focus-visible {
   font-weight: 600;
   text-align: left;
   text-decoration: none;
-  color: var(--primary);
+  color: var(--brand-1-deep);
   background: transparent;
   border: 1px solid var(--primary);
   border-radius: 4px;
@@ -1376,8 +1383,8 @@ a:focus-visible {
 }
 
 .eventos-calendar-day.has-event {
-  background: var(--brand-2);
-  border-color: var(--brand-2);
+  background: var(--brand-2-deep);
+  border-color: var(--brand-2-deep);
   color: var(--text-on-dark);
   font-weight: 600;
 }
@@ -1815,7 +1822,6 @@ a:focus-visible {
   padding-top: var(--space-lg);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 0.8125rem;
-  opacity: 0.9;
 }
 
 .footer-credits p {
