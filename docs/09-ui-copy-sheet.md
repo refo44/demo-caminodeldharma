@@ -71,7 +71,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 - **Título de sección:** Mantras para la práctica
 - **Mantra (implementado):** OM AMI DEWA HRIH
 - **Texto del mantra:** OM AMI DEWA HRIH
-- **Descripción:** Este es el mantra corto de Amitābha, el Buda de la Luz Infinita. En la tradición buddhista se recita como una práctica de familiarización y aspiración hacia la Tierra Pura.
+- **Descripción:** Este es el mantra corto de Amitābha, el Buda de la Luz Infinita. 
 - **Leyenda del audio:** Recitación del mantra de Amitābha.
 - **Extensible:** la sección admite uno o más mantras; cada uno con texto y reproductor de audio local.
 
