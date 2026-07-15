@@ -21,6 +21,7 @@
 | `Pagina web Camino del Dharma/Link-videos-youtube.md` | Mismo contenido que el .docx: lista canónica de 4 videos YouTube (título + URL) |
 | `Pagina web Camino del Dharma/FOTOS PAGINA WEB/` | Imágenes, videos y logo por pestaña |
 | `Amitabha.mp3` | Referencia local del audio de la recitación de Amitābha. Copiar a `assets/audio/amitabha.mp3`; no enlazar desde el sitio a `content-source/`. |
+| `NamoGuanShiYinPusa.mp3` | Referencia local del audio de la recitación de Guān Shì Yīn Púsà. Copiar a `assets/audio/namo-guan-shi-yin-pusa.mp3`; no enlazar desde el sitio a `content-source/`. |
 
 ---
 
@@ -78,6 +79,7 @@ Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-
 | Origen en `content-source/` | Archivo en `assets/audio/` | Uso |
 |-----------------------------|----------------------------|-----|
 | `Amitabha.mp3` | `amitabha.mp3` | Recitación de Amitābha en la sección «Mantras para la práctica» (`/practica/`). Reproductor nativo `<audio controls>`. |
+| `NamoGuanShiYinPusa.mp3` | `namo-guan-shi-yin-pusa.mp3` | Recitación de Guān Shì Yīn Púsà en la sección «Mantras para la práctica» (`/practica/`). Reproductor nativo `<audio controls>`. |
 
 Los archivos de audio se copian a `assets/audio/` en la raíz del repo (o al theme en Fase 3). Mantener el original en `content-source/` sin editar. Ver 15 §9.
 

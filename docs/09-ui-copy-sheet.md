@@ -69,12 +69,19 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 ### Mantras para la práctica
 
 - **Título de sección:** Mantras para la práctica
-- **Mantra (implementado):** Amitābha
-- **Texto del mantra:** Amitābha
-- **Pronunciación:** A-MI-TA-BA · A · MI · TĀ · BHA (aproximación al sánscrito)
-- **Descripción:** Amitābha es el Buda de la Luz Infinita, una de las figuras centrales del Budismo Mahāyāna y, especialmente, de la tradición de la Tierra Pura. Su nombre expresa la luz ilimitada de la sabiduría que ilumina a todos los seres sin distinción.
-- **Origen:** Sánscrito · **Significado:** Luz Infinita (o Luz Inconmensurable) · **Forma:** Nombre del Buda Amitābha · **Escritura:** Alfabeto latino (Amitābha; Amitabha sin signos diacríticos)
-- **Leyenda del audio:** Recitación de Amitābha.
+- **Mantra (implementado):** Amitābha · Guān Shì Yīn Púsà
+- **Amitābha**
+  - **Texto del mantra:** Amitābha
+  - **Pronunciación:** A-MI-TA-BA · A · MI · TĀ · BHA (aproximación al sánscrito)
+  - **Descripción:** Amitābha es el Buda de la Luz Infinita, una de las figuras centrales del Budismo Mahāyāna y, especialmente, de la tradición de la Tierra Pura. Su nombre expresa la luz ilimitada de la sabiduría que ilumina a todos los seres sin distinción.
+  - **Origen:** Sánscrito · **Significado:** Luz Infinita (o Luz Inconmensurable) · **Forma:** Nombre del Buda Amitābha · **Escritura:** Alfabeto latino (Amitābha; Amitabha sin signos diacríticos)
+  - **Leyenda del audio:** Recitación de Amitābha.
+- **Guān Shì Yīn Púsà**
+  - **Texto del mantra:** Guān Shì Yīn Púsà
+  - **Pronunciación:** NA-MO GUAN SHI YIN PU-SA · NA-MO · GUAN · SHI · YIN · PU-SA
+  - **Descripción:** Guān Shì Yīn Púsà es el nombre chino del Bodhisattva de la Compasión, conocido en sánscrito como Avalokiteśvara. En la tradición del Budismo Chan su recitación expresa confianza, refugio y el cultivo de la compasión hacia todos los seres.
+  - **Origen:** Chino · **Significado:** "Homenaje al Bodhisattva Guān Shì Yīn" o "Me refugio en el Bodhisattva que escucha los sonidos (clamores) del mundo." · **Forma:** Pronunciación china (mandarín) · **Escritura:** Alfabeto latino (Namo Guan Shi Yin Pusa)
+  - **Leyenda del audio:** Recitación de Guān Shì Yīn Púsà.
 - **Extensible:** la sección admite uno o más mantras; cada uno con texto y reproductor de audio local.
 
 *Nota:* No incluir enlaces externos de contexto teórico en esta sección.

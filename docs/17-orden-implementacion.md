@@ -81,7 +81,7 @@ La maqueta debe comportarse como el sitio real:
 - Estructura de bloques igual a `06-wireframes`
 - Microcopy final desde `09-ui-copy-sheet`
 
-**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sección Mantras para la práctica en Práctica (Amitābha con reproductor de audio); sidebar CTA contribuir en Inicio (junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
+**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sección Mantras para la práctica en Práctica (Amitābha y Guān Shì Yīn Púsà con reproductor de audio); sidebar CTA contribuir en Inicio (junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
 
 ### 2.4 Simulación de estados dinámicos
 

@@ -75,7 +75,7 @@ Bloques (orden en la maqueta):
 - Título / **Aprende en la práctica** (introducción)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
 - **Recitación práctica de la comida** (texto + enlace «Descargar PDF»)
-- **Mantras para la práctica** (uno o más mantras; por ahora Amitābha con texto breve y reproductor `<audio controls>`)
+- **Mantras para la práctica** (uno o más mantras; Amitābha y Guān Shì Yīn Púsà con texto breve y reproductor `<audio controls>`)
 - **Caminos de profundización:** talleres vivenciales, retiro de iniciación, retiros de meditación
 - **Videos y enseñanzas** (embeds + enlace «Ver más videos» → `/practica/videos/`)
 - **Vida comunitaria y celebraciones** (Encuentro nacional, Vesak, conferencias; según Contenido_Web P4)

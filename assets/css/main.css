@@ -1294,6 +1294,10 @@ a:focus-visible {
   gap: 1.25rem;
 }
 
+.mantra-section .mantra-card + .mantra-card {
+  margin-block-start: 2.5rem;
+}
+
 .mantra-card h3,
 .mantra-card h4,
 .mantra-card p,
