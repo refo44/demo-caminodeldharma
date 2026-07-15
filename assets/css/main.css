@@ -793,7 +793,29 @@ a:focus-visible {
   }
 }
 
-/* --- Linaje: vertical timeline --- */
+/* --- Linaje --- */
+.linaje-tradition-focus {
+  margin: 0 0 var(--space-md);
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.linaje-masters {
+  margin: var(--space-md) 0 var(--space-lg);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.linaje-masters li {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9375rem;
+  line-height: var(--line-height-body);
+}
+
+/* --- Linaje: vertical timeline (legacy) --- */
 .linaje-timeline-wrap {
   margin-top: var(--space-xl);
 }
