@@ -20,7 +20,7 @@
 | `Pagina web Camino del Dharma/Link videos subidos en Youtube.docx` | URLs de videos en YouTube (fuente original) |
 | `Pagina web Camino del Dharma/Link-videos-youtube.md` | Mismo contenido que el .docx: lista canónica de 4 videos YouTube (título + URL) |
 | `Pagina web Camino del Dharma/FOTOS PAGINA WEB/` | Imágenes, videos y logo por pestaña |
-| `Amitabha Mantra (A Mi De Wa Hrih).mp3` | Referencia local del audio del mantra OM AMI DEWA HRIH. Copiar a `assets/audio/om-ami-dewa-hrih.mp3`; no enlazar desde el sitio a `content-source/`. |
+| `Amitabha.mp3` | Referencia local del audio de la recitación de Amitābha. Copiar a `assets/audio/amitabha.mp3`; no enlazar desde el sitio a `content-source/`. |
 
 ---
 
@@ -77,7 +77,7 @@ Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-
 
 | Origen en `content-source/` | Archivo en `assets/audio/` | Uso |
 |-----------------------------|----------------------------|-----|
-| `Amitabha Mantra (A Mi De Wa Hrih).mp3` | `om-ami-dewa-hrih.mp3` | Recitación del mantra OM AMI DEWA HRIH en la sección «Mantras para la práctica» (`/practica/`). Reproductor nativo `<audio controls>`. |
+| `Amitabha.mp3` | `amitabha.mp3` | Recitación de Amitābha en la sección «Mantras para la práctica» (`/practica/`). Reproductor nativo `<audio controls>`. |
 
 Los archivos de audio se copian a `assets/audio/` en la raíz del repo (o al theme en Fase 3). Mantener el original en `content-source/` sin editar. Ver 15 §9.
 

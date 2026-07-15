@@ -60,7 +60,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 - Aprende en la práctica (introducción)
 - Meditación semanal (bloque repetido)
 - Recitación práctica de la comida (texto + PDF descargable)
-- Mantras para la práctica (extensible; por ahora OM AMI DEWA HRIH con audio local)
+- Mantras para la práctica (extensible; por ahora Amitābha con audio local)
 - Caminos de profundización: talleres vivenciales, retiro de iniciación, retiros de meditación
 - Videos y enseñanzas (embeds + enlace a subpágina de videos)
 - Vida comunitaria (Encuentro nacional, Vesak, Conferencias)

@@ -75,14 +75,14 @@ Bloques (orden en la maqueta):
 - Título / **Aprende en la práctica** (introducción)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
 - **Recitación práctica de la comida** (texto + enlace «Descargar PDF»)
-- **Mantras para la práctica** (uno o más mantras; por ahora OM AMI DEWA HRIH con texto breve y reproductor `<audio controls>`)
+- **Mantras para la práctica** (uno o más mantras; por ahora Amitābha con texto breve y reproductor `<audio controls>`)
 - **Caminos de profundización:** talleres vivenciales, retiro de iniciación, retiros de meditación
 - **Videos y enseñanzas** (embeds + enlace «Ver más videos» → `/practica/videos/`)
 - **Vida comunitaria y celebraciones** (Encuentro nacional, Vesak, conferencias; según Contenido_Web P4)
 - Enlaces «Eventos · Contacto»
 - Pie
 
-**Maqueta estática:** `.recitation-section` (recitación comida); `.mantra-section` con `.mantra-text` y `.mantra-audio` por mantra. Audio en `assets/audio/om-ami-dewa-hrih.mp3` (19: controles visibles, `preload="metadata"`, sin autoplay).
+**Maqueta estática:** `.recitation-section` (recitación comida); `.mantra-section` con `.mantra-text` y `.mantra-audio` por mantra. Audio en `assets/audio/amitabha.mp3` (19: controles visibles, `preload="metadata"`, sin autoplay).
 
 **Nota editorial:** Recitación de la comida y mantras son **extensiones de la maqueta** no listadas en Contenido_Web canónico; se mantienen como recursos de práctica en `/practica/`.
 
