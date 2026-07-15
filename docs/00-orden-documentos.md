@@ -21,6 +21,7 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 | **18** | Criterios contemporáneos | Tendencias UX/UI aplicadas al sistema. Filtro estratégico para validación de diseño e implementación. |
 | **19** | Accesibilidad | Estándares únicos de accesibilidad: estrategia, diseño, HTML semántico, ARIA, contenido editorial, checklist y testing. WCAG 2.1/2.2 AA. |
 | **20** | Principios de layout | Ancho de lectura, ritmo vertical, uso del blanco, relación tipografía/imagen. Cierra el sistema visual antes de escribir HTML. |
+| **21–23** | Voz y sistema editorial | Manual de copywriting; sistema editorial (tipos de contenido, presentación en pantalla, extensión del blog). |
 
 ---
 
@@ -52,6 +53,8 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 18. `18-tendencias-ux-ui-sistema-editorial`
 19. `19-accesibilidad-estandares`
 20. `20-layout-principles`
+21. `21-manual-voz-copywriting-editorial`
+23. `23-sistema-editorial`
 
 ---
 
