@@ -1102,6 +1102,48 @@ a:focus-visible {
   color: var(--link);
 }
 
+.article-deck {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-md);
+  line-height: var(--line-height-body);
+}
+
+.article-byline {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-lg);
+  line-height: var(--line-height-body);
+}
+
+.article-byline p {
+  margin: 0 0 var(--space-xs);
+}
+
+.article-references {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.article-references h2 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-md);
+}
+
+.article-references ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.article-references li + li {
+  margin-top: var(--space-sm);
+}
+
 /* --- Buttons --- */
 .btn {
   display: inline-flex;
