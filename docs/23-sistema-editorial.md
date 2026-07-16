@@ -156,9 +156,10 @@ La estructura responde al **tema**, no a un mínimo de palabras por sección. He
 
 - Cuerpo completo en superficie de lectura.
 - Botón «Compartir» solo aquí (`09-ui-copy-sheet` §6).
-- Metadatos sociales: `03-wordpress-content-model` §8.
+- Metadatos sociales: `03-wordpress-content-model` §8 (título, extracto ~155 caracteres, imagen, URL canónica).
+- Copy al compartir por plataforma: templates en el detalle (`09-ui-copy-sheet` §6, mensaje de blog). Línea de contexto obligatoria: `Reflexión · [Autor] · Camino del Dharma`.
 
-Redacción de título, extracto y cuerpo: `21-manual-voz-copywriting-editorial` (rector), `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet` (copy de interfaz).
+Redacción de título, extracto y cuerpo: `21-manual-voz-copywriting-editorial` (rector), `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet` (copy de interfaz y compartir).
 
 ---
 
@@ -273,8 +274,9 @@ Checklist de **pantalla** (este documento, §12): forma, estructura y presentaci
 - [ ] Validar rangos de extensión del blog (§4.3) con quienes producirán contenido
 - [ ] Confirmar artículo vs. ensayo por intención (§5)
 - [ ] Definir subtítulo del blog (`09-ui-copy-sheet`)
+- [x] Mensaje de blog al compartir por plataforma (`09-ui-copy-sheet` §6)
 - [ ] Confirmar que el alcance de `21-manual-voz-copywriting-editorial` §2 cubre explícitamente entradas del blog
-- [ ] Añadir fila «Blog» en tono por sección (`07-guia-voz-microcopy-ux` §8)
+- [x] Añadir fila «Blog» en tono por sección (`07-guia-voz-microcopy-ux` §8)
 - [ ] Aprobar o descartar este documento como lineamiento oficial
 
 ---

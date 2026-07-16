@@ -313,6 +313,25 @@ Los emojis se reservan para identificar datos prácticos (`📅`, `🕘`, `📍`
 
 La URL compartida debe ser la página del evento, no el formulario externo. Además de mantener el contexto editorial, esto permite que WhatsApp obtenga la vista previa desde los metadatos de Camino del Dharma.
 
+### Mensajes de blog al compartir
+
+Los mensajes prellenados al compartir una entrada del blog son **borradores editables**: quien comparte puede añadir su comentario, tags o sustituirlos por completo.
+
+Deben dejar claro que el título pertenece a una **reflexión publicada**, no a una opinión personal de quien envía el enlace. Por eso la primera línea siempre atribuye autor y fuente:
+
+`Reflexión · [Autor] · Camino del Dharma`
+
+Secuencia recomendada (WhatsApp):
+
+1. Línea de contexto con autor y comunidad.
+2. Título del artículo.
+3. Subtítulo, si existe.
+4. URL única del artículo.
+
+En X y Threads: misma línea de contexto y título; subtítulo opcional en Threads. Sin `Comparto…` en el borrador del sitio. Sin emojis ni hashtags impuestos por la comunidad.
+
+El copy es **más breve** que el de eventos: orienta y atribuye, pero deja espacio para la voz de quien comparte. Detalle por plataforma en `09-ui-copy-sheet` §6.
+
 ---
 
 ## 12. Sistema de intención

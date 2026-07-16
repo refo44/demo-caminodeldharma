@@ -35,7 +35,7 @@ assets/
 ├── js/
 │   ├── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
 │   ├── gallery.js  Álbumes de galería con paginación independiente y carga bajo demanda por página.
-│   └── share.js    Panel accesible para compartir eventos/blog mediante intents y copia de enlace.
+│   └── share.js    Panel para compartir: templates WhatsApp, X y Threads; Facebook y copiar enlace usan URL + meta tags OG.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Fjalla One (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.

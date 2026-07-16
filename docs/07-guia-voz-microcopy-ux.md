@@ -123,6 +123,7 @@ No se usan códigos ni tecnicismos visibles.
 | El linaje | Sereno, informativo |
 | Práctica y actividades | Práctico, orientador |
 | Eventos (cuando visible) | Claro, informativo, invitación a participar |
+| Blog | Reflexivo, sobrio; atribución clara al compartir |
 | Contacto | Cortés, simple |
 
 ---

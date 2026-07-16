@@ -34,10 +34,12 @@
     return new URL(value, window.location.href).href;
   }
 
-  function getWhatsAppMessage(button, fallback) {
-    var templateId = button.getAttribute('data-share-whatsapp-template');
-    var template = templateId ? document.getElementById(templateId) : null;
-    if (!template) return fallback;
+  function getTemplateText(button, templateAttr) {
+    var templateId = button.getAttribute(templateAttr);
+    if (!templateId) return null;
+
+    var template = document.getElementById(templateId);
+    if (!template) return null;
 
     return template.content.textContent
       .split('\n')
@@ -50,12 +52,16 @@
   function getShareData(button) {
     var title = button.getAttribute('data-share-title');
     var url = absoluteUrl(button.getAttribute('data-share-url'));
+    var xText = getTemplateText(button, 'data-share-x-template') || title;
+    var threadsText = getTemplateText(button, 'data-share-threads-template') || xText;
 
     return {
       title: title,
       description: button.getAttribute('data-share-description'),
       url: url,
-      whatsappMessage: getWhatsAppMessage(button, title + ' ' + url)
+      whatsappMessage: getTemplateText(button, 'data-share-whatsapp-template') || (title + ' ' + url),
+      xText: xText,
+      threadsText: threadsText
     };
   }
 
@@ -69,14 +75,15 @@
     status.textContent = '';
     contentTitle.textContent = currentShare.title;
 
-    var encodedTitle = encodeURIComponent(currentShare.title);
     var encodedUrl = encodeURIComponent(currentShare.url);
-    var encodedText = encodeURIComponent(currentShare.whatsappMessage);
+    var encodedWhatsAppText = encodeURIComponent(currentShare.whatsappMessage);
+    var encodedXText = encodeURIComponent(currentShare.xText);
+    var encodedThreadsText = encodeURIComponent(currentShare.threadsText);
 
-    setIntent('whatsapp', 'https://api.whatsapp.com/send?text=' + encodedText);
+    setIntent('whatsapp', 'https://api.whatsapp.com/send?text=' + encodedWhatsAppText);
     setIntent('facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl);
-    setIntent('x', 'https://x.com/intent/post?text=' + encodedTitle + '&url=' + encodedUrl);
-    setIntent('threads', 'https://www.threads.com/intent/post?text=' + encodedTitle + '&url=' + encodedUrl);
+    setIntent('x', 'https://x.com/intent/post?text=' + encodedXText + '&url=' + encodedUrl);
+    setIntent('threads', 'https://www.threads.com/intent/post?text=' + encodedThreadsText + '&url=' + encodedUrl);
 
     dialog.showModal();
     dialog.scrollTop = 0;
