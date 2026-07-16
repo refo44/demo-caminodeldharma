@@ -208,10 +208,19 @@
         📍 Casa de Retiro San Pablo, Puerto Colombia
       </template>
       <div class="evento-actions">
-        <a href="ical/encuentro-nacional-2026.ics" class="btn btn-secondary" download="encuentro-nacional-2026.ics">
+        <button
+          type="button"
+          class="btn btn-secondary calendar-trigger"
+          data-calendar-title="7.º Encuentro Nacional Buddhista – 2026"
+          data-calendar-start="20260807"
+          data-calendar-end="20260810"
+          data-calendar-description="Tres días para detenernos, respirar profundo y reencontrarnos con lo esencial. Información e inscripciones: https://refo44.github.io/demo-caminodeldharma/eventos/#encuentro-nacional-2026"
+          data-calendar-location="Casa Retiro San Pablo, Puerto Colombia"
+          data-calendar-ics="ical/encuentro-nacional-2026.ics"
+        >
           <svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
           Añadir al calendario
-        </a>
+        </button>
         <p class="share-actions">
         <button
           type="button"
@@ -407,5 +416,6 @@
 
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/share.js" defer></script>
+  <script src="../assets/js/calendar.js" defer></script>
 </body>
 </html>

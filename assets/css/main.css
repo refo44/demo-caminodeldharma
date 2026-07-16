@@ -1218,6 +1218,10 @@ a:focus-visible {
   gap: var(--space-xs);
 }
 
+.calendar-trigger {
+  gap: var(--space-xs);
+}
+
 .evento-actions .btn-secondary .lucide-icon {
   width: 1.125rem;
   height: 1.125rem;
