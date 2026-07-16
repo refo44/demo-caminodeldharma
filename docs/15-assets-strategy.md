@@ -15,8 +15,8 @@ Define qué assets existen, dónde viven y cómo se usan. La geografía del proy
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Iconos**         | SVG inline o sprite. Sin icon fonts. Inline para iconos sueltos; sprite para iconos muy repetidos (no mezclar estrategias sin necesidad en la primera entrega).  |
 | **Biblioteca de iconos** | **Lucide.** Una sola biblioteca en todo el sitio; no mezclar. Lucide ofrece el mejor equilibrio para una comunidad espiritual: limpia, amplia, no comercial, no tecnológica, no llamativa; coherente con identidad sobria y acogedora (docs 01, 02, 06). |
-| **Fuentes**        | Según manual de marca. Autohospedadas en `assets/fonts/` (woff2/ttf). Inter (cuerpo), Downtown (headings), MarloweEscapade (display).                               |
-| **Tipografía**     | Definida: MarloweEscapade (display), Downtown DEMO Regular (headings), Inter (body). Según 02; uso en 14.                                                        |
+| **Fuentes**        | Según manual de marca, con una desviación documentada. Autohospedadas en `assets/fonts/` (woff2/ttf). Inter (cuerpo), Fjalla One (headings), MarloweEscapade (display).                               |
+| **Tipografía**     | Definida: MarloweEscapade (display), Fjalla One (headings; reemplaza a Downtown DEMO Regular del manual, ver 02), Inter (body). Según 02; uso en 14.                                                        |
 | **Favicon**        | Set completo: `favicon.ico`, `favicon.svg`, `apple-touch-icon.png` (180×180), `favicon-32x32.png`, `favicon-16x16.png`, `site.webmanifest` con name/theme_color de 02. |
 | **SVG**            | Iconos en `assets/icons/` (inline o sprite). Favicon en `assets/favicon/favicon.svg`. Sin icon fonts.                                                             |
 | **PDF**            | En content-source: solo referencia (manual de marca, no se despliega). Si el sitio ofrece PDFs descargables, usar `assets/documents/` y enlazar desde el sitio.  |
@@ -38,7 +38,7 @@ assets/
 │   └── share.js    Panel accesible para compartir eventos/blog mediante intents y copia de enlace.
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
-├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Downtown (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
+├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Fjalla One (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
 ├── favicon/        ico, svg, png, webmanifest
 ├── audio/          Archivos de audio (si aplica): meditación, enseñanzas
 └── documents/      PDFs públicos descargables (si aplica)
@@ -61,8 +61,8 @@ En la raíz del repo, el script `scripts/optimize-images.sh` optimiza todas las 
 
 ### 3.1 Fuentes: carga y licencia
 
-- **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS mapean a: MarloweEscapade (display), Downtown DEMO Regular (headings), Inter (body). Inter está autohospedada en `assets/fonts/inter/` (woff2: 400, 600, 400 italic); licencia SIL OFL (02, fonts/README.md).
-- **Licencia:** **Obligatorio** antes de producción: validar licencia de tipografías (p. ej. Downtown DEMO Regular; las fuentes "DEMO" a veces no permiten uso en producción). Inter: SIL OFL. MarloweEscapade: CC BY 4.0 (crédito en footer). Si alguna licencia no permite uso comercial o en producción, reemplazar por alternativa adecuada.
+- **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS mapean a: MarloweEscapade (display), Fjalla One (headings), Inter (body). Inter está autohospedada en `assets/fonts/inter/` (woff2: 400, 600, 400 italic); licencia SIL OFL (02, fonts/README.md).
+- **Licencia:** Inter: SIL OFL. Fjalla One: SIL OFL 1.1 (Google Fonts). MarloweEscapade: CC BY 4.0 (crédito en footer). Downtown DEMO Regular (fuente del manual para el logo) se descartó para `--font-heading` en 2026-07: carecía de glifos para vocales acentuadas y ñ, causando mezcla de fuentes en títulos en español; ver nota de desviación en 02.
 
 ---
 

@@ -33,9 +33,11 @@
   font-display: swap;
 }
 
+/* Fjalla One — Google Fonts (SIL OFL 1.1); self-hosted */
 @font-face {
-  font-family: "Downtown DEMO Regular";
-  src: url("../fonts/downtown/downtown-demo-regular.ttf") format("truetype");
+  font-family: "Fjalla One";
+  src: url("../fonts/fjalla-one/fjalla-one-latin-400-normal.woff2") format("woff2"),
+       url("../fonts/fjalla-one/fjalla-one.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -85,7 +87,7 @@
 
   /* Typography */
   --font-display: "MarloweEscapade", serif;
-  --font-heading: "Downtown DEMO Regular", "MarloweEscapade", serif;
+  --font-heading: "Fjalla One", "MarloweEscapade", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 
   /* Grid & rhythm */

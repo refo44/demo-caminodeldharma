@@ -71,12 +71,14 @@ Solo dos familias definidas en el manual de marca.
 
 **Nota:** Estas son fuentes de display del logo. Para cuerpo de texto y navegación, el manual no especifica; usar una fuente web legible y sobria que armonice (p. ej. una sans-serif neutra para cuerpo, manteniendo MarloweEscapade o Downtown para títulos si están disponibles para web). Si las fuentes del logo no están disponibles para web, priorizar legibilidad y coherencia con la paleta.
 
+**Desviación del manual (2026-07):** Downtown DEMO Regular no tiene glifos para vocales acentuadas ni ñ, por lo que el navegador mezclaba letras de MarloweEscapade dentro de títulos en español (p. ej. "Meditación"). Se reemplazó por **Fjalla One** (Google Fonts, SIL OFL) en `--font-heading` para el sitio web; Downtown sigue siendo la fuente del manual para el logo impreso/gráfico, esto solo afecta la tipografía de texto en la web.
+
 ### 2.2 Variables CSS
 
 ```css
 :root {
   --font-display: "MarloweEscapade", serif;
-  --font-heading: "Downtown DEMO Regular", "MarloweEscapade", serif;
+  --font-heading: "Fjalla One", "MarloweEscapade", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 ```
@@ -140,7 +142,7 @@ El sitio debe transmitir **calma, claridad y coherencia**.
 | Capa | Estado |
 |------|--------|
 | Paleta | Definida (4 colores) |
-| Tipografía | Definida: display MarloweEscapade, headings Downtown DEMO Regular, body Inter (autohospedada) |
+| Tipografía | Definida: display MarloweEscapade, headings Fjalla One (web; Downtown DEMO Regular en manual/logo), body Inter (autohospedada) |
 | Logo | Disponible |
 | Manual de marca | PDF canónico |
 

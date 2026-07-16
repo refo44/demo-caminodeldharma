@@ -53,7 +53,7 @@ Define cómo se ve y cómo se percibe el sitio.
 
 Incluye:
 
-- Tipografías oficiales (MarloweEscapade, Downtown DEMO Regular)
+- Tipografías oficiales (MarloweEscapade, Downtown DEMO Regular en el manual/logo; Fjalla One en `--font-heading` del sitio web)
 - Paleta cromática institucional (#8c2b3d, #b27474, #d1aeab, #3e424b)
 - Ritmo visual
 - Uso del espacio en blanco

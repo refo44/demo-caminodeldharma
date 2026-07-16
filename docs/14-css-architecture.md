@@ -28,7 +28,7 @@ No hay frameworks (Tailwind, Bootstrap). No hay preprocesadores obligatorios; si
 Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
 
 1. **Variables ( :root )**  
-   Tokens de 02: `--brand-1` a `--brand-4` (este proyecto usa 4 colores de marca; 02), `--text`, `--link`, `--surface`, `--header-bg`, `--footer-bg`, `--font-display`, `--font-heading`, `--font-body`. Tipografía: **body** Inter (autohospedada en `assets/fonts/inter/`, 02 y 15); **display/headings** MarloweEscapade y Downtown para hero y títulos (02 y 15).
+   Tokens de 02: `--brand-1` a `--brand-4` (este proyecto usa 4 colores de marca; 02), `--text`, `--link`, `--surface`, `--header-bg`, `--footer-bg`, `--font-display`, `--font-heading`, `--font-body`. Tipografía: **body** Inter (autohospedada en `assets/fonts/inter/`, 02 y 15); **display/headings** MarloweEscapade y Fjalla One para hero y títulos (02 y 15).
 
 2. **Base / reset mínimo**  
    Box-sizing, márgenes básicos, tipografía base, enlaces. Prohibido reset agresivo (p. ej. `* { all: unset; }`). Se permite normalize ligero y box-sizing; solo lo necesario para consistencia.
