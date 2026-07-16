@@ -1484,12 +1484,12 @@ a:focus-visible {
   margin-top: var(--space-lg);
 }
 
-.founder-block .pausa-link {
+.founder-block .founder-blog-link {
   font-size: 0.9375rem;
   margin-top: var(--space-md);
 }
 
-.founder-block .pausa-link a {
+.founder-block .founder-blog-link a {
   font-weight: 600;
 }
 

@@ -53,7 +53,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Header:** logo + nombre del sitio + navegación principal (Inicio, Comunidad, Linaje, Práctica, Eventos) + subnav (Galería, Blog, Contribuir, Contacto). Presente en todas las páginas.
 
-**Footer:** presente en todas las páginas. Contenido: Comunidad Buddhista Camino del Dharma, Personería Jurídica Especial – Ministerio del Interior de Colombia, Contacto | Redes sociales, Pausa Profunda (proyecto vinculado), información de donaciones, WhatsApp, correo.
+**Footer:** presente en todas las páginas. Contenido: Comunidad Buddhista Camino del Dharma, Personería Jurídica Especial – Ministerio del Interior de Colombia, Contacto | Redes sociales, Blog (ensayos y reflexiones), información de donaciones, WhatsApp, correo.
 
 ---
 
@@ -67,7 +67,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
-**Elementos globales (componentes):** Header (logo + navegación), Footer (identidad, contacto, redes, donaciones, WhatsApp, Pausa Profunda). No son pantallas; se repiten en todas las vistas.
+**Elementos globales (componentes):** Header (logo + navegación), Footer (identidad, contacto, redes, donaciones, WhatsApp, Blog). No son pantallas; se repiten en todas las vistas.
 
 ---
 

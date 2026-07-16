@@ -159,7 +159,7 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 - [ ] Todas las páginas maquetadas
 - [ ] Formulario de contacto funcional
 - [ ] Botón WhatsApp operativo
-- [ ] Enlaces externos (Pausa Profunda, redes) verificados
+- [ ] Enlaces externos (redes) verificados
 - [ ] Datos bancarios correctos en footer
 - [ ] Accesibilidad: estándares 19 aplicados (contraste, alt, teclado, focus, formularios)
 - [ ] `npm run lint:css` finaliza sin errores

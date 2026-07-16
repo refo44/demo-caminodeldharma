@@ -118,7 +118,7 @@ Elementos centrales:
 - Botón principal de orientación: "Practica con nosotros"
 - Acceso directo a la meditación semanal
 - Acceso directo a WhatsApp
-- Pausa Profunda: enlace externo (nueva pestaña)
+- Blog: enlace interno a `/blog/`
 - Footer como ancla institucional (contacto, redes, donaciones)
 
 **Principio rector:** La persona siempre sabe cómo llegar a la práctica o al contacto.

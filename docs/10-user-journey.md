@@ -33,7 +33,7 @@ La mayoría de las personas llega primero al Inicio, donde ve una invitación cl
 - Inicio
 - → La comunidad
 - → Lee quiénes somos y biografía del fundador
-- → "Visitar Pausa Profunda" (si le interesa)
+- → "Visitar el blog" (si le interesa)
 - → "Practica con nosotros" o Contacto
 
 La persona entiende el contexto antes de actuar.

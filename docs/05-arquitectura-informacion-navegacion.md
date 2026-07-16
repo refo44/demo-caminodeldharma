@@ -50,7 +50,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 | Enlace | Destino |
 |--------|---------|
 | Contacto | Contacto |
-| Pausa Profunda | URL externa (nueva pestaña) |
+| Blog | `/blog/` |
 | Facebook | URL externa |
 | Instagram | URL externa |
 | Sostener la comunidad / Donar | Sección donaciones o modal |
@@ -76,11 +76,11 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 | Enlace | Destino | Tipo |
 |--------|---------|------|
-| "Visitar Pausa Profunda" | URL externa (nueva pestaña) | Primario |
+| "Visitar el blog" | Blog | Primario |
 | "Practica con nosotros" | Contacto | Secundario |
 | Práctica | Práctica | Secundario |
 
-**Nota:** Biografía del fundador con divisor suave; enlace Pausa Profunda con tipografía menor.
+**Nota:** Biografía del fundador con divisor suave; enlace al blog con tipografía menor.
 
 ---
 

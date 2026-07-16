@@ -362,7 +362,7 @@ Se formulan como invitaciones claras.
 - Inscribirme
 - Enviar
 - Donar
-- Visitar Pausa Profunda
+- Visitar el blog
 
 ### CTAs no aprobados
 

@@ -24,7 +24,7 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 ### Footer
 
 - Contacto
-- Pausa Profunda *(enlace externo)*
+- Blog *(enlace interno)*
 - Facebook
 - Instagram
 - Sostener la comunidad / Donar
@@ -270,7 +270,7 @@ La URL **no** va dentro del template; `share.js` la añade en el intent. En X, p
 
 ## 9. Enlaces externos
 
-- **Pausa Profunda:** Abre en nueva pestaña
+- **Blog:** Enlace interno a `/blog/`
 - **Redes sociales:** Facebook, Instagram
 - **WhatsApp:** +57 320 662 7608
 - **Correo:** caminodeldharma1@gmail.com

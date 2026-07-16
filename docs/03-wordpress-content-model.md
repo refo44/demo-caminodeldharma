@@ -45,7 +45,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ### Comunidad (page)
 
 - Quiénes somos (texto)
-- Fundador: Venerable Maestro Zheng Gong (biografía, foto, enlace Pausa Profunda)
+- Fundador: Venerable Maestro Zheng Gong (biografía, foto, enlace al blog)
 - Experiencia y propósito (texto)
 
 ### Linaje (page)
@@ -182,7 +182,7 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 | **WhatsApp** | Link en cabecera/footer (Lluvia de ideas: "Link para ir al whatsapp de Camino del Dharma") |
 | Formulario contacto | Envío a caminodeldharma1@gmail.com o plugin |
 | **Donaciones** | Botón + datos bancarios en footer (Banco Popular, cuenta 220065151425) — Lluvia de ideas: "Incluir botón de donaciones" |
-| Pausa Profunda | Enlace externo, nueva pestaña |
+| Blog | Enlace interno a `/blog/` |
 | Redes sociales | Facebook, Instagram en footer |
 
 ---

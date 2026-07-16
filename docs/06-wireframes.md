@@ -29,7 +29,7 @@ Bloques en orden vertical:
 - **Eventos** (si hay evento vigente: próximo evento + enlace a Eventos; si no: no mostrar bloque o mensaje amable)
 - **Galería** (fila de imágenes + enlace “Ver galería completa”; según 04)
 - **Contacto / Practica con nosotros** (CTA principal hacia Contacto o WhatsApp)
-- **Pie** (identidad, contacto, redes, donaciones, Pausa Profunda)
+- **Pie** (identidad, contacto, redes, donaciones, Blog)
 
 Todo en Inicio debe llevar hacia práctica o contacto. Sin listas largas ni ruido.
 
@@ -44,7 +44,7 @@ Bloques:
 - Cabecera
 - Título / introducción
 - Quiénes somos (texto)
-- Fundador (biografía; divisor suave; enlace “Visitar Pausa Profunda” en tipografía menor; según Contenido_Web P2)
+- Fundador (biografía; divisor suave; enlace “Visitar el blog” en tipografía menor)
 - Experiencia y propósito
 - CTA “Practica con nosotros” o equivalente
 - Pie
@@ -178,7 +178,7 @@ Bloques:
 
 - **Progresión:** La lectura de cada página debe llevar naturalmente hacia la práctica o el contacto. Refuerza la intención del sistema.
 - **Bloques estructurales:** Cabecera y Pie (presentes en todas las pantallas; enmarcan la vista). **Bloques editoriales:** el resto (Hero, Comunidad, contenido por página); su orden define la jerarquía de lectura.
-- **Pie:** presente en todas las pantallas (identidad, Personería, Contacto | redes, Pausa Profunda, redes sociales, contacto directo WhatsApp/correo, sostener la comunidad/donaciones; según Contenido_Web “Footer en todas las páginas”). Definido en 04.
+- **Pie:** presente en todas las pantallas (identidad, Personería, Contacto | redes, Blog, redes sociales, contacto directo WhatsApp/correo, sostener la comunidad/donaciones; según Contenido_Web “Footer en todas las páginas”). Definido en 04.
 - **Cabecera:** consistente; menú alineado con 05 (4–6 ítems, Eventos condicional).
 - **Sin:** carruseles innecesarios, “lo más visto”, bloques de marketing. Experiencia sobria y orientada (01, 18).
 

@@ -84,7 +84,7 @@ La longitud **no es el eje** de la política editorial. Es una **consecuencia** 
 | Página | Reglas de presentación |
 |--------|------------------------|
 | Inicio | Hero, bloques en orden de Contenido_Web; meditación semanal como bloque fijo |
-| La comunidad | Biografía del fundador con divisor suave; enlace Pausa Profunda en tipografía menor, nueva pestaña |
+| La comunidad | Biografía del fundador con divisor suave; enlace al blog en tipografía menor |
 | El linaje | Texto + imágenes; jerarquía H1 → H2 sin saltos |
 | Práctica | Bloques de profundización; meditación semanal repetida; superficies especiales (§7) |
 | Contribuir | Marco de generosidad; datos bancarios; no transaccional |
@@ -171,15 +171,15 @@ Los artículos y los ensayos **pueden compartir rangos de extensión**. La difer
 |---|----------|--------|
 | **Función** | Informar, divulgar o reflexionar sobre un tema concreto | Desarrollar una tesis o una argumentación sostenida |
 | **Extensión típica** | 150 – 2 000 palabras (orientativo) | 800 – 3 000+ palabras (orientativo) |
-| **Territorio** | Blog del sitio | **Pausa Profunda** (proyecto vinculado, enlace externo); casos puntuales en blog |
+| **Territorio** | Blog del sitio | Blog del sitio (ensayos en profundidad) |
 
 Un texto de 1 000 palabras puede ser artículo o ensayo breve. Lo define la **profundidad argumentativa**, no el conteo.
 
-### 5.1 Ensayos en Pausa Profunda
+### 5.1 Ensayos en el blog
 
 - Desarrollo argumentativo de mayor alcance.
-- No compite con el blog del sitio en función ni extensión habitual.
-- Enlace desde footer y biografía del fundador; nueva pestaña.
+- Publicados en el blog del sitio cuando el tema lo requiera.
+- Enlace desde footer y biografía del fundador.
 
 ---
 
