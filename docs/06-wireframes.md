@@ -101,7 +101,7 @@ Bloques:
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
 
-**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`. El mensaje editorial de WhatsApp vive en un `<template>` asociado mediante `data-share-whatsapp-template`; así conserva saltos de línea y datos específicos sin incrustar copy largo en JavaScript.
+**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`. Los mensajes editoriales viven en `<template>`: WhatsApp (`data-share-whatsapp-template`), X (`data-share-x-template`) y Threads (`data-share-threads-template`); así conservan saltos de línea y datos específicos sin incrustar copy largo en JavaScript.
 
 **Compartir:** el panel propio está disponible tanto en las tarjetas del listado como dentro de cada detalle y ofrece WhatsApp, Facebook, X, Threads y copiar enlace. No genera imágenes para Instagram. Los eventos con página propia comparten su detalle; si todavía no existe un detalle, se comparte el ancla estable de su tarjeta en `/eventos/`. En el blog, cada detalle de entrada usa `.share-trigger` con templates por plataforma (`data-share-whatsapp-template`, `data-share-x-template`, `data-share-threads-template`); ver `09-ui-copy-sheet` §6.
 

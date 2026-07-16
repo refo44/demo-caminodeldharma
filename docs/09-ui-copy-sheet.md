@@ -116,7 +116,27 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 El panel usa lenguaje funcional y sobrio. No incluye contadores, invitaciones promocionales ni SDKs de seguimiento.
 
-### Mensaje de evento para WhatsApp
+### Mensaje de evento al compartir
+
+Cada evento próximo define copy de compartir **por plataforma**, en `<template>` asociados al botón `.share-trigger` mediante:
+
+- `data-share-whatsapp-template`
+- `data-share-x-template`
+- `data-share-threads-template`
+
+Además: `data-share-title`, `data-share-description` (extracto social / meta tags) y `data-share-url`.
+
+**Principio:** el texto prellenado es un **borrador editable**. Quien comparte puede añadir su mensaje, tags o reemplazarlo por completo.
+
+**Atribución obligatoria (X y Threads):** la primera línea identifica la pieza como invitación de la comunidad, no como anuncio personal de quien comparte.
+
+Formato fijo de la línea de contexto:
+
+`[Tipo de evento] · Camino del Dharma`
+
+Donde `[Tipo de evento]` es la etiqueta editorial del encuentro: Encuentro, Taller, Retiro o Conferencia.
+
+#### WhatsApp (eventos)
 
 Los eventos usan un mensaje editorial propio, no la combinación genérica título + URL. Orden estándar:
 
@@ -132,6 +152,27 @@ Los eventos usan un mensaje editorial propio, no la combinación genérica títu
 Se permiten únicamente emojis funcionales para facilitar el escaneo (`📅`, `🕘`, `📍`, `💰`). No se usan emojis decorativos en saludos, títulos, cupos ni cierres. Las inclusiones emplean viñetas (`•`). Los datos ausentes se omiten; no se muestran etiquetas vacías.
 
 **Vista previa en WhatsApp:** El mensaje contiene una sola URL y debe ser la página pública del evento. No se incluye la URL directa de Google Forms u otro formulario externo, porque WhatsApp podría usarla para generar la vista previa. La página del evento contiene el botón de inscripción.
+
+#### X y Threads (eventos)
+
+1. Línea de contexto: `[Tipo] · Camino del Dharma`
+2. Nombre del evento
+3. **X:** fecha y lugar escaneables (emojis funcionales `📅`, `📍`); dejar ~160 caracteres libres para comentario personal
+4. **Threads:** propósito breve + fecha y lugar si cabe (~500 caracteres totales con URL)
+
+La URL **no** va dentro del template; `share.js` la añade en el intent. No usar `Comparto…` en templates de X/Threads (lo añade quien comparte si lo desea).
+
+**Implementación estática:** ver `eventos/index.html` (Encuentro Nacional 2026) como referencia.
+
+#### Por plataforma (eventos)
+
+| Plataforma | Qué envía el botón | Copy del sitio |
+|------------|-------------------|----------------|
+| **WhatsApp** | Template completo (incluye URL) | Invitación editorial completa |
+| **Facebook** | Solo URL | Tarjeta desde meta tags OG |
+| **X** | Template (sin URL) + URL en intent | Contexto + nombre + fecha/lugar |
+| **Threads** | Template (sin URL) + URL en intent | Contexto + nombre + propósito + datos |
+| **Copiar enlace** | Solo URL | Tarjeta desde meta tags OG |
 
 ### Mensaje de blog al compartir
 
@@ -236,4 +277,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4

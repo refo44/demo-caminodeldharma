@@ -313,6 +313,8 @@ Los emojis se reservan para identificar datos prácticos (`📅`, `🕘`, `📍`
 
 La URL compartida debe ser la página del evento, no el formulario externo. Además de mantener el contexto editorial, esto permite que WhatsApp obtenga la vista previa desde los metadatos de Camino del Dharma.
 
+En **X y Threads**, el borrador prellenado usa la línea de contexto `[Tipo de evento] · Camino del Dharma`, el nombre del evento y datos escaneables (fecha, lugar). Es editable y más breve que el mensaje de WhatsApp. Detalle en `09-ui-copy-sheet` §6.
+
 ### Mensajes de blog al compartir
 
 Los mensajes prellenados al compartir una entrada del blog son **borradores editables**: quien comparte puede añadir su comentario, tags o sustituirlos por completo.
