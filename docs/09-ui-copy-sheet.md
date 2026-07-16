@@ -100,7 +100,10 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 - **Botón:** Inscribirme
 - **Acción secundaria por evento próximo:** Compartir
+- **Calendario (eventos próximos):** Añadir al calendario — enlace a archivo `.ics` en `eventos/ical/{slug}.ics`
 - **Sin eventos:** "No hay eventos programados en este momento."
+
+Cada evento próximo con fechas definidas tiene un archivo iCalendar (`.ics`) con título, fechas, lugar, descripción breve y URL del evento. El botón descarga o abre el archivo para importarlo en Google Calendar, Apple Calendar, Outlook u otra app compatible. Solo aplica a eventos próximos, no a eventos finalizados.
 
 ---
 
@@ -277,4 +280,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.5

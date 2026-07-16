@@ -1202,6 +1202,27 @@ a:focus-visible {
   margin: var(--space-md) 0 0;
 }
 
+.evento-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin: var(--space-md) 0 0;
+}
+
+.evento-actions .share-actions {
+  margin: 0;
+}
+
+.evento-actions .btn-secondary {
+  gap: var(--space-xs);
+}
+
+.evento-actions .btn-secondary .lucide-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
 .blog-list-item .share-actions {
   padding: 0 var(--space-md) var(--space-md);
 }
