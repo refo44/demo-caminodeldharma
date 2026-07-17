@@ -1458,18 +1458,9 @@ a:focus-visible {
   }
 }
 
-.meditation-block .read-width {
-  margin-inline: auto;
-}
-
 .meditation-block h2 {
   margin-top: 0;
   color: var(--text);
-}
-
-.meditation-block-figure {
-  max-width: var(--read-max);
-  margin: 0 auto var(--space-md);
 }
 
 .meditation-block ul {
