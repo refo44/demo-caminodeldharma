@@ -123,7 +123,7 @@ Bloques:
 - Enlace “Volver al inicio”
 - Pie
 
-Los álbumes pueden responder a criterios editoriales distintos: año (`2026`), evento (`Encuentro nacional`) o actividad (`Retiros y práctica`). Cada álbum conserva una ancla estable y su página activa en la URL mediante un parámetro propio, por ejemplo `?encuentro-nacional-page=2#encuentro-nacional`.
+Los álbumes pueden responder a criterios editoriales distintos: **General** (memoria comunitaria; imágenes destacadas al inicio), año (`2023`, `2021`) u otro criterio editorial. Cada álbum conserva una ancla estable y su página activa en la URL mediante un parámetro propio, por ejemplo `?galeria-2023-page=2#galeria-2023`.
 
 **Maqueta estática:** `#gallery-data` mantiene el inventario de imágenes y `#gallery-albums-data` define los álbumes demostrativos, sus títulos y rangos. `gallery.js` crea una sección `.gallery-album` por definición, con `.gallery-grid`, `.gallery-pagination` y una región de estado accesible independientes.
 
