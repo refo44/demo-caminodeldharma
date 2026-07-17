@@ -78,7 +78,7 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 | Pestaña 3 | Biografía fundador |
 | Pestaña 5 | Videos (meditación, YouTube) |
 | Pestaña 6 | Contacto |
-| Pestaña 7 | Galería (`galeria-01.jpg` … `galeria-39.jpg` en `assets/images/galeria/`; álbum General + años 2023 y 2021; script `scripts/rename-gallery-to-kebab.sh`; 16). |
+| Pestaña 7 | Galería (`galeria-01.jpg` … `galeria-36.jpg` en `assets/images/galeria/`; álbum General + años 2023 y 2021; script `scripts/rename-gallery-to-kebab.sh`; 16). |
 | Pestaña 8 | Celebraciones (Vesak, Diwali) |
 
 ---

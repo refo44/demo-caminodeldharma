@@ -26,7 +26,7 @@ demo-caminodeldharma/          (o nombre del repo)
 │   ├── css/                  main.css, normalize.css
 │   ├── js/                   main.js, gallery.js, share.js, calendar.js
 │   ├── fonts/                Fjalla One, Inter, MarloweEscapade (15)
-│   ├── images/               Imágenes por sección (eventos: assets/images/eventos/; galería: galeria-01.jpg … galeria-39.jpg; 16)
+│   ├── images/               Imágenes por sección (eventos: assets/images/eventos/; galería: galeria-01.jpg … galeria-36.jpg; 16)
 │   ├── audio/                Audio local (p. ej. amitabha.mp3, namo-guan-shi-yin-pusa.mp3; 15, 16)
 │   └── documents/            PDFs descargables (p. ej. recitacion-practica-comida.pdf; 15, 16)
 ├── scripts/                  Scripts de mantenimiento (no se despliegan)
