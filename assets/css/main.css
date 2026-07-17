@@ -1467,6 +1467,11 @@ a:focus-visible {
   color: var(--text);
 }
 
+.meditation-block-figure {
+  max-width: var(--read-max);
+  margin: 0 auto var(--space-md);
+}
+
 .meditation-block ul {
   list-style: none;
   padding: 0;
