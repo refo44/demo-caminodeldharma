@@ -73,3 +73,4 @@ wp-config.php
 # Node.js tooling
 /node_modules/
 camino-del-dharma-deploy.zip
+camino-del-dharma-v*.zip

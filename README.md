@@ -38,18 +38,32 @@ Este comando debe ejecutarse después de cualquier cambio en `assets/css/` y ant
 
 ## Estructura del proyecto
 
-- **Raíz:** `index.html`, `404.html`
+- **Raíz:** `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `VERSION`
+- **Versionado:** `CHANGELOG.md` (historial de despliegues), `VERSION` (versión actual)
 - **Secciones:** `comunidad/`, `linaje/`, `practica/`, `eventos/`, `galeria/`, `contacto/`, `donaciones/`, `blog/`
 - **Assets:** `assets/css/`, `assets/js/`, `assets/images/`
 - **Documentación:** `docs/` (identidad, mapa de pantallas, copy, URLs, orden de implementación)
 - **Scripts:** `scripts/` (ver abajo)
+
+## Despliegue en Hostinger
+
+El README documenta el proyecto; el historial de publicaciones vive en [`CHANGELOG.md`](CHANGELOG.md).
+
+Antes de cada despliegue:
+
+1. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
+2. Ejecutar `npm run lint:css` (sin errores).
+3. Generar el ZIP de producción con el nombre `camino-del-dharma-vX.Y.Z.zip` (según la versión en `VERSION`).
+4. Subir y extraer en `public_html` del File Manager de Hostinger.
+
+El ZIP de despliegue incluye solo archivos de producción (HTML, assets, `robots.txt`, `sitemap.xml`, `.htaccess`). No incluye `docs/`, `content-source/`, `node_modules/` ni `.git/`.
 
 ## Scripts
 
 Desde la raíz del repositorio:
 
 | Script | Descripción | Requisito |
-|--------|-------------|------------|
+| -------- | ------------- | ------------ |
 | `scripts/optimize-images.sh` | Optimiza JPEG/PNG en `assets/images/` (tamaño, calidad, metadatos) | [ImageMagick](https://imagemagick.org/) (`brew install imagemagick`) |
 | `scripts/rename-gallery-to-kebab.sh` | Renombra imágenes en `assets/images/galeria/` a `galeria-01.jpg`, `galeria-02.jpg`, … | Ninguno |
 
@@ -73,7 +87,7 @@ Según `docs/17-orden-implementacion.md`, la maqueta estática (esta fase) se va
 **Comunidad Buddhista Camino del Dharma**  
 Personería Jurídica Especial – Ministerio del Interior de Colombia  
 
-- Correo: caminodeldharma1@gmail.com  
+- Correo: <caminodeldharma1@gmail.com>  
 - WhatsApp: +57 320 662 7608  
 
 **Maqueta estática (código y estructura):** Rafael Figueredo Oropeza.  

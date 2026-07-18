@@ -497,7 +497,7 @@ a:focus-visible {
 
 /* Below the large nav tier, logo + hamburger + language switcher share one row.
    Hide the wordmark so ES|EN is never clipped on narrow phones (e.g. ~360px). */
-@media (max-width: 1279px) {
+@media (width <= 1279px) {
   .site-name {
     display: none;
   }
@@ -514,7 +514,7 @@ a:focus-visible {
   }
 }
 
-@media (max-width: 479px) {
+@media (width <= 479px) {
   .site-header .layout-container {
     gap: var(--space-xs);
     padding-inline: max(var(--space-sm), env(safe-area-inset-left, 0px)) max(var(--space-sm), env(safe-area-inset-right, 0px));
