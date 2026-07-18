@@ -285,6 +285,7 @@ a:focus-visible {
   justify-content: space-between;
   gap: var(--space-md);
   padding-block: var(--space-sm);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 
 .site-logo {
@@ -492,6 +493,41 @@ a:focus-visible {
 .lang-switcher-sep {
   opacity: 0.7;
   pointer-events: none;
+}
+
+/* Below the large nav tier, logo + hamburger + language switcher share one row.
+   Hide the wordmark so ES|EN is never clipped on narrow phones (e.g. ~360px). */
+@media (max-width: 1279px) {
+  .site-name {
+    display: none;
+  }
+
+  .site-logo {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-inline-end: 0;
+  }
+
+  .nav-main,
+  .lang-switcher {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .site-header .layout-container {
+    gap: var(--space-xs);
+    padding-inline: max(var(--space-sm), env(safe-area-inset-left, 0px)) max(var(--space-sm), env(safe-area-inset-right, 0px));
+  }
+
+  .lang-switcher {
+    gap: 0.125rem;
+  }
+
+  .lang-btn {
+    min-width: 2.75rem;
+    padding-inline: 0.375rem;
+  }
 }
 
 /* --- Lucide-style icons (inline SVG) --- */
@@ -1992,6 +2028,13 @@ a:focus-visible {
 
 .footer-credits p:last-child {
   margin-bottom: 0;
+}
+
+.footer-copyright {
+  margin: 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  font-size: 0.875rem;
 }
 
 /* --- Forms --- */
