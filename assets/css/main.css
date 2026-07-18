@@ -1790,15 +1790,6 @@ a:focus-visible {
   margin-top: 0;
 }
 
-/* Finished events: the CTA is a non-interactive <span>, not a disabled
-   <a href>, so there's nothing left to click regardless of input method. */
-.evento-card--past .evento-cta .btn-primary,
-.evento-card--finalizado .evento-cta .btn-primary {
-  background-color: var(--text-muted);
-  color: var(--text-on-dark);
-  cursor: default;
-}
-
 /* Single event (single-event.php / eventos/{slug}/) */
 .single-event .single-event-title {
   font-family: var(--font-heading);
