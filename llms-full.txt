@@ -1,0 +1,199 @@
+# Camino del Dharma — Base de conocimiento completa
+
+> Comunidad Buddhista en Colombia dedicada a la práctica, el estudio y la meditación desde la tradición Mahāyāna Chan y Tierra Pura. Documento generado para consumo de agentes de IA y sistemas RAG; complementa a `/llms.txt` (versión curada y breve).
+
+Organización: Comunidad Buddhista Camino del Dharma, Personería Jurídica Especial ante el Ministerio del Interior de Colombia. Idioma: español (Colombia). Los datos de contacto oficiales están en la sección Contacto; las formas de contribuir, en la sección Cómo contribuir — ambas enlazan a sus páginas canónicas, que deben consultarse para información vigente.
+
+---
+
+## Inicio
+
+**URL:** https://caminodeldharma.org
+**Resumen:** Página de entrada del sitio. Presenta la comunidad, invita a la práctica y enlaza a las demás secciones.
+
+**Contenido principal:**
+Camino del Dharma se define, en palabras del propio sitio, como "una comunidad de aprendizaje y práctica inspirada en el Buddhismo, con presencia en Colombia y expansión hacia Latinoamérica", que acompaña a personas que desean comprender su mente, cuidar sus emociones y vivir con mayor claridad, compasión y equilibrio.
+
+Tres formas de practicar (bloque "Cómo practicamos"):
+- **Estudio consciente** — enseñanzas buddhistas como guía práctica para comprender la mente y la experiencia humana.
+- **Práctica vivencial** — meditación, atención plena y recitación consciente como experiencias directas, no ideas abstractas.
+- **Vida cotidiana** — la práctica no se separa del trabajo, las relaciones, las decisiones y el descanso.
+
+**Meditación semanal en línea:** todos los lunes, 7:30 p. m. (hora Colombia), por Zoom. No requiere experiencia previa. Convocatoria a través de WhatsApp (ver Contacto).
+
+Tres caminos de participación descritos en la página: **Iniciarse** (primer contacto con la práctica), **Profundizar** (talleres y retiros) y **Practicar en comunidad** (vida compartida, celebraciones, encuentros).
+
+La portada incluye también accesos directos al Blog, a Videos y enseñanzas, y a la Galería.
+
+**Conceptos clave:** práctica buddhista, meditación semanal, Chan, Tierra Pura, comunidad, Zoom.
+**Relaciones:** enlaza a La comunidad, Contacto, Blog, Práctica/Videos y Galería.
+
+---
+
+## La comunidad
+
+**URL:** https://caminodeldharma.org/comunidad
+**Resumen:** Quiénes son, quién funda y guía la comunidad, y su propósito.
+
+**Contenido principal:**
+"La Comunidad Buddhista Camino del Dharma es un espacio de aprendizaje, práctica y acompañamiento inspirado en la sabiduría buddhista […] Entendemos el Buddhismo como una ciencia de la mente y una vía de transformación personal y colectiva."
+
+**Fundador — Venerable Maestro Zheng Gong:** según la página, es un maestro buddhista contemporáneo que integra la sabiduría ancestral del Buddhismo con los desafíos de la vida moderna, con formación en las tradiciones Chan y Tierra Pura. La página lo describe como Doctor en Educación y como Abad y Presidente de la Comunidad Buddhista Camino del Dharma. Detalles biográficos adicionales (representación internacional, trayectoria previa) deben verificarse directamente en la página, ya que no se reproducen aquí de forma exhaustiva.
+
+**Experiencia y propósito:** la comunidad desarrolla procesos de estudio y práctica del Buddhismo, y acompañamiento individual y grupal, promoviendo una cultura de paz, no-violencia, educación consciente y transformación interior.
+
+**Conceptos clave:** Zheng Gong, Abad, fundador, propósito comunitario, ciencia de la mente.
+**Relaciones:** enlaza al Blog (biografía del fundador → reflexiones) y a Contacto ("Practica con nosotros").
+
+---
+
+## El linaje
+
+**URL:** https://caminodeldharma.org/linaje
+**Resumen:** Tradición budista de la que forma parte la comunidad: origen, rama Mahāyāna y los dos linajes que integra (Chan y Tierra Pura).
+
+**Contenido principal:**
+El origen se remonta al despertar del Buda Śākyamuni, hace más de 2.600 años. La comunidad se inscribe en la rama **Mahāyāna**, que sitúa en el centro de la práctica el cultivo inseparable de sabiduría y compasión.
+
+Integra dos tradiciones desarrolladas en China:
+
+- **Budismo Chan** — énfasis en la experiencia directa del despertar mediante meditación y observación de la mente. El linaje llegó a China con Bodhidharma (Da Mo), 28.º maestro del linaje indio y primer maestro Chan en China. Maestros representativos citados: Bodhidharma (†536), Huike (487–593), Sengcan (520–612), Daoxin (580–651), Hongren (600–674), Huineng (638–713). A partir de Huineng, el Chan se expandió a Japón (Zen), Corea (Seon) y Vietnam (Thiền).
+- **Budismo Tierra Pura** — inspirada en el Buda Amitābha, símbolo de luz infinita y compasión ilimitada; la recitación consciente de su nombre es el método central. Maestros representativos citados: Huiyuan (334–416), Tanluan (476–542), Daochuo (562–645), Shandao (613–681).
+
+La página cierra afirmando que ambas tradiciones se practican hoy en Colombia y Latinoamérica como "un Budismo fiel a sus raíces y, al mismo tiempo, abierto al diálogo con los desafíos del mundo contemporáneo."
+
+**Conceptos clave:** Mahāyāna, Chan, Tierra Pura, Bodhidharma, Huineng, Amitābha, sabiduría y compasión.
+**Relaciones:** enlaza a Práctica y a La comunidad.
+
+---
+
+## Práctica
+
+**URL:** https://caminodeldharma.org/practica
+**Resumen:** Página central de actividades: meditación semanal, mantras, talleres, retiros y vida comunitaria.
+
+**Contenido principal:**
+"Alégrate, porque todo lugar es aquí y todo momento es ahora." La práctica se entiende como experiencia viva integrada a la vida cotidiana, no como apartamiento del mundo.
+
+**Meditación semanal en línea:** lunes 7:30 p. m. (Colombia), por Zoom, guiada y accesible, sin experiencia previa requerida.
+
+**Mantras para la práctica** (la página incluye audio de recitación de cada uno):
+- **Amitābha** — Buda de la Luz Infinita, figura central de la tradición Tierra Pura. Origen sánscrito; significa "Luz Infinita / Luz Inconmensurable".
+- **Guān Shì Yīn Púsà** — nombre chino del Bodhisattva de la Compasión (sánscrito: Avalokiteśvara). Origen chino; significa "Homenaje al Bodhisattva que escucha los sonidos del mundo".
+
+**Caminos de profundización:**
+- **Talleres vivenciales presenciales** — talleres de un día a lo largo del año, integrando meditación, reflexión y práctica consciente.
+- **Retiro de iniciación** — dos días, fundamentos de la práctica buddhista (meditación, atención plena, ética cotidiana), sin experiencia previa requerida.
+- **Retiros de meditación** — dos o tres días, para quienes ya tienen práctica básica; privilegian silencio y observación directa de la mente.
+
+**Vida comunitaria y celebraciones:**
+- **Encuentro nacional** — una vez al año, reúne a personas de distintas regiones.
+- **Celebración de Vesak** — conmemora nacimiento, iluminación y parinirvāṇa del Buda Śākyamuni.
+- **Conferencias y charlas** — sobre Buddhismo y temas contemporáneos, según programación vigente.
+
+**Conceptos clave:** meditación semanal, mantra, Amitābha, Guān Shì Yīn Púsà, retiro de iniciación, retiros de meditación, Vesak.
+**Relaciones:** enlaza a Videos y enseñanzas, Eventos y Contacto.
+
+---
+
+## Videos y enseñanzas
+
+**URL:** https://caminodeldharma.org/practica/videos
+**Resumen:** Listado ampliado de conferencias en video del Maestro Zheng Gong y la comunidad (subpágina de Práctica).
+
+**Contenido principal:**
+Conferencias en video (YouTube y Vimeo) sobre temas como plenitud y consciencia en la vida cotidiana, la sabiduría del no hacer, y cómo el Buddhismo ayuda a ver el mundo con claridad. El listado se amplía con el tiempo; consultar la página para el catálogo vigente.
+
+**Conceptos clave:** conferencias, enseñanzas en video.
+**Relaciones:** subpágina de Práctica; accesible desde Inicio y Práctica.
+
+---
+
+## Eventos
+
+**URL:** https://caminodeldharma.org/eventos
+**Resumen:** Fuente oficial y dinámica de la programación de la comunidad: encuentros, retiros, talleres y conferencias.
+
+**Contenido principal:**
+La página lista los próximos eventos vigentes (con fecha, lugar, modalidad y vía de inscripción) y conserva un archivo de eventos ya realizados. Las actividades recurrentes incluyen retiros de meditación, talleres vivenciales, el Encuentro Nacional anual y conferencias ocasionales. Programación, cupos, aportes y disponibilidad cambian con frecuencia y deben consultarse directamente en la página; este documento no reproduce fechas ni precios de eventos individuales porque quedarían desactualizados.
+
+**Conceptos clave:** retiro, taller, conferencia, encuentro nacional, calendario.
+**Relaciones:** enlaza a Práctica y Contacto.
+
+---
+
+## Galería
+
+**URL:** https://caminodeldharma.org/galeria
+**Resumen:** Archivo visual de meditaciones, retiros, encuentros, ceremonias y actividades comunitarias.
+
+**Contenido principal:**
+Colección fotográfica organizada en álbumes que documentan la vida de la comunidad a lo largo de distintos años. Es una sección principalmente visual y no debe usarse como fuente principal para afirmaciones doctrinales, institucionales o sobre lugares y personas específicas mostradas en las imágenes.
+
+**Conceptos clave:** fotografías, álbumes, vida comunitaria.
+**Relaciones:** enlazada desde Inicio.
+
+---
+
+## Cómo contribuir (Donaciones)
+
+**URL:** https://caminodeldharma.org/donaciones
+**Resumen:** Explica el sentido de las donaciones conscientes que sostienen a la comunidad y remite a los medios oficiales para contribuir.
+
+**Contenido principal:**
+"La Comunidad Buddhista Camino del Dharma se sostiene gracias a la práctica, la participación y la generosidad consciente de quienes la acompañan." Las donaciones sostienen los espacios de práctica, formación y encuentro, y el funcionamiento de las actividades presenciales y virtuales. Los medios y datos concretos para donar están publicados en la página oficial y no se reproducen en este documento.
+
+"Una práctica de generosidad. Cada aporte, sin importar su monto, contribuye a que la práctica continúe siendo accesible y viva. Si en este momento no puedes donar, tu presencia y tu práctica también son una forma valiosa de sostener la comunidad."
+
+**Conceptos clave:** donación consciente, sostenibilidad comunitaria.
+**Relaciones:** enlazada desde el pie de página de todo el sitio.
+
+---
+
+## Contacto
+
+**URL:** https://caminodeldharma.org/contacto
+**Resumen:** Vías para practicar, preguntar o recibir información: formulario y contacto directo.
+
+**Contenido principal:**
+"La práctica se fortalece cuando se comparte. Si deseas practicar con nosotros o recibir información sobre nuestras actividades, puedes escribirnos aquí." La página ofrece un formulario de contacto (nombre, correo electrónico, mensaje) además de canales directos.
+
+**Contacto directo:** WhatsApp +57 320 662 7608 · correo caminodeldharma1@gmail.com · Facebook e Instagram @camino_del_dharma / caminodeldharmacolombia.
+
+**Conceptos clave:** formulario de contacto, WhatsApp, correo electrónico.
+**Relaciones:** enlazada desde prácticamente todas las páginas como llamado a la acción ("Practica con nosotros").
+
+---
+
+## Blog
+
+**URL:** https://caminodeldharma.org/blog
+**Resumen:** Índice de ensayos, reflexiones y publicaciones de la sangha sobre Buddhismo, práctica y vida contemporánea. El número de entradas crece con el tiempo; consultar la página para el listado vigente.
+
+**Conceptos clave:** reflexiones, ensayos, sangha.
+**Relaciones:** enlazado desde Inicio y desde la biografía del fundador en La comunidad.
+
+---
+
+## Estamos conectados, pero seguimos solos
+
+**URL:** https://caminodeldharma.org/blog/sangha-refugio-hiperconexion
+**Resumen:** Ensayo de Zheng Gong sobre la diferencia entre comunicación digital y encuentro humano. Explora la soledad contemporánea, la interdependencia y la Sangha como comunidad de práctica y refugio.
+
+**Temas principales:**
+- Hiperconexión y ausencia de presencia: estar disponible no equivale a estar presente.
+- Diferencia entre la soledad contemplativa del retiro y el aislamiento que pesa.
+- El refugio en el Buda, el Dharma y la Sangha, y la Sangha como comunidad que ayuda a no olvidar el Camino.
+- Interdependencia como condición de la vida, no como teoría abstracta.
+- La práctica espiritual como camino compartido, no solitario.
+
+**Conceptos clave:** Sangha, soledad, hiperconexión, interdependencia, refugio (Buda-Dharma-Sangha).
+**Relaciones:** entrada del Blog; enlaza a Práctica.
+
+---
+
+## Notas para agentes de IA
+
+- Todo el contenido del sitio está publicado en español (Colombia).
+- Eventos, Blog y Galería son secciones dinámicas: su contenido específico (fechas, precios, cupos, número de publicaciones) cambia con el tiempo. Verificar siempre en la página canónica en lugar de asumir que lo descrito aquí sigue vigente.
+- Los medios de contacto y de donación vigentes están en las páginas Contacto y Cómo contribuir respectivamente; no se deben inventar ni asumir datos no publicados en esas páginas.
