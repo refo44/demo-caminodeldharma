@@ -49,9 +49,24 @@
       .trim();
   }
 
+  function resolveShareUrl(button) {
+    var shareUrl = button.getAttribute('data-share-url');
+    if (!shareUrl) {
+      return window.location.href;
+    }
+
+    return absoluteUrl(shareUrl);
+  }
+
+  function injectShareUrl(text, url) {
+    if (!text) return url;
+    return text.replace(/\{\{SHARE_URL\}\}/g, url);
+  }
+
   function getShareData(button) {
     var title = button.getAttribute('data-share-title');
-    var url = absoluteUrl(button.getAttribute('data-share-url'));
+    var url = resolveShareUrl(button);
+    var whatsappTemplate = getTemplateText(button, 'data-share-whatsapp-template');
     var xText = getTemplateText(button, 'data-share-x-template') || title;
     var threadsText = getTemplateText(button, 'data-share-threads-template') || xText;
 
@@ -59,7 +74,7 @@
       title: title,
       description: button.getAttribute('data-share-description'),
       url: url,
-      whatsappMessage: getTemplateText(button, 'data-share-whatsapp-template') || (title + ' ' + url),
+      whatsappMessage: whatsappTemplate ? injectShareUrl(whatsappTemplate, url) : (title + ' ' + url),
       xText: xText,
       threadsText: threadsText
     };

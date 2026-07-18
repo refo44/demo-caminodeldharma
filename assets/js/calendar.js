@@ -34,12 +34,34 @@
     return new URL(value, window.location.href).href;
   }
 
+  function resolveEventUrl(button) {
+    var eventUrl = button.getAttribute('data-calendar-event-url');
+    if (!eventUrl) {
+      return window.location.href;
+    }
+
+    return absoluteUrl(eventUrl);
+  }
+
+  function resolvePosterUrl(button) {
+    var posterPath = button.getAttribute('data-calendar-poster');
+    if (!posterPath) return '';
+    return absoluteUrl(posterPath);
+  }
+
+  function resolveCalendarDescription(button) {
+    var description = button.getAttribute('data-calendar-description') || '';
+    return description
+      .replace(/\{\{EVENT_URL\}\}/g, resolveEventUrl(button))
+      .replace(/\{\{POSTER_URL\}\}/g, resolvePosterUrl(button));
+  }
+
   function getCalendarData(button) {
     return {
       title: button.getAttribute('data-calendar-title'),
       start: button.getAttribute('data-calendar-start'),
       end: button.getAttribute('data-calendar-end'),
-      description: button.getAttribute('data-calendar-description') || '',
+      description: resolveCalendarDescription(button),
       location: button.getAttribute('data-calendar-location') || '',
       icsPath: button.getAttribute('data-calendar-ics')
     };

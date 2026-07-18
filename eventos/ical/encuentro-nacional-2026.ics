@@ -9,10 +9,10 @@ DTSTAMP:20260716T230000Z
 DTSTART;VALUE=DATE:20260807
 DTEND;VALUE=DATE:20260810
 SUMMARY:7.º Encuentro Nacional Buddhista – 2026
-DESCRIPTION:Tres días para detenernos\, respirar profundo y reencontrarnos con lo esencial. Presencial – retiro. Información e inscripciones: https://refo44.github.io/demo-caminodeldharma/eventos/encuentro-nacional-2026/\nCartel: https://refo44.github.io/demo-caminodeldharma/assets/images/eventos/evento-7-encuentro-nacional-2026.jpg
+DESCRIPTION:Tres días para detenernos\, respirar profundo y reencontrarnos con lo esencial. Presencial – retiro. Información e inscripciones: https://caminodeldharma.org/eventos/encuentro-nacional-2026/\nCartel: https://caminodeldharma.org/assets/images/eventos/evento-7-encuentro-nacional-2026.jpg
 LOCATION:Casa Retiro San Pablo\, Puerto Colombia
-URL:https://refo44.github.io/demo-caminodeldharma/eventos/encuentro-nacional-2026/
-ATTACH;FMTTYPE=image/jpeg;VALUE=URI:https://refo44.github.io/demo-caminodeldharma/assets/images/eventos/evento-7-encuentro-nacional-2026.jpg
+URL:https://caminodeldharma.org/eventos/encuentro-nacional-2026/
+ATTACH;FMTTYPE=image/jpeg;VALUE=URI:https://caminodeldharma.org/assets/images/eventos/evento-7-encuentro-nacional-2026.jpg
 ORGANIZER;CN=Comunidad Buddhista Camino del Dharma:MAILTO:caminodeldharma1@gmail.com
 END:VEVENT
 END:VCALENDAR
