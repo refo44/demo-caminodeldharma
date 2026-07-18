@@ -6,6 +6,18 @@ La versión actual del repositorio está en [`VERSION`](VERSION).
 
 Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
+## [1.0.4] - 2026-07-18
+
+### Mejoras
+
+- Resolución de URLs canónicas en `calendar.js` y `share.js` para enlaces de eventos y compartir.
+- Rutas absolutas corregidas en páginas de eventos, práctica y blog.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.3] - 2026-07-18
 
 ### Mejoras
