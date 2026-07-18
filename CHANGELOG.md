@@ -6,6 +6,21 @@ La versión actual del repositorio está en [`VERSION`](VERSION).
 
 Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
+## [1.0.2] - 2026-07-18
+
+### Mejoras
+
+- `sitemap.xsl`: texto introductorio más breve en la vista del mapa del sitio.
+
+### Correcciones
+
+- Eventos finalizados: eliminados CTAs obsoletos en HTML y estilos asociados en `main.css`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.1] - 2026-07-18
 
 ### Mejoras
