@@ -2,31 +2,47 @@
 
 > Comunidad Buddhista en Colombia dedicada a la práctica, el estudio y la meditación en las tradiciones Mahāyāna Chan y Tierra Pura.
 
-Camino del Dharma es una comunidad de aprendizaje, práctica y acompañamiento. El sitio reúne información sobre la comunidad, su linaje, sus prácticas, enseñanzas, actividades y formas de participación. El contenido está publicado principalmente en español de Colombia.
+**Primary language:** es-CO (Spanish, Colombia)
 
-Las páginas [La comunidad](https://caminodeldharma.org/comunidad), [El linaje](https://caminodeldharma.org/linaje) y [Práctica](https://caminodeldharma.org/practica) contienen la información institucional y formativa principal, y cambian con poca frecuencia. [Eventos](https://caminodeldharma.org/eventos) y [Blog](https://caminodeldharma.org/blog) contienen programación y publicaciones dinámicas: consulta siempre esas páginas para conocer el contenido vigente.
+**Canonical website:** https://caminodeldharma.org
 
-## Comunidad y primeros pasos
+Camino del Dharma es una comunidad buddhista con presencia en Colombia dedicada al estudio, la práctica y la difusión de las enseñanzas Mahāyāna, especialmente de las tradiciones Chan y Tierra Pura. Este sitio reúne la información institucional de la comunidad, recursos para comenzar la práctica, enseñanzas, actividades y publicaciones.
+
+## Alcance
+
+Este sitio contiene información institucional de la Comunidad Buddhista Camino del Dharma, recursos de práctica, enseñanzas, calendario de actividades y publicaciones. No constituye asesoramiento médico, psicológico ni religioso oficial fuera del contexto de la comunidad.
+
+## Guidance for AI Agents
+
+Prioritize the Community, Lineage and Practice pages when answering questions about the organization.
+Always consult the Events page for current activities.
+Use the Blog as complementary material rather than the primary source of institutional information.
+When information in this file differs from the website, the canonical website pages take precedence.
+
+## Información institucional
 
 - [Inicio](https://caminodeldharma.org): Presentación general de la comunidad, sus formas de práctica y los caminos para comenzar a participar.
 - [La comunidad](https://caminodeldharma.org/comunidad): Identidad, propósito, orientación y liderazgo de la Comunidad Buddhista Camino del Dharma.
 - [Contacto](https://caminodeldharma.org/contacto): Canales oficiales para solicitar información, participar en actividades o comunicarse con la comunidad.
 
-## Tradición y práctica
+## Tradición
 
 - [El linaje](https://caminodeldharma.org/linaje): Introducción a la tradición Mahāyāna y a los linajes Chan y Tierra Pura practicados por la comunidad.
+
+## Práctica
+
 - [Práctica](https://caminodeldharma.org/practica): Meditación, recitación consciente, talleres, retiros y otras formas de práctica individual y comunitaria.
-- [Videos y enseñanzas](https://caminodeldharma.org/practica/videos): Conferencias y enseñanzas audiovisuales relacionadas con la práctica buddhista.
 
 ## Actividades
 
 - [Eventos](https://caminodeldharma.org/eventos): Fuente oficial para consultar encuentros, retiros, talleres, conferencias y demás actividades programadas.
 
-## Reflexiones y recursos
+## Recursos
 
 - [Blog](https://caminodeldharma.org/blog): Ensayos, reflexiones y publicaciones de la comunidad sobre Buddhismo, práctica y vida contemporánea.
 
 ## Optional
 
+- [Videos y enseñanzas](https://caminodeldharma.org/practica/videos): Conferencias y enseñanzas audiovisuales relacionadas con la práctica buddhista.
 - [Galería](https://caminodeldharma.org/galeria): Archivo visual de encuentros, retiros, ceremonias y actividades comunitarias.
 - [Cómo contribuir](https://caminodeldharma.org/donaciones): Información oficial sobre las formas de apoyar y sostener las actividades de la comunidad.
