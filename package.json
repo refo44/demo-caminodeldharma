@@ -1,6 +1,6 @@
 {
   "name": "demo-caminodeldharma",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** (Colombia). Incluye las páginas de inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto. El contenido y la estructura siguen la documentación en `docs/`. Pensado como base para una futura adaptación a WordPress.",
   "main": "index.js",
   "directories": {
