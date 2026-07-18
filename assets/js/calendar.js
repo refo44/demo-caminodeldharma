@@ -34,13 +34,23 @@
     return new URL(value, window.location.href).href;
   }
 
+  function resolveCanonicalUrl() {
+    var canonical = document.querySelector('link[rel="canonical"]');
+    return canonical && canonical.href ? canonical.href : null;
+  }
+
   function resolveEventUrl(button) {
     var eventUrl = button.getAttribute('data-calendar-event-url');
-    if (!eventUrl) {
-      return window.location.href;
+    if (eventUrl) {
+      return absoluteUrl(eventUrl);
     }
 
-    return absoluteUrl(eventUrl);
+    var canonicalUrl = resolveCanonicalUrl();
+    if (canonicalUrl) {
+      return canonicalUrl;
+    }
+
+    return window.location.href;
   }
 
   function resolvePosterUrl(button) {
