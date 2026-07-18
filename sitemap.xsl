@@ -136,7 +136,7 @@
           <header>
             <h1>Mapa del sitio</h1>
             <p class="intro">
-              Listado de páginas públicas de Camino del Dharma. Los buscadores leen este archivo en formato XML; esta vista existe solo para facilitar su lectura en el navegador.
+              Listado de páginas públicas de Camino del Dharma.
             </p>
             <p class="meta">
               <xsl:value-of select="count(s:urlset/s:url)" /> URLs indexadas
