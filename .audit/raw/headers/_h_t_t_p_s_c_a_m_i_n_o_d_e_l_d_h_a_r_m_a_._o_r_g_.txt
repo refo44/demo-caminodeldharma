@@ -1,0 +1,23 @@
+HTTP/2 200 
+date: Sun, 19 Jul 2026 21:22:55 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding
+cache-control: max-age=0, must-revalidate
+expires: Sun, 19 Jul 2026 21:22:55 GMT
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: W/"5911-6a5d31e0-b712632aace1623d;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 13151308a3c17965036da5e0a5aa45fb-phx-edge8
+x-hcdn-cache-status: DYNAMIC
+x-hcdn-upstream-rt: 0.196
+
+FINAL_URL_EFFECTIVE:https://caminodeldharma.org/ REMOTE_IP:77.37.76.90 HTTP_VERSION:2 TIME_TOTAL:0.613382

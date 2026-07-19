@@ -1,0 +1,6 @@
+page,profile,run,cache,ttfb_ms,dcl_ms,load_ms,fcp_ms,lcp_ms,cls,requests,transfer_kb,long_tasks,notes
+https://caminodeldharma.org/,desktop-1440x900-unthrottled,1,cold,302,1807,2078,4852,4852,0,18,602,,paint timing inflated by pane initialization
+https://caminodeldharma.org/,desktop-1440x900-unthrottled,2,warm,310,932,1412,,,0,16,0,,paint entries suppressed by pane
+https://caminodeldharma.org/,desktop-1440x900-unthrottled,3,warm,170,188,542,,,0,16,0,0,paint entries suppressed by pane
+https://caminodeldharma.org/,mobile-390x844-unthrottled,1,warm,306,546,886,,,0,,,,image/dimension audit run
+https://caminodeldharma.org/eventos/encuentro-nacional-2026,mobile-390x844-unthrottled,1,warm,303,,1416,,,,,,,captured during calendar-dialog test

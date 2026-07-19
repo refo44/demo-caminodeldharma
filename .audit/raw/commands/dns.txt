@@ -1,0 +1,15 @@
+== dig A caminodeldharma.org
+77.37.76.240
+92.112.198.106
+== dig AAAA
+;; connection timed out; no servers could be reached
+== dig A www
+www.caminodeldharma.org.cdn.hstgr.net.
+147.79.120.218
+92.112.198.108
+== dig CNAME www
+;; connection timed out; no servers could be reached
+== dig NS
+;; connection timed out; no servers could be reached
+== dig MX
+;; connection timed out; no servers could be reached

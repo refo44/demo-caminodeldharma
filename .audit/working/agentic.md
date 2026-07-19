@@ -1,0 +1,2 @@
+# AEO working notes
+Discovery: open robots, clean sitemap, stable slugs. Parsability: semantic HTML; gallery JS-only (AEO-001); approx token cost of pages low (5.8KB HTML home gz). Actions: contact form dead (FUNC-001), ics 404 (FUNC-002), Google/Outlook calendar links OK, wa.me links OK. Task-based eval: "contact the community" via form = FAILED (silent); via WhatsApp link = Successful; "add event to calendar" = Partially successful (2/4 options). Injection: no hidden instructions found in metadata/alt/llms.txt (EVID-0013/0017 review).

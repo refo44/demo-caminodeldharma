@@ -1,0 +1,84 @@
+== index.html
+  lang=es title=Budismo Chan y Tierra Pura en Colombia | Camino del Dharma
+  desc=yes,122ch canonical=https://caminodeldharma.org robots=index,follow,max-image-preview:large
+  og=Budismo Chan y Tierra Pura en Colombia | | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Camino del Dharma']
+  jsonld_types=['Organization', 'Person', 'WebSite', 'WebPage']
+== comunidad/index.html
+  lang=es title=Comunidad Budista en Colombia | Camino del Dharma
+  desc=yes,114ch canonical=https://caminodeldharma.org/comunidad robots=(none)
+  og=Comunidad Budista en Colombia | Camino d | og:image=https://caminodeldharma.org/assets/images/comunidad-linaje/comunidad-quienes-somos.jpg
+  h1_count=1 h1=['La comunidad']
+  jsonld_types=['BreadcrumbList', 'WebPage']
+== linaje/index.html
+  lang=es title=Linaje Chan y Tierra Pura | Camino del Dharma
+  desc=yes,100ch canonical=https://caminodeldharma.org/linaje robots=(none)
+  og=Linaje Chan y Tierra Pura | Camino del D | og:image=https://caminodeldharma.org/assets/images/comunidad-linaje/linaje-budismo-chan.jpg
+  h1_count=1 h1=['El linaje']
+  jsonld_types=['BreadcrumbList']
+== practica/index.html
+  lang=es title=Meditación Budista y Práctica Chan | Camino del Dharma
+  desc=yes,99ch canonical=https://caminodeldharma.org/practica robots=(none)
+  og=Meditación Budista y Práctica Chan | Cam | og:image=https://caminodeldharma.org/assets/images/practica/meditacion-semanal-en-linea.jpg
+  h1_count=1 h1=['Práctica y actividades']
+  jsonld_types=['BreadcrumbList']
+== practica/videos/index.html
+  lang=es title=Videos y enseñanzas — Camino del Dharma
+  desc=yes,111ch canonical=https://caminodeldharma.org/practica/videos robots=(none)
+  og=Videos y enseñanzas — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Videos y enseñanzas']
+  jsonld_types=['BreadcrumbList', 'ItemList']
+== galeria/index.html
+  lang=es title=Galería — Camino del Dharma
+  desc=yes,111ch canonical=https://caminodeldharma.org/galeria robots=(none)
+  og=Galería — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Galería comunitaria']
+  jsonld_types=['BreadcrumbList']
+== contacto/index.html
+  lang=es title=Contacto — Camino del Dharma
+  desc=yes,134ch canonical=https://caminodeldharma.org/contacto robots=(none)
+  og=Contacto — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Contacto']
+  jsonld_types=['BreadcrumbList']
+== donaciones/index.html
+  lang=es title=Cómo contribuir — Camino del Dharma
+  desc=yes,116ch canonical=https://caminodeldharma.org/donaciones robots=(none)
+  og=Cómo contribuir — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Cómo contribuir']
+  jsonld_types=['BreadcrumbList']
+== eventos/index.html
+  lang=es title=Eventos — Camino del Dharma
+  desc=yes,84ch canonical=https://caminodeldharma.org/eventos robots=(none)
+  og=Eventos — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Eventos']
+  jsonld_types=['BreadcrumbList']
+== eventos/encuentro-nacional-2026/index.html
+  lang=es title=7.º Encuentro Nacional Buddhista – 2026 — Camino del Dharma
+  desc=yes,137ch canonical=https://caminodeldharma.org/eventos/encuentro-nacional-2026 robots=(none)
+  og=7.º Encuentro Nacional Buddhista – 2026 | og:image=https://caminodeldharma.org/assets/images/eventos/evento-7-encuentro-nacional-2026.jpg
+  h1_count=1 h1=['7.º Encuentro Nacional Buddhista – 2026']
+  jsonld_types=['BreadcrumbList', 'Event']
+== eventos/pausa-profunda-cali/index.html
+  lang=es title=Pausa Profunda – Cali — Camino del Dharma
+  desc=yes,86ch canonical=https://caminodeldharma.org/eventos/pausa-profunda-cali robots=(none)
+  og=Pausa Profunda – Cali | og:image=https://caminodeldharma.org/assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg
+  h1_count=1 h1=['Pausa Profunda – Cali']
+  jsonld_types=['BreadcrumbList', 'Event']
+== blog/index.html
+  lang=es title=Blog — Camino del Dharma
+  desc=yes,102ch canonical=https://caminodeldharma.org/blog robots=(none)
+  og=Blog — Camino del Dharma | og:image=https://caminodeldharma.org/assets/images/og-default.jpg
+  h1_count=1 h1=['Blog']
+  jsonld_types=['BreadcrumbList']
+== blog/sangha-refugio-hiperconexion/index.html
+  lang=es title=Estamos conectados, pero seguimos solos — Blog — Camino del Dharma
+  desc=yes,125ch canonical=https://caminodeldharma.org/blog/sangha-refugio-hiperconexion robots=(none)
+  og=Estamos conectados, pero seguimos solos | og:image=https://caminodeldharma.org/assets/images/blog/sangha-refugio-hiperconexion.jpg
+  h1_count=1 h1=['Estamos conectados, pero seguimos solos']
+  jsonld_types=['BreadcrumbList', 'BlogPosting']
+== 404.html
+  lang=es title=Página no encontrada — Camino del Dharma
+  desc=yes,87ch canonical=MISSING robots=noindex,follow
+  og=- | og:image=-
+  h1_count=1 h1=['Esta página no existe.']
+  jsonld_types=[]

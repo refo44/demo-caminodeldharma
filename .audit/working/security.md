@@ -1,0 +1,2 @@
+# Security working notes
+TLS1.3 LE cert apex+www to 2026-10-12 (EVID-0005). Headers: nosniff/XFO/RP/PP/XPCDP present; CSP only upgrade-insecure-requests (SEC-002); HSTS absent pending decision (SEC-001 → ACTIVATE NOW). Exposure: .git/.htaccess denied; repo files 404; webmanifest 410; no dir listing (EVID-0016). Cookies: GA only, no consent (PRIV-001). security.txt missing (SEC-003). No forms submitted; passive level respected.

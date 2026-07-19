@@ -1,0 +1,23 @@
+url,page_type,discovery_source,status,indexable,canonical,depth,selected_for_testing,selection_reason
+https://caminodeldharma.org,home,sitemap+crawl,200,yes,self,0,yes,primary template + HSTS decision page
+https://caminodeldharma.org/comunidad,section,sitemap+nav,200,yes,self,1,yes,institutional template
+https://caminodeldharma.org/linaje,section,sitemap+nav,200,yes,self,1,yes,institutional template
+https://caminodeldharma.org/practica,section,sitemap+nav,200,yes,self,1,yes,practice template with embeds
+https://caminodeldharma.org/practica/videos,subsection,sitemap+nav,200,yes,self,2,yes,video embed template
+https://caminodeldharma.org/galeria,section,sitemap+nav,200,yes,self,1,yes,JS-rendered gallery template
+https://caminodeldharma.org/contacto,section,sitemap+nav,200,yes,self,1,yes,form + conversion journey
+https://caminodeldharma.org/donaciones,section,sitemap+nav,200,yes,self,1,yes,donation journey
+https://caminodeldharma.org/eventos,section,sitemap+nav,200,yes,self,1,yes,event listing template
+https://caminodeldharma.org/eventos/encuentro-nacional-2026,event-detail,sitemap+nav,200,yes,self,2,yes,upcoming event + calendar actions
+https://caminodeldharma.org/eventos/pausa-profunda-cali,event-detail,sitemap+nav,200,yes,self,2,yes,finished event template
+https://caminodeldharma.org/blog,section,sitemap+nav,200,yes,self,1,yes,blog listing template
+https://caminodeldharma.org/blog/sangha-refugio-hiperconexion,article,sitemap+nav,200,yes,self,2,yes,article template
+https://caminodeldharma.org/pagina-inexistente-audit-2026,error,probe,404,no (noindex),n/a,n/a,yes,404 behavior
+http://caminodeldharma.org/,redirect,probe,301,n/a,n/a,n/a,yes,HSTS transport entry point
+http://www.caminodeldharma.org/,redirect,probe,301,n/a,n/a,n/a,yes,HSTS transport entry point
+https://www.caminodeldharma.org/,redirect,probe,301,n/a,n/a,n/a,yes,host canonicalization
+https://caminodeldharma.org/sitemap.xml,machine,robots.txt,200,n/a,n/a,n/a,yes,discovery
+https://caminodeldharma.org/robots.txt,machine,convention,200,n/a,n/a,n/a,yes,crawler policy
+https://caminodeldharma.org/llms.txt,machine,repo,200,n/a,n/a,n/a,yes,AI guidance file
+https://caminodeldharma.org/ical/encuentro-nacional-2026.ics,download,calendar dialog link,404,n/a,n/a,n/a,yes,broken download (FUNC-002)
+https://caminodeldharma.org/ical/pausa-profunda-cali.ics,download,calendar dialog link,404,n/a,n/a,n/a,yes,broken download (FUNC-002)

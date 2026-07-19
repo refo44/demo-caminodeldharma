@@ -1,0 +1,7 @@
+# grep evidence (2026-07-19, commit be896db2)
+Past events: eventos/index.html:295-366 — section "Eventos realizados", each card carries
+  visible badge <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
+  plus <p class="visually-hidden">Evento finalizado</p>. Event JSON-LD includes eventStatus.
+Privacy: no page in the site contains a privacy policy / política de tratamiento de datos; grep hits for
+  "privacidad|datos personales|habeas|tratamiento de datos|cookies" only matched incidental prose in
+  practica/*.html. No consent banner markup exists (EVID-0018).

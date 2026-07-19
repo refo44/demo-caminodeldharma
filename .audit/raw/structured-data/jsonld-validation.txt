@@ -1,0 +1,6 @@
+index.html: Organization missing_recommended=['address'] @id=https://caminodeldharma.org/#organization
+index.html: Person name=Rafael Figueredo Oropeza sameAs=True
+index.html: WebSite name=Camino del Dharma url=https://caminodeldharma.org
+eventos/encuentro-nacional-2026/index.html: Event name=7.º Encuentro Nacional Buddhista – 2026 startDate=2026-08-07 MISSING_REQ=[] missing_recommended=[]
+eventos/pausa-profunda-cali/index.html: Event name=Pausa Profunda – Cali startDate=2026-02-15T08:00:00-05:00 MISSING_REQ=[] missing_recommended=[]
+blog/sangha-refugio-hiperconexion/index.html: BlogPosting headline=Estamos conectados, pero seguimos solos MISSING_REQ=[] missing_recommended=[]

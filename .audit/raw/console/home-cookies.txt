@@ -1,0 +1,3 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/ (desktop 1440x900, first load, 2026-07-19)
+{"cookies":"_ga_B8FY69RGSS=GS2.1.s1784496474$o1$g0$t1784496474$j60$l0$h0; _ga=GA1.1.122201289.1784496475","localStorage":["caminodeldharma-lang"],"title":"Budismo Chan y Tierra Pura en Colombia | Camino del Dharma","lang":"es","consentBanner":false,"gtagLoaded":"function","dataLayerLen":4}
+# Console: "No console logs." on home, galeria and eventos detail pages.

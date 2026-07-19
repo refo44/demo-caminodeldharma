@@ -1,0 +1,12 @@
+# Source review of assets/js/*.js at commit be896db2 (2026-07-19)
+main.js (2374 B): nav toggle with aria-expanded sync, Escape closes + refocuses toggle, outside-click close,
+  desktop-resize close; language switcher UI-only (localStorage caminodeldharma-lang), EN button disabled
+  ("Próximamente en inglés"), deliberately does NOT rewrite document lang. No form handling.
+gallery.js (7353 B): album pagination from embedded JSON (#gallery-data, #gallery-albums-data); 12/page;
+  URL query param per album + pushState/popstate; aria-busy, aria-live status, aria-label'd nav; focus to
+  current page link; imgs created with width/height=400, loading=lazy, alt from data.
+calendar.js (5784 B): native <dialog>; builds Google/Outlook URLs client-side; Apple/.ics links point to
+  data-calendar-ics path (files missing -> FUNC-002); visually-hidden labels; close button; focus handling.
+share.js (6216 B): native <dialog>; WhatsApp/Facebook/X/Threads intents + copy-link with aria-live status;
+  rel=noopener noreferrer on all external options.
+Conclusion: no script anywhere attaches a submit handler to the contact form (relevant to FUNC-001).

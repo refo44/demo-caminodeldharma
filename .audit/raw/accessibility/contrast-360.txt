@@ -1,0 +1,11 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/eventos/encuentro-nacional-2026 (360x800, 2026-07-19)
+{"hscroll":false,"sw":360,"contrast":[
+ {"sel":"p","color":"rgb(62, 66, 75)","bg":"rgb(209, 174, 171)","size":"13px","weight":"600","ratio":4.96},
+ {"sel":"a","color":"rgb(255, 255, 255)","bg":"rgb(140, 43, 61)","size":"16px","weight":"600","ratio":8.31},
+ {"sel":"h1","color":"rgb(62, 66, 75)","bg":"rgb(209, 174, 171)","size":"32px","weight":"700","ratio":4.96},
+ {"sel":"h2","color":"rgb(62, 66, 75)","bg":"rgb(209, 174, 171)","size":"22px","weight":"700","ratio":4.96},
+ {"sel":".btn-primary","color":"rgb(255, 255, 255)","bg":"rgb(140, 43, 61)","size":"16px","weight":"600","ratio":8.31},
+ {"sel":".site-footer p","color":"rgb(255, 255, 255)","bg":"rgb(157, 102, 102)","size":"16px","weight":"600","ratio":4.64},
+ {"sel":".site-footer a","color":"rgb(255, 255, 255)","bg":"rgb(157, 102, 102)","size":"16px","weight":"400","ratio":4.64},
+ {"sel":"nav a","color":"rgb(255, 255, 255)","bg":"rgb(140, 43, 61)","size":"16px","weight":"400","ratio":8.31}],
+"smallTargets":"inline text links only (16-20px height) — WCAG 2.5.8 inline exception applies"}

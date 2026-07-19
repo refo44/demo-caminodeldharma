@@ -1,0 +1,82 @@
+control_id,area,control,weight,status,evidence_ids,notes
+HSTS-01,HSTS,HTTP entry points redirect directly and safely to HTTPS,3,PASS,EVID-0004 EVID-0029,apex direct 301; www 2-hop safe upgrade chain
+HSTS-02,HSTS,No redirect loops or downgrades; path+query preserved,3,PASS,EVID-0029,
+HSTS-03,HSTS,TLS certificates valid and cover all decision hostnames,3,PASS,EVID-0005,LE cert apex+www to 2026-10-12
+HSTS-04,HSTS,Representative pages/assets/errors work over HTTPS,3,PASS,EVID-0006 EVID-0009,
+HSTS-05,HSTS,No active or passive mixed content,3,PASS,EVID-0011,
+HSTS-06,HSTS,No resource or integration depends on HTTP,3,PASS,EVID-0011 EVID-0012,all third parties HTTPS
+HSTS-07,HSTS,www/non-www behavior intentional and certificate-covered,2,PASS,EVID-0004 EVID-0005 EVID-0008,
+HSTS-08,HSTS,HSTS not emitted over HTTP; consistent emission plan for HTTPS,2,PASS,EVID-0029,currently absent everywhere (pre-activation)
+HSTS-09,HSTS,No operational fallback to HTTP required,2,PASS,EVID-0008,static site; rewrites force HTTPS
+HSTS-10,HSTS,Subdomain inventory before includeSubDomains,2,PARTIAL,EVID-0003,only www known; full zone not enumerable → includeSubDomains not approved
+HSTS-11,HSTS,Preload criteria verified before preload approval,1,NOT_APPLICABLE,,preload not a candidate; rejected separately
+HSTS-12,HSTS,Source/config matches production behavior,2,PASS,EVID-0008 EVID-0010,
+HSTS-13,HSTS,Rollback feasibility and renewal reliability assessed,2,PARTIAL,EVID-0005 EVID-0030,renewal history NOT_VERIFIED (crt.sh 502); rollback via max-age=0 viable
+HSTS-14,HSTS,Rollout strategy safe,2,PASS,EVID-0008,single host-only directive; activation task + verification task designed
+SEO-01,SEO,robots.txt valid with sitemap reference,2,PASS,EVID-0007,
+SEO-02,SEO,sitemap.xml valid; URLs canonical and 200,3,PASS,EVID-0007 EVID-0009,13/13
+SEO-03,SEO,Unique titles and meta descriptions,3,PASS,EVID-0013,
+SEO-04,SEO,Self-referential canonicals consistent with sitemap,3,PASS,EVID-0013,
+SEO-05,SEO,Status/redirect hygiene (404 real; slash normalization; legacy 301s),3,PASS,EVID-0006 EVID-0008,
+SEO-06,SEO,Single H1; semantic heading order,2,PASS,EVID-0013 EVID-0022,
+SEO-07,SEO,Open Graph/Twitter cards with valid images,2,PASS,EVID-0013 EVID-0015,
+SEO-08,SEO,Internal links resolve (no broken links),3,PASS,EVID-0015,400 refs OK
+SEO-09,SEO,hreflang/i18n handling,1,NOT_APPLICABLE,,single-language site; EN disabled placeholder
+SD-01,Structured Data,JSON-LD parses on all pages,3,PASS,EVID-0014,
+SD-02,Structured Data,Event required+recommended properties,3,PASS,EVID-0014,startDate location eventStatus offers present
+SD-03,Structured Data,BlogPosting/Organization/WebSite properties,2,PASS,EVID-0014,Organization lacks only postal address
+SD-04,Structured Data,No duplicate/contradictory entities,2,PASS,EVID-0014,@id used on Organization
+CONT-01,Content,Expired events labeled and separated,2,PASS,EVID-0031,
+CONT-02,Content,Navigation/breadcrumb architecture coherent,2,PASS,EVID-0013 EVID-0022,BreadcrumbList site-wide
+PERF-01,Performance,Page weight and request count reasonable,2,PASS,EVID-0019,602KB 18 req cold home
+PERF-02,Performance,CLS stable; no long tasks,3,PASS,EVID-0019 EVID-0020,CLS 0 all runs
+PERF-03,Performance,Images sized to display / responsive variants,3,FAIL,EVID-0021,PERF-001
+PERF-04,Performance,Lazy loading below the fold,2,PASS,EVID-0020 EVID-0023,
+PERF-05,Performance,Text compression (brotli/gzip),2,PASS,EVID-0029,br on HTML
+PERF-06,Performance,Cache policy per asset class,2,PASS,EVID-0027,html no-cache; css/js 7d; img 30d; woff2 1y immutable
+PERF-07,Performance,Cache busting/versioning for mutable assets,2,FAIL,EVID-0027,PERF-002
+PERF-08,Performance,Fonts self-hosted woff2 with sensible caching,2,PASS,EVID-0017 EVID-0027,
+PERF-09,Performance,LCP/INP field or calibrated lab data,3,NOT_VERIFIED,EVID-0019,no field data; lab paint metrics suppressed
+RUNTIME-01,Runtime,Console free of errors/warnings on tested pages,2,PASS,EVID-0018 EVID-0026,home galeria eventos clean
+RUNTIME-02,Runtime,Image dimensions declared (no shift),2,PASS,EVID-0020,
+A11Y-01,Accessibility,Landmarks and skip link,3,PASS,EVID-0022,
+A11Y-02,Accessibility,Heading hierarchy,2,PASS,EVID-0022,
+A11Y-03,Accessibility,Menu toggle ARIA state + keyboard (Escape/focus),3,PASS,EVID-0022 EVID-0024,
+A11Y-04,Accessibility,Text contrast AA (sampled),3,PASS,EVID-0028,all samples ≥4.64
+A11Y-05,Accessibility,Image alt coverage,3,PASS,EVID-0020 EVID-0023,0 missing on tested pages
+A11Y-06,Accessibility,Form labels/autocomplete,2,PASS,EVID-0025,labels correct (form itself broken → FUNC-001)
+A11Y-07,Accessibility,Dialogs accessible (native dialog aria labels focus),2,PASS,EVID-0024 EVID-0026,
+A11Y-08,Accessibility,Full screen-reader pass,3,NOT_VERIFIED,,no AT available in environment
+RESP-01,Responsive,No horizontal overflow at 360/390,3,PASS,EVID-0020 EVID-0028,
+RESP-02,Responsive,Touch targets adequate,2,PASS,EVID-0028,inline links exempt; controls ≥44px
+RESP-03,Responsive,Viewport meta correct,1,PASS,EVID-0013,
+SEC-H1,Security,X-Content-Type-Options nosniff,1,PASS,EVID-0004,
+SEC-H2,Security,X-Frame-Options / frame-ancestors,1,PASS,EVID-0004,SAMEORIGIN
+SEC-H3,Security,Referrer-Policy,1,PASS,EVID-0004,strict-origin-when-cross-origin
+SEC-H4,Security,Permissions-Policy,1,PASS,EVID-0004,camera/mic/geo denied
+SEC-H5,Security,Content-Security-Policy restrictive,3,FAIL,EVID-0004,SEC-002: only upgrade-insecure-requests
+SEC-H6,Security,HSTS active,3,FAIL,EVID-0029,SEC-001: pending activation (approved by this audit)
+SEC-T1,Security,TLS 1.3 valid chain,3,PASS,EVID-0005,
+SEC-E1,Security,No repo/config/VCS exposure,3,PASS,EVID-0016,.git 403; repo files 404
+SEC-E2,Security,No directory listing,2,PASS,EVID-0016 EVID-0008,Options -Indexes
+SEC-E3,Security,security.txt published,1,FAIL,EVID-0029,SEC-003
+SEC-C1,Security,Cookies scoped/secure,2,PARTIAL,EVID-0018,only GA cookies; set without consent → PRIV-001
+SEC-P1,Privacy,Consent before persistent identifiers,3,FAIL,EVID-0018,PRIV-001
+SEC-P2,Privacy,Privacy policy published,2,FAIL,EVID-0031,PRIV-001
+SEC-S1,Security,Third-party scripts minimal and HTTPS,2,PASS,EVID-0012,single GA4 script
+CODE-01,Code,Deployed matches source commit,3,PASS,EVID-0010,
+CODE-02,Code,JS quality: guards a11y patterns no dead code,2,PASS,EVID-0024,
+CODE-03,Code,Lint tooling configured,1,PASS,EVID-0007,stylelint
+CODE-04,Code,Automated tests,1,NOT_VERIFIED,,none present; static site — risk accepted but untested
+CODE-05,Code,Functional integrity of shipped features,3,FAIL,EVID-0025 EVID-0026,FUNC-001 FUNC-002
+AI-01,AI Search,llms.txt accurate and consistent,2,PASS,EVID-0017,
+AI-02,AI Search,Server-rendered indexable content,2,PASS,EVID-0009,all primary content static (gallery exception → AEO-001)
+AI-03,AI Search,Entity consistency (org person sameAs),2,PASS,EVID-0014,
+AEO-01,AEO,Crawler policy consistent (robots/meta/headers),2,PASS,EVID-0007 EVID-0013,no AI-crawler blocks
+AEO-02,AEO,Machine-parsable semantic HTML,2,PASS,EVID-0013 EVID-0022,
+AEO-03,AEO,Critical content without JS,2,PARTIAL,EVID-0023,gallery only → AEO-001
+AEO-04,AEO,Agent-executable actions work (contact calendar),3,FAIL,EVID-0025 EVID-0026,FUNC-001 FUNC-002
+AEO-05,AEO,No prompt-injection surface detected,2,PASS,EVID-0013 EVID-0017,manual review of llms.txt metadata alt text
+AEO-06,AEO,External profiles linked (sameAs),1,PASS,EVID-0014,
+OBS-01,Observability,Analytics present,1,PASS,EVID-0012,GA4
+OBS-02,Observability,Error tracking / uptime / RUM,2,NOT_VERIFIED,,no access to any monitoring account

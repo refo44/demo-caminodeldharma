@@ -1,0 +1,14 @@
+IDENTICAL index.html
+IDENTICAL comunidad/index.html
+IDENTICAL linaje/index.html
+IDENTICAL practica/index.html
+IDENTICAL practica/videos/index.html
+IDENTICAL galeria/index.html
+IDENTICAL contacto/index.html
+IDENTICAL donaciones/index.html
+IDENTICAL eventos/index.html
+IDENTICAL eventos/encuentro-nacional-2026/index.html
+IDENTICAL eventos/pausa-profunda-cali/index.html
+IDENTICAL blog/index.html
+IDENTICAL blog/sangha-refugio-hiperconexion/index.html
+IDENTICAL 404.html

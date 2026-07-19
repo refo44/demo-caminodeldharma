@@ -1,0 +1,44 @@
+{
+  "target": "https://caminodeldharma.org",
+  "candidate_header": "Header always set Strict-Transport-Security \"max-age=31536000\"",
+  "basic_hsts_decision": "ACTIVATE_HSTS_NOW",
+  "confidence": "HIGH",
+  "evidence_ids": ["EVID-0003","EVID-0004","EVID-0005","EVID-0006","EVID-0008","EVID-0009","EVID-0010","EVID-0011","EVID-0012","EVID-0016","EVID-0027","EVID-0029","EVID-0030"],
+  "favorable_evidence_ids": ["EVID-0004","EVID-0005","EVID-0006","EVID-0008","EVID-0009","EVID-0011","EVID-0012","EVID-0027","EVID-0029"],
+  "blocker_finding_ids": [],
+  "prerequisite_task_ids": [],
+  "activation_task_id": "TASK-0004",
+  "tested_hostnames": ["caminodeldharma.org", "www.caminodeldharma.org"],
+  "untested_known_hostnames": [],
+  "include_subdomains": {
+    "decision": "REJECTED",
+    "evidence_ids": ["EVID-0003"],
+    "risk": "Full subdomain inventory could not be enumerated (only www verified; config declares no known subdomains, but future subdomains — e.g. mail or panel hosts — would be force-pinned to HTTPS). Host-only success is not evidence of subdomain safety.",
+    "pending_requirements": ["Authoritative DNS zone inventory from the Hostinger panel", "HTTPS verification of every discovered subdomain", "Separate approval and its own task (TASK-0012) after basic HSTS has been stable in production"]
+  },
+  "preload": {
+    "decision": "REJECTED",
+    "evidence_ids": [],
+    "risk": "Preload requires includeSubDomains (not approved), max-age >= 31536000 site-wide and near-irreversible browser-list persistence. Not a candidate in configuration and operationally premature.",
+    "pending_requirements": ["includeSubDomains approved and stable first", "Verification of current hstspreload.org criteria at decision time", "Explicit organizational acknowledgement of the persistence commitment"]
+  },
+  "exact_recommended_action": "In DOCS/demo-caminodeldharma/.htaccess line 103, replace `# Header always set Strict-Transport-Security \"max-age=31536000\"` with `Header always set Strict-Transport-Security \"max-age=31536000\"` and deploy. No other directive changes.",
+  "validation_steps": [
+    "curl -sS -D - -o /dev/null https://caminodeldharma.org/ | grep -i strict-transport-security  → exactly max-age=31536000",
+    "curl -sS -D - -o /dev/null https://www.caminodeldharma.org/ | grep -i strict-transport-security",
+    "curl -sS -D - -o /dev/null https://caminodeldharma.org/pagina-inexistente | grep -i strict-transport-security  (404 class)",
+    "curl -sS -D - -o /dev/null https://caminodeldharma.org/eventos/ | grep -i strict-transport-security  (301 class)",
+    "curl -sS -D - -o /dev/null http://caminodeldharma.org/ → 301 to HTTPS unchanged (header over HTTP is ignored by browsers; its presence there is tolerable, its absence preferable)",
+    "Full navigation smoke test of all 13 pages over HTTPS",
+    "Confirm certificate expiry monitoring exists (cert valid to 2026-10-12)"
+  ],
+  "rollback_constraints": [
+    "Never roll back by simply removing the header: serve Strict-Transport-Security \"max-age=0\" over valid HTTPS so pinned browsers unlearn the policy on their next visit",
+    "Rollback requires working TLS; a certificate outage while HSTS is pinned locks out returning visitors until TLS is restored — certificate renewal must be monitored",
+    "Cached policy persists up to 1 year in browsers that do not revisit after a max-age=0 rollback"
+  ],
+  "residual_risks": [
+    "Certificate renewal history could not be verified via CT logs (crt.sh 502, EVID-0030); reliance on Hostinger-managed Let's Encrypt renewal is INFERRED from the freshly issued certificate (2026-07-14)",
+    "DNS AAAA/NS records not enumerable from the audit environment (resolver timeouts, EVID-0003); no indication of additional hostnames in any observed configuration"
+  ]
+}

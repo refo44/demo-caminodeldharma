@@ -1,0 +1,5 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/galeria (mobile 390x844, 2026-07-19)
+{"thumbCount":0,"firstTag":null,"lazyCount":22,"imgTotal":23,"missingAlt":0}
+# thumbCount 0 = no lightbox buttons exist (pagination-only design). Grid rendered client-side from #gallery-data JSON.
+# gallery.js provides: aria-busy, aria-live polite status, aria-label'd pagination nav, focus to current page link after navigation.
+# No <noscript> fallback exists on any page (grep -l noscript over site HTML: no matches).

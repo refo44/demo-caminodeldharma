@@ -1,0 +1,23 @@
+area,score,coverage,confidence,evidence_summary
+SEO,100,90,HIGH,All 8 applicable controls PASS (SEO-01..08); hreflang N/A
+Technical SEO,100,90,HIGH,Status/redirect/canonical/sitemap hygiene all PASS
+Structured Data,100,95,HIGH,SD-01..04 PASS; validated locally with property checks
+Content Architecture,100,80,MEDIUM,CONT-01..02 PASS; qualitative depth review limited
+Performance,67,75,MEDIUM,PERF-03 PERF-07 FAIL; weight/caching/compression PASS; timing partial
+Core Web Vitals,NOT SCORED,20,LOW,Only CLS measured reliably; LCP/INP NOT_VERIFIED
+Runtime Efficiency,100,70,MEDIUM,No console errors; no long tasks; dimensions declared
+Accessibility,100,70,MEDIUM,All tested structural/contrast/keyboard controls PASS; A11Y-08 NOT_VERIFIED excluded from denominator
+Responsive Design,100,80,HIGH,360/390/1440 no overflow; targets OK
+Security,61,90,HIGH,"HSTS FAIL (pending activation), CSP FAIL, security.txt FAIL, consent FAIL/PARTIAL; TLS/exposure/headers PASS"
+Code Quality,78,70,MEDIUM,CODE-05 FAIL (broken features); source clean; tests absent (NOT_VERIFIED)
+Architecture and Maintainability,90,60,MEDIUM,Simple coherent static architecture; versioning gap (PERF-002)
+Best Practices,85,75,MEDIUM,Solid overall; MIME/chain observations informational
+AI Search Readiness,100,80,HIGH,AI-01..03 PASS; llms.txt consistent
+Agentic Discoverability,100,75,HIGH,AEO-01 PASS; robots open; sitemap canonical
+Agentic Parsability,83,75,HIGH,AEO-02 PASS; AEO-03 PARTIAL (gallery JS-only)
+Agentic Actionability,25,80,HIGH,AEO-04 FAIL: both agent-executable actions (contact form, ics download) broken
+Agentic Safety,100,70,MEDIUM,No injection surface found in llms.txt/metadata/alt
+Agentic Observability,NOT SCORED,10,LOW,No monitoring access
+Overall Agentic Readiness,77,70,MEDIUM,Weighted across AEO areas scored
+Production Readiness,80,85,HIGH,Transport/deploy/SEO excellent; two functional breaks and consent gap hold it back
+Overall Website Score,84,78,MEDIUM,Weighted mean of scored areas (NOT SCORED areas excluded from denominator)

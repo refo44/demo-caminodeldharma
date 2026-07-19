@@ -1,0 +1,12 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/ (mobile 390x844, DPR 2, 2026-07-19)
+[{"src":"logo.png","disp":"44x44","nat":"1000x1000","ratio":11.4,"loading":"auto","srcset":false},
+ {"src":"hero-estatua-buda-montanas.webp","disp":"292x195","nat":"626x417","ratio":1.1,"loading":"auto","srcset":false},
+ {"src":"inicio-encuentro-comunidad.jpg","disp":"342x228","loading":"lazy","srcset":false},
+ {"src":"inicio-ambiente.jpg","disp":"342x513","loading":"lazy","srcset":false},
+ {"src":"inicio-kuan-yin.jpg","disp":"342x342","loading":"lazy","srcset":false},
+ {"src":"meditacion-semanal-en-linea.jpg","disp":"278x185","loading":"lazy","srcset":false},
+ {"src":"sangha-refugio-hiperconexion.jpg","disp":"340x255","loading":"lazy","srcset":false},
+ {"src":"galeria-01.jpg","disp":"159x159","nat":"1000x750","ratio":3.1,"loading":"auto","srcset":false},
+ {"src":"galeria-02.jpg","disp":"159x159","nat":"1000x1000","ratio":3.1,"loading":"auto","srcset":false},
+ {"src":"galeria-03.jpg","disp":"159x159","nat":"750x1000","ratio":2.4,"loading":"auto","srcset":false}]
+# Disk sizes: logo.png = 46025 bytes (content-length, EVID-0027). No srcset/sizes on any <img> site-wide (grep).

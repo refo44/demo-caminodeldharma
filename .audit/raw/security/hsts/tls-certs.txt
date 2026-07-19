@@ -1,0 +1,20 @@
+===== caminodeldharma.org
+subject=CN=caminodeldharma.org
+issuer=C=US, O=Let's Encrypt, CN=YE1
+notBefore=Jul 14 23:13:06 2026 GMT
+notAfter=Oct 12 23:13:05 2026 GMT
+X509v3 Subject Alternative Name: 
+    DNS:caminodeldharma.org, DNS:www.caminodeldharma.org
+-- protocol:
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Protocol: TLSv1.3
+===== www.caminodeldharma.org
+subject=CN=caminodeldharma.org
+issuer=C=US, O=Let's Encrypt, CN=YE1
+notBefore=Jul 14 23:13:06 2026 GMT
+notAfter=Oct 12 23:13:05 2026 GMT
+X509v3 Subject Alternative Name: 
+    DNS:caminodeldharma.org, DNS:www.caminodeldharma.org
+-- protocol:
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Protocol: TLSv1.3

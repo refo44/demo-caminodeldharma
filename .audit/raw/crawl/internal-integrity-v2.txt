@@ -1,0 +1,15 @@
+refs OK: 400
+BROKEN (13):
+  ('blog/index.html', 'a:href', '/.')
+  ('blog/sangha-refugio-hiperconexion/index.html', 'a:href', '/.')
+  ('comunidad/index.html', 'a:href', '/.')
+  ('contacto/index.html', 'a:href', '/.')
+  ('donaciones/index.html', 'a:href', '/.')
+  ('eventos/encuentro-nacional-2026/index.html', 'a:href', '/.')
+  ('eventos/index.html', 'a:href', '/.')
+  ('eventos/pausa-profunda-cali/index.html', 'a:href', '/.')
+  ('galeria/index.html', 'a:href', '/.')
+  ('index.html', 'a:href', '/.')
+  ('linaje/index.html', 'a:href', '/.')
+  ('practica/index.html', 'a:href', '/.')
+  ('practica/videos/index.html', 'a:href', '/.')

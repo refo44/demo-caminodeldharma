@@ -1,0 +1,158 @@
+===== https://caminodeldharma.org/nonexistent-page-xyz-12345
+HTTP/2 404 
+date: Sun, 19 Jul 2026 21:23:19 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: W/"253e-6a5d31e0-2f81201b2eaf9537;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+cache-control: max-age=0, must-revalidate
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 9a7db52a981171716d999db1492514d1-phx-edge8
+
+HTTP_VERSION:2 TIME:0.445804
+===== https://caminodeldharma.org/robots.txt
+HTTP/2 200 
+date: Sun, 19 Jul 2026 21:23:20 GMT
+content-type: text/plain; charset=UTF-8
+content-length: 73
+vary: Accept-Encoding
+cache-control: public, max-age=3600
+expires: Sun, 19 Jul 2026 22:23:20 GMT
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: "49-6a5d31e0-64c90908ad8df81b;;;"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: f19f94138d023957a1ec814609baa97d-phx-edge7
+x-hcdn-cache-status: MISS
+x-hcdn-upstream-rt: 0.066
+accept-ranges: bytes
+
+HTTP_VERSION:2 TIME:0.416798
+===== https://caminodeldharma.org/sitemap.xml
+HTTP/2 200 
+date: Sun, 19 Jul 2026 21:23:21 GMT
+content-type: application/xml
+vary: Accept-Encoding
+cache-control: public, max-age=3600
+expires: Sun, 19 Jul 2026 22:23:20 GMT
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: W/"61c-6a5d31e0-2551fc0986db0ffa;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: a754d96dffab3324c60e2ac32ea366f7-phx-edge5
+x-hcdn-cache-status: DYNAMIC
+x-hcdn-upstream-rt: 0.198
+
+HTTP_VERSION:2 TIME:0.594058
+===== https://caminodeldharma.org/llms.txt
+HTTP/2 200 
+date: Sun, 19 Jul 2026 21:23:21 GMT
+content-type: text/plain; charset=UTF-8
+vary: Accept-Encoding
+cache-control: public, max-age=3600
+expires: Sun, 19 Jul 2026 22:23:21 GMT
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: W/"b28-6a5d31e0-150fceb87f17b62a;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: ef91a443b7dbc9ae6adccb99d4bf3e7c-phx-edge7
+x-hcdn-cache-status: DYNAMIC
+x-hcdn-upstream-rt: 0.065
+
+HTTP_VERSION:2 TIME:0.422915
+===== https://caminodeldharma.org/assets/css/styles.css
+HTTP/2 404 
+date: Sun, 19 Jul 2026 21:23:21 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding
+last-modified: Sun, 19 Jul 2026 20:21:52 GMT
+etag: W/"253e-6a5d31e0-2f81201b2eaf9537;gz"
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+cache-control: max-age=0, must-revalidate
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 18584545100ef1185b37f25135521b42-phx-edge8
+
+HTTP_VERSION:2 TIME:0.422887
+===== https://caminodeldharma.org/eventos/
+HTTP/2 301 
+date: Sun, 19 Jul 2026 21:23:22 GMT
+content-type: text/html
+content-length: 795
+location: https://caminodeldharma.org/eventos
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 141416fb65627167ce6f76ff6e0e6eef-phx-edge9
+x-hcdn-cache-status: MISS
+x-hcdn-upstream-rt: 0.195
+
+HTTP_VERSION:2 TIME:0.543932
+===== https://caminodeldharma.org/blog/
+HTTP/2 301 
+date: Sun, 19 Jul 2026 21:23:22 GMT
+content-type: text/html
+content-length: 795
+location: https://caminodeldharma.org/blog
+platform: hostinger
+panel: hpanel
+content-security-policy: upgrade-insecure-requests
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: camera=(), microphone=(), geolocation=()
+x-permitted-cross-domain-policies: none
+server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 43f567aa74bc3ce353d49731aa73b2a4-phx-edge6
+x-hcdn-cache-status: MISS
+x-hcdn-upstream-rt: 0.065
+
+HTTP_VERSION:2 TIME:0.410913

@@ -1,0 +1,19 @@
+== path+query preservation on HTTP->HTTPS
+HTTP/1.1 301 Moved Permanently
+location: https://caminodeldharma.org/practica?tema=zen&x=1
+== http www deep path
+HTTP/1.1 301 Moved Permanently
+location: https://www.caminodeldharma.org/eventos
+== full redirect chain www http -> final
+2 redirects -> https://caminodeldharma.org/eventos
+== compression
+content-encoding: br
+== security.txt
+404
+== HSTS absent check (all classes)
+https://caminodeldharma.org/ -> STS: 0
+0
+https://caminodeldharma.org/eventos -> STS: 0
+0
+https://caminodeldharma.org/nonexistent-xyz -> STS: 0
+0

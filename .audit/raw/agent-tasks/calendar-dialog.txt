@@ -1,0 +1,11 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/eventos/encuentro-nacional-2026 (mobile 390x844, 2026-07-19)
+{"url":"/eventos/encuentro-nacional-2026","hasCalendarBtn":true,"dialogOpen":true,
+ "googleHref":"https://calendar.google.com/calendar/render?action=TEMPLATE&text=7.%C2%BA+Encuentro+Nacional+Buddhista+%E2%80%93+2026&dates=20260807%2F20260810&details=...&location=Casa+Retiro+San+Pablo%2C+Puerto+Colombia",
+ "icsHref":"https://caminodeldharma.org/ical/encuentro-nacional-2026.ics",
+ "focusInDialog":true,"closedOk":true,"hasShareBtn":true,"ttfb":303,"load":1416}
+# curl status checks (2026-07-19):
+#   https://caminodeldharma.org/ical/encuentro-nacional-2026.ics -> 404
+#   https://caminodeldharma.org/ical/pausa-profunda-cali.ics -> 404
+# Repo: no ical/ directory exists at commit be896db2.
+# Referencing markup: eventos/index.html:268 and eventos/encuentro-nacional-2026/index.html:243 (data-calendar-ics)
+# Link construction: assets/js/calendar.js:130-138 (appleLink.href = icsUrl; downloadLink.href = icsUrl)

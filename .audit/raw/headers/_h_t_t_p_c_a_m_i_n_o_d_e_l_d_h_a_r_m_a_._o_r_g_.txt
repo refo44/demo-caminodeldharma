@@ -1,0 +1,16 @@
+HTTP/1.1 301 Moved Permanently
+Date: Sun, 19 Jul 2026 21:22:54 GMT
+Content-Type: text/html
+Content-Length: 795
+Connection: keep-alive
+Location: https://caminodeldharma.org/
+platform: hostinger
+panel: hpanel
+Content-Security-Policy: upgrade-insecure-requests
+Server: hcdn
+alt-svc: h3=":443"; ma=86400
+x-hcdn-request-id: 8cfcc526fb325fb9ee007ca6b17bd0e5-phx-edge7
+x-hcdn-cache-status: MISS
+x-hcdn-upstream-rt: 0.125
+
+FINAL_URL_EFFECTIVE:http://caminodeldharma.org/ REMOTE_IP:92.112.198.165 HTTP_VERSION:1.1 TIME_TOTAL:0.438403

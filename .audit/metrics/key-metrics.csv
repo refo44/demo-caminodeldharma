@@ -1,0 +1,13 @@
+metric,mobile,desktop,source,status
+TTFB (ms),306,170-310,Performance API (unthrottled lab),MEASURED
+Page load home warm (ms),886,542-1412,Performance API,MEASURED
+Page load home cold (ms),n/a,2078,Performance API run 1,MEASURED
+CLS,0,0,PerformanceObserver buffered,MEASURED
+Long tasks,0,0,PerformanceObserver,MEASURED
+Requests (home cold),n/a,18,Resource Timing,MEASURED
+Transfer (home cold KB),n/a,602,Resource Timing,MEASURED
+Third-party requests,n/a,3,Resource Timing,MEASURED
+LCP,NOT_VERIFIED,NOT_VERIFIED,pane throttling suppressed entries,NOT_VERIFIED
+INP,NOT_VERIFIED,NOT_VERIFIED,no field data,NOT_VERIFIED
+HTML compression,br,br,curl --compressed,MEASURED
+HTTP protocol,h2 (h3 advertised),h2 (h3 advertised),curl/alt-svc,MEASURED

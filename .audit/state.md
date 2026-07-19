@@ -1,0 +1,21 @@
+# Audit State
+
+- Target: https://caminodeldharma.org
+- Environment: production
+- Started: 2026-07-19 (session start)
+- Last checkpoint: Phase 10 complete
+- Status: COMPLETE
+- Current phase: DONE
+- Completed phases: PHASE-0, PHASE-1, PHASE-2, PHASE-3 (PARTIAL: paint metrics unavailable — recorded), PHASE-4, PHASE-4A, PHASE-5, PHASE-6, PHASE-7, PHASE-8, PHASE-9, PHASE-10
+- Partial phases: PHASE-3 (LCP/INP not measurable; CLS/TTFB/weight measured — limitations 1-2)
+- Blocked phases: none
+- Accepted findings: 10 (0 CRITICAL, 2 HIGH, 4 MEDIUM, 3 LOW, 1 INFORMATIONAL)
+- Evidence artifacts: 31 ledger records + raw/ tree
+- URLs discovered: 13 indexable + 404 + entry points + machine files (full coverage)
+- URLs tested: all discovered
+- Source commit reviewed: be896db2214c4dafdc8adad89f8496421c8b6071 (deploy parity 14/14 byte-identical)
+- HSTS decision: ACTIVATE_HSTS_NOW (host-only); includeSubDomains REJECTED; preload REJECTED
+- Tasks: 12 (9 READY, 3 BLOCKED) in implementation/tasks.jsonl — audit agent assigned only READY/BLOCKED
+- Verifier: fresh-context pass complete, verdict ACCEPT (1 minor clarification applied — see verification.md)
+- Current limitations: see limitations.md (9 entries)
+- Next executable action: Stage 2 (separate session) — implement TASK-0004 via IMPLEMENTATION_AGENT_TEMPLATE.md, then TASK-0005 validation

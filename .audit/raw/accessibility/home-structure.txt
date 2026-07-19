@@ -1,0 +1,2 @@
+# Captured via Claude Browser javascript_tool on https://caminodeldharma.org/ (mobile 390x844, 2026-07-19)
+{"skipLink":{"text":"Saltar al contenido","href":"#main"},"menuOpen":true,"expanded":"true","landmarks":["HEADER","NAV","MAIN","UL[list]","FOOTER"],"headingCount":20,"headings":["H1:Camino del Dharma","H2:Transforma tu vida.","H2:Un poco de nuestra comunidad","H2:Cómo practicamos","H3:Estudio consciente","H3:Práctica vivencial","H3:Vida cotidiana","H2:Meditación semanal en línea","H2:Caminos de participación","H3:Iniciarse","H3:Profundizar","H3:Practicar en comunidad"]}
