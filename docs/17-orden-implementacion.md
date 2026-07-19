@@ -1,9 +1,28 @@
 # Camino del Dharma — Orden de implementación
 
-**Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
-**Versión 3.0**
+**Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**
 
-**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `adr/README`
+## Propósito
+
+Este documento define el orden oficial de implementación, validación, migración y mantenimiento del sitio Camino del Dharma y actúa como referencia para todas las fases del proyecto.
+
+| | |
+| --- | --- |
+| **Versión** | 3.0 |
+| **Fecha** | 2026-07-19 |
+| **Estado** | Vigente |
+
+### Cambios principales (3.0)
+
+- Incorporación de criterios de aceptación por fase
+- Incorporación de Fase 2.5 (QA)
+- Incorporación de § Transición estático → WordPress
+- Incorporación de registro ADR y referencia a `docs/adr/README.md`
+- Incorporación de mantenimiento post-publicación
+- Despliegue manual y CI/CD pospuesto (ADR 0015, ADR 0016)
+- Congelamiento de documentación base (§ más abajo)
+
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `docs/adr/README.md`
 
 ---
 
@@ -42,6 +61,27 @@ Excepciones permitidas sin doc previo: corrección de errores tipográficos alin
 | **Producción** | Solo desde `main` (o tag asociado a un commit de `main`). |
 
 Semántica sugerida: **MAJOR** (cambio estructural o de URLs), **MINOR** (nueva sección o funcionalidad), **PATCH** (correcciones y ajustes menores).
+
+### Congelamiento de documentación base
+
+A partir de la versión 3.0 de este documento, la **documentación arquitectónica base** se considera **suficiente y congelada**. Los cambios sobre esos documentos deben ser **excepcionales** y responder a necesidades reales del proyecto (error, requisito nuevo validado, inconsistencia con `content-source/`), no a refinamiento continuo.
+
+Documentos congelados:
+
+- `02-identidad-corporativa`
+- `03-wordpress-content-model`
+- `04-mapa-pantallas`
+- `05-arquitectura-informacion-navegacion`
+- `06-wireframes`
+- `11-arbol-urls-final`
+- `14-css-architecture`
+- `17-orden-implementacion` (este documento)
+- `19-accesibilidad-estandares`
+- `23-sistema-editorial`
+
+**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta.
+
+Evitar ciclos de refinamiento permanente que retrasen la implementación. Prioridad: **código y validación** según las fases definidas aquí.
 
 ---
 
@@ -174,9 +214,11 @@ Cualquier cambio **estructural** importante debe documentarse y **reflejarse tam
 
 Detalle completo en **§ Transición estático → WordPress**. Resumen:
 
-- Monorepo: `static/` (producción) + `wordpress/` (desarrollo) + `docs/` (compartido).
+- Monorepo (desde Fase 3): `static/` (producción) + `wordpress/` (desarrollo) + `docs/` (compartido).
 - Despliegues manuales; CI/CD pospuesto (ADR 0015, ADR 0016).
 - Registro de diferencias: `docs/migracion-static-wordpress.md`.
+
+> **Nota:** Hasta el inicio de la **Fase 3**, el sitio HTML permanece en la **raíz** del repositorio. La carpeta `static/` **no existe aún**; la reorganización raíz → `static/` es el **primer paso** de Fase 3 y **no debe adelantarse**.
 
 ### Criterios de aceptación — Fase 2
 
@@ -275,6 +317,8 @@ camino-del-dharma/
 ```
 
 **Estado actual (Fase 2):** HTML en la **raíz** del repo (= producción). La carpeta `static/` se crea al **iniciar Fase 3**.
+
+> **Nota:** Hasta el inicio de la **Fase 3**, el contenido HTML permanece en la **raíz** del repositorio. La reorganización a `static/` forma parte del primer paso de Fase 3 y **no debe adelantarse**.
 
 **No versionar en Git:** core WordPress, `wp-config.php`, credenciales, BD, cachés, backups, `uploads/` de producción.
 
@@ -471,6 +515,8 @@ Este documento define el **orden oficial de implementación** y el **ciclo de vi
 
 Durante la transición: un solo repo, despliegues manuales del estático, WordPress en staging, registro en `migracion-static-wordpress.md`. CI/CD pospuesto (ADR 0016).
 
+A partir de esta versión, **priorizar implementación** sobre ampliación de documentación de alto nivel (ver § Congelamiento de documentación base).
+
 ---
 
-**Versión:** 3.0
+**Versión:** 3.0 · **Fecha:** 2026-07-19 · **Estado:** Vigente
