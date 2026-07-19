@@ -2,53 +2,68 @@
 
 **Geografía del proyecto: repositorio y archivos estáticos**
 
-Define dónde viven los archivos del proyecto que no son generados dinámicamente por WordPress: documentación, contenido fuente, assets del theme y, si aplica, salida de build o maqueta estática.
+Define dónde viven los archivos del proyecto: documentación, contenido fuente, implementación estática, theme WordPress y assets.
 
-**Depende de:** `12-theme-file-structure`, `15-assets-strategy`. **Referencia:** `16-content-source-inventario`
+**Depende de:** `12-theme-file-structure`, `15-assets-strategy`. **Referencia:** `16-content-source-inventario`, `adr/0014-monorepo-static-wordpress`, `adr/0013-fuentes-de-verdad-duales-y-alcance-despliegue`
 
 ---
 
-## 1. Estructura del repositorio (nivel raíz)
+## 1. Estructura del repositorio por fase
+
+El layout del repo **evoluciona** según la fase (ADR 0014). No mezclar HTML estático y plantillas PHP en el mismo directorio.
+
+### 1.1 Fase 2 — Sitio estático en producción (estado actual)
 
 ```
-demo-caminodeldharma/          (o nombre del repo)
-├── docs/                      Documentación del proyecto (01–20)
-├── content-source/            Fuentes de contenido; no se despliega (16)
-│   └── Pagina web Camino del Dharma/
-│       ├── Contenido_Web_Camino_del_Dharma.docx | .md
-│       ├── Lluvia de ideas… .docx | .md
-│       ├── Link-videos-youtube.md | Link videos subidos en Youtube.docx
-│       ├── Identidad CAMINO DEL DHARMA- (1).pdf
-│       └── FOTOS PAGINA WEB/   Imágenes y videos por pestaña
-├── index.html, 404.html       Sitio estático (Fase 2 / GitHub Pages)
-├── robots.txt, sitemap.xml, llms.txt   SEO e indexación (15 §12.2)
-├── .htaccess                  Apache: HTTPS, canonical, cache (producción Hostinger)
-├── favicon.ico, favicon.svg   Raíz; favicons (15 §3.2, §11). Sin site.webmanifest.
-├── comunidad/, linaje/, practica/, practica/videos/, eventos/, eventos/{slug}/, galeria/, contacto/, donaciones/, blog/
+demo-caminodeldharma/
+├── docs/                      Documentación (01–23, adr/)
+├── content-source/            Fuentes editoriales; no se despliega (16)
+├── index.html, 404.html       Sitio estático en la raíz
+├── robots.txt, sitemap.xml, llms.txt
+├── .htaccess
+├── favicon.ico, favicon.svg
+├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/
 ├── assets/
-│   ├── css/                  main.css, normalize.css
-│   ├── js/                   main.js, gallery.js, share.js, calendar.js
-│   ├── fonts/                Fjalla One, Inter, MarloweEscapade (15)
-│   ├── images/               Imágenes por sección (eventos: assets/images/eventos/; galería: galeria-01.jpg … galeria-36.jpg; 16)
-│   ├── audio/                Audio local (p. ej. amitabha.mp3, namo-guan-shi-yin-pusa.mp3; 15, 16)
-│   └── documents/            PDFs descargables (p. ej. recitacion-practica-comida.pdf; 15, 16)
-├── scripts/                  Scripts de mantenimiento (no se despliegan)
-│   ├── optimize-images.sh    Optimización de imágenes para web (15 §3.0)
-│   └── rename-gallery-to-kebab.sh  Renombrar galería a kebab-case (16)
-└── theme-camino-del-dharma/  Theme WordPress (12) — destino final Fase 3
-    ├── style.css
-    ├── theme.json
-    ├── functions.php
-    ├── (plantillas PHP)
-    └── assets/                Archivos estáticos del theme (13)
-        ├── css/
-        ├── js/
-        ├── fonts/
-        ├── icons/
-        ├── images/
-        └── favicon/
+└── scripts/                   No se despliegan
 ```
-El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; es solo referencia. En **Fase 2 (estático)**, para despliegue en GitHub Pages, el sitio vive en la **raíz del repo**: `index.html`, `404.html`, `assets/`, `comunidad/`, etc. En Fase 3 se alinean en el theme.
+
+La **raíz** es el sitio desplegado en Hostinger. Ver README y Fase 4 en `17-orden-implementacion`.
+
+### 1.2 Fase 3 — Monorepo (static/ + wordpress/)
+
+**Primer paso de Fase 3:** mover el sitio estático de la raíz a `static/` (ADR 0014).
+
+```
+demo-caminodeldharma/
+├── static/                    Referencia congelada (ex raíz)
+│   ├── index.html, 404.html
+│   ├── comunidad/, practica/, eventos/, …
+│   ├── assets/
+│   ├── robots.txt, sitemap.xml
+│   └── …
+├── wordpress/
+│   └── wp-content/
+│       ├── themes/
+│       │   └── camino-del-dharma/    Theme (12)
+│       └── plugins/
+│           └── camino-del-dharma-core/   Solo si aplica
+├── docs/
+├── scripts/
+└── .github/
+```
+
+**Reglas:**
+
+- `static/` = contrato de aceptación; comparar plantillas WP contra HTML aprobado.
+- `wordpress/` = theme y plugins **propios** versionados. **No** core WP, `wp-config.php`, uploads ni credenciales en Git.
+- Despliegue estático (pre-corte): contenido de `static/` → `public_html`.
+- Despliegue theme (post-corte): solo `wordpress/…/camino-del-dharma/` → servidor (ADR 0013).
+
+### 1.3 Post-Fase 3 — WordPress como implementación única
+
+- `static/` archivada (tag Git); no desplegar.
+- Theme = única implementación activa.
+- Repo puede simplificarse hacia `wordpress/wp-content/themes/camino-del-dharma/` o `theme/` en la raíz.
 
 ---
 
@@ -56,38 +71,47 @@ El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; e
 
 | Ubicación | Regla |
 |-----------|--------|
-| **docs/** | Solo Markdown (y recursos referenciados). Orden por prefijo numérico (00–20). No se despliega al sitio. |
-| **content-source/** | Solo en local. No se enlaza desde el código. Assets para el sitio se copian al theme o a la raíz del repo (p. ej. `assets/`) según 13 y 15. Puede ignorarse en producción (deploy), pero debe mantenerse versionado en el repo para trazabilidad editorial. |
-| **theme-camino-del-dharma/** | Theme WordPress. Los archivos estáticos (CSS, JS, imágenes, fuentes) viven en `assets/` dentro del theme. WordPress los sirve desde la URL del theme. Solo los assets dentro de `theme-camino-del-dharma/assets/` son accesibles públicamente desde el sitio. |
-| **Sitio estático (Fase 2)** | Para GitHub Pages el sitio está en la **raíz del repo**: `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `favicon.ico`, `assets/`, `comunidad/`, `linaje/`, etc. Rutas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `/donaciones/`, `/blog/`, `404`. **Web tradicional, no PWA** (15 §11). JSON-LD y metadatos SEO en `<head>` de cada HTML (15 §12). La carpeta `scripts/` es solo para mantenimiento local (optimizar imágenes, renombrar galería). |
+| **docs/** | Markdown y `adr/`. No se despliega. |
+| **content-source/** | Referencia editorial. No enlazar desde el sitio. |
+| **Raíz (Fase 2)** | Sitio estático en producción. |
+| **static/ (Fase 3+)** | Sitio público en producción durante transición; recibe mantenimiento. Referencia de paridad con theme. |
+| **wordpress/…/camino-del-dharma/** | Theme; assets en `assets/` del theme. |
+| **scripts/** | Mantenimiento local. |
 
-**Versionado:** `content-source/` se versiona (trazabilidad editorial). El sitio estático en raíz (index.html, assets/, etc.) se versiona para GitHub Pages.
+### Fuentes de verdad (post-corte WordPress)
+
+| Qué | Dónde |
+| --- | ----- |
+| Código (theme, CSS, JS, plantillas) | Git |
+| Contenido (entradas, eventos, medios subidos) | WordPress (BD + `uploads/`) |
+
+Detalle en ADR 0013.
 
 ---
 
-## 3. Flujo de assets estáticos
+## 3. Flujo de assets
 
-1. **Contenido y referencia:** `content-source/` (inventario en 16).
-2. **Decisión de uso:** 15-assets-strategy (qué existe, formatos, tamaños).
-3. **Estructura técnica:** 12-theme-file-structure (dónde va cada tipo de archivo en el theme).
-4. **Copia/migración:** Assets necesarios se copian al theme (p. ej. `assets/images/`, `assets/fonts/`) o se referencian por URL (YouTube). Nunca enlazar a `content-source/` desde el sitio. Los assets copiados al theme deben estar optimizados (peso, formato web).
+1. **Referencia:** `content-source/` (16).
+2. **Estrategia:** `15-assets-strategy`.
+3. **Estático:** `assets/` en raíz (Fase 2) o `static/assets/` (Fase 3).
+4. **Theme:** `wordpress/…/camino-del-dharma/assets/`.
+5. Sincronizar estático → theme durante migración; nunca enlazar a `content-source/`.
 
 ---
 
-## 4. Qué no es “archivo estático” aquí
+## 4. Qué no versionar en Git (WordPress)
 
-- Plantillas PHP (son parte del theme; 12).
-- Contenido generado por WordPress (páginas, posts, CPT) desde la base de datos.
-- Plugins (fuera del alcance de este documento).
-
-Este documento se limita a la **geografía de archivos estáticos** del proyecto (docs, content-source, assets del theme).
+- Núcleo de WordPress.
+- `wp-config.php`, credenciales.
+- `wp-content/uploads/` de producción.
+- Cachés, backups, plugins de terceros no propios.
 
 ---
 
 ## Cierre
 
-Este documento define la **geografía oficial** del repositorio: dónde viven docs, content-source y assets del theme. No define plantillas PHP ni contenido dinámico (12); tampoco formatos o tamaños de assets (15). Alineado con 12 (theme), 15 (estrategia de assets) y 16 (inventario de contenido fuente).
+Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/` (Fase 3) → theme único (post-corte). Alineado con 12, 15, 16, ADR 0013, ADR 0014 y `17-orden-implementacion` §2.7.
 
 ---
 
-**Versión:** 1.9
+**Versión:** 2.1

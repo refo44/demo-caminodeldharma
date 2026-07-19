@@ -66,14 +66,18 @@ Variantes WebP viven junto a los JPEG en `assets/images/` (p. ej. `assets/images
 
 ## Despliegue en Hostinger
 
-El README documenta el proyecto; el historial de publicaciones vive en [`CHANGELOG.md`](CHANGELOG.md).
+Despliegue **manual** (ADR 0015). CI/CD pospuesto (ADR 0016). Historial en [`CHANGELOG.md`](CHANGELOG.md).
+
+**No subir** el repositorio completo a `public_html` — solo el sitio estático.
+
+### Fase 2 (actual): sitio en la raíz del repo
 
 Antes de cada despliegue:
 
-1. **Actualizar `sitemap.xml`:** revisar las páginas HTML modificadas desde el último despliegue y actualizar su `<lastmod>` (formato `YYYY-MM-DD`). Solo incluir URLs de páginas indexables; no añadir `llms.txt` ni otros archivos no HTML. Este paso es **obligatorio antes** de incrementar `VERSION`.
+1. Actualizar `sitemap.xml` (`<lastmod>` de páginas modificadas).
 2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
-3. Ejecutar `npm run lint:css` (sin errores).
-4. Generar el ZIP de producción con el nombre `camino-del-dharma-vX.Y.Z.zip` (según la versión en `VERSION`):
+3. `npm run lint:css` (sin errores).
+4. Generar ZIP de producción:
 
 ```bash
 VERSION=$(cat VERSION)
@@ -83,11 +87,13 @@ zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
   -x "*.DS_Store" -x "*__MACOSX*"
 ```
 
-5. Subir y extraer en `public_html` del File Manager de Hostinger.
+5. Subir y extraer en `public_html` (File Manager de Hostinger).
 
-Para detectar páginas modificadas, comparar contra el último commit de release (p. ej. `git diff HEAD~1 -- '*.html'`) o revisar manualmente que cada URL del sitemap refleje la fecha del cambio más reciente.
+### Fase 3 (tras reorg): sitio en `static/`
 
-El ZIP de despliegue incluye solo archivos de producción: HTML, `assets/` (CSS, JS, imágenes JPEG/WebP, fuentes, favicon, audio, PDF), `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`. No incluye `docs/`, `content-source/`, `node_modules/`, `scripts/`, `VERSION`, `CHANGELOG.md` ni `.git/`.
+Mismo procedimiento, pero el ZIP se genera **desde el contenido de `static/`** (no incluir `docs/`, `wordpress/`, `scripts/`). Ver `17-orden-implementacion` § Transición.
+
+WordPress se despliega manualmente a **staging separado**; no instalar sobre producción hasta el corte final.
 
 ## Scripts
 
@@ -107,11 +113,13 @@ Ejemplo:
 
 ## Documentación
 
-En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos y el **orden de implementación** (incl. fases WordPress). El índice de documentos está en `docs/00-orden-documentos.md`.
+En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). El índice de documentos está en `docs/00-orden-documentos.md`.
+
+Colaboración, lint y despliegue: `CONTRIBUTING.md`. Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
 
 ## Próximos pasos
 
-Según `docs/17-orden-implementacion.md`, la maqueta estática (esta fase) se validará en responsive y luego se adaptará a **plantillas WordPress** sin cambiar la estructura visual ni las URLs.
+Según `docs/17-orden-implementacion.md` (v3.0, § Transición): producción = sitio estático (raíz hoy; `static/` en Fase 3). WordPress en staging paralelo. Despliegues **manuales**; registro de migración en [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR: [`docs/adr/README.md`](docs/adr/README.md).
 
 ## Autor
 

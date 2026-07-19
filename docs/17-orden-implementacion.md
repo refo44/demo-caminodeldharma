@@ -1,9 +1,47 @@
 # Camino del Dharma — Orden de implementación
 
 **Secuencia acordada para llevar el sitio a la web.** **No saltar etapas.**  
-**Versión 1.6**
+**Versión 3.0**
 
-**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `adr/README`
+
+---
+
+## Principios transversales
+
+### Fuente única de verdad
+
+**Repositorio Git como fuente única de verdad.**
+
+- Todo cambio debe realizarse en el repositorio. No se editarán archivos directamente en el servidor de producción.
+- El servidor (Hostinger) es un **destino de despliegue**, no un entorno de edición.
+- `content-source/` es la fuente canónica del copy; el código y los assets del sitio viven en el repo según `13-static-file-structure` y `15-assets-strategy`.
+- Cambios manuales en producción se pierden en el siguiente despliegue y no deben realizarse.
+- Decisión formal: ADR 0004, ADR 0005.
+
+### Política de cambios
+
+Toda modificación que afecte **estructura**, **navegación**, **identidad visual** o **arquitectura** debe reflejarse **primero** en la documentación correspondiente (`docs/`) antes de implementarse.
+
+Orden recomendado:
+
+1. Actualizar el doc afectado (p. ej. `05`, `11`, `14`, `15`).
+2. Implementar en código.
+3. Validar según los criterios de aceptación de la fase activa.
+
+Excepciones permitidas sin doc previo: corrección de errores tipográficos alineados con `content-source/`, bugs de accesibilidad y ajustes de performance que no alteren la arquitectura.
+
+### Estrategia de versionado
+
+| Aspecto | Regla |
+| -------- | ------ |
+| **Ramas** | Desarrollo en ramas de feature; `main` es la rama de producción. |
+| **Integración** | Merge a `main` mediante Pull Request con revisión. |
+| **Etiquetas** | Releases etiquetados (`v1.0.0`, `v1.1.0`, …) al desplegar a producción. |
+| **Versión en repo** | Archivo `VERSION` y entrada en `CHANGELOG.md` (ver README). |
+| **Producción** | Solo desde `main` (o tag asociado a un commit de `main`). |
+
+Semántica sugerida: **MAJOR** (cambio estructural o de URLs), **MINOR** (nueva sección o funcionalidad), **PATCH** (correcciones y ajustes menores).
 
 ---
 
@@ -13,6 +51,16 @@
 2. **Wireframes:** Estructura de bloques por pantalla según `06-wireframes` (y `04-mapa-pantallas`); en papel, Figma o HTML
 3. **Validar documentación:** Revisar que todos los docs estén alineados
 4. **Consultar tendencias UX/UI:** `18-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
+
+### Criterios de aceptación — Fase 1
+
+La fase se considera **cerrada** cuando:
+
+- [ ] Paleta y tipografía documentadas en `02-identidad-corporativa`
+- [ ] Wireframes o equivalente HTML de bloques por pantalla según `04` y `06`
+- [ ] Sin contradicciones entre docs referenciados (regla de dependencias en `00-orden-documentos`)
+- [ ] Copy y estructura alineados con `content-source/` (prioridad máxima)
+- [ ] Decisiones de diseño revisadas contra `18-tendencias-ux-ui-sistema-editorial`
 
 ---
 
@@ -94,44 +142,250 @@ Antes de WordPress, se validan flujos con contenido estático:
 
 Esto permite validar navegación real sin backend.
 
-### 2.5 Invariantes de diseño
+### 2.5 Invariantes de diseño (congelamiento arquitectónico)
 
-Durante la migración a WordPress no se modifica:
+Durante la migración a WordPress **no se rediseña** el sitio. WordPress adapta la maqueta; aporta motor de contenido, administración y eventos dinámicos (ADR 0002, ADR 0012).
 
-- Estructura de bloques
-- Jerarquía visual
-- Copy editorial
-- Tokens de identidad
-- Arquitectura CSS
+Se consideran **estables** (congelamiento arquitectónico, no de contenido):
 
-WordPress solo aporta: motor de contenido, administración, eventos dinámicos.
+- Arquitectura de información y estructura de páginas
+- Navegación principal y URLs (ADR 0008)
+- Componentes y jerarquía visual
+- Sistema de diseño, tokens de identidad y arquitectura CSS (ADR 0009)
+- Modelo de contenido (`03-wordpress-content-model`)
+- Jerarquía editorial y voz (`07`, `08`, `21`, `23`)
+- Criterios de accesibilidad (`19`)
 
-### Por qué este agregado es importante
+**Permitido durante la transición** (el sitio estático sigue en producción y recibe mantenimiento):
 
-Con esto el documento deja explícito algo clave:
+- Correcciones de errores y compatibilidad
+- Mantenimiento de contenido y actualización de eventos
+- Mejoras de accesibilidad, SEO y rendimiento
+- Ajustes menores necesarios para producción estable
 
-- La maqueta **no es un prototipo**; es la primera versión real del sitio.
-- La fase WordPress pasa a ser solo: **cambiar motor, no rediseñar.**
+Cualquier cambio **estructural** importante debe documentarse y **reflejarse también en WordPress** (registro en `docs/migracion-static-wordpress.md`).
 
-Eso reduce riesgo técnico y de diseño.
+### 2.6 Referencia definitiva (no prototipo)
 
-### 2.6 Congelamiento de maqueta
+- La maqueta **no es un prototipo**; es la base visual y funcional del theme.
+- La fase WordPress es **cambiar motor, no rediseñar.**
 
-Antes de iniciar Fase 3:
+### 2.7 Convivencia temporal (resumen)
 
-- La maqueta se considera estructura definitiva.
-- Cambios posteriores solo si: hay error, hay problema de accesibilidad, hay inconsistencia con `content-source/`.
+Detalle completo en **§ Transición estático → WordPress**. Resumen:
 
-Esto evita rediseños eternos.
+- Monorepo: `static/` (producción) + `wordpress/` (desarrollo) + `docs/` (compartido).
+- Despliegues manuales; CI/CD pospuesto (ADR 0015, ADR 0016).
+- Registro de diferencias: `docs/migracion-static-wordpress.md`.
+
+### Criterios de aceptación — Fase 2
+
+La fase se considera **cerrada** cuando:
+
+- [ ] Todas las páginas de la estructura §2.1 existen y son navegables
+- [ ] Prioridad de páginas (§ más abajo) implementada según `04-mapa-pantallas`
+- [ ] Responsive validado en móvil, tablet y desktop
+- [ ] Checklist de `18-tendencias-ux-ui-sistema-editorial` (§8) completado
+- [ ] Accesibilidad revisada según `19-accesibilidad-estandares` (checklist §10 y testing §11)
+- [ ] `npm run lint:css` finaliza sin errores
+- [ ] Lighthouse ≥ 90 en Performance, Accessibility, Best Practices y SEO (home y una página interior representativa)
+- [ ] No existen enlaces rotos (internos y externos del footer)
+- [ ] No existen imágenes informativas sin `alt` adecuado
+- [ ] El sitio funciona correctamente sin JavaScript (navegación, lectura, formularios básicos); JS solo aporta mejoras progresivas
+- [ ] SEO técnico inicial según `15-assets-strategy` (§12): `<title>`, canonical, OG por página
+- [ ] Fase 2.5 (QA) completada
+
+---
+
+## Fase 2.5: QA (control de calidad)
+
+Etapa explícita entre maqueta validada y WordPress (o despliegue, mientras la maqueta estática esté en producción). Hace visible el trabajo de verificación que de otro modo quedaría implícito.
+
+### Navegadores
+
+Probar en la versión estable más reciente de:
+
+- Chrome
+- Firefox
+- Safari
+- Edge
+
+### Dispositivos y viewports
+
+- **Desktop** (≥ 1280 px)
+- **Tablet** (~768 px)
+- **Móvil** (Android e iPhone, o emulación fiel en DevTools)
+
+### Validaciones automáticas
+
+- **Lighthouse** (Performance, Accessibility, Best Practices, SEO) — umbral ≥ 90
+- **W3C Validator** (HTML) — opcional; corregir errores graves
+- **`npm run lint:css`** — sin errores
+
+### Validaciones manuales
+
+- Navegación completa con teclado (`19` §11)
+- Focus visible en enlaces, botones e inputs
+- Formulario de contacto: labels, errores y envío
+- Contraste en combinaciones críticas de marca
+- Lectura de flujos clave (screen reader opcional pero recomendado en releases)
+
+### Criterios de aceptación — Fase 2.5
+
+- [ ] Sitio probado en los cuatro navegadores indicados
+- [ ] Sitio probado en desktop, tablet y móvil
+- [ ] Lighthouse ≥ 90 en las cuatro categorías (home + página interior)
+- [ ] Sin enlaces rotos ni regresiones visuales evidentes
+- [ ] Incidencias encontradas documentadas y resueltas o registradas como deuda explícita
+
+---
+
+## Transición estático → WordPress
+
+**Decisiones consolidadas** (ADR 0012, 0014, 0015, 0016, 0017). Una sola base documental y un solo repositorio.
+
+### Objetivo
+
+- El **sitio estático** permanece la versión **oficial en producción** hasta que WordPress esté desarrollado, validado en staging y listo para reemplazarlo.
+- Durante ese periodo el estático **sigue recibiendo mantenimiento**: correcciones, contenido, accesibilidad, SEO, rendimiento.
+- **WordPress** se desarrolla en paralelo en staging; **no** se instala sobre producción hasta el corte final.
+- La migración **no implica rediseño** (ADR 0002).
+
+### Por qué WordPress
+
+Administración por **terceros** sin HTML, Git ni acceso al servidor. WordPress aporta: gestión de contenido, usuarios, medios, entradas, eventos y flujos editoriales.
+
+### Organización del repositorio
+
+**Antes de implementar WordPress**, reorganizar (ADR 0014):
+
+```text
+camino-del-dharma/
+├── static/                 # Sitio público actual (producción en Fase 3)
+│   ├── index.html, 404.html
+│   ├── assets/, blog/, comunidad/, …
+│   ├── robots.txt, sitemap.xml, .htaccess, …
+├── wordpress/
+│   └── wp-content/
+│       ├── themes/camino-del-dharma/
+│       └── plugins/camino-del-dharma-core/   # si aplica
+├── docs/                   # Incluye adr/, migracion-static-wordpress.md
+├── scripts/
+├── README.md, CHANGELOG.md, VERSION, package.json
+```
+
+**Estado actual (Fase 2):** HTML en la **raíz** del repo (= producción). La carpeta `static/` se crea al **iniciar Fase 3**.
+
+**No versionar en Git:** core WordPress, `wp-config.php`, credenciales, BD, cachés, backups, `uploads/` de producción.
+
+### Fuentes de verdad durante la transición
+
+| Ámbito | Fuente de verdad |
+| ------ | ---------------- |
+| Sitio público (producción) | `static/` |
+| Implementación WordPress en desarrollo | `wordpress/` |
+| Decisiones, requisitos, criterios | `docs/` |
+
+No son equivalentes. Cambios en diseño, estructura, navegación, CSS, JS, a11y o SEO en producción **deben portarse a WordPress**. Contenido temporal (p. ej. eventos que caducan antes del corte) puede quedar solo en static.
+
+**Registro obligatorio:** `docs/migracion-static-wordpress.md`.
+
+### Despliegue durante la transición
+
+**Manual únicamente** (ADR 0015). **CI/CD pospuesto** (ADR 0016).
+
+| Destino | Qué subir | Dónde |
+| ------- | --------- | ----- |
+| **Producción (estático)** | Solo contenido de `static/` | `public_html` Hostinger |
+| **Staging (WordPress)** | Theme y plugins propios | Entorno separado |
+
+**Prohibido:** subir el repo completo, `docs/`, `scripts/` o `wordpress/` en desarrollo a producción pública.
+
+Procedimiento estático: README (ZIP acotado a `static/` tras reorg). Validar con `npm run lint:css` antes de desplegar.
+
+### Fuentes de verdad tras el corte (WordPress en producción)
+
+| Dominio | Fuente de verdad |
+| ------- | ---------------- |
+| Código (theme, plugins propios, CSS, JS, plantillas) | **Git** |
+| Contenido (páginas, entradas, eventos, usuarios, medios subidos) | **WordPress** (BD + uploads) |
+
+Cuando se automatice el despliegue, `rsync --delete` **solo** sobre directorios versionados (theme, plugins propios) — nunca todo `public_html` ni `uploads/` (ADR 0013).
+
+### Migración final (corte a producción)
+
+1. Pausa temporal de cambios editoriales en static.
+2. Revisar `docs/migracion-static-wordpress.md` (sin pendientes estructurales).
+3. Última migración de contenido a WordPress.
+4. Backup completo del sitio estático (tag Git final).
+5. Backup WordPress (BD + medios).
+6. Validar WordPress en staging (Fase 2.5).
+7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché.
+8. Cambio controlado a producción.
+9. Smoke test del sitio público.
+10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
+
+WordPress pasa a ser la **única implementación activa**.
 
 ---
 
 ## Fase 3: WordPress
 
-1. **Convertir** la maqueta en theme de WordPress según `12-theme-file-structure` (plantillas, parts, URL → plantilla)
-2. Ajustar a `03-wordpress-content-model` y `11-arbol-urls-final`; assets dentro del theme según `15-assets-strategy`
-3. Implementar CPT `event` si se requieren eventos dinámicos
-4. **Subir** al servidor: staging (opcional) y producción; configurar contenido y hosting
+**Justificación:** CMS para terceros (ADR 0012). Ver § Transición estático → WordPress.
+
+1. **Reorganizar repo:** raíz → `static/` (ADR 0014); actualizar README y procedimiento de despliegue
+2. Crear theme en `wordpress/wp-content/themes/camino-del-dharma/`
+3. Convertir HTML de `static/` a plantillas PHP (`12-theme-file-structure`)
+4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`
+5. CPT `event`; roles editoriales; mantener registro en `migracion-static-wordpress.md`
+6. WordPress en **staging separado**; Fase 2.5 sobre el theme
+7. **Corte final** según checklist § Transición; static archivada en tag
+
+### Criterios de aceptación — Fase 3
+
+La fase se considera **cerrada** cuando:
+
+- [ ] Theme refleja la maqueta congelada (§2.6): mismas URLs, bloques, copy y CSS
+- [ ] Plantillas mapeadas según tabla §2.2 y `12-theme-file-structure`
+- [ ] CPT `event` operativo si aplica; estados con/sin evento validados
+- [ ] Contenido editable desde WordPress sin romper layout ni tokens
+- [ ] Fase 2.5 repetida sobre el theme en staging antes de producción
+- [ ] Checklist pre-lanzamiento (§ más abajo) completado en staging
+
+---
+
+## Fase 4: Despliegue
+
+### Vigente: despliegue manual (transición)
+
+ADR 0015, ADR 0016. **No hay pipelines de CI/CD activos** para despliegue.
+
+**Sitio estático en producción:**
+
+1. Actualizar `sitemap.xml` (en `static/` tras reorg), `VERSION`, `CHANGELOG.md`
+2. `npm run lint:css` (sin errores)
+3. ZIP **solo** con contenido de `static/` (no repo completo)
+4. Subir a `public_html` en Hostinger
+5. Smoke test y Search Console si aplica
+
+**WordPress:** despliegue manual del theme a **staging** hasta el corte final.
+
+### Futuro: automatización (pospuesta)
+
+Cuando la estructura esté estable (ADR 0016):
+
+- Validación en PR (`lint.yml` u equivalente, a crear)
+- Deploy acotado: estático pre-corte; theme post-corte (ADR 0013)
+- SSH + rsync con `--delete` solo en directorios versionados (ADR 0007)
+
+### Criterios de aceptación — Fase 4 (estático, vigente)
+
+- [ ] Despliegue realizado desde `main` (commit o tag documentado)
+- [ ] `VERSION` y `CHANGELOG.md` actualizados
+- [ ] Sitio en producción coincide con el artefacto del repositorio
+- [ ] Smoke test post-despliegue: home, contacto, galería, blog, 404
+- [ ] Cabeceras HTTP y `.htaccess` operativos (HTTPS, compresión, caché según config)
+- [ ] Sitemap enviado o actualizado en Search Console
 
 ---
 
@@ -149,7 +403,26 @@ Esto evita rediseños eternos.
 
 ## Regla
 
-No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté validada.
+No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté validada (Fase 2 + Fase 2.5).
+
+---
+
+## Registro de decisiones arquitectónicas
+
+Las decisiones técnicas y estructurales relevantes del proyecto deben documentarse mediante **Architecture Decision Records (ADR)** en `docs/adr/`.
+
+Crear un ADR cuando una decisión:
+
+- afecte la arquitectura, el despliegue, la seguridad o la estructura de contenido;
+- implique elegir entre varias alternativas razonables;
+- establezca una restricción que deba mantenerse en fases posteriores;
+- pueda resultar difícil de entender sin conocer su contexto original.
+
+Cada ADR debe indicar **estado**, **fecha**, **contexto**, **decisión**, **alternativas consideradas** y **consecuencias**. Estados controlados: Propuesta, Aceptada, Rechazada, Sustituida, Obsoleta (ver `docs/adr/README.md`).
+
+Los ADR **aceptados** se consideran históricos e **inmutables**. Si una decisión cambia, se crea un **nuevo** ADR que la sustituye y se enlazan ambos; no se reescribe el ADR original.
+
+La implementación y la documentación general del proyecto deben mantenerse alineadas con los ADR vigentes. Índice completo: [`docs/adr/README.md`](adr/README.md).
 
 ---
 
@@ -170,10 +443,34 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 
 ---
 
-## Cierre
+## Mantenimiento (post-publicación)
 
-Este documento define el **orden oficial de implementación**: documentación y diseño → maqueta estática validada → theme WordPress. No escribir código de theme ni desplegar hasta que la maqueta esté validada. Prioridad de páginas y checklist pre-lanzamiento están alineados con mapa de pantallas (04), arquitectura (05) y contenido (03).
+Tareas periódicas una vez el sitio está en producción. No son desarrollo de features, pero forman parte del ciclo de vida del sitio.
+
+| Frecuencia | Tarea |
+| ---------- | ----- |
+| **Tras cada despliegue** | Smoke test de URLs clave; verificar formulario y enlaces del footer |
+| **Mensual** | Revisión de enlaces rotos (internos y externos) |
+| **Mensual** | Comprobar que `sitemap.xml` refleja el inventario de URLs indexables |
+| **Trimestral** | Auditoría Lighthouse (home + una página interior) |
+| **Trimestral** | Revisión de accesibilidad según `19-accesibilidad-estandares` (§10–11) |
+| **Trimestral** | Revisión de cabeceras HTTP, HTTPS y reglas de `.htaccess` |
+| **Semestral** | Revisión de Search Console (cobertura, errores, rendimiento) |
+| **Según necesidad** | Limpieza de contenido obsoleto (eventos pasados, entradas de blog desactualizadas) |
+| **Según necesidad** | Actualización de dependencias de desarrollo (`npm`; Stylelint) |
+
+Incidencias detectadas en mantenimiento siguen la **política de cambios**: documentar si afectan arquitectura o navegación; corregir directamente si son bugs o contenido editorial alineado con `content-source/`.
 
 ---
 
-**Versión:** 1.7
+## Cierre
+
+Este documento define el **orden oficial de implementación** y el **ciclo de vida completo** del sitio:
+
+**Documentación y diseño → maqueta estática validada → QA → transición (static/ + wordpress/) → corte WordPress → mantenimiento.**
+
+Durante la transición: un solo repo, despliegues manuales del estático, WordPress en staging, registro en `migracion-static-wordpress.md`. CI/CD pospuesto (ADR 0016).
+
+---
+
+**Versión:** 3.0

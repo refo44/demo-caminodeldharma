@@ -4,6 +4,10 @@
 
 Define la arquitectura de archivos del theme: qué plantillas existen y qué partes se reutilizan. Las rutas oficiales están en 11; este documento define cómo se renderizan.
 
+**Ubicación en el repositorio (Fase 3):** `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0011). Tras el corte de producción, el theme puede moverse a `theme/` o permanecer bajo `wp-content/themes/` (13 §1.3).
+
+**Prerrequisito:** ratificación de ADR 0012 antes de iniciar Fase 3.
+
 **Depende de:** `03-wordpress-content-model`, `04-mapa-pantallas`, `11-arbol-urls-final`, `05-arquitectura-informacion-navegacion`. **Referencia:** `02-identidad-corporativa` (theme.json), `06-wireframes` (estructura de bloques por pantalla)
 
 ---
@@ -71,8 +75,10 @@ Las partes reutilizables se integran mediante `get_template_part()` para mantene
 
 ## 5. Árbol del theme
 
+Ruta en repo durante migración: `wordpress/wp-content/themes/camino-del-dharma/` (las rutas abajo son relativas a esa carpeta).
+
 ```
-theme-camino-del-dharma/
+camino-del-dharma/
 ├── style.css              (obligatorio, metadata, no estilos)
 ├── theme.json             ← tokens de diseño (paleta, tipografía, espaciado)
 ├── screenshot.png          (preview del theme en admin; práctica estándar WP)
@@ -248,4 +254,4 @@ Este documento define la **estructura oficial de archivos del theme**: plantilla
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

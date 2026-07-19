@@ -45,7 +45,7 @@ assets/
 └── documents/      PDFs públicos descargables (si aplica)
 ```
 
-En WordPress, esta estructura va dentro del directorio del theme (`theme-camino-del-dharma/assets/`). Geografía completa del repo (docs, content-source, theme) en 12.
+En WordPress, esta estructura va dentro del theme (`wordpress/wp-content/themes/camino-del-dharma/assets/` durante Fase 3; ver ADR 0011). Geografía completa del repo en 13.
 
 ---
 
@@ -146,7 +146,7 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 
 ## 10. Regla de migración
 
-`content-source/` **no se despliega**. Copiar assets necesarios al theme (`theme-camino-del-dharma/assets/`) o a la raíz del repo para sitio estático (GitHub Pages: `assets/`, `index.html`, etc.). El destino final de producción puede ser el theme (Fase 3) o la raíz para Pages. No enlazar nunca a `content-source/` desde el código. Detalle del flujo en 13.
+`content-source/` **no se despliega**. Copiar assets necesarios a `assets/` en la raíz (sitio estático, Fase 2) o al theme en `wordpress/wp-content/themes/camino-del-dharma/assets/` (Fase 3). No enlazar nunca a `content-source/` desde el código. Detalle del flujo en 13.
 
 ---
 
