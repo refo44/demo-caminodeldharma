@@ -163,6 +163,10 @@ No escribir código de theme WordPress ni subir a servidor final hasta que la ma
 - [ ] Datos bancarios correctos en footer
 - [ ] Accesibilidad: estándares 19 aplicados (contraste, alt, teclado, focus, formularios)
 - [ ] `npm run lint:css` finaliza sin errores
+- [ ] SEO técnico (`15` §12): `<title>`, canonical, OG por página; `robots.txt` y `sitemap.xml` actualizados
+- [ ] Sin `<link rel="manifest">` ni PWA (15 §11)
+- [ ] Eventos con URL propia: JSON-LD `Event` completo según §12.3; listado `/eventos/` sin microdata duplicada
+- [ ] Google Search Console: sitemap enviado; tras despliegue, solicitar indexación de URLs modificadas
 
 ---
 
@@ -172,4 +176,4 @@ Este documento define el **orden oficial de implementación**: documentación y 
 
 ---
 
-**Versión:** 1.6
+**Versión:** 1.7

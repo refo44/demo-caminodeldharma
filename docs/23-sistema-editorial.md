@@ -194,6 +194,20 @@ Un texto de 1 000 palabras puede ser artículo o ensayo breve. Lo define la **pr
 - Descripción: orientación y contexto; no funnel de marketing.
 - Estructura de campos: `03-wordpress-content-model` §3.
 
+### 6.1 Datos estructurados (Event)
+
+Reglas completas en **`15-assets-strategy` §12.3**. Resumen editorial:
+
+| Rol | Entidad en schema | Nombre |
+|-----|-------------------|--------|
+| Organiza la actividad | `organizer` | Camino del Dharma |
+| Dirige o imparte (si aplica) | `performer` | Venerable Maestro Zheng Gong u otra persona real |
+| Inscripción | `offers` | Solo si hay formulario, aporte o cupo documentado |
+
+- JSON-LD **solo en la URL de detalle** del evento; el listado `/eventos/` no lleva microdata ni Event duplicado.
+- No inventar `performer` ni `offers` para satisfacer Search Console.
+- Eventos pasados sin página propia: sin schema hasta tener slug dedicado.
+
 ---
 
 ## 7. Práctica (superficies especiales)
@@ -287,6 +301,6 @@ Este documento concentra el **sistema editorial** del sitio: niveles de texto, r
 
 ---
 
-**Versión:** 0.2 (borrador)  
+**Versión:** 0.3 (borrador)  
 **Estado:** en análisis — no es lineamiento final  
 **Referencias de copy:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet`, `21-manual-voz-copywriting-editorial`

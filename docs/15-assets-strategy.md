@@ -1,7 +1,7 @@
 # Camino del Dharma — Estrategia de assets
 
-**Iconos, fuentes, favicon, SVG, PDF, imágenes, audio**  
-**Versión 1.4**
+**Iconos, fuentes, favicon, SVG, PDF, imágenes, audio, SEO técnico, datos estructurados**  
+**Versión 2.0**
 
 Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, content-source, theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
 
@@ -197,10 +197,121 @@ Solo con decisión explícita de producto: manifest con `"display": "browser"` o
 
 ---
 
-## Cierre
+## 12. SEO técnico y datos estructurados
 
-Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes, favicon, PDF, imágenes, videos, audio y scripts. Alineado con la identidad (02), el inventario (16), la estructura del theme (12), la estructura de archivos estáticos (13) y la arquitectura CSS (14).
+Metadatos, canonical, Open Graph y JSON-LD viven en el `<head>` de cada página HTML. **No crear páginas ni URLs solo por SEO** (p. ej. `/budismo-en-colombia`); reforzar páginas existentes y el blog (`17`, decisión 2026-07).
+
+### 12.1 `<title>` vs H1 visible
+
+| Capa | Función | Regla |
+|------|---------|--------|
+| `<title>` | Pestaña del navegador y señal para buscadores | Puede incluir keywords de búsqueda; formato `Tema \| Camino del Dharma` |
+| `<meta name="description">` | Snippet en resultados | Una oración clara; no duplicar el `<title>` |
+| H1 visible | Encabezado que ve la persona | Copy institucional del content-source; **no forzar keywords** |
+
+**Intención semántica por página (titles SEO, H1 sin cambiar):**
+
+| Página | `<title>` orientado a búsqueda | H1 visible (marca / sección) |
+|--------|--------------------------------|------------------------------|
+| Inicio | Budismo Chan y Tierra Pura en Colombia \| Camino del Dharma | Camino del Dharma |
+| `/comunidad` | Comunidad Budista en Colombia \| Camino del Dharma | La comunidad |
+| `/practica` | Meditación Budista y Práctica Chan \| Camino del Dharma | Práctica y actividades |
+| `/linaje` | Linaje Chan y Tierra Pura \| Camino del Dharma | El linaje |
+| Evento (detalle) | Nombre del evento — Camino del Dharma | Nombre del evento |
+
+En `<title>` y description usar **“budista”** (forma habitual de búsqueda). En cuerpo y footer conservar **“Comunidad Buddhista Camino del Dharma”** (nombre institucional del content-source).
+
+Subtítulo semántico en Inicio (visible, no sustituye al H1): *Comunidad budista Chan y Tierra Pura en Colombia*.
+
+### 12.2 Archivos obligatorios en producción
+
+- `robots.txt` — Allow `/`; declarar `Sitemap: https://caminodeldharma.org/sitemap.xml`
+- `sitemap.xml` — solo URLs indexables; actualizar `<lastmod>` al cambiar una página
+- `llms.txt` — curado; no sustituye al sitemap
+- `.htaccess` — HTTPS, dominio canónico, URLs limpias (ver despliegue en README)
+
+**Google Search Console:** propiedad verificada; sitemap enviado; tras cambios relevantes en `<head>` o JSON-LD, solicitar indexación de las URLs afectadas. Usar **Rendimiento** e **Indexación** para guiar mejoras; no es un paso de configuración único.
+
+### 12.3 Event — JSON-LD (`Event`)
+
+**Una sola fuente de verdad:** JSON-LD en la **página de detalle** del evento (`/eventos/{slug}/`). **No usar microdata** (`itemscope` / `itemprop`) en tarjetas del listado `/eventos/` — genera Eventos duplicados e incompletos en Search Console.
+
+**No perseguir el 100 %** de advertencias en GSC. Rellenar solo campos **verdaderos y útiles**; un dato inventado es peor que omitir un campo opcional.
+
+| Campo | Regla |
+|-------|--------|
+| `name`, `description`, `startDate`, `endDate` | Obligatorios; copy del content-source |
+| `eventStatus` | `EventScheduled` (próximo) o `EventCompleted` (realizado) |
+| `eventAttendanceMode` | `OfflineEventAttendanceMode` o `OnlineEventAttendanceMode` según modalidad |
+| `location` + `address` | Solo eventos presenciales; `PostalAddress` con localidad y país (`CO`) |
+| `organizer` | **Comunidad:** `{ "@type": "Organization", "name": "Camino del Dharma", "url": "https://caminodeldharma.org" }` — no confundir con el maestro |
+| `performer` | Solo si una persona **dirige o imparte** el evento (p. ej. retiro con Maestro Zheng Gong): `"Venerable Maestro Zheng Gong"`. Omitir en práctica comunitaria sin facilitador nombrado |
+| `offers` | **Solo** si existe inscripción o aporte documentado (precio o gratuita con formulario). Incluir `validFrom` cuando se conozca la fecha de apertura. Eventos pasados: `SoldOut` si aplica |
+| `url`, `image` | URL canónica del evento e imagen del cartel |
+
+**Eventos históricos sin página propia** (solo tarjeta en `/eventos/`): sin JSON-LD hasta que exista URL dedicada.
+
+**Plantilla mínima (adaptar por evento):**
+
+```json
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://caminodeldharma.org" },
+        { "@type": "ListItem", "position": 2, "name": "Eventos", "item": "https://caminodeldharma.org/eventos" },
+        { "@type": "ListItem", "position": 3, "name": "Nombre del evento", "item": "https://caminodeldharma.org/eventos/slug" }
+      ]
+    },
+    {
+      "@type": "Event",
+      "name": "Nombre del evento",
+      "description": "Descripción del evento.",
+      "startDate": "2026-08-07",
+      "endDate": "2026-08-09",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Nombre del lugar",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ciudad",
+          "addressRegion": "Departamento",
+          "addressCountry": "CO"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Camino del Dharma",
+        "url": "https://caminodeldharma.org"
+      },
+      "url": "https://caminodeldharma.org/eventos/slug"
+    }
+  ]
+}
+```
+
+Añadir `performer` y `offers` solo según las reglas de la tabla.
+
+### 12.4 Blog — `BlogPosting`
+
+En artículos del blog: `headline`, `description`, `author`, `publisher`, `image`, `datePublished`, `dateModified`, `mainEntityOfPage`, `inLanguage`.
+
+### 12.5 Otros tipos en el sitio
+
+- **Inicio:** `Organization`, `WebSite`, `WebPage` en `@graph` (ya implementado)
+- **Subpáginas:** `BreadcrumbList` donde aplique
+- **No crear** `SearchAction`, PWA ni manifest por SEO (§11)
 
 ---
 
-**Versión:** 1.9
+## Cierre
+
+Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes, favicon, PDF, imágenes, videos, audio, scripts, SEO técnico y datos estructurados. Alineado con la identidad (02), el inventario (16), la estructura del theme (12), la estructura de archivos estáticos (13) y la arquitectura CSS (14).
+
+---
+
+**Versión:** 2.0

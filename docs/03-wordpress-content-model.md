@@ -105,6 +105,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 **Cronograma de eventos (Lluvia de ideas):** Listado/archive en `/eventos/`. Por defecto: **listado cronológico con agrupación por mes**. Vista de calendario solo si hay masa crítica de eventos en el tiempo.
 
+**Datos estructurados (SEO):** JSON-LD `Event` solo en `single-event.php` (URL de detalle). `organizer` = Camino del Dharma; `performer` solo si hay facilitador nombrado; `offers` solo con inscripción real. Sin microdata en el archive. Detalle en `15-assets-strategy` §12.3.
+
 ---
 
 ## 3.1. Sangha (Custom Post Type, si se implementa)
@@ -232,4 +234,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.1
+**Versión:** 2.2

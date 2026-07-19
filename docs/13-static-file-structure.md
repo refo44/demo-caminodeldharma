@@ -21,6 +21,8 @@ demo-caminodeldharma/          (o nombre del repo)
 │       ├── Identidad CAMINO DEL DHARMA- (1).pdf
 │       └── FOTOS PAGINA WEB/   Imágenes y videos por pestaña
 ├── index.html, 404.html       Sitio estático (Fase 2 / GitHub Pages)
+├── robots.txt, sitemap.xml, llms.txt   SEO e indexación (15 §12.2)
+├── .htaccess                  Apache: HTTPS, canonical, cache (producción Hostinger)
 ├── favicon.ico, favicon.svg   Raíz; favicons (15 §3.2, §11). Sin site.webmanifest.
 ├── comunidad/, linaje/, practica/, practica/videos/, eventos/, eventos/{slug}/, galeria/, contacto/, donaciones/, blog/
 ├── assets/
@@ -57,7 +59,7 @@ El nombre del repo (`demo-caminodeldharma`) no forma parte de la arquitectura; e
 | **docs/** | Solo Markdown (y recursos referenciados). Orden por prefijo numérico (00–20). No se despliega al sitio. |
 | **content-source/** | Solo en local. No se enlaza desde el código. Assets para el sitio se copian al theme o a la raíz del repo (p. ej. `assets/`) según 13 y 15. Puede ignorarse en producción (deploy), pero debe mantenerse versionado en el repo para trazabilidad editorial. |
 | **theme-camino-del-dharma/** | Theme WordPress. Los archivos estáticos (CSS, JS, imágenes, fuentes) viven en `assets/` dentro del theme. WordPress los sirve desde la URL del theme. Solo los assets dentro de `theme-camino-del-dharma/assets/` son accesibles públicamente desde el sitio. |
-| **Sitio estático (Fase 2)** | Para GitHub Pages el sitio está en la **raíz del repo**: `index.html`, `404.html`, `favicon.ico`, `assets/`, `comunidad/`, `linaje/`, etc. Rutas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `/donaciones/`, `/blog/`, `404`. **Web tradicional, no PWA** (15 §11). La carpeta `scripts/` es solo para mantenimiento local (optimizar imágenes, renombrar galería). |
+| **Sitio estático (Fase 2)** | Para GitHub Pages el sitio está en la **raíz del repo**: `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `favicon.ico`, `assets/`, `comunidad/`, `linaje/`, etc. Rutas: `/`, `/comunidad/`, `/linaje/`, `/practica/`, `/eventos/`, `/galeria/`, `/contacto/`, `/donaciones/`, `/blog/`, `404`. **Web tradicional, no PWA** (15 §11). JSON-LD y metadatos SEO en `<head>` de cada HTML (15 §12). La carpeta `scripts/` es solo para mantenimiento local (optimizar imágenes, renombrar galería). |
 
 **Versionado:** `content-source/` se versiona (trazabilidad editorial). El sitio estático en raíz (index.html, assets/, etc.) se versiona para GitHub Pages.
 
@@ -88,4 +90,4 @@ Este documento define la **geografía oficial** del repositorio: dónde viven do
 
 ---
 
-**Versión:** 1.8
+**Versión:** 1.9
