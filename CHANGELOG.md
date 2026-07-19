@@ -8,6 +8,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.9] - 2026-07-19
+
+### Mejoras
+
+- Eventos: JSON-LD enriquecido en páginas de detalle (`@id`, organizer, performer, `validFrom`, dirección ampliada).
+- Eventos: eliminado microdata (`itemscope`/`itemprop`) del listado y de las fichas; datos estructurados solo en JSON-LD de cada evento.
+- `sitemap.xml`: `<lastmod>` actualizado en `/eventos`, `/eventos/encuentro-nacional-2026` y `/eventos/pausa-profunda-cali` (`2026-07-19`), tras los cambios JSON-LD en esas páginas.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.8] - 2026-07-19
 
 ### Mejoras
