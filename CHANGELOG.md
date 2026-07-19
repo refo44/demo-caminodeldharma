@@ -8,6 +8,18 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.11] - 2026-07-19
+
+### Mejoras
+
+- Google Analytics 4 (`G-B8FY69RGSS`): etiqueta `gtag.js` directa en las 14 páginas HTML (sin Google Tag Manager).
+- `sitemap.xml`: `<lastmod>` en todas las URLs indexables (`2026-07-19`), al modificarse cada HTML del sitio.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.10] - 2026-07-19
 
 ### Mejoras
