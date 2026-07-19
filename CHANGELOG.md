@@ -6,6 +6,17 @@ La versión actual del repositorio está en [`VERSION`](VERSION).
 
 Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
+## [1.0.5] - 2026-07-18
+
+### Mejoras
+
+- `llms.txt`: guía curada del sitio para agentes de IA (convención llmstxt.org), con enlaces canónicos a las páginas principales.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.4] - 2026-07-18
 
 ### Mejoras
