@@ -977,6 +977,11 @@ a:focus-visible {
   border-radius: 6px;
 }
 
+.hero-figure picture,
+.section-figure picture {
+  display: block;
+}
+
 .hero-figure img {
   width: 100%;
   height: 100%;

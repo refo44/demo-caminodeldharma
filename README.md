@@ -38,12 +38,20 @@ Este comando debe ejecutarse después de cualquier cambio en `assets/css/` y ant
 
 ## Estructura del proyecto
 
-- **Raíz:** `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `VERSION`
-- **Versionado:** `CHANGELOG.md` (historial de despliegues), `VERSION` (versión actual)
+- **Raíz (producción):** `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`
+- **Versionado (solo repositorio):** `CHANGELOG.md` (historial de despliegues), `VERSION` (versión actual; ver [`VERSION`](VERSION))
 - **Secciones:** `comunidad/`, `linaje/`, `practica/`, `eventos/`, `galeria/`, `contacto/`, `donaciones/`, `blog/`
-- **Assets:** `assets/css/`, `assets/js/`, `assets/images/`
-- **Documentación:** `docs/` (identidad, mapa de pantallas, copy, URLs, orden de implementación)
-- **Scripts:** `scripts/` (ver abajo)
+- **Assets:** `assets/css/`, `assets/js/`, `assets/images/`, `assets/favicon/`, `assets/fonts/`, `assets/audio/`
+- **Documentación (solo repositorio):** `docs/` (identidad, mapa de pantallas, copy, URLs, orden de implementación)
+- **Scripts (solo repositorio):** `scripts/` (ver abajo)
+
+### SEO e indexación
+
+- `robots.txt` — acceso de rastreadores y referencia al sitemap
+- `sitemap.xml` — URLs indexables con `<lastmod>`; vista legible vía `sitemap.xsl`
+- `llms.txt` — índice curado para agentes de IA ([convención llmstxt.org](https://llmstxt.org/)); no sustituye al sitemap
+
+El sitio es web tradicional (sin PWA ni `site.webmanifest`). Metadatos SEO, Open Graph, JSON-LD y `<meta name="theme-color">` están en el `<head>` de cada HTML.
 
 ## Despliegue en Hostinger
 
@@ -59,7 +67,7 @@ Antes de cada despliegue:
 
 Para detectar páginas modificadas, comparar contra el último commit de release (p. ej. `git diff HEAD~1 -- '*.html'`) o revisar manualmente que cada URL del sitemap refleje la fecha del cambio más reciente.
 
-El ZIP de despliegue incluye solo archivos de producción (HTML, assets, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`). No incluye `docs/`, `content-source/`, `node_modules/` ni `.git/`.
+El ZIP de despliegue incluye solo archivos de producción: HTML, `assets/`, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`. No incluye `docs/`, `content-source/`, `node_modules/`, `scripts/`, `VERSION`, `CHANGELOG.md` ni `.git/`.
 
 ## Scripts
 
