@@ -8,6 +8,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.12] - 2026-07-19
+
+### Privacidad
+
+- **Google Analytics 4 desactivado** en las 14 páginas HTML: eliminado el bloque `gtag.js` (`G-B8FY69RGSS`). Motivo: cookies `_ga` sin consentimiento ni política de privacidad (hallazgo audit PRIV-001).
+- **Reactivación:** solo tras política publicada y Consent Mode v2 (o alternativa acordada). Ver `.audit/implementation/tasks/TASK-0006.md` y `docs/17-orden-implementacion.md` §2.75 (PRIV-001). ID de propiedad conservado para uso futuro: `G-B8FY69RGSS`.
+- Métricas de indexación: seguir usando **Google Search Console** (sin cookies en el sitio).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.11] - 2026-07-19
 
 ### Mejoras

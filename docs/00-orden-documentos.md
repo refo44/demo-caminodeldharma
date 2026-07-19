@@ -57,7 +57,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 21. `21-manual-voz-copywriting-editorial`
 23. `23-sistema-editorial`
 
-**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0017). **Migración:** `migracion-static-wordpress.md`. No llevan prefijo numérico en `00` para no romper la regla de dependencias lineal; se referencian desde `17-orden-implementacion`.
+**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0017). **Migración:** `migracion-static-wordpress.md`. **Archivo (respaldos):** `archive/contacto-formulario-estatico/` — snapshot de la página `/contacto` y estilos del formulario para restauración post-WordPress o tras cambios del estático. No llevan prefijo numérico en `00` para no romper la regla de dependencias lineal; se referencian desde `17-orden-implementacion`.
 
 **Nota sobre `21-manual-voz-*.docx`:** los `.docx` en `docs/` son exportaciones para compartir; el documento editable principal es `21-manual-voz-copywriting-editorial.md`.
 

@@ -1,44 +1,77 @@
 {
   "target": "https://caminodeldharma.org",
-  "candidate_header": "Header always set Strict-Transport-Security \"max-age=31536000\"",
+  "updated": "2026-07-19T23:00:00Z",
+  "project_decision_adr": "docs/adr/0018-hsts-despliegue-escalonado.md",
+  "deployment_strategy": "STAGED",
   "basic_hsts_decision": "ACTIVATE_HSTS_NOW",
   "confidence": "HIGH",
+  "phase_1": {
+    "label": "transition_static_to_wordpress",
+    "candidate_header": "Header always set Strict-Transport-Security \"max-age=604800\"",
+    "max_age_seconds": 604800,
+    "max_age_human": "7 days",
+    "decision": "ACTIVATE_NOW",
+    "activation_task_id": "TASK-0004",
+    "rationale": "Conservative staged rollout during WordPress transition: real HSTS protection with faster recovery window than one year if TLS or redirect misconfiguration occurs."
+  },
+  "phase_2": {
+    "label": "wordpress_stable_production",
+    "candidate_header": "Header always set Strict-Transport-Security \"max-age=31536000\"",
+    "max_age_seconds": 31536000,
+    "max_age_human": "1 year",
+    "decision": "APPROVED_DEFERRED",
+    "trigger": "After WordPress production cutover, full smoke test, and >=30 days without TLS/redirect incidents",
+    "rationale": "Original audit approved full-year host-only HSTS with high confidence; deferred until operational uncertainty of migration ends."
+  },
+  "ultra_conservative_alternative": {
+    "candidate_headers": [
+      "Header always set Strict-Transport-Security \"max-age=300\"",
+      "Header always set Strict-Transport-Security \"max-age=86400\""
+    ],
+    "decision": "ACTIVATE_NOW_IF_SELECTED",
+    "tradeoff": "Minimal browser pin during transition; weaker effective HSTS protection for returning visitors within the transition window."
+  },
+  "immediate_full_year_alternative": {
+    "candidate_header": "Header always set Strict-Transport-Security \"max-age=31536000\"",
+    "decision": "APPROVED_NOT_PREFERRED",
+    "note": "Original audit recommendation; still technically safe for this site; project prefers staged approach per ADR 0018."
+  },
   "evidence_ids": ["EVID-0003","EVID-0004","EVID-0005","EVID-0006","EVID-0008","EVID-0009","EVID-0010","EVID-0011","EVID-0012","EVID-0016","EVID-0027","EVID-0029","EVID-0030"],
   "favorable_evidence_ids": ["EVID-0004","EVID-0005","EVID-0006","EVID-0008","EVID-0009","EVID-0011","EVID-0012","EVID-0027","EVID-0029"],
   "blocker_finding_ids": [],
   "prerequisite_task_ids": [],
-  "activation_task_id": "TASK-0004",
   "tested_hostnames": ["caminodeldharma.org", "www.caminodeldharma.org"],
-  "untested_known_hostnames": [],
   "include_subdomains": {
     "decision": "REJECTED",
     "evidence_ids": ["EVID-0003"],
-    "risk": "Full subdomain inventory could not be enumerated (only www verified; config declares no known subdomains, but future subdomains — e.g. mail or panel hosts — would be force-pinned to HTTPS). Host-only success is not evidence of subdomain safety.",
-    "pending_requirements": ["Authoritative DNS zone inventory from the Hostinger panel", "HTTPS verification of every discovered subdomain", "Separate approval and its own task (TASK-0012) after basic HSTS has been stable in production"]
+    "pending_requirements": ["Authoritative DNS zone inventory", "HTTPS verification per subdomain", "TASK-0012 after phase 2 stable"]
   },
   "preload": {
     "decision": "REJECTED",
-    "evidence_ids": [],
-    "risk": "Preload requires includeSubDomains (not approved), max-age >= 31536000 site-wide and near-irreversible browser-list persistence. Not a candidate in configuration and operationally premature.",
-    "pending_requirements": ["includeSubDomains approved and stable first", "Verification of current hstspreload.org criteria at decision time", "Explicit organizational acknowledgement of the persistence commitment"]
+    "pending_requirements": ["includeSubDomains approved first", "hstspreload.org criteria", "Organizational acknowledgement"]
   },
-  "exact_recommended_action": "In DOCS/demo-caminodeldharma/.htaccess line 103, replace `# Header always set Strict-Transport-Security \"max-age=31536000\"` with `Header always set Strict-Transport-Security \"max-age=31536000\"` and deploy. No other directive changes.",
-  "validation_steps": [
-    "curl -sS -D - -o /dev/null https://caminodeldharma.org/ | grep -i strict-transport-security  → exactly max-age=31536000",
+  "exact_recommended_action_phase_1": "In .htaccess line ~103, replace the commented HSTS line with: Header always set Strict-Transport-Security \"max-age=604800\" and deploy. Do not activate max-age=31536000 until phase 2 unless project explicitly opts out of staging (ADR 0018).",
+  "validation_steps_phase_1": [
+    "curl -sS -D - -o /dev/null https://caminodeldharma.org/ | grep -i strict-transport-security  → exactly max-age=604800",
     "curl -sS -D - -o /dev/null https://www.caminodeldharma.org/ | grep -i strict-transport-security",
     "curl -sS -D - -o /dev/null https://caminodeldharma.org/pagina-inexistente | grep -i strict-transport-security  (404 class)",
     "curl -sS -D - -o /dev/null https://caminodeldharma.org/eventos/ | grep -i strict-transport-security  (301 class)",
-    "curl -sS -D - -o /dev/null http://caminodeldharma.org/ → 301 to HTTPS unchanged (header over HTTP is ignored by browsers; its presence there is tolerable, its absence preferable)",
+    "curl -sS -D - -o /dev/null http://caminodeldharma.org/ → 301 to HTTPS unchanged",
     "Full navigation smoke test of all 13 pages over HTTPS",
     "Confirm certificate expiry monitoring exists (cert valid to 2026-10-12)"
   ],
+  "validation_steps_phase_2": [
+    "Same curl matrix as phase 1 with expected max-age=31536000",
+    "CHANGELOG entry with deployment date",
+    ">=30 days stable production since WordPress cutover"
+  ],
   "rollback_constraints": [
-    "Never roll back by simply removing the header: serve Strict-Transport-Security \"max-age=0\" over valid HTTPS so pinned browsers unlearn the policy on their next visit",
-    "Rollback requires working TLS; a certificate outage while HSTS is pinned locks out returning visitors until TLS is restored — certificate renewal must be monitored",
-    "Cached policy persists up to 1 year in browsers that do not revisit after a max-age=0 rollback"
+    "Never roll back by simply removing the header: serve Strict-Transport-Security \"max-age=0\" over valid HTTPS",
+    "Effective pin duration equals active max-age (604800 in phase 1; up to 31536000 in phase 2)",
+    "Rollback requires working TLS; certificate renewal must be monitored"
   ],
   "residual_risks": [
-    "Certificate renewal history could not be verified via CT logs (crt.sh 502, EVID-0030); reliance on Hostinger-managed Let's Encrypt renewal is INFERRED from the freshly issued certificate (2026-07-14)",
-    "DNS AAAA/NS records not enumerable from the audit environment (resolver timeouts, EVID-0003); no indication of additional hostnames in any observed configuration"
+    "Certificate renewal history could not be verified via CT logs (crt.sh 502, EVID-0030)",
+    "Phase 1 provides shorter HSTS protection than one-year pin until phase 2 is deployed"
   ]
 }

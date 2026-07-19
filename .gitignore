@@ -80,5 +80,8 @@ wp-config.php
 
 # Node.js tooling
 /node_modules/
+
+# Paquetes de despliegue — generar siempre en ~/Desktop, nunca en el repo
+/*.zip
 camino-del-dharma-deploy.zip
 camino-del-dharma-v*.zip

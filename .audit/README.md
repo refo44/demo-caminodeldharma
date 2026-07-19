@@ -1,6 +1,6 @@
 # Workspace de auditoría — Camino del Dharma (2026-07-19)
 
-Auditoría de solo lectura de https://caminodeldharma.org (fuente: commit be896db2). Estado: **COMPLETE**. Resultado principal: **DECISION: ACTIVATE HSTS NOW** (ver `hsts-decision.md`).
+Auditoría de solo lectura de https://caminodeldharma.org (fuente: commit be896db2). Estado: **COMPLETE**. Resultado HSTS: **ACTIVATE NOW — despliegue escalonado** (Fase 1 `max-age=604800`; Fase 2 `31536000` post-WordPress — ADR 0018, ver `hsts-decision.md`).
 
 Puntos de entrada:
 

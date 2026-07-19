@@ -2,7 +2,7 @@
 
 ## Estado
 
-Aceptada
+Sustituida → [ADR 0018](0018-hsts-despliegue-escalonado.md) (activación y `max-age` escalonado, 2026-07-19)
 
 ## Fecha
 

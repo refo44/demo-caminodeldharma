@@ -8,9 +8,19 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.0 |
+| **Versión** | 3.1 |
 | **Fecha** | 2026-07-19 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.1)
+
+- **Estado actual del proyecto:** sitio estático en producción (`v1.0.11`), Fase 2 sustancialmente completada; Fase 2.5 y auditoría de producción registradas.
+- **Nueva § Fase 2.75:** auditoría integral de producción (2026-07-19), hallazgos, olas de remediación y enlace a `.audit/`.
+- **Formulario de contacto:** estado real documentado (markup presente, envío no operativo en estático); respaldo en `docs/archive/contacto-formulario-estatico/` para restauración en WordPress.
+- **HSTS:** despliegue **escalonado** (ADR 0018) — Fase 1 `max-age=604800` (TASK-0004/0005); Fase 2 `max-age=31536000` tras WordPress estable.
+- Criterios de aceptación de Fase 2 y checklist pre-lanzamiento actualizados según evidencia de la auditoría.
+- **ADR 0018:** HSTS escalonado — Fase 1 `max-age=604800`, Fase 2 `31536000` post-WordPress; ADR 0010 sustituida en lo operativo.
+- Mantenimiento: incorporación de tareas post-auditoría y revisión trimestral ampliada.
 
 ### Cambios principales (3.0)
 
@@ -22,7 +32,25 @@ Este documento define el orden oficial de implementación, validación, migraci�
 - Despliegue manual y CI/CD pospuesto (ADR 0015, ADR 0016)
 - Congelamiento de documentación base (§ más abajo)
 
-**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `docs/adr/README.md`
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `docs/adr/README.md`, `.audit/` (auditoría de producción 2026-07-19)
+
+---
+
+## Estado actual del proyecto (2026-07-19)
+
+| Aspecto | Estado |
+| ------- | ------ |
+| **Fase activa** | Fase 2 (maqueta estática) **en producción**; mantenimiento y remediación post-auditoría |
+| **Versión desplegada** | `1.0.11` (`VERSION`) |
+| **URL producción** | https://caminodeldharma.org |
+| **Estructura repo** | HTML en **raíz** (Fase 3 no iniciada; carpeta `static/` aún no existe) |
+| **WordPress** | No iniciado (Fase 3 pendiente) |
+| **Auditoría producción** | **COMPLETE** — ver § Fase 2.75 y `.audit/` |
+| **GA4** | **Desactivado** (v1.0.12) hasta política de privacidad + consentimiento — TASK-0006 |
+| **Score global auditoría** | 84/100 — SEO 100; 0 críticos; 2 hallazgos ALTOS (formulario, `.ics`) |
+| **Próxima acción técnica** | `.audit/implementation/tasks/TASK-0004.md` (activar HSTS) + `TASK-0005` (verificación) |
+
+La maqueta cumple la estructura §2.1 (13 URLs indexables + 404), despliegue idéntico al repo auditado (14/14 páginas byte-identical) y SEO técnico impecable. Pendientes de cierre operativo: formulario de contacto sin backend, archivos `.ics` inexistentes, HSTS por activar, consentimiento GA4 (decisión organizativa).
 
 ---
 
@@ -79,7 +107,7 @@ Documentos congelados:
 - `19-accesibilidad-estandares`
 - `23-sistema-editorial`
 
-**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta.
+**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta, respaldos en `docs/archive/` (p. ej. formulario de contacto para WordPress).
 
 Evitar ciclos de refinamiento permanente que retrasen la implementación. Prioridad: **código y validación** según las fases definidas aquí.
 
@@ -222,20 +250,22 @@ Detalle completo en **§ Transición estático → WordPress**. Resumen:
 
 ### Criterios de aceptación — Fase 2
 
-La fase se considera **cerrada** cuando:
+La fase se considera **cerrada para producción estática** cuando se cumplen los ítems marcados. Los pendientes explícitos se remedian en § Fase 2.75 o se resuelven en WordPress (formulario con backend).
 
-- [ ] Todas las páginas de la estructura §2.1 existen y son navegables
-- [ ] Prioridad de páginas (§ más abajo) implementada según `04-mapa-pantallas`
-- [ ] Responsive validado en móvil, tablet y desktop
-- [ ] Checklist de `18-tendencias-ux-ui-sistema-editorial` (§8) completado
-- [ ] Accesibilidad revisada según `19-accesibilidad-estandares` (checklist §10 y testing §11)
-- [ ] `npm run lint:css` finaliza sin errores
-- [ ] Lighthouse ≥ 90 en Performance, Accessibility, Best Practices y SEO (home y una página interior representativa)
-- [ ] No existen enlaces rotos (internos y externos del footer)
-- [ ] No existen imágenes informativas sin `alt` adecuado
-- [ ] El sitio funciona correctamente sin JavaScript (navegación, lectura, formularios básicos); JS solo aporta mejoras progresivas
-- [ ] SEO técnico inicial según `15-assets-strategy` (§12): `<title>`, canonical, OG por página
-- [ ] Fase 2.5 (QA) completada
+- [x] Todas las páginas de la estructura §2.1 existen y son navegables (13/13 en sitemap; auditoría 2026-07-19)
+- [x] Prioridad de páginas (§ más abajo) implementada según `04-mapa-pantallas`
+- [x] Responsive validado en móvil, tablet y desktop (auditoría: 360/390/1440 sin overflow)
+- [x] Checklist de `18-tendencias-ux-ui-sistema-editorial` (§8) completado en implementación
+- [x] Accesibilidad estructural revisada según `19-accesibilidad-estandares` (skip link, landmarks, contraste en muestras, teclado; pase AT no verificado en auditoría)
+- [x] `npm run lint:css` finaliza sin errores (obligatorio antes de cada despliegue)
+- [~] Lighthouse ≥ 90 en las cuatro categorías — **no verificado en auditoría** (herramienta no disponible en sesión de audit); repetir en Fase 2.5 o mantenimiento trimestral
+- [x] No existen enlaces rotos internos (400 refs OK; auditoría EVID-0015)
+- [x] No existen imágenes informativas sin `alt` adecuado (100 % en auditoría)
+- [~] El sitio funciona correctamente sin JavaScript — navegación y lectura sí; **galería** requiere JS (AEO-001, severidad baja); formulario no entrega sin JS ni con JS
+- [x] SEO técnico inicial según `15-assets-strategy` (§12): títulos, canonical, OG, robots, sitemap — **100/100** en auditoría
+- [~] Fase 2.5 (QA) — parcial; auditoría de producción (§2.75) cubre parte del alcance con limitaciones documentadas
+- [ ] **Formulario de contacto operativo** — pendiente: estático tiene `action="#"` sin handler (FUNC-001); ver §2.75 y `docs/archive/contacto-formulario-estatico/`
+- [ ] **Descargas `.ics` de eventos** — pendiente: archivos `/ical/*.ics` referenciados pero inexistentes (FUNC-002)
 
 ---
 
@@ -268,17 +298,87 @@ Probar en la versión estable más reciente de:
 
 - Navegación completa con teclado (`19` §11)
 - Focus visible en enlaces, botones e inputs
-- Formulario de contacto: labels, errores y envío
+- Formulario de contacto: labels y focus OK; **envío end-to-end pendiente** hasta backend estático o WordPress (FUNC-001)
 - Contraste en combinaciones críticas de marca
 - Lectura de flujos clave (screen reader opcional pero recomendado en releases)
 
 ### Criterios de aceptación — Fase 2.5
 
-- [ ] Sitio probado en los cuatro navegadores indicados
-- [ ] Sitio probado en desktop, tablet y móvil
-- [ ] Lighthouse ≥ 90 en las cuatro categorías (home + página interior)
-- [ ] Sin enlaces rotos ni regresiones visuales evidentes
-- [ ] Incidencias encontradas documentadas y resueltas o registradas como deuda explícita
+- [~] Sitio probado en los cuatro navegadores indicados — recomendado antes de corte WordPress; auditoría usó un entorno
+- [x] Sitio probado en desktop, tablet y móvil (viewports auditados)
+- [~] Lighthouse ≥ 90 en las cuatro categorías — pendiente de corrida local con Lighthouse instalado
+- [x] Sin enlaces rotos internos (auditoría)
+- [x] Incidencias documentadas — ver `.audit/findings.jsonl` y backlog §2.75
+
+---
+
+## Fase 2.75: Auditoría de producción (2026-07-19)
+
+Auditoría de solo lectura sobre https://caminodeldharma.org y el código fuente (commit auditado `be896db2`; paridad deploy 14/14). **No implementó cambios.** Workspace completo en [`.audit/`](../.audit/README.md).
+
+### Resultado resumido
+
+| Métrica | Valor |
+| ------- | ----- |
+| Estado | COMPLETE · verificador ACCEPT |
+| Score global | **84/100** |
+| Hallazgos | 0 CRÍTICO · 2 ALTO · 4 MEDIO · 3 BAJO · 1 INFORMATIVO |
+| SEO / SEO técnico | **100/100** — sin hallazgos accionables |
+| Decisión HSTS | **ACTIVATE NOW — Fase 1** `max-age=604800` (7 d) → **Fase 2** `31536000` post-WordPress — `.audit/hsts-decision.md`, **ADR 0018** |
+
+### Hallazgos que afectan operación (prioridad de remediación)
+
+| ID | Severidad | Tema | Acción recomendada | Tarea |
+| -- | --------- | ---- | ------------------ | ----- |
+| FUNC-001 | ALTA | Formulario contacto no entrega (`action="#"`) | CTAs WhatsApp/correo (corto plazo) o backend real (WordPress) | TASK-0002 READY · TASK-0003 BLOCKED |
+| FUNC-002 | ALTA | Descargas `.ics` → 404 | Crear `ical/*.ics` para ambos eventos | TASK-0001 READY |
+| SEC-001 | MEDIA | HSTS comentado en `.htaccess:103` | Activar Fase 1 (`max-age=604800`) | TASK-0004 + TASK-0005 READY |
+| PRIV-001 | MEDIA | GA4 sin consentimiento ni política | Decisión organizativa + TASK-0006 BLOCKED |
+| PERF-001 | MEDIA | Imágenes sobredimensionadas | Logo + srcset galería | TASK-0007 READY |
+| PERF-002 | BAJA | CSS/JS sin versionado `?v=` | TASK-0011 READY |
+| SEC-002 | MEDIA | CSP mínima | Report-Only → enforce | TASK-0008 READY |
+| SEC-003 | BAJA | Sin `security.txt` | TASK-0009 READY |
+| AEO-001 | BAJA | Galería solo client-side | Pre-render primera página | TASK-0010 READY |
+
+Detalle completo: `.audit/findings.jsonl`, paquetes en `.audit/remediation/`, tareas atómicas en `.audit/implementation/tasks/`.
+
+### Olas de implementación (post-auditoría)
+
+Orden en `.audit/implementation/waves.md`:
+
+1. **WAVE-1** — HSTS (0004→0005), `.ics` (0001), contacto (0002); gate: HSTS verificado, sin 404 en `/ical/`, `/contacto` sin vía muerta
+2. **WAVE-2** — Imágenes (0007)
+3. **WAVE-3** — *(vacía: SEO/SD/contenido en verde)*
+4. **WAVE-4** — CSP (0008), `security.txt` (0009), privacidad (0006 BLOCKED), `includeSubDomains` (0012 BLOCKED)
+5. **WAVE-5** — Versionado assets (0011)
+6. **WAVE-6** — Pre-render galería (0010)
+
+**Arranque recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
+
+Implementar en sesiones separadas; cada tarea incluye criterios de aceptación, validación y rollback. Respetar `conflict-map.md` (no editar `.htaccess`, `contacto/index.html` ni las 14 páginas HTML en paralelo dentro del mismo conflict group).
+
+### Respaldo formulario de contacto
+
+Antes de TASK-0002 (retiro temporal del formulario) o de cualquier cambio en `/contacto`, el markup y estilos vigentes están archivados en:
+
+**`docs/archive/contacto-formulario-estatico/`**
+
+Contiene página completa, bloque `<main>`, extracto CSS y README con instrucciones para restaurar en estático o replicar en `page-contacto.php` (WordPress).
+
+### Limitaciones de la auditoría (relevantes para este doc)
+
+- Sin Lighthouse/axe en la sesión → LCP/INP no puntuados; CLS = 0 sí medido
+- Sin datos de Search Console / GA4 interno
+- Formulario inspeccionado en código, no enviado en vivo
+- Conclusiones legales de privacidad fuera de alcance
+
+Ver `.audit/limitations.md`.
+
+### Relación con ADR 0010 e ADR 0018 (HSTS)
+
+La auditoría satisface el checklist de ADR 0010. **ADR 0018** (Aceptada) define el despliegue escalonado: **Fase 1** ahora con `max-age=604800`; **Fase 2** con `max-age=31536000` tras WordPress estable en producción (≥30 días sin incidencias TLS/redirect). Alternativa ultra-conservadora: `max-age=300` o `86400`. Año completo desde el día uno sigue técnicamente válido pero no es la preferencia del proyecto durante la transición.
+
+Implementación Fase 1: TASK-0004; verificación: TASK-0005. Registrar en `CHANGELOG.md`. `includeSubDomains` / preload: rechazados (TASK-0012).
 
 ---
 
@@ -364,10 +464,11 @@ Cuando se automatice el despliegue, `rsync --delete` **solo** sobre directorios 
 4. Backup completo del sitio estático (tag Git final).
 5. Backup WordPress (BD + medios).
 6. Validar WordPress en staging (Fase 2.5).
-7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché.
+7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché, **HSTS Fase 1** (`max-age=604800`).
 8. Cambio controlado a producción.
 9. Smoke test del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
+11. **Tras ≥30 días estables:** subir HSTS a Fase 2 (`max-age=31536000`, ADR 0018) y registrar en `CHANGELOG.md`.
 
 WordPress pasa a ser la **única implementación activa**.
 
@@ -436,7 +537,7 @@ Cuando la estructura esté estable (ADR 0016):
 ## Prioridad de páginas
 
 1. **Inicio** — Hero, meditación semanal, caminos de participación
-2. **Contacto** — Formulario + bloque Redes sociales (Facebook, Instagram) + WhatsApp
+2. **Contacto** — Formulario (markup listo; **envío pendiente** — FUNC-001) + bloque Redes sociales + WhatsApp/correo. Respaldo: `docs/archive/contacto-formulario-estatico/`. En WordPress: formulario funcional vía plugin o handler del theme.
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, recitación comida, mantras (audio), talleres, retiros, videos
 5. **El linaje** — Tradición, Chan, Tierra Pura
@@ -447,7 +548,7 @@ Cuando la estructura esté estable (ADR 0016):
 
 ## Regla
 
-No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté validada (Fase 2 + Fase 2.5).
+No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté validada (Fase 2 + Fase 2.5). **Excepción operativa:** remediación post-auditoría (§2.75) sobre el estático en producción está permitida y priorizada (HSTS, `.ics`, contacto, rendimiento) sin iniciar Fase 3.
 
 ---
 
@@ -472,18 +573,22 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 
 ## Checklist pre-lanzamiento
 
-- [ ] Identidad (paleta, tipografía) definida
-- [ ] Todas las páginas maquetadas
-- [ ] Formulario de contacto funcional
-- [ ] Botón WhatsApp operativo
-- [ ] Enlaces externos (redes) verificados
-- [ ] Datos bancarios correctos en footer
-- [ ] Accesibilidad: estándares 19 aplicados (contraste, alt, teclado, focus, formularios)
-- [ ] `npm run lint:css` finaliza sin errores
-- [ ] SEO técnico (`15` §12): `<title>`, canonical, OG por página; `robots.txt` y `sitemap.xml` actualizados
-- [ ] Sin `<link rel="manifest">` ni PWA (15 §11)
-- [ ] Eventos con URL propia: JSON-LD `Event` completo según §12.3; listado `/eventos/` sin microdata duplicada
-- [ ] Google Search Console: sitemap enviado; tras despliegue, solicitar indexación de URLs modificadas
+- [x] Identidad (paleta, tipografía) definida
+- [x] Todas las páginas maquetadas (13 indexables + 404)
+- [ ] Formulario de contacto **funcional** (entrega end-to-end) — pendiente; canales WhatsApp/correo operativos
+- [x] Botón WhatsApp operativo
+- [x] Enlaces externos (redes) verificados
+- [x] Datos bancarios correctos en footer
+- [x] Accesibilidad: estándares 19 aplicados en estructura (contraste muestreado, alt, teclado, focus, labels de formulario)
+- [x] `npm run lint:css` finaliza sin errores
+- [x] SEO técnico (`15` §12): `<title>`, canonical, OG por página; `robots.txt` y `sitemap.xml` actualizados (auditoría 100/100)
+- [x] Sin `<link rel="manifest">` ni PWA (15 §11)
+- [x] Eventos con URL propia: JSON-LD `Event` completo según §12.3; listado `/eventos/` sin microdata duplicada
+- [ ] Descargas `.ics` de calendario operativas (FUNC-002)
+- [ ] HSTS Fase 1 activo (`max-age=604800`) tras TASK-0004 — ADR 0018
+- [ ] HSTS Fase 2 (`max-age=31536000`) tras WordPress estable en producción
+- [ ] Política de privacidad / consentimiento GA4 si aplica (PRIV-001 — decisión organizativa)
+- [ ] Google Search Console: sitemap enviado; solicitar indexación de URLs modificadas tras cada despliegue relevante
 
 ---
 
@@ -493,13 +598,15 @@ Tareas periódicas una vez el sitio está en producción. No son desarrollo de f
 
 | Frecuencia | Tarea |
 | ---------- | ----- |
-| **Tras cada despliegue** | Smoke test de URLs clave; verificar formulario y enlaces del footer |
+| **Tras cada despliegue** | Smoke test de URLs clave; verificar enlaces del footer; si hay formulario, probar envío end-to-end |
+| **Post-auditoría (2026-07-19)** | Ejecutar olas §2.75 según `.audit/implementation/backlog.md`; registrar en `CHANGELOG.md` |
 | **Mensual** | Revisión de enlaces rotos (internos y externos) |
 | **Mensual** | Comprobar que `sitemap.xml` refleja el inventario de URLs indexables |
 | **Trimestral** | Auditoría Lighthouse (home + una página interior) |
 | **Trimestral** | Revisión de accesibilidad según `19-accesibilidad-estandares` (§10–11) |
-| **Trimestral** | Revisión de cabeceras HTTP, HTTPS y reglas de `.htaccess` |
+| **Trimestral** | Revisión de cabeceras HTTP, HTTPS, HSTS y reglas de `.htaccess` |
 | **Semestral** | Revisión de Search Console (cobertura, errores, rendimiento) |
+| **Anual** | Renovar `/.well-known/security.txt` (Expires) si se publicó (TASK-0009) |
 | **Según necesidad** | Limpieza de contenido obsoleto (eventos pasados, entradas de blog desactualizadas) |
 | **Según necesidad** | Actualización de dependencias de desarrollo (`npm`; Stylelint) |
 
@@ -511,12 +618,12 @@ Incidencias detectadas en mantenimiento siguen la **política de cambios**: docu
 
 Este documento define el **orden oficial de implementación** y el **ciclo de vida completo** del sitio:
 
-**Documentación y diseño → maqueta estática validada → QA → transición (static/ + wordpress/) → corte WordPress → mantenimiento.**
+**Documentación y diseño → maqueta estática validada → QA → auditoría producción (§2.75) → remediación → transición (static/ + wordpress/) → corte WordPress → mantenimiento.**
 
 Durante la transición: un solo repo, despliegues manuales del estático, WordPress en staging, registro en `migracion-static-wordpress.md`. CI/CD pospuesto (ADR 0016).
 
-A partir de esta versión, **priorizar implementación** sobre ampliación de documentación de alto nivel (ver § Congelamiento de documentación base).
+A partir de la versión 3.0, **priorizar implementación** sobre ampliación de documentación de alto nivel (ver § Congelamiento de documentación base). La versión 3.1 incorpora el estado real post-auditoría: el estático puede recibir mejoras de §2.75 sin bloquear la planificación de Fase 3.
 
 ---
 
-**Versión:** 3.0 · **Fecha:** 2026-07-19 · **Estado:** Vigente
+**Versión:** 3.1 · **Fecha:** 2026-07-19 · **Estado:** Vigente

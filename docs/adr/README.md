@@ -88,7 +88,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0007](0007-rsync-como-mecanismo-de-sincronizacion.md) | rsync como mecanismo de sincronización | Aceptada |
 | [0008](0008-urls-estables-desde-la-maqueta.md) | URLs estables desde la maqueta | Aceptada |
 | [0009](0009-css-y-tokens-invariantes-en-migracion.md) | CSS y tokens invariantes en la migración | Aceptada |
-| [0010](0010-hsts-desactivado-hasta-auditoria.md) | HSTS desactivado hasta auditoría | Aceptada |
+| [0010](0010-hsts-desactivado-hasta-auditoria.md) | HSTS desactivado hasta auditoría | Sustituida → [0018](0018-hsts-despliegue-escalonado.md) |
 | [0011](0011-implementaciones-separadas-durante-migracion.md) | Implementaciones separadas durante migración | Sustituida → [0014](0014-monorepo-static-wordpress.md) |
 | [0012](0012-wordpress-como-motor-de-contenido.md) | WordPress como motor de contenido | Aceptada |
 | [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md) | Fuentes de verdad duales y alcance del despliegue | Aceptada |
@@ -96,6 +96,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0015](0015-despliegue-manual-temporal.md) | Despliegue manual temporal | Aceptada |
 | [0016](0016-automatizacion-ci-cd-pospuesta.md) | Automatización CI/CD pospuesta | Aceptada |
 | [0017](0017-repositorio-unico-durante-transicion.md) | Repositorio único durante la transición | Aceptada |
+| [0018](0018-hsts-despliegue-escalonado.md) | HSTS — despliegue escalonado (transición → año) | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -109,6 +110,7 @@ Documentos, issues, commits o ADR relacionados.
 | Producción no se edita directamente | [0005](0005-produccion-sin-edicion-manual.md) |
 | Despliegue manual temporal | [0015](0015-despliegue-manual-temporal.md) |
 | CI/CD pospuesto | [0016](0016-automatizacion-ci-cd-pospuesta.md) (implementación de [0006](0006-github-actions-para-despliegue.md) diferida) |
+| HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) (histórico), [0018](0018-hsts-despliegue-escalonado.md) (vigente) |
 
 ---
 

@@ -1,0 +1,243 @@
+/*
+  Respaldo 2026-07-19 — commit 8430f96
+  Extracto de assets/css/main.css para la página /contacto y su formulario.
+  Origen (líneas aprox. en main.css vivo): variables :root, layout read-width/section-gap,
+  lucide-icon, deco-icon-wrap, section-figure, .btn, Forms, page-contact, contact-social,
+  center-block, estados de validación y focus en inputs.
+
+  En producción el sitio carga main.css completo; este archivo es referencia para WordPress
+  o restauración sin depender del repo en vivo.
+*/
+
+:root {
+  --brand-1: #8c2b3d;
+  --brand-2: #b27474;
+  --brand-3: #d1aeab;
+  --brand-4: #3e424b;
+  --brand-1-deep: #7a2436;
+  --brand-2-deep: #9d6666;
+  --bg: var(--brand-3);
+  --text: var(--brand-4);
+  --text-muted: var(--brand-4);
+  --link: var(--brand-1-deep);
+  --link-hover: var(--brand-4);
+  --primary: var(--brand-1);
+  --primary-hover: var(--brand-2-deep);
+  --text-on-dark: #fff;
+  --font-heading: "Fjalla One", "MarloweEscapade", serif;
+  --read-max: 65ch;
+  --section-gap: 3rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+}
+
+.read-width {
+  max-width: var(--read-max);
+}
+
+.section-gap {
+  margin-bottom: var(--section-gap);
+}
+
+.section-gap:last-child {
+  margin-bottom: 0;
+}
+
+.center-block {
+  margin-inline: auto;
+}
+
+/* Lucide-style icons (inline SVG) */
+.lucide-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: -0.25em;
+  stroke: currentcolor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lucide-icon--sm {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.2em;
+}
+
+.btn .lucide-icon {
+  margin-right: var(--space-xs);
+  vertical-align: -0.35em;
+}
+
+.deco-icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-lg) 0;
+  pointer-events: none;
+}
+
+.lucide-icon--deco {
+  width: 4rem;
+  height: 4rem;
+  opacity: 0.35;
+  stroke: var(--brand-1);
+}
+
+.section-figure {
+  margin: 0 0 var(--space-lg);
+}
+
+.section-figure img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-sm) var(--space-lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--text-on-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--text-on-dark);
+}
+
+.btn:active {
+  filter: brightness(0.92);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid var(--brand-2);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 0;
+}
+
+.form-group textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-group.is-error input,
+.form-group.is-error textarea {
+  border-color: var(--brand-1);
+  border-width: 2px;
+}
+
+.form-error-message {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.875rem;
+  color: var(--brand-1);
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Page-specific: contacto */
+.page-contact .read-width {
+  margin-inline: 0;
+}
+
+.contact-social {
+  padding: var(--space-lg);
+  background: var(--bg);
+  border: 1px solid var(--border, var(--brand-3));
+  border-radius: 4px;
+}
+
+.contact-social-heading {
+  margin-top: 0;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+}
+
+.contact-social-lead {
+  margin-bottom: var(--space-lg);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.contact-social-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-social-links li {
+  display: flex;
+}
+
+.contact-social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 500;
+}
+
+.contact-social-links .lucide-icon {
+  flex-shrink: 0;
+}

@@ -22,6 +22,7 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 
 | Fecha | Cambio | Static | WordPress | Estado |
 | ----- | ------ | ------ | --------- | ------ |
+| 2026-07-19 | GA4 (`G-B8FY69RGSS`) retirado de las 14 páginas HTML (PRIV-001; sin consentimiento ni `/privacidad`) | Sí | Pendiente portar decisión al theme | Completo (static) |
 | — | *(añadir filas al iniciar Fase 3)* | — | — | — |
 
 **Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`, `Cerrado`.

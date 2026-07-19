@@ -77,7 +77,7 @@ Antes de cada despliegue:
 1. Actualizar `sitemap.xml` (`<lastmod>` de páginas modificadas).
 2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
 3. `npm run lint:css` (sin errores).
-4. Generar ZIP de producción:
+4. Generar ZIP de producción (**solo en el Escritorio**, no dentro del repositorio):
 
 ```bash
 VERSION=$(cat VERSION)
@@ -86,6 +86,8 @@ zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
   assets comunidad linaje practica eventos galeria contacto donaciones blog \
   -x "*.DS_Store" -x "*__MACOSX*"
 ```
+
+Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni commitearlos al repo.
 
 5. Subir y extraer en `public_html` (File Manager de Hostinger).
 
