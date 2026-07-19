@@ -934,10 +934,23 @@ a:focus-visible {
   font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 600;
   text-align: center;
-  margin: 0 0 var(--space-lg);
+  margin: 0 0 var(--space-sm);
   color: var(--brand-1);
   letter-spacing: 0.02em;
   line-height: var(--line-height-tight);
+}
+
+.site-tagline {
+  margin: 0 auto var(--space-sm);
+  max-width: 36rem;
+  text-align: center;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  line-height: var(--line-height-body);
+  color: var(--text-muted);
+}
+
+.site-intro-link {
+  margin: 0 0 var(--space-lg);
 }
 
 .hero {
