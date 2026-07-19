@@ -17,11 +17,11 @@ Define qué assets existen, dónde viven y cómo se usan. La geografía del proy
 | **Biblioteca de iconos** | **Lucide.** Una sola biblioteca en todo el sitio; no mezclar. Lucide ofrece el mejor equilibrio para una comunidad espiritual: limpia, amplia, no comercial, no tecnológica, no llamativa; coherente con identidad sobria y acogedora (docs 01, 02, 06). |
 | **Fuentes**        | Según manual de marca, con una desviación documentada. Autohospedadas en `assets/fonts/` (woff2/ttf). Inter (cuerpo), Fjalla One (headings), MarloweEscapade (display).                               |
 | **Tipografía**     | Definida: MarloweEscapade (display), Fjalla One (headings; reemplaza a Downtown DEMO Regular del manual, ver 02), Inter (body). Según 02; uso en 14.                                                        |
-| **Favicon**        | Set completo: `favicon.ico`, `favicon.svg`, `apple-touch-icon.png` (180×180), `favicon-32x32.png`, `favicon-16x16.png`, `site.webmanifest` con name/theme_color de 02. |
+| **Favicon**        | Set en `assets/favicon/` y raíz: `favicon.ico`, `favicon.svg`, `favicon-48x48.png`, `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180×180). En `<head>`: `<meta name="theme-color" content="#8c2b3d">` (02). **Sin Web App Manifest** — ver §11. |
 | **SVG**            | Iconos en `assets/icons/` (inline o sprite). Favicon en `assets/favicon/favicon.svg`. Sin icon fonts.                                                             |
 | **PDF**            | En content-source: solo referencia (manual de marca, no se despliega). Si el sitio ofrece PDFs descargables, usar `assets/documents/` y enlazar desde el sitio.  |
 | **Audio**          | Si aplica: `assets/audio/`. Formatos: MP3 y/o Opus/WebM para streaming. Uso: meditación guiada, enseñanzas, podcasts.                                             |
-| **JS**             | Solo navegación, formularios, accesibilidad. Sin frameworks. Scripts en footer; `defer` opcional mediante `script_loader_tag` solo para scripts no críticos.      |
+| **JS**             | Solo navegación, formularios, accesibilidad. Sin frameworks. **Sin Service Worker ni flujo de instalación PWA.** Scripts en footer; `defer` opcional mediante `script_loader_tag` solo para scripts no críticos.      |
 | **CSS**            | `style.css` solo cabecera del theme (obligatorio WP). Estilos reales en `assets/css/main.css`; encolar en functions.php. theme.json para tokens. Capas, variables y criterios en 12 §7 y 14. |
 
 ---
@@ -40,7 +40,7 @@ assets/
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Fjalla One (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
-├── favicon/        ico, svg, png, webmanifest
+├── favicon/        ico, svg, png (48, 32, 16, apple-touch 180). Sin webmanifest.
 ├── audio/          Archivos de audio (si aplica): meditación, enseñanzas
 └── documents/      PDFs públicos descargables (si aplica)
 ```
@@ -64,6 +64,22 @@ En la raíz del repo, el script `scripts/optimize-images.sh` optimiza todas las 
 
 - **Carga:** `font-display: swap` obligatorio; declarar fallback stack en CSS (14). Las variables `--font-display`, `--font-heading` y `--font-body` en CSS mapean a: MarloweEscapade (display), Fjalla One (headings), Inter (body). Inter está autohospedada en `assets/fonts/inter/` (woff2: 400, 600, 400 italic); licencia SIL OFL (02, fonts/README.md).
 - **Licencia:** Inter: SIL OFL. Fjalla One: SIL OFL 1.1 (Google Fonts). MarloweEscapade: CC BY 4.0 (crédito en footer). Downtown DEMO Regular (fuente del manual para el logo) se descartó para `--font-heading` en 2026-07: carecía de glifos para vocales acentuadas y ñ, causando mezcla de fuentes en títulos en español; ver nota de desviación en 02.
+
+### 3.2 Favicon en `<head>` (sitio estático)
+
+En **todas** las páginas HTML, declarar favicons con URL absoluta canónica y `theme-color`:
+
+```html
+<meta name="theme-color" content="#8c2b3d">
+<link rel="icon" href="https://caminodeldharma.org/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" href="https://caminodeldharma.org/assets/favicon/favicon-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="https://caminodeldharma.org/assets/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://caminodeldharma.org/assets/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="icon" href="https://caminodeldharma.org/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://caminodeldharma.org/assets/favicon/apple-touch-icon.png" sizes="180x180">
+```
+
+**No incluir** `<link rel="manifest">`. Ver §11.
 
 ---
 
@@ -134,10 +150,57 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 
 ---
 
+## 11. Web tradicional: no PWA
+
+Camino del Dharma es un **sitio web institucional e informativo**, no una aplicación instalable. La experiencia debe ser la de una web normal: sin diálogos de instalación al cargar el home, sin modo `standalone` y sin expectativa de “descargar la app”.
+
+### Decisión (2026-07)
+
+| Elemento | Regla |
+|----------|--------|
+| `site.webmanifest` / `manifest.json` | **No usar.** No crear ni desplegar. |
+| `<link rel="manifest">` | **Prohibido** en el `<head>` de cualquier página. |
+| `"display": "standalone"` | **Prohibido.** No anunciar el sitio como app. |
+| Service Worker (`sw.js`, `service-worker.js`) | **Prohibido.** Sin caché offline ni registro con `navigator.serviceWorker`. |
+| `beforeinstallprompt` / `.prompt()` | **Prohibido.** Sin botón “Instalar app” ni apertura automática del diálogo nativo. |
+| Favicons + `apple-touch-icon` | **Sí.** Independientes del manifest; pestaña, Google, accesos manuales. |
+| `<meta name="theme-color">` | **Sí.** Color de marca `#8c2b3d` (02). |
+
+### Por qué
+
+Un Web App Manifest con `"display": "standalone"` (o un manifest enlazado desde el HTML) proporciona la **principal señal estándar** para que Chrome trate el sitio como PWA instalable y puede mostrar el diálogo nativo de instalación **sin acción del usuario** — comportamiento intrusivo e inadecuado para este proyecto (07, 01).
+
+Sin `<link rel="manifest">` y sin manifest accesible desde la página, el sitio deja de ofrecer esa señal. Los navegadores pueden seguir permitiendo **manualmente** “Añadir a pantalla de inicio” (Safari, Chrome); eso no se impide ni se promueve.
+
+### Implementación en producción
+
+- **Raíz del sitio:** `favicon.ico`, `favicon.svg` (opcional).
+- **`assets/favicon/`:** PNG 48×48, 32×32, 16×16, `apple-touch-icon.png` 180×180.
+- **`.htaccess`:** responder **410 Gone** a `/site.webmanifest` por si quedó en caché o en despliegues anteriores:
+
+  ```apache
+  RewriteRule ^site\.webmanifest$ - [G,L]
+  ```
+
+- **ZIP de despliegue:** no incluir `site.webmanifest` (ver README).
+
+### Comprobación tras despliegue
+
+1. `<head>` en vivo **sin** `<link rel="manifest">`.
+2. `curl -sI https://caminodeldharma.org/site.webmanifest` → **410 Gone** (o 404 si el archivo no existe).
+3. Chrome Android: home en ventana de incógnito **sin** diálogo de instalación automático.
+4. Eliminar accesos directos creados durante pruebas PWA anteriores.
+
+### Si en el futuro se quisiera instalación opcional
+
+Solo con decisión explícita de producto: manifest con `"display": "browser"` o botón visible “Añadir a inicio” que llame a `deferredPrompt.prompt()` **tras clic del usuario**. No es el caso actual del proyecto.
+
+---
+
 ## Cierre
 
 Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes, favicon, PDF, imágenes, videos, audio y scripts. Alineado con la identidad (02), el inventario (16), la estructura del theme (12), la estructura de archivos estáticos (13) y la arquitectura CSS (14).
 
 ---
 
-**Versión:** 1.8
+**Versión:** 1.9

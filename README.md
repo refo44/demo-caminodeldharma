@@ -51,7 +51,7 @@ El README documenta el proyecto; el historial de publicaciones vive en [`CHANGEL
 
 Antes de cada despliegue:
 
-1. **Actualizar `sitemap.xml`:** revisar las páginas HTML modificadas desde el último despliegue y actualizar su `<lastmod>` (formato `YYYY-MM-DD`). Solo incluir URLs de páginas indexables; no añadir `llms.txt`, `site.webmanifest` ni otros archivos no HTML. Este paso es **obligatorio antes** de incrementar `VERSION`.
+1. **Actualizar `sitemap.xml`:** revisar las páginas HTML modificadas desde el último despliegue y actualizar su `<lastmod>` (formato `YYYY-MM-DD`). Solo incluir URLs de páginas indexables; no añadir `llms.txt` ni otros archivos no HTML. Este paso es **obligatorio antes** de incrementar `VERSION`.
 2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
 3. Ejecutar `npm run lint:css` (sin errores).
 4. Generar el ZIP de producción con el nombre `camino-del-dharma-vX.Y.Z.zip` (según la versión en `VERSION`).
@@ -59,7 +59,7 @@ Antes de cada despliegue:
 
 Para detectar páginas modificadas, comparar contra el último commit de release (p. ej. `git diff HEAD~1 -- '*.html'`) o revisar manualmente que cada URL del sitemap refleje la fecha del cambio más reciente.
 
-El ZIP de despliegue incluye solo archivos de producción (HTML, assets, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `site.webmanifest`, `.htaccess`). No incluye `docs/`, `content-source/`, `node_modules/` ni `.git/`.
+El ZIP de despliegue incluye solo archivos de producción (HTML, assets, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`). No incluye `docs/`, `content-source/`, `node_modules/` ni `.git/`.
 
 ## Scripts
 
