@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.10] - 2026-07-19
+
+### Mejoras
+
+- Rendimiento (PageSpeed): preload del hero WebP, fuente Inter 400 y CSS principal en inicio.
+- Inicio: imágenes con `<picture>` (WebP + JPEG), `fetchpriority="high"` en hero, lazy load bajo el pliegue.
+- Imágenes optimizadas en `assets/images/inicio/` (JPEG recomprimidos + variantes `.webp`).
+- CSS: `picture` en bloques hero y section-figure.
+- `sitemap.xml`: `<lastmod>` actualizado en `/` (`2026-07-19`).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.9] - 2026-07-19
 
 ### Mejoras

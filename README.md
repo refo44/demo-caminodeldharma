@@ -53,6 +53,17 @@ Este comando debe ejecutarse después de cualquier cambio en `assets/css/` y ant
 
 El sitio es web tradicional (sin PWA ni `site.webmanifest`). Metadatos SEO, Open Graph, JSON-LD y `<meta name="theme-color">` están en el `<head>` de cada HTML.
 
+### Rendimiento (PageSpeed)
+
+En el home y donde aplique:
+
+- Imágenes WebP con `<picture>` (JPEG como fallback)
+- `preload` del hero, fuente Inter 400 y CSS principal
+- `fetchpriority="high"` en la imagen LCP del hero
+- `loading="lazy"` y `decoding="async"` en imágenes bajo el pliegue
+
+Variantes WebP viven junto a los JPEG en `assets/images/` (p. ej. `assets/images/inicio/*.webp`). Incluir ambos formatos en el ZIP de despliegue.
+
 ## Despliegue en Hostinger
 
 El README documenta el proyecto; el historial de publicaciones vive en [`CHANGELOG.md`](CHANGELOG.md).
@@ -62,12 +73,21 @@ Antes de cada despliegue:
 1. **Actualizar `sitemap.xml`:** revisar las páginas HTML modificadas desde el último despliegue y actualizar su `<lastmod>` (formato `YYYY-MM-DD`). Solo incluir URLs de páginas indexables; no añadir `llms.txt` ni otros archivos no HTML. Este paso es **obligatorio antes** de incrementar `VERSION`.
 2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
 3. Ejecutar `npm run lint:css` (sin errores).
-4. Generar el ZIP de producción con el nombre `camino-del-dharma-vX.Y.Z.zip` (según la versión en `VERSION`).
+4. Generar el ZIP de producción con el nombre `camino-del-dharma-vX.Y.Z.zip` (según la versión en `VERSION`):
+
+```bash
+VERSION=$(cat VERSION)
+zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
+  index.html 404.html robots.txt sitemap.xml sitemap.xsl llms.txt .htaccess favicon.ico favicon.svg \
+  assets comunidad linaje practica eventos galeria contacto donaciones blog \
+  -x "*.DS_Store" -x "*__MACOSX*"
+```
+
 5. Subir y extraer en `public_html` del File Manager de Hostinger.
 
 Para detectar páginas modificadas, comparar contra el último commit de release (p. ej. `git diff HEAD~1 -- '*.html'`) o revisar manualmente que cada URL del sitemap refleje la fecha del cambio más reciente.
 
-El ZIP de despliegue incluye solo archivos de producción: HTML, `assets/`, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`. No incluye `docs/`, `content-source/`, `node_modules/`, `scripts/`, `VERSION`, `CHANGELOG.md` ni `.git/`.
+El ZIP de despliegue incluye solo archivos de producción: HTML, `assets/` (CSS, JS, imágenes JPEG/WebP, fuentes, favicon, audio, PDF), `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`. No incluye `docs/`, `content-source/`, `node_modules/`, `scripts/`, `VERSION`, `CHANGELOG.md` ni `.git/`.
 
 ## Scripts
 
