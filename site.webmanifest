@@ -21,6 +21,6 @@
   ],
   "theme_color": "#8c2b3d",
   "background_color": "#ffffff",
-  "display": "standalone",
+  "display": "browser",
   "lang": "es-CO"
 }
