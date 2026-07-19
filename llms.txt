@@ -1,12 +1,12 @@
 # Camino del Dharma
 
-> Comunidad Buddhista en Colombia dedicada a la práctica, el estudio y la meditación en las tradiciones Mahāyāna Chan y Tierra Pura.
+> Comunidad Buddhista en Colombia dedicada al budismo Chan y Tierra Pura — práctica, estudio y meditación.
 
 **Primary language:** es-CO (Spanish, Colombia)
 
 **Canonical website:** https://caminodeldharma.org
 
-Camino del Dharma es una comunidad buddhista con presencia en Colombia dedicada al estudio, la práctica y la difusión de las enseñanzas Mahāyāna, especialmente de las tradiciones Chan y Tierra Pura. Este sitio reúne la información institucional de la comunidad, recursos para comenzar la práctica, enseñanzas, actividades y publicaciones.
+Camino del Dharma es una comunidad buddhista con presencia en Colombia dedicada al budismo Chan y Tierra Pura: estudio, práctica, meditación y difusión de enseñanzas Mahāyāna. Este sitio reúne la información institucional de la comunidad, recursos para comenzar la práctica, enseñanzas, actividades y publicaciones.
 
 ## Alcance
 
@@ -39,7 +39,7 @@ When information in this file differs from the website, the canonical website pa
 
 ## Recursos
 
-- [Blog](https://caminodeldharma.org/blog): Ensayos, reflexiones y publicaciones de la comunidad sobre Buddhismo, práctica y vida contemporánea.
+- [Blog](https://caminodeldharma.org/blog): Ensayos, reflexiones y publicaciones de la comunidad sobre budismo, práctica y vida contemporánea.
 
 ## Optional
 
