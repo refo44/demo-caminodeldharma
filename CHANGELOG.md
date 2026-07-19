@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.8] - 2026-07-19
+
+### Mejoras
+
+- `<meta name="theme-color">` en todas las páginas; favicon 48×48 añadido.
+- SEO: títulos y descripciones refinados en inicio, comunidad, linaje y práctica.
+- Inicio: tagline y enlace introductorio a la comunidad.
+- Eliminado `site.webmanifest` y referencias PWA (decisión de no implementar app instalable).
+- `sitemap.xml`: `<lastmod>` alineado en todas las URLs (`2026-07-19`).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.7] - 2026-07-18
 
 ### Mejoras
