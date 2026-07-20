@@ -8,6 +8,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.14] - 2026-07-20
+
+### Privacidad (embeds y almacenamiento local)
+
+- `index.html`, `practica/index.html`, `practica/videos/index.html`: iframes de YouTube migrados a `youtube-nocookie.com`; Vimeo con `?dnt=1`; JSON-LD `embedUrl` alineado (hallazgo audit PRIV-001 / TASK-0006).
+- `assets/js/main.js`: retirada la persistencia en `localStorage` del selector de idioma mientras el sitio es solo español (ADR 0019).
+- `sitemap.xml`: `<lastmod>` actualizado a `2026-07-20` en `/`, `/practica` y `/practica/videos`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.13] - 2026-07-20
 
 ### Contenido editorial (grafía Buddhismo)
