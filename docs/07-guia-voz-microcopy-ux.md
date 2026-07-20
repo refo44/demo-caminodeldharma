@@ -123,7 +123,7 @@ No se usan códigos ni tecnicismos visibles.
 | El linaje | Sereno, informativo |
 | Práctica y actividades | Práctico, orientador |
 | Eventos (cuando visible) | Claro, informativo, invitación a participar |
-| Blog | Reflexivo, sobrio; atribución clara al compartir |
+| Blog | Reflexivo o informativo según la pieza (`23` §4.0); siempre sobrio; atribución clara al compartir (`21` §11) |
 | Contacto | Cortés, simple |
 
 ---
@@ -143,4 +143,4 @@ Debe sonar como: **Un espacio de acogida, serio y vivo.**
 
 ---
 
-**Versión:** 1.0
+**Versión:** 1.1 (2026-07-20 — tono Blog ampliado para piezas educativas)

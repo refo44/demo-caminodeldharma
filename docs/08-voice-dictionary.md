@@ -135,6 +135,14 @@ Cuando alguien pueda tropezar con la grafía, se explica en el propio contenido 
 la del linaje, por ser la que trata la tradición y su transmisión; repetirla en otras secciones
 diluiría el mensaje.
 
+### Entradas del blog
+
+- En el **cuerpo visible** del artículo se mantiene **Buddhismo / buddhista** (`21` §14).
+- Los **metadatos** de la entrada (`description`, Open Graph) pueden usar *budismo / budista* cuando
+  ayuden a quien busca con esa grafía — son metadatos, no voz de la comunidad.
+- Un **título o encabezado en forma de pregunta** es válido cuando la pieza responde una duda real
+  (`23` §4.0, artículo educativo). Debe sonar a orientación, no a titular de marketing.
+
 ---
 
 ## 8. Regla final
@@ -145,6 +153,6 @@ El sitio no vende. El sitio acoge.
 
 ---
 
-**Referencia:** `09-ui-copy-sheet` (textos concretos por pantalla).
+**Referencia:** `09-ui-copy-sheet` (textos concretos por pantalla). Tipos de pieza en blog: `23-sistema-editorial` §4.0. Brief editorial: `24-brief-editorial-blog-y-visibilidad`.
 
-**Versión:** 1.0
+**Versión:** 1.1 (2026-07-20 — entradas del blog)

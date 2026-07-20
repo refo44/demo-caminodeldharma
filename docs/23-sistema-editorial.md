@@ -1,9 +1,11 @@
 # Camino del Dharma — Sistema editorial
 
-> **Estado: borrador en análisis**  
-> Este documento **no es política editorial final**. Registra el marco en discusión para escribir, editar y presentar textos en el sitio. No debe citarse como lineamiento oficial hasta su revisión y aprobación.
+> **Estado: borrador revisado (2026-07-20)**  
+> Actualizado para alinear el blog con el plan editorial (`24-brief-editorial-blog-y-visibilidad`) y el manual de voz (`21`). **Pendiente ratificación comunitaria final** antes de citarlo como lineamiento oficial.
 
 Define **cómo habitan la pantalla** los distintos tipos de contenido: niveles de texto, formatos, estructura, extensión orientativa y reglas de presentación (listado vs. detalle).
+
+**Brief para el equipo editorial (no técnico):** `24-brief-editorial-blog-y-visibilidad` — contexto del hallazgo de visibilidad y calendario de artículos propuesto.
 
 **Complementa:** `01-plataforma-comunidad-plan` (Capa 6), `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `06-wireframes`  
 **Referencia:** `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `20-layout-principles`
@@ -22,13 +24,14 @@ Este documento y los de copy **trabajan juntos**; no se sustituyen ni se duplica
 | `07-guia-voz-microcopy-ux` | Voz del sistema: atributos (sobria, acogedora, clara), personas gramaticales, CTAs, tono por sección. |
 | `08-voice-dictionary` | Léxico permitido y prohibido. |
 | `09-ui-copy-sheet` | Copy fijo de interfaz: botones, menús, estados, mensajes de compartir. |
-| **`23-sistema-editorial` (este doc)** | Tipos de contenido, niveles de texto, estructura por formato, extensión orientativa, presentación listado/detalle, checklist de **pantalla** (§12). |
+| **`23-sistema-editorial` (este doc)** | Tipos de contenido, niveles de texto, estructura por formato, extensión orientativa, presentación listado/detalle, checklist de **pantalla** (§12). Tipos de intención del blog (§4.0). |
+| **`24-brief-editorial-blog-y-visibilidad`** | Brief no técnico para editores: por qué ampliar el blog y propuesta de calendario (derivado del audit; ver TASK-0016). |
 
 ### Cómo se aplican en conjunto
 
 Al publicar contenido editorial (p. ej. una entrada del blog):
 
-1. **`23`** — define el **formato**: artículo breve o estándar, estructura con `h2`, extracto de una o dos oraciones, detalle con superficie de lectura.
+1. **`23`** — define el **formato** y el **tipo de intención** (§4.0): reflexión, artículo educativo o nota; extensión según §4.3; estructura con `h2`, extracto de una o dos oraciones, detalle con superficie de lectura.
 2. **`21`** — define la **redacción**: orientar antes que atraer, decir menos pero mejor, ritmo pausado, checklist §17.
 3. **`07` / `08`** — acotan **voz y léxico** en título, cuerpo y CTA.
 4. **`09`** — aplica solo si hay copy de interfaz (Compartir, navegación).
@@ -98,6 +101,24 @@ Copy exacto: `content-source`. Estructura de bloques: `06-wireframes`.
 
 Los artículos del blog tienen naturaleza **circunstancial** y estructura **flexible** (`04-mapa-pantallas`). Pueden ser breves o extensos según el propósito; el cuerpo siempre usa la **superficie de lectura** (`20-layout-principles`).
 
+### 4.0 Tipos de intención (no confundir con extensión)
+
+La extensión (§4.3) y la estructura (§4.5) dependen del **tema**. La **intención** define qué tipo de pieza es. Una misma extensión puede ser reflexión o artículo educativo.
+
+| Tipo | Función | Ejemplos orientativos | Tono (`07` §8, `21` §12) |
+| --- | --- | --- | --- |
+| **Reflexión** | Acompañar, profundizar en una experiencia o enseñanza concreta | Ensayo sobre la sangha, la soledad, la práctica cotidiana | Reflexivo — orientar / invitar |
+| **Artículo educativo** | Explicar un tema con claridad para quien aún no conoce la tradición | «¿Qué es el budismo Chan?», Tierra Pura y nianfo | Informativo — explicar / orientar |
+| **Nota de contexto** | Situar un hecho, lugar o actividad con datos verificables | Práctica en Cali, contexto de un encuentro | Informativo — orientar |
+
+**Reglas:**
+
+- El título puede formularse como **pregunta** cuando la pieza responde una duda real (`21` §6.1: orientar antes que atraer). No es un truco de posicionamiento: la respuesta debe estar en el primer párrafo, con voz de la comunidad.
+- No duplicar páginas institucionales canónicas (`content-source`): el blog **complementa**, no sustituye Inicio, Linaje ni Práctica.
+- Calendario y temas prioritarios: ver `24-brief-editorial-blog-y-visibilidad` §5 (propuesta para acuerdo comunitario).
+
+Al compartir en redes, la línea de contexto usa el tipo de pieza (`21` §11).
+
 ### 4.1 Principios de extensión
 
 - Una **sola idea principal** por artículo.
@@ -157,7 +178,7 @@ La estructura responde al **tema**, no a un mínimo de palabras por sección. He
 - Cuerpo completo en superficie de lectura.
 - Botón «Compartir» solo aquí (`09-ui-copy-sheet` §6).
 - Metadatos sociales: `03-wordpress-content-model` §8 (título, extracto ~155 caracteres, imagen, URL canónica).
-- Copy al compartir por plataforma: templates en el detalle (`09-ui-copy-sheet` §6, mensaje de blog). Línea de contexto obligatoria: `Reflexión · [Autor] · Camino del Dharma`.
+- Copy al compartir por plataforma: templates en el detalle (`09-ui-copy-sheet` §6, mensaje de blog). Línea de contexto según tipo de pieza (§4.0): p. ej. `Reflexión · [Autor] · Camino del Dharma`, `Artículo · …`, `Nota · …`.
 
 Redacción de título, extracto y cuerpo: `21-manual-voz-copywriting-editorial` (rector), `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet` (copy de interfaz y compartir).
 
@@ -286,12 +307,14 @@ Checklist de **pantalla** (este documento, §12): forma, estructura y presentaci
 ## 13. Pendiente de decisión
 
 - [ ] Validar rangos de extensión del blog (§4.3) con quienes producirán contenido
-- [ ] Confirmar artículo vs. ensayo por intención (§5)
+- [x] Confirmar tipos de intención del blog (§4.0): reflexión, artículo educativo, nota de contexto
+- [ ] Confirmar artículo vs. ensayo por intención (§5) en la primera reunión editorial
 - [ ] Definir subtítulo del blog (`09-ui-copy-sheet`)
-- [x] Mensaje de blog al compartir por plataforma (`09-ui-copy-sheet` §6)
-- [ ] Confirmar que el alcance de `21-manual-voz-copywriting-editorial` §2 cubre explícitamente entradas del blog
+- [x] Mensaje de blog al compartir por plataforma (`09-ui-copy-sheet` §6; tipos en `21` §11)
+- [x] Confirmar que el alcance de `21-manual-voz-copywriting-editorial` §2 cubre explícitamente entradas del blog
 - [x] Añadir fila «Blog» en tono por sección (`07-guia-voz-microcopy-ux` §8)
-- [ ] Aprobar o descartar este documento como lineamiento oficial
+- [ ] Aprobar calendario de artículos propuesto en `24-brief-editorial-blog-y-visibilidad` §5
+- [ ] Aprobar este documento como lineamiento oficial (ratificación comunitaria)
 
 ---
 
@@ -301,6 +324,6 @@ Este documento concentra el **sistema editorial** del sitio: niveles de texto, r
 
 ---
 
-**Versión:** 0.3 (borrador)  
-**Estado:** en análisis — no es lineamiento final  
-**Referencias de copy:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet`, `21-manual-voz-copywriting-editorial`
+**Versión:** 0.4 (borrador revisado 2026-07-20)  
+**Estado:** en análisis — alineado con `24-brief-editorial-blog-y-visibilidad`; pendiente ratificación comunitaria final  
+**Referencias de copy:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet`, `21-manual-voz-copywriting-editorial`, `24-brief-editorial-blog-y-visibilidad`

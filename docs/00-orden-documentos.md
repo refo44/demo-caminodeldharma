@@ -56,6 +56,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 20. `20-layout-principles`
 21. `21-manual-voz-copywriting-editorial`
 23. `23-sistema-editorial`
+24. `24-brief-editorial-blog-y-visibilidad` — brief para el equipo editorial (hallazgo de visibilidad y plan de artículos; no sustituye `21` ni `23`)
 
 **ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0017). **Migración:** `migracion-static-wordpress.md`. **Archivo (respaldos):** `archive/contacto-formulario-estatico/` — snapshot de la página `/contacto` y estilos del formulario para restauración post-WordPress o tras cambios del estático. No llevan prefijo numérico en `00` para no romper la regla de dependencias lineal; se referencian desde `17-orden-implementacion`.
 

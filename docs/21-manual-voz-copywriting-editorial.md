@@ -30,9 +30,13 @@ Este manual aplica a toda expresión escrita de la comunidad, en especial a:
 - títulos y subtítulos
 - textos de presentación institucional
 - descripciones de práctica, actividades y eventos
+- **entradas del blog** (reflexiones, artículos educativos, notas de contexto)
+- extractos, subtítulos y cuerpo de entradas del blog
 - llamadas a la acción
 
 No regula el contenido doctrinal en sí mismo. Regula su forma de presentación escrita.
+
+Para formato, extensión y tipos de pieza en el blog, ver `23-sistema-editorial` §4. Para el contexto del plan editorial de contenido, ver `24-brief-editorial-blog-y-visibilidad`.
 
 ---
 
@@ -319,13 +323,19 @@ En **X y Threads**, el borrador prellenado usa la línea de contexto `[Tipo de e
 
 Los mensajes prellenados al compartir una entrada del blog son **borradores editables**: quien comparte puede añadir su comentario, tags o sustituirlos por completo.
 
-Deben dejar claro que el título pertenece a una **reflexión publicada**, no a una opinión personal de quien envía el enlace. Por eso la primera línea siempre atribuye autor y fuente:
+Deben dejar claro que el título pertenece a una **pieza publicada en el blog**, no a una opinión personal de quien envía el enlace. Por eso la primera línea siempre atribuye tipo de pieza, autor y fuente:
 
-`Reflexión · [Autor] · Camino del Dharma`
+| Tipo de entrada (`23` §4.0) | Línea de contexto al compartir |
+| --- | --- |
+| Reflexión | `Reflexión · [Autor] · Camino del Dharma` |
+| Artículo educativo | `Artículo · [Autor] · Camino del Dharma` |
+| Nota de contexto | `Nota · [Autor] · Camino del Dharma` |
+
+Si la pieza no encaja en una categoría, usar la más cercana o `Artículo · …` por defecto. No inventar etiquetas promocionales.
 
 Secuencia recomendada (WhatsApp):
 
-1. Línea de contexto con autor y comunidad.
+1. Línea de contexto con tipo, autor y comunidad.
 2. Título del artículo.
 3. Subtítulo, si existe.
 4. URL única del artículo.
@@ -645,3 +655,7 @@ Más presencia.
 
 La comunicación no necesita convencer.
 Necesita estar disponible.
+
+---
+
+**Versión:** 1.1 (2026-07-20 — alcance blog §2; compartir por tipo de pieza §11)
