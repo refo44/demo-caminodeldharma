@@ -15,9 +15,11 @@
 
 ## 2. Resumen ejecutivo
 
-**DECISION: ACTIVATE HSTS NOW** — la cabecera candidata `Strict-Transport-Security "max-age=31536000"` (solo host) puede activarse ya: los 14 controles de la fase de decisión HSTS pasaron con evidencia reproducible (redirecciones directas, certificado válido para apex y www, TLS 1.3, cero contenido mixto, configuración fuente = producción). `includeSubDomains` y `preload` quedan **RECHAZADOS** como decisiones separadas (ver `hsts-decision.md`).
+> **Revisión 2026-07-19 (continuación):** HSTS era la decisión que este informe destacaba en cabecera; queda reposicionado como **un criterio de seguridad de transporte más**, no el objetivo de la auditoría. Además, el sitio estático auditado es **temporal** (migración a WordPress planificada), por lo que la decisión vigente es el **despliegue escalonado** (ADR 0018): Fase 1 `max-age=604800` ahora; `max-age=31536000` solo tras WordPress estable. **No** configurar el año completo en esta etapa.
 
-El sitio es un estático pequeño, muy bien construido: higiene SEO impecable (títulos, canónicas, sitemap, datos estructurados completos), accesibilidad estructural sólida, despliegue idéntico al commit auditado y superficie de exposición mínima. Los problemas materiales son pocos y concretos:
+**HSTS (criterio de transporte):** los 14 controles de la fase de decisión pasaron con evidencia reproducible (redirecciones directas, certificado válido para apex y www, TLS 1.3, cero contenido mixto, configuración fuente = producción). Decisión: **activar en Fase 1 con `max-age=604800`** (ADR 0018). `includeSubDomains` y `preload` quedan **RECHAZADOS** como decisiones separadas (ver `hsts-decision.md`).
+
+El sitio es un estático pequeño, muy bien construido: higiene SEO **interna** impecable (títulos, canónicas, sitemap, datos estructurados completos), accesibilidad estructural sólida, despliegue idéntico al commit auditado y superficie de exposición mínima. La continuación añadió la dimensión que faltaba — **SEO externo** — con resultado deficiente: el sitio solo se encuentra buscando su nombre exacto (SEO-EXT-001/002, §8). Los problemas materiales son concretos:
 
 1. **FUNC-001 (ALTA):** el formulario de contacto no entrega mensajes (action="#", sin backend ni handler): pérdida silenciosa del journey principal de conversión.
 2. **FUNC-002 (ALTA):** las descargas de calendario `.ics` devuelven 404 en ambos eventos (los archivos `/ical/*.ics` nunca se crearon).
@@ -42,8 +44,8 @@ Ver `tools.md`. Relevante: Lighthouse/axe no disponibles (instalación prohibida
 | Severidad | Nº | Categorías principales |
 |---|---:|---|
 | CRÍTICA | 0 | — |
-| ALTA | 2 | Funcionalidad (formulario de contacto, descargas .ics) |
-| MEDIA | 4 | Seguridad/transporte (HSTS, CSP), Privacidad (consentimiento), Rendimiento (imágenes) |
+| ALTA | 3 | Funcionalidad (formulario de contacto, descargas .ics), SEO externo (visibilidad temática nula — SEO-EXT-001, continuación) |
+| MEDIA | 5 | Seguridad/transporte (HSTS, CSP), Privacidad (consentimiento), Rendimiento (imágenes), SEO externo (índice con residuos WordPress — SEO-EXT-002, continuación) |
 | BAJA | 3 | Caché sin versionado, galería sin fallback JS, security.txt |
 | INFORMATIVA | 1 | Cadena www 2 saltos, MIME x-javascript, README de fuentes público |
 
@@ -72,7 +74,7 @@ Los 10 hallazgos completos (con reproducción, causa raíz, criterios de aceptac
 - **FUNC-002 · ALTA · CONFIRMADO** — `.ics` rotos: `data-calendar-ics` apunta a `/ical/encuentro-nacional-2026.ics` y `/ical/pausa-profunda-cali.ics`; ambos 404 en producción y ausentes del repo (no existe `ical/`). 2 de 4 opciones del diálogo "Añadir al calendario" fallan en ambos eventos. Evidencia EVID-0026. → `remediation/FUNC-002.md`, TASK-0001 (READY).
 
 ### Seguridad y transporte
-- **SEC-001 · MEDIA · CONFIRMADO** — HSTS ausente (línea 103 de `.htaccess` comentada a la espera de esta auditoría). Decisión: **ACTIVATE HSTS NOW** con confianza alta; riesgo residual: renovación de certificado inferida (crt.sh caído), fijación de 1 año. → `remediation/SEC-001.md`, TASK-0004 + verificación TASK-0005; `includeSubDomains` en TASK-0012 (BLOCKED).
+- **SEC-001 · MEDIA · CONFIRMADO** — HSTS ausente (línea 103 de `.htaccess` comentada a la espera de esta auditoría). Decisión: **activar en Fase 1 con `max-age=604800`** (despliegue escalonado ADR 0018; el año completo solo tras WordPress estable — el sitio estático es temporal). Riesgo residual: renovación de certificado inferida (crt.sh caído); fijación limitada a 7 días en Fase 1. → `remediation/SEC-001.md`, TASK-0004 + verificación TASK-0005; `includeSubDomains` en TASK-0012 (BLOCKED).
 - **SEC-002 · MEDIA · CONFIRMADO** — CSP solo `upgrade-insecure-requests`: sin contención XSS. Política propuesta (inventario de terceros ya hecho: GA4, YouTube, Vimeo) con despliegue Report-Only → enforce. → TASK-0008.
 - **SEC-003 · BAJA · CONFIRMADO** — Sin `/.well-known/security.txt` (SECURITY.md existe pero no se publica). → TASK-0009.
 - **PRIV-001 · MEDIA · CONFIRMADO** — GA4 fija `_ga*` en el primer render sin banner ni mecanismo de consentimiento, y el sitio no tiene política de privacidad. Riesgo regulatorio (Ley 1581/2012; visitantes UE) — la conclusión legal corresponde a asesoría. Embeds de YouTube sin modo nocookie. → TASK-0006 (BLOCKED: decisión organizativa + texto de política).
@@ -83,6 +85,10 @@ Los 10 hallazgos completos (con reproducción, causa raíz, criterios de aceptac
 
 ### AEO (Agentic Engine Optimization)
 - **AEO-001 · BAJA · CONFIRMADO** — `/galeria` renderiza el grid 100 % en cliente sin fallback: vacía para agentes sin JS. Prueba de tareas agénticas: "contactar" por formulario = FALLA silenciosa (FUNC-001); "añadir evento a calendario" = parcial (2/4 opciones); enlaces WhatsApp/Google Calendar = correctos. → TASK-0010.
+
+### SEO externo (continuación 2026-07-19 — `working/seo-external.md`)
+- **SEO-EXT-001 · ALTA · CONFIRMADO** — El sitio solo es localizable por el nombre exacto "Camino del Dharma": ausente del top 10 en TODAS las consultas temáticas probadas (budismo en colombia, comunidad/centro budista, budismo chan/tierra pura, budismo cali, retiros). Causas: autoridad externa casi nula (Buddhistdoor cita la comunidad pero enlaza solo a Facebook; ausente del directorio budismo.com), sin señales locales (Cali/2012 no aparecía en el sitio), contenido temático mínimo (1 entrada de blog), sin GSC verificable. Evidencia EVID-0033/0035/0036. Mejoras on-page implementadas en la continuación; off-page y medición → TASK-0014/0015; contenido → TASK-0016.
+- **SEO-EXT-002 · MEDIA · CONFIRMADO** — Índice contaminado por URLs residuales de la etapa WordPress: `www./prueba/` (¡página de prueba en el SERP de marca!), `/category/*` (301→404), `?page_id=10` (200 duplicado). Evidencia EVID-0032/0034. Redirects 410/301 implementados en fuente (.htaccess) → desplegar con TASK-0013 y retirar en GSC con TASK-0015.
 
 ### Informativos (sin acción requerida)
 - **INFO-001** — Cadena de 2 saltos solo en la entrada http://www (borde de plataforma, cada salto seguro); JS servido como `application/x-javascript` (legado, funcional); `assets/fonts/README.md` público (inofensivo).
@@ -111,7 +117,8 @@ Detalle completo por evidencia (comando, timestamp, artefacto crudo): `evidence-
 
 | Área | Score | Cobertura | Confianza | Resumen |
 |---|---:|---:|---|---|
-| SEO | 100 | 90 % | ALTA | 8/8 controles aplicables PASS |
+| SEO (interno/on-page) | 100 | 90 % | ALTA | 8/8 controles aplicables PASS — **solo mide SEO interno** |
+| SEO externo (visibilidad orgánica) | 25 | 70 % | MEDIA | continuación 2026-07-19: solo el nombre exacto posiciona; consultas temáticas 0/8 en top 10; índice con residuos WP (`working/seo-external.md`) |
 | SEO técnico | 100 | 90 % | ALTA | estados, canónicas, sitemap, redirecciones |
 | Datos estructurados | 100 | 95 % | ALTA | validación local completa |
 | Arquitectura de contenido | 100 | 80 % | MEDIA | eventos expirados bien gestionados |
@@ -138,7 +145,7 @@ Método y pesos: `metrics/scorecard.csv` + `controls.csv` (fórmula de AUDIT_SCH
 
 ## 11. Roadmap priorizado
 
-Ver `roadmap.md`. Orden recomendado de arranque: TASK-0004+0005 (HSTS, objetivo de la auditoría, 30 min y reversible) → TASK-0001 (.ics, <30 min, elimina 404 de cara al usuario) → TASK-0002 (contacto). Después WAVE-2/4/5/6 según `implementation/waves.md`.
+Ver `roadmap.md`. Orden recomendado de arranque por impacto en usuarios: TASK-0001 (.ics, <30 min, elimina 404 de cara al usuario) → TASK-0002 (contacto) → TASK-0004+0005 (HSTS Fase 1 `max-age=604800`, 30 min y reversible en días — un criterio de transporte más, no el objetivo de la auditoría). Después WAVE-2/4/5/6 según `implementation/waves.md`.
 
 ## 12. Diseños de remediación
 
@@ -162,4 +169,4 @@ Uno por hallazgo accionable en `remediation/<FINDING_ID>.md` (índice en `remedi
 
 ## 17. Veredicto final
 
-**Listo para producción con reservas puntuales.** No hay bloqueadores críticos. La activación de HSTS está aprobada y lista (SEC-001 → TASK-0004). Los mayores riesgos por dominio: UX/negocio = formulario de contacto silenciosamente roto (FUNC-001); funcionalidad = descargas .ics 404 (FUNC-002); seguridad = CSP mínima (SEC-002) y consentimiento/privacidad (PRIV-001); rendimiento = imágenes sobredimensionadas (PERF-001) con CWV no verificables (limitación); mantenibilidad = assets sin versionado (PERF-002); AI search = en verde; agéntico = accionabilidad 25/100 por FUNC-001/002. **Primer paso de implementación: TASK-0004 (activar HSTS) seguido de TASK-0005 (verificación independiente).** Cada afirmación de este veredicto referencia hallazgos aceptados del ledger.
+**Listo para producción con reservas puntuales.** No hay bloqueadores críticos. La activación de HSTS Fase 1 (`max-age=604800`, ADR 0018) está aprobada y lista (SEC-001 → TASK-0004); el `max-age` de un año queda diferido a la etapa post-WordPress porque el sitio estático es temporal. Los mayores riesgos por dominio: UX/negocio = formulario de contacto silenciosamente roto (FUNC-001); funcionalidad = descargas .ics 404 (FUNC-002); seguridad = CSP mínima (SEC-002) y consentimiento/privacidad (PRIV-001); rendimiento = imágenes sobredimensionadas (PERF-001) con CWV no verificables (limitación); mantenibilidad = assets sin versionado (PERF-002); AI search = en verde; agéntico = accionabilidad 25/100 por FUNC-001/002. **Primeros pasos de implementación: TASK-0001 (.ics) y TASK-0002 (contacto), seguidos de TASK-0004 (HSTS Fase 1) + TASK-0005 (verificación independiente).** Cada afirmación de este veredicto referencia hallazgos aceptados del ledger.

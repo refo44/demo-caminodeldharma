@@ -16,6 +16,15 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - **Reactivación:** solo tras política publicada y Consent Mode v2 (o alternativa acordada). Ver `.audit/implementation/tasks/TASK-0006.md` y `docs/17-orden-implementacion.md` §2.75 (PRIV-001). ID de propiedad conservado para uso futuro: `G-B8FY69RGSS`.
 - Métricas de indexación: seguir usando **Google Search Console** (sin cookies en el sitio).
 
+### SEO (auditoría externa — continuación 2026-07-19)
+
+- `.htaccess`: limpieza del índice residual de la etapa WordPress — `410` para `/prueba`, `301` de `/category/*` → `/blog`, `301` de `/?page_id=10` → `/comunidad` y de otros `?page_id=` → portada (hallazgo SEO-EXT-002; estas URLs seguían indexadas y una página "prueba" aparecía en el SERP de marca).
+- `index.html` (JSON-LD Organization): retirado `alternateName` "budismo en Colombia" (keyword, no nombre real); añadidos `foundingDate: 2012`, `foundingLocation: Cali` y `knowsAbout` (Chan, Tierra Pura, meditación, atención plena). Dirección postal no añadida: pendiente de confirmación de la comunidad.
+- `index.html` y `comunidad/index.html`: mención textual de la fundación en Cali (2012) — señal local que el sitio no tenía.
+- `eventos/index.html`: título "Eventos y Retiros Budistas en Colombia | Camino del Dharma" y descripción con intención temática (og/twitter sincronizados).
+- `blog/index.html`: título "Blog de Budismo — Reflexiones y Enseñanzas | Camino del Dharma" (og/twitter sincronizados).
+- Evidencia y análisis completo: `.audit/working/seo-external.md`; tareas derivadas TASK-0013–0016.
+
 ### Estado
 
 - Desarrollo: Finalizado

@@ -6,7 +6,7 @@ Regla general: dentro de una ola, las tareas del mismo conflict group se ejecuta
 Sin tareas: no se encontraron bloqueadores de producción que exijan contención inmediata.
 
 ## WAVE-1 — High-value, low-risk stabilization
-- **TASK-0004** Activar HSTS (prio 1, CG-HTACCESS) — objetivo principal de la auditoría; decisión ACTIVATE_HSTS_NOW.
+- **TASK-0004** Activar HSTS Fase 1 `max-age=604800` (CG-HTACCESS) — criterio de seguridad de transporte (uno más del conjunto auditado, no el objetivo principal); despliegue escalonado ADR 0018.
 - **TASK-0005** Verificación de producción HSTS (prio 1, depende de 0004).
 - **TASK-0001** Crear archivos .ics (prio 2, paralelo seguro con 0004).
 - **TASK-0002** Retirar formulario muerto → CTAs (prio 3, CG-CONTACTO).

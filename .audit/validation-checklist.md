@@ -4,7 +4,7 @@
 Cada TASK-00XX incluye su "Independent validation checklist"; el validador usa TASK_VALIDATOR_TEMPLATE.md, contexto fresco, y escribe `implementation/validations/TASK-00XX.md`.
 
 ## Re-chequeo global tras WAVE-1
-- [ ] `curl -sS -D - -o /dev/null https://caminodeldharma.org/ | grep -i strict-transport-security` → exactamente `max-age=31536000`
+- [ ] `curl -sS -D - -o /dev/null https://caminodeldharma.org/ | grep -i strict-transport-security` → exactamente `max-age=604800` (Fase 1, ADR 0018; `max-age=31536000` solo en Fase 2 post-WordPress)
 - [ ] Ídem en www, 404 y 301; HTTP sigue redirigiendo 301
 - [ ] `curl -o /dev/null -w '%{http_code}' https://caminodeldharma.org/ical/encuentro-nacional-2026.ics` → 200 (y pausa-profunda-cali)
 - [ ] `/contacto` sin `<form>` inentregable; CTAs operativos

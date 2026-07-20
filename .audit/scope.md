@@ -14,7 +14,7 @@
 - Max URLs: 500; max pages per template: 5; performance runs per profile: 3
 - Report language: Spanish
 - HSTS decision required: yes
-  - Candidate: `Header always set Strict-Transport-Security "max-age=31536000"`
+  - Candidate: `Header always set Strict-Transport-Security "max-age=31536000"` (evaluated; superseded operationally by staged rollout ADR 0018 — Phase 1 `max-age=604800` while the temporary static site is live)
   - includeSubDomains candidate: false; preload candidate: false
   - Known subdomains: [] (none declared)
   - Config path: DOCS/demo-caminodeldharma/.htaccess

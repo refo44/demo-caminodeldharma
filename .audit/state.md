@@ -9,13 +9,14 @@
 - Completed phases: PHASE-0, PHASE-1, PHASE-2, PHASE-3 (PARTIAL: paint metrics unavailable — recorded), PHASE-4, PHASE-4A, PHASE-5, PHASE-6, PHASE-7, PHASE-8, PHASE-9, PHASE-10
 - Partial phases: PHASE-3 (LCP/INP not measurable; CLS/TTFB/weight measured — limitations 1-2)
 - Blocked phases: none
-- Accepted findings: 10 (0 CRITICAL, 2 HIGH, 4 MEDIUM, 3 LOW, 1 INFORMATIONAL)
-- Evidence artifacts: 31 ledger records + raw/ tree
+- Accepted findings: 12 (0 CRITICAL, 3 HIGH, 5 MEDIUM, 3 LOW, 1 INFORMATIONAL) — SEO-EXT-001/002 added by 2026-07-19 continuation
+- Evidence artifacts: 36 ledger records + raw/ tree (EVID-0032–0036: external SEO)
 - URLs discovered: 13 indexable + 404 + entry points + machine files (full coverage)
 - URLs tested: all discovered
 - Source commit reviewed: be896db2214c4dafdc8adad89f8496421c8b6071 (deploy parity 14/14 byte-identical)
-- HSTS decision: ACTIVATE_HSTS_NOW (host-only); includeSubDomains REJECTED; preload REJECTED
-- Tasks: 12 (9 READY, 3 BLOCKED) in implementation/tasks.jsonl — audit agent assigned only READY/BLOCKED
+- HSTS decision: STAGED (ADR 0018) — Phase 1 now: host-only max-age=604800; Phase 2 (max-age=31536000) deferred until WordPress cutover stable (static site is temporary). includeSubDomains REJECTED; preload REJECTED. HSTS is one transport-security criterion, not the audit's primary objective.
+- Tasks: 16 (12 READY, 4 BLOCKED) in implementation/tasks.jsonl — TASK-0013–0016 added by continuation (external SEO); TASK-0013 changes already made in source, pending deploy
+- Continuation 2026-07-19: external SEO audit executed (working/seo-external.md); HSTS artifacts realigned to staged rollout (ADR 0018); on-page SEO improvements implemented in source (index, comunidad, eventos, blog, .htaccess)
 - Verifier: fresh-context pass complete, verdict ACCEPT (1 minor clarification applied — see verification.md)
 - Current limitations: see limitations.md (9 entries)
-- Next executable action: Stage 2 (separate session) — implement TASK-0004 via IMPLEMENTATION_AGENT_TEMPLATE.md, then TASK-0005 validation
+- Next executable action: Stage 2 (separate session) — deploy TASK-0013 (SEO changes already in source) and TASK-0001/0002; TASK-0004 (HSTS Fase 1 max-age=604800) via IMPLEMENTATION_AGENT_TEMPLATE.md, then TASK-0005 validation; human actions TASK-0014/0015

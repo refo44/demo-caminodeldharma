@@ -6,8 +6,8 @@ Ninguno.
 ## Quick wins (<30 min)
 | Prio | Finding | Acción | Esfuerzo | Beneficio | Riesgo | Owner | Dep. |
 |---:|---|---|---|---|---|---|---|
-| 1 | SEC-001 | TASK-0004: activar HSTS (descomentar .htaccess:103) + TASK-0005 verificación | <30m + <30m | ALTO | BAJO | DevOps/Security | decisión ya registrada |
-| 2 | FUNC-002 | TASK-0001: crear los 2 archivos .ics | <30m | ALTO | BAJO | Frontend | — |
+| 1 | FUNC-002 | TASK-0001: crear los 2 archivos .ics | <30m | ALTO | BAJO | Frontend | — |
+| 2 | SEC-001 | TASK-0004: activar HSTS **Fase 1 `max-age=604800`** (.htaccess:103, ADR 0018 — no el año completo mientras el estático temporal siga en producción) + TASK-0005 verificación | <30m + <30m | ALTO | BAJO | DevOps/Security | decisión escalonada registrada |
 | 3 | SEC-003 | TASK-0009: publicar security.txt | <30m | BAJO | BAJO | DevOps | — |
 
 ## Tareas pequeñas (30 min – 2 h)

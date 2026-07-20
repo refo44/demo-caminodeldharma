@@ -9,3 +9,8 @@
 7. **Contrast sampling.** Contrast was computed for representative selectors on two templates, not exhaustively for every element/state pair.
 8. **Single geography/network.** All measurements from one location; CDN behavior elsewhere not verified.
 9. **Legal scope.** Privacy findings (PRIV-001) describe observed behavior; legal compliance conclusions require counsel and are not asserted.
+
+## Añadidas por la continuación (2026-07-19, SEO externo)
+10. Posiciones de Google medidas por aproximación (herramienta de búsqueda real con índice tipo Google/US + DuckDuckGo región co-es); Google.com.co directo no navegable en esta sesión (navegación del panel denegada) y Bing no medible vía curl (shell JS). Los datos exactos por país requieren Google Search Console (TASK-0015).
+11. DuckDuckGo bloqueó por anti-bot las consultas temáticas (páginas "anomaly" guardadas en raw/seo-external/); solo `site:` y marca devolvieron resultados.
+12. Sin acceso a Search Console/Bing Webmaster ni a herramientas de backlinks (Ahrefs/Semrush): el perfil de enlaces se evaluó por inspección directa de las páginas que citan la comunidad (Buddhistdoor, budismo.com).
