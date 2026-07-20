@@ -172,5 +172,9 @@ antes de esta continuación. La forma «buddhista Chan y Tierra Pura» nunca exi
 con palabras clave. Es spam según las Search Essentials de Google (riesgo de acción manual sobre un
 dominio que ya arrastra DA 2), los atributos ARIA no son señal de ranking —por lo que **no
 funcionaría**—, y degradaría la experiencia de lectores de pantalla. En su lugar se optó por
-**contenido visible**: notas editoriales en `/comunidad` («Cómo nos nombramos») y `/linaje` («Sobre la
-palabra Buddhismo»), que cubren ambas grafías de forma natural y responden una duda real del lector.
+**contenido visible**: nota editorial en `/linaje` («Sobre la palabra Buddhismo»), que cubre ambas
+grafías de forma natural y responde una duda real del lector. Redacción final del propietario: vincula
+la doble d al término sánscrito *buddha* y precisa que no es un nombre propio sino un título —«el
+despierto»—, señalando que *budismo* y *budista* son las formas extendidas en español y nombran la
+misma tradición. Se decidió desarrollarla **solo en `/linaje`** (la página de la tradición); la nota
+equivalente en `/comunidad` se retiró para no duplicar el mensaje.

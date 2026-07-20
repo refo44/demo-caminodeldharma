@@ -532,8 +532,9 @@ El criterio: **la voz de la comunidad conserva la doble d**; los metadatos pensa
 pueden usar la forma extendida. El nombre propio —Comunidad Buddhista Camino del Dharma— no se altera
 en ningún contexto.
 
-Cuando la grafía pueda generar duda, se explica con naturalidad dentro del contenido (ver `/comunidad`
-y `/linaje`). Nunca se resuelve escondiendo palabras clave: eso pertenece al registro de landing page
+Cuando la grafía pueda generar duda, se explica con naturalidad dentro del contenido (ver `/linaje`,
+«Sobre la palabra Buddhismo» — única página donde se desarrolla). Nunca se resuelve escondiendo
+palabras clave: eso pertenece al registro de landing page
 que esta voz rechaza, y las directrices de Google lo sancionan como spam.
 
 ---

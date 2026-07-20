@@ -130,9 +130,10 @@ contenido visible y la forma con una d en los metadatos que sirven al buscador.
 palabras clave, etiquetas sin función real). Además de contravenir las directrices de Google y de
 degradar la accesibilidad, contradice la regla final de este documento.
 
-Cuando alguien pueda tropezar con la grafía, se explica en el propio contenido —como en
-`/comunidad` («Cómo nos nombramos») y `/linaje` («Sobre la palabra Buddhismo»)— en lugar de
-esconderlo.
+Cuando alguien pueda tropezar con la grafía, se explica en el propio contenido —como en `/linaje`
+(«Sobre la palabra Buddhismo»)— en lugar de esconderlo. La explicación vive **en una sola página**,
+la del linaje, por ser la que trata la tradición y su transmisión; repetirla en otras secciones
+diluiría el mensaje.
 
 ---
 
