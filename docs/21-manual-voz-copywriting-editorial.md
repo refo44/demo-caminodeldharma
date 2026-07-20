@@ -514,7 +514,7 @@ Cuando una palabra suena como si pudiera aparecer en una landing, una app, una s
 
 Algunos términos deben mantenerse con una forma estable para cuidar la coherencia editorial de la comunidad:
 
-- Buddhismo
+- Buddhismo / buddhista
 - Dharma
 - Chan
 - Tierra Pura
@@ -522,6 +522,19 @@ Algunos términos deben mantenerse con una forma estable para cuidar la coherenc
 - Śākyamuni
 - parinirvāṇa
 - Vesak
+
+#### La doble d y el público que aún no conoce la tradición
+
+La comunidad escribe *Buddhismo* con doble d. Quien no conoce la tradición escribe *budismo*, y es la
+forma que usa al buscar. Las dos son correctas y las dos importan.
+
+El criterio: **la voz de la comunidad conserva la doble d**; los metadatos pensados para el buscador
+pueden usar la forma extendida. El nombre propio —Comunidad Buddhista Camino del Dharma— no se altera
+en ningún contexto.
+
+Cuando la grafía pueda generar duda, se explica con naturalidad dentro del contenido (ver `/comunidad`
+y `/linaje`). Nunca se resuelve escondiendo palabras clave: eso pertenece al registro de landing page
+que esta voz rechaza, y las directrices de Google lo sancionan como spam.
 
 ---
 

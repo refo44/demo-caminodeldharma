@@ -76,6 +76,7 @@ referencia del budismo Chan en Colombia.
 | Local | budismo cali / meditación cali | Origen real de la comunidad (2012) + evento "Pausa profunda Cali" |
 | Long-tail | meditación budista online en español / meditación en línea lunes | La meditación semanal virtual es única entre los competidores revisados (todos presenciales) |
 | Informacional | qué es el budismo chan; recitación de amitabha; nianfo | Contenido educativo pendiente (TASK-0016) |
+| **Dualidad de grafía** | **budista** (público general) **+ buddhista** (practicantes y conocedores) | Ver §9 |
 
 ## 6. Cambios implementados en esta continuación (fuente; requieren deploy)
 
@@ -137,3 +138,39 @@ GSC conectada a este dominio (refuerza TASK-0015).
 > existente". Fue una **inferencia a partir del SERP, no una verificación**. Comprobada la página
 > (EVID-0044): la ficha describe a la comunidad en detalle pero **no contiene ningún enlace saliente
 > al dominio**. Análisis de autoridad completo en `authority-backlinks.md`.
+
+
+---
+
+## 9. Dualidad de grafía: budista / buddhista (2026-07-20, EVID-0049)
+
+Dos grafías nombran lo mismo y sirven a **públicos distintos**: quien no conoce la tradición escribe
+*budista*; quien la conoce —y la propia comunidad— escribe *buddhista*. Ambas son objetivos legítimos.
+
+**Verificación en Google (hl=es, gl=co):** la consulta "comunidad buddhista colombia" **no dispara
+corrección ortográfica** y devuelve **prácticamente el mismo conjunto de resultados** que la grafía con
+una d. El buscador resuelve ambas a la misma intención, de modo que **la elección editorial no tiene
+coste SEO apreciable**. (El sitio está ausente de la página 1 con ambas grafías, coherente con
+SEO-EXT-001.)
+
+**Procedencia del cambio de copy:** el tagline visible «Comunidad budista Chan y Tierra Pura en
+Colombia» fue **añadido** —no modificado— en el commit `fbb9e05` del propietario (2026-07-18), dos días
+antes de esta continuación. La forma «buddhista Chan y Tierra Pura» nunca existió en el historial.
+**No es atribuible a la auditoría.** El tagline sí se desviaba del estándar del propio proyecto:
+`docs/08-voice-dictionary.md` §7 fija «Buddhismo … usar con consistencia».
+
+**Política adoptada** (registrada en los docs de voz del proyecto):
+
+| Contexto | Grafía |
+|---|---|
+| Nombre institucional | `Comunidad Buddhista Camino del Dharma` — invariable |
+| Copy visible de identidad | `Buddhismo` / `buddhista` |
+| Metadatos de descubrimiento (`description`, `og`, `twitter`) | `budista` / `budismo` |
+| `alternateName` en JSON-LD | ambas — «Comunidad Budista Camino del Dharma» es grafía real del nombre |
+
+**Descartado explícitamente:** ocultar la grafía alternativa mediante texto invisible o `aria-label`
+con palabras clave. Es spam según las Search Essentials de Google (riesgo de acción manual sobre un
+dominio que ya arrastra DA 2), los atributos ARIA no son señal de ranking —por lo que **no
+funcionaría**—, y degradaría la experiencia de lectores de pantalla. En su lugar se optó por
+**contenido visible**: notas editoriales en `/comunidad` («Cómo nos nombramos») y `/linaje` («Sobre la
+palabra Buddhismo»), que cubren ambas grafías de forma natural y responden una duda real del lector.

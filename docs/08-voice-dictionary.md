@@ -102,7 +102,7 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 
 Usar con consistencia:
 
-- **Buddhismo** (con doble 'd' según preferencia de la comunidad)
+- **Buddhismo** / **buddhista** (con doble 'd' según preferencia de la comunidad)
 - **Dharma**
 - **Chan**
 - **Tierra Pura**
@@ -110,6 +110,29 @@ Usar con consistencia:
 - **Śākyamuni**
 - **parinirvāṇa**
 - **Vesak**
+
+### Buddhista y budista: cuándo se usa cada forma
+
+Ambas grafías nombran lo mismo y **ambas son legítimas**. La elección depende de a quién habla el texto:
+
+| Contexto | Forma | Motivo |
+| --- | --- | --- |
+| Nombre institucional | **Comunidad Buddhista Camino del Dharma** | Es el nombre propio de la comunidad. Nunca se altera |
+| Copy visible de identidad (tagline, «quiénes somos», linaje) | **Buddhismo / buddhista** | Coherencia con esta preferencia editorial |
+| Metadatos de descubrimiento (`description`, `og:description`, `twitter:description`) | **budista / budismo** | Es como escribe la mayoría al buscar. Son metadatos, no voz de la comunidad |
+| `alternateName` en datos estructurados | ambas | «Comunidad Budista Camino del Dharma» es una grafía real del nombre |
+
+Quien no conoce la tradición escribe *budista*; quien la conoce suele escribir *buddhista*. El sitio
+debe **acoger a los dos** sin renunciar a su propia voz. Por eso la forma con doble d vive en el
+contenido visible y la forma con una d en los metadatos que sirven al buscador.
+
+**No se admite** ocultar ninguna de las dos formas para posicionar (texto invisible, `aria-label` con
+palabras clave, etiquetas sin función real). Además de contravenir las directrices de Google y de
+degradar la accesibilidad, contradice la regla final de este documento.
+
+Cuando alguien pueda tropezar con la grafía, se explica en el propio contenido —como en
+`/comunidad` («Cómo nos nombramos») y `/linaje` («Sobre la palabra Buddhismo»)— en lugar de
+esconderlo.
 
 ---
 
