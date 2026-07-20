@@ -1,6 +1,8 @@
 # Execution waves
 
-Regla general: dentro de una ola, las tareas del mismo conflict group se ejecutan en serie; entre grupos distintos pueden ir en paralelo si `parallel_safe_with` lo permite. Cada tarea termina con su artefacto de resultado y validación independiente antes de cerrar.
+> **Actualización 2026-07-20:** WAVE-1 a WAVE-6 completadas en producción (v1.0.14) salvo HSTS (TASK-0004/0005, ADR 0020).
+
+Regla general: dentro de una ola, las tareas del mismo conflict group se ejecutan en serie; entre grupos distintos pueden ir en paralelo si `parallel_safe_with` lo permite.
 
 ## WAVE-0 — Urgent containment and production blockers
 Sin tareas: no se encontraron bloqueadores de producción que exijan contención inmediata.

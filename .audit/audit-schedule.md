@@ -38,11 +38,11 @@ conciencia y no por inercia.
 ## Calendario
 
 ### Hito 0 — Antes del corte · no es auditoría, es prerrequisito
-**Cuándo:** esta semana · **Esfuerzo:** ver `manual-inputs-howto.md`
+**Cuándo:** ✅ **Completado 2026-07-20** (deploy v1.0.14 confirmado por propietario)
 
-Desplegar lo que ya está en fuente (TASK-0013, TASK-0001, embeds sin cookies, `localStorage` retirado)
-y avanzar los insumos manuales. Todo lo que se despliegue **después** del corte se confunde con los
-efectos de la migración.
+Despliegue estático cerrado: TASK-0013, TASK-0001, embeds sin cookies, resto de tareas READY y off-page (0014/0015). Ver `implementation/results/DEPLOY-v1.0.14.md`.
+
+Todo lo que se despliegue **después** del corte a WordPress se confunde con los efectos de la migración.
 
 ---
 

@@ -1,5 +1,7 @@
 # Resumen ejecutivo — Auditoría Camino del Dharma (2026-07-19)
 
+> **Actualización 2026-07-20 (etapa 2):** el propietario confirmó deploy **v1.0.14** y cierre de las 14 tareas de implementación ejecutables (todas las READY + TASK-0001). Etapa 2 cerrada. Pendiente: 6 tareas BLOCKED (decisiones humanas + HSTS post-WordPress). Detalle: `state.md`, `implementation/backlog.md`.
+
 > **Revisión 2026-07-19 (continuación):** la versión original de este resumen presentaba HSTS como decisión titular con `max-age=31536000` inmediato. HSTS es **uno más** de los criterios evaluados (seguridad de transporte), no el objetivo de la auditoría, y el sitio estático actual es **temporal** (será reemplazado por WordPress). La decisión vigente es el **despliegue escalonado** del ADR 0018: **no** configurar un `max-age` de un año en esta etapa.
 
 **Estado general: 84/100.** Sitio estático pequeño y excepcionalmente bien construido: SEO on-page, datos estructurados, accesibilidad estructural y despliegue impecables. Cero hallazgos críticos. Nota: la puntuación SEO 100 refleja solo el **SEO interno/técnico**; la visibilidad externa en buscadores se evalúa en la continuación (ver `working/seo-external.md`).

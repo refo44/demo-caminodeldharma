@@ -1,13 +1,15 @@
 # Plan de implementación por fases (para agentes externos)
 
-Este plan describe la secuenciación; la auditoría no implementa nada. Detalle operativo por ola en `implementation/waves.md`; reglas de concurrencia en `implementation/conflict-map.md`.
+> **Actualización 2026-07-20:** etapa 2 cerrada. Deploy v1.0.14 confirmado. Fases 1–6 completadas para el sitio estático. Pendiente solo tareas BLOCKED y HSTS post-WordPress.
 
-- **Fase 0 — Bloqueadores de producción:** vacía (no se encontraron).
-- **Fase 1 — Estabilización inmediata (WAVE-1):** TASK-0004 → TASK-0005 (HSTS + verificación), TASK-0001 (.ics), TASK-0002 (contacto CTA). Gate: cabecera HSTS exacta verificada; 0 enlaces rotos; contacto sin vía muerta. Rollback por tarea.
-- **Fase 2 — CWV y accesibilidad (WAVE-2):** TASK-0007 (imágenes). Gate: ratios ≤2.5, paridad visual.
-- **Fase 3 — SEO y contenido (WAVE-3):** sin tareas (área en verde).
-- **Fase 4 — Endurecimiento de seguridad (WAVE-4):** TASK-0008 (CSP por etapas), TASK-0009 (security.txt); desbloquear cuando proceda TASK-0006 (privacidad) y TASK-0012 (includeSubDomains). Gate: CSP enforced sin violaciones.
-- **Fase 5 — Arquitectura y mantenibilidad (WAVE-5):** TASK-0011 (versionado de assets). Gate: invalidación verificada.
-- **Fase 6 — AI search y agéntico (WAVE-6):** TASK-0010 (galería sin JS). Gate: curl muestra imágenes.
+Este plan describe la secuenciación histórica; detalle en `implementation/waves.md` y estado actual en `implementation/backlog.md`.
 
-Reglas: una tarea por sesión de agente; validación independiente antes de cerrar (TASK_VALIDATOR_TEMPLATE.md); los grupos CG-HTACCESS, CG-CONTACTO y CG-HTML-GLOBAL se ejecutan en serie.
+- **Fase 0 — Bloqueadores de producción:** vacía.
+- **Fase 1 — Estabilización (WAVE-1):** ✅ TASK-0001, 0002, 0013, 0015. HSTS (0004/0005) aplazada ADR 0020.
+- **Fase 2 — Rendimiento (WAVE-2):** ✅ TASK-0007, 0014, 0017, 0019.
+- **Fase 3 — SEO/contenido (WAVE-3):** ✅ TASK-0018. BLOCKED: 0016, 0020.
+- **Fase 4 — Seguridad (WAVE-4):** ✅ TASK-0006, 0008, 0009. BLOCKED: 0012 (DNS).
+- **Fase 5 — Mantenibilidad (WAVE-5):** ✅ TASK-0011.
+- **Fase 6 — AEO (WAVE-6):** ✅ TASK-0010.
+
+**Próximo hito:** migración WordPress → auditoría completa a +30 días estables (`audit-schedule.md`).

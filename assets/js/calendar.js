@@ -53,17 +53,9 @@
     return window.location.href;
   }
 
-  function resolvePosterUrl(button) {
-    var posterPath = button.getAttribute('data-calendar-poster');
-    if (!posterPath) return '';
-    return absoluteUrl(posterPath);
-  }
-
   function resolveCalendarDescription(button) {
     var description = button.getAttribute('data-calendar-description') || '';
-    return description
-      .replace(/\{\{EVENT_URL\}\}/g, resolveEventUrl(button))
-      .replace(/\{\{POSTER_URL\}\}/g, resolvePosterUrl(button));
+    return description.replace(/\{\{EVENT_URL\}\}/g, resolveEventUrl(button));
   }
 
   function getCalendarData(button) {

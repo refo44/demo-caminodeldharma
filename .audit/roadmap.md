@@ -1,5 +1,7 @@
 # Roadmap priorizado
 
+> **Actualización 2026-07-20:** deploy v1.0.14 cerró la mayoría de ítems abajo (TASK-0001, 0002, 0006–0011, 0013–0015, 0017–0018). Pendiente: HSTS post-WordPress (0004/0005), formulario real (0003), DNS (0012), plan editorial (0016), sanghas (0020).
+
 ## Críticos
 Ninguno.
 
