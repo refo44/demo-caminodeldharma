@@ -115,7 +115,7 @@ La extensión (§4.3) y la estructura (§4.5) dependen del **tema**. La **intenc
 
 - El título puede formularse como **pregunta** cuando la pieza responde una duda real (`21` §6.1: orientar antes que atraer). No es un truco de posicionamiento: la respuesta debe estar en el primer párrafo, con voz de la comunidad.
 - No duplicar páginas institucionales canónicas (`content-source`): el blog **complementa**, no sustituye Inicio, Linaje ni Práctica.
-- Calendario y temas prioritarios: ver `24-brief-editorial-blog-y-visibilidad` §5 (propuesta para acuerdo comunitario).
+- Calendario y temas prioritarios: ver `24-brief-editorial-blog-y-visibilidad` §6 (propuesta para acuerdo comunitario).
 
 Al compartir en redes, la línea de contexto usa el tipo de pieza (`21` §11).
 
@@ -313,7 +313,7 @@ Checklist de **pantalla** (este documento, §12): forma, estructura y presentaci
 - [x] Mensaje de blog al compartir por plataforma (`09-ui-copy-sheet` §6; tipos en `21` §11)
 - [x] Confirmar que el alcance de `21-manual-voz-copywriting-editorial` §2 cubre explícitamente entradas del blog
 - [x] Añadir fila «Blog» en tono por sección (`07-guia-voz-microcopy-ux` §8)
-- [ ] Aprobar calendario de artículos propuesto en `24-brief-editorial-blog-y-visibilidad` §5
+- [ ] Aprobar calendario de artículos propuesto en `24-brief-editorial-blog-y-visibilidad` §6
 - [ ] Aprobar este documento como lineamiento oficial (ratificación comunitaria)
 
 ---
