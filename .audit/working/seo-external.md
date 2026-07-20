@@ -178,3 +178,11 @@ la doble d al término sánscrito *buddha* y precisa que no es un nombre propio 
 despierto»—, señalando que *budismo* y *budista* son las formas extendidas en español y nombran la
 misma tradición. Se decidió desarrollarla **solo en `/linaje`** (la página de la tradición); la nota
 equivalente en `/comunidad` se retiró para no duplicar el mensaje.
+
+
+---
+
+## 10. Hipótesis de URL y páginas por ciudad
+
+Evaluadas el 2026-07-20 sin implementar, a petición del propietario: ver `url-hypotheses.md`.
+Renombrado de `/comunidad` **descartado** (refutado con datos); páginas por ciudad → **TASK-0020 (BLOCKED)**.

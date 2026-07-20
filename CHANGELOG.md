@@ -8,6 +8,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.13] - 2026-07-20
+
+### Contenido editorial (grafía Buddhismo)
+
+- `comunidad/index.html`: eliminada la sección «Cómo nos nombramos»; la explicación de grafía queda centralizada en Linaje. El copy usa «Buddhismo» y «buddhista» con naturalidad, sin justificación repetida.
+- `linaje/index.html`: reescrita la nota «Sobre la palabra Buddhismo» — término sánscrito *buddha*, *Buddha*/*Buda* como título (no nombre propio), y reconocimiento de *budismo*/*budista* como formas extendidas en español.
+- `sitemap.xml`: `<lastmod>` actualizado a `2026-07-20` solo en `/comunidad` y `/linaje` (únicas páginas modificadas; sin URLs nuevas ni retiradas).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.12] - 2026-07-19
 
 ### Privacidad
