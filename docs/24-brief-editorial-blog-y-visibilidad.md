@@ -5,6 +5,8 @@
 **Fecha:** 2026-07-20  
 
 > Documento **autosuficiente**: puede leerse y compartirse sin otros manuales. Resume el diagnóstico SEO, por qué el blog importa para las búsquedas, sugerencias de temas y criterios de voz y formato. **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales.
+>
+> **Alcance:** solo **entradas del blog** (`/blog/…`). **Sí** incluye artículos o notas del blog sobre una ciudad (p. ej. “budismo en Cali”), si hay datos reales. **No** incluye **páginas nuevas del sitio** fuera del blog — como una sección `/sanghas/` con una página fija por ciudad — ni cambios en Inicio/Comunidad/Linaje/Práctica; eso es otro trabajo (comunidad y equipo técnico), ajeno a este brief.
 
 ---
 
@@ -12,9 +14,11 @@
 
 El sitio [caminodeldharma.org](https://caminodeldharma.org) está bien construido: Inicio, Comunidad, Linaje, Práctica y el resto de páginas fijas cumplen su función.
 
-El hallazgo de la auditoría SEO no es “arreglar la web”, sino que el **blog tiene muy poco contenido**: hoy hay **una entrada** (*Estamos conectados, pero seguimos solos*). Para quien busca en Google respuestas como “¿qué es el budismo Chan?” o “meditación budista online en español” —sin conocer aún la comunidad— hay **casi ninguna página del blog** que responda.
+El hallazgo de la auditoría SEO no es “arreglar la web”, sino que el **blog tiene muy poco contenido**: hoy hay **una entrada** (*Estamos conectados, pero seguimos solos*).
 
-**Sugerencia del audit (referencia, no orden):** publicar artículos que cubran esas preguntas. Menciona **tres entradas nuevas** como punto de partida para medir resultados. **Publicar o no, qué temas y cuándo, lo define la persona encargada de la edición.**
+**Importante:** en julio de 2026 el sitio **ya aparece primero** en Google Colombia para *“budismo chan colombia”* y *“budismo tierra pura colombia”* (y para la marca “Camino del Dharma”). El blog **no** busca “arreglar” eso. Busca cubrir las búsquedas donde **aún no aparecen** — sobre todo *meditación budista online en español*, consultas amplias (*budismo en Colombia*) y locales (*budismo Cali*, *Medellín*, etc.).
+
+**Sugerencia del audit (referencia, no orden):** artículos del blog orientados a esas **brechas**, no a repetir lo que Inicio y Linaje ya posicionan bien. **Publicar o no, qué temas y cuándo, lo define la persona encargada de la edición.**
 
 ---
 
@@ -22,22 +26,28 @@ El hallazgo de la auditoría SEO no es “arreglar la web”, sino que el **blog
 
 A mediados de julio de 2026 se revisó cómo aparece el sitio en Google y buscadores similares.
 
-### Lo que ya funciona
+### Lo que ya funciona (no es el foco del blog)
 
-| Situación | Lectura |
+| Búsqueda (ejemplos) | Lectura |
 |---|---|
-| Búsquedas por **“Camino del Dharma”** o nicho (**Chan**, **Tierra Pura** en Colombia) | El sitio **sí aparece**, a menudo primero |
-| Páginas institucionales | Coherentes con la identidad; **no hay que reescribirlas** para “optimizar” |
+| **“Camino del Dharma”** (marca) | Suele salir **primero** |
+| **“budismo chan colombia”** | **#1** en Google Colombia (julio 2026) — Inicio/Linaje ya responden |
+| **“budismo tierra pura colombia”** | **#1** en Google Colombia — ídem |
+| Páginas institucionales | Coherentes con la identidad; **no hay que reescribirlas** |
 
-### Lo que importa al blog
+Artículos del blog sobre Chan o Tierra Pura **pueden** complementar (más profundidad, otro tono), pero **no corrigen** la posición en esas keywords: **ya está ganada**.
 
-| Situación | Lectura |
+### Donde el sitio es débil (aquí sí puede ayudar el blog)
+
+| Búsqueda (ejemplos) | Lectura |
 |---|---|
-| Búsquedas amplias (“budismo en Colombia”, “comunidad budista Colombia”) y **locales** (“budismo Cali”, “budismo Medellín”, “budismo Bogotá”, “budismo Barranquilla”) | El sitio **casi no sale** en la primera página |
-| Competidores en Colombia | Tienen **más artículos y guías**, no solo una portada bonita |
-| Blog actual | **Una sola entrada**; poco material cuando la pregunta es educativa |
+| **“meditación budista online en español”** (y similares) | **No aparece** en la primera página; la sesión del lunes solo está como párrafo en Práctica |
+| **“budismo en Colombia”**, **“comunidad budista Colombia”** | **Casi no aparece**; mucha competencia |
+| **“budismo Cali”**, **“budismo Medellín”**, etc. | **Casi no aparece**; dominan packs locales y otras comunidades |
+| Preguntas del tipo *“dónde practicar budismo chan en Colombia”* | **No aparece** en la primera página (aunque la keyword corta sí esté en #1) |
+| Blog actual | **Una sola entrada**; no cubre esas intenciones |
 
-**Conclusión:** el sitio gana en **marca y nicho**; pierde en **descubrimiento** porque el blog no cubre preguntas que la gente formula con sus propias palabras.
+**Conclusión:** el blog debe orientarse a las **brechas**, no a duplicar temas que el sitio ya posiciona bien.
 
 ---
 
@@ -70,22 +80,19 @@ Para el blog **no** significa:
 
 ### Qué hace Google
 
-Cuando alguien busca *“qué es el budismo chan”* o *“meditación budista online en español”*, Google busca páginas que **respondan eso** y elige cuáles mostrar.
+Cuando alguien busca, Google elige páginas que **respondan la consulta tal cual la escribe la gente**. No es lo mismo *“budismo chan colombia”* (donde el sitio ya es #1) que *“meditación budista online en español”* o *“budismo Cali”* (donde **no** sale).
 
-Hoy Camino del Dharma **casi no tiene** páginas que encajen: Inicio y Linaje hablan del tema en general; el blog solo tiene una **reflexión** que no responde esas búsquedas tal cual las escribe la gente.
+Hoy, para las búsquedas **débiles**, el blog casi no aporta: solo hay una **reflexión** que no responde esas intenciones. Inicio y Linaje ayudan al nicho Chan/Tierra Pura en keyword, pero **no** sustituyen un artículo dedicado a meditación online ni a una ciudad concreta.
 
-### Qué cambia con artículos nuevos
+### Qué puede cambiar con artículos nuevos (prioridad según brecha)
 
-Cada entrada del blog es una **página nueva** con su propia dirección en internet.
-
-| Si se publica… | Efecto esperado |
-|---|---|
-| Texto sobre qué es el Chan **en esta comunidad** | Google **puede** mostrar esa página en búsquedas sobre Chan |
-| Texto sobre Tierra Pura / nianfo | Cubre preguntas informacionales que hoy no tienen respuesta en el sitio |
-| Texto sobre meditación online en español (sesión del lunes) | Atiende una búsqueda donde la comunidad ofrece algo **único** (práctica gratuita, virtual, semanal) |
-| Relato o entrevista sobre **cómo alguien practica** en la comunidad | Humaniza la sangha; puede enlazar con temas concretos (Chan, meditación online, vida cotidiana) |
-| Título claro + primer párrafo que responde | Google entiende **de qué va** la página, sin trucos |
-| Enlace desde otra página del sitio | Refuerza que el artículo es **parte importante** del sitio |
+| Prioridad | Si se publica en el blog… | Por qué (según audit) |
+|---|---|---|
+| **Alta** | Artículo sobre **meditación online en español** (sesión del lunes) | Brecha clara: hoy **no aparecen**; la comunidad sí ofrece esto |
+| **Media** | Artículo del blog sobre **práctica en una ciudad** (Cali, Medellín, etc.) | Brecha local: **no aparecen** en “budismo + ciudad” |
+| **Complemento** | Texto educativo sobre Chan o Tierra Pura | El sitio **ya es #1** en *“budismo chan/tierra pura colombia”*; un artículo puede ayudar en **otras formas** de pregunta o dar profundidad, pero no “arregla” lo principal |
+| **Baja / difícil** | Artículo genérico “budismo en Colombia” | Mucha competencia; beneficio incierto |
+| **Opcional** | Relato o entrevista | Más **acogida** que posicionamiento nuevo |
 
 No es “meter keywords”: es que **exista una página útil** sobre el tema. Las palabras de la búsqueda salen **solas** en título y texto porque el asunto es el mismo.
 
@@ -103,13 +110,14 @@ Alguien busca: “meditación budista online en español”
 
 ### Expectativas realistas
 
-| Sí puede mejorar | No lo resuelven solos los artículos |
+| Sí puede mejorar (brechas reales) | No lo resuelven solos los artículos |
 |---|---|
-| Búsquedas informacionales (“qué es…”, “cómo practicar…”) | Dominar ya “budismo en Colombia” (mucha competencia) |
-| Búsquedas **locales** (“budismo Cali”, “budismo Medellín”, etc.), si hay nota con datos reales | Reemplazar perfil en Google Maps ni enlaces desde otros sitios |
+| **Meditación online en español** — hoy ausentes | Posición **ya ganada** en *“budismo chan/tierra pura colombia”* — el blog no es urgente ahí |
+| **Budismo + ciudad** — hoy ausentes | Dominar *“budismo en Colombia”* (mucha competencia) |
+| Preguntas en forma *“dónde practicar…”* | Perfil en Google Maps, enlaces desde otros sitios |
 | Visitas de quien **no** conoce la marca | Resultados **al día siguiente** (suelen tardar semanas) |
 
-Hoy casi todas las visitas desde buscadores llegan por el **nombre “Camino del Dharma”**. El audit sugiere que, en unos meses, también puedan aparecer consultas como *budismo chan*, *meditación budista online* o *budismo* + nombre de ciudad (Cali, Medellín, Bogotá, Barranquilla), **si** existe una nota útil sobre práctica real en ese lugar.
+Hoy casi todas las visitas desde buscadores llegan por el **nombre “Camino del Dharma”**. El audit sugiere que el blog, **en las brechas**, pueda sumar consultas como *meditación budista online* o *budismo* + ciudad — no reemplazar lo que Inicio/Linaje ya posicionan en Chan y Tierra Pura.
 
 ### Cómo saber si ayudó (referencia SEO)
 
@@ -146,32 +154,46 @@ Las entrevistas y relatos de miembros **no sustituyen** los artículos educativo
 
 ## 6. Sugerencia de temas (solo referencia del audit SEO)
 
-Ideas según **qué busca la gente** y **qué falta en el blog**. La persona encargada puede ignorarlas, cambiarlas o proponer otras.
+Ideas según **dónde el sitio es débil**. La persona encargada puede ignorarlas, cambiarlas o proponer otras.
 
-| Prioridad sugerida | Título orientativo | Quién lo busca | Nota |
+La columna **Quién lo busca** ayuda a imaginar al lector y a redactar el **título** y el **primer párrafo**.
+
+### Prioridad alta y media (brechas del audit)
+
+| Prioridad | Título orientativo | Quién lo busca | Nota |
 |---|---|---|---|
-| 1 | ¿Qué es el budismo Chan en la vida cotidiana? | Quien quiere entender el linaje sin jerga | Voz docente, no académica; puede enlazar a la página El linaje |
-| 2 | Tierra Pura y recitación (nianfo): una puerta de práctica | Quien quiere saber qué es Tierra Pura aquí | Sin comparar agresivamente otras tradiciones |
-| 3 | Meditación budista online en español: la sesión del lunes | Quien busca práctica gratuita en línea | Explica el valor; la página Práctica tiene horario y cómo participar — no duplicar solo el horario |
+| **Alta** | Meditación budista online en español: la sesión del lunes | Quien busca práctica gratuita en línea | **Mayor brecha:** hoy no aparecen en Google; Práctica tiene horario — el artículo **explica**, no repite solo el horario |
+| **Media** | (ver tabla por ciudad abajo) | Quien busca budismo o meditación **en su ciudad** | Brecha local; solo con datos reales de práctica |
 
-**Opcional — notas locales** (solo si el equipo confirma datos reales; no copiar texto genérico):
+### Complemento (el sitio ya es #1 en la keyword corta)
 
-| Ciudad | Búsqueda típica | Qué se sabe hoy (referencia editorial) | Cuidado |
+Estos temas **no** son la urgencia principal: *“budismo chan colombia”* y *“budismo tierra pura colombia”* **ya posicionan primero** con Inicio/Linaje. Un artículo del blog **puede** servir para profundizar, otro tono o consultas en forma de pregunta — pero **no** “mejora” lo que ya está ganado.
+
+| Prioridad | Título orientativo | Quién lo busca | Nota |
 |---|---|---|---|
-| **Cali** | “budismo Cali” | Comunidad fundada aquí en 2012; ha habido actividades presenciales (p. ej. talleres) | Incluir modalidad, contacto y horarios **actuales**, no solo historia |
-| **Barranquilla** | “budismo Barranquilla” | Encuentros puntuales en la región (p. ej. retiros cerca de Puerto Colombia) | Un evento no equivale a sangha permanente; decir con claridad qué es y qué no es |
-| **Medellín** | “budismo Medellín” | Hay menciones de práctica compartida en redes — **sin** página propia en el sitio aún | Publicar solo tras confirmar con la comunidad qué ocurre allí de forma sostenida |
-| **Bogotá** | “budismo Bogotá” | **Sin** información verificada en el sitio hoy | **No** publicar una nota vacía solo por la búsqueda; haría más daño que ayuda |
+| Complemento | ¿Qué es el budismo Chan en la vida cotidiana? | Quien quiere entender el linaje sin jerga | Opcional; puede enlazar a El linaje |
+| Complemento | Tierra Pura y recitación (nianfo): una puerta de práctica | Quien quiere saber qué es Tierra Pura aquí | Opcional; sin comparar agresivamente otras tradiciones |
 
-En estas búsquedas locales compiten páginas con **dirección, horario, contacto y actividades concretas**. Una nota del blog solo ayuda si aporta algo **real y distinto** — no un párrafo genérico repetido por ciudad.
+**Opcional — artículos del blog por ciudad** (entrada en `/blog/…`; no es una página nueva del sitio):
 
-**Opcional — voces de la sangha** (decisión editorial; el audit no prioriza esto sobre los tres temas anteriores):
+Misma lógica: quien escribe piensa en **quién busca** (*“budismo Cali”*, *“meditación budista Medellín”*, etc.) y responde en el **primer párrafo** con práctica real en esa ciudad — modalidad, frecuencia, cómo contactar. La persona encargada sabe qué ocurre en cada lugar; aquí solo se sugiere **ángulo y enfoque**.
 
-| Formato | Ejemplo orientativo | Para qué sirve | Cuidado |
+| Ciudad | Título orientativo | Quién lo busca | Nota (cómo escribirlo) |
 |---|---|---|---|
-| **Entrevista breve** | “Practicar en línea desde [ciudad]: conversación con…” | Acerca la comunidad a quien duda si esto es “para gente como yo” | **Permiso explícito** de la persona; no publicar datos sensibles sin acuerdo |
-| **Relato en primera persona** | “Lo que aprendí en mi primer retiro” | Complementa reflexiones con experiencia concreta | No testimonial de “milagros”; centrado en la **práctica**, no en el currículum |
-| **Perfil de quien facilita** | Solo si la comunidad lo pide | Orienta sobre quién guía un taller o la sesión del lunes | Sobrio: trayectoria en la práctica, no autopromoción ni lenguaje de influencer |
+| **Cali** | Practicar budismo en Cali con Camino del Dharma | Alguien en Cali o el Valle que busca comunidad budista, meditación o linaje Chan cerca | Abrir diciendo qué hay aquí y para quién es; datos actuales (presencial, en línea, talleres); enlace a Práctica o contacto |
+| **Medellín** | Budismo y meditación en Medellín | Persona en Medellín que pregunta si puede practicar budismo sin ir a otra ciudad | Solo si hay actividad que describir; primer párrafo claro: qué, cuándo, cómo participar |
+| **Barranquilla** | Práctica budista en Barranquilla y la región | Quien en la costa busca retiros, encuentros o meditación en español | Diferenciar encuentro puntual de práctica regular; fechas y modalidad concretas si aplica |
+| **Bogotá** | (título según lo que haya que contar) | Quien vive en Bogotá y busca dónde practicar budismo | Publicar solo si hay algo real que decir; si no hay práctica allí, este artículo no aplica |
+
+Reglas simples: **un texto distinto por ciudad**; **respuesta al inicio** (no enterrar el dato en el tercer párrafo); **honestidad** sobre qué es recurrente y qué es puntual.
+
+**Opcional — voces de la sangha** (acogida; no corrige las brechas principales del audit):
+
+| Formato | Título orientativo | Quién lo busca | Nota (cómo escribirlo) |
+|---|---|---|---|
+| **Entrevista breve** | Practicar en línea desde Cali | Quien duda si la meditación online es para alguien como él o ella | Título sobre el **tema** (práctica, ciudad, modalidad); permiso de quien habla |
+| **Relato en primera persona** | Lo que aprendí en mi primer retiro | Quien considera un retiro pero no sabe qué esperar | Experiencia concreta, tono sobrio; enfoque en la práctica, no en el currículum |
+| **Perfil de quien facilita** | (según lo que pida la comunidad) | Quien quiere saber quién guía antes de participar | Solo si la comunidad lo pide; trayectoria en la práctica, sin autopromoción |
 
 En entrevistas y relatos conviene que el **título nombre el tema** (meditación, Chan, retiro, práctica online), no solo el nombre de la persona — así el texto sigue siendo útil para quien busca orientación, no solo para quien ya conoce a ese miembro.
 
@@ -281,7 +303,7 @@ El audit SEO **coincide**: el blog debe ser **más útil y más claro**, no “S
 | **Equipo de publicación web** | Subir el artículo al sitio, aspectos técnicos |
 | **Coordinación del proyecto** | Herramientas como Search Console, enlaces desde otros sitios (fuera del blog) |
 
-**No es trabajo editorial:** subir archivos al servidor, cambiar textos fijos de Inicio/Comunidad/Linaje, certificados, migración técnica del sitio.
+**No es trabajo editorial:** subir archivos al servidor, cambiar textos fijos de Inicio/Comunidad/Linaje/Práctica, crear la **sección institucional** `/sanghas/` (páginas fijas por ciudad fuera del blog), certificados, migración técnica del sitio.
 
 **Sí es trabajo editorial:** decidir qué publicar, redactar, revisar y entregar texto final (e imagen con permiso, si aplica).
 
@@ -295,7 +317,7 @@ El audit **solo entrega insumos**. La persona encargada resuelve, si lo consider
 2. Quién escribe y quién revisa  
 3. Si usa, adapta o descarta la tabla de temas (§6)  
 4. Extensión y tipo de cada pieza  
-5. Si publica notas locales (Cali, Medellín, Bogotá, Barranquilla u otra) y con qué datos reales confirmados  
+5. Si publica **artículos del blog** sobre ciudades (Cali, Medellín, Bogotá, Barranquilla) y con qué datos reales confirmados  
 6. Si incluye entrevistas, relatos o perfiles de miembros — quién entrevista, quién autoriza y qué se publica
 
 No hay nada que “aprobar” con quien hizo el audit SEO.
@@ -329,7 +351,7 @@ No. Título honesto y primer párrafo que responda bastan.
 No debería. Práctica **informa** (horario, cómo participar). El artículo **explica** (para quién es, por qué es gratuito, en qué tradición).
 
 **¿Solo reflexiones, como la entrada actual?**  
-Sí es posible seguir publicando reflexiones. También caben **entrevistas y relatos** de miembros, si la persona encargada lo ve oportuno y con permiso de quien participa. El audit **sugiere** que textos educativos adicionales ayudarían más a la visibilidad en buscadores; las voces de la sangha **complementan** sin reemplazar esos temas.
+Sí es posible seguir publicando reflexiones. El audit **sugiere** priorizar artículos donde el sitio **no** aparece hoy (meditación online, ciudades); Chan/Tierra Pura en keyword corta **ya están**; entrevistas **complementan** sin cerrar la brecha principal.
 
 **¿Entrevistas a miembros — ayudan en Google?**  
 Un poco, sobre todo si el título habla del **tema** (práctica online, retiro, Chan), no solo del nombre. Su valor principal es **acogida**: que alguien vea cómo es practicar aquí. No hace falta una serie de perfiles; una entrevista bien hecha cada cierto tiempo puede bastar.
@@ -337,23 +359,27 @@ Un poco, sobre todo si el título habla del **tema** (práctica online, retiro, 
 **¿Quién sube el artículo al sitio?**  
 El equipo de publicación web. La persona encargada entrega el texto revisado.
 
-**¿Es posible hacer notas por ciudad (“budismo Cali”, “budismo Medellín”, etc.)?**  
-Sí, **si** hay práctica o actividad real que describir (modalidad, contacto, frecuencia). Cali tiene la base más clara (origen de la comunidad, 2012). En Medellín y Barranquilla conviene confirmar antes de publicar. En Bogotá, hoy **no** hay datos en el sitio — mejor no inventar una nota solo por la búsqueda.
+**¿Artículos sobre Chan o Tierra Pura — hace falta si ya somos #1?**  
+En Google Colombia (julio 2026) el sitio **ya sale primero** en *“budismo chan colombia”* y *“budismo tierra pura colombia”* gracias a Inicio y Linaje. **No es urgente** repetir eso en el blog. Un artículo **puede** complementar (más profundidad, otro estilo), pero la **prioridad** del audit para el blog está en **meditación online** y **ciudades**, donde hoy **no** aparecen.
 
 **¿Se puede ignorar todo este brief?**  
 Sí. Es insumo del audit SEO, no mandato editorial.
+
+**¿Artículos del blog sobre Cali, Medellín, Bogotá o Barranquilla?**  
+Sí, pueden encajar: son entradas en `/blog/` sobre práctica en esa ciudad, con datos concretos (modalidad, contacto, frecuencia). La persona encargada decide en cuáles ciudades hay algo real que contar. **No** tiene que ver con crear una sección nueva del sitio (`/sanghas/` u otra) — eso es otro tema.
+
+**¿Este brief pide crear la sección `/sanghas/` en el sitio?**  
+**No.** Aquí solo se habla de **textos para el blog**.
 
 ---
 
 ## 12. Cierre
 
-El sitio **invita bien** a quien llega por la marca o por temas muy específicos del linaje. El audit sugiere que el blog, **si la persona encargada lo ve oportuno**, puede ampliar el círculo: personas que buscan Chan, Tierra Pura, meditación online, budismo en Colombia o **en una ciudad concreta** (Cali, Medellín, Bogotá, Barranquilla) **sin conocer aún** la comunidad.
+El sitio **ya posiciona bien** la marca y el nicho Chan/Tierra Pura en Colombia. El audit sugiere que el blog, **si la persona encargada lo ve oportuno**, ataque sobre todo las **brechas**: **meditación online en español**, **budismo + ciudad** y, en segundo plano, profundizar temas que Inicio/Linaje ya cubren.
 
-Eso se lograría con **artículos claros, revisados por quien edita** — educativos, notas locales con datos reales, reflexiones o, si se decide incluir, **entrevistas y relatos de la sangha** —, no con trucos técnicos. La voz sigue siendo **de la comunidad**.
+Eso se lograría con **artículos claros, revisados por quien edita** — priorizando donde hoy **no** aparecen en Google —, no con trucos técnicos. La voz sigue siendo **de la comunidad**.
 
 **Publicación en el sitio:** equipo de publicación web.  
 **Diagnóstico SEO o este brief:** quien realizó la auditoría SEO.
 
 ---
-
-*Documento autosuficiente para compartir con quien esté a cargo de la edición del blog. Puede copiarse, imprimirse o enviarse por correo tal cual.*
