@@ -17,9 +17,11 @@ Este documento define el orden oficial de implementación, validación, migraci�
 - **Estado actual del proyecto:** sitio estático en producción (`v1.0.11`), Fase 2 sustancialmente completada; Fase 2.5 y auditoría de producción registradas.
 - **Nueva § Fase 2.75:** auditoría integral de producción (2026-07-19), hallazgos, olas de remediación y enlace a `.audit/`.
 - **Formulario de contacto:** estado real documentado (markup presente, envío no operativo en estático); respaldo en `docs/archive/contacto-formulario-estatico/` para restauración en WordPress.
-- **HSTS:** despliegue **escalonado** (ADR 0018) — Fase 1 `max-age=604800` (TASK-0004/0005); Fase 2 `max-age=31536000` tras WordPress estable.
+- **HSTS:** **aplazado** (ADR 0020) — no se activa durante la transición; se revisa tras el corte a WordPress y ≥30 días estables. ADR 0018 queda sustituida en lo operativo.
 - Criterios de aceptación de Fase 2 y checklist pre-lanzamiento actualizados según evidencia de la auditoría.
-- **ADR 0018:** HSTS escalonado — Fase 1 `max-age=604800`, Fase 2 `31536000` post-WordPress; ADR 0010 sustituida en lo operativo.
+- **ADR 0018:** HSTS escalonado — sustituida en lo operativo por ADR 0020.
+- **ADR 0020:** HSTS aplazado hasta después del corte a WordPress. Motivo: sitio de 2 días, ~9 clics/28 días (EVID-0052) y migración inminente que puede tocar TLS y redirects.
+- **ADR 0019:** sin analítica con cookies. GA4 descartado definitivamente; medición por Search Console. Quedan fuera de esa decisión los embeds de vídeo (pendiente `youtube-nocookie`) y la política de privacidad.
 - Mantenimiento: incorporación de tareas post-auditoría y revisión trimestral ampliada.
 
 ### Cambios principales (3.0)
@@ -46,11 +48,11 @@ Este documento define el orden oficial de implementación, validación, migraci�
 | **Estructura repo** | HTML en **raíz** (Fase 3 no iniciada; carpeta `static/` aún no existe) |
 | **WordPress** | No iniciado (Fase 3 pendiente) |
 | **Auditoría producción** | **COMPLETE** — ver § Fase 2.75 y `.audit/` |
-| **GA4** | **Desactivado** (v1.0.12) hasta política de privacidad + consentimiento — TASK-0006 |
+| **GA4** | **Descartado de forma definitiva** (ADR 0019, 2026-07-20). Medición vía Search Console, sin cookies. Si algún día hiciera falta comportamiento en sitio: analítica sin cookies, nunca GA4 |
 | **Score global auditoría** | 84/100 — SEO 100; 0 críticos; 2 hallazgos ALTOS (formulario, `.ics`) |
-| **Próxima acción técnica** | `.audit/implementation/tasks/TASK-0004.md` (activar HSTS) + `TASK-0005` (verificación) |
+| **Próxima acción técnica** | Desplegar lo pendiente en fuente (TASK-0013, TASK-0001, embeds sin cookies). HSTS aplazado por ADR 0020 |
 
-La maqueta cumple la estructura §2.1 (13 URLs indexables + 404), despliegue idéntico al repo auditado (14/14 páginas byte-identical) y SEO técnico impecable. Pendientes de cierre operativo: formulario de contacto sin backend, archivos `.ics` inexistentes, HSTS por activar, consentimiento GA4 (decisión organizativa).
+La maqueta cumple la estructura §2.1 (13 URLs indexables + 404), despliegue idéntico al repo auditado (14/14 páginas byte-identical) y SEO técnico impecable. Pendientes de cierre operativo: formulario de contacto sin backend, ruta de los `.ics` (corregida en fuente, pendiente de despliegue), migración de los embeds de vídeo a `youtube-nocookie` (aplicada en fuente) y política de privacidad. HSTS queda aplazado por decisión (ADR 0020). El consentimiento de GA4 deja de ser un pendiente: **ADR 0019** descarta la analítica con cookies de forma definitiva.
 
 ---
 

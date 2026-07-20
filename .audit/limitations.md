@@ -26,3 +26,5 @@
 17. Métrica 'Social shares' de SEO Review Tools inservible: devuelve 0 en los seis dominios medidos, incluidos los líderes del sector. La herramienta no recolecta el dato (restricciones de la API de Facebook). Descartada como evidencia, no interpretada.
 
 18. Los datos de PSI son de **laboratorio** (móvil: Moto G Power emulado con 4G lenta; escritorio: emulado), no de campo. CrUX no dispone de datos para este origen. Las métricas de laboratorio no sustituyen la experiencia real de usuarios; INP en particular no es medible en laboratorio.
+
+19. **RESUELTA PARCIALMENTE 2026-07-20:** ya se dispone de datos de Search Console (EVID-0052). Persiste una limitación distinta y más importante: la ventana solo cubre 2 días porque el sitio se publicó el 2026-07-18. Ninguna conclusión sobre eficacia de acciones SEO es sostenible hasta re-medir en 4-8 semanas.

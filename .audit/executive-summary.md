@@ -8,11 +8,11 @@
 1. El **formulario de contacto no entrega mensajes** (envía a `action="#"` sin backend): quien lo usa cree haber escrito a la comunidad y el mensaje se pierde en silencio.
 2. ~~Las descargas .ics fallan en los dos eventos~~ → **corregido 2026-07-20:** afecta a **un** evento (el otro está finalizado y no ofrece calendario) y el archivo **sí existe**; el 404 lo causa una ruta relativa bajo URLs sin barra final. Rebajado a MEDIA — ver adenda ASO/AEO.
 
-**Riesgos medios:** HSTS pendiente — activar en **Fase 1 con `max-age=604800` (7 días)**, dejando el año completo para después del corte a WordPress estable (ADR 0018) —, CSP mínima, cookies de Google Analytics sin consentimiento ni política de privacidad publicada, e imágenes sobredimensionadas (logo de 1000 px (46 KB servidos) para un hueco de 44 px).
+**Riesgos medios:** HSTS pendiente — activar en **Fase 1 con `max-age=604800` (7 días)**, dejando el año completo para después del corte a WordPress estable (ADR 0018) —, CSP mínima e imágenes sobredimensionadas (logo de 1000 px (46 KB servidos) para un hueco de 44 px).
 
-**Entregable:** 19 tareas atómicas (12 originales + 4 de SEO externo + 2 de ASO + 1 de autoridad) para agentes implementadores externos (15 listas, 4 bloqueadas por decisiones humanas: backend del formulario, enfoque de consentimiento, inventario de subdominios, plan editorial). Arranque recomendado por impacto: desplegar los cambios SEO ya hechos en fuente (TASK-0013) → corregir la ruta .ics (TASK-0001, <30 min) → sustituir el formulario muerto por CTAs de WhatsApp/correo (TASK-0002) → activar HSTS Fase 1 (30 min, reversible en días).
+**Entregable:** 20 tareas atómicas (12 originales + 4 de SEO externo + 2 de ASO + 1 de autoridad + 1 de sanghas por ciudad) para agentes implementadores externos (14 listas, 4 bloqueadas por decisiones humanas: backend del formulario, inventario de subdominios, plan editorial, confirmación de sanghas por ciudad). Arranque recomendado por impacto: desplegar los cambios SEO ya hechos en fuente (TASK-0013) → corregir la ruta .ics (TASK-0001, <30 min) → sustituir el formulario muerto por CTAs de WhatsApp/correo (TASK-0002) → activar HSTS Fase 1 (30 min, reversible en días).
 
-**Decisiones que solo la comunidad puede tomar:** (1) ¿formulario real con backend o solo WhatsApp/correo?; (2) enfoque de consentimiento/privacidad y texto de la política.
+**Decisiones que solo la comunidad puede tomar:** (1) ¿formulario real con backend o solo WhatsApp/correo?; (2) texto de la política de privacidad; (3) ¿enlace de Zoom público o puerta por WhatsApp?; (4) en qué ciudades hay sangha real. *(La decisión sobre analítica ya está tomada: ADR 0019 — ver adenda final.)*
 
 ---
 
@@ -81,3 +81,42 @@
 **La comparativa móvil/escritorio aísla el problema de imágenes:** 185 KiB de ahorro en móvil frente a 42 KiB en escritorio (4,4×). Esa diferencia es exactamente la firma de la falta de `srcset` que ya señalaba PERF-001 — al móvil se le entregan imágenes dimensionadas para pantallas grandes.
 
 **Y una corrección:** la auditoría registró CLS = 0 en ambos perfiles; PSI mide **0,081** en móvil y **0,005** en escritorio. Sigue en verde (<0,1), pero el 0 se midió sin throttling y era optimista, y revela que el desplazamiento es **específico de móvil** — conviene vigilarlo si se toca la portada.
+
+---
+
+## Adenda (2026-07-20) — Decisión sobre analítica
+
+**No se usará Google Analytics.** Decisión definitiva del propietario, formalizada en **ADR 0019**.
+
+El motivo no es ideológico sino de utilidad: con CrUX sin datos (tráfico bajo el umbral de Google), DA 2 y ausencia de la página 1 en las consultas amplias, GA4 produciría un puñado de sesiones al mes — ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino que **no llegan**, y esa pregunta la responde **Search Console**: gratis, sin cookies y sin banner.
+
+Se suma que el propósito del sitio no es comercial: la señal de participación real —que alguien acuda a la meditación del lunes— ya se observa directamente, y quien se acerca pasa por un canal humano donde puede preguntarse cómo llegó. A esta escala eso aporta más que la analítica agregada.
+
+**Verificado:** producción no sirve **ninguna cookie propia**. Es una posición poco común que conviene preservar: elimina la necesidad de banner, reduce la superficie legal y encaja con el registro editorial de la comunidad.
+
+**Efecto en la auditoría:** PRIV-001 baja de MEDIA a **BAJA** y se reenfoca a dos elementos concretos — los **10 embeds de vídeo** (8 YouTube + 2 Vimeo) que no usan la variante `nocookie` y pueden fijar cookies de terceros al reproducir, y la **política de privacidad**, que sigue siendo recomendable porque la Ley 1581/2012 cubre el tratamiento de datos personales en general, no solo cookies. TASK-0006 pasa de BLOQUEADA a lista: desaparece la decisión de consentimiento que la detenía.
+
+**Si algún día hiciera falta medir comportamiento**, la vía será analítica sin cookies (Plausible, Fathom o equivalente), nunca volver a GA4.
+
+---
+
+## Adenda (2026-07-20) — Datos de Search Console y un matiz que lo reencuadra todo
+
+Con los datos que compartiste, la auditoría pasa de estimar a **medir**. Y aparece un dato de contexto que cambia cómo hay que leer buena parte del análisis de visibilidad.
+
+**El sitio actual se publicó el 2026-07-18. La auditoría se ejecutó el 07-19 — sobre un sitio de un día de vida.**
+
+Los hallazgos técnicos no se ven afectados: el formulario roto, la ruta de los `.ics`, las imágenes, HSTS, CSP, accesibilidad y rendimiento son independientes de la antigüedad. Pero las conclusiones de posicionamiento sí necesitan matizarse:
+
+| Lo que dije | Cómo debe leerse |
+|---|---|
+| «Ausente de página 1 en consultas amplias» | **Esperable a los dos días.** Sigue siendo la brecha a trabajar, pero no es un defecto |
+| «Solo 4 de 13 URLs indexadas» | Progreso normal de rastreo |
+| «#1 en budismo chan y tierra pura colombia» | **Más meritorio de lo que parecía**: logrado en dos días |
+| «Dominio sin autoridad tras 7,5 años» | **Se mantiene** — es el hallazgo de fondo. El déficit viene de la etapa WordPress anterior, no del sitio nuevo |
+
+**Lo que Search Console confirma:** 9 clics y 35 impresiones en total, y **una sola consulta genera impresiones: el nombre de la comunidad** (posición media 3,35; Colombia aporta 8 de los 9 clics). Es exactamente lo que había medido desde fuera, ahora con datos de Google.
+
+**Un hallazgo nuevo:** Google todavía cuenta por separado `https://`, `https://www.` y `http://`. Las redirecciones son correctas, así que debería consolidarse solo — conviene revisarlo en 4-8 semanas.
+
+**La consecuencia práctica más útil:** no saques conclusiones sobre si las acciones de autoridad y contenido funcionan hasta volver a mirar Search Console dentro de **4 a 8 semanas**. Medir hoy la eficacia de algo que aún no ha tenido tiempo de actuar solo produciría conclusiones falsas.

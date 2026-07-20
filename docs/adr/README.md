@@ -96,7 +96,9 @@ Documentos, issues, commits o ADR relacionados.
 | [0015](0015-despliegue-manual-temporal.md) | Despliegue manual temporal | Aceptada |
 | [0016](0016-automatizacion-ci-cd-pospuesta.md) | Automatización CI/CD pospuesta | Aceptada |
 | [0017](0017-repositorio-unico-durante-transicion.md) | Repositorio único durante la transición | Aceptada |
-| [0018](0018-hsts-despliegue-escalonado.md) | HSTS — despliegue escalonado (transición → año) | Aceptada |
+| [0018](0018-hsts-despliegue-escalonado.md) | HSTS — despliegue escalonado (transición → año) | Sustituida en lo operativo → [0020](0020-hsts-aplazado-hasta-wordpress.md) |
+| [0019](0019-sin-analitica-con-cookies.md) | Sin analítica con cookies — GA4 descartado definitivamente | Aceptada |
+| [0020](0020-hsts-aplazado-hasta-wordpress.md) | HSTS aplazado hasta después del corte a WordPress | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -110,7 +112,8 @@ Documentos, issues, commits o ADR relacionados.
 | Producción no se edita directamente | [0005](0005-produccion-sin-edicion-manual.md) |
 | Despliegue manual temporal | [0015](0015-despliegue-manual-temporal.md) |
 | CI/CD pospuesto | [0016](0016-automatizacion-ci-cd-pospuesta.md) (implementación de [0006](0006-github-actions-para-despliegue.md) diferida) |
-| HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) (histórico), [0018](0018-hsts-despliegue-escalonado.md) (vigente) |
+| HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) y [0018](0018-hsts-despliegue-escalonado.md) (históricos), [0020](0020-hsts-aplazado-hasta-wordpress.md) (vigente) |
+| Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
 
 ---
 

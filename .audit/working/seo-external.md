@@ -186,3 +186,63 @@ equivalente en `/comunidad` se retiró para no duplicar el mensaje.
 
 Evaluadas el 2026-07-20 sin implementar, a petición del propietario: ver `url-hypotheses.md`.
 Renombrado de `/comunidad` **descartado** (refutado con datos); páginas por ciudad → **TASK-0020 (BLOCKED)**.
+
+---
+
+## 11. Datos reales de Search Console (2026-07-20, EVID-0052) — y una reinterpretación necesaria
+
+Export del propietario, 28 días, búsqueda web. CSV archivados en `raw/gsc/`.
+
+### Los datos
+
+| Métrica | Valor |
+|---|---|
+| Clics / impresiones totales | **9 / 35** |
+| Consultas con datos | **UNA sola: «camino del dharma»** — 5 clics, 17 impresiones, CTR 29,41 %, posición media **3,35** |
+| Colombia | 8 clics · 32 impresiones · posición 3,19 |
+| España / Vietnam | 1/2 · 0/1 |
+| Móvil / escritorio | 6 clics de 7 impresiones · 3 clics de 28 |
+
+Páginas que reciben impresiones:
+
+| URL | Clics | Posición |
+|---|---:|---:|
+| `https://caminodeldharma.org/` | 7 | 3,0 |
+| `https://www.caminodeldharma.org/` | 1 | 8,33 |
+| `http://caminodeldharma.org/` | 1 | 1,0 |
+
+### El dato que obliga a reinterpretar el resto
+
+**El gráfico contiene solo dos fechas: 2026-07-17 y 2026-07-18.** El sitio estático actual se publicó
+el **2026-07-18** (`CHANGELOG` v1.0.0). Es decir: **la ventana de datos cubre prácticamente toda la
+vida del sitio**, y la auditoría original del 2026-07-19 se ejecutó sobre un sitio de **un día**.
+
+Esto **no invalida** los hallazgos técnicos —formulario, rutas `.ics`, imágenes, HSTS, CSP,
+accesibilidad, rendimiento— que son independientes de la antigüedad. Pero **sí obliga a matizar las
+conclusiones de visibilidad**:
+
+| Conclusión previa | Reinterpretación |
+|---|---|
+| «Ausente de página 1 en consultas amplias y locales» | **Esperable a los dos días.** No es señal de descuido ni de un problema estructural: es que no ha habido tiempo. Se mantiene como brecha a trabajar, no como defecto |
+| «Solo 4 de 13 URLs indexadas» | **Normal.** Es progreso de rastreo, no un fallo |
+| «Dominio establecido que nunca acumuló enlaces» | **Sigue siendo cierto y es el hallazgo de fondo**: el dominio tiene 7,5 años y DR 0,4. Pero el *sitio* actual es nuevo — el déficit de autoridad viene de la etapa WordPress anterior, no de negligencia reciente |
+| «#1 en budismo chan / tierra pura colombia» | **Más notable de lo que parecía**: alcanzado con dos días de vida |
+
+### Lo que los datos confirman
+
+**La localizabilidad solo por marca queda confirmada con datos de primera parte:** una única consulta
+genera impresiones, y es el nombre exacto. Es exactamente lo que midió SEO-EXT-001 desde fuera. La
+diferencia es que ahora sabemos que la causa inmediata es la edad, y la causa de fondo la autoridad.
+
+### Hallazgo nuevo: variantes de host y protocolo en el índice
+
+GSC contabiliza por separado `https://`, `https://www.` y `http://`. Las tres redirigen correctamente
+(301 verificado), pero Google todavía no ha consolidado las señales en la canónica. Con dos días de
+vida es normal y debería resolverse solo. **Vigilar**: si en 4–8 semanas siguen apareciendo separadas,
+revisar la consolidación. Refuerza el valor de TASK-0015 (enviar sitemap, inspeccionar URLs).
+
+### Consecuencia práctica
+
+La prioridad no cambia, pero sí la expectativa temporal: **conviene volver a mirar GSC en 4–8 semanas**
+antes de sacar conclusiones sobre si las acciones de autoridad y contenido funcionan. Medir hoy la
+eficacia de algo que aún no ha tenido tiempo de actuar llevaría a conclusiones falsas.

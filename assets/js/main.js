@@ -44,16 +44,18 @@
  * Language switcher (UI only; content stays in Spanish in this version)
  */
 (function () {
-  var STORAGE_KEY = 'caminodeldharma-lang';
   var switcher = document.querySelector('.lang-switcher');
   if (!switcher) return;
 
   var buttons = switcher.querySelectorAll('.lang-btn');
-  var current = (typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEY)) || 'es';
+  var current = 'es';
 
+  // No persistence while the site is Spanish-only: storing a preference that
+  // cannot change writes to every visitor's browser for no purpose. When the
+  // English version ships, WordPress will handle language selection with its
+  // own mechanism (see ADR 0019 on keeping client-side storage to a minimum).
   function setActive(lang) {
     current = lang;
-    if (typeof localStorage !== 'undefined') localStorage.setItem(STORAGE_KEY, lang);
     // Content is Spanish-only in this version, so the real `lang` attribute
     // (set server-side per page) must never be overwritten by a stored
     // preference — doing so would mislabel Spanish text as English for

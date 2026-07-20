@@ -9,6 +9,7 @@ Puntos de entrada:
 - `hsts-decision.md` / `hsts-decision.json` — decisión HSTS con evidencia.
 - `manual-inputs-pending.md` — insumos que solo el propietario puede obtener (herramientas con CAPTCHA, cuentas, decisiones de la comunidad) y cómo entregarlos.
 - `manual-inputs-howto.md` — guía paso a paso para ejecutar esos insumos: GSC, GBP, peticiones de enlace (con borradores), DNS y despliegue.
+- `audit-schedule.md` — cronograma de próximas auditorías, organizado alrededor del corte a WordPress.
 - `findings.jsonl` (10) + `evidence-ledger.jsonl` (31) — ledgers canónicos.
 - `remediation/` — un paquete de remediación por hallazgo accionable.
 - `implementation/` — backlog de 12 tareas atómicas para agentes externos (9 READY, 3 BLOCKED); empezar por `implementation/backlog.md`.

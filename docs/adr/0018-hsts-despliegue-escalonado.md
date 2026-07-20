@@ -2,7 +2,7 @@
 
 ## Estado
 
-Aceptada
+**Sustituida en lo operativo** por [ADR 0020](0020-hsts-aplazado-hasta-wordpress.md) (2026-07-20): HSTS queda **aplazado** hasta después del corte a WordPress; la Fase 1 nunca llegó a activarse. El análisis técnico de este documento sigue siendo válido.
 
 ## Fecha
 
