@@ -75,9 +75,17 @@ Despliegue **manual** (ADR 0015). CI/CD pospuesto (ADR 0016). Historial en [`CHA
 Antes de cada despliegue:
 
 1. Actualizar `sitemap.xml` (`<lastmod>` de páginas modificadas).
-2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md).
+2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md); commit de release en git.
 3. `npm run lint:css` (sin errores).
-4. Generar ZIP de producción (**solo en el Escritorio**, no dentro del repositorio):
+4. Etiquetar la versión en git (tag anotado, convención `vX.Y.Z` alineada con `VERSION`):
+
+```bash
+git tag -a "v$(cat VERSION)" -m "Release v$(cat VERSION)"
+```
+
+Para publicar el tag en el remoto: `git push origin "v$(cat VERSION)"`.
+
+5. Generar ZIP de producción (**solo en el Escritorio**, no dentro del repositorio):
 
 ```bash
 VERSION=$(cat VERSION)
@@ -89,7 +97,7 @@ zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
 
 Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni commitearlos al repo.
 
-5. Subir y extraer en `public_html` (File Manager de Hostinger).
+6. Subir y extraer en `public_html` (File Manager de Hostinger).
 
 ### Fase 3 (tras reorg): sitio en `static/`
 
