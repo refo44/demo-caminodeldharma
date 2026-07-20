@@ -1,10 +1,10 @@
 # Brief — Blog y visibilidad en buscadores
 
-**Para:** responsables de redacción y edición del blog de Camino del Dharma  
+**Para:** persona encargada de la redacción y edición del blog de Camino del Dharma  
 **De:** auditoría SEO del sitio (julio 2026) — insumos y sugerencias, no decisiones editoriales  
 **Fecha:** 2026-07-20  
 
-> Documento **autosuficiente**: puede leerse y compartirse sin otros manuales. Resume el diagnóstico SEO, por qué el blog importa para las búsquedas, sugerencias de temas y criterios de voz y formato. **Ustedes deciden** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales.
+> Documento **autosuficiente**: puede leerse y compartirse sin otros manuales. Resume el diagnóstico SEO, por qué el blog importa para las búsquedas, sugerencias de temas y criterios de voz y formato. **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales.
 
 ---
 
@@ -14,7 +14,7 @@ El sitio [caminodeldharma.org](https://caminodeldharma.org) está bien construid
 
 El hallazgo de la auditoría SEO no es “arreglar la web”, sino que el **blog tiene muy poco contenido**: hoy hay **una entrada** (*Estamos conectados, pero seguimos solos*). Para quien busca en Google respuestas como “¿qué es el budismo Chan?” o “meditación budista online en español” —sin conocer aún la comunidad— hay **casi ninguna página del blog** que responda.
 
-**Sugerencia del audit (referencia, no orden):** publicar artículos que cubran esas preguntas. Menciona **tres entradas nuevas** como punto de partida para medir resultados. **Publicar o no, qué temas y cuándo, lo define el equipo editorial.**
+**Sugerencia del audit (referencia, no orden):** publicar artículos que cubran esas preguntas. Menciona **tres entradas nuevas** como punto de partida para medir resultados. **Publicar o no, qué temas y cuándo, lo define la persona encargada de la edición.**
 
 ---
 
@@ -57,7 +57,7 @@ Para el blog **no** significa:
 - artículos que **respondan preguntas reales**;
 - **títulos claros** (a veces en forma de pregunta);
 - **respuesta directa** al inicio del texto;
-- **enlaces** desde Inicio, Práctica o Linaje hacia el artículo, si ustedes lo consideran útil.
+- **enlaces** desde Inicio, Práctica o Linaje hacia el artículo, si la persona encargada lo considera útil.
 
 | Capa | Quién | Estado |
 |---|---|---|
@@ -78,7 +78,7 @@ Hoy Camino del Dharma **casi no tiene** páginas que encajen: Inicio y Linaje ha
 
 Cada entrada del blog es una **página nueva** con su propia dirección en internet.
 
-| Si publican… | Efecto esperado |
+| Si se publica… | Efecto esperado |
 |---|---|
 | Texto sobre qué es el Chan **en esta comunidad** | Google **puede** mostrar esa página en búsquedas sobre Chan |
 | Texto sobre Tierra Pura / nianfo | Cubre preguntas informacionales que hoy no tienen respuesta en el sitio |
@@ -95,7 +95,7 @@ No es “meter keywords”: es que **exista una página útil** sobre el tema. L
 Alguien busca: “meditación budista online en español”
     → Google busca páginas que respondan
     → Hoy: pocas páginas de Camino del Dharma encajan
-    → Publican un artículo sobre la sesión del lunes (gratuita, en línea, en español)
+    → Se publica un artículo sobre la sesión del lunes (gratuita, en línea, en español)
     → Google indexa la nueva URL (días o semanas)
     → Si el texto es claro, puede empezar a salir en resultados
     → Personas que no conocían la comunidad la descubren
@@ -146,7 +146,7 @@ Las entrevistas y relatos de miembros **no sustituyen** los artículos educativo
 
 ## 6. Sugerencia de temas (solo referencia del audit SEO)
 
-Ideas según **qué busca la gente** y **qué falta en el blog**. Ustedes pueden ignorarlas, cambiarlas o proponer otras.
+Ideas según **qué busca la gente** y **qué falta en el blog**. La persona encargada puede ignorarlas, cambiarlas o proponer otras.
 
 | Prioridad sugerida | Título orientativo | Quién lo busca | Nota |
 |---|---|---|---|
@@ -156,7 +156,7 @@ Ideas según **qué busca la gente** y **qué falta en el blog**. Ustedes pueden
 
 **Opcional — notas locales** (solo si el equipo confirma datos reales; no copiar texto genérico):
 
-| Ciudad | Búsqueda típica | Qué se sabe hoy (referencia para ustedes) | Cuidado |
+| Ciudad | Búsqueda típica | Qué se sabe hoy (referencia editorial) | Cuidado |
 |---|---|---|---|
 | **Cali** | “budismo Cali” | Comunidad fundada aquí en 2012; ha habido actividades presenciales (p. ej. talleres) | Incluir modalidad, contacto y horarios **actuales**, no solo historia |
 | **Barranquilla** | “budismo Barranquilla” | Encuentros puntuales en la región (p. ej. retiros cerca de Puerto Colombia) | Un evento no equivale a sangha permanente; decir con claridad qué es y qué no es |
@@ -287,16 +287,16 @@ El audit SEO **coincide**: el blog debe ser **más útil y más claro**, no “S
 
 ---
 
-## 9. Decisiones del equipo editorial
+## 9. Decisiones de la persona encargada
 
-El audit **solo entrega insumos**. Ustedes resuelven, si lo consideran pertinente:
+El audit **solo entrega insumos**. La persona encargada resuelve, si lo considera pertinente:
 
-1. Si publican y con qué calendario  
+1. Si publica y con qué calendario  
 2. Quién escribe y quién revisa  
-3. Si usan, adaptan o descartan la tabla de temas (§6)  
+3. Si usa, adapta o descarta la tabla de temas (§6)  
 4. Extensión y tipo de cada pieza  
-5. Si publican notas locales (Cali, Medellín, Bogotá, Barranquilla u otra) y con qué datos reales confirmados  
-6. Si incluyen entrevistas, relatos o perfiles de miembros — quién entrevista, quién autoriza y qué se publica
+5. Si publica notas locales (Cali, Medellín, Bogotá, Barranquilla u otra) y con qué datos reales confirmados  
+6. Si incluye entrevistas, relatos o perfiles de miembros — quién entrevista, quién autoriza y qué se publica
 
 No hay nada que “aprobar” con quien hizo el audit SEO.
 
@@ -304,14 +304,14 @@ No hay nada que “aprobar” con quien hizo el audit SEO.
 
 ## 10. Flujo posible (orientativo)
 
-Ustedes lo adaptan o lo omiten:
+Este flujo puede adaptarse u omitirse:
 
 ```
 Conversación interna del equipo editorial
     → Calendario y responsables
     → Borrador → revisión de voz (§7) → aprobación interna
     → Entrega al equipo de publicación web
-    → Enlaces desde otras páginas del sitio, si lo ven útil
+    → Enlaces desde otras páginas del sitio, si se considera útil
     → Siguientes artículos, a su ritmo
 ```
 
@@ -320,7 +320,7 @@ Conversación interna del equipo editorial
 ## 11. Preguntas frecuentes
 
 **¿Hay que escribir “para Google”?**  
-No. Escriben para **la persona que busca orientación**. Google muestra lo claro y útil.
+No. Se escribe para **la persona que busca orientación**. Google muestra lo claro y útil.
 
 **¿Repetir “budismo chan colombia” en cada párrafo?**  
 No. Título honesto y primer párrafo que responda bastan.
@@ -329,31 +329,31 @@ No. Título honesto y primer párrafo que responda bastan.
 No debería. Práctica **informa** (horario, cómo participar). El artículo **explica** (para quién es, por qué es gratuito, en qué tradición).
 
 **¿Solo reflexiones, como la entrada actual?**  
-Sí pueden seguir publicando reflexiones. También caben **entrevistas y relatos** de miembros, si el equipo lo ve oportuno y con permiso de quien participa. El audit **sugiere** que textos educativos adicionales ayudarían más a la visibilidad en buscadores; las voces de la sangha **complementan** sin reemplazar esos temas.
+Sí es posible seguir publicando reflexiones. También caben **entrevistas y relatos** de miembros, si la persona encargada lo ve oportuno y con permiso de quien participa. El audit **sugiere** que textos educativos adicionales ayudarían más a la visibilidad en buscadores; las voces de la sangha **complementan** sin reemplazar esos temas.
 
 **¿Entrevistas a miembros — ayudan en Google?**  
 Un poco, sobre todo si el título habla del **tema** (práctica online, retiro, Chan), no solo del nombre. Su valor principal es **acogida**: que alguien vea cómo es practicar aquí. No hace falta una serie de perfiles; una entrevista bien hecha cada cierto tiempo puede bastar.
 
 **¿Quién sube el artículo al sitio?**  
-El equipo de publicación web. Ustedes entregan el texto revisado.
+El equipo de publicación web. La persona encargada entrega el texto revisado.
 
-**¿Pueden hacer notas por ciudad (“budismo Cali”, “budismo Medellín”, etc.)?**  
+**¿Es posible hacer notas por ciudad (“budismo Cali”, “budismo Medellín”, etc.)?**  
 Sí, **si** hay práctica o actividad real que describir (modalidad, contacto, frecuencia). Cali tiene la base más clara (origen de la comunidad, 2012). En Medellín y Barranquilla conviene confirmar antes de publicar. En Bogotá, hoy **no** hay datos en el sitio — mejor no inventar una nota solo por la búsqueda.
 
-**¿Pueden ignorar todo este brief?**  
+**¿Se puede ignorar todo este brief?**  
 Sí. Es insumo del audit SEO, no mandato editorial.
 
 ---
 
 ## 12. Cierre
 
-El sitio **invita bien** a quien llega por la marca o por temas muy específicos del linaje. El audit sugiere que el blog, **si ustedes lo ven oportuno**, puede ampliar el círculo: personas que buscan Chan, Tierra Pura, meditación online, budismo en Colombia o **en una ciudad concreta** (Cali, Medellín, Bogotá, Barranquilla) **sin conocer aún** la comunidad.
+El sitio **invita bien** a quien llega por la marca o por temas muy específicos del linaje. El audit sugiere que el blog, **si la persona encargada lo ve oportuno**, puede ampliar el círculo: personas que buscan Chan, Tierra Pura, meditación online, budismo en Colombia o **en una ciudad concreta** (Cali, Medellín, Bogotá, Barranquilla) **sin conocer aún** la comunidad.
 
-Eso se lograría con **artículos claros, revisados por ustedes** — educativos, notas locales con datos reales, reflexiones o, si lo deciden, **entrevistas y relatos de la sangha** —, no con trucos técnicos. La voz sigue siendo **de la comunidad**.
+Eso se lograría con **artículos claros, revisados por quien edita** — educativos, notas locales con datos reales, reflexiones o, si se decide incluir, **entrevistas y relatos de la sangha** —, no con trucos técnicos. La voz sigue siendo **de la comunidad**.
 
 **Publicación en el sitio:** equipo de publicación web.  
 **Diagnóstico SEO o este brief:** quien realizó la auditoría SEO.
 
 ---
 
-*Documento autosuficiente para compartir con el equipo editorial. Puede copiarse, imprimirse o enviarse por correo tal cual.*
+*Documento autosuficiente para compartir con quien esté a cargo de la edición del blog. Puede copiarse, imprimirse o enviarse por correo tal cual.*
