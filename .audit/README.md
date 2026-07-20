@@ -7,6 +7,8 @@ Puntos de entrada:
 - `executive-summary.md` — resumen para dirección (español).
 - `report.md` — informe completo (17 secciones).
 - `hsts-decision.md` / `hsts-decision.json` — decisión HSTS con evidencia.
+- `manual-inputs-pending.md` — insumos que solo el propietario puede obtener (herramientas con CAPTCHA, cuentas, decisiones de la comunidad) y cómo entregarlos.
+- `manual-inputs-howto.md` — guía paso a paso para ejecutar esos insumos: GSC, GBP, peticiones de enlace (con borradores), DNS y despliegue.
 - `findings.jsonl` (10) + `evidence-ledger.jsonl` (31) — ledgers canónicos.
 - `remediation/` — un paquete de remediación por hallazgo accionable.
 - `implementation/` — backlog de 12 tareas atómicas para agentes externos (9 READY, 3 BLOCKED); empezar por `implementation/backlog.md`.

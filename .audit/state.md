@@ -7,16 +7,19 @@
 - Status: COMPLETE
 - Current phase: DONE
 - Completed phases: PHASE-0, PHASE-1, PHASE-2, PHASE-3 (PARTIAL: paint metrics unavailable — recorded), PHASE-4, PHASE-4A, PHASE-5, PHASE-6, PHASE-7, PHASE-8, PHASE-9, PHASE-10
-- Partial phases: PHASE-3 (LCP/INP not measurable; CLS/TTFB/weight measured — limitations 1-2)
+- Partial phases: PHASE-3 — LCP RESOLVED 2026-07-20 via PSI/Lighthouse (1.4s, EVID-0047); INP still unmeasurable (no CrUX field data, limitation 2). CLS corrected: 0.081 mobile / 0.005 desktop (was recorded as 0 on both) — shift is mobile-viewport specific
 - Blocked phases: none
-- Accepted findings: 12 (0 CRITICAL, 3 HIGH, 5 MEDIUM, 3 LOW, 1 INFORMATIONAL) — SEO-EXT-001/002 added by 2026-07-19 continuation
-- Evidence artifacts: 36 ledger records + raw/ tree (EVID-0032–0036: external SEO)
+- Accepted findings: 14 (0 CRITICAL, 1 HIGH, 9 MEDIUM, 3 LOW, 1 INFORMATIONAL) — SEO-EXT-001/002 + ASO-001/002 added by continuation; SEO-EXT-001 revised HIGH→MEDIUM (EVID-0037); FUNC-002 revised HIGH→MEDIUM with CORRECTED root cause (EVID-0041)
+- Evidence artifacts: 48 ledger records + raw/ tree (EVID-0032–0037 external SEO; EVID-0038–0042 ASO/AEO; EVID-0043–0044 authority/backlinks)
 - URLs discovered: 13 indexable + 404 + entry points + machine files (full coverage)
 - URLs tested: all discovered
 - Source commit reviewed: be896db2214c4dafdc8adad89f8496421c8b6071 (deploy parity 14/14 byte-identical)
 - HSTS decision: STAGED (ADR 0018) — Phase 1 now: host-only max-age=604800; Phase 2 (max-age=31536000) deferred until WordPress cutover stable (static site is temporary). includeSubDomains REJECTED; preload REJECTED. HSTS is one transport-security criterion, not the audit's primary objective.
-- Tasks: 16 (12 READY, 4 BLOCKED) in implementation/tasks.jsonl — TASK-0013–0016 added by continuation (external SEO); TASK-0013 changes already made in source, pending deploy
+- Tasks: 19 (13 READY, 4 BLOCKED, 1 COMPLETED audit-input, 1 IMPLEMENTED_PENDING_VALIDATION) — TASK-0001 implemented in source 2026-07-20, awaiting deploy + independent validation. Note: .htaccess is now VERSIONED (owner decision 2026-07-20; previously excluded by the WordPress gitignore template) — git revert is a valid rollback again, though production still requires a manual ZIP redeploy in implementation/tasks.jsonl — TASK-0013–0016 (external SEO), TASK-0017–0018 (ASO) added by continuation; TASK-0001 CORRECTED (was prescribing creation of an already-existing .ics); TASK-0013 changes already made in source, pending deploy
 - Continuation 2026-07-19: external SEO audit executed (working/seo-external.md); HSTS artifacts realigned to staged rollout (ADR 0018); on-page SEO improvements implemented in source (index, comunidad, eventos, blog, .htaccess)
+- Continuation 2026-07-20: authority/backlink metrics added (working/authority-backlinks.md) — DR 0.4, DA 6, PA 18, UR 4, Spam Score 7%, domain age 7y5m; root cause = three authoritative sources cite the community without linking the domain. Auditor self-correction: the ecoespiritualidad backlink recorded on 07-19 was inferred, not verified — it does not exist (EVID-0044)
+- Continuation 2026-07-20: ASO/AEO audit executed (working/aso-aeo.md) — AI-crawler access, context efficiency, question-form retrieval, agentic task eval, injection sweep. FUNC-002 root cause corrected (relative path + slashless canonical policy, not missing files)
 - Verifier: fresh-context pass complete, verdict ACCEPT (1 minor clarification applied — see verification.md)
-- Current limitations: see limitations.md (9 entries)
+- Current limitations: see limitations.md (12 entries; limitation 10 resolved 2026-07-20 by direct Google CO verification)
+- Pending manual inputs (owner-executed): see manual-inputs-pending.md (status) and manual-inputs-howto.md (step-by-step execution guide) — competitor baseline DELIVERED 2026-07-20 (EVID-0046, TASK-0019 completed); still open: GSC (TASK-0015), GBP + 3 link requests (TASK-0014), 4 community decisions, DNS inventory (TASK-0012), deploy (TASK-0013/0001)
 - Next executable action: Stage 2 (separate session) — deploy TASK-0013 (SEO changes already in source) and TASK-0001/0002; TASK-0004 (HSTS Fase 1 max-age=604800) via IMPLEMENTATION_AGENT_TEMPLATE.md, then TASK-0005 validation; human actions TASK-0014/0015

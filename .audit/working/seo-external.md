@@ -106,3 +106,34 @@ sitemap; robots.txt; canónicas; llms.txt; JSON-LD Event/BlogPosting.
   aproximación de esta auditoría).
 - TASK-0016: plan editorial de contenido temático (educacional Chan/Tierra Pura, página de
   meditación online, posible página Cali) — BLOCKED: decisión editorial y manual de voz.
+
+---
+
+## 8. Verificación directa en Google Colombia (2026-07-20 — supersede §3 para estas consultas)
+
+Navegación real a google.com (hl=es, gl=co) desde el panel de navegador; texto de SERPs archivado
+en `raw/seo-external/google-co-serps-2026-07-20.md` (EVID-0037).
+
+| Consulta | Posición verificada en Google CO |
+|---|---|
+| site:caminodeldharma.org | 4 URLs principales (home, 1 post, 2 eventos) + omitidas por similitud; **sin residuos WP en primer plano** |
+| camino del dharma (marca) | **#1** home; #2 ficha en ecoespiritualidad.org (cita **SIN enlace** — ver corrección abajo); #3 Facebook |
+| budismo chan colombia | **#1** |
+| budismo tierra pura colombia | **#1** + PAA "¿Qué es la Comunidad Camino del Dharma?" |
+| budismo en colombia | Ausente de página 1; pack local (GBP) + budismocolombia.org dominan |
+| comunidad budista colombia | Ausente de página 1; pack local primero |
+| budismo cali | Ausente de página 1 (pese al evento "Pausa Profunda – Cali" indexado); pack local + páginas Cali de Kadampa/Diamante |
+
+**Correcciones respecto a la aproximación (§3):** las consultas de nicho ya están ganadas (#1),
+mejor de lo estimado con índice US; el SERP de marca en Google CO está limpio (los residuos WP
+afectan a DuckDuckGo/otros índices — la limpieza 410/301 sigue siendo correcta). SEO-EXT-001
+rebajado ALTA→MEDIA y reformulado: la brecha real está en consultas amplias e intención local,
+donde **los packs locales de Google Business Profile dominan todos los SERPs probados** — GBP pasa
+a ser la acción individual de mayor palanca (TASK-0014, requiere dirección confirmada). El anuncio
+de Google "¿Eres dueño de caminodeldharma.org? Prueba Search Console" sugiere que no hay propiedad
+GSC conectada a este dominio (refuerza TASK-0015).
+
+> **CORRECCIÓN 2026-07-20:** arriba registré la ficha de ecoespiritualidad.org como "cita/backlink
+> existente". Fue una **inferencia a partir del SERP, no una verificación**. Comprobada la página
+> (EVID-0044): la ficha describe a la comunidad en detalle pero **no contiene ningún enlace saliente
+> al dominio**. Análisis de autoridad completo en `authority-backlinks.md`.

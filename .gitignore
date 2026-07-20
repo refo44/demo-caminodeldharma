@@ -40,8 +40,11 @@ wp-config.php
 # Log files
 *.log
 
-# htaccess
-/.htaccess
+# htaccess — versionado desde 2026-07-20 (decisión del propietario).
+# La exclusion anterior venia de la plantilla WordPress del .gitignore.
+# Nota para el corte a WordPress: WP reescribe su propio bloque
+# (# BEGIN WordPress / # END WordPress). Las reglas propias deben quedar
+# FUERA de ese bloque para que no las sobrescriba.
 
 # All plugins
 #

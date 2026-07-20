@@ -19,13 +19,15 @@
 
 **HSTS (criterio de transporte):** los 14 controles de la fase de decisión pasaron con evidencia reproducible (redirecciones directas, certificado válido para apex y www, TLS 1.3, cero contenido mixto, configuración fuente = producción). Decisión: **activar en Fase 1 con `max-age=604800`** (ADR 0018). `includeSubDomains` y `preload` quedan **RECHAZADOS** como decisiones separadas (ver `hsts-decision.md`).
 
-El sitio es un estático pequeño, muy bien construido: higiene SEO **interna** impecable (títulos, canónicas, sitemap, datos estructurados completos), accesibilidad estructural sólida, despliegue idéntico al commit auditado y superficie de exposición mínima. La continuación añadió la dimensión que faltaba — **SEO externo** — con resultado deficiente: el sitio solo se encuentra buscando su nombre exacto (SEO-EXT-001/002, §8). Los problemas materiales son concretos:
+El sitio es un estático pequeño, muy bien construido: higiene SEO **interna** impecable (títulos, canónicas, sitemap, datos estructurados completos), accesibilidad estructural sólida, despliegue idéntico al commit auditado y superficie de exposición mínima. La continuación añadió la dimensión que faltaba — **SEO externo** — verificada finalmente en Google CO real: nicho ya ganado (#1 en "budismo chan colombia" y "budismo tierra pura colombia") pero ausente de la página 1 en consultas amplias y locales, dominadas por packs locales de Google Business Profile (SEO-EXT-001/002, §8). Los problemas materiales son concretos:
 
 1. **FUNC-001 (ALTA):** el formulario de contacto no entrega mensajes (action="#", sin backend ni handler): pérdida silenciosa del journey principal de conversión.
-2. **FUNC-002 (ALTA):** las descargas de calendario `.ics` devuelven 404 en ambos eventos (los archivos `/ical/*.ics` nunca se crearon).
+2. **FUNC-002 (MEDIA, causa raíz corregida):** la descarga `.ics` devuelve 404 en el evento vigente — no por falta del archivo (existe y responde 200), sino porque la ruta **relativa** resuelve mal bajo URLs canónicas sin barra final.
 3. **MEDIAS:** HSTS pendiente de activación (aprobada por esta auditoría), CSP mínima, cookies GA4 sin consentimiento ni política de privacidad, imágenes sobredimensionadas (logo de 1000 px y 46 KB servidos —36 KB en repo— para un hueco de 44 px).
 
-Nada de esto exige contención urgente; todo está convertido en 12 tareas atómicas (9 READY, 3 BLOCKED por decisiones humanas) en `implementation/`.
+4. **Autoridad de dominio nula (SEO-EXT-001, cuantificado):** DR 0,4 / DA 6 sobre un dominio de 7 años y 5 meses, con Spam Score sano (7 %) — ausencia de enlaces, no toxicidad.
+
+Nada de esto exige contención urgente; todo está convertido en 19 tareas atómicas (15 READY, 4 BLOCKED por decisiones humanas) en `implementation/`.
 
 ## 3. Índice
 
@@ -37,15 +39,15 @@ Auditoría de solo lectura sobre producción y código fuente. Descubrimiento po
 
 ## 5. Herramientas
 
-Ver `tools.md`. Relevante: Lighthouse/axe no disponibles (instalación prohibida durante la auditoría); métricas de pintura del navegador embebido suprimidas por throttling del panel → LCP/INP no verificados; crt.sh caído (502) → historial de renovación de certificado no verificado.
+Ver `tools.md`. Relevante: Lighthouse/axe no disponibles durante la auditoría original (instalación prohibida) → **subsanado el 2026-07-20** con un informe PSI/Lighthouse 13.4.0 aportado por el propietario (EVID-0047), que cierra la medición de LCP; INP sigue sin verificar por ausencia de datos de campo; crt.sh caído (502) → historial de renovación de certificado no verificado.
 
 ## 6. Panel de riesgos
 
 | Severidad | Nº | Categorías principales |
 |---|---:|---|
 | CRÍTICA | 0 | — |
-| ALTA | 3 | Funcionalidad (formulario de contacto, descargas .ics), SEO externo (visibilidad temática nula — SEO-EXT-001, continuación) |
-| MEDIA | 5 | Seguridad/transporte (HSTS, CSP), Privacidad (consentimiento), Rendimiento (imágenes), SEO externo (índice con residuos WordPress — SEO-EXT-002, continuación) |
+| ALTA | 1 | Funcionalidad (formulario de contacto) |
+| MEDIA | 9 | Seguridad/transporte (HSTS, CSP), Privacidad (consentimiento), Rendimiento (imágenes), SEO externo (SEO-EXT-001, SEO-EXT-002), ASO (ASO-001 consultas en lenguaje natural, ASO-002 meditación semanal sin entidad), Funcionalidad (FUNC-002 .ics — rebajado ALTA→MEDIA tras corregir causa raíz) |
 | BAJA | 3 | Caché sin versionado, galería sin fallback JS, security.txt |
 | INFORMATIVA | 1 | Cadena www 2 saltos, MIME x-javascript, README de fuentes público |
 
@@ -56,22 +58,36 @@ Ver `tools.md`. Relevante: Lighthouse/axe no disponibles (instalación prohibida
 | TTFB | 306 ms | 170–310 ms | Performance API (lab sin throttling) | MEASURED |
 | Load home (caliente) | 886 ms | 542–1412 ms | Performance API | MEASURED |
 | Load home (fría) | — | 2078 ms | Performance API run 1 | MEASURED |
-| CLS | 0 | 0 | PerformanceObserver | MEASURED |
+| CLS | **0,081** | **0,005** | PSI (EVID-0047/0048) | MEASURED — desplazamiento **específico de móvil** (16×); el 0 original se midió sin throttling |
 | Long tasks | 0 | 0 | PerformanceObserver | MEASURED |
 | Peso home (fría) | — | 602 KB / 18 requests (3 de terceros) | Resource Timing | MEASURED |
-| LCP / INP | — | — | — | NOT_VERIFIED (limitaciones 1–2) |
+| **LCP** | **1,4 s** | **0,4 s** | PSI/Lighthouse 13.4.0 (EVID-0047/0048) | **MEASURED** |
+| INP | — | — | — | NOT_VERIFIED (limitación 2: sin datos CrUX) |
 | Compresión | br | br | curl | MEASURED |
 | Protocolo | h2 (h3 anunciado) | h2 | curl/alt-svc | MEASURED |
 
-Datos de campo: no disponibles (sin acceso a Search Console/RUM).
+Datos de campo: **no disponibles** — CrUX responde "No hay datos" para este origen (tráfico por debajo del umbral del dataset), lo que **corrobora de forma independiente** el diagnóstico de visibilidad externa. INP no es medible sin ellos.
+
+**PSI/Lighthouse 2026-07-20 (EVID-0047 móvil, EVID-0048 escritorio):**
+
+| | Móvil (4G lenta) | Escritorio |
+|---|---:|---:|
+| Rendimiento | **99** | **100** |
+| Accesibilidad · Prácticas · SEO | 100 · 100 · 100 | 100 · 100 · 100 |
+| Navegación agéntica | 3/3 | 3/3 |
+| FCP · LCP · TBT · CLS · SI | 0,9 s · 1,4 s · 0 ms · 0,081 · 1,0 s | 0,3 s · 0,4 s · 0 ms · 0,005 · 0,3 s |
+| Ahorro en imágenes | **185 KiB** | 42 KiB |
+| Bloqueo de renderizado | 450 ms | 200 ms |
+
+La diferencia 185 vs 42 KiB en imágenes (4,4×) es la firma de la falta de `srcset` (**PERF-001**): el móvil recibe imágenes dimensionadas para pantallas grandes. El CLS de 0,081 en móvil frente a 0,005 en escritorio revela un desplazamiento **exclusivo del viewport móvil** — dentro del umbral bueno, pero vigilable.
 
 ## 8. Hallazgos por categoría
 
-Los 10 hallazgos completos (con reproducción, causa raíz, criterios de aceptación, pasos numerados, validación y rollback) están en `findings.jsonl`; cada uno enlaza su paquete en `remediation/` y sus tareas. Resumen:
+Los 14 hallazgos completos (10 originales + SEO-EXT-001/002 + ASO-001/002) (con reproducción, causa raíz, criterios de aceptación, pasos numerados, validación y rollback) están en `findings.jsonl`; cada uno enlaza su paquete en `remediation/` y sus tareas. Resumen:
 
 ### Funcionalidad
 - **FUNC-001 · ALTA · CONFIRMADO** — Formulario de contacto inentregable. `contacto/index.html:127-147` (`action="#" method="post"`), ningún script adjunta handler (revisión completa de los 4 JS), host estático. Impacto agéntico CRÍTICO (única acción de contacto en página falla en silencio). Evidencia EVID-0024/0025. → `remediation/FUNC-001.md`, TASK-0002 (READY), TASK-0003 (BLOCKED: decisión de producto).
-- **FUNC-002 · ALTA · CONFIRMADO** — `.ics` rotos: `data-calendar-ics` apunta a `/ical/encuentro-nacional-2026.ics` y `/ical/pausa-profunda-cali.ics`; ambos 404 en producción y ausentes del repo (no existe `ical/`). 2 de 4 opciones del diálogo "Añadir al calendario" fallan en ambos eventos. Evidencia EVID-0026. → `remediation/FUNC-002.md`, TASK-0001 (READY).
+- **FUNC-002 · MEDIA · CONFIRMADO (causa raíz CORREGIDA 2026-07-20)** — La descarga `.ics` devuelve 404, pero **no porque el archivo falte**: `eventos/ical/encuentro-nacional-2026.ics` existe y responde 200. Las referencias son **relativas** (`ical/…`, `../ical/…`) y bajo la política canónica **sin barra final** resuelven a `/ical/…` → 404 (verificado en navegador real, EVID-0041). Solo **un** evento ofrece calendario; "Pausa Profunda – Cali" está finalizado (`EventCompleted`) y correctamente no lo ofrece. La auditoría original afirmaba que los archivos nunca se crearon y que ambos eventos estaban rotos: inexacto. Arreglo correcto = rutas absolutas + `text/calendar` (no crear archivos). → TASK-0001 (corregida).
 
 ### Seguridad y transporte
 - **SEC-001 · MEDIA · CONFIRMADO** — HSTS ausente (línea 103 de `.htaccess` comentada a la espera de esta auditoría). Decisión: **activar en Fase 1 con `max-age=604800`** (despliegue escalonado ADR 0018; el año completo solo tras WordPress estable — el sitio estático es temporal). Riesgo residual: renovación de certificado inferida (crt.sh caído); fijación limitada a 7 días en Fase 1. → `remediation/SEC-001.md`, TASK-0004 + verificación TASK-0005; `includeSubDomains` en TASK-0012 (BLOCKED).
@@ -87,8 +103,42 @@ Los 10 hallazgos completos (con reproducción, causa raíz, criterios de aceptac
 - **AEO-001 · BAJA · CONFIRMADO** — `/galeria` renderiza el grid 100 % en cliente sin fallback: vacía para agentes sin JS. Prueba de tareas agénticas: "contactar" por formulario = FALLA silenciosa (FUNC-001); "añadir evento a calendario" = parcial (2/4 opciones); enlaces WhatsApp/Google Calendar = correctos. → TASK-0010.
 
 ### SEO externo (continuación 2026-07-19 — `working/seo-external.md`)
-- **SEO-EXT-001 · ALTA · CONFIRMADO** — El sitio solo es localizable por el nombre exacto "Camino del Dharma": ausente del top 10 en TODAS las consultas temáticas probadas (budismo en colombia, comunidad/centro budista, budismo chan/tierra pura, budismo cali, retiros). Causas: autoridad externa casi nula (Buddhistdoor cita la comunidad pero enlaza solo a Facebook; ausente del directorio budismo.com), sin señales locales (Cali/2012 no aparecía en el sitio), contenido temático mínimo (1 entrada de blog), sin GSC verificable. Evidencia EVID-0033/0035/0036. Mejoras on-page implementadas en la continuación; off-page y medición → TASK-0014/0015; contenido → TASK-0016.
+- **SEO-EXT-001 · MEDIA · CONFIRMADO (revisado 2026-07-20 con Google CO real)** — Visibilidad débil en consultas amplias y locales; nicho ya ganado. Verificado en Google (hl=es, gl=co): **#1 para "budismo chan colombia" y "budismo tierra pura colombia"**; marca #1 con SERP limpio; **ausente de página 1** en "budismo en colombia", "comunidad budista colombia" y "budismo cali", donde dominan los packs locales (Google Business Profile) y competidores con más autoridad. Causas restantes: sin GBP, backlinks mínimos (una cita: ecoespiritualidad.org; Buddhistdoor enlaza solo Facebook; ausente de budismo.com), 1 entrada de blog, indexación parcial (4/13 URLs visibles en site:). Evidencia EVID-0033/0035/0036/0037. Palanca nº1: GBP (TASK-0014); medición GSC (TASK-0015); contenido (TASK-0016).
 - **SEO-EXT-002 · MEDIA · CONFIRMADO** — Índice contaminado por URLs residuales de la etapa WordPress: `www./prueba/` (¡página de prueba en el SERP de marca!), `/category/*` (301→404), `?page_id=10` (200 duplicado). Evidencia EVID-0032/0034. Redirects 410/301 implementados en fuente (.htaccess) → desplegar con TASK-0013 y retirar en GSC con TASK-0015.
+
+### ASO / AEO — visibilidad y accionabilidad agéntica (continuación 2026-07-20 — `working/aso-aeo.md`)
+- **ASO-001 · MEDIA · CONFIRMADO** — El sitio gana la *keyword* pero desaparece en la **misma consulta formulada como pregunta**, que es como recuperan los motores agénticos: #1 en "budismo chan colombia" pero ausente de página 1 en "dónde practicar budismo chan en Colombia" y en "meditación budista online en español gratis". El AI Overview de Google para la consulta de marca cita EcoEspiritualidad, Wisdom Library, Wikipedia y otros — **no al sitio**, pese a ser el resultado orgánico #1. Causa: contenido como prosa institucional por tema, sin encabezados en forma de pregunta, sin respuestas directas breves ni páginas por intención. Evidencia EVID-0040. → TASK-0018.
+- **ASO-002 · MEDIA · CONFIRMADO** — La **meditación semanal online de los lunes** —acción recurrente de mayor valor y mayor diferenciador frente a competidores presenciales— no es una entidad citable: sin URL propia, sin `Event`/`EventSeries`, ausente de `llms.txt` y del sitemap, sin enlace de unión directo. Un agente al que le preguntan por meditación budista online en español no tiene nada que citar. Evidencia EVID-0040/0042. → TASK-0017.
+- **Verificado sin hallazgos (AEO):** acceso de crawlers de IA (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Googlebot, Bingbot → 200, tamaño idéntico, sin cloaking ni WAF — EVID-0038); eficiencia de contexto (~400–1 600 tokens/página, ratio de texto 19–35 % — EVID-0039); seguridad agéntica (barrido de inyección de prompts: cero coincidencias — EVID-0042).
+
+### Autoridad de dominio y perfil de enlaces (continuación 2026-07-20 — `working/authority-backlinks.md`)
+
+Cuantifica la causa que SEO-EXT-001 describía cualitativamente. Métricas de terceros, con proveedor y fecha:
+
+| Métrica | Valor | Fuente |
+|---|---:|---|
+| Domain Rating (Ahrefs) | **0,4** | Dapachecker (ejecución manual del propietario, 2026-07-20) |
+| URL Rating (Ahrefs) | 4 | ídem |
+| Domain Authority (Moz) | **6** | ídem |
+| Page Authority (Moz) | 18 | ídem |
+| Spam Score (Moz) | **7 %** (sano) | ídem |
+| Antigüedad del dominio | **7 años 5 meses** | ídem |
+| DA / PA (estimación Semrush) | 2 / 8 | SEO Review Tools (agente, 2026-07-20) |
+
+**Baseline de competidores (2026-07-20, misma herramienta y fecha — EVID-0046):**
+
+| Dominio | DA | PA | Enlaces → dominio |
+|---|---:|---:|---:|
+| sotozencolombia.org | 20 | 42 | 585 |
+| budismocolombia.co | 18 | 2 | 368 |
+| meditacionencolombia.org | 17 | 51 | 1 327 |
+| budismocolombia.org | 8 | 1 | 214 |
+| centroyamantaka.org | 8 | 16 | 496 |
+| **caminodeldharma.org** | **2** | 8 | 207 |
+
+**Lectura:** DR 0,4 sobre un dominio de 7,5 años = dominio establecido que **nunca acumuló enlaces**; no aplica el argumento de "hay que esperar". Spam Score 7 % = **no hay enlaces tóxicos**: la estrategia es adquisición, no `disavow`. **El baseline confirma el escenario favorable:** ningún competidor supera DA 20 (mediana 17) — nicho de autoridad uniformemente baja, sin actor dominante. Brecha de solo **6 puntos** al peldaño más cercano. Y el dato decisivo: `budismocolombia.org` tiene **214** enlaces externos (vs **207** aquí) pero **DA 8 vs 2** — mismo volumen, cuatro veces la autoridad: el déficit es **calidad y diversidad de dominios de referencia, no cantidad**. Metas: DA 8 (primer hito, alcanzable con TASK-0014), DA 15–17 (segundo, requiere contenido sostenido y presencia local). Causa raíz verificada en tres fuentes temáticas autorizadas que **citan a la comunidad sin enlazar el dominio**: Buddhistdoor (enlaza solo a Facebook), EcoEspiritualidad (ficha completa, #2 en Google para la marca, sin ningún enlace saliente) y el directorio budismo.com (no listada). Es una causa inusualmente fácil de corregir → TASK-0014 (tres peticiones concretas). Baseline de competidores no obtenido (CAPTCHA + rate limit) → TASK-0019. TF/CF de Majestic no obtenidos (registro) → limitación.
+
+**Advertencia metodológica:** los comprobadores de "PageRank" (dnschecker, smallseotools, prchecker) **no se usaron como evidencia** — Google no publica PageRank desde 2016 y esas cifras no son auditables; incluirlas sería fabricar evidencia.
 
 ### Informativos (sin acción requerida)
 - **INFO-001** — Cadena de 2 saltos solo en la entrada http://www (borde de plataforma, cada salto seguro); JS servido como `application/x-javascript` (legado, funcional); `assets/fonts/README.md` público (inofensivo).
@@ -118,12 +168,12 @@ Detalle completo por evidencia (comando, timestamp, artefacto crudo): `evidence-
 | Área | Score | Cobertura | Confianza | Resumen |
 |---|---:|---:|---|---|
 | SEO (interno/on-page) | 100 | 90 % | ALTA | 8/8 controles aplicables PASS — **solo mide SEO interno** |
-| SEO externo (visibilidad orgánica) | 25 | 70 % | MEDIA | continuación 2026-07-19: solo el nombre exacto posiciona; consultas temáticas 0/8 en top 10; índice con residuos WP (`working/seo-external.md`) |
+| SEO externo (visibilidad orgánica) | 45 | 80 % | ALTA | verificado en Google CO 2026-07-20: nicho #1 (chan, tierra pura); marca #1; ausente de página 1 en consultas amplias y locales; packs locales GBP dominan (`working/seo-external.md` §8) |
 | SEO técnico | 100 | 90 % | ALTA | estados, canónicas, sitemap, redirecciones |
 | Datos estructurados | 100 | 95 % | ALTA | validación local completa |
 | Arquitectura de contenido | 100 | 80 % | MEDIA | eventos expirados bien gestionados |
-| Rendimiento | 67 | 75 % | MEDIA | imágenes y versionado FAIL; resto PASS |
-| Core Web Vitals | NOT SCORED | 20 % | BAJA | solo CLS fiable; LCP/INP no verificados |
+| Rendimiento | 85 | 90 % | ALTA | entrega excelente (PSI 99/100, métricas en verde); dimensionado de imágenes y versionado siguen FAIL como higiene, + render-blocking 450 ms |
+| Core Web Vitals | 90 | 70 % | ALTA | LCP 1,4 s y CLS 0,081 buenos, TBT 0 ms (PSI); INP no disponible sin datos de campo |
 | Eficiencia runtime | 100 | 70 % | MEDIA | consola limpia, 0 long tasks |
 | Accesibilidad | 100 | 70 % | MEDIA | estructural/contraste/teclado PASS; sin pase AT |
 | Responsive | 100 | 80 % | ALTA | 360/390/1440 sin defectos |
@@ -131,13 +181,13 @@ Detalle completo por evidencia (comando, timestamp, artefacto crudo): `evidence-
 | Calidad de código | 78 | 70 % | MEDIA | código limpio; 2 funciones rotas; sin tests |
 | Arquitectura y mantenibilidad | 90 | 60 % | MEDIA | estático coherente; falta versionado de assets |
 | Best practices | 85 | 75 % | MEDIA | observaciones menores |
-| AI Search Readiness | 100 | 80 % | ALTA | llms.txt coherente; entidades consistentes |
+| AI Search Readiness | 70 | 90 % | ALTA | acceso de crawlers IA y llms.txt PASS; pero sin citación en AI Overview, invisible en consultas tipo pregunta y meditación semanal sin entidad (ASO-001/002) |
 | Descubribilidad agéntica | 100 | 75 % | ALTA | robots abierto, sitemap canónico |
 | Parsabilidad agéntica | 83 | 75 % | ALTA | galería solo-JS |
-| Accionabilidad agéntica | 25 | 80 % | ALTA | las 2 acciones ejecutables están rotas |
+| Accionabilidad agéntica | 40 | 85 % | ALTA | formulario de contacto roto (FUNC-001); calendario 2/4 opciones por ruta relativa (FUNC-002, causa corregida); WhatsApp/correo/Google/Outlook operativos |
 | Seguridad agéntica | 100 | 70 % | MEDIA | sin inyección detectada |
 | Observabilidad agéntica | NOT SCORED | 10 % | BAJA | sin acceso a monitorización |
-| **Preparación agéntica global** | **77** | 70 % | MEDIA | ponderado de las áreas AEO puntuadas |
+| **Preparación agéntica global** | **72** | 85 % | ALTA | acceso/parsabilidad/seguridad sólidos; brechas en citación agéntica y accionabilidad |
 | **Preparación para producción** | **80** | 85 % | ALTA | excelente base; 2 roturas funcionales y brecha de consentimiento |
 | **Score global del sitio** | **84** | 78 % | MEDIA | media ponderada de áreas puntuadas (las NOT SCORED no promedian como cero) |
 
@@ -153,7 +203,7 @@ Uno por hallazgo accionable en `remediation/<FINDING_ID>.md` (índice en `remedi
 
 ## 13. Backlog incremental de implementación
 
-12 tareas atómicas en `implementation/tasks/` (ledger: `implementation/tasks.jsonl`; tabla: `implementation/backlog.md`). 9 READY, 3 BLOCKED (TASK-0003 decisión de formulario; TASK-0006 decisión de consentimiento; TASK-0012 inventario DNS + estabilidad HSTS). Cada paquete es autocontenido: un agente externo puede ejecutarlo sin redescubrir el problema, con criterios, validación, rollback y checklist de validación independiente.
+19 tareas atómicas en `implementation/tasks/` (ledger: `implementation/tasks.jsonl`; tabla: `implementation/backlog.md`). 15 READY, 4 BLOCKED (TASK-0003 decisión de formulario; TASK-0006 decisión de consentimiento; TASK-0012 inventario DNS + estabilidad HSTS; TASK-0016 decisión editorial). Añadidas por las continuaciones: TASK-0013–0016 (SEO externo), TASK-0017–0018 (ASO), TASK-0019 (baseline de autoridad de competidores). Cada paquete es autocontenido: un agente externo puede ejecutarlo sin redescubrir el problema, con criterios, validación, rollback y checklist de validación independiente.
 
 ## 14. Olas de ejecución y grafo de dependencias
 

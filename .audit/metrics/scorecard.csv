@@ -1,6 +1,6 @@
 area,score,coverage,confidence,evidence_summary
 SEO (internal/on-page),100,90,HIGH,All 8 applicable controls PASS (SEO-01..08); hreflang N/A — measures INTERNAL SEO only
-SEO external (organic visibility),25,70,MEDIUM,"Continuation 2026-07-19: brand-only findability; 0/8 thematic queries in top 10; index polluted by WP residue (working/seo-external.md; SEO-EXT-001/002)"
+SEO external (organic visibility),45,80,HIGH,"Google CO verified 2026-07-20: #1 niche (chan, tierra pura) and brand; absent page 1 broad+local queries where GBP local packs dominate; WP residue in secondary indexes (working/seo-external.md §8)"
 Technical SEO,100,90,HIGH,Status/redirect/canonical/sitemap hygiene all PASS
 Structured Data,100,95,HIGH,SD-01..04 PASS; validated locally with property checks
 Content Architecture,100,80,MEDIUM,CONT-01..02 PASS; qualitative depth review limited

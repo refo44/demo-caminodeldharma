@@ -1,0 +1,125 @@
+# Camino del Dharma — Apache/LiteSpeed (Hostinger)
+
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset UTF-8
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS si el servidor o el proxy no indican conexión segura
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+  RewriteRule ^ https://caminodeldharma.org%{REQUEST_URI} [R=301,L]
+
+  # Dominio canónico: cualquier otro host -> sin www
+  RewriteCond %{HTTP_HOST} !^caminodeldharma\.org$ [NC]
+  RewriteRule ^ https://caminodeldharma.org%{REQUEST_URI} [R=301,L]
+
+  # Manifest retirado: web tradicional, no PWA
+  RewriteRule ^site\.webmanifest$ - [G,L]
+
+  # Rutas antiguas -> URL canónica
+  RewriteRule ^sangha-refugio-hiperconexion/?$ /blog/sangha-refugio-hiperconexion [R=301,L]
+  RewriteRule ^encuentro-nacional-2026/?$ /eventos/encuentro-nacional-2026 [R=301,L]
+  RewriteRule ^pausa-profunda-cali/?$ /eventos/pausa-profunda-cali [R=301,L]
+
+  # URLs residuales de la etapa WordPress todavia indexadas en buscadores
+  # /prueba era una pagina de prueba sin equivalente: 410 para acelerar la desindexacion
+  RewriteRule ^prueba/?$ - [G,L]
+  # Archivos de categoria de WordPress -> blog
+  RewriteRule ^category(/.*)?$ /blog [R=301,L]
+  # ?page_id=10 era "La comunidad" en WordPress
+  RewriteCond %{QUERY_STRING} (^|&)page_id=10(&|$)
+  RewriteRule ^$ /comunidad? [R=301,L]
+  # Cualquier otro ?page_id= -> portada sin query
+  RewriteCond %{QUERY_STRING} (^|&)page_id=
+  RewriteRule ^$ /? [R=301,L]
+
+  # Eliminar barra final, excepto la raíz
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteCond %{REQUEST_URI} ^(.+)/$
+  RewriteRule ^ %1 [R=301,L]
+
+  # Eliminar index.html de la URL
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+  # /comunidad -> /comunidad/index.html internamente
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+[^/])$ $1/index.html [END]
+</IfModule>
+
+<IfModule mod_mime.c>
+  # Calendarios .ics: el servidor los entregaba como text/plain
+  AddType text/calendar .ics
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/avif "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+
+  ExpiresByType audio/mpeg "access plus 30 days"
+  ExpiresByType application/pdf "access plus 30 days"
+
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header append Vary Accept-Encoding
+
+  <FilesMatch "\.(html?|json)$">
+    Header always set Cache-Control "max-age=0, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.(css|js)$">
+    Header always set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  <FilesMatch "\.(jpe?g|png|webp|avif|svg|mp3|pdf)$">
+    Header always set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.woff2$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+
+  # HSTS — ADR 0018: Fase 1 transición max-age=604800 (7 d); Fase 2 post-WordPress max-age=31536000
+  # Header always set Strict-Transport-Security "max-age=604800"
+</IfModule>
+
+<Files ".htaccess">
+  Require all denied
+</Files>
