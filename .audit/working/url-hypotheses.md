@@ -170,6 +170,72 @@ real es precisamente lo que hay que confirmar antes de crear nada.
 
 ---
 
+## Hipótesis 2c — Contenido de la página de sangha y filtrado de eventos por ciudad
+
+### Qué más puede contener una página de sangha
+
+Los campos ya definidos en `docs/03` §3.1 (nombre, ciudad, contacto, WhatsApp, horario, mapa) son la
+base. Lo que añade valor real —y lo que diferencia una página que rankea de una ficha vacía—:
+
+| Bloque | Por qué |
+|---|---|
+| **Modalidad** (presencial / en línea / mixta) | Primera pregunta de quien busca; determina si el sitio le sirve |
+| **Qué se practica ahí** (meditación, estudio, recitación) | Contenido único por ciudad; evita que las páginas se parezcan |
+| **Quién acompaña o referencia** | Señal de confianza; el competidor que rankea no la tiene → oportunidad |
+| **Cómo asistir la primera vez** | Baja la barrera de entrada. Es el bloque con mayor efecto en conversión, no solo en SEO |
+| **Fotos reales de ese grupo o lugar** | Contenido propio no duplicable; también alimenta el perfil de empresa |
+| **Próximos encuentros en esa ciudad** | La subsección de eventos que se propone — ver abajo |
+| **Preguntas frecuentes de esa ciudad** | Captura consultas en lenguaje natural (coherente con ASO-001) |
+
+Datos estructurados sugeridos: `Place` o subentidad de `Organization` con la localidad, más los
+`Event` de esa ciudad. No `LocalBusiness` salvo que haya sede física con horario de atención.
+
+### Taxonomía de ciudad para eventos: **sí, como dato**
+
+Necesaria para asociar cada evento con su sangha y poder listarlos. Encaja en ambas versiones:
+
+| Versión | Implementación |
+|---|---|
+| Estática (actual) | Atributo o clase en el marcado del evento; la sección «en esta ciudad» se mantiene a mano |
+| WordPress | Taxonomía `event_city` sobre el CPT `event`, junto a la ya existente `event_type` |
+
+### URLs públicas `/eventos/cali`: **no, y hay un motivo técnico concreto**
+
+**1. Conflicto de rutas.** `docs/11` §3 ya define `/eventos/{slug}/` para el evento individual. Una
+ruta `/eventos/cali` es indistinguible de un evento cuyo slug sea «cali»: **WordPress la resolvería
+como single de evento, no como archivo de ciudad.** Requeriría una base distinta —`/eventos/ciudad/cali`—
+lo que ya no es la propuesta original.
+
+**2. Contenido delgado.** Hoy existen **dos** eventos en todo el sitio (uno vigente, uno finalizado).
+Archivos por ciudad tendrían 0 o 1 elemento cada uno: páginas casi vacías, exactamente el patrón que
+Google penaliza y el mismo riesgo que ya bloquea TASK-0020.
+
+**3. Canibalización.** `/sanghas/cali` y `/eventos/cali` competirían por la misma consulta
+(«budismo cali», «eventos budistas cali»). Con **DA 2**, repartir señal entre dos páginas débiles es
+peor que concentrarla en una sólida.
+
+**4. Precedente del propio proyecto.** `event_type` es una taxonomía real desde el diseño inicial y
+**no tiene URL pública de archivo** en `docs/11`. Se usa como etiqueta y filtro, no como página. La
+ciudad debería seguir el mismo criterio.
+
+### Recomendación
+
+**Los eventos de la ciudad se muestran dentro de `/sanghas/{ciudad}`**, no en una URL propia. Una sola
+página fuerte por ciudad, que reúne identidad + práctica + contacto + próximos encuentros. Es además
+lo que la propia propuesta apuntaba con «una subsección de eventos que aplique solo para esa ciudad».
+
+**Revisar cuando haya volumen:** si una ciudad supera ~5 eventos y la sección se vuelve inmanejable
+dentro de la página, entonces sí crear archivo público —pero como `/eventos/ciudad/{ciudad}` para
+evitar el conflicto de rutas, y con ADR que lo justifique (ADR 0008).
+
+### Coste de mantenimiento en la versión estática
+
+Con dos eventos, mantener a mano la sección por ciudad es trivial. A medida que crezca, cada evento
+nuevo obligará a tocar varias páginas. Es un argumento más para **no** multiplicar URLs ahora y dejar
+el filtrado real para WordPress, donde la taxonomía lo resuelve sola.
+
+---
+
 ## Resumen de decisiones
 
 | Propuesta | Decisión | Motivo |
@@ -177,3 +243,5 @@ real es precisamente lo que hay que confirmar antes de crear nada.
 | Renombrar `/comunidad` | **Omitida** — sin tarea | Refutada por los datos del propio sitio y de los competidores; coste cierto contra beneficio no demostrado; contradice ADR 0008 |
 | Páginas por ciudad | **TASK-0020 (BLOCKED)** | Fundamento sólido, pero exige confirmar actividad real por ciudad y contenido sustancial; se secuencia tras GBP |
 | Estructura `/cali` o `/comunidad/cali` | **Ninguna** — se adopta `/sanghas/{ciudad}` | Ya definida en `11-arbol-urls-final` §3.1 y con CPT en `03-wordpress-content-model` §3.1; aporta página hub `/sanghas/` y sobrevive a la migración |
+| Taxonomía de ciudad para eventos | **Sí, como dato** (`event_city`) | Necesaria para asociar eventos y sanghas; sirve en estático y en WordPress |
+| URLs públicas `/eventos/cali` | **No por ahora** | Conflicto de rutas con `/eventos/{slug}`, contenido delgado (2 eventos en total) y canibalización con `/sanghas/{ciudad}`. Precedente: `event_type` tampoco tiene archivo público |

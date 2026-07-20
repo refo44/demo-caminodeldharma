@@ -12,3 +12,12 @@
 | AEO-001 | LOW | READY | Frontend | 30m-2h | remediation/AEO-001.md | — | — |
 | SEC-003 | LOW | READY | DevOps | <30m | remediation/SEC-003.md | — | — |
 | INFO-001 | INFORMATIONAL | NOT_REQUIRED | — | — | — | — | — |
+
+## Añadidos por la continuación (2026-07-19/20)
+
+| Hallazgo | Paquete | Área |
+|---|---|---|
+| SEO-EXT-001 | `SEO-EXT-001.md` | SEO externo — visibilidad y autoridad |
+| SEO-EXT-002 | `SEO-EXT-002.md` | SEO externo — higiene de índice |
+| ASO-001 | `ASO-001.md` | ASO — recuperación en lenguaje natural |
+| ASO-002 | `ASO-002.md` | ASO — entidad citable |
