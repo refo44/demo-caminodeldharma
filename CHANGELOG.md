@@ -8,6 +8,22 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.15] - 2026-07-21
+
+### Meditación semanal en línea y eventos
+
+- Nueva página `/practica/meditacion-semanal-en-linea` (horario, modalidad Zoom, enlace de participación).
+- `index.html` y `practica/index.html`: enlace visible a la meditación semanal en línea.
+- `eventos/index.html`: fichas de eventos pasados (Barranquilla, Calma en la Ciudad, Medellín, UniRemington, Vesak Bogotá) con imágenes nuevas.
+- `eventos/encuentro-nacional-2026`: descripción del calendario `.ics` sin duplicar URL del cartel en el texto.
+- `llms.txt`: entrada de la meditación semanal; `assets/css/main.css`: estilos de eventos pasados.
+- `sitemap.xml`: `<lastmod>` `2026-07-21` en `/`, `/practica`, `/practica/meditacion-semanal-en-linea`, `/eventos` y `/eventos/encuentro-nacional-2026`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.14] - 2026-07-20
 
 ### Privacidad (embeds y almacenamiento local)
