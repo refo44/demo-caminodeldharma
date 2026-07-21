@@ -27,6 +27,10 @@ No hay frameworks (Tailwind, Bootstrap). No hay preprocesadores obligatorios; si
 
 Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
 
+0. **Normalize (sección 0.0) y fuentes (sección 0)**  
+   `normalize.css` v8.0.1 va **incorporado literalmente al inicio de `main.css`**, antes de las fuentes y de las variables. No se enlaza como hoja aparte: eso añadía una segunda petición bloqueante y encadenaba la ruta crítica (`documento → normalize.css`). Comprimido con Brotli el bloque cuesta ~500 B dentro de `main.css` frente a ~2,3 KB como archivo suelto, porque el compresor aprovecha la redundancia entre ambos.  
+   **Debe permanecer primero en la cascada** y sin editar (es código de terceros); cualquier ajuste va en la sección 2 (Base / reset mínimo) como override.
+
 1. **Variables ( :root )**  
    Tokens de 02: `--brand-1` a `--brand-4` (este proyecto usa 4 colores de marca; 02), `--text`, `--link`, `--surface`, `--header-bg`, `--footer-bg`, `--font-display`, `--font-heading`, `--font-body`. Tipografía: **body** Inter (autohospedada en `assets/fonts/inter/`, 02 y 15); **display/headings** MarloweEscapade y Fjalla One para hero y títulos (02 y 15).
 
@@ -125,7 +129,14 @@ npm run lint:css
 
 **Regla obligatoria:** ejecutar `npm run lint:css` después de cualquier modificación CSS y antes de cerrar una tarea, crear un commit o desplegar. El comando debe terminar sin errores.
 
-No se desactivan reglas para ocultar errores concretos. Toda excepción debe responder a una convención real del proyecto y quedar documentada en `.stylelintrc.json`. Las excepciones actuales de `normalize.css` conservan únicamente hacks de compatibilidad propios de ese archivo externo.
+No se desactivan reglas para ocultar errores concretos. Toda excepción debe responder a una convención real del proyecto y quedar justificada por escrito.
+
+Al incorporar `normalize.css` dentro de `main.css` (§2, sección 0.0) las excepciones dejaron de poder expresarse por archivo en `.stylelintrc.json`. Se declaran ahora **en línea y con alcance acotado**, cada una con su motivo tras `--`:
+
+- Un par `stylelint-disable` / `stylelint-enable` que envuelve **solo** el bloque de normalize, para `property-no-vendor-prefix` y `font-family-no-duplicate-names` (hacks de compatibilidad propios de ese código externo).
+- Cinco `stylelint-disable-next-line no-duplicate-selectors` en la sección 2, donde el reset propio redeclara a propósito los selectores base de normalize (`html`, `body`, `img`, `a`, `h1`).
+
+Ninguna regla se desactiva globalmente: siguen activas en todo el CSS propio. `.stylelintrc.json` ya no contiene bloque `overrides` (se eliminó junto con `assets/css/normalize.css`).
 
 ---
 
@@ -144,4 +155,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.5
+**Versión:** 1.6

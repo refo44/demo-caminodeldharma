@@ -58,11 +58,12 @@ El sitio es web tradicional (sin PWA ni `site.webmanifest`). Metadatos SEO, Open
 En el home y donde aplique:
 
 - Imágenes WebP con `<picture>` (JPEG como fallback)
-- `preload` del hero, fuente Inter 400 y CSS principal
+- `preload` del hero y de la fuente Inter 400
 - `fetchpriority="high"` en la imagen LCP del hero
 - `loading="lazy"` y `decoding="async"` en imágenes bajo el pliegue
+- **Una sola hoja de estilos bloqueante:** `assets/css/main.css`. `normalize.css` está incorporado al inicio de `main.css` (sección 0.0), no se enlaza aparte. Evita una segunda petición que bloqueaba el render y encadenaba la ruta crítica (`documento → normalize.css`)
 
-Variantes WebP viven junto a los JPEG en `assets/images/` (p. ej. `assets/images/inicio/*.webp`). Incluir ambos formatos en el ZIP de despliegue.
+Variantes WebP viven junto a los JPEG en `assets/images/` (p. ej. `assets/images/inicio/*.webp`). Las miniaturas de la galería del home viven en `assets/images/galeria/thumbs/` (600×600, jpg + webp); los originales de `assets/images/galeria/` se conservan porque el lightbox de `/galeria` los necesita a tamaño completo. Incluir ambos formatos en el ZIP de despliegue.
 
 ## Despliegue en Hostinger
 
@@ -74,7 +75,7 @@ Despliegue **manual** (ADR 0015). CI/CD pospuesto (ADR 0016). Historial en [`CHA
 
 Antes de cada despliegue:
 
-1. Actualizar `sitemap.xml` (`<lastmod>` de páginas modificadas).
+1. Actualizar `sitemap.xml` (`<lastmod>` de páginas con contenido indexable modificado; no hace falta si solo cambia infraestructura CSS/JS sin alterar el copy visible).
 2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md); commit de release en git.
 3. `npm run lint:css` (sin errores).
 4. Etiquetar la versión en git (tag anotado, convención `vX.Y.Z` alineada con `VERSION`):

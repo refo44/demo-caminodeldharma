@@ -8,6 +8,24 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.18] - 2026-07-21
+
+### CSS — una sola hoja bloqueante
+
+- `assets/css/main.css`: `normalize.css` v8.0.1 incorporado literalmente al inicio (nueva sección 0.0), antes de fuentes y variables. Sin cambios en el orden de cascada.
+- `assets/css/normalize.css`: eliminado (su contenido vive ahora en `main.css`; una sola fuente de verdad).
+- 15 páginas HTML: retirado el `<link>` a `normalize.css`. En `index.html`, retirado además el `preload` redundante de `main.css` (el `<link rel="stylesheet">` iba inmediatamente después).
+- `.stylelintrc.json`: eliminado el bloque `overrides` de `normalize.css` (el archivo ya no existe). Las excepciones se declaran ahora en línea y acotadas dentro de `main.css`; ver `docs/14-css-architecture.md` §8.
+
+**Motivo:** PageSpeed señalaba una cadena crítica `documento → normalize.css`. Medido sobre Brotli en producción: antes 8.407 B + 2.280 B en 2 peticiones; ahora 8.915 B en 1 petición (~1,8 KB menos y un round trip menos). La auditoría de dependencias de red pasa.
+
+- `sitemap.xml`: **sin cambio de `<lastmod>`** — la modificación es de infraestructura de estilos, no de contenido indexable. Ver nota abajo.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.17] - 2026-07-21
 
 ### Inicio — galería y logo
