@@ -36,7 +36,23 @@
 
 ---
 
-## 1. Veredicto
+## 1. Contexto y veredicto
+
+### El sitio
+
+`caminodeldharma.org` es el sitio de la Comunidad Buddhista Camino del Dharma, una comunidad budista sin ánimo de lucro fundada en Cali en 2012, de tradición Chan y Tierra Pura. El sitio informa sobre la comunidad, su linaje y su práctica, publica eventos y un blog, y canaliza el contacto de quien quiere acercarse. **No hay transacciones ni área privada**: no se venden productos, no hay registro de usuarios ni autenticación.
+
+Datos que condicionan varias decisiones de este informe:
+
+| Hecho | Implicación |
+|---|---|
+| **Sitio estático**, sin base de datos ni backend | No hay superficie de ataque de servidor; el formulario no puede procesar envíos por sí solo |
+| **Publicado el 18 de julio de 2026** (v1.0.0) | Al auditarse tenía **un día de vida**. Toda observación sobre indexación debe leerse como progreso de rastreo, no como fallo |
+| **Es una etapa temporal**: será sustituido por WordPress | No procede ninguna configuración de compromiso largo (HSTS de un año, `preload`) |
+| **Sin analítica y sin cookies propias** | Decisión formalizada de la comunidad. Verificado: producción no sirve ninguna cookie propia |
+| **13 páginas publicadas** | Sitio pequeño: fue posible probarlas todas, sin muestreo |
+
+### Veredicto
 
 **La salud técnica del sitio es alta y está verificada por dos vías independientes.** La evaluación interna dio **8 de 8 controles superados**, y PageSpeed Insights (Lighthouse 13.4.0) puntúa **SEO 100 y Rendimiento 99 en móvil / 100 en escritorio**.
 
@@ -44,7 +60,12 @@
 
 Esto conviene decirlo con precisión, porque es el error de lectura más común en este proyecto: **la baja visibilidad orgánica del sitio no tiene causa técnica.** Lo técnico está resuelto.
 
-La brecha está en la **autoridad del dominio** —prácticamente ningún sitio externo enlaza hacia él— y en el **volumen de contenido**. Ninguna de esas dos cosas se corrige desde el código, y por tanto **ninguna tarea de este informe las resolverá**. Conviene tenerlo presente para no atribuir a la implementación técnica un resultado que no depende de ella.
+La brecha está en dos cosas que no se corrigen desde el código:
+
+- **Autoridad del dominio.** Prácticamente ningún sitio externo enlaza hacia él: en las escalas habituales del sector puntúa **2 sobre 100**, frente a una mediana de 17 entre comunidades comparables. Tres publicaciones especializadas describen a la comunidad y **ninguna incluye el enlace**.
+- **Volumen de contenido.** Una sola entrada de blog en el momento de la auditoría.
+
+**Ninguna tarea de este informe resolverá esas dos cosas.** Conviene tenerlo presente para no atribuir a la implementación técnica un resultado que no depende de ella — y también al revés: que la visibilidad tarde en llegar no indica que estas tareas se hayan hecho mal.
 
 ---
 
@@ -243,7 +264,7 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 
 | ID | Severidad | Hallazgo | Estado |
 |---|---|---|---|
-| FUNC-001 | **Alta** | Formulario de contacto con `action="#"` y sin backend: los mensajes se pierden en silencio | Mitigado con CTAs de WhatsApp y correo. Solución definitiva **bloqueada** por decisión de la comunidad |
+| FUNC-001 | **Alta** | Formulario de contacto con `action="#"` y sin backend: los mensajes se pierden en silencio | Mitigado con CTAs de WhatsApp y correo. Solución definitiva **en espera**: ver nota abajo |
 | FUNC-002 | Media | Descarga `.ics` con ruta relativa que rompe bajo la política de URL sin barra final | **Corregido** |
 | SEC-001 | Media | HSTS no activa | **Aplazado deliberadamente** hasta después de la migración a WordPress |
 | SEC-002 | Media | Política de seguridad de contenido limitada a `upgrade-insecure-requests`: sin restricciones de script, frame ni objeto | Abierto |
@@ -253,6 +274,14 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 | SEC-003 | Baja | Ausencia de `/.well-known/security.txt` pese a mantenerse `SECURITY.md` | Abierto |
 | PRIV-001 | Baja | Diez vídeos incrustados (8 YouTube + 2 Vimeo) sin variante `nocookie`; política de privacidad pendiente | Abierto |
 | INFO-001 | Informativa | Cadena de redirección de dos saltos en la entrada `www` por HTTP; JavaScript servido como `application/x-javascript` | Abierto |
+
+### Sobre el formulario de contacto (FUNC-001)
+
+El formulario apuntaba a `action="#"` sobre un alojamiento estático sin ningún manejador de envío: **quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso**. Verificado por revisión de código y ausencia confirmada de manejador; no se comprobó mediante un envío real, por restricción de alcance.
+
+**Mitigación ya desplegada:** el formulario se sustituyó por accesos directos de WhatsApp y correo, ambos operativos. Hoy nadie queda sin respuesta.
+
+**Por qué no se implementó una solución definitiva:** un formulario funcional en un sitio estático exige un servicio externo de procesamiento, con su configuración, su mantenimiento y su tratamiento de datos personales. Es una decisión de la comunidad —no técnica— si ese canal adicional aporta algo sobre WhatsApp y correo. **No implementar nada es un desenlace válido de esa decisión.**
 
 ### Sobre la cabecera HSTS
 

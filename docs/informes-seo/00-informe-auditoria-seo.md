@@ -108,15 +108,19 @@ No se enviaron formularios, no se crearon cuentas y no se realizaron pruebas inv
 
 **Cómo leer este cuadro.** Las primeras filas miden **cómo está hecho el sitio**. La fila destacada mide **cuánta gente lo encuentra**. Que lo primero sea casi perfecto y lo último un 45 no es incoherente: describe con precisión un sitio impecable que todavía nadie ha recomendado.
 
-### Hallazgos por severidad
+### Los catorce hallazgos
 
-| Severidad | Nº |
-|---|---:|
-| Crítica | **0** |
-| Alta | 1 — formulario de contacto |
-| Media | 8 |
-| Baja | 4 |
-| Informativa | 1 |
+| Severidad | Nº | Cuáles |
+|---|---:|---|
+| **Crítica** | **0** | — |
+| **Alta** | 1 | El formulario de contacto no entregaba los mensajes |
+| **Media** | 8 | Visibilidad en búsquedas amplias · restos de la web anterior en los buscadores · invisibilidad ante asistentes de IA · la meditación semanal sin entidad propia · descarga de calendario averiada · dos cabeceras de seguridad pendientes · imágenes sobredimensionadas |
+| **Baja** | 4 | Archivos que pueden tardar en actualizarse · galería que no funciona sin JavaScript · falta un archivo de contacto de seguridad · vídeos incrustados que pueden fijar cookies |
+| **Informativa** | 1 | Detalles menores de configuración del servidor |
+
+**Estado.** El formulario ya está mitigado con accesos directos de WhatsApp y correo —hoy nadie queda sin respuesta— y la descarga de calendario está corregida. Los restos de la web anterior se limpiaron. El resto son tareas de mantenimiento a cargo del equipo de publicación web: **ninguna de ellas está frenando la visibilidad del sitio.**
+
+Dos hallazgos de severidad media dependen de decisiones de la comunidad y se tratan en §11.
 
 ---
 
