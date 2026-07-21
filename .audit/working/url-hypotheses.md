@@ -1,5 +1,8 @@
 # Análisis de hipótesis de URL y páginas por ciudad (2026-07-20)
 
+> **CORRECCIÓN 2026-07-21 — GBP descartado.** Todo lo que este documento afirma sobre Google Business Profile como acción prioritaria queda **retirado**: la comunidad no tiene sede ni dirección física y no es elegible según las directrices de Google (las entidades exclusivamente en línea quedan excluidas; se exige dirección real verificable aunque se oculte al público). Las consultas locales dejan de contabilizarse como brecha alcanzable. El texto original se conserva sin modificar como registro del análisis del 19–20 de julio. Ver `decisions.md`.
+
+
 Propuestas del propietario, evaluadas **antes de implementar**, con la instrucción explícita de crear
 tareas solo si suponen una mejora real y omitirlas si no. Ninguna se ha implementado.
 

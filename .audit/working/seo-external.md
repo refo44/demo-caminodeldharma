@@ -1,5 +1,10 @@
 # Auditoría SEO externa — visibilidad orgánica (continuación 2026-07-19)
 
+> **CORRECCIÓN 2026-07-21 — GBP descartado.** Todo lo que este documento afirma sobre Google Business Profile como acción prioritaria queda **retirado**: la comunidad no tiene sede ni dirección física y no es elegible según las directrices de Google (las entidades exclusivamente en línea quedan excluidas; se exige dirección real verificable aunque se oculte al público). Las consultas locales dejan de contabilizarse como brecha alcanzable. El texto original se conserva sin modificar como registro del análisis del 19–20 de julio. Ver `decisions.md`.
+
+> **CORRECCIÓN 2026-07-21 — directorio budismo.com retirado.** Su autoridad nunca se midió, el sitio no muestra mantenimiento desde 2010 y carece de formulario de alta. Se recomendó con un estándar de evidencia inferior al aplicado al resto del análisis. Retirado de las recomendaciones; el texto original se conserva como registro.
+
+
 La auditoría original solo cubrió **SEO interno/técnico** (working/seo.md: 8/8 PASS). Esta continuación
 evalúa la **visibilidad real en buscadores**: indexación, posiciones por consultas temáticas, keywords
 y comparación con competidores. Evidencia cruda en `raw/seo-external/` (HTML de SERPs + JSON parseado).

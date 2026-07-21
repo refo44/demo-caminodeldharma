@@ -43,7 +43,7 @@ Artículos del blog sobre Chan o Tierra Pura **pueden** complementar (más profu
 |---|---|
 | **“meditación budista online en español”** (y similares) | **No aparece** en la primera página; la sesión del lunes solo está como párrafo en Práctica |
 | **“budismo en Colombia”**, **“comunidad budista Colombia”** | **Casi no aparece**; mucha competencia |
-| **“budismo Cali”**, **“budismo Medellín”**, etc. | **Casi no aparece**; dominan packs locales y otras comunidades |
+| **“budismo Cali”**, **“budismo Medellín”**, etc. | **Casi no aparece**. Google muestra primero un bloque de mapas con centros que tienen sede física; la comunidad no la tiene, así que ese bloque no es alcanzable. Debajo sí hay resultados normales, y ahí es donde un artículo puede aparecer |
 | Preguntas del tipo *“dónde practicar budismo chan en Colombia”* | **No aparece** en la primera página (aunque la keyword corta sí esté en #1) |
 | Blog actual | **Una sola entrada**; no cubre esas intenciones |
 
@@ -89,7 +89,7 @@ Hoy, para las búsquedas **débiles**, el blog casi no aporta: solo hay una **re
 | Prioridad | Si se publica en el blog… | Por qué (según audit) |
 |---|---|---|
 | **Alta** | Artículo sobre **meditación online en español** (sesión del lunes) | Brecha clara: hoy **no aparecen**; la comunidad sí ofrece esto |
-| **Media** | Artículo del blog sobre **práctica en una ciudad** (Cali, Medellín, etc.) | Brecha local: **no aparecen** en “budismo + ciudad” |
+| **Media** | Artículo del blog sobre **práctica en una ciudad** (Cali, Medellín, etc.) | Brecha local: **no aparecen** en “budismo + ciudad”. Expectativa realista: el bloque de mapas que Google pone arriba no es alcanzable sin sede física — el artículo compite por los resultados de debajo |
 | **Complemento** | Texto educativo sobre Chan o Tierra Pura | El sitio **ya es #1** en *“budismo chan/tierra pura colombia”*; un artículo puede ayudar en **otras formas** de pregunta o dar profundidad, pero no “arregla” lo principal |
 | **Baja / difícil** | Artículo genérico “budismo en Colombia” | Mucha competencia; beneficio incierto |
 | **Opcional** | Relato o entrevista | Más **acogida** que posicionamiento nuevo |
@@ -114,7 +114,7 @@ Alguien busca: “meditación budista online en español”
 |---|---|
 | **Meditación online en español** — hoy ausentes | Posición **ya ganada** en *“budismo chan/tierra pura colombia”* — el blog no es urgente ahí |
 | **Budismo + ciudad** — hoy ausentes | Dominar *“budismo en Colombia”* (mucha competencia) |
-| Preguntas en forma *“dónde practicar…”* | Perfil en Google Maps, enlaces desde otros sitios |
+| Preguntas en forma *“dónde practicar…”* | Enlaces desde otros sitios que hablen de la comunidad |
 | Visitas de quien **no** conoce la marca | Resultados **al día siguiente** (suelen tardar semanas) |
 
 Hoy casi todas las visitas desde buscadores llegan por el **nombre “Camino del Dharma”**. El audit sugiere que el blog, **en las brechas**, pueda sumar consultas como *meditación budista online* o *budismo* + ciudad — no reemplazar lo que Inicio/Linaje ya posicionan en Chan y Tierra Pura.

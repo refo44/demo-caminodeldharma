@@ -1,5 +1,8 @@
 # Auditoría ASO / AEO — visibilidad y accionabilidad agéntica (continuación 2026-07-20)
 
+> **CORRECCIÓN 2026-07-21 — GBP descartado.** Todo lo que este documento afirma sobre Google Business Profile como acción prioritaria queda **retirado**: la comunidad no tiene sede ni dirección física y no es elegible según las directrices de Google (las entidades exclusivamente en línea quedan excluidas; se exige dirección real verificable aunque se oculte al público). Las consultas locales dejan de contabilizarse como brecha alcanzable. El texto original se conserva sin modificar como registro del análisis del 19–20 de julio. Ver `decisions.md`.
+
+
 **ASO** (Agentic Search Optimization) = si los motores y asistentes de IA *encuentran, entienden y citan*
 el sitio. **AEO** (Agentic Engine Optimization) = si un agente puede *acceder, parsear y actuar* sobre él.
 

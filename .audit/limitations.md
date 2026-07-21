@@ -1,5 +1,8 @@
 # Limitations
 
+> **CORRECCIÓN 2026-07-21 — directorio budismo.com retirado.** Su autoridad nunca se midió, el sitio no muestra mantenimiento desde 2010 y carece de formulario de alta. Se recomendó con un estándar de evidencia inferior al aplicado al resto del análisis. Retirado de las recomendaciones; el texto original se conserva como registro.
+
+
 1. **No calibrated lab performance tooling.** Lighthouse/axe are not installed and installing packages is prohibited during the audit. Lab metrics come from the in-app browser Performance API without CPU/network throttling; paint/LCP entries were suppressed on warm runs (pane throttling). Effect: Core Web Vitals cannot be scored; CLS (0) and TTFB (170–310 ms) are reliable, FCP/LCP are not. Severity of PERF findings is therefore based on byte/dimension evidence, not on timing claims.
 2. **No field data.** No Search Console, GA4 account access, RUM or server logs were provided. INP and field LCP are unknown. Observability controls are NOT_VERIFIED.
 3. **Form submission prohibited** (`form_submission_permission: false`). FUNC-001 is confirmed from source code plus verified absence of any submit handler, not from a live submission.

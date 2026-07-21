@@ -122,3 +122,19 @@ Los hallazgos técnicos no se ven afectados: el formulario roto, la ruta de los 
 **Un hallazgo nuevo:** Google todavía cuenta por separado `https://`, `https://www.` y `http://`. Las redirecciones son correctas, así que debería consolidarse solo — conviene revisarlo en 4-8 semanas.
 
 **La consecuencia práctica más útil:** no saques conclusiones sobre si las acciones de autoridad y contenido funcionan hasta volver a mirar Search Console dentro de **4 a 8 semanas**. Medir hoy la eficacia de algo que aún no ha tenido tiempo de actuar solo produciría conclusiones falsas.
+
+---
+
+## Adenda (2026-07-21) — Tres correcciones que cambian el orden de prioridades
+
+**1. Google Business Profile queda descartado, no pendiente.** La adenda del 2026-07-19 lo señalaba como «la acción individual de mayor palanca». Se retira: la comunidad **no tiene sede ni dirección física**, y las directrices de Google excluyen a las entidades exclusivamente en línea. Aunque una organización sin sede visible puede ocultar la dirección al público, Google exige una dirección real verificable en el back end, sin apartados postales ni oficinas virtuales.
+
+Fue una deducción a partir del SERP —los packs locales dominaban todas las consultas amplias y locales— **sin verificar la elegibilidad**. Mismo patrón que el falso backlink de EcoEspiritualidad.
+
+**Consecuencia estratégica:** las consultas locales dejan de contabilizarse como brecha. El esfuerzo se reorienta a autoridad y a la **práctica en línea**, donde la comunidad es el único caso virtual entre los seis dominios comparados.
+
+**2. El directorio budismo.com se retira de las recomendaciones.** Su autoridad nunca se midió —no estaba en el baseline de competidores—, el sitio no muestra mantenimiento desde 2010, no tiene formulario de alta y su posición en los SERPs puede deberse en buena parte a la coincidencia exacta del nombre de dominio, que no implica autoridad transferible. Se recomendó aplicando un estándar de evidencia inferior al exigido al resto del análisis.
+
+**3. TASK-0017 no estaba hecha.** El cierre en bloque del deploy v1.0.14 la marcó COMPLETED. Verificación del 2026-07-21: ninguno de sus cuatro criterios se cumple. Reabierta como READY — y es ahora **la acción de mayor recorrido disponible**, con el prerrequisito ya resuelto (puerta por WhatsApp, sin publicar el enlace de Zoom).
+
+**Estado de la off-page:** peticiones a Buddhistdoor y EcoEspiritualidad enviadas; URL de la web puesta en Facebook; **pendiente en Instagram** — con la salvedad de que los enlaces de redes no transfieren autoridad y su valor es de tráfico y coherencia.

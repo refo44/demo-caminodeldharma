@@ -19,3 +19,12 @@
 - Pending manual inputs: see manual-inputs-pending.md — deploy, GSC, GBP and link requests marked delivered per owner confirmation 2026-07-20
 - Audit schedule: see audit-schedule.md — next full audit after WordPress cutover + 30 stable days
 - Next executable action: **none in Stage 2** — await community decisions on BLOCKED tasks or post-WordPress HSTS (TASK-0004). Optional: Stage 3 spot validation of deploy v1.0.14
+
+## Actualización 2026-07-21
+
+- **TASK-0017 REABIERTA (READY).** Figuraba COMPLETED por el cierre en bloque del deploy v1.0.14, pero la verificación del 2026-07-21 muestra que ninguno de sus 4 criterios se cumple (sin URL en sitemap, sin `EventSeries` en `practica/index.html`, sin entrada en `llms.txt`, sin página que enlazar). Prerrequisito resuelto: puerta por WhatsApp.
+- **TASK-0014 → PARTIALLY_COMPLETED.** Peticiones de enlace enviadas y URL en Facebook hechas; **Instagram pendiente**. **GBP descartado** por inelegibilidad (sin sede ni dirección física). **Directorio budismo.com retirado** de las recomendaciones.
+- **Corte a WordPress aplazado** a después del 10 de agosto (tras el Encuentro Nacional). Se probará antes en servidor y URL temporales; Hitos 1 y 2 del cronograma se mantienen íntegros.
+- **Tareas: 20 — 12 COMPLETED, 1 PARTIALLY_COMPLETED, 1 READY (TASK-0017), 6 BLOCKED.**
+- **Próxima acción ejecutable: TASK-0017.**
+- Entregables externos en `docs/informes-seo/` (informe general y auditoría técnica) + `docs/24-brief-editorial-blog-y-visibilidad.md`.
