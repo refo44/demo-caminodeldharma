@@ -96,7 +96,7 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 
 ### Lo que ya se corrigió
 
-Catorce de veinte tareas están hechas y publicadas: se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, y se sustituyó el formulario averiado por accesos directos de WhatsApp y correo.
+Catorce de veinte tareas están hechas y publicadas: se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
 
 **Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta**, aunque la solución definitiva depende de una decisión (§5.2).
 
@@ -207,10 +207,12 @@ Es más: la puerta por WhatsApp **es la respuesta a la pregunta que hace quien b
 |---|---|---|
 | Escribir a **Buddhistdoor en Español** | Pedir que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
 | Escribir a **EcoEspiritualidad** | Pedir que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
-| Perfiles de **Facebook e Instagram** | Añadir `caminodeldharma.org` en el campo de enlace del perfil | 10 min |
+| Perfil de **Instagram** | Añadir `caminodeldharma.org` en el campo de enlace de la biografía. En Facebook ya está puesto | 5 min |
 | **Página propia para la meditación de los lunes** | Página que describa la sesión —qué es, para quién, en qué tradición, a qué hora— con el botón de WhatsApp como puerta de entrada, más su ficha para buscadores. **Sin publicar el enlace de Zoom** | ~4 h |
 
 Las dos primeras atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
+
+**Una precisión sobre el enlace de Instagram:** las redes sociales marcan sus enlaces de forma que **no transfieren autoridad**. Ponerlo no moverá la puntuación de §3. Su valor es otro y también real: que quien llega por Instagram pueda pasar al sitio, y que la dirección de la web aparezca de forma coherente allí donde la comunidad tiene presencia. Es cinco minutos bien empleados, pero por motivos de tráfico y coherencia, no de autoridad.
 
 **La página de la meditación es la de mayor recorrido a medio plazo.** Es la única búsqueda donde la comunidad no tiene competencia real: ninguna de las cinco comunidades comparadas ofrece práctica en línea. Y no compromete la decisión ya tomada — lo que indexan los buscadores es la descripción de la sesión, no la sala.
 
