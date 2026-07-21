@@ -29,10 +29,11 @@
 7. [Datos estructurados](#7-datos-estructurados)
 8. [Hallazgos técnicos](#8-hallazgos-técnicos)
 9. [Analítica, cookies y privacidad](#9-analítica-cookies-y-privacidad)
-10. [Protocolo de medición](#10-protocolo-de-medición)
-11. [Plan de acción técnico](#11-plan-de-acción-técnico)
-12. [Limitaciones](#12-limitaciones)
-13. [Glosario técnico](#13-glosario-técnico)
+10. [Migración a WordPress: verificación del corte](#10-migración-a-wordpress-verificación-del-corte)
+11. [Protocolo de medición](#11-protocolo-de-medición)
+12. [Plan de acción técnico](#12-plan-de-acción-técnico)
+13. [Limitaciones](#13-limitaciones)
+14. [Glosario técnico](#14-glosario-técnico)
 
 ---
 
@@ -308,7 +309,48 @@ El motivo es de utilidad, no ideológico: sin datos de campo en el conjunto de G
 
 ---
 
-## 10. Protocolo de medición
+## 10. Migración a WordPress: verificación del corte
+
+El corte queda previsto **después del 10 de agosto de 2026**, tras el Encuentro Nacional, y se habrá probado antes en un servidor y una URL temporales.
+
+**El ensayo en preproducción reduce mucho el riesgo, pero no cubre lo que solo existe en el dominio real.** Esta sección enumera exactamente eso.
+
+### Lo que un entorno de pruebas NO valida
+
+| Área | Por qué no se transfiere |
+|---|---|
+| **`robots.txt` y la opción «Disuadir a los motores de búsqueda»** | Los entornos de prueba se configuran para no indexarse. WordPress guarda esa opción en **Ajustes → Lectura**, y viaja con la base de datos si se migra. **Es el fallo más común y más silencioso de una migración** |
+| **Canónicas** | En preproducción apuntan a la URL temporal. Si se migra la base de datos sin reemplazar el dominio, quedan canónicas apuntando al servidor de pruebas |
+| **`.htaccess`** | WordPress reescribe su propio bloque `# BEGIN WordPress` al instalarse. El archivo de producción contiene reglas que **no existen en preproducción**: redirecciones heredadas, limpieza de URLs de la etapa WordPress anterior, `AddType text/calendar` y cabeceras de seguridad |
+| **Certificado y redirecciones de entrada** | `http→https` y `www→sin www` son propias del dominio real |
+| **Search Console** | La propiedad es del dominio real; la indexación no puede validarse desde otra URL |
+| **Rendimiento** | Otro servidor, otros recursos. Las métricas de preproducción no predicen las de producción |
+
+### Verificación obligatoria, 24–48 h tras el corte
+
+1. **`robots.txt`** no contiene `Disallow: /`, y **Ajustes → Lectura** tiene desmarcada la opción de disuadir buscadores. **Comprobar esto primero.**
+2. **Canónicas** apuntan a `caminodeldharma.org`, sin rastro de la URL de pruebas. Buscar la URL temporal en toda la base de datos y en el HTML servido.
+3. **Sin `noindex`** en ninguna de las 13 páginas.
+4. **Paridad de URLs:** las 13 direcciones responden 200 y la canónica no cambió.
+5. **`.htaccess`:** confirmar que sobrevivieron las redirecciones heredadas, la limpieza de URLs antiguas, `AddType text/calendar` y las cabeceras de seguridad.
+6. **Sin cookies propias:** verificar que ni WordPress ni ningún plugin las introduce.
+7. **Datos estructurados** íntegros tras el cambio de plantillas.
+8. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir a los actuales.
+9. **`llms.txt`** sigue servido.
+10. **Descargas `.ics` y diálogo de calendario** operativos.
+11. **Rendimiento** contra la fotografía previa: PHP y plugins cambian el perfil.
+
+### Antes del corte, imprescindible
+
+**Fotografía completa del estado actual**, 2–3 días antes: export de Search Console, PageSpeed móvil y escritorio, inventario de las 13 URLs con estado y canónica, posiciones de la batería de consultas, autoridad con la herramienta habitual, cabeceras completas de la portada y copia del `.htaccess` vigente.
+
+**Sin un «antes» no hay forma de demostrar qué rompió la migración.**
+
+**Criterio de vuelta atrás:** decidido de antemano, no durante. Copia del sitio estático lista para restaurar en minutos.
+
+---
+
+## 11. Protocolo de medición
 
 Sin este protocolo, comparar la medición base con las siguientes no significa nada.
 
@@ -324,7 +366,7 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 
 ---
 
-## 11. Plan de acción técnico
+## 12. Plan de acción técnico
 
 | Prioridad | Acción | Esfuerzo | Estado |
 |---|---|---|---|
@@ -342,7 +384,7 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 
 ---
 
-## 12. Limitaciones
+## 13. Limitaciones
 
 1. **INP no medible:** el conjunto de datos de campo de Google no tiene información para este origen. Solo se cerrará con más tráfico o instrumentando medición de usuarios reales.
 2. **Los datos de PageSpeed son de laboratorio**, no de campo (móvil: dispositivo emulado con red 4G lenta). No sustituyen la experiencia real de los usuarios.
@@ -356,7 +398,7 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 
 ---
 
-## 13. Glosario técnico
+## 14. Glosario técnico
 
 | Término | Significado |
 |---|---|
@@ -374,4 +416,4 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 
 ---
 
-*Auditoría realizada sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §12.*
+*Auditoría realizada sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §13.*

@@ -40,10 +40,7 @@
 
 **Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
-**Lo que necesito de ustedes.** Dos decisiones, detalladas en §5:
-
-1. En qué ciudades hay práctica real.
-2. Si el formulario de contacto debe funcionar de verdad o basta con WhatsApp y correo.
+**Lo que necesito de ustedes.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
 
 **Lo que cuesta.** Las tres peticiones de enlace y perfil suman **poco más de una hora** y ningún gasto. La página de la meditación de los lunes, unas cuatro horas de trabajo técnico. El resto es contenido, al ritmo que la comunidad quiera darle.
 
@@ -98,7 +95,7 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 
 Catorce de veinte tareas están hechas y publicadas: se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
 
-**Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta**, aunque la solución definitiva depende de una decisión (§5.2).
+**Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta.**
 
 ---
 
@@ -165,37 +162,15 @@ Medí cinco comunidades budistas colombianas comparables, con la misma herramien
 
 ## 5. Lo que se necesita de la comunidad
 
-Las tareas que quedan abiertas **no están detenidas por falta de tiempo ni de capacidad técnica**. Dependen de decisiones que no corresponde tomar a quien realizó la auditoría.
+### ¿En qué ciudades hay práctica real?
 
-### 5.1 ¿En qué ciudades hay práctica real?
+Es el único dato que falta, y no puede obtenerse desde fuera.
 
 **Se necesita:** para cada ciudad, si hay práctica **recurrente**, **puntual** o **ninguna**, y cómo se contacta.
 
 **Por qué importa:** publicar contenido sobre una ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas, sin nada detrás— y supondría faltar a la verdad con quien busca dónde practicar.
 
 **Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas.
-
-### 5.2 ¿El formulario de contacto debe funcionar de verdad?
-
-**Situación actual:** ya funcionan los accesos de WhatsApp y correo. **Nadie queda sin respuesta hoy.**
-
-**La decisión:** un formulario operativo en este tipo de sitio requiere contratar un servicio externo, configurarlo, mantenerlo y hacerse cargo del tratamiento de los datos que reciba.
-
-**Si WhatsApp y correo cubren la necesidad, no hacer nada es una respuesta válida.**
-
-### Ya decidido — la meditación de los lunes
-
-**La comunidad ha resuelto que el enlace de Zoom no se publica.** Quien quiera practicar entra por el enlace de WhatsApp que figura en la página. La puerta sigue siendo humana.
-
-Lo dejo registrado aquí porque **esa decisión no impide hacer visible la sesión**, y conviene no confundir las dos cosas.
-
-La sesión semanal en línea es **el elemento más distintivo que tiene la comunidad**: gratuita, para principiantes, sin límite geográfico — y **el único formato en línea entre todas las comunidades comparadas**, que son presenciales. Hoy vive como un párrafo dentro de otra página, y por eso quien pregunte a Google o a un asistente de inteligencia artificial por meditación budista en línea en español no la encuentra.
-
-**Lo que hace visible una actividad no es el enlace de acceso, sino que exista una página que la describa.** Una página propia para la meditación de los lunes —qué es, para quién, en qué tradición, a qué hora, y un botón de WhatsApp para acercarse— es indexable por completo sin publicar el Zoom. Los buscadores necesitan la descripción, no la sala.
-
-Es más: la puerta por WhatsApp **es la respuesta a la pregunta que hace quien busca**. Alguien que busca «meditación budista en línea en español» quiere saber si puede participar y cómo; que el primer paso sea escribir a una persona es información útil, no un obstáculo.
-
-**Esto convierte la acción en ejecutable sin más decisiones** (§6).
 
 ---
 
@@ -208,20 +183,22 @@ Es más: la puerta por WhatsApp **es la respuesta a la pregunta que hace quien b
 | Escribir a **Buddhistdoor en Español** | Pedir que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
 | Escribir a **EcoEspiritualidad** | Pedir que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
 | Perfil de **Instagram** | Añadir `caminodeldharma.org` en el campo de enlace de la biografía. En Facebook ya está puesto | 5 min |
-| **Página propia para la meditación de los lunes** | Página que describa la sesión —qué es, para quién, en qué tradición, a qué hora— con el botón de WhatsApp como puerta de entrada, más su ficha para buscadores. **Sin publicar el enlace de Zoom** | ~4 h |
+| **Página propia para la meditación de los lunes** | Página que describa la sesión —qué es, para quién, en qué tradición, a qué hora— con el botón de WhatsApp como puerta de entrada, más su ficha para buscadores | ~4 h |
 
 Las dos primeras atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
 
 **Una precisión sobre el enlace de Instagram:** las redes sociales marcan sus enlaces de forma que **no transfieren autoridad**. Ponerlo no moverá la puntuación de §3. Su valor es otro y también real: que quien llega por Instagram pueda pasar al sitio, y que la dirección de la web aparezca de forma coherente allí donde la comunidad tiene presencia. Es cinco minutos bien empleados, pero por motivos de tráfico y coherencia, no de autoridad.
 
-**La página de la meditación es la de mayor recorrido a medio plazo.** Es la única búsqueda donde la comunidad no tiene competencia real: ninguna de las cinco comunidades comparadas ofrece práctica en línea. Y no compromete la decisión ya tomada — lo que indexan los buscadores es la descripción de la sesión, no la sala.
+**La página de la meditación es la de mayor recorrido a medio plazo.** Es la única búsqueda donde la comunidad no tiene competencia real: ninguna de las cinco comunidades comparadas ofrece práctica en línea.
+
+Hoy la sesión vive como un párrafo dentro de otra página, y por eso no la encuentra quien pregunta por meditación budista en línea en español. **Lo que hace visible una actividad no es su enlace de acceso, sino que exista una página que la describa:** los buscadores necesitan la descripción, no la sala. Que el primer paso sea escribir por WhatsApp es además la respuesta útil para quien busca — quiere saber si puede participar y cómo.
 
 ### Requiere decisión previa
 
 | Acción | Esfuerzo | Depende de |
 |---|---|---|
 | Contenido en formato pregunta y respuesta | Editorial | Ritmo editorial |
-| Contenido orientado a cada ciudad | Editorial | §5.1 |
+| Contenido orientado a cada ciudad | Editorial | §5 |
 
 ### Mantenimiento técnico
 
@@ -265,13 +242,37 @@ Es habitual usar un servicio como Linktree en el campo de enlace de las redes, q
 
 ---
 
-## 8. Cuándo se sabrá si funcionó
+## 8. Calendario de medición
 
-**Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no.
+**El principio que ordena el calendario:** no medir eficacia antes de que las acciones hayan podido actuar, y no medir estabilidad en mitad de un cambio. Una medición completa a las cuatro semanas sería inútil si WordPress entra en la semana dos: la migración invalida las comparaciones.
 
-Medir ahora la eficacia de acciones que aún no han tenido tiempo de actuar produciría conclusiones falsas. Los buscadores tardan semanas en recorrer un sitio nuevo y en registrar enlaces nuevos.
+Por eso el calendario se organiza **alrededor del corte a WordPress**, no en intervalos fijos.
 
-### Qué se mirará
+**El corte queda previsto para después del Encuentro Nacional** (posterior al 10 de agosto), de modo que la migración no coincida con los días de mayor búsqueda del año. El cambio se habrá probado antes en un servidor y una dirección temporales.
+
+> **Lo que un entorno de pruebas no puede comprobar.** Probar en otra dirección resuelve casi todo lo relativo al contenido y al diseño, pero **no** lo que solo existe en el dominio real: las redirecciones desde las direcciones actuales, el certificado de seguridad, las reglas del servidor que WordPress reescribe al instalarse, y la indexación en Google. Hay un riesgo concreto que conviene nombrar: los sitios de prueba se configuran para **no ser indexados**, y si esa configuración viaja al sitio definitivo, la web desaparece de Google en pocos días. Es el fallo más común de una migración y el más silencioso. Por eso los dos primeros hitos del calendario siguen siendo imprescindibles aunque todo se haya probado antes.
+
+| Momento | Qué se hace | Esfuerzo | Criticidad |
+|---|---|---|---|
+| **2–3 días antes del corte** | Fotografía completa del estado actual: posiciones, visitas, velocidad, estado de las 13 páginas, cabeceras y autoridad | ~1 h | **Alta** |
+| **24–48 h después del corte** | Verificar que nada se rompió: que las 13 direcciones responden, que las redirecciones sobrevivieron, que no aparecieron cookies, que los datos para buscadores siguen íntegros | ~2 h | **Máxima** |
+| **2 semanas después del corte** | Estabilización: si Google reindexó, si las posiciones volvieron. Una caída temporal es normal; una sostenida, no | ~1 h | Media |
+| **~15 de septiembre** | Primera medición legítima de eficacia: si las publicaciones añadieron el enlace, si sube la autoridad, si aparecen búsquedas que no son la marca | ~2 h | Media |
+| **~octubre, tras 30 días de WordPress estable** | Auditoría completa del sitio definitivo | Auditoría nueva | **Alta** |
+
+**Si solo pudieran hacerse dos, que sean los dos primeros.** Son los que protegen contra el único riesgo capaz de deshacer todo el trabajo acumulado: una migración que rompe algo sin que nadie lo note a tiempo. Sin una fotografía del «antes» no hay forma de demostrar qué cambió.
+
+**Por qué la última es una auditoría nueva y no una revisión.** WordPress es otra tecnología y trae superficie que hoy no existe: base de datos, plugins, panel de administración, cuentas de usuario, formularios reales. Nada de lo auditado ahora garantiza nada sobre eso.
+
+### Vigilancia continua, sin auditoría formal
+
+| Qué | Cuándo | Por qué |
+|---|---|---|
+| **Caducidad del certificado de seguridad** | **antes del 12 de octubre de 2026** | Un fallo de certificado puede dejar el sitio inaccesible |
+| Cobertura en Search Console | mensual, 5 minutos | Detecta problemas de indexación pronto |
+| Autoridad del dominio | trimestral, misma herramienta | La comparabilidad exige no cambiar de herramienta |
+
+### Qué se mirará en la medición de septiembre
 
 | Indicador | Hoy | Meta |
 |---|:---:|:---:|
@@ -285,7 +286,7 @@ Medir ahora la eficacia de acciones que aún no han tenido tiempo de actuar prod
 
 **Cuánta gente acude a la meditación de los lunes** y **cuántos contactos entran por WhatsApp y correo**.
 
-Son los que de verdad importan. El sitio no tiene analítica instalada —decisión formalizada de la comunidad— porque con este volumen de visitas produciría ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino **que no llegan**, y eso ya se responde con las herramientas gratuitas de Google, sin cookies y sin aviso de consentimiento.
+Son los que de verdad importan. El sitio no tiene analítica instalada porque con este volumen de visitas produciría ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino **que no llegan**, y eso ya se responde con las herramientas gratuitas de Google, sin cookies y sin aviso de consentimiento.
 
 ---
 
