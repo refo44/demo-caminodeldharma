@@ -22,7 +22,7 @@ La numeración conserva un hueco en el 01 (informe de rendimiento, ver abajo). N
 
 No se emitió. Un informe de rendimiento reporta evolución de tráfico, conversiones y retorno de inversión, y hoy **ninguna de las tres es reportable**: no hay periodo anterior (el sitio se publicó el 2026-07-18), no hay analítica (decisión formalizada) y no hay transacciones (sitio no comercial).
 
-Rellenarlo con estimaciones habría sido fabricar evidencia. El cuadro de indicadores que lo sustituye —incluidos asistentes a la meditación y contactos entrantes— está en el §9 del informe 00.
+Rellenarlo con estimaciones habría sido fabricar evidencia. El cuadro de indicadores que lo sustituye —incluidos asistentes a la meditación y contactos entrantes— está en el **§8** del informe 00.
 
 **Emitir tras la re-medición**, si para entonces hay datos que lo justifiquen.
 
@@ -32,14 +32,27 @@ Rellenarlo con estimaciones habría sido fabricar evidencia. El cuadro de indica
 
 Una versión preliminar lo situaba como acción prioritaria: fue una deducción a partir del SERP sin verificar el requisito. Documentado en el §7 del informe 00, con la consecuencia estratégica — las búsquedas locales dejan de contar como brecha y el foco pasa a autoridad y práctica en línea.
 
+## Actualización del 21 de julio
+
+Los dos informes se revisaron tras el despliegue de **v1.0.15 y v1.0.16**:
+
+- **Meditación semanal con página propia** (`/practica/meditacion-semanal-en-linea`): sale del plan de acción y pasa a «hecho». Sitemap 13 → **14 URLs**.
+- **Cinco encuentros presenciales** en Barranquilla, Bogotá y Medellín incorporados con datos estructurados completos. Es la **primera señal geográfica real** del sitio, y la vía legítima tras descartar Google Business Profile.
+- **Listado de eventos** agrupado por año con encabezados reales y carga diferida de imágenes.
+- **FUNC-003**: enlaces de navegación que resolvían a la raíz por usar ruta relativa bajo la política canónica sin barra final. Afectaba a `/practica/videos` **desde su publicación**. Segunda aparición de la misma causa que FUNC-002 → regla elevada a **ADR 0008** y añadida al checklist del corte a WordPress.
+
+Lo detectó el propietario al pulsar el enlace, no la auditoría.
+
+---
+
 ## Próxima emisión
 
 **Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no: se estaría midiendo la eficacia de acciones que aún no han tenido tiempo de actuar.
 
 1. Copiar a `NN-nombre-AAAA-MM.md` para conservar el histórico.
 2. Actualizar por secciones, sin reescribir los documentos enteros.
-3. Seguir el protocolo del §10 del informe 02 — misma herramienta, mismo método, misma lista de palabras clave.
-4. Añadir columna de evolución a la tabla de posiciones (§9 del informe 00).
+3. Seguir el protocolo del **§11** del informe 02 — misma herramienta, mismo método, misma lista de palabras clave.
+4. Añadir columna de evolución a la tabla de posiciones del **§2** del informe 00, y comparar contra las metas del **§8**.
 5. Evaluar si ya procede emitir el informe de rendimiento.
 
 ## Decisiones que condicionan los informes

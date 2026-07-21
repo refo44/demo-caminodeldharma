@@ -6,8 +6,8 @@
 |---|---|
 | **Cliente** | Comunidad Buddhista Camino del Dharma |
 | **Sitio auditado** | https://caminodeldharma.org |
-| **Versión en producción** | v1.0.14 |
-| **Fecha del informe** | 20 de julio de 2026 |
+| **Versión en producción** | v1.0.16 |
+| **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
 | **Naturaleza** | Estado de salud técnica del sitio |
 | **Destinatario** | Equipo de publicación web |
@@ -34,6 +34,7 @@
 12. [Plan de acción técnico](#12-plan-de-acción-técnico)
 13. [Limitaciones](#13-limitaciones)
 14. [Glosario técnico](#14-glosario-técnico)
+15. [Cambios posteriores a la auditoría](#15-cambios-posteriores-a-la-auditoría-21-de-julio)
 
 ---
 
@@ -51,7 +52,7 @@ Datos que condicionan varias decisiones de este informe:
 | **Publicado el 18 de julio de 2026** (v1.0.0) | Al auditarse tenía **un día de vida**. Toda observación sobre indexación debe leerse como progreso de rastreo, no como fallo |
 | **Es una etapa temporal**: será sustituido por WordPress | No procede ninguna configuración de compromiso largo (HSTS de un año, `preload`) |
 | **Sin analítica y sin cookies propias** | Decisión formalizada de la comunidad. Verificado: producción no sirve ninguna cookie propia |
-| **13 páginas publicadas** | Sitio pequeño: fue posible probarlas todas, sin muestreo |
+| **14 páginas publicadas** | Sitio pequeño: fue posible probarlas todas, sin muestreo |
 
 ### Veredicto
 
@@ -76,7 +77,7 @@ Auditoría de **solo lectura** sobre el sitio en producción y su código fuente
 
 ### Cobertura
 
-- **13 direcciones** del mapa del sitio: **todas probadas**, sin muestreo.
+- **13 direcciones** del mapa del sitio en el momento de la auditoría: **todas probadas**, sin muestreo. *(El sitio tiene 14 desde el 21 de julio; ver §15.)*
 - Página de error 404, puntos de entrada y archivos técnicos (`robots.txt`, `sitemap.xml`, `llms.txt`).
 - Los **4 módulos de JavaScript**, revisados íntegramente.
 - Validación local completa de los datos estructurados.
@@ -132,7 +133,7 @@ No se enviaron formularios, no se crearon cuentas, no se resolvieron CAPTCHAs y 
 | Control | Resultado |
 |---|---|
 | `robots.txt` abierto y con referencia al mapa del sitio | Correcto |
-| `sitemap.xml` con 13 direcciones, coincidencia exacta con las páginas publicadas | Correcto |
+| `sitemap.xml` con 14 direcciones, coincidencia exacta con las páginas publicadas | Correcto |
 | Etiquetas canónicas presentes y coherentes | Correcto |
 | Política de URL sin barra final, impuesta por redirección permanente | Correcto |
 | Títulos y descripciones únicos en todas las páginas | Correcto |
@@ -362,7 +363,7 @@ El corte queda previsto **después del 10 de agosto de 2026**, tras el Encuentro
 
 ### Antes del corte, imprescindible
 
-**Fotografía completa del estado actual**, 2–3 días antes: export de Search Console, PageSpeed móvil y escritorio, inventario de las 13 URLs con estado y canónica, posiciones de la batería de consultas, autoridad con la herramienta habitual, cabeceras completas de la portada y copia del `.htaccess` vigente.
+**Fotografía completa del estado actual**, 2–3 días antes: export de Search Console, PageSpeed móvil y escritorio, inventario de todas las URLs del sitemap con estado y canónica, posiciones de la batería de consultas, autoridad con la herramienta habitual, cabeceras completas de la portada y copia del `.htaccess` vigente.
 
 **Sin un «antes» no hay forma de demostrar qué rompió la migración.**
 
@@ -433,6 +434,49 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 | **Redirección 301 / 410** | Reenvío permanente a una nueva dirección / declaración de retirada definitiva |
 | **`srcset`** | Atributo que permite servir versiones de una imagen adaptadas al tamaño de pantalla |
 | **TBT** | Tiempo total durante el cual la página no responde a interacciones mientras carga |
+
+---
+
+## 15. Cambios posteriores a la auditoría (21 de julio)
+
+Trabajo desplegado después del informe original, en las versiones **v1.0.15** y **v1.0.16**. Se registra aquí para que el informe describa el sitio real.
+
+### Meditación semanal en línea — página propia
+
+`/practica/meditacion-semanal-en-linea`. Cierra ASO-002: la práctica continua de la comunidad ya no vive como párrafo dentro de otra página.
+
+- `EventSeries` con `OnlineEventAttendanceMode` y `Schedule` (`P1W`, lunes, 19:30, `America/Bogota`)
+- Entrada en `llms.txt`, en `sitemap.xml` y enlazada desde portada y `/practica`
+- Vía de participación: **WhatsApp**. El enlace de la sala **no se publica** — decisión de la comunidad
+- El bloque existente de `/practica` se conservó: informa (cuándo y cómo entro) mientras la página nueva explica (qué es y si es para mí)
+
+**Sitemap: 13 → 14 direcciones.**
+
+### Archivo de encuentros presenciales
+
+Cinco encuentros ya celebrados, antes ausentes del sitio, incorporados al listado de eventos con datos estructurados completos:
+
+| Fecha | Ciudad | `addressLocality` |
+|---|---|---|
+| 09/07/2026 | Barranquilla | Atlántico |
+| 28/06/2026 | Bogotá | Bogotá D.C. |
+| 23/05/2026 | Medellín | Antioquia |
+| 22/05/2026 | Medellín | Antioquia |
+| 09/05/2026 | Bogotá | Bogotá D.C. |
+
+Todos con `Event`, `EventCompleted` y dirección completa. **Es la vía legítima de relevancia geográfica** para una comunidad sin sede física: ciudades declaradas sobre actividad real y verificable, no sobre páginas creadas para captar búsquedas.
+
+### Mejoras del listado de eventos
+
+- **Agrupación por año** con encabezados reales (`h3` para el año, `h4` para los títulos), de modo que un lector de pantalla pueda saltar entre años en lugar de recorrer todas las tarjetas
+- **Carga diferida** en 8 de las 9 imágenes de evento: difiere ~1,8 MB. La primera queda en carga inmediata por ser candidata a LCP
+- Todas declaran `width` y `height`, así que la carga diferida **no introduce desplazamiento de diseño**
+
+> **Nota sobre las imágenes.** No se redimensionaron los carteles. Miden 1024–1122 px de ancho y el contenedor de lectura llega a ~520–580 px, que en pantallas de alta densidad equivalen a ~1 100 px: **no están sobredimensionados**. Reducirlos habría degradado la nitidez sin ganancia real. PERF-001 se refiere a un caso distinto —el logotipo de 1000 px en un hueco de 44 px—, que sigue abierto.
+
+### FUNC-003
+
+Detectado y corregido en esta tanda. Ver §8.
 
 ---
 

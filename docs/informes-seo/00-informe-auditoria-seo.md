@@ -6,7 +6,7 @@
 |---|---|
 | **Para** | Liderazgo de la Comunidad Buddhista Camino del Dharma |
 | **Sitio auditado** | https://caminodeldharma.org |
-| **Fecha del informe** | 20 de julio de 2026 |
+| **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
 | **Mercado evaluado** | Colombia |
 | **Próxima medición** | Entre el 17 de agosto y el 14 de septiembre de 2026 |
@@ -42,7 +42,7 @@
 
 **Lo que necesito de ustedes.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
 
-**Lo que cuesta.** Las tres peticiones de enlace y perfil suman **poco más de una hora** y ningún gasto. La página de la meditación de los lunes, unas cuatro horas de trabajo técnico. El resto es contenido, al ritmo que la comunidad quiera darle.
+**Lo que cuesta.** Lo que queda pendiente suma **poco más de una hora** y ningún gasto: dos correos y un campo de perfil. El resto es contenido, al ritmo que la comunidad quiera darle.
 
 ---
 
@@ -87,13 +87,19 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 | Lo que parece | Cómo debe leerse |
 |---|---|
 | «El sitio no aparece en búsquedas amplias» | **Esperable a los dos días.** Es una brecha a trabajar, no un descuido |
-| «Solo 4 de 13 páginas indexadas» | Progreso normal: Google tarda semanas en recorrer un sitio nuevo |
+| «Solo 4 de las 13 páginas de entonces estaban indexadas» | Progreso normal: Google tarda semanas en recorrer un sitio nuevo |
 | «Es primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días |
 | «El dominio no tiene autoridad tras 7 años» | **Esto sí es de fondo** — y es el asunto de este informe |
 
 ### Lo que ya se corrigió
 
-Catorce de veinte tareas están hechas y publicadas: se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
+Se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
+
+**Y el 21 de julio se publicaron tres cosas más:**
+
+- **La meditación de los lunes tiene página propia**, con su ficha para buscadores y asistentes de inteligencia artificial. Quien pregunte por meditación budista en línea en español ya puede encontrarla. El acceso sigue siendo por WhatsApp: el enlace de la sala no se publica.
+- **Cinco encuentros presenciales ya celebrados** —en Barranquilla, Bogotá y Medellín— se incorporaron al sitio, donde antes no aparecían. Cada uno declara su ciudad de forma que los buscadores la entienden. **Es la vía honesta de asociar la comunidad a esas ciudades** sin tener sede en ellas.
+- **El listado de eventos se agrupó por año** y sus imágenes se cargan solo al llegar a ellas, lo que aligera la página.
 
 **Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta.**
 
@@ -183,15 +189,12 @@ Es el único dato que falta, y no puede obtenerse desde fuera.
 | Escribir a **Buddhistdoor en Español** | Pedir que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
 | Escribir a **EcoEspiritualidad** | Pedir que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
 | Perfil de **Instagram** | Añadir `caminodeldharma.org` en el campo de enlace de la biografía. En Facebook ya está puesto | 5 min |
-| **Página propia para la meditación de los lunes** | Página que describa la sesión —qué es, para quién, en qué tradición, a qué hora— con el botón de WhatsApp como puerta de entrada, más su ficha para buscadores | ~4 h |
 
 Las dos primeras atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
 
 **Una precisión sobre el enlace de Instagram:** las redes sociales marcan sus enlaces de forma que **no transfieren autoridad**. Ponerlo no moverá la puntuación de §3. Su valor es otro y también real: que quien llega por Instagram pueda pasar al sitio, y que la dirección de la web aparezca de forma coherente allí donde la comunidad tiene presencia. Es cinco minutos bien empleados, pero por motivos de tráfico y coherencia, no de autoridad.
 
-**La página de la meditación es la de mayor recorrido a medio plazo.** Es la única búsqueda donde la comunidad no tiene competencia real: ninguna de las cinco comunidades comparadas ofrece práctica en línea.
-
-Hoy la sesión vive como un párrafo dentro de otra página, y por eso no la encuentra quien pregunta por meditación budista en línea en español. **Lo que hace visible una actividad no es su enlace de acceso, sino que exista una página que la describa:** los buscadores necesitan la descripción, no la sala. Que el primer paso sea escribir por WhatsApp es además la respuesta útil para quien busca — quiere saber si puede participar y cómo.
+> **Hecho el 21 de julio:** la meditación de los lunes ya tiene página propia. Era la acción de mayor recorrido a medio plazo, porque es la única búsqueda donde la comunidad no tiene competencia real —ninguna de las cinco comunidades comparadas ofrece práctica en línea—. Queda pendiente de que Google la recorra e indexe, cosa de semanas.
 
 ### Requiere decisión previa
 
@@ -254,8 +257,8 @@ Por eso el calendario se organiza **alrededor del corte a WordPress**, no en int
 
 | Momento | Qué se hace | Esfuerzo | Criticidad |
 |---|---|---|---|
-| **2–3 días antes del corte** | Fotografía completa del estado actual: posiciones, visitas, velocidad, estado de las 13 páginas, cabeceras y autoridad | ~1 h | **Alta** |
-| **24–48 h después del corte** | Verificar que nada se rompió: que las 13 direcciones responden, que las redirecciones sobrevivieron, que no aparecieron cookies, que los datos para buscadores siguen íntegros | ~2 h | **Máxima** |
+| **2–3 días antes del corte** | Fotografía completa del estado actual: posiciones, visitas, velocidad, estado de todas las páginas del sitio, cabeceras y autoridad | ~1 h | **Alta** |
+| **24–48 h después del corte** | Verificar que nada se rompió: que todas las direcciones responden, que las redirecciones sobrevivieron, que no aparecieron cookies, que los datos para buscadores siguen íntegros | ~2 h | **Máxima** |
 | **2 semanas después del corte** | Estabilización: si Google reindexó, si las posiciones volvieron. Una caída temporal es normal; una sostenida, no | ~1 h | Media |
 | **~15 de septiembre** | Primera medición legítima de eficacia: si las publicaciones añadieron el enlace, si sube la autoridad, si aparecen búsquedas que no son la marca | ~2 h | Media |
 | **~octubre, tras 30 días de WordPress estable** | Auditoría completa del sitio definitivo | Auditoría nueva | **Alta** |
@@ -279,6 +282,7 @@ Por eso el calendario se organiza **alrededor del corte a WordPress**, no en int
 | Búsquedas distintas que traen visitas | 1 | 10 o más |
 | Visitas que **no** vienen del nombre de la comunidad | 0 % | más del 20 % |
 | Páginas del sitio que reciben visitas | 1 | 6 o más |
+| Búsquedas con nombre de ciudad que muestran el sitio | 0 | alguna |
 | Autoridad del dominio | 2 | 8 |
 | Publicaciones que enlazan al sitio | 0 | 2 o más |
 
@@ -308,7 +312,7 @@ Es una opción legítima y conviene plantearla con honestidad.
 
 Auditoría de **solo lectura** sobre el sitio publicado y su código. No se modificó nada durante la evaluación.
 
-- **13 direcciones** del sitio: **todas probadas**, sin muestreo.
+- **13 direcciones** del sitio en el momento de la auditoría: **todas probadas**, sin muestreo. *(Hoy son 14.)*
 - **Navegación real a Google** con configuración de Colombia, sin sesión iniciada para evitar resultados personalizados.
 - **Google Search Console:** datos aportados por la comunidad.
 - **PageSpeed Insights**, herramienta oficial de Google, en móvil y ordenador.
