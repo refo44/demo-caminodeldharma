@@ -52,10 +52,207 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://caminodeldharma.org" },
-      { "@type": "ListItem", "position": 2, "name": "Eventos", "item": "https://caminodeldharma.org/eventos" }
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://caminodeldharma.org"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Eventos",
+            "item": "https://caminodeldharma.org/eventos"
+          }
+        ]
+      },
+      {
+        "@type": "Event",
+        "@id": "https://caminodeldharma.org/eventos#meditacion-presencial-barranquilla-jul-2026",
+        "name": "Meditación Presencial en Barranquilla",
+        "description": "Encuentro de meditación presencial en Barranquilla, guiado en vivo de forma virtual por el Maestro Zheng Gong.",
+        "startDate": "2026-07-09T19:00:00-05:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCompleted",
+        "image": "https://caminodeldharma.org/assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
+        "location": {
+          "@type": "Place",
+          "name": "Barranquilla",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle 71 # 39-117",
+            "addressLocality": "Barranquilla",
+            "addressRegion": "Atlántico",
+            "addressCountry": "CO"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Comunidad Buddhista Camino del Dharma",
+          "url": "https://caminodeldharma.org"
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "Maestro Zheng Gong"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/SoldOut",
+          "url": "https://caminodeldharma.org/eventos"
+        }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://caminodeldharma.org/eventos#festival-calma-en-la-ciudad-jun-2026",
+        "name": "Meditación Budista – Festival Calma en la Ciudad",
+        "description": "Meditación budista al aire libre en el Parque de los Novios, en el marco del Festival Calma en la Ciudad — Tu retiro en Bogotá.",
+        "startDate": "2026-06-28T09:00:00-05:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCompleted",
+        "image": "https://caminodeldharma.org/assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
+        "location": {
+          "@type": "Place",
+          "name": "Parque de los Novios",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Calle 63 # 45-10",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Bogotá D.C.",
+            "addressCountry": "CO"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Comunidad Buddhista Camino del Dharma",
+          "url": "https://caminodeldharma.org"
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "Maestro Zheng Gong"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/SoldOut",
+          "url": "https://caminodeldharma.org/eventos"
+        }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://caminodeldharma.org/eventos#pausa-profunda-medellin-may-2026",
+        "name": "Pausa Profunda – Medellín",
+        "description": "Taller de un día de meditación consciente: prácticas contemplativas desde la perspectiva buddhista para habitar el cansancio con mayor presencia.",
+        "startDate": "2026-05-23T08:00:00-05:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCompleted",
+        "image": "https://caminodeldharma.org/assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
+        "location": {
+          "@type": "Place",
+          "name": "Centro de formación Los Pomos",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle 37 20A-60, barrio Buenos Aires",
+            "addressLocality": "Medellín",
+            "addressRegion": "Antioquia",
+            "addressCountry": "CO"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Comunidad Buddhista Camino del Dharma",
+          "url": "https://caminodeldharma.org"
+        },
+        "endDate": "2026-05-23T16:00:00-05:00",
+        "performer": {
+          "@type": "Person",
+          "name": "Maestro Zheng Gong"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "180000",
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/SoldOut",
+          "url": "https://caminodeldharma.org/eventos"
+        }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://caminodeldharma.org/eventos#uniremington-ansiedad-agotamiento-may-2026",
+        "name": "Ansiedad, agotamiento y crisis de atención en el mundo actual",
+        "description": "Conferencia sobre salud mental, hiperconectividad y atención, convocada por la Dirección de Bienestar Institucional de Uniremington.",
+        "startDate": "2026-05-22T09:00:00-05:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCompleted",
+        "image": "https://caminodeldharma.org/assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
+        "location": {
+          "@type": "Place",
+          "name": "Uniremington, Torre 1, Piso 20",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Uniremington, Torre 1, Piso 20",
+            "addressLocality": "Medellín",
+            "addressRegion": "Antioquia",
+            "addressCountry": "CO"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Comunidad Buddhista Camino del Dharma",
+          "url": "https://caminodeldharma.org"
+        },
+        "performer": {
+          "@type": "Person",
+          "name": "Maestro Zheng Gong"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/SoldOut",
+          "url": "https://caminodeldharma.org/eventos"
+        }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://caminodeldharma.org/eventos#vesak-2026-bogota",
+        "name": "Vesak 2026 – Colombia Cuida la Vida",
+        "description": "Celebración del Vesak con meditación guiada, música y mantras, conversatorio y concierto de música colombiana en vivo, junto a Bogotá Cultura + Consciente.",
+        "startDate": "2026-05-09T08:30:00-05:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventCompleted",
+        "image": "https://caminodeldharma.org/assets/images/eventos/evento-vesak-2026-bogota.jpeg",
+        "location": {
+          "@type": "Place",
+          "name": "Biblioteca Pública Virgilio Barco, Sala de Música",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Avenida Carrera 60 # 57-60",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Bogotá D.C.",
+            "addressCountry": "CO"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Comunidad Buddhista Camino del Dharma",
+          "url": "https://caminodeldharma.org"
+        },
+        "endDate": "2026-05-09T12:00:00-05:00",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "COP",
+          "availability": "https://schema.org/SoldOut",
+          "url": "https://caminodeldharma.org/eventos"
+        }
+      }
     ]
   }
   </script>
@@ -285,14 +482,17 @@
         Eventos realizados
       </h2>
 
-    <article class="evento-card evento-card--past read-width section-gap">
+    
+    <h3 class="eventos-anio" id="eventos-2026">2026</h3>
+    <div class="eventos-anio-grupo" role="group" aria-labelledby="eventos-2026">
+<article class="evento-card evento-card--past read-width section-gap">
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Meditación</p>
-      <h3 class="evento-title">Meditación Presencial en Barranquilla</h3>
+      <h4 class="evento-title">Meditación Presencial en Barranquilla</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg" alt="Cartel de Meditación Presencial en Barranquilla — guiada en vivo de forma virtual por el Maestro Zheng Gong" width="1024" height="1536">
+        <img src="../assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg" alt="Cartel de Meditación Presencial en Barranquilla — guiada en vivo de forma virtual por el Maestro Zheng Gong" width="1024" height="1536" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Un espacio para detenernos, respirar y reconectar con lo esencial.</p>
@@ -323,10 +523,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Meditación</p>
-      <h3 class="evento-title">Meditación Budista – Festival Calma en la Ciudad</h3>
+      <h4 class="evento-title">Meditación Budista – Festival Calma en la Ciudad</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg" alt="Cartel de Meditación Budista en el Festival Calma en la Ciudad — Tu retiro en Bogotá, dirigido por el Monje Buddhista Zheng Gong" width="1122" height="1402">
+        <img src="../assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg" alt="Cartel de Meditación Budista en el Festival Calma en la Ciudad — Tu retiro en Bogotá, dirigido por el Monje Buddhista Zheng Gong" width="1122" height="1402" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Hay momentos en los que lo más valioso no es hacer más, sino detenernos un instante.</p>
@@ -358,10 +558,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Taller</p>
-      <h3 class="evento-title">Pausa Profunda – Medellín</h3>
+      <h4 class="evento-title">Pausa Profunda – Medellín</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg" alt="Cartel del taller Pausa Profunda en Medellín — Taller de meditación consciente de un día, dirigido por el Maestro Zheng Gong" width="1024" height="1536">
+        <img src="../assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg" alt="Cartel del taller Pausa Profunda en Medellín — Taller de meditación consciente de un día, dirigido por el Maestro Zheng Gong" width="1024" height="1536" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Un espacio para detenerte, escucharte y volver a lo esencial.</p>
@@ -392,10 +592,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Conferencia</p>
-      <h3 class="evento-title">Ansiedad, agotamiento y crisis de atención en el mundo actual</h3>
+      <h4 class="evento-title">Ansiedad, agotamiento y crisis de atención en el mundo actual</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg" alt="Cartel de la conferencia Ansiedad, agotamiento y crisis de atención en el mundo actual — Una reflexión para cuidar nuestra salud mental, en Uniremington Medellín" width="905" height="1280">
+        <img src="../assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg" alt="Cartel de la conferencia Ansiedad, agotamiento y crisis de atención en el mundo actual — Una reflexión para cuidar nuestra salud mental, en Uniremington Medellín" width="905" height="1280" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Una reflexión para cuidar nuestra salud mental.</p>
@@ -430,10 +630,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Celebración</p>
-      <h3 class="evento-title">Vesak 2026 – Colombia Cuida la Vida</h3>
+      <h4 class="evento-title">Vesak 2026 – Colombia Cuida la Vida</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-vesak-2026-bogota.jpeg" alt="Cartel de Vesak 2026 – Colombia Cuida la Vida, celebración en la Biblioteca Pública Virgilio Barco de Bogotá" width="1024" height="1536">
+        <img src="../assets/images/eventos/evento-vesak-2026-bogota.jpeg" alt="Cartel de Vesak 2026 – Colombia Cuida la Vida, celebración en la Biblioteca Pública Virgilio Barco de Bogotá" width="1024" height="1536" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Una mañana de meditación colectiva, música, mantras y conversatorio para cultivar paz interior y el cuidado consciente de la vida.</p>
@@ -468,10 +668,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Taller</p>
-      <h3 class="evento-title"><a href="/eventos/pausa-profunda-cali">Pausa Profunda – Cali</a></h3>
+      <h4 class="evento-title"><a href="/eventos/pausa-profunda-cali">Pausa Profunda – Cali</a></h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg" alt="Cartel del taller Pausa Profunda — Un día para detenerte, escuchar y volver a lo esencial" width="800" height="600">
+        <img src="../assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg" alt="Cartel del taller Pausa Profunda — Un día para detenerte, escuchar y volver a lo esencial" width="800" height="600" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">¿Sientes que necesitas bajar el ritmo, respirar con más calma y volver a lo esencial?</p>
@@ -502,10 +702,10 @@
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Conferencia</p>
-      <h3 class="evento-title">Buddhismo para tiempos de cansancio</h3>
+      <h4 class="evento-title">Buddhismo para tiempos de cansancio</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg" alt="Cartel de Buddhismo para tiempos de cansancio — Conferencia con el Maestro Zheng Gong" width="800" height="600">
+        <img src="../assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg" alt="Cartel de Buddhismo para tiempos de cansancio — Conferencia con el Maestro Zheng Gong" width="800" height="600" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Conferencia guiada por el Maestro Zheng Gong. Un espacio de enseñanza, reflexión y práctica, transmitido en vivo por Zoom y YouTube, con participación internacional.</p>
@@ -524,17 +724,18 @@
 
       <p><strong>Zoom</strong> — ID de reunión: 859 0106 4155 · Código de acceso: 123456</p>
     </article>
+    </div>
 
-    <hr class="eventos-card-divider" aria-hidden="true">
-
-    <article class="evento-card evento-card--finalizado read-width section-gap">
+    <h3 class="eventos-anio" id="eventos-2025">2025</h3>
+    <div class="eventos-anio-grupo" role="group" aria-labelledby="eventos-2025">
+<article class="evento-card evento-card--finalizado read-width section-gap">
       <p class="evento-badge evento-badge--finalizado" aria-hidden="true">Evento finalizado</p>
       <p class="visually-hidden">Evento finalizado</p>
       <p class="evento-type">Encuentro</p>
-      <h3 class="evento-title">6.º Encuentro Nacional Buddhista – 2025</h3>
+      <h4 class="evento-title">6.º Encuentro Nacional Buddhista – 2025</h4>
 
       <figure class="evento-figure">
-        <img src="../assets/images/eventos/evento-6-encuentro-nacional.jpeg" alt="Cartel del 6.º Encuentro Nacional — Meditación, compasión y diálogo para sanar juntos" width="800" height="600">
+        <img src="../assets/images/eventos/evento-6-encuentro-nacional.jpeg" alt="Cartel del 6.º Encuentro Nacional — Meditación, compasión y diálogo para sanar juntos" width="800" height="600" loading="lazy" decoding="async">
       </figure>
 
       <p class="evento-lead">Meditación, compasión y diálogo para sanar juntos.</p>
@@ -556,6 +757,8 @@
 
       <p>También podías escribir al WhatsApp <a href="https://wa.me/573206627608" target="_blank" rel="noopener noreferrer">+57 320 662 7608</a> para información o apoyo en la inscripción.</p>
     </article>
+    </div>
+
 
     <p class="eventos-section-links"><a href="../practica">Práctica</a> · <a href="../contacto">Contacto</a></p>
     </section>

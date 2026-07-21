@@ -81,6 +81,38 @@ La persona entiende el contexto antes de actuar.
 
 ---
 
+## 5b. Persona consulta el archivo de eventos
+
+*(Añadido 2026-07-21: el recorrido §5 cubría solo eventos vigentes; el archivo de eventos finalizados sirve a intenciones distintas que no estaban descritas.)*
+
+**Dos objetivos, ninguno es inscribirse:**
+
+**a) Evaluar si la comunidad está activa**
+
+- Llega desde Inicio, buscador o una mención externa
+- → Eventos
+- → Recorre el archivo buscando **ritmo**: cuántos, dónde, con qué frecuencia
+- → Decide si vale la pena acercarse
+
+**b) Saber si la comunidad llega a su ciudad**
+
+- Busca «budismo» + su ciudad, o llega al sitio y quiere confirmarlo
+- → Eventos
+- → Busca su ciudad en el archivo
+- → Encuentra encuentros previos allí (o no) y su frecuencia
+- → Contacto o práctica en línea
+
+**Requisitos de este recorrido:**
+
+- Debe poder **escanearse**, no leerse: quien busca ritmo o ciudad no lee descripciones completas
+- La ciudad debe ser visible **sin abrir cada evento**
+- Distinción inequívoca respecto de lo vigente: nadie debe intentar asistir a algo terminado
+- Agrupación por año con encabezados reales, para saltar con lector de pantalla (§9)
+
+**Nota:** con encuentros presenciales 2–3 veces al año por ciudad y práctica semanal **en línea**, el archivo es la principal evidencia de presencia territorial del sitio. Ver `informes-seo/`.
+
+---
+
 ## 6. Persona quiere contactar
 
 **Objetivo:** escribir o recibir información.

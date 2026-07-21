@@ -97,15 +97,38 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 **Sin pagos internos:** El sitio no procesa pagos, no tiene checkout ni lógica financiera. Si un evento requiere inscripción económica, se usa `event_signup_url` para redirigir a la plataforma externa correspondiente.
 
-**Regla de visibilidad:** Solo eventos con `event_status = vigente` aparecen en la sección Eventos del sitio y en la ruta `/eventos/` (template Eventos). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
+**Regla de visibilidad:** `/eventos/` muestra **dos bloques diferenciados**: los eventos con `event_status = vigente` (acción posible) y, debajo, el **archivo de eventos finalizados** (memoria y evidencia de actividad). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
 **Definición de «vigente»:** `event_status` es la fuente de verdad (manual). Opcionalmente, si `event_date` es anterior a hoy, el sistema puede sugerir marcar como «finalizado» para evitar eventos antiguos visibles por error.
 
-**Eventos finalizados:** Pueden mantenerse accesibles vía `single-event.php` para memoria histórica, pero no aparecen en listados principales (archive, sección Eventos del sitio).
+**Eventos finalizados: SÍ aparecen en el listado, en su propio bloque.**
 
-**Cronograma de eventos (Lluvia de ideas):** Listado/archive en `/eventos/`. Por defecto: **listado cronológico con agrupación por mes**. Vista de calendario solo si hay masa crítica de eventos en el tiempo.
+> **Actualizado 2026-07-21.** La versión anterior decía que los eventos finalizados «no aparecen en listados principales». **Queda revocado.** El motivo del cambio:
+>
+> 1. **Son la vía legítima de relevancia geográfica.** La comunidad no tiene sede física y por tanto no es elegible para Google Business Profile (ver `informes-seo/`). Los encuentros reales en Cali, Bogotá, Medellín y Barranquilla son la única forma honesta de asociar la comunidad a esas ciudades ante los buscadores. Ocultarlos del listado desperdicia esa señal.
+> 2. **Son prueba de actividad sostenida.** Quien evalúa si acercarse necesita ver que la comunidad se mueve con un ritmo real —2 a 3 encuentros al año por ciudad—, y eso solo se percibe viendo el conjunto.
+> 3. **La proporción lo hace inevitable.** Con encuentros puntuales y pocos eventos vigentes a la vez, un listado que solo muestre lo vigente está vacío la mayor parte del año.
+>
+> **Requisito que se mantiene:** la distinción entre lo vigente y lo finalizado debe ser **inequívoca** —insignia, tratamiento visual y texto para lectores de pantalla—. El fallo grave de esta página es que alguien intente asistir a algo que ya terminó.
 
-**Datos estructurados (SEO):** JSON-LD `Event` solo en `single-event.php` (URL de detalle). `organizer` = Camino del Dharma; `performer` solo si hay facilitador nombrado; `offers` solo con inscripción real. Sin microdata en el archive. Detalle en `15-assets-strategy` §12.3.
+**Agrupación del listado:** distinta por bloque, porque responden a intenciones distintas.
+
+| Bloque | Agrupación | Motivo |
+|---|---|---|
+| **Vigentes** | Por **mes** | Lógica de calendario: cuándo es lo próximo |
+| **Archivo** | Por **año** | Lógica de memoria: agrupar por mes daría grupos de uno |
+
+Los encabezados de agrupación deben ser **encabezados reales** (`h3`, con los títulos de evento en `h4`), no separadores decorativos: quien usa lector de pantalla navega saltando entre encabezados. Ver `19-accesibilidad-estandares`.
+
+**Densidad:** los eventos finalizados usan **tarjeta compacta** (miniatura, título, ciudad, fecha, enlace al detalle); los vigentes conservan el tratamiento completo. Motivo: con carteles verticales a ancho de lectura, cada tarjeta completa ocupa cerca de una pantalla —más en escritorio que en móvil—, y el archivo se vuelve intransitable. El detalle extenso vive en `single-event.php`, donde alguien llega a propósito.
+
+**Escalado:** con el ritmo actual (~8–12 eventos/año) el listado único con agrupación por año es suficiente hasta unos 25–30 eventos. A partir de ahí, archivos por año (`/eventos/2025/`) usando los archivos de fecha nativos de WordPress. **No usar paginación numerada ni carga por JavaScript:** la primera entierra el contenido y la segunda no se indexa de forma fiable, lo que anularía el punto 1.
+
+**Cronograma de eventos (Lluvia de ideas):** vista de calendario solo si hay masa crítica de eventos vigentes simultáneos.
+
+**Datos estructurados (SEO):** JSON-LD `Event` en `single-event.php` **y en el listado** para los eventos que no tengan página de detalle propia. `organizer` = Camino del Dharma; `performer` solo si hay facilitador nombrado; `offers` solo con inscripción real; `eventStatus = EventCompleted` y `location.address.addressLocality` **obligatorio** en finalizados — es lo que convierte el archivo en señal geográfica. Detalle en `15-assets-strategy` §12.3.
+
+**Taxonomía de ciudad — advertencia de implementación:** si se añade una taxonomía `ciudad`, WordPress generará automáticamente un archivo por cada término (`/eventos/ciudad/medellin/`). Con una sola entrada, esas páginas son *doorway pages* según las políticas de spam de Google — creadas por el CMS sin que nadie las escriba. **Controlar su indexación** y abrirlas solo donde haya volumen real de eventos.
 
 ---
 

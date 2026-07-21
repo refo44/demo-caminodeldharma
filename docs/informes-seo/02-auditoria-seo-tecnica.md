@@ -330,15 +330,16 @@ El corte queda previsto **después del 10 de agosto de 2026**, tras el Encuentro
 
 1. **`robots.txt`** no contiene `Disallow: /`, y **Ajustes → Lectura** tiene desmarcada la opción de disuadir buscadores. **Comprobar esto primero.**
 2. **Canónicas** apuntan a `caminodeldharma.org`, sin rastro de la URL de pruebas. Buscar la URL temporal en toda la base de datos y en el HTML servido.
-3. **Sin `noindex`** en ninguna de las 13 páginas.
-4. **Paridad de URLs:** las 13 direcciones responden 200 y la canónica no cambió.
-5. **`.htaccess`:** confirmar que sobrevivieron las redirecciones heredadas, la limpieza de URLs antiguas, `AddType text/calendar` y las cabeceras de seguridad.
-6. **Sin cookies propias:** verificar que ni WordPress ni ningún plugin las introduce.
-7. **Datos estructurados** íntegros tras el cambio de plantillas.
-8. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir a los actuales.
-9. **`llms.txt`** sigue servido.
-10. **Descargas `.ics` y diálogo de calendario** operativos.
-11. **Rendimiento** contra la fotografía previa: PHP y plugins cambian el perfil.
+3. **Sin `noindex`** en ninguna página del sitemap.
+4. **Paridad de URLs:** todas las direcciones del `sitemap.xml` previo responden 200 y su canónica no cambió.
+5. **Patrón de URL de los eventos:** WordPress debe generar `/eventos/{slug}/` — en plural, sin fecha intercalada ni `/evento/` en singular. **Comprobarlo explícitamente**, porque es donde un CMS impone su propio patrón por defecto: los eventos que hoy solo existen como tarjetas del listado nacerán en WordPress sin un «antes» contra el que compararse, y un patrón equivocado pasaría inadvertido.
+6. **`.htaccess`:** confirmar que sobrevivieron las redirecciones heredadas, la limpieza de URLs antiguas, `AddType text/calendar` y las cabeceras de seguridad.
+7. **Sin cookies propias:** verificar que ni WordPress ni ningún plugin las introduce.
+8. **Datos estructurados** íntegros tras el cambio de plantillas — incluidos los `Event` del archivo, con su `addressLocality`, y el `EventSeries` de la meditación semanal.
+9. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir a los actuales.
+10. **`llms.txt`** sigue servido, con la entrada de la meditación semanal.
+11. **Descargas `.ics` y diálogo de calendario** operativos.
+12. **Rendimiento** contra la fotografía previa: PHP y plugins cambian el perfil.
 
 ### Antes del corte, imprescindible
 

@@ -1798,6 +1798,21 @@ a:focus-visible {
   color: var(--text-muted);
 }
 
+
+/* Agrupación por año en el archivo de eventos */
+.eventos-anio {
+  margin-block: var(--space-xl) var(--space-md);
+  padding-bottom: var(--space-2xs);
+  border-bottom: 1px solid var(--color-border, currentColor);
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.eventos-anio-grupo > .evento-card:first-of-type {
+  margin-top: 0;
+}
+
 .evento-card--past .evento-figure img,
 .evento-card--finalizado .evento-figure img {
   opacity: 0.5;
