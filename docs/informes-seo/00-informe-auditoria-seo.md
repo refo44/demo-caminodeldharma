@@ -95,11 +95,7 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 
 Se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
 
-**Y el 21 de julio se publicaron tres cosas más:**
-
-- **La meditación de los lunes tiene página propia**, con su ficha para buscadores y asistentes de inteligencia artificial. Quien pregunte por meditación budista en línea en español ya puede encontrarla. El acceso sigue siendo por WhatsApp: el enlace de la sala no se publica.
-- **Cinco encuentros presenciales ya celebrados** —en Barranquilla, Bogotá y Medellín— se incorporaron al sitio, donde antes no aparecían. Cada uno declara su ciudad de forma que los buscadores la entienden. **Es la vía honesta de asociar la comunidad a esas ciudades** sin tener sede en ellas.
-- **El listado de eventos se agrupó por año** y sus imágenes se cargan solo al llegar a ellas, lo que aligera la página.
+**El 21 de julio se publicaron dos cosas más:** la meditación de los lunes ya tiene página propia, de modo que quien pregunte por meditación budista en línea en español pueda encontrarla —el acceso sigue siendo por WhatsApp—, y se incorporaron cinco encuentros presenciales ya celebrados en Barranquilla, Bogotá y Medellín, que antes no aparecían en el sitio. **Esos encuentros son la vía honesta de asociar la comunidad a esas ciudades** sin tener sede en ellas.
 
 **Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta.**
 
@@ -194,8 +190,6 @@ Las dos primeras atacan directamente la causa medida en §3: publicaciones que y
 
 **Una precisión sobre el enlace de Instagram:** las redes sociales marcan sus enlaces de forma que **no transfieren autoridad**. Ponerlo no moverá la puntuación de §3. Su valor es otro y también real: que quien llega por Instagram pueda pasar al sitio, y que la dirección de la web aparezca de forma coherente allí donde la comunidad tiene presencia. Es cinco minutos bien empleados, pero por motivos de tráfico y coherencia, no de autoridad.
 
-> **Hecho el 21 de julio:** la meditación de los lunes ya tiene página propia. Era la acción de mayor recorrido a medio plazo, porque es la única búsqueda donde la comunidad no tiene competencia real —ninguna de las cinco comunidades comparadas ofrece práctica en línea—. Queda pendiente de que Google la recorra e indexe, cosa de semanas.
-
 ### Requiere decisión previa
 
 | Acción | Esfuerzo | Depende de |
@@ -282,7 +276,6 @@ Por eso el calendario se organiza **alrededor del corte a WordPress**, no en int
 | Búsquedas distintas que traen visitas | 1 | 10 o más |
 | Visitas que **no** vienen del nombre de la comunidad | 0 % | más del 20 % |
 | Páginas del sitio que reciben visitas | 1 | 6 o más |
-| Búsquedas con nombre de ciudad que muestran el sitio | 0 | alguna |
 | Autoridad del dominio | 2 | 8 |
 | Publicaciones que enlazan al sitio | 0 | 2 o más |
 
