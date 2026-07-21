@@ -8,6 +8,20 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.17] - 2026-07-21
+
+### Inicio — galería y logo
+
+- `index.html`: mini-galería con `<picture>` (WebP + JPEG), `loading="lazy"` y `decoding="async"`.
+- Nuevas miniaturas en `assets/images/galeria/thumbs/` (jpg y webp).
+- `assets/images/logo.png`: optimizado (menor peso).
+- `sitemap.xml`: sin cambio — `/` ya tenía `<lastmod>` `2026-07-21` (única página HTML modificada).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.16] - 2026-07-21
 
 ### Enlaces internos (práctica)
