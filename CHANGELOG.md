@@ -8,6 +8,18 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.16] - 2026-07-21
+
+### Enlaces internos (práctica)
+
+- `practica/index.html`, `practica/meditacion-semanal-en-linea/index.html` y `practica/videos/index.html`: enlaces relativos sustituidos por rutas absolutas desde la raíz (`/…`) para evitar roturas con la política de URLs canónicas (ADR 0008; hallazgos FUNC-002/003).
+- `sitemap.xml`: `<lastmod>` `2026-07-21` en `/practica/videos` (las demás URLs de práctica ya estaban en esa fecha).
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.15] - 2026-07-21
 
 ### Meditación semanal en línea y eventos
