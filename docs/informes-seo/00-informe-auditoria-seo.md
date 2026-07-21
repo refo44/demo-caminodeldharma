@@ -36,7 +36,7 @@
 
 **La causa.** No es el sitio web. Es que **ningún sitio relevante enlaza hacia él**. Para Google, un enlace externo funciona como una recomendación, y la comunidad recibe menciones —incluso elogiosas, en publicaciones especializadas— pero ninguna recomendación enlazada.
 
-**La buena noticia.** La corrección es sencilla y barata: **escribir a las tres publicaciones que ya hablan de la comunidad y pedirles que, en el texto que ya tienen publicado, incluyan la dirección `caminodeldharma.org`.** Hoy la mencionan por su nombre pero no enlazan a ninguna parte, o enlazan a Facebook en lugar de a la web. A eso se suma darse de alta en el directorio del sector donde debería estar y no está. Ninguna de estas acciones requiere sede, presupuesto ni programación.
+**La buena noticia.** La corrección es sencilla y barata: **escribir a las dos publicaciones especializadas que ya hablan de la comunidad y pedirles que, en el texto que ya tienen publicado, incluyan la dirección `caminodeldharma.org`.** Hoy la mencionan por su nombre pero no enlazan a ninguna parte, o enlazan a Facebook en lugar de a la web. No requiere sede, presupuesto ni programación: son dos correos y un campo de perfil.
 
 **Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
@@ -46,7 +46,7 @@
 2. Si el formulario de contacto debe funcionar de verdad o basta con WhatsApp y correo.
 3. Si la meditación de los lunes se anuncia con enlace público.
 
-**Lo que cuesta.** Las cuatro acciones de mayor impacto suman **menos de dos horas de trabajo** y ningún gasto. El resto es contenido, que depende del ritmo que la comunidad quiera darle.
+**Lo que cuesta.** Las tres acciones de mayor impacto suman **poco más de una hora de trabajo** y ningún gasto. El resto es contenido, que depende del ritmo que la comunidad quiera darle.
 
 ---
 
@@ -119,9 +119,8 @@ En las escalas que estiman la reputación de un dominio ante los buscadores —d
 |---|---|:---:|
 | **Buddhistdoor en Español** | La describe como **la referencia del budismo Chan en Colombia** | **No** — enlaza solo a Facebook |
 | **EcoEspiritualidad** | Ficha completa: propósito, liderazgo, congresos internacionales del abad. Es el **segundo resultado** cuando alguien busca el nombre | **No** — no tiene ningún enlace |
-| **budismo.com** (directorio de centros de Colombia) | — | **No aparece**: lista 11 centros y la comunidad no está |
 
-**Tres fuentes autorizadas hablan de la comunidad y ninguna enlaza al sitio.** Eso explica la puntuación mínima pese a la antigüedad y pese al reconocimiento que el sector ya le da.
+**Las dos publicaciones que describen a la comunidad con más detalle no la enlazan.** Eso explica la puntuación mínima pese a la antigüedad y pese al reconocimiento que el sector ya le da.
 
 ### Por qué esto es una buena noticia
 
@@ -160,7 +159,7 @@ Medí cinco comunidades budistas colombianas comparables, con la misma herramien
 
 | Meta | Cómo | Plazo |
 |---|---|---|
-| **Autoridad 8** — igualar a los dos más cercanos | Que dos o tres publicaciones añadan el enlace a la web, más el alta en el directorio | 1–2 trimestres |
+| **Autoridad 8** — igualar a los dos más cercanos | Que las dos publicaciones especializadas añadan el enlace a la web | 1–2 trimestres |
 | **Autoridad 15–17** — mediana del sector | Contenido sostenido + la meditación en línea como página propia | 3–4 trimestres |
 
 ---
@@ -199,16 +198,15 @@ Hoy vive como un párrafo dentro de otra página. Quien pregunte a Google o a un
 
 ## 6. Qué se hará y qué esfuerzo supone
 
-### Sin coste y sin decisiones pendientes
+### Prioridad alta — sin coste y sin decisiones pendientes
 
 | Acción | Qué se pide exactamente | Esfuerzo |
 |---|---|---|
 | Escribir a **Buddhistdoor en Español** | Que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
 | Escribir a **EcoEspiritualidad** | Que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
-| Alta en el directorio **budismo.com** | Solicitar la inclusión de la comunidad en su listado de centros de Colombia, del que hoy no forma parte | 30 min |
 | Perfiles de **Facebook e Instagram** | Añadir `caminodeldharma.org` en el campo de enlace del perfil | 10 min |
 
-**Estas cuatro concentran el mayor impacto disponible.** Suman menos de dos horas y ningún gasto.
+**Estas tres concentran el mayor impacto disponible**, y las dos primeras son las que atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
 
 ### Requiere decisión previa
 
@@ -276,7 +274,7 @@ Es una opción legítima y conviene plantearla con honestidad.
 
 **Lo que se deja de ganar** es concreto: la comunidad es la referencia del budismo Chan en el país —así la describe la publicación especializada más importante del sector en español— y esa condición no se refleja en dónde la encuentra la gente.
 
-**El desequilibrio entre esfuerzo y resultado es lo llamativo:** cuatro acciones que suman menos de dos horas, sin coste, atacan directamente la causa medida.
+**El desequilibrio entre esfuerzo y resultado es lo llamativo:** dos correos y un campo de perfil, sin coste, atacan directamente la causa medida.
 
 ---
 
