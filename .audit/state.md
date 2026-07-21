@@ -33,3 +33,8 @@
 - **TASK-0020 reformulada:** pasa a depender de TASK-0022. Las páginas por ciudad solo son legítimas si se sostienen sobre el historial de encuentros de esa ciudad.
 - **Estructura confirmada:** práctica semanal **en línea**; encuentros presenciales 2–3 al año por ciudad. Refuerza la centralidad de TASK-0017.
 - **Tareas: 22 — 12 COMPLETED, 1 PARTIALLY_COMPLETED, 2 READY, 7 BLOCKED.**
+- **TASK-0017 IMPLEMENTED_PENDING_VALIDATION** (2026-07-21): `/practica/meditacion-semanal-en-linea` creada y ya visible en producción. Los 4 criterios verificados. CTA de WhatsApp; el enlace de Zoom no se publica.
+- **FUNC-003 nuevo (MEDIA, corregido en fuente):** enlaces de navegación a `/practica` resolvían a la raíz por usar ruta relativa bajo la política canónica sin barra final. Afectaba a `/practica/videos` **desde su publicación** y se reintrodujo al enlazar la página nueva. **Segunda aparición de la misma causa que FUNC-002** → regla elevada a **ADR 0008**: enlaces internos con ruta absoluta de raíz.
+- **Detectado por el propietario**, no por la auditoría. Añadido al checklist de verificación del corte a WordPress.
+- **Hallazgos: 15** (1 ALTA, 9 MEDIA, 4 BAJA, 1 INFORMATIVA).
+- **Pendiente de despliegue:** correcciones de FUNC-003, separadores de año en `/eventos`, JSON-LD de los 5 encuentros y carga diferida de imágenes.

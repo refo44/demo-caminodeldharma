@@ -267,6 +267,7 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 |---|---|---|---|
 | FUNC-001 | **Alta** | Formulario de contacto con `action="#"` y sin backend: los mensajes se pierden en silencio | Mitigado con CTAs de WhatsApp y correo. Solución definitiva **en espera**: ver nota abajo |
 | FUNC-002 | Media | Descarga `.ics` con ruta relativa que rompe bajo la política de URL sin barra final | **Corregido** |
+| FUNC-003 | Media | Enlaces de navegación a `/practica` resuelven a la raíz — **misma causa que FUNC-002**, detectada de nuevo el 21/07 | **Corregido en fuente**, pendiente de despliegue |
 | SEC-001 | Media | HSTS no activa | **Aplazado deliberadamente** hasta después de la migración a WordPress |
 | SEC-002 | Media | Política de seguridad de contenido limitada a `upgrade-insecure-requests`: sin restricciones de script, frame ni objeto | Abierto |
 | PERF-001 | Media | Imágenes sobredimensionadas, sin `srcset` | Abierto |
@@ -275,6 +276,23 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 | SEC-003 | Baja | Ausencia de `/.well-known/security.txt` pese a mantenerse `SECURITY.md` | Abierto |
 | PRIV-001 | Baja | Diez vídeos incrustados (8 YouTube + 2 Vimeo) sin variante `nocookie`; política de privacidad pendiente | Abierto |
 | INFO-001 | Informativa | Cadena de redirección de dos saltos en la entrada `www` por HTTP; JavaScript servido como `application/x-javascript` | Abierto |
+
+### Sobre las rutas relativas (FUNC-002 y FUNC-003)
+
+**Es la única clase de fallo que ha reaparecido en este proyecto**, y conviene entender por qué para que no vuelva.
+
+La política canónica del sitio es **sin barra final** (`/practica`, no `/practica/`). Un navegador situado en `/practica` interpreta el último segmento como archivo, no como carpeta, y resuelve cualquier ruta relativa **un nivel por encima** de lo esperado:
+
+| Página actual | Enlace relativo | Resuelve a | Esperado |
+|---|---|---|---|
+| `/practica` | `meditacion-semanal-en-linea` | `/meditacion-semanal-en-linea` (404) | `/practica/meditacion-semanal-en-linea` |
+| `/practica/videos` | `..` | `/` | `/practica` |
+
+FUNC-002 fue la descarga `.ics`; FUNC-003 son los enlaces de navegación de `/practica/videos`, que llevaban así en producción desde su publicación.
+
+**Regla, registrada en ADR 0008:** todos los enlaces internos usan **ruta absoluta de raíz** (`/practica/...`). Las relativas solo son admisibles para recursos que cuelgan de la raíz (`../../assets/...`), donde el acotado las hace equivalentes.
+
+**En WordPress:** `home_url()` y `get_permalink()` siempre; nunca rutas relativas escritas a mano en plantillas. **La política sin barra final y las rutas relativas son incompatibles.**
 
 ### Sobre el formulario de contacto (FUNC-001)
 
@@ -333,13 +351,14 @@ El corte queda previsto **después del 10 de agosto de 2026**, tras el Encuentro
 3. **Sin `noindex`** en ninguna página del sitemap.
 4. **Paridad de URLs:** todas las direcciones del `sitemap.xml` previo responden 200 y su canónica no cambió.
 5. **Patrón de URL de los eventos:** WordPress debe generar `/eventos/{slug}/` — en plural, sin fecha intercalada ni `/evento/` en singular. **Comprobarlo explícitamente**, porque es donde un CMS impone su propio patrón por defecto: los eventos que hoy solo existen como tarjetas del listado nacerán en WordPress sin un «antes» contra el que compararse, y un patrón equivocado pasaría inadvertido.
-6. **`.htaccess`:** confirmar que sobrevivieron las redirecciones heredadas, la limpieza de URLs antiguas, `AddType text/calendar` y las cabeceras de seguridad.
-7. **Sin cookies propias:** verificar que ni WordPress ni ningún plugin las introduce.
-8. **Datos estructurados** íntegros tras el cambio de plantillas — incluidos los `Event` del archivo, con su `addressLocality`, y el `EventSeries` de la meditación semanal.
-9. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir a los actuales.
-10. **`llms.txt`** sigue servido, con la entrada de la meditación semanal.
-11. **Descargas `.ics` y diálogo de calendario** operativos.
-12. **Rendimiento** contra la fotografía previa: PHP y plugins cambian el perfil.
+6. **Enlaces internos absolutos:** ningún `href` interno resuelve a la raíz por usar ruta relativa. Es la única clase de fallo que ha reaparecido en el proyecto (FUNC-002 y FUNC-003) y WordPress la reintroduce con facilidad si las plantillas escriben rutas a mano. Recorrer los enlaces de las subpáginas y verificar destino real.
+7. **`.htaccess`:** confirmar que sobrevivieron las redirecciones heredadas, la limpieza de URLs antiguas, `AddType text/calendar` y las cabeceras de seguridad.
+8. **Sin cookies propias:** verificar que ni WordPress ni ningún plugin las introduce.
+9. **Datos estructurados** íntegros tras el cambio de plantillas — incluidos los `Event` del archivo, con su `addressLocality`, y el `EventSeries` de la meditación semanal.
+10. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir a los actuales.
+11. **`llms.txt`** sigue servido, con la entrada de la meditación semanal.
+12. **Descargas `.ics` y diálogo de calendario** operativos.
+13. **Rendimiento** contra la fotografía previa: PHP y plugins cambian el perfil.
 
 ### Antes del corte, imprescindible
 
