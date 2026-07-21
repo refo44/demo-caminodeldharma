@@ -58,7 +58,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 23. `23-sistema-editorial`
 24. `24-brief-editorial-blog-y-visibilidad` — brief autosuficiente para el equipo editorial (hallazgo de visibilidad, voz, formato y sugerencia de temas; puede compartirse sin `21` ni `23`)
 
-**Informes SEO (entregas periódicas):** `informes-seo/README.md` — cuatro informes derivados de `.audit/`: rendimiento, auditoría técnica, visibilidad orgánica y posicionamiento de keywords. Se re-emiten con cadencia (trimestral o mensual), por lo que **no llevan prefijo numérico en la cadena lineal**: no son documentos de diseño del proyecto sino mediciones fechadas. Dependen de la auditoría, no de los docs numerados.
+**Informes SEO (entregas periódicas):** `informes-seo/README.md` — el informe general de auditoría SEO (documento que se comparte con la comunidad) y el análisis de visibilidad orgánica que lo respalda, ambos derivados de `.audit/`. Se re-emiten con cadencia trimestral, por lo que **no llevan prefijo numérico en la cadena lineal**: no son documentos de diseño del proyecto sino mediciones fechadas. Dependen de la auditoría, no de los docs numerados.
 
 **ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0017). **Migración:** `migracion-static-wordpress.md`. **Archivo (respaldos):** `archive/contacto-formulario-estatico/` — snapshot de la página `/contacto` y estilos del formulario para restauración post-WordPress o tras cambios del estático. No llevan prefijo numérico en `00` para no romper la regla de dependencias lineal; se referencian desde `17-orden-implementacion`.
 
