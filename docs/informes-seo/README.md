@@ -1,89 +1,49 @@
-# Informes SEO — Camino del Dharma
+# informes-seo/ — nota interna
 
-Dos informes derivados de la auditoría de `.audit/`, separados por **audiencia y pregunta que responden**.
+**Este archivo no se entrega.** Es la nota de trabajo de la carpeta.
 
-| # | Documento | Responde a | Audiencia | Cadencia |
-|---|---|---|---|---|
-| 00 | [Informe de Auditoría SEO](00-informe-auditoria-seo.md) | ¿Qué se encontró y qué hay que decidir? | **Liderazgo — es el que se comparte** | Por hito |
-| 03 | [Análisis de Visibilidad Orgánica](03-analisis-visibilidad-organica.md) | ¿Dónde estamos, frente a quién, y cómo se vuelve a medir? | Coordinación + quien pida detalle | Trimestral |
+## Los tres entregables
 
-> **Se conserva la numeración 00 y 03** de la primera emisión, para que las referencias externas y el historial de git sigan resolviendo. No es un error de secuencia.
+| # | Documento | Cubre | Destinatario |
+|---|---|---|---|
+| 00 | [Informe de Auditoría SEO](00-informe-auditoria-seo.md) | General y ejecutivo: visibilidad, autoridad, comparación con otras comunidades, plan de acción y decisiones pendientes | Liderazgo de la comunidad |
+| 02 | [Auditoría SEO Técnica](02-auditoria-seo-tecnica.md) | Estado de salud del sitio: indexación, velocidad, datos estructurados, seguridad, protocolo de medición | Equipo de publicación web |
+| 24 | [Brief editorial](../24-brief-editorial-blog-y-visibilidad.md) | Qué escribir en el blog, con qué voz y en qué orden | Equipo editorial |
 
----
+**No se solapan y no compiten.** El 00 responde *qué se encontró y qué hay que decidir*; el 02, *cómo está construido el sitio*; el 24, *qué escribir*. Cada uno es autosuficiente: ninguno depende de `.audit/`, de este README ni de los otros dos para leerse, y los tres se remiten entre sí donde corresponde.
 
-## Qué compartir con la comunidad
+La numeración conserva un hueco en el 01 (informe de rendimiento, ver abajo). No es un error de secuencia.
 
-**Se comparten dos documentos, y son complementarios por diseño:**
+## Origen de los datos
 
-| Documento | Cubre | Audiencia |
-|---|---|---|
-| [00 — Informe de Auditoría SEO](00-informe-auditoria-seo.md) | Lo que está **fuera del blog**: hallazgos, enlaces, decisiones pendientes | Liderazgo |
-| [24 — Brief editorial](../24-brief-editorial-blog-y-visibilidad.md) | Lo que va **dentro del blog**: temas, voz, formato | Equipo editorial |
+`.audit/` — informes de auditoría, ledger de evidencia, hallazgos y datos crudos. Los entregables **no generan datos nuevos**: los redactan para audiencia externa, sin códigos de evidencia ni identificadores de tarea.
 
-No se solapan: el 24 se limita explícitamente a entradas de blog; el 00 cubre lo institucional que el 24 deja fuera por alcance (peticiones de enlace, artículos por ciudad, formulario, meditación semanal).
+## Informe de rendimiento — pendiente hasta septiembre
 
-**El 03 se entrega solo si piden el detalle con cifras.**
+No se emitió. Un informe de rendimiento reporta evolución de tráfico, conversiones y retorno de inversión, y hoy **ninguna de las tres es reportable**: no hay periodo anterior (el sitio se publicó el 2026-07-18), no hay analítica (decisión formalizada) y no hay transacciones (sitio no comercial).
 
----
+Rellenarlo con estimaciones habría sido fabricar evidencia. El cuadro de indicadores que lo sustituye —incluidos asistentes a la meditación y contactos entrantes— está en el §9 del informe 00.
 
-## Dos correcciones registradas
+**Emitir tras la re-medición**, si para entonces hay datos que lo justifiquen.
 
-**1. Google Business Profile — recomendación retirada (2026-07-20).** La primera emisión lo situaba como acción prioritaria. Se retiró tras confirmar que la comunidad **no tiene sede ni dirección física** y no es elegible según las reglas de Google: las entidades exclusivamente en línea quedan excluidas, y aunque una organización sin sede visible puede ocultar la dirección al público, Google exige una dirección real verificable en el back end. Fue una deducción a partir del SERP sin comprobar el requisito — el mismo error de extrapolación que la auditoría ya había cometido con el supuesto backlink de EcoEspiritualidad. Detalle en el informe [00 §4](00-informe-auditoria-seo.md).
+## Corrección de fondo registrada
 
-**Efecto estratégico:** las búsquedas locales dejan de contar como brecha, y el esfuerzo se reorienta a la autoridad y a la **práctica en línea** — donde la comunidad es el único caso virtual entre los seis dominios comparados.
+**Google Business Profile quedó descartado** tras confirmar que la comunidad no tiene sede ni dirección física y, por tanto, no es elegible según las directrices de Google (las entidades exclusivamente en línea quedan excluidas, y Google exige una dirección real verificable aunque se oculte al público).
 
-**2. Tres informes eliminados (2026-07-20).** La primera emisión tenía cinco. Se redujo a dos:
-
-| Eliminado | Motivo |
-|---|---|
-| `01-informe-rendimiento-seo.md` | Sin periodo anterior, sin analítica (ADR 0019) y sin transacciones, no reportaba nada. Se re-emitirá desde cero en septiembre, cuando haya datos. Su cuadro de indicadores se conservó en el 03 §11 |
-| `02-auditoria-seo-tecnica.md` | Duplicaba `.audit/report.md` y `.audit/working/`, que son la fuente de verdad. Su única conclusión relevante para la comunidad (*el sitio está impecable; el problema no es la web*) está en el 00 §7 |
-| `04-posicionamiento-palabras-clave.md` | Anexo natural del 03. Su tabla T0 y el protocolo de re-medición se integraron en el 03 §11 |
-
-Recuperables desde git (commit `19cb801`) si en algún momento hacen falta.
-
----
-
-## Estado de esta emisión (2026-07-20)
-
-**Ambos son mediciones base (T0).** El sitio estático se publicó el **2026-07-18**: en el momento de la auditoría tenía **un día de vida**.
-
-Eso condiciona qué puede afirmarse. La ausencia de las consultas amplias **es esperable a esa edad** — es una brecha a trabajar, no un defecto. Lo que sí es un hallazgo de fondo, independiente de la edad, es el déficit de autoridad heredado de la etapa WordPress.
-
-**Nada se extrapola.** Lo que no se pudo medir figura como limitación explícita.
-
----
-
-## Hallazgo transversal
-
-**El sitio está técnicamente impecable y comercialmente invisible.** SEO interno 100, rendimiento 99/100 móvil, datos estructurados 100 — y **DR 0,4 / DA 2** en un dominio de 7 años y medio.
-
-La causa está verificada una por una: **tres fuentes temáticas autorizadas hablan de la comunidad y ninguna enlaza al dominio** (Buddhistdoor enlaza solo a Facebook; EcoEspiritualidad es el #2 de marca sin ningún enlace saliente; el directorio budismo.com lista 11 centros y no a esta comunidad).
-
-Es una causa inusualmente fácil de corregir: no hace falta link building desde cero, **hace falta pedirlo**. Y no requiere sede, dirección ni presupuesto — a diferencia de todo lo relacionado con búsqueda local.
-
----
+Una versión preliminar lo situaba como acción prioritaria: fue una deducción a partir del SERP sin verificar el requisito. Documentado en el §7 del informe 00, con la consecuencia estratégica — las búsquedas locales dejan de contar como brecha y el foco pasa a autoridad y práctica en línea.
 
 ## Próxima emisión
 
-**Entre 2026-08-17 y 2026-09-14** (4–8 semanas después de T0).
+**Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no: se estaría midiendo la eficacia de acciones que aún no han tenido tiempo de actuar.
 
-Antes de esa fecha, cualquier conclusión sobre si las acciones funcionaron sería falsa: se estaría midiendo la eficacia de algo que aún no ha tenido tiempo de actuar.
+1. Copiar a `NN-nombre-AAAA-MM.md` para conservar el histórico.
+2. Actualizar por secciones, sin reescribir los documentos enteros.
+3. Seguir el protocolo del §10 del informe 02 — misma herramienta, mismo método, misma lista de palabras clave.
+4. Añadir columna de evolución a la tabla de posiciones (§9 del informe 00).
+5. Evaluar si ya procede emitir el informe de rendimiento.
 
-Al re-emitir:
+## Decisiones que condicionan los informes
 
-1. Copiar el informe a `NN-nombre-AAAA-MM-DD.md` para conservar el histórico.
-2. Actualizar el vigente **por secciones**, sin reescribirlo entero.
-3. Seguir el **protocolo de medición** del informe [03 §11](03-analisis-visibilidad-organica.md) — sin él, la comparación entre periodos no significa nada.
-4. Evaluar si ya procede re-emitir un informe de rendimiento con datos reales.
-
-**La regla que hace comparables las mediciones:** misma herramienta, mismo método, mismo mercado, misma lista de keywords. Comparar DA de Moz con DR de Ahrefs no dice nada.
-
----
-
-## Relación con el resto de la documentación
-
-- **Origen de los datos:** `.audit/` — informes, ledger de evidencia (`evidence-ledger.jsonl`), hallazgos (`findings.jsonl`) y datos crudos (`raw/`). Estos documentos **no generan datos nuevos**: los sintetizan por audiencia.
-- **Decisiones que los condicionan:** [ADR 0019](../adr/0019-sin-analitica-con-cookies.md) (sin analítica con cookies) y [ADR 0020](../adr/0020-hsts-aplazado-hasta-wordpress.md) (HSTS aplazado).
-- **Documento hermano:** [`24-brief-editorial-blog-y-visibilidad.md`](../24-brief-editorial-blog-y-visibilidad.md) — traduce estos hallazgos a instrucciones para el equipo editorial.
-- **Migración pendiente:** el sitio actual es temporal (WordPress, ADR 0002/0018). Ninguna recomendación compromete al sitio a plazos largos.
+- [ADR 0019](../adr/0019-sin-analitica-con-cookies.md) — sin analítica con cookies.
+- [ADR 0020](../adr/0020-hsts-aplazado-hasta-wordpress.md) — HSTS aplazado hasta después de WordPress.
+- ADR 0002 / 0018 — el sitio estático es temporal, previo a la migración a WordPress.
