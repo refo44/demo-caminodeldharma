@@ -48,3 +48,17 @@
 - 2026-07-20 Decisión del propietario: HSTS APLAZADO por completo hasta después del corte a WordPress. Verificado que la línea seguía comentada en el repo y que producción nunca sirvió la cabecera (repo y produccion sincronizados; no hubo cambio que revertir). Formalizado en ADR 0020, que sustituye operativamente a ADR 0018 (esta pasa a 'Sustituida' en cuanto al calendario; su análisis técnico sigue vigente). Razonamiento: con ~9 clics en 28 dias (EVID-0052) y un sitio de 2 dias, la exposicion al downgrade es minima, mientras que fijar politica de transporte antes de una migracion que puede tocar TLS y redirects si anade riesgo operativo. Es la misma logica de ADR 0018 llevada a su conclusion. SEC-001 -> DEFERRED_BY_OWNER (no se cierra: la brecha se acepta de forma consciente). TASK-0004/0005 -> BLOCKED; TASK-0012 pospuesta.
 - 2026-07-20 CORRECCIÓN de dependencias detectada al aplazar HSTS: TASK-0008 (CSP) declaraba depends_on=[TASK-0004], pero la relacion era solo de grupo de conflicto (ambas tocan .htaccess), no logica. Sin corregirlo, aplazar HSTS habria bloqueado la CSP por arrastre. Dependencia retirada; se conserva CG-HTACCESS para serializar los cambios sobre el archivo.
 - 2026-07-20 CIERRE ETAPA 2 (implementación estática): el propietario confirmó deploy en producción **v1.0.14** y cierre de todas las tareas que estaban READY más TASK-0001. Ledger actualizado: 14 COMPLETED, 6 BLOCKED, 0 READY. Tareas cerradas: 0001, 0002, 0006, 0007, 0008, 0009, 0010, 0011, 0013, 0014, 0015, 0017, 0018 (+ 0019 ya completada). Permanece BLOCKED: 0003 (formulario real), 0004/0005 (HSTS ADR 0020), 0012 (DNS), 0016 (plan editorial), 0020 (sanghas por ciudad). Artefactos alineados: state.md, backlog.md, tasks.jsonl, manual-inputs-pending.md, README.md.
+
+---
+
+## 2026-07-21 — Meditación de los lunes: puerta por WhatsApp, sin enlace de Zoom público
+
+**Decisión del propietario/comunidad.** El enlace de Zoom de la meditación semanal **no se publica**. Quien quiera practicar entra por el enlace de WhatsApp que figura en la página.
+
+**Resuelve** la disyuntiva abierta en TASK-0017 y en la adenda ASO/AEO del resumen ejecutivo («¿enlace de Zoom público o puerta por WhatsApp?»).
+
+**Efecto sobre la recomendación:** ninguno en cuanto a su viabilidad. TASK-0017 sigue vigente y pasa de BLOQUEADA a ejecutable, con el diseño acotado: página propia para la sesión (descripción, público, tradición, horario) + `Event`/`EventSeries` en línea + entrada en `llms.txt` y en el sitemap, **con CTA de WhatsApp en lugar del enlace de la sala**.
+
+**Razonamiento SEO:** la visibilidad de una actividad depende de que exista una página indexable que la describa, no de que el enlace de acceso sea público. Los buscadores necesitan la descripción, no la sala. Además, que el primer paso sea un contacto humano responde a la intención de quien busca «meditación budista en línea en español» — quiere saber si puede participar y cómo.
+
+**Registrado en los entregables:** `docs/informes-seo/00-informe-auditoria-seo.md` §5 (como decisión tomada) y §6 (acción ejecutable).

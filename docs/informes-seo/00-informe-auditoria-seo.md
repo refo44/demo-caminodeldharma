@@ -40,13 +40,12 @@
 
 **Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
-**Lo que necesito de ustedes.** Tres decisiones, detalladas en §5:
+**Lo que necesito de ustedes.** Dos decisiones, detalladas en §5:
 
 1. En qué ciudades hay práctica real.
 2. Si el formulario de contacto debe funcionar de verdad o basta con WhatsApp y correo.
-3. Si la meditación de los lunes se anuncia con enlace público.
 
-**Lo que cuesta.** Las tres acciones de mayor impacto suman **poco más de una hora de trabajo** y ningún gasto. El resto es contenido, que depende del ritmo que la comunidad quiera darle.
+**Lo que cuesta.** Las tres peticiones de enlace y perfil suman **poco más de una hora** y ningún gasto. La página de la meditación de los lunes, unas cuatro horas de trabajo técnico. El resto es contenido, al ritmo que la comunidad quiera darle.
 
 ---
 
@@ -166,7 +165,7 @@ Medí cinco comunidades budistas colombianas comparables, con la misma herramien
 
 ## 5. Lo que se necesita de la comunidad
 
-Las seis tareas que quedan **no están detenidas por falta de tiempo ni de capacidad técnica**. Dependen de decisiones que no corresponde tomar a quien realizó la auditoría.
+Las tareas que quedan abiertas **no están detenidas por falta de tiempo ni de capacidad técnica**. Dependen de decisiones que no corresponde tomar a quien realizó la auditoría.
 
 ### 5.1 ¿En qué ciudades hay práctica real?
 
@@ -184,35 +183,41 @@ Las seis tareas que quedan **no están detenidas por falta de tiempo ni de capac
 
 **Si WhatsApp y correo cubren la necesidad, no hacer nada es una respuesta válida.**
 
-### 5.3 ¿La meditación de los lunes se anuncia con enlace público?
+### Ya decidido — la meditación de los lunes
 
-**Por qué importa:** la sesión semanal en línea es **el elemento más distintivo que tiene la comunidad**. Gratuita, virtual, para principiantes, sin límite geográfico — y **el único formato en línea entre todas las comunidades comparadas**, que son presenciales.
+**La comunidad ha resuelto que el enlace de Zoom no se publica.** Quien quiera practicar entra por el enlace de WhatsApp que figura en la página. La puerta sigue siendo humana.
 
-Hoy vive como un párrafo dentro de otra página. Quien pregunte a Google o a un asistente de inteligencia artificial por meditación budista en línea en español **no puede encontrarla**.
+Lo dejo registrado aquí porque **esa decisión no impide hacer visible la sesión**, y conviene no confundir las dos cosas.
 
-**El intercambio real:** publicar el enlace abiertamente la hace encontrable por cualquiera, también por quien no tiene intención de practicar. Mantener la puerta por WhatsApp conserva el acompañamiento humano de la primera vez, y a cambio la sesión sigue siendo invisible fuera de la comunidad.
+La sesión semanal en línea es **el elemento más distintivo que tiene la comunidad**: gratuita, para principiantes, sin límite geográfico — y **el único formato en línea entre todas las comunidades comparadas**, que son presenciales. Hoy vive como un párrafo dentro de otra página, y por eso quien pregunte a Google o a un asistente de inteligencia artificial por meditación budista en línea en español no la encuentra.
 
-**No hay una respuesta correcta.** Es una decisión sobre qué tipo de puerta quiere tener la comunidad.
+**Lo que hace visible una actividad no es el enlace de acceso, sino que exista una página que la describa.** Una página propia para la meditación de los lunes —qué es, para quién, en qué tradición, a qué hora, y un botón de WhatsApp para acercarse— es indexable por completo sin publicar el Zoom. Los buscadores necesitan la descripción, no la sala.
+
+Es más: la puerta por WhatsApp **es la respuesta a la pregunta que hace quien busca**. Alguien que busca «meditación budista en línea en español» quiere saber si puede participar y cómo; que el primer paso sea escribir a una persona es información útil, no un obstáculo.
+
+**Esto convierte la acción en ejecutable sin más decisiones** (§6).
 
 ---
 
 ## 6. Qué se hará y qué esfuerzo supone
 
-### Prioridad alta — sin coste y sin decisiones pendientes
+### Ejecutable ya — sin decisiones pendientes
 
-| Acción | Qué se pide exactamente | Esfuerzo |
+| Acción | Qué implica | Esfuerzo |
 |---|---|---|
-| Escribir a **Buddhistdoor en Español** | Que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
-| Escribir a **EcoEspiritualidad** | Que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
+| Escribir a **Buddhistdoor en Español** | Pedir que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
+| Escribir a **EcoEspiritualidad** | Pedir que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
 | Perfiles de **Facebook e Instagram** | Añadir `caminodeldharma.org` en el campo de enlace del perfil | 10 min |
+| **Página propia para la meditación de los lunes** | Página que describa la sesión —qué es, para quién, en qué tradición, a qué hora— con el botón de WhatsApp como puerta de entrada, más su ficha para buscadores. **Sin publicar el enlace de Zoom** | ~4 h |
 
-**Estas tres concentran el mayor impacto disponible**, y las dos primeras son las que atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
+Las dos primeras atacan directamente la causa medida en §3: publicaciones que ya reconocen a la comunidad pero no la enlazan.
+
+**La página de la meditación es la de mayor recorrido a medio plazo.** Es la única búsqueda donde la comunidad no tiene competencia real: ninguna de las cinco comunidades comparadas ofrece práctica en línea. Y no compromete la decisión ya tomada — lo que indexan los buscadores es la descripción de la sesión, no la sala.
 
 ### Requiere decisión previa
 
 | Acción | Esfuerzo | Depende de |
 |---|---|---|
-| Meditación semanal con página propia y ficha para buscadores | ~4 h | §5.3 |
 | Contenido en formato pregunta y respuesta | Editorial | Ritmo editorial |
 | Contenido orientado a cada ciudad | Editorial | §5.1 |
 
