@@ -12,6 +12,14 @@ intervalos fijos.
 
 ---
 
+## ✅ Riesgo de calendario — RESUELTO 2026-07-21
+
+**Decisión de la comunidad: se adopta la opción 1.** El corte se aplaza a después del **10 de agosto**, tras el Encuentro Nacional. La migración se probará previamente en servidor y URL temporales.
+
+**Los Hitos 1 y 2 se mantienen íntegros:** el ensayo en preproducción no valida `robots.txt`/«Disuadir a los motores de búsqueda», canónicas con dominio real, el bloque `.htaccess` reescrito por WordPress, certificado, redirecciones de entrada ni indexación en GSC. Lista completa en `docs/informes-seo/02-auditoria-seo-tecnica.md` §10.
+
+<details><summary>Análisis original del riesgo (2026-07-20)</summary>
+
 ## ⚠️ Riesgo de calendario detectado
 
 | Fecha | Hecho |
@@ -32,6 +40,8 @@ Si la migración sale mal, sale mal en el peor momento posible. Tres opciones, p
 
 Recomendación: la **opción 1**. Es una decisión de la comunidad, no técnica, pero conviene tomarla a
 conciencia y no por inercia.
+
+</details>
 
 ---
 
@@ -100,11 +110,11 @@ durante.
 
 Primera medición **legítima** de si el trabajo de posicionamiento funciona:
 
-- ¿Aceptaron el enlace Buddhistdoor, EcoEspiritualidad y budismo.com?
+- ¿Aceptaron el enlace Buddhistdoor y EcoEspiritualidad?
 - DA/DR re-medidos con la misma herramienta → ¿se acerca el hito de **DA 8**?
 - GSC: ¿aparecen consultas que no son la marca?
 - Repetir la batería de consultas, incluidas las de tipo pregunta (ASO-001)
-- ¿El perfil de empresa entró en los packs locales?
+- ¿Está la dirección de la web en el perfil de Instagram? (Facebook ya la tiene)
 
 ---
 

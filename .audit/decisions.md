@@ -62,3 +62,17 @@
 **Razonamiento SEO:** la visibilidad de una actividad depende de que exista una página indexable que la describa, no de que el enlace de acceso sea público. Los buscadores necesitan la descripción, no la sala. Además, que el primer paso sea un contacto humano responde a la intención de quien busca «meditación budista en línea en español» — quiere saber si puede participar y cómo.
 
 **Registrado en los entregables:** `docs/informes-seo/00-informe-auditoria-seo.md` §5 (como decisión tomada) y §6 (acción ejecutable).
+
+---
+
+## 2026-07-21 — Corte a WordPress: aplazado hasta después del Encuentro Nacional
+
+**Decisión del propietario/comunidad.** El corte se traslada a **después del 10 de agosto de 2026**, evitando la coincidencia con el 7.º Encuentro Nacional Buddhista (7–9 de agosto). Adopta la **opción 1** del riesgo de calendario registrado en `audit-schedule.md`.
+
+**Contexto añadido:** la migración se probará previamente en un **servidor y una URL temporales** antes del corte.
+
+**Efecto sobre el calendario:** el Hito 1 (fotografía pre-migración) y el Hito 2 (verificación post-corte) **se mantienen íntegros**. El ensayo en preproducción no los sustituye: no valida `robots.txt` ni la opción «Disuadir a los motores de búsqueda», las canónicas con el dominio real, el bloque `.htaccess` que WordPress reescribe, el certificado, las redirecciones de entrada ni la indexación en Search Console.
+
+**Riesgo principal identificado:** que la configuración de no indexación del entorno de pruebas viaje al sitio definitivo. Es el fallo de migración más común y más silencioso, y en este caso costaría las posiciones #1 recién ganadas. Verificación obligatoria en primer lugar tras el corte.
+
+**Registrado en los entregables:** `docs/informes-seo/00-informe-auditoria-seo.md` §8 y `docs/informes-seo/02-auditoria-seo-tecnica.md` §10 (lista de verificación completa).
