@@ -4,7 +4,7 @@
 **De:** auditoría SEO del sitio (julio 2026) — insumos y sugerencias, no decisiones editoriales  
 **Fecha:** 2026-07-20  
 
-> Documento **autosuficiente**: puede leerse y compartirse sin otros manuales. Resume el diagnóstico SEO, por qué el blog importa para las búsquedas, sugerencias de temas y criterios de voz y formato. **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales.
+> **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales: aquí solo hay diagnóstico y sugerencias.
 >
 > **Alcance:** solo **entradas del blog** (`/blog/…`). **Sí** incluye artículos o notas del blog sobre una ciudad (p. ej. “budismo en Cali”), si hay datos reales. **No** incluye **páginas nuevas del sitio** fuera del blog — como una sección `/sanghas/` con una página fija por ciudad — ni cambios en Inicio/Comunidad/Linaje/Práctica; eso es otro trabajo (comunidad y equipo técnico), ajeno a este brief.
 

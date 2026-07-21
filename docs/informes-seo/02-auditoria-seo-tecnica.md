@@ -12,7 +12,7 @@
 | **Naturaleza** | Estado de salud técnica del sitio |
 | **Destinatario** | Equipo de publicación web |
 
-> **Qué contiene este informe:** el estado de salud técnica del sitio — indexación y rastreo, higiene del índice, rendimiento, datos estructurados, seguridad y protocolo de medición. Es un documento de ejecución: cada hallazgo lleva estado, esfuerzo estimado y criterio de aceptación.
+> **Alcance:** indexación y rastreo, higiene del índice, rendimiento, datos estructurados, seguridad y protocolo de medición. Cada hallazgo lleva estado, esfuerzo estimado y criterio de aceptación.
 
 > **Naturaleza del sitio.** El estático actual es **temporal**: será sustituido por WordPress. Ninguna recomendación de este informe compromete al sitio a plazos largos —por ejemplo, cabeceras de seguridad con vigencia de un año—.
 
@@ -62,7 +62,7 @@ Esto conviene decirlo con precisión, porque es el error de lectura más común 
 
 La brecha está en dos cosas que no se corrigen desde el código:
 
-- **Autoridad del dominio.** Prácticamente ningún sitio externo enlaza hacia él: en las escalas habituales del sector puntúa **2 sobre 100**, frente a una mediana de 17 entre comunidades comparables. Tres publicaciones especializadas describen a la comunidad y **ninguna incluye el enlace**.
+- **Autoridad del dominio.** Prácticamente ningún sitio externo enlaza hacia él: en las escalas habituales del sector puntúa **2 sobre 100**, frente a una mediana de 17 entre comunidades comparables. Tres publicaciones especializadas describen a la comunidad en sus artículos, pero **ninguna incluye la dirección del sitio** en el texto — una de ellas enlaza a Facebook en su lugar.
 - **Volumen de contenido.** Una sola entrada de blog en el momento de la auditoría.
 
 **Ninguna tarea de este informe resolverá esas dos cosas.** Conviene tenerlo presente para no atribuir a la implementación técnica un resultado que no depende de ella — y también al revés: que la visibilidad tarde en llegar no indica que estas tareas se hayan hecho mal.

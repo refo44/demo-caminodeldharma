@@ -4,351 +4,192 @@
 
 | | |
 |---|---|
-| **Cliente** | Comunidad Buddhista Camino del Dharma |
+| **Para** | Liderazgo de la Comunidad Buddhista Camino del Dharma |
 | **Sitio auditado** | https://caminodeldharma.org |
 | **Fecha del informe** | 20 de julio de 2026 |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
-| **Mercado evaluado** | Colombia (Google `hl=es`, `gl=co`) |
-| **Naturaleza** | Informe general y ejecutivo |
+| **Mercado evaluado** | Colombia |
 | **Próxima medición** | Entre el 17 de agosto y el 14 de septiembre de 2026 |
-
-> **Qué contiene este informe:** qué se encontró en la auditoría, qué significa para la comunidad y qué hace falta decidir. Los aspectos de construcción del sitio —código, configuración de servidor, seguridad— se resumen aquí en lo que afecta a la visibilidad, y su ejecución corresponde al equipo de publicación web.
 
 ---
 
 ## Índice
 
-1. [Resumen ejecutivo](#1-resumen-ejecutivo)
-2. [Cómo se midió](#2-cómo-se-midió)
-3. [Estado general](#3-estado-general)
-4. [Visibilidad en buscadores](#4-visibilidad-en-buscadores)
-5. [Autoridad del dominio: el hallazgo de fondo](#5-autoridad-del-dominio-el-hallazgo-de-fondo)
-6. [Comparación con otras comunidades](#6-comparación-con-otras-comunidades)
-7. [Búsqueda local: evaluación y descarte](#7-búsqueda-local-evaluación-y-descarte)
-8. [Presencia en asistentes de inteligencia artificial](#8-presencia-en-asistentes-de-inteligencia-artificial)
-9. [Medición base y seguimiento](#9-medición-base-y-seguimiento)
-10. [Plan de acción priorizado](#10-plan-de-acción-priorizado)
-11. [Decisiones que requieren a la comunidad](#11-decisiones-que-requieren-a-la-comunidad)
-12. [Limitaciones](#12-limitaciones)
-13. [Glosario](#13-glosario)
+1. [En una página](#1-en-una-página)
+2. [Qué encontré](#2-qué-encontré)
+3. [Por qué casi nadie encuentra el sitio](#3-por-qué-casi-nadie-encuentra-el-sitio)
+4. [Cómo está el sitio frente a otras comunidades](#4-cómo-está-el-sitio-frente-a-otras-comunidades)
+5. [Lo que se necesita de la comunidad](#5-lo-que-se-necesita-de-la-comunidad)
+6. [Qué se hará y qué esfuerzo supone](#6-qué-se-hará-y-qué-esfuerzo-supone)
+7. [Por qué descarté Google Maps](#7-por-qué-descarté-google-maps)
+8. [Cuándo se sabrá si funcionó](#8-cuándo-se-sabrá-si-funcionó)
+9. [Qué ocurre si no se hace nada](#9-qué-ocurre-si-no-se-hace-nada)
+- [Anexo A — Cómo se midió](#anexo-a--cómo-se-midió)
+- [Anexo B — Limitaciones](#anexo-b--limitaciones)
+- [Anexo C — Glosario](#anexo-c--glosario)
 
 ---
 
-## 1. Resumen ejecutivo
+## 1. En una página
 
-**Estado general: 84 sobre 100. Cero hallazgos críticos.**
+**La situación.** El sitio está excepcionalmente bien construido —lo confirman las herramientas oficiales de Google, con puntuaciones máximas o cercanas a las máximas— y aun así **casi nadie lo encuentra**. En los datos disponibles, una sola búsqueda trajo visitas: el nombre exacto de la comunidad.
 
-El sitio de Camino del Dharma está excepcionalmente bien construido. En todo lo que mide cómo está hecha una web —estructura, velocidad, datos para buscadores, accesibilidad— obtiene puntuaciones máximas o cercanas a las máximas, verificadas de forma independiente por las herramientas oficiales de Google.
+**La causa.** No es el sitio web. Es que **ningún sitio relevante enlaza hacia él**. Para Google, un enlace externo funciona como una recomendación, y la comunidad recibe menciones —incluso elogiosas, en publicaciones especializadas— pero ninguna recomendación enlazada.
 
-**Y sin embargo, casi nadie lo encuentra.** En los dos días de datos disponibles, una sola búsqueda generó visitas: el nombre exacto de la comunidad.
+**La buena noticia.** La corrección es sencilla y barata: **escribir a las tres publicaciones que ya hablan de la comunidad y pedirles que, en el texto que ya tienen publicado, incluyan la dirección `caminodeldharma.org`.** Hoy la mencionan por su nombre pero no enlazan a ninguna parte, o enlazan a Facebook en lugar de a la web. A eso se suma darse de alta en el directorio del sector donde debería estar y no está. Ninguna de estas acciones requiere sede, presupuesto ni programación.
 
-Esa aparente contradicción es el eje de este informe, y se resuelve así:
+**Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
-**El problema no es el sitio web. El problema es que ningún sitio relevante enlaza hacia él.** Para Google, un enlace externo funciona como una recomendación. La comunidad recibe menciones —incluso elogiosas, en publicaciones especializadas del sector— pero ninguna recomendación enlazada. Por eso el dominio puntúa **2 sobre 100** en autoridad pese a existir desde hace siete años y medio.
+**Lo que necesito de ustedes.** Tres decisiones, detalladas en §5:
 
-### Los cinco hechos que definen la situación
+1. En qué ciudades hay práctica real.
+2. Si el formulario de contacto debe funcionar de verdad o basta con WhatsApp y correo.
+3. Si la meditación de los lunes se anuncia con enlace público.
 
-1. **El sitio es primero en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones.
-2. **Está ausente de la primera página** en búsquedas amplias («budismo en Colombia») y locales («budismo Cali»).
-3. **Tres fuentes autorizadas hablan de la comunidad y ninguna enlaza al dominio.** Es la causa raíz, verificada una por una.
-4. **El sector entero es de autoridad baja.** Ninguna comunidad comparable supera 20 sobre 100. No hay un actor dominante contra el que competir.
-5. **El sitio se publicó el 18 de julio de 2026.** Todo lo anterior se midió sobre un sitio de dos días de vida.
+**Lo que cuesta.** Las cuatro acciones de mayor impacto suman **menos de dos horas de trabajo** y ningún gasto. El resto es contenido, que depende del ritmo que la comunidad quiera darle.
 
-### El matiz que reencuadra todo lo demás
+---
 
-La auditoría se ejecutó sobre un sitio de **un día de vida**. Eso no afecta a los hallazgos técnicos, pero sí obliga a leer los de visibilidad con otra vara:
+## 2. Qué encontré
 
-| Conclusión aparente | Cómo debe leerse |
+### El sitio está bien hecho
+
+En todo lo que mide cómo está construida una web —estructura, velocidad, información para buscadores, accesibilidad— el sitio obtiene puntuaciones máximas o cercanas. Es rápido tanto en móvil como en ordenador, se ve bien en cualquier pantalla y no tiene enlaces rotos.
+
+**No hay ningún problema técnico frenando la visibilidad.** Conviene decirlo con claridad porque es la conclusión que más suele confundirse.
+
+### Pero casi nadie llega
+
+| Dato | Valor |
+|---|---:|
+| Visitas desde buscadores | **9** |
+| Veces que el sitio apareció en resultados | **35** |
+| Búsquedas distintas que trajeron visitas | **1** |
+
+La única búsqueda que trae gente es **«camino del dharma»**: el nombre exacto. Es decir, **solo encuentra el sitio quien ya sabe que existe**.
+
+### Dónde aparece el sitio y dónde no
+
+| Búsqueda | Posición |
+|---|:---:|
+| camino del dharma | **1.ª** |
+| budismo chan colombia | **1.ª** |
+| budismo tierra pura colombia | **1.ª** |
+| budismo en colombia | Fuera de la primera página |
+| comunidad budista colombia | Fuera de la primera página |
+| budismo cali | Fuera de la primera página |
+| «dónde practicar budismo chan en Colombia» | Fuera de la primera página |
+
+**El patrón:** el sitio gana la palabra clave y pierde la pregunta. Es primero en «budismo chan colombia» y desaparece cuando alguien formula la misma intención en lenguaje natural — que es como se pregunta a los asistentes de inteligencia artificial.
+
+### Un dato de contexto que cambia la lectura
+
+**El sitio se publicó el 18 de julio de 2026.** Lo audité al día siguiente.
+
+Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibilidad:
+
+| Lo que parece | Cómo debe leerse |
 |---|---|
-| «Ausente en búsquedas amplias» | **Esperable a esa edad.** Brecha a trabajar, no defecto |
-| «Solo 4 de 13 páginas indexadas» | Progreso normal de rastreo |
-| «Primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días |
-| «Dominio sin autoridad tras 7,5 años» | **Se mantiene** — es el hallazgo de fondo |
+| «El sitio no aparece en búsquedas amplias» | **Esperable a los dos días.** Es una brecha a trabajar, no un descuido |
+| «Solo 4 de 13 páginas indexadas» | Progreso normal: Google tarda semanas en recorrer un sitio nuevo |
+| «Es primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días |
+| «El dominio no tiene autoridad tras 7 años» | **Esto sí es de fondo** — y es el asunto de este informe |
 
-### La conclusión operativa
+### Lo que ya se corrigió
 
-La acción de mayor impacto disponible **no requiere sede, presupuesto ni programación**: pedir el enlace a las tres fuentes que ya escriben sobre la comunidad, y darse de alta en el directorio del sector donde debería estar y no está.
+Catorce de veinte tareas están hechas y publicadas: se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, y se sustituyó el formulario averiado por accesos directos de WhatsApp y correo.
 
-El dato que lo justifica: una comunidad comparable tiene **214 enlaces externos —prácticamente los mismos 207 de Camino del Dharma— y cuatro veces la autoridad**. No faltan enlaces; faltan enlaces buenos.
-
----
-
-## 2. Cómo se midió
-
-Auditoría de **solo lectura** sobre el sitio en producción y su código fuente. No se modificó nada durante la evaluación.
-
-- **13 direcciones** del mapa del sitio: **todas probadas**, sin muestreo.
-- **Navegación real a Google** con configuración de Colombia, sin sesión iniciada para evitar resultados personalizados.
-- **Google Search Console**: datos de primera parte aportados por la comunidad.
-- **PageSpeed Insights**, la herramienta oficial de Google, en móvil y escritorio.
-- **Herramientas de autoridad** aplicadas con la misma herramienta y la misma fecha al dominio propio y a cinco comunidades comparables, para garantizar que la comparación sea válida.
-- **Verificación directa** de cada sitio que menciona a la comunidad, comprobando si enlaza o no.
-
-### Principios aplicados
-
-- **Nada se extrapola.** Toda afirmación procede de una medición registrada. Lo que no se pudo medir figura como limitación (§12), nunca como estimación.
-- **Las herramientas no auditables se descartaron.** Los comprobadores de «PageRank» no se usaron: Google no publica ese valor desde 2016, y presentar esas cifras como métricas sería fabricar evidencia.
-- **Las métricas de terceros se reportan con proveedor, escala y fecha**, porque son estimaciones sobre catálogos de enlaces privados, no mediciones directas.
-
-No se enviaron formularios, no se crearon cuentas y no se realizaron pruebas invasivas.
+**Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta**, aunque la solución definitiva depende de una decisión (§5.2).
 
 ---
 
-## 3. Estado general
+## 3. Por qué casi nadie encuentra el sitio
 
-| Área | Puntuación |
-|---|---:|
-| Cómo está construido el sitio (estructura, datos, accesibilidad) | **100** |
-| Velocidad y estabilidad | **85–90** |
-| Seguridad | 61 |
-| Preparación para asistentes de IA | 70 |
-| **Visibilidad en buscadores** | **45** |
-| | |
-| **Estado general** | **84** |
+Esta es la conclusión central del informe.
 
-**Cómo leer este cuadro.** Las primeras filas miden **cómo está hecho el sitio**. La fila destacada mide **cuánta gente lo encuentra**. Que lo primero sea casi perfecto y lo último un 45 no es incoherente: describe con precisión un sitio impecable que todavía nadie ha recomendado.
+### La medida
 
-### Los catorce hallazgos
+En las escalas que estiman la reputación de un dominio ante los buscadores —de 0 a 100—, `caminodeldharma.org` puntúa **entre 2 y 6**, según el proveedor. El dominio existe desde hace **siete años y cinco meses**.
 
-| Severidad | Nº | Cuáles |
-|---|---:|---|
-| **Crítica** | **0** | — |
-| **Alta** | 1 | El formulario de contacto no entregaba los mensajes |
-| **Media** | 8 | Visibilidad en búsquedas amplias · restos de la web anterior en los buscadores · invisibilidad ante asistentes de IA · la meditación semanal sin entidad propia · descarga de calendario averiada · dos cabeceras de seguridad pendientes · imágenes sobredimensionadas |
-| **Baja** | 4 | Archivos que pueden tardar en actualizarse · galería que no funciona sin JavaScript · falta un archivo de contacto de seguridad · vídeos incrustados que pueden fijar cookies |
-| **Informativa** | 1 | Detalles menores de configuración del servidor |
+**No es un sitio joven que necesite madurar. Es un dominio establecido que nunca acumuló recomendaciones.** Siete años y medio descartan el argumento de «hay que darle tiempo».
 
-**Estado.** El formulario ya está mitigado con accesos directos de WhatsApp y correo —hoy nadie queda sin respuesta— y la descarga de calendario está corregida. Los restos de la web anterior se limpiaron. El resto son tareas de mantenimiento a cargo del equipo de publicación web: **ninguna de ellas está frenando la visibilidad del sitio.**
+### La causa exacta, verificada una por una
 
-Dos hallazgos de severidad media dependen de decisiones de la comunidad y se tratan en §11.
-
----
-
-## 4. Visibilidad en buscadores
-
-### Posición por tipo de búsqueda
-
-| Búsqueda | Tipo | Posición en Google Colombia |
+| Publicación | Qué dice de la comunidad | ¿Enlaza al sitio? |
 |---|---|:---:|
-| camino del dharma | Marca | **1** |
-| budismo chan colombia | Nicho | **1** |
-| budismo tierra pura colombia | Nicho | **1** + pregunta destacada |
-| budismo en colombia | Amplia | Fuera de la primera página |
-| comunidad budista colombia | Amplia | Fuera de la primera página |
-| budismo cali | Local | Fuera de la primera página |
-| «dónde practicar budismo chan en Colombia» | Pregunta | Fuera de la primera página |
+| **Buddhistdoor en Español** | La describe como **la referencia del budismo Chan en Colombia** | **No** — enlaza solo a Facebook |
+| **EcoEspiritualidad** | Ficha completa: propósito, liderazgo, congresos internacionales del abad. Es el **segundo resultado** cuando alguien busca el nombre | **No** — no tiene ningún enlace |
+| **budismo.com** (directorio de centros de Colombia) | — | **No aparece**: lista 11 centros y la comunidad no está |
 
-**El patrón es nítido: el sitio gana la palabra clave y pierde la pregunta.** Es primero en «budismo chan colombia» y desaparece cuando la misma intención se formula en lenguaje natural — que es exactamente como se consulta a los asistentes de inteligencia artificial.
+**Tres fuentes autorizadas hablan de la comunidad y ninguna enlaza al sitio.** Eso explica la puntuación mínima pese a la antigüedad y pese al reconocimiento que el sector ya le da.
 
-### Datos de Search Console
+### Por qué esto es una buena noticia
 
-Ventana disponible: **dos días** (17 y 18 de julio de 2026).
+**No hay nada dañado que limpiar.** No hay enlaces problemáticos ni penalizaciones: el indicador de riesgo está en niveles sanos. En una auditoría de enlaces, la disyuntiva habitual es limpiar o construir. **Aquí solo toca construir.**
 
-| Métrica | Valor |
-|---|---:|
-| Clics | **9** |
-| Impresiones | **35** |
-| Búsquedas distintas con datos | **1** |
+**Y no hace falta empezar de cero.** El trabajo difícil —que una publicación especializada considere a la comunidad digna de un artículo— **ya está hecho**. Lo que falta es un detalle de edición: que en ese artículo, donde dice «Camino del Dharma», el texto lleve la dirección de la web.
 
-La única búsqueda con datos es **«camino del dharma»**: 5 clics, 17 impresiones, posición media 3,35. Colombia aporta 8 de los 9 clics.
-
-**La localizabilidad exclusivamente por marca queda así confirmada con datos de Google**, no solo por observación externa.
-
-### Una anomalía relevante
-
-El resumen generado por inteligencia artificial que Google muestra para la búsqueda de marca **cita a terceros y no al sitio**, pese a que el sitio es el primer resultado orgánico. La comunidad es la fuente primaria sobre sí misma y no aparece como tal en la respuesta.
+Es una petición razonable y concreta: se escribe al medio, se le agradece la mención y se le pide que añada `caminodeldharma.org` donde ya nombra a la comunidad. En el caso de Buddhistdoor, que hoy enlaza a Facebook, se le pide que enlace también —o en su lugar— a la web.
 
 ---
 
-## 5. Autoridad del dominio: el hallazgo de fondo
+## 4. Cómo está el sitio frente a otras comunidades
 
-| Métrica | Valor | Escala | Proveedor |
-|---|---:|---|---|
-| Domain Rating | **0,4** | 0–100 | Ahrefs |
-| Domain Authority | **6** | 0–100 | Moz |
-| Domain Authority (contraste) | 2 | 0–100 | Semrush |
-| Autoridad de la portada | 18 | 0–100 | Moz |
-| Puntuación de spam | **7 %** | 0–100 % | Moz |
-| Antigüedad del dominio | 7 años 5 meses | — | — |
+Medí cinco comunidades budistas colombianas comparables, con la misma herramienta y el mismo día.
+
+| Comunidad | Autoridad (0–100) |
+|---|---:|
+| sotozencolombia.org | **20** |
+| budismocolombia.co | **18** |
+| meditacionencolombia.org | **17** |
+| budismocolombia.org | 8 |
+| centroyamantaka.org | 8 |
+| **caminodeldharma.org** | **2** |
 
 ### Tres lecturas
 
-**No es un sitio joven: es un dominio que nunca acumuló enlaces.** Siete años y medio de historial con autoridad prácticamente nula descarta el argumento de «hay que darle tiempo».
+**El sector entero es de autoridad baja.** Ninguna comunidad supera 20 sobre 100. **No hay un actor dominante** contra el que competir: esto es un escenario alcanzable, no uno adverso.
 
-**No hay enlaces dañinos: hay ausencia de enlaces.** Una puntuación de spam del 7 % es sana. Esto responde la disyuntiva habitual de toda auditoría de enlaces: **aquí no toca limpiar, toca construir.**
+**La distancia es corta.** Al siguiente escalón hay **6 puntos**; a la mediana del sector, 15.
 
-**La portada concentra lo poco que hay.** Las páginas internas carecen de fuerza propia, coherente con que solo 4 de 13 direcciones aparezcan en los buscadores.
+**Y el dato que ordena la estrategia:** `budismocolombia.org` tiene **214 enlaces externos** —prácticamente los mismos **207** de Camino del Dharma— y sin embargo **cuatro veces la autoridad**. Mismo volumen, resultado radicalmente distinto.
 
-### La causa raíz, verificada una por una
-
-| Fuente | Relación con la comunidad | ¿Enlaza? |
-|---|---|:---:|
-| **Buddhistdoor en Español** | La describe como la referencia del budismo Chan en Colombia | **No** — enlaza solo a Facebook |
-| **EcoEspiritualidad** | Ficha completa; es el **segundo resultado** para la marca | **No** — sin enlaces salientes |
-| **budismo.com** (directorio de centros de Colombia) | — | **No aparece**: lista 11 centros, sin esta comunidad |
-| Facebook / Instagram | Perfiles propios | Enlaces sin transferencia de autoridad |
-
-**Tres fuentes temáticas autorizadas citan a la comunidad y ninguna enlaza al dominio.** Eso explica la autoridad mínima pese a la antigüedad y al reconocimiento del sector.
-
-Y es una causa **inusualmente fácil de corregir**: no requiere construir presencia desde cero, sino pedir el enlace a quienes ya escriben sobre la comunidad.
-
----
-
-## 6. Comparación con otras comunidades
-
-Misma herramienta y misma fecha para los seis dominios.
-
-| Dominio | Autoridad | Autoridad de portada | Enlaces externos |
-|---|---:|---:|---:|
-| sotozencolombia.org | **20** | 42 | 585 |
-| budismocolombia.co | **18** | 2 | 368 |
-| meditacionencolombia.org | **17** | 51 | 1 327 |
-| budismocolombia.org | 8 | 1 | 214 |
-| centroyamantaka.org | 8 | 16 | 496 |
-| **caminodeldharma.org** | **2** | 8 | 207 |
-
-**Mínimo 8 · Mediana 17 · Máximo 20.**
-
-### Lectura estratégica
-
-**a) El sector entero es de autoridad baja.** Ninguna comunidad supera 20 sobre 100. No hay un actor dominante: la distancia hasta el siguiente escalón son **6 puntos**.
-
-**b) El hallazgo que cambia la estrategia.** `budismocolombia.org` tiene **214 enlaces externos** —prácticamente los mismos **207** de Camino del Dharma— y sin embargo **cuatro veces la autoridad**. Mismo volumen, resultado radicalmente distinto. **No faltan enlaces: faltan enlaces buenos.**
-
-**c) Coherencia entre autoridad y visibilidad.** Las dos comunidades con mayor autoridad son exactamente las que dominaron las búsquedas locales y de tipo pregunta.
+**No faltan enlaces: faltan enlaces buenos.** Por eso tres peticiones bien dirigidas valen más que cualquier campaña de volumen.
 
 ### Metas propuestas
 
-| Hito | Meta | Vía | Plazo |
-|---|---|---|---|
-| **1.º** | Autoridad **8** | Tres peticiones de enlace + alta en directorio | 1–2 trimestres |
-| **2.º** | Autoridad **15–17** (mediana del sector) | Plan editorial sostenido + práctica en línea como entidad propia | 3–4 trimestres |
-
-Re-medir cada trimestre **con la misma herramienta**. Comparar métricas de proveedores distintos no aporta información.
+| Meta | Cómo | Plazo |
+|---|---|---|
+| **Autoridad 8** — igualar a los dos más cercanos | Que dos o tres publicaciones añadan el enlace a la web, más el alta en el directorio | 1–2 trimestres |
+| **Autoridad 15–17** — mediana del sector | Contenido sostenido + la meditación en línea como página propia | 3–4 trimestres |
 
 ---
 
-## 7. Búsqueda local: evaluación y descarte
+## 5. Lo que se necesita de la comunidad
 
-En las búsquedas amplias y locales evaluadas, Google muestra primero un bloque de mapas alimentado por **Google Business Profile**. Una versión preliminar de este informe lo señalaba como la acción prioritaria. **Esa recomendación queda retirada.**
+Las seis tareas que quedan **no están detenidas por falta de tiempo ni de capacidad técnica**. Dependen de decisiones que no corresponde tomar a quien realizó la auditoría.
 
-**Motivo.** Las directrices de Google exigen que la organización atienda presencialmente en un lugar propio o se desplace hasta las personas. Las entidades exclusivamente en línea **no son elegibles**. Una organización sin sede visible puede ocultar su dirección al público, pero Google **conserva una dirección real para verificarla** y rechaza apartados postales y oficinas virtuales.
-
-**La comunidad no cumple hoy ese requisito:** no hay sede ni dirección, la práctica semanal es en línea y los encuentros presenciales ocurren en lugares prestados o alquilados. Registrar el domicilio de una persona, o un lugar que no se controla, contravendría las directrices y expondría el perfil a suspensión.
-
-**Consecuencia.** Las búsquedas locales **no son terreno alcanzable por ahora** y dejan de contabilizarse como brecha. No es una carencia de la comunidad: ese espacio pertenece a organizaciones con sede física.
-
-**Y esto reordena la estrategia hacia donde la comunidad sí es fuerte.** La práctica semanal en línea es el único formato virtual entre las seis comunidades comparadas — el resto son presenciales. Competir en «meditación budista en línea en español» aprovecha lo que la comunidad ya es, en lugar de forzarla a parecer lo que no es.
-
-**Revisable** si en algún momento existe un lugar de encuentro estable y propio.
-
-> **Nota.** Disponer de perfil en Google Maps no es incompatible con ser una comunidad sin ánimo de lucro; templos y centros de meditación lo usan con normalidad. El impedimento es de elegibilidad, no de principios. Si algún día se cumple el requisito, conviene saber que el perfil habilita reseñas públicas con puntuación, algo que algunas comunidades espirituales prefieren evitar.
-
----
-
-## 8. Presencia en asistentes de inteligencia artificial
-
-**Puntuación: 70 sobre 100.**
-
-**La capa técnica está resuelta.** Los ocho rastreadores de inteligencia artificial evaluados acceden al sitio sin bloqueo, el coste de procesamiento por página es bajo y no se detectó ningún patrón de manipulación. La herramienta de Google otorga la puntuación máxima en navegación para agentes automáticos.
-
-**La brecha es de citación, no de acceso.** Dos manifestaciones:
-
-**El sitio gana la palabra clave y pierde la pregunta.** Primero en «budismo chan colombia», ausente en «dónde practicar budismo chan en Colombia».
-
-**La meditación semanal en línea no existe para un asistente de IA.** Es el activo más distintivo de la comunidad —gratuita, virtual, para principiantes, sin límite geográfico y **el único formato en línea entre todas las comunidades evaluadas**— pero vive como un párrafo dentro de otra página: sin dirección propia, sin datos estructurados, ausente del mapa del sitio. Quien pregunte a un asistente por meditación budista en línea en español no puede recibirla como respuesta.
-
----
-
-## 9. Medición base y seguimiento
-
-Esta es la **medición cero**. No hay evolución que mostrar porque no existe medición anterior.
-
-### Posiciones registradas — julio de 2026
-
-| # | Palabra clave | Tipo | Posición | Meta siguiente |
-|---:|---|---|:---:|:---:|
-| 1 | camino del dharma | Marca | **1** | mantener |
-| 2 | budismo chan colombia | Nicho | **1** | mantener |
-| 3 | budismo tierra pura colombia | Nicho | **1** | mantener |
-| 4 | budismo en colombia | Amplia | >10 | top 20 |
-| 5 | comunidad budista colombia | Amplia | >10 | top 20 |
-| 6 | comunidad buddhista colombia | Grafía alternativa | >10 | top 20 |
-| 7 | dónde practicar budismo chan en Colombia | Pregunta | >10 | top 10 |
-| 8 | meditación budista online en español | Long-tail | no medida | **medir y posicionar** |
-| 9 | budismo cali | Local | >10 | *sin meta* — terreno no alcanzable (§7) |
-| 10 | retiro budista colombia 2026 | Estacional | >10 | top 20 |
-
-Las búsquedas 7, 8 y 10 se midieron con un índice internacional, no con navegación directa a Google Colombia. Se marcan como estimación y deben re-verificarse con el método de las seis primeras.
-
-### Qué se medirá, al no haber conversiones ni ingresos
-
-**No se utilizará Google Analytics.** Es una decisión formalizada de la comunidad, y el motivo es de utilidad, no ideológico: con el tráfico actual, una herramienta de analítica produciría un puñado de sesiones al mes — ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino **que no llegan**, y esa pregunta la responde Search Console: gratis, sin cookies y sin aviso de consentimiento.
-
-| Indicador | Fuente |
-|---|---|
-| Clics e impresiones orgánicas | Search Console |
-| Nº de búsquedas distintas con impresiones | Search Console |
-| Proporción de marca frente a no-marca | Search Console |
-| Páginas indexadas de las 13 del mapa del sitio | Search Console |
-| Autoridad y distancia a la mediana del sector | Herramienta de autoridad |
-| Dominios temáticos que enlazan | Verificación directa |
-| **Asistentes a la meditación de los lunes** | Observación de la comunidad |
-| **Contactos entrantes por WhatsApp y correo** | Observación de la comunidad |
-
-Los dos últimos son los que de verdad importan, y no salen de ninguna herramienta.
-
-### Cuándo volver a medir
-
-**Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no: se estaría midiendo la eficacia de acciones que aún no han tenido tiempo de actuar, lo que llevaría a conclusiones falsas.
-
-**Para que la comparación sea válida**, la nueva medición debe repetir las condiciones de esta: mismo buscador y misma configuración de país, sin sesión iniciada; la misma lista de palabras clave, añadiendo nuevas al final sin alterar las existentes; y la misma herramienta de autoridad, aplicada el mismo día al dominio propio y a las cinco comunidades comparables.
-
-Comparar métricas obtenidas con herramientas distintas no aporta información: cada proveedor usa su propia escala y su propio catálogo de enlaces.
-
----
-
-## 10. Plan de acción priorizado
-
-| # | Acción | Impacto | Esfuerzo | Requiere |
-|---|---|---|---|---|
-| 1 | Pedir a **Buddhistdoor** que enlace al dominio, no solo a Facebook | Máximo | 1 correo | — |
-| 2 | Pedir enlace a **EcoEspiritualidad** | Máximo | 1 correo | — |
-| 3 | Alta en el directorio **budismo.com** | Alto | 30 min | — |
-| 4 | Dirección de la web en los perfiles de Facebook e Instagram | Medio | 10 min | — |
-| 5 | **Meditación semanal como entidad propia**: página, datos estructurados y presencia para asistentes de IA | Alto | ~4 h | Decisión §11.3 |
-| 6 | Contenido en formato **pregunta y respuesta** | Alto | Editorial | Plan editorial |
-| 7 | Plan editorial temático (Chan, Tierra Pura, meditación en línea) | Alto, sostenido | Editorial | Decisión editorial |
-| 8 | Artículos por ciudad | Condicional | Editorial | Decisión §11.1 |
-| — | ~~Google Business Profile~~ | — | — | **Descartado** (§7) |
-
-**Las cuatro primeras acciones concentran el mayor impacto disponible y no requieren sede, presupuesto ni programación.**
-
-Existen además tareas de mantenimiento técnico —optimización de imágenes, caché, cabeceras de seguridad— que corresponden al equipo de publicación web y no requieren decisión de la comunidad. Ninguna de ellas está frenando la visibilidad del sitio.
-
----
-
-## 11. Decisiones que requieren a la comunidad
-
-Catorce de veinte tareas están completadas y publicadas. Las restantes **no están detenidas por falta de capacidad técnica**, sino porque dependen de decisiones que no corresponde tomar a quien realizó la auditoría.
-
-### 11.1 ¿En qué ciudades hay práctica real?
-
-Publicar contenido por ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas— y supondría faltar a la verdad con quien busca dónde practicar.
+### 5.1 ¿En qué ciudades hay práctica real?
 
 **Se necesita:** para cada ciudad, si hay práctica **recurrente**, **puntual** o **ninguna**, y cómo se contacta.
 
-**Esta respuesta desbloquea dos cosas a la vez:** la posible sección institucional del sitio y la publicación de contenido orientado a cada ciudad.
+**Por qué importa:** publicar contenido sobre una ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas, sin nada detrás— y supondría faltar a la verdad con quien busca dónde practicar.
 
-### 11.2 ¿El formulario de contacto debe funcionar de verdad?
+**Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas.
 
-El formulario **no entregaba los mensajes**: quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. Ya se sustituyó por accesos directos de WhatsApp y correo, que sí funcionan, de modo que **hoy nadie queda sin respuesta**.
+### 5.2 ¿El formulario de contacto debe funcionar de verdad?
 
-La decisión pendiente es si hace falta más: un formulario operativo requiere un servicio adicional y mantenimiento continuado.
+**Situación actual:** ya funcionan los accesos de WhatsApp y correo. **Nadie queda sin respuesta hoy.**
 
-### 11.3 ¿La meditación de los lunes se anuncia con enlace público?
+**La decisión:** un formulario operativo en este tipo de sitio requiere contratar un servicio externo, configurarlo, mantenerlo y hacerse cargo del tratamiento de los datos que reciba.
 
-Es el activo más distintivo de la comunidad y hoy es invisible para buscadores y asistentes de inteligencia artificial.
+**Si WhatsApp y correo cubren la necesidad, no hacer nada es una respuesta válida.**
+
+### 5.3 ¿La meditación de los lunes se anuncia con enlace público?
+
+**Por qué importa:** la sesión semanal en línea es **el elemento más distintivo que tiene la comunidad**. Gratuita, virtual, para principiantes, sin límite geográfico — y **el único formato en línea entre todas las comunidades comparadas**, que son presenciales.
+
+Hoy vive como un párrafo dentro de otra página. Quien pregunte a Google o a un asistente de inteligencia artificial por meditación budista en línea en español **no puede encontrarla**.
 
 **El intercambio real:** publicar el enlace abiertamente la hace encontrable por cualquiera, también por quien no tiene intención de practicar. Mantener la puerta por WhatsApp conserva el acompañamiento humano de la primera vez, y a cambio la sesión sigue siendo invisible fuera de la comunidad.
 
@@ -356,47 +197,149 @@ Es el activo más distintivo de la comunidad y hoy es invisible para buscadores 
 
 ---
 
-## 12. Limitaciones
+## 6. Qué se hará y qué esfuerzo supone
 
-Se declaran porque condicionan el alcance de las conclusiones. Ninguna se compensó con estimaciones.
+### Sin coste y sin decisiones pendientes
 
-1. **Ventana de datos de dos días.** Ninguna conclusión sobre eficacia de acciones es sostenible hasta re-medir en 4–8 semanas.
-2. **Sin datos de usuarios reales.** El sitio no alcanza el umbral de tráfico del conjunto de datos de Google.
-3. **Sin herramientas de análisis de enlaces de pago:** las métricas correspondientes no se obtuvieron y **no se extrapolaron**.
-4. **Las métricas de autoridad son estimaciones de terceros**, no mediciones directas. Varían entre proveedores.
-5. **Comprobadores de «PageRank» descartados deliberadamente:** Google no publica ese valor desde 2016.
-6. **Métrica de compartidos sociales inservible:** devuelve cero en los seis dominios, incluidos los líderes del sector. Indica fallo de recolección de la herramienta, no ausencia de compartidos.
-7. **Una sola ubicación geográfica y de red.**
-8. **Buscadores secundarios** (Bing, DuckDuckGo) no medibles de forma fiable por bloqueos automáticos.
-9. **Una parte de la evaluación técnica** (accesibilidad con lector de pantalla real, enumeración de subdominios, historial de certificados) quedó fuera de alcance por restricciones de acceso. No afecta a las conclusiones de visibilidad de este informe.
+| Acción | Qué se pide exactamente | Esfuerzo |
+|---|---|---|
+| Escribir a **Buddhistdoor en Español** | Que en su artículo sobre el budismo en Colombia, donde ya describe a la comunidad y enlaza a Facebook, añada también la dirección `caminodeldharma.org` | 1 correo |
+| Escribir a **EcoEspiritualidad** | Que en la ficha que ya tiene publicada sobre la comunidad incluya la dirección de la web, hoy ausente | 1 correo |
+| Alta en el directorio **budismo.com** | Solicitar la inclusión de la comunidad en su listado de centros de Colombia, del que hoy no forma parte | 30 min |
+| Perfiles de **Facebook e Instagram** | Añadir `caminodeldharma.org` en el campo de enlace del perfil | 10 min |
 
-### Dos correcciones de la propia auditoría
+**Estas cuatro concentran el mayor impacto disponible.** Suman menos de dos horas y ningún gasto.
 
-Se registran por transparencia metodológica:
+### Requiere decisión previa
 
-**1.** Una fuente se anotó inicialmente como «enlace existente» a partir de su aparición en los resultados de búsqueda. Comprobada la página, **no contenía tal enlace**. Fue una inferencia, no una verificación, y quedó corregida.
+| Acción | Esfuerzo | Depende de |
+|---|---|---|
+| Meditación semanal con página propia y ficha para buscadores | ~4 h | §5.3 |
+| Contenido en formato pregunta y respuesta | Editorial | Ritmo editorial |
+| Contenido orientado a cada ciudad | Editorial | §5.1 |
 
-**2.** El valor «0 compartidos sociales» se interpretó como falta de amplificación de la audiencia propia. La comparación con otras comunidades demostró que la herramienta no recoge ese dato. Corregido y descartado como evidencia.
+### Mantenimiento técnico
 
-Ambas ilustran por qué este informe distingue de forma estricta entre lo medido y lo deducido.
+Existen tareas menores a cargo del equipo de publicación web —optimización de imágenes, caché, cabeceras de seguridad—. **Ninguna está frenando la visibilidad** y ninguna requiere decisión de la comunidad.
 
 ---
 
-## 13. Glosario
+## 7. Por qué descarté Google Maps
+
+En las búsquedas amplias y locales, Google muestra primero un bloque de mapas con centros cercanos. En una versión preliminar señalé ese bloque como la acción prioritaria. **Retiré esa recomendación**, y conviene explicar por qué.
+
+**Las reglas de Google** exigen que la organización atienda presencialmente en un lugar propio o se desplace hasta las personas. Las entidades exclusivamente en línea **no son elegibles**. Una organización sin sede visible puede ocultar su dirección al público, pero Google **conserva una dirección real para verificarla** y rechaza apartados postales y oficinas virtuales.
+
+**La comunidad no cumple hoy ese requisito:** no hay sede ni dirección, la práctica semanal es en línea y los encuentros presenciales ocurren en lugares prestados. Registrar el domicilio de una persona, o un lugar que no se controla, contravendría las reglas y expondría el perfil a suspensión.
+
+**Consecuencia:** las búsquedas locales **no son terreno alcanzable por ahora**, y dejan de contarse como una brecha pendiente. No es una carencia de la comunidad: ese espacio pertenece a organizaciones con sede física.
+
+**Y esto reordena la estrategia hacia donde la comunidad sí es fuerte.** La práctica semanal en línea es el único formato virtual entre las seis comunidades comparadas. Competir en «meditación budista en línea en español» aprovecha lo que la comunidad ya es, en lugar de forzarla a parecer lo que no es.
+
+**Revisable** si en algún momento existe un lugar de encuentro estable y propio.
+
+> Tener perfil en Google Maps no es incompatible con ser una comunidad sin ánimo de lucro; templos y centros de meditación lo usan con normalidad. El impedimento es de elegibilidad, no de principios. Si algún día se cumple el requisito, conviene saber que el perfil habilita reseñas públicas con puntuación — algo que algunas comunidades espirituales prefieren evitar.
+
+---
+
+## 8. Cuándo se sabrá si funcionó
+
+**Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no.
+
+Medir ahora la eficacia de acciones que aún no han tenido tiempo de actuar produciría conclusiones falsas. Los buscadores tardan semanas en recorrer un sitio nuevo y en registrar enlaces nuevos.
+
+### Qué se mirará
+
+| Indicador | Hoy | Meta |
+|---|:---:|:---:|
+| Búsquedas distintas que traen visitas | 1 | 10 o más |
+| Visitas que **no** vienen del nombre de la comunidad | 0 % | más del 20 % |
+| Páginas del sitio que reciben visitas | 1 | 6 o más |
+| Autoridad del dominio | 2 | 8 |
+| Publicaciones que enlazan al sitio | 0 | 2 o más |
+
+### Y dos indicadores que no salen de ninguna herramienta
+
+**Cuánta gente acude a la meditación de los lunes** y **cuántos contactos entran por WhatsApp y correo**.
+
+Son los que de verdad importan. El sitio no tiene analítica instalada —decisión formalizada de la comunidad— porque con este volumen de visitas produciría ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino **que no llegan**, y eso ya se responde con las herramientas gratuitas de Google, sin cookies y sin aviso de consentimiento.
+
+---
+
+## 9. Qué ocurre si no se hace nada
+
+Es una opción legítima y conviene plantearla con honestidad.
+
+**El sitio seguirá funcionando bien.** No se degradará: está bien construido y las posiciones ya ganadas en «budismo chan» y «budismo tierra pura» son estables mientras nadie con más autoridad decida competir por ellas.
+
+**Pero la situación no se corrige sola.** El dominio lleva siete años y medio sin acumular recomendaciones; nada indica que vaya a empezar espontáneamente. Quien busque «budismo en Colombia» o «dónde practicar meditación budista» seguirá encontrando otras comunidades, y a Camino del Dharma solo la encontrará quien ya sepa su nombre.
+
+**Lo que se deja de ganar** es concreto: la comunidad es la referencia del budismo Chan en el país —así la describe la publicación especializada más importante del sector en español— y esa condición no se refleja en dónde la encuentra la gente.
+
+**El desequilibrio entre esfuerzo y resultado es lo llamativo:** cuatro acciones que suman menos de dos horas, sin coste, atacan directamente la causa medida.
+
+---
+
+## Anexo A — Cómo se midió
+
+Auditoría de **solo lectura** sobre el sitio publicado y su código. No se modificó nada durante la evaluación.
+
+- **13 direcciones** del sitio: **todas probadas**, sin muestreo.
+- **Navegación real a Google** con configuración de Colombia, sin sesión iniciada para evitar resultados personalizados.
+- **Google Search Console:** datos aportados por la comunidad.
+- **PageSpeed Insights**, herramienta oficial de Google, en móvil y ordenador.
+- **Herramientas de autoridad** aplicadas con la misma herramienta y el mismo día al sitio propio y a cinco comunidades comparables.
+- **Verificación directa** de cada publicación que menciona a la comunidad, comprobando si enlaza o no.
+
+### Principios aplicados
+
+**Nada se extrapola.** Toda afirmación procede de una medición registrada. Lo que no se pudo medir figura como limitación, nunca como estimación.
+
+**Las herramientas no auditables se descartaron.** Los comprobadores de «PageRank» no se usaron: Google no publica ese valor desde 2016, y presentar esas cifras como métricas sería fabricar evidencia.
+
+**Las métricas de terceros se reportan con proveedor y fecha**, porque son estimaciones sobre catálogos de enlaces privados, no mediciones directas. Por eso deben compararse siempre contra sí mismas y con la misma herramienta.
+
+No se enviaron formularios, no se crearon cuentas y no se realizaron pruebas invasivas.
+
+---
+
+## Anexo B — Limitaciones
+
+Se declaran porque condicionan el alcance de las conclusiones. Ninguna se compensó con estimaciones.
+
+1. **Ventana de datos de dos días.** Ninguna conclusión sobre eficacia de acciones es sostenible hasta volver a medir.
+2. **Sin datos de usuarios reales:** el sitio no alcanza el umbral de tráfico del conjunto de datos de Google.
+3. **Sin herramientas de análisis de enlaces de pago:** las métricas correspondientes no se obtuvieron y **no se extrapolaron**.
+4. **Las métricas de autoridad son estimaciones de terceros**, no mediciones directas. Varían entre proveedores.
+5. **Métrica de contenidos compartidos inservible:** devuelve cero en las seis comunidades, incluidas las líderes. Indica fallo de la herramienta, no ausencia real.
+6. **Una sola ubicación geográfica.**
+7. **Buscadores secundarios** (Bing, DuckDuckGo) no medibles de forma fiable.
+8. **Parte de la evaluación técnica** quedó fuera de alcance por restricciones de acceso. No afecta a las conclusiones de este informe.
+
+### Dos correcciones de la propia auditoría
+
+Se registran por transparencia:
+
+**1.** Anoté una publicación como «enlace existente» a partir de su aparición en los resultados. Al comprobar la página, **no contenía tal enlace**. Fue una deducción mía, no una verificación, y la corregí.
+
+**2.** Interpreté el valor «0 contenidos compartidos» como falta de difusión por parte de la propia audiencia. Al compararlo con las demás comunidades vi que la herramienta no recoge ese dato. Lo descarté como evidencia.
+
+Ambas ilustran por qué distingo de forma estricta entre lo medido y lo deducido.
+
+---
+
+## Anexo C — Glosario
 
 | Término | Significado |
 |---|---|
-| **Autoridad de dominio** | Estimación de 0 a 100 de la reputación de un sitio ante los buscadores, basada principalmente en quién lo enlaza. No es una métrica oficial de Google |
-| **Backlink / enlace externo** | Enlace desde otro sitio hacia el propio. Funciona como una recomendación |
-| **CTR** | Proporción de personas que hacen clic tras ver el sitio en los resultados |
-| **Datos estructurados** | Información en formato legible por máquinas que describe qué es la organización, sus eventos y sus contenidos |
+| **Autoridad de dominio** | Estimación de 0 a 100 de la reputación de un sitio ante los buscadores, basada sobre todo en quién lo enlaza. No es una métrica oficial de Google |
+| **Enlace externo** | Enlace desde otro sitio hacia el propio. Funciona como una recomendación |
 | **Impresión** | Cada vez que el sitio aparece en una página de resultados, se haya hecho clic o no |
 | **Indexación** | Proceso por el que un buscador incorpora una página a su catálogo y puede mostrarla |
 | **Pack local** | Bloque de mapas con organizaciones cercanas que Google muestra en búsquedas con intención geográfica |
 | **Posición media** | Puesto promedio en el que aparece el sitio para una búsqueda determinada |
-| **SERP** | Página de resultados de un buscador |
-| **Sitemap / mapa del sitio** | Archivo que lista las páginas del sitio para facilitar su rastreo |
+| **Search Console** | Herramienta gratuita de Google que informa de qué búsquedas muestran el sitio y cuántas visitas traen |
 
 ---
 
-*Informe elaborado sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §12. El sitio actual es una etapa temporal previa a la migración a WordPress: ninguna recomendación compromete a la comunidad a plazos largos.*
+*Informe elaborado sobre el sitio publicado y su código, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en el Anexo B. El sitio actual es una etapa temporal previa a la migración a WordPress: ninguna recomendación compromete a la comunidad a plazos largos.*
