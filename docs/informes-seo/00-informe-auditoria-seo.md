@@ -57,19 +57,11 @@ Y la corrección es sencilla: **no hace falta empezar de cero, hace falta pedirl
 
 ---
 
-## 3. Cuatro decisiones que solo la comunidad puede tomar
+## 3. Tres decisiones que solo la comunidad puede tomar
 
 El trabajo técnico está hecho: 14 de 20 tareas completadas y publicadas. Las que faltan **no están detenidas por falta de tiempo ni de capacidad técnica**, sino porque dependen de decisiones que no corresponde tomar a quien hizo la auditoría.
 
-### 3.1 ¿Cuál es la dirección física de la comunidad?
-
-**Por qué importa:** en todas las búsquedas locales que se probaron, Google muestra primero un bloque de mapas con centros cercanos. Ese bloque se alimenta de Google Business Profile, que **requiere una dirección verificable**. Sin ella no hay presencia en esas búsquedas, por bueno que sea el sitio.
-
-**Es la acción de mayor efecto disponible hoy**, y no depende de escribir ni programar nada.
-
-**Qué se necesita:** una dirección donde la comunidad tenga presencia real y pueda recibir la verificación de Google.
-
-### 3.2 ¿En qué ciudades hay práctica real?
+### 3.1 ¿En qué ciudades hay práctica real?
 
 **Por qué importa:** publicar páginas por ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas, sin nada detrás—. Y sería, además, faltar a la verdad con quien busca dónde practicar.
 
@@ -77,13 +69,13 @@ El trabajo técnico está hecho: 14 de 20 tareas completadas y publicadas. Las q
 
 **Esta respuesta desbloquea dos cosas a la vez:** la posible sección institucional del sitio y los artículos de blog por ciudad que sugiere el brief editorial (§6).
 
-### 3.3 ¿El formulario de contacto debe funcionar de verdad?
+### 3.2 ¿El formulario de contacto debe funcionar de verdad?
 
 **Situación:** el formulario de la página de contacto **no entregaba los mensajes**. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. Ya se sustituyó por botones de WhatsApp y correo, que sí funcionan, así que **hoy nadie queda sin respuesta**.
 
 **La decisión pendiente es si hace falta más:** un formulario que funcione de verdad requiere un servicio adicional y mantenimiento. Si WhatsApp y correo cubren la necesidad, no hace falta hacer nada.
 
-### 3.4 ¿La meditación de los lunes se anuncia con enlace público?
+### 3.3 ¿La meditación de los lunes se anuncia con enlace público?
 
 **Por qué importa:** la sesión semanal en línea es, según la comparación con otras comunidades, **el elemento más distintivo que tiene la comunidad**: gratuita, virtual, para principiantes, sin límite geográfico. Las demás comunidades revisadas son solo presenciales.
 
@@ -95,20 +87,37 @@ Hoy existe como un párrafo dentro de la página de Práctica. Quien le pregunte
 
 ---
 
-## 4. Qué pasa después de estas decisiones
+## 4. Sobre Google Maps y las búsquedas locales
 
-| Decisión | Qué se puede hacer enseguida |
-|---|---|
-| Dirección confirmada | Crear el perfil en Google Maps |
-| Ciudades con práctica real | Páginas y artículos por ciudad, con datos verdaderos |
-| Formulario | Cerrarlo como está o conectar un servicio |
-| Meditación de los lunes | Darle página propia para que sea encontrable |
+En las búsquedas del tipo «budismo Cali» o «budismo en Colombia», Google muestra primero un bloque de mapas con centros cercanos. Ese bloque se alimenta de **Google Business Profile**, y una versión anterior de este informe lo señalaba como la acción prioritaria. **Esa recomendación queda retirada.**
 
-En paralelo, y sin depender de ninguna decisión, ya se solicitaron los tres enlaces y el alta en el directorio.
+**Motivo:** las reglas de Google exigen que la organización atienda presencialmente en un lugar propio, o que se desplace hasta las personas. Las entidades exclusivamente en línea **no son elegibles**. Y aunque una organización sin sede visible puede ocultar su dirección al público, Google **conserva una dirección real para verificarla** y rechaza apartados postales y oficinas virtuales.
+
+La comunidad **no cumple hoy ese requisito**: no hay sede ni dirección, la práctica semanal es en línea y los encuentros presenciales ocurren en lugares prestados o alquilados. Registrar la casa de una persona, o un lugar que no se controla, contravendría las reglas y expone a una suspensión del perfil.
+
+**Consecuencia:** las búsquedas locales **no son terreno alcanzable por ahora**, y conviene dejar de tratarlas como una brecha por cerrar. No es una carencia de la comunidad: es que ese espacio pertenece a organizaciones con sede física.
+
+**Y eso reordena la estrategia hacia donde la comunidad sí es fuerte.** La meditación semanal en línea es el único formato virtual entre todas las comunidades comparadas —el resto son presenciales—. Competir en «budismo en línea en español» juega a favor de lo que la comunidad ya es, en lugar de forzarla a parecer lo que no es. Por eso la decisión §3.3 sube de importancia: hoy es la mayor oportunidad disponible.
+
+**Esto puede cambiar** si en algún momento hay un lugar de encuentro estable y propio. Entonces conviene volver a evaluarlo — y no antes.
+
+> **Nota aparte:** tener perfil en Google Maps no es incompatible con ser una comunidad sin ánimo de lucro; templos y centros de meditación lo usan con normalidad. El impedimento aquí es de elegibilidad, no de principios. Si algún día se cumple el requisito, sí conviene saber que el perfil habilita reseñas públicas con estrellas, algo que algunas comunidades espirituales prefieren evitar. Es una consideración para ese momento, no para hoy.
 
 ---
 
-## 5. Cuándo sabremos si funcionó
+## 5. Qué pasa después de estas decisiones
+
+| Decisión | Qué se puede hacer enseguida |
+|---|---|
+| Ciudades con práctica real | Artículos por ciudad, con datos verdaderos |
+| Formulario | Cerrarlo como está o conectar un servicio |
+| Meditación de los lunes | Darle página propia para que sea encontrable |
+
+En paralelo, y sin depender de ninguna decisión, ya se solicitaron los tres enlaces y el alta en el directorio. **Esa es hoy la acción de mayor efecto disponible**, y no requiere sede, dirección ni presupuesto.
+
+---
+
+## 6. Cuándo sabremos si funcionó
 
 **Entre mediados de agosto y mediados de septiembre.** Antes no.
 
@@ -123,7 +132,7 @@ Lo que se mirará entonces:
 
 ---
 
-## 6. Una nota sobre el alcance
+## 7. Una nota sobre el alcance
 
 Vale la pena decirlo con claridad, porque suele confundirse: **el problema no es el sitio web.**
 
@@ -140,9 +149,8 @@ Este informe resume lo esencial. Si se quiere profundizar en algún punto:
 | Documento | Contiene |
 |---|---|
 | [**Brief editorial: Blog y visibilidad en buscadores**](../24-brief-editorial-blog-y-visibilidad.md) | Qué escribir en el blog, con qué voz y en qué orden. **Para el equipo editorial** |
-| [Análisis de Visibilidad Orgánica](03-analisis-visibilidad-organica.md) | Las cifras de autoridad, la comparación con las otras cinco comunidades y la evidencia de cada afirmación de la §2 |
-| [Posicionamiento de Palabras Clave](04-posicionamiento-palabras-clave.md) | La lista completa de búsquedas medidas y la posición en cada una |
-| [Auditoría SEO Técnica](02-auditoria-seo-tecnica.md) | El estado técnico del sitio en detalle. Documento para el equipo de publicación web |
-| [Informe de Rendimiento SEO](01-informe-rendimiento-seo.md) | Las visitas del periodo. **Se emitirá con contenido útil en septiembre**, cuando haya datos suficientes |
+| [Análisis de Visibilidad Orgánica](03-analisis-visibilidad-organica.md) | Las cifras de autoridad, la comparación con las otras cinco comunidades, la lista completa de búsquedas medidas y la evidencia de cada afirmación de este informe |
+
+El detalle técnico del sitio (velocidad, errores, estructura) está en la auditoría completa, en `.audit/` del repositorio. No se resume aquí porque no hay nada que decidir: **está en buen estado**.
 
 *El sitio actual es temporal: será reemplazado por una versión en WordPress. Ninguna recomendación de este documento compromete a la comunidad a plazos largos.*

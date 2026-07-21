@@ -19,7 +19,9 @@ Cuatro informes derivados de la auditoría de `.audit/`, separados por **audienc
 | [00 — Informe de Auditoría SEO](00-informe-auditoria-seo.md) | Lo que está **fuera del blog**: hallazgos, enlaces, presencia local y cuatro decisiones pendientes | Liderazgo |
 | [24 — Brief editorial](../24-brief-editorial-blog-y-visibilidad.md) | Lo que va **dentro del blog**: temas, voz, formato | Equipo editorial |
 
-No se solapan: el 24 se limita explícitamente a entradas de blog; el 00 cubre lo institucional que el 24 deja fuera por alcance (Google Business Profile, peticiones de enlace, sección por ciudades, formulario, meditación semanal).
+No se solapan: el 24 se limita explícitamente a entradas de blog; el 00 cubre lo institucional que el 24 deja fuera por alcance (peticiones de enlace, artículos por ciudad, formulario, meditación semanal).
+
+> **Corrección registrada 2026-07-20:** la primera versión situaba **Google Business Profile** como acción prioritaria. Se retiró tras confirmar que la comunidad **no tiene sede ni dirección física** y, por tanto, no es elegible según las reglas de Google. Fue una deducción a partir del SERP sin verificar el requisito — el mismo error de extrapolación que la auditoría ya había cometido y corregido con el supuesto backlink de EcoEspiritualidad. Detalle en el informe 00 §4.
 
 **El 03 se entrega solo si piden el detalle con cifras.** El 01 es prematuro hasta la re-medición de septiembre —reportar «9 clics» sin el contexto de que el sitio tenía dos días invita a la conversación equivocada—. El 02 es interno: su única conclusión relevante para la comunidad (*el sitio está técnicamente impecable; el problema no es la web*) ya está en el 00 §6.
 

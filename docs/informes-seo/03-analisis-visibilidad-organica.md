@@ -62,7 +62,11 @@ El SERP de marca está **limpio** en Google Colombia: sin residuos de la etapa W
 
 **El patrón es nítido y es el hallazgo más útil de este informe: el sitio gana la palabra clave y pierde la pregunta.** Es #1 en «budismo chan colombia» y desaparece cuando la misma intención se formula en lenguaje natural — que es exactamente como se consulta a los asistentes de IA.
 
-**Quién ocupa lo que la comunidad no ocupa:** en todas las consultas amplias y locales probadas, **los packs locales de Google Business Profile aparecen primero**. Por eso GBP es la acción individual de mayor palanca disponible.
+**Quién ocupa lo que la comunidad no ocupa:** en todas las consultas amplias y locales probadas, **los packs locales de Google Business Profile aparecen primero**.
+
+> **CORRECCIÓN 2026-07-20.** Una versión anterior concluía de aquí que «GBP es la acción individual de mayor palanca». **Retirada.** Fue un salto: se dedujo la acción del SERP sin verificar la elegibilidad. Las reglas de Google excluyen a las entidades exclusivamente en línea, y aunque una organización sin sede visible puede ocultar la dirección al público, Google exige una **dirección real verificable** en el back end (sin apartados postales ni oficinas virtuales). **La comunidad no tiene sede ni dirección** (confirmado por el propietario, 2026-07-20): práctica semanal en línea, encuentros presenciales en locales prestados. **No es elegible hoy.**
+>
+> **Consecuencia estratégica:** las consultas locales no son terreno alcanzable y dejan de contar como brecha. El esfuerzo se reorienta a la autoridad (§6) y a la **práctica en línea**, donde la comunidad es el único caso virtual entre los seis dominios comparados. Revisar solo si algún día hay un lugar de encuentro estable y propio.
 
 ---
 
@@ -137,7 +141,7 @@ Y es una causa **inusualmente fácil de corregir**: no hace falta link building 
 | Hito | Meta | Cómo | Plazo estimado |
 |---|---|---|---|
 | **1.º** | **DA 8** — paridad con `budismocolombia.org` y `centroyamantaka.org` | Tres peticiones de enlace + alta en directorio budismo.com (TASK-0014) | 1–2 trimestres |
-| **2.º** | **DA 15–17** — mediana del sector | Plan editorial sostenido (TASK-0016) + presencia local (GBP) | 3–4 trimestres |
+| **2.º** | **DA 15–17** — mediana del sector | Plan editorial sostenido (TASK-0016) + la meditación en línea como entidad citable (TASK-0017) | 3–4 trimestres |
 
 **Re-medir cada trimestre con la misma herramienta.** Comparar DA de Moz con DR de Ahrefs o con estimaciones de Semrush no dice nada: son grafos y escalas distintos.
 
@@ -148,7 +152,7 @@ Y es una causa **inusualmente fácil de corregir**: no hace falta link building 
 Dos activos reales que hoy no producen visibilidad:
 
 1. **La meditación semanal online** — gratuita, virtual, para principiantes, sin límite geográfico, y **el único formato online frente a competidores íntegramente presenciales**. Hoy vive como un párrafo: sin URL propia, sin datos estructurados, ausente de `llms.txt` y del sitemap. Quien pregunte a un asistente por «meditación budista online en español» no puede recibirla como respuesta. → TASK-0017.
-2. **El origen en Cali en 2012** — señal local verificable por terceros (Buddhistdoor). Ya incorporada al JSON-LD y al texto visible durante la auditoría; falta convertirla en presencia local real vía Google Business Profile.
+2. **El origen en Cali en 2012** — señal local verificable por terceros (Buddhistdoor). Ya incorporada al JSON-LD y al texto visible durante la auditoría. Sin sede física no puede convertirse en presencia en el pack local, pero **sigue siendo útil como señal de entidad**: aporta antigüedad, procedencia y verificabilidad al perfil de la organización.
 
 ---
 
@@ -169,15 +173,80 @@ Dos activos reales que hoy no producen visibilidad:
 
 | # | Acción | Palanca | Estado |
 |---|---|---|---|
-| 1 | **Google Business Profile** — los packs locales dominan **todos** los SERPs amplios y locales probados | Máxima | TASK-0014 — requiere dirección confirmada |
-| 2 | Pedir a **Buddhistdoor** que enlace al dominio, no solo a Facebook | Alta | TASK-0014 |
-| 3 | Pedir enlace a **EcoEspiritualidad** (ya es #2 de marca) | Alta | TASK-0014 |
-| 4 | Alta en el directorio **budismo.com** | Alta | TASK-0014 |
-| 5 | URL del sitio en los perfiles de Facebook e Instagram | Media | TASK-0014 |
-| 6 | Contenido en formato **pregunta-respuesta** (cerrar la brecha keyword/pregunta) | Alta | TASK-0018 |
-| 7 | Meditación semanal como **entidad citable** (URL propia + `Event`/`EventSeries` + `llms.txt`) | Alta | TASK-0017 — decisión pendiente: ¿Zoom público o puerta por WhatsApp? |
-| 8 | Plan editorial temático (Chan, Tierra Pura, meditación) | Alta, sostenida | **TASK-0016 BLOQUEADA** — decisión editorial |
-| 9 | Páginas por ciudad | Condicional | **TASK-0020 BLOQUEADA** — sin sangha confirmada serían *doorway pages* |
+| 1 | Pedir a **Buddhistdoor** que enlace al dominio, no solo a Facebook | Máxima | TASK-0014 |
+| 2 | Pedir enlace a **EcoEspiritualidad** (ya es #2 de marca) | Máxima | TASK-0014 |
+| 3 | Alta en el directorio **budismo.com** | Alta | TASK-0014 |
+| 4 | Meditación semanal como **entidad citable** (URL propia + `Event`/`EventSeries` + `llms.txt`) | Alta | TASK-0017 — decisión pendiente: ¿Zoom público o puerta por WhatsApp? |
+| 5 | Contenido en formato **pregunta-respuesta** (cerrar la brecha keyword/pregunta) | Alta | TASK-0018 |
+| 6 | URL del sitio en los perfiles de Facebook e Instagram | Media | TASK-0014 |
+| 7 | Plan editorial temático (Chan, Tierra Pura, meditación **en línea**) | Alta, sostenida | **TASK-0016 BLOQUEADA** — decisión editorial |
+| 8 | Artículos por ciudad | Condicional | **TASK-0020 BLOQUEADA** — sin sangha confirmada serían *doorway pages* |
+| — | ~~Google Business Profile~~ | — | **DESCARTADA** — sin sede física, la comunidad no es elegible (§3) |
+
+**El orden cambió respecto a la primera versión:** las peticiones de enlace pasan al primer lugar porque GBP quedó descartado, y porque son la única acción de máxima palanca que **no depende de sede, presupuesto ni decisión pendiente**. Las tres pueden ejecutarse hoy.
+
+---
+
+---
+
+## 11. Medición base (T0) y protocolo de re-medición
+
+Punto de partida contra el que se comparará todo lo que venga. **No hay evolución que mostrar**: el sitio se publicó el 2026-07-18 y esta es la primera medición.
+
+### Posiciones — T0, 2026-07-20
+
+| # | Palabra clave | Tipo | Pos. T0 | Meta T1 |
+|---:|---|---|:---:|:---:|
+| 1 | camino del dharma | Marca | **1** | mantener |
+| 2 | budismo chan colombia | Nicho | **1** | mantener |
+| 3 | budismo tierra pura colombia | Nicho | **1** | mantener |
+| 4 | budismo en colombia | Amplia | >10 | top 20 |
+| 5 | comunidad budista colombia | Amplia | >10 | top 20 |
+| 6 | comunidad buddhista colombia | Grafía alt. | >10 | top 20 |
+| 7 | dónde practicar budismo chan en Colombia | Pregunta | >10 | top 10 |
+| 8 | meditación budista online en español | Long-tail | no medida | **medir y posicionar** |
+| 9 | budismo cali | Local | >10 | *sin meta* — terreno no alcanzable (§3) |
+| 10 | retiro budista colombia 2026 | Estacional | >10 | top 20 |
+
+Las consultas 7, 8 y 10 se midieron con índice de tipo Google-US, no con navegación directa a Google CO. Se marcan como estimación y deben re-verificarse en T1 con el método de las consultas 1–6.
+
+### Datos de Search Console — T0
+
+| Métrica | Valor |
+|---|---:|
+| Clics / impresiones | **9 / 35** (solo 2 días con datos: 07-17 y 07-18) |
+| Consultas con datos | **1** — «camino del dharma»: 5 clics, 17 impr., CTR 29,41 %, pos. 3,35 |
+| Colombia | 8 clics · 32 impr. · pos. 3,19 |
+| Móvil / escritorio | 6 clics de 7 impr. · 3 clics de 28 |
+
+Los 5 clics de la consulta no suman los 9 totales: es la agregación y anonimización normal de Search Console con volúmenes bajos, no un error de export. El CTR móvil (85,71 % sobre 7 impresiones) **no es interpretable**.
+
+### Protocolo — sin esto, comparar T0 con T1 no significa nada
+
+1. **Mismo método:** navegación real a `google.com/search` con `hl=es&gl=co`, sesión sin iniciar. Archivar el texto del SERP en `.audit/raw/seo-external/`.
+2. **Misma lista de keywords**, añadiendo nuevas al final sin alterar las existentes.
+3. **Misma herramienta de autoridad** (SEO Review Tools) y mismo día para el dominio propio y los cinco competidores.
+4. **Exportar los CSV de Search Console** (Consultas, Páginas, Países, Dispositivos, Gráfico) a `.audit/raw/gsc/`.
+5. **Registrar fecha exacta** y versión del sitio en producción.
+
+### Qué medir en lugar de conversiones y ROI
+
+**No hay analítica instalada y es una decisión deliberada** ([ADR 0019](../adr/0019-sin-analitica-con-cookies.md)): con tráfico bajo el umbral de CrUX, GA4 produciría ruido estadístico, no información. El cuello de botella medido no es qué hacen las visitas, sino que no llegan — y eso lo responde Search Console, gratis y sin cookies. Producción **no sirve ninguna cookie propia**, posición que conviene preservar.
+
+Al no haber transacciones, el rendimiento se evalúa así:
+
+| Indicador | Fuente |
+|---|---|
+| Clics e impresiones orgánicas | Search Console |
+| Nº de consultas distintas con impresiones | Search Console |
+| Proporción marca vs. no-marca | Search Console |
+| URLs indexadas de las 13 del sitemap | Search Console |
+| Autoridad (DA) y brecha con la mediana del sector | SEO Review Tools |
+| Dominios temáticos que enlazan | Verificación directa |
+| **Asistentes a la meditación de los lunes** | Observación de la comunidad |
+| **Contactos entrantes por WhatsApp/correo** | Observación de la comunidad |
+
+Los dos últimos son los que de verdad importan y no salen de ninguna herramienta.
 
 ---
 
