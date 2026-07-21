@@ -11,16 +11,5 @@
         "message": "Expected class selector to use kebab-case or BEM modifiers"
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "assets/css/normalize.css"
-      ],
-      "rules": {
-        "font-family-no-duplicate-names": null,
-        "property-no-vendor-prefix": null
-      }
-    }
-  ]
+  }
 }
