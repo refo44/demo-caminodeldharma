@@ -21,7 +21,7 @@
 4. [Cómo está el sitio frente a otras comunidades](#4-cómo-está-el-sitio-frente-a-otras-comunidades)
 5. [Lo que se necesita de la comunidad](#5-lo-que-se-necesita-de-la-comunidad)
 6. [Qué se hará y qué esfuerzo supone](#6-qué-se-hará-y-qué-esfuerzo-supone)
-7. [Por qué descarté Google Maps](#7-por-qué-descarté-google-maps)
+7. [Opciones que descarté](#7-opciones-que-descarté)
 8. [Cuándo se sabrá si funcionó](#8-cuándo-se-sabrá-si-funcionó)
 9. [Qué ocurre si no se hace nada](#9-qué-ocurre-si-no-se-hace-nada)
 - [Anexo A — Cómo se midió](#anexo-a--cómo-se-midió)
@@ -229,7 +229,11 @@ Existen tareas menores a cargo del equipo de publicación web —optimización d
 
 ---
 
-## 7. Por qué descarté Google Maps
+## 7. Opciones que descarté
+
+Dos caminos que suelen proponerse y que **no recomiendo** en este caso. Los dejo razonados para que la decisión quede tomada con sus motivos, y no haya que rehacerla más adelante.
+
+### Google Maps y las búsquedas locales
 
 En las búsquedas amplias y locales, Google muestra primero un bloque de mapas con centros cercanos. En una versión preliminar señalé ese bloque como la acción prioritaria. **Retiré esa recomendación**, y conviene explicar por qué.
 
@@ -244,6 +248,20 @@ En las búsquedas amplias y locales, Google muestra primero un bloque de mapas c
 **Revisable** si en algún momento existe un lugar de encuentro estable y propio.
 
 > Tener perfil en Google Maps no es incompatible con ser una comunidad sin ánimo de lucro; templos y centros de meditación lo usan con normalidad. El impedimento es de elegibilidad, no de principios. Si algún día se cumple el requisito, conviene saber que el perfil habilita reseñas públicas con puntuación — algo que algunas comunidades espirituales prefieren evitar.
+
+---
+
+### Linktree en la biografía de Instagram
+
+Es habitual usar un servicio como Linktree en el campo de enlace de las redes, que muestra una lista de destinos en lugar de llevar a un solo sitio. **No lo recomiendo aquí**, y el motivo principal no es de posicionamiento sino de tráfico.
+
+**Costaría visitas.** El enlace de la biografía no transfiere autoridad vaya donde vaya, así que por ese lado es indiferente. Lo que cambia es dónde aterriza la gente: con un intermediario, quien pulsa llega a una lista de opciones en vez de a la comunidad, y una parte se queda por el camino. Además, las visitas que continúan figuran como procedentes del intermediario y no de Instagram, con lo que se pierde claridad sobre de dónde viene realmente la gente.
+
+**Resuelve un problema que la comunidad no tiene.** Ese tipo de servicio sirve cuando hace falta apuntar a muchos destinos desde un único campo. Aquí el sitio ya cumple esa función: tiene eventos, práctica, contacto y donaciones, organizados con la identidad de la comunidad.
+
+**Y si algún día hiciera falta esa función** —inscripción a un retiro, donación, WhatsApp y vídeo a la vez—, la vía correcta es una página sencilla **en el propio dominio**. Hace lo mismo, se queda con la visita, es indexable y no depende de un tercero que puede cambiar sus condiciones o cerrar. Es el mismo criterio aplicado a la meditación de los lunes: lo que importa vive en el sitio propio.
+
+**Recomendación:** en Instagram, enlace directo a `caminodeldharma.org`.
 
 ---
 
