@@ -25,6 +25,11 @@
 - **TASK-0017 REABIERTA (READY).** Figuraba COMPLETED por el cierre en bloque del deploy v1.0.14, pero la verificación del 2026-07-21 muestra que ninguno de sus 4 criterios se cumple (sin URL en sitemap, sin `EventSeries` en `practica/index.html`, sin entrada en `llms.txt`, sin página que enlazar). Prerrequisito resuelto: puerta por WhatsApp.
 - **TASK-0014 → PARTIALLY_COMPLETED.** Peticiones de enlace enviadas y URL en Facebook hechas; **Instagram pendiente**. **GBP descartado** por inelegibilidad (sin sede ni dirección física). **Directorio budismo.com retirado** de las recomendaciones.
 - **Corte a WordPress aplazado** a después del 10 de agosto (tras el Encuentro Nacional). Se probará antes en servidor y URL temporales; Hitos 1 y 2 del cronograma se mantienen íntegros.
-- **Tareas: 20 — 12 COMPLETED, 1 PARTIALLY_COMPLETED, 1 READY (TASK-0017), 6 BLOCKED.**
-- **Próxima acción ejecutable: TASK-0017.**
+- **Tareas: 21 — 12 COMPLETED, 1 PARTIALLY_COMPLETED, 2 READY, 6 BLOCKED.**
+- **TASK-0021 nueva (READY):** etiqueta visible de modalidad y ciudad en los eventos, derivada del JSON-LD existente. Propuesta del propietario; señal local legítima ahora que GBP quedó descartado.
+- **Próximas acciones ejecutables: TASK-0017 y TASK-0021.**
 - Entregables externos en `docs/informes-seo/` (informe general y auditoría técnica) + `docs/24-brief-editorial-blog-y-visibilidad.md`.
+- **TASK-0022 nueva (BLOCKED):** historial de encuentros presenciales por ciudad. El propietario confirma encuentros en Bogotá, Medellín y Barranquilla **nunca publicados en la web**, con cadencia de **2–3 al año por ciudad**. Espera el listado (dato de archivo, no decisión).
+- **TASK-0020 reformulada:** pasa a depender de TASK-0022. Las páginas por ciudad solo son legítimas si se sostienen sobre el historial de encuentros de esa ciudad.
+- **Estructura confirmada:** práctica semanal **en línea**; encuentros presenciales 2–3 al año por ciudad. Refuerza la centralidad de TASK-0017.
+- **Tareas: 22 — 12 COMPLETED, 1 PARTIALLY_COMPLETED, 2 READY, 7 BLOCKED.**
