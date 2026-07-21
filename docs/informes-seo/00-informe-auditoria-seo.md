@@ -12,7 +12,7 @@
 | **Naturaleza** | Informe general y ejecutivo |
 | **Próxima medición** | Entre el 17 de agosto y el 14 de septiembre de 2026 |
 
-> **Este es el informe general de la auditoría:** qué se encontró, qué significa y qué hace falta decidir. El detalle técnico —estructura, velocidad, código, seguridad— se entrega aparte, en la **Auditoría SEO Técnica**. Lo editorial —qué escribir en el blog y con qué voz— se entrega en el **Brief editorial**.
+> **Qué contiene este informe:** qué se encontró en la auditoría, qué significa para la comunidad y qué hace falta decidir. Los aspectos de construcción del sitio —código, configuración de servidor, seguridad— se resumen aquí en lo que afecta a la visibilidad, y su ejecución corresponde al equipo de publicación web.
 
 ---
 
@@ -107,8 +107,6 @@ No se enviaron formularios, no se crearon cuentas y no se realizaron pruebas inv
 | **Estado general** | **84** |
 
 **Cómo leer este cuadro.** Las primeras filas miden **cómo está hecho el sitio**. La fila destacada mide **cuánta gente lo encuentra**. Que lo primero sea casi perfecto y lo último un 45 no es incoherente: describe con precisión un sitio impecable que todavía nadie ha recomendado.
-
-El desglose completo por área, con cobertura y nivel de confianza, está en la **Auditoría SEO Técnica**.
 
 ### Hallazgos por severidad
 
@@ -300,7 +298,9 @@ Los dos últimos son los que de verdad importan, y no salen de ninguna herramien
 
 **Entre el 17 de agosto y el 14 de septiembre de 2026.** Antes no: se estaría midiendo la eficacia de acciones que aún no han tenido tiempo de actuar, lo que llevaría a conclusiones falsas.
 
-El protocolo detallado de re-medición está en la **Auditoría SEO Técnica**.
+**Para que la comparación sea válida**, la nueva medición debe repetir las condiciones de esta: mismo buscador y misma configuración de país, sin sesión iniciada; la misma lista de palabras clave, añadiendo nuevas al final sin alterar las existentes; y la misma herramienta de autoridad, aplicada el mismo día al dominio propio y a las cinco comunidades comparables.
+
+Comparar métricas obtenidas con herramientas distintas no aporta información: cada proveedor usa su propia escala y su propio catálogo de enlaces.
 
 ---
 
@@ -320,7 +320,7 @@ El protocolo detallado de re-medición está en la **Auditoría SEO Técnica**.
 
 **Las cuatro primeras acciones concentran el mayor impacto disponible y no requieren sede, presupuesto ni programación.**
 
-Las acciones técnicas (imágenes, caché, seguridad) están priorizadas por separado en la **Auditoría SEO Técnica**.
+Existen además tareas de mantenimiento técnico —optimización de imágenes, caché, cabeceras de seguridad— que corresponden al equipo de publicación web y no requieren decisión de la comunidad. Ninguna de ellas está frenando la visibilidad del sitio.
 
 ---
 
@@ -334,7 +334,7 @@ Publicar contenido por ciudad donde no hay actividad confirmada es una práctica
 
 **Se necesita:** para cada ciudad, si hay práctica **recurrente**, **puntual** o **ninguna**, y cómo se contacta.
 
-**Esta respuesta desbloquea dos cosas a la vez:** la posible sección institucional del sitio y los artículos por ciudad que sugiere el brief editorial.
+**Esta respuesta desbloquea dos cosas a la vez:** la posible sección institucional del sitio y la publicación de contenido orientado a cada ciudad.
 
 ### 11.2 ¿El formulario de contacto debe funcionar de verdad?
 
@@ -364,8 +364,7 @@ Se declaran porque condicionan el alcance de las conclusiones. Ninguna se compen
 6. **Métrica de compartidos sociales inservible:** devuelve cero en los seis dominios, incluidos los líderes del sector. Indica fallo de recolección de la herramienta, no ausencia de compartidos.
 7. **Una sola ubicación geográfica y de red.**
 8. **Buscadores secundarios** (Bing, DuckDuckGo) no medibles de forma fiable por bloqueos automáticos.
-
-Las limitaciones de orden técnico se detallan en la **Auditoría SEO Técnica**.
+9. **Una parte de la evaluación técnica** (accesibilidad con lector de pantalla real, enumeración de subdominios, historial de certificados) quedó fuera de alcance por restricciones de acceso. No afecta a las conclusiones de visibilidad de este informe.
 
 ### Dos correcciones de la propia auditoría
 
@@ -393,15 +392,6 @@ Ambas ilustran por qué este informe distingue de forma estricta entre lo medido
 | **Posición media** | Puesto promedio en el que aparece el sitio para una búsqueda determinada |
 | **SERP** | Página de resultados de un buscador |
 | **Sitemap / mapa del sitio** | Archivo que lista las páginas del sitio para facilitar su rastreo |
-
----
-
-## Documentos que acompañan a este informe
-
-| Documento | Contenido | Destinatario |
-|---|---|---|
-| **Auditoría SEO Técnica** | Estado de salud del sitio en detalle: estructura, velocidad, índice, datos estructurados, seguridad, protocolo de medición | Equipo de publicación web |
-| **Brief editorial: Blog y visibilidad en buscadores** | Qué escribir en el blog, con qué voz, en qué orden y con qué criterios de formato | Equipo editorial |
 
 ---
 

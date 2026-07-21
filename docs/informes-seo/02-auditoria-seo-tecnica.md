@@ -12,7 +12,7 @@
 | **Naturaleza** | Estado de salud técnica del sitio |
 | **Destinatario** | Equipo de publicación web |
 
-> **Documento complementario al Informe de Auditoría SEO.** Aquel cubre visibilidad, autoridad y decisiones; este cubre **cómo está construido el sitio**: estructura, indexación, velocidad, datos estructurados, seguridad y protocolo de medición.
+> **Qué contiene este informe:** el estado de salud técnica del sitio — indexación y rastreo, higiene del índice, rendimiento, datos estructurados, seguridad y protocolo de medición. Es un documento de ejecución: cada hallazgo lleva estado, esfuerzo estimado y criterio de aceptación.
 
 > **Naturaleza del sitio.** El estático actual es **temporal**: será sustituido por WordPress. Ninguna recomendación de este informe compromete al sitio a plazos largos —por ejemplo, cabeceras de seguridad con vigencia de un año—.
 
@@ -42,7 +42,9 @@
 
 **No hay ningún hallazgo crítico ni ningún defecto técnico que esté frenando la indexación.**
 
-Esto conviene decirlo con precisión, porque es el error de lectura más común en este proyecto: **la baja visibilidad orgánica del sitio no tiene causa técnica.** Lo técnico está resuelto. La brecha es de autoridad y contenido, y se trata en el Informe de Auditoría SEO.
+Esto conviene decirlo con precisión, porque es el error de lectura más común en este proyecto: **la baja visibilidad orgánica del sitio no tiene causa técnica.** Lo técnico está resuelto.
+
+La brecha está en la **autoridad del dominio** —prácticamente ningún sitio externo enlaza hacia él— y en el **volumen de contenido**. Ninguna de esas dos cosas se corrige desde el código, y por tanto **ninguna tarea de este informe las resolverá**. Conviene tenerlo presente para no atribuir a la implementación técnica un resultado que no depende de ella.
 
 ---
 
@@ -340,15 +342,6 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 | **Redirección 301 / 410** | Reenvío permanente a una nueva dirección / declaración de retirada definitiva |
 | **`srcset`** | Atributo que permite servir versiones de una imagen adaptadas al tamaño de pantalla |
 | **TBT** | Tiempo total durante el cual la página no responde a interacciones mientras carga |
-
----
-
-## Documentos que acompañan a este informe
-
-| Documento | Contenido | Destinatario |
-|---|---|---|
-| **Informe de Auditoría SEO** | Informe general: visibilidad, autoridad, comparación con otras comunidades, plan de acción y decisiones pendientes | Liderazgo de la comunidad |
-| **Brief editorial: Blog y visibilidad en buscadores** | Qué escribir en el blog, con qué voz y en qué orden | Equipo editorial |
 
 ---
 
