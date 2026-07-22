@@ -220,13 +220,9 @@ Publicar cada semana empujaría en dirección contraria: más presión sobre un 
 2. **Una pregunta en lenguaje natural** — del tipo *«dónde practicar budismo chan en Colombia»*.
 3. **Una ciudad**, solo si hay datos reales confirmados.
 
-> **Sobre los plazos, para no sacar conclusiones falsas.** El plazo de 2 a 6 meses se malinterpreta con facilidad, así que conviene separarlo bien.
+> **Sobre los plazos, para no sacar conclusiones falsas.** Publicar el artículo y compartir su enlace es inmediato, y esa es la vía por la que llegarán los primeros lectores. **No depende del SEO.**
 >
-> **Publicar y difundir es inmediato.** El artículo queda disponible el mismo día y se puede compartir por WhatsApp, Instagram o correo sin ninguna espera. Eso funciona desde el minuto uno y **no depende del SEO en absoluto** — de hecho, es la vía por la que llegarán los primeros lectores.
->
-> **El plazo lento es otro:** que Google empiece a mostrar el artículo a quien busca el tema **sin conocer a la comunidad**. Ahí sí median de 2 a 6 meses. Puede aparecer en Search Console en una o dos semanas, pero en posiciones inestables que no permiten concluir nada.
->
-> Dicho de otro modo: **compartir alcanza a quien ya está cerca; el buscador trae a desconocidos, y ese es el que tarda.** Los artículos sirven para las dos cosas, pero solo la segunda se mide con paciencia.
+> Que Google empiece a mostrar el artículo a quien busca el tema **sin conocer a la comunidad** tarda de 2 a 6 meses. Puede verse en Search Console en una o dos semanas, pero en posiciones inestables que no permiten concluir nada.
 >
 > Consecuencia práctica: **lo que se publique ahora no aparecerá en la re-medición de septiembre.** El efecto del contenido se evalúa hacia **diciembre o enero**; medirlo antes solo produciría la conclusión falsa de que no sirvió.
 

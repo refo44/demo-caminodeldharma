@@ -266,11 +266,7 @@ Lo mismo con la meditación de los lunes: es lo más distintivo que ofrece la co
 
 No conviene ir más rápido. El ritmo no es un factor de posicionamiento —Google no premia publicar seguido—, así que la frecuencia solo debe responder a que el equipo pueda sostenerla y a que cada pieza tenga sustancia. Un calendario semanal presiona a un equipo voluntario, se abandona con facilidad y empuja a publicar piezas delgadas, que Google trata como abuso de contenido a escala.
 
-> **Sobre los plazos, que se prestan a confusión.** Conviene separar dos cosas que ocurren a velocidades muy distintas.
->
-> **El artículo está disponible el mismo día.** Se publica y ya se puede compartir por WhatsApp, Instagram o correo, y funciona perfectamente. Eso es inmediato y no tiene nada que ver con el SEO.
->
-> **Lo que tarda de dos a seis meses es otra cosa:** que **Google lo muestre a alguien que busca el tema y no conoce a la comunidad**. Compartir llega a quien ya está cerca; el buscador trae a quien no sabe que la comunidad existe — y ese camino es el lento.
+> **Sobre los plazos.** Publicar el artículo y compartir su enlace funciona desde el primer día. Que **Google lo muestre a quien busca el tema sin conocer a la comunidad** tarda de dos a seis meses.
 >
 > Por eso lo que se publique ahora **no se verá reflejado en la medición de septiembre**: esa sirve para los enlaces, no para juzgar el contenido. El efecto de los artículos se evalúa hacia diciembre o enero (§8).
 
