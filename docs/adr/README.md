@@ -99,6 +99,8 @@ Documentos, issues, commits o ADR relacionados.
 | [0018](0018-hsts-despliegue-escalonado.md) | HSTS — despliegue escalonado (transición → año) | Sustituida en lo operativo → [0020](0020-hsts-aplazado-hasta-wordpress.md) |
 | [0019](0019-sin-analitica-con-cookies.md) | Sin analítica con cookies — GA4 descartado definitivamente | Aceptada |
 | [0020](0020-hsts-aplazado-hasta-wordpress.md) | HSTS aplazado hasta después del corte a WordPress | Aceptada |
+| [0021](0021-lightbox-galeria-nativo-wordpress.md) | Lightbox de la galería — nativo de WordPress, no propio | Aceptada |
+| [0022](0022-sin-urls-de-filtro-por-ciudad.md) | La ciudad es taxonomía, no URL — sin archivos de eventos por ciudad | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -115,6 +117,7 @@ Documentos, issues, commits o ADR relacionados.
 | HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) y [0018](0018-hsts-despliegue-escalonado.md) (históricos), [0020](0020-hsts-aplazado-hasta-wordpress.md) (vigente) |
 | Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
 | Lightbox de la galería | [0021](0021-lightbox-galeria-nativo-wordpress.md) — visor nativo de Gutenberg; no se implementa uno propio en la maqueta |
+| URLs de filtro por ciudad | [0022](0022-sin-urls-de-filtro-por-ciudad.md) — la ciudad es taxonomía, no dirección; los eventos de cada ciudad van dentro de `/sanghas/{ciudad}` |
 
 ---
 

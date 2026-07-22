@@ -69,6 +69,14 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - **Aclarada la frase que explica la causa (§1).** Decía *«la comunidad recibe menciones […] pero ninguna recomendación enlazada»*: obligaba a desandar la metáfora (enlace = recomendación) para entenderla. Ahora separa las dos cosas — la comunidad **sí** recibe menciones, pero la nombran **sin poner la dirección de la web**, y una mención sin enlace no cuenta para Google. Es la frase que sostiene el diagnóstico central del informe.
 - **Corregida una imprecisión de posicionamiento.** El informe afirmaba ser primero «en chan y tierra pura» (§2) y tener posiciones estables en «budismo chan» y «budismo tierra pura» (§9). Las consultas realmente medidas llevan el país: **«budismo chan colombia»** y **«budismo tierra pura colombia»**. Sin ese calificador la afirmación se lee como liderazgo en el tema a nivel general, que no es lo medido. El resumen ejecutivo del audit (`.audit/executive-summary.md`) sí lo decía bien; el calificador se perdió al adaptarlo al entregable.
 
+### Documentación — la ciudad es taxonomía, no URL (ADR 0022)
+
+- **ADR 0022 (nuevo):** no se crearán URLs de filtro por ciudad para eventos (`/eventos/cali`, `/eventos/ciudad/cali`). Queda **derogada** la condición de revisión del 2026-07-20 que las preveía al superar ~5 eventos por ciudad. Motivos: (1) contradecía `03-wordpress-content-model` §3, que ya define el escalado del listado **por año** — el volumen crece por fecha, no por ciudad; (2) el umbral era de **cantidad** cuando la decisión es de **contenido**; (3) es navegación facetada, que Google recomienda no rastrear, y la canibalización con `/sanghas/{ciudad}` no mejora con el volumen.
+- Se mantiene lo ya aprobado: **`event_city` como taxonomía sin archivo público** —mismo criterio que `event_type`— y los encuentros de cada ciudad **dentro de `/sanghas/{ciudad}`**.
+- Propagado a `11-arbol-urls-final` §3, `03-wordpress-content-model` §4 (se añade `event_city` a la tabla de taxonomías), `.audit/decisions.md`, `.audit/state.md`, `.audit/working/url-hypotheses.md` (derogación anotada, análisis original conservado) y la nota de exclusión de **TASK-0021**.
+- **Índice de ADR corregido:** el 0021 no se había añadido a la tabla numerada al crearlo. Ahora están el 0021 y el 0022.
+- **Los informes SEO no se tocaron.**
+
 ### Pendiente
 
 - Relanzar PageSpeed Insights tras desplegar y actualizar §6 del informe técnico.

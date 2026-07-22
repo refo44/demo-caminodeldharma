@@ -162,10 +162,13 @@ Campos mínimos recomendados:
 | Key | Label ES | Tipo | Aplica a |
 |-----|----------|------|----------|
 | event_type | Tipo de evento | Jerárquica | event |
+| event_city | Ciudad del evento | Plana | event |
 
 **Valores (términos):** Taller, Retiro, Conferencia, Encuentro (etiqueta corta para «Encuentro nacional»), Celebración (Vesak, Diwali, etc.).
 
 En la maqueta estática estos valores se muestran como etiqueta encima del título de cada evento (clase `.evento-type`). En WordPress se asignan vía la taxonomía `event_type`; el theme debe mostrar el término como label en single y en listados.
+
+**Ninguna de las dos taxonomías tiene archivo público.** Se usan como dato y como etiqueta, nunca como página: no existe `/eventos/taller` ni `/eventos/cali`. `event_city` sirve para asociar cada evento con su sangha y listarlo dentro de `/sanghas/{ciudad}`. En la maqueta estática es un atributo en el marcado del evento. Ver **ADR 0022**.
 
 ---
 

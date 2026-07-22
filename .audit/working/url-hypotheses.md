@@ -227,9 +227,23 @@ ciudad debería seguir el mismo criterio.
 página fuerte por ciudad, que reúne identidad + práctica + contacto + próximos encuentros. Es además
 lo que la propia propuesta apuntaba con «una subsección de eventos que aplique solo para esa ciudad».
 
-**Revisar cuando haya volumen:** si una ciudad supera ~5 eventos y la sección se vuelve inmanejable
+~~**Revisar cuando haya volumen:** si una ciudad supera ~5 eventos y la sección se vuelve inmanejable
 dentro de la página, entonces sí crear archivo público —pero como `/eventos/ciudad/{ciudad}` para
-evitar el conflicto de rutas, y con ADR que lo justifique (ADR 0008).
+evitar el conflicto de rutas, y con ADR que lo justifique (ADR 0008).~~
+
+> **DEROGADA 2026-07-22 — ADR 0022.** La condición de revisión queda sin efecto: **no se crearán URLs de
+> filtro por ciudad, con ningún volumen.** Tres motivos aparecidos al revisarla:
+>
+> 1. **Contradecía una decisión previa del proyecto.** `03-wordpress-content-model` §3 ya define el
+>    escalado del listado: agrupación por año hasta ~25–30 eventos y después archivos por año
+>    (`/eventos/2025/`). El volumen crece por fecha, no por ciudad.
+> 2. **El umbral era de cantidad, no de contenido.** Una lista filtrada no aporta nada que no exista ya
+>    en `/eventos` y en `/sanghas/{ciudad}`, tenga 5 elementos o 20.
+> 3. **Es navegación facetada.** La documentación de Google recomienda impedir su rastreo. La
+>    canibalización tampoco mejora con el volumen: más eventos no separan la intención de búsqueda.
+>
+> El análisis de arriba se conserva porque sus cuatro motivos siguen siendo válidos; solo se deroga la
+> salida que dejaba abierta.
 
 ### Costo de mantenimiento en la versión estática
 
@@ -247,4 +261,4 @@ el filtrado real para WordPress, donde la taxonomía lo resuelve sola.
 | Páginas por ciudad | **TASK-0020 (BLOCKED)** | Fundamento sólido, pero exige confirmar actividad real por ciudad y contenido sustancial; se secuencia tras GBP |
 | Estructura `/cali` o `/comunidad/cali` | **Ninguna** — se adopta `/sanghas/{ciudad}` | Ya definida en `11-arbol-urls-final` §3.1 y con CPT en `03-wordpress-content-model` §3.1; aporta página hub `/sanghas/` y sobrevive a la migración |
 | Taxonomía de ciudad para eventos | **Sí, como dato** (`event_city`) | Necesaria para asociar eventos y sanghas; sirve en estático y en WordPress |
-| URLs públicas `/eventos/cali` | **No por ahora** | Conflicto de rutas con `/eventos/{slug}`, contenido delgado (2 eventos en total) y canibalización con `/sanghas/{ciudad}`. Precedente: `event_type` tampoco tiene archivo público |
+| URLs públicas `/eventos/cali` | **No** (era «no por ahora»; desde 2026-07-22, **definitivo** — ADR 0022) | Conflicto de rutas con `/eventos/{slug}`, contenido delgado y canibalización con `/sanghas/{ciudad}`. Precedente: `event_type` tampoco tiene archivo público. La salida `/eventos/ciudad/{ciudad}` queda derogada |

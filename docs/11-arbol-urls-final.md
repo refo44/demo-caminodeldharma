@@ -38,6 +38,8 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | Listado | `/eventos/` |
 | Single | `/eventos/{slug}/` |
 
+**Sin archivos por ciudad.** La ciudad de cada evento es **taxonomía (`event_city`), no dirección**: no existe `/eventos/cali` ni `/eventos/ciudad/cali`. Los encuentros de una ciudad se muestran dentro de `/sanghas/{ciudad}`; si el listado general crece, se archiva **por año** (`03-wordpress-content-model` §3). Mismo criterio que `event_type`, que también es taxonomía sin archivo público. Ver **ADR 0022**.
+
 ### 3.1. Sanghas (si se implementa CPT)
 
 | Tipo | URL |
