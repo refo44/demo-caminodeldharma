@@ -45,6 +45,12 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - **Faltante detectado de paso:** `/practica/meditacion-semanal-en-linea` **no estaba documentada** en `11-arbol-urls-final` ni en `04-mapa-pantallas`, pese a estar publicada desde el 21/07 y presente en `sitemap.xml` y `llms.txt`. Añadida a ambos.
 - Informe 00 §5: la sección de privacidad se reescribió para el público de liderazgo — empieza explicando **qué es** una política de privacidad y **cómo se vería en el sitio** (página nueva, enlace en el pie, sin banners). Informe 02 §9: nueva subsección **«Dónde y cómo se publica»** con los criterios de aceptación de PRIV-001.
 
+### Informe 00 — precisiones de redacción
+
+- **§5 separa el requisito de la decisión.** Decía «¿En qué ciudades hay práctica real?» como si el dato resolviera el asunto. No lo resuelve: el dato es el **paso 1** (requisito, solo obtenible dentro de la comunidad) y la decisión —**a qué ciudades se les creará página**— es el paso 2. **Que haya práctica real habilita la página, no obliga a crearla.** Se añadió el riesgo inverso, antes ausente: una página sobre una ciudad con poco que decir queda vacía aunque la actividad sea real. §1 alineado con este cambio.
+- **Registro impersonal.** «Se necesita de la comunidad» → «Se necesita»; «Lo que necesito de ustedes» → «Lo que se necesita»; encabezado de §5 e índice ajustados en consecuencia. §5 ya usaba la forma impersonal en su otra subsección.
+- **Se eliminaron** el párrafo «Lo que cuesta» de §1 y toda la subsección «Lo que ya se corrigió» de §2.
+
 ### Pendiente
 
 - Relanzar PageSpeed Insights tras desplegar y actualizar §6 del informe técnico.

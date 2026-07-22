@@ -40,7 +40,7 @@
 
 **Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
-**Lo que se necesita.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
+**Lo que se necesita.** Una decisión, detallada en §5: **a qué ciudades se les creará página.** Requiere antes un dato que solo está dentro de la comunidad —en qué ciudades hay práctica real—, pero tenerlo no resuelve la decisión: que haya práctica **habilita** la página, no obliga a crearla.
 
 ---
 
@@ -154,15 +154,28 @@ Medí cinco comunidades budistas colombianas comparables, con la misma herramien
 
 ## 5. Lo que se necesita
 
-### ¿En qué ciudades hay práctica real?
+### ¿A qué ciudades se les creará página?
 
-Es el único dato que falta, y no puede obtenerse desde fuera.
+Es la única decisión que no puede tomarse desde fuera, y tiene **dos pasos que conviene no confundir**.
 
-**Se necesita:** para cada ciudad, si hay práctica **recurrente**, **puntual** o **ninguna**, y cómo se contacta.
+**Paso 1 — el dato (requisito).** Para cada ciudad: si hay práctica **recurrente**, **puntual** o **ninguna**, y cómo se contacta. Es información que solo está dentro de la comunidad; sin ella no se puede decidir nada.
 
-**Por qué importa:** publicar contenido sobre una ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas, sin nada detrás— y supondría faltar a la verdad con quien busca dónde practicar.
+**Paso 2 — la decisión (lo que de verdad falta).** Cuáles de esas ciudades tendrán página y cuáles no.
 
-**Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas.
+> **Que haya práctica real habilita la página; no obliga a crearla.**
+
+Puede haber actividad confirmada en una ciudad y aun así decidirse no publicarla — porque no hay suficiente que contar, porque la presencia todavía no es estable, o simplemente porque no se quiere sostener ese compromiso por ahora. Esa elección es de la dirección, no del análisis.
+
+**Por qué importa, en los dos sentidos:**
+
+| Riesgo | En qué consiste |
+|---|---|
+| Publicar de más | Una página sobre una ciudad sin actividad confirmada es de las prácticas que Google penaliza —páginas creadas solo para captar búsquedas, sin nada detrás— y falta a la verdad con quien busca dónde practicar |
+| Publicar sin sustancia | Aunque la actividad sea real, una página con poco que decir queda vacía: no posiciona y deja mala impresión a quien llega |
+
+**Más páginas no es mejor; mejores páginas sí.** Conviene empezar por las ciudades donde haya material suficiente —encuentros ya celebrados, fotos, personas de contacto— y dejar las demás para cuando lo haya.
+
+**Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas. Son dos vehículos distintos y también hay que elegir entre ellos: un artículo en el blog es más liviano y reversible; una sección propia es un compromiso mayor de mantenimiento.
 
 ### Publicar una política de privacidad
 
