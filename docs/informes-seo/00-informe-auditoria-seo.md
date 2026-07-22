@@ -35,7 +35,7 @@
 
 **La situación.** El sitio está excepcionalmente bien construido —lo confirman las herramientas oficiales de Google, con puntuaciones máximas o cercanas a las máximas— y aun así **casi nadie lo encuentra**. En los datos disponibles, una sola búsqueda trajo visitas: el nombre exacto de la comunidad.
 
-**La causa.** No es el sitio web. Es que **ningún sitio relevante enlaza hacia él**. Para Google, un enlace externo funciona como una recomendación, y la comunidad recibe menciones —incluso elogiosas, en publicaciones especializadas— pero ninguna recomendación enlazada.
+**La causa.** No es el sitio web. Es que **ningún sitio relevante enlaza hacia él**. Para Google, un enlace desde otra página cuenta como una recomendación: es la forma en que un sitio respalda a otro. La comunidad **sí** recibe menciones, incluso elogiosas y en publicaciones especializadas — pero la nombran **sin poner la dirección de la web**. Y una mención sin enlace, para Google, no cuenta.
 
 **La buena noticia.** La corrección es sencilla y barata: **escribir a las dos publicaciones especializadas que ya hablan de la comunidad y pedirles que, en el texto que ya tienen publicado, incluyan la dirección `caminodeldharma.org`.** Hoy la mencionan por su nombre pero no enlazan a ninguna parte, o enlazan a Facebook en lugar de a la web. No requiere sede, presupuesto ni programación: son dos correos y un campo de perfil.
 
@@ -235,10 +235,13 @@ Las dos primeras atacan directamente la causa medida en §3: publicaciones que y
 
 ### Requiere decisión previa
 
-| Acción | Esfuerzo | Depende de |
+| Acción | Qué búsqueda ataca (§2) | Depende de |
 |---|---|---|
-| Contenido en formato pregunta y respuesta | Editorial | Decisión de publicar y con qué ritmo |
-| Contenido orientado a cada ciudad | Editorial | §5 |
+| **Artículo sobre la meditación de los lunes** | «meditación budista en línea», en español. **La mayor brecha:** es lo más distintivo de la comunidad y hoy el sitio no aparece | Decisión de publicar |
+| Contenido en formato pregunta y respuesta | «dónde practicar budismo chan en Colombia» y similares. El sitio es primero en la palabra suelta y desaparece en la pregunta | Decisión de publicar |
+| Contenido orientado a cada ciudad | «budismo» o «meditación» + ciudad | Decisión de §5 |
+
+**Ritmo sugerido para las tres: una pieza cada tres o cuatro semanas.** El detalle y su fundamento, abajo.
 
 #### Por qué el contenido nuevo mueve la visibilidad
 
@@ -253,8 +256,6 @@ Lo mismo con la meditación de los lunes: es lo más distintivo que ofrece la co
 **Una pieza cada tres o cuatro semanas**, sostenida durante dos o tres trimestres. Son de seis a nueve artículos en el año, que es el volumen que mueve la aguja.
 
 No conviene ir más rápido. El ritmo no es un factor de posicionamiento —Google no premia publicar seguido—, así que la frecuencia solo debe responder a que el equipo pueda sostenerla y a que cada pieza tenga sustancia. Un calendario semanal presiona a un equipo voluntario, se abandona con facilidad y empuja a publicar piezas delgadas, que Google trata como abuso de contenido a escala.
-
-**Orden sugerido**, según las brechas medidas en §2: primero **la meditación de los lunes** —lo más distintivo de la comunidad, hoy invisible—, después **una pregunta en lenguaje natural**, y luego **una ciudad** si se decide crearla (§5).
 
 > **Sobre los plazos.** Una página tarda entre dos y seis meses en asentarse. **Lo que se publique ahora no se verá reflejado en la medición de septiembre**, y conviene saberlo antes: esa medición sirve para los enlaces, no para juzgar el contenido. El efecto de los artículos se evalúa hacia diciembre o enero (§8).
 
