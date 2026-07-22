@@ -164,27 +164,41 @@ Es el único dato que falta, y no puede obtenerse desde fuera.
 
 **Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas.
 
-### Política de privacidad
+### Publicar una política de privacidad
 
-**Sigue siendo recomendable, aunque el sitio no use cookies.**
+**Qué es.** Una página más del sitio —como Contacto o Galería— donde la comunidad explica, en lenguaje sencillo, qué datos personales recibe de la gente, para qué los usa, quién puede verlos y cómo alguien puede pedir que los borren. No es un documento para abogados: es una explicación honesta dirigida a quien escribe.
 
-Conviene separar dos cosas que suelen confundirse. Que se descartara la analítica —y con ella el aviso de cookies— resuelve el problema *de las cookies*. No resuelve el del **tratamiento de datos personales**, que es más amplio: la **Ley 1581/2012** cubre la recogida y el uso de datos personales en general, no solo los que llegan por cookies.
+Responde cuatro preguntas:
 
-Y el sitio **sí recoge datos personales**: los canales de contacto —WhatsApp y correo— reciben nombre, teléfono y lo que cada persona escriba al acercarse a la comunidad.
+| La pregunta de quien escribe | Lo que la página responde |
+|---|---|
+| ¿Qué datos suyos quedan guardados? | Nombre, teléfono o correo, y el mensaje que envió |
+| ¿Para qué los usan? | Para responderle y acompañarlo en la práctica; para nada más |
+| ¿Quién los ve? | Quien atiende los canales de contacto de la comunidad |
+| ¿Cómo pide que los borren? | Escribiendo a un correo, que la propia página indica |
 
-**Se necesita:** la decisión de publicarla y el texto.
+**Por qué hace falta.** Porque el sitio **sí recibe datos personales**. Los canales de contacto —WhatsApp y correo— reciben el nombre, el teléfono y lo que cada persona escriba al acercarse. Eso ya es tratamiento de datos, aunque no haya formulario ni cookies.
 
-**Y hay un segundo motivo: ya llegan visitantes desde España.** Search Console registra 1 clic y 2 impresiones desde España sobre 9 y 35 totales. Es poco, pero es real — y España está en la Unión Europea, donde rige el **RGPD**, una norma distinta de la colombiana.
+Conviene deshacer una confusión frecuente: al descartar la analítica se resolvió el asunto **de las cookies**, y por eso el sitio no necesita el molesto aviso de aceptar cookies. Pero la ley colombiana de datos personales (**Ley 1581/2012**) cubre algo más amplio: cualquier recogida de datos, venga de donde venga. **La recogida no desapareció; cambió de canal.**
 
-Dos cosas conviene saber sobre eso:
+**Hay un segundo motivo: ya llegan visitantes desde España.** Search Console registra 1 clic y 2 impresiones desde España, sobre 9 y 35 en total. Es poco, pero es real — y España está en la Unión Europea, donde rige el **RGPD**, una norma distinta de la colombiana.
 
-- **Lo más delicado del RGPD no aplica aquí, y se puede demostrar.** La parte más exigente se activa cuando un sitio *rastrea* a sus visitantes. Este no rastrea a nadie: sin analítica, sin cookies, sin perfilado. **La decisión de no poner analítica protege también en este frente**, y eso ya está verificado.
-- **Queda una pregunta abierta que no es técnica:** si la comunidad se considera que "ofrece un servicio" a personas en Europa. El sitio declara Colombia como su ámbito, pero **la meditación semanal por Zoom no tiene fronteras** y alguien desde España puede sumarse.
+- **Lo más exigente del RGPD no aplica aquí, y se puede demostrar.** Esa parte se activa cuando un sitio *rastrea* a sus visitantes, y este no rastrea a nadie: sin analítica, sin cookies, sin perfilado. **La decisión de no poner analítica protege también en este frente.**
+- **Queda una pregunta abierta, y no es técnica:** si se considera que la comunidad "ofrece un servicio" a personas en Europa. El sitio declara Colombia como su ámbito, pero **la meditación de los lunes por Zoom no tiene fronteras** y alguien desde España puede sumarse.
 
-La buena noticia práctica: **ambas normas piden en esencia lo mismo** —explicar qué datos se recogen, para qué y cómo ejercer derechos—, así que una sola política bien hecha cubre la mayor parte de las dos.
+Lo práctico: **ambas normas piden en esencia lo mismo**, así que **una sola página bien redactada cubre la mayor parte de las dos**.
+
+**Cómo se vería en el sitio.** Es una tarea pequeña para el equipo de publicación web, y ya está definida:
+
+1. Una página nueva en `caminodeldharma.org/privacidad`.
+2. Un enlace discreto **en el pie de todas las páginas**, junto al aviso de derechos reservados. Es el lugar donde la gente lo busca por convención, y no interfiere con la lectura.
+3. La página se añade al mapa del sitio para que los buscadores la conozcan.
+
+No lleva ventanas emergentes, ni banners, ni nada que interrumpa a quien visita. **La única persona que la verá es quien la busque.**
+
+**Se necesita de la comunidad:** la decisión de publicarla y el texto. Lo primero es de liderazgo; lo segundo conviene que lo revise quien asesore legalmente, porque es quien puede confirmar qué exige cada norma.
 
 > **Alcance de esta recomendación.** Es una señal de diligencia, no un dictamen. **La conclusión jurídica —tanto sobre la ley colombiana como sobre el RGPD— corresponde a asesoría legal, no a esta auditoría técnica.** Aquí solo se constatan hechos verificables: hay recogida de datos por canales de contacto, hay visitantes desde España, y no hay rastreo de ningún tipo.
-
 ---
 
 ## 6. Qué se hará y qué esfuerzo supone

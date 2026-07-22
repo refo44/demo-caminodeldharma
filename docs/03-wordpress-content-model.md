@@ -181,7 +181,7 @@ En la maqueta estática estos valores se muestran como etiqueta encima del títu
 - `page-contacto.php`: Contacto
 - `home.php` / `index.php`: Blog (según modelo)
 - `single-event.php`: Evento individual (si aplica)
-- `page.php`: Fallback para páginas
+- `page.php`: Fallback para páginas — cubre **Privacidad** (`/privacidad`), que no necesita plantilla propia
 - `404.php`: Página no encontrada (estado; copy en 08)
 
 ### 5.1 Galería — bloque de Gutenberg, con lightbox nativo

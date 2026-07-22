@@ -54,6 +54,7 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 | Facebook | URL externa |
 | Instagram | URL externa |
 | Sostener la comunidad / Donar | Sección donaciones o modal |
+| Privacidad | `/privacidad` — *pendiente de publicar.* Enlace discreto junto al aviso de derechos reservados; **solo en el pie, nunca en el menú** |
 
 ---
 

@@ -39,6 +39,12 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - En los tres sitios queda explícito que **la conclusión jurídica corresponde a asesoría legal, no a la auditoría técnica**.
 - **RGPD añadido al análisis.** Search Console documenta visitantes desde España (1 clic / 2 impresiones de 9 / 35 totales), así que los informes plantean también esa norma. Se separan las dos vías del art. 3.2: *observar el comportamiento* **no aplica y es demostrable** (cero cookies, sin analítica, sin perfilado — ADR 0019 protege también en este frente); *ofrecer servicios* se deja planteada con sus elementos, señalando que la meditación por Zoom no tiene restricción geográfica. **No se emite conclusión jurídica**: se aportan los hechos verificables para que la valoración se haga sobre datos.
 
+### Documentación — `/privacidad` prevista, y un faltante detectado
+
+- **`/privacidad` dada de alta en la documentación** (aún sin publicar): `11-arbol-urls-final` (páginas fijas, árbol y URL→plantilla), `04-mapa-pantallas` (páginas fijas, conjunto total y plantillas), `05-arquitectura-informacion-navegacion` (enlace en el pie, nunca en el menú) y `03-wordpress-content-model` (la cubre `page.php`, sin plantilla propia).
+- **Faltante detectado de paso:** `/practica/meditacion-semanal-en-linea` **no estaba documentada** en `11-arbol-urls-final` ni en `04-mapa-pantallas`, pese a estar publicada desde el 21/07 y presente en `sitemap.xml` y `llms.txt`. Añadida a ambos.
+- Informe 00 §5: la sección de privacidad se reescribió para el público de liderazgo — empieza explicando **qué es** una política de privacidad y **cómo se vería en el sitio** (página nueva, enlace en el pie, sin banners). Informe 02 §9: nueva subsección **«Dónde y cómo se publica»** con los criterios de aceptación de PRIV-001.
+
 ### Pendiente
 
 - Relanzar PageSpeed Insights tras desplegar y actualizar §6 del informe técnico.

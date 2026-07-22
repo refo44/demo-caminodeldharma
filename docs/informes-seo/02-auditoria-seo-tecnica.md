@@ -405,6 +405,21 @@ Esto abre una segunda pregunta, distinta de la de la Ley 1581/2012. Lo que sigue
 
 **Lo práctico, que sí es técnico.** Las dos normas piden en gran medida lo mismo: informar de qué datos se recogen, para qué, quién responde y cómo ejercer derechos. **Una política de privacidad bien redactada cubre la mayor parte de ambas.** El RGPD añade elementos propios —base jurídica, plazos de conservación, algunos derechos adicionales— que quien la redacte sabrá incorporar si concluye que aplica.
 
+### Dónde y cómo se publica
+
+Los criterios de aceptación ya están fijados en el hallazgo PRIV-001 de la auditoría. La implementación es pequeña y no toca ninguna decisión de diseño:
+
+| Paso | Detalle |
+|---|---|
+| **Página nueva** | `/privacidad`, siguiendo la política canónica de URL sin barra final |
+| **Enlace en el pie** | En la región de pie de **todas las páginas** (incluida la 404), junto a `.footer-copyright`. Es la convención que la gente espera y no interfiere con la lectura |
+| **Mapa del sitio** | Añadir la URL a `sitemap.xml` con su `<lastmod>` |
+| **Sin banner** | No lleva ventana emergente ni aviso de cookies: no hay cookies que consentir. Solo la ve quien la busca |
+
+**Criterio de aceptación (PRIV-001):** *«Privacy policy published and linked in the footer»*.
+
+**Nota para la migración:** al pasar a WordPress, la página se recrea como `page` y el enlace del pie vive en la plantilla de pie del tema. Conviene incluirla en el checklist del corte (§10) para que no se pierda al reconstruir el pie.
+
 > **Alcance, otra vez.** Determinar si el RGPD resulta aplicable a esta comunidad **es una conclusión jurídica y corresponde a asesoría legal.** Este informe aporta los hechos verificables —volumen y procedencia del tráfico, ausencia total de rastreo, ámbito declarado del sitio, carácter global de la actividad en línea— para que esa valoración se haga sobre datos y no sobre suposiciones.
 
 **Si algún día hiciera falta medir comportamiento**, la vía será analítica sin cookies, nunca volver a una herramienta con seguimiento.

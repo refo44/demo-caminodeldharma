@@ -27,6 +27,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | Contribuir (donaciones) | `/donaciones/` |
 | Contacto | `/contacto/` |
 | Blog | `/blog/` |
+| Privacidad | `/privacidad/` *(pendiente de publicar; texto por definir — ver `informes-seo/02` §9)* |
 
 ---
 
@@ -54,6 +55,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 /linaje/
 /practica/
 /practica/videos/          (secundaria: no en navbar; acceso desde Práctica «Ver más videos»)
+/practica/meditacion-semanal-en-linea/   (secundaria: no en navbar; enlazada desde Inicio y Práctica)
 /eventos/
 /eventos/{slug}/
 /galeria/
@@ -61,6 +63,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 /contacto/
 /blog/
 /blog/{slug}/
+/privacidad/               (pendiente de publicar; enlace en el pie de todas las páginas)
 ```
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
 
@@ -87,6 +90,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | `/eventos/{slug}/` | single-event.php |
 | `/galeria/` | page-galeria.php |
 | `/contacto/` | page-contacto.php |
+| `/privacidad/` | page.php (fallback; no requiere plantilla propia) |
 
 *(Si se implementa CPT sangha: `/sanghas/` → archive-sangha.php; `/sanghas/{slug}/` → single-sangha.php.)*
 

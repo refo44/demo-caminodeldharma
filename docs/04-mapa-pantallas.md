@@ -21,6 +21,8 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
 | Blog | Listado de entradas sin acciones secundarias; cada detalle individual incluye opciones para compartir. |
+| Meditación semanal en línea | *(secundaria, no en navbar)* Qué es la sesión de los lunes, para quién es y cómo participar; acceso por WhatsApp — el enlace de la sala no se publica. Enlazada desde Inicio y Práctica. Publicada el 21/07/2026. |
+| Privacidad | *(secundaria, no en navbar)* **Pendiente de publicar.** Qué datos personales recibe la comunidad por los canales de contacto, para qué se usan, quién los ve y cómo pedir que se borren. Enlace en el pie de todas las páginas, no en el menú. Ver `informes-seo/00` §5 y `informes-seo/02` §9. |
 
 ---
 
@@ -67,6 +69,8 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
+**Páginas secundarias (fuera del menú):** Meditación semanal en línea (`/practica/meditacion-semanal-en-linea`) · Videos (`/practica/videos`) · Privacidad (`/privacidad`, pendiente de publicar; enlazada desde el pie)
+
 **Elementos globales (componentes):** Header (logo + navegación), Footer (identidad, contacto, redes, donaciones, WhatsApp, Blog). No son pantallas; se repiten en todas las vistas.
 
 ---
@@ -85,6 +89,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Eventos especiales | `archive-event.php` o `page-eventos.php` (condicional) |
 | Blog | `home.php` o `index.php` (según modelo) |
 | Evento individual | `single-event.php` (si se activa) |
+| Privacidad | `page.php` (fallback; no requiere plantilla propia) |
 | 404 | `404.php` |
 | Header global | `parts/header.php` (incluye navigation) |
 | Footer global | `parts/footer.php` |
