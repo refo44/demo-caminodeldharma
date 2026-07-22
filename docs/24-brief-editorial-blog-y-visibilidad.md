@@ -133,13 +133,23 @@ Eso mide si las sugerencias del audit fueron útiles; **no califica** el trabajo
 
 **Pieza = artículo del blog**: una entrada nueva en la sección Blog, con su propia dirección (como la entrada actual sobre la sangha y la hiperconexión). Cada pieza es una dirección más que Google puede mostrar — por eso este brief cuenta piezas y no palabras.
 
-Los **tipos de pieza** y su extensión orientativa están definidos en el **Sistema editorial** (`23` §4.0 y §4.3): reflexión, artículo educativo y nota de contexto. Lo que añade la mirada SEO es cómo se comporta cada uno ante las búsquedas:
+Hay **tres tipos de pieza**. Lo que añade la mirada SEO es cómo se comporta cada uno ante las búsquedas:
 
-| Tipo de pieza (`23` §4.0) | Qué aporta en visibilidad |
-|---|---|
-| **Artículo educativo** | El que más búsquedas nuevas atrae: responde preguntas que hoy ninguna página del sitio responde |
-| **Nota de contexto** | La única vía para las búsquedas por ciudad, y solo si hay datos reales que contar |
-| **Reflexión** | Acompaña a quien ya llegó; rara vez atrae búsquedas nuevas |
+| Tipo de pieza | Para qué sirve | Qué aporta en visibilidad |
+|---|---|---|
+| **Artículo educativo** | Explicar un tema a quien aún no conoce la tradición | El que más búsquedas nuevas atrae: responde preguntas que hoy ninguna página del sitio responde |
+| **Nota de contexto** | Situar un hecho, lugar o actividad con datos verificables | La única vía para las búsquedas por ciudad, y solo si hay datos reales que contar |
+| **Reflexión** | Acompañar, profundizar en una experiencia o enseñanza | Acompaña a quien ya llegó; rara vez atrae búsquedas nuevas |
+
+**Extensión orientativa**, flexible según el tema. La longitud responde al asunto, no a una meta de palabras: no hay ninguna ventaja de posicionamiento en alargar un texto.
+
+| Tipo de publicación | Extensión | Lectura aprox. |
+|---|---|---|
+| Artículo breve | 150 – 400 palabras | 1 – 2 min |
+| Artículo estándar | 400 – 1 000 palabras | 2 – 5 min |
+| En profundidad | 1 000 – 2 000 palabras | 5 – 10 min |
+
+*(Los tipos de pieza y estas extensiones proceden del Sistema editorial del proyecto, documento interno aún pendiente de ratificación comunitaria. Se recogen aquí para que este brief pueda leerse sin él.)*
 
 Si la comunidad decide publicar **relatos o entrevistas** de miembros (§9), conviene saber que su valor es sobre todo de acogida: suman en buscadores cuando el título nombra el tema —práctica en línea, retiro, Chan— y no solo a la persona. **No sustituyen** a los artículos educativos del §6, aunque se combinan bien: primero el tema, después un relato que lo ilustre.
 
@@ -225,16 +235,13 @@ Publicar cada semana empujaría en dirección contraria: más presión sobre un 
 
 ## 7. Voz y formato: dónde están definidos
 
-La voz de la comunidad y el formato de una entrada **ya están definidos**, y este brief no los repite: hacerlo crearía dos fuentes para la misma regla, y a la primera actualización dejarían de coincidir.
+La voz de la comunidad **ya está definida** en el **Manual de voz y copywriting editorial**, y este brief no la repite: hacerlo crearía dos fuentes para la misma regla, y a la primera actualización dejarían de coincidir. Allí están los atributos de la voz, los principios de escritura, el léxico permitido y prohibido, las llamadas a la acción aprobadas, la grafía *Buddhismo* / *budismo* y el checklist de revisión editorial.
 
-| Para saber… | Documento | Cubre |
-|---|---|---|
-| Cómo debe **sonar** el texto | **Manual de voz y copywriting editorial** (`21`) | Atributos de la voz, principios de escritura, léxico permitido y prohibido, llamadas a la acción aprobadas, la grafía *Buddhismo* / *budismo* y el checklist de revisión editorial |
-| Cómo debe **estructurarse** la entrada | **Sistema editorial** (`23`) | Tipos de intención, extensión orientativa según el tipo, estructura con subtítulos, extracto del listado y presentación en listado y en detalle |
+Del formato, este brief recoge lo imprescindible en el §5 —tipos de pieza y extensión orientativa—, de modo que no haga falta ningún otro documento para usarlo.
 
 Lo único que este brief añade sobre la forma del texto es lo que responde a una razón **de búsqueda**, y ya está en el §3: título claro, respuesta directa en el primer párrafo y enlaces internos hacia el artículo. No contradice a los documentos anteriores; es la misma recomendación por otro motivo.
 
-**El punto donde voz y búsqueda se rozan**, por si surge la duda: la comunidad escribe *Buddhismo* con doble d, y quien busca en Google suele escribir *budismo*. El manual (`21` §14) ya resuelve el caso —la voz conserva la doble d, los metadatos pensados para el buscador pueden usar la forma extendida, y nunca se esconden palabras—. No hay que elegir entre sonar como la comunidad y ser encontrable.
+**El punto donde voz y búsqueda se rozan**, por si surge la duda: la comunidad escribe *Buddhismo* con doble d, y quien busca en Google suele escribir *budismo*. El manual de voz ya resuelve el caso (§14) —la voz conserva la doble d, los metadatos pensados para el buscador pueden usar la forma extendida, y nunca se esconden palabras—. No hay que elegir entre sonar como la comunidad y ser encontrable.
 
 ---
 
