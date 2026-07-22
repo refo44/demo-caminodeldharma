@@ -207,7 +207,7 @@ En entrevistas y relatos conviene que el **título nombre el tema** (meditación
 |---|---|---|
 | El ritmo de publicación **no es señal de posicionamiento** | Declaraciones de John Mueller (Google) | Un calendario apretado no compra posiciones |
 | El **presupuesto de rastreo** solo concierne a sitios desde ~10.000 páginas | Documentación oficial de Google | Con 14 páginas, publicar más rápido no hace que Google pase más | 
-| Una página tarda **de 2 a 6 meses** en asentarse en consultas de baja competencia | Estudios de sector (Ahrefs, Semrush) | El resultado llega por calendario, no por ritmo |
+| Un artículo tarda **de 2 a 6 meses** en **posicionarse en Google** para consultas de baja competencia — publicarlo y compartirlo, en cambio, es inmediato | Estudios de sector (Ahrefs, Semrush) | El resultado llega por calendario, no por ritmo |
 | El **volumen sin valor** está tipificado como *scaled content abuse* | Políticas de spam de Google | Publicar de más tiene riesgo; publicar despacio, no |
 
 **El razonamiento.** Como el ritmo no puntúa y el rastreo no es un problema, la frecuencia solo debe responder a dos cosas: **que se pueda sostener** y **que cada pieza tenga algo real que decir**. Una al mes cumple ambas y deja de seis a nueve artículos en el año — que es el volumen que cambia las cosas, no la cadencia con que se llegue a él.
@@ -220,7 +220,15 @@ Publicar cada semana empujaría en dirección contraria: más presión sobre un 
 2. **Una pregunta en lenguaje natural** — del tipo *«dónde practicar budismo chan en Colombia»*.
 3. **Una ciudad**, solo si hay datos reales confirmados.
 
-> **Sobre los plazos, para no sacar conclusiones falsas.** Con un horizonte de 2 a 6 meses, **lo que se publique ahora no aparecerá en la re-medición de septiembre**. Puede verse en Search Console en una o dos semanas, pero en posiciones inestables que no permiten concluir nada. El efecto del contenido se evalúa hacia **diciembre o enero**. Medirlo antes solo produciría la conclusión falsa de que no sirvió.
+> **Sobre los plazos, para no sacar conclusiones falsas.** El plazo de 2 a 6 meses se malinterpreta con facilidad, así que conviene separarlo bien.
+>
+> **Publicar y difundir es inmediato.** El artículo queda disponible el mismo día y se puede compartir por WhatsApp, Instagram o correo sin ninguna espera. Eso funciona desde el minuto uno y **no depende del SEO en absoluto** — de hecho, es la vía por la que llegarán los primeros lectores.
+>
+> **El plazo lento es otro:** que Google empiece a mostrar el artículo a quien busca el tema **sin conocer a la comunidad**. Ahí sí median de 2 a 6 meses. Puede aparecer en Search Console en una o dos semanas, pero en posiciones inestables que no permiten concluir nada.
+>
+> Dicho de otro modo: **compartir alcanza a quien ya está cerca; el buscador trae a desconocidos, y ese es el que tarda.** Los artículos sirven para las dos cosas, pero solo la segunda se mide con paciencia.
+>
+> Consecuencia práctica: **lo que se publique ahora no aparecerá en la re-medición de septiembre.** El efecto del contenido se evalúa hacia **diciembre o enero**; medirlo antes solo produciría la conclusión falsa de que no sirvió.
 
 **Fuentes:** [Search Engine Roundtable](https://www.seroundtable.com/google-content-frequency-25367.html) · [iLoveSEO](https://iloveseo.com/seo/google-publishing-consistency-does-not-affect-rankings/) · [Google — Crawl Budget](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget) · [Google — Spam Policies](https://developers.google.com/search/docs/essentials/spam-policies)
 

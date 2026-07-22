@@ -257,8 +257,13 @@ Lo mismo con la meditación de los lunes: es lo más distintivo que ofrece la co
 
 No conviene ir más rápido. El ritmo no es un factor de posicionamiento —Google no premia publicar seguido—, así que la frecuencia solo debe responder a que el equipo pueda sostenerla y a que cada pieza tenga sustancia. Un calendario semanal presiona a un equipo voluntario, se abandona con facilidad y empuja a publicar piezas delgadas, que Google trata como abuso de contenido a escala.
 
-> **Sobre los plazos.** Una página tarda entre dos y seis meses en asentarse. **Lo que se publique ahora no se verá reflejado en la medición de septiembre**, y conviene saberlo antes: esa medición sirve para los enlaces, no para juzgar el contenido. El efecto de los artículos se evalúa hacia diciembre o enero (§8).
-
+> **Sobre los plazos, que se prestan a confusión.** Conviene separar dos cosas que ocurren a velocidades muy distintas.
+>
+> **El artículo está disponible el mismo día.** Se publica y ya se puede compartir por WhatsApp, Instagram o correo, y funciona perfectamente. Eso es inmediato y no tiene nada que ver con el SEO.
+>
+> **Lo que tarda de dos a seis meses es otra cosa:** que **Google lo muestre a alguien que busca el tema y no conoce a la comunidad**. Compartir llega a quien ya está cerca; el buscador trae a quien no sabe que la comunidad existe — y ese camino es el lento.
+>
+> Por eso lo que se publique ahora **no se verá reflejado en la medición de septiembre**: esa sirve para los enlaces, no para juzgar el contenido. El efecto de los artículos se evalúa hacia diciembre o enero (§8).
 
 ### Mantenimiento técnico
 
@@ -318,7 +323,7 @@ Por eso el calendario se organiza **alrededor del corte a WordPress**, no en int
 | **24–48 h después del corte** | Verificar que nada se rompió: que todas las direcciones responden, que las redirecciones sobrevivieron, que no aparecieron cookies, que los datos para buscadores siguen íntegros | ~2 h | **Máxima** |
 | **2 semanas después del corte** | Estabilización: si Google reindexó, si las posiciones volvieron. Una caída temporal es normal; una sostenida, no | ~1 h | Media |
 | **~15 de septiembre** | Primera medición legítima **de los enlaces**: si las publicaciones añadieron la dirección y si sube la autoridad | ~2 h | Media |
-| **~diciembre–enero** | Primera medición legítima **del contenido**: si aparecen búsquedas que no son la marca. Antes no: una página tarda de 2 a 6 meses en asentarse (§6) | ~2 h | Media |
+| **~diciembre–enero** | Primera medición legítima **del contenido**: si aparecen búsquedas que no son la marca. Antes no: un artículo tarda de 2 a 6 meses en **posicionarse en Google** — aunque se pueda compartir desde el primer día (§6) | ~2 h | Media |
 | **~octubre, tras 30 días de WordPress estable** | Auditoría completa del sitio definitivo | Auditoría nueva | **Alta** |
 
 **Si solo pudieran hacerse dos, que sean los dos primeros.** Son los que protegen contra el único riesgo capaz de deshacer todo el trabajo acumulado: una migración que rompe algo sin que nadie lo note a tiempo. Sin una fotografía del «antes» no hay forma de demostrar qué cambió.
@@ -375,13 +380,6 @@ Auditoría de **solo lectura** sobre el sitio publicado y su código. No se modi
 - **PageSpeed Insights**, herramienta oficial de Google, en móvil y computador.
 - **Herramientas de autoridad** aplicadas con la misma herramienta y el mismo día al sitio propio y a cinco comunidades comparables.
 - **Verificación directa** de cada publicación que menciona a la comunidad, comprobando si enlaza o no.
-
-### Fuentes de la recomendación de frecuencia (§6)
-
-- **Google:** el ritmo de publicación no es señal de posicionamiento — declaraciones de John Mueller recogidas en [Search Engine Roundtable](https://www.seroundtable.com/google-content-frequency-25367.html) e [iLoveSEO](https://iloveseo.com/seo/google-publishing-consistency-does-not-affect-rankings/).
-- **Google, documentación oficial:** el presupuesto de rastreo solo concierne a sitios grandes — [Crawl Budget Management](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget).
-- **Google, políticas de spam:** el volumen de contenido sin valor está tipificado como *scaled content abuse* — [Spam Policies for Google Web Search](https://developers.google.com/search/docs/essentials/spam-policies).
-- **Plazos de posicionamiento:** de 2 a 6 meses para consultas de baja competencia, según estudios de sector (Ahrefs, Semrush). Son estimaciones de terceros y se reportan como tales, igual que las métricas de autoridad.
 
 ### Principios aplicados
 
