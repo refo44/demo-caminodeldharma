@@ -315,7 +315,7 @@ Dos hallazgos de esta tabla —**PERF-002** (versionado de CSS/JS) y **A11Y** (g
 | PERF-002 | `?v=` en las referencias css/js de producción | **Ninguna.** El historial del repositorio no registra ningún cambio que lo introdujera |
 | A11Y | `curl https://caminodeldharma.org/galeria \| grep -c '<img'` | **1** — el logotipo. El grid sigue construyéndose entero en el navegador |
 
-**Causa:** el cierre del despliegue del 20 de julio se hizo por confirmación global, sin comprobar tarea por tarea. Afectó a cuatro tareas en total; el detalle está en `.audit/implementation/results/DEPLOY-v1.0.14.md`.
+**Causa:** el cierre del despliegue del 20 de julio se hizo por confirmación global, sin comprobar tarea por tarea. Afectó a cuatro tareas en total.
 
 **Consecuencia práctica para este informe:** el plan de acción de §12 sigue teniendo abiertas las prioridades 2 y 6, que se creían cerradas. PERF-002 gana además relevancia: al pasar de `main.css` a `main.min.css` el cambio de nombre invalidó la caché una vez, pero **la próxima edición de ese mismo archivo volverá a chocar con los 7 días de caché**.
 
@@ -332,7 +332,7 @@ La política canónica del sitio es **sin barra final** (`/practica`, no `/pract
 
 FUNC-002 fue la descarga `.ics`; FUNC-003 son los enlaces de navegación de `/practica/videos`, que llevaban así en producción desde su publicación.
 
-**Regla, registrada en ADR 0008:** todos los enlaces internos usan **ruta absoluta de raíz** (`/practica/...`). Las relativas solo son admisibles para recursos que cuelgan de la raíz (`../../assets/...`), donde el acotado las hace equivalentes.
+**Regla adoptada:** todos los enlaces internos usan **ruta absoluta de raíz** (`/practica/...`). Las relativas solo son admisibles para recursos que cuelgan de la raíz (`../../assets/...`), donde el acotado las hace equivalentes.
 
 **En WordPress:** `home_url()` y `get_permalink()` siempre; nunca rutas relativas escritas a mano en plantillas. **La política sin barra final y las rutas relativas son incompatibles.**
 
@@ -382,7 +382,7 @@ Es decir: la recogida de datos no desapareció con las cookies — **cambió de 
 
 > **Alcance.** Este informe constata un hecho técnico —hay recogida de datos personales por canales de contacto— y señala que la normativa aplicable no depende de la presencia de cookies. **La conclusión jurídica corresponde a asesoría legal, no a esta decisión técnica.** No se ofrece aquí ni el texto de la política ni una valoración de cumplimiento.
 
-Concuerda con lo ya registrado en **ADR 0019** («Costos aceptados») y en `.audit/decisions.md`: la decisión sobre analítica **no elimina** la política de privacidad.
+Concuerda con la decisión ya formalizada sobre la analítica y sus costos aceptados: descartarla **no elimina** la política de privacidad.
 
 ### RGPD — hay visitantes desde España
 
@@ -542,7 +542,7 @@ Trabajo desplegado después del informe original, en las versiones **v1.0.15** y
 
 ### Meditación semanal en línea — página propia
 
-`/practica/meditacion-semanal-en-linea`. Cierra ASO-002: la práctica continua de la comunidad ya no vive como párrafo dentro de otra página.
+`/practica/meditacion-semanal-en-linea`. La práctica continua de la comunidad ya no vive como párrafo dentro de otra página.
 
 - `EventSeries` con `OnlineEventAttendanceMode` y `Schedule` (`P1W`, lunes, 19:30, `America/Bogota`)
 - Entrada en `llms.txt`, en `sitemap.xml` y enlazada desde portada y `/practica`

@@ -10,10 +10,13 @@
   },
   "scripts": {
     "lint:css": "stylelint \"assets/css/**/*.css\"",
-    "build:css": "cleancss -O2 -o assets/css/main.min.css assets/css/main.css"
+    "build:css": "cleancss -O2 -o assets/css/main.min.css assets/css/main.css",
+    "build:docx": "node scripts/build-docx/build.js",
+    "check:docx": "python3 scripts/build-docx/check.py"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
+    "docx": "^9.7.1",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1"
   }
