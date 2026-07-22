@@ -376,7 +376,7 @@ Descartar la analítica resolvió el problema **de las cookies**: sin cookies pr
 | Qué exige | Consentimiento previo para las no esenciales | Informar del tratamiento: qué se recoge, para qué, quién responde y cómo ejercer derechos |
 | Estado en este sitio | **Resuelto** — cero cookies propias, verificado en producción | **Abierto** |
 
-**La Ley 1581/2012 cubre el tratamiento de datos personales en general, no solo el que ocurre por cookies.** Y el sitio **sí recoge datos personales**: tras retirarse el formulario sin backend (FUNC-001), la vía de contacto son **WhatsApp y correo**, que reciben nombre, teléfono y el contenido de cada mensaje.
+**La [Ley 1581 de 2012](https://www.sic.gov.co/recursos_user/documentos/normatividad/Leyes/2012/Ley_1581_2012.pdf) cubre el tratamiento de datos personales en general, no solo el que ocurre por cookies.** (PDF oficial de la **Superintendencia de Industria y Comercio**, autoridad de protección de datos. Versión con **vigencia expresa y control de constitucionalidad** en la [Secretaría del Senado](http://www.secretariasenado.gov.co/senado/basedoc/ley_1581_2012.html) — ese sitio solo responde por HTTP, no ofrece HTTPS.) Y el sitio **sí recoge datos personales**: tras retirarse el formulario sin backend (FUNC-001), la vía de contacto son **WhatsApp y correo**, que reciben nombre, teléfono y el contenido de cada mensaje.
 
 Es decir: la recogida de datos no desapareció con las cookies — **cambió de canal**.
 

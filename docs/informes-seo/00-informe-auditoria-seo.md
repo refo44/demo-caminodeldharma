@@ -196,7 +196,7 @@ Responde cuatro preguntas:
 
 **Por qué hace falta.** Porque la comunidad **sí recibe datos personales**. Los canales de contacto que ofrece el sitio —WhatsApp y correo— llevan a la comunidad el nombre, el teléfono y lo que cada persona escriba al acercarse. Eso ya es tratamiento de datos, aunque no haya formulario ni cookies, y ocurre **fuera** del sitio web: en un teléfono y en una bandeja de correo.
 
-Conviene deshacer una confusión frecuente: al descartar la analítica se resolvió el asunto **de las cookies**, y por eso el sitio no necesita el molesto aviso de aceptar cookies. Pero la ley colombiana de datos personales (**Ley 1581/2012**) cubre algo más amplio: cualquier recogida de datos, venga de donde venga. **La recogida no desapareció; cambió de canal.**
+Conviene deshacer una confusión frecuente: al descartar la analítica se resolvió el asunto **de las cookies**, y por eso el sitio no necesita el molesto aviso de aceptar cookies. Pero la ley colombiana de datos personales (**[Ley 1581 de 2012](https://www.sic.gov.co/recursos_user/documentos/normatividad/Leyes/2012/Ley_1581_2012.pdf)**, texto oficial en PDF, publicado por la **Superintendencia de Industria y Comercio** — la entidad que vigila su cumplimiento) cubre algo más amplio: cualquier recogida de datos, venga de donde venga. **La recogida no desapareció; cambió de canal.**
 
 **Hay un segundo motivo: ya llegan visitantes desde España.** Search Console registra 1 clic y 2 impresiones desde España, sobre 9 y 35 en total. Es poco, pero es real — y España está en la Unión Europea, donde rige el **RGPD**, una norma distinta de la colombiana.
 

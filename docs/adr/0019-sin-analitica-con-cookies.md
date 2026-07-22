@@ -77,7 +77,7 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
 - **Embeds de vídeo:** el sitio incrusta 8 reproductores de YouTube y 2 de Vimeo, ninguno con
   `youtube-nocookie` (verificado 2026-07-20). Al reproducir, esos terceros pueden fijar cookies.
   Migrar los embeds a `youtube-nocookie.com` sigue pendiente y permanece dentro de TASK-0006.
-- **Política de privacidad:** sigue siendo recomendable. La Ley 1581/2012 cubre el tratamiento de
+- **Política de privacidad:** sigue siendo recomendable. La [Ley 1581 de 2012](https://www.sic.gov.co/recursos_user/documentos/normatividad/Leyes/2012/Ley_1581_2012.pdf) cubre el tratamiento de
   datos personales en general —no solo cookies—, y el sitio recoge datos por canales de contacto.
   La conclusión jurídica corresponde a asesoría, no a esta decisión técnica.
 
