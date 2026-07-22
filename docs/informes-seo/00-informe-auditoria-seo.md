@@ -86,7 +86,7 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 |---|---|
 | «El sitio no aparece en búsquedas amplias» | **Esperable a los dos días.** Es una brecha a trabajar, no un descuido |
 | «Solo 4 de las 13 páginas de entonces estaban indexadas» | Progreso normal: Google tarda semanas en recorrer un sitio nuevo |
-| «Es primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días |
+| «Es primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días. Con una precisión: es primero en «budismo chan **colombia**» y «budismo tierra pura **colombia**», no en esos temas sin el país |
 | «El dominio no tiene autoridad tras 7 años» | **Esto sí es de fondo** — y es el asunto de este informe |
 
 ---
@@ -179,18 +179,22 @@ Puede haber actividad confirmada en una ciudad y aun así decidirse no publicarl
 
 ### Publicar una política de privacidad
 
-**Qué es.** Una página más del sitio —como Contacto o Galería— donde la comunidad explica, en lenguaje sencillo, qué datos personales recibe de la gente, para qué los usa, quién puede verlos y cómo alguien puede pedir que los borren. No es un documento para abogados: es una explicación honesta dirigida a quien escribe.
+**Qué es.** Un **compromiso escrito**: el texto donde la comunidad deja claro qué datos personales recibe, para qué los usa, quién puede verlos y cómo alguien puede pedir que los borren. No es un documento para abogados — es una explicación honesta dirigida a quien escribe.
+
+**No es una página web.** Es una distinción que conviene tener presente: la política es el compromiso; **publicarla como página del sitio es solo la forma de darla a conocer**. Podría comunicarse de otras maneras; se publica en el sitio porque es donde la gente la busca.
+
+Y tiene una consecuencia práctica: **el compromiso cubre todo lo que la comunidad hace con esos datos**, no solo lo que pasa en el sitio web. Si alguien escribe por WhatsApp y ese mensaje queda guardado en un teléfono, o si se arma una lista de correos para avisar de un retiro, eso también está dentro. Por eso **no es una tarea del equipo web**: es una decisión de la comunidad sobre cómo trata la información de quienes se le acercan. El equipo web solo la publica.
 
 Responde cuatro preguntas:
 
-| La pregunta de quien escribe | Lo que la página responde |
+| La pregunta de quien escribe | Lo que el texto responde |
 |---|---|
 | ¿Qué datos suyos quedan guardados? | Nombre, teléfono o correo, y el mensaje que envió |
 | ¿Para qué los usan? | Para responderle y acompañarlo en la práctica; para nada más |
 | ¿Quién los ve? | Quien atiende los canales de contacto de la comunidad |
-| ¿Cómo pide que los borren? | Escribiendo a un correo, que la propia página indica |
+| ¿Cómo pide que los borren? | Escribiendo a un correo, que el propio texto indica |
 
-**Por qué hace falta.** Porque el sitio **sí recibe datos personales**. Los canales de contacto —WhatsApp y correo— reciben el nombre, el teléfono y lo que cada persona escriba al acercarse. Eso ya es tratamiento de datos, aunque no haya formulario ni cookies.
+**Por qué hace falta.** Porque la comunidad **sí recibe datos personales**. Los canales de contacto que ofrece el sitio —WhatsApp y correo— llevan a la comunidad el nombre, el teléfono y lo que cada persona escriba al acercarse. Eso ya es tratamiento de datos, aunque no haya formulario ni cookies, y ocurre **fuera** del sitio web: en un teléfono y en una bandeja de correo.
 
 Conviene deshacer una confusión frecuente: al descartar la analítica se resolvió el asunto **de las cookies**, y por eso el sitio no necesita el molesto aviso de aceptar cookies. Pero la ley colombiana de datos personales (**Ley 1581/2012**) cubre algo más amplio: cualquier recogida de datos, venga de donde venga. **La recogida no desapareció; cambió de canal.**
 
@@ -201,7 +205,7 @@ Conviene deshacer una confusión frecuente: al descartar la analítica se resolv
 
 Lo práctico: **ambas normas piden en esencia lo mismo**, así que **una sola página bien redactada cubre la mayor parte de las dos**.
 
-**Cómo se vería en el sitio.** Es una tarea pequeña para el equipo de publicación web, y ya está definida:
+**Cómo se da a conocer.** Publicar el texto sí es tarea del equipo web, y es pequeña. Ya está definida:
 
 1. Una página nueva en `caminodeldharma.org/privacidad`.
 2. Un enlace discreto **en el pie de todas las páginas**, junto al aviso de derechos reservados. Es el lugar donde la gente lo busca por convención, y no interfiere con la lectura.
@@ -329,7 +333,7 @@ Son los que de verdad importan. El sitio no tiene analítica instalada porque co
 
 Es una opción legítima y conviene plantearla con honestidad.
 
-**El sitio seguirá funcionando bien.** No se degradará: está bien construido y las posiciones ya ganadas en «budismo chan» y «budismo tierra pura» son estables mientras nadie con más autoridad decida competir por ellas.
+**El sitio seguirá funcionando bien.** No se degradará: está bien construido y las posiciones ya ganadas en «budismo chan colombia» y «budismo tierra pura colombia» son estables mientras nadie con más autoridad decida competir por ellas.
 
 **Pero la situación no se corrige sola.** El dominio lleva siete años y medio sin acumular recomendaciones; nada indica que vaya a empezar espontáneamente. Quien busque «budismo en Colombia» o «dónde practicar meditación budista» seguirá encontrando otras comunidades, y a Camino del Dharma solo la encontrará quien ya sepa su nombre.
 
