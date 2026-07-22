@@ -38,3 +38,18 @@
 - **Detectado por el propietario**, no por la auditoría. Añadido al checklist de verificación del corte a WordPress.
 - **Hallazgos: 15** (1 ALTA, 9 MEDIA, 4 BAJA, 1 INFORMATIVA).
 - **Pendiente de despliegue:** correcciones de FUNC-003, separadores de año en `/eventos`, JSON-LD de los 5 encuentros y carga diferida de imágenes.
+
+## Actualización 2026-07-21 (tarde) — rendimiento y corrección de estados
+
+- **Tres tareas más figuraban COMPLETED sin cumplir su DoD**, misma causa ya detectada en TASK-0017: cierre en bloque del deploy v1.0.14 por confirmación global del propietario, sin artefacto de validación por tarea. Con TASK-0017 son **cuatro** casos; deja de ser un fallo aislado y pasa a ser un problema del procedimiento de cierre.
+  - **TASK-0007 → COMPLETED reatribuida a v1.0.19.** El DoD no se cumplía en v1.0.14: el 2026-07-21 `logo.png` seguía en 1000×1000 / 35,5 KB.
+  - **TASK-0010 → NOT DONE.** `curl /galeria | grep -c '<img'` = 1; el DoD exige ≥12. Sin `<noscript>`. **AEO-001 sigue abierto.**
+  - **TASK-0011 → NOT DONE.** Nunca se implementó: ninguna referencia css/js lleva `?v=` y `git log -S'?v=' --all` no registra commits. **PERF-002 sigue abierto.**
+- **PERF-001 → RESOLVED** (v1.0.19, no v1.0.14). `logo.png` 240×240; miniaturas del home; y `gallery.js` sirviendo `assets/images/galeria/thumbs/` con `srcset` 300w/600w — antes cada página de galería entregaba ~2 MB en 12 originales para teselas de ~285 px. Desviación documentada: miniaturas de 600 px (no ≤500) y `srcset` 300/600 (no variantes `-400`); 600 px es lo que exige una tesela de ~285 px a DPR2.
+- **Nota de corrección:** en el análisis previo se afirmó que `/galeria` necesitaba los originales a tamaño completo para un lightbox. **Es falso**: `gallery.js` no tiene lightbox ni manejador de clic sobre las imágenes; los únicos `click` son de paginación. Los originales se servían como simples teselas.
+- **Otros cambios de rendimiento (v1.0.18–v1.0.19), ya en producción:** `normalize.css` incorporado a `main.css` (una sola hoja bloqueante); `main.min.css` vía `npm run build:css` (9,0 → 5,8 KB con Brotli); MarloweEscapade subsetada a "Camino del Dharma" (52,1 → 3,4 KB); `srcset` en las imágenes del home.
+- **Deriva repo↔producción detectada:** `assets/images/logo.png` es 7.423 B en el repo (escala de grises + alfa) y 10.079 B en producción (RGBA). Ambos 240×240 y ambos cumplen el DoD, pero **no son el mismo fichero**. Conviene alinearlos en el próximo despliegue.
+- **Tareas: 22 — 10 COMPLETED, 2 NOT DONE, 1 PARTIALLY_COMPLETED, 1 IMPLEMENTED_PENDING_VALIDATION, 2 READY, 7 BLOCKED.**
+- **Próximas acciones ejecutables:** TASK-0011 (`?v=`, PERF-002 — ahora más relevante: al renombrar a `main.min.css` la caché se invalidó una vez, pero las siguientes ediciones del mismo fichero volverán a chocar con los 7 días de `max-age`), TASK-0010 (fallback sin JS, AEO-001), TASK-0021.
+- **Recomendación de procedimiento:** no marcar COMPLETED sin artefacto de validación por tarea (comando + salida) en `implementation/results/`, tal como ya prevé el campo `validation_result_artifact` de `tasks.jsonl`.
+- `raw/` **no se ha tocado**: es la evidencia congelada del 2026-07-19.

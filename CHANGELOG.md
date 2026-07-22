@@ -8,6 +8,32 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.20] - 2026-07-21
+
+### Galería — miniaturas en el grid (cierra PERF-001)
+
+- `assets/js/gallery.js`: el grid deja de servir los originales y usa `assets/images/galeria/thumbs/` mediante `<picture>` con `srcset` 300w/600w. Antes cada página de 12 imágenes entregaba **~2 MB** para teselas de ~285 px; ahora **~216 KB** en móvil.
+- `assets/images/galeria/thumbs/`: miniaturas para las 36 imágenes (600 px jpg + webp, y 300 px webp).
+- Si una miniatura no fuese derivable del nombre, `gallery.js` cae al original: peor peso, pero nunca un hueco roto.
+
+**Corrección de un diagnóstico previo:** en v1.0.17 se justificó conservar los originales porque `/galeria` los necesitaría para un visor ampliado. **Era falso** — `gallery.js` no tiene visor ni manejador de clic sobre las imágenes; los únicos son de paginación. Los originales se servían como simples teselas.
+
+### Auditoría e informes
+
+- `.audit`: **tres tareas figuraban COMPLETED sin cumplir su Definition of Done** (mismo patrón ya detectado en TASK-0017). TASK-0007 reatribuida a v1.0.19; **TASK-0010 y TASK-0011 revertidas a NOT DONE**. PERF-001 pasa a RESOLVED; PERF-002 y AEO-001 siguen abiertos. Detalle y evidencia en `.audit/README.md` y `.audit/implementation/results/DEPLOY-v1.0.14.md`.
+- `docs/informes-seo/`: nueva §16 en el informe técnico con el trabajo de rendimiento, y corrección de estados en §8 y §12. Las cifras de Lighthouse del 20 de julio **se conservan fechadas**, sin recalcular: la cuota de la API de PageSpeed estaba agotada.
+- **No se modificó `.audit/raw/` ni `evidence-ledger.jsonl`**: son la evidencia congelada de la auditoría del 2026-07-19.
+
+### Pendiente
+
+- Relanzar PageSpeed Insights tras desplegar y actualizar §6 del informe técnico.
+- **Deriva repo↔producción:** `assets/images/logo.png` es 7.423 b en el repo (grises+alfa) y 10.079 b en producción (RGBA). Ambos 240×240 y válidos, pero no son el mismo fichero.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.19] - 2026-07-21
 
 ### Rendimiento — fuente subsetada, CSS minificado e imágenes responsive

@@ -199,7 +199,7 @@ Las dos primeras atacan directamente la causa medida en §3: publicaciones que y
 
 ### Mantenimiento técnico
 
-Existen tareas menores a cargo del equipo de publicación web —optimización de imágenes, caché, cabeceras de seguridad—. **Ninguna está frenando la visibilidad** y ninguna requiere decisión de la comunidad.
+Existen tareas menores a cargo del equipo de publicación web —caché, cabeceras de seguridad—. **Ninguna está frenando la visibilidad** y ninguna requiere decisión de la comunidad. *(La optimización de imágenes y de estilos se completó el 21 de julio; el detalle técnico está en §16 del informe técnico.)*
 
 ---
 

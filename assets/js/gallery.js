@@ -111,6 +111,48 @@
     };
   }
 
+  /**
+   * El grid nunca muestra el original: las teselas miden ~152px (2 col) a ~285px
+   * (4 col), asi que se sirven las miniaturas de assets/images/galeria/thumbs/.
+   * Servir los originales suponia ~2 MB por pagina de 12 (PERF-001).
+   * "../assets/images/galeria/galeria-01.jpg" -> ".../thumbs/galeria-01{,-300}.{webp,jpg}"
+   */
+  function thumbBase(src) {
+    var slash = src.lastIndexOf('/');
+    var dot = src.lastIndexOf('.');
+    if (slash === -1 || dot === -1 || dot < slash) return null;
+    return src.slice(0, slash) + '/thumbs/' + src.slice(slash + 1, dot);
+  }
+
+  function createThumb(item) {
+    var base = thumbBase(item.src);
+    var image = document.createElement('img');
+
+    image.alt = item.alt || '';
+    image.width = 600;
+    image.height = 600;
+    image.loading = 'lazy';
+    image.decoding = 'async';
+
+    // Sin miniatura derivable, se cae al original: peor peso, pero nunca un hueco roto.
+    if (!base) {
+      image.src = item.src;
+      return image;
+    }
+
+    var picture = document.createElement('picture');
+    var source = document.createElement('source');
+
+    source.type = 'image/webp';
+    source.srcset = base + '-300.webp 300w, ' + base + '.webp 600w';
+    source.sizes = '(min-width: 1024px) 285px, (min-width: 768px) 33vw, 50vw';
+    image.src = base + '.jpg';
+
+    picture.appendChild(source);
+    picture.appendChild(image);
+    return picture;
+  }
+
   function renderGrid(album, page) {
     var start = (page - 1) * IMAGES_PER_PAGE;
     var pageImages = album.images.slice(start, start + IMAGES_PER_PAGE);
@@ -118,13 +160,7 @@
 
     album.grid.setAttribute('aria-busy', 'true');
     pageImages.forEach(function (item) {
-      var image = document.createElement('img');
-      image.src = item.src;
-      image.alt = item.alt || '';
-      image.width = 400;
-      image.height = 400;
-      image.loading = 'lazy';
-      fragment.appendChild(image);
+      fragment.appendChild(createThumb(item));
     });
     album.grid.replaceChildren(fragment);
     album.grid.setAttribute('aria-busy', 'false');

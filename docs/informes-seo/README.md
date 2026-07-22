@@ -43,6 +43,14 @@ Los dos informes se revisaron tras el despliegue de **v1.0.15 y v1.0.16**:
 
 Lo detectó el propietario al pulsar el enlace, no la auditoría.
 
+### Segunda revisión del 21 de julio (v1.0.18–v1.0.19)
+
+- **Nueva §16 del informe 02** con el trabajo de rendimiento: una sola hoja de estilos bloqueante, CSS minificado, tipografía subsetada (52,1 → 3,4 KB) e imágenes adaptadas. Cierra 3 de las 4 oportunidades del cuadro de §6.
+- **Corrección de estados en §8 y §12.** Dos hallazgos que constaban resueltos —**PERF-002** (versionado de CSS/JS) y **A11Y** (galería sin `noscript`)— **no lo estaban**. El cierre del despliegue del 20 de julio se hizo por confirmación global, sin verificar tarea por tarea; afectó a cuatro tareas. Detalle en `.audit/implementation/results/DEPLOY-v1.0.14.md`.
+- **Las cifras de Lighthouse de §6 no se recalcularon**: la cuota diaria de la API de PageSpeed estaba agotada. Lo de §16 son mediciones directas de recursos en producción. **Queda pendiente relanzar PageSpeed** tras desplegar el cambio de `/galeria`.
+
+Estas dos revisiones siguen la regla de la sección siguiente: actualizar por secciones y conservar fechada la medición original, en lugar de reescribir cifras del 20 de julio.
+
 ---
 
 ## Próxima emisión

@@ -1,6 +1,6 @@
 {
   "name": "demo-caminodeldharma",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "private": true,
   "description": "Maqueta estática del sitio web de la Comunidad Buddhista Camino del Dharma (Colombia). Sitio estático; npm solo se usa para herramientas de desarrollo.",
   "license": "MIT",

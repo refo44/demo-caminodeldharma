@@ -6,7 +6,7 @@
 |---|---|
 | **Cliente** | Comunidad Buddhista Camino del Dharma |
 | **Sitio auditado** | https://caminodeldharma.org |
-| **Versión en producción** | v1.0.16 |
+| **Versión en producción** | v1.0.19 (`/galeria` pendiente de despliegue) |
 | **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
 | **Naturaleza** | Estado de salud técnica del sitio |
@@ -35,6 +35,7 @@
 13. [Limitaciones](#13-limitaciones)
 14. [Glosario técnico](#14-glosario-técnico)
 15. [Cambios posteriores a la auditoría](#15-cambios-posteriores-a-la-auditoría-21-de-julio)
+16. [Trabajo de rendimiento (v1.0.18–v1.0.19)](#16-trabajo-de-rendimiento-21-de-julio-v1018v1019)
 
 ---
 
@@ -122,7 +123,9 @@ No se enviaron formularios, no se crearon cuentas, no se resolvieron CAPTCHAs y 
 | | | | |
 | **Preparación para producción** | **80** | 85 % | Alta |
 
-> **Sobre la puntuación de rendimiento.** Una medición preliminar dio 67 y PageSpeed da 99. No se contradicen: el 67 medía **controles de higiene** que siguen incumplidos (dimensionado de imágenes, versionado de archivos), mientras que el 99 mide la **experiencia entregada**, que es excelente. El cuadro reconcilia ambas lecturas en 85.
+> **Sobre la puntuación de rendimiento.** Una medición preliminar dio 67 y PageSpeed da 99. No se contradicen: el 67 medía **controles de higiene** incumplidos (dimensionado de imágenes, versionado de archivos), mientras que el 99 mide la **experiencia entregada**, que es excelente. El cuadro reconcilia ambas lecturas en 85.
+>
+> **Actualización 2026-07-21:** de esos dos controles de higiene, el **dimensionado de imágenes está resuelto** en la portada (y en `/galeria`, pendiente de desplegar); el **versionado de archivos sigue incumplido** — ver la corrección de §8. La puntuación de 85 del cuadro no se ha recalculado a la espera de una medición homogénea de PageSpeed.
 
 ---
 
@@ -226,7 +229,7 @@ Nota metodológica: una medición preliminar registró CLS 0 en ambos perfiles. 
 
 **2. Google no dispone de datos de campo para este origen.** El informe indica «No hay datos»: el sitio no alcanza el umbral de tráfico del conjunto CrUX. Esto confirma el diagnóstico de visibilidad por una vía independiente, y significa que **INP no podrá medirse** hasta que haya más tráfico o se instrumente medición de usuarios reales.
 
-### Oportunidades abiertas — ninguna urgente
+### Oportunidades abiertas — situación al 20 de julio
 
 | Oportunidad | Ahorro móvil | Ahorro escritorio | Relación |
 |---|---|---|---|
@@ -235,7 +238,31 @@ Nota metodológica: una medición preliminar registró CLS 0 en ambos perfiles. 
 | Minificar CSS | 3 KB | 3 KB | Menor |
 | Versionado para caché eficiente | 1 KB | 1 KB | Ver §8 |
 
-La proporción 185 KB en móvil frente a 42 KB en escritorio (4,4×) es la firma característica de la falta de `srcset`: al móvil se le entregan imágenes dimensionadas para pantallas grandes. El caso más claro es el **logotipo de 1000 px (46 KB servidos) renderizado en un hueco de 44 px**.
+La proporción 185 KB en móvil frente a 42 KB en escritorio (4,4×) era la firma característica de la falta de `srcset`: al móvil se le entregaban imágenes dimensionadas para pantallas grandes. El caso más claro era el **logotipo de 1000 px (46 KB servidos) renderizado en un hueco de 44 px**.
+
+### Actualización 2026-07-21 — tres de las cuatro oportunidades, cerradas
+
+Los cambios de las versiones v1.0.18 y v1.0.19 atacan directamente este cuadro.
+
+| Oportunidad | Estado | Qué se hizo |
+|---|---|---|
+| Entrega de imágenes adaptadas | **Cerrada en la portada**; pendiente de desplegar en `/galeria` | `srcset`/`sizes` en las imágenes de la portada; logotipo a 240 px; miniaturas dedicadas para el grid de la galería |
+| Recursos que bloquean el renderizado | **Cerrada** | `normalize.css` incorporado a `main.css`: una sola hoja bloqueante en vez de dos peticiones encadenadas |
+| Minificar CSS | **Cerrada** | Nuevo paso `npm run build:css`; las páginas enlazan `main.min.css` |
+| Versionado para caché eficiente | **Abierta** | Sin implementar. Ver la corrección de §8 |
+
+**Medido en producción el 2026-07-21** (peticiones directas al servidor, no Lighthouse):
+
+| Recurso | Antes | Ahora |
+|---|---:|---:|
+| Hojas de estilo bloqueantes | 2 peticiones | **1 petición** |
+| CSS servido (Brotli) | 8.407 b + 2.280 b = 10.687 b | **~5.900 b** |
+| `logo.png` | 1000 px, 46.025 b | **240 px, 10.079 b** |
+| MarloweEscapade | 52,1 KB | **3,4 KB** (subset a los 13 caracteres de "Camino del Dharma") |
+
+**Pendiente de desplegar:** el grid de `/galeria` todavía entrega los originales a tamaño completo — unos **2 MB por página de 12 imágenes** para teselas de ~285 px. La corrección ya está en el repositorio (miniaturas con `srcset` 300w/600w, ~216 KB por página en móvil), pero no en producción.
+
+> **Nota sobre las cifras.** La tabla de Lighthouse de arriba sigue siendo la del **20 de julio** y no se ha recalculado: la cuota diaria de la API de PageSpeed estaba agotada al redactar esta actualización. Las cifras de esta sección son mediciones directas de recursos en producción, que es un dato distinto —y más estable— que una puntuación de laboratorio. **Conviene relanzar PageSpeed Insights** una vez desplegado lo de `/galeria` para obtener una lectura homogénea con la del 20 de julio.
 
 ### Señales marcadas por Lighthouse pese al 100 en Prácticas
 
@@ -271,12 +298,25 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 | FUNC-003 | Media | Enlaces de navegación a `/practica` resuelven a la raíz — **misma causa que FUNC-002**, detectada de nuevo el 21/07 | **Corregido en fuente**, pendiente de despliegue |
 | SEC-001 | Media | HSTS no activa | **Aplazado deliberadamente** hasta después de la migración a WordPress |
 | SEC-002 | Media | Política de seguridad de contenido limitada a `upgrade-insecure-requests`: sin restricciones de script, frame ni objeto | Abierto |
-| PERF-001 | Media | Imágenes sobredimensionadas, sin `srcset` | Abierto |
-| PERF-002 | Baja | CSS y JS con caché de 7 días **sin versionado**: un despliegue puede servir archivos obsoletos hasta una semana | Abierto |
-| A11Y | Baja | Galería renderizada solo por JavaScript, sin alternativa `noscript` | Abierto |
+| PERF-001 | Media | Imágenes sobredimensionadas, sin `srcset` | **Corregido** (v1.0.19, 21/07). Portada desplegada; miniaturas de `/galeria` pendientes de despliegue |
+| PERF-002 | Baja | CSS y JS con caché de 7 días **sin versionado**: un despliegue puede servir archivos obsoletos hasta una semana | **Abierto.** Se dio por hecho el 20/07 y no lo estaba — ver nota abajo |
+| A11Y | Baja | Galería renderizada solo por JavaScript, sin alternativa `noscript` | **Abierto.** Se dio por hecho el 20/07 y no lo estaba — ver nota abajo |
 | SEC-003 | Baja | Ausencia de `/.well-known/security.txt` pese a mantenerse `SECURITY.md` | Abierto |
 | PRIV-001 | Baja | Diez vídeos incrustados (8 YouTube + 2 Vimeo) sin variante `nocookie`; política de privacidad pendiente | Abierto |
 | INFO-001 | Informativa | Cadena de redirección de dos saltos en la entrada `www` por HTTP; JavaScript servido como `application/x-javascript` | Abierto |
+
+### Corrección de estados (21 de julio)
+
+Dos hallazgos de esta tabla —**PERF-002** (versionado de CSS/JS) y **A11Y** (galería sin `noscript`)— constaban como resueltos tras el despliegue del 20 de julio. **No lo estaban.** La verificación del 21 de julio lo confirma con dos comprobaciones directas:
+
+| Hallazgo | Comprobación | Resultado |
+|---|---|---|
+| PERF-002 | `?v=` en las referencias css/js de producción | **Ninguna.** El historial del repositorio no registra ningún cambio que lo introdujera |
+| A11Y | `curl https://caminodeldharma.org/galeria \| grep -c '<img'` | **1** — el logotipo. El grid sigue construyéndose entero en el navegador |
+
+**Causa:** el cierre del despliegue del 20 de julio se hizo por confirmación global, sin comprobar tarea por tarea. Afectó a cuatro tareas en total; el detalle está en `.audit/implementation/results/DEPLOY-v1.0.14.md`.
+
+**Consecuencia práctica para este informe:** el plan de acción de §12 sigue teniendo abiertas las prioridades 2 y 6, que se creían cerradas. PERF-002 gana además relevancia: al pasar de `main.css` a `main.min.css` el cambio de nombre invalidó la caché una vez, pero **la próxima edición de ese mismo archivo volverá a chocar con los 7 días de caché**.
 
 ### Sobre las rutas relativas (FUNC-002 y FUNC-003)
 
@@ -391,12 +431,12 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 
 | Prioridad | Acción | Esfuerzo | Estado |
 |---|---|---|---|
-| 1 | Añadir `srcset` y redimensionar logotipo y miniaturas | ~2 h | Abierto |
-| 2 | Versionar CSS y JS para permitir caché larga sin servir archivos obsoletos | ~1 h | Abierto |
+| 1 | Añadir `srcset` y redimensionar logotipo y miniaturas | ~2 h | **Hecho** (v1.0.19, 21/07). `/galeria` pendiente de despliegue |
+| 2 | Versionar CSS y JS para permitir caché larga sin servir archivos obsoletos | ~1 h | **Abierto — ahora es la prioridad 1 real.** Se dio por hecho el 20/07 y no se había implementado |
 | 3 | Ampliar la política de seguridad de contenido | ~2 h | Abierto |
 | 4 | Cambiar los diez vídeos incrustados a variantes sin cookies | ~30 min | Abierto |
 | 5 | Publicar `/.well-known/security.txt` | 15 min | Abierto |
-| 6 | Alternativa `noscript` para la galería | ~1 h | Abierto |
+| 6 | Alternativa `noscript` para la galería | ~1 h | **Abierto.** Se dio por hecho el 20/07 y no se había implementado |
 | 7 | Reducir la cadena de redirección de la entrada `www` por HTTP | ~30 min | Abierto |
 | 8 | Corregir el tipo MIME de JavaScript | 15 min | Abierto |
 | 9 | Verificar consolidación de host y protocolo en Search Console | 15 min | **A las 4–8 semanas** |
@@ -481,3 +521,51 @@ Detectado y corregido en esta tanda. Ver §8.
 ---
 
 *Auditoría realizada sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §13.*
+---
+
+## 16. Trabajo de rendimiento (21 de julio, v1.0.18–v1.0.19)
+
+Cierra tres de las cuatro oportunidades del cuadro de §6. Se registra aquí con las mediciones que lo sostienen.
+
+### Una sola hoja de estilos bloqueante
+
+PageSpeed señalaba una cadena crítica `documento → normalize.css`: dos hojas bloqueantes en serie. `normalize.css` se incorporó al inicio de `main.css` y se retiró su enlace de las 15 páginas.
+
+| | Peticiones | Servido (Brotli) |
+|---|---:|---:|
+| Antes | 2 | 8.407 b + 2.280 b = 10.687 b |
+| Después | **1** | **~5.900 b** |
+
+Comprimido dentro de `main.css`, el bloque de `normalize` cuesta ~500 b en vez de 2.280 b: Brotli aprovecha la redundancia entre ambos. La auditoría de dependencias de red pasa.
+
+### CSS minificado — nuevo paso de build
+
+Las páginas enlazan `main.min.css`, generado con `npm run build:css`. **Es el único paso de build del proyecto**; `main.css` sigue siendo el único archivo que se edita. Queda documentado en el checklist de despliegue: si se toca `main.css` y no se regenera, el paquete sale con CSS antiguo.
+
+### Tipografía subsetada
+
+`MarloweEscapade` pesaba **52,1 KB** y solo dibuja dos elementos —`.site-name` y `.site-title`—, que en las 15 páginas dicen lo mismo: "Camino del Dharma". Subsetada a esos 13 caracteres queda en **3,4 KB (−93 %)**.
+
+Como contrapartida, dejó de poder usarse como respaldo de `--font-heading`: sobre texto arbitrario dibujaría solo algunos glifos y el resto caería a serif, mezclados. Si ese texto cambia, hay que regenerar el subset con `scripts/build-fonts.sh`.
+
+### Imágenes adaptadas
+
+- **Logotipo:** 1000 px / 46 KB → **240 px / 10 KB**.
+- **Portada:** `srcset` con `sizes` reales. El primer intento usó `100vw`, que sobreestimaba el ancho —el real es 327 px, no 375— y hacía que el móvil se saltara la variante pequeña; corregido a `calc(100vw - 3rem)`.
+- **Galería:** el grid entregaba los **originales completos**, ~2 MB por página de 12 imágenes, para teselas de ~285 px. Ahora sirve miniaturas dedicadas con `srcset` 300w/600w: **~216 KB por página en móvil**. **Pendiente de despliegue.**
+
+> **Corrección de un diagnóstico previo.** En el análisis intermedio se afirmó que `/galeria` necesitaba los originales a tamaño completo porque los usaba un visor ampliado. Es falso: `gallery.js` no tiene visor ni ningún manejador de clic sobre las imágenes —los únicos son de paginación—. Los originales se servían como simples teselas, que es justo lo que PERF-001 describía.
+
+### Lo que se revisó y se decidió no tocar
+
+| Señal de PageSpeed | Decisión |
+|---|---|
+| «Evitar redirecciones» | **Nada que corregir.** La dirección canónica resuelve con **0 saltos**; solo quedan `http→https` y `www→sin www`, ambos necesarios y correctos |
+| «Mejorar la caché» | **Aplazado.** El ahorro que estima la propia herramienta es de 1 KB, y alargar la caché exige antes el versionado de PERF-002 |
+| «Latencia del documento inicial» | **Sin margen.** El desglose de LCP da TTFB de 0 ms |
+
+### Estado de la medición
+
+Las cifras de esta sección son **mediciones directas de recursos en producción**, no puntuaciones de laboratorio: la cuota diaria de la API de PageSpeed estaba agotada. La tabla de Lighthouse de §6 sigue siendo la del 20 de julio.
+
+**Acción pendiente:** relanzar PageSpeed Insights una vez desplegado el cambio de `/galeria`, y actualizar §6 con una lectura homogénea.
