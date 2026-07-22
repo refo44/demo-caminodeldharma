@@ -42,8 +42,6 @@
 
 **Lo que necesito de ustedes.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
 
-**Lo que cuesta.** Lo que queda pendiente suma **poco más de una hora** y ningún gasto: dos correos y un campo de perfil. El resto es contenido, al ritmo que la comunidad quiera darle.
-
 ---
 
 ## 2. Qué encontré
@@ -90,14 +88,6 @@ Esto no afecta a los hallazgos técnicos, pero sí a cómo debe leerse la visibi
 | «Solo 4 de las 13 páginas de entonces estaban indexadas» | Progreso normal: Google tarda semanas en recorrer un sitio nuevo |
 | «Es primero en chan y tierra pura» | **Más meritorio de lo que parecía**: logrado en dos días |
 | «El dominio no tiene autoridad tras 7 años» | **Esto sí es de fondo** — y es el asunto de este informe |
-
-### Lo que ya se corrigió
-
-Se limpiaron los restos de la web anterior que ensuciaban los resultados, se arregló la descarga de calendario, se añadió el origen en Cali y el año de fundación a la información que leen los buscadores, se sustituyó el formulario averiado por accesos directos de WhatsApp y correo, y se añadió la dirección de la web al perfil de Facebook.
-
-**El 21 de julio se publicaron dos cosas más:** la meditación de los lunes ya tiene página propia, de modo que quien pregunte por meditación budista en línea en español pueda encontrarla —el acceso sigue siendo por WhatsApp—, y se incorporaron cinco encuentros presenciales ya celebrados en Barranquilla, Bogotá y Medellín, que antes no aparecían en el sitio. **Esos encuentros son la vía honesta de asociar la comunidad a esas ciudades** sin tener sede en ellas.
-
-**Sobre el formulario:** no entregaba los mensajes. Quien escribía creía haber contactado a la comunidad y el mensaje se perdía sin aviso. **Hoy nadie queda sin respuesta.**
 
 ---
 
