@@ -44,7 +44,7 @@
   <meta name="twitter:image:alt" content="Comunidad Buddhista Camino del Dharma — meditación y budismo en Colombia">
   <link rel="preload" href="assets/images/inicio/hero-estatua-buda-montanas.webp" as="image" type="image/webp" fetchpriority="high">
   <link rel="preload" href="assets/fonts/inter/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/main.min.css">
   <link rel="icon" href="https://caminodeldharma.org/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" href="https://caminodeldharma.org/assets/favicon/favicon-48x48.png" sizes="48x48">
   <link rel="icon" type="image/png" href="https://caminodeldharma.org/assets/favicon/favicon-32x32.png" sizes="32x32">
@@ -197,7 +197,11 @@
       <h2>Un poco de nuestra comunidad</h2>
       <figure class="section-figure">
         <picture>
-          <source srcset="assets/images/inicio/inicio-encuentro-comunidad.webp" type="image/webp">
+          <source
+            srcset="assets/images/inicio/inicio-encuentro-comunidad-768.webp 768w,
+                    assets/images/inicio/inicio-encuentro-comunidad-1280.webp 1280w"
+            sizes="(min-width: 680px) 620px, calc(100vw - 3rem)"
+            type="image/webp">
           <img src="assets/images/inicio/inicio-encuentro-comunidad.jpg" alt="Encuentro de la comunidad Camino del Dharma" width="800" height="534" loading="lazy" decoding="async">
         </picture>
       </figure>
@@ -211,7 +215,11 @@
       </figure>
       <figure class="section-figure">
         <picture>
-          <source srcset="assets/images/inicio/inicio-kuan-yin.webp" type="image/webp">
+          <source
+            srcset="assets/images/inicio/inicio-kuan-yin-768.webp 768w,
+                    assets/images/inicio/inicio-kuan-yin.webp 945w"
+            sizes="(min-width: 680px) 620px, calc(100vw - 3rem)"
+            type="image/webp">
           <img src="assets/images/inicio/inicio-kuan-yin.jpg" alt="Kuan Yin — compasión" width="945" height="945" loading="lazy" decoding="async">
         </picture>
       </figure>

@@ -1,18 +1,19 @@
 {
   "name": "demo-caminodeldharma",
-  "version": "1.0.11",
-  "description": "Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** (Colombia). Incluye las páginas de inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto. El contenido y la estructura siguen la documentación en `docs/`. Pensado como base para una futura adaptación a WordPress.",
-  "main": "index.js",
+  "version": "1.0.19",
+  "private": true,
+  "description": "Maqueta estática del sitio web de la Comunidad Buddhista Camino del Dharma (Colombia). Sitio estático; npm solo se usa para herramientas de desarrollo.",
+  "license": "MIT",
+  "author": "Rafael Figueredo Oropeza",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "lint:css": "stylelint \"assets/css/**/*.css\""
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "build:css": "cleancss -O2 -o assets/css/main.min.css assets/css/main.css"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "clean-css-cli": "^5.6.3",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1"
   }

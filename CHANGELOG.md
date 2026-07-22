@@ -8,6 +8,34 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.19] - 2026-07-21
+
+### Rendimiento — fuente subsetada, CSS minificado e imágenes responsive
+
+- `assets/fonts/marlowe-escapade/marlowe-escapade-subset.woff2`: nuevo. MarloweEscapade subsetada a los 13 caracteres de "Camino del Dharma", los únicos que dibuja (`.site-name`, `.site-title`): **52,1 KB → 3,4 KB**.
+- `assets/css/main.css`: `--font-heading` pasa de `"Fjalla One", "MarloweEscapade", serif` a `"Fjalla One", serif`. Con la fuente subsetada, dejarla de fallback mezclaría glifos sueltos con serif sobre texto arbitrario.
+- `scripts/build-fonts.sh`: nuevo. Regenera el subset (requiere `pyftsubset`).
+- **Nuevo paso de build:** `npm run build:css` (clean-css) genera `assets/css/main.min.css`, que es lo que enlazan las 15 páginas. Servido con Brotli: **9,0 KB → 5,8 KB (−36 %)**. `main.css` sigue siendo el único archivo que se edita; `main.min.css` queda en `.stylelintignore`.
+- `index.html`: `srcset` + `sizes` en `inicio-encuentro-comunidad` (768w/1280w) e `inicio-kuan-yin` (768w/945w). En móvil se sirve el 768w; en retina de escritorio, el grande (antes había un solo tamaño para todo).
+
+**Medido (Lighthouse móvil):** rendimiento 93 → 97, LCP 2,9 s → 2,4 s, FCP 2,0 s → 1,8 s, página 879 KB → 333 KB desde el inicio de la serie. `unminified-css` y el árbol de dependencias de red pasan.
+
+**No se tocó:** redirecciones (la URL canónica ya resuelve con 0 saltos; solo quedan http→https y www→no-www, ambos correctos y necesarios) ni la caché (el ahorro que estima Lighthouse es de 1 KiB y subir el TTL exige cache-busting, que hoy no existe).
+
+- `sitemap.xml`: **sin cambio de `<lastmod>`** — cambios de assets y estilos, no de contenido indexable.
+
+### Dependencias y manifiesto
+
+- `npm audit`: 0 vulnerabilidades (antes 1 alta). `fast-uri` 3.1.3 → 3.1.4, dependencia transitiva de stylelint; solo desarrollo, nunca llegó al sitio.
+- `clean-css-cli` añadido como `devDependency` (build del CSS).
+- `package.json` corregido: `license` decía `ISC` cuando [`LICENSE`](LICENSE) y el README dicen **MIT**; `version` estaba en 1.0.11 y ahora sigue a [`VERSION`](VERSION); `main` apuntaba a un `index.js` inexistente (eliminado); `author` vacío → Rafael Figueredo Oropeza; añadido `private: true` (repo de sitio, no se publica en npm).
+- `package-lock.json` sincronizado; `npm ci` reproduce la instalación sin vulnerabilidades.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.18] - 2026-07-21
 
 ### CSS — una sola hoja bloqueante

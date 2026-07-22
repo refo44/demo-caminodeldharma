@@ -56,7 +56,7 @@ Los ADR aceptados son **inmutables**. Para cambiar una decisión, crear un ADR n
 
 ### Fase 2 (actual): raíz del repo → `public_html`
 
-Ver `README.md`: sitemap, `VERSION`, `CHANGELOG.md`, `npm run lint:css`, ZIP acotado al sitio estático.
+Ver `README.md`: sitemap, `VERSION`, `CHANGELOG.md`, `npm run lint:css`, `npm run build:css` (regenera `main.min.css`), ZIP acotado al sitio estático.
 
 **No subir** `docs/`, `wordpress/`, `scripts/` ni el repo completo.
 

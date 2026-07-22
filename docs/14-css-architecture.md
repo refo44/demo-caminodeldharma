@@ -19,6 +19,8 @@ Define cómo se organiza el CSS del sitio: relación entre theme.json, variables
 
 No hay frameworks (Tailwind, Bootstrap). No hay preprocesadores obligatorios; si se usa uno, la salida es un único bundle encolado. Si `main.css` crece, se permiten parciales en `assets/css/` que se concatenan o importan, manteniendo un único entry point encolado (estilo ITCSS opcional).
 
+**Fuente y artefacto.** `assets/css/main.css` es el **fuente** y el único archivo que se edita. Las páginas enlazan `assets/css/main.min.css`, generado con `npm run build:css` (clean-css). Ambos se versionan: el despliegue es un ZIP manual y el servidor no ejecuta build. Stylelint valida solo el fuente; el artefacto está en `.stylelintignore`. Minificar baja el CSS servido de 9,0 KB a 5,8 KB con Brotli (−36 %), y `main.css` es el único recurso que bloquea el render.
+
 **Compatibilidad de rutas:** En Fase 2 (estático, p. ej. GitHub Pages) el entry point vive en `assets/css/main.css` en la raíz del repo; en WordPress, en `theme/assets/css/main.css`. Misma arquitectura, dos ubicaciones.
 
 ---
@@ -33,6 +35,8 @@ Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
 
 1. **Variables ( :root )**  
    Tokens de 02: `--brand-1` a `--brand-4` (este proyecto usa 4 colores de marca; 02), `--text`, `--link`, `--surface`, `--header-bg`, `--footer-bg`, `--font-display`, `--font-heading`, `--font-body`. Tipografía: **body** Inter (autohospedada en `assets/fonts/inter/`, 02 y 15); **display/headings** MarloweEscapade y Fjalla One para hero y títulos (02 y 15).
+
+   **MarloweEscapade está subsetada.** Solo la usan `.site-name` y `.site-title`, y ambas dicen "Camino del Dharma": su woff2 se subseta a esos 13 caracteres (52,1 KB → 3,4 KB) con `scripts/build-fonts.sh`. Dos consecuencias: (a) si ese texto cambia hay que regenerar el subset o faltarán glifos; (b) MarloweEscapade **no puede** figurar como fallback en `--font-heading`, porque sobre texto arbitrario dibujaría solo algunos glifos y el resto caería a serif, mezclados. Por eso `--font-heading` es `"Fjalla One", serif`.
 
 2. **Base / reset mínimo**  
    Box-sizing, márgenes básicos, tipografía base, enlaces. Prohibido reset agresivo (p. ej. `* { all: unset; }`). Se permite normalize ligero y box-sizing; solo lo necesario para consistencia.
@@ -155,4 +159,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.6
+**Versión:** 1.7

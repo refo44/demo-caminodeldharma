@@ -402,10 +402,13 @@ template {
   font-display: swap;
 }
 
-/* MarloweEscapade — OnlineWebFonts (CC BY 4.0); credit in footer */
+/* MarloweEscapade — OnlineWebFonts (CC BY 4.0); credit in footer.
+   El woff2 está subsetado a los 13 caracteres de "Camino del Dharma" (52,1 KB -> 3,4 KB),
+   los únicos que esta fuente dibuja: .site-name y .site-title (§2 de 14-css-architecture).
+   Si ese texto cambia, regenerar con scripts/build-fonts.sh — si no, faltarán glifos. */
 @font-face {
   font-family: MarloweEscapade;
-  src: url("../fonts/marlowe-escapade/marlowe-escapade.woff2") format("woff2"),
+  src: url("../fonts/marlowe-escapade/marlowe-escapade-subset.woff2") format("woff2"),
        url("../fonts/marlowe-escapade/marlowe-escapade.woff") format("woff"),
        url("../fonts/marlowe-escapade/marlowe-escapade.ttf") format("truetype");
   font-weight: normal;
@@ -446,7 +449,10 @@ template {
 
   /* Typography */
   --font-display: "MarloweEscapade", serif;
-  --font-heading: "Fjalla One", "MarloweEscapade", serif;
+
+  /* MarloweEscapade no va aquí: su woff2 está subsetado a "Camino del Dharma",
+     así que como fallback dejaría glifos sueltos mezclados con serif. */
+  --font-heading: "Fjalla One", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 
   /* Grid & rhythm */

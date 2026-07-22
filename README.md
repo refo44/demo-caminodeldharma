@@ -8,7 +8,7 @@ Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** 
 - CSS3 (tokens, diseño responsivo)
 - JavaScript mínimo con `defer` (menú, galería, accesibilidad)
 - Stylelint como validación obligatoria del CSS
-- Sin proceso de build: archivos estáticos listos para servir; npm se usa únicamente para herramientas de desarrollo
+- Un único paso de build: `npm run build:css` minifica `assets/css/main.css` → `assets/css/main.min.css` (lo que enlazan las páginas). El resto son archivos estáticos listos para servir; npm se usa solo para herramientas de desarrollo
 
 ## Cómo ver el sitio
 
@@ -35,6 +35,18 @@ npm run lint:css
 ```
 
 Este comando debe ejecutarse después de cualquier cambio en `assets/css/` y antes de cerrar una tarea, crear un commit o desplegar. La validación debe finalizar sin errores.
+
+Stylelint valida **solo el fuente** (`main.css`); `main.min.css` está en `.stylelintignore` porque es un artefacto generado.
+
+## Build del CSS
+
+Las páginas enlazan `assets/css/main.min.css`, que se genera desde `assets/css/main.css`:
+
+```bash
+npm run build:css
+```
+
+**Regla:** editar siempre `main.css` (el fuente) y regenerar. Nunca editar `main.min.css` a mano: el siguiente build lo sobrescribe. Ambos se versionan en git, porque el despliegue es un ZIP manual y en el servidor no se ejecuta ningún build.
 
 ## Estructura del proyecto
 
@@ -76,8 +88,8 @@ Despliegue **manual** (ADR 0015). CI/CD pospuesto (ADR 0016). Historial en [`CHA
 Antes de cada despliegue:
 
 1. Actualizar `sitemap.xml` (`<lastmod>` de páginas con contenido indexable modificado; no hace falta si solo cambia infraestructura CSS/JS sin alterar el copy visible).
-2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md); commit de release en git.
-3. `npm run lint:css` (sin errores).
+2. Actualizar [`VERSION`](VERSION) y [`CHANGELOG.md`](CHANGELOG.md); commit de release en git. Sincronizar también `version` en `package.json` (`npm version --no-git-tag-version $(cat VERSION)`); [`VERSION`](VERSION) es la fuente canónica y `package.json` debe seguirla.
+3. `npm run lint:css` (sin errores) y `npm run build:css` (regenera `main.min.css`, que es lo que sirven las páginas). Si se tocó `main.css` y no se regenera, el ZIP sale con CSS viejo.
 4. Etiquetar la versión en git (tag anotado, convención `vX.Y.Z` alineada con `VERSION`):
 
 ```bash
@@ -114,6 +126,7 @@ Desde la raíz del repositorio:
 | -------- | ------------- | ------------ |
 | `scripts/optimize-images.sh` | Optimiza JPEG/PNG en `assets/images/` (tamaño, calidad, metadatos) | [ImageMagick](https://imagemagick.org/) (`brew install imagemagick`) |
 | `scripts/rename-gallery-to-kebab.sh` | Renombra imágenes en `assets/images/galeria/` a `galeria-01.jpg`, `galeria-02.jpg`, … | Ninguno |
+| `scripts/build-fonts.sh` | Regenera `marlowe-escapade-subset.woff2` (subset a "Camino del Dharma", 52,1 KB → 3,4 KB) | `pyftsubset` (`pip install 'fonttools[woff]' brotli`) |
 
 Ejemplo:
 
