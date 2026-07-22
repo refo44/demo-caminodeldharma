@@ -56,7 +56,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 20. `20-layout-principles`
 21. `21-manual-voz-copywriting-editorial`
 23. `23-sistema-editorial`
-24. `24-brief-editorial-blog-y-visibilidad` — brief autosuficiente para el equipo editorial (hallazgo de visibilidad, voz, formato y sugerencia de temas; puede compartirse sin `21` ni `23`)
+24. `24-brief-editorial-blog-y-visibilidad` — brief para el equipo editorial (hallazgo de visibilidad, sugerencia de temas y ritmo de publicación). La voz la define `21` y el formato `23`: el brief remite a ellos en lugar de repetirlos, así que se entrega **junto con** ambos
 
 **Informes SEO (entregables):** `informes-seo/README.md` — dos informes autosuficientes derivados de `.audit/` y redactados para entrega externa: `00-informe-auditoria-seo.md` (general y ejecutivo, para el liderazgo) y `02-auditoria-seo-tecnica.md` (estado de salud del sitio, para el equipo de publicación web). Se entregan junto a `24-brief-editorial-blog-y-visibilidad.md`, que cubre lo editorial. Se re-emiten con cadencia trimestral, por lo que **no llevan prefijo en la cadena lineal**: no son documentos de diseño del proyecto sino mediciones fechadas. Dependen de la auditoría, no de los docs numerados.
 

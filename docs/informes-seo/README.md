@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 00 | [Informe de Auditoría SEO](00-informe-auditoria-seo.md) | General y ejecutivo: visibilidad, autoridad, comparación con otras comunidades, plan de acción y decisiones pendientes | Liderazgo de la comunidad |
 | 02 | [Auditoría SEO Técnica](02-auditoria-seo-tecnica.md) | Estado de salud del sitio: indexación, velocidad, datos estructurados, seguridad, protocolo de medición | Equipo de publicación web |
-| 24 | [Brief editorial](../24-brief-editorial-blog-y-visibilidad.md) | Qué escribir en el blog, con qué voz y en qué orden | Equipo editorial |
+| 24 | [Brief editorial](../24-brief-editorial-blog-y-visibilidad.md) | Qué escribir en el blog y en qué orden (la voz la define `21`, el formato `23`) | Equipo editorial |
 
 **No se solapan y no compiten.** El 00 responde *qué se encontró y qué hay que decidir*; el 02, *cómo está construido el sitio*; el 24, *qué escribir*. Cada uno es autosuficiente: ninguno depende de `.audit/`, de este README ni de los otros dos para leerse, y los tres se remiten entre sí donde corresponde.
 

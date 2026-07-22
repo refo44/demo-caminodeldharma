@@ -4,10 +4,6 @@
 **De:** Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> — auditoría SEO del sitio (julio 2026); insumos y sugerencias, no decisiones editoriales  
 **Fecha:** 2026-07-20  
 
-> **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales: aquí solo hay diagnóstico y sugerencias.
->
-> **Alcance:** solo **entradas del blog** (`/blog/…`). **Sí** incluye artículos o notas del blog sobre una ciudad (p. ej. “budismo en Cali”), si hay datos reales. **No** incluye **páginas nuevas del sitio** fuera del blog — como una sección `/sanghas/` con una página fija por ciudad — ni cambios en Inicio/Comunidad/Linaje/Práctica; eso es otro trabajo (comunidad y equipo técnico), ajeno a este brief.
-
 ---
 
 ## 1. Resumen
@@ -135,20 +131,17 @@ Eso mide si las sugerencias del audit fueron útiles; **no califica** el trabajo
 
 ## 5. Qué es una “pieza”
 
-**Pieza = artículo del blog**: una entrada nueva en la sección Blog del sitio, con su propia dirección (como la entrada sobre la sangha y la hiperconexión).
+**Pieza = artículo del blog**: una entrada nueva en la sección Blog, con su propia dirección (como la entrada actual sobre la sangha y la hiperconexión). Cada pieza es una dirección más que Google puede mostrar — por eso este brief cuenta piezas y no palabras.
 
-**No tocar:** textos fijos de Inicio, Comunidad, Linaje y Práctica. Son copy oficial de la comunidad y **no se parafrasean**; el blog **complementa**, no sustituye.
+Los **tipos de pieza** y su extensión orientativa están definidos en el **Sistema editorial** (`23` §4.0 y §4.3): reflexión, artículo educativo y nota de contexto. Lo que añade la mirada SEO es cómo se comporta cada uno ante las búsquedas:
 
-En el blog caben:
+| Tipo de pieza (`23` §4.0) | Qué aporta en visibilidad |
+|---|---|
+| **Artículo educativo** | El que más búsquedas nuevas atrae: responde preguntas que hoy ninguna página del sitio responde |
+| **Nota de contexto** | La única vía para las búsquedas por ciudad, y solo si hay datos reales que contar |
+| **Reflexión** | Acompaña a quien ya llegó; rara vez atrae búsquedas nuevas |
 
-| Tipo | Para qué sirve | Ejemplo |
-|---|---|---|
-| **Reflexión** | Acompañar, profundizar en una experiencia o enseñanza | La entrada actual sobre hiperconexión y sangha |
-| **Artículo educativo** | Explicar un tema a quien no conoce la tradición | “¿Qué es el budismo Chan en la vida cotidiana?” |
-| **Nota de contexto** | Situar un hecho, lugar o actividad con datos reales | Nota sobre práctica en Cali, Medellín, Bogotá o Barranquilla — **solo** si hay información verificable |
-| **Relato o entrevista** | Mostrar cómo vive la práctica alguien de la sangha, con su voz | “Cómo llegué a la meditación semanal” (con permiso de la persona entrevistada) |
-
-Las entrevistas y relatos de miembros **no sustituyen** los artículos educativos del §6: ayudan a que quien llegue **sienta** la comunidad, pero suelen atraer menos búsquedas nuevas que un texto que responde “¿qué es el Chan?”. Pueden combinarse bien: primero el tema, después un relato que lo ilustre.
+Si la comunidad decide publicar **relatos o entrevistas** de miembros (§9), conviene saber que su valor es sobre todo de acogida: suman en buscadores cuando el título nombra el tema —práctica en línea, retiro, Chan— y no solo a la persona. **No sustituyen** a los artículos educativos del §6, aunque se combinan bien: primero el tema, después un relato que lo ilustre.
 
 ---
 
@@ -206,7 +199,7 @@ En entrevistas y relatos conviene que el **título nombre el tema** (meditación
 | Hecho | Fuente | Qué implica aquí |
 |---|---|---|
 | El ritmo de publicación **no es señal de posicionamiento** | Declaraciones de John Mueller (Google) | Un calendario apretado no compra posiciones |
-| El **presupuesto de rastreo** solo concierne a sitios desde ~10.000 páginas | Documentación oficial de Google | Con 14 páginas, publicar más rápido no hace que Google pase más | 
+| El **presupuesto de rastreo** —cuánto alcanza a revisar Google de un sitio web— solo llega a preocupar a sitios de unas 10.000 direcciones en adelante | Documentación oficial de Google | El sitio web entero son **14 direcciones**, y Google ya las revisa todas. Publicar más rápido no hace que las revise más a menudo |
 | Un artículo tarda **de 2 a 6 meses** en **posicionarse en Google** para consultas de baja competencia — publicarlo y compartirlo, en cambio, es inmediato | Estudios de sector (Ahrefs, Semrush) | El resultado llega por calendario, no por ritmo |
 | El **volumen sin valor** está tipificado como *scaled content abuse* | Políticas de spam de Google | Publicar de más tiene riesgo; publicar despacio, no |
 
@@ -230,98 +223,18 @@ Publicar cada semana empujaría en dirección contraria: más presión sobre un 
 
 ---
 
-## 7. Voz y formato (criterios de la comunidad)
+## 7. Voz y formato: dónde están definidos
 
-Lo siguiente resume **cómo debe sonar y verse un artículo del blog** en Camino del Dharma. No hace falta otro manual para publicar con coherencia.
+La voz de la comunidad y el formato de una entrada **ya están definidos**, y este brief no los repite: hacerlo crearía dos fuentes para la misma regla, y a la primera actualización dejarían de coincidir.
 
-### 7.1 Cómo habla la comunidad
-
-La comunicación **no vende**. **Invita a practicar.**
-
-Tres cualidades obligatorias:
-
-| Cualidad | Significa | Evita |
+| Para saber… | Documento | Cubre |
 |---|---|---|
-| **Sobria** | Nombra con precisión, sin exceso | Superlativos, dramatización, grandilocuencia |
-| **Acogedora** | Abre espacio, acompaña | Frialdad institucional, entusiasmo artificial |
-| **Clara** | Va al punto, lenguaje concreto | Ambigüedad, párrafos inflados |
+| Cómo debe **sonar** el texto | **Manual de voz y copywriting editorial** (`21`) | Atributos de la voz, principios de escritura, léxico permitido y prohibido, llamadas a la acción aprobadas, la grafía *Buddhismo* / *budismo* y el checklist de revisión editorial |
+| Cómo debe **estructurarse** la entrada | **Sistema editorial** (`23`) | Tipos de intención, extensión orientativa según el tipo, estructura con subtítulos, extracto del listado y presentación en listado y en detalle |
 
-### 7.2 Principios al escribir
+Lo único que este brief añade sobre la forma del texto es lo que responde a una razón **de búsqueda**, y ya está en el §3: título claro, respuesta directa en el primer párrafo y enlaces internos hacia el artículo. No contradice a los documentos anteriores; es la misma recomendación por otro motivo.
 
-1. **Orientar antes que atraer** — El primer párrafo ubica: de qué va el texto, no “engancha” con marketing.
-2. **Presentar, no promocionar** — Se muestra la práctica; no se prometen resultados.
-3. **Decir menos, pero mejor** — La longitud sigue al tema, no a una meta de palabras.
-4. **Sin urgencia** — No “cupos limitados”, “no te lo pierdas”, “transforma tu vida ya”.
-
-Primero responder, en lo posible:
-
-- qué es esto;
-- cómo se practica aquí;
-- cómo puede acercarse una persona.
-
-### 7.3 Palabras y tono
-
-**Invitaciones apropiadas:** Practica con nosotros · Participar · Conocer · Explorar · Contactar · Inscribirme (eventos) · Donar.
-
-**Evitar** (suenan a marketing, tienda o red social): increíble · imperdible · descubre · únete (si suena comercial) · suscríbete · compra · exclusivo · contenido premium · transforma tu vida ya.
-
-**Términos de la tradición** (usar con consistencia cuando haga falta): Buddhismo · Dharma · Chan · Tierra Pura · Mahāyāna · sangha · meditación · recitación.
-
-**Buddhismo y budismo:** la comunidad escribe *Buddhismo* con doble d. Mucha gente busca *budismo* con una d — también es válido. En el **texto visible** del artículo se usa *Buddhismo*; en el **resumen corto** que ve Google al compartir el enlace puede usarse *budismo* si ayuda a quien busca así. **Nunca** ocultar palabras con trucos (texto invisible, etc.).
-
-**El blog puede sonar** reflexivo, informativo o **conversacional** (entrevistas), según la pieza; siempre sobrio.
-
-**Entrevistas y relatos de miembros:**
-
-- Pedir **permiso por escrito** (o acuerdo claro) antes de publicar nombre, foto o cita.
-- El eje es la **práctica** y la experiencia en la sangha — no currículum, logros externos ni “antes y después”.
-- Evitar tono de testimonial comercial (“cambió mi vida para siempre”, “no te lo pierdas”).
-- Quien entrevista puede editar por claridad y longitud; la persona revisa el texto final.
-
-### 7.4 Formato de una entrada
-
-**En el listado del blog:** título + extracto de una o dos oraciones (resume la idea).
-
-**En la página del artículo:**
-
-- un solo título principal;
-- párrafo inicial que **responda** la pregunta o el tema;
-- subtítulos (`h2`) si el texto lo necesita — no decorativos;
-- cierre breve, sin moraleja emotiva forzada.
-
-**Extensión orientativa** (flexible según el tema):
-
-| Tipo | Palabras aprox. | Lectura |
-|---|---|---|
-| Artículo breve | 150 – 400 | 1 – 2 min |
-| Artículo estándar | 400 – 1 000 | 2 – 5 min |
-| En profundidad | 1 000 – 2 000 | 5 – 10 min |
-
-Una **sola idea principal** por artículo. Claridad importa más que extensión.
-
-**Al compartir** en WhatsApp o redes, la línea de contexto puede ser:
-
-- `Reflexión · [Autor] · Camino del Dharma`
-- `Artículo · [Autor] · Camino del Dharma`
-- `Nota · [Autor] · Camino del Dharma`
-- `Entrevista · [Autor o entrevistado] · Camino del Dharma`
-- `Relato · [Autor] · Camino del Dharma`
-
-(según el tipo de pieza de la tabla en §5)
-
-### 7.5 Checklist antes de publicar
-
-- ¿Suena a **espacio de acogida**?
-- ¿Está escrito con **sobriedad**?
-- ¿Se **entiende a la primera**?
-- ¿Evita marketing, autoayuda y urgencia?
-- ¿Respeta la terminología de la comunidad?
-- ¿Dice **solo lo necesario**?
-- Si hay **entrevista o relato personal**: ¿hay permiso y el foco está en la práctica, no en autopromoción?
-
-Si alguna respuesta es no, el texto aún no está listo.
-
-El audit SEO **coincide**: el blog debe ser **más útil y más claro**, no “SEO agresivo”.
+**El punto donde voz y búsqueda se rozan**, por si surge la duda: la comunidad escribe *Buddhismo* con doble d, y quien busca en Google suele escribir *budismo*. El manual (`21` §14) ya resuelve el caso —la voz conserva la doble d, los metadatos pensados para el buscador pueden usar la forma extendida, y nunca se esconden palabras—. No hay que elegir entre sonar como la comunidad y ser encontrable.
 
 ---
 
@@ -355,22 +268,7 @@ No hay nada que “aprobar” con quien hizo el audit SEO.
 
 ---
 
-## 10. Flujo posible (orientativo)
-
-Este flujo puede adaptarse u omitirse:
-
-```
-Conversación interna del equipo editorial
-    → Calendario y responsables
-    → Borrador → revisión de voz (§7) → aprobación interna
-    → Entrega al equipo de publicación web
-    → Enlaces desde otras páginas del sitio, si se considera útil
-    → Siguientes artículos, a su ritmo
-```
-
----
-
-## 11. Preguntas frecuentes
+## 10. Preguntas frecuentes
 
 **¿Hay que escribir “para Google”?**  
 No. Se escribe para **la persona que busca orientación**. Google muestra lo claro y útil.
@@ -387,9 +285,6 @@ Sí es posible seguir publicando reflexiones. El audit **sugiere** priorizar art
 **¿Entrevistas a miembros — ayudan en Google?**  
 Un poco, sobre todo si el título habla del **tema** (práctica online, retiro, Chan), no solo del nombre. Su valor principal es **acogida**: que alguien vea cómo es practicar aquí. No hace falta una serie de perfiles; una entrevista bien hecha cada cierto tiempo puede bastar.
 
-**¿Quién sube el artículo al sitio?**  
-El equipo de publicación web. La persona encargada entrega el texto revisado.
-
 **¿Artículos sobre Chan o Tierra Pura — hace falta si ya somos #1?**  
 En Google Colombia (julio 2026) el sitio **ya sale primero** en *“budismo chan colombia”* y *“budismo tierra pura colombia”* gracias a Inicio y Linaje. **No es urgente** repetir eso en el blog. Un artículo **puede** complementar (más profundidad, otro estilo), pero la **prioridad** del audit para el blog está en **meditación online** y **ciudades**, donde hoy **no** aparecen.
 
@@ -399,12 +294,9 @@ Sí. Es insumo del audit SEO, no mandato editorial.
 **¿Artículos del blog sobre Cali, Medellín, Bogotá o Barranquilla?**  
 Sí, pueden encajar: son entradas en `/blog/` sobre práctica en esa ciudad, con datos concretos (modalidad, contacto, frecuencia). La persona encargada decide en cuáles ciudades hay algo real que contar. **No** tiene que ver con crear una sección nueva del sitio (`/sanghas/` u otra) — eso es otro tema.
 
-**¿Este brief pide crear la sección `/sanghas/` en el sitio?**  
-**No.** Aquí solo se habla de **textos para el blog**.
-
 ---
 
-## 12. Cierre
+## 11. Cierre
 
 El sitio **ya posiciona bien** la marca y el nicho Chan/Tierra Pura en Colombia. El audit sugiere que el blog, **si la persona encargada lo ve oportuno**, ataque sobre todo las **brechas**: **meditación online en español**, **budismo + ciudad** y, en segundo plano, profundizar temas que Inicio/Linaje ya cubren.
 

@@ -10,7 +10,6 @@
 | **Versión en producción** | v1.0.19 (`/galeria` pendiente de despliegue) |
 | **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
-| **Naturaleza** | Estado de salud técnica del sitio |
 | **Destinatario** | Equipo de publicación web |
 
 > **Alcance:** indexación y rastreo, higiene del índice, rendimiento, datos estructurados, seguridad y protocolo de medición. Cada hallazgo lleva estado, esfuerzo estimado y criterio de aceptación.
