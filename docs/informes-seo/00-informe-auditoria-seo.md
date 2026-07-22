@@ -176,7 +176,16 @@ Puede haber actividad confirmada en una ciudad y aun así decidirse no publicarl
 
 **Más páginas no es mejor; mejores páginas sí.** Conviene empezar por las ciudades donde haya material suficiente —encuentros ya celebrados, fotos, personas de contacto— y dejar las demás para cuando lo haya.
 
-**Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas. Son dos vehículos distintos y también hay que elegir entre ellos: un artículo en el blog es más liviano y reversible; una sección propia es un compromiso mayor de mantenimiento.
+**Qué desbloquea:** contenido orientado a cada ciudad. Hay **dos formas de hacerlo**, y también hay que elegir entre ellas, porque no cuestan lo mismo ni se deshacen igual:
+
+| | Cómo quedaría la dirección | Qué implica |
+|---|---|---|
+| **Artículo en el blog** | `caminodeldharma.org/blog/budismo-en-cali` | Lo liviano y reversible. Es una entrada más del blog: si la actividad en esa ciudad cambia, se actualiza o se retira sin tocar la estructura del sitio |
+| **Sección propia de sanghas** | `caminodeldharma.org/sanghas/cali` | Un compromiso mayor. Implica una sección nueva —hoy no existe— con una página fija por ciudad, que hay que mantener al día indefinidamente |
+
+**La recomendación es empezar por el blog.** Una dirección permanente como `/sanghas/cali` le promete al visitante una presencia estable en esa ciudad; conviene crearla cuando esa estabilidad esté demostrada, no antes. El artículo permite decir lo mismo sin comprometer al sitio.
+
+*(Las direcciones van sin barra al final, siguiendo la convención ya establecida en el sitio.)*
 
 ### Publicar una política de privacidad
 
