@@ -58,7 +58,7 @@ Reglas:
 **Riesgos:**
 
 - Configuración inicial de SSH y secrets.
-- Coste de minutos de Actions (bajo para este proyecto).
+- Costo de minutos de Actions (bajo para este proyecto).
 
 **Trabajo futuro:**
 

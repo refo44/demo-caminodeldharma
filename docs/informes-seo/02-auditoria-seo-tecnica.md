@@ -148,7 +148,7 @@ No se enviaron formularios, no se crearon cuentas, no se resolvieron CAPTCHAs y 
 
 Ocho rastreadores verificados **sin bloqueo ni contenido diferenciado**: GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Googlebot y Bingbot.
 
-Coste de contexto por página: **400–1 600 tokens** (bajo). Cero patrones de inyección de instrucciones. Lighthouse otorga **3 de 3** en navegación agéntica, tanto en móvil como en escritorio.
+Costo de contexto por página: **400–1 600 tokens** (bajo). Cero patrones de inyección de instrucciones. Lighthouse otorga **3 de 3** en navegación agéntica, tanto en móvil como en escritorio.
 
 **No hay ninguna acción pendiente en esta área.**
 
@@ -302,7 +302,8 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 | PERF-002 | Baja | CSS y JS con caché de 7 días **sin versionado**: un despliegue puede servir archivos obsoletos hasta una semana | **Abierto.** Se dio por hecho el 20/07 y no lo estaba — ver nota abajo |
 | A11Y | Baja | Galería renderizada solo por JavaScript, sin alternativa `noscript` | **Abierto.** Se dio por hecho el 20/07 y no lo estaba — ver nota abajo |
 | SEC-003 | Baja | Ausencia de `/.well-known/security.txt` pese a mantenerse `SECURITY.md` | Abierto |
-| PRIV-001 | Baja | Diez vídeos incrustados (8 YouTube + 2 Vimeo) sin variante `nocookie`; política de privacidad pendiente | Abierto |
+| PRIV-001 | Baja | Diez vídeos incrustados (8 YouTube + 2 Vimeo) sin variante `nocookie` | Abierto |
+| PRIV-001b | Baja | **Política de privacidad pendiente.** Independiente de las cookies: la Ley 1581/2012 cubre el tratamiento de datos personales, y el contacto por WhatsApp y correo recoge datos. **Además hay visitantes desde España** (Search Console: 1 clic / 2 impresiones), lo que abre la pregunta del RGPD | Abierto — **requiere asesoría legal**, ver §9 |
 | INFO-001 | Informativa | Cadena de redirección de dos saltos en la entrada `www` por HTTP; JavaScript servido como `application/x-javascript` | Abierto |
 
 ### Corrección de estados (21 de julio)
@@ -362,7 +363,49 @@ El motivo es de utilidad, no ideológico: sin datos de campo en el conjunto de G
 
 **Verificado:** el sitio en producción **no sirve ninguna cookie propia**. Es una posición poco común que conviene preservar: elimina la necesidad de banner, reduce la superficie legal y encaja con el registro editorial de la comunidad.
 
-**Queda pendiente** el cambio de los diez vídeos incrustados a variantes sin cookies, y la publicación de la política de privacidad —recomendable con independencia de las cookies, porque la normativa colombiana de protección de datos cubre el tratamiento de datos personales en general—.
+**Queda pendiente** el cambio de los diez vídeos incrustados a variantes sin cookies, y la publicación de la política de privacidad.
+
+### Política de privacidad — por qué sigue siendo recomendable sin cookies
+
+Es el punto que más se malinterpreta al leer «el sitio no usa cookies», así que conviene dejarlo explícito.
+
+Descartar la analítica resolvió el problema **de las cookies**: sin cookies propias no hace falta banner de consentimiento. Pero eso **no cubre el tratamiento de datos personales**, que es un asunto distinto y más amplio.
+
+| | Cookies | Datos personales |
+|---|---|---|
+| Qué exige | Consentimiento previo para las no esenciales | Informar del tratamiento: qué se recoge, para qué, quién responde y cómo ejercer derechos |
+| Estado en este sitio | **Resuelto** — cero cookies propias, verificado en producción | **Abierto** |
+
+**La Ley 1581/2012 cubre el tratamiento de datos personales en general, no solo el que ocurre por cookies.** Y el sitio **sí recoge datos personales**: tras retirarse el formulario sin backend (FUNC-001), la vía de contacto son **WhatsApp y correo**, que reciben nombre, teléfono y el contenido de cada mensaje.
+
+Es decir: la recogida de datos no desapareció con las cookies — **cambió de canal**.
+
+> **Alcance.** Este informe constata un hecho técnico —hay recogida de datos personales por canales de contacto— y señala que la normativa aplicable no depende de la presencia de cookies. **La conclusión jurídica corresponde a asesoría legal, no a esta decisión técnica.** No se ofrece aquí ni el texto de la política ni una valoración de cumplimiento.
+
+Concuerda con lo ya registrado en **ADR 0019** («Costos aceptados») y en `.audit/decisions.md`: la decisión sobre analítica **no elimina** la política de privacidad.
+
+### RGPD — hay visitantes desde España
+
+**El dato, y su fuente.** Search Console registra **1 clic y 2 impresiones desde España** sobre un total de 9 clics y 35 impresiones (2026-07-20). Es un volumen mínimo, pero **es tráfico real y está documentado** — y conviene subrayar que el dato viene de Search Console, no de analítica: el sitio no tiene, y aun así la procedencia se conoce.
+
+Esto abre una segunda pregunta, distinta de la de la Ley 1581/2012. Lo que sigue **no la responde**: ordena los hechos que necesitaría quien deba responderla.
+
+**Cómo se estructura la pregunta.** El RGPD se aplica fuera de la UE por dos vías (art. 3.2), y conviene mirarlas por separado porque este sitio está en posiciones muy distintas frente a cada una:
+
+| Vía del art. 3.2 | Situación de este sitio |
+|---|---|
+| **(b) Observar el comportamiento** de personas en la UE | **No se da, y es verificable.** Cero cookies propias, sin analítica, sin píxeles, sin perfilado. Nada rastrea a nadie |
+| **(a) Ofrecer bienes o servicios** a personas en la UE | **Es la vía que hay que valorar.** No es automática: el considerando 23 dice que la mera accesibilidad del sitio no basta; hace falta una **intención aparente** de dirigirse a personas de la UE |
+
+**Elementos que un análisis jurídico querría pesar**, tal como están hoy en el sitio:
+
+- **En contra de esa intención:** `areaServed` declarado **Colombia** en los datos estructurados; teléfono +57; sin transacciones ni área privada; todo el contenido referido a Colombia; los encuentros presenciales son en Barranquilla, Bogotá, Cali y Medellín.
+- **El idioma no es indicio aquí.** El sitio está en español porque es la lengua de Colombia, no como señal de dirigirse a España. Distinto sería ofrecer precios en euros o un teléfono español.
+- **El elemento a valorar:** la **meditación semanal en línea por Zoom no tiene restricción geográfica**. Es una actividad recurrente y abierta a la que alguien desde España puede sumarse, y la vía de acceso es WhatsApp — es decir, con recogida de datos personales.
+
+**Lo práctico, que sí es técnico.** Las dos normas piden en gran medida lo mismo: informar de qué datos se recogen, para qué, quién responde y cómo ejercer derechos. **Una política de privacidad bien redactada cubre la mayor parte de ambas.** El RGPD añade elementos propios —base jurídica, plazos de conservación, algunos derechos adicionales— que quien la redacte sabrá incorporar si concluye que aplica.
+
+> **Alcance, otra vez.** Determinar si el RGPD resulta aplicable a esta comunidad **es una conclusión jurídica y corresponde a asesoría legal.** Este informe aporta los hechos verificables —volumen y procedencia del tráfico, ausencia total de rastreo, ámbito declarado del sitio, carácter global de la actividad en línea— para que esa valoración se haga sobre datos y no sobre suposiciones.
 
 **Si algún día hiciera falta medir comportamiento**, la vía será analítica sin cookies, nunca volver a una herramienta con seguimiento.
 
@@ -441,6 +484,7 @@ Sin este protocolo, comparar la medición base con las siguientes no significa n
 | 8 | Corregir el tipo MIME de JavaScript | 15 min | Abierto |
 | 9 | Verificar consolidación de host y protocolo en Search Console | 15 min | **A las 4–8 semanas** |
 | — | HSTS Fase 1 (`max-age=604800`) | 30 min | **Aplazado** — post-WordPress |
+| — | **Publicar la política de privacidad** | — | **Requiere decisión y texto.** No es tarea técnica: la conclusión jurídica corresponde a asesoría legal, y ahora cubre dos normas (Ley 1581/2012 y, a valorar, RGPD por visitantes desde España). Recomendable aunque no haya cookies — ver §9 |
 | — | Formulario con backend | — | **Bloqueado** — decisión de la comunidad |
 
 ---

@@ -24,10 +24,25 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - `docs/informes-seo/`: nueva §16 en el informe técnico con el trabajo de rendimiento, y corrección de estados en §8 y §12. Las cifras de Lighthouse del 20 de julio **se conservan fechadas**, sin recalcular: la cuota de la API de PageSpeed estaba agotada.
 - **No se modificó `.audit/raw/` ni `evidence-ledger.jsonl`**: son la evidencia congelada de la auditoría del 2026-07-19.
 
+### Documentación de WordPress — decisión sobre el visor ampliado
+
+- **ADR 0021 (nuevo):** el lightbox de la galería será el **nativo del bloque de Gutenberg** (WP 6.4+). No se implementa visor propio en la maqueta estática ni se instalará plugin. Fija además la arquitectura de imágenes: miniaturas para el grid, originales para el visor — por eso los 36 originales **no se borran**.
+- `03-wordpress-content-model.md` §5.1 (nueva): cómo se modela la galería en WordPress y qué se migra.
+- `12-theme-file-structure.md`: `gallery.js` **no viaja al tema**; la galería pasa a bloque de Gutenberg.
+- `15-assets-strategy.md`, `17-orden-implementacion.md`, `19-accesibilidad-estandares.md`, `migracion-static-wordpress.md`: alineados con la decisión.
+- Nota de orden registrada: si alguna vez se añadiera un visor propio a la maqueta, **primero** hay que cerrar TASK-0010 (AEO-001), o se agrava la dependencia de JavaScript que ese hallazgo señala.
+
+### Informes SEO — política de privacidad
+
+- Precisado en ambos informes por qué **la política de privacidad sigue siendo recomendable aunque el sitio no use cookies**: la Ley 1581/2012 cubre el tratamiento de datos personales en general, y tras retirarse el formulario sin backend (FUNC-001) el contacto por WhatsApp y correo sigue recogiendo nombre, teléfono y mensajes. La recogida no desapareció con las cookies — cambió de canal.
+- Nuevo apartado en §9 del informe técnico; entrada en §5 del informe general (donde se pide lo que depende de la comunidad); hallazgo **PRIV-001b** separado del de los vídeos; y fila propia en el plan de acción de §12, que antes solo recogía la mitad de PRIV-001.
+- En los tres sitios queda explícito que **la conclusión jurídica corresponde a asesoría legal, no a la auditoría técnica**.
+- **RGPD añadido al análisis.** Search Console documenta visitantes desde España (1 clic / 2 impresiones de 9 / 35 totales), así que los informes plantean también esa norma. Se separan las dos vías del art. 3.2: *observar el comportamiento* **no aplica y es demostrable** (cero cookies, sin analítica, sin perfilado — ADR 0019 protege también en este frente); *ofrecer servicios* se deja planteada con sus elementos, señalando que la meditación por Zoom no tiene restricción geográfica. **No se emite conclusión jurídica**: se aportan los hechos verificables para que la valoración se haga sobre datos.
+
 ### Pendiente
 
 - Relanzar PageSpeed Insights tras desplegar y actualizar §6 del informe técnico.
-- **Deriva repo↔producción:** `assets/images/logo.png` es 7.423 b en el repo (grises+alfa) y 10.079 b en producción (RGBA). Ambos 240×240 y válidos, pero no son el mismo fichero.
+- **Deriva repo↔producción:** `assets/images/logo.png` es 7.423 b en el repo (grises+alfa) y 10.079 b en producción (RGBA). Ambos 240×240 y válidos, pero no son el mismo archivo.
 
 ### Estado
 

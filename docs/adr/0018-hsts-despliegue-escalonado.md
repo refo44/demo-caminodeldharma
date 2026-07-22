@@ -57,7 +57,7 @@ Registrar cada cambio de fase en `CHANGELOG.md` con fecha y commit de despliegue
 - Si hay un error de TLS o redirect, la política expira en días (Fase 1), no en un año.
 - Camino claro hacia `max-age=31536000` cuando el riesgo operativo baje.
 
-**Costes / riesgos:**
+**Costos / riesgos:**
 
 - Protección HSTS más débil en Fase 1 que con un año (ventana de downgrade mayor para visitantes que no re-visitan en la semana).
 - Requiere disciplina: no olvidar la subida a Fase 2 tras el corte WordPress (checklist en `17-orden-implementacion` § Transición y checklist pre-lanzamiento).

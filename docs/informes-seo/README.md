@@ -41,12 +41,14 @@ Los dos informes se revisaron tras el despliegue de **v1.0.15 y v1.0.16**:
 - **Listado de eventos** agrupado por año con encabezados reales y carga diferida de imágenes.
 - **FUNC-003**: enlaces de navegación que resolvían a la raíz por usar ruta relativa bajo la política canónica sin barra final. Afectaba a `/practica/videos` **desde su publicación**. Segunda aparición de la misma causa que FUNC-002 → regla elevada a **ADR 0008** y añadida al checklist del corte a WordPress.
 
-Lo detectó el propietario al pulsar el enlace, no la auditoría.
+Lo detectó el propietario al hacer clic en el enlace, no la auditoría.
 
 ### Segunda revisión del 21 de julio (v1.0.18–v1.0.19)
 
 - **Nueva §16 del informe 02** con el trabajo de rendimiento: una sola hoja de estilos bloqueante, CSS minificado, tipografía subsetada (52,1 → 3,4 KB) e imágenes adaptadas. Cierra 3 de las 4 oportunidades del cuadro de §6.
 - **Corrección de estados en §8 y §12.** Dos hallazgos que constaban resueltos —**PERF-002** (versionado de CSS/JS) y **A11Y** (galería sin `noscript`)— **no lo estaban**. El cierre del despliegue del 20 de julio se hizo por confirmación global, sin verificar tarea por tarea; afectó a cuatro tareas. Detalle en `.audit/implementation/results/DEPLOY-v1.0.14.md`.
+- **Política de privacidad, precisada en ambos informes.** Que se descartara la analítica resolvió lo *de las cookies*, no el **tratamiento de datos personales**: la Ley 1581/2012 lo cubre en general, y tras retirarse el formulario el contacto por WhatsApp y correo sigue recogiendo datos. Nuevo apartado en §9 del informe 02, entrada en §5 del informe 00, hallazgo **PRIV-001b** y fila propia en el plan de §12. **La conclusión jurídica queda explícitamente fuera del alcance de la auditoría.**
+- **RGPD incorporado**, a raíz de los visitantes desde España que registra Search Console (1 clic / 2 impresiones de 9 / 35). Se separan las dos vías del art. 3.2: la de *observar el comportamiento* **no aplica y es verificable** (cero cookies, sin analítica, sin perfilado — la decisión de ADR 0019 protege también aquí); la de *ofrecer servicios* queda planteada con sus elementos a favor y en contra, sin resolverla. La meditación por Zoom, sin restricción geográfica, es el elemento a valorar.
 - **Las cifras de Lighthouse de §6 no se recalcularon**: la cuota diaria de la API de PageSpeed estaba agotada. Lo de §16 son mediciones directas de recursos en producción. **Queda pendiente relanzar PageSpeed** tras desplegar el cambio de `/galeria`.
 
 Estas dos revisiones siguen la regla de la sección siguiente: actualizar por secciones y conservar fechada la medición original, en lugar de reescribir cifras del 20 de julio.

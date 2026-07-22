@@ -109,6 +109,7 @@ camino-del-dharma/
 │   │   └── main.css       ← estilos reales (layout, lectura, componentes)
 │   ├── js/
 │   │   └── main.js       ← navegación, accesibilidad; se encola en footer (no bloquea render); defer opcional vía script_loader_tag (14, 17)
+│                            NO se migra gallery.js: la galería pasa a bloque de Gutenberg (ADR 0021)
 │   ├── fonts/
 │   ├── icons/
 │   ├── images/
@@ -229,6 +230,7 @@ Estructura recomendada si se necesita crecer:
 ### 11.5 Performance y accesibilidad (alineado con Fase 2)
 
 - **CSS/JS mínimos:** `main.css` + `main.js` (si aplica), sin frameworks. Scripts con carga en footer (o defer vía `script_loader_tag`) y sin lógica compleja.
+- **`gallery.js` no se migra.** En la maqueta estática construye el grid, la paginación y las miniaturas de `/galeria`. En WordPress esa función la asume el **bloque de galería de Gutenberg**, que además aporta el **lightbox nativo** ("Ampliar al hacer clic", WP 6.4+). No se implementa visor propio ni se instala plugin para ello: **ADR 0021**.
 - **Accesibilidad preservada:** no romper focus visible, navegación por teclado, contraste y estructura semántica de la maqueta estática (19 y 20).
 - **No animaciones decorativas en lectura:** coherente con la regla contemplativa (18).
 

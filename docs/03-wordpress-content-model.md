@@ -176,13 +176,32 @@ En la maqueta estática estos valores se muestran como etiqueta encima del títu
 - `page-linaje.php`: El linaje
 - `page-practica.php`: Práctica y actividades
 - `page-eventos.php` o `archive-event.php`: Eventos (condicional)
-- `page-galeria.php`: Galería
+- `page-galeria.php`: Galería — ver §5.1
 - `page-donaciones.php`: Contribuir (donaciones)
 - `page-contacto.php`: Contacto
 - `home.php` / `index.php`: Blog (según modelo)
 - `single-event.php`: Evento individual (si aplica)
 - `page.php`: Fallback para páginas
 - `404.php`: Página no encontrada (estado; copy en 08)
+
+### 5.1 Galería — bloque de Gutenberg, con lightbox nativo
+
+La galería **no se reimplementa** en el tema. Decisión registrada en **ADR 0021**.
+
+| | Maqueta estática (hoy) | WordPress (destino) |
+|---|---|---|
+| Grid y paginación | `assets/js/gallery.js` + JSON embebido | **Bloque de galería de Gutenberg** |
+| Miniaturas | `assets/images/galeria/thumbs/` (300w/600w, generadas a mano) | Tamaños derivados que genera la biblioteca de medios |
+| Visor ampliado | **No existe** | **Lightbox nativo** del bloque ("Ampliar al hacer clic", WP 6.4+) |
+
+**Consecuencias para la migración:**
+
+- `gallery.js` **no viaja al tema** (ver `12-theme-file-structure` §11.5).
+- Los **36 originales** de `assets/images/galeria/` se suben a la biblioteca de medios; WordPress genera sus propios tamaños. Las miniaturas manuales de `thumbs/` **no se migran**: son una solución provisional de la etapa estática.
+- **No se instala plugin de lightbox.** El núcleo ya lo cubre; un plugin añadiría superficie de mantenimiento para algo que el núcleo ya resuelve.
+- El bloque de galería renderiza en servidor, lo que **resuelve de paso AEO-001** (hoy la galería estática es invisible sin JavaScript).
+
+**Accesibilidad:** el lightbox del núcleo ya trae gestión de foco, cierre con `Esc` y ARIA. Si en algún momento se sustituyera por uno propio, debería cumplir `19-accesibilidad-estandares` y seguir el patrón `.share-dialog` que ya existe en el proyecto.
 
 ---
 

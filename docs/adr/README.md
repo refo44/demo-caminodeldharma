@@ -114,6 +114,7 @@ Documentos, issues, commits o ADR relacionados.
 | CI/CD pospuesto | [0016](0016-automatizacion-ci-cd-pospuesta.md) (implementación de [0006](0006-github-actions-para-despliegue.md) diferida) |
 | HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) y [0018](0018-hsts-despliegue-escalonado.md) (históricos), [0020](0020-hsts-aplazado-hasta-wordpress.md) (vigente) |
 | Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
+| Lightbox de la galería | [0021](0021-lightbox-galeria-nativo-wordpress.md) — visor nativo de Gutenberg; no se implementa uno propio en la maqueta |
 
 ---
 

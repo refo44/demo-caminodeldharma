@@ -57,9 +57,9 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
 
 | Alternativa | Decisión |
 | ----------- | -------- |
-| **Reactivar GA4 con Consent Mode v2 y banner** | Rechazada. Coste de UX y de superficie legal a cambio de datos incompletos (quien rechaza no se mide) y estadísticamente vacíos al volumen actual. Un banner de cookies contradice además el registro editorial de `docs/21` |
+| **Reactivar GA4 con Consent Mode v2 y banner** | Rechazada. Costo de UX y de superficie legal a cambio de datos incompletos (quien rechaza no se mide) y estadísticamente vacíos al volumen actual. Un banner de cookies contradice además el registro editorial de `docs/21` |
 | **Analítica sin cookies desde ya** | Rechazada por ahora. Es la opción correcta *si* algún día hace falta, pero hoy Search Console cubre la pregunta abierta |
-| **Solo logs del servidor** | Disponible en Hostinger sin coste ni instrumentación; suficiente como complemento puntual |
+| **Solo logs del servidor** | Disponible en Hostinger sin costo ni instrumentación; suficiente como complemento puntual |
 | **Mantener GA4 desactivado sin decidir** | Rechazada: dejaba TASK-0006 bloqueada de forma indefinida y el ID en un limbo |
 
 ## Consecuencias
@@ -81,7 +81,7 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
   datos personales en general —no solo cookies—, y el sitio recoge datos por canales de contacto.
   La conclusión jurídica corresponde a asesoría, no a esta decisión técnica.
 
-**Costes aceptados**
+**Costos aceptados**
 
 - No habrá datos de comportamiento dentro del sitio (recorridos, permanencia, puntos de abandono).
 - Si el sitio crece, habrá un periodo sin histórico comparativo. Se acepta conscientemente.

@@ -32,7 +32,7 @@
 
 ## Adenda de la continuación (2026-07-20) — ASO / AEO
 
-**Lo técnico está bien; lo que falla es ser citable.** Los ocho crawlers de IA probados (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Googlebot, Bingbot) acceden sin bloqueo ni cloaking; el coste de contexto es bajo (~400–1 600 tokens por página); no hay ni un patrón de inyección de prompts. **La brecha es de visibilidad agéntica:**
+**Lo técnico está bien; lo que falla es ser citable.** Los ocho crawlers de IA probados (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Googlebot, Bingbot) acceden sin bloqueo ni cloaking; el costo de contexto es bajo (~400–1 600 tokens por página); no hay ni un patrón de inyección de prompts. **La brecha es de visibilidad agéntica:**
 
 - **El sitio gana la keyword y pierde la pregunta.** Es #1 en "budismo chan colombia", pero desaparece de la página 1 en "dónde practicar budismo chan en Colombia" — la misma intención en lenguaje natural, que es como consultan los asistentes de IA. Y el AI Overview de Google para la búsqueda de marca cita a EcoEspiritualidad, Wisdom Library y Wikipedia, **no al sitio**, aunque sea el resultado orgánico #1.
 - **La meditación semanal online no existe para un agente.** Es la joya de la corona (gratuita, virtual, para principiantes, sin límite geográfico, y el único formato online frente a competidores presenciales), pero vive como un párrafo: sin URL propia, sin datos estructurados, ausente de `llms.txt` y del sitemap. Quien pregunte a un asistente por meditación budista online en español no puede recibirlos como respuesta.

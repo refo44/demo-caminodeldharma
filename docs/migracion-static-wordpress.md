@@ -23,6 +23,9 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 | Fecha | Cambio | Static | WordPress | Estado |
 | ----- | ------ | ------ | --------- | ------ |
 | 2026-07-19 | GA4 (`G-B8FY69RGSS`) retirado de las 14 páginas HTML (PRIV-001; sin consentimiento ni `/privacidad`) | Sí | Pendiente portar decisión al theme | Completo (static) |
+| 2026-07-21 | Grid de `/galeria` pasa a servir miniaturas (`galeria/thumbs/`, `srcset` 300w/600w) en vez de los originales — PERF-001 | Sí | **No aplica**: la galería pasa a bloque de Gutenberg; `gallery.js` no se migra (ADR 0021) | Completo (static) |
+| 2026-07-21 | Visor ampliado (lightbox) de la galería | **No se implementa** | **Nativo del bloque de galería** ("Ampliar al hacer clic", WP 6.4+); sin plugin ni JS propio | Cerrado por ADR 0021 |
+| 2026-07-21 | `normalize.css` incorporado a `main.css`; `main.min.css` vía `npm run build:css`; MarloweEscapade subsetada | Sí | Pendiente portar al theme (encolado de `main.min.css` y subset de la fuente) | Pendiente (WordPress) |
 | — | *(añadir filas al iniciar Fase 3)* | — | — | — |
 
 **Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`, `Cerrado`.

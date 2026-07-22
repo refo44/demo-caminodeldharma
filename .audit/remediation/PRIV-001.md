@@ -19,7 +19,7 @@ Cabecera HTML de las 14 páginas (snippet gtag), nueva página /privacidad, foot
 DECISIÓN ORGANIZATIVA pendiente: (a) Consent Mode v2 con banner por defecto denegado, (b) medición sin cookies, o (c) aceptar riesgo documentado. Texto de política aprobado por la comunidad. → La tarea queda BLOCKED hasta esa decisión.
 
 ## Immediate containment, when required
-Opcional y de bajo coste sin decisión legal: cambiar ya los embeds a youtube-nocookie.com.
+Opcional y de bajo costo sin decisión legal: cambiar ya los embeds a youtube-nocookie.com.
 
 ## Minimal safe fix
 Publicar la política + embeds nocookie (no resuelve el consentimiento pero reduce superficie y da transparencia).

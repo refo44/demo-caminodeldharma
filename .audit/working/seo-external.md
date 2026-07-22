@@ -155,7 +155,7 @@ Dos grafías nombran lo mismo y sirven a **públicos distintos**: quien no conoc
 **Verificación en Google (hl=es, gl=co):** la consulta "comunidad buddhista colombia" **no dispara
 corrección ortográfica** y devuelve **prácticamente el mismo conjunto de resultados** que la grafía con
 una d. El buscador resuelve ambas a la misma intención, de modo que **la elección editorial no tiene
-coste SEO apreciable**. (El sitio está ausente de la página 1 con ambas grafías, coherente con
+costo SEO apreciable**. (El sitio está ausente de la página 1 con ambas grafías, coherente con
 SEO-EXT-001.)
 
 **Procedencia del cambio de copy:** el tagline visible «Comunidad budista Chan y Tierra Pura en

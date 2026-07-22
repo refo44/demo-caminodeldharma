@@ -42,7 +42,7 @@ cambio: un rastreador que pida ese `embedUrl` sin `Referer` recibirá 401.
 ## Alcance de lo que resuelve
 
 Elimina la última vía de cookies **del propio sitio**. Matiz honesto sobre YouTube: el modo
-«privacidad mejorada» no almacena información **mientras no se reproduzca** el vídeo; al pulsar play,
+«privacidad mejorada» no almacena información **mientras no se reproduzca** el vídeo; al hacer clic en play,
 YouTube puede fijar cookies igualmente. Para eliminación total haría falta una *facade* (miniatura que
 carga el iframe solo al hacer clic), no contemplada aquí.
 

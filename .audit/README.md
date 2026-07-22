@@ -26,4 +26,4 @@ Puntos de entrada:
 | TASK-0010 | COMPLETED (v1.0.14) | **NOT DONE** | `curl /galeria \| grep -c '<img'` = **1**; el DoD exige ≥12. Sin `<noscript>` ni imágenes estáticas. AEO-001 abierto. |
 | TASK-0011 | COMPLETED (v1.0.14) | **NOT DONE** | Ninguna referencia css/js lleva `?v=`, ni en producción ni en el repo; `git log -S'?v=' --all` no registra ningún commit. PERF-002 abierto. |
 
-Los ficheros de `raw/` **no se han modificado**: son la evidencia congelada del estado auditado el 2026-07-19.
+Los archivos de `raw/` **no se han modificado**: son la evidencia congelada del estado auditado el 2026-07-19.

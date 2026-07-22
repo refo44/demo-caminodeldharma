@@ -31,16 +31,16 @@ espanol.buddhistdoor.net · budismocolombia.org · meditacionencolombia.org
 **c) La keyword ya está donde sí pesa.** El `<title>` de la página es «Comunidad Budista en Colombia
 | Camino del Dharma». El título es una señal de ranking muy superior a la cadena de la URL.
 
-### Coste real del cambio
+### Costo real del cambio
 
-| Coste | Detalle |
+| Costo | Detalle |
 |---|---|
 | Pérdida de señal | Todo 301 disipa parte del valor acumulado |
 | Indexación | Solo **4 de 13** URLs aparecen hoy en `site:`; renombrar reinicia lo poco consolidado |
 | Proceso (ADR 0008) | Exige actualizar `11-arbol-urls-final`, `sitemap.xml`, redirects, **ADR nuevo** si es estructural, y solicitar reindexación. Puede implicar incremento **MAJOR** de versión |
 | Migración pendiente | Cambiar URLs ahora y posiblemente otra vez en el corte a WordPress es rotación innecesaria |
 
-**Conclusión:** beneficio marginal y no demostrado, contra un coste cierto y un ADR que declara la
+**Conclusión:** beneficio marginal y no demostrado, contra un costo cierto y un ADR que declara la
 estructura de URLs **definitiva**. La palanca real para esas consultas está en autoridad (SEO-EXT-001)
 y presencia local, no en el slug.
 
@@ -231,7 +231,7 @@ lo que la propia propuesta apuntaba con «una subsección de eventos que aplique
 dentro de la página, entonces sí crear archivo público —pero como `/eventos/ciudad/{ciudad}` para
 evitar el conflicto de rutas, y con ADR que lo justifique (ADR 0008).
 
-### Coste de mantenimiento en la versión estática
+### Costo de mantenimiento en la versión estática
 
 Con dos eventos, mantener a mano la sección por ciudad es trivial. A medida que crezca, cada evento
 nuevo obligará a tocar varias páginas. Es un argumento más para **no** multiplicar URLs ahora y dejar
@@ -243,7 +243,7 @@ el filtrado real para WordPress, donde la taxonomía lo resuelve sola.
 
 | Propuesta | Decisión | Motivo |
 |---|---|---|
-| Renombrar `/comunidad` | **Omitida** — sin tarea | Refutada por los datos del propio sitio y de los competidores; coste cierto contra beneficio no demostrado; contradice ADR 0008 |
+| Renombrar `/comunidad` | **Omitida** — sin tarea | Refutada por los datos del propio sitio y de los competidores; costo cierto contra beneficio no demostrado; contradice ADR 0008 |
 | Páginas por ciudad | **TASK-0020 (BLOCKED)** | Fundamento sólido, pero exige confirmar actividad real por ciudad y contenido sustancial; se secuencia tras GBP |
 | Estructura `/cali` o `/comunidad/cali` | **Ninguna** — se adopta `/sanghas/{ciudad}` | Ya definida en `11-arbol-urls-final` §3.1 y con CPT en `03-wordpress-content-model` §3.1; aporta página hub `/sanghas/` y sobrevive a la migración |
 | Taxonomía de ciudad para eventos | **Sí, como dato** (`event_city`) | Necesaria para asociar eventos y sanghas; sirve en estático y en WordPress |

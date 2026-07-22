@@ -35,6 +35,7 @@ assets/
 ├── js/
 │   ├── main.js     Navegación, formularios, accesibilidad. Sin frameworks; encolado en footer; `defer` opcional vía filtro.
 │   ├── gallery.js  Álbumes de galería con paginación independiente y carga bajo demanda por página.
+│                   Sirve miniaturas de galeria/thumbs/ con srcset 300w/600w. No se migra a WordPress (ADR 0021).
 │   ├── share.js      Panel para compartir: templates WhatsApp, X y Threads.
 │   └── calendar.js   Panel para añadir eventos a Google Calendar, Outlook o .ics (Apple/otros).
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
@@ -94,7 +95,7 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 | Pestaña 3 | Biografía fundador |
 | Pestaña 5 | Videos (meditación, YouTube) |
 | Pestaña 6 | Contacto |
-| Pestaña 7 | Galería (`galeria-01.jpg` … `galeria-36.jpg` en `assets/images/galeria/`; álbum General + años 2023 y 2021; script `scripts/rename-gallery-to-kebab.sh`; 16). |
+| Pestaña 7 | Galería (`galeria-01.jpg` … `galeria-36.jpg` en `assets/images/galeria/`; álbum General + años 2023 y 2021; script `scripts/rename-gallery-to-kebab.sh`; 16). **El grid sirve miniaturas de `assets/images/galeria/thumbs/`** (300w/600w), no los originales: v1.0.20, hallazgo PERF-001. Los **originales se conservan** — son la fuente de las miniaturas y del futuro visor ampliado (**ADR 0021**); no borrar en limpiezas de assets. |
 | Pestaña 8 | Celebraciones (Vesak, Diwali) |
 
 ---

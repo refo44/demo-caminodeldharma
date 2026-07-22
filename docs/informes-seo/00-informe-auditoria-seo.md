@@ -50,7 +50,7 @@
 
 ### El sitio está bien hecho
 
-En todo lo que mide cómo está construida una web —estructura, velocidad, información para buscadores, accesibilidad— el sitio obtiene puntuaciones máximas o cercanas. Es rápido tanto en móvil como en ordenador, se ve bien en cualquier pantalla y no tiene enlaces rotos.
+En todo lo que mide cómo está construida una web —estructura, velocidad, información para buscadores, accesibilidad— el sitio obtiene puntuaciones máximas o cercanas. Es rápido tanto en móvil como en computador, se ve bien en cualquier pantalla y no tiene enlaces rotos.
 
 **No hay ningún problema técnico frenando la visibilidad.** Conviene decirlo con claridad porque es la conclusión que más suele confundirse.
 
@@ -173,6 +173,27 @@ Es el único dato que falta, y no puede obtenerse desde fuera.
 **Por qué importa:** publicar contenido sobre una ciudad donde no hay actividad confirmada es una práctica que Google penaliza —son páginas creadas solo para captar búsquedas, sin nada detrás— y supondría faltar a la verdad con quien busca dónde practicar.
 
 **Qué desbloquea:** contenido orientado a cada ciudad, y la posible sección del sitio dedicada a las sanghas.
+
+### Política de privacidad
+
+**Sigue siendo recomendable, aunque el sitio no use cookies.**
+
+Conviene separar dos cosas que suelen confundirse. Que se descartara la analítica —y con ella el aviso de cookies— resuelve el problema *de las cookies*. No resuelve el del **tratamiento de datos personales**, que es más amplio: la **Ley 1581/2012** cubre la recogida y el uso de datos personales en general, no solo los que llegan por cookies.
+
+Y el sitio **sí recoge datos personales**: los canales de contacto —WhatsApp y correo— reciben nombre, teléfono y lo que cada persona escriba al acercarse a la comunidad.
+
+**Se necesita:** la decisión de publicarla y el texto.
+
+**Y hay un segundo motivo: ya llegan visitantes desde España.** Search Console registra 1 clic y 2 impresiones desde España sobre 9 y 35 totales. Es poco, pero es real — y España está en la Unión Europea, donde rige el **RGPD**, una norma distinta de la colombiana.
+
+Dos cosas conviene saber sobre eso:
+
+- **Lo más delicado del RGPD no aplica aquí, y se puede demostrar.** La parte más exigente se activa cuando un sitio *rastrea* a sus visitantes. Este no rastrea a nadie: sin analítica, sin cookies, sin perfilado. **La decisión de no poner analítica protege también en este frente**, y eso ya está verificado.
+- **Queda una pregunta abierta que no es técnica:** si la comunidad se considera que "ofrece un servicio" a personas en Europa. El sitio declara Colombia como su ámbito, pero **la meditación semanal por Zoom no tiene fronteras** y alguien desde España puede sumarse.
+
+La buena noticia práctica: **ambas normas piden en esencia lo mismo** —explicar qué datos se recogen, para qué y cómo ejercer derechos—, así que una sola política bien hecha cubre la mayor parte de las dos.
+
+> **Alcance de esta recomendación.** Es una señal de diligencia, no un dictamen. **La conclusión jurídica —tanto sobre la ley colombiana como sobre el RGPD— corresponde a asesoría legal, no a esta auditoría técnica.** Aquí solo se constatan hechos verificables: hay recogida de datos por canales de contacto, hay visitantes desde España, y no hay rastreo de ningún tipo.
 
 ---
 
@@ -297,7 +318,7 @@ Es una opción legítima y conviene plantearla con honestidad.
 
 **Lo que se deja de ganar** es concreto: la comunidad es la referencia del budismo Chan en el país —así la describe la publicación especializada más importante del sector en español— y esa condición no se refleja en dónde la encuentra la gente.
 
-**El desequilibrio entre esfuerzo y resultado es lo llamativo:** dos correos y un campo de perfil, sin coste, atacan directamente la causa medida.
+**El desequilibrio entre esfuerzo y resultado es lo llamativo:** dos correos y un campo de perfil, sin costo, atacan directamente la causa medida.
 
 ---
 
@@ -308,7 +329,7 @@ Auditoría de **solo lectura** sobre el sitio publicado y su código. No se modi
 - **13 direcciones** del sitio en el momento de la auditoría: **todas probadas**, sin muestreo. *(Hoy son 14.)*
 - **Navegación real a Google** con configuración de Colombia, sin sesión iniciada para evitar resultados personalizados.
 - **Google Search Console:** datos aportados por la comunidad.
-- **PageSpeed Insights**, herramienta oficial de Google, en móvil y ordenador.
+- **PageSpeed Insights**, herramienta oficial de Google, en móvil y computador.
 - **Herramientas de autoridad** aplicadas con la misma herramienta y el mismo día al sitio propio y a cinco comunidades comparables.
 - **Verificación directa** de cada publicación que menciona a la comunidad, comprobando si enlaza o no.
 

@@ -182,7 +182,7 @@ La maqueta define el layout definitivo. En Fase 3 solo se envolverá el HTML con
 | `/linaje/index.html`      | `page-linaje.php`                        |
 | `/practica/index.html`    | `page-practica.php`                      |
 | `/eventos/index.html`     | `archive-event.php` o `page-eventos.php` |
-| `/galeria/index.html`     | `page-galeria.php`                       |
+| `/galeria/index.html`     | `page-galeria.php` — bloque de galería de Gutenberg, con lightbox nativo; `gallery.js` no se migra (ADR 0021) |
 | `/contacto/index.html`    | `page-contacto.php`                      |
 | `/donaciones/index.html`  | `page-donaciones.php`                    |
 | `/blog/index.html`        | `index.php` o `home.php` (según modelo)  |
@@ -263,7 +263,8 @@ La fase se considera **cerrada para producción estática** cuando se cumplen lo
 - [~] Lighthouse ≥ 90 en las cuatro categorías — **no verificado en auditoría** (herramienta no disponible en sesión de audit); repetir en Fase 2.5 o mantenimiento trimestral
 - [x] No existen enlaces rotos internos (400 refs OK; auditoría EVID-0015)
 - [x] No existen imágenes informativas sin `alt` adecuado (100 % en auditoría)
-- [~] El sitio funciona correctamente sin JavaScript — navegación y lectura sí; **galería** requiere JS (AEO-001, severidad baja); formulario no entrega sin JS ni con JS
+- [~] El sitio funciona correctamente sin JavaScript — navegación y lectura sí; **galería** requiere JS (AEO-001, severidad baja; **sigue abierto**: TASK-0010 figuró COMPLETED sin implementarse, ver `.audit/README.md`); formulario no entrega sin JS ni con JS
+  - En WordPress se resuelve solo: el bloque de galería renderiza en servidor (ADR 0021). Si antes del corte se añadiera un visor propio a la maqueta, **primero** hay que cerrar TASK-0010: si no, se aumenta la dependencia de JS que este mismo criterio señala.
 - [x] SEO técnico inicial según `15-assets-strategy` (§12): títulos, canonical, OG, robots, sitemap — **100/100** en auditoría
 - [~] Fase 2.5 (QA) — parcial; auditoría de producción (§2.75) cubre parte del alcance con limitaciones documentadas
 - [ ] **Formulario de contacto operativo** — pendiente: estático tiene `action="#"` sin handler (FUNC-001); ver §2.75 y `docs/archive/contacto-formulario-estatico/`

@@ -41,7 +41,7 @@ Texto extraído por un agente sin JS (script/style eliminados):
 | eventos | 25 571 b | 5 290 c | 20,7 % | ~1 322 |
 | galeria | 17 045 b | 1 704 c | 10,0 % | ~426 (**grid vacío sin JS — AEO-001**) |
 
-**PASS** salvo galería: coste de contexto bajo, sin boilerplate excesivo. Confirma AEO-001 sin cambios.
+**PASS** salvo galería: costo de contexto bajo, sin boilerplate excesivo. Confirma AEO-001 sin cambios.
 
 ## 3. Visibilidad en consultas de tipo pregunta (ASO — brecha principal)
 
