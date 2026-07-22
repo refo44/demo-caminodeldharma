@@ -19,7 +19,7 @@
 2. [Qué encontré](#2-qué-encontré)
 3. [Por qué casi nadie encuentra el sitio](#3-por-qué-casi-nadie-encuentra-el-sitio)
 4. [Cómo está el sitio frente a otras comunidades](#4-cómo-está-el-sitio-frente-a-otras-comunidades)
-5. [Lo que se necesita de la comunidad](#5-lo-que-se-necesita-de-la-comunidad)
+5. [Lo que se necesita](#5-lo-que-se-necesita)
 6. [Qué se hará y qué esfuerzo supone](#6-qué-se-hará-y-qué-esfuerzo-supone)
 7. [Opciones que descarté](#7-opciones-que-descarté)
 8. [Cuándo se sabrá si funcionó](#8-cuándo-se-sabrá-si-funcionó)
@@ -40,7 +40,7 @@
 
 **Lo que ya funciona.** El sitio es **el primer resultado en Google Colombia** para «budismo chan colombia», «budismo tierra pura colombia» y para el nombre de la comunidad. Son posiciones ganadas, no aspiraciones — y se lograron con el sitio recién publicado.
 
-**Lo que necesito de ustedes.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
+**Lo que se necesita.** Un solo dato, detallado en §5: **en qué ciudades hay práctica real.** Es lo único que no puede averiguarse desde fuera, y sin ello no se puede publicar contenido local sin faltar a la verdad.
 
 ---
 
@@ -152,7 +152,7 @@ Medí cinco comunidades budistas colombianas comparables, con la misma herramien
 
 ---
 
-## 5. Lo que se necesita de la comunidad
+## 5. Lo que se necesita
 
 ### ¿En qué ciudades hay práctica real?
 
@@ -196,7 +196,7 @@ Lo práctico: **ambas normas piden en esencia lo mismo**, así que **una sola p�
 
 No lleva ventanas emergentes, ni banners, ni nada que interrumpa a quien visita. **La única persona que la verá es quien la busque.**
 
-**Se necesita de la comunidad:** la decisión de publicarla y el texto. Lo primero es de liderazgo; lo segundo conviene que lo revise quien asesore legalmente, porque es quien puede confirmar qué exige cada norma.
+**Se necesita:** la decisión de publicarla y el texto. Lo primero es una decisión interna; lo segundo conviene que lo revise una asesoría legal, que es quien puede confirmar qué exige cada norma.
 
 > **Alcance de esta recomendación.** Es una señal de diligencia, no un dictamen. **La conclusión jurídica —tanto sobre la ley colombiana como sobre el RGPD— corresponde a asesoría legal, no a esta auditoría técnica.** Aquí solo se constatan hechos verificables: hay recogida de datos por canales de contacto, hay visitantes desde España, y no hay rastreo de ningún tipo.
 ---
