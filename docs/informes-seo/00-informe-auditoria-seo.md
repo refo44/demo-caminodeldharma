@@ -5,6 +5,7 @@
 | | |
 |---|---|
 | **Para** | Liderazgo de la Comunidad Buddhista Camino del Dharma |
+| **Autor** | Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> |
 | **Sitio auditado** | https://caminodeldharma.org |
 | **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
 | **Periodo de auditoría** | 19–20 de julio de 2026 |
@@ -236,8 +237,27 @@ Las dos primeras atacan directamente la causa medida en §3: publicaciones que y
 
 | Acción | Esfuerzo | Depende de |
 |---|---|---|
-| Contenido en formato pregunta y respuesta | Editorial | Ritmo editorial |
+| Contenido en formato pregunta y respuesta | Editorial | Decisión de publicar y con qué ritmo |
 | Contenido orientado a cada ciudad | Editorial | §5 |
+
+#### Por qué el contenido nuevo mueve la visibilidad
+
+El sitio solo puede aparecer en las búsquedas que sus páginas responden. Hoy son catorce páginas y **una sola entrada de blog**, y eso marca el techo: por muy bien construido que esté, no puede salir en una búsqueda sobre algo que no trata.
+
+**Cada artículo es una puerta de entrada nueva.** Y hay una brecha concreta que solo el contenido puede cerrar, ya medida en §2: el sitio es primero en «budismo chan colombia» pero desaparece cuando alguien pregunta *«dónde practicar budismo chan en Colombia»*. Gana la palabra suelta y pierde la pregunta — que es justo como se busca hoy, y como se le pregunta a los asistentes de inteligencia artificial. Las páginas institucionales no responden preguntas; los artículos sí.
+
+Lo mismo con la meditación de los lunes: es lo más distintivo que ofrece la comunidad y **no aparece** ante quien busca meditación budista en línea en español. Es una brecha de contenido, no técnica.
+
+#### Con qué frecuencia publicar
+
+**Una pieza cada tres o cuatro semanas**, sostenida durante dos o tres trimestres. Son de seis a nueve artículos en el año, que es el volumen que mueve la aguja.
+
+No conviene ir más rápido. El ritmo no es un factor de posicionamiento —Google no premia publicar seguido—, así que la frecuencia solo debe responder a que el equipo pueda sostenerla y a que cada pieza tenga sustancia. Un calendario semanal presiona a un equipo voluntario, se abandona con facilidad y empuja a publicar piezas delgadas, que Google trata como abuso de contenido a escala.
+
+**Orden sugerido**, según las brechas medidas en §2: primero **la meditación de los lunes** —lo más distintivo de la comunidad, hoy invisible—, después **una pregunta en lenguaje natural**, y luego **una ciudad** si se decide crearla (§5).
+
+> **Sobre los plazos.** Una página tarda entre dos y seis meses en asentarse. **Lo que se publique ahora no se verá reflejado en la medición de septiembre**, y conviene saberlo antes: esa medición sirve para los enlaces, no para juzgar el contenido. El efecto de los artículos se evalúa hacia diciembre o enero (§8).
+
 
 ### Mantenimiento técnico
 
@@ -296,7 +316,8 @@ Por eso el calendario se organiza **alrededor del corte a WordPress**, no en int
 | **2–3 días antes del corte** | Fotografía completa del estado actual: posiciones, visitas, velocidad, estado de todas las páginas del sitio, cabeceras y autoridad | ~1 h | **Alta** |
 | **24–48 h después del corte** | Verificar que nada se rompió: que todas las direcciones responden, que las redirecciones sobrevivieron, que no aparecieron cookies, que los datos para buscadores siguen íntegros | ~2 h | **Máxima** |
 | **2 semanas después del corte** | Estabilización: si Google reindexó, si las posiciones volvieron. Una caída temporal es normal; una sostenida, no | ~1 h | Media |
-| **~15 de septiembre** | Primera medición legítima de eficacia: si las publicaciones añadieron el enlace, si sube la autoridad, si aparecen búsquedas que no son la marca | ~2 h | Media |
+| **~15 de septiembre** | Primera medición legítima **de los enlaces**: si las publicaciones añadieron la dirección y si sube la autoridad | ~2 h | Media |
+| **~diciembre–enero** | Primera medición legítima **del contenido**: si aparecen búsquedas que no son la marca. Antes no: una página tarda de 2 a 6 meses en asentarse (§6) | ~2 h | Media |
 | **~octubre, tras 30 días de WordPress estable** | Auditoría completa del sitio definitivo | Auditoría nueva | **Alta** |
 
 **Si solo pudieran hacerse dos, que sean los dos primeros.** Son los que protegen contra el único riesgo capaz de deshacer todo el trabajo acumulado: una migración que rompe algo sin que nadie lo note a tiempo. Sin una fotografía del «antes» no hay forma de demostrar qué cambió.
@@ -354,6 +375,13 @@ Auditoría de **solo lectura** sobre el sitio publicado y su código. No se modi
 - **Herramientas de autoridad** aplicadas con la misma herramienta y el mismo día al sitio propio y a cinco comunidades comparables.
 - **Verificación directa** de cada publicación que menciona a la comunidad, comprobando si enlaza o no.
 
+### Fuentes de la recomendación de frecuencia (§6)
+
+- **Google:** el ritmo de publicación no es señal de posicionamiento — declaraciones de John Mueller recogidas en [Search Engine Roundtable](https://www.seroundtable.com/google-content-frequency-25367.html) e [iLoveSEO](https://iloveseo.com/seo/google-publishing-consistency-does-not-affect-rankings/).
+- **Google, documentación oficial:** el presupuesto de rastreo solo concierne a sitios grandes — [Crawl Budget Management](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget).
+- **Google, políticas de spam:** el volumen de contenido sin valor está tipificado como *scaled content abuse* — [Spam Policies for Google Web Search](https://developers.google.com/search/docs/essentials/spam-policies).
+- **Plazos de posicionamiento:** de 2 a 6 meses para consultas de baja competencia, según estudios de sector (Ahrefs, Semrush). Son estimaciones de terceros y se reportan como tales, igual que las métricas de autoridad.
+
 ### Principios aplicados
 
 **Nada se extrapola.** Toda afirmación procede de una medición registrada. Lo que no se pudo medir figura como limitación, nunca como estimación.
@@ -405,4 +433,4 @@ Ambas ilustran por qué distingo de forma estricta entre lo medido y lo deducido
 
 ---
 
-*Informe elaborado sobre el sitio publicado y su código, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en el Anexo B. El sitio actual es una etapa temporal previa a la migración a WordPress: ninguna recomendación compromete a la comunidad a plazos largos.*
+*Informe elaborado por **Rafael Figueredo Oropeza** sobre el sitio publicado y su código, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en el Anexo B. El sitio actual es una etapa temporal previa a la migración a WordPress: ninguna recomendación compromete a la comunidad a plazos largos.*

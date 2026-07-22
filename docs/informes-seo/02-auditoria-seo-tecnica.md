@@ -5,6 +5,7 @@
 | | |
 |---|---|
 | **Cliente** | Comunidad Buddhista Camino del Dharma |
+| **Autor** | Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> |
 | **Sitio auditado** | https://caminodeldharma.org |
 | **Versión en producción** | v1.0.19 (`/galeria` pendiente de despliegue) |
 | **Fecha del informe** | 20 de julio de 2026 · **actualizado el 21 de julio** |
@@ -579,7 +580,7 @@ Detectado y corregido en esta tanda. Ver §8.
 
 ---
 
-*Auditoría realizada sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §13.*
+*Auditoría realizada por **Rafael Figueredo Oropeza** sobre el sitio en producción y su código fuente, sin modificarlos. Toda afirmación procede de una medición registrada; las limitaciones se declaran en §13.*
 ---
 
 ## 16. Trabajo de rendimiento (21 de julio, v1.0.18–v1.0.19)

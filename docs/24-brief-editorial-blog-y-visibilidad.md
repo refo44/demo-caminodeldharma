@@ -1,7 +1,7 @@
 # Brief — Blog y visibilidad en buscadores
 
 **Para:** persona encargada de la redacción y edición del blog de Camino del Dharma  
-**De:** auditoría SEO del sitio (julio 2026) — insumos y sugerencias, no decisiones editoriales  
+**De:** Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> — auditoría SEO del sitio (julio 2026); insumos y sugerencias, no decisiones editoriales  
 **Fecha:** 2026-07-20  
 
 > **La persona encargada decide** qué publicar. Quien elaboró este brief **no forma parte** de las decisiones editoriales: aquí solo hay diagnóstico y sugerencias.
@@ -196,6 +196,33 @@ Reglas simples: **un texto distinto por ciudad**; **respuesta al inicio** (no en
 | **Perfil de quien facilita** | (según lo que pida la comunidad) | Quien quiere saber quién guía antes de participar | Solo si la comunidad lo pide; trayectoria en la práctica, sin autopromoción |
 
 En entrevistas y relatos conviene que el **título nombre el tema** (meditación, Chan, retiro, práctica online), no solo el nombre de la persona — así el texto sigue siendo útil para quien busca orientación, no solo para quien ya conoce a ese miembro.
+
+### 6.1 Ritmo de publicación sugerido
+
+**Una pieza cada tres o cuatro semanas** —aproximadamente una al mes—, sostenida durante dos o tres trimestres. La persona encargada decide si lo adopta; aquí solo se explica de dónde sale la cifra.
+
+**Lo primero, porque suele darse por supuesto:** publicar seguido **no mejora el posicionamiento por sí mismo**. Es de los mitos SEO más extendidos, y para un sitio de este tamaño es directamente falso.
+
+| Hecho | Fuente | Qué implica aquí |
+|---|---|---|
+| El ritmo de publicación **no es señal de posicionamiento** | Declaraciones de John Mueller (Google) | Un calendario apretado no compra posiciones |
+| El **presupuesto de rastreo** solo concierne a sitios desde ~10.000 páginas | Documentación oficial de Google | Con 14 páginas, publicar más rápido no hace que Google pase más | 
+| Una página tarda **de 2 a 6 meses** en asentarse en consultas de baja competencia | Estudios de sector (Ahrefs, Semrush) | El resultado llega por calendario, no por ritmo |
+| El **volumen sin valor** está tipificado como *scaled content abuse* | Políticas de spam de Google | Publicar de más tiene riesgo; publicar despacio, no |
+
+**El razonamiento.** Como el ritmo no puntúa y el rastreo no es un problema, la frecuencia solo debe responder a dos cosas: **que se pueda sostener** y **que cada pieza tenga algo real que decir**. Una al mes cumple ambas y deja de seis a nueve artículos en el año — que es el volumen que cambia las cosas, no la cadencia con que se llegue a él.
+
+Publicar cada semana empujaría en dirección contraria: más presión sobre un equipo pequeño, más probabilidad de abandonar a los dos meses, y más tentación de rellenar. **Y publicar de forma irregular no penaliza.** Saltarse un mes no daña nada; la constancia importa para que el trabajo no se abandone, no para el buscador.
+
+**Orden sugerido de las primeras piezas**, según las brechas del §6:
+
+1. **Meditación en línea** — la mayor brecha, y la única del cuadro marcada como prioridad alta.
+2. **Una pregunta en lenguaje natural** — del tipo *«dónde practicar budismo chan en Colombia»*.
+3. **Una ciudad**, solo si hay datos reales confirmados.
+
+> **Sobre los plazos, para no sacar conclusiones falsas.** Con un horizonte de 2 a 6 meses, **lo que se publique ahora no aparecerá en la re-medición de septiembre**. Puede verse en Search Console en una o dos semanas, pero en posiciones inestables que no permiten concluir nada. El efecto del contenido se evalúa hacia **diciembre o enero**. Medirlo antes solo produciría la conclusión falsa de que no sirvió.
+
+**Fuentes:** [Search Engine Roundtable](https://www.seroundtable.com/google-content-frequency-25367.html) · [iLoveSEO](https://iloveseo.com/seo/google-publishing-consistency-does-not-affect-rankings/) · [Google — Crawl Budget](https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget) · [Google — Spam Policies](https://developers.google.com/search/docs/essentials/spam-policies)
 
 ---
 
