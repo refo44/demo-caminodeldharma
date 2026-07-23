@@ -1,7 +1,7 @@
 # Brief — Blog y visibilidad en buscadores
 
 **Para:** persona encargada de la redacción y edición del blog de Camino del Dharma  
-**De:** Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> — auditoría SEO del sitio (julio 2026); insumos y sugerencias, no decisiones editoriales  
+**De:** Rafael Figueredo Oropeza — [LinkedIn](https://www.linkedin.com/in/rafaelfigueredo/) · <refo44@gmail.com> — auditoría SEO del sitio (julio 2026)  
 **Fecha:** 2026-07-20  
 
 ---
@@ -14,7 +14,7 @@ El hallazgo de la auditoría SEO no es “arreglar la web”, sino que el **blog
 
 **Importante:** en julio de 2026 el sitio **ya aparece primero** en Google Colombia para *“budismo chan colombia”* y *“budismo tierra pura colombia”* (y para la marca “Camino del Dharma”). El blog **no** busca “arreglar” eso. Busca cubrir las búsquedas donde **aún no aparecen** — sobre todo *meditación budista online en español*, consultas amplias (*budismo en Colombia*) y locales (*budismo Cali*, *Medellín*, etc.).
 
-**Sugerencia del audit (referencia, no orden):** artículos del blog orientados a esas **brechas**, no a repetir lo que Inicio y Linaje ya posicionan bien. **Publicar o no, qué temas y cuándo, lo define la persona encargada de la edición.**
+La dirección sugerida: artículos del blog orientados a esas **brechas**, no a repetir lo que Inicio y Linaje ya posicionan bien.
 
 ---
 
@@ -123,7 +123,7 @@ Unos **tres meses** después de publicar, en **Google Search Console** (herramie
 - si hay **clics** a los artículos nuevos;
 - qué **palabras** usó la gente antes de llegar.
 
-Eso mide si las sugerencias del audit fueron útiles; **no califica** el trabajo editorial.
+Eso mide si las sugerencias del audit fueron útiles.
 
 **En una frase:** más artículos útiles → más páginas que Google puede mostrar → más formas de que alguien encuentre la comunidad sin conocerla antes.
 
@@ -155,9 +155,9 @@ Si la comunidad decide publicar **relatos o entrevistas** de miembros (§9), con
 
 ---
 
-## 6. Sugerencia de temas (solo referencia del audit SEO)
+## 6. Sugerencia de temas
 
-Ideas según **dónde el sitio es débil**. La persona encargada puede ignorarlas, cambiarlas o proponer otras.
+Ideas según **dónde el sitio es débil**.
 
 La columna **Quién lo busca** ayuda a imaginar al lector y a redactar el **título** y el **primer párrafo**.
 
@@ -249,7 +249,7 @@ Lo único que este brief añade sobre la forma del texto es lo que responde a un
 
 | Rol | Responsabilidad |
 |---|---|
-| **Auditoría SEO** | Diagnóstico, sugerencias de temas, explicación del porqué. **No** decide qué se publica. |
+| **Auditoría SEO** | Diagnóstico, sugerencias de temas y explicación del porqué |
 | **Equipo editorial** | Temas, calendario, autores, revisión de voz y doctrina. Aceptar o descartar sugerencias. |
 | **Equipo de publicación web** | Subir el artículo al sitio, aspectos técnicos |
 | **Coordinación del proyecto** | Herramientas como Search Console, enlaces desde otros sitios (fuera del blog) |
@@ -262,7 +262,7 @@ Lo único que este brief añade sobre la forma del texto es lo que responde a un
 
 ## 9. Decisiones de la persona encargada
 
-El audit **solo entrega insumos**. La persona encargada resuelve, si lo considera pertinente:
+Quedan a criterio de la persona encargada:
 
 1. Si publica y con qué calendario  
 2. Quién escribe y quién revisa  
@@ -270,8 +270,6 @@ El audit **solo entrega insumos**. La persona encargada resuelve, si lo consider
 4. Extensión y tipo de cada pieza  
 5. Si publica **artículos del blog** sobre ciudades (Cali, Medellín, Bogotá, Barranquilla) y con qué datos reales confirmados  
 6. Si incluye entrevistas, relatos o perfiles de miembros — quién entrevista, quién autoriza y qué se publica
-
-No hay nada que “aprobar” con quien hizo el audit SEO.
 
 ---
 
@@ -294,9 +292,6 @@ Un poco, sobre todo si el título habla del **tema** (práctica online, retiro, 
 
 **¿Artículos sobre Chan o Tierra Pura — hace falta si ya somos #1?**  
 En Google Colombia (julio 2026) el sitio **ya sale primero** en *“budismo chan colombia”* y *“budismo tierra pura colombia”* gracias a Inicio y Linaje. **No es urgente** repetir eso en el blog. Un artículo **puede** complementar (más profundidad, otro estilo), pero la **prioridad** del audit para el blog está en **meditación online** y **ciudades**, donde hoy **no** aparecen.
-
-**¿Se puede ignorar todo este brief?**  
-Sí. Es insumo del audit SEO, no mandato editorial.
 
 **¿Artículos del blog sobre Cali, Medellín, Bogotá o Barranquilla?**  
 Sí, pueden encajar: son entradas en `/blog/` sobre práctica en esa ciudad, con datos concretos (modalidad, contacto, frecuencia). La persona encargada decide en cuáles ciudades hay algo real que contar. **No** tiene que ver con crear una sección nueva del sitio (`/sanghas/` u otra) — eso es otro tema.
