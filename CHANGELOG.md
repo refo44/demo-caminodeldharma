@@ -8,6 +8,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.21] - 2026-07-23
+
+### Meditación semanal — copy y metadatos
+
+- `practica/meditacion-semanal-en-linea/index.html`: descripción más concisa (retirado «guiada» redundante); estructura de la sesión aclarada en el cuerpo; JSON-LD alineado.
+- `llms.txt`: descripción de la meditación semanal sincronizada.
+- `sitemap.xml`: `<lastmod>` `2026-07-23` en `/practica/meditacion-semanal-en-linea`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.20] - 2026-07-21
 
 ### Galería — miniaturas en el grid (cierra PERF-001)
@@ -15,6 +28,7 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - `assets/js/gallery.js`: el grid deja de servir los originales y usa `assets/images/galeria/thumbs/` mediante `<picture>` con `srcset` 300w/600w. Antes cada página de 12 imágenes entregaba **~2 MB** para teselas de ~285 px; ahora **~216 KB** en móvil.
 - `assets/images/galeria/thumbs/`: miniaturas para las 36 imágenes (600 px jpg + webp, y 300 px webp).
 - Si una miniatura no fuese derivable del nombre, `gallery.js` cae al original: peor peso, pero nunca un hueco roto.
+- `sitemap.xml`: **sin cambio de `<lastmod>`** — cambio de assets y JS, no de contenido indexable en `/galeria`.
 
 **Corrección de un diagnóstico previo:** en v1.0.17 se justificó conservar los originales porque `/galeria` los necesitaría para un visor ampliado. **Era falso** — `gallery.js` no tiene visor ni manejador de clic sobre las imágenes; los únicos son de paginación. Los originales se servían como simples teselas.
 
