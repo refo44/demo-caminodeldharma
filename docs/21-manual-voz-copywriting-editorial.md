@@ -1,4 +1,4 @@
-# Camino del Dharma — Manual de voz
+# Camino del Dharma — Manual de voz y copywriting editorial
 
 ## Documento rector de lenguaje
 
@@ -36,7 +36,7 @@ Este manual aplica a toda expresión escrita de la comunidad, en especial a:
 
 No regula el contenido doctrinal en sí mismo. Regula su forma de presentación escrita.
 
-Para formato, extensión y tipos de pieza en el blog, ver `23-sistema-editorial` §4. Para el contexto del plan editorial de contenido, ver `24-brief-editorial-blog-y-visibilidad`.
+Para formato, extensión y tipos de pieza en el blog, y para el contexto del plan editorial de contenido, ver el **brief editorial de blog y visibilidad**.
 
 ---
 
@@ -317,7 +317,7 @@ Los emojis se reservan para identificar datos prácticos (`📅`, `🕘`, `📍`
 
 La URL compartida debe ser la página del evento, no el formulario externo. Además de mantener el contexto editorial, esto permite que WhatsApp obtenga la vista previa desde los metadatos de Camino del Dharma.
 
-En **X y Threads**, el borrador prellenado usa la línea de contexto `[Tipo de evento] · Camino del Dharma`, el nombre del evento y datos escaneables (fecha, lugar). Es editable y más breve que el mensaje de WhatsApp. Detalle en `09-ui-copy-sheet` §6.
+En **X y Threads**, el borrador prellenado usa la línea de contexto `[Tipo de evento] · Camino del Dharma`, el nombre del evento y datos escaneables (fecha, lugar). Es editable y más breve que el mensaje de WhatsApp.
 
 ### Mensajes de blog al compartir
 
@@ -325,7 +325,7 @@ Los mensajes prellenados al compartir una entrada del blog son **borradores edit
 
 Deben dejar claro que el título pertenece a una **pieza publicada en el blog**, no a una opinión personal de quien envía el enlace. Por eso la primera línea siempre atribuye tipo de pieza, autor y fuente:
 
-| Tipo de entrada (`23` §4.0) | Línea de contexto al compartir |
+| Tipo de entrada | Línea de contexto al compartir |
 | --- | --- |
 | Reflexión | `Reflexión · [Autor] · Camino del Dharma` |
 | Artículo educativo | `Artículo · [Autor] · Camino del Dharma` |
@@ -342,7 +342,7 @@ Secuencia recomendada (WhatsApp):
 
 En X y Threads: misma línea de contexto y título; subtítulo opcional en Threads. Sin `Comparto…` en el borrador del sitio. Sin emojis ni hashtags impuestos por la comunidad.
 
-El copy es **más breve** que el de eventos: orienta y atribuye, pero deja espacio para la voz de quien comparte. Detalle por plataforma en `09-ui-copy-sheet` §6.
+El copy es **más breve** que el de eventos: orienta y atribuye, pero deja espacio para la voz de quien comparte.
 
 ---
 

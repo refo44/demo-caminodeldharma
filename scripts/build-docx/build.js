@@ -303,6 +303,36 @@ const docs = [
     },
     source: ['docs/24-brief-editorial-blog-y-visibilidad.md', '## 1. Resumen'],
   },
+  {
+    // El .docx anterior era la versión 1.0 (marzo) y le faltaban dos secciones
+    // de §11 y una de §14 que el markdown ya trae. Se regenera desde el markdown,
+    // que es la 1.1, para que no quede desfasado respecto del resto del envío
+    // —el brief remite a su §14— y para que no dependa de Aptos, ausente en
+    // Google Docs.
+    out: 'docs/21-manual-voz-copywriting-editorial.docx',
+    shortName: 'Manual de voz y copywriting editorial',
+    coverCfg: {
+      kicker: 'Comunidad Buddhista',
+      title: 'Manual de voz y copywriting editorial',
+      subtitle: 'Documento rector de lenguaje',
+      tagline: 'Un espacio de acogida, sobrio, claro y vivo.',
+      footNote: 'Versión 1.1 · 20 de julio de 2026',
+    },
+    front: {
+      title: 'Manual de voz y copywriting editorial',
+      meta: [
+        ['Para', 'Comunidad Buddhista Camino del Dharma'],
+        ['Versión', '**1.1** · 20 de julio de 2026'],
+        ['Sustituye a', 'Versión 1.0 · 18 de marzo de 2026'],
+        ['Alcance', 'Toda expresión escrita de la comunidad. No regula el contenido doctrinal.'],
+      ],
+      notes: [
+        'Este documento define **cómo habla** la Comunidad Buddhista Camino del Dharma. No define las enseñanzas buddhistas; define la voz que sostiene la comunicación de la comunidad.',
+        'Su propósito es ofrecer un criterio editorial unificado para titulares, textos de apoyo, descripciones, llamadas a la acción, piezas breves de orientación y otros contenidos institucionales o comunitarios.',
+      ],
+    },
+    source: ['docs/21-manual-voz-copywriting-editorial.md', '## 1. Propósito'],
+  },
 ];
 
 /* ------------------------------------------------------------- ejecución */

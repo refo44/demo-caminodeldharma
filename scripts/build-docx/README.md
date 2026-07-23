@@ -1,13 +1,14 @@
 # build-docx
 
 Genera las versiones `.docx` —con la identidad visual de Camino del Dharma— de los
-tres entregables que hoy viven como Markdown:
+cuatro entregables que hoy viven como Markdown:
 
 | Fuente Markdown | Salida `.docx` |
 |---|---|
 | `docs/informes-seo/00-informe-auditoria-seo.md` | `docs/informes-seo/00-informe-auditoria-seo.docx` |
 | `docs/informes-seo/02-auditoria-seo-tecnica.md` | `docs/informes-seo/02-auditoria-seo-tecnica.docx` |
 | `docs/24-brief-editorial-blog-y-visibilidad.md` | `docs/24-brief-editorial-blog-y-visibilidad.docx` |
+| `docs/21-manual-voz-copywriting-editorial.md` | `docs/21-manual-voz-copywriting-editorial.docx` |
 
 El Markdown es la fuente de verdad. Los `.docx` se **regeneran** desde él; no se
 editan a mano, o el siguiente `npm run build:docx` sobrescribiría los cambios.
@@ -15,10 +16,14 @@ editan a mano, o el siguiente `npm run build:docx` sobrescribiría los cambios.
 ## Uso
 
 ```bash
-npm run build:docx        # regenera los tres
+npm run build:docx        # regenera los cuatro
 npm run build:docx -- 24  # solo los cuya ruta contenga "24"
 npm run check:docx        # valida los .docx contra su Markdown
 ```
+
+El manual de voz se incorporó en julio de 2026: su `.docx` era la versión 1.0 (marzo)
+y le faltaban dos secciones de §11 y una de §14 que el Markdown ya recogía en la 1.1.
+La 1.0 sigue en el historial, en el commit `372a5e2`.
 
 `build:docx` necesita `docx` (npm, en devDependencies). `check:docx` solo usa la
 librería estándar de Python 3.

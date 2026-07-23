@@ -115,4 +115,6 @@ if __name__ == '__main__':
                    R + 'docs/informes-seo/02-auditoria-seo-tecnica.md', '## 1. Contexto y veredicto')
     total += check(R + 'docs/24-brief-editorial-blog-y-visibilidad.docx',
                    R + 'docs/24-brief-editorial-blog-y-visibilidad.md', '## 1. Resumen')
+    total += check(R + 'docs/21-manual-voz-copywriting-editorial.docx',
+                   R + 'docs/21-manual-voz-copywriting-editorial.md', '## 1. Propósito')
     sys.exit(1 if total else 0)
