@@ -16,15 +16,25 @@ const C = {
   white: 'FFFFFF',
 };
 
+// Tipografías elegidas para que Google Docs las tenga sin sustituir: el flujo de
+// entrega es .docx → Google Docs → PDF, y ahí Aptos o Consolas (de Microsoft) no
+// existen y se reemplazarían por otra cosa.
+//   Georgia — estándar en Google Docs; es la de títulos del manual de voz.
+//   Inter   — fuente de cuerpo de la marca (identidad §2.2) y Google Font.
+//   Roboto Mono — Google Font, para los fragmentos de código.
 const FONT_HEAD = 'Georgia';
-const FONT_BODY = 'Aptos';
-const FONT_MONO = 'Consolas';
+const FONT_BODY = 'Inter';
+const FONT_MONO = 'Roboto Mono';
 
-// A4, con los márgenes del documento de referencia.
+// A4. Los márgenes laterales son más anchos que los del manual de voz (1368) a
+// propósito: con 1368 la línea salía de ~87 caracteres, muy por encima del rango
+// legible de 60–75 y del «~65ch» que pide la identidad (§5, ritmo editorial).
+// A 1930 el texto mide 14 cm ≈ 76 caracteres, sin estrechar tanto la caja como
+// para apretar las tablas de cuatro columnas.
 const PAGE = {
   width: 11909,
   height: 16834,
-  margin: { top: 1224, right: 1368, bottom: 1224, left: 1368 },
+  margin: { top: 1224, right: 1930, bottom: 1224, left: 1930 },
 };
 const CONTENT_WIDTH = PAGE.width - PAGE.margin.left - PAGE.margin.right; // 9173 dxa
 
@@ -36,7 +46,9 @@ const styles = {
   default: {
     document: {
       run: { font: FONT_BODY, size: 22, color: C.brand4 },
-      paragraph: { spacing: { after: 160, line: 300, lineRule: 'auto' } },
+      // line 336 = 1,4 de interlineado (336/240). El manual de voz usaba 1,25,
+      // que en línea larga cansa; la identidad pide 1,5–1,6 para texto corrido.
+      paragraph: { spacing: { after: 180, line: 336, lineRule: 'auto' } },
     },
     heading1: {
       run: { font: FONT_HEAD, bold: true, size: 34, color: C.brand1 },
@@ -67,7 +79,7 @@ const styles = {
       basedOn: 'Normal',
       quickFormat: true,
       run: { font: FONT_BODY, size: 23, color: C.brand4 },
-      paragraph: { spacing: { after: 200, line: 324, lineRule: 'auto' } },
+      paragraph: { spacing: { after: 220, line: 352, lineRule: 'auto' } },
     },
     {
       id: 'SmallCapsMuted',

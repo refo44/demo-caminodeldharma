@@ -52,9 +52,11 @@ function cover({ kicker, title, subtitle, tagline, footNote }) {
     font: FONT_HEAD, bold: true, size: 48, color: C.brand1,
   })], { spacing: { before: 200, after: 60 } }));
 
+  // El texto va ya en mayúsculas en lugar de usar allCaps: Google Docs no
+  // conserva esa propiedad al importar y el rótulo saldría en caja mixta.
   out.push(centered([new TextRun({
-    text: kicker,
-    font: FONT_BODY, size: 19, color: C.brand2, allCaps: true, characterSpacing: 60,
+    text: kicker.toUpperCase(),
+    font: FONT_BODY, size: 19, color: C.brand2, characterSpacing: 60,
   })], { spacing: { after: 320 } }));
 
   out.push(centered([new TextRun({
@@ -156,7 +158,8 @@ function frontMatter({ title, meta, notes }) {
   out.push(new Paragraph({
     style: 'SmallCapsMuted',
     children: [new TextRun({
-      text: 'Pulse con el botón derecho sobre el índice y elija «Actualizar campos» para generarlo.',
+      text: 'Para generar el índice: en Word, clic derecho sobre él y «Actualizar campos». '
+          + 'En Google Docs, Insertar › Índice.',
     })],
   }));
   out.push(new TableOfContents('Contenido', { hyperlinks: true, headingStyleRange: '1-3' }));
