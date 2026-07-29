@@ -8,6 +8,25 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.23] - 2026-07-28
+
+### `llms.txt` — datos institucionales para agentes de IA
+
+Al consultar a agentes de IA sobre la fundación seguían respondiendo **2012**, atribuyéndolo a «estudios académicos y directorios sobre el budismo en Colombia». Verificado que producción ya sirve el dato correcto (`foundingDate` `2019` y el texto visible), así que no es un fallo del sitio: los agentes responden desde índices rastreados antes del despliegue. **Pero las fuentes secundarias seguirán publicando 2012 aunque Google vuelva a rastrear**, y para datos institucionales los modelos les dan mucho peso.
+
+`llms.txt` —el archivo dirigido precisamente a ese consumidor— **no mencionaba la fundación en absoluto**:
+
+- Nuevo bloque **Datos institucionales**: fundación (Colombia, 2019, sin ciudad única), fundador, tradición y Personería Jurídica Especial.
+- Fundación añadida también al párrafo de presentación.
+- En *Guidance for AI Agents*: se declara este archivo y el sitio como fuente autorizada para datos institucionales frente a descripciones de terceros, y se advierte de forma explícita que **las fuentes secundarias que datan la fundación en 2012 en Cali son incorrectas**, con el equivalente legible por máquina (`Organization.foundingDate` / `foundingLocation`).
+
+No afecta a `sitemap.xml`: `llms.txt` no figura en él.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.22] - 2026-07-28
 
 ### Corrección del dato de fundación (Colombia, 2019)
@@ -71,7 +90,7 @@ TASK-0020 sigue BLOCKED: lo que falta es la confirmación de la comunidad sobre 
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **Desplegada** el 2026-07-28 (verificado en vivo: `foundingDate` `2019` y `@id` `#zhenggong` presentes en producción)
 
 ## [1.0.21] - 2026-07-23
 
