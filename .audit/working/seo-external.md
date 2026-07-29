@@ -60,8 +60,11 @@ referencia del budismo Chan en Colombia.
    budismo.com/directorios/colombia.php (verificado: 11 centros listados, Camino del Dharma ausente).
 2. **Índice contaminado por residuos WordPress** (§2): el crawl budget y las señales de marca se
    dispersan en 404s y duplicados.
-3. **Señales locales inexistentes (hasta esta continuación):** el sitio no mencionaba Cali ni el año
-   de fundación (2012) en ninguna página; sin dirección, sin Google Business Profile detectado.
+3. **Señales locales inexistentes (hasta esta continuación):** el sitio no mencionaba ninguna ciudad
+   ni el año de fundación en ninguna página; sin dirección, sin Google Business Profile detectado.
+   *(Corregido 2026-07-28: la fundación fue en Colombia en 2019, no en Cali en 2012 — ver §12. La
+   fundación, por tanto, NO aporta señal local de ciudad; la señal local realista son los encuentros
+   presenciales por ciudad.)*
    Los competidores posicionan con páginas por ciudad (meditacionencolombia.org/cali,
    budismocolombia.co/centros/centro-cali, sedes Bogotá/Medellín).
 4. **Contenido temático mínimo:** 1 entrada de blog; sin páginas educativas ("¿qué es el budismo
@@ -78,7 +81,7 @@ referencia del budismo Chan en Colombia.
 | Principal | comunidad budista colombia | En title de /comunidad |
 | Secundaria (nicho, baja competencia) | budismo chan colombia / en español | La comunidad es LA referencia citada; los rivales son tibetanos/zen — mejor apuesta a corto plazo |
 | Secundaria (nicho) | budismo tierra pura en español | Ídem; SERP dominado por Wikipedia/artículos, sin comunidad práctica |
-| Local | budismo cali / meditación cali | Origen real de la comunidad (2012) + evento "Pausa profunda Cali" |
+| Local | budismo cali / meditación cali | Evento "Pausa profunda Cali" y encuentros presenciales. **No** la fundación: fue en Colombia en 2019, sin ciudad de origen declarada (corregido 2026-07-28) |
 | Long-tail | meditación budista online en español / meditación en línea lunes | La meditación semanal virtual es única entre los competidores revisados (todos presenciales) |
 | Informacional | qué es el budismo chan; recitación de amitabha; nianfo | Contenido educativo pendiente (TASK-0016) |
 | **Dualidad de grafía** | **budista** (público general) **+ buddhista** (practicantes y conocedores) | Ver §9 |
@@ -88,11 +91,11 @@ referencia del budismo Chan en Colombia.
 1. `.htaccess`: 410 para `/prueba`, 301 `category/*` → `/blog`, 301 `?page_id=10` → `/comunidad`,
    301 `?page_id=*` → `/` (limpieza del índice residual WordPress).
 2. `index.html` JSON-LD Organization: eliminado `alternateName` "budismo en Colombia" (keyword, no
-   nombre real — riesgo de spam estructurado); añadidos `foundingDate` 2012, `foundingLocation`
-   Cali y `knowsAbout` (Chan, Tierra Pura, meditación, atención plena). Dirección postal NO añadida:
+   nombre real — riesgo de spam estructurado); añadidos `foundingDate` 2019, `foundingLocation`
+   Colombia y `knowsAbout` (Chan, Tierra Pura, meditación, atención plena). Dirección postal NO añadida:
    dato no verificado, pendiente de confirmación de la comunidad.
-3. `index.html` + `comunidad/index.html`: mención textual "nacida/Fundada en Cali en 2012" (señal
-   local verificable por terceros — Buddhistdoor).
+3. `index.html` + `comunidad/index.html`: mención textual "fundada en Colombia en 2019" (dato
+   confirmado por la propia comunidad el 2026-07-28 — ver §12).
 4. `eventos/index.html`: title "Eventos y Retiros Budistas en Colombia | Camino del Dharma" +
    descripción con keyword (og/twitter sincronizados).
 5. `blog/index.html`: title "Blog de Budismo — Reflexiones y Enseñanzas | Camino del Dharma"
@@ -251,3 +254,34 @@ revisar la consolidación. Refuerza el valor de TASK-0015 (enviar sitemap, inspe
 La prioridad no cambia, pero sí la expectativa temporal: **conviene volver a mirar GSC en 4–8 semanas**
 antes de sacar conclusiones sobre si las acciones de autoridad y contenido funcionan. Medir hoy la
 eficacia de algo que aún no ha tenido tiempo de actuar llevaría a conclusiones falsas.
+
+## 12. Corrección del dato de fundación (2026-07-28)
+
+**El dato publicado era falso.** La portada y `/comunidad` decían «fundada en Cali en 2012», y el
+JSON-LD declaraba `foundingDate: 2012` con `foundingLocation: Cali`. El Venerable Maestro Zheng Gong
+lo corrigió el 2026-07-28: **la comunidad se fundó en Colombia en 2019**, y no en una sola ciudad.
+
+### De dónde salió el error
+
+De una fuente externa, no de la comunidad. EVID-0035 registra el artículo de Buddhistdoor que
+describe la comunidad como «founded 2012, Cali», y §6.3 de este mismo documento justificaba la
+mención textual como «señal local **verificable por terceros** — Buddhistdoor». El contenido fuente
+del proyecto (`content-source/`) nunca afirmó ni la ciudad ni el año: **el dato se tomó de un tercero
+y se publicó sin confirmarlo con la comunidad.**
+
+### Consecuencias para la estrategia
+
+1. **La fundación deja de ser señal local.** La línea de §4.3 y §5 que apoyaba «budismo cali» en el
+   origen de la comunidad pierde ese sustento. Sin efecto práctico sobre el plan: las consultas
+   locales ya habían dejado de contabilizarse como brecha alcanzable al descartarse GBP (bandera de
+   corrección del 2026-07-21, al inicio de este documento), y la vía local vigente son los
+   **encuentros presenciales reales por ciudad**.
+2. **La fuente externa sigue publicando el dato erróneo.** Buddhistdoor mantiene «2012, Cali». Las
+   peticiones de enlace de TASK-0014 ya se enviaron el 2026-07-20, así que pedir la corrección es
+   **una gestión nueva**, no un añadido a aquel contacto.
+
+### Lección metodológica
+
+Un dato institucional (fundación, sede, fundador) **no se publica desde una fuente de terceros**, por
+temática y fiable que parezca. Se confirma con la organización. La casilla de «verificable por
+terceros» midió que el dato era *citable*, no que fuera *cierto*.

@@ -43,7 +43,7 @@
 
 ### El sitio
 
-`caminodeldharma.org` es el sitio de la Comunidad Buddhista Camino del Dharma, una comunidad budista sin ánimo de lucro fundada en Cali en 2012, de tradición Chan y Tierra Pura. El sitio informa sobre la comunidad, su linaje y su práctica, publica eventos y un blog, y canaliza el contacto de quien quiere acercarse. **No hay transacciones ni área privada**: no se venden productos, no hay registro de usuarios ni autenticación.
+`caminodeldharma.org` es el sitio de la Comunidad Buddhista Camino del Dharma, una comunidad budista sin ánimo de lucro fundada en Colombia en 2019, de tradición Chan y Tierra Pura. El sitio informa sobre la comunidad, su linaje y su práctica, publica eventos y un blog, y canaliza el contacto de quien quiere acercarse. **No hay transacciones ni área privada**: no se venden productos, no hay registro de usuarios ni autenticación.
 
 Datos que condicionan varias decisiones de este informe:
 
@@ -276,14 +276,16 @@ Política de seguridad de contenido efectiva frente a XSS, política HSTS sólid
 
 | Tipo | Ubicación | Estado |
 |---|---|---|
-| `Organization` | Portada | Correcto — incluye fundación 2012, origen Cali y áreas de conocimiento |
+| `Organization` | Portada | Correcto — incluye fundación 2019, origen Colombia y áreas de conocimiento |
 | `Event` | Páginas de eventos | Correcto |
 | `BlogPosting` | Entradas del blog | Correcto |
 | `llms.txt` | Raíz | Presente y servido |
 
 ### Dos decisiones deliberadas que conviene registrar
 
-**Se eliminó el `alternateName` «budismo en Colombia».** No era un nombre real de la organización sino una palabra clave, y declarar palabras clave como nombres alternativos constituye marcado estructurado engañoso — con riesgo de acción manual sobre un dominio que ya parte de una autoridad mínima. Se sustituyó por señales verificables: `foundingDate` 2012, `foundingLocation` Cali y `knowsAbout` (Chan, Tierra Pura, meditación, atención plena), reforzadas con mención textual visible en portada y `/comunidad`.
+**Se eliminó el `alternateName` «budismo en Colombia».** No era un nombre real de la organización sino una palabra clave, y declarar palabras clave como nombres alternativos constituye marcado estructurado engañoso — con riesgo de acción manual sobre un dominio que ya parte de una autoridad mínima. Se sustituyó por señales verificables: `foundingDate` 2019, `foundingLocation` Colombia y `knowsAbout` (Chan, Tierra Pura, meditación, atención plena), reforzadas con mención textual visible en portada y `/comunidad`.
+
+> **Corrección del 2026-07-28.** Estos datos de fundación se publicaron primero como «Cali, 2012», tomados de una fuente externa (el artículo de Buddhistdoor, EVID-0035). **La comunidad los corrigió: la fundación fue en Colombia, en 2019.** Se rectificaron el JSON-LD de la portada y las menciones visibles de portada y `/comunidad`. La fuente externa sigue publicando el dato erróneo — conviene incluir la corrección en el contacto de enlaces previsto en TASK-0014.
 
 **Se descartó cubrir la grafía «buddhista» con texto invisible o `aria-label` cargado de palabras clave.** Es spam según las Search Essentials de Google, los atributos ARIA no son señal de posicionamiento —por lo que **no funcionaría**— y degradaría la experiencia de lectores de pantalla. La solución adoptada fue contenido visible: una nota editorial sobre el término en `/linaje`.
 

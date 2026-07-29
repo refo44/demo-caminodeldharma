@@ -79,12 +79,29 @@ perder), pero tampoco es lo que produce el resultado.
 
 **¿Existen actividades reales y sostenidas en cada ciudad?** Lo verificado hasta ahora:
 
-| Ciudad | Evidencia encontrada |
-|---|---|
-| Cali | Fundación de la comunidad (2012); taller «Pausa Profunda – Cali» (finalizado) |
-| Barranquilla | Encuentro Nacional 2026 en Puerto Colombia (evento puntual, no sangha permanente) |
-| Medellín | Mención en Facebook («En Medellín compartimos…») — sin confirmar en el sitio |
-| Bogotá | **Sin evidencia** en el sitio |
+**Tabla rehecha el 2026-07-28** a partir del inventario completo de `/eventos` (9 tarjetas, incluido el
+archivo de encuentros). La versión anterior se apoyaba en el análisis del 19–20 de julio, previo a ese
+archivo, y quedaba desfasada en las cuatro ciudades:
+
+| Ciudad | Encuentros presenciales documentados en el sitio | Estado anterior de esta tabla |
+|---|---|---|
+| **Cali** | **2** — 6.º Encuentro Nacional Buddhista (16–18 ago 2025, 3 días) · Pausa Profunda – Cali (15 feb 2026) | Decía «fundación 2012» — **dato falso**, ya retirado. La evidencia real de Cali no era esa: son dos encuentros |
+| **Bogotá** | **2** — Vesak 2026 «Colombia Cuida la Vida» (9 may 2026) · Meditación Budista en el Festival Calma en la Ciudad (28 jun 2026) | Decía «**sin evidencia** en el sitio» — incorrecto |
+| **Medellín** | **2** — «Ansiedad, agotamiento y crisis de atención» (22 may 2026) · Pausa Profunda – Medellín (23 may 2026), mismo fin de semana | Decía «solo mención en Facebook, sin confirmar en el sitio» — incorrecto: ambos con JSON-LD completo |
+| **Barranquilla** | **1 + 1 próximo** — Meditación Presencial (9 jul 2026) · 7.º Encuentro Nacional (7–9 ago 2026, Puerto Colombia, a 30 min) | Decía solo el Encuentro Nacional |
+| *(sin ciudad)* | Conferencia «Buddhismo para tiempos de cansancio» (23 ene 2026), en línea por Zoom y YouTube | No figuraba |
+
+**Tres lecturas que cambian el cuadro:**
+
+1. **Las cuatro ciudades tienen historial presencial**, no solo Cali. La afirmación «Bogotá sin evidencia»
+   y «Medellín solo Facebook» ya no se sostienen.
+2. **Los Encuentros Nacionales rotan de ciudad** — Cali 2025, Puerto Colombia 2026. Son señal de
+   actividad *nacional itinerante*, no de sangha permanente en la ciudad que los aloja. Conviene no
+   contarlos como prueba de arraigo local.
+3. **El recuento de 5 encuentros de la entrada de ADR 0022 (2026-07-22) se quedó corto:** contaba solo
+   los recién archivados (Bogotá 2, Medellín 2, Barranquilla 1) y omitía los dos de Cali. El total real
+   de encuentros pasados es **8**, más uno próximo. La conclusión de aquella entrada —«ninguna ciudad
+   pasa de dos»— sigue siendo válida.
 
 **Riesgo si no hay actividad real:** páginas delgadas o duplicadas por ciudad son *doorway pages*,
 explícitamente sancionadas por las directrices de Google. Sobre un dominio con **DA 2** que además
@@ -92,6 +109,13 @@ está intentando construir autoridad, una acción manual sería especialmente da
 ciudad sin sangha real haría más daño que no tenerla.**
 
 ### Prioridad relativa: primero el perfil de empresa
+
+> **SIN EFECTO desde el 2026-07-21 — GBP descartado.** Este apartado ordenaba TASK-0020 *después* de
+> una decisión que ya se tomó: la comunidad no es elegible para Google Business Profile (sin sede ni
+> dirección física). No hay ficha que esperar, y la dependencia TASK-0020 → TASK-0014 quedó retirada
+> el 2026-07-28. **Consecuencia inversa a la que aquí se razona:** con el pack local fuera de alcance,
+> las páginas por ciudad dejan de ser «la opción de debajo» y pasan a ser la vía local principal,
+> junto con los encuentros presenciales. El texto original se conserva como registro del análisis.
 
 En **todas** las consultas locales probadas, los tres primeros puestos los ocupa el *pack local* de
 Google (fichas de Business Profile). Una página de ciudad compite por los puestos orgánicos **por

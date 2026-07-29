@@ -8,6 +8,71 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.22] - 2026-07-28
+
+### Corrección del dato de fundación (Colombia, 2019)
+
+El sitio afirmaba que la comunidad fue **«fundada en Cali en 2012»**. Es falso. Corrección del Venerable Maestro Zheng Gong: **la comunidad se fundó en Colombia, en 2019**, y no en una sola ciudad.
+
+- `index.html`: JSON-LD `Organization` — `foundingDate` `2012` → **`2019`**; `foundingLocation` pasa de `Place` «Cali, Colombia» a **`Country` «Colombia»**.
+- `index.html`: párrafo de «Quiénes somos» — «nacida en Cali en 2012, con presencia en Colombia» → **«fundada en Colombia en 2019, con presencia en distintas ciudades del país»** (se evita además repetir «Colombia» en la misma frase).
+- `comunidad/index.html`: «Fundada en Cali en 2012» → **«Fundada en Colombia en 2019»**.
+- `sitemap.xml`: `<lastmod>` `2026-07-28` en `/` y `/comunidad`.
+
+**De dónde venía el error.** No de la comunidad: el dato se tomó del artículo de Buddhistdoor (`EVID-0035`, «founded 2012, Cali») y se publicó sin confirmarlo. `working/seo-external.md` §6.3 lo justificaba precisamente como «señal local **verificable por terceros**» — pero eso medía que el dato era *citable*, no que fuera *cierto*. El contenido fuente del proyecto (`content-source/`) nunca afirmó ni la ciudad ni el año.
+
+**Consecuencia para la estrategia SEO:** la fundación **deja de ser una señal local de ciudad**, y se cae la premisa que apoyaba «budismo cali» en el origen de la comunidad. Sin efecto sobre el plan vigente: las consultas locales ya habían dejado de contabilizarse como brecha alcanzable al descartarse Google Business Profile el 2026-07-21, y la vía local en pie son los encuentros presenciales reales por ciudad.
+
+**Pendiente con terceros:** Buddhistdoor sigue publicando «2012, Cali». Pedir la corrección es una **gestión nueva** — las peticiones de enlace de TASK-0014 se enviaron el 2026-07-20.
+
+### Documentación
+
+- `docs/informes-seo/02-auditoria-seo-tecnica.md`: corregidos la descripción del sitio (§ El sitio), la tabla de datos estructurados y el apartado de decisiones deliberadas, con nota de corrección fechada. `.docx` regenerado.
+- `.audit/manual-inputs-howto.md`: tabla de datos del proyecto y **plantilla de alta en el directorio budismo.com** — esta última habría propagado el dato erróneo a un tercero.
+- `.audit/executive-summary.md`, `.audit/working/seo-external.md` (§4.3, §5, §6 y nueva §12), `.audit/working/url-hypotheses.md`, `TASK-0013` y `TASK-0020` (ficha y `tasks.jsonl`).
+- `.audit/decisions.md`: decisión registrada con el origen del error y la lección — un dato institucional (fundación, sede, fundador) se confirma con la organización, nunca se publica desde una fuente de terceros.
+
+### Consolidación de entidades en el JSON-LD
+
+El Maestro Zheng Gong aparecía **8 veces como `Person` suelta con tres nombres distintos** («Venerable Maestro Zheng Gong» ×2, «Maestro Zheng Gong» ×5, «Zheng Gong» ×1 en el blog), ninguna con `@id`: para un buscador podían ser tres personas. Los `organizer`/`publisher` incrustados sumaban otros 8 nodos `Organization` con dos nombres, ninguno apuntando al `@id` que ya existía en la portada.
+
+- **Un solo `@id` por entidad:** `#zhenggong` y `#organization`. Ahora los **10 nodos `Person`** y los **11 `Organization`** del sitio comparten identificador y nombre canónico. El nombre canónico es «Venerable Maestro Zheng Gong» —el que usa `/comunidad`, su página de biografía— con `alternateName` para las otras dos formas, de modo que las menciones visibles («Por Zheng Gong» en el blog, «Maestro Zheng Gong» en eventos) siguen respaldadas.
+- **`founder` declarado.** `Organization` no decía quién la fundó, pese a que `/comunidad` tiene la sección «Nuestro fundador». Añadido `founder` → `#zhenggong`, y `worksFor` en sentido inverso.
+- **Nodo `Person` completo** en `index.html` y en `comunidad/index.html`, con descripción, foto de la biografía y `knowsAbout`. Se define en cada página en lugar de referenciarse desde otra: Google evalúa los datos estructurados **página a página**, así que una referencia suelta a un `@id` externo no resolvería.
+- **`comunidad/index.html`:** `about` pasa de un `Thing` genérico («comunidad budista en Colombia», una palabra clave) a referenciar la `Organization` real. Mismo criterio por el que la auditoría retiró el `alternateName` de keyword en la 1.0.12.
+- `sitemap.xml`: `<lastmod>` `2026-07-28` en las cinco páginas restantes con JSON-LD modificado.
+
+**Por qué importa:** conecta con **ASO-001** — el AI Overview de marca no cita el sitio pese a ser #1 orgánico. Con DA 2, que Google resuelva «una organización, un maestro» pesa más que cualquier retoque de texto. Verificado: los 15 bloques del sitio parsean, `Event` y `BlogPosting` conservan sus campos obligatorios, y el `logo` del `publisher` del blog sigue intacto.
+
+### Evidencia de actividad por ciudad (TASK-0020) rehecha
+
+La tabla de evidencia procedía del análisis del 19–20 de julio, **anterior al archivo de encuentros**, y estaba desfasada en las cuatro ciudades. Rehecha desde el inventario completo de `/eventos` (9 tarjetas):
+
+| Ciudad | Encuentros presenciales documentados | Decía antes |
+|---|---|---|
+| **Cali** | **2** — 6.º Encuentro Nacional (16–18 ago 2025, 3 días) · Pausa Profunda (15 feb 2026) | «fundación 2012» — dato falso |
+| **Bogotá** | **2** — Vesak 2026 (9 may) · Festival Calma en la Ciudad (28 jun) | «**sin evidencia** en el sitio» |
+| **Medellín** | **2** — «Ansiedad, agotamiento…» (22 may) · Pausa Profunda (23 may) | «solo mención en Facebook» |
+| **Barranquilla** | **1 + 1 próximo** — Meditación Presencial (9 jul) · 7.º Encuentro Nacional (7–9 ago, Puerto Colombia) | solo el Encuentro Nacional |
+
+Más una conferencia en línea sin ciudad («Buddhismo para tiempos de cansancio», 23 ene 2026), que no figuraba.
+
+**«Bogotá sin evidencia» y «Medellín solo mención en Facebook» eran afirmaciones falsas:** ambas ciudades tienen dos encuentros con JSON-LD completo en el propio sitio. **Matiz nuevo:** los Encuentros Nacionales **rotan de ciudad** (Cali 2025 → Puerto Colombia 2026), luego son señal de actividad nacional itinerante, no de arraigo local en la ciudad que los aloja. **Nota sobre el recuento de ADR 0022:** decía «son 5» contando solo los recién archivados y omitiendo los dos de Cali — el total real de pasados es **8**, más uno próximo; su conclusión («ninguna ciudad pasa de dos») no cambia.
+
+TASK-0020 sigue BLOCKED: lo que falta es la confirmación de la comunidad sobre qué ciudades tienen actividad **sostenida** — 2–3 encuentros al año no son sangha permanente —, no el inventario.
+
+### Trazabilidad de Google Business Profile (dos huecos, detectados al revisar lo anterior)
+
+- **`decisions.md` no tenía la decisión.** GBP se descartó el **2026-07-21** por inelegibilidad —la comunidad no tiene sede ni dirección física, y Google excluye a las entidades exclusivamente en línea— y se propagó a nueve documentos. Pero las cinco banderas de corrección que lo anuncian remiten a «Ver `decisions.md`», y ese archivo **nunca recibió la entrada**: sus dos únicas menciones a GBP son del 2026-07-20 y lo tratan como pendiente. Añadida ahora la entrada canónica, fechada en su día y marcada como registro retroactivo. **No es un ADR:** los ADR 0001–0022 no cubren GBP.
+- **TASK-0020 seguía bloqueada por esa decisión ya tomada.** Su ficha exigía «resolver antes la decisión de GBP (TASK-0014)», con `depends_on: TASK-0014`, prerrequisito propio y `deployment_sequence: "Tras TASK-0014 (GBP)"`. Retirado todo: **`depends_on` queda en `TASK-0022`**, que es el bloqueo real (historial de encuentros por ciudad). Anotado también el apartado «Prioridad relativa: primero el perfil de empresa» de `working/url-hypotheses.md`, cuyo razonamiento se invierte: sin pack local alcanzable, las páginas por ciudad dejan de ser «la opción de debajo» y pasan a ser la vía local principal.
+
+**No se reescribe la historia:** la entrada 1.0.12 se deja intacta (registra lo que se hizo entonces) y **`evidence-ledger.jsonl` no se toca** — `EVID-0035` es el registro fiel de lo que Buddhistdoor publica, y sigue siendo cierto que lo publica. Se respeta la convención de evidencia congelada declarada en 1.0.20.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.21] - 2026-07-23
 
 ### Meditación semanal — copy y metadatos

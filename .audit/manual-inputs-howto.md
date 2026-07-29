@@ -10,7 +10,7 @@ Datos del proyecto que necesitarás:
 | Sitio | `https://caminodeldharma.org` |
 | Correo | `caminodeldharma1@gmail.com` |
 | Teléfono | +57 320 662 7608 |
-| Fundación | Cali, 2012 |
+| Fundación | Colombia, 2019 |
 | Fundador | Venerable Maestro Zheng Gong |
 | Tradición | Budismo Chan y Tierra Pura (Mahāyāna) |
 | Facebook | `facebook.com/caminodeldharmacolombia` |
@@ -169,7 +169,7 @@ enlace de contacto o alta y envía:
 ```
 Nombre:      Comunidad Buddhista Camino del Dharma
 Tradición:   Budismo Chan y Tierra Pura (Mahāyāna)
-Ciudad:      Cali, Colombia (fundada en 2012)
+País:        Colombia (fundada en 2019)
 Sitio web:   https://caminodeldharma.org
 Correo:      caminodeldharma1@gmail.com
 Teléfono:    +57 320 662 7608
@@ -235,8 +235,8 @@ despliegue manual por ADR 0015).
 
 Ya en código fuente, sin desplegar:
 - `.htaccess`: 410 para `/prueba`, 301 de `category/*` → `/blog`, 301 de `?page_id=10` → `/comunidad`
-- `index.html`: JSON-LD con `foundingDate` 2012, `foundingLocation` Cali y `knowsAbout`
-- `index.html` y `comunidad/index.html`: mención "fundada en Cali en 2012"
+- `index.html`: JSON-LD con `foundingDate` 2019, `foundingLocation` Colombia y `knowsAbout`
+- `index.html` y `comunidad/index.html`: mención "fundada en Colombia en 2019"
 - `eventos/index.html` y `blog/index.html`: títulos temáticos
 - (1.0.12 incluye además la retirada de GA4, tampoco desplegada)
 
