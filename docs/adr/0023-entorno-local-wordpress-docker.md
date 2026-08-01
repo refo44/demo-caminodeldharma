@@ -78,9 +78,12 @@ riesgo desde la fase de desarrollo, no solo en el staging final.
 
 **Contrapartidas aceptadas**
 
-- Requiere confirmar manualmente la versión de PHP y MySQL/MariaDB de Hostinger antes de fijar las
-  imágenes en el `docker-compose.yml` — tarea pendiente; no bloquea esta decisión, pero sí bloquea su
-  implementación.
+- Requería confirmar manualmente la versión de PHP y MySQL/MariaDB de Hostinger antes de fijar las
+  imágenes en el `docker-compose.yml`. **Confirmado 2026-08-01:** PHP 8.3.30 (hPanel → Avanzado →
+  Información de PHP) y MariaDB 11.8.8-MariaDB-log (`SELECT VERSION();` vía phpMyAdmin, base temporal
+  creada y borrada solo para esta comprobación, ya que producción hoy es estática y no tenía ninguna
+  base de datos existente). Prerrequisito de implementación cerrado; ver
+  [`docs/docker-wordpress-playbook.md`](../docker-wordpress-playbook.md) §2.
 - Un entorno Docker local no reproduce configuraciones propias del hosting compartido de Hostinger
   (límites de recursos, módulos específicos del servidor web). Docker **no sustituye** la validación
   en staging real descrita en `docs/17-orden-implementacion.md` § Transición estático → WordPress,

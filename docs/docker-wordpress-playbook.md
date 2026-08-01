@@ -26,13 +26,14 @@ junto al código que valida.
 ## 2. Arquitectura mínima (3 servicios)
 
 ```text
-db         → mariadb:11            (volumen db_data; healthcheck)
-wordpress  → wordpress:X.Y-phpZ    (Apache; volumen wp_data; puerto local)
-wpcli      → wordpress:cli-phpZ    (mismos mounts y DB; para wp <cmd>)
+db         → mariadb:11.8           (volumen db_data; healthcheck)
+wordpress  → wordpress:php8.3       (Apache; volumen wp_data; puerto local)
+wpcli      → wordpress:cli-php8.3   (mismos mounts y DB; para wp <cmd>)
 ```
 
-`X.Y-phpZ` se fija según la versión real de PHP/MySQL de Hostinger (pendiente de confirmar en el
-hPanel — mismo prerrequisito ya registrado en ADR 0023).
+Versiones confirmadas en el hPanel de Hostinger (2026-08-01): **PHP 8.3.30** (vía Información de PHP,
+`Avanzado`) y **MariaDB 11.8.8-MariaDB-log** (vía `SELECT VERSION();` en phpMyAdmin, base temporal
+`u548735796_version_check`, borrada tras la comprobación). Prerrequisito de ADR 0023 cerrado.
 
 Reglas que demostraron su valor en el proyecto de origen:
 
@@ -111,9 +112,9 @@ Reglas que demostraron su valor en el proyecto de origen:
 5. **Puerto parametrizado con default** (`"${WORDPRESS_PORT:-8080}:80"`) para convivir con otros
    proyectos dockerizados en la misma máquina.
 
-6. **Fijar versiones de imagen que imiten al hosting** (p. ej. `wordpress:6.8-php8.2`, nunca `latest`):
-   la paridad de versión PHP con Hostinger es lo que da valor probatorio a `php -l` y al resto de la QA
-   local. Confirmar la versión real antes de fijar el tag (prerrequisito de ADR 0023).
+6. **Fijar versiones de imagen que imiten al hosting** (`wordpress:php8.3` + `mariadb:11.8`, nunca
+   `latest`): la paridad de versión PHP/MariaDB con Hostinger es lo que da valor probatorio a `php -l`
+   y al resto de la QA local. Versiones reales confirmadas 2026-08-01 (ver §2).
 
 ## 4. Método: qué QA ejecutar en cuanto el entorno levanta
 
@@ -151,7 +152,8 @@ entregando de verdad a caminodeldharma1@gmail.com se valida en staging, no solo 
 ## 6. Checklist portable (para cuando se implemente)
 
 - [ ] `docker-compose.yml` en la raíz con `name:`, 3 servicios (db con healthcheck, wordpress, wpcli)
-      y versiones de imagen fijadas a la paridad de Hostinger (confirmar antes en hPanel).
+      y versiones de imagen fijadas a la paridad de Hostinger: PHP 8.3, MariaDB 11.8 (confirmadas
+      2026-08-01).
 - [ ] Bind-mounts SOLO del theme `camino-del-dharma` (y plugin propio si se crea); core y BD en
       volúmenes.
 - [ ] `WORDPRESS_CONFIG_EXTRA` con `WP_ENVIRONMENT_TYPE` + debug log, **duplicado en `wpcli`**.
