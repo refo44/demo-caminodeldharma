@@ -101,6 +101,11 @@ Documentos, issues, commits o ADR relacionados.
 | [0020](0020-hsts-aplazado-hasta-wordpress.md) | HSTS aplazado hasta después del corte a WordPress | Aceptada |
 | [0021](0021-lightbox-galeria-nativo-wordpress.md) | Lightbox de la galería — nativo de WordPress, no propio | Aceptada |
 | [0022](0022-sin-urls-de-filtro-por-ciudad.md) | La ciudad es taxonomía, no URL — sin archivos de eventos por ciudad | Aceptada |
+| [0023](0023-entorno-local-wordpress-docker.md) | Entorno de desarrollo local de WordPress con Docker | Aceptada |
+| [0024](0024-plugin-dominio-theme-presentacion.md) | Plugin propio para el dominio; el theme solo presenta | Aceptada |
+| [0025](0025-politica-plugins-terceros.md) | Plugins de terceros solo con aprobación por ADR | Aceptada |
+| [0026](0026-contact-form-7.md) | Contact Form 7 para el formulario de contacto | Aceptada |
+| [0027](0027-estandares-ingenieria-codigo.md) | Estándares de ingeniería y estilo de código para Fase 3 | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -118,6 +123,11 @@ Documentos, issues, commits o ADR relacionados.
 | Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
 | Lightbox de la galería | [0021](0021-lightbox-galeria-nativo-wordpress.md) — visor nativo de Gutenberg; no se implementa uno propio en la maqueta |
 | URLs de filtro por ciudad | [0022](0022-sin-urls-de-filtro-por-ciudad.md) — la ciudad es taxonomía, no dirección; los eventos de cada ciudad van dentro de `/sanghas/{ciudad}` |
+| Entorno de desarrollo local WordPress | [0023](0023-entorno-local-wordpress-docker.md) — Docker, replicando versiones de Hostinger; tarea separada de implementar el theme |
+| Dominio en plugin, presentación en theme | [0024](0024-plugin-dominio-theme-presentacion.md) — `camino-del-dharma-core` dueño de CPTs/taxonomías/roles desde el inicio de Fase 3 |
+| Plugins de terceros | [0025](0025-politica-plugins-terceros.md) — solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno |
+| Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com |
+| Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
 
 ---
 

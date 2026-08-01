@@ -46,7 +46,7 @@ camino-del-dharma/
 │       │       ├── functions.php
 │       │       └── style.css
 │       └── plugins/
-│           └── camino-del-dharma-core/   # Solo si hay plugin propio
+│           └── camino-del-dharma-core/   # Plugin propio, dueño del dominio — ver ADR 0024
 ├── docs/
 │   └── adr/
 ├── scripts/
@@ -105,9 +105,18 @@ Reglas:
 - Actualizar `13-static-file-structure` y `17-orden-implementacion` §2.7.
 - Tag Git pre-reorg como punto de rollback.
 
+## Nota (2026-07-31)
+
+La condicionalidad original de `plugins/camino-del-dharma-core/` ("solo si hay plugin propio") queda
+resuelta por **ADR 0024**: el plugin se crea desde el inicio de Fase 3, sin condición. No cambia el
+resto de esta decisión (estructura del monorepo, roles de `static/`/`wordpress/`/`docs/`/`scripts/`),
+por lo que este ADR permanece **Aceptada** — solo se anota el resultado de esa condición, igual que
+ADR 0020 anotó la parte operativa de ADR 0018 sin invalidar su análisis técnico.
+
 ## Referencias
 
 - Sustituye layout de rutas de ADR 0011 (estado → Sustituida)
 - ADR 0012, ADR 0013
+- ADR 0024 — resuelve la condicionalidad del plugin propio (ver nota arriba)
 - `docs/13-static-file-structure`
 - `docs/17-orden-implementacion` §2.7, Fase 3
