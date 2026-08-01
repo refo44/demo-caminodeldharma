@@ -147,6 +147,16 @@ Campos mínimos recomendados:
 | sangha_schedule | text | Horario o frecuencia (texto corto) |
 | sangha_map_url | url | Enlace a mapa (opcional) |
 
+**Nota sobre sedes (2026-07-31):** ninguna ciudad tiene sede fija ni dirección física propia — la
+misma razón por la que se descartó Google Business Profile (`.audit/decisions.md`, 2026-07-21).
+`sangha_map_url` seguirá vacío en la práctica para la mayoría o todas las ciudades; no se debe rellenar
+con una dirección genérica o supuesta. Algunas actividades recurrentes usan de hecho el mismo lugar por
+temporadas (p. ej. la meditación al parque), pero eso también cambia (en Bogotá ese mismo evento se ha
+hecho en parques distintos): la ubicación es un dato **por evento**, no de la sangha. Vive en
+`event_place` (§3, texto libre por evento), nunca como dirección fija heredada de la página de ciudad.
+El contenido de cada página de sangha (cuando se implemente, ver TASK-0020) debe describir la actividad
+y cómo confirmar el lugar de cada convocatoria (WhatsApp), no afirmar una ubicación permanente.
+
 ---
 
 ## 3.2. Testimonial: estándar del modelo

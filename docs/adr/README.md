@@ -106,6 +106,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0025](0025-politica-plugins-terceros.md) | Plugins de terceros solo con aprobación por ADR | Aceptada |
 | [0026](0026-contact-form-7.md) | Contact Form 7 para el formulario de contacto | Aceptada |
 | [0027](0027-estandares-ingenieria-codigo.md) | Estándares de ingeniería y estilo de código para Fase 3 | Aceptada |
+| [0028](0028-privacidad-aplazada-conscientemente.md) | Política de privacidad aplazada conscientemente | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -128,6 +129,7 @@ Documentos, issues, commits o ADR relacionados.
 | Plugins de terceros | [0025](0025-politica-plugins-terceros.md) — solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno |
 | Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com |
 | Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
+| Política de privacidad | [0028](0028-privacidad-aplazada-conscientemente.md) — aplazada hasta asesoría legal; gate obligatorio antes de publicar Contact Form 7 |
 
 ---
 
