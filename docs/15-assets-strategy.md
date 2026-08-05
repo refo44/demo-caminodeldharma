@@ -226,10 +226,20 @@ Subtítulo semántico en Inicio (visible, no sustituye al H1): *Comunidad budist
 
 ### 12.2 Archivos obligatorios en producción
 
+**`static/` (maqueta estática, sigue vigente sin cambios):**
+
 - `robots.txt` — Allow `/`; declarar `Sitemap: https://caminodeldharma.org/sitemap.xml`
-- `sitemap.xml` — solo URLs indexables; actualizar `<lastmod>` al cambiar una página
+- `sitemap.xml` — mantenido a mano, solo URLs indexables; actualizar `<lastmod>` al cambiar una página
 - `llms.txt` — curado; no sustituye al sitemap
 - `.htaccess` — HTTPS, dominio canónico, URLs limpias (ver despliegue en README)
+
+**WordPress (ADR 0030):** el `sitemap.xml` manual queda **deprecado**. Se usa el sitemap nativo del
+núcleo de WordPress (`/wp-sitemap.xml`) como única fuente de verdad; `robots.txt` del theme declara
+`Sitemap: https://caminodeldharma.org/wp-sitemap.xml`. No se escribe ni se mantiene ningún
+`sitemap.xml` propio en el theme ni en `camino-del-dharma-core`. Antes de publicar, verificar que
+`/wp-sitemap.xml` no incluya `event_city`/`event_type` (ADR 0022) ni ninguna URL fuera de
+`docs/11-arbol-urls-final.md`. `llms.txt` y `.htaccess` siguen aplicando igual en ambas
+implementaciones.
 
 **Google Search Console:** propiedad verificada; sitemap enviado; tras cambios relevantes en `<head>` o JSON-LD, solicitar indexación de las URLs afectadas. Usar **Rendimiento** e **Indexación** para guiar mejoras; no es un paso de configuración único.
 
@@ -297,9 +307,82 @@ Subtítulo semántico en Inicio (visible, no sustituye al H1): *Comunidad budist
 
 Añadir `performer` y `offers` solo según las reglas de la tabla.
 
-### 12.4 Blog — `BlogPosting`
+### 12.4 Blog — JSON-LD (`BlogPosting`)
 
-En artículos del blog: `headline`, `description`, `author`, `publisher`, `image`, `datePublished`, `dateModified`, `mainEntityOfPage`, `inLanguage`.
+**Una sola fuente de verdad:** JSON-LD en la **página de detalle** de la entrada (`/blog/{slug}/`), igual que en Event (§12.3). No se pone JSON-LD de artículo en el listado `/blog/` — solo `BreadcrumbList` si aplica.
+
+**No perseguir el 100 %** de advertencias en GSC. Rellenar solo campos **verdaderos y útiles**; un dato inventado es peor que omitir un campo opcional — mismo criterio que §12.3.
+
+Spec extraída del artículo real ya publicado en la maqueta estática (`blog/sangha-refugio-hiperconexion/index.html`), no inventada: es el ejemplo canónico a replicar por código.
+
+| Campo | Regla |
+|-------|--------|
+| `headline`, `description`, `datePublished`, `dateModified` | Obligatorios. `headline` = título editorial; `description` = extracto (mismo texto que `meta description`/`og:description`); fechas reales de publicación y última edición — no la fecha de build ni la de migración. |
+| `image` | URL absoluta de la imagen destacada de la entrada. Si la entrada no tiene imagen destacada, **omitir el campo** — no usar el logo ni una imagen genérica como relleno. |
+| `author` | `Person` **solo si la entrada tiene una persona autora acreditada** en el byline editorial (p. ej. una reflexión firmada por el Venerable Maestro Zheng Gong). Objeto fijo y curado por persona (no el perfil de usuario de WordPress tal cual): `@id` estable (`https://caminodeldharma.org/#{slug-persona}`), `name`, `alternateName` si tiene variantes de tratamiento, `url` a su página institucional (p. ej. `/comunidad`). Si la entrada se publica sin firma individual (comunicado o anuncio institucional), `author` **es la misma `Organization`** que `publisher` — no inventar un autor genérico ni usar el usuario técnico de WordPress que hizo la publicación. |
+| `publisher` | Fijo en **toda** entrada, igual que `organizer` en Event: `{ "@type": "Organization", "name": "Comunidad Buddhista Camino del Dharma", "logo": { "@type": "ImageObject", "url": "https://caminodeldharma.org/assets/images/logo.png" } }`. |
+| `mainEntityOfPage` | URL canónica de la entrada. Es el campo de identidad de la página (convención `BlogPosting`); no añadir además un `url` redundante a nivel del objeto. |
+| `inLanguage` | Fijo `"es-CO"`. |
+| `keywords` | **Opcional.** Solo si la entrada tiene tags (`post_tag`, ADR 0031) asignados: lista de los nombres de los tags. Omitir por completo si no hay tags — no rellenar con palabras clave inventadas. |
+| `BreadcrumbList` (en el mismo `@graph`) | Inicio → Blog → título de la entrada — mismo patrón que Event. |
+
+**Personas autoras: registro fijo, no texto libre.** Igual que `performer` en Event no es un campo de texto libre sino un dato verificado, los objetos `Person` de autoría deben salir de un registro pequeño y fijo en código (hoy: solo el Venerador Maestro Zheng Gong), no generarse a partir del nombre de usuario de WordPress que publica. Evita que `@id`/`alternateName`/`url` diverjan entre entradas de la misma persona por un error de tipeo.
+
+**Mapeo a campos de WordPress (para generarlo por código, no a mano — ver `docs/03-wordpress-content-model.md` §Metadatos sociales):**
+
+| Campo JSON-LD | Origen en WordPress |
+|---|---|
+| `headline` | `get_the_title()` |
+| `description` | extracto editorial (`get_the_excerpt()` o campo dedicado) |
+| `image` | URL de la imagen destacada; omitir si no existe |
+| `author` | registro fijo de `Person` si el post tiene autor acreditado (ver arriba); si no, el mismo objeto `Organization` de `publisher` |
+| `publisher` | constante en código, igual en toda entrada |
+| `datePublished` / `dateModified` | `get_the_date()` / `get_the_modified_date()` |
+| `mainEntityOfPage` | `get_permalink()` |
+
+**Plantilla mínima (adaptar por entrada):**
+
+```json
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://caminodeldharma.org" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://caminodeldharma.org/blog" },
+        { "@type": "ListItem", "position": 3, "name": "Título de la entrada", "item": "https://caminodeldharma.org/blog/slug" }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Título de la entrada",
+      "description": "Extracto editorial de la entrada.",
+      "image": "https://caminodeldharma.org/assets/images/blog/slug.jpg",
+      "author": {
+        "@type": "Organization",
+        "@id": "https://caminodeldharma.org/#organization",
+        "name": "Comunidad Buddhista Camino del Dharma"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://caminodeldharma.org/#organization",
+        "name": "Comunidad Buddhista Camino del Dharma",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://caminodeldharma.org/assets/images/logo.png"
+        }
+      },
+      "mainEntityOfPage": "https://caminodeldharma.org/blog/slug",
+      "datePublished": "2026-08-01",
+      "dateModified": "2026-08-01",
+      "inLanguage": "es-CO"
+    }
+  ]
+}
+```
+
+Sustituir `author` por el objeto `Person` del registro fijo cuando la entrada tenga una persona autora acreditada (ver ejemplo real completo en `blog/sangha-refugio-hiperconexion/index.html`).
 
 ### 12.5 Otros tipos en el sitio
 
@@ -315,4 +398,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.0
+**Versión:** 2.1 — §12.4 ampliado con la spec completa de JSON-LD `BlogPosting` (antes solo listaba nombres de campo).

@@ -173,29 +173,40 @@ y cómo confirmar el lugar de cada convocatoria (WhatsApp), no afirmar una ubica
 |-----|----------|------|----------|
 | event_type | Tipo de evento | Jerárquica | event |
 | event_city | Ciudad del evento | Plana | event |
+| post_tag | Tags | Nativa, plana | post (blog) |
 
 **Valores (términos):** Taller, Retiro, Conferencia, Encuentro (etiqueta corta para «Encuentro nacional»), Celebración (Vesak, Diwali, etc.).
 
 En la maqueta estática estos valores se muestran como etiqueta encima del título de cada evento (clase `.evento-type`). En WordPress se asignan vía la taxonomía `event_type`; el theme debe mostrar el término como label en single y en listados.
 
-**Ninguna de las dos taxonomías tiene archivo público.** Se usan como dato y como etiqueta, nunca como página: no existe `/eventos/taller` ni `/eventos/cali`. `event_city` sirve para asociar cada evento con su sangha y listarlo dentro de `/sanghas/{ciudad}`. En la maqueta estática es un atributo en el marcado del evento. Ver **ADR 0022**.
+**Ninguna de las dos taxonomías de evento tiene archivo público.** Se usan como dato y como etiqueta, nunca como página: no existe `/eventos/taller` ni `/eventos/cali`. `event_city` sirve para asociar cada evento con su sangha y listarlo dentro de `/sanghas/{ciudad}`. En la maqueta estática es un atributo en el marcado del evento. Ver **ADR 0022**.
+
+**`post_tag` (tags del blog) es distinta: sí tiene archivo, pero condicionalmente indexable (ADR 0031).**
+Los editores asignan tags libremente a cada entrada del blog desde el editor, sin vocabulario cerrado.
+El archivo de cada tag existe en `/blog/tag/{slug}/` (`docs/11-arbol-urls-final.md`), pero se sirve
+`noindex, follow` por defecto hasta que ese tag reúna suficiente contenido para ser un hub temático útil
+— criterio cualitativo revisado caso por caso, no un umbral automático (mismo aprendizaje que la
+revisión de ADR 0022). Si la entrada tiene tags, el `BlogPosting` puede incluir `keywords`
+(`docs/15-assets-strategy.md` §12.4).
 
 ---
 
 ## 5. Plantillas mínimas
 
-- `front-page.php`: Inicio
-- `page-comunidad.php`: La comunidad
-- `page-linaje.php`: El linaje
-- `page-practica.php`: Práctica y actividades
-- `page-eventos.php` o `archive-event.php`: Eventos (condicional)
-- `page-galeria.php`: Galería — ver §5.1
-- `page-donaciones.php`: Contribuir (donaciones)
-- `page-contacto.php`: Contacto
-- `home.php` / `index.php`: Blog (según modelo)
-- `single-event.php`: Evento individual (si aplica)
-- `page.php`: Fallback para páginas — cubre **Privacidad** (`/privacidad`), que no necesita plantilla propia
-- `404.php`: Página no encontrada (estado; copy en 08)
+- `templates/front-page.html`: Inicio
+- `templates/page-comunidad.html`: La comunidad
+- `templates/page-linaje.html`: El linaje
+- `templates/page-practica.html`: Práctica y actividades
+- `templates/page-eventos.html` o `templates/archive-event.html`: Eventos (condicional)
+- `templates/page-galeria.html`: Galería — ver §5.1
+- `templates/page-donaciones.html`: Contribuir (donaciones)
+- `templates/page-contacto.html`: Contacto
+- `templates/home.html` / `templates/single.html`: Blog (§4, §12 §2.2)
+- `templates/single-event.html`: Evento individual (si aplica)
+- `templates/page.html`: Fallback para páginas — cubre **Privacidad** (`/privacidad`), que no necesita plantilla propia
+- `templates/404.html`: Página no encontrada (estado; copy en 08)
+
+*(Plantillas de bloques — theme de bloques / Full Site Editing, ADR 0029. Ver `12-theme-file-structure` §5–§6.)*
 
 ### 5.1 Galería — bloque de Gutenberg, con lightbox nativo
 
@@ -213,6 +224,22 @@ La galería **no se reimplementa** en el tema. Decisión registrada en **ADR 002
 - Los **36 originales** de `assets/images/galeria/` se suben a la biblioteca de medios; WordPress genera sus propios tamaños. Las miniaturas manuales de `thumbs/` **no se migran**: son una solución provisional de la etapa estática.
 - **No se instala plugin de lightbox.** El núcleo ya lo cubre; un plugin añadiría superficie de mantenimiento para algo que el núcleo ya resuelve.
 - El bloque de galería renderiza en servidor, lo que **resuelve de paso AEO-001** (hoy la galería estática es invisible sin JavaScript).
+
+**Álbumes: creados libremente por el editor, sin lista fija.** En la maqueta estática los álbumes
+("General", por año, etc. — ver `06-wireframes` §6) están fijados en `#gallery-albums-data`, editable
+solo por quien toca código. En WordPress, `page-galeria.html` renderiza el contenido de la Page
+(`/galeria/`) a través del bloque **Contenido de la entrada**, y cada álbum es simplemente un bloque
+**Encabezado** (título, cualquier texto que el editor escriba) seguido de un bloque **Galería** con las
+imágenes de ese álbum — repetido tantas veces como álbumes se quieran, en cualquier orden. No hay
+taxonomía, CPT ni vocabulario cerrado: crear un álbum nuevo es agregar un par Encabezado+Galería desde
+el editor de bloques, sin desplegar código. Coherente con ADR 0021 (núcleo de WordPress, sin
+reimplementar) y con ADR 0029 (contenido editable desde wp-admin).
+
+**Punto abierto, no resuelto por esta nota:** el bloque de Galería nativo no pagina — muestra todas las
+imágenes del álbum (con lazy-loading nativo). La paginación de 12 imágenes por álbum que sí tiene la
+maqueta estática (`06-wireframes` §6) no se traslada automáticamente; si un álbum crece mucho, hace
+falta decidir aparte si eso importa (lazy-loading ya evita la descarga completa) o si se quiere alguna
+mitigación adicional. No se decide en esta nota.
 
 **Accesibilidad:** el lightbox del núcleo ya trae gestión de foco, cierre con `Esc` y ARIA. Si en algún momento se sustituyera por uno propio, debería cumplir `19-accesibilidad-estandares` y seguir el patrón `.share-dialog` que ya existe en el proyecto.
 
@@ -253,7 +280,7 @@ Sin reemplazar lo definido en `19-accesibilidad-estandares`, este modelo exige d
 
 **Estructura editorial (SEO mínimo):** Cada página debe tener un H1 único y jerarquía H2/H3 clara. No saltar niveles (p. ej. H1 → H3).
 
-**Metadatos sociales:** Entradas del blog y eventos compartibles deben generar en servidor URL canónica, Open Graph y Twitter Card con título, descripción e imagen propios. La fuente es `get_the_title()`, extracto editorial, `get_permalink()` e imagen destacada (o campo social específico). Si un plugin SEO genera estas etiquetas, debe ser la única fuente para evitar duplicados.
+**Metadatos sociales:** Entradas del blog y eventos compartibles deben generar en servidor URL canónica, Open Graph y Twitter Card con título, descripción e imagen propios. La fuente es `get_the_title()`, extracto editorial, `get_permalink()` e imagen destacada (o campo social específico). **No hay plugin SEO aprobado** (ADR 0025 vetea por defecto las suites todo-en-uno); esto se construye como código first-party en `camino-del-dharma-core` o el theme (ADR 0025, preferencia 2), no se instala un plugin de terceros para resolverlo. El `<title>` y el canonical siguen las reglas de §12.1/§12.2 de `docs/15-assets-strategy.md`; JSON-LD de `Event` según §12.3 del mismo documento. Lo mismo aplica a cualquier pieza de SEO dinámico que WordPress no resuelva de forma nativa: se construye en PHP propio (plugin/theme) o JS propio, nunca vía plugin de terceros por comodidad.
 
 Detalle y criterios ampliados en `19-accesibilidad-estandares`.
 
@@ -289,4 +316,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.2
+**Versión:** 2.3 — §5 corregido a plantillas de bloques (ADR 0029, había quedado en `.php`); §5.1 añade el mecanismo de álbumes de galería creados libremente por el editor (Encabezado + Galería nativos, sin lista fija).

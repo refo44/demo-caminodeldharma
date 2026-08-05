@@ -6,6 +6,14 @@ Define cómo se organiza el CSS del sitio: relación entre theme.json, variables
 
 **Depende de:** `02-identidad-corporativa`, `12-theme-file-structure`. **Referencia:** `15-assets-strategy` (tipografía, fuentes), `19-accesibilidad-estandares`, `20-layout-principles` (grid y responsive como principios)
 
+**Alcance tras ADR 0029:** este documento sigue gobernando **`static/`** sin cambios — un solo
+`main.css`, tokens fijos en `:root`, Stylelint (ADR 0001 intacto). Para la implementación WordPress,
+ADR [0029](adr/0029-theme-bloques-full-site-editing.md) mueve los tokens de diseño a `theme.json`
+(editables desde wp-admin vía Global Styles) y deja `main.css` como hoja **complementaria** para lo
+que Global Styles no expresa (layout, ritmo de lectura, estados). El detalle de esa arquitectura vive
+en `12-theme-file-structure.md` §7–§8; las capas y criterios de este documento (naming, especificidad,
+accesibilidad, grid) siguen aplicando igual en ambos lados.
+
 ---
 
 ## 1. Capas del sistema de estilos

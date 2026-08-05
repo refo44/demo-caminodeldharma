@@ -85,7 +85,10 @@ El momento de mayor riesgo de todo el proyecto. Qué verificar, en orden:
    seguridad, HSTS si ya está activo
 3. **Sin cookies:** verificar que WordPress o algún plugin no introduce cookies (ADR 0019)
 4. **Datos estructurados:** JSON-LD íntegro tras el cambio de plantillas
-5. **`sitemap.xml` y `robots.txt`:** WordPress genera los suyos — no deben duplicar ni contradecir
+5. **`sitemap.xml` y `robots.txt`:** resuelto por ADR 0030 — gana el sitemap nativo de WordPress
+   (`/wp-sitemap.xml`); confirmar que `robots.txt` apunta ahí (no a `/sitemap.xml`) y que
+   `/wp-sitemap.xml` no expone `event_city`/`event_type` (ADR 0022) ni URLs fuera de
+   `docs/11-arbol-urls-final.md`
 6. **Rendimiento:** PSI contra la fotografía del Hito 1; PHP y plugins cambian el perfil
 7. **`llms.txt`** sigue servido
 8. **Los `.ics` y el diálogo de calendario** siguen operativos

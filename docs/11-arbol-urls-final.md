@@ -47,6 +47,16 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | Listado | `/sanghas/` |
 | Single | `/sanghas/{slug}/` |
 
+### 3.2. Blog — tags (`post_tag`)
+
+| Tipo | URL |
+|------|-----|
+| Archivo de tag | `/blog/tag/{slug}/` |
+
+Esta URL **sí existe** (no es 404), a diferencia de `event_city`/`event_type` que no tienen archivo.
+Se sirve `noindex, follow` por defecto hasta que el tag tenga volumen suficiente de contenido — ver
+**ADR 0031** y `docs/03-wordpress-content-model.md` §4.
+
 ---
 
 ## 4. Árbol completo
@@ -65,6 +75,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 /contacto/
 /blog/
 /blog/{slug}/
+/blog/tag/{slug}/          (existe; noindex hasta volumen suficiente — ADR 0031)
 /privacidad/               (pendiente de publicar; enlace en el pie de todas las páginas)
 ```
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
@@ -82,19 +93,26 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 
 ## 6. URL → plantilla
 
+Plantillas de bloques (`templates/*.html`), no PHP — theme de bloques / Full Site Editing, ADR 0029.
+Ver `docs/12-theme-file-structure.md` §5–§6 para el árbol completo.
+
 | Ruta | Plantilla |
 |------|-----------|
-| `/` | front-page.php |
-| `/comunidad/` | page-comunidad.php |
-| `/linaje/` | page-linaje.php |
-| `/practica/` | page-practica.php |
-| `/eventos/` | page-eventos.php o archive-event.php |
-| `/eventos/{slug}/` | single-event.php |
-| `/galeria/` | page-galeria.php |
-| `/contacto/` | page-contacto.php |
-| `/privacidad/` | page.php (fallback; no requiere plantilla propia) |
+| `/` | `templates/front-page.html` |
+| `/comunidad/` | `templates/page-comunidad.html` |
+| `/linaje/` | `templates/page-linaje.html` |
+| `/practica/` | `templates/page-practica.html` |
+| `/eventos/` | `templates/page-eventos.html` o `templates/archive-event.html` |
+| `/eventos/{slug}/` | `templates/single-event.html` |
+| `/galeria/` | `templates/page-galeria.html` |
+| `/contacto/` | `templates/page-contacto.html` |
+| `/blog/` | `templates/home.html` (página de entradas) |
+| `/blog/{slug}/` | `templates/single.html` |
+| `/blog/tag/{slug}/` | resuelve por la jerarquía nativa de plantillas de WordPress (`templates/taxonomy-post_tag.html` si existe, si no `templates/archive.html`/`templates/index.html`); noindex por defecto (ADR 0031), no requiere plantilla propia |
+| `/privacidad/` | `templates/page.html` (fallback; no requiere plantilla propia) |
 
-*(Si se implementa CPT sangha: `/sanghas/` → archive-sangha.php; `/sanghas/{slug}/` → single-sangha.php.)*
+*(Si se implementa CPT sangha: `/sanghas/` → `templates/archive-sangha.html`; `/sanghas/{slug}/` →
+`templates/single-sangha.html`.)*
 
 ---
 
@@ -104,4 +122,4 @@ Este documento es la **geografía oficial de rutas** del sitio. Si una URL no es
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4 — añade `/blog/tag/{slug}/` (ADR 0031) y corrige §6 a plantillas de bloques (ADR 0029, antes listaba nombres `.php`).

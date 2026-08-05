@@ -87,7 +87,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0006](0006-github-actions-para-despliegue.md) | GitHub Actions para CI/CD | Aceptada |
 | [0007](0007-rsync-como-mecanismo-de-sincronizacion.md) | rsync como mecanismo de sincronización | Aceptada |
 | [0008](0008-urls-estables-desde-la-maqueta.md) | URLs estables desde la maqueta | Aceptada |
-| [0009](0009-css-y-tokens-invariantes-en-migracion.md) | CSS y tokens invariantes en la migración | Aceptada |
+| [0009](0009-css-y-tokens-invariantes-en-migracion.md) | CSS y tokens invariantes en la migración | Sustituida (WordPress) → [0029](0029-theme-bloques-full-site-editing.md) |
 | [0010](0010-hsts-desactivado-hasta-auditoria.md) | HSTS desactivado hasta auditoría | Sustituida → [0018](0018-hsts-despliegue-escalonado.md) |
 | [0011](0011-implementaciones-separadas-durante-migracion.md) | Implementaciones separadas durante migración | Sustituida → [0014](0014-monorepo-static-wordpress.md) |
 | [0012](0012-wordpress-como-motor-de-contenido.md) | WordPress como motor de contenido | Aceptada |
@@ -107,6 +107,9 @@ Documentos, issues, commits o ADR relacionados.
 | [0026](0026-contact-form-7.md) | Contact Form 7 para el formulario de contacto | Aceptada |
 | [0027](0027-estandares-ingenieria-codigo.md) | Estándares de ingeniería y estilo de código para Fase 3 | Aceptada |
 | [0028](0028-privacidad-aplazada-conscientemente.md) | Política de privacidad aplazada conscientemente | Aceptada |
+| [0029](0029-theme-bloques-full-site-editing.md) | Theme de bloques (Full Site Editing) en vez de PHP clásico con CSS congelado | Aceptada |
+| [0030](0030-sitemap-nativo-wordpress.md) | Sitemap nativo de WordPress (`/wp-sitemap.xml`) reemplaza al `sitemap.xml` manual | Aceptada |
+| [0031](0031-tags-blog-noindex-hasta-volumen.md) | Tags nativos en el blog (`post_tag`) — habilitados; archivo noindex hasta tener volumen | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -130,6 +133,9 @@ Documentos, issues, commits o ADR relacionados.
 | Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com |
 | Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
 | Política de privacidad | [0028](0028-privacidad-aplazada-conscientemente.md) — aplazada hasta asesoría legal; gate obligatorio antes de publicar Contact Form 7 |
+| Arquitectura del theme WordPress | [0029](0029-theme-bloques-full-site-editing.md) — theme de bloques (Full Site Editing); paleta, tipografía y espaciado editables desde wp-admin vía `theme.json`/Global Styles; sustituye a [0009](0009-css-y-tokens-invariantes-en-migracion.md) solo para WordPress |
+| Sitemap en WordPress | [0030](0030-sitemap-nativo-wordpress.md) — `/wp-sitemap.xml` nativo reemplaza al `sitemap.xml` manual solo para WordPress; `static/` no cambia |
+| Tags del blog | [0031](0031-tags-blog-noindex-hasta-volumen.md) — `post_tag` habilitado para editores; archivo de tag existe pero noindex hasta volumen suficiente, criterio cualitativo |
 
 ---
 

@@ -2,7 +2,9 @@
 
 ## Estado
 
-Aceptada
+Sustituida → [ADR 0029](0029-theme-bloques-full-site-editing.md) (theme de bloques / Full Site Editing,
+2026-08-01) para la implementación WordPress. Sigue vigente sin cambios para la maqueta estática
+(`static/`).
 
 ## Fecha
 
