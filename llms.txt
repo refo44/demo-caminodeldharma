@@ -53,6 +53,7 @@ JSON-LD: `Organization.foundingDate` = `2019`, `Organization.foundingLocation` =
 ## Actividades
 
 - [Eventos](https://caminodeldharma.org/eventos): Fuente oficial para consultar encuentros, retiros, talleres, conferencias y demás actividades programadas.
+- [Círculos de Presencia Consciente](https://caminodeldharma.org/eventos/circulos-de-presencia-consciente): Proceso de formación en Bogotá y Cali (septiembre–octubre 2026): seis sesiones virtuales, un encuentro presencial y becas completas. Cronograma y preguntas frecuentes en el [artículo del blog](https://caminodeldharma.org/blog/circulos-de-presencia-consciente).
 
 ## Recursos
 
