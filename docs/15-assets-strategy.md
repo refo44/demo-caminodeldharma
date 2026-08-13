@@ -98,6 +98,23 @@ Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo de
 | Pestaña 7 | Galería (`galeria-01.jpg` … `galeria-36.jpg` en `assets/images/galeria/`; álbum General + años 2023 y 2021; script `scripts/rename-gallery-to-kebab.sh`; 16). **El grid sirve miniaturas de `assets/images/galeria/thumbs/`** (300w/600w), no los originales: v1.0.20, hallazgo PERF-001. Los **originales se conservan** — son la fuente de las miniaturas y del futuro visor ampliado (**ADR 0021**); no borrar en limpiezas de assets. |
 | Pestaña 8 | Celebraciones (Vesak, Diwali) |
 
+### 4.1 Blog — imagen del artículo
+
+Relación de aspecto: **3:2**, fija para todas las imágenes de blog (consistente con el primer post publicado, `sangha-refugio-hiperconexion.jpg`, 1000×666). Esto es específico del blog — no aplica a `/galeria`, que no tiene relación de aspecto fija (fotos sueltas, ver fila Pestaña 7 arriba).
+
+Tamaños recomendados (elegir según la calidad de la foto de origen y el uso previsto; todas mantienen 3:2):
+
+| Opción | Tamaño | Cuándo usarla |
+|--------|--------|----------------|
+| Mínima | 1200×800 px | Cubre el tamaño `large` de WordPress (1024 px) sin ampliar. Válido pero algo blanda en pantallas retina/HiDPI. |
+| **Recomendada (por defecto)** | **1600×1067 px** | Nítida en retina hasta el ancho del artículo (~700 px en pantalla), sin generar un archivo innecesariamente pesado. |
+| Alta calidad | 2000×1333 px | Si se planea recortar la imagen para redes sociales o usarla como portada destacada más ancha. |
+| Máxima razonable | 2400×1600 px | Solo si la foto de origen es de buena calidad y se reutiliza en varios formatos (blog + redes + posible impresión). Pasado esto, el peso extra no aporta. |
+
+**Formato y peso:** JPG calidad 75–82%, apuntando a 150–500 KB según la opción elegida (si el archivo supera ~600 KB, comprimir más antes de subirlo).
+
+**Nota WordPress Media:** subir el tamaño elegido como imagen "completa" a la Media Library — no hace falta generar variantes a mano como se hizo para `/galeria` en el sitio estático (thumbs 300w/600w). WordPress genera automáticamente `thumbnail` (150 px), `medium` (300 px), `medium_large` (768 px) y `large` (1024 px), y los sirve vía `srcset` según el viewport. Desde WordPress 6.5, además genera variantes WebP de esas subimágenes de forma nativa.
+
 ---
 
 ## 5. Logo

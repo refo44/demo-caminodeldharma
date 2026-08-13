@@ -61,6 +61,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 | Foto fundador | 600–800 px | JPG/WebP |
 | Imágenes sección | 800–1000 px | JPG/WebP |
 | Thumbnail galería | 400–600 px | JPG/WebP |
+| Blog / artículo | 1200–2400 px, 3:2, recomendado 1600×1067 | JPG (detalle y opciones en `15-assets-strategy` §4.1) |
 
 ---
 

@@ -1543,6 +1543,28 @@ a:focus-visible {
   margin: 0 0 var(--space-xs);
 }
 
+.article-cta {
+  margin: var(--space-lg) 0;
+}
+
+.read-width ul,
+.read-width ol {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.25rem;
+}
+
+.read-width li + li {
+  margin-top: var(--space-xs);
+}
+
+.read-width ol li p {
+  margin-bottom: var(--space-xs);
+}
+
+.read-width ol li p:last-child {
+  margin-bottom: 0;
+}
+
 .article-references {
   margin-top: var(--space-xl);
   padding-top: var(--space-md);

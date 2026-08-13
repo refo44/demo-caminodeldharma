@@ -3,7 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://caminodeldharma.org</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://caminodeldharma.org/comunidad</loc>
@@ -51,7 +51,11 @@
   </url>
   <url>
     <loc>https://caminodeldharma.org/blog</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-08-13</lastmod>
+  </url>
+  <url>
+    <loc>https://caminodeldharma.org/blog/circulos-de-presencia-consciente</loc>
+    <lastmod>2026-08-13</lastmod>
   </url>
   <url>
     <loc>https://caminodeldharma.org/blog/sangha-refugio-hiperconexion</loc>
