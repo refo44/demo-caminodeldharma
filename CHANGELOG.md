@@ -8,6 +8,23 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.24] - 2026-08-13
+
+### Blog — Círculos de Presencia Consciente
+
+Segunda entrada del blog, publicada el 13 de agosto de 2026. Nota de Zheng Gong sobre el proceso de formación en Bogotá y Cali (sesiones virtuales de septiembre y encuentros presenciales en octubre), con becas completas.
+
+- `/blog/circulos-de-presencia-consciente`: artículo completo, metadata SEO (canonical, Open Graph, Twitter Card) y JSON-LD `BlogPosting` con el registro fijo de `Person` del Venerable Maestro Zheng Gong.
+- Imagen destacada 3:2 (`assets/images/blog/circulos-de-presencia-consciente.jpg`, 1024×682).
+- Listado `/blog` e inicio («Del blog»): la entrada nueva va primero.
+- Tres botones de preinscripción (`Quiero preinscribirme` ×2, `Realizar mi preinscripción`) abren en pestaña nueva; el `href` queda vacío hasta que exista el formulario.
+- `sitemap.xml`: `<lastmod>` `2026-08-13` en `/`, `/blog` y la URL nueva.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.23] - 2026-07-28
 
 ### `llms.txt` — datos institucionales para agentes de IA
