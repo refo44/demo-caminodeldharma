@@ -8,6 +8,24 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.25] - 2026-08-13
+
+### Evento — Círculos de Presencia Consciente
+
+Ficha de evento operativa y enlazada al artículo del blog publicado en v1.0.24.
+
+- `/eventos/circulos-de-presencia-consciente`: página completa con metadata SEO, JSON-LD `Event` (proceso híbrido septiembre–octubre 2026, Bogotá y Cali), cartel (`assets/images/eventos/evento-circulos-de-presencia-consciente.jpg`) y botón **Inscribirme** al formulario de Google.
+- `/eventos/ical/circulos-de-presencia-consciente.ics`: descarga de calendario para la sesión de bienvenida.
+- `/eventos`: evento vigente en primer lugar; calendario actualizado a **Septiembre 2026**; 7.º Encuentro Nacional movido a eventos pasados.
+- `/blog/circulos-de-presencia-consciente`: URLs de preinscripción activas, metadata SEO refinada, JSON-LD `BlogPosting` enlazado al `Event`, botón **Ver evento** y enlace cruzado con la ficha.
+- `llms.txt`: entradas del evento y del artículo como fuentes oficiales.
+- `sitemap.xml`: `<lastmod>` `2026-08-13` en `/eventos`, `/eventos/circulos-de-presencia-consciente` y páginas del blog ya actualizadas en v1.0.24.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.24] - 2026-08-13
 
 ### Blog — Círculos de Presencia Consciente
@@ -23,7 +41,7 @@ Segunda entrada del blog, publicada el 13 de agosto de 2026. Nota de Zheng Gong 
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **No desplegada** — superseded por v1.0.25 (ficha de evento y formulario añadidos después del tag)
 
 ## [1.0.23] - 2026-07-28
 
