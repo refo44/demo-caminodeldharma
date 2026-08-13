@@ -1544,6 +1544,10 @@ a:focus-visible {
 }
 
 .article-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
   margin: var(--space-lg) 0;
 }
 
