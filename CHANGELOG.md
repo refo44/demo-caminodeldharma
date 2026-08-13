@@ -24,9 +24,7 @@ Ficha de evento operativa y enlazada al artículo del blog publicado en v1.0.24.
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
-
-## [1.0.24] - 2026-08-13
+- Producción: **Desplegada** el 2026-08-13
 
 ### Blog — Círculos de Presencia Consciente
 
