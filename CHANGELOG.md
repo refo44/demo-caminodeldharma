@@ -16,7 +16,7 @@ Un solo evento vigente junto a «Un poco de nuestra comunidad»: atajo a esa fic
 
 - Rótulo «Próximo evento · Curso» encima del cartel (`<p>`, alineado al `h2`); cartel completo a ancho de columna WordPress `medium` (~300 px); título, fecha, lugar y **Ver evento** (solo la ficha; sin enlace al listado).
 - Sin caja; filete izquierdo en escritorio. El borde derecho del módulo coincide con el del hero.
-- Miniatura decorativa (`alt=""`); teclado y lector usan el título y «Ver evento». Un destacado finalizado no aparece; si no hay vigentes, se omite el módulo.
+- Miniatura decorativa (`alt=""`); atajo de puntero a la ficha (mismo patrón que el listado). Teclado y lector usan el título y «Ver evento». Un destacado finalizado no aparece; si no hay vigentes, se omite el módulo.
 - SEO/AEO de Inicio: descripción y Open Graph incluyen **cursos**; keywords institucionales (`cursos budistas`); JSON-LD `WebPage.mentions` y `rel="related"` a la ficha vigente. El JSON-LD `Event` sigue solo en `/eventos/circulos-de-presencia-consciente/`.
 - `sitemap.xml`: `/` ya tenía `<lastmod>` `2026-08-13`.
 

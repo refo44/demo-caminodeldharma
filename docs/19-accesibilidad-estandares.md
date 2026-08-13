@@ -1,7 +1,7 @@
 # Camino del Dharma — Accesibilidad (estándares)
 
 **Documento único de estándares de accesibilidad del sitio.**  
-**Versión 1.3**
+**Versión 1.4**
 
 Define estrategia, principios, reglas de diseño, HTML semántico, ARIA, contenido editorial, checklist de implementación y testing. Un solo documento operativo, alineado con WCAG 2.1/2.2 Level AA y con la naturaleza editorial del proyecto (no SaaS, no dashboards).
 
@@ -148,7 +148,7 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 |------------|------------|
 | **Icon button** (botón sin texto visible) | Proveer nombre accesible con texto en el DOM. Orden preferido: (1) `<span class="visually-hidden">…</span>`, (2) `aria-labelledby`, (3) `aria-label` solo si no hay alternativa. El icono/SVG debe ir con `aria-hidden="true"` y `focusable="false"`. |
 | **Enlaces** | Texto del enlace descriptivo. Evitar "aquí", "ver más", "clic". «Ver evento →» es válido: nombra la ficha. |
-| **Tarjeta de evento con ficha** | El título es enlace a `/eventos/{slug}/` (recorrido de teclado y lector). «Ver evento →» (listado) o «Ver evento» (Inicio) es el enlace de texto explícito al mismo destino, con nombre distinto (WCAG 2.4.4). El cartel **del listado** puede ser atajo de puntero (`tabindex="-1"` y `aria-hidden="true"` en el enlace de la imagen); no usar `aria-hidden` en un contenedor que siga siendo enfocable. En la nota de Inicio la miniatura **no es enlace**: `alt=""` (el `h3`, la fecha y el lugar son la alternativa de texto; WCAG 1.1.1 y 1.4.5). Orden visual y en el DOM (1.3.2): rótulo «Próximo evento · Curso» (`<p>`, no encabezado) → cartel → nombre del evento (`h3`) → datos → «Ver evento». Así el rótulo se alinea al `h2` de comunidad y el lector no oye primero una imagen vacía. En WordPress la miniatura de Inicio usa `medium` (~300 px en pantalla, sin recorte) para que las letras del cartel se lean y siga nítida al zoom 200 % (1.4.4); no `thumbnail` recortado a 150 px. |
+| **Tarjeta de evento con ficha** | El título es enlace a `/eventos/{slug}/` (recorrido de teclado y lector). «Ver evento →» (listado) o «Ver evento» (Inicio) es el enlace de texto explícito al mismo destino, con nombre distinto (WCAG 2.4.4). El cartel **del listado y de la nota de Inicio** es atajo de puntero (`tabindex="-1"` y `aria-hidden="true"` en el enlace de la imagen; `alt=""`); no usar `aria-hidden` en un contenedor que siga siendo enfocable. El teclado y el lector usan el `h3` y «Ver evento» (WCAG 1.1.1 y 2.4.4). Orden visual y en el DOM (1.3.2): rótulo «Próximo evento · Curso» (`<p>`, no encabezado) → cartel → nombre del evento (`h3`) → datos → «Ver evento». Así el rótulo se alinea al `h2` de comunidad y el lector no oye primero una imagen vacía. En WordPress la miniatura de Inicio usa `medium` (~300 px en pantalla, sin recorte) para que las letras del cartel se lean y siga nítida al zoom 200 % (1.4.4); no `thumbnail` recortado a 150 px. |
 | **Modal / Dialog** | Si es custom: `role="dialog"` (o `alertdialog` si interrumpe); `aria-modal="true"`; `aria-labelledby` obligatorio; `aria-describedby` si hay texto explicativo. Focus al abrir dentro del modal; focus trap; retorno del foco al cerrar. Si se usa `<dialog>` nativo, validar igual el comportamiento de foco y cierre por teclado (Esc). |
 | **Dropdown / Menú** | Si es menú de navegación simple, preferir `nav` + enlaces y no convertirlo en "menú ARIA" si no hace falta. Si es dropdown interactivo: trigger con `aria-expanded` dinámico y `aria-controls` al panel. Teclado: Enter/Space abre, Esc cierra, flechas navegan si aplica. |
 | **Tabs** | `role="tablist"`, `role="tab"`, `role="tabpanel"`; `aria-selected` y `tabindex` correctos; `aria-controls` y `aria-labelledby` consistentes. |
@@ -230,5 +230,5 @@ Este documento es el **estándar único de accesibilidad** del proyecto: estrate
 
 ---
 
-**Versión:** 1.3 — Inicio: nota del evento (secuencia rótulo → cartel → `h3` → «Ver evento»; miniatura no enlace; `medium`).
+**Versión:** 1.4 — Inicio: cartel como atajo de puntero (mismo patrón que el listado); teclado y lector siguen el `h3` y «Ver evento».
 **Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`, lluvia de ideas de accesibilidad del proyecto. Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).

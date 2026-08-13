@@ -1,7 +1,7 @@
 # Camino del Dharma — Estrategia de assets
 
 **Iconos, fuentes, favicon, SVG, PDF, imágenes, audio, SEO técnico, datos estructurados**  
-**Versión 2.4**
+**Versión 2.5**
 
 Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, content-source, theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
 
@@ -115,7 +115,7 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 
 **Nota WordPress Media:** subir el tamaño elegido como imagen "completa" a la Media Library — no hace falta generar variantes a mano como se hizo para `/galeria` en el sitio estático (thumbs 300w/600w). WordPress genera automáticamente `thumbnail` (150 px), `medium` (300 px), `medium_large` (768 px) y `large` (1024 px), y los sirve vía `srcset` según el viewport. Desde WordPress 6.5, además genera variantes WebP de esas subimágenes de forma nativa.
 
-**Miniatura del evento en Inicio:** se muestra al **ancho de la columna** (~300 px en escritorio, coincidente con WordPress `medium`; en móvil, el ancho de lectura), **debajo** del rótulo «Próximo evento · {tipo}». Usar **`medium`**, no `thumbnail`. Motivo: a 150 px las letras del cartel no se leen; `thumbnail` además recorta a cuadrado (WCAG 1.4.5). `medium` (300 px, proporcional) deja el cartel entero y legible a ese tamaño, y sigue nítido al zoom 200 % (WCAG 1.4.4). La miniatura es decorativa (`alt=""`), no es enlace; nombre, fecha y lugar van en HTML. En la ficha del evento, `large` o el original.
+**Miniatura del evento en Inicio:** se muestra al **ancho de la columna** (~300 px en escritorio, coincidente con WordPress `medium`; en móvil, el ancho de lectura), **debajo** del rótulo «Próximo evento · {tipo}». Usar **`medium`**, no `thumbnail`. Motivo: a 150 px las letras del cartel no se leen; `thumbnail` además recorta a cuadrado (WCAG 1.4.5). `medium` (300 px, proporcional) deja el cartel entero y legible a ese tamaño, y sigue nítido al zoom 200 % (WCAG 1.4.4). La miniatura es decorativa (`alt=""`); es atajo de puntero a la ficha (`tabindex="-1"` y `aria-hidden="true"`, igual que el listado). Nombre, fecha y lugar van en HTML; el teclado usa el título y «Ver evento». En la ficha del evento, `large` o el original.
 
 ---
 
@@ -419,4 +419,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.4 — Inicio: `WebPage.mentions` al evento vigente (sin duplicar JSON-LD `Event`); descripción y keywords institucionales incluyen cursos.
+**Versión:** 2.5 — Inicio: cartel del evento vigente como atajo de puntero a la ficha.

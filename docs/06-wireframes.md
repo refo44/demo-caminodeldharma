@@ -21,7 +21,7 @@ Bloques en orden vertical:
 - **Cabecera** (logo, menú principal 4–6 ítems + subnav: Galería, Blog, Contribuir, Contacto; ver 05)
 - **Hero** (mensaje de acogida, CTA “Practica con nosotros”; posible imagen)
 - **Del blog** (opcional: fila de entradas destacadas + “Ver todas las entradas”; según implementación)
-- **Comunidad** (breve: quiénes somos, enlace a La comunidad; según Contenido_Web “Un poco de nuestra comunidad”). En escritorio, el texto y «Conocer la comunidad» comparten fila con **una nota** del evento vigente (rótulo «Próximo evento · Curso» encima del cartel, cartel a ancho de columna `medium`, título, fecha, lugar, «Ver evento»), alineada al `h2`, sin caja. Las fotos de la sección quedan debajo, a ancho de lectura. Solo eventos no finalizados; un destacado que ya terminó no se muestra. Si no hay evento vigente, no se muestra la nota. No es un segundo listado de Eventos; es un atajo a ese evento. Ver `03` (regla Inicio) y `09`.
+- **Comunidad** (breve: quiénes somos, enlace a La comunidad; según Contenido_Web “Un poco de nuestra comunidad”). En escritorio, el texto y «Conocer la comunidad» comparten fila con **una nota** del evento vigente (rótulo «Próximo evento · Curso» encima del cartel, cartel a ancho de columna `medium` y atajo de puntero a la ficha, título, fecha, lugar, «Ver evento»), alineada al `h2`, sin caja. Las fotos de la sección quedan debajo, a ancho de lectura. Solo eventos no finalizados; un destacado que ya terminó no se muestra. Si no hay evento vigente, no se muestra la nota. No es un segundo listado de Eventos; es un atajo a ese evento. Ver `03` (regla Inicio) y `09`.
 - **Cómo practicamos** (Estudio consciente, Práctica vivencial, Vida cotidiana; según Contenido_Web)
 - **Linaje breve** (micro-bloque opcional: “Nuestro linaje”, 2 líneas, enlace a /linaje/)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
@@ -192,4 +192,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.6 — Inicio: nota del evento (rótulo encima del cartel, sin caja, alineada al `h2`).
+**Versión:** 1.7 — Inicio: cartel de la nota como atajo de puntero a la ficha.

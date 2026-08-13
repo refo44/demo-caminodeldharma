@@ -697,9 +697,10 @@ easy to get wrong:
   note: label **Próximo evento · {type}** first (a `<p>`, not a heading, aligned with the
   community `h2`), then a complete event image using WordPress **`medium`** (300 px, uncropped — not
   `thumbnail` 150×150 crop), displayed at the sidebar column width (~18.75rem / ~300 px;
-  full read width on small screens) so poster type remains readable, **not a link** (`alt=""`; title and
-  **Ver evento** are the keyboard path), then title, date, place, and **Ver evento** (to that event’s
-  page only — not the events listing). No card box, signup button, or calendar.
+  full read width on small screens) so poster type remains readable. The poster is a **pointer-only**
+  shortcut to the event page (`tabindex="-1"` and `aria-hidden="true"`, `alt=""` — same pattern as
+  listing cards); title and **Ver evento** are the keyboard path. Then title, date, place, and
+  **Ver evento** (to that event’s page only — not the events listing). No card box, signup button, or calendar.
 - Finished events use a compact card treatment (thumbnail, title, city, date, link to detail); vigente
   events keep the full treatment. Detail lives in `templates/single-event.html`. Listing cards with a
   detail page expose that page via the title, a pointer-only poster link, and the text link

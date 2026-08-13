@@ -107,7 +107,7 @@ muestran (decisión revertida el 2026-07-21): son la única señal geográfica h
 comunidad, ya que ninguna ciudad tiene sede fija ni es elegible para Google Business Profile.
 
 **Inicio:** como máximo un evento **vigente** junto a «Un poco de nuestra comunidad» (rótulo
-«Próximo evento», cartel WordPress `medium`, «Ver evento» a esa ficha). Un destacado ya terminado
+«Próximo evento», cartel WordPress `medium` (atajo de puntero a la ficha), «Ver evento» a esa ficha). Un destacado ya terminado
 no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 
 **Árbol de URLs completo (todas indexables):**

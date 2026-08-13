@@ -1424,11 +1424,15 @@ a:focus-visible {
   }
 }
 
+.home-featured-event .evento-figure-link {
+  margin: 0 0 var(--space-sm);
+}
+
 .home-featured-event-thumb {
   display: block;
   width: 100%;
   height: auto;
-  margin: 0 0 var(--space-sm);
+  margin: 0;
   border-radius: 4px;
 }
 

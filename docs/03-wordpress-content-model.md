@@ -110,7 +110,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 4. Si hay más de un destacado vigente, se muestra el de fecha de inicio más cercana. La guía editorial: marcar solo uno.
 5. Si no hay ningún vigente, **no se renderiza el módulo** (ni caja vacía ni mensaje). El texto de comunidad queda a ancho de lectura, sin columna derecha.
 
-La UI no dice «destacado». El visitante ve, en este orden: rótulo «Próximo evento · {tipo}» (encima del cartel, alineado al `h2` de comunidad), cartel completo a tamaño WordPress `medium` (~300 px en escritorio, al ras del borde derecho del hero; ancho de lectura en móvil), nombre (`h3`), fecha, lugar y «Ver evento». No hay enlace al listado, caja, Preinscribirme ni calendario. El cartel a tamaño de lectura amplio vive también en la ficha del evento.
+La UI no dice «destacado». El visitante ve, en este orden: rótulo «Próximo evento · {tipo}» (encima del cartel, alineado al `h2` de comunidad), cartel completo a tamaño WordPress `medium` (~300 px en escritorio, al ras del borde derecho del hero; ancho de lectura en móvil; atajo de puntero a la ficha, igual que el listado), nombre (`h3`), fecha, lugar y «Ver evento». No hay enlace al listado, caja, Preinscribirme ni calendario. El cartel a tamaño de lectura amplio vive también en la ficha del evento.
 
 **Eventos finalizados: SÍ aparecen en el listado, en su propio bloque.**
 
@@ -327,4 +327,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.11 — Inicio: nota del vigente (rótulo encima del cartel `medium`, alineada al hero; «Ver evento» a esa ficha; sin listado ni caja); ocultar el módulo si no hay vigentes.
+**Versión:** 2.12 — Inicio: cartel de la nota como atajo de puntero a la ficha (mismo patrón que el listado).
