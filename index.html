@@ -215,7 +215,7 @@
     </section>
 
     <section class="section-gap home-community">
-      <!-- Home event: only vigente (not finished), even if event_featured. Prefer featured among vigentes; else soonest start. Omit the entire aside if none are vigente. -->
+      <!-- Home event: Círculos de Presencia Consciente has event_featured. Only vigente events are eligible; featured+finished is ignored. Prefer featured among vigentes; else soonest start. A newer vigente does not replace this note while event_featured remains true. Omit the aside if none are vigente. -->
       <div class="home-community-row">
         <div class="home-community-copy">
           <h2>Un poco de nuestra comunidad</h2>
@@ -223,7 +223,7 @@
           <p>Practicamos juntos porque sabemos que la transformación interior no ocurre en soledad y que, al cuidar nuestra experiencia interna, también contribuimos a transformar el mundo que habitamos.</p>
           <p><a href="comunidad">Conocer la comunidad</a></p>
         </div>
-        <aside class="home-featured-event" aria-labelledby="home-featured-event-title">
+        <aside class="home-featured-event" aria-labelledby="home-featured-event-title" data-event-status="vigente" data-event-featured="true">
           <p class="home-featured-event-kicker">Próximo evento · Curso</p>
           <a href="eventos/circulos-de-presencia-consciente" class="evento-figure-link" tabindex="-1" aria-hidden="true">
             <img class="home-featured-event-thumb" src="assets/images/eventos/evento-circulos-de-presencia-consciente.jpg" alt="" width="1024" height="1024" loading="lazy" decoding="async">

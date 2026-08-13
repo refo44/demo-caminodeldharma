@@ -693,7 +693,9 @@ easy to get wrong:
   (not a second events listing). Candidates are vigente only: a featured event that is finished
   is ignored. Prefer `event_featured` among vigentes; else the vigente with the soonest start
   date. If more than one is featured, use the soonest start date. If none are vigente, omit the
-  module entirely (no empty box). The UI never says "destacado". The home module is a quiet
+  module entirely (no empty box). The UI never says "destacado". In the static mock,
+  Círculos de Presencia Consciente has `event_featured = true` (a sooner vigente does not
+  replace it on the homepage while that flag stays on). The home module is a quiet
   note: label **Próximo evento · {type}** first (a `<p>`, not a heading, aligned with the
   community `h2`), then a complete event image using WordPress **`medium`** (300 px, uncropped — not
   `thumbnail` 150×150 crop), displayed at the sidebar column width (~18.75rem / ~300 px;
