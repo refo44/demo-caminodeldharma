@@ -84,7 +84,7 @@ Las acciones nunca son órdenes. Son invitaciones.
 | 3 | Contactar |
 | 4 | Inscribirse (eventos) |
 
-**Ejemplos correctos:** "Practica con nosotros", "Participar", "Enviar", "Inscribirme", "Preinscribirme", "Ver evento →"
+**Ejemplos correctos:** "Practica con nosotros", "Participar", "Enviar", "Inscribirme", "Preinscribirme", "Ver evento" (Inicio), "Ver evento →" (listado)
 
 **Incorrectos:** "Compra ya", "Suscríbete ahora", "Obtén acceso exclusivo"
 
@@ -143,4 +143,4 @@ Debe sonar como: **Un espacio de acogida, serio y vivo.**
 
 ---
 
-**Versión:** 1.2 (2026-08-13 — Ver evento → / Preinscribirme)
+**Versión:** 1.3 (2026-08-13 — Ver evento / Ver evento → / Preinscribirme)

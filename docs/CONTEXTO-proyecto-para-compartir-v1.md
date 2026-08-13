@@ -2,7 +2,7 @@
 
 Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no tiene
 acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y lo que
-está en curso, a fecha **2026-08-01**.
+está en curso, a fecha **2026-08-13**.
 
 ---
 
@@ -23,12 +23,13 @@ cómo contactar (WhatsApp, correo, y en el futuro un formulario funcional).
 
 ---
 
-## 2. Estado actual (2026-08-01)
+## 2. Estado actual (2026-08-13)
 
 | Aspecto | Estado |
 |---|---|
 | **Producción** | Sitio estático (HTML/CSS/JS, sin build step de servidor) en `https://caminodeldharma.org`, alojado en **Hostinger** (hosting compartido) |
 | **Versión desplegada** | v1.0.23 |
+| **Versión en el repositorio** | v1.0.28 (pendiente de despliegue) |
 | **Fase activa** | Transición a **Fase 3 (WordPress)** — el repo aún no se ha reorganizado (`static/` todavía no existe; el HTML sigue en la raíz) |
 | **Repo** | Monorepo único durante toda la transición (Git como fuente única de verdad) |
 | **Despliegue** | Manual (ZIP → File Manager de Hostinger). CI/CD explícitamente pospuesto |
@@ -53,7 +54,7 @@ código ni servidor, una vez WordPress esté implementado.
 - Un lightbox de galería propio (se usa el nativo de Gutenberg)
 
 **Tono editorial:** sobrio, cálido, sin urgencia. CTAs como "Practica con nosotros", "Participar",
-"Inscribirme", "Preinscribirme", "Ver evento →", "Donar" — nunca lenguaje de venta.
+"Inscribirme", "Preinscribirme", "Ver evento" (Inicio, a esa ficha), "Ver evento →" (listado), "Donar" — nunca lenguaje de venta.
 
 ---
 
@@ -104,6 +105,10 @@ páginas casi-duplicadas sin contenido real (doorway pages).
 (agrupados por mes) y un **archivo de finalizados** (agrupados por año). Los finalizados **sí** se
 muestran (decisión revertida el 2026-07-21): son la única señal geográfica honesta que tiene la
 comunidad, ya que ninguna ciudad tiene sede fija ni es elegible para Google Business Profile.
+
+**Inicio:** como máximo un evento **vigente** junto a «Un poco de nuestra comunidad» (rótulo
+«Próximo evento», cartel WordPress `medium`, «Ver evento» a esa ficha). Un destacado ya terminado
+no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 
 **Árbol de URLs completo (todas indexables):**
 ```

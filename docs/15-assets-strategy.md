@@ -1,7 +1,7 @@
 # Camino del Dharma — Estrategia de assets
 
 **Iconos, fuentes, favicon, SVG, PDF, imágenes, audio, SEO técnico, datos estructurados**  
-**Versión 2.0**
+**Versión 2.4**
 
 Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, content-source, theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
 
@@ -114,6 +114,8 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 **Formato y peso:** JPG calidad 75–82%, apuntando a 150–500 KB según la opción elegida (si el archivo supera ~600 KB, comprimir más antes de subirlo).
 
 **Nota WordPress Media:** subir el tamaño elegido como imagen "completa" a la Media Library — no hace falta generar variantes a mano como se hizo para `/galeria` en el sitio estático (thumbs 300w/600w). WordPress genera automáticamente `thumbnail` (150 px), `medium` (300 px), `medium_large` (768 px) y `large` (1024 px), y los sirve vía `srcset` según el viewport. Desde WordPress 6.5, además genera variantes WebP de esas subimágenes de forma nativa.
+
+**Miniatura del evento en Inicio:** se muestra al **ancho de la columna** (~300 px en escritorio, coincidente con WordPress `medium`; en móvil, el ancho de lectura), **debajo** del rótulo «Próximo evento · {tipo}». Usar **`medium`**, no `thumbnail`. Motivo: a 150 px las letras del cartel no se leen; `thumbnail` además recorta a cuadrado (WCAG 1.4.5). `medium` (300 px, proporcional) deja el cartel entero y legible a ese tamaño, y sigue nítido al zoom 200 % (WCAG 1.4.4). La miniatura es decorativa (`alt=""`), no es enlace; nombre, fecha y lugar van en HTML. En la ficha del evento, `large` o el original.
 
 ---
 
@@ -324,6 +326,8 @@ implementaciones.
 
 Añadir `performer` y `offers` solo según las reglas de la tabla.
 
+**Inicio no duplica el `Event`:** si la portada muestra la nota del evento vigente, `WebPage` puede apuntar a esa ficha con `mentions` (`@id` del evento) y un `<link rel="related">`. **No** incrustar un segundo objeto `Event` completo en `/`. Las keywords de la portada son institucionales (p. ej. `cursos budistas`); el nombre del evento, fechas y ciudades van solo en la ficha. Si no hay vigentes, omitir `mentions` y el `rel="related"`.
+
 ### 12.4 Blog — JSON-LD (`BlogPosting`)
 
 **Una sola fuente de verdad:** JSON-LD en la **página de detalle** de la entrada (`/blog/{slug}/`), igual que en Event (§12.3). No se pone JSON-LD de artículo en el listado `/blog/` — solo `BreadcrumbList` si aplica.
@@ -403,7 +407,7 @@ Sustituir `author` por el objeto `Person` del registro fijo cuando la entrada te
 
 ### 12.5 Otros tipos en el sitio
 
-- **Inicio:** `Organization`, `WebSite`, `WebPage` en `@graph` (ya implementado)
+- **Inicio:** `Organization`, `WebSite`, `WebPage` en `@graph`. Si hay un evento vigente, `WebPage.mentions` apunta al `@id` de esa ficha; el JSON-LD `Event` sigue solo en el detalle (§12.3).
 - **Subpáginas:** `BreadcrumbList` donde aplique
 - **No crear** `SearchAction`, PWA ni manifest por SEO (§11)
 
@@ -415,4 +419,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.2 — el listado `/eventos/` enlaza a la ficha con HTML ordinario (título, cartel, «Ver evento →»); el JSON-LD `Event` sigue solo en el detalle.
+**Versión:** 2.4 — Inicio: `WebPage.mentions` al evento vigente (sin duplicar JSON-LD `Event`); descripción y keywords institucionales incluyen cursos.

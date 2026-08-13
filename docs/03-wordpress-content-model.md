@@ -37,7 +37,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ### Inicio (front-page)
 
 - Hero: título, subtítulo, botón principal
-- Bloque comunidad (texto)
+- Bloque comunidad (texto) + nota de un evento vigente a la derecha en escritorio (rótulo encima del cartel, cartel `medium`, alineada al borde derecho del hero; ver §3 regla Inicio)
 - Cómo practicamos (3 columnas: Estudio consciente, Práctica vivencial, Vida cotidiana)
 - Meditación semanal (texto, horario, botón Participar → WhatsApp)
 - Caminos de participación (Iniciarse, Profundizar, Practicar en comunidad)
@@ -92,14 +92,25 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | event_signup_url | url | Enlace a inscripción (formulario externo, WhatsApp, plataforma o pasarela externa) |
 | event_status | select | vigente / finalizado / cancelado |
 | event_signup_payment | boolean o url | Indica si hay pago/contribución; el pago siempre es externo (redirección vía event_signup_url) |
+| event_featured | boolean | Candidato para el Inicio. **Solo cuenta si el evento está vigente.** Un destacado finalizado se ignora. Marcar como máximo uno. |
 
-**Prioridad a campos nativos:** Se prioriza usar campos nativos de WordPress cuando sea posible: **Title** → nombre del evento, **Content** → descripción, **Featured image** → imagen principal. Los campos custom (`event_date`, `event_place`, `event_modality`, `event_status`, `event_signup_url`, etc.) complementan lo que el core no ofrece.
+**Prioridad a campos nativos:** Se prioriza usar campos nativos de WordPress cuando sea posible: **Title** → nombre del evento, **Content** → descripción, **Featured image** → imagen principal. Los campos custom (`event_date`, `event_place`, `event_modality`, `event_status`, `event_featured`, `event_signup_url`, etc.) complementan lo que el core no ofrece.
 
 **Sin pagos internos:** El sitio no procesa pagos, no tiene checkout ni lógica financiera. Si un evento requiere inscripción económica, se usa `event_signup_url` para redirigir a la plataforma externa correspondiente.
 
 **Regla de visibilidad:** `/eventos/` muestra **dos bloques diferenciados**: los eventos con `event_status = vigente` (acción posible) y, debajo, el **archivo de eventos finalizados** (memoria y evidencia de actividad). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
 **Definición de «vigente»:** `event_status` es la fuente de verdad (manual). Opcionalmente, si `event_date` es anterior a hoy, el sistema puede sugerir marcar como «finalizado» para evitar eventos antiguos visibles por error.
+
+**Un evento en el Inicio:** la portada muestra **como máximo un** evento **vigente**, en nota junto al texto de «Un poco de nuestra comunidad» (no es un segundo listado). Un evento **finalizado nunca aparece aquí**, aunque tenga `event_featured = true`: la marca de destacado se ignora si el evento ya terminó. Selección:
+
+1. Candidatos: solo `event_status = vigente`.
+2. Si entre ellos hay uno con `event_featured = true`, se muestra ese.
+3. Si no hay ninguno marcado, se muestra el vigente con fecha de inicio más cercana.
+4. Si hay más de un destacado vigente, se muestra el de fecha de inicio más cercana. La guía editorial: marcar solo uno.
+5. Si no hay ningún vigente, **no se renderiza el módulo** (ni caja vacía ni mensaje). El texto de comunidad queda a ancho de lectura, sin columna derecha.
+
+La UI no dice «destacado». El visitante ve, en este orden: rótulo «Próximo evento · {tipo}» (encima del cartel, alineado al `h2` de comunidad), cartel completo a tamaño WordPress `medium` (~300 px en escritorio, al ras del borde derecho del hero; ancho de lectura en móvil), nombre (`h3`), fecha, lugar y «Ver evento». No hay enlace al listado, caja, Preinscribirme ni calendario. El cartel a tamaño de lectura amplio vive también en la ficha del evento.
 
 **Eventos finalizados: SÍ aparecen en el listado, en su propio bloque.**
 
@@ -316,4 +327,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.4 — listado: enlace explícito a la ficha («Ver evento →») cuando el evento tiene página propia; CTA Preinscribirme cuando el proceso es preinscripción.
+**Versión:** 2.11 — Inicio: nota del vigente (rótulo encima del cartel `medium`, alineada al hero; «Ver evento» a esa ficha; sin listado ni caja); ocultar el módulo si no hay vigentes.

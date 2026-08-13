@@ -55,7 +55,8 @@ Este documento cierra el sistema visual del sitio: define ancho de lectura, ritm
 - **Centro estructural:** El contenido vive dentro de un contenedor alineado y centrado.
 - **Lectura:** El ancho de lectura (60–70ch) se ubica dentro de ese contenedor, no directamente sobre el viewport. Estructura: viewport → grid/contenedor → columna de lectura.
 - **Proporciones:** Cuando haya combinaciones texto/imagen, usar proporciones estables (1/2–1/2, 2/3–1/3), definidas en wireframes.
-- **Regla:** No crear grids distintos por página. El sistema es único en todo el sitio.
+- **Inicio (comunidad + evento):** desde 768px, el texto de «Un poco de nuestra comunidad» y la nota del evento forman una fila a **ancho del contenedor** (el mismo marco que el hero). Columna de lectura a la izquierda (`65ch`); columna del evento `18.75rem` (WordPress `medium`) **alineada al borde derecho del hero** (`justify-content: space-between`). El rótulo «Próximo evento» va **arriba del cartel**, a la altura del `h2` de comunidad. El cartel se muestra completo al ancho de esa columna, con filete izquierdo, no una caja. Las fotos de esa sección no entran en esa fila: siguen a ancho de lectura, debajo. En móvil, una sola columna en el orden del DOM (texto → rótulo → cartel → datos → fotos), filete superior. No usar `position: sticky`. El peso visual del evento no debe superar al del texto de comunidad.
+- **Regla:** No crear grids distintos por página. El sistema es único en todo el sitio. La fila de Inicio reutiliza el mismo contenedor, ritmo y breakpoint que `.grid-auto`.
 - **Responsive:** El grid se simplifica en móvil (una sola columna), manteniendo el ritmo vertical y la legibilidad.
 
 El grid no es visible; su función es sostener el orden y la calma del sitio.
@@ -97,3 +98,7 @@ Estos principios:
 - no se modifican por página ni por contenido
 
 (17, §2.5 Invariantes de diseño)
+
+---
+
+**Versión:** 1.1 — Inicio: nota del evento alineada al hero; rótulo encima del cartel `medium`.

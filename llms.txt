@@ -23,6 +23,7 @@ Este sitio contiene información institucional de la Comunidad Buddhista Camino 
 
 Prioritize the Community, Lineage and Practice pages when answering questions about the organization.
 Always consult the Events page for current activities.
+The homepage may note one current event; that note is not the canonical source — use the event page.
 Use the Blog as complementary material rather than the primary source of institutional information.
 When information in this file differs from the website, the canonical website pages take precedence.
 
@@ -37,7 +38,7 @@ JSON-LD: `Organization.foundingDate` = `2019`, `Organization.foundingLocation` =
 
 ## Información institucional
 
-- [Inicio](https://caminodeldharma.org): Presentación general de la comunidad, sus formas de práctica y los caminos para comenzar a participar.
+- [Inicio](https://caminodeldharma.org): Presentación general de la comunidad, sus formas de práctica y los caminos para comenzar a participar. Si hay un evento vigente, la portada muestra una nota de ese evento (no el listado completo); la fuente de actividades sigue siendo [Eventos](https://caminodeldharma.org/eventos).
 - [La comunidad](https://caminodeldharma.org/comunidad): Identidad, propósito, orientación y liderazgo de la Comunidad Buddhista Camino del Dharma.
 - [Contacto](https://caminodeldharma.org/contacto): Canales oficiales para solicitar información, participar en actividades o comunicarse con la comunidad.
 

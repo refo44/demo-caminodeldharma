@@ -16,6 +16,7 @@ Sirve para validar: arquitectura de información, navegación, microcopy, jerarq
 
 - Inicio
 - → Lee el hero y el mensaje de la comunidad
+- → Si hay un evento vigente, ve el rótulo «Próximo evento», el cartel y puede abrir esa ficha con «Ver evento» (atajo; no sustituye al menú Eventos ni enlaza el listado)
 - → "Practica con nosotros" o "Participar" (meditación)
 - → Contacto o WhatsApp
 - → Primer contacto
@@ -194,4 +195,4 @@ Este documento es la **guía de validación de recorridos** del sitio. Alineado 
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.4 — Inicio: atajo «Ver evento» a la ficha vigente (rótulo encima del cartel).

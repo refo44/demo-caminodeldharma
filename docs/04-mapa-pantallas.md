@@ -10,7 +10,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Página | Función |
 |--------|---------|
-| Inicio | Título del sitio (site-title), hero, sección «Un poco de nuestra comunidad» (con sidebar CTA contribuir a la derecha en desktop), cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
+| Inicio | Título del sitio (site-title), hero, sección «Un poco de nuestra comunidad» (texto + nota de un evento vigente a la derecha en desktop, alineada al borde del hero: rótulo encima del cartel `medium`, título, fecha, lugar, «Ver evento»; fotos a ancho de lectura debajo), cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
 | La comunidad | Quiénes somos, fundador, experiencia y propósito |
 | El linaje | Tradición viva, Mahāyāna, Chan y Tierra Pura |
 | Práctica y actividades | Aprende en la práctica, meditación semanal, recitación práctica de la comida (texto + descarga PDF), mantras para la práctica (Amitābha, Guān Shì Yīn Púsà + audio), caminos de profundización (talleres, retiros), videos y enseñanzas, vida comunitaria |
@@ -124,4 +124,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.5
+**Versión:** 2.7 — Inicio: nota del evento vigente (rótulo, cartel `medium`, «Ver evento»; alineada al hero).

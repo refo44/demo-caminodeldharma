@@ -1,7 +1,7 @@
 # Camino del Dharma — Arquitectura de información y navegación
 
 **Mapa de navegación y enlaces vivos**  
-**Versión 1.0**
+**Versión 1.6**
 
 Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben existir.
 
@@ -64,6 +64,8 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 |--------|---------|------|
 | "Practica con nosotros" | Contacto o WhatsApp | Primario |
 | "Participar" (meditación) | WhatsApp | Primario |
+| "Conocer la comunidad" | Comunidad | Secundario |
+| "Ver evento" | Ficha del evento vigente (`/eventos/{slug}/`) | Secundario (solo si hay vigente; un solo evento; no enlaza el listado) |
 | "Ver galería completa" | Galería | Secundario |
 | La comunidad | Comunidad | Secundario |
 | El linaje | Linaje | Secundario |
@@ -186,4 +188,4 @@ Este documento es la **guía estructural definitiva** de navegación y arquitect
 
 ---
 
-**Versión:** 1.4
+**Versión:** 1.6 — Inicio: «Ver evento» a la ficha vigente (no al listado); el listado sigue usando «Ver evento →».

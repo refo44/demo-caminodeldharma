@@ -41,6 +41,24 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 *Tono:* El título es deliberadamente sobrio (sin "YA", sin exclamación). Si se prefiere un tono más neutro y contemplativo, alternativa: **"La práctica en la vida cotidiana."**
 
+### Comunidad (Inicio)
+
+- **Título de sección:** Un poco de nuestra comunidad
+- **Enlace:** Conocer la comunidad
+
+### Evento en el Inicio (nota tipográfica)
+
+Un solo evento **vigente**, junto al texto de comunidad en escritorio. No dice «destacado». Un evento finalizado no aparece, aunque esté marcado como destacado. Si no hay vigentes, no se muestra el módulo (ni caja vacía).
+
+- **Miniatura:** cartel completo (sin recorte), **ancho de la columna** (~300 px en escritorio = tamaño WordPress `medium`; en móvil, ancho de lectura). No usar `thumbnail` (150 × 150 recortado): las letras del cartel quedarían ilegibles y un original no cuadrado se recorta (WCAG 1.4.4 y 1.4.5). Decorativa (`alt=""`): el nombre, la fecha y el lugar van en HTML. No es enlace (el teclado usa el título y «Ver evento»).
+- **Encabezado del módulo:** Próximo evento — **encima del cartel**, alineado al `h2` de comunidad, tamaño de rótulo (`0.875rem`), no de título de sección. Solo cuando el evento mostrado es el vigente de fecha de inicio más cercana. Si un destacado editorial no es el más cercano, omitir este rótulo y dejar tipo + título. Es un `<p>`, no un encabezado: no compite con «Un poco de nuestra comunidad» ni con el nombre del evento.
+- **Tipo:** etiqueta `event_type` (Curso, Taller, Retiro, etc.), en la misma línea que el encabezado (`Próximo evento · Curso`)
+- **Título:** nombre del evento (`h3`, enlace a la ficha, subrayado como el resto de enlaces)
+- **Datos:** fecha y lugar
+- **Enlace:** Ver evento (solo la ficha de ese evento; no el listado)
+
+Sin Preinscribirme, calendario ni compartir. Sin recuadro: en escritorio, filete izquierdo; en móvil, filete superior. Orden: rótulo → cartel `medium` → título → datos → Ver evento.
+
 ### Meditación semanal
 
 - **Título:** Meditación semanal en línea
@@ -289,4 +307,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.7
+**Versión:** 1.9 — Inicio: rótulo encima del cartel `medium`; «Ver evento» a esa ficha; alineación al hero.

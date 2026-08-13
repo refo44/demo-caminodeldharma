@@ -53,7 +53,7 @@ Orden sugerido dentro de `main.css` (o de los parciales si se dividen después):
    Contenedores, grid o flex para secciones (hero, columnas “cómo practicamos”, footer). Ancho de columna de lectura objetivo 60 a 70ch y ritmo vertical consistente. No usar layout dependiente del DOM profundo (p. ej. `.site-header nav ul li a span`). Espaciado generoso (coherente con la configuración de espaciado en theme.json, definido en 12).
 
 4. **Componentes**  
-   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-card`, `.mantra-reading`, `.mantra-ruby`, `.mantra-language-data`, `.mantra-audio`) y panel para compartir (`.share-trigger`, `.share-dialog`, `.share-option`, `.share-status`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
+   Cabecera, pie, navegación, bloque de meditación, botones, formulario, tarjetas de evento, nota de evento en Inicio (`.home-community-row`, `.home-featured-event`), recitación práctica (`.recitation-section`), mantras (`.mantra-section`, `.mantra-card`, `.mantra-reading`, `.mantra-ruby`, `.mantra-language-data`, `.mantra-audio`) y panel para compartir (`.share-trigger`, `.share-dialog`, `.share-option`, `.share-status`). Nombres semánticos (p. ej. `.site-header`, `.meditation-block`, `.btn-primary`).
 
 5. **Páginas específicas (si hace falta)**  
    Ajustes por template (front-page, page-contacto). Mantener al mínimo; preferir componentes reutilizables.
@@ -91,7 +91,7 @@ Implementación técnica del grid definido en `20-layout-principles` (§5):
 - **Base:** Preferir CSS Grid para layout de columnas; Flexbox solo para alineación interna de componentes. Contenedor principal centrado que alberga cabecera, contenido y pie.
 - **Tokens mínimos del grid (en :root):** `--container-max`, `--gutter`, `--section-gap`, `--grid-gap`; existen y se usan para consistencia; los valores se definen según 20 y contexto.
 - **Contenedor:** Una clase (o contenedor semántico) que define el ancho máximo y el centro estructural. El ancho de lectura (60–70ch) vive dentro de él. El contenedor central define el eje del sitio; los bloques visuales pueden romper el ancho cuando el wireframe lo indique (hero, imágenes, citas).
-- **Columnas:** Columnas reutilizables cuando el wireframe pida 2 columnas (p. ej. texto + imagen en proporciones 1/2–1/2 o 2/3–1/3). No crear grids distintos por página; un solo sistema.
+- **Columnas:** Columnas reutilizables cuando el wireframe pida 2 columnas (p. ej. texto + imagen en proporciones 1/2–1/2 o 2/3–1/3). No crear grids distintos por página; un solo sistema. Excepción documentada en 20: `.home-community-row` (lectura + columna `18.75rem` al borde derecho del contenedor/hero, `justify-content: space-between`).
 - **Utilidades:** Si se usan clases de utilidad para columnas o anchos, que sean pocas y coherentes con el grid. Detalle de breakpoints y comportamiento en §6.
 
 Este documento responde *cómo se codifica* lo que el layout define; la lógica espacial está en 20.
@@ -167,4 +167,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.7
+**Versión:** 1.9 — Inicio: `.home-community-row` / `.home-featured-event` (rótulo, cartel `medium`, alineación al hero).

@@ -122,7 +122,7 @@ The platform exists to:
 5. Let editors (without developer access) manage events and blog posts through WordPress
 
 CTAs use participatory language: "Practica con nosotros," "Participar," "Inscribirme,"
-"Preinscribirme," "Ver evento →," "Donar." Never
+"Preinscribirme," "Ver evento" (home, to that event page), "Ver evento →" (listing), "Donar." Never
 funnel or urgency language.
 
 ---
@@ -679,8 +679,8 @@ easy to get wrong:
 
 - **Prioritize native fields** where the content model says to: Title → event name, Content →
   description, Featured image → event image. Custom meta only for what core doesn't cover
-  (`event_date`, `event_place`, `event_modality`, `event_status`, `event_signup_url`,
-  `event_signup_payment`).
+  (`event_date`, `event_place`, `event_modality`, `event_status`, `event_featured`,
+  `event_signup_url`, `event_signup_payment`).
 - **`/eventos/` shows two distinct blocks, not one filtered list:** vigente events (grouped by month)
   and a finalizado archive (grouped by year). This was explicitly reversed on 2026-07-21 — an earlier
   version of the doc said finished events should be hidden; that is revoked. Finished events are the
@@ -689,6 +689,17 @@ easy to get wrong:
   (`h3` group headers, `h4` event titles) — not decorative dividers, because screen-reader users navigate
   by heading.
 - `event_status` (manual field) is the source of truth for "vigente," not just a date comparison.
+- The homepage shows **at most one** vigente event in a compact aside beside the community copy
+  (not a second events listing). Candidates are vigente only: a featured event that is finished
+  is ignored. Prefer `event_featured` among vigentes; else the vigente with the soonest start
+  date. If more than one is featured, use the soonest start date. If none are vigente, omit the
+  module entirely (no empty box). The UI never says "destacado". The home module is a quiet
+  note: label **Próximo evento · {type}** first (a `<p>`, not a heading, aligned with the
+  community `h2`), then a complete event image using WordPress **`medium`** (300 px, uncropped — not
+  `thumbnail` 150×150 crop), displayed at the sidebar column width (~18.75rem / ~300 px;
+  full read width on small screens) so poster type remains readable, **not a link** (`alt=""`; title and
+  **Ver evento** are the keyboard path), then title, date, place, and **Ver evento** (to that event’s
+  page only — not the events listing). No card box, signup button, or calendar.
 - Finished events use a compact card treatment (thumbnail, title, city, date, link to detail); vigente
   events keep the full treatment. Detail lives in `templates/single-event.html`. Listing cards with a
   detail page expose that page via the title, a pointer-only poster link, and the text link
