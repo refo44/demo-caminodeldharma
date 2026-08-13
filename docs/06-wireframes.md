@@ -97,7 +97,7 @@ Bloques:
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
 - **Calendario estático** (un mes; días con evento marcados; según 04)
-- **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”; acción secundaria “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
+- **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Curso, Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”; acción secundaria “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
 
@@ -151,7 +151,7 @@ Bloques:
 Bloques:
 
 - Cabecera
-- Etiqueta tipo de evento (Taller, Retiro, Conferencia, Encuentro) si se muestra en listado
+- Etiqueta tipo de evento (Curso, Taller, Retiro, Conferencia, Encuentro) si se muestra en listado
 - Imagen destacada del evento (si existe)
 - Título del evento
 - Fecha, lugar, descripción

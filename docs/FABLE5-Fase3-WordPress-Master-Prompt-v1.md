@@ -697,7 +697,7 @@ easy to get wrong:
 ## 10.3 Taxonomies
 
 Register `event_type` (hierarchical) and `event_city` (flat) on `event`. **Neither has a public
-archive** — see §7.3. `event_type` terms: Taller, Retiro, Conferencia, Encuentro, Celebración.
+archive** — see §7.3. `event_type` terms: Curso, Taller, Retiro, Conferencia, Encuentro, Celebración.
 
 ## 10.4 Roles
 

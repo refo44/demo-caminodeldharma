@@ -96,7 +96,7 @@ alcance ahora mismo).
 tener ciudades confirmadas y un wireframe, que todavía no existen. No implementarlo "ya que la
 arquitectura del plugin lo soporta fácilmente".
 
-**Taxonomías:** `event_type` (jerárquica: Taller, Retiro, Conferencia, Encuentro, Celebración) y
+**Taxonomías:** `event_type` (jerárquica: Curso, Taller, Retiro, Conferencia, Encuentro, Celebración) y
 `event_city` (plana). **Ninguna tiene archivo público** — son solo etiquetas, nunca URLs, para evitar
 páginas casi-duplicadas sin contenido real (doorway pages).
 

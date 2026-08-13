@@ -68,7 +68,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ### Eventos (page o archive-event)
 
 - **Condicional:** visible solo cuando hay evento vigente
-- **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, botón Inscribirme. En la maqueta: etiqueta de tipo encima del título (Taller, Retiro, Conferencia, Encuentro); separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
+- **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, botón Inscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
 - Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme
 
 ### Contacto (page)
@@ -175,7 +175,7 @@ y cómo confirmar el lugar de cada convocatoria (WhatsApp), no afirmar una ubica
 | event_city | Ciudad del evento | Plana | event |
 | post_tag | Tags | Nativa, plana | post (blog) |
 
-**Valores (términos):** Taller, Retiro, Conferencia, Encuentro (etiqueta corta para «Encuentro nacional»), Celebración (Vesak, Diwali, etc.).
+**Valores (términos):** Curso, Taller, Retiro, Conferencia, Encuentro (etiqueta corta para «Encuentro nacional»), Celebración (Vesak, Diwali, etc.).
 
 En la maqueta estática estos valores se muestran como etiqueta encima del título de cada evento (clase `.evento-type`). En WordPress se asignan vía la taxonomía `event_type`; el theme debe mostrar el término como label en single y en listados.
 

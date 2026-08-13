@@ -144,7 +144,7 @@ Formato fijo de la línea de contexto:
 
 `[Tipo de evento] · Camino del Dharma`
 
-Donde `[Tipo de evento]` es la etiqueta editorial del encuentro: Encuentro, Taller, Retiro o Conferencia.
+Donde `[Tipo de evento]` es la etiqueta editorial del encuentro: Curso, Encuentro, Taller, Retiro o Conferencia.
 
 #### WhatsApp (eventos)
 
