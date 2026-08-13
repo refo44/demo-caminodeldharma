@@ -2114,6 +2114,38 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+.evento-figure-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.evento-figure-link img {
+  transition: opacity 0.2s;
+}
+
+.evento-figure-link:hover img {
+  opacity: 0.9;
+}
+
+.evento-card--past .evento-figure-link:hover img,
+.evento-card--finalizado .evento-figure-link:hover img {
+  opacity: 0.75;
+}
+
+.evento-cta {
+  margin: 0;
+}
+
+.evento-detail-link {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+}
+
+.evento-detail-link a {
+  color: var(--link);
+}
+
 .evento-placeholder {
   display: flex;
   align-items: center;

@@ -68,8 +68,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 ### Eventos (page o archive-event)
 
 - **Condicional:** visible solo cuando hay evento vigente
-- **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, botón Inscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
-- Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme
+- **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, enlace a la ficha si existe («Ver evento →»), botón Inscribirme / Preinscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); título y cartel enlazan a `/eventos/{slug}/` cuando hay página propia; separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
+- Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme (o Preinscribirme), URL de la ficha cuando el evento tiene `single-event`
 
 ### Contacto (page)
 
@@ -120,7 +120,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 Los encabezados de agrupación deben ser **encabezados reales** (`h3`, con los títulos de evento en `h4`), no separadores decorativos: quien usa lector de pantalla navega saltando entre encabezados. Ver `19-accesibilidad-estandares`.
 
-**Densidad:** los eventos finalizados usan **tarjeta compacta** (miniatura, título, ciudad, fecha, enlace al detalle); los vigentes conservan el tratamiento completo. Motivo: con carteles verticales a ancho de lectura, cada tarjeta completa ocupa cerca de una pantalla —más en escritorio que en móvil—, y el archivo se vuelve intransitable. El detalle extenso vive en `single-event.php`, donde alguien llega a propósito.
+**Densidad:** los eventos finalizados usan **tarjeta compacta** (miniatura, título, ciudad, fecha, enlace al detalle); los vigentes conservan el tratamiento completo. Motivo: con carteles verticales a ancho de lectura, cada tarjeta completa ocupa cerca de una pantalla —más en escritorio que en móvil—, y el archivo se vuelve intransitable. El detalle extenso vive en `single-event.php`, donde alguien llega a propósito. En el listado, quien desea ese detalle entra por «Ver evento →», por el título o por el cartel; el listado no duplica cronograma ni condiciones operativas.
 
 **Escalado:** con el ritmo actual (~8–12 eventos/año) el listado único con agrupación por año es suficiente hasta unos 25–30 eventos. A partir de ahí, archivos por año (`/eventos/2025/`) usando los archivos de fecha nativos de WordPress. **No usar paginación numerada ni carga por JavaScript:** la primera entierra el contenido y la segunda no se indexa de forma fiable, lo que anularía el punto 1.
 
@@ -316,4 +316,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.3 — §5 corregido a plantillas de bloques (ADR 0029, había quedado en `.php`); §5.1 añade el mecanismo de álbumes de galería creados libremente por el editor (Encabezado + Galería nativos, sin lista fija).
+**Versión:** 2.4 — listado: enlace explícito a la ficha («Ver evento →») cuando el evento tiene página propia; CTA Preinscribirme cuando el proceso es preinscripción.

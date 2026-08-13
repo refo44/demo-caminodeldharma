@@ -69,15 +69,30 @@ La persona entiende el contexto antes de actuar.
 
 ## 5. Persona busca evento específico
 
-**Objetivo:** inscribirse a un retiro o taller.
+**Objetivo:** inscribirse a un curso, retiro o taller, o comprender el evento completo antes de hacerlo.
 
-**Recorrido:**
+El listado permite **escanear**. La ficha (`/eventos/{slug}/`) es la fuente del detalle operativo (cronograma, condiciones, becas, cómo participar) cuando el evento tiene página propia.
+
+**Dos intenciones en la misma tarjeta:**
+
+**a) Entender el evento completo**
+
+- Menú o Inicio
+- → Eventos (si visible)
+- → Lee tipo, título, cartel, descripción, fecha y lugar
+- → «Ver evento →» (el título y el cartel también llevan a la ficha)
+- → Lee la ficha
+- → «Inscribirme» / «Preinscribirme», o «← Volver a Eventos»
+
+**b) Participar desde el listado**
 
 - Menú o Inicio
 - → Eventos (si visible)
 - → Lee descripción, fecha, lugar
-- → "Inscribirme"
+- → «Inscribirme» / «Preinscribirme»
 - → Formulario externo o contacto
+
+Quien necesita el detalle no debe depender de adivinar que el título o el cartel son clicables. «Ver evento →» es la salida explícita a la ficha; el botón de inscripción sigue siendo el único CTA primario de la tarjeta.
 
 ---
 
@@ -179,4 +194,4 @@ Este documento es la **guía de validación de recorridos** del sitio. Alineado 
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

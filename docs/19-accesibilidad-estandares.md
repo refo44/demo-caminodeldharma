@@ -147,7 +147,8 @@ Camino del Dharma es un sitio **editorial** y **comunitario**: contenido largo, 
 | Componente | Requisitos |
 |------------|------------|
 | **Icon button** (botón sin texto visible) | Proveer nombre accesible con texto en el DOM. Orden preferido: (1) `<span class="visually-hidden">…</span>`, (2) `aria-labelledby`, (3) `aria-label` solo si no hay alternativa. El icono/SVG debe ir con `aria-hidden="true"` y `focusable="false"`. |
-| **Enlaces** | Texto del enlace descriptivo. Evitar "aquí", "ver más", "clic". |
+| **Enlaces** | Texto del enlace descriptivo. Evitar "aquí", "ver más", "clic". «Ver evento →» es válido: nombra la ficha. |
+| **Tarjeta de evento con ficha** | El título es enlace a `/eventos/{slug}/` (recorrido de teclado y lector). «Ver evento →» es el enlace de texto explícito al mismo destino, con nombre distinto (WCAG 2.4.4). El cartel puede ser atajo de puntero (`tabindex="-1"` y `aria-hidden="true"` en el enlace de la imagen) para no anunciar tres veces la misma salida; el alt del cartel no debe ser la única descripción del evento. No usar `aria-hidden` en un contenedor que siga siendo enfocable. |
 | **Modal / Dialog** | Si es custom: `role="dialog"` (o `alertdialog` si interrumpe); `aria-modal="true"`; `aria-labelledby` obligatorio; `aria-describedby` si hay texto explicativo. Focus al abrir dentro del modal; focus trap; retorno del foco al cerrar. Si se usa `<dialog>` nativo, validar igual el comportamiento de foco y cierre por teclado (Esc). |
 | **Dropdown / Menú** | Si es menú de navegación simple, preferir `nav` + enlaces y no convertirlo en "menú ARIA" si no hace falta. Si es dropdown interactivo: trigger con `aria-expanded` dinámico y `aria-controls` al panel. Teclado: Enter/Space abre, Esc cierra, flechas navegan si aplica. |
 | **Tabs** | `role="tablist"`, `role="tab"`, `role="tabpanel"`; `aria-selected` y `tabindex` correctos; `aria-controls` y `aria-labelledby` consistentes. |
@@ -229,5 +230,5 @@ Este documento es el **estándar único de accesibilidad** del proyecto: estrate
 
 ---
 
-**Versión:** 1.1  
+**Versión:** 1.2  
 **Referencias:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `17-orden-implementacion`, `18-tendencias-ux-ui-sistema-editorial`, lluvia de ideas de accesibilidad del proyecto. Estándar: [WCAG 2.1](https://www.w3.org/TR/WCAG21/) / [WCAG 2.2](https://www.w3.org/TR/WCAG22/) (W3C).

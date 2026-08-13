@@ -78,11 +78,13 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 |---------|-------|
 | CTA principal | Practica con nosotros |
 | Meditación | Participar |
-| Evento | Inscribirme |
+| Evento | Inscribirme (Preinscribirme si el proceso es preinscripción) |
+| Ficha de evento | Ver evento → |
+| Retorno al listado | ← Volver a Eventos |
 | Formulario | Enviar |
 | Donaciones | Donar / Sostener la comunidad |
 
-**Nunca:** Ver más, Comprar ahora, Empieza aquí, Suscríbete, Descubre, Únete (si suena a CTA agresivo).
+**Nunca:** Ver más, Comprar ahora, Empieza aquí, Suscríbete, Descubre, Únete (si suena a CTA agresivo). «Ver evento →» sí se usa: nombra el destino (la ficha), no es un «ver más» genérico.
 
 ---
 
@@ -155,4 +157,4 @@ El sitio no vende. El sitio acoge.
 
 **Referencia:** `09-ui-copy-sheet` (textos concretos por pantalla). Tipos de pieza en blog: `23-sistema-editorial` §4.0. Brief editorial: `24-brief-editorial-blog-y-visibilidad`.
 
-**Versión:** 1.1 (2026-07-20 — entradas del blog)
+**Versión:** 1.2 (2026-08-13 — ficha de evento: Ver evento → / Preinscribirme)

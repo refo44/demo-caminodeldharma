@@ -53,7 +53,7 @@ código ni servidor, una vez WordPress esté implementado.
 - Un lightbox de galería propio (se usa el nativo de Gutenberg)
 
 **Tono editorial:** sobrio, cálido, sin urgencia. CTAs como "Practica con nosotros", "Participar",
-"Inscribirme", "Donar" — nunca lenguaje de venta.
+"Inscribirme", "Preinscribirme", "Ver evento →", "Donar" — nunca lenguaje de venta.
 
 ---
 

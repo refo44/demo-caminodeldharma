@@ -117,11 +117,21 @@ Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben exis
 
 En la página de Eventos, los enlaces «Práctica» y «Contacto» aparecen **una sola vez** (bloque común al final), no en cada tarjeta de evento.
 
+Cada evento con página propia ofrece una salida explícita a su ficha. El listado no sustituye al detalle: resume para escanear; la ficha concentra cronograma, condiciones y cómo participar.
+
 | Enlace | Destino | Tipo |
 |--------|---------|------|
-| "Inscribirme" | URL de inscripción | Primario |
+| "Inscribirme" / "Preinscribirme" | URL de inscripción o preinscripción | Primario |
+| "Ver evento →" | Ficha del evento (`/eventos/{slug}/`) | Secundario (por tarjeta, solo si hay página propia) |
+| Título del evento | Ficha del evento | Secundario (mismo destino; el encabezado es enlace) |
+| Cartel | Ficha del evento | Atajo de puntero (no está en el orden de tabulación; ver `19`) |
+| "Añadir al calendario" | Panel de calendario | Secundario (solo próximos) |
+| "Compartir" | Panel para compartir | Secundario (solo próximos) |
+| "← Volver a Eventos" | `/eventos` | Secundario (en la ficha) |
 | Práctica | Práctica | Secundario (una vez en la página) |
 | Contacto | Contacto | Secundario (una vez en la página) |
+
+**Orden en la tarjeta vigente:** datos (fecha, lugar, modalidad) → «Ver evento →» → botón de inscripción → Añadir al calendario / Compartir. El enlace a la ficha no se intercala entre grupos de botones ni se reserva al pie de la tarjeta.
 
 ---
 
@@ -176,4 +186,4 @@ Este documento es la **guía estructural definitiva** de navegación y arquitect
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4

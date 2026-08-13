@@ -121,7 +121,8 @@ The platform exists to:
    comunidad," never checkout language)
 5. Let editors (without developer access) manage events and blog posts through WordPress
 
-CTAs use participatory language: "Practica con nosotros," "Participar," "Inscribirme," "Donar." Never
+CTAs use participatory language: "Practica con nosotros," "Participar," "Inscribirme,"
+"Preinscribirme," "Ver evento →," "Donar." Never
 funnel or urgency language.
 
 ---
@@ -689,7 +690,10 @@ easy to get wrong:
   by heading.
 - `event_status` (manual field) is the source of truth for "vigente," not just a date comparison.
 - Finished events use a compact card treatment (thumbnail, title, city, date, link to detail); vigente
-  events keep the full treatment. Detail lives in `templates/single-event.html`.
+  events keep the full treatment. Detail lives in `templates/single-event.html`. Listing cards with a
+  detail page expose that page via the title, a pointer-only poster link, and the text link
+  **Ver evento →** (after the event meta, before the signup CTA). Do not rely on heading-as-link
+  affordance alone.
 - JSON-LD `Event` goes on both `single-event.html` and the listing (for events without a detail page) —
   full field spec with exact rules for `organizer`/`performer`/`offers`/`eventStatus` is in
   `docs/15-assets-strategy.md` §12.3. Follow it exactly; do not invent fields not backed by real data.

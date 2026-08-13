@@ -262,7 +262,7 @@ implementaciones.
 
 ### 12.3 Event — JSON-LD (`Event`)
 
-**Una sola fuente de verdad:** JSON-LD en la **página de detalle** del evento (`/eventos/{slug}/`). **No usar microdata** (`itemscope` / `itemprop`) en tarjetas del listado `/eventos/` — genera Eventos duplicados e incompletos en Search Console.
+**Una sola fuente de verdad:** JSON-LD en la **página de detalle** del evento (`/eventos/{slug}/`). **No usar microdata** (`itemscope` / `itemprop`) en tarjetas del listado `/eventos/` — genera Eventos duplicados e incompletos en Search Console. El listado sí usa enlaces HTML ordinarios a esa URL (título, cartel, «Ver evento →»).
 
 **No perseguir el 100 %** de advertencias en GSC. Rellenar solo campos **verdaderos y útiles**; un dato inventado es peor que omitir un campo opcional.
 
@@ -415,4 +415,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.1 — §12.4 ampliado con la spec completa de JSON-LD `BlogPosting` (antes solo listaba nombres de campo).
+**Versión:** 2.2 — el listado `/eventos/` enlaza a la ficha con HTML ordinario (título, cartel, «Ver evento →»); el JSON-LD `Event` sigue solo en el detalle.

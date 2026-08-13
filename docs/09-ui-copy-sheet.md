@@ -98,10 +98,12 @@ Fuente única de verdad para botones, menús, mensajes, formularios y estados. C
 
 ## 5. Eventos
 
-- **Botón:** Inscribirme
+- **Botón (primario):** Inscribirme. **Preinscribirme** cuando el proceso es una preinscripción (p. ej. asignación de becas; la preinscripción no garantiza el cupo).
+- **Enlace a la ficha (eventos con página propia):** Ver evento → — enlace de texto, no botón; mismo tono que «← Volver a Eventos» en la ficha. En la tarjeta vigente va **después de los datos** (fecha, lugar, modalidad) y **antes** del CTA de inscripción. En eventos realizados con ficha, al cierre de la tarjeta.
 - **Acción secundaria por evento próximo:** Compartir
 - **Calendario (eventos próximos):** Añadir al calendario — abre un panel con Google Calendar, Outlook, Apple Calendar y descarga del archivo `.ics`
 - **Sin eventos:** "No hay eventos programados en este momento."
+- **Retorno desde la ficha:** ← Volver a Eventos
 
 Cada evento próximo con fechas definidas expone un botón **Añadir al calendario** que abre un panel (mismo patrón que Compartir):
 
@@ -287,4 +289,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.6
+**Versión:** 1.7

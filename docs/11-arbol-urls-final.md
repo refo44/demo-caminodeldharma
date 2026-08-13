@@ -38,6 +38,8 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | Listado | `/eventos/` |
 | Single | `/eventos/{slug}/` |
 
+El listado enlaza cada evento con ficha propia hacia `/eventos/{slug}/` (título, cartel y «Ver evento →»). No todas las tarjetas tienen single: las que no, viven solo en el listado.
+
 **Sin archivos por ciudad.** La ciudad de cada evento es **taxonomía (`event_city`), no dirección**: no existe `/eventos/cali` ni `/eventos/ciudad/cali`. Los encuentros de una ciudad se muestran dentro de `/sanghas/{ciudad}`; si el listado general crece, se archiva **por año** (`03-wordpress-content-model` §3). Mismo criterio que `event_type`, que también es taxonomía sin archivo público. Ver **ADR 0022**.
 
 ### 3.1. Sanghas (si se implementa CPT)
@@ -122,4 +124,4 @@ Este documento es la **geografía oficial de rutas** del sitio. Si una URL no es
 
 ---
 
-**Versión:** 1.4 — añade `/blog/tag/{slug}/` (ADR 0031) y corrige §6 a plantillas de bloques (ADR 0029, antes listaba nombres `.php`).
+**Versión:** 1.5 — el listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha (título, cartel, «Ver evento →»).

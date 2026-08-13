@@ -97,11 +97,12 @@ Bloques:
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
 - **Calendario estático** (un mes; días con evento marcados; según 04)
-- **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Curso, Taller, Retiro, Conferencia, Encuentro) encima del título; título; imagen (si aplica); fecha, lugar, modalidad; descripción; CTA “Inscribirme”; acción secundaria “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
+- **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Curso, Taller, Retiro, Conferencia, Encuentro) encima del título; título (enlace a la ficha si existe); imagen (si aplica; cartel clicable hacia la ficha); fecha, lugar, modalidad; descripción; enlace de texto «Ver evento →» (si hay página propia); CTA “Inscribirme” / “Preinscribirme”; acciones secundarias “Añadir al calendario” y “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
+- **Por cada evento realizado con ficha:** mismo cartel clicable y enlace «Ver evento →» al cierre de la tarjeta; sin CTA de inscripción ni calendario/compartir.
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
 - Pie
 
-**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`. Los mensajes editoriales viven en `<template>`: WhatsApp (`data-share-whatsapp-template`), X (`data-share-x-template`) y Threads (`data-share-threads-template`); así conservan saltos de línea y datos específicos sin incrustar copy largo en JavaScript.
+**Maqueta estática:** clase `.evento-type` para la etiqueta; `.evento-card` por evento; `.evento-figure-link` para el cartel clicable; `.evento-detail-link` para «Ver evento →»; `.eventos-card-divider` o `hr` entre tarjetas; `.eventos-section-links` para Práctica · Contacto. Cada evento próximo usa un botón `.share-trigger` con título, descripción y URL en atributos `data-share-*`. Los mensajes editoriales viven en `<template>`: WhatsApp (`data-share-whatsapp-template`), X (`data-share-x-template`) y Threads (`data-share-threads-template`); así conservan saltos de línea y datos específicos sin incrustar copy largo en JavaScript.
 
 **Compartir:** el panel propio está disponible tanto en las tarjetas del listado como dentro de cada detalle y ofrece WhatsApp, Facebook, X, Threads y copiar enlace. No genera imágenes para Instagram. Los eventos con página propia comparten su detalle; si todavía no existe un detalle, se comparte el ancla estable de su tarjeta en `/eventos/`. En el blog, cada detalle de entrada usa `.share-trigger` con templates por plataforma (`data-share-whatsapp-template`, `data-share-x-template`, `data-share-threads-template`); ver `09-ui-copy-sheet` §6. Los eventos próximos incluyen botón **Añadir al calendario** (panel con Google Calendar, Outlook y `.ics`) y enlace **Compartir**; ver `09-ui-copy-sheet` §5 y §6.
 
@@ -144,9 +145,9 @@ Bloques:
 
 ---
 
-## 8. Single evento (si se implementa)
+## 8. Single evento
 
-**Función:** detalle de un evento.
+**Función:** detalle operativo de un evento con página propia. El listado no duplica este contenido: resume; la ficha informa.
 
 Bloques:
 
@@ -156,8 +157,10 @@ Bloques:
 - Título del evento
 - Fecha, lugar, descripción
 - CTA inscripción o enlace
-- Navegación: Volver a Eventos, Práctica, Contacto
+- Navegación: «← Volver a Eventos», Práctica, Contacto
 - Pie
+
+La ficha es el destino de «Ver evento →», del título y del cartel en el listado. El enlace de retorno usa el mismo tono de texto, no un botón.
 
 ---
 
@@ -190,4 +193,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.3
+**Versión:** 1.4

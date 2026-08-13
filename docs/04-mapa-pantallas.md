@@ -16,7 +16,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Práctica y actividades | Aprende en la práctica, meditación semanal, recitación práctica de la comida (texto + descarga PDF), mantras para la práctica (Amitābha, Guān Shì Yīn Púsà + audio), caminos de profundización (talleres, retiros), videos y enseñanzas, vida comunitaria |
 
 *Extensiones de maqueta en Práctica (no en Contenido_Web canónico):* recitación de la comida y mantras con audio.
-| Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles e inscripción; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
+| Eventos | Calendario estático (un mes, días con evento marcados), listado próximos / realizados con carteles; cada evento con ficha propia se abre desde el título, el cartel y «Ver evento →»; inscripción o preinscripción en el listado y en el detalle; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
 | Galería | Página dedicada organizada en álbumes o secciones con título propio (por año, evento o actividad); cada álbum tiene grid y paginación independiente. |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
@@ -38,7 +38,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 | Vista | Uso |
 |-------|-----|
-| Evento individual | Detalle de evento (si se implementa single-event) |
+| Evento individual | Detalle operativo del evento (`/eventos/{slug}/`) |
 
 ---
 
@@ -65,7 +65,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Página condicional:** 7. Eventos especiales — la ruta `/eventos/` existe siempre; contenido: listado si hay eventos vigentes, mensaje amable si no.
 
-**Vistas de contenido:** 8. Evento individual — solo si se habilita vista detalle por evento.
+**Vistas de contenido:** 8. Evento individual — ficha en `/eventos/{slug}/` cuando el evento tiene página propia.
 
 **Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
@@ -88,7 +88,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Contacto | `page-contacto.php` |
 | Eventos especiales | `archive-event.php` o `page-eventos.php` (condicional) |
 | Blog | `home.php` o `index.php` (según modelo) |
-| Evento individual | `single-event.php` (si se activa) |
+| Evento individual | `single-event.php` |
 | Privacidad | `page.php` (fallback; no requiere plantilla propia) |
 | 404 | `404.php` |
 | Header global | `parts/header.php` (incluye navigation) |
@@ -124,4 +124,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.4
+**Versión:** 2.5
