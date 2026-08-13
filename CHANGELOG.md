@@ -8,6 +8,22 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.27] - 2026-08-13
+
+### Círculos de Presencia Consciente — «Taller» → «Curso»
+
+Alineación editorial y SEO: el formato es un **curso**, no un taller.
+
+- `/eventos/circulos-de-presencia-consciente`: tipo visible **Curso**; títulos, descriptions, Open Graph y JSON-LD `Event` con `additionalType` `Course` y `alternateName`.
+- `/blog/circulos-de-presencia-consciente`: metadata SEO y JSON-LD actualizados; autor visible **Comunidad Camino del Dharma** (antes atribuido a Zheng Gong en esta entrada).
+- `/eventos`, `/` («Del blog»), `llms.txt`, `.ics`: copy y descripciones alineadas.
+- `sitemap.xml`: sin cambio de `<lastmod>` — fechas `2026-08-13` ya vigentes en las URLs modificadas.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.26] - 2026-08-13
 
 ### Corrección — enlaces de navegación en blog y eventos
