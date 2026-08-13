@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.26] - 2026-08-13
+
+### Corrección — enlaces de navegación en blog y eventos
+
+Enlaces relativos (`href=".."`) en páginas anidadas resolvían mal la ruta del listado padre (p. ej. `/blog/circulos-de-presencia-consciente` → `/blog/circulos-de-presencia-consciente` en lugar de `/blog`).
+
+- `blog/circulos-de-presencia-consciente/index.html`, `blog/sangha-refugio-hiperconexion/index.html`: **Blog** y «Ver más entradas del blog» → `/blog`.
+- `eventos/circulos-de-presencia-consciente/index.html`, `eventos/encuentro-nacional-2026/index.html`, `eventos/pausa-profunda-cali/index.html`: **Eventos** → `/eventos`.
+- `sitemap.xml`: `<lastmod>` `2026-08-13` en `/eventos/pausa-profunda-cali` y `/blog/sangha-refugio-hiperconexion`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.25] - 2026-08-13
 
 ### Evento — Círculos de Presencia Consciente
