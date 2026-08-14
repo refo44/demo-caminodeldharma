@@ -14,6 +14,7 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 - Lunes sin otro evento (7, 14, 21 y 28 de septiembre): borde `brand-2`, enlace a `/practica/meditacion-semanal-en-linea`. No son ítems del listado.
 - Tooltip propio (`data-tooltip`) en días de evento y de meditación; hover y foco. Sin `title` nativo.
+- Sin leyenda bajo el calendario (el tooltip nombra cada día).
 - Metadata SEO: description y Open Graph mencionan la meditación semanal; `rel="related"` a esa página.
 - `llms.txt`: calendario de eventos incluye la meditación semanal.
 - `sitemap.xml`: sin cambio de `<lastmod>` — `/eventos` ya en `2026-08-13`.
@@ -21,7 +22,7 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **Desplegada** el 2026-08-13
 
 ## [1.0.29] - 2026-08-13
 
