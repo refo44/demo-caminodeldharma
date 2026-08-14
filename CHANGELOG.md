@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.30] - 2026-08-13
+
+### `/eventos` — calendario y tooltips
+
+- Lunes sin otro evento (7, 14, 21 y 28 de septiembre): borde `brand-2`, enlace a `/practica/meditacion-semanal-en-linea`. No son ítems del listado.
+- Tooltip propio (`data-tooltip`) en días de evento y de meditación; hover y foco. Sin `title` nativo.
+- Metadata SEO: description y Open Graph mencionan la meditación semanal; `rel="related"` a esa página.
+- `llms.txt`: calendario de eventos incluye la meditación semanal.
+- `sitemap.xml`: sin cambio de `<lastmod>` — `/eventos` ya en `2026-08-13`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.29] - 2026-08-13
 
 ### Inicio — refinamientos del módulo de evento vigente
@@ -15,9 +30,6 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 - Cartel del evento enlazado como atajo de puntero (`evento-figure-link`, `tabindex="-1"`, `aria-hidden="true"`); teclado y lector siguen usando título y «Ver evento».
 - `data-event-status="vigente"` y `data-event-featured="true"` en Inicio, `/eventos` y ficha de Círculos de Presencia Consciente.
 - Círculos marcado `event_featured`: un vigente con fecha más cercana **no** lo sustituye en Inicio mientras siga vigente.
-- Calendario de `/eventos`: lunes sin otro evento (7, 14, 21 y 28 de septiembre) con borde `brand-2` (sin relleno), enlace a `/practica/meditacion-semanal-en-linea`. No son ítems del listado.
-- Tooltip propio (`data-tooltip`) en días de evento y de meditación; se muestra al hover y al foco. Sin `title` nativo.
-- `/eventos`: `meta description` / Open Graph mencionan la meditación semanal; `rel="related"` a esa página.
 - CSS: margen del enlace del cartel separado de la miniatura.
 - `sitemap.xml`: sin cambio de `<lastmod>` — fechas `2026-08-13` ya vigentes.
 
