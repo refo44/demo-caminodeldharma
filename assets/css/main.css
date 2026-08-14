@@ -2045,6 +2045,7 @@ a:focus-visible {
   max-width: 20rem;
   margin-inline: auto;
   font-size: 0.875rem;
+  overflow: visible;
 }
 
 /* Row grouping for valid ARIA grid structure without breaking the CSS grid layout */
@@ -2068,12 +2069,20 @@ a:focus-visible {
   border: 1px solid var(--border);
   border-radius: 4px;
   color: var(--text);
+  position: relative;
 }
 
 .eventos-calendar-day.has-event {
   background: var(--brand-2-deep);
   border-color: var(--brand-2-deep);
   color: var(--text-on-dark);
+  font-weight: 600;
+}
+
+.eventos-calendar-day.has-practice {
+  background: var(--bg);
+  border-color: var(--brand-2);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -2089,6 +2098,43 @@ a:focus-visible {
   border-radius: 3px;
   text-decoration: none;
   color: inherit;
+  position: relative;
+}
+
+.eventos-calendar-day a[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.4rem);
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 11rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  background: var(--brand-4);
+  color: var(--text-on-dark);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.12s ease, visibility 0.12s ease;
+}
+
+.eventos-calendar-day a[data-tooltip]:hover::after,
+.eventos-calendar-day a[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.eventos-calendar-day:has(a[data-tooltip]:hover),
+.eventos-calendar-day:has(a[data-tooltip]:focus-visible) {
+  z-index: 2;
 }
 
 .eventos-calendar-day a:hover,
@@ -2101,6 +2147,12 @@ a:focus-visible {
 .eventos-calendar-day.has-event a:focus-visible {
   background: var(--brand-1);
   color: var(--text-on-dark);
+}
+
+.eventos-calendar-day.has-practice a:hover,
+.eventos-calendar-day.has-practice a:focus-visible {
+  background: transparent;
+  color: var(--brand-1-deep);
 }
 
 .eventos-calendar-legend {

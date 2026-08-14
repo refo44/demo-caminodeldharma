@@ -44,7 +44,7 @@ afectadas, la versión previa escrita bajo ADR 0009 (theme clásico, CSS congela
 | Listado | `templates/archive-event.html` |
 | Single | `templates/single-event.html` |
 
-*Single y archive de evento asumen soporte para imagen destacada del evento (03). Ambas plantillas usan el bloque núcleo **Query Loop** (archive) y bloques de campo de entrada (single) — no se escribe una consulta a medida en PHP para lo que el bloque núcleo ya resuelve.*
+*Single y archive de evento asumen soporte para imagen destacada del evento (03). El listado usa el bloque núcleo **Query Loop**; el single, bloques de campo de entrada. **Excepción — calendario del mes:** no lo resuelve Query Loop ni `get_calendar()`. En Fase 3, `camino-del-dharma-core` expone los datos de cada celda; el theme registra un bloque dinámico propio (p. ej. `camino-del-dharma/eventos-calendar`) en `templates/archive-event.html`. No se instala un plugin de calendario de terceros (ADR 0024, ADR 0025). La meditación semanal no es un `event`.*
 
 ### 2.1. Sangha (opcional; fuera del alcance actual; no está en mapa de pantallas ni wireframes)
 
@@ -316,4 +316,4 @@ Este documento define la **estructura oficial de archivos del theme**: plantilla
 
 ---
 
-**Versión:** 2.1 — añade plantillas de Galería, Donaciones y Blog (post nativo + tags, ADR 0031), ausentes desde la versión 1.2. La versión 2.0 introdujo la arquitectura de theme de bloques (ADR 0029), que sustituye la versión 1.2 basada en ADR 0009.
+**Versión:** 2.2 — `/eventos/`: calendario del mes como bloque dinámico propio (datos en `camino-del-dharma-core`); el listado sigue en Query Loop.

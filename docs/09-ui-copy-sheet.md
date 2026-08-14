@@ -121,6 +121,7 @@ Sin Preinscribirme, calendario ni compartir. Sin recuadro: en escritorio, filete
 - **Acción secundaria por evento próximo:** Compartir
 - **Calendario (eventos próximos):** Añadir al calendario — abre un panel con Google Calendar, Outlook, Apple Calendar y descarga del archivo `.ics`
 - **Sin eventos:** "No hay eventos programados en este momento."
+- **Leyenda del calendario del mes:** Los días con evento están marcados en tono más intenso. Los lunes en tono más claro son la meditación semanal en línea.
 - **Retorno desde la ficha:** ← Volver a Eventos
 
 Cada evento próximo con fechas definidas expone un botón **Añadir al calendario** que abre un panel (mismo patrón que Compartir):
@@ -131,6 +132,8 @@ Cada evento próximo con fechas definidas expone un botón **Añadir al calendar
 4. **Descargar archivo .ics** — descarga el archivo para importarlo manualmente en cualquier calendario.
 
 Los datos del evento viven en atributos `data-calendar-*` del botón; el archivo `.ics` vive en `eventos/ical/{slug}.ics`. Solo aplica a eventos próximos.
+
+**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover y al foco de teclado; no usar `title` nativo. No aparece como tarjeta en el listado.
 
 ---
 
@@ -307,4 +310,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.10 — Inicio: cartel como atajo de puntero a la ficha (mismo patrón que el listado).
+**Versión:** 1.12 — Eventos: calendario (borde en lunes de meditación, tooltip `data-tooltip`).

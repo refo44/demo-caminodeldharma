@@ -95,7 +95,7 @@ Bloques:
 
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
-- **Calendario estático** (un mes; días con evento marcados; según 04)
+- **Calendario estático** (un mes; días de evento rellenos, enlazan a la tarjeta; lunes sin otro evento con el mismo fondo y borde `brand-2`, tooltip, enlazan a `/practica/meditacion-semanal-en-linea`; no crear tarjeta de evento para la meditación semanal; según 04)
 - **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Curso, Taller, Retiro, Conferencia, Encuentro) encima del título; título (enlace a la ficha si existe); imagen (si aplica; cartel clicable hacia la ficha); fecha, lugar, modalidad; descripción; enlace de texto «Ver evento →» (si hay página propia); CTA “Inscribirme” / “Preinscribirme”; acciones secundarias “Añadir al calendario” y “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
 - **Por cada evento realizado con ficha:** mismo cartel clicable y enlace «Ver evento →» al cierre de la tarjeta; sin CTA de inscripción ni calendario/compartir.
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
@@ -192,4 +192,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.7 — Inicio: cartel de la nota como atajo de puntero a la ficha.
+**Versión:** 1.9 — Eventos: calendario con borde en lunes de meditación y tooltip (`data-tooltip`).

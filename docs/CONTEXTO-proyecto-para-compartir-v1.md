@@ -106,6 +106,9 @@ páginas casi-duplicadas sin contenido real (doorway pages).
 muestran (decisión revertida el 2026-07-21): son la única señal geográfica honesta que tiene la
 comunidad, ya que ninguna ciudad tiene sede fija ni es elegible para Google Business Profile.
 
+El calendario de un mes en `/eventos/` marca los días de evento y, si un lunes no tiene otro evento,
+la meditación semanal en línea (borde, no relleno; no es un ítem del listado).
+
 **Inicio:** como máximo un evento **vigente** junto a «Un poco de nuestra comunidad» (rótulo
 «Próximo evento», cartel WordPress `medium` (atajo de puntero a la ficha), «Ver evento» a esa ficha). Un destacado ya terminado
 no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.

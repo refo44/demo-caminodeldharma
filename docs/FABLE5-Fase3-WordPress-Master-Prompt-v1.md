@@ -689,6 +689,15 @@ easy to get wrong:
   (`h3` group headers, `h4` event titles) — not decorative dividers, because screen-reader users navigate
   by heading.
 - `event_status` (manual field) is the source of truth for "vigente," not just a date comparison.
+- The month calendar on `/eventos/` marks CPT event days as filled `.has-event` (link to that card).
+  Each Monday **without another event that day** is `.has-practice` (same cell background, `brand-2`
+  border — not a washed fill) linking to `/practica/meditacion-semanal-en-linea`. Tooltips use
+  `data-tooltip` on hover and keyboard focus; do not use native `title` (double tooltip). That Monday
+  mark is not an `event`: no listing card, no event detail, no JSON-LD `Event`. If a Monday already
+  has an event, mark only the event. The month shown is the month of the next vigente event.
+  **WordPress:** domain query in `camino-del-dharma-core`; a first-party dynamic block in the theme
+  on `archive-event.html`. Do not install The Events Calendar or a second calendar plugin; do not
+  register weekly meditation as an `event`; `get_calendar()` is not sufficient.
 - The homepage shows **at most one** vigente event in a compact aside beside the community copy
   (not a second events listing). Candidates are vigente only: a featured event that is finished
   is ignored. Prefer `event_featured` among vigentes; else the vigente with the soonest start

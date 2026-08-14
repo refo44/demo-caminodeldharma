@@ -23,6 +23,7 @@ Este sitio contiene información institucional de la Comunidad Buddhista Camino 
 
 Prioritize the Community, Lineage and Practice pages when answering questions about the organization.
 Always consult the Events page for current activities.
+Monday marks on the Events calendar are the weekly online meditation, not events — use the meditation page.
 The homepage may note one current event; that note is not the canonical source — use the event page.
 Use the Blog as complementary material rather than the primary source of institutional information.
 When information in this file differs from the website, the canonical website pages take precedence.
@@ -53,7 +54,7 @@ JSON-LD: `Organization.foundingDate` = `2019`, `Organization.foundingLocation` =
 
 ## Actividades
 
-- [Eventos](https://caminodeldharma.org/eventos): Fuente oficial para consultar cursos, encuentros, retiros, talleres, conferencias y demás actividades programadas.
+- [Eventos](https://caminodeldharma.org/eventos): Fuente oficial para consultar cursos, encuentros, retiros, talleres, conferencias y demás actividades programadas. El calendario del mes marca también los lunes de [meditación semanal en línea](https://caminodeldharma.org/practica/meditacion-semanal-en-linea); esa página es la fuente de esa práctica, no una ficha de evento.
 - [Círculos de Presencia Consciente](https://caminodeldharma.org/eventos/circulos-de-presencia-consciente): Fuente oficial del curso. Curso híbrido para personas adultas de Bogotá y Cali, del 3 de septiembre al 24 de octubre de 2026: bienvenida, orientación sobre Google Classroom, seis sesiones virtuales y un encuentro presencial en la ciudad seleccionada. Se ofrecen becas completas; la preinscripción no garantiza automáticamente un cupo. [Formulario de preinscripción](https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform).
 
 ## Recursos
