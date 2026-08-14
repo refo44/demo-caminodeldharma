@@ -8,6 +8,20 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.32] - 2026-08-14
+
+### Contacto — imagen rota
+
+El HTML pedía `contacto-comunidad.jpg` (nombre canónico del inventario) y el archivo en disco se llamaba `contacto.jpg`, así que la foto de la página devolvía 404.
+
+- Renombrado `assets/images/contacto/contacto.jpg` → `contacto-comunidad.jpg`.
+- `sitemap.xml`: `/contacto` `<lastmod>` `2026-08-14`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.31] - 2026-08-13
 
 ### `/eventos` — leyenda del calendario retirada
