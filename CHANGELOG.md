@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.29] - 2026-08-13
+
+### Inicio — refinamientos del módulo de evento vigente
+
+- Cartel del evento enlazado como atajo de puntero (`evento-figure-link`, `tabindex="-1"`, `aria-hidden="true"`); teclado y lector siguen usando título y «Ver evento».
+- `data-event-status="vigente"` y `data-event-featured="true"` en Inicio, `/eventos` y ficha de Círculos de Presencia Consciente.
+- Círculos marcado `event_featured`: un vigente con fecha más cercana **no** lo sustituye en Inicio mientras siga vigente.
+- CSS: margen del enlace del cartel separado de la miniatura.
+- `sitemap.xml`: sin cambio de `<lastmod>` — fechas `2026-08-13` ya vigentes.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.28] - 2026-08-13
 
 ### Inicio — nota del evento vigente
@@ -16,8 +31,7 @@ Un solo evento vigente junto a «Un poco de nuestra comunidad»: atajo a esa fic
 
 - Rótulo «Próximo evento · Curso» encima del cartel (`<p>`, alineado al `h2`); cartel completo a ancho de columna WordPress `medium` (~300 px); título, fecha, lugar y **Ver evento** (solo la ficha; sin enlace al listado).
 - Sin caja; filete izquierdo en escritorio. El borde derecho del módulo coincide con el del hero.
-- Miniatura decorativa (`alt=""`); atajo de puntero a la ficha (mismo patrón que el listado). Teclado y lector usan el título y «Ver evento». Un destacado finalizado no aparece; si no hay vigentes, se omite el módulo.
-- Círculos de Presencia Consciente está marcado `event_featured`: un vigente con fecha más cercana no lo sustituye en Inicio.
+- Miniatura decorativa (`alt=""`); teclado y lector usan el título y «Ver evento». Un destacado finalizado no aparece; si no hay vigentes, se omite el módulo.
 - SEO/AEO de Inicio: descripción y Open Graph incluyen **cursos**; keywords institucionales (`cursos budistas`); JSON-LD `WebPage.mentions` y `rel="related"` a la ficha vigente. El JSON-LD `Event` sigue solo en `/eventos/circulos-de-presencia-consciente/`.
 - `sitemap.xml`: `/` ya tenía `<lastmod>` `2026-08-13`.
 
