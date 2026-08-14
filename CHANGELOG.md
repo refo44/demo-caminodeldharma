@@ -21,7 +21,7 @@ La leyenda bajo la cuadrícula del mes duplicaba lo que ya explican los tooltips
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **Desplegada** el 2026-08-14
 
 ## [1.0.30] - 2026-08-13
 
