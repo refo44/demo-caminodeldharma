@@ -8,13 +8,27 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.31] - 2026-08-13
+
+### `/eventos` — leyenda del calendario retirada
+
+La leyenda bajo la cuadrícula del mes duplicaba lo que ya explican los tooltips (`data-tooltip`) en cada día.
+
+- Eliminado el párrafo `.eventos-calendar-legend` en `/eventos`.
+- Eliminados estilos `.eventos-calendar-legend` en `main.css` / `main.min.css`.
+- `sitemap.xml`: sin cambio de `<lastmod>` — solo ajuste visual en HTML/CSS.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.30] - 2026-08-13
 
 ### `/eventos` — calendario y tooltips
 
 - Lunes sin otro evento (7, 14, 21 y 28 de septiembre): borde `brand-2`, enlace a `/practica/meditacion-semanal-en-linea`. No son ítems del listado.
 - Tooltip propio (`data-tooltip`) en días de evento y de meditación; hover y foco. Sin `title` nativo.
-- Sin leyenda bajo el calendario (el tooltip nombra cada día).
 - Metadata SEO: description y Open Graph mencionan la meditación semanal; `rel="related"` a esa página.
 - `llms.txt`: calendario de eventos incluye la meditación semanal.
 - `sitemap.xml`: sin cambio de `<lastmod>` — `/eventos` ya en `2026-08-13`.
