@@ -132,7 +132,7 @@ Cada evento próximo con fechas definidas expone un botón **Añadir al calendar
 
 Los datos del evento viven en atributos `data-calendar-*` del botón; el archivo `.ics` vive en `eventos/ical/{slug}.ics`. Solo aplica a eventos próximos.
 
-**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover y al foco de teclado; no usar `title` nativo. **Sin leyenda** bajo la cuadrícula. No aparece como tarjeta en el listado.
+**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover, al foco de teclado y, en vista táctil / sin hover o en viewport estrecho, al primer toque (el segundo sigue el enlace); no usar `title` nativo. **Sin leyenda** bajo la cuadrícula. No aparece como tarjeta en el listado.
 
 ---
 
@@ -309,4 +309,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.13 — Eventos: sin leyenda bajo el calendario del mes (el tooltip nombra cada día).
+**Versión:** 1.14 — Eventos: tooltip del calendario también al primer toque en móvil.

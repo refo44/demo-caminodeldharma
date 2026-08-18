@@ -2082,6 +2082,7 @@ a:focus-visible {
 .eventos-calendar-day.has-practice {
   background: var(--bg);
   border-color: var(--brand-2);
+  border-width: 2px;
   color: var(--text);
   font-weight: 600;
 }
@@ -2099,6 +2100,7 @@ a:focus-visible {
   text-decoration: none;
   color: inherit;
   position: relative;
+  overflow: visible;
 }
 
 .eventos-calendar-day a[data-tooltip]::after {
@@ -2108,7 +2110,7 @@ a:focus-visible {
   bottom: calc(100% + 0.4rem);
   transform: translateX(-50%);
   width: max-content;
-  max-width: 11rem;
+  max-width: min(11rem, calc(100vw - 2 * var(--gutter)));
   padding: 0.35rem 0.5rem;
   border-radius: 4px;
   background: var(--brand-4);
@@ -2126,15 +2128,37 @@ a:focus-visible {
   transition: opacity 0.12s ease, visibility 0.12s ease;
 }
 
+/* Monday (and Sunday) sit on the left edge: grow the tooltip rightward so
+   “Meditación semanal en línea” is not clipped by the viewport on phones. */
+.eventos-calendar-day:nth-child(-n+2) a[data-tooltip]::after {
+  left: 0;
+  transform: none;
+}
+
+.eventos-calendar-day:nth-child(n+6) a[data-tooltip]::after {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
 .eventos-calendar-day a[data-tooltip]:hover::after,
-.eventos-calendar-day a[data-tooltip]:focus-visible::after {
+.eventos-calendar-day a[data-tooltip]:focus-visible::after,
+.eventos-calendar-day a[data-tooltip].is-tooltip-visible::after {
   opacity: 1;
   visibility: visible;
 }
 
 .eventos-calendar-day:has(a[data-tooltip]:hover),
-.eventos-calendar-day:has(a[data-tooltip]:focus-visible) {
+.eventos-calendar-day:has(a[data-tooltip]:focus-visible),
+.eventos-calendar-day:has(a[data-tooltip].is-tooltip-visible) {
   z-index: 2;
+}
+
+@media (hover: none), (width <= 767px) {
+  .eventos-calendar-day a[data-tooltip]::after {
+    bottom: auto;
+    top: calc(100% + 0.4rem);
+  }
 }
 
 .eventos-calendar-day a:hover,

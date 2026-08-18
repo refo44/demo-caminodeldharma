@@ -139,7 +139,7 @@ Los encabezados de agrupación deben ser **encabezados reales** (`h3`, con los t
 
 **Cronograma de eventos (Lluvia de ideas):** vista de calendario solo si hay masa crítica de eventos vigentes simultáneos.
 
-**Calendario del mes:** los días de un `event` se marcan rellenos (`.has-event`, `brand-2-deep`) y enlazan a esa tarjeta. Cada lunes **sin otro evento ese día** se marca con el mismo fondo que un día vacío y borde `brand-2` (`.has-practice`) y enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip propio (`data-tooltip`) al hover y al foco de teclado; no usar `title` nativo (duplicaría el aviso). No es un evento: no va al listado, no tiene ficha ni JSON-LD `Event`. Si ese lunes ya tiene un evento, solo se marca el evento. El mes mostrado es el del próximo vigente (en la maqueta: septiembre 2026).
+**Calendario del mes:** los días de un `event` se marcan rellenos (`.has-event`, `brand-2-deep`) y enlazan a esa tarjeta. Cada lunes **sin otro evento ese día** se marca con el mismo fondo que un día vacío y borde `brand-2` (`.has-practice`) y enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip propio (`data-tooltip`) al hover, al foco de teclado y, en vista sin hover, al primer toque; no usar `title` nativo (duplicaría el aviso). No es un evento: no va al listado, no tiene ficha ni JSON-LD `Event`. Si ese lunes ya tiene un evento, solo se marca el evento. El mes mostrado es el del próximo vigente (en la maqueta: septiembre 2026).
 
 **WordPress (Fase 3):** no instalar un plugin de calendario de terceros ni crear un segundo plugin. La selección de celdas (qué día es evento, qué lunes es práctica, URL y tooltip) vive en `camino-del-dharma-core` (ADR 0024). El theme pinta un bloque dinámico propio (p. ej. `camino-del-dharma/eventos-calendar`) en `archive-event.html`, con el CSS de la maqueta. `get_calendar()` del núcleo no sirve. La meditación semanal no se da de alta como `event`.
 
@@ -333,4 +333,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.15 — Calendario: `.has-practice` (borde, sin relleno), tooltip `data-tooltip`; en WP: query en el plugin, bloque en el theme.
+**Versión:** 2.16 — Calendario: tooltip también al primer toque en vista sin hover.
