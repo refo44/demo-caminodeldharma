@@ -317,7 +317,7 @@
   <main id="main" class="page-main layout-container section-gap">
     <h1>Eventos</h1>
 
-    <!-- Calendar: has-event days (filled) link to that event’s card. Mondays without another event (has-practice: same background, brand-2 border) link to weekly meditation — not an event listing item. Tooltips via data-tooltip (hover, keyboard focus, first tap on touch or viewport ≤767px); no native title. If a Monday already has an event, mark only the event. -->
+    <!-- Calendar: has-event days (filled) link to that event’s card. Mondays without another event (has-practice: same background, brand-2 border) link to weekly meditation — not an event listing item. Tooltips via data-tooltip (hover/focus on desktop); on touch or viewport ≤767px a short label (data-tooltip-short) stays visible in the cell — one tap follows the link. No native title. If a Monday already has an event, mark only the event. -->
     <section class="eventos-calendar section-gap read-width" aria-label="Calendario del mes">
       <h2 class="eventos-calendar-title">Septiembre 2026</h2>
       <div class="eventos-calendar-grid" role="grid" aria-readonly="true">
@@ -335,41 +335,41 @@
           <span class="eventos-calendar-day" role="gridcell" aria-hidden="true"></span>
           <span class="eventos-calendar-day" role="gridcell">1</span>
           <span class="eventos-calendar-day" role="gridcell">2</span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="3: Círculos de Presencia Consciente">3</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="3: Círculos de Presencia Consciente">3</a></span>
           <span class="eventos-calendar-day" role="gridcell">4</span>
           <span class="eventos-calendar-day" role="gridcell">5</span>
         </div>
         <div class="eventos-calendar-row" role="row">
           <span class="eventos-calendar-day" role="gridcell">6</span>
-          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" aria-label="Lunes 7: meditación semanal en línea">7</a></span>
+          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" data-tooltip-short="Meditación semanal" aria-label="Lunes 7: meditación semanal en línea">7</a></span>
           <span class="eventos-calendar-day" role="gridcell">8</span>
           <span class="eventos-calendar-day" role="gridcell">9</span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="10: Círculos de Presencia Consciente">10</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="10: Círculos de Presencia Consciente">10</a></span>
           <span class="eventos-calendar-day" role="gridcell">11</span>
           <span class="eventos-calendar-day" role="gridcell">12</span>
         </div>
         <div class="eventos-calendar-row" role="row">
           <span class="eventos-calendar-day" role="gridcell">13</span>
-          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" aria-label="Lunes 14: meditación semanal en línea">14</a></span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="15: Círculos de Presencia Consciente">15</a></span>
+          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" data-tooltip-short="Meditación semanal" aria-label="Lunes 14: meditación semanal en línea">14</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="15: Círculos de Presencia Consciente">15</a></span>
           <span class="eventos-calendar-day" role="gridcell">16</span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="17: Círculos de Presencia Consciente">17</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="17: Círculos de Presencia Consciente">17</a></span>
           <span class="eventos-calendar-day" role="gridcell">18</span>
           <span class="eventos-calendar-day" role="gridcell">19</span>
         </div>
         <div class="eventos-calendar-row" role="row">
           <span class="eventos-calendar-day" role="gridcell">20</span>
-          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" aria-label="Lunes 21: meditación semanal en línea">21</a></span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="22: Círculos de Presencia Consciente">22</a></span>
+          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" data-tooltip-short="Meditación semanal" aria-label="Lunes 21: meditación semanal en línea">21</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="22: Círculos de Presencia Consciente">22</a></span>
           <span class="eventos-calendar-day" role="gridcell">23</span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="24: Círculos de Presencia Consciente">24</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="24: Círculos de Presencia Consciente">24</a></span>
           <span class="eventos-calendar-day" role="gridcell">25</span>
           <span class="eventos-calendar-day" role="gridcell">26</span>
         </div>
         <div class="eventos-calendar-row" role="row">
           <span class="eventos-calendar-day" role="gridcell">27</span>
-          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" aria-label="Lunes 28: meditación semanal en línea">28</a></span>
-          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" aria-label="29: Círculos de Presencia Consciente">29</a></span>
+          <span class="eventos-calendar-day has-practice" role="gridcell"><a href="/practica/meditacion-semanal-en-linea" data-tooltip="Meditación semanal en línea" data-tooltip-short="Meditación semanal" aria-label="Lunes 28: meditación semanal en línea">28</a></span>
+          <span class="eventos-calendar-day has-event" role="gridcell"><a href="#circulos-de-presencia-consciente" data-tooltip="Círculos de Presencia Consciente" data-tooltip-short="Círculos" aria-label="29: Círculos de Presencia Consciente">29</a></span>
           <span class="eventos-calendar-day" role="gridcell">30</span>
         </div>
       </div>

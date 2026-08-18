@@ -8,6 +8,23 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.34] - 2026-08-18
+
+### `/eventos` — etiquetas visibles en móvil (un solo toque)
+
+El doble toque de v1.0.33 no era evidente: muchas personas no entendían que había que tocar dos veces.
+
+- En viewport táctil o ≤767px, la etiqueta corta (`data-tooltip-short`) queda siempre visible bajo el número en días marcados; un toque sigue el enlace.
+- Escritorio sin cambio: tooltip completo al hover o foco.
+- Eliminado JS de `.is-tooltip-visible`; estilos móviles en CSS.
+- `data-tooltip-short`: «Círculos» (evento), «Meditación semanal» (lunes).
+- `sitemap.xml`: `/eventos` `<lastmod>` `2026-08-18`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.33] - 2026-08-18
 
 ### `/eventos` — tooltip de la meditación semanal en vista móvil
@@ -21,7 +38,7 @@ En viewport estrecho el nombre «Meditación semanal en línea» no se veía: el
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **No desplegada** — superseded por v1.0.34 (etiquetas siempre visibles en móvil)
 
 ## [1.0.32] - 2026-08-14
 

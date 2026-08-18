@@ -167,4 +167,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.12 — Eventos: tooltip del calendario visible también al toque (`.is-tooltip-visible`); borde `2px` en `.has-practice`.
+**Versión:** 1.13 — Eventos: etiqueta corta siempre visible en el calendario móvil (un solo toque).
