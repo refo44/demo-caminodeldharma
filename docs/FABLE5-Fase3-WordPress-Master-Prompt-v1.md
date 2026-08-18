@@ -692,7 +692,8 @@ easy to get wrong:
 - The month calendar on `/eventos/` marks CPT event days as filled `.has-event` (link to that card).
   Each Monday **without another event that day** is `.has-practice` (same cell background, `brand-2`
   border — not a washed fill) linking to `/practica/meditacion-semanal-en-linea`. Tooltips use
-  `data-tooltip` on hover and keyboard focus; do not use native `title` (double tooltip). That Monday
+  `data-tooltip` on hover, keyboard focus, and first tap when there is no hover or the viewport is
+  narrow (`max-width: 767px`; second tap follows the link); do not use native `title` (double tooltip). That Monday
   mark is not an `event`: no listing card, no event detail, no JSON-LD `Event`. If a Monday already
   has an event, mark only the event. The month shown is the month of the next vigente event.
   **WordPress:** domain query in `camino-del-dharma-core`; a first-party dynamic block in the theme

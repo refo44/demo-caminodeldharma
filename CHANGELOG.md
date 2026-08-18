@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.33] - 2026-08-18
+
+### `/eventos` — tooltip de la meditación semanal en vista móvil
+
+En viewport estrecho el nombre «Meditación semanal en línea» no se veía: el tooltip solo respondía a hover, y un toque en un lunes salía de la página.
+
+- Primer toque en un día con `data-tooltip` (hover nulo o `max-width: 767px`) revela el nombre; el segundo sigue el enlace. Clase `.is-tooltip-visible`.
+- Lunes `.has-practice`: borde `2px`. Tooltip alineado al borde izquierdo en las columnas Dom/Lun; bajo la celda en móvil.
+- `sitemap.xml`: sin cambio de `<lastmod>` — copy indexable sin cambio; solo CSS/JS y comentario de implementación.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.32] - 2026-08-14
 
 ### Contacto — imagen rota
