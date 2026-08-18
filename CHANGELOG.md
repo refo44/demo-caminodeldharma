@@ -38,7 +38,7 @@ En viewport estrecho el nombre «Meditación semanal en línea» no se veía: el
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: **No desplegada** — superseded por v1.0.34 (etiquetas siempre visibles en móvil)
+- Producción: **Desplegada** el 2026-08-18 (reemplazada en producción por v1.0.34 cuando se suba el siguiente ZIP)
 
 ## [1.0.32] - 2026-08-14
 
