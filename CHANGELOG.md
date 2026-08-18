@@ -8,6 +8,22 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.35] - 2026-08-18
+
+### `/eventos` — etiquetas cortas del calendario móvil
+
+Ajuste de `data-tooltip-short` para que quepan en celdas estrechas sin perder sentido.
+
+- Lunes (`.has-practice`): «Meditación» (antes «Meditación semanal»).
+- Días de evento (`.has-event`): categoría del evento — «Curso» para Círculos de Presencia Consciente (antes «Círculos»).
+- Tooltip completo (`data-tooltip`) y `aria-label` sin cambio; solo la etiqueta visible en móvil.
+- `sitemap.xml`: sin cambio de `<lastmod>` — ya `2026-08-18` en v1.0.34.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.34] - 2026-08-18
 
 ### `/eventos` — etiquetas visibles en móvil (un solo toque)
@@ -23,7 +39,7 @@ El doble toque de v1.0.33 no era evidente: muchas personas no entendían que hab
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **No desplegada** — superseded por v1.0.35 (etiquetas más cortas)
 
 ## [1.0.33] - 2026-08-18
 
