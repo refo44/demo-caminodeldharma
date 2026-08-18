@@ -10,15 +10,12 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [1.0.34] - 2026-08-18
 
-### `/eventos` — etiquetas visibles en móvil (un solo toque)
+### `/eventos` — aviso de doble toque en móvil
 
-El doble toque de v1.0.33 no era evidente: muchas personas no entendían que había que tocar dos veces.
+Misma interacción que v1.0.33 (primer toque = nombre, segundo = enlace). Se añade una línea bajo el calendario, visible solo en pantallas táctiles o viewport ≤767px, para indicarlo sin volver a la leyenda del mes.
 
-- En viewport táctil o ≤767px, la etiqueta corta (`data-tooltip-short`) queda siempre visible bajo el número en días marcados; un toque sigue el enlace.
-- Escritorio sin cambio: tooltip completo al hover o foco.
-- Eliminado JS de `.is-tooltip-visible`; estilos móviles en CSS.
-- `data-tooltip-short`: categoría del evento — «Curso» (Círculos de Presencia Consciente); lunes `.has-practice`: «Meditación».
-- Tooltip completo (`data-tooltip`) y `aria-label` sin cambio.
+- Párrafo `.eventos-calendar-hint` bajo la cuadrícula.
+- Sin etiquetas fijas en las celdas ni `data-tooltip-short`.
 - `sitemap.xml`: `/eventos` `<lastmod>` `2026-08-18`.
 
 ### Estado

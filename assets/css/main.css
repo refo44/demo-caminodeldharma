@@ -2142,61 +2142,36 @@ a:focus-visible {
 }
 
 .eventos-calendar-day a[data-tooltip]:hover::after,
-.eventos-calendar-day a[data-tooltip]:focus-visible::after {
+.eventos-calendar-day a[data-tooltip]:focus-visible::after,
+.eventos-calendar-day a[data-tooltip].is-tooltip-visible::after {
   opacity: 1;
   visibility: visible;
 }
 
 .eventos-calendar-day:has(a[data-tooltip]:hover),
-.eventos-calendar-day:has(a[data-tooltip]:focus-visible) {
+.eventos-calendar-day:has(a[data-tooltip]:focus-visible),
+.eventos-calendar-day:has(a[data-tooltip].is-tooltip-visible) {
   z-index: 2;
 }
 
+.eventos-calendar-hint {
+  display: none;
+  max-width: 20rem;
+  margin: var(--space-sm) auto 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--text-muted);
+}
+
 @media (hover: none), (width <= 767px) {
-  .eventos-calendar-grid {
-    max-width: min(100%, 22rem);
-  }
-
-  .eventos-calendar-day.has-event,
-  .eventos-calendar-day.has-practice {
-    aspect-ratio: auto;
-    min-height: 2.85rem;
-  }
-
-  .eventos-calendar-day a[data-tooltip] {
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.1rem;
-    padding: 0.15rem 0.05rem;
-    line-height: 1.1;
-  }
-
   .eventos-calendar-day a[data-tooltip]::after {
-    content: attr(data-tooltip-short);
-    position: static;
-    left: auto;
-    right: auto;
     bottom: auto;
-    top: auto;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    width: 100%;
-    max-width: none;
-    padding: 0;
-    background: transparent;
-    font-size: 0.5625rem;
-    font-weight: 500;
-    line-height: 1.15;
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    top: calc(100% + 0.4rem);
   }
 
-  .eventos-calendar-day.has-practice a[data-tooltip]::after {
-    color: var(--brand-1-deep);
+  .eventos-calendar-hint {
+    display: block;
   }
 }
 

@@ -167,4 +167,4 @@ Este documento define la **arquitectura CSS oficial** del sitio: una capa de tok
 
 ---
 
-**Versión:** 1.13 — Eventos: etiqueta corta siempre visible en el calendario móvil (un solo toque).
+**Versión:** 1.14 — Eventos: aviso `.eventos-calendar-hint` para doble toque en móvil.

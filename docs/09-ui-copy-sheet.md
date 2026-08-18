@@ -132,7 +132,7 @@ Cada evento próximo con fechas definidas expone un botón **Añadir al calendar
 
 Los datos del evento viven en atributos `data-calendar-*` del botón; el archivo `.ics` vive en `eventos/ical/{slug}.ics`. Solo aplica a eventos próximos.
 
-**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». En escritorio se muestra al hover y al foco de teclado; en móvil la etiqueta corta (`data-tooltip-short`: categoría del evento, p. ej. «Curso»; en lunes, «Meditación») queda visible en la celda y un solo toque sigue el enlace; no usar `title` nativo. **Sin leyenda** bajo la cuadrícula. No aparece como tarjeta en el listado.
+**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover y al foco de teclado; en vista táctil o viewport ≤767px, al primer toque (el segundo sigue el enlace). Bajo la cuadrícula, `.eventos-calendar-hint` (solo móvil/táctil) indica el doble toque; no usar `title` nativo. **Sin leyenda** de tipos de día bajo la cuadrícula. No aparece como tarjeta en el listado.
 
 ---
 
@@ -309,4 +309,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.16 — Calendario móvil: `data-tooltip-short` = categoría del evento o «Meditación».
+**Versión:** 1.17 — Eventos: aviso `.eventos-calendar-hint` para doble toque en móvil.
