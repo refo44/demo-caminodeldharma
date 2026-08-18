@@ -35,7 +35,7 @@ El HTML pedía `contacto-comunidad.jpg` (nombre canónico del inventario) y el a
 ### Estado
 
 - Desarrollo: Finalizado
-- Producción: Pendiente de despliegue
+- Producción: **Desplegada** el 2026-08-18
 
 ## [1.0.31] - 2026-08-13
 
