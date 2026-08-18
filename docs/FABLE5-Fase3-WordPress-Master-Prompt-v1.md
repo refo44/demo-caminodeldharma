@@ -692,9 +692,12 @@ easy to get wrong:
 - The month calendar on `/eventos/` marks CPT event days as filled `.has-event` (link to that card).
   Each Monday **without another event that day** is `.has-practice` (same cell background, `brand-2`
   border — not a washed fill) linking to `/practica/meditacion-semanal-en-linea`. Tooltips use
-  `data-tooltip` on hover, keyboard focus, and first tap when there is no hover or the viewport is
-  narrow (`max-width: 767px`; second tap follows the link); do not use native `title` (double tooltip). That Monday
-  mark is not an `event`: no listing card, no event detail, no JSON-LD `Event`. If a Monday already
+  `data-tooltip` on hover, keyboard focus, and first tap with a coarse pointer
+  (`pointer: coarse`, or `hover: none` and viewport `max-width: 767px`; second tap follows the
+  link). Keyboard Enter must not be intercepted (`event.detail === 0`). After the first tap,
+  show «Toca de nuevo para ver el evento.» under the grid (`.eventos-calendar-hint`,
+  `aria-hidden="true"`; reserve height so the listing does not shift). Do not use native
+  `title` (double tooltip). That Monday mark is not an `event`: no listing card, no event detail, no JSON-LD `Event`. If a Monday already
   has an event, mark only the event. The month shown is the month of the next vigente event.
   **WordPress:** domain query in `camino-del-dharma-core`; a first-party dynamic block in the theme
   on `archive-event.html`. Do not install The Events Calendar or a second calendar plugin; do not

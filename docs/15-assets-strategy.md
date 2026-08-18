@@ -1,7 +1,7 @@
 # Camino del Dharma — Estrategia de assets
 
 **Iconos, fuentes, favicon, SVG, PDF, imágenes, audio, SEO técnico, datos estructurados**  
-**Versión 2.5**
+**Versión 2.6**
 
 Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, content-source, theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
 
@@ -37,7 +37,7 @@ assets/
 │   ├── gallery.js  Álbumes de galería con paginación independiente y carga bajo demanda por página.
 │                   Sirve miniaturas de galeria/thumbs/ con srcset 300w/600w. No se migra a WordPress (ADR 0021).
 │   ├── share.js      Panel para compartir: templates WhatsApp, X y Threads.
-│   └── calendar.js   Panel para añadir eventos a Google Calendar, Outlook o .ics (Apple/otros).
+│   └── calendar.js   Panel para añadir eventos a Google Calendar, Outlook o .ics; tooltips del calendario del mes (primer toque en puntero grueso).
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
 ├── images/         Fotos por sección (desde content-source)
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Fjalla One (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
@@ -419,4 +419,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.5 — Inicio: cartel del evento vigente como atajo de puntero a la ficha.
+**Versión:** 2.6 — `calendar.js`: tooltips del calendario del mes además del panel .ics.

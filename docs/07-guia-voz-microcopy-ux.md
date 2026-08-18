@@ -97,6 +97,7 @@ Nunca se usa lenguaje de software.
 | Situación | Texto |
 |-----------|-------|
 | No hay eventos | "No hay eventos programados en este momento." |
+| Calendario (puntero grueso) | "Toca de nuevo para ver el evento." |
 | Error de envío | "No fue posible enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp." |
 
 **Nunca:** "No se encontraron resultados", "Error 404", "Empty"
@@ -143,4 +144,4 @@ Debe sonar como: **Un espacio de acogida, serio y vivo.**
 
 ---
 
-**Versión:** 1.3 (2026-08-13 — Ver evento / Ver evento → / Preinscribirme)
+**Versión:** 1.4 (2026-08-18 — Calendario: «Toca de nuevo para ver el evento.»)

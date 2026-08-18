@@ -95,6 +95,7 @@ El sitio no persuade. No empuja. No captura. Acompaña.
 | Situación | Texto |
 |-----------|-------|
 | Sin eventos | "No hay eventos programados en este momento." |
+| Calendario (puntero grueso) | "Toca de nuevo para ver el evento." |
 | Error envío | "No fue posible enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp." |
 | 404 | "Esta página no existe." |
 
@@ -159,4 +160,4 @@ El sitio no vende. El sitio acoge.
 
 **Referencia:** `09-ui-copy-sheet` (textos concretos por pantalla). Tipos de pieza en blog: `23-sistema-editorial` §4.0. Brief editorial: `24-brief-editorial-blog-y-visibilidad`.
 
-**Versión:** 1.5 (2026-08-13 — Inicio: Ver evento a la ficha; sin enlace al listado; distinto de «Ver evento →» del listado)
+**Versión:** 1.6 (2026-08-18 — Calendario: «Toca de nuevo para ver el evento.»)

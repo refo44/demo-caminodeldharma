@@ -16,7 +16,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Práctica y actividades | Aprende en la práctica, meditación semanal, recitación práctica de la comida (texto + descarga PDF), mantras para la práctica (Amitābha, Guān Shì Yīn Púsà + audio), caminos de profundización (talleres, retiros), videos y enseñanzas, vida comunitaria |
 
 *Extensiones de maqueta en Práctica (no en Contenido_Web canónico):* recitación de la comida y mantras con audio.
-| Eventos | Calendario de un mes (días de evento rellenos; lunes sin otro evento con borde, tooltip al hover, foco y primer toque en móvil, a la meditación semanal en línea — no son ítems del listado; aviso de doble toque bajo la cuadrícula en móvil), listado próximos / realizados con carteles; cada evento con ficha propia se abre desde el título, el cartel y «Ver evento →»; inscripción o preinscripción en el listado y en el detalle; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
+| Eventos | Calendario de un mes (días de evento rellenos; lunes sin otro evento con borde, tooltip al hover y al foco, a la meditación semanal en línea — no son ítems del listado; con puntero grueso el primer toque revela el nombre y «Toca de nuevo para ver el evento.» bajo la cuadrícula, `aria-hidden`; Enter sigue el enlace al primer paso), listado próximos / realizados con carteles; cada evento con ficha propia se abre desde el título, el cartel y «Ver evento →»; inscripción o preinscripción en el listado y en el detalle; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
 | Galería | Página dedicada organizada en álbumes o secciones con título propio (por año, evento o actividad); cada álbum tiene grid y paginación independiente. |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
@@ -124,4 +124,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.12 — Eventos: aviso de doble toque bajo el calendario en móvil.
+**Versión:** 2.15 — Eventos: aviso táctil bajo la cuadrícula; teclado sin doble activación.

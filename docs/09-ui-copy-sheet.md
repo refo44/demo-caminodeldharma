@@ -132,7 +132,7 @@ Cada evento próximo con fechas definidas expone un botón **Añadir al calendar
 
 Los datos del evento viven en atributos `data-calendar-*` del botón; el archivo `.ics` vive en `eventos/ical/{slug}.ics`. Solo aplica a eventos próximos.
 
-**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover y al foco de teclado; en vista táctil o viewport ≤767px, al primer toque (el segundo sigue el enlace). Bajo la cuadrícula, `.eventos-calendar-hint` (solo móvil/táctil) indica el doble toque; no usar `title` nativo. **Sin leyenda** de tipos de día bajo la cuadrícula. No aparece como tarjeta en el listado.
+**Calendario del mes (vista):** no es el panel «Añadir al calendario». Los días de evento (`.has-event`, relleno) enlazan al ancla de esa tarjeta. Cada lunes **sin otro evento** (`.has-practice`: mismo fondo, borde `brand-2`) enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip (`data-tooltip`): en eventos, el nombre del evento; en lunes, «Meditación semanal en línea». Se muestra al hover y al foco de teclado. Con puntero grueso (dedo), al primer toque se muestra el nombre; **«Toca de nuevo para ver el evento.»** aparece bajo la cuadrícula (`.eventos-calendar-hint`, `aria-hidden="true"`), no dentro del tooltip. El aviso reserva su altura para no desplazar el listado. El segundo toque sigue el enlace. Teclado: Enter sigue el enlace en el primer paso (`event.detail === 0`). Verbo **toca** (pantalla; Colombia), no «presiona». No usar `title` nativo. **Sin leyenda** de tipos de día bajo la cuadrícula. No aparece como tarjeta en el listado.
 
 ---
 
@@ -284,6 +284,7 @@ La URL **no** va dentro del template; `share.js` la añade en el intent. En X, p
 | Situación | Texto |
 |-----------|-------|
 | Sin eventos | "No hay eventos programados en este momento." |
+| Calendario (puntero grueso) | "Toca de nuevo para ver el evento." |
 | Error envío | "No fue posible enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp." |
 | 404 | "Esta página no existe." |
 | Error técnico | "No fue posible mostrar este contenido." |
@@ -309,4 +310,4 @@ Criterios completos en `19-accesibilidad-estandares`.
 
 ---
 
-**Versión:** 1.17 — Eventos: aviso `.eventos-calendar-hint` para doble toque en móvil.
+**Versión:** 1.22 — Eventos: «Toca de nuevo para ver el evento.»; doble toque solo en puntero grueso.

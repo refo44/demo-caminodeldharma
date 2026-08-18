@@ -95,7 +95,7 @@ Bloques:
 
 - Cabecera
 - Título (ej. “Eventos” o “Próximos eventos”)
-- **Calendario estático** (un mes; días de evento rellenos, enlazan a la tarjeta; lunes sin otro evento con el mismo fondo y borde `brand-2`, tooltip al hover, foco y primer toque en móvil, enlazan a `/practica/meditacion-semanal-en-linea`; aviso de doble toque bajo la cuadrícula en móvil; no crear tarjeta de evento para la meditación semanal; según 04)
+- **Calendario estático** (un mes; días de evento rellenos, enlazan a la tarjeta; lunes sin otro evento con el mismo fondo y borde `brand-2`, tooltip al hover y al foco, enlazan a `/practica/meditacion-semanal-en-linea`; con puntero grueso el primer toque revela el nombre y «Toca de nuevo para ver el evento.» bajo la cuadrícula, `aria-hidden`; Enter no se intercepta; no crear tarjeta de evento para la meditación semanal; según 04)
 - **Por cada evento próximo (tarjeta):** etiqueta de **tipo de evento** (Curso, Taller, Retiro, Conferencia, Encuentro) encima del título; título (enlace a la ficha si existe); imagen (si aplica; cartel clicable hacia la ficha); fecha, lugar, modalidad; descripción; enlace de texto «Ver evento →» (si hay página propia); CTA “Inscribirme” / “Preinscribirme”; acciones secundarias “Añadir al calendario” y “Compartir”. Separación clara entre tarjetas (p. ej. borde/`hr` entre eventos).
 - **Por cada evento realizado con ficha:** mismo cartel clicable y enlace «Ver evento →» al cierre de la tarjeta; sin CTA de inscripción ni calendario/compartir.
 - **Una sola vez en la página:** enlaces “Práctica · Contacto” (bloque común al final del listado), no repetidos en cada tarjeta.
@@ -192,4 +192,4 @@ Este documento define la **estructura en bloque** de cada pantalla para Camino d
 
 ---
 
-**Versión:** 1.12 — Eventos: aviso de doble toque bajo el calendario en móvil.
+**Versión:** 1.15 — Eventos: aviso táctil bajo la cuadrícula; teclado sin doble activación.

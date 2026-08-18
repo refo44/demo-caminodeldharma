@@ -10,12 +10,12 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [1.0.34] - 2026-08-18
 
-### `/eventos` — aviso de doble toque en móvil
+### `/eventos` — aviso de segundo toque bajo el calendario
 
-Misma interacción que v1.0.33 (primer toque = nombre, segundo = enlace). Se añade una línea bajo el calendario, visible solo en pantallas táctiles o viewport ≤767px, para indicarlo sin volver a la leyenda del mes.
+Misma interacción que v1.0.33, acotada al puntero grueso: primer toque = nombre, segundo = destino. Teclado sigue el enlace al primer Enter. Tras el primer toque aparece «Toca de nuevo para ver el evento.» (`aria-hidden`). El aviso reserva altura para no correr el listado.
 
-- Párrafo `.eventos-calendar-hint` bajo la cuadrícula.
-- Sin etiquetas fijas en las celdas ni `data-tooltip-short`.
+- `.eventos-calendar-hint` con `aria-hidden="true"`; visible con `.is-tooltip-visible`.
+- `calendar.js`: no intercepta `event.detail === 0`; `matchMedia('(pointer: coarse), (hover: none) and (max-width: 767px)')`.
 - `sitemap.xml`: `/eventos` `<lastmod>` `2026-08-18`.
 
 ### Estado

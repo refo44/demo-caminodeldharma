@@ -2156,12 +2156,12 @@ a:focus-visible {
 
 .eventos-calendar-hint {
   display: none;
-  max-width: 20rem;
-  margin: var(--space-sm) auto 0;
-  font-size: 0.8125rem;
+  margin: var(--space-sm) 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
   line-height: 1.45;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 @media (hover: none), (width <= 767px) {
@@ -2169,9 +2169,16 @@ a:focus-visible {
     bottom: auto;
     top: calc(100% + 0.4rem);
   }
+}
 
+@media (pointer: coarse), (hover: none) and (width <= 767px) {
   .eventos-calendar-hint {
     display: block;
+    visibility: hidden;
+  }
+
+  .eventos-calendar:has(.is-tooltip-visible) .eventos-calendar-hint {
+    visibility: visible;
   }
 }
 

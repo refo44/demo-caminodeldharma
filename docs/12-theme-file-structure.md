@@ -44,7 +44,7 @@ afectadas, la versión previa escrita bajo ADR 0009 (theme clásico, CSS congela
 | Listado | `templates/archive-event.html` |
 | Single | `templates/single-event.html` |
 
-*Single y archive de evento asumen soporte para imagen destacada del evento (03). El listado usa el bloque núcleo **Query Loop**; el single, bloques de campo de entrada. **Excepción — calendario del mes:** no lo resuelve Query Loop ni `get_calendar()`. En Fase 3, `camino-del-dharma-core` expone los datos de cada celda; el theme registra un bloque dinámico propio (p. ej. `camino-del-dharma/eventos-calendar`) en `templates/archive-event.html`. No se instala un plugin de calendario de terceros (ADR 0024, ADR 0025). La meditación semanal no es un `event`.*
+*Single y archive de evento asumen soporte para imagen destacada del evento (03). El listado usa el bloque núcleo **Query Loop**; el single, bloques de campo de entrada. **Excepción — calendario del mes:** no lo resuelve Query Loop ni `get_calendar()`. En Fase 3, `camino-del-dharma-core` expone los datos de cada celda; el theme registra un bloque dinámico propio (p. ej. `camino-del-dharma/eventos-calendar`) en `templates/archive-event.html`, con tooltips `data-tooltip` y el aviso táctil `.eventos-calendar-hint` según 09 y 19. No se instala un plugin de calendario de terceros (ADR 0024, ADR 0025). La meditación semanal no es un `event`.*
 
 ### 2.1. Sangha (opcional; fuera del alcance actual; no está en mapa de pantallas ni wireframes)
 
@@ -316,4 +316,4 @@ Este documento define la **estructura oficial de archivos del theme**: plantilla
 
 ---
 
-**Versión:** 2.2 — `/eventos/`: calendario del mes como bloque dinámico propio (datos en `camino-del-dharma-core`); el listado sigue en Query Loop.
+**Versión:** 2.3 — Calendario del mes: aviso táctil `.eventos-calendar-hint` según 09 y 19.

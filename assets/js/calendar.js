@@ -148,8 +148,9 @@
 
 /**
  * Month-grid tooltips (eventos). Hover and :focus-visible are CSS-only.
- * On touch, no-hover, or a narrow viewport the first tap reveals the name;
- * the second follows the link. See .eventos-calendar-hint under the grid.
+ * Finger (pointer: coarse): first tap reveals the name; the visual hint
+ * “Toca de nuevo para ver el evento.” appears under the grid (aria-hidden).
+ * Keyboard (event.detail === 0) follows the link on the first activation.
  */
 (function () {
   var grid = document.querySelector('.eventos-calendar-grid');
@@ -158,7 +159,7 @@
   var tooltipLinks = grid.querySelectorAll('a[data-tooltip]');
   if (!tooltipLinks.length) return;
 
-  var revealOnTapQuery = window.matchMedia('(hover: none), (max-width: 767px)');
+  var revealOnTapQuery = window.matchMedia('(pointer: coarse), (hover: none) and (max-width: 767px)');
 
   function clearVisibleTooltips(exceptLink) {
     tooltipLinks.forEach(function (link) {
@@ -168,6 +169,7 @@
 
   grid.addEventListener('click', function (event) {
     if (!revealOnTapQuery.matches) return;
+    if (event.detail === 0) return;
 
     var link = event.target.closest('a[data-tooltip]');
     if (!link || !grid.contains(link)) return;

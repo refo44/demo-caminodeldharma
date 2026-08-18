@@ -317,7 +317,7 @@
   <main id="main" class="page-main layout-container section-gap">
     <h1>Eventos</h1>
 
-    <!-- Calendar: has-event days (filled) link to that event’s card. Mondays without another event (has-practice: same background, brand-2 border) link to weekly meditation — not an event listing item. Tooltips via data-tooltip (hover, keyboard focus, first tap on touch or viewport ≤767px); no native title. Touch hint in .eventos-calendar-hint. If a Monday already has an event, mark only the event. -->
+    <!-- Calendar: has-event days (filled) link to that event’s card. Mondays without another event (has-practice: same background, brand-2 border) link to weekly meditation — not an event listing item. Tooltips via data-tooltip (hover, keyboard focus, first tap on coarse pointer); no native title. After a first tap, .eventos-calendar-hint appears under the grid (visual only, aria-hidden). Keyboard follows the link on first activation. If a Monday already has an event, mark only the event. -->
     <section class="eventos-calendar section-gap read-width" aria-label="Calendario del mes">
       <h2 class="eventos-calendar-title">Septiembre 2026</h2>
       <div class="eventos-calendar-grid" role="grid" aria-readonly="true">
@@ -373,7 +373,7 @@
           <span class="eventos-calendar-day" role="gridcell">30</span>
         </div>
       </div>
-      <p class="eventos-calendar-hint">En pantallas táctiles, toca dos veces un día marcado: primero verás el nombre; al segundo toque irás al enlace.</p>
+      <p class="eventos-calendar-hint" aria-hidden="true">Toca de nuevo para ver el evento.</p>
     </section>
 
     <section class="eventos-section" aria-labelledby="eventos-proximos-heading">
