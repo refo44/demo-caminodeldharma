@@ -29,7 +29,7 @@ No hay frameworks (Tailwind, Bootstrap). No hay preprocesadores obligatorios; si
 
 **Fuente y artefacto.** `assets/css/main.css` es el **fuente** y el único archivo que se edita. Las páginas enlazan `assets/css/main.min.css`, generado con `npm run build:css` (clean-css). Ambos se versionan: el despliegue es un ZIP manual y el servidor no ejecuta build. Stylelint valida solo el fuente; el artefacto está en `.stylelintignore`. Minificar baja el CSS servido de 9,0 KB a 5,8 KB con Brotli (−36 %), y `main.css` es el único recurso que bloquea el render.
 
-**Compatibilidad de rutas:** En Fase 2 (estático, p. ej. GitHub Pages) el entry point vive en `assets/css/main.css` en la raíz del repo; en WordPress, en `theme/assets/css/main.css`. Misma arquitectura, dos ubicaciones.
+**Compatibilidad de rutas:** En Fase 2 (estático en Hostinger; HTML en la raíz del repo) el entry point vive en `assets/css/main.css`; en WordPress, en el theme (`assets/css/` complementario, ADR 0029). Misma disciplina de capas, dos ubicaciones.
 
 ---
 

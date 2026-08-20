@@ -10,12 +10,15 @@ Define la arquitectura de archivos del theme: qué plantillas existen y qué par
 
 **Depende de:** `03-wordpress-content-model`, `04-mapa-pantallas`, `11-arbol-urls-final`, `05-arquitectura-informacion-navegacion`. **Referencia:** `02-identidad-corporativa` (theme.json), `06-wireframes` (estructura de bloques por pantalla)
 
-**Arquitectura (ADR 0029):** el theme es un **theme de bloques (block theme / Full Site Editing)**,
-no un theme clásico PHP. `theme.json` es la fuente de verdad de los tokens de diseño y alimenta el
-panel **Estilos** del Editor de sitio, para que un Administrador pueda ajustar paleta, tipografía y
-espaciado desde wp-admin sin desplegar código. Las vistas se definen como plantillas de bloques
-(`templates/*.html`, `parts/*.html`), no como archivos PHP. Este documento sustituye, en las secciones
-afectadas, la versión previa escrita bajo ADR 0009 (theme clásico, CSS congelado).
+**Arquitectura (ADR 0029):** el theme se construye **directamente** como **block theme / Full Site
+Editing** a partir de la maqueta estática. No hay theme clásico PHP intermedio. `theme.json` es la
+fuente de verdad de los tokens de diseño y alimenta el panel **Estilos** del Editor de sitio.
+Las vistas son `templates/*.html` y `parts/*.html`, no `front-page.php` / `page-*.php`. Este documento
+sustituye, en las secciones afectadas, la versión previa escrita bajo ADR 0009 (theme clásico, CSS
+congelado).
+
+**Migración (ADR 0032):** un archivo en `templates/` **no** crea la Page, el post ni el CPT en la
+base de datos. Ver `docs/contrato-migracion-static-wordpress.md`.
 
 ---
 

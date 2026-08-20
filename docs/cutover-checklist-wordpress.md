@@ -1,0 +1,88 @@
+# Checklist de cutover static → WordPress
+
+Checklist durable para el corte de producción. No sustituye Fase 2.5 ni la [matriz](matriz-migracion-static-wordpress.md).
+
+**Contrato:** [contrato-migracion-static-wordpress.md](contrato-migracion-static-wordpress.md) (ADR 0032).
+**Importación:** ADR 0033. **Despliegue:** ADR 0013, ADR 0015.
+
+```text
+DEPLOY SUCCESS ≠ APPLICATION SUCCESS
+```
+
+No marcar un ítem por un ZIP, FTP o File Manager en verde. Cada casilla exige evidencia del
+environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
+
+WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute el corte, no antes.
+
+---
+
+## PRE-CUTOVER
+
+- [ ] Backup de archivos del `public_html` estático (y tag Git de la maqueta)
+- [ ] Backup de base de datos WordPress de staging (y plan de backup de producción WP en el momento del corte)
+- [ ] Inventario de URLs = [matriz](matriz-migracion-static-wordpress.md) + `sitemap.xml` actual + redirects de `.htaccess`
+- [ ] Migration matrix completa (todas las filas con estrategia CONTENT + PRESENTATION + ROUTING + BEHAVIOR + QA)
+- [ ] Importador de contenido probado (dry-run + `--apply` en local y staging; create-missing-only; sin pisar wp-admin)
+- [ ] Templates de bloques (`templates/*.html`) mapeados **desde la maqueta**, no desde un theme PHP clásico (ADR 0029)
+- [ ] JS probado (menú, share, calendario, galería Gutenberg; selectores y ARIA)
+- [ ] Assets probados (imágenes, fuentes, audio, PDF, `.ics`, favicon; sin 404)
+- [ ] CPT routing probado: `/eventos` archive + al menos un single; **incoming HTTP**, no solo `get_permalink()`
+- [ ] Tags del blog: archivo existe; `noindex` hasta volumen (ADR 0031)
+- [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
+- [ ] Contact Form 7: privacidad resuelta o el form sigue gated (ADR 0026, ADR 0028)
+- [ ] Rollback definido (volver a estático versionado **o** restaurar BD+files WP; dueño y ventana)
+- [ ] Indexing policy definida: staging no indexable; producción: `robots.txt` + sitemap nativo (ADR 0030); no dejar «Disuadir motores de búsqueda» en producción
+- [ ] Deploy scope auditado: theme + plugin propio solamente; no core, no `wp-config.php`, no uploads, no plugins de terceros sobrescritos
+- [ ] Flujo ZIP/HTML legacy **incapaz** de escribir sobre el document root WP tras el corte (README/CONTRIBUTING actualizados)
+- [ ] `.htaccess` de producción: backup + plan para permalinks WP **y** redirects legacy de este dominio
+- [ ] HSTS sigue aplazado hasta ≥30 días estables post-corte (ADR 0020); no activarlo en el día del corte por este checklist
+
+---
+
+## CUTOVER
+
+- [ ] WordPress operativo en el hostname de producción
+- [ ] Theme `camino-del-dharma` desplegado y **activo**
+- [ ] Plugin `camino-del-dharma-core` desplegado y **activo**
+- [ ] Contact Form 7 activo **solo** si ADR 0028/0026 lo permiten
+- [ ] Pages institucionales reales creadas/importadas (no solo templates en disco)
+- [ ] Slugs correctos (ADR 0008, sin barra final en la URL pública canónica)
+- [ ] Permalinks / rewrite verificados (`flush` de activación ya ocurrido; **no** flush por request)
+- [ ] Ajustes: portada + página de entradas (`/blog`)
+- [ ] Navegación completa sin 404 inesperados (navbar, subnav, footer)
+- [ ] Formularios: contacto envía **o** el estado no-operativo está explícito y los CTAs WhatsApp/correo funcionan
+- [ ] JS funcionando en las URLs de la matriz
+- [ ] Assets sin 404
+- [ ] Search: confirmado **ausente** (no hay buscador en este sitio)
+- [ ] Custom 404 funcionando (status 404 + `templates/404.html`)
+- [ ] No fixtures públicos accidentales (grep `_cdd_fixture` / equivalente)
+- [ ] Redirects legacy 301/410 verificados con HTTP
+
+---
+
+## POST-CUTOVER
+
+- [ ] Anonymous smoke test (sesión sin cookies de admin)
+- [ ] Desktop QA (paridad visual vs maqueta)
+- [ ] Mobile QA
+- [ ] Keyboard QA (menú, calendario, diálogos, lightbox)
+- [ ] Accessibility basics (`docs/19-accesibilidad-estandares`)
+- [ ] `robots.txt` correcto para producción
+- [ ] Sitemap nativo alcanzado; XML estático antiguo no compite o redirige (ADR 0030)
+- [ ] Canonical por URL
+- [ ] Metadata / OG / JSON-LD
+- [ ] Redirects (host, HTTPS, legacy)
+- [ ] Cookies: sin analítica (ADR 0019); embeds según política vigente
+- [ ] Privacy: no publicar `/privacidad` sin copy legal (ADR 0028)
+- [ ] Media / downloads (PDF, audio, `.ics`)
+- [ ] Legacy static deploy disabled/retired (README, CONTRIBUTING, procedimiento ZIP)
+- [ ] Rollback window evaluated
+- [ ] Production evidence documented (fecha, tag, backups, matriz en estado Migrada)
+- [ ] Search Console: sitemap nuevo; no asumir que el deploy equivale a indexación
+
+---
+
+## Referencias
+
+- `docs/17-orden-implementacion.md` § Transición (pasos históricos de corte; este checklist los detalla)
+- ADR 0013, 0015, 0020, 0029, 0032, 0033

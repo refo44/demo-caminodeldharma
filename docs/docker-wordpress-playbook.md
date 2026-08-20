@@ -1,15 +1,17 @@
 # Playbook — Entorno local de WordPress con Docker
 
-Aplicación al proyecto Camino del Dharma de un playbook portable, aportado por el propietario y
-destilado en otro proyecto WordPress con la misma forma (código propio versionado en Git, hosting
-compartido sin contenedores en producción, necesidad de QA real sin instalar toolchain global en la
-máquina). Complementa a **ADR 0023** (la decisión y sus alternativas); este documento es la referencia
-operativa para cuando se implemente.
+Referencia operativa de **este** proyecto para cuando se implemente ADR 0023. Complementa la
+decisión; no la sustituye.
 
-**No se ejecuta en esta sesión** — solo se deja listo, según ADR 0023 (dockerizar es tarea separada de
-implementar el theme).
+**CURRENT STATE:** no hay `docker-compose.yml` en el repo. No ejecutar ni desplegar nada desde este
+documento.
 
-**Origen:** aprendizajes de la Revista de Filosofía LOGO ET SPES (Fase 3, WordPress), 2026-07-31.
+Environments de este repo: **LOCAL** (este playbook), **STAGING** (Hostinger, hostname no versionado),
+**PRODUCTION** (`https://caminodeldharma.org`, hoy estático). No mezclar credenciales, BD, uploads,
+fixtures ni indexación.
+
+Nota histórica: el propietario aportó gotchas de Docker de otro sitio WordPress (2026-07-31). Las
+versiones PHP/MariaDB y los nombres de theme/plugin de **abajo** son de Camino del Dharma / Hostinger.
 
 ---
 
@@ -123,14 +125,18 @@ Secuencia repetible, cada paso deja evidencia registrable:
 1. **Sintaxis:** `php -l` sobre todos los `.php` propios del theme vía `wpcli`.
 2. **Activación:** `wp theme activate` (+ `wp plugin activate` si existe plugin propio) + `debug.log`
    vacío.
-3. **Permalinks + jerarquía:** `wp rewrite structure '/%postname%/'` y `curl` de las 14 URLs canónicas
-   (`docs/11-arbol-urls-final.md`) esperando 200.
-4. **Comandos propios, en escalera** (si se crean comandos WP-CLI para el CPT `sangha`/`event`):
-   dry-run → `--apply` → re-ejecución, probando idempotencia.
-5. **Ciclo de vida de datos demo:** teardown → seed → verify → reseed (sin duplicados) → teardown (sin
-   huérfanos) → teardown de nuevo (no-op seguro).
-6. **Invariantes de front:** `curl -I` buscando ausencia de `Set-Cookie` (coherente con ADR 0019 —
-   sin cookies); grep del HTML renderizado buscando recursos de hosts externos.
+3. **Permalinks + jerarquía:** fijar estructura de permalinks y `curl` de las URLs canónicas
+   (`docs/11-arbol-urls-final.md`) esperando 200. La URL **pública** de este proyecto **no lleva barra
+   final** (ADR 0008). Un ejemplo tipo `/%postname%/` de WordPress no es prueba de que el incoming
+   route coincida con la política canónica; hay que verificar HTTP en la forma sin barra. `get_permalink()`
+   solo no basta (ADR 0032).
+4. **Comandos propios, en escalera** (WP-CLI en `camino-del-dharma-core`, CPT `event`; `sangha` fuera
+   del alcance inicial): dry-run → `--apply` → re-ejecución, idempotencia (ADR 0033).
+5. **Ciclo de vida de fixtures** (no contenido real): teardown → seed → verify → reseed (sin
+   duplicados) → teardown (sin huérfanos) → teardown de nuevo (no-op). Nunca teardown genérico contra
+   Pages institucionales (ADR 0033).
+6. **Invariantes de front:** `curl -I` buscando ausencia de `Set-Cookie` de analítica (ADR 0019);
+   grep del HTML renderizado buscando recursos de hosts externos no aprobados.
 7. **Plugins de terceros aprobados** (p. ej. Contact Form 7, TASK-0003): instalar con
    `wp plugin install` y verificar comportamiento observable, no solo el declarado.
 
@@ -167,8 +173,8 @@ entregando de verdad a caminodeldharma1@gmail.com se valida en staging, no solo 
 ## 7. Referencias
 
 - ADR [0023](adr/0023-entorno-local-wordpress-docker.md) — la decisión y sus alternativas
+- ADR [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md)
 - `docs/17-orden-implementacion.md` § Transición estático → WordPress
 - `.audit/audit-schedule.md` — Hito 2
 - `docs/13-static-file-structure.md`, ADR [0014](adr/0014-monorepo-static-wordpress.md)
-- TASK-0003 (`.audit/implementation/tasks/TASK-0003.md`) — Contact Form 7, primer plugin de terceros a
-  validar con este entorno
+- TASK-0003 (`.audit/implementation/tasks/TASK-0003.md`) — Contact Form 7

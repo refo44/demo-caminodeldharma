@@ -105,6 +105,12 @@ de WordPress, no como theme clásico PHP.
 - Decidir, al implementar, si algún bloque reutilizable necesita un patrón sincronizado en vez de un
   template part.
 
+## Nota (2026-08-19)
+
+El propietario confirma la ruta de Fase 3: **maqueta estática → FSE**, sin construir un theme
+clásico PHP como puente. Eso es exactamente esta decisión; no la altera. No implementar
+`front-page.php` / `page-*.php` «para migrar después a bloques».
+
 ## Referencias
 
 - ADR [0009](0009-css-y-tokens-invariantes-en-migracion.md) — sustituido por este ADR para la

@@ -40,7 +40,8 @@ Good-faith security research that respects user privacy and avoids data destruct
 
 ## Known considerations
 
-- HSTS is intentionally disabled pending audit (ADR 0010).
+- HSTS is intentionally **deferred** until after the WordPress cutover and a stable window (ADR 0020). ADR 0010/0018 are historical.
 - Production must not be edited manually; deploy from Git (ADR 0004, ADR 0005).
+- After WordPress cutover: do not deploy the static ZIP over the WordPress document root (ADR 0013, ADR 0032).
 
 See `docs/adr/` for architectural security decisions.

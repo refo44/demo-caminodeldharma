@@ -10,7 +10,7 @@ Define dónde viven los archivos del proyecto: documentación, contenido fuente,
 
 ## 1. Estructura del repositorio por fase
 
-El layout del repo **evoluciona** según la fase (ADR 0014). No mezclar HTML estático y plantillas PHP en el mismo directorio.
+El layout del repo **evoluciona** según la fase (ADR 0014). No mezclar HTML estático y plantillas del theme en el mismo directorio. No desplegar el ZIP estático sobre un document root WordPress después del corte (ADR 0032).
 
 ### 1.1 Fase 2 — Sitio estático en producción (estado actual)
 
@@ -82,10 +82,20 @@ demo-caminodeldharma/
 
 | Qué | Dónde |
 | --- | ----- |
-| Código (theme, CSS, JS, plantillas) | Git |
-| Contenido (entradas, eventos, medios subidos) | WordPress (BD + `uploads/`) |
+| Código (theme, CSS, JS, plantillas de bloques) | Git |
+| Contenido (entradas, eventos, Pages, medios subidos) | WordPress (BD + `uploads/`) |
 
-Detalle en ADR 0013.
+Copy institucional: `content-source/` no se convierte en HTML-como-fuente (ADR 0033). Detalle en ADR 0013 y `docs/contrato-migracion-static-wordpress.md`.
+
+### Environments (nombres de este repo)
+
+| Environment | Uso | Estado |
+| ----------- | --- | ------ |
+| LOCAL | Docker WordPress (`WP_ENVIRONMENT_TYPE=local`, ADR 0023) | Playbook listo; compose aún no versionado |
+| STAGING | WordPress en Hostinger separado de producción | Planificado; hostname no versionado aquí |
+| PRODUCTION | `https://caminodeldharma.org` | Actual: sitio estático en `public_html` |
+
+No mezclar credenciales, BD, uploads, fixtures ni política de indexación entre environments.
 
 ---
 
@@ -114,4 +124,4 @@ Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/
 
 ---
 
-**Versión:** 2.1
+**Versión:** 2.2

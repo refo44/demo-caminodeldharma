@@ -48,6 +48,8 @@ La **maqueta estática HTML/CSS/JS** en la raíz del repositorio es la **primera
 - Completar criterios de aceptación de Fase 2 y Fase 2.5 en `17-orden-implementacion`.
 - Mantener paridad visual estricta al crear plantillas PHP.
 
+*(Nota 2026-08-19: el mecanismo de plantillas objetivo pasó a theme de bloques / FSE en ADR 0029. El contrato de completitud de la migración es ADR 0032. Este ADR no cambia de sentido: la maqueta sigue siendo la base definitiva.)*
+
 ## Referencias
 
 - `docs/17-orden-implementacion` §2, §2.6

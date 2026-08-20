@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.1 |
-| **Fecha** | 2026-07-19 |
+| **Versión** | 3.3 |
+| **Fecha** | 2026-08-19 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.3)
+
+- Aclara que Fase 3 es **static → FSE** (sin theme clásico PHP intermedio). §2.2 mapea HTML estático a `templates/*.html` solamente.
+- Contrato de migración, matriz y checklist de cutover (ADR 0032, ADR 0033). Completitud ≠ theme activado.
+- Documentación nueva de migración permitida sin levantar el congelamiento de la base (ADR + contrato).
 
 ### Cambios principales (3.1)
 
@@ -38,21 +44,30 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 ---
 
-## Estado actual del proyecto (2026-07-19)
+## Estado actual del proyecto (2026-08-19)
+
+Tres tiempos (no mezclar):
+
+| Tiempo | Hecho |
+| ------ | ----- |
+| **CURRENT STATE** | Fase 2 en **producción** (`https://caminodeldharma.org`). HTML en la **raíz** del repo. `static/` y `wordpress/` **no existen**. WordPress **no iniciado**. Despliegue ZIP manual (ADR 0015). Versión de código: archivo `VERSION` en la raíz. |
+| **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. |
+| **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Maqueta estática → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Corte: `docs/cutover-checklist-wordpress.md`. |
 
 | Aspecto | Estado |
 | ------- | ------ |
-| **Fase activa** | Fase 2 (maqueta estática) **en producción**; mantenimiento y remediación post-auditoría |
-| **Versión desplegada** | `1.0.11` (`VERSION`) |
+| **Fase activa** | Fase 2 (maqueta estática) **en producción**; mantenimiento; Fase 3 **no iniciada** |
 | **URL producción** | https://caminodeldharma.org |
-| **Estructura repo** | HTML en **raíz** (Fase 3 no iniciada; carpeta `static/` aún no existe) |
-| **WordPress** | No iniciado (Fase 3 pendiente) |
-| **Auditoría producción** | **COMPLETE** — ver § Fase 2.75 y `.audit/` |
-| **GA4** | **Descartado de forma definitiva** (ADR 0019, 2026-07-20). Medición vía Search Console, sin cookies. Si algún día hiciera falta comportamiento en sitio: analítica sin cookies, nunca GA4 |
-| **Score global auditoría** | 84/100 — SEO 100; 0 críticos; 2 hallazgos ALTOS (formulario, `.ics`) |
-| **Próxima acción técnica** | Desplegar lo pendiente en fuente (TASK-0013, TASK-0001, embeds sin cookies). HSTS aplazado por ADR 0020 |
+| **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
+| **WordPress** | No iniciado (Fase 3 pendiente). Activar un theme futuro **no** crea Pages (ADR 0032). |
+| **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` |
+| **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
+| **GA4** | **Descartado de forma definitiva** (ADR 0019) |
+| **HSTS** | Aplazado (ADR 0020) |
 
-La maqueta cumple la estructura §2.1 (13 URLs indexables + 404), despliegue idéntico al repo auditado (14/14 páginas byte-identical) y SEO técnico impecable. Pendientes de cierre operativo: formulario de contacto sin backend, ruta de los `.ics` (corregida en fuente, pendiente de despliegue), migración de los embeds de vídeo a `youtube-nocookie` (aplicada en fuente) y política de privacidad. HSTS queda aplazado por decisión (ADR 0020). El consentimiento de GA4 deja de ser un pendiente: **ADR 0019** descarta la analítica con cookies de forma definitiva.
+La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La versión de código vigente está en `VERSION`.
+
+La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). Pendientes de cierre operativo: formulario de contacto sin backend, política de privacidad (ADR 0028). HSTS aplazado (ADR 0020). **ADR 0019** descarta la analítica con cookies.
 
 ---
 
@@ -109,7 +124,7 @@ Documentos congelados:
 - `19-accesibilidad-estandares`
 - `23-sistema-editorial`
 
-**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta, respaldos en `docs/archive/` (p. ej. formulario de contacto para WordPress).
+**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, `docs/contrato-migracion-static-wordpress.md`, `docs/matriz-migracion-static-wordpress.md`, `docs/cutover-checklist-wordpress.md`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta, respaldos en `docs/archive/` (p. ej. formulario de contacto para WordPress).
 
 Evitar ciclos de refinamiento permanente que retrasen la implementación. Prioridad: **código y validación** según las fases definidas aquí.
 
@@ -149,7 +164,7 @@ La fase se considera **cerrada** cuando:
 ### 2.1 Estructura HTML final (base para WordPress)
 
 La maqueta estática debe construirse con la misma estructura de rutas finales del sitio.  
-La fase WordPress será una **adaptación directa del HTML a plantillas PHP**, sin rediseñar ni cambiar la estructura visual.
+La fase WordPress es una **adaptación sin rediseño** (ADR 0002) al theme de bloques (ADR 0029), no un rediseño ni un volcado de HTML estático sobre WordPress.
 
 Estructura recomendada:
 
@@ -171,22 +186,30 @@ Estructura recomendada:
 - URLs limpias desde el inicio
 - No inventar rutas temporales
 
-### 2.2 Correspondencia futura con WordPress
+### 2.2 Correspondencia futura con WordPress (static → FSE)
 
-La maqueta define el layout definitivo. En Fase 3 solo se envolverá el HTML con WordPress:
+Ruta **única** de Fase 3 (ADR 0029, ADR 0032): cada HTML de la maqueta se adapta a una plantilla de
+**bloques** (`templates/*.html`). No hay theme clásico PHP en el medio.
 
-| HTML estático             | WordPress                                |
-| ------------------------- | ---------------------------------------- |
-| `/index.html`             | `front-page.php`                         |
-| `/comunidad/index.html`   | `page-comunidad.php`                     |
-| `/linaje/index.html`      | `page-linaje.php`                        |
-| `/practica/index.html`    | `page-practica.php`                      |
-| `/eventos/index.html`     | `archive-event.php` o `page-eventos.php` |
-| `/galeria/index.html`     | `page-galeria.php` — bloque de galería de Gutenberg, con lightbox nativo; `gallery.js` no se migra (ADR 0021) |
-| `/contacto/index.html`    | `page-contacto.php`                      |
-| `/donaciones/index.html`  | `page-donaciones.php`                    |
-| `/blog/index.html`        | `index.php` o `home.php` (según modelo)  |
-| `/404.html`               | `404.php`                                |
+> Docs anteriores a ADR 0029 hablaban de `front-page.php` / `page-*.php`. Eso es **HISTORICAL STATE**.
+> No se implementa. Un archivo en `templates/` **no** crea la Page ni la URL (ADR 0032).
+
+La maqueta define el layout definitivo. En Fase 3 se adapta a FSE **sin rediseño** (ADR 0002):
+
+| HTML estático | Plantilla FSE |
+| ------------- | ------------- |
+| `/index.html` | `templates/front-page.html` |
+| `/comunidad/index.html` | `templates/page-comunidad.html` |
+| `/linaje/index.html` | `templates/page-linaje.html` |
+| `/practica/index.html` | `templates/page-practica.html` |
+| `/eventos/index.html` | `templates/archive-event.html` (no Page slug `eventos`) |
+| `/galeria/index.html` | `templates/page-galeria.html` — bloque Gutenberg; `gallery.js` no se migra (ADR 0021) |
+| `/contacto/index.html` | `templates/page-contacto.html` + Contact Form 7 (ADR 0026), gated ADR 0028 |
+| `/donaciones/index.html` | `templates/page-donaciones.html` |
+| `/blog/index.html` | `templates/home.html` |
+| `/404.html` | `templates/404.html` |
+
+Filas, JS y assets por URL: `docs/matriz-migracion-static-wordpress.md`. Geografía del theme: `docs/12-theme-file-structure.md`.
 
 ### 2.3 Reglas para la maqueta
 
@@ -461,19 +484,30 @@ Cuando se automatice el despliegue, `rsync --delete` **solo** sobre directorios 
 
 ### Migración final (corte a producción)
 
+Checklist durable (pre / cutover / post): [`docs/cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md).
+Contrato de completitud: [`docs/contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md).
+
+```text
+DEPLOY SUCCESS ≠ APPLICATION SUCCESS
+```
+
+Un ZIP o File Manager verde no prueba Pages, routing, JS ni SEO.
+
+Resumen (detalle en el checklist):
+
 1. Pausa temporal de cambios editoriales en static.
-2. Revisar `docs/migracion-static-wordpress.md` (sin pendientes estructurales).
-3. Última migración de contenido a WordPress.
+2. Matriz completa; ledger `docs/migracion-static-wordpress.md` sin pendientes estructurales.
+3. Importación de contenido (ADR 0033): Pages reales, no solo templates en disco.
 4. Backup completo del sitio estático (tag Git final).
 5. Backup WordPress (BD + medios).
-6. Validar WordPress en staging (Fase 2.5).
-7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché, **HSTS Fase 1** (`max-age=604800`).
-8. Cambio controlado a producción.
-9. Smoke test del sitio público.
+6. Validar WordPress en staging (Fase 2.5 sobre el theme).
+7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché. **HSTS sigue aplazado** el día del corte (ADR 0020).
+8. Cambio controlado a producción. Retirar el deploy ZIP estático sobre `public_html`.
+9. Smoke test anónimo del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
-11. **Tras ≥30 días estables:** subir HSTS a Fase 2 (`max-age=31536000`, ADR 0018) y registrar en `CHANGELOG.md`.
+11. **Tras ≥30 días estables:** revisar HSTS (ADR 0020 / 0018) y registrar en `CHANGELOG.md`.
 
-WordPress pasa a ser la **única implementación activa**.
+WordPress pasa a ser la **única implementación activa**. Activar el theme **no** cierra este corte.
 
 ---
 
@@ -482,23 +516,25 @@ WordPress pasa a ser la **única implementación activa**.
 **Justificación:** CMS para terceros (ADR 0012). Ver § Transición estático → WordPress.
 
 1. **Reorganizar repo:** raíz → `static/` (ADR 0014); actualizar README y procedimiento de despliegue
-2. Crear theme en `wordpress/wp-content/themes/camino-del-dharma/`
-3. Convertir HTML de `static/` a plantillas PHP (`12-theme-file-structure`)
-4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`
-5. CPT `event`; roles editoriales; mantener registro en `migracion-static-wordpress.md`
-6. WordPress en **staging separado**; Fase 2.5 sobre el theme
-7. **Corte final** según checklist § Transición; static archivada en tag
+2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024)
+3. Adaptar cada HTML de `static/` **directamente** a `templates/*.html` / `parts/` / `patterns/` (`12-theme-file-structure`). Ruta: maqueta → FSE. **Prohibido** un theme clásico PHP como puente.
+4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`, [matriz](matriz-migracion-static-wordpress.md)
+5. CPT `event` en el plugin; roles editoriales; importador create-missing-only (ADR 0033); ledger `migracion-static-wordpress.md`
+6. WordPress en **staging separado**; Fase 2.5 sobre el theme. Theme activado ≠ Pages creadas.
+7. **Corte final** según [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); static archivada en tag
 
 ### Criterios de aceptación — Fase 3
 
 La fase se considera **cerrada** cuando:
 
-- [ ] Theme refleja la maqueta congelada (§2.6): mismas URLs, bloques, copy y CSS
-- [ ] Plantillas mapeadas según tabla §2.2 y `12-theme-file-structure`
-- [ ] CPT `event` operativo si aplica; estados con/sin evento validados
-- [ ] Contenido editable desde WordPress sin romper layout ni tokens
+- [ ] Theme refleja la maqueta congelada (§2.6): mismas URLs, bloques, copy y paridad visual inicial (ADR 0001, ADR 0029)
+- [ ] Plantillas de bloques mapeadas según `12-theme-file-structure` y la [matriz](matriz-migracion-static-wordpress.md)
+- [ ] Pages institucionales **existen en la BD** (un template en disco no basta)
+- [ ] CPT `event` operativo; archive + single con HTTP real; estados con/sin evento validados
+- [ ] Contenido editable desde WordPress sin romper layout
+- [ ] Cinco entregables del contrato (ADR 0032) cubiertos, no solo el theme desplegado
 - [ ] Fase 2.5 repetida sobre el theme en staging antes de producción
-- [ ] Checklist pre-lanzamiento (§ más abajo) completado en staging
+- [ ] [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md) completado en staging
 
 ---
 
@@ -588,9 +624,8 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 - [x] Sin `<link rel="manifest">` ni PWA (15 §11)
 - [x] Eventos con URL propia: JSON-LD `Event` completo según §12.3; listado `/eventos/` sin microdata duplicada
 - [ ] Descargas `.ics` de calendario operativas (FUNC-002)
-- [ ] HSTS Fase 1 activo (`max-age=604800`) tras TASK-0004 — ADR 0018
-- [ ] HSTS Fase 2 (`max-age=31536000`) tras WordPress estable en producción
-- [ ] Política de privacidad / consentimiento GA4 si aplica (PRIV-001 — decisión organizativa)
+- [ ] HSTS — **aplazado** hasta después del corte WordPress (ADR 0020). Los ítems ADR 0018 Fase 1/2 quedan históricos en lo operativo.
+- [ ] Política de privacidad aplazada (ADR 0028). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente.
 - [ ] Google Search Console: sitemap enviado; solicitar indexación de URLs modificadas tras cada despliegue relevante
 
 ---
@@ -629,4 +664,4 @@ A partir de la versión 3.0, **priorizar implementación** sobre ampliación de 
 
 ---
 
-**Versión:** 3.2 · **Fecha:** 2026-08-18 · **Estado:** Vigente
+**Versión:** 3.3 · **Fecha:** 2026-08-19 · **Estado:** Vigente

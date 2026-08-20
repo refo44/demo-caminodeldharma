@@ -77,6 +77,10 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 ## Traducción a WordPress (plantillas)
 
+> **Nota de estado (2026-08-19).** La tabla PHP siguiente es **HISTORICAL STATE** (antes de ADR 0029).
+> **No implementarla.** Fase 3 va de la maqueta estática **directo** a FSE
+> (`docs/12-theme-file-structure.md`, `docs/17` §2.2). Un archivo de plantilla no crea la Page (ADR 0032).
+
 | Vista | Plantilla |
 |-------|-----------|
 | Inicio | `front-page.php` |

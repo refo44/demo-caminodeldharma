@@ -6,7 +6,9 @@ Gracias por contribuir al sitio web de la Comunidad Buddhista Camino del Dharma.
 
 1. Lee `docs/17-orden-implementacion.md` para conocer la fase activa del proyecto.
 2. Revisa los [ADR vigentes](docs/adr/README.md) (`docs/adr/`). Las decisiones **Aceptada** son obligatorias.
-3. El copy editorial proviene de `content-source/` — no parafrasear.
+3. El copy editorial proviene de `content-source/` — no parafrasear. El HTML generado no es una segunda fuente editorial (ADR 0033).
+4. Migración futura: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Un template no crea una Page. No desplegar HTML estático sobre un document root WordPress.
+5. Guías para agentes: [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md).
 
 ## Flujo Git
 
@@ -20,7 +22,13 @@ Gracias por contribuir al sitio web de la Comunidad Buddhista Camino del Dharma.
 
 ## Transición estático → WordPress
 
-Durante Fase 3, registrar cambios que afecten solo una implementación en [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). Cambios de diseño, CSS, navegación o a11y en producción deben portarse también a `wordpress/`.
+**Estado actual:** producción estática; Fase 3 no iniciada (`wordpress/` aún no existe).
+
+**Ruta de Fase 3:** maqueta estática → **FSE** (ADR 0029). No construir un theme clásico PHP como puente.
+
+Durante Fase 3, registrar cambios que afecten solo una implementación en [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). Cambios de diseño, CSS, navegación o a11y en producción deben portarse también a `wordpress/`. Completitud del corte: cinco entregables y matriz (ADR 0032), no «theme activado».
+
+**Prohibido tras el corte:** subir el ZIP estático a `public_html` de WordPress. Theme/plugin solo a sus directorios (ADR 0013). No desplegar `uploads/`, `wp-config.php`, core ni base de datos.
 
 ## Validaciones locales
 
@@ -64,9 +72,9 @@ Ver `README.md`: sitemap, `VERSION`, `CHANGELOG.md`, `npm run lint:css`, `npm ru
 
 ZIP generado solo desde `static/` tras reorganización del repo.
 
-### WordPress
+### WordPress (futuro)
 
-Theme desplegado manualmente a **staging separado** hasta el corte final. Post-corte: sync acotado al theme (ADR 0013); automatización futura (ADR 0006, diferida por ADR 0016).
+Theme y plugin propio desplegados manualmente a **staging separado** hasta el corte final. Post-corte: sync acotado al theme y al plugin propio (ADR 0013); automatización futura (ADR 0006, diferida por ADR 0016). Un File Manager/FTP en verde no prueba navegación, contenido en BD ni JS.
 
 ## Commits
 

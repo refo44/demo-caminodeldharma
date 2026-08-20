@@ -1,15 +1,17 @@
-# Playbook — Migración static → WordPress (aprendizajes generalizables)
+# Playbook — Migración static → WordPress (Camino del Dharma)
 
-Aplicación a Camino del Dharma de un playbook portable aportado por el propietario, destilado en otro
-proyecto WordPress con la misma forma de migración (Revista de Filosofía LOGO ET SPES: código propio
-versionado en Git, hosting compartido sin contenedores en producción, estático congelado como
-referencia). Complementa —no sustituye— los ADR y `docs/17-orden-implementacion.md`.
+Playbook operativo de **este** repositorio para Fase 3. Complementa —no sustituye— los ADR,
+`docs/17-orden-implementacion.md` y el contrato
+[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md) (ADR 0032).
 
-**No se implementa nada de esto en esta sesión** — es análisis y decisión, para dejar listo el arranque
-de Fase 3. Lo académico-específico del proyecto de origen (DOI/ORCID, portal de autores, sistema de
-envíos) **no aplica** aquí y se omite.
+**No implementar WordPress** en una sesión que solo actualice documentación.
 
-**Origen:** Revista de Filosofía LOGO ET SPES (Fase 3, WordPress), 2026-07-31.
+Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio con forma parecida
+(estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
+pipelines de otros proyectos. Lo que Camino del Dharma no ha decidido se deja abierto.
+
+**Contrato (ADR 0032):** cinco entregables. Ruta **maqueta estática → FSE** (sin theme PHP clásico).
+Theme activado ≠ migración completa. Template ≠ Page. Deploy success ≠ application success.
 
 ---
 
@@ -17,13 +19,13 @@ envíos) **no aplica** aquí y se omite.
 
 | # | Aprendizaje | Estado en Camino del Dharma |
 | - | ----------- | --------------------------- |
-| 1 | El estático es el contrato | **Ya cubierto** — ADR 0001, 0002, 0009; ledger bidireccional ya existe en `migracion-static-wordpress.md` |
+| 1 | El estático es el contrato visual/de comportamiento | **Cubierto** — ADR 0001, 0002; excepciones registradas (ADR 0021); CSS static = ADR 0009; CSS WP = ADR 0029 |
 | 2 | Monorepo con separación dura | **Ya cubierto** (estructura de carpetas, ADR 0014) + **decisión nueva hoy** (plugin=dominio/theme=presentación, ADR 0024) |
 | 3 | Unidades de trabajo con estado durable | **Nuevo — recomendado adoptar** (§3 abajo) |
 | 4 | Jerarquía de fuentes de verdad | **Nuevo — recomendado formalizar** (§4 abajo), implícito hasta ahora |
 | 5 | Alcance por fases con límites explícitos | **Ya cubierto** (criterios de aceptación por fase en `docs/17`); el grep de patrones prohibidos es **nuevo, recomendado** |
-| 6 | Migración de contenido: generador + importador | **Nuevo — pendiente decidir** cuando se aborde la carga de eventos/galería/blog a WordPress |
-| 7 | Matriz de cobertura static → WP | **Nuevo — recomendado crear** al iniciar Fase 3 |
+| 6 | Migración de contenido: importador WP-CLI | **Decidido** — ADR 0033 (aún no implementado) |
+| 7 | Matriz de cobertura static → WP | **Creada** — `docs/matriz-migracion-static-wordpress.md` (inventario; completar estrategias en Fase 3) |
 | 8 | QA en 4 niveles con honestidad probatoria | **Parcialmente cubierto** (`Pass (local)` ya en ADR 0023/playbook Docker) — **recomendado generalizar** a los 4 niveles |
 | 9 | Entorno local Docker | **Ya cubierto** — ADR 0023, `docs/docker-wordpress-playbook.md` |
 | 10 | Despliegue acotado y manual | **Ya cubierto** — ADR 0015 (manual), ADR 0016 (CI/CD pospuesto); el detalle de `workflow_dispatch` aplica **cuando** se retome ADR 0016 |
@@ -70,30 +72,30 @@ Orden recomendado, para cuando docs y código diverjan (evita resolverlo en sile
 1. **Contenido canónico** — `content-source/` (texto institucional aprobado por la comunidad)
 2. **ADR** — decisiones de arquitectura, alcance, privacidad (`docs/adr/`)
 3. **Documentación numerada** — `docs/01`–`docs/24`
-4. **Implementación estática validada** — `static/` (referencia de paridad visual)
+4. **Implementación estática validada** — raíz hoy; `static/` en Fase 3 (paridad visual, **no** fuente editorial)
 5. **Código actual en Git** — lo que realmente corre
 
 **Regla:** si algo diverge, **registrar la discrepancia** (en `migracion-static-wordpress.md` o
-`.audit/decisions.md`) y corregir en un commit separado — nunca resolver el conflicto en silencio
-sobrescribiendo uno de los dos lados sin dejar rastro.
+`.audit/decisions.md`) y corregir en un commit separado. El HTML generado no es una segunda
+redacción (ADR 0033).
 
 ---
 
 ## 6. Migración de contenido: generador + importador
 
-Pendiente de decidir cuando se aborde cargar a WordPress el contenido que hoy vive en el estático
-(eventos de `/eventos`, imágenes de `/galeria`, la entrada de `/blog`, las sanghas confirmadas de
-TASK-0020). Arquitectura recomendada, de dos pasos:
+**Decisión:** ADR 0033. No implementado. CPT `sangha` sigue fuera del alcance inicial de Fase 3
+(ADR 0024). Arquitectura prevista, de dos pasos:
 
 ```text
-content-source/ o static/  →  [generador local]  →  payload versionado (JSON)
+content-source/  →  [generador local]  →  payload versionado (JSON)
+(el HTML estático no es la fuente editorial)
                                                             ↓
                                                   [importador WP-CLI en camino-del-dharma-core]
                                                             ↓
                                                   WordPress (BD + Media Library)
 ```
 
-Reglas que demostraron valor en el proyecto de origen y aplican igual aquí:
+Reglas de este proyecto (ADR 0033):
 
 | Regla | Por qué importa aquí |
 | ----- | --------------------- |
@@ -113,18 +115,11 @@ demo con contenido institucional real.
 
 ## 7. Matriz de cobertura static → WordPress
 
-Recomendado crear, al iniciar Fase 3, una fila por cada una de las 13 URLs indexables (más 404):
+La matriz vive en [`docs/matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md)
+(ADR 0032). Plantillas vigentes: `templates/*.html` (ADR 0029), no `front-page.php`.
 
-| Static | Plantilla WP | Parte compartida | Fuente dinámica | Diferencias conocidas |
-| ------ | ------------ | ----------------- | ---------------- | ---------------------- |
-| `index.html` | `front-page.php` | … | … | … |
-| `contacto/index.html` | `page-contacto.php` | … | Contact Form 7 (ADR 0026) | … |
-| … | … | … | … | … |
-
-**Por qué importa:** la trazabilidad 1:1 facilita la QA visual (comparar cada URL contra su
-equivalente estático) y las revisiones futuras. Las páginas institucionales simples pueden compartir un
-template part delgado (`docs/12-theme-file-structure.md` ya define la estructura); la lógica única
-(formulario, listado de eventos, CPT `sangha`) queda en el wrapper específico de cada plantilla.
+No considerar una URL migrada hasta que su fila tenga estrategia de contenido, presentación,
+routing, comportamiento y QA. `sangha` no entra en el corte inicial salvo decisión nueva.
 
 ---
 
@@ -156,7 +151,8 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 
 | Invariante | Cómo se verifica | Referencia en este proyecto |
 | ---------- | ------------------ | ----------------------------- |
-| CSS inmutable | Checksums SHA-256 del theme vs. `static/` | ADR 0009 |
+| CSS del estático | Un `main.css`; checksums vs maqueta | ADR 0009 (solo static) |
+| CSS / tokens WordPress | `theme.json` + hoja complementaria; no page builders | ADR 0029, ADR 0025 |
 | Sin datos demo en producción | Grep de marcadores de fixture (`_cdd_fixture`) antes de desplegar | §6 arriba |
 | Sin cookies anónimas | `curl -I` + inspección de red sin `Set-Cookie` | ADR 0019 |
 | Sin registro de dominio en el theme | Grep de `register_post_type`/`register_taxonomy` en `themes/camino-del-dharma/` (debe estar vacío) | ADR 0024 |
@@ -171,16 +167,18 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 **Antes de escribir código WordPress:**
 - [x] ADR: monorepo `static/` + `wordpress/` (ADR 0014)
 - [x] ADR: plugin dueño del dominio vs. theme presentación (ADR 0024)
-- [x] ADR: alcance de fase — criterios de aceptación ya en `docs/17-orden-implementacion.md`
+- [x] ADR: theme de bloques / FSE (ADR 0029)
+- [x] ADR: contrato de migración (ADR 0032) e import vs fixtures (ADR 0033)
+- [x] Alcance de fase — criterios de aceptación ya en `docs/17-orden-implementacion.md`
+- [x] Matriz de cobertura — `docs/matriz-migracion-static-wordpress.md` (completar estrategias al implementar)
 - [ ] Harness: `fase3-execution-state.md` + `fase3-validation-matrix.md` (§3 arriba)
-- [ ] Baseline de checksums CSS/JS del estático actual
-- [ ] Matriz de cobertura pantalla a pantalla (§7 arriba)
+- [ ] Baseline visual / tokens del estático actual (ADR 0029: `theme.json` inicial)
 
 **Durante la implementación:**
 - [ ] WU con commits pequeños y QA por unidad (§3)
-- [ ] Plantillas 1:1 con template parts compartidos (§7, `docs/12-theme-file-structure.md`)
-- [ ] Migración de contenido en dos pasos: generador + WP-CLI (§6)
-- [ ] Fixtures de desarrollo aisladas con teardown (§6)
+- [ ] Plantillas FSE 1:1 con la maqueta (`templates/` + parts/patterns); **no** hay `page-*.php` clásicos; template ≠ Page
+- [ ] Migración de contenido WP-CLI (ADR 0033)
+- [ ] Fixtures de desarrollo aisladas con teardown **solo** de objetos fixture
 - [ ] `docker-compose.yml` para QA local (ADR 0023, ya listo el playbook)
 - [ ] Despliegue del theme/plugin solo manual y acotado (ADR 0015/0016)
 
@@ -198,9 +196,9 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 | Anti-patrón | Por qué falla |
 | ------------ | -------------- |
 | Migrar todo de golpe en un solo PR/sesión | Imposible de revisar, imposible de reanudar entre sesiones |
-| Page builder o bloques no nativos sobre el CSS congelado | Rompe la paridad visual con `static/` (ADR 0009) — vetado por defecto en ADR 0025 |
+| Page builder o bloques no nativos sobre el diseño acordado | Rompe paridad con la maqueta (ADR 0001) y está vetado por defecto (ADR 0025) |
 | Ejecutar la migración de contenido dentro de la activación del plugin | Peligroso e impredecible; la migración debe ser un comando explícito, no un side-effect |
-| Datos demo mezclados con contenido institucional real | Contamina producción; separar con marcador de fixture (§6) |
+| Datos demo mezclados con contenido institucional real | Contamina producción; ADR 0033 |
 | Auto-deploy de WordPress sin QA de runtime | Contradice ADR 0015/0016 (despliegue manual mientras dure la transición) |
 | Instalar PHP/MySQL global "para probar rápido" | No reproducible entre máquinas — por eso ADR 0023 elige Docker |
 | Declarar una WU o un hallazgo "resuelto" sin evidencia ejecutada | Ya ocurrió en este proyecto (TASK-0002 y TASK-0006 se marcaron `COMPLETED` sin que el fix estuviera realmente en el código — ver revisión de esta misma sesión) — es la razón de ser de la distinción `Pass (local)` vs `Pass` |
@@ -209,17 +207,19 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 
 ## Síntesis
 
-Tratar el estático como contrato visual congelado, separar dominio (plugin) de presentación (theme),
-migrar contenido con un pipeline determinista e idempotente, validar en capas con evidencia honesta, y
-desplegar solo lo mínimo de forma manual y acotada.
+Tratar el estático como contrato visual y de comportamiento, separar dominio (plugin) de
+presentación (theme FSE), migrar contenido con un pipeline idempotente (ADR 0033), validar los
+cinco entregables (ADR 0032) con evidencia honesta, y desplegar solo código acotado de forma
+manual. Un transfer verde no cierra el corte.
 
 ## Referencias
 
-- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0009](adr/0009-css-y-tokens-invariantes-en-migracion.md) — el estático como contrato
-- ADR [0014](adr/0014-monorepo-static-wordpress.md), [0024](adr/0024-plugin-dominio-theme-presentacion.md) — monorepo y separación de dominio
-- ADR [0015](adr/0015-despliegue-manual-temporal.md), [0016](adr/0016-automatizacion-ci-cd-pospuesta.md) — despliegue acotado
-- ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y `docker-wordpress-playbook.md` — entorno local
-- ADR [0025](adr/0025-politica-plugins-terceros.md), [0026](adr/0026-contact-form-7.md) — plugins de terceros
-- `docs/17-orden-implementacion.md` § Transición estático → WordPress, § Fase 3
-- `docs/migracion-static-wordpress.md` — ledger operativo de diferencias static/WordPress
-- `.audit/decisions.md` — trazabilidad completa de decisiones
+- [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md), [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md), [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
+- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0029](adr/0029-theme-bloques-full-site-editing.md), [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md)
+- ADR [0014](adr/0014-monorepo-static-wordpress.md), [0024](adr/0024-plugin-dominio-theme-presentacion.md)
+- ADR [0015](adr/0015-despliegue-manual-temporal.md), [0016](adr/0016-automatizacion-ci-cd-pospuesta.md)
+- ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y `docker-wordpress-playbook.md`
+- ADR [0025](adr/0025-politica-plugins-terceros.md), [0026](adr/0026-contact-form-7.md)
+- `docs/17-orden-implementacion.md` § Transición
+- `docs/migracion-static-wordpress.md` — ledger, no contrato
+- `.audit/decisions.md`

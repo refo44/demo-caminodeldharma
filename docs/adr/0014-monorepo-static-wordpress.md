@@ -113,6 +113,13 @@ resto de esta decisión (estructura del monorepo, roles de `static/`/`wordpress/
 por lo que este ADR permanece **Aceptada** — solo se anota el resultado de esa condición, igual que
 ADR 0020 anotó la parte operativa de ADR 0018 sin invalidar su análisis técnico.
 
+## Nota (2026-08-19)
+
+El árbol de ejemplo de este ADR muestra `front-page.php` / `page-comunidad.php` porque se escribió
+antes de ADR 0029. **No se reescribe el árbol histórico.** Los archivos objetivo del theme son
+`templates/*.html` (block theme). El resto de esta decisión (monorepo `static/` + `wordpress/`)
+sigue **Aceptada**.
+
 ## Referencias
 
 - Sustituye layout de rutas de ADR 0011 (estado → Sustituida)

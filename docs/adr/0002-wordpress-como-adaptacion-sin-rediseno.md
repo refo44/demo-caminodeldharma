@@ -24,6 +24,8 @@ En Fase 3:
 - Se mantienen bloques, jerarquía visual, copy, tokens, arquitectura CSS y URLs (ADR 0008, ADR 0009).
 - WordPress aporta: edición de contenido, CPT de eventos, blog dinámico y panel de administración.
 
+*(Nota 2026-08-19: el mecanismo de plantillas pasó a theme de bloques / FSE en ADR 0029. El sentido de este ADR no cambia: WordPress no rediseña. La tabla §2.2 de `17` se anota como histórica → bloques.)*
+
 ## Alternativas consideradas
 
 | Alternativa | Motivo de descarte |

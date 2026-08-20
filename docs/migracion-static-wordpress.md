@@ -1,8 +1,15 @@
 # Migración static/ → WordPress
 
-Registro operativo de diferencias entre la implementación estática (`static/`) y el theme WordPress (`wordpress/`) **durante la Fase 3**.
+**Ledger operativo** de diferencias entre la implementación estática y el theme WordPress **durante la Fase 3**.
 
-**No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día de la transición.
+**No es el contrato de aceptación.** Completitud, Pages vs templates, matriz y QA:
+[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md) (ADR 0032).
+Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md).
+
+**No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
+
+**CURRENT STATE:** Fase 3 no iniciada. No existe `static/` ni `wordpress/`. Las filas de abajo registran
+cambios del estático en producción y deudas hacia el theme futuro.
 
 ---
 
@@ -52,17 +59,19 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 ## Antes del corte final
 
 1. Revisar que no queden filas en `En migración` o `Pendiente` (salvo `No aplica`).
-2. Migración final de contenido editorial a WordPress.
-3. Validación en staging (Fase 2.5 sobre theme).
-4. Backup estático + backup WordPress (BD + uploads).
-5. Corte a producción según checklist en `17-orden-implementacion` § Transición.
+2. [Matriz](matriz-migracion-static-wordpress.md) con estrategia en las cinco columnas de entregable.
+3. Importación de contenido (ADR 0033); Pages institucionales reales en BD.
+4. Validación en staging (Fase 2.5 sobre theme). Theme activado ≠ corte completo.
+5. Backup estático + backup WordPress (BD + uploads).
+6. Corte según [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md). Retirar el ZIP estático del document root WP.
 
 ---
 
 ## Referencias
 
 - `docs/17-orden-implementacion` § Transición estático → WordPress
-- ADR 0012, ADR 0014, ADR 0015, ADR 0016
+- `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
+- ADR 0012, ADR 0014, ADR 0015, ADR 0016, ADR 0029, ADR 0033
 - `docs/12-theme-file-structure`
 
 ---

@@ -1,6 +1,6 @@
 # demo-caminodeldharma
 
-Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** (Colombia). Incluye las páginas de inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto. El contenido y la estructura siguen la documentación en `docs/`. Pensado como base para una futura adaptación a WordPress.
+Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** (Colombia). Incluye las páginas de inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto. El contenido y la estructura siguen la documentación en `docs/`. Base para una futura migración **directa** a WordPress Full Site Editing (block theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 
 ## Tecnologías
 
@@ -116,7 +116,7 @@ Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni 
 
 Mismo procedimiento, pero el ZIP se genera **desde el contenido de `static/`** (no incluir `docs/`, `wordpress/`, `scripts/`). Ver `17-orden-implementacion` § Transición.
 
-WordPress se despliega manualmente a **staging separado**; no instalar sobre producción hasta el corte final.
+WordPress (cuando exista) se despliega manualmente a **staging separado**; no instalar sobre producción hasta el corte final. Activar el theme **no** crea Pages ni sustituye el checklist de cutover.
 
 ## Scripts
 
@@ -137,13 +137,24 @@ Ejemplo:
 
 ## Documentación
 
-En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). El índice de documentos está en `docs/00-orden-documentos.md`.
+En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Contrato de migración futura: `docs/contrato-migracion-static-wordpress.md`. Agentes: `AGENTS.md`, `CLAUDE.md`.
 
 Colaboración, lint y despliegue: `CONTRIBUTING.md`. Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
 
+## Estado actual vs plan futuro
+
+| | |
+| --- | --- |
+| **Actual (producción)** | Sitio **estático**. HTML en la raíz del repo. Hostinger `public_html` via ZIP manual (ADR 0015). WordPress **no iniciado**. |
+| **Futuro (Fase 3)** | `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado hasta el corte. |
+
+La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md) (ADR 0032). Matriz de URLs: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).
+
+**Tras el corte:** un ZIP de HTML estático **no** debe escribir sobre el document root de WordPress (`STATIC DEPLOY ≠ WORDPRESS CODE DEPLOY ≠ WORDPRESS CONTENT`, ADR 0013).
+
 ## Próximos pasos
 
-Según `docs/17-orden-implementacion.md` (v3.0, § Transición): producción = sitio estático (raíz hoy; `static/` en Fase 3). WordPress en staging paralelo. Despliegues **manuales**; registro de migración en [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR: [`docs/adr/README.md`](docs/adr/README.md).
+Según `docs/17-orden-implementacion.md` (§ Transición): producción = sitio estático (raíz hoy; `static/` cuando arranque Fase 3). WordPress en staging paralelo. Despliegues **manuales**. Ledger de diferencias: [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR: [`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
 
 ## Autor
 

@@ -122,6 +122,11 @@ Ver `docs/12-theme-file-structure.md` §5–§6 para el árbol completo.
 
 Este documento es la **geografía oficial de rutas** del sitio. Si una URL no está aquí, no existe. Alineado con 03 (modelo de contenido), 04 (mapa de pantallas), 05 (navegación) y 12 (plantillas). Referencia técnica estable para la estructura de URLs en WordPress.
 
+**Migración:** cada URL de este árbol tiene (o debe tener) una fila en
+[`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md). Una plantilla en el
+theme no publica la ruta: hace falta el objeto WordPress y rewrite (ADR 0032). Canonical pública:
+**sin barra final** (ADR 0008). No hay buscador.
+
 ---
 
-**Versión:** 1.5 — el listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha (título, cartel, «Ver evento →»).
+**Versión:** 1.6 — el listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz de migración: `matriz-migracion-static-wordpress.md`.

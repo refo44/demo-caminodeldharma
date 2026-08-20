@@ -110,6 +110,8 @@ Documentos, issues, commits o ADR relacionados.
 | [0029](0029-theme-bloques-full-site-editing.md) | Theme de bloques (Full Site Editing) en vez de PHP clásico con CSS congelado | Aceptada |
 | [0030](0030-sitemap-nativo-wordpress.md) | Sitemap nativo de WordPress (`/wp-sitemap.xml`) reemplaza al `sitemap.xml` manual | Aceptada |
 | [0031](0031-tags-blog-noindex-hasta-volumen.md) | Tags nativos en el blog (`post_tag`) — habilitados; archivo noindex hasta tener volumen | Aceptada |
+| [0032](0032-contrato-migracion-static-wordpress.md) | Contrato de migración static → WordPress (cinco entregables) | Aceptada |
+| [0033](0033-importador-contenido-vs-fixtures.md) | Importador de contenido institucional vs fixtures | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -136,12 +138,15 @@ Documentos, issues, commits o ADR relacionados.
 | Arquitectura del theme WordPress | [0029](0029-theme-bloques-full-site-editing.md) — theme de bloques (Full Site Editing); paleta, tipografía y espaciado editables desde wp-admin vía `theme.json`/Global Styles; sustituye a [0009](0009-css-y-tokens-invariantes-en-migracion.md) solo para WordPress |
 | Sitemap en WordPress | [0030](0030-sitemap-nativo-wordpress.md) — `/wp-sitemap.xml` nativo reemplaza al `sitemap.xml` manual solo para WordPress; `static/` no cambia |
 | Tags del blog | [0031](0031-tags-blog-noindex-hasta-volumen.md) — `post_tag` habilitado para editores; archivo de tag existe pero noindex hasta volumen suficiente, criterio cualitativo |
+| Contrato de migración static → WordPress | [0032](0032-contrato-migracion-static-wordpress.md) — cinco entregables; ruta **static → FSE** (sin theme clásico intermedio); template ≠ Page; deploy success ≠ application success |
+| Importación de contenido vs fixtures | [0033](0033-importador-contenido-vs-fixtures.md) — WP-CLI, create-missing-only, sin teardown genérico; HTML estático no es fuente editorial |
 
 ---
 
 ## Relación con otros documentos
 
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
+- **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

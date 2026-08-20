@@ -34,6 +34,8 @@ Reglas:
 - Cambios **editoriales** → panel WordPress; **no** editar HTML en Git para contenido dinámico post-corte.
 - Backups de producción WordPress incluyen **base de datos** y **`wp-content/uploads/`** además del theme.
 
+*(Nota 2026-08-19: «plantillas PHP» en la tabla de código es redacción previa a ADR 0029. El código versionado del theme serán plantillas de bloques. El sentido de las dos fuentes de verdad no cambia.)*
+
 ### Alcance del despliegue rsync
 
 **Fase estática (actual):** ADR 0007 sigue vigente — sync del artefacto estático a `public_html` (raíz del sitio).

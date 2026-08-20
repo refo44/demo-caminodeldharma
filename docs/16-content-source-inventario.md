@@ -5,7 +5,7 @@
 
 **Referenciado por:** `15-assets-strategy` (estrategia de uso y migración de assets)
 
-**Importante:** `content-source/` **solo existe en local** (no se despliega). Para el sitio estático (GitHub Pages) o el sitio final, copiar el material necesario en `assets/` en la raíz del repo o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en la raíz para evitar pérdida de calidad y sobrescrituras accidentales.
+**Importante:** `content-source/` **solo existe en local** (no se despliega). Para el sitio estático en Hostinger (producción actual) o el theme WordPress (Fase 3), copiar el material necesario en `assets/` en la raíz del repo o dentro del theme (véase 12). Mantener las copias originales sin editar dentro de `content-source/`; trabajar siempre sobre copias en el theme o en la raíz para evitar pérdida de calidad y sobrescrituras accidentales. El HTML generado **no** es una segunda fuente editorial (ADR 0033).
 
 ---
 
@@ -104,7 +104,7 @@ Revisar la página de Paramitas como referencia de estructura y navegación si e
 
 ## Cierre
 
-Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio, con la estrategia de assets (15) y con la estructura del theme (12). No se despliega; los assets se copian al theme o a `assets/` en la raíz del repo (GitHub Pages) según 12.
+Este documento es el **inventario oficial** de `content-source/`: qué archivos y carpetas existen y cómo se mapean al sitio. Está alineado con la estructura real del directorio, con la estrategia de assets (15) y con la estructura del theme (12). No se despliega; los assets se copian al theme o a `assets/` en la raíz del repo (producción estática en Hostinger) según 12.
 
 ---
 

@@ -4,6 +4,20 @@
 ## Fase 3: WordPress, first-party plugin, content migration, QA, manual deployment, and resumable agentic execution
 
 **Prompt version:** 1.0
+**Status (2026-08-19):** HISTORICAL EXECUTION PROMPT. **Do not run as-is.**
+
+Supersessions after this prompt was written:
+
+| Topic in this prompt | Later decision |
+| -------------------- | -------------- |
+| Classic PHP theme (`front-page.php`, …) | **ADR 0029** — block theme / FSE; `templates/*.html` |
+| Completeness = theme built/activated | **ADR 0032** — five deliverables; template ≠ Page |
+| Content load unspecified | **ADR 0033** — importer vs fixtures |
+| URLs / cutover | `docs/contrato-migracion-static-wordpress.md`, matriz, cutover checklist |
+
+Keep this file as a historical agent brief. For current architecture use ADR 0029, doc 12, and the
+migration contract. Do not copy classic-theme steps into new implementation work.
+
 **Target agent:** Fable 5
 **Execution mode:** Repository-first, evidence-based, manually deployed, resumable
 **Project phase:** Fase 3, WordPress
@@ -11,11 +25,10 @@
 **Code, code comments, and Git commits:** English
 **Front-end language:** Spanish (no i18n switcher active; strings must remain translation-ready — see §7.5)
 
-Adapted from a template prompt built for a different project (Revista de Filosofía LOGO ET SPES).
-Every section below has been re-derived from this project's actual ADRs and `docs/` — do not assume
-the source project's specifics (academic CPTs, FTPS deploy, WP Statistics, fixture architecture, search
-page) carry over. Where this project genuinely has no equivalent decision yet, that is stated explicitly
-as an open point, not filled in by analogy.
+Adapted from a template prompt built for a different project. Every section below was re-derived from
+this project's ADRs and `docs/` **as of prompt v1.0**. Do not assume another project's CPTs, FTPS
+deploy, search page, or fixture architecture. Where this project had no equivalent decision, that
+was an open point — several are now closed by ADR 0029/0032/0033.
 
 ---
 
