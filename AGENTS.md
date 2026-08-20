@@ -7,29 +7,30 @@ Do not copy names, URLs, slugs, CPTs, hosts, or deploy architecture from other r
 ## Inspect before modify
 
 Read `README.md`, `docs/17-orden-implementacion.md` (current phase), `docs/adr/README.md`,
-and `docs/contrato-migracion-static-wordpress.md` before changing architecture or WordPress plans.
+`docs/inventario-contenido-produccion-static.md`, and `docs/contrato-migracion-static-wordpress.md`
+before changing architecture or WordPress plans.
 
 ## Three times
 
 | | |
 | --- | --- |
 | **Historical** | Older docs may mention classic PHP templates (`*.php`) or a previous WordPress on this domain (`.htaccess` leftovers). Do not rewrite those as if they were never true. |
-| **Current** | Production is the **static** site at `https://caminodeldharma.org`. HTML lives at the **repo root**. There is no `wordpress/` tree, no `static/` folder, no CI deploy workflow. |
-| **Future** | Fase 3: `static/` + `wordpress/` (ADR 0014). Migration path is **static mockup → FSE block theme** (ADR 0029). No classic PHP theme in between. Plugin `camino-del-dharma-core` (ADR 0024). |
+| **Current** | Production is the **live static** site at `https://caminodeldharma.org` (real visitors). HTML at repo root is production data, not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON are REAL PRODUCTION CONTENT. |
+| **Future** | Fase 3: `static/` + `wordpress/` (ADR 0014). Path: **live static production → FSE block theme** (ADR 0029). No classic PHP theme in between. Plugin `camino-del-dharma-core` (ADR 0024). |
 
 ## Canonical content
 
-```text
-content-source/  >  structured docs (03, 09, 16)  >  generated static HTML
-```
+Until cutover, **live static HTML/JSON is a production content source** for events, posts, and gallery
+(ADR 0034). Institutional copy still prefers `content-source/` when present; divergences are UNCLEAR
+(owner review). After cutover, WordPress owns editorial content.
 
-Do not treat published HTML as a second editorial source. Do not paraphrase `content-source/`.
-Priority: `content-source/` > `docs/` > other files.
+Do not paraphrase `content-source/`. Do not discard hardcoded HTML as dummy. Prefer deterministic
+extraction over retyping. Counts must reconcile.
 
-## Static prototype is a contract
+## Static site is production + visual contract
 
-Unless an ADR records an exception (e.g. ADR 0021 gallery lightbox), the static HTML/CSS/JS is the
-visual and behavioral contract (ADR 0001, ADR 0002).
+The static HTML/CSS/JS is both **published content** and the visual/behavioral contract (ADR 0001,
+ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
 
 ## WordPress migration rules (docs only until Fase 3 is explicitly started)
 
@@ -42,7 +43,11 @@ visual and behavioral contract (ADR 0001, ADR 0002).
 - Test **incoming routes** (HTTP), not only `get_permalink()`.
 - Public URLs have **no trailing slash** (ADR 0008).
 - No search feature (`docs/04-mapa-pantallas.md`).
-- Distinguish **fixtures** from real content (ADR 0033). Never generic teardown against editorial data.
+- Distinguish **fixtures** from real content (ADR 0033). Never mark live events/posts/gallery as fixtures.
+- Never discard hardcoded content without classification (ADR 0034). Inventory before modeling.
+- Prefer deterministic extraction over retyping. Counts must reconcile.
+- Preserve URLs or record KEEP/301. **NO CUTOVER WITH BROKEN NAVIGATION.**
+- FSE templates and patterns are presentation, not editorial storage.
 - Preserve wp-admin edits; default importer behaviour is create-missing-only.
 - No destructive DB reset in production. No implicit overwrite of production content.
 - `STATIC DEPLOY ≠ WORDPRESS CODE DEPLOY ≠ WORDPRESS CONTENT`. Never static-ZIP over a WordPress

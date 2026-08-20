@@ -1,42 +1,40 @@
 # CLAUDE.md
 
-Project: **Comunidad Buddhista Camino del Dharma** — static mockup → **FSE** (no classic PHP theme in between).
+Project: **Comunidad Buddhista Camino del Dharma** — **live static production** → **FSE** (no classic PHP theme in between).
 
 Independent of any other WordPress repository. Do not import foreign slugs, CPTs, hosts, or deploy
 pipelines.
 
 ## Current state
 
-- Production: static HTML on Hostinger (`https://caminodeldharma.org`).
-- Repo layout: site at **root** (`index.html`, section folders, `assets/`). `static/` and
-  `wordpress/` do **not** exist yet (ADR 0014 applies when Fase 3 starts).
-- Canonical copy: `content-source/` (never paraphrase). Then `docs/`. Generated HTML is presentation,
-  not a second editorial source.
-- Deploy today: manual ZIP (ADR 0015). No GitHub Actions deploy in this repo.
-- WordPress implementation: **not started**.
+- Production: static HTML on Hostinger (`https://caminodeldharma.org`) with real visitors. Not a disposable mockup.
+- Hardcoded events (10 cards), blog posts (2), gallery JSON (35 + 3 albums) are **production content** (ADR 0034).
+- Repo layout: site at **root**. `static/` and `wordpress/` do **not** exist yet.
+- Institutional copy: `content-source/` when present; live HTML is what is published; divergences = UNCLEAR.
+- Deploy: manual ZIP (ADR 0015). WordPress: **not started**.
 
 ## Must-read before WordPress or migration work
 
-1. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
-2. `docs/matriz-migracion-static-wordpress.md`
-3. `docs/cutover-checklist-wordpress.md`
-4. `docs/adr/README.md` — especially 0001, 0008, 0012, 0013, 0024, 0029, 0032, 0033
-5. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
+1. `docs/inventario-contenido-produccion-static.md` and `docs/conteos-reconciliacion-migracion.md` (ADR 0034)
+2. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
+3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
+4. `docs/cutover-checklist-wordpress.md`
+5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, 0032, 0033, 0034
+6. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 
 ## Hard rules
 
-- Inspect before modify.
-- Static prototype is the visual/behavioral contract unless an ADR supersedes it.
-- Template ≠ Page. Theme activation does not create content.
-- Do not deploy while auditing. Do not touch production, databases, or importers unless asked.
-- Never overwrite production content implicitly. create-missing-only. Preserve wp-admin edits.
-- Fixtures ≠ editorial content. No generic destructive DB reset in production.
-- No static deploy over a WordPress document root after cutover.
-- Test incoming HTTP routes, not only generated permalinks. No trailing slash on public URLs (ADR 0008).
-- When migrating markup, re-check JS selectors, DOM, data attributes, ARIA, events.
-- Preserve accessibility behaviour (`docs/19-accesibilidad-estandares`).
-- No on-site search. No invented `/privacidad` copy. No `sangha` CPT unless scope is reopened.
-- Target architecture: **static mockup → FSE** (ADR 0029). Do not build a classic PHP theme as a bridge. Domain lives in `camino-del-dharma-core`.
+- Inspect before modify. Inventory before WordPress modeling.
+- Live static content is production data (ADR 0034). Never discard hardcoded content without classification.
+- Prefer programmatic extraction over manual retyping when deterministic.
+- Migration counts must reconcile (`docs/conteos-reconciliacion-migracion.md`).
+- Preserve URLs or record KEEP/301 in `docs/redirect-ledger.md`. Never silent URL changes.
+- Template ≠ Page. FSE templates are presentation, not content storage. Patterns ≠ editorial collections.
+- Importer ≠ fixtures. No generic destructive DB reset in production.
+- Do not deploy while auditing. No cutover with broken navigation.
+- Test incoming HTTP routes, not only `get_permalink()`. No trailing slash (ADR 0008).
+- Preserve JS/DOM contracts, accessibility (`docs/19`), media relationships.
+- Target: **static production → FSE** (ADR 0029). No classic PHP theme as a bridge.
 - Update durable docs after verified implementation.
 
 ## Docs-only vs implementation

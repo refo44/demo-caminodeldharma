@@ -6,7 +6,7 @@ Gracias por contribuir al sitio web de la Comunidad Buddhista Camino del Dharma.
 
 1. Lee `docs/17-orden-implementacion.md` para conocer la fase activa del proyecto.
 2. Revisa los [ADR vigentes](docs/adr/README.md) (`docs/adr/`). Las decisiones **Aceptada** son obligatorias.
-3. El copy editorial proviene de `content-source/` — no parafrasear. El HTML generado no es una segunda fuente editorial (ADR 0033).
+3. Copy institucional: `content-source/` — no parafrasear. No usar el HTML como segunda *redacción* institucional (ADR 0033). Eventos, posts y JSON de galería en el HTML live **sí** son contenido de producción hasta extraerse (ADR 0034); no tratarlos como demo ni reescribirlos a mano si se pueden parsear.
 4. Migración futura: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Un template no crea una Page. No desplegar HTML estático sobre un document root WordPress.
 5. Guías para agentes: [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md).
 

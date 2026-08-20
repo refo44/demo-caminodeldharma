@@ -10,8 +10,9 @@ Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio 
 (estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
 pipelines de otros proyectos. Lo que Camino del Dharma no ha decidido se deja abierto.
 
-**Contrato (ADR 0032):** cinco entregables. Ruta **maqueta estática → FSE** (sin theme PHP clásico).
+**Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción → FSE** (sin theme PHP clásico).
 Theme activado ≠ migración completa. Template ≠ Page. Deploy success ≠ application success.
+El HTML live es fuente de contenido de producción hasta el corte (ADR 0034).
 
 ---
 
@@ -65,19 +66,21 @@ criterios de aceptación, plan de QA, rollback.
 
 ---
 
-## 4. Jerarquía de fuentes de verdad
+## 4. Fuentes de verdad (por tipo, no una sola jerarquía)
 
-Orden recomendado, para cuando docs y código diverjan (evita resolverlo en silencio):
+No hay un único árbol para todo (ADR 0034).
 
-1. **Contenido canónico** — `content-source/` (texto institucional aprobado por la comunidad)
-2. **ADR** — decisiones de arquitectura, alcance, privacidad (`docs/adr/`)
-3. **Documentación numerada** — `docs/01`–`docs/24`
-4. **Implementación estática validada** — raíz hoy; `static/` en Fase 3 (paridad visual, **no** fuente editorial)
-5. **Código actual en Git** — lo que realmente corre
+| Tipo | SOURCE OF TRUTH hoy | PRESENTATION / GENERATED |
+| ---- | ------------------- | ------------------------ |
+| Copy institucional | `content-source/` si existe; HTML live = publicado; divergencia = UNCLEAR | HTML/CSS |
+| Eventos, posts, JSON de galería | **HTML / JSON embebido live** | cards, listados, `gallery.js` |
+| Arquitectura | ADR, luego `docs/01`–`24` | — |
+| CSS servido | `assets/css/main.css` | `main.min.css` |
+| URLs | `sitemap.xml` + ADR 0008 | — |
 
-**Regla:** si algo diverge, **registrar la discrepancia** (en `migracion-static-wordpress.md` o
-`.audit/decisions.md`) y corregir en un commit separado. El HTML generado no es una segunda
-redacción (ADR 0033).
+**Regla:** si algo diverge, **registrar** (UNCLEAR o ledger) — no resolver en silencio.
+El HTML no es una segunda *redacción institucional* frente a `content-source/` (ADR 0033).
+El HTML **sí** es la base de datos temporal de entidades publicadas (ADR 0034).
 
 ---
 
@@ -87,13 +90,20 @@ redacción (ADR 0033).
 (ADR 0024). Arquitectura prevista, de dos pasos:
 
 ```text
-content-source/  →  [generador local]  →  payload versionado (JSON)
-(el HTML estático no es la fuente editorial)
-                                                            ↓
-                                                  [importador WP-CLI en camino-del-dharma-core]
-                                                            ↓
-                                                  WordPress (BD + Media Library)
+content-source/          →  generador (copy institucional)
+HTML / JSON live         →  extractor read-only (eventos, posts, galería, media refs)
+                            ↓
+                   payload versionado revisable (migration-payload.json)
+                            ↓
+                   validate / dry-run
+                            ↓
+                   importador WP-CLI en camino-del-dharma-core  (ADR 0033)
+                            ↓
+                   WordPress (BD + Media Library)
 ```
+
+El extractor **no está implementado**. Preferir parseo determinista a reescribir a mano.
+Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
 
 Reglas de este proyecto (ADR 0033):
 
@@ -168,7 +178,8 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 - [x] ADR: monorepo `static/` + `wordpress/` (ADR 0014)
 - [x] ADR: plugin dueño del dominio vs. theme presentación (ADR 0024)
 - [x] ADR: theme de bloques / FSE (ADR 0029)
-- [x] ADR: contrato de migración (ADR 0032) e import vs fixtures (ADR 0033)
+- [x] ADR: contrato de migración (ADR 0032), import vs fixtures (ADR 0033), estático live = producción (ADR 0034)
+- [x] Inventario + conteos + redirect ledger (docs de ADR 0034)
 - [x] Alcance de fase — criterios de aceptación ya en `docs/17-orden-implementacion.md`
 - [x] Matriz de cobertura — `docs/matriz-migracion-static-wordpress.md` (completar estrategias al implementar)
 - [ ] Harness: `fase3-execution-state.md` + `fase3-validation-matrix.md` (§3 arriba)
@@ -214,8 +225,8 @@ manual. Un transfer verde no cierra el corte.
 
 ## Referencias
 
-- [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md), [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md), [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
-- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0029](adr/0029-theme-bloques-full-site-editing.md), [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md)
+- [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md), [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md), [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md), [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
+- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0029](adr/0029-theme-bloques-full-site-editing.md), [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md), [0034](adr/0034-static-live-como-fuente-contenido-produccion.md)
 - ADR [0014](adr/0014-monorepo-static-wordpress.md), [0024](adr/0024-plugin-dominio-theme-presentacion.md)
 - ADR [0015](adr/0015-despliegue-manual-temporal.md), [0016](adr/0016-automatizacion-ci-cd-pospuesta.md)
 - ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y `docker-wordpress-playbook.md`

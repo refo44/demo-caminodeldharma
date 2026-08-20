@@ -16,7 +16,27 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 
 ---
 
-## PRE-CUTOVER
+## PRE-CUTOVER GATE (obligatorio)
+
+- [ ] Content inventory complete ([inventario](inventario-contenido-produccion-static.md))
+- [ ] URL inventory complete (sitemap + [redirect-ledger](redirect-ledger.md))
+- [ ] Migration matrix complete (URLs **y** entidades: 10 events, 2 posts, 35 gallery items)
+- [ ] Content counts reconciled ([conteos](conteos-reconciliacion-migracion.md))
+- [ ] Media inventory complete (incl. UNCLEAR: `galeria-04`, PDF, celebraciones)
+- [ ] Importer dry-run clean
+- [ ] Importer tested (idempotent; create-missing-only; 0 fixtures públicos)
+- [ ] FSE templates ready (static → `templates/*.html`; copy editorial en BD)
+- [ ] JS parity tested
+- [ ] Routing tested (incoming HTTP; archive+single; 404)
+- [ ] Redirects tested (ledger; sin cadenas)
+- [ ] SEO metadata preserved (title, description, canonical, OG, JSON-LD)
+- [ ] Backup verified (static files + WP DB + uploads)
+- [ ] Rollback defined (static artifact + document root + ventana)
+- [ ] No unresolved content loss
+- [ ] No important URL without KEEP/301
+- [ ] No broken navigation (header, footer, CTAs, cards)
+
+## PRE-CUTOVER (detalle operativo)
 
 - [ ] Backup de archivos del `public_html` estático (y tag Git de la maqueta)
 - [ ] Backup de base de datos WordPress de staging (y plan de backup de producción WP en el momento del corte)
@@ -79,10 +99,16 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Rollback window evaluated
 - [ ] Production evidence documented (fecha, tag, backups, matriz en estado Migrada)
 - [ ] Search Console: sitemap nuevo; no asumir que el deploy equivale a indexación
+- [ ] HTTP smoke anónimo
+- [ ] CPT archives/singles
+- [ ] 301 del ledger
+- [ ] no unexpected 404
+- [ ] content counts still reconcile
+- [ ] Artefacto estático **aún disponible** para rollback (no borrado)
 
 ---
 
 ## Referencias
 
 - `docs/17-orden-implementacion.md` § Transición (pasos históricos de corte; este checklist los detalla)
-- ADR 0013, 0015, 0020, 0029, 0032, 0033
+- ADR 0013, 0015, 0020, 0029, 0032, 0033, 0034

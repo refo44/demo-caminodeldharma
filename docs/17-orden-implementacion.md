@@ -8,9 +8,14 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.3 |
+| **Versión** | 3.4 |
 | **Fecha** | 2026-08-19 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.4)
+
+- El estático live es **contenido de producción** (ADR 0034): inventario, conteos, redirect ledger.
+- Eventos/blog/galería hardcodeados no son demo. Extraer, no reescribir. Freeze/delta al corte.
 
 ### Cambios principales (3.3)
 
@@ -50,17 +55,17 @@ Tres tiempos (no mezclar):
 
 | Tiempo | Hecho |
 | ------ | ----- |
-| **CURRENT STATE** | Fase 2 en **producción** (`https://caminodeldharma.org`). HTML en la **raíz** del repo. `static/` y `wordpress/` **no existen**. WordPress **no iniciado**. Despliegue ZIP manual (ADR 0015). Versión de código: archivo `VERSION` en la raíz. |
-| **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. |
-| **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Maqueta estática → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Corte: `docs/cutover-checklist-wordpress.md`. |
+| **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). `static/` y `wordpress/` **no existen**. WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
+| **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. El nombre «maqueta» en docs antiguos no significa prototipo desechable (ADR 0001). |
+| **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Estático de producción → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Extracción + import (ADR 0033/0034). Corte: `docs/cutover-checklist-wordpress.md`. Producción estática **sigue** hasta el corte. |
 
 | Aspecto | Estado |
 | ------- | ------ |
-| **Fase activa** | Fase 2 (maqueta estática) **en producción**; mantenimiento; Fase 3 **no iniciada** |
+| **Fase activa** | Fase 2 **en producción** (sitio estático live); mantenimiento; Fase 3 **no iniciada** |
 | **URL producción** | https://caminodeldharma.org |
 | **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
 | **WordPress** | No iniciado (Fase 3 pendiente). Activar un theme futuro **no** crea Pages (ADR 0032). |
-| **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` |
+| **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` + inventario ADR 0034 |
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |
 | **HSTS** | Aplazado (ADR 0020) |
@@ -79,9 +84,11 @@ La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). 
 
 - Todo cambio debe realizarse en el repositorio. No se editarán archivos directamente en el servidor de producción.
 - El servidor (Hostinger) es un **destino de despliegue**, no un entorno de edición.
-- `content-source/` es la fuente canónica del copy; el código y los assets del sitio viven en el repo según `13-static-file-structure` y `15-assets-strategy`.
-- Cambios manuales en producción se pierden en el siguiente despliegue y no deben realizarse.
-- Decisión formal: ADR 0004, ADR 0005.
+- `content-source/` es la fuente canónica del **copy institucional** cuando existe; si diverge del HTML publicado, el caso es UNCLEAR (ADR 0034).
+- Eventos, posts y JSON de galería: el HTML live es la fuente de producción **hasta extraerse** (ADR 0034). No descartarlo como maqueta.
+- El código y los assets viven en el repo según `13-static-file-structure` y `15-assets-strategy`.
+- Cambios manuales en el servidor se pierden en el siguiente ZIP y no deben realizarse.
+- Decisión formal: ADR 0004, ADR 0005, ADR 0034.
 
 ### Política de cambios
 
@@ -189,7 +196,8 @@ Estructura recomendada:
 ### 2.2 Correspondencia futura con WordPress (static → FSE)
 
 Ruta **única** de Fase 3 (ADR 0029, ADR 0032): cada HTML de la maqueta se adapta a una plantilla de
-**bloques** (`templates/*.html`). No hay theme clásico PHP en el medio.
+**bloques** (`templates/*.html`). No hay theme clásico PHP en el medio. El copy editorial de
+eventos/posts/galería vive en la BD, no en `templates/` ni en `patterns/` (ADR 0034).
 
 > Docs anteriores a ADR 0029 hablaban de `front-page.php` / `page-*.php`. Eso es **HISTORICAL STATE**.
 > No se implementa. Un archivo en `templates/` **no** crea la Page ni la URL (ADR 0032).

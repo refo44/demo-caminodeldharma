@@ -13,6 +13,7 @@ Supersessions after this prompt was written:
 | Classic PHP theme (`front-page.php`, …) | **ADR 0029** — block theme / FSE; `templates/*.html` |
 | Completeness = theme built/activated | **ADR 0032** — five deliverables; template ≠ Page |
 | Content load unspecified | **ADR 0033** — importer vs fixtures |
+| Live HTML as dummy/demo | **ADR 0034** — production content; extract; reconcile counts |
 | URLs / cutover | `docs/contrato-migracion-static-wordpress.md`, matriz, cutover checklist |
 
 Keep this file as a historical agent brief. For current architecture use ADR 0029, doc 12, and the

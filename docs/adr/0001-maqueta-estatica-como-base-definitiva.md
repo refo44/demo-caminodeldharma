@@ -22,6 +22,8 @@ La **maqueta estática HTML/CSS/JS** en la raíz del repositorio es la **primera
 - Debe construirse con la estructura de rutas finales (`/comunidad/`, `/practica/`, etc.).
 - Se **congela** antes de iniciar Fase 3 (WordPress); cambios posteriores solo por error, accesibilidad o inconsistencia con `content-source/`.
 
+*(Nota 2026-08-19, ADR 0034: el estático **ya es producción con visitas**. El HTML/JSON hardcodeado de eventos, blog y galería es contenido real, no demo. El «congelamiento» de diseño no autoriza a descartar ese contenido. El CHANGELOG muestra que el estático sigue recibiendo parches; ver freeze/delta en ADR 0034.)*
+
 ## Alternativas consideradas
 
 | Alternativa | Motivo de descarte |

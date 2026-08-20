@@ -6,7 +6,8 @@ Contrato de aceptación de la futura migración del sitio de la Comunidad Buddhi
 despliegue.
 
 **Decisión:** [ADR 0032](adr/0032-contrato-migracion-static-wordpress.md),
-[ADR 0033](adr/0033-importador-contenido-vs-fixtures.md).
+[ADR 0033](adr/0033-importador-contenido-vs-fixtures.md),
+[ADR 0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
 
 **No sustituye:** ADR, `17-orden-implementacion`, `11-arbol-urls-final`, `12-theme-file-structure`.
 **Complementa:** `migracion-static-wordpress.md` (ledger de diferencias) y
@@ -19,7 +20,7 @@ despliegue.
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. |
-| **CURRENT STATE** | Producción = sitio **estático** en Hostinger, `https://caminodeldharma.org`. HTML en la **raíz** del repo (no existe `static/` todavía). No hay carpeta `wordpress/`, no hay `docker-compose.yml`, no hay `.github/workflows`. Versión de código: `VERSION`. Despliegue: ZIP manual (ADR 0015). |
+| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. No hay `wordpress/`, ni `docker-compose.yml`, ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
 | **FUTURE PLAN** | Fase 3: reorg a `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE** (ADR 0029), sin theme clásico PHP. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado; corte según [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md). |
 
 Afirmaciones como «WordPress not started» y «deploy HTML to production» describen el **estado
@@ -64,16 +65,22 @@ El contenido editorial debe **sobrevivir** a un cambio de theme.
 | Fuente de verdad futura (post-corte) | WordPress (ADR 0013) | Git / theme de bloques |
 | Puede cambiar el theme sin reescribir | Sí, si el copy no está hardcodeado en plantillas | N/A |
 
-Precedencia de copy (ADR 0033):
+Precedencia **por tipo** (ADR 0033 + ADR 0034). No hay una jerarquía única:
+
+| Tipo | SOURCE OF TRUTH (hoy) | Tras el corte |
+| ---- | --------------------- | ------------- |
+| Copy institucional en `content-source/` | ese documento; HTML live es lo publicado (diverge → UNCLEAR) | WP |
+| Eventos, posts, JSON galería, fechas, cards | **HTML/JSON live** (única representación completa) | WP |
+| `main.min.css` | generado desde `main.css` | theme |
+| Presentación | HTML/CSS/JS de la maqueta (contrato visual) | theme FSE |
+
+Hasta el corte:
 
 ```text
-canonical content source (content-source/)
-  > structured project content (docs/03, 09, 16; payload del importador)
-    > generated static output (HTML de la maqueta)
+Until migration is complete, the live static repository is a production content source.
 ```
 
-El HTML generado es contrato de **presentación y comportamiento**, no una segunda redacción
-editorial.
+Hardcoded ≠ dummy. Extraer, no reescribir. Conteos deben cuadrar. Patterns FSE no almacenan colecciones reales.
 
 ---
 
@@ -210,6 +217,17 @@ En el cutover:
 - `.htaccess` de la raíz del servidor: tratamiento explícito (diff, backup, reglas de permalinks WP + redirects legacy de este dominio).
 - Hostinger File Manager / FTP: si se usa FTP/FTPS, cuenta dedicada, alcance mínimo, directorios remotos explícitos, secretos por environment, producción separada. Hoy el estático se sube por File Manager (README); no hay workflow FTPS en este repo.
 
+### Rollback window
+
+No borrar el sitio estático el día del corte. Conservar:
+
+- artefacto estático versionado (tag Git + ZIP desplegado);
+- backup de BD WordPress y `uploads/`;
+- plan de document root / DNS (volver el `public_html` al ZIP estático **o** restaurar WP);
+- media y `.htaccess` respaldados.
+
+La ventana la define el propietario. El corte no está cerrado si el rollback no es ejecutable.
+
 ---
 
 ## 9. Environments
@@ -281,6 +299,14 @@ Mapping desde la **maqueta**, no desde un theme PHP:
 | JS de la maqueta | encolado desde el theme, o bloque dinámico solo donde se justifique (calendario de `/eventos`) |
 | Galería `gallery.js` | excepción ADR 0021: bloque Gutenberg + lightbox nativo |
 
+**Pattern ≠ content.** `patterns/` = estructura reutilizable. Eventos, posts y las 35 fotos de galería
+viven en la BD, no en patterns.
+
+Producción **sigue** en el estático mientras FSE se construye en Docker/staging. Extractores (no ahora):
+HTML/JSON → payload → dry-run → import. Conteos deben cuadrar (ADR 0034). Ledger de cambios durante
+el build; freeze corto al corte. Rollback: no borrar el artefacto estático el día del corte.
+**NO CUTOVER WITH BROKEN NAVIGATION.**
+
 ---
 
 ## 12. Inventario estático (contrato: todo esto se migra o se registra como excepción)
@@ -334,7 +360,10 @@ documentación; hace falta no olvidarlo en Fase 3.
 
 | Documento | Rol |
 | --------- | --- |
-| [matriz-migracion-static-wordpress.md](matriz-migracion-static-wordpress.md) | Una fila por URL |
+| [inventario-contenido-produccion-static.md](inventario-contenido-produccion-static.md) | Inventario live (ADR 0034) |
+| [conteos-reconciliacion-migracion.md](conteos-reconciliacion-migracion.md) | Conteos que deben cuadrar |
+| [redirect-ledger.md](redirect-ledger.md) | KEEP / 301 |
+| [matriz-migracion-static-wordpress.md](matriz-migracion-static-wordpress.md) | Una fila por URL y por entidad |
 | [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md) | Pre / cutover / post |
 | [migracion-static-wordpress.md](migracion-static-wordpress.md) | Ledger de diferencias static vs WP |
 | [playbook-migracion-static-wordpress.md](playbook-migracion-static-wordpress.md) | QA, WU, anti-patrones |

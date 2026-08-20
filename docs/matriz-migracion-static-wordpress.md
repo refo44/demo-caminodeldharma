@@ -7,6 +7,12 @@ Geografía: [11-arbol-urls-final.md](11-arbol-urls-final.md). Contrato:
 **Regla:** una URL no se considera migrada hasta que su fila tenga estrategia para
 **contenido + presentación + routing + comportamiento + QA**.
 
+Una **entidad** hardcodeada (card de evento, ítem de galería) tampoco está migrada hasta tener fila
+propia o estar contada en [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
+Inventario: [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md) (ADR 0034).
+
+Columnas ampliadas cuando el ítem no es una URL: Current URL, Static source, **Content item**, Current type, Future WP object, Future route, Template/FSE, Media, JS, Migration status, QA.
+
 Las columnas WP (objeto, ruta, plantilla, import, QA) se completan al implementar Fase 3. Hoy
 registran el inventario estático y el mapeo **previsto** según docs vigentes (ADR 0029, doc 12).
 No es implementación.
@@ -67,6 +73,26 @@ No crear Page con slug `eventos`.
 | `/eventos/pausa-profunda-cali` | `eventos/pausa-profunda-cali/index.html` | Ficha (sin `.ics` en repo al auditar) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share |
 
 Singles futuros: misma fila-patrón `/eventos/{slug}`. Sin archivos `/eventos/{ciudad}` (ADR 0022).
+
+### Entidades en el listado (una fila por card — ADR 0034)
+
+SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT. No son demo.
+
+| Current URL | Static source | Content item | Current type | Future WP object | Future route | Template/FSE | Media | JS | Migration status | QA |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `/eventos` (card) | `eventos/index.html` #circulos… | Círculos de Presencia Consciente | card + single | CPT `event` | `/eventos/circulos-de-presencia-consciente` | `single-event.html` | cartel + `.ics` | share, calendar | Inventario | 1 objeto; featured home no duplica |
+| `/eventos/encuentro-nacional-2026` | HTML ficha + card | 7.º Encuentro 2026 | card + single | CPT `event` | KEEP | `single-event.html` | cartel + `.ics` | share | Inventario | finalizado |
+| `/eventos` card only | listado | Meditación Presencial Barranquilla | card listado | CPT `event` | **sin** single nuevo salvo owner | archive | cartel jul-2026 | — | Inventario | no inventar slug |
+| `/eventos` card only | listado | Festival Calma en la Ciudad | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/eventos` card only | listado | Pausa Profunda – Medellín | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/eventos` card only | listado | Ansiedad, agotamiento… | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/eventos` card only | listado | Vesak 2026 | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/eventos/pausa-profunda-cali` | ficha + card | Pausa Profunda – Cali | card + single | CPT `event` | KEEP | `single-event.html` | cartel | share | Inventario | |
+| `/eventos` card only | listado | Buddhismo para tiempos de cansancio | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/eventos` card only | listado | 6.º Encuentro Nacional 2025 | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| `/` aside | `index.html` | nota featured = evento #1 | duplicado de presentación | **no** CPT extra | — | `front-page.html` Query | mismo cartel | — | Inventario | conteo eventos sigue en 10 |
+
+Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas ya arriba. Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
 
 ---
 

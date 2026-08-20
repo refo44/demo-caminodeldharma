@@ -1,6 +1,10 @@
 # demo-caminodeldharma
 
-Maqueta estática del sitio web de la **Comunidad Buddhista Camino del Dharma** (Colombia). Incluye las páginas de inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto. El contenido y la estructura siguen la documentación en `docs/`. Base para una futura migración **directa** a WordPress Full Site Editing (block theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
+Sitio **estático en producción** de la **Comunidad Buddhista Camino del Dharma** (Colombia). Recibe visitas en `https://caminodeldharma.org`. Incluye inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto.
+
+El nombre histórico «maqueta» en ADRs antiguos (ADR 0001) significa **base definitiva**, no prototipo desechable. Eventos, posts y galería hardcodeados en HTML/JSON son **contenido de producción** (ADR 0034).
+
+El copy institucional sigue `content-source/` y `docs/`. Base para una futura migración **directa** a WordPress Full Site Editing (block theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 
 ## Tecnologías
 
@@ -137,7 +141,7 @@ Ejemplo:
 
 ## Documentación
 
-En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Contrato de migración futura: `docs/contrato-migracion-static-wordpress.md`. Agentes: `AGENTS.md`, `CLAUDE.md`.
+En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Inventario de producción y contrato de migración: `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`. Agentes: `AGENTS.md`, `CLAUDE.md`.
 
 Colaboración, lint y despliegue: `CONTRIBUTING.md`. Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
 
@@ -145,10 +149,10 @@ Colaboración, lint y despliegue: `CONTRIBUTING.md`. Licencia del código: `LICE
 
 | | |
 | --- | --- |
-| **Actual (producción)** | Sitio **estático**. HTML en la raíz del repo. Hostinger `public_html` via ZIP manual (ADR 0015). WordPress **no iniciado**. |
+| **Actual (producción)** | Sitio **estático live**. HTML en la raíz. Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **no iniciado**. |
 | **Futuro (Fase 3)** | `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado hasta el corte. |
 
-La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md) (ADR 0032). Matriz de URLs: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).
+La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Inventario: [`docs/inventario-contenido-produccion-static.md`](docs/inventario-contenido-produccion-static.md). Matriz: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).
 
 **Tras el corte:** un ZIP de HTML estático **no** debe escribir sobre el document root de WordPress (`STATIC DEPLOY ≠ WORDPRESS CODE DEPLOY ≠ WORDPRESS CONTENT`, ADR 0013).
 

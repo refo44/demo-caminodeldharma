@@ -53,6 +53,8 @@ Ninguno implica a los demás.
 | **BEHAVIOR** | JavaScript real (`main.js`, y paridad o sustitución documentada de `gallery.js` / `share.js` / `calendar.js`), formulario de contacto (ADR 0026), menú, diálogos, calendario de `/eventos`, audio, descargas |
 | **OPERATIONS** | Despliegue acotado, environments, backups, rollback, importadores, fixtures, política de indexación, QA con evidencia, ownership |
 
+*(Nota 2026-08-19, ADR 0034: CONTENT también cubre entidades **hardcodeadas en el HTML live** — 10 eventos, 2 posts, 35 ítems de galería + 3 álbumes. Esos datos son producción. El HTML no sustituye `content-source/` para copy institucional.)*
+
 **Reglas:**
 
 1. **La migración no está completa** porque el theme esté desplegado o activado.
@@ -124,5 +126,5 @@ Ninguno implica a los demás.
 - Cutover: [`docs/cutover-checklist-wordpress.md`](../cutover-checklist-wordpress.md)
 - ADR [0001](0001-maqueta-estatica-como-base-definitiva.md), [0002](0002-wordpress-como-adaptacion-sin-rediseno.md), [0008](0008-urls-estables-desde-la-maqueta.md)
 - ADR [0012](0012-wordpress-como-motor-de-contenido.md), [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md), [0015](0015-despliegue-manual-temporal.md)
-- ADR [0029](0029-theme-bloques-full-site-editing.md), [0033](0033-importador-contenido-vs-fixtures.md)
+- ADR [0029](0029-theme-bloques-full-site-editing.md), [0033](0033-importador-contenido-vs-fixtures.md), [0034](0034-static-live-como-fuente-contenido-produccion.md)
 - `docs/11-arbol-urls-final.md`, `docs/17-orden-implementacion.md` § Transición

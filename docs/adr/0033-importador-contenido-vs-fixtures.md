@@ -52,9 +52,10 @@ content-source/          (copy institucional aprobado)
     > HTML estático generado (maqueta: contrato de presentación, no fuente editorial)
 ```
 
-El HTML de producción **no** debe convertirse en una segunda fuente editorial. Tras el corte, las
-ediciones de wp-admin son la fuente de verdad del contenido (ADR 0013). El theme puede cambiar sin
-reescribir el copy.
+El HTML de producción **no** debe convertirse en una segunda redacción *institucional* frente a
+`content-source/`. **Complemento (ADR 0034, 2026-08-19):** para eventos, posts, JSON de galería y
+cards publicadas, el HTML live **sí** es la fuente de producción actual hasta extraerse. No tratarlo
+como demo. Tras el corte, wp-admin es la SoT editorial (ADR 0013).
 
 ### Preferencia de implementación (cuando se construya)
 
@@ -87,7 +88,7 @@ Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se 
 | ----------- | ------------------ |
 | Crear Pages a mano solo en wp-admin, sin importador | Frágil, no repetible entre local/staging, fácil de olvidar una ruta. Admisible como respaldo, no como única estrategia. |
 | Ejecutar la carga en la activación del plugin | Impredecible; contradice el playbook de este repo y ADR 0005. |
-| Usar el HTML estático como fuente editorial del importador | Convierte el artefacto de presentación en copy; `content-source/` pierde prioridad. El HTML sirve para paridad visual, no para reescribir textos. |
+| Usar el HTML estático como fuente editorial del importador | Convierte el artefacto de presentación en copy *institucional*; `content-source/` pierde prioridad. **Nota 2026-08-19 (ADR 0034):** esta alternativa se refiere al copy institucional. Extraer eventos/posts/galería del HTML live **sí** está decidido. |
 | Fixtures sin marcador, o teardown de «todos los posts» | Contamina o destruye contenido real. |
 | ACF / page builder como almacén de contenido institucional | Vetado por ADR 0025. |
 
