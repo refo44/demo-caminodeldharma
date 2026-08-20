@@ -10,6 +10,9 @@ baseline documental. ADR [0034](adr/0034-static-live-como-fuente-contenido-produ
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
+Ítems UNCLEAR pendientes: [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md)
+(backlog, no ADR).
+
 ---
 
 ## 1. URLs públicas (sitemap)

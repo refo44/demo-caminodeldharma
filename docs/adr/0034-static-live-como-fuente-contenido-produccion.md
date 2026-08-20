@@ -127,6 +127,8 @@ en la BD, no hardcodeadas en `templates/*.html` ni en patterns.
 no se resuelven en el extractor.
 
 **Trabajo futuro:** extractores e importador en Fase 3. No en la sesión de este ADR.
+Ítems UNCLEAR del propietario: [`docs/backlog-decisiones-owner-migracion.md`](../backlog-decisiones-owner-migracion.md)
+(backlog, no ADR).
 
 ## Referencias
 
@@ -135,3 +137,4 @@ no se resuelven en el extractor.
 - [`docs/inventario-contenido-produccion-static.md`](../inventario-contenido-produccion-static.md)
 - [`docs/conteos-reconciliacion-migracion.md`](../conteos-reconciliacion-migracion.md)
 - [`docs/redirect-ledger.md`](../redirect-ledger.md)
+- [`docs/backlog-decisiones-owner-migracion.md`](../backlog-decisiones-owner-migracion.md)

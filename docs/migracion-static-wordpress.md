@@ -11,6 +11,9 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 **CURRENT STATE:** Fase 3 no iniciada. No existe `static/` ni `wordpress/`. Las filas de abajo registran
 cambios del estático en producción y deudas hacia el theme futuro.
 
+Decisiones del propietario aún abiertas (no ADR):
+[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
+
 ---
 
 ## Cuándo actualizar este documento

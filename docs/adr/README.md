@@ -149,6 +149,7 @@ Documentos, issues, commits o ADR relacionados.
 
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
+- **UNCLEAR del propietario:** `docs/backlog-decisiones-owner-migracion.md` — backlog, no ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 
