@@ -19,8 +19,9 @@ pipelines.
 2. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
 3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
 4. `docs/cutover-checklist-wordpress.md`
-5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, 0032, 0033, 0034
-6. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
+5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0037**
+6. `docs/backlog-decisiones-owner-migracion.md` (cerrado; 0 abiertas)
+7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 
 ## Hard rules
 

@@ -11,13 +11,13 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 | Página | Función |
 |--------|---------|
 | Inicio | Título del sitio (site-title), hero, sección «Un poco de nuestra comunidad» (texto + nota de un evento vigente a la derecha en desktop, alineada al borde del hero: rótulo encima del cartel `medium`, título, fecha, lugar, «Ver evento»; fotos a ancho de lectura debajo), cómo practicamos, meditación semanal, caminos de participación, fila de imágenes de galería + enlace «Ver galería completa» |
-| La comunidad | Quiénes somos, fundador, experiencia y propósito |
+| La comunidad | Quiénes somos, fundador, experiencia y propósito. *(WP: enlaces a fichas `/author/…`, OWN-016; no cambiar el estático ahora.)* |
 | El linaje | Tradición viva, Mahāyāna, Chan y Tierra Pura |
 | Práctica y actividades | Aprende en la práctica, meditación semanal, mantras para la práctica (Amitābha, Guān Shì Yīn Púsà + audio), caminos de profundización (talleres, retiros), videos y enseñanzas, vida comunitaria. *(HISTORICAL: recitación de la comida + PDF — RETIRE OWN-002, 2026-08-28.)* |
 
 *Extensiones de maqueta en Práctica (no en Contenido_Web canónico):* recitación de la comida y mantras con audio.
 | Eventos | Calendario de un mes (días de evento rellenos; lunes sin otro evento con borde, tooltip al hover y al foco, a la meditación semanal en línea — no son ítems del listado; con puntero grueso el primer toque revela el nombre y «Toca de nuevo para ver el evento.» bajo la cuadrícula, `aria-hidden`; Enter sigue el enlace al primer paso), listado próximos / realizados con carteles; cada evento con ficha propia se abre desde el título, el cartel y «Ver evento →»; inscripción o preinscripción en el listado y en el detalle; cada evento próximo incluye opciones para compartir en el listado y en su detalle cuando existe |
-| Galería | Página dedicada organizada en álbumes o secciones con título propio (por año, evento o actividad); cada álbum tiene grid y paginación independiente. |
+| Galería | Página dedicada organizada en álbumes o secciones con título propio (por año, evento o actividad); grid por álbum. *(Estático: paginación 12. Destino FSE: sin números, ADR 0036 / OWN-011; URLs `/galeria/{slug}` noindex hasta volumen.)* |
 | Contribuir (donaciones) | Cómo contribuir, datos bancarios, texto sobre generosidad |
 | Contacto | Formulario Nombre, Correo, Mensaje; bloque Redes sociales (Facebook, Instagram); enlaces WhatsApp y correo. |
 | Blog | Listado de entradas sin acciones secundarias; cada detalle individual incluye opciones para compartir. |

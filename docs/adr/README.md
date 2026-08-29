@@ -114,6 +114,8 @@ Documentos, issues, commits o ADR relacionados.
 | [0033](0033-importador-contenido-vs-fixtures.md) | Importador de contenido institucional vs fixtures | Aceptada |
 | [0034](0034-static-live-como-fuente-contenido-produccion.md) | Sitio estático live como fuente de contenido de producción hasta el corte | Aceptada |
 | [0035](0035-todos-los-eventos-tienen-single.md) | Todo evento tiene ficha pública; los pasados no se inscriben | Aceptada |
+| [0036](0036-urls-album-galeria-noindex.md) | URLs de álbum `/galeria/{slug}` permitidas; noindex hasta volumen | Aceptada |
+| [0037](0037-cpt-autor-blog-url-author.md) | CPT de autor del blog; perfil `/author/{slug}` | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -144,6 +146,8 @@ Documentos, issues, commits o ADR relacionados.
 | Importación de contenido vs fixtures | [0033](0033-importador-contenido-vs-fixtures.md) — WP-CLI, create-missing-only; copy institucional vs `content-source/`; eventos/blog/galería live = HTML hasta extraer (ADR 0034) |
 | Estático live como contenido de producción | [0034](0034-static-live-como-fuente-contenido-produccion.md) — hardcoded ≠ dummy; extracción; conteos; freeze/delta; patterns ≠ content |
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
+| URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
+| Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
 
 ---
 
@@ -151,7 +155,7 @@ Documentos, issues, commits o ADR relacionados.
 
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **UNCLEAR del propietario:** `docs/backlog-decisiones-owner-migracion.md` — backlog, no ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — cerrado (v1.18); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

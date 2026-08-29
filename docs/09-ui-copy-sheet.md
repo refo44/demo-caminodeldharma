@@ -119,7 +119,7 @@ Sin Preinscribirme, calendario ni compartir. Sin recuadro: en escritorio, filete
 - **Botón (primario):** Inscribirme. **Preinscribirme** cuando el proceso es una preinscripción (p. ej. asignación de becas; la preinscripción no garantiza el cupo).
 - **Enlace a la ficha (eventos con página propia):** Ver evento → — enlace de texto, no botón; mismo tono que «← Volver a Eventos» en la ficha. En la tarjeta vigente va **después de los datos** (fecha, lugar, modalidad) y **antes** del CTA de inscripción. En eventos realizados con ficha, al cierre de la tarjeta.
 - **Acción secundaria por evento próximo:** Compartir
-- **Calendario (eventos próximos):** Añadir al calendario — abre un panel con Google Calendar, Outlook, Apple Calendar y descarga del archivo `.ics`
+- **Calendario (eventos próximos):** Añadir al calendario — abre un panel con Google Calendar, Outlook, Apple Calendar y descarga del archivo `.ics`. *(OWN-012: en finalizados el botón no se muestra.)*
 - **Sin eventos:** "No hay eventos programados en este momento."
 - **Retorno desde la ficha:** ← Volver a Eventos
 

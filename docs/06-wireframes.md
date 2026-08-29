@@ -127,6 +127,8 @@ Los álbumes pueden responder a criterios editoriales distintos: **General** (me
 
 **Maqueta estática:** `#gallery-data` mantiene el inventario de imágenes y `#gallery-albums-data` define los álbumes demostrativos, sus títulos y rangos. `gallery.js` crea una sección `.gallery-album` por definición, con `.gallery-grid`, `.gallery-pagination` y una región de estado accesible independientes.
 
+*(Nota 2026-08-29, OWN-011: la paginación de 12 y los query params son del estático. El destino FSE no los porta: bloque Galería completo + lazy-load; álbum = taxonomía, no Page hija ni CPT.)*
+
 ---
 
 ## 7. Contacto

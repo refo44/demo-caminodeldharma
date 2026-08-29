@@ -21,7 +21,10 @@ Forma canónica: **sin barra final**.
 | `/practica` | `/practica` | KEEP | igual | Page |
 | `/practica/videos` | `/practica/videos` | KEEP | igual | Page hija o slug anidado |
 | `/practica/meditacion-semanal-en-linea` | misma | KEEP | igual | Page |
-| `/galeria` | `/galeria` | KEEP | igual | Page |
+| `/galeria` | `/galeria` | KEEP | igual | Page; hub SEO (ADR 0036) |
+| `/galeria/general` | misma | **PLANNED KEEP** | término `gallery_album` | no existe en static; **noindex** hasta volumen |
+| `/galeria/2023` | misma | **PLANNED KEEP** | término | noindex hasta volumen (5 fotos hoy) |
+| `/galeria/2021` | misma | **PLANNED KEEP** | término | noindex hasta volumen (5 fotos hoy) |
 | `/contacto` | `/contacto` | KEEP | igual | Page |
 | `/donaciones` | `/donaciones` | KEEP | igual | Page |
 | `/eventos` | `/eventos` | KEEP | archive CPT; **no** Page `eventos` | |
@@ -35,9 +38,15 @@ Forma canónica: **sin barra final**.
 | `/eventos/vesak-2026` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
 | `/eventos/buddhismo-tiempos-cansancio` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
 | `/eventos/6-encuentro-nacional-2025` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/ical/circulos-de-presencia-consciente.ics` | misma mientras vigente | KEEP | `.ics` **generado** (OWN-009) | **noindex** (OWN-014); al vencer (OWN-013): **410** |
+| `/eventos/ical/encuentro-nacional-2026.ics` | — | **RETIRE / 410** | no servir | evento finalizado (OWN-012); no seed |
 | `/blog` | `/blog` | KEEP | posts page | |
 | `/blog/circulos-de-presencia-consciente` | misma | KEEP | `post` | |
 | `/blog/sangha-refugio-hiperconexion` | misma | KEEP | `post` | |
+| `/author/zheng-gong` | misma | **PLANNED KEEP** | CPT `blog_author` | no existe en static; corte WP (ADR 0037); indexable |
+| `/author/comunidad-camino-del-dharma` | misma | **PLANNED KEEP** | CPT `blog_author` | slug cambiable **antes** del corte; luego KEEP/301 |
+| `/author` (archivo de fichas) | misma | **PLANNED KEEP** | archive CPT | **noindex** hasta volumen (ADR 0037) |
+| `/author/{user}` nativo WP | — | **404** | no es perfil | apagar rewrite de users |
 | *(404 genérico)* | plantilla 404 | KEEP behavior | HTTP 404 | no URL `/404` |
 
 `/privacidad`: **no live**. Cuando exista copy legal: publicar + enlazar; no 301 desde nada hoy.
@@ -77,4 +86,4 @@ WordPress reescribe `.htaccess`: estas reglas deben **reimplementarse** (plugin 
 
 ---
 
-**Versión:** 1.0
+**Versión:** 1.2

@@ -29,7 +29,7 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 | Carteles eventos | **10** | `assets/images/eventos/` | |
 | Audio mantras | **2** | `assets/audio/` | |
 | PDF recitación | **0** (sitio) | RETIRE OWN-002 | excluido de la web; no es archivo del sitio |
-| `.ics` | **2** | `eventos/ical/` | |
+| `.ics` | **2** en disco; destino WP: **0 attachments** (generados) | `eventos/ical/` | OWN-009; Encuentro RETIRE; Círculos KEEP URL mientras vigente (OWN-013) |
 | Embeds videos page | **5** | 4 YouTube + 1 Vimeo | |
 | Formulario | **1** | `/contacto` markup | envío no live |
 | Fixtures | **0** | no hay marcador `_cdd_fixture` | |
@@ -43,12 +43,13 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 | Pages (institucionales + secundarias + blog page si aplica) | 10 (±1 si front-page no es Page) | `wp post list --post_type=page --format=count` |
 | CPT `event` | **10** | incluye las 7 sin single |
 | `event` con permalink público | **10** | ADR 0035 / OWN-004; 3 KEEP + 7 PLANNED |
-| `post` | **2** | |
+| `post` | **2** | meta `authors` asignado (ADR 0037) |
+| CPT `blog_author` | **2** | Zheng Gong + Comunidad Camino del Dharma |
 | Media de galería pública | **35** | no incluir ilustraciones ni huérfanas (OWN-001, OWN-003) |
 | Media huérfana (oculta) | N = imágenes en disco no referenciadas | seed; **0** URLs públicas; listar en el payload |
 | Álbumes / términos de galería | **3** | |
 | Featured images de eventos | **10** | |
-| Attachments audio | **2** | |
+| Attachments audio | **2** | OWN-009: mantras, no `.ics` |
 | PDF | **0** | OWN-002: no importar recitación |
 | Fixtures públicos | **0** | |
 

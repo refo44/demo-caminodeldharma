@@ -15,6 +15,11 @@ Supersessions after this prompt was written:
 | Content load unspecified | **ADR 0033** — importer vs fixtures |
 | Live HTML as dummy/demo | **ADR 0034** — production content; extract; reconcile counts |
 | URLs / cutover | `docs/contrato-migracion-static-wordpress.md`, matriz, cutover checklist |
+| Solo 3 singles de evento | **ADR 0035** — 10 singles; pasados sin inscripción |
+| Galería una sola URL | **ADR 0036** — `/galeria/{slug}` noindex hasta volumen |
+| Autores = copy / Users | **ADR 0037** — CPT `blog_author`; `/author/{slug}` |
+| `event_status` solo manual | **OWN-013** — manda la fecha de fin |
+| `.ics` como archivo a importar | **OWN-009 / 012 / 014** — generado; pasados 410; noindex |
 
 Keep this file as a historical agent brief. For current architecture use ADR 0029, doc 12, and the
 migration contract. Do not copy classic-theme steps into new implementation work.

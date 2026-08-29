@@ -278,38 +278,36 @@ Verify these values against the current commit before relying on them:
   media used by `/practica` and is not a gallery item.
 - 10 event posters.
 - 2 audio files.
-- 2 `.ics` files.
+- 2 `.ics` files on disk (Encuentro RETIRE; Círculos generated while current — OWN-009 / OWN-012).
 - 1 historical recitation PDF path, now retired from the website by OWN-002.
 - 0 production fixtures.
 
-Use the defaults in `docs/backlog-decisiones-owner-migracion.md` without blocking unrelated work:
+Owner backlog is **closed** (`docs/backlog-decisiones-owner-migracion.md` v1.18). Use those
+decisions; do not treat the rows below as still open:
 
 - Per OWN-001, import `galeria-04.jpg` exactly once as Media Library content for `/practica`; never
   add it to `/galeria`.
 - Per OWN-002, retire `assets/documents/recitacion-practica-comida.pdf`. Do not move it into
   deployable `static/`, link, import, seed, publish, or create a URL for it.
-- `assets/images/celebraciones/` remains unresolved and must not be deleted or published silently.
-  Audio and `.ics` storage strategy also remains open.
+- `assets/images/celebraciones/`: used images are page media (OWN-001); unused stay in the library
+  **hidden** (OWN-003). Audio → Media Library; `.ics` generated, not Media Library (OWN-009).
 - Per OWN-009-img, import every referenced content image—gallery, posters, page illustrations, hero,
   founder, and other published images—into the Media Library through a real-content command named
   `seed`. This is not a fixture: it has no `_cdd_fixture`, has no teardown, and follows dry-run,
   explicit apply, idempotent, create-missing-only rules. WordPress regenerates derivative sizes.
-- Import all 10 events, but expose only the 3 already-public single routes. Do not invent 7 public
-  URLs. Implement the simplest explicit archive-only visibility rule and test that those additional
-  single routes are not public.
+- Import all 10 events with **10 public singles** (ADR 0035). The 7 listing-only slugs are
+  PLANNED KEEP. Past events: no signup, no add-to-calendar, no `.ics` (OWN-012 / OWN-013).
 - Keep the default build-time change ledger plus a short content freeze immediately before cutover.
 - Per OWN-006, extract from the latest repository `VERSION`, not an older ZIP still deployed on
   Hostinger. Record the exact commit/tag in the payload. If production parity cannot be proven, label
   it `Unverified`; the older deployment is deploy/delta debt, not the extraction source.
-- Keep author attributions as editorial copy; do not create public author routes.
+- Blog bylines: CPT `blog_author` + `/author/{slug}` (ADR 0037 / OWN-010). Do not use the WP user as the public author. Do not use hardcoded copy lists.
 - Do not implement CPT `sangha`.
 
-OWN-008 remains open. Extract all 35 gallery images, alt text, and the three source album memberships,
-but do not implement or mark the album persistence model complete until the owner closes OWN-008.
-This does not block the FSE shell, Media Library seed, or unrelated Pages. Native Gutenberg Gallery
-blocks and the native lightbox remain binding; no custom `gallery.js` or lightbox is allowed. If
-Heading + Gallery is selected, update the backlog, inventory, counts, and migration matrix before
-implementing that model. A new public route or non-native gallery architecture requires an ADR.
+OWN-008 is **closed** (ADR 0036): same three albums on `/galeria`; public `/galeria/{slug}` with
+`noindex` until volume; taxonomy, not album CPT. No numbered pagination (OWN-011). Native Gutenberg
+Gallery + lightbox remain binding; no `gallery.js`. Extract all 35 gallery images, alt text, and
+album memberships.
 
 ---
 
@@ -380,7 +378,7 @@ Create/import real objects and settings for:
 - Blog posts page and Reading settings;
 - 2 real posts;
 - 10 real events;
-- the extracted three album memberships, pending OWN-008's persistence-model decision;
+- the extracted three album memberships as `gallery_album` terms (ADR 0036);
 - 35 public gallery images plus `galeria-04.jpg` attached to Práctica;
 - all other referenced content images through the real-content Media Library seed;
 - event posters, required audio, linked downloads, and other confirmed production media.
@@ -460,7 +458,7 @@ Replace static `gallery.js`, embedded gallery JSON rendering, handmade thumbnail
 lightbox expectation with native Gutenberg Gallery blocks and the native WordPress lightbox. Seed the
 35 public gallery originals into the Media Library and let WordPress generate derived sizes. Seed
 `galeria-04.jpg` separately as Práctica media, never as gallery content. Do not import handmade thumbs
-as editorial originals. Do not finalize the album persistence model before OWN-008 is closed.
+as editorial originals. Album model is closed: taxonomy + hub Page (ADR 0036); no numbered pagination (OWN-011).
 
 ### 9.5 Other behavior
 

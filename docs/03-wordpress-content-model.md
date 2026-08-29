@@ -14,6 +14,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 |-----|----------|------|------|---------------|
 | page | Páginas | Nativo | según cada página | Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Contribuir (donaciones), Contacto, Blog |
 | event | Eventos | Custom | /eventos/ | Eventos especiales vigentes (retiros, talleres, Vesak, etc.) |
+| blog_author | Autores (blog) | Custom | /author/ | Ficha de quien firma una entrada. URL `/author/{slug}`. No es el usuario WP (ADR 0037). |
 | sangha | Sanghas | Custom | /sanghas/ | Contacto por sangha (Lluvia de ideas: conectar con cada sangha). Ver §3.1. |
 | testimonial | Testimonios | Custom o bloque | /testimonios/ o bloque | Por defecto: bloque en página; si CPT, ver §3.2. |
 
@@ -46,6 +47,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 - Quiénes somos (texto)
 - Fundador: Venerable Maestro Zheng Gong (biografía, foto, enlace al blog)
+- *(OWN-016, en WP no en el estático: enlace del fundador a `/author/zheng-gong`; enlace de la comunidad a su ficha `/author/{slug}`.)*
 - Experiencia y propósito (texto)
 
 ### Linaje (page)
@@ -71,7 +73,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 - **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, enlace a la ficha si existe («Ver evento →»), botón Inscribirme / Preinscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); título y cartel enlazan a `/eventos/{slug}/` cuando hay página propia; separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
 - Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme (o Preinscribirme), URL de la ficha cuando el evento tiene `single-event`
 
-*(Nota 2026-08-28, ADR 0035 / OWN-004: **todo** evento tiene `single` `/eventos/{slug}`. Inscribirme / Preinscribirme **solo** si está vigente y hay inscripción real. Los finalizados no muestran ese CTA.)*
+*(Nota 2026-08-28, ADR 0035 / OWN-004: **todo** evento tiene `single` `/eventos/{slug}`. Inscribirme / Preinscribirme **solo** si está vigente y hay inscripción real. Los finalizados no muestran ese CTA. OWN-012 / OWN-013: finalizados **sin** calendario ni `.ics`; el paso a finalizado es automático al vencer la fecha de fin.)*
 
 ### Contacto (page)
 
@@ -86,7 +88,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | Campo | Tipo | Uso |
 |-------|------|-----|
 | event_name | text | Nombre del evento |
-| event_date | date | Fecha |
+| event_date | date | Fecha de inicio |
+| event_end | date | Fecha de fin (si no se rellena, vale `event_date`). OWN-013 compara contra esta |
 | event_place | text | Lugar |
 | event_modality | select | presencial / virtual / híbrido |
 | event_description | WYSIWYG | Descripción, sentido, a quién va dirigido |
@@ -102,7 +105,15 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 
 **Regla de visibilidad:** `/eventos/` muestra **dos bloques diferenciados**: los eventos con `event_status = vigente` (acción posible) y, debajo, el **archivo de eventos finalizados** (memoria y evidencia de actividad). *En el mapa de pantallas (04) corresponde a la página de Eventos.*
 
-**Definición de «vigente»:** `event_status` es la fuente de verdad (manual). Opcionalmente, si `event_date` es anterior a hoy, el sistema puede sugerir marcar como «finalizado» para evitar eventos antiguos visibles por error.
+**Definición de «vigente» (OWN-013, 2026-08-29):** la fecha de fin manda, no un interruptor manual.
+En `America/Bogota`, si `hoy > event_end` (o `event_date` si no hay fin), el evento es **finalizado**:
+bloque archivo, sin inscripción, sin «Añadir al calendario», `.ics` **410** y se borra cualquier
+archivo `.ics` huérfano (OWN-012). El **último día** sigue vigente. `cancelado` lo pone el editor
+y la fecha no lo cambia. El visitante lo ve al cargar la página (el plugin calcula; un cron puede
+persistir `event_status` para el listado de wp-admin, pero no es lo que ve el público). Si se
+alarga `event_end`, vuelve a vigente y el `.ics` generado (OWN-009) responde otra vez. La
+meditación semanal no es `event`. En wp-admin, **Eliminar huérfanos** (OWN-015) fuerza a mano
+la misma limpieza de `.ics`; no toca imágenes.
 
 **Un evento en el Inicio:** la portada muestra **como máximo un** evento **vigente**, en nota junto al texto de «Un poco de nuestra comunidad» (no es un segundo listado). Un evento **finalizado nunca aparece aquí**, aunque tenga `event_featured = true`: la marca de destacado se ignora si el evento ya terminó. Selección:
 
@@ -148,6 +159,18 @@ Los encabezados de agrupación deben ser **encabezados reales** (`h3`, con los t
 **Datos estructurados (SEO):** JSON-LD `Event` en `single-event.php` **y en el listado** para los eventos que no tengan página de detalle propia. `organizer` = Camino del Dharma; `performer` solo si hay facilitador nombrado; `offers` solo con inscripción real; `eventStatus = EventCompleted` y `location.address.addressLocality` **obligatorio** en finalizados — es lo que convierte el archivo en señal geográfica. Detalle en `15-assets-strategy` §12.3.
 
 **Taxonomía de ciudad — advertencia de implementación:** si se añade una taxonomía `ciudad`, WordPress generará automáticamente un archivo por cada término (`/eventos/ciudad/medellin/`). Con una sola entrada, esas páginas son *doorway pages* según las políticas de spam de Google — creadas por el CMS sin que nadie las escriba. **Controlar su indexación** y abrirlas solo donde haya volumen real de eventos.
+
+---
+
+## 3.0. Autores del blog (CPT `blog_author`)
+
+*(ADR 0037 / OWN-010, 2026-08-29.)* El «Por…» de las **entradas** sale de fichas CPT, no de
+copy ni de `post_author`. El usuario que publica no aparece en el sitio. Todas las fichas son
+el mismo tipo (Comunidad Camino del Dharma = una ficha más). Relación: meta `authors` (IDs,
+orden = byline). Publicar exige ≥1 ficha publicada. `query_var` = `blog_author` (**nunca**
+`author`). Rewrite slug `author`. Archivos de usuarios WP = 404. No Page slug `author`.
+Eventos no usan este CPT. `/comunidad` no se sustituye por `/author/zheng-gong`. En WP se
+**enlaza** desde esa Page a las fichas (OWN-016); el HTML estático no se toca ahora.
 
 ---
 
@@ -249,16 +272,16 @@ La galería **no se reimplementa** en el tema. Decisión registrada en **ADR 002
 solo por quien toca código. En WordPress, `page-galeria.html` renderiza el contenido de la Page
 (`/galeria/`) a través del bloque **Contenido de la entrada**, y cada álbum es simplemente un bloque
 **Encabezado** (título, cualquier texto que el editor escriba) seguido de un bloque **Galería** con las
-imágenes de ese álbum — repetido tantas veces como álbumes se quieran, en cualquier orden. No hay
-taxonomía, CPT ni vocabulario cerrado: crear un álbum nuevo es agregar un par Encabezado+Galería desde
-el editor de bloques, sin desplegar código. Coherente con ADR 0021 (núcleo de WordPress, sin
-reimplementar) y con ADR 0029 (contenido editable desde wp-admin).
+imágenes de ese álbum — o Query por término. **ADR 0036 / OWN-008:** taxonomía de álbum
+(`/galeria/{slug}`), no CPT ni Page hija. El hub `/galeria` es la Page (KEEP, indexable). Los
+archivos de término nacen `noindex, follow` hasta volumen. El plugin evita que el rewrite robe
+`/galeria`. Crear un álbum = término + asignar fotos (+ bloques en el hub si se desea). Coherente
+con ADR 0021 y ADR 0029.
 
-**Punto abierto, no resuelto por esta nota:** el bloque de Galería nativo no pagina — muestra todas las
-imágenes del álbum (con lazy-loading nativo). La paginación de 12 imágenes por álbum que sí tiene la
-maqueta estática (`06-wireframes` §6) no se traslada automáticamente; si un álbum crece mucho, hace
-falta decidir aparte si eso importa (lazy-loading ya evita la descarga completa) o si se quiere alguna
-mitigación adicional. No se decide en esta nota.
+**Paginación (OWN-011, 2026-08-29):** el bloque Galería nativo **no pagina** — muestra todas las
+imágenes del álbum (lazy-loading nativo). En el corte FSE **no** se recrea la paginación de 12 de la
+maqueta (`06-wireframes` §6, `gallery.js`). Tampoco `/galeria/{slug}/page/2`. Revisar solo si un
+álbum crece mucho; entonces, si acaso, solo en la URL del término, no en el hub.
 
 **Accesibilidad:** el lightbox del núcleo ya trae gestión de foco, cierre con `Esc` y ARIA. Si en algún momento se sustituyera por uno propio, debería cumplir `19-accesibilidad-estandares` y seguir el patrón `.share-dialog` que ya existe en el proyecto.
 

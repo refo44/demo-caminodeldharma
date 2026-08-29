@@ -73,11 +73,14 @@ Se sirve `noindex, follow` por defecto hasta que el tag tenga volumen suficiente
 /eventos/
 /eventos/{slug}/
 /galeria/
+/galeria/{slug}/            (álbum; existe; noindex hasta volumen — ADR 0036)
 /donaciones/
 /contacto/
 /blog/
 /blog/{slug}/
 /blog/tag/{slug}/          (existe; noindex hasta volumen suficiente — ADR 0031)
+/author/{slug}/            (ficha CPT blog_author; indexable — ADR 0037)
+/author/                   (archivo de fichas; noindex hasta volumen — ADR 0037)
 /privacidad/               (pendiente de publicar; enlace en el pie de todas las páginas)
 ```
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
@@ -107,10 +110,13 @@ Ver `docs/12-theme-file-structure.md` §5–§6 para el árbol completo.
 | `/eventos/` | `templates/page-eventos.html` o `templates/archive-event.html` |
 | `/eventos/{slug}/` | `templates/single-event.html` |
 | `/galeria/` | `templates/page-galeria.html` |
+| `/galeria/{slug}/` | `taxonomy-gallery_album.html` o jerarquía nativa; **noindex** por defecto (ADR 0036) |
 | `/contacto/` | `templates/page-contacto.html` |
 | `/blog/` | `templates/home.html` (página de entradas) |
 | `/blog/{slug}/` | `templates/single.html` |
 | `/blog/tag/{slug}/` | resuelve por la jerarquía nativa de plantillas de WordPress (`templates/taxonomy-post_tag.html` si existe, si no `templates/archive.html`/`templates/index.html`); noindex por defecto (ADR 0031), no requiere plantilla propia |
+| `/author/{slug}/` | `templates/single-blog_author.html`; **query_var ≠ `author`** (ADR 0037) |
+| `/author/` | archivo CPT; **noindex** hasta volumen |
 | `/privacidad/` | `templates/page.html` (fallback; no requiere plantilla propia) |
 
 *(Si se implementa CPT sangha: `/sanghas/` → `templates/archive-sangha.html`; `/sanghas/{slug}/` →

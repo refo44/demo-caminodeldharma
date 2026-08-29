@@ -11,8 +11,9 @@ eso es deuda de deploy, no la fuente del extracto.
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
-Ítems UNCLEAR pendientes: [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md)
-(backlog, no ADR).
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog v1.18, 0 abiertas). El archivo
+[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) queda como
+registro de decisiones (no ADR).
 
 ---
 
@@ -68,7 +69,7 @@ Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entid
 Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
 La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
 
-`.ics`: 2 archivos (`circulos…`, `encuentro-nacional-2026`). Pausa Cali **sin** `.ics` en repo.
+`.ics`: 2 archivos en disco. Destino WP: **generados**, no Media Library (OWN-009). Encuentro 2026 **RETIRE** (OWN-012). Círculos KEEP hasta que `hoy >` su fecha de fin; entonces 410 y se borra el huérfano (OWN-013). Pausa Cali **sin** `.ics`.
 
 ---
 
@@ -79,7 +80,9 @@ La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/pra
 | `circulos-de-presencia-consciente` | Círculos de Presencia Consciente | Comunidad Camino del Dharma | REAL PRODUCTION | `post` |
 | `sangha-refugio-hiperconexion` | Estamos conectados, pero seguimos solos | Zheng Gong | REAL PRODUCTION | `post` |
 
-Autores: **atribución en copy**, no hay CPT author ni archivo `/author/`. No forzar CPT author.
+Autores en el **estático:** copy (no hay `/author/`). **Destino WP (ADR 0037):** CPT
+`blog_author`; semilla Zheng Gong + Comunidad Camino del Dharma; las 2 entradas se asignan
+por meta. No Users, no copy hardcodeado.
 Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 
 ---
@@ -93,7 +96,7 @@ Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 | Ítem | Clase | WP |
 | ---- | ----- | -- |
 | 35 imágenes del JSON + alt | REAL PRODUCTION | Media Library + relación de galería |
-| 3 álbumes | REAL PRODUCTION | taxonomía o parent/galería editorial |
+| 3 álbumes | REAL PRODUCTION | Mismos grupos en `/galeria`. URLs `/galeria/general`, `/2023`, `/2021` (ADR 0036); **noindex** hasta volumen. Taxonomía, no Page hija ni CPT. Destino FSE: **sin** paginación de 12 (OWN-011). |
 | `galeria-04.jpg` (ilustración de `/practica`) | REAL PRODUCTION (página, **no** galería) | Media de la Page Práctica. **OWN-001:** no añadir al álbum. |
 | thumbs | GENERATED/derivados | regenerar o importar según estrategia media |
 
@@ -135,12 +138,12 @@ Si `content-source/` y HTML divergen: **gana el HTML live** (OWN-007). No restau
 | `assets/images/celebraciones/` | ~3 | 1 en `/practica` (`diwali`); resto huérfano | **OWN-003:** usadas = media de Page; huérfanas = seed **oculto** (no se ven en el sitio) |
 | `assets/audio/` | 2 mp3 | mantras en `/practica` | IMPORT o KEEP download path |
 | `assets/documents/recitacion-practica-comida.pdf` | — | **RETIRE (OWN-002).** Excluido de la web; no es archivo del sitio. | No importar; no enlace; no URL |
-| `eventos/ical/*.ics` | 2 | descargas calendario | KEEP path o attachment |
+| `eventos/ical/*.ics` | 2 en disco | Círculos generado mientras vigente; Encuentro RETIRE | OWN-009 + OWN-013: no seed a Media Library |
 | favicon / OG default | varios | SEO | KEEP o Site Icon |
 
 **Imágenes (OWN-009-img + OWN-003, 2026-08-28):** seed → Media Library (contenido real, no fixture).
 Referenciadas: visibles según uso (álbum, Page, featured). **Huérfanas:** mismo seed, **ocultas**
-(no álbum, no Page, no teaser). Thumbs: regenerar. Audio/`.ics` abiertos. **PDF (OWN-002):** RETIRE.
+(no álbum, no Page, no teaser). Thumbs: regenerar. Audio → Media Library (OWN-009). `.ics` generado, no biblioteca; pasados 410 + borrar huérfano (OWN-012, OWN-013). **PDF (OWN-002):** RETIRE.
 
 ---
 
@@ -195,7 +198,7 @@ Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER 
 
 ## 11. Qué no hay (no inventar)
 
-- Buscador, área privada, CPT `sangha` en el estático, tags, archivo de autor, page builder, fixtures públicos.
+- Buscador, área privada, CPT `sangha` en el estático, tags, archivo de **usuario** WP, page builder, fixtures públicos. (Perfil CPT `/author/{slug}` es destino WP, ADR 0037; no está en el estático.)
 
 ---
 

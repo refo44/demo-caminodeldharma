@@ -47,8 +47,13 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Templates de bloques (`templates/*.html`) mapeados **desde la maqueta**, no desde un theme PHP clásico (ADR 0029)
 - [ ] JS probado (menú, share, calendario, galería Gutenberg; selectores y ARIA)
 - [ ] Assets probados (imágenes, fuentes, audio, PDF, `.ics`, favicon; sin 404)
-- [ ] CPT routing probado: `/eventos` archive + **10** singles (ADR 0035); **incoming HTTP**, no solo `get_permalink()`; pasados **sin** Inscribirme
+- [ ] CPT routing probado: `/eventos` archive + **10** singles (ADR 0035); **incoming HTTP**, no solo `get_permalink()`; pasados **sin** Inscribirme **ni** «Añadir al calendario» (OWN-012)
+- [ ] `/eventos/ical/encuentro-nacional-2026.ics` → **410**; Círculos `.ics` **generado** 200 solo si `hoy ≤` fecha de fin (OWN-009, OWN-013); **noindex** (OWN-014); no está en `/wp-sitemap.xml`
+- [ ] Evento con fecha de fin vencida: bloque archivo, sin inscripción ni calendario; ningún `.ics` huérfano en Media Library ni en disco
+- [ ] wp-admin: herramienta «Eliminar huérfanos» (OWN-015) — dry-run + apply; solo `.ics`; no borra fotos OWN-003
 - [ ] Tags del blog: archivo existe; `noindex` hasta volumen (ADR 0031)
+- [ ] Autores (ADR 0037): `/author/zheng-gong` **200** (CPT, no user); `query_var === 'blog_author'`; users `/author/{login}` **404**; byline ≠ usuario WP; publicar post exige ficha; archivo `/author` noindex
+- [ ] `/comunidad` (WP): enlaces a `/author/zheng-gong` y a la ficha Comunidad (OWN-016); copy live no pisado; estático no cambiado por esto
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
 - [ ] Contact Form 7: privacidad resuelta o el form sigue gated (ADR 0026, ADR 0028)
 - [ ] Rollback definido (volver a estático versionado **o** restaurar BD+files WP; dueño y ventana)

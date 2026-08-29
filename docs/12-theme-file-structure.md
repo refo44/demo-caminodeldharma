@@ -63,6 +63,8 @@ base de datos. Ver `docs/contrato-migracion-static-wordpress.md`.
 | Listado (`/blog/`) | `templates/home.html` |
 | Single (`/blog/{slug}/`) | `templates/single.html` |
 | Archivo de tag (`/blog/tag/{slug}/`) | Resuelve por la jerarquía nativa de WordPress (`templates/taxonomy-post_tag.html` si se crea; si no, cae a `templates/archive.html`/`templates/index.html`) — no requiere plantilla propia. `noindex, follow` por defecto (ADR 0031) hasta que el tag tenga volumen suficiente; el filtro que lo aplica vive en `camino-del-dharma-core` o el theme, no en la plantilla. |
+| Ficha de autor (`/author/{slug}/`) | `templates/single-blog_author.html` (ADR 0037). **No** usar archivo de usuario WP. |
+| Archivo de fichas (`/author/`) | jerarquía nativa o `archive-blog_author.html`; **noindex** hasta volumen |
 
 ---
 
@@ -132,6 +134,8 @@ camino-del-dharma/
 │   ├── single.html          (entrada del blog, /blog/{slug}/)
 │   ├── single-event.html   (si CPT event)
 │   ├── archive-event.html  (si CPT event)
+│   ├── single-blog_author.html  (ADR 0037)
+│   ├── archive-blog_author.html (opcional; noindex hasta volumen)
 │   ├── 404.html
 │   ├── archive-sangha.html (si CPT sangha)
 │   └── single-sangha.html  (si CPT sangha)
@@ -176,6 +180,9 @@ CPTs, taxonomías y roles **no** viven en este árbol: son responsabilidad de `c
 | `/contacto/` | `templates/page-contacto.html` |
 | `/blog/` | `templates/home.html` |
 | `/blog/{slug}/` | `templates/single.html` |
+| `/author/{slug}/` | `templates/single-blog_author.html` (ADR 0037; `query_var` ≠ `author`) |
+| `/author/` | archivo CPT; noindex hasta volumen |
+| `/galeria/{slug}/` | taxonomía álbum; noindex (ADR 0036) |
 | `/blog/tag/{slug}/` | jerarquía nativa (`taxonomy-post_tag.html`/`archive.html`/`index.html`); noindex por defecto (ADR 0031) |
 | Cualquier otra | `templates/404.html` |
 

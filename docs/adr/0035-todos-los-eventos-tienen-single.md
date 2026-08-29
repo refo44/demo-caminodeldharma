@@ -30,6 +30,10 @@ en silencio.
 4. CTA de inscripción **solo** si el evento está **vigente** y hay inscripción real.
    Finalizado: ficha + cartel + copy + JSON-LD `EventCompleted`; **sin** Inscribirme /
    Preinscribirme; **sin** `offers` de inscripción.
+   *(Nota 2026-08-29, OWN-012 / OWN-013: finalizado tampoco muestra «Añadir al calendario»
+   ni tiene `.ics`. El paso a finalizado es automático cuando `hoy >` fecha de fin
+   (`America/Bogota`). `encuentro-nacional-2026.ics` se RETIRE. Círculos conserva botón y
+   `.ics` generado hasta el día siguiente a su fin.)*
 5. La meditación semanal sigue **sin** ser `event` (Page `/practica/meditacion-semanal-en-linea`).
 
 | Evento (listado) | Slug previsto |

@@ -27,17 +27,21 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 - `/privacidad` aplazada, copy no inventado — ADR 0028
 - CPT `sangha` fuera del corte inicial — ADR 0024
 - Freeze por defecto: ledger durante el build + freeze corto al corte — ADR 0034
-- Todo evento tiene single; pasados sin inscripción — ADR 0035 (OWN-004)
+- Todo evento tiene single; pasados sin inscripción ni «Añadir al calendario» — ADR 0035 (OWN-004, OWN-012)
+- `.ics` generado al vuelo (no Media Library); mp3 sí — OWN-009
+- Fecha de fin vencida → finalizado automático; `.ics` huérfano se elimina — OWN-013
+- wp-admin: acción manual «Eliminar huérfanos» (solo `.ics`) — OWN-015
+- `/eventos/ical/{slug}.ics` no se indexa (SEO/AEO) — OWN-014
+- Autores del blog: CPT + `/author/{slug}`; usuario WP no firma — ADR 0037 (OWN-010)
+- En WP, `/comunidad` enlaza a esas fichas; el estático no se toca — OWN-016
+- Álbumes: misma agrupación que prod; URLs `/galeria/{slug}` noindex hasta volumen — ADR 0036 (OWN-008)
+- Galería WP: taxonomía (no Page hija ni CPT); corte **sin** paginación numerada — OWN-011
 
 ---
 
 ## Abiertas
 
-| ID | Pregunta | Tipo | Mientras tanto (default) | ¿Podría volverse ADR? |
-| -- | -------- | ---- | ------------------------ | --------------------- |
-| OWN-008 | Álbumes de galería (3): ¿taxonomía, padre/hijo u otro? | Modelo CMS | 3 colecciones reales; no hardcodear en patterns. Elegir al implementar el plugin. | **Sí**, si el modelo no queda cubierto por docs 03/16 al implementar. |
-| OWN-009 | Audio y `.ics`: ¿Media Library o path de descarga? | Media | Imágenes ya decididas (seed → Media Library). Audio/`.ics` siguen abiertos. | No. |
-| OWN-010 | Autores en cards (Comunidad / Zheng Gong): ¿seguir como copy o Users de WP? | Modelo CMS | Atribución en copy; no forzar CPT author ni `/author/`. | **Sí**, solo si se crean rutas `/author/` (entonces KEEP/301). |
+Ninguna.
 
 ## Decididas
 
@@ -51,6 +55,15 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 | OWN-004 | 2026-08-28 | **Todo evento tiene single.** Los 10 CPT tienen `/eventos/{slug}`. Los 7 que hoy no tienen ficha se publican en el corte (slugs en ADR 0035 / ledger). Eventos **pasados: sin Inscribirme / Preinscribirme**. Vigentes: inscripción solo si es real. |
 | OWN-005 | 2026-08-29 | **C+A confirmado.** Producción = estático en `caminodeldharma.org`. WordPress se despliega en **otra instancia Hostinger, sin dominio custom**, hasta el switch. Esa instancia es **STAGING**: noindex; no pisa `public_html` del estático. Ledger durante el build; freeze corto al corte. Delta (B) solo si el freeze no es viable. |
 | OWN-007 | 2026-08-29 | **Gana el HTML live.** El copy y el contenido de producción en `caminodeldharma.org` son los correctos. Si `content-source/` diverge, **no** se usa para pisar Pages. **QA obligatorio:** revisar y comparar copy, contenido **y estilos** contra la versión **publicada** (`https://caminodeldharma.org`), no solo contra el repo local o `content-source/`. Si repo y Hostinger no coinciden, anotar el delta (OWN-006 + ledger); no asumir paridad. |
+| OWN-008 | 2026-08-29 | **Agrupar como en producción** en `/galeria` (General, 2023, 2021). **Además** se permiten URLs `/galeria/{slug}` (taxonomía, no CPT). Hub `/galeria` = SEO principal (KEEP). Términos **`noindex, follow` hasta volumen** (ADR 0036), igual espíritu que tags (ADR 0031). Hoy 2023/2021 tienen 5 fotos: no indexar en el corte. |
+| OWN-011 | 2026-08-29 | **Taxonomía confirmada; sin paginación numerada en el corte.** El álbum es término `gallery_album`, no Page hija ni CPT. En WordPress el bloque Galería muestra **todas** las fotos del álbum (lazy-load nativo). No se porta `?galeria-*-page=` ni `/galeria/{slug}/page/2`. La paginación de 12 de la maqueta (`gallery.js`, `06` §6) es HISTORICAL para el destino FSE. Revisar solo si un álbum crece mucho; entonces, si acaso, solo en la URL del álbum. |
+| OWN-009 | 2026-08-29 | **mp3 → Media Library. `.ics` no.** Los 2 mantras se suben como attachments (bloque Audio). El `.ics` lo **genera** `camino-del-dharma-core` al vuelo desde los campos del evento (título, fechas, lugar, URL). URL estable `/eventos/ical/{slug}.ics` mientras esté vigente (Círculos KEEP). No se guarda en la biblioteca: no se desactualiza ni cambia de ruta. Vista previa en wp-admin = descargar el generado, no reescribir un archivo. |
+| OWN-012 | 2026-08-29 | **Pasados: sin «Añadir al calendario» y sin `.ics`.** Misma lógica que ADR 0035 (sin inscripción). No seed, no URL, no botón (oculto, no deshabilitado a la vista). `encuentro-nacional-2026.ics` → **RETIRE** (410). Círculos sigue vigente: su `.ics` y el botón se mantienen hasta que pase a finalizado; entonces la misma regla. El estático aún tiene el archivo huérfano; no se toca HTML/ICS live en esta nota. |
+| OWN-013 | 2026-08-29 | **Al día siguiente de la fecha de fin, el evento pasa solo a finalizado.** Comparar en `America/Bogota`: `hoy > event_end` (si no hay fin, `event_date`). Ese día el evento **sigue** vigente. `cancelado` no lo pisa la fecha. El visitante ve el archivo **al pedir la página** (no espera un cron). Al pasar: sin inscripción, sin calendario, `/eventos/ical/{slug}.ics` → **410**, y se **borra** cualquier `.ics` guardado (attachment o archivo huérfano). Si se alarga la fecha de fin, vuelve a vigente y el `.ics` generado reaparece. La meditación semanal no es `event`. |
+| OWN-014 | 2026-08-29 | **El `.ics` no se indexa.** `/eventos/ical/{slug}.ics` es descarga para calendarios, no documento. Fuera del sitemap (hoy no está; en WP el plugin no lo añade a `/wp-sitemap.xml`). Cabecera `X-Robots-Tag: noindex, nofollow`. No entra en `llms.txt`. SEO y AEO van a la ficha `/eventos/{slug}` (JSON-LD `Event`, doc 15 §12.3). `rel="alternate" type="text/calendar"` en la ficha vigente sí: lo usan los calendarios, no Google. |
+| OWN-015 | 2026-08-29 | **wp-admin tiene «Eliminar huérfanos»** (forzar a mano). Vive en `camino-del-dharma-core` (herramientas del plugin, no un plugin de terceros). Alcance: **solo `.ics`** — attachments `text/calendar` y archivos sueltos que no correspondan a un evento **vigente**. Primero lista (dry-run); luego aplica con nonce. Quien puede: editar eventos. No borra fotos huérfanas (OWN-003), mp3 ni carteles. El pase automático (OWN-013) sigue valiendo; este botón es por si quedó un resto o se quiere limpiar ya. **Aceptado 2026-08-29:** no hay otro tipo de archivo que valga la pena borrar. PDF de recitación no se importa (OWN-002). mp3 son los mantras. Thumbs no se importan. Embeds no son archivos. La papelera y las revisiones de WP no entran en este botón. |
+| OWN-010 | 2026-08-29 | **D — CPT de autor.** El «Por…» del blog sale de fichas `blog_author`, no de copy ni del usuario WP. Perfil `/author/{slug}` (ADR 0037). Semilla: Zheng Gong (`zheng-gong`), Comunidad Camino del Dharma (`comunidad-camino-del-dharma`). Buscador al asignar; publicar exige ≥1 ficha. `query_var` ≠ `author`. Archivos de users = 404. Eventos no usan este CPT. `/comunidad` no se mueve. |
+| OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
 
 Al cerrar una fila: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -58,4 +71,8 @@ Al cerrar una fila: fecha, decisión en una frase, y actualizar
 
 ---
 
-**Versión:** 1.8 · **Fecha:** 2026-08-29 · **Estado:** 3 abiertas · 8 decididas (Fase 3 no iniciada)
+**Reconciliación docs (2026-08-29):** backlog **cerrado**. Alineados AGENTS/CLAUDE, contrato, playbook,
+FABLE5 v2, docs 03/04/12/15/17, inventario, matriz, ledger, ADR 0035–0037. FABLE5 v1 sigue
+HISTORICAL (tabla de supersesiones actualizada). Fase 3 no iniciada.
+
+**Versión:** 1.18 · **Fecha:** 2026-08-29 · **Estado:** 0 abiertas · 17 decididas (Fase 3 no iniciada)

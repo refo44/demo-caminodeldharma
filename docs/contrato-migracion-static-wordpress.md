@@ -44,10 +44,10 @@ A migration is NOT complete merely because the WordPress theme is deployed or ac
 
 | # | Entregable | Definición |
 | - | ---------- | ---------- |
-| 1 | **CONTENT** | Objetos en la base de datos y media: Pages, posts, CPT `event` (y `sangha` solo si una decisión posterior lo activa), taxonomías, metadata, biblioteca de medios, copy institucional. |
+| 1 | **CONTENT** | Objetos en la base de datos y media: Pages, posts, CPT `event`, CPT `blog_author` (ADR 0037), taxonomía de álbum (ADR 0036), `sangha` solo si una decisión posterior lo activa, metadata, biblioteca de medios, copy institucional. |
 | 2 | **PRESENTATION** | Theme de bloques: `templates/*.html`, `parts/*.html`, `patterns/`, `theme.json`, CSS complementario, layout responsive, estructura de accesibilidad. |
 | 3 | **ROUTING** | Slugs, permalinks, archives/singles, taxonomías con archivo público, redirects, 404, canonicales. Las URLs públicas deben coincidir con ADR 0008 y `11-arbol-urls-final`. |
-| 4 | **BEHAVIOR** | JavaScript, formulario, menú móvil, diálogos (compartir / añadir al calendario), tooltips del calendario de `/eventos`, paginación de galería o su sustituto Gutenberg (ADR 0021), audio de mantras, descargas `.ics`/PDF. |
+| 4 | **BEHAVIOR** | JavaScript, formulario, menú móvil, diálogos (compartir / añadir al calendario en **vigentes**), tooltips del calendario de `/eventos`, galería Gutenberg **sin** paginación numerada (ADR 0021, OWN-011), audio de mantras, `.ics` **generado** (OWN-009). |
 | 5 | **OPERATIONS** | Environments, backups, rollback, importadores, fixtures, indexación, QA con evidencia, ownership, retiro del deploy estático legacy. |
 
 Un entregable en verde no cierra los otros cuatro.
@@ -142,7 +142,8 @@ No basta con que exista `assets/js/main.js` encolado. Comprobar:
 - estado ARIA (`aria-expanded`, `aria-current`, `aria-hidden` del hint del calendario);
 - eventos (click, Escape, resize, primer/segundo toque en puntero grueso);
 - formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, gated por ADR 0028);
-- comportamiento dinámico (paginación de álbumes, diálogo de calendario, `.ics`).
+- comportamiento dinámico (diálogo de calendario, `.ics`; galería: bloque Gutenberg, **sin**
+  paginación numerada — OWN-011).
 
 Diferencia ya decidida: `gallery.js` **no** se porta; la galería pasa al bloque Gutenberg con
 lightbox nativo (ADR 0021). Eso debe quedar en la matriz como «sustitución documentada», no como
@@ -354,7 +355,9 @@ redes, donaciones, datos bancarios).
 - `sitemap.xml` + `sitemap.xsl`
 - `llms.txt`
 - `.htaccess` (canonicalización, redirects, caché, seguridad; HSTS **comentado**, ADR 0020)
-- Favicon, fuentes, imágenes (JPEG/WebP), audio documentado en `16`, `.ics` en `eventos/ical/`. PDF de recitación: **RETIRE** (OWN-002); no migrar.
+- Favicon, fuentes, imágenes (JPEG/WebP), audio (mp3 → Media Library, OWN-009). `.ics` **generado**
+  por el plugin (no biblioteca); vigentes: `/eventos/ical/{slug}.ics`; pasados: 410 y borrar
+  huérfano (OWN-012, OWN-013). PDF de recitación: **RETIRE** (OWN-002); no migrar.
 
 Todo esto forma parte del contrato. No hace falta un equivalente WordPress en esta tarea de
 documentación; hace falta no olvidarlo en Fase 3.

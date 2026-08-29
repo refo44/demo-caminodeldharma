@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.4 |
-| **Fecha** | 2026-08-19 |
+| **Versión** | 3.5 |
+| **Fecha** | 2026-08-29 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.5)
+
+- Backlog de dueño de la auditoría **cerrado** (v1.18). ADR 0035–0037: singles de eventos, álbumes
+  `/galeria/{slug}` noindex, CPT autor `/author/{slug}`.
+- ICS generado; pasados sin calendario; fecha de fin automática; autores no son Users WP.
 
 ### Cambios principales (3.4)
 
