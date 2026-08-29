@@ -19,9 +19,10 @@ pipelines.
 2. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
 3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
 4. `docs/cutover-checklist-wordpress.md`
-5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0037**
+5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0038**
 6. `docs/backlog-decisiones-owner-migracion.md` (cerrado; 0 abiertas)
 7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
+8. `docs/guia-pruebas-plugin-theme-fse.md` — TDD, wp-phpunit, FSE, Sonar (ADR 0038)
 
 ## Hard rules
 
@@ -38,6 +39,8 @@ pipelines.
 - Compare copy, content, and styles to published production (`https://caminodeldharma.org`), not only the local repo (OWN-007).
 - Target: **static production → FSE** (ADR 0029). No classic PHP theme as a bridge.
 - Update durable docs after verified implementation.
+- New plugin domain: TDD. Do not mock WordPress. Sonar scope is `.sonarcloud.properties`
+  (Automatic Analysis ON). Guide: `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).
 
 ## Docs-only vs implementation
 

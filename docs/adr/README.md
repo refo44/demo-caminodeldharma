@@ -116,6 +116,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0035](0035-todos-los-eventos-tienen-single.md) | Todo evento tiene ficha pública; los pasados no se inscriben | Aceptada |
 | [0036](0036-urls-album-galeria-noindex.md) | URLs de álbum `/galeria/{slug}` permitidas; noindex hasta volumen | Aceptada |
 | [0037](0037-cpt-autor-blog-url-author.md) | CPT de autor del blog; perfil `/author/{slug}` | Aceptada |
+| [0038](0038-pruebas-tdd-phpunit-sonar.md) | Pruebas TDD, wp-phpunit y SonarQube Cloud | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -148,12 +149,14 @@ Documentos, issues, commits o ADR relacionados.
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
 | Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
+| Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — tres niveles; kit el día uno del PHP; Automatic Analysis + `.sonarcloud.properties` |
 
 ---
 
 ## Relación con otros documentos
 
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
+- **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
 - **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — cerrado (v1.18); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.

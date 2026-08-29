@@ -7,8 +7,9 @@ Do not copy names, URLs, slugs, CPTs, hosts, or deploy architecture from other r
 ## Inspect before modify
 
 Read `README.md`, `docs/17-orden-implementacion.md` (current phase), `docs/adr/README.md`,
-`docs/inventario-contenido-produccion-static.md`, and `docs/contrato-migracion-static-wordpress.md`
-before changing architecture or WordPress plans.
+`docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`,
+and `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038) before changing architecture, WordPress
+plans, or adding tests.
 
 ## Three times
 
@@ -70,6 +71,14 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   `author`. WP user archives 404. Do not copy another repo’s author plugin; follow ADR 0037.
 - `/comunidad` stays; in WP only, add links to author profiles (OWN-016). Do not edit static HTML
   for that now.
+
+## Testing (ADR 0038)
+
+New domain behavior in the future plugin is TDD. wp-phpunit is the default for in-process
+WordPress contracts. The FSE theme does not own domain. Do not mock WordPress APIs. Do not
+scaffold PHPUnit/Composer/`wordpress/` before Fase 3 starts. Sonar Automatic Analysis is
+ON: configure scope in `.sonarcloud.properties` only; never add a second scanner.
+Guide: `docs/guia-pruebas-plugin-theme-fse.md`.
 
 ## Do not deploy while auditing or documenting
 

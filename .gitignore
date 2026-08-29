@@ -84,6 +84,9 @@ wp-config.php
 # Node.js tooling
 /node_modules/
 
+# PHP test tooling (root Composer, ADR 0038) — created on day one of first-party PHP
+/vendor/
+
 # Paquetes de despliegue — generar siempre en ~/Desktop, nunca en el repo
 /*.zip
 camino-del-dharma-deploy.zip

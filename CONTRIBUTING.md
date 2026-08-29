@@ -9,14 +9,24 @@ Gracias por contribuir al sitio web de la Comunidad Buddhista Camino del Dharma.
 3. Copy de producción: **HTML live** (OWN-007). Si `content-source/` diverge, gana el sitio. No parafrasear el live ni restaurar el doc encima. Eventos, posts y galería también se extraen del HTML (ADR 0034).
 4. Migración futura: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Un template no crea una Page. No desplegar HTML estático sobre un document root WordPress.
 5. Guías para agentes: [`AGENTS.md`](AGENTS.md), [`CLAUDE.md`](CLAUDE.md).
+6. Pruebas y TDD: [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md) (ADR 0038).
 
 ## Flujo Git
 
-1. Crear rama desde `main`: `feature/descripcion-corta` o `fix/descripcion-corta`.
-2. Implementar cambios en el repositorio (nunca editar producción directamente — ADR 0005).
-3. Ejecutar validaciones locales (ver abajo).
-4. Abrir Pull Request hacia `main` con descripción clara del cambio y referencia a docs/ADR si aplica.
-5. Tras merge, **despliegue manual** según README y ADR 0015 (CI/CD pospuesto — ADR 0016).
+**Hoy:** `main` no está protegida; se permite push directo a `main`. Producción solo se
+despliega desde `main` (ADR 0004, ADR 0015).
+
+**Futuro:** ramas `feature/descripcion-corta` o `fix/descripcion-corta` y Pull Request
+obligatorio hacia `main`. El gate de CI será Stylelint + `composer test` (cuando exista
+PHP). El despliegue sigue siendo **manual** (ADR 0016).
+
+Hasta entonces:
+
+1. Implementar cambios en el repositorio (nunca editar producción directamente — ADR 0005).
+2. Ejecutar validaciones locales (ver abajo). TDD en dominio nuevo: ADR 0038 y
+   [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md).
+3. Push a `main` (hoy) o PR (cuando la protección de rama esté activa).
+4. **Despliegue manual** según README y ADR 0015.
 
 **Producción solo desde `main`**, asociada a `VERSION` y `CHANGELOG.md`.
 
@@ -37,7 +47,16 @@ npm install
 npm run lint:css
 ```
 
-Stylelint debe finalizar **sin errores** antes de commit, PR o despliegue.
+Stylelint debe finalizar **sin errores** antes de commit, push, PR o despliegue.
+
+Cuando exista PHP propio (Fase 3): `composer test` es el gate barato (sintaxis + audit del
+lockfile + units). `composer test:wp` y `tools/qa-*.sh` son locales, con Docker, y no
+entran en CI. Oficio y taxonomía: [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md)
+(ADR 0038).
+
+SonarQube Cloud (Automatic Analysis) ya escanea el repo. El alcance está en
+`.sonarcloud.properties`. No añadir un scanner en Actions mientras Automatic Analysis esté
+ON. El 0.0 % de cobertura en Sonar es esperado.
 
 Para cambios de CSS/HTML significativos, revisar también:
 
@@ -66,7 +85,7 @@ Los ADR aceptados son **inmutables**. Para cambiar una decisión, crear un ADR n
 
 Ver `README.md`: sitemap, `VERSION`, `CHANGELOG.md`, `npm run lint:css`, `npm run build:css` (regenera `main.min.css`), ZIP acotado al sitio estático.
 
-**No subir** `docs/`, `wordpress/`, `scripts/` ni el repo completo.
+**No subir** `docs/`, `wordpress/`, `scripts/`, `tests/` ni el repo completo.
 
 ### Fase 3: `static/` → `public_html`
 

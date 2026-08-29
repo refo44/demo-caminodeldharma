@@ -24,7 +24,9 @@ demo-caminodeldharma/
 ├── favicon.ico, favicon.svg
 ├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/
 ├── assets/
-└── scripts/                   No se despliegan
+├── scripts/                   No se despliegan
+├── tests/                     Taxonomía de pruebas (ADR 0038); suites en Fase 3
+└── .sonarcloud.properties      Alcance SonarQube Cloud
 ```
 
 La **raíz** es el sitio desplegado en Hostinger. Ver README y Fase 4 en `17-orden-implementacion`.
@@ -49,7 +51,9 @@ demo-caminodeldharma/
 │           └── camino-del-dharma-core/   Solo si aplica
 ├── docs/
 ├── scripts/
-└── .github/
+├── tests/                     PHPUnit + Gherkin (ADR 0038)
+├── .sonarcloud.properties
+└── .github/                   test.yml el día uno del PHP; no deploy.yml (ADR 0016)
 ```
 
 **Reglas:**
@@ -77,6 +81,7 @@ demo-caminodeldharma/
 | **static/ (Fase 3+)** | Sitio público en producción durante transición; recibe mantenimiento. Referencia de paridad con theme. |
 | **wordpress/…/camino-del-dharma/** | Theme; assets en `assets/` del theme. |
 | **scripts/** | Mantenimiento local. |
+| **tests/** | PHPUnit / Gherkin (ADR 0038). No se despliega. Vacío de suites hasta Fase 3. |
 
 ### Fuentes de verdad (post-corte WordPress)
 
@@ -124,4 +129,4 @@ Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/
 
 ---
 
-**Versión:** 2.2
+**Versión:** 2.3

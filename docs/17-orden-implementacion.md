@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.5 |
+| **Versión** | 3.6 |
 | **Fecha** | 2026-08-29 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.6)
+
+- Taxonomía de pruebas y TDD para el plugin + theme FSE (ADR 0038). Alcance de
+  SonarQube Cloud en `.sonarcloud.properties`. El kit PHPUnit se crea el día uno del
+  PHP propio, no antes.
 
 ### Cambios principales (3.5)
 
@@ -137,7 +143,7 @@ Documentos congelados:
 - `19-accesibilidad-estandares`
 - `23-sistema-editorial`
 
-**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, `docs/contrato-migracion-static-wordpress.md`, `docs/matriz-migracion-static-wordpress.md`, `docs/cutover-checklist-wordpress.md`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales, `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta, respaldos en `docs/archive/` (p. ej. formulario de contacto para WordPress).
+**Documentación nueva permitida sin levantar el congelamiento:** ADR en `docs/adr/`, `docs/contrato-migracion-static-wordpress.md`, `docs/matriz-migracion-static-wordpress.md`, `docs/cutover-checklist-wordpress.md`, entradas en `docs/migracion-static-wordpress.md`, guías operativas puntuales (incl. `docs/guia-pruebas-plugin-theme-fse.md`), `CHANGELOG.md`, actualizaciones de `12`, `13`, `15` cuando la implementación lo exija de forma concreta, respaldos en `docs/archive/` (p. ej. formulario de contacto para WordPress).
 
 Evitar ciclos de refinamiento permanente que retrasen la implementación. Prioridad: **código y validación** según las fases definidas aquí.
 
@@ -530,7 +536,7 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
 **Justificación:** CMS para terceros (ADR 0012). Ver § Transición estático → WordPress.
 
 1. **Reorganizar repo:** raíz → `static/` (ADR 0014); actualizar README y procedimiento de despliegue
-2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024)
+2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024). El mismo día: kit de pruebas (Composer de raíz, `tests/Unit/`, `tests/WordPress/`, wp-phpunit). TDD en dominio nuevo (ADR 0038, `docs/guia-pruebas-plugin-theme-fse.md`). Actualizar `.sonarcloud.properties` con las rutas del plugin y del theme.
 3. Adaptar cada HTML de `static/` **directamente** a `templates/*.html` / `parts/` / `patterns/` (`12-theme-file-structure`). Ruta: maqueta → FSE. **Prohibido** un theme clásico PHP como puente.
 4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`, [matriz](matriz-migracion-static-wordpress.md)
 5. CPT `event` en el plugin; roles editoriales; importador create-missing-only (ADR 0033); ledger `migracion-static-wordpress.md`
@@ -547,6 +553,7 @@ La fase se considera **cerrada** cuando:
 - [ ] CPT `event` operativo; archive + single con HTTP real; estados con/sin evento validados
 - [ ] Contenido editable desde WordPress sin romper layout
 - [ ] Cinco entregables del contrato (ADR 0032) cubiertos, no solo el theme desplegado
+- [ ] Kit de pruebas del día uno: `composer test` verde; wp-phpunit para CPT/meta/rewrites; dominio nuevo con TDD (ADR 0038)
 - [ ] Fase 2.5 repetida sobre el theme en staging antes de producción
 - [ ] [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md) completado en staging
 
@@ -678,4 +685,4 @@ A partir de la versión 3.0, **priorizar implementación** sobre ampliación de 
 
 ---
 
-**Versión:** 3.3 · **Fecha:** 2026-08-19 · **Estado:** Vigente
+**Versión:** 3.6 · **Fecha:** 2026-08-29 · **Estado:** Vigente

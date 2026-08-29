@@ -169,11 +169,15 @@ entregando de verdad a caminodeldharma1@gmail.com se valida en staging, no solo 
 - [ ] Comentario de uso en cabecera del compose (up, run wpcli, URL, admin).
 - [ ] Primera sesión de QA en escalera (§4) con resultados registrados en `migracion-static-wordpress.md`
       o equivalente.
+- [ ] Kit de pruebas (ADR 0038) el mismo día que exista PHP propio: `composer test` +
+      `composer test:wp`. Harnesses de nivel 3 usan un compose **efímero** (`-p cdd-qa-<slice>`,
+      `down -v`), no este volumen de desarrollo.
 
 ## 7. Referencias
 
 - ADR [0023](adr/0023-entorno-local-wordpress-docker.md) — la decisión y sus alternativas
 - ADR [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md)
+- ADR [0038](adr/0038-pruebas-tdd-phpunit-sonar.md) y `docs/guia-pruebas-plugin-theme-fse.md`
 - `docs/17-orden-implementacion.md` § Transición estático → WordPress
 - `.audit/audit-schedule.md` — Hito 2
 - `docs/13-static-file-structure.md`, ADR [0014](adr/0014-monorepo-static-wordpress.md)

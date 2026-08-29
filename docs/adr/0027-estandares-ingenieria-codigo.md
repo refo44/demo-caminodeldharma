@@ -72,9 +72,17 @@ cualquier implementador —humano o agente, en cualquier sesión futura— parta
 - Añade fricción de revisión (linting, prefijos, escaping) desde la primera línea de código de Fase 3 —
   aceptada a cambio de no acumular deuda técnica desde el inicio.
 
+## Nota (2026-08-29)
+
+ADR [0038](0038-pruebas-tdd-phpunit-sonar.md) fija TDD y la taxonomía de pruebas (PHPUnit,
+wp-phpunit, harnesses, SonarQube Cloud) para el plugin y el theme FSE. No sustituye WPCS ni
+el guardrail anti-sobre-ingeniería de este ADR: PHPCS sigue siendo estilo; PHPUnit prueba
+comportamiento. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
+
 ## Referencias
 
 - ADR [0024](0024-plugin-dominio-theme-presentacion.md) — este ADR fija cómo se escribe ese código
+- ADR [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD, niveles de test y Sonar (complementa, no sustituye)
 - `docs/docker-wordpress-playbook.md` §4 — nivel 1 de QA (`php -l`, sintaxis)
 - `docs/03-wordpress-content-model.md` — criterio "evita scope creep" ya vigente en el proyecto
 - `.audit/decisions.md` (2026-07-20) — retiro del selector de idioma hasta que exista versión en inglés

@@ -143,7 +143,9 @@ Ejemplo:
 
 En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Inventario de producción y contrato de migración: `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`. Decisiones de dueño (auditoría, **cerradas**): `docs/backlog-decisiones-owner-migracion.md`. Agentes: `AGENTS.md`, `CLAUDE.md`.
 
-Colaboración, lint y despliegue: `CONTRIBUTING.md`. Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
+Colaboración, lint, pruebas y despliegue: `CONTRIBUTING.md`. Guía de pruebas (TDD, wp-phpunit,
+FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md)
+(ADR 0038). Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
 
 ## Estado actual vs plan futuro
 

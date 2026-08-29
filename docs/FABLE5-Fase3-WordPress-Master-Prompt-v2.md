@@ -635,6 +635,11 @@ Record evidence using only:
 
 `Pass (local)` never proves Hostinger PHP/Apache/HTTPS/mail behavior.
 
+Test taxonomy (runners, TDD, what not to mock, Sonar): `docs/guia-pruebas-plugin-theme-fse.md`
+and ADR 0038. Create the PHPUnit + wp-phpunit kit the same day first-party PHP exists. FABLE5
+QA levels below are *migration evidence*; they map to those runners (QA 1 = cheap gate, QA 2 =
+unit + wp-phpunit, QA 3 = wp-phpunit + isolated harnesses, QA 4 = manual + staging).
+
 ### QA level 1 — static checks
 
 - PHP syntax;
