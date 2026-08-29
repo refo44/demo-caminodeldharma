@@ -47,6 +47,10 @@ riesgo desde la fase de desarrollo, no solo en el staging final.
    desarrollo — mismo criterio que ya aplica a `scripts/` en la estructura de ADR 0014. No se versiona
    en Git: core de WordPress, `wp-config.php`, credenciales, volúmenes de base de datos ni `uploads/` —
    mismo criterio ya establecido en `docs/17-orden-implementacion.md` § "No versionar en Git".
+
+*(Nota 2026-08-29, OWN-005: el staging remoto es **otra instancia Hostinger sin dominio custom**,
+hasta el switch. Producción sigue siendo el estático en `caminodeldharma.org`. Docker local no
+cambia: no sustituye esa instancia. Staging noindex; no instalar WP sobre el `public_html` del live.)*
 6. **Arquitectura de 3 servicios** (`db` con healthcheck, `wordpress`, `wpcli`), con bind-mount
    limitado al theme propio (`camino-del-dharma`, y al plugin propio si llega a crearse) — el core y la
    base de datos quedan en volúmenes Docker, nunca en Git. Detalle completo, gotchas y checklist en

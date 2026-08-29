@@ -120,7 +120,7 @@ Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni 
 
 Mismo procedimiento, pero el ZIP se genera **desde el contenido de `static/`** (no incluir `docs/`, `wordpress/`, `scripts/`). Ver `17-orden-implementacion` § Transición.
 
-WordPress (cuando exista) se despliega manualmente a **staging separado**; no instalar sobre producción hasta el corte final. Activar el theme **no** crea Pages ni sustituye el checklist de cutover.
+WordPress se despliega en **otra instancia Hostinger, sin dominio custom** (staging), hasta el switch. Producción sigue siendo el estático en `caminodeldharma.org`. No instalar WordPress sobre ese `public_html` hasta el corte. Activar el theme **no** crea Pages ni sustituye el checklist de cutover.
 
 ## Scripts
 

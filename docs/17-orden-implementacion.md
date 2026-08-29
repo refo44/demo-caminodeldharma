@@ -57,7 +57,7 @@ Tres tiempos (no mezclar):
 | ------ | ----- |
 | **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). `static/` y `wordpress/` **no existen**. WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
 | **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. El nombre «maqueta» en docs antiguos no significa prototipo desechable (ADR 0001). |
-| **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Estático de producción → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Extracción + import (ADR 0033/0034). Corte: `docs/cutover-checklist-wordpress.md`. Producción estática **sigue** hasta el corte. |
+| **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Estático de producción → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Extracción + import (ADR 0033/0034). WP en **otra instancia Hostinger sin dominio custom** (staging, OWN-005) hasta el switch. Corte: `docs/cutover-checklist-wordpress.md`. Producción estática **sigue** hasta el corte. |
 
 | Aspecto | Estado |
 | ------- | ------ |

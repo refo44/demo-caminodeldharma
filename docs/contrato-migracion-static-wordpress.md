@@ -237,8 +237,8 @@ Nombres que **sí** usa este repositorio:
 | Environment | Nombre en docs | Estado |
 | ----------- | -------------- | ------ |
 | **LOCAL** | Docker Compose, `WP_ENVIRONMENT_TYPE=local` (ADR 0023, `docker-wordpress-playbook.md`) | Planificado; `docker-compose.yml` aún no existe |
-| **STAGING** | Staging WordPress en Hostinger, separado de producción | Planificado; no hay hostname versionado en el repo |
-| **PRODUCTION** | `https://caminodeldharma.org` en Hostinger `public_html` | **Actual:** sitio estático |
+| **STAGING** | WordPress en **otra instancia Hostinger**, **sin dominio custom**, hasta el switch (OWN-005) | Planificado / en paralelo; noindex; no pisa el estático. Hostname no versionado en el repo |
+| **PRODUCTION** | `https://caminodeldharma.org` en Hostinger `public_html` | **Actual y hasta el corte:** sitio **estático** |
 
 No mezclar entre environments: credenciales, base de datos, uploads, política de indexación
 (staging no debe indexarse), fixtures, dominios.

@@ -106,6 +106,10 @@ sustituirla):
 - Delta import (opción B) solo si el freeze no es viable; entonces el extractor se re-ejecuta y se
   reconcilian conteos otra vez.
 
+*(Nota 2026-08-29, OWN-005: el propietario **confirmó C+A**. WordPress vive en otra instancia
+Hostinger sin dominio custom hasta el switch. El estático en `caminodeldharma.org` sigue siendo
+producción.)*
+
 ### 7. Patterns FSE ≠ contenido
 
 Los `patterns/` son estructura reutilizable. Las colecciones reales (eventos, posts, galería) viven
