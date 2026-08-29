@@ -108,14 +108,14 @@ de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importa
 
 | Recurso | SoT preferida | Publicado en | Clase |
 | ------- | ------------- | ------------ | ----- |
-| Comunidad, linaje, práctica (narrativa) | `content-source/` | HTML live | REAL PRODUCTION |
-| Home hero, caminos, cómo practicamos | `content-source/` + HTML | `index.html` | REAL PRODUCTION + STRUCTURAL COPY |
-| Datos bancarios footer | `content-source/` | todas las páginas | REAL PRODUCTION |
+| Comunidad, linaje, práctica (narrativa) | **HTML live** (OWN-007) | HTML live | REAL PRODUCTION |
+| Home hero, caminos, cómo practicamos | **HTML live** | `index.html` | REAL PRODUCTION + STRUCTURAL COPY |
+| Datos bancarios footer | **HTML live** | todas las páginas | REAL PRODUCTION |
 | Nav / skip link / labels | docs 09 | HTML | STRUCTURAL COPY |
 | Language switcher (solo UI, sitio en español) | `main.js` | header | STRUCTURAL COPY (no i18n real) |
 | Formulario contacto | markup live; envío no opera | `/contacto` | REAL PRODUCTION (campos); backend = ADR 0026 |
 
-Si `content-source/` y HTML divergen: **UNCLEAR**, no pisar el live en silencio.
+Si `content-source/` y HTML divergen: **gana el HTML live** (OWN-007). No restaurar el doc sobre producción.
 
 ---
 

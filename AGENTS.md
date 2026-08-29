@@ -20,12 +20,13 @@ before changing architecture or WordPress plans.
 
 ## Canonical content
 
-Until cutover, **live static HTML/JSON is a production content source** for events, posts, and gallery
-(ADR 0034). Institutional copy still prefers `content-source/` when present; divergences are UNCLEAR
-(owner review). After cutover, WordPress owns editorial content.
+Until cutover, **live static HTML/JSON is the production content source** for events, posts, gallery,
+and institutional copy (ADR 0034, OWN-007). `content-source/` is reference only; if it diverges, **live
+HTML wins**. After cutover, WordPress owns editorial content.
 
-Do not paraphrase `content-source/`. Do not discard hardcoded HTML as dummy. Prefer deterministic
-extraction over retyping. Counts must reconcile.
+Do not overwrite live copy from `content-source/`. Do not discard hardcoded HTML as dummy. Prefer
+deterministic extraction over retyping. Counts must reconcile. Before cutover, compare copy, content,
+and styles to the **published** site (`https://caminodeldharma.org`), not only the local repo.
 
 ## Static site is production + visual contract
 

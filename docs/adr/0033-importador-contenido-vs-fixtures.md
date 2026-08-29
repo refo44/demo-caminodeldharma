@@ -57,6 +57,10 @@ El HTML de producción **no** debe convertirse en una segunda redacción *instit
 cards publicadas, el HTML live **sí** es la fuente de producción actual hasta extraerse. No tratarlo
 como demo. Tras el corte, wp-admin es la SoT editorial (ADR 0013).
 
+*(Nota 2026-08-29, OWN-007: el propietario eligió el **HTML live** como copy correcto de producción.
+Si `content-source/` y el sitio divergen, el importador usa el HTML. QA: comparar copy, contenido y
+estilos con `https://caminodeldharma.org`, no solo el repo.)*
+
 ### Preferencia de implementación (cuando se construya)
 
 - Comando WP-CLI en `camino-del-dharma-core` (ADR 0024), no como side-effect de `register_activation_hook`.

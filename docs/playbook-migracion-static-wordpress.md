@@ -72,7 +72,7 @@ No hay un único árbol para todo (ADR 0034).
 
 | Tipo | SOURCE OF TRUTH hoy | PRESENTATION / GENERATED |
 | ---- | ------------------- | ------------------------ |
-| Copy institucional | `content-source/` si existe; HTML live = publicado; divergencia = UNCLEAR | HTML/CSS |
+| Copy institucional | **HTML live** (OWN-007). `content-source/` = referencia | HTML/CSS |
 | Eventos, posts, JSON de galería | **HTML / JSON embebido live** | cards, listados, `gallery.js` |
 | Arquitectura | ADR, luego `docs/01`–`24` | — |
 | CSS servido | `assets/css/main.css` | `main.min.css` |
@@ -149,7 +149,7 @@ completas:
 | 1 — Estático | Sintaxis PHP, JSON/YAML si aplica, checksums CSS/JS, greps de patrones prohibidos | No — siempre disponible |
 | 2 — Componente | CPTs, meta fields, comandos WP-CLI propios, idempotencia de migración/fixtures | Sí — Docker local (ADR 0023) basta |
 | 3 — Integración | Activación de plugin/theme, permalinks, Contact Form 7 entregando, plugins de terceros aprobados | Sí — Docker local basta |
-| 4 — Regresión UX | Paridad visual contra `static/`, navegación por teclado, ausencia de cookies (ADR 0019), red | Sí — Docker + staging real para lo que depende del hosting |
+| 4 — Regresión UX | Paridad de **copy, contenido y estilos** contra `https://caminodeldharma.org` (OWN-007), no solo el repo local; teclado; sin cookies (ADR 0019) | Sí — Docker + staging; evidencia frente al live |
 
 **Reglas de honestidad que ya aplican en este proyecto y se mantienen:**
 - `Pass (local)` **no** sustituye a `Pass` para nada que dependa del hosting real de Hostinger:

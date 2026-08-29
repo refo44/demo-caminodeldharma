@@ -10,7 +10,7 @@ pipelines.
 - Production: static HTML on Hostinger (`https://caminodeldharma.org`) with real visitors. Not a disposable mockup.
 - Hardcoded events (10 cards), blog posts (2), gallery JSON (35 + 3 albums) are **production content** (ADR 0034).
 - Repo layout: site at **root**. `static/` and `wordpress/` do **not** exist yet.
-- Institutional copy: `content-source/` when present; live HTML is what is published; divergences = UNCLEAR.
+- Institutional copy: **live HTML wins** (OWN-007). `content-source/` is reference; do not overwrite production from the doc.
 - Deploy: manual ZIP (ADR 0015). WordPress: **not started**.
 
 ## Must-read before WordPress or migration work
@@ -34,6 +34,7 @@ pipelines.
 - Do not deploy while auditing. No cutover with broken navigation.
 - Test incoming HTTP routes, not only `get_permalink()`. No trailing slash (ADR 0008).
 - Preserve JS/DOM contracts, accessibility (`docs/19`), media relationships.
+- Compare copy, content, and styles to published production (`https://caminodeldharma.org`), not only the local repo (OWN-007).
 - Target: **static production → FSE** (ADR 0029). No classic PHP theme as a bridge.
 - Update durable docs after verified implementation.
 

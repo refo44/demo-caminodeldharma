@@ -35,6 +35,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] No unresolved content loss
 - [ ] No important URL without KEEP/301
 - [ ] No broken navigation (header, footer, CTAs, cards)
+- [ ] Parity vs **producción publicada** (`https://caminodeldharma.org`): copy, contenido **y** estilos (OWN-007). No basta el repo local.
 
 ## PRE-CUTOVER (detalle operativo)
 
@@ -83,7 +84,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 ## POST-CUTOVER
 
 - [ ] Anonymous smoke test (sesión sin cookies de admin)
-- [ ] Desktop QA (paridad visual vs maqueta)
+- [ ] Desktop QA (paridad visual vs **sitio publicado**, no solo maqueta local)
 - [ ] Mobile QA
 - [ ] Keyboard QA (menú, calendario, diálogos, lightbox)
 - [ ] Accessibility basics (`docs/19-accesibilidad-estandares`)

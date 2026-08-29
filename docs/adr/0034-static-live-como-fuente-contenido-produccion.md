@@ -61,7 +61,7 @@ No hay una jerarquía única para todo.
 
 | Tipo | SOURCE OF TRUTH hoy | GENERATED / PRESENTATION |
 | ---- | ------------------- | ------------------------ |
-| Copy institucional (comunidad, linaje, práctica, footer, donaciones) | `content-source/` cuando existe; el HTML live es lo **publicado** — si divergen: UNCLEAR | HTML/CSS |
+| Copy institucional (comunidad, linaje, práctica, footer, donaciones) | **HTML live** (OWN-007, 2026-08-29). `content-source/` = referencia; no pisa el live | HTML/CSS |
 | Eventos (10 cards en `/eventos`, 3 singles) | **HTML live** (`eventos/index.html` y fichas) | CSS/JS de cards y calendario |
 | Entradas de blog (2) | **HTML live** (`blog/{slug}/`) | listado/home |
 | Galería (35 ítems JSON, 3 álbumes) | **JSON embebido** en `galeria/index.html` + archivos en `assets/images/galeria/` | `gallery.js` |
@@ -70,6 +70,9 @@ No hay una jerarquía única para todo.
 | URLs públicas | `sitemap.xml` + ADR 0008 + `.htaccess` | — |
 
 Tras el corte: contenido editorial → WordPress (ADR 0013). El theme FSE es presentación, no almacén.
+
+QA (OWN-007): comparar copy, contenido **y estilos** con `https://caminodeldharma.org`, no solo con
+el checkout local ni con `content-source/`.
 
 ### 4. Extracción programática (cuando se implemente)
 

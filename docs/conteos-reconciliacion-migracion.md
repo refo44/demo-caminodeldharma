@@ -66,7 +66,7 @@ Cualquier otra cifra exige fila en «Mismatches».
 | 10 posters vs 10 events | OK si el mapeo de filenames es 1:1 | verificar al extraer | |
 | Docs 16 mencionan PDF | 0 en WP | excluido a propósito | **OWN-002 RETIRE** — no mismatch |
 | Repo más nuevo vs ZIP en Hostinger | conteos o HTML distintos | deploy atrasado | **OWN-006:** extraer el repo vigente (`VERSION`); el ZIP viejo no es la fuente |
-| `content-source/` vs HTML | copy institucional distinto | dos SoT | UNCLEAR por campo |
+| `content-source/` vs HTML | copy institucional distinto | live es el correcto | **OWN-007:** extraer HTML; no mismatch si el doc queda atrás |
 
 ---
 

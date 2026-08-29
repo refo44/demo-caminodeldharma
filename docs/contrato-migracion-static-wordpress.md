@@ -69,7 +69,7 @@ Precedencia **por tipo** (ADR 0033 + ADR 0034). No hay una jerarquía única:
 
 | Tipo | SOURCE OF TRUTH (hoy) | Tras el corte |
 | ---- | --------------------- | ------------- |
-| Copy institucional en `content-source/` | ese documento; HTML live es lo publicado (diverge → UNCLEAR) | WP |
+| Copy institucional | **HTML live** (OWN-007). `content-source/` no pisa producción | WP |
 | Eventos, posts, JSON galería, fechas, cards | **HTML/JSON live** (única representación completa) | WP |
 | `main.min.css` | generado desde `main.css` | theme |
 | Presentación | HTML/CSS/JS de la maqueta (contrato visual) | theme FSE |
@@ -260,6 +260,11 @@ Smoke HTTP mínimo (tras cutover, sobre el hostname del environment bajo prueba)
 - 404 real (ruta fuera del árbol) con `templates/404.html`.
 - Formulario: prueba funcional en staging (correo a `caminodeldharma1@gmail.com`), no solo markup.
 - Comportamiento: menú teclado, calendario `/eventos`, compartir en una ficha, galería (bloque Gutenberg).
+
+**Paridad vs producción publicada (OWN-007):** antes de dar por buena una Page, un import o el
+corte, comparar copy, contenido **y** estilos con `https://caminodeldharma.org`. El repo local o
+`content-source/` no bastan. Si ZIP en Hostinger y `VERSION` del repo no coinciden, registrar el
+delta; no asumir que son el mismo artefacto.
 
 Honestidad probatoria ya adoptada: `Unverified` / `Pass (local)` / `Pass`. `Pass (local)` no
 sustituye a `Pass` para PHP/Apache/HTTPS/correo reales de Hostinger (ADR 0023).

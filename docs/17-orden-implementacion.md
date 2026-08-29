@@ -84,7 +84,7 @@ La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). 
 
 - Todo cambio debe realizarse en el repositorio. No se editarán archivos directamente en el servidor de producción.
 - El servidor (Hostinger) es un **destino de despliegue**, no un entorno de edición.
-- `content-source/` es la fuente canónica del **copy institucional** cuando existe; si diverge del HTML publicado, el caso es UNCLEAR (ADR 0034).
+- Copy institucional de producción: **HTML live** (OWN-007). `content-source/` es referencia; si diverge, no pisa el sitio.
 - Eventos, posts y JSON de galería: el HTML live es la fuente de producción **hasta extraerse** (ADR 0034). No descartarlo como maqueta.
 - El código y los assets viven en el repo según `13-static-file-structure` y `15-assets-strategy`.
 - Cambios manuales en el servidor se pierden en el siguiente ZIP y no deben realizarse.

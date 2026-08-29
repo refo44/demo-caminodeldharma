@@ -35,7 +35,6 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 
 | ID | Pregunta | Tipo | Mientras tanto (default) | ¿Podría volverse ADR? |
 | -- | -------- | ---- | ------------------------ | --------------------- |
-| OWN-007 | Divergencias `content-source/` vs HTML publicado (copy institucional), campo a campo | Editorial | UNCLEAR; no pisar el live en silencio. | No. Es revisión editorial, no arquitectura. |
 | OWN-008 | Álbumes de galería (3): ¿taxonomía, padre/hijo u otro? | Modelo CMS | 3 colecciones reales; no hardcodear en patterns. Elegir al implementar el plugin. | **Sí**, si el modelo no queda cubierto por docs 03/16 al implementar. |
 | OWN-009 | Audio y `.ics`: ¿Media Library o path de descarga? | Media | Imágenes ya decididas (seed → Media Library). Audio/`.ics` siguen abiertos. | No. |
 | OWN-010 | Autores en cards (Comunidad / Zheng Gong): ¿seguir como copy o Users de WP? | Modelo CMS | Atribución en copy; no forzar CPT author ni `/author/`. | **Sí**, solo si se crean rutas `/author/` (entonces KEEP/301). |
@@ -51,6 +50,7 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 | OWN-003 | 2026-08-28 | **Huérfanas → seed oculto.** Toda imagen del repo no enlazada en HTML (p. ej. `celebracion-vesak-2019` y el resto no usado de `celebraciones/`) se sube a Media Library con el seed, **sin** mostrarse en el sitio: no álbum, no Page, no teaser. Quedan en la biblioteca por si se usan después. `celebracion-diwali.jpg` **sí** está en `/practica` → media de página (OWN-001), no huérfana. El PDF no es imagen (OWN-002). |
 | OWN-004 | 2026-08-28 | **Todo evento tiene single.** Los 10 CPT tienen `/eventos/{slug}`. Los 7 que hoy no tienen ficha se publican en el corte (slugs en ADR 0035 / ledger). Eventos **pasados: sin Inscribirme / Preinscribirme**. Vigentes: inscripción solo si es real. |
 | OWN-005 | 2026-08-29 | **C+A confirmado.** Producción = estático en `caminodeldharma.org`. WordPress se despliega en **otra instancia Hostinger, sin dominio custom**, hasta el switch. Esa instancia es **STAGING**: noindex; no pisa `public_html` del estático. Ledger durante el build; freeze corto al corte. Delta (B) solo si el freeze no es viable. |
+| OWN-007 | 2026-08-29 | **Gana el HTML live.** El copy y el contenido de producción en `caminodeldharma.org` son los correctos. Si `content-source/` diverge, **no** se usa para pisar Pages. **QA obligatorio:** revisar y comparar copy, contenido **y estilos** contra la versión **publicada** (`https://caminodeldharma.org`), no solo contra el repo local o `content-source/`. Si repo y Hostinger no coinciden, anotar el delta (OWN-006 + ledger); no asumir paridad. |
 
 Al cerrar una fila: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -58,4 +58,4 @@ Al cerrar una fila: fecha, decisión en una frase, y actualizar
 
 ---
 
-**Versión:** 1.7 · **Fecha:** 2026-08-29 · **Estado:** 4 abiertas · 7 decididas (Fase 3 no iniciada)
+**Versión:** 1.8 · **Fecha:** 2026-08-29 · **Estado:** 3 abiertas · 8 decididas (Fase 3 no iniciada)
