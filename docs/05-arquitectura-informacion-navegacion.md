@@ -1,7 +1,7 @@
 # Camino del Dharma — Arquitectura de información y navegación
 
 **Mapa de navegación y enlaces vivos**  
-**Versión 1.6**
+**Versión 1.7**
 
 Define qué enlaces salen de cada pantalla, a dónde van y cuáles no deben existir.
 
@@ -188,4 +188,4 @@ Este documento es la **guía estructural definitiva** de navegación y arquitect
 
 ---
 
-**Versión:** 1.6 — Inicio: «Ver evento» a la ficha vigente (no al listado); el listado sigue usando «Ver evento →».
+**Versión:** 1.7 — Pie: enlace `/privacidad` publicado (ADR 0039). Inicio: «Ver evento» a la ficha vigente (no al listado).

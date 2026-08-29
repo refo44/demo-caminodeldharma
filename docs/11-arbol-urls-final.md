@@ -135,4 +135,4 @@ theme no publica la ruta: hace falta el objeto WordPress y rewrite (ADR 0032). C
 
 ---
 
-**Versión:** 1.6 — el listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz de migración: `matriz-migracion-static-wordpress.md`.
+**Versión:** 1.7 — `/privacidad` publicada (ADR 0039). El listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz: `matriz-migracion-static-wordpress.md`.

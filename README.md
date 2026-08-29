@@ -1,6 +1,6 @@
 # demo-caminodeldharma
 
-Sitio **estático en producción** de la **Comunidad Buddhista Camino del Dharma** (Colombia). Recibe visitas en `https://caminodeldharma.org`. Incluye inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir y contacto.
+Sitio **estático en producción** de la **Comunidad Buddhista Camino del Dharma** (Colombia). Recibe visitas en `https://caminodeldharma.org`. Incluye inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir, contacto y privacidad.
 
 El nombre histórico «maqueta» en ADRs antiguos (ADR 0001) significa **base definitiva**, no prototipo desechable. Eventos, posts y galería hardcodeados en HTML/JSON son **contenido de producción** (ADR 0034).
 
@@ -56,7 +56,7 @@ npm run build:css
 
 - **Raíz (producción):** `index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `sitemap.xsl`, `llms.txt`, `.htaccess`, `favicon.ico`, `favicon.svg`
 - **Versionado (solo repositorio):** `CHANGELOG.md` (historial de despliegues), `VERSION` (versión actual; ver [`VERSION`](VERSION))
-- **Secciones:** `comunidad/`, `linaje/`, `practica/`, `eventos/`, `galeria/`, `contacto/`, `donaciones/`, `blog/`
+- **Secciones:** `comunidad/`, `linaje/`, `practica/`, `eventos/`, `galeria/`, `contacto/`, `donaciones/`, `blog/`, `privacidad/`
 - **Assets:** `assets/css/`, `assets/js/`, `assets/images/`, `assets/favicon/`, `assets/fonts/`, `assets/audio/`
 - **Documentación (solo repositorio):** `docs/` (identidad, mapa de pantallas, copy, URLs, orden de implementación)
 - **Scripts (solo repositorio):** `scripts/` (ver abajo)
@@ -108,7 +108,7 @@ Para publicar el tag en el remoto: `git push origin "v$(cat VERSION)"`.
 VERSION=$(cat VERSION)
 zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
   index.html 404.html robots.txt sitemap.xml sitemap.xsl llms.txt .htaccess favicon.ico favicon.svg \
-  assets comunidad linaje practica eventos galeria contacto donaciones blog \
+  assets comunidad linaje practica eventos galeria contacto donaciones blog privacidad \
   -x "*.DS_Store" -x "*__MACOSX*"
 ```
 

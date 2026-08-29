@@ -12,6 +12,8 @@ pipelines.
 - Repo layout: site at **root**. `static/` does **not** exist. `wordpress/` holds empty plugin/theme trees (README only) for Sonar; no FSE implementation yet.
 - Institutional copy: **live HTML wins** (OWN-007). `content-source/` is reference; do not overwrite production from the doc.
 - Deploy: manual ZIP (ADR 0015). WordPress: **not started**.
+- `/privacidad` is published (ADR 0039, provisional). Do not rewrite the live notice. Contact Form 7
+  stays gated until that notice describes a server-side form.
 
 ## Must-read before WordPress or migration work
 

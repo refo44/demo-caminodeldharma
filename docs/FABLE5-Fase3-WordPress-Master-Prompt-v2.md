@@ -432,7 +432,9 @@ Create/import real objects and settings for:
 
 `/eventos` is the `event` CPT archive. Never create a Page with slug `eventos`.
 
-Do not create or publish `/privacidad` copy. That content requires owner/legal review.
+Import `/privacidad` from live HTML (`privacidad/index.html`, ADR 0039). Do not rewrite the
+notice. It is provisional until legal review. Contact Form 7 in production still requires updating
+that notice (it currently states the form does not submit) plus legal review.
 
 ---
 
@@ -470,6 +472,7 @@ At minimum:
 /galeria/{album-slug}                  → templates/taxonomy-gallery_album.html or hierarchy fallback
 /donaciones                            → templates/page-donaciones.html
 /contacto                              → templates/page-contacto.html
+/privacidad                            → templates/page.html
 /blog                                  → templates/home.html
 /blog/{slug}                           → templates/single.html
 /author                                → templates/archive-blog_author.html or hierarchy fallback
@@ -582,11 +585,12 @@ Organization.
 
 Contact Form 7 is approved and should send to `caminodeldharma1@gmail.com`, but:
 
-- `/privacidad` content must never be invented;
-- ADR 0028 is a hard gate before Contact Form 7 enters **production**;
+- `/privacidad` is published (ADR 0039); import the live notice; do not rewrite it;
+- Contact Form 7 in **production** stays gated until that notice is updated to describe a
+  server-side form and legal review is done (ADR 0039);
 - local/staging implementation and synthetic-data testing may proceed;
 - real delivery must be verified in Hostinger staging before release;
-- do not claim Contact Form 7 production eligibility while the privacy gate remains open;
+- do not claim Contact Form 7 production eligibility while the form-processing gate remains open;
 - WordPress cutover may proceed with Contact Form 7 absent or disabled and the existing
   WhatsApp/email alternatives working, provided the matrix and cutover checklist record that state;
 - do not add another antispam plugin without its own ADR.

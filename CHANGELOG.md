@@ -17,6 +17,7 @@ Página nueva en el estático, enlazada en el pie de todas las páginas. El text
 - `privacidad/index.html`; enlace «Privacidad» junto al copyright del pie (17 páginas + 404).
 - `sitemap.xml`: `/privacidad` `<lastmod>` `2026-08-29`.
 - Estilos `.privacy-notice` en `main.css`.
+- ZIP de despliegue: incluir carpeta `privacidad/` (README).
 
 ### Estado
 

@@ -4,6 +4,10 @@ Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT
 acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y lo que
 está en curso, a fecha **2026-08-13**.
 
+**Addenda 2026-08-29:** `/privacidad` está publicada (aviso provisional, ADR 0039). El aplazamiento de
+ADR 0028 queda sustituido. Contact Form 7 sigue gated hasta actualizar el aviso y la revisión legal.
+La versión del repositorio es **1.0.35**. Fase 3 (FSE) sigue sin iniciar.
+
 ---
 
 ## 1. Qué es el proyecto
@@ -128,7 +132,7 @@ no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 /contacto/
 /blog/
 /blog/{slug}/
-/privacidad/          (pendiente de publicar)
+/privacidad/          (publicada; aviso provisional — ADR 0039)
 ```
 
 **Sin buscador, sin páginas de filtro, sin URLs creadas solo por SEO.**
@@ -188,10 +192,9 @@ no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 
 - **Sin cookies de analítica, nunca** (ADR 0019). Search Console es el único canal de medición.
 - **HSTS desactivado**, aplazado hasta ≥30 días después de que WordPress esté estable en producción.
-- **Política de privacidad (`/privacidad/`) pendiente de publicar** — requiere asesoría legal (Ley
-  1581/2012 de Colombia, posible exposición a RGPD por visitantes desde España). **Gate obligatorio:**
-  debe publicarse antes de que Contact Form 7 entre en producción, porque ese es el momento en que el
-  sitio empieza a recolectar datos personales de forma automatizada.
+- **Política de privacidad (`/privacidad/`) publicada** (ADR 0039, aviso provisional hasta asesoría
+  legal). **Gate de Contact Form 7:** actualizar este aviso (hoy dice que el formulario no envía) y
+  la revisión legal **antes** de que CF7 entre en producción.
 - Hoy el único canal de contacto es humano (WhatsApp/correo), sin recolección automatizada de datos.
 
 ---
@@ -225,7 +228,8 @@ no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 - Confirmar si la política canónica de URLs es con o sin barra final — hay una tensión documentada entre
   ADR 0008 (dice "sin barra final") y el árbol de URLs oficial `11-arbol-urls-final.md` (todas las rutas
   llevan barra final). Se resuelve revisando el `.htaccess` real, no asumiendo.
-- Redactar y publicar `/privacidad/` (requiere asesoría legal, no solo texto genérico).
+- Redactar y publicar `/privacidad/` — **hecho** el 2026-08-29 (ADR 0039, provisional). Sigue la
+  revisión legal y, antes de Contact Form 7, actualizar el aviso.
 - Migrar los embeds de YouTube a `youtube-nocookie.com` (pendiente, independiente de la decisión de
   analítica).
 - Descargas `.ics` de eventos devuelven 404 en el estático (hallazgo de auditoría, prioridad alta).

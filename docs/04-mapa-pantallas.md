@@ -128,4 +128,4 @@ La única lógica dinámica del sitio:
 
 ---
 
-**Versión:** 2.15 — Eventos: aviso táctil bajo la cuadrícula; teclado sin doble activación.
+**Versión:** 2.16 — Privacidad (`/privacidad`) publicada; aviso provisional. Eventos: aviso táctil bajo la cuadrícula.
