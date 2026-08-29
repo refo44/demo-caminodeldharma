@@ -2,13 +2,14 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.0  
-**Status:** CURRENT — use this prompt for execution  
-**Date:** 2026-08-28  
+**Prompt version:** 2.1
+**Status:** CURRENT — use this prompt for execution
+**Date:** 2026-08-29
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
-or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0034.
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0037,
+plus the closed owner-decision backlog v1.18.
 
 ---
 
@@ -39,8 +40,8 @@ Start and execute **Fase 3: WordPress** by migrating the live static production 
 2. A first-party domain plugin named `camino-del-dharma-core`.
 3. A reproducible local WordPress environment using Docker.
 4. A deterministic extraction and idempotent WP-CLI import pipeline for real production content.
-5. WordPress Pages, posts, events, media, settings, routes, and behavior that satisfy the migration
-   contract.
+5. WordPress Pages, posts, events, blog-author profiles, gallery albums, media, settings, routes, and
+   behavior that satisfy the migration contract.
 6. Durable execution state and QA evidence that another session can resume without chat history.
 7. A manual, bounded staging deployment runbook and a build ready for staging validation.
 
@@ -66,7 +67,7 @@ This prompt authorizes:
 - the root-to-`static/` monorepo reorganization;
 - local Docker operations;
 - creation of the theme, plugin, migration tools, tests, and durable execution artifacts;
-- local content import with non-production data or the reviewed migration payload;
+- local fixture import; real reviewed-payload import only after §4.2's governance gate is resolved;
 - small, coherent local Git commits after relevant checks pass.
 
 This prompt does **not** authorize:
@@ -105,21 +106,32 @@ For architecture, scope, routing, security, deployment, and migration behavior:
 Do not modify an accepted ADR to change its meaning. A genuinely new architectural, URL, dependency,
 security, or deployment decision requires a new ADR before implementation.
 
-### 4.2 Content precedence is type-specific
+### 4.2 Content and presentation precedence is type-specific
 
 There is no single source hierarchy for every content type:
 
-- **Institutional copy:** `content-source/` is canonical. Copy it verbatim. Never paraphrase,
-  summarize, improve, or silently reconcile it with published HTML.
-- **Events, blog posts, gallery JSON, dates, cards, and their media relationships:** the live static
-  HTML/JSON is production content until it is extracted and verified.
-- **Presentation and behavior:** the static HTML/CSS/JS is the visual and behavioral contract unless
-  an accepted ADR records a replacement.
+- **Institutional copy, page structure, section order, hierarchy, and design guidance have a known
+  governance conflict:** OWN-007 and the migration contract say the published HTML wins, while the
+  currently always-applied `.cursor/rules/content-source-priority.mdc` and
+  `.cursor/rules/contenido-web-canonical.mdc` say `content-source/` wins. Repository rules rank above
+  this prompt and current docs.
+- **Until those rules are explicitly reconciled:** inventory both sources and record exact
+  divergences, but do not implement or apply real WordPress content, media relationships, or
+  presentation from the static source. Continue only work independent of the conflict: architecture,
+  Git reorganization, local environment, generic tooling, domain schemas, and non-content routing.
+- **Events, blog posts, gallery JSON, dates, cards, and their media relationships:** ADR 0034,
+  OWN-007, and the migration docs classify live static HTML/JSON as production content, but the
+  currently active repository rule does not permit it as an editorial source or fallback. It may be
+  inventoried and extracted into a reviewable payload, but not imported or applied until governance
+  is reconciled.
+- **Presentation and behavior:** the static HTML/CSS/JS is the visual and behavioral contract only
+  where it does not conflict with the higher-priority content rules or an accepted ADR replacement.
 - **URLs:** `sitemap.xml`, ADR 0008, the redirect ledger, and incoming HTTP behavior.
 - **After cutover:** WordPress owns editorial content; Git owns theme/plugin code.
 
-When institutional copy differs from the published HTML, classify it as
-`UNCLEAR — OWNER REVIEW REQUIRED`. Do not choose silently.
+Do not silently resolve the content/presentation governance conflict. A documentation statement does
+not override an always-applied repository rule. Block only the affected areas and record their exact
+scope in the execution state.
 
 ### 4.3 Mandatory reading
 
@@ -128,7 +140,7 @@ Before implementation, read:
 - `.cursor/rules/`, `CLAUDE.md`, `AGENTS.md`;
 - `docs/17-orden-implementacion.md`;
 - `docs/adr/README.md`;
-- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0034;
+- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0037;
 - `docs/contrato-migracion-static-wordpress.md`;
 - `docs/inventario-contenido-produccion-static.md`;
 - `docs/conteos-reconciliacion-migracion.md`;
@@ -146,7 +158,7 @@ Before implementation, read:
 - `docs/20-layout-principles.md`;
 - `docs/docker-wordpress-playbook.md`.
 
-Check the ADR index for decisions newer than ADR 0034 and read any that affect this scope.
+Check the ADR index for decisions newer than ADR 0037 and read any that affect this scope.
 
 ---
 
@@ -212,8 +224,15 @@ as the visual baseline before any later Global Styles changes.
 `camino-del-dharma-core` owns:
 
 - CPT `event`;
+- CPT `blog_author`, its `authors` post relationship, assignment UI, and publication guards;
 - `event_type` and `event_city`;
+- `gallery_album` and its `/galeria/{slug}` routing;
 - event metadata and validation;
+- event status calculation in `America/Bogota`, current/completed visibility, and signup/calendar rules;
+- generated `.ics` responses, retirement/410 behavior, and the scoped orphan-`.ics` cleanup tool;
+- author routing with `query_var=blog_author`, author archive policy, and suppression of native WP-user
+  author archives;
+- album/tag/author indexation inputs;
 - domain queries and visibility rules;
 - editorial capabilities or role adjustments that are actually required;
 - WP-CLI extraction/import support;
@@ -248,7 +267,8 @@ Yoast, RankMath, optimization suites, analytics plugins, calendar plugins, or li
 
 Do not call the migration complete because the theme activates or looks correct.
 
-1. **CONTENT:** actual WordPress Pages, posts, events, metadata, terms, media, and settings.
+1. **CONTENT:** actual WordPress Pages, posts, events, blog-author profiles, metadata, terms, media,
+   and settings.
 2. **PRESENTATION:** FSE templates, parts, patterns, `theme.json`, CSS, responsive layout, and
    accessibility structure.
 3. **ROUTING:** incoming canonical URLs, CPT archive/singles, blog routes, redirects, 404, canonical
@@ -270,7 +290,8 @@ Verify these values against the current commit before relying on them:
 - 16 public sitemap URLs plus the non-public 404 template.
 - 10 institutional/secondary Page objects, allowing the documented front-page counting variation.
 - 10 real `event` entities: 1 current and 9 historical.
-- 3 existing public event single URLs; the other 7 are archive/listing-only.
+- 3 existing event single URLs plus 7 listing-only cards in the static source. The WordPress target is
+  10 public event singles under ADR 0035.
 - 2 real blog posts.
 - 3 gallery albums.
 - 35 publicly referenced gallery images.
@@ -297,11 +318,37 @@ decisions; do not treat the rows below as still open:
   explicit apply, idempotent, create-missing-only rules. WordPress regenerates derivative sizes.
 - Import all 10 events with **10 public singles** (ADR 0035). The 7 listing-only slugs are
   PLANNED KEEP. Past events: no signup, no add-to-calendar, no `.ics` (OWN-012 / OWN-013).
+  Use exactly these slugs unless the redirect ledger is updated through a new accepted decision:
+  `circulos-de-presencia-consciente`, `encuentro-nacional-2026`,
+  `meditacion-presencial-barranquilla`, `festival-calma-en-la-ciudad`,
+  `pausa-profunda-medellin`, `ansiedad-agotamiento-crisis-de-atencion`, `vesak-2026`,
+  `pausa-profunda-cali`, `buddhismo-tiempos-cansancio`, and
+  `6-encuentro-nacional-2025`.
+- Calculate completion on request in `America/Bogota`: an event is completed when
+  `today > event_end`, falling back to `event_date`; the final date itself remains current.
+  `cancelled` is not overridden. Extending the end date makes the event current again.
+- Generate `.ics` only for current events at `/eventos/ical/{slug}.ics`; do not store it in the Media
+  Library. Completed events return 410, show no calendar control, and retain no orphan file. Send
+  `X-Robots-Tag: noindex, nofollow`, exclude downloads from sitemap/`llms.txt`, and expose
+  `rel="alternate" type="text/calendar"` only on current event singles.
+- Provide the nonce/capability-protected wp-admin action **Eliminar huérfanos** for `.ics` only:
+  dry-run list first, explicit apply second; never delete images, audio, posters, or unrelated media.
 - Keep the default build-time change ledger plus a short content freeze immediately before cutover.
+- Build WordPress on a separate noindex Hostinger instance without a custom domain until the
+  authorized switch (OWN-005). Do not touch the static production document root.
 - Per OWN-006, extract from the latest repository `VERSION`, not an older ZIP still deployed on
   Hostinger. Record the exact commit/tag in the payload. If production parity cannot be proven, label
   it `Unverified`; the older deployment is deploy/delta debt, not the extraction source.
-- Blog bylines: CPT `blog_author` + `/author/{slug}` (ADR 0037 / OWN-010). Do not use the WP user as the public author. Do not use hardcoded copy lists.
+- Blog bylines: CPT `blog_author` + `/author/{slug}` (ADR 0037 / OWN-010). Seed Zheng Gong and
+  Comunidad Camino del Dharma. Do not use the WP user as public author or a hardcoded copy list.
+  WordPress `/comunidad` adds links to these profiles without replacing its existing biography or
+  changing the static HTML (OWN-016).
+- Store each post's authors as an ordered, unique array of published `blog_author` IDs. Allow
+  multiple authors and no default. Drafts may have none; publishing or updating a published post
+  requires at least one. Plugin activation must not unpublish legacy posts that lack the relationship.
+- Author assignment uses REST search after at least two characters, never a preloaded catalog or
+  inline creation. Author profiles use only title/name, slug, content/bio, and featured image; do not
+  add person/organization branches, ORCID, or affiliation.
 - Do not implement CPT `sangha`.
 
 OWN-008 is **closed** (ADR 0036): same three albums on `/galeria`; public `/galeria/{slug}` with
@@ -328,11 +375,13 @@ WordPress database + Media Library
 ```
 
 The payload must identify its source commit/version and preserve stable source keys. Prefer
-programmatic parsing over manual transcription.
+programmatic parsing over manual transcription. Extract from the latest repository `VERSION`, then
+compare copy, content, and styles against the published site and record any repo/Hostinger delta.
 
-Institutional copy must be generated or validated against `content-source/` verbatim. Static HTML is
-not allowed to silently override canonical institutional copy, but it remains authoritative for the
-published event/blog/gallery entities that `content-source/` does not contain.
+Do not implement or apply real content, media relationships, or presentation from static HTML/JSON
+while §4.2's repository-rule conflict remains. Read-only extraction into a versioned review payload
+may continue, but real-content import may not. Importer behavior may be developed and tested only
+with clearly marked disposable local fixtures until the gate is resolved.
 
 ### 8.2 WP-CLI importer
 
@@ -364,7 +413,7 @@ objects created by that fixture system. Do not build a fixture framework merely 
 
 ### 8.3 Required WordPress objects
 
-Create/import real objects and settings for:
+After §4.2's governance gate is resolved, create/import real objects and settings for:
 
 - front page and Reading settings;
 - Comunidad;
@@ -377,11 +426,15 @@ Create/import real objects and settings for:
 - Donaciones;
 - Blog posts page and Reading settings;
 - 2 real posts;
-- 10 real events;
+- 10 real events with 10 public singles and the ADR 0035 slugs;
+- 2 seeded `blog_author` profiles and ordered `authors` relationships on both posts;
 - the extracted three album memberships as `gallery_album` terms (ADR 0036);
 - 35 public gallery images plus `galeria-04.jpg` attached to Práctica;
+- all unreferenced repository images as hidden Media Library attachments, never public gallery/Page
+  content unless explicitly assigned;
 - all other referenced content images through the real-content Media Library seed;
-- event posters, required audio, linked downloads, and other confirmed production media.
+- 10 event posters and 2 mantra MP3 attachments;
+- no PDF attachment and no `.ics` attachment.
 
 `/eventos` is the `event` CPT archive. Never create a Page with slug `eventos`.
 
@@ -393,7 +446,7 @@ Do not create or publish `/privacidad` copy. That content requires owner/legal r
 
 ### 9.1 No redesign
 
-Preserve:
+Subject to §4.2's higher-priority governance gate, preserve:
 
 - page and section order;
 - visual hierarchy;
@@ -405,6 +458,8 @@ Preserve:
 - states with and without current events.
 
 Any intentional static-to-WordPress substitution must be recorded in the migration matrix and ledger.
+If a listed item conflicts with `content-source/`, inventory and block that affected view rather than
+choosing a source silently.
 
 ### 9.2 Template and route mapping
 
@@ -416,12 +471,15 @@ At minimum:
 /linaje                                → templates/page-linaje.html
 /practica                              → templates/page-practica.html
 /eventos                               → templates/archive-event.html
-/eventos/{existing-public-slug}        → templates/single-event.html
+/eventos/{all-10-approved-slugs}        → templates/single-event.html
 /galeria                               → templates/page-galeria.html
+/galeria/{album-slug}                  → templates/taxonomy-gallery_album.html or hierarchy fallback
 /donaciones                            → templates/page-donaciones.html
 /contacto                              → templates/page-contacto.html
 /blog                                  → templates/home.html
 /blog/{slug}                           → templates/single.html
+/author                                → templates/archive-blog_author.html or hierarchy fallback
+/author/{slug}                         → templates/single-blog_author.html
 unknown route                          → templates/404.html with HTTP 404
 ```
 
@@ -444,13 +502,18 @@ The archive must:
 - show at most one valid featured current event on the home page;
 - show no empty featured module when no current event exists;
 - keep `event_type` and `event_city` as non-public taxonomies;
-- preserve the 3 existing public singles and keep the other 7 archive-only;
+- expose all 10 approved public singles: 3 existing KEEP and 7 PLANNED KEEP;
+- hide signup, add-to-calendar, and `.ics` for completed/cancelled events;
 - expose the documented empty state when no current event exists.
 
 The monthly event calendar is a dynamic block. Domain selection/data belongs to
 `camino-del-dharma-core`; presentation belongs to the theme. Preserve event cells, weekly meditation
 cells, tooltips, keyboard behavior, pointer first/second-touch behavior, and ARIA behavior. Weekly
 meditation is not an event.
+
+Determine current/completed state on each request in `America/Bogota`; do not make frontend truth
+depend on cron. Generate `.ics` only for current events. The plugin may persist status for wp-admin,
+but request-time behavior is authoritative.
 
 ### 9.4 Gallery
 
@@ -459,6 +522,9 @@ lightbox expectation with native Gutenberg Gallery blocks and the native WordPre
 35 public gallery originals into the Media Library and let WordPress generate derived sizes. Seed
 `galeria-04.jpg` separately as Práctica media, never as gallery content. Do not import handmade thumbs
 as editorial originals. Album model is closed: taxonomy + hub Page (ADR 0036); no numbered pagination (OWN-011).
+The hub keeps General, 2023, and 2021. `/galeria/general`, `/galeria/2023`, and `/galeria/2021`
+resolve as term routes and remain `noindex, follow` until a case-by-case editorial decision changes
+their status. The Page `/galeria` must not be stolen by taxonomy rewrites.
 
 ### 9.5 Other behavior
 
@@ -466,13 +532,20 @@ Preserve or document a native replacement for:
 
 - mobile navigation and keyboard interaction;
 - share behavior on event/blog singles;
-- add-to-calendar behavior and valid `.ics` downloads;
+- add-to-calendar behavior and generated `.ics` downloads for current events only;
 - mantra audio playback;
+- blog bylines linked to ordered `blog_author` profiles;
+- author profiles with bio, image, and related-post listing;
 - video embeds;
 - skip link, focus management, reduced motion, and semantic landmarks.
 
 Do not blindly enqueue the old JavaScript. Inspect its DOM/selectors and either preserve the required
 contract or document the native Gutenberg replacement.
+
+Render blog bylines from the ordered relationship as “Por A y B” using the site's documented voice.
+Author-profile related posts query the `authors` relationship, never `post_author`. Each profile
+emits JSON-LD `Thing` with its name and canonical profile URL; the post publisher remains the site's
+Organization.
 
 ---
 
@@ -485,6 +558,12 @@ contract or document the native Gutenberg replacement.
 - Avoid chains, loops, temporary redirects, and soft 404s.
 - Flush rewrite rules only on plugin activation or explicit versioned upgrade, never per request.
 - Do not expose event-city or event-type archive URLs.
+- Preserve the 3 existing event singles and add the 7 ADR 0035 routes as PLANNED KEEP.
+- Preserve `/galeria`; add the 3 ADR 0036 term routes as PLANNED KEEP.
+- Add `/author`, `/author/zheng-gong`, and `/author/comunidad-camino-del-dharma` under ADR 0037.
+- Native WP-user author archives return 404; no Page may use slug `author`.
+- Current event `.ics` routes return generated calendar data; completed/retired `.ics` routes return
+  410 and are not redirected to a single.
 - Do not create search or `/buscar`.
 - Do not create `/404`; render the 404 template with an actual 404 status.
 
@@ -494,13 +573,15 @@ contract or document the native Gutenberg replacement.
 - Update production `robots.txt` only during an authorized cutover.
 - Native `post_tag` archives are supported at `/blog/tag/{slug}`. When a term exists, the incoming
   route must resolve and remain `noindex, follow` until the documented qualitative review changes.
+- `gallery_album` term routes remain `noindex, follow` until separately approved; `/galeria` remains
+  the indexable hub.
+- `/author` remains `noindex, follow` until volume; `blog_author` singles are indexable.
 - Preserve server-rendered titles, descriptions, canonical URLs, Open Graph, Twitter metadata, and
   JSON-LD according to `docs/15-assets-strategy.md`.
-- Existing event singles use Event JSON-LD with real data. Before implementing structured data for
-  the 7 archive-only events, resolve the conflict between `docs/03-wordpress-content-model.md` §3
-  (JSON-LD on the listing) and `docs/15-assets-strategy.md` §12.3 (none without a dedicated URL).
-  Block only that WU-08 subtask, record it as `Unverified`, and do not create new singles as a
-  workaround. Never invent optional fields.
+- All 10 event singles use Event JSON-LD with real data. Completed events use `EventCompleted` and
+  omit signup offers. Never invent optional fields.
+- Generated `.ics` responses send `X-Robots-Tag: noindex, nofollow`, stay outside the sitemap and
+  `llms.txt`, and are linked with `rel="alternate" type="text/calendar"` only while current.
 - Do not install an SEO suite.
 
 ### 10.3 Privacy and contact
@@ -568,7 +649,10 @@ Record evidence using only:
 
 - CPT, taxonomies, fields, capability and sanitization behavior;
 - event current/historical/featured rules;
-- archive-only versus public-single rules;
+- all 10 event single routes and approved slugs;
+- `blog_author` assignment, publication guard, search, ordering, and query-var isolation;
+- `gallery_album` hub/term rewrite behavior and noindex policy;
+- request-time event completion, generated `.ics`, 410 behavior, and scoped orphan cleanup;
 - WP-CLI validate/plan/import/verify;
 - importer idempotency and create-missing-only behavior;
 - fixture isolation if fixtures exist.
@@ -581,7 +665,7 @@ Record evidence using only:
 - template hierarchy and block rendering;
 - incoming routes, canonicalization, redirects, and real 404;
 - counts and media relationships;
-- navigation, calendar, share, audio, gallery, downloads;
+- navigation, calendar, share, audio, gallery, author profiles, and generated downloads;
 - anonymous cookie/storage behavior.
 
 ### QA level 4 — visual and staging
@@ -590,6 +674,8 @@ Record evidence using only:
 - keyboard-only navigation and visible focus;
 - screen-reader-relevant labels/headings/ARIA;
 - visual comparison against `static/`;
+- copy, content, structure, and style comparison against `https://caminodeldharma.org`, with
+  repo/live/content-source deltas recorded; do not bypass §4.2's governance blocker;
 - staging PHP/Apache/HTTPS behavior;
 - actual Contact Form 7 delivery;
 - network requests and absence of unexpected tracking;
@@ -644,9 +730,9 @@ Use these work-unit boundaries unless repository evidence requires a safer subdi
 3. **WU-02 — Local Docker environment**
 4. **WU-03 — First-party plugin scaffold and quality tooling**
 5. **WU-04 — FSE theme scaffold and visual token baseline**
-6. **WU-05 — Event domain model, routing, calendar data**
+6. **WU-05 — Event, gallery-album, and blog-author domain models, routing, calendar/ICS data**
 7. **WU-06 — Extractor, payload, WP-CLI importer, reconciliation**
-8. **WU-07 — Pages, posts, media, templates, gallery**
+8. **WU-07 — Pages, posts, authors, media, templates, gallery**
 9. **WU-08 — Behavior, accessibility, SEO, redirects**
 10. **WU-09 — Contact Form 7 integration and privacy gate**
 11. **WU-10 — Full local QA and staging-readiness runbook**
@@ -657,6 +743,10 @@ implement and validate only WU-02, update the execution state, and stop again. T
 implementation begins in a later session after rerunning the WU-02 QA gate. Keep application work in
 separate commits/work units. Make small, reviewable commits after applicable QA passes. Use concise
 English conventional commit messages. Do not push.
+
+While §4.2's governance conflict remains, WU-00 through WU-03 may proceed within their normal
+session boundaries. Stop before WU-04: do not establish a visual-token baseline, implement
+content-bearing templates, apply the real migration payload, or claim CONTENT/PRESENTATION parity.
 
 Do not stop after planning. Continue through safe, unblocked work units, except for ADR 0023's
 mandatory boundaries before and after WU-02. Otherwise stop only when:
@@ -712,6 +802,8 @@ and continue from `Next exact action`. Repository state outranks chat memory.
 Repository/local work is ready for staging only when:
 
 - the monorepo is correctly separated;
+- the content/presentation governance conflict in §4.2 is reconciled before affected content or views
+  are implemented and before staging is declared content- or presentation-complete;
 - theme and plugin activate locally without warnings/fatals;
 - every required WordPress object has an explicit import strategy;
 - importer dry-run and idempotency checks pass locally;
@@ -775,8 +867,8 @@ Report:
 7. **Environment status:** local, staging, production reported separately.
 8. **Privacy gate:** `/privacidad` status and Contact Form 7 release eligibility.
 9. **Governance:** ADR/doc conflicts found, defaults used, ledger/matrix updates.
-10. **Out-of-scope confirmation:** no `sangha`, search, analytics, PWA, HSTS, event taxonomy archives,
-    custom gallery system, unapproved plugin, CI/CD workflow, or production cutover.
+10. **Out-of-scope confirmation:** no `sangha`, search, analytics, PWA, HSTS, event-city/type
+    archives, custom gallery system, unapproved plugin, CI/CD workflow, or production cutover.
 11. **Continuity:** working-tree state, last verified commit, current execution-state file, and exact
     resume action.
 12. **Recommended next action:** exactly one.
