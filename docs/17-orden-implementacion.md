@@ -98,7 +98,7 @@ Tres tiempos (no mezclar):
 
 La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La versión de código vigente está en `VERSION`.
 
-La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). Pendientes de cierre operativo: formulario de contacto sin backend, política de privacidad (ADR 0028). HSTS aplazado (ADR 0020). **ADR 0019** descarta la analítica con cookies.
+La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). Pendientes de cierre operativo: formulario de contacto sin backend; aviso de privacidad publicado y provisional (ADR 0039). HSTS aplazado (ADR 0020). **ADR 0019** descarta la analítica con cookies.
 
 ---
 
@@ -244,7 +244,8 @@ La maqueta define el layout definitivo. En Fase 3 se adapta a FSE **sin rediseñ
 | `/practica/index.html` | `templates/page-practica.html` |
 | `/eventos/index.html` | `templates/archive-event.html` (no Page slug `eventos`) |
 | `/galeria/index.html` | `templates/page-galeria.html` — bloque Gutenberg; `gallery.js` no se migra (ADR 0021) |
-| `/contacto/index.html` | `templates/page-contacto.html` + Contact Form 7 (ADR 0026), gated ADR 0028 |
+| `/contacto/index.html` | `templates/page-contacto.html` + Contact Form 7 (ADR 0026), gated ADR 0039 |
+| `/privacidad/index.html` | `templates/page.html` (fallback; ADR 0039) |
 | `/donaciones/index.html` | `templates/page-donaciones.html` |
 | `/blog/index.html` | `templates/home.html` |
 | `/404.html` | `templates/404.html` |
@@ -661,7 +662,7 @@ La automatización de despliegue permanece pospuesta hasta que la estructura est
 2. **Contacto** — Formulario (markup listo; **envío pendiente** — FUNC-001) + bloque Redes sociales
    junto con WhatsApp/correo. Respaldo: `docs/archive/contacto-formulario-estatico/`. En WordPress: Contact
    Form 7 (ADR 0026), probado localmente/staging; su publicación en producción queda sujeta al gate
-   de privacidad ADR 0028. Nunca un handler del theme.
+   de privacidad ADR 0039 (actualizar el aviso: el texto actual dice que el formulario no envía). Nunca un handler del theme.
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, mantras (audio), talleres, retiros y videos. El PDF de recitación está
    retirado (OWN-002).
@@ -705,7 +706,7 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 ## Checklist pre-lanzamiento
 
 - [x] Identidad (paleta, tipografía) definida
-- [x] Todas las páginas maquetadas (13 indexables + 404)
+- [x] Todas las páginas maquetadas (17 indexables + 404)
 - [ ] Formulario de contacto **funcional** (entrega end-to-end) — pendiente; canales WhatsApp/correo operativos
 - [x] Botón WhatsApp operativo
 - [x] Enlaces externos (redes) verificados
@@ -718,7 +719,7 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 - [~] Descargas `.ics`: dos archivos existen en el estático; el destino WordPress genera solo las
   vigentes y devuelve 410 para finalizadas (OWN-009/012/013)
 - [ ] HSTS — **aplazado** hasta después del corte WordPress (ADR 0020). Los ítems ADR 0018 Fase 1/2 quedan históricos en lo operativo.
-- [ ] Política de privacidad aplazada (ADR 0028). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente.
+- [x] Política de privacidad publicada (ADR 0039, provisional). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente. Revisión legal y CF7 siguen abiertos.
 - [ ] Google Search Console: sitemap enviado; solicitar indexación de URLs modificadas tras cada despliegue relevante
 
 ---

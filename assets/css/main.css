@@ -2656,6 +2656,22 @@ a:focus-visible {
   font-size: 0.875rem;
 }
 
+/* Privacy page: provisional notice, same calm register as donate copy */
+.privacy-notice {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border-inline-start: 3px solid var(--brand-1);
+  background: rgb(255 255 255 / 22%);
+}
+
+.privacy-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-updated {
+  font-size: 0.9375rem;
+}
+
 /* --- Forms --- */
 .form-group {
   margin-bottom: var(--space-md);

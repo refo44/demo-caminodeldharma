@@ -38,6 +38,7 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 | 2026-07-21 | Visor ampliado (lightbox) de la galería | **No se implementa** | **Nativo del bloque de galería** ("Ampliar al hacer clic", WP 6.4+); sin plugin ni JS propio | Cerrado por ADR 0021 |
 | 2026-07-21 | `normalize.css` incorporado a `main.css`; `main.min.css` vía `npm run build:css`; MarloweEscapade subsetada | Sí | Pendiente portar al theme (encolado de `main.min.css` y subset de la fuente) | Pendiente (WordPress) |
 | 2026-07-31 | Formulario de contacto (FUNC-001/TASK-0003): decidido resolverlo con **Contact Form 7** en el theme WordPress | **No** — `contacto/index.html` conserva el `<form action="#">` no funcional junto a los CTAs de WhatsApp/correo, por decisión expresa de no tocar el estático | Pendiente (WordPress), a implementar al iniciar Fase 3 | Pendiente (WordPress) |
+| 2026-08-29 | `/privacidad` publicada (aviso provisional; ADR 0039). Pie de todas las páginas. CF7 sigue gated | Sí | Page `privacidad` + enlace en `parts/footer.html`; importar HTML live | Completo (static); pendiente WordPress |
 | — | *(añadir filas al iniciar Fase 3)* | — | — | — |
 
 **Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`, `Cerrado`.

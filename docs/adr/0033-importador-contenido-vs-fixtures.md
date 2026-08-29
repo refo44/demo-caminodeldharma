@@ -86,7 +86,8 @@ Antes del cutover debe existir una estrategia explícita para crear o importar a
 Inicio (ajustes de lectura / front page), Comunidad, Linaje, Práctica, Práctica/videos, Meditación
 semanal, Galería, Contacto, Donaciones, Blog (página de entradas si aplica). `/eventos` es archivo
 del CPT `event` — **no** publicar una Page con slug `eventos` (`docs/12-theme-file-structure.md`).
-`/privacidad` sigue aplazada (ADR 0028) y no se inventa copy.
+`/privacidad` está publicada (ADR 0039); el copy se importa del HTML live y no se reescribe. Sigue
+provisional hasta asesoría legal.
 
 Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se importan como CPT
 `event` y `post`, no como Pages genéricas, salvo diferencia registrada.

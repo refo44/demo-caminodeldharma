@@ -27,6 +27,7 @@ Forma canónica: **sin barra final**.
 | `/galeria/2021` | misma | **PLANNED KEEP** | término | noindex hasta volumen (5 fotos hoy) |
 | `/contacto` | `/contacto` | KEEP | igual | Page |
 | `/donaciones` | `/donaciones` | KEEP | igual | Page |
+| `/privacidad` | `/privacidad` | KEEP | igual | Page; aviso provisional (ADR 0039) |
 | `/eventos` | `/eventos` | KEEP | archive CPT; **no** Page `eventos` | |
 | `/eventos/circulos-de-presencia-consciente` | misma | KEEP | single `event` | |
 | `/eventos/encuentro-nacional-2026` | misma | KEEP | single `event` | |
@@ -49,7 +50,7 @@ Forma canónica: **sin barra final**.
 | `/author/{user}` nativo WP | — | **404** | no es perfil | apagar rewrite de users |
 | *(404 genérico)* | plantilla 404 | KEEP behavior | HTTP 404 | no URL `/404` |
 
-`/privacidad`: **no live**. Cuando exista copy legal: publicar + enlazar; no 301 desde nada hoy.
+`/privacidad`: **live** (ADR 0039). Enlace en el pie; no 301 desde nada. Copy provisional hasta asesoría legal.
 
 `/blog/tag/{slug}`: no existe en static; en WP existirá con noindex (ADR 0031). No es 301 desde el estático.
 

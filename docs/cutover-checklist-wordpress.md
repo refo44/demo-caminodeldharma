@@ -55,7 +55,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Autores (ADR 0037): `/author/zheng-gong` **200** (CPT, no user); `query_var === 'blog_author'`; users `/author/{login}` **404**; byline ≠ usuario WP; publicar post exige ficha; archivo `/author` noindex
 - [ ] `/comunidad` (WP): enlaces a `/author/zheng-gong` y a la ficha Comunidad (OWN-016); copy live no pisado; estático no cambiado por esto
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
-- [ ] Contact Form 7: privacidad resuelta o el form sigue gated (ADR 0026, ADR 0028)
+- [ ] Contact Form 7: actualizar `/privacidad` y revisión legal, o el form sigue gated (ADR 0026, ADR 0039)
 - [ ] Rollback definido (volver a estático versionado **o** restaurar BD+files WP; dueño y ventana)
 - [ ] Indexing policy definida: staging no indexable; producción: `robots.txt` + sitemap nativo (ADR 0030); no dejar «Disuadir motores de búsqueda» en producción
 - [ ] Deploy scope auditado: theme + plugin propio solamente; no core, no `wp-config.php`, no uploads, no plugins de terceros sobrescritos
@@ -70,7 +70,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] WordPress operativo en el hostname de producción
 - [ ] Theme `camino-del-dharma` desplegado y **activo**
 - [ ] Plugin `camino-del-dharma-core` desplegado y **activo**
-- [ ] Contact Form 7 activo **solo** si ADR 0028/0026 lo permiten
+- [ ] Contact Form 7 activo **solo** si ADR 0039/0026 lo permiten
 - [ ] Pages institucionales reales creadas/importadas (no solo templates en disco)
 - [ ] Slugs correctos (ADR 0008, sin barra final en la URL pública canónica)
 - [ ] Permalinks / rewrite verificados (`flush` de activación ya ocurrido; **no** flush por request)
@@ -99,7 +99,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Metadata / OG / JSON-LD
 - [ ] Redirects (host, HTTPS, legacy)
 - [ ] Cookies: sin analítica (ADR 0019); embeds según política vigente
-- [ ] Privacy: no publicar `/privacidad` sin copy legal (ADR 0028)
+- [ ] Privacy: `/privacidad` publicada (ADR 0039); no reescribir el copy live; revisión legal sigue abierta
 - [ ] Media / downloads (PDF, audio, `.ics`)
 - [ ] Legacy static deploy disabled/retired (README, CONTRIBUTING, procedimiento ZIP)
 - [ ] Rollback window evaluated

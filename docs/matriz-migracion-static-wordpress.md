@@ -57,8 +57,8 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 | `/galeria/2021` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2021` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex |
 | `/galeria/general` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/general` | taxonomía | — | 25 fotos | PLANNED; **noindex** al corte | 200; noindex |
 | `/donaciones` | `donaciones/index.html` | `content-source/` (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
-| `/contacto` | `contacto/index.html` | `content-source/` + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de privacidad (ADR 0028) | 200; envío real en staging; WhatsApp/correo; a11y labels |
-| `/privacidad` | *no existe en static* | Texto **por definir** (ADR 0028) | Page `privacidad` cuando exista copy legal | `/privacidad` | `templates/page.html` | `main.js` | — | **No importar copy inventado.** Pendiente asesoría legal | Hoy: no publicar. Tras copy: 200; enlace footer |
+| `/contacto` | `contacto/index.html` | `content-source/` + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de actualizar `/privacidad` (ADR 0039) | 200; envío real en staging; WhatsApp/correo; a11y labels |
+| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar el HTML live; no reescribir. Seguir marcado provisional hasta asesoría legal | 200; enlace footer en todas las páginas |
 
 `templates/page-*.html` **no** crea la Page. Ver ADR 0032 / 0033.
 

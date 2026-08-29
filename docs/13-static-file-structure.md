@@ -22,7 +22,7 @@ demo-caminodeldharma/
 ├── robots.txt, sitemap.xml, llms.txt
 ├── .htaccess
 ├── favicon.ico, favicon.svg
-├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/
+├── comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/, privacidad/
 ├── assets/
 ├── scripts/                   No se despliegan
 ├── tests/                     Taxonomía de pruebas (ADR 0038); suites en Fase 3

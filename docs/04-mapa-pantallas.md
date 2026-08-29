@@ -69,7 +69,7 @@ Lista de qué pantallas existen. No describe diseño; solo qué vistas hay que c
 
 **Estados:** Sin eventos vigentes (en `/eventos/`, mensaje amable) · 404
 
-**Páginas secundarias (fuera del menú):** Meditación semanal en línea (`/practica/meditacion-semanal-en-linea`) · Videos (`/practica/videos`) · Privacidad (`/privacidad`, pendiente de publicar; enlazada desde el pie)
+**Páginas secundarias (fuera del menú):** Meditación semanal en línea (`/practica/meditacion-semanal-en-linea`) · Videos (`/practica/videos`) · Privacidad (`/privacidad`, aviso provisional; enlazada desde el pie)
 
 **Elementos globales (componentes):** Header (logo + navegación), Footer (identidad, contacto, redes, donaciones, WhatsApp, Blog). No son pantallas; se repiten en todas las vistas.
 

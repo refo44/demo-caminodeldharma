@@ -58,7 +58,7 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
 - Future theme is **FSE / block theme built directly from the static mockup** (ADR 0029). Do **not**
   scaffold a classic PHP theme (`front-page.php`, `page-*.php`) as a bridge.
 - CPT `sangha` is out of initial Fase 3 scope unless the owner reopens it (ADR 0024).
-- Privacy page copy is not invented (ADR 0028).
+- Privacy page is published at `/privacidad` (ADR 0039). Copy is provisional until legal review; do not rewrite it. Contact Form 7 stays gated until the notice is updated to describe a server-side form.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
   v1.18). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. Later-phase rows (`POST-*`, v1.19) are i18n/English after cutover: do not implement

@@ -31,7 +31,7 @@ listado. No mezclar.
 
 Ya resuelto por ADR (no repetir aquí como pregunta):
 
-- `/privacidad` aplazada, copy no inventado — ADR 0028
+- `/privacidad` publicada (provisional) — ADR 0039; [0028](adr/0028-privacidad-aplazada-conscientemente.md) sustituida
 - CPT `sangha` fuera del corte inicial — ADR 0024
 - Freeze por defecto: ledger durante el build + freeze corto al corte — ADR 0034
 - Todo evento tiene single; pasados sin inscripción ni «Añadir al calendario» — ADR 0035 (OWN-004, OWN-012)
@@ -104,7 +104,7 @@ Tienen ADR o decisión de dueño y un disparador propio. No son `POST-*` nuevos:
 | Tema | Dónde | Disparador |
 | ---- | ----- | ---------- |
 | HSTS | ADR 0020 | ≥30 días estables **después** del corte WordPress |
-| Copy de `/privacidad` | ADR 0028 | Texto legal aportado; no inventar |
+| Copy de `/privacidad` | ADR 0039 | Publicada (provisional). Revisión legal sigue abierta; CF7 gated a actualizar el aviso |
 | Automatización de deploy/CD | ADR 0016 | Estructura estable; no crear workflows de deploy ahora |
 | CPT `sangha` | ADR 0024 | Fuera del corte inicial; reabrir solo con decisión nueva |
 | Paginación numerada de galería | OWN-011 | Solo si un álbum crece mucho **después** del corte |

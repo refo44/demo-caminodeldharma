@@ -1,6 +1,6 @@
 # Conteos de reconciliación static → WordPress
 
-Baseline 2026-08-19, repo `VERSION` 1.0.34. ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
+Baseline 2026-08-19, repo `VERSION` 1.0.34; actualizado 2026-08-29 a 1.0.35 (`/privacidad`). ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
 Detalle: [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md).
 
 ```text
@@ -16,9 +16,9 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 
 | Colección | Conteo | Cómo se contó | Notas |
 | --------- | ------ | ------------- | ----- |
-| URLs en sitemap | 16 | `sitemap.xml` | sin 404 |
-| HTML de páginas | 16 (+ `404.html`) | glob `**/index.html` + 404 | |
-| Pages institucionales / secundarias (no CPT, no posts) | 10 | home, comunidad, linaje, practica, videos, meditacion, galeria, donaciones, contacto, blog (archivo) | `/eventos` es archive CPT, no Page |
+| URLs en sitemap | 17 | `sitemap.xml` | sin 404; incluye `/privacidad` |
+| HTML de páginas | 17 (+ `404.html`) | glob `**/index.html` + 404 | |
+| Pages institucionales / secundarias (no CPT, no posts) | 11 | home, comunidad, linaje, practica, videos, meditacion, galeria, donaciones, contacto, blog (archivo), privacidad | `/eventos` es archive CPT, no Page |
 | Eventos (cards) | **10** | `article.evento-card` en `eventos/index.html` | 1 vigente + 9 finalizados |
 | Eventos con URL single | **3** | sitemap `/eventos/{slug}` | las otras 7 solo viven en el listado |
 | Posts | **2** | `blog/{slug}` | |
@@ -40,7 +40,7 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 
 | Colección | Esperado | Cómo verificar |
 | --------- | -------- | -------------- |
-| Pages (institucionales + secundarias + blog page si aplica) | 10 (±1 si front-page no es Page) | `wp post list --post_type=page --format=count` |
+| Pages (institucionales + secundarias + blog page si aplica) | 11 (±1 si front-page no es Page) | `wp post list --post_type=page --format=count` |
 | CPT `event` | **10** | incluye las 7 sin single |
 | `event` con permalink público | **10** | ADR 0035 / OWN-004; 3 KEEP + 7 PLANNED |
 | `post` | **2** | meta `authors` asignado (ADR 0037) |
@@ -71,4 +71,4 @@ Cualquier otra cifra exige fila en «Mismatches».
 
 ---
 
-**Versión:** 1.0
+**Versión:** 1.1

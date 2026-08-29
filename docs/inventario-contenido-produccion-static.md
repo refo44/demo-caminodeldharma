@@ -1,6 +1,6 @@
 # Inventario de contenido de producción (sitio estático live)
 
-Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**. No es un extracto ejecutado: es el
+Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**, actualizado a **1.0.35** (`/privacidad`, ADR 0039). No es un extracto ejecutado: es el
 baseline documental. ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
 
 **Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática:** raíz del repo (no hay
@@ -20,7 +20,7 @@ bloquean el corte.
 
 ## 1. URLs públicas (sitemap)
 
-16 URLs en `sitemap.xml`. Todas **KEEP** salvo decisión nueva. Ver [`redirect-ledger.md`](redirect-ledger.md).
+17 URLs en `sitemap.xml`. Todas **KEEP** salvo decisión nueva. Ver [`redirect-ledger.md`](redirect-ledger.md).
 
 | URL | Archivo | Tipo | Clase |
 | --- | ------- | ---- | ----- |
@@ -33,6 +33,7 @@ bloquean el corte.
 | `/galeria` | `galeria/index.html` | Page + JSON | REAL PRODUCTION |
 | `/contacto` | `contacto/index.html` | Page + form no operativo | REAL PRODUCTION |
 | `/donaciones` | `donaciones/index.html` | Page institucional | REAL PRODUCTION |
+| `/privacidad` | `privacidad/index.html` | Page institucional (aviso provisional) | REAL PRODUCTION |
 | `/eventos` | `eventos/index.html` | Listado + calendario | REAL PRODUCTION |
 | `/eventos/circulos-de-presencia-consciente` | ficha | Event single | REAL PRODUCTION |
 | `/eventos/encuentro-nacional-2026` | ficha | Event single | HISTORICAL (publicado) |
@@ -41,7 +42,7 @@ bloquean el corte.
 | `/blog/circulos-de-presencia-consciente` | ficha | Post | REAL PRODUCTION |
 | `/blog/sangha-refugio-hiperconexion` | ficha | Post | REAL PRODUCTION |
 
-`404.html` no es URL pública. `/privacidad` **no** está en HTML ni sitemap (ADR 0028). No inventar copy.
+`404.html` no es URL pública. `/privacidad` está publicada (ADR 0039); el copy es provisional hasta asesoría legal. No reescribirlo al importar.
 
 Búsqueda: **no existe** (doc 04). No crear.
 
@@ -189,7 +190,7 @@ Contrato: static DOM → FSE template/parts/patterns/blocks → JS. Una Page 200
 
 **Home CTAs / cards:** comunidad, contacto, evento destacado, WhatsApp meditación, página meditación, 2 posts, blog, videos, galería.
 
-**Footer:** contacto, Facebook, Instagram, mailto, WhatsApp, donaciones, créditos. **Sin** enlace `/privacidad` en el HTML actual (docs lo prevén pendiente).
+**Footer:** contacto, Facebook, Instagram, mailto, WhatsApp, donaciones, créditos, **Privacidad** (`/privacidad`, ADR 0039).
 
 **Eventos:** título/cartel/«Ver evento» hacia singles cuando existen; anclas `#id` en la misma página; lunes → meditación.
 
@@ -203,4 +204,4 @@ Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER 
 
 ---
 
-**Versión inventario:** 1.0 · **Repo:** 1.0.34 · **Fecha:** 2026-08-19
+**Versión inventario:** 1.1 · **Repo:** 1.0.35 · **Fecha:** 2026-08-29

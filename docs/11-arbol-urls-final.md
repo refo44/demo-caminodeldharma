@@ -27,7 +27,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 | Contribuir (donaciones) | `/donaciones/` |
 | Contacto | `/contacto/` |
 | Blog | `/blog/` |
-| Privacidad | `/privacidad/` *(pendiente de publicar; texto por definir — ver `informes-seo/02` §9)* |
+| Privacidad | `/privacidad/` *(publicada; aviso provisional — ADR 0039)* |
 
 ---
 
@@ -81,7 +81,7 @@ Se sirve `noindex, follow` por defecto hasta que el tag tenga volumen suficiente
 /blog/tag/{slug}/          (existe; noindex hasta volumen suficiente — ADR 0031)
 /author/{slug}/            (ficha CPT blog_author; indexable — ADR 0037)
 /author/                   (archivo de fichas; noindex hasta volumen — ADR 0037)
-/privacidad/               (pendiente de publicar; enlace en el pie de todas las páginas)
+/privacidad/               (publicada; enlace en el pie de todas las páginas; ADR 0039)
 ```
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
 

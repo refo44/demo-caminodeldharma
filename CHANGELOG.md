@@ -8,6 +8,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [1.0.35] - 2026-08-29
+
+### `/privacidad` — aviso de privacidad provisional
+
+Página nueva en el estático, enlazada en el pie de todas las páginas. El texto describe el tratamiento real de este sitio (sin cookies propias, sin analítica, formulario de contacto que no envía, WhatsApp/correo, embeds, Google Forms/Zoom cuando una actividad los usa). Queda marcado como provisional hasta asesoría legal. ADR 0039 sustituye el aplazamiento de publicación de ADR 0028; Contact Form 7 sigue gated.
+
+- `privacidad/index.html`; enlace «Privacidad» junto al copyright del pie (17 páginas + 404).
+- `sitemap.xml`: `/privacidad` `<lastmod>` `2026-08-29`.
+- Estilos `.privacy-notice` en `main.css`.
+
+### Estado
+
+- Desarrollo: Finalizado
+- Producción: Pendiente de despliegue
+
 ## [1.0.34] - 2026-08-18
 
 ### `/eventos` — aviso de segundo toque bajo el calendario

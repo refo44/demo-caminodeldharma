@@ -67,3 +67,4 @@ JSON-LD: `Organization.foundingDate` = `2019`, `Organization.foundingLocation` =
 - [Videos y enseñanzas](https://caminodeldharma.org/practica/videos): Conferencias y enseñanzas audiovisuales relacionadas con la práctica buddhista.
 - [Galería](https://caminodeldharma.org/galeria): Archivo visual de encuentros, retiros, ceremonias y actividades comunitarias.
 - [Cómo contribuir](https://caminodeldharma.org/donaciones): Información oficial sobre las formas de apoyar y sostener las actividades de la comunidad.
+- [Privacidad](https://caminodeldharma.org/privacidad): Aviso de privacidad del sitio (versión provisional): qué datos se tratan al visitar, escribir o participar, y cómo ejercer derechos.

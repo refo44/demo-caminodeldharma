@@ -141,7 +141,7 @@ No basta con que exista `assets/js/main.js` encolado. Comprobar:
 - `data-*` attributes;
 - estado ARIA (`aria-expanded`, `aria-current`, `aria-hidden` del hint del calendario);
 - eventos (click, Escape, resize, primer/segundo toque en puntero grueso);
-- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, gated por ADR 0028);
+- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, gated por ADR 0039);
 - comportamiento dinámico (diálogo de calendario, `.ics`; galería: bloque Gutenberg, **sin**
   paginación numerada — OWN-011).
 
@@ -257,7 +257,7 @@ Smoke HTTP mínimo (tras cutover, sobre el hostname del environment bajo prueba)
 - Cada URL de la [matriz](matriz-migracion-static-wordpress.md) con estrategia «migrada».
 - CPT: **archive + single** (`/eventos` y al menos una ficha).
 - Blog: **archivo + single**.
-- Pages institucionales críticas: `/`, `/comunidad`, `/linaje`, `/practica`, `/contacto`, `/donaciones`, `/galeria`.
+- Pages institucionales críticas: `/`, `/comunidad`, `/linaje`, `/practica`, `/contacto`, `/donaciones`, `/galeria`, `/privacidad`.
 - 404 real (ruta fuera del árbol) con `templates/404.html`.
 - Formulario: prueba funcional en staging (correo a `caminodeldharma1@gmail.com`), no solo markup.
 - Comportamiento: menú teclado, calendario `/eventos`, compartir en una ficha, galería (bloque Gutenberg).

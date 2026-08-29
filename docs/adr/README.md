@@ -106,7 +106,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0025](0025-politica-plugins-terceros.md) | Plugins de terceros solo con aprobación por ADR | Aceptada |
 | [0026](0026-contact-form-7.md) | Contact Form 7 para el formulario de contacto | Aceptada |
 | [0027](0027-estandares-ingenieria-codigo.md) | Estándares de ingeniería y estilo de código para Fase 3 | Aceptada |
-| [0028](0028-privacidad-aplazada-conscientemente.md) | Política de privacidad aplazada conscientemente | Aceptada |
+| [0028](0028-privacidad-aplazada-conscientemente.md) | Política de privacidad aplazada conscientemente | Sustituida → [0039](0039-aviso-privacidad-provisional-estatico.md) |
 | [0029](0029-theme-bloques-full-site-editing.md) | Theme de bloques (Full Site Editing) en vez de PHP clásico con CSS congelado | Aceptada |
 | [0030](0030-sitemap-nativo-wordpress.md) | Sitemap nativo de WordPress (`/wp-sitemap.xml`) reemplaza al `sitemap.xml` manual | Aceptada |
 | [0031](0031-tags-blog-noindex-hasta-volumen.md) | Tags nativos en el blog (`post_tag`) — habilitados; archivo noindex hasta tener volumen | Aceptada |
@@ -117,6 +117,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0036](0036-urls-album-galeria-noindex.md) | URLs de álbum `/galeria/{slug}` permitidas; noindex hasta volumen | Aceptada |
 | [0037](0037-cpt-autor-blog-url-author.md) | CPT de autor del blog; perfil `/author/{slug}` | Aceptada |
 | [0038](0038-pruebas-tdd-phpunit-sonar.md) | Pruebas TDD, wp-phpunit y SonarQube Cloud | Aceptada |
+| [0039](0039-aviso-privacidad-provisional-estatico.md) | Aviso de privacidad provisional en el estático | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -139,7 +140,7 @@ Documentos, issues, commits o ADR relacionados.
 | Plugins de terceros | [0025](0025-politica-plugins-terceros.md) — solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno |
 | Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com |
 | Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
-| Política de privacidad | [0028](0028-privacidad-aplazada-conscientemente.md) — aplazada hasta asesoría legal; gate obligatorio antes de publicar Contact Form 7 |
+| Política de privacidad | [0039](0039-aviso-privacidad-provisional-estatico.md) — `/privacidad` publicada (provisional); [0028](0028-privacidad-aplazada-conscientemente.md) sustituida. Contact Form 7 sigue gated hasta actualizar el aviso y la revisión legal |
 | Arquitectura del theme WordPress | [0029](0029-theme-bloques-full-site-editing.md) — theme de bloques (Full Site Editing); paleta, tipografía y espaciado editables desde wp-admin vía `theme.json`/Global Styles; sustituye a [0009](0009-css-y-tokens-invariantes-en-migracion.md) solo para WordPress |
 | Sitemap en WordPress | [0030](0030-sitemap-nativo-wordpress.md) — `/wp-sitemap.xml` nativo reemplaza al `sitemap.xml` manual solo para WordPress; `static/` no cambia |
 | Tags del blog | [0031](0031-tags-blog-noindex-hasta-volumen.md) — `post_tag` habilitado para editores; archivo de tag existe pero noindex hasta volumen suficiente, criterio cualitativo |
@@ -150,6 +151,7 @@ Documentos, issues, commits o ADR relacionados.
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
 | Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
 | Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
+| Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; CF7 gated |
 
 ---
 
