@@ -8,9 +8,16 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.6 |
+| **Versión** | 3.7 |
 | **Fecha** | 2026-08-29 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.7)
+
+- Reglas `.cursor` de fuentes editoriales alineadas con OWN-007 y ADR 0034: el sitio publicado gana
+  antes del corte; `content-source/` queda como referencia protegida y potencialmente desactualizada.
+- FABLE5 v2.2 elimina el gate documental ya resuelto. Fase 3 queda lista para iniciar WU-00/WU-01
+  cuando el propietario lo autorice; WordPress continúa sin implementación.
 
 ### Cambios principales (3.6)
 
@@ -54,14 +61,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 - Incorporación de § Transición estático → WordPress
 - Incorporación de registro ADR y referencia a `docs/adr/README.md`
 - Incorporación de mantenimiento post-publicación
-- Despliegue manual y CI/CD pospuesto (ADR 0015, ADR 0016)
+- Despliegue/CD manual y automatización de deploy pospuesta (ADR 0015, ADR 0016). El CI de calidad
+  pasa a ser obligatorio al existir tests PHP (ADR 0038).
 - Congelamiento de documentación base (§ más abajo)
 
 **Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `docs/adr/README.md`, `.audit/` (auditoría de producción 2026-07-19)
 
 ---
 
-## Estado actual del proyecto (2026-08-19)
+## Estado actual del proyecto (2026-08-29)
 
 Tres tiempos (no mezclar):
 
@@ -74,9 +82,9 @@ Tres tiempos (no mezclar):
 | Aspecto | Estado |
 | ------- | ------ |
 | **Fase activa** | Fase 2 **en producción** (sitio estático live); mantenimiento; Fase 3 **no iniciada** |
-| **URL producción** | https://caminodeldharma.org |
+| **URL producción** | [https://caminodeldharma.org](https://caminodeldharma.org) |
 | **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
-| **WordPress** | No iniciado (Fase 3 pendiente). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. Activar un theme futuro **no** crea Pages (ADR 0032). |
+| **WordPress** | No iniciado (Fase 3 pendiente y decisiones cerradas). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. FABLE5 v2.2 puede iniciar WU-00/WU-01 cuando el propietario lo autorice. Activar un theme futuro **no** crea Pages (ADR 0032). |
 | **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` + inventario ADR 0034 |
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |
@@ -90,9 +98,10 @@ La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). 
 
 ## Principios transversales
 
-### Fuente única de verdad
+### Fuentes de verdad durante producción estática
 
-**Repositorio Git como fuente única de verdad.**
+**Git gobierna el código y los artefactos de despliegue; el sitio publicado gobierna el contenido
+visible hasta el corte (OWN-007).**
 
 - Todo cambio debe realizarse en el repositorio. No se editarán archivos directamente en el servidor de producción.
 - El servidor (Hostinger) es un **destino de despliegue**, no un entorno de edición.
@@ -112,14 +121,15 @@ Orden recomendado:
 2. Implementar en código.
 3. Validar según los criterios de aceptación de la fase activa.
 
-Excepciones permitidas sin doc previo: corrección de errores tipográficos alineados con `content-source/`, bugs de accesibilidad y ajustes de performance que no alteren la arquitectura.
+Excepciones permitidas sin doc previo: corrección de errores tipográficos alineados con el sitio
+publicado, bugs de accesibilidad y ajustes de performance que no alteren la arquitectura.
 
 ### Estrategia de versionado
 
 | Aspecto | Regla |
 | -------- | ------ |
 | **Ramas** | Desarrollo en ramas de feature; `main` es la rama de producción. |
-| **Integración** | Merge a `main` mediante Pull Request con revisión. |
+| **Integración** | Hoy se permite push a `main`; ramas feature y PR obligatorios se activarán más adelante. El CI de calidad corre en ambos cuando exista (ADR 0038). |
 | **Etiquetas** | Releases etiquetados (`v1.0.0`, `v1.1.0`, …) al desplegar a producción. |
 | **Versión en repo** | Archivo `VERSION` y entrada en `CHANGELOG.md` (ver README). |
 | **Producción** | Solo desde `main` (o tag asociado a un commit de `main`). |
@@ -128,7 +138,10 @@ Semántica sugerida: **MAJOR** (cambio estructural o de URLs), **MINOR** (nueva 
 
 ### Congelamiento de documentación base
 
-A partir de la versión 3.0 de este documento, la **documentación arquitectónica base** se considera **suficiente y congelada**. Los cambios sobre esos documentos deben ser **excepcionales** y responder a necesidades reales del proyecto (error, requisito nuevo validado, inconsistencia con `content-source/`), no a refinamiento continuo.
+A partir de la versión 3.0 de este documento, la **documentación arquitectónica base** se considera
+**suficiente y congelada**. Los cambios sobre esos documentos deben ser **excepcionales** y responder
+a necesidades reales del proyecto (error, requisito nuevo validado, inconsistencia con producción o
+una decisión vigente), no a refinamiento continuo.
 
 Documentos congelados:
 
@@ -163,7 +176,8 @@ La fase se considera **cerrada** cuando:
 - [ ] Paleta y tipografía documentadas en `02-identidad-corporativa`
 - [ ] Wireframes o equivalente HTML de bloques por pantalla según `04` y `06`
 - [ ] Sin contradicciones entre docs referenciados (regla de dependencias en `00-orden-documentos`)
-- [ ] Copy y estructura alineados con `content-source/` (prioridad máxima)
+- [x] Copy y estructura implementados desde las fuentes iniciales; la producción publicada pasa a
+  gobernar durante la migración bajo OWN-007
 - [ ] Decisiones de diseño revisadas contra `18-tendencias-ux-ui-sistema-editorial`
 
 ---
@@ -242,7 +256,14 @@ La maqueta debe comportarse como el sitio real:
 - Estructura de bloques igual a `06-wireframes`
 - Microcopy final desde `09-ui-copy-sheet`
 
-**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog, Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de color; calendario estático (un mes: eventos rellenos; lunes de meditación con borde y tooltip; aviso «Toca de nuevo para ver el evento.» al primer toque en puntero grueso) en Eventos; sección Recitación práctica de la comida en Práctica (con enlace de descarga PDF); sección Mantras para la práctica en Práctica (Amitābha y Guān Shì Yīn Púsà con reproductor de audio); nota de un evento vigente en Inicio (rótulo, cartel `medium`, «Ver evento», junto a «Un poco de nuestra comunidad»); página Contribuir (donaciones) y Blog.
+**Componentes implementados en la maqueta:** navegación principal + subnav (Galería, Blog,
+Contribuir, Contacto); título del sitio (site-title) en Inicio; hero con imagen contenida y fondo de
+color; calendario estático (un mes: eventos rellenos; lunes de meditación con borde y tooltip; aviso
+«Toca de nuevo para ver el evento.» al primer toque en puntero grueso) en Eventos; sección Mantras
+para la práctica en Práctica (Amitābha y Guān Shì Yīn Púsà con reproductor de audio); nota de un
+evento vigente en Inicio (rótulo, cartel `medium`, «Ver evento», junto a «Un poco de nuestra
+comunidad»); página Contribuir (donaciones) y Blog. La antigua recitación de la comida y su PDF
+quedaron retirados por OWN-002.
 
 ### 2.4 Simulación de estados dinámicos
 
@@ -251,7 +272,8 @@ Antes de WordPress, se validan flujos con contenido estático:
 - **Eventos:**
   - Versión con evento
   - Versión sin evento (mensaje amable)
-- **Single evento (opcional):** `/eventos/retiro/index.html`
+- **Single de evento en Fase 2:** tres URLs implementadas. En Fase 3, los 10 eventos tienen single
+  público según ADR 0035.
 
 Esto permite validar navegación real sin backend.
 
@@ -264,7 +286,8 @@ Se consideran **estables** (congelamiento arquitectónico, no de contenido):
 - Arquitectura de información y estructura de páginas
 - Navegación principal y URLs (ADR 0008)
 - Componentes y jerarquía visual
-- Sistema de diseño, tokens de identidad y arquitectura CSS (ADR 0009)
+- Sistema visual base y CSS del estático. En WordPress se traduce a `theme.json` y Global Styles
+  editables según ADR 0029.
 - Modelo de contenido (`03-wordpress-content-model`)
 - Jerarquía editorial y voz (`07`, `08`, `21`, `23`)
 - Criterios de accesibilidad (`19`)
@@ -288,7 +311,8 @@ Cualquier cambio **estructural** importante debe documentarse y **reflejarse tam
 Detalle completo en **§ Transición estático → WordPress**. Resumen:
 
 - Monorepo (desde Fase 3): `static/` (producción) + `wordpress/` (desarrollo) + `docs/` (compartido).
-- Despliegues manuales; CI/CD pospuesto (ADR 0015, ADR 0016).
+- Despliegues manuales; automatización de deploy/CD pospuesta (ADR 0015, ADR 0016). CI de calidad
+  obligatorio cuando existan tests PHP (ADR 0038).
 - Registro de diferencias: `docs/migracion-static-wordpress.md`.
 
 > **Nota:** Hasta el inicio de la **Fase 3**, el sitio HTML permanece en la **raíz** del repositorio. La carpeta `static/` **no existe aún**; la reorganización raíz → `static/` es el **primer paso** de Fase 3 y **no debe adelantarse**.
@@ -311,7 +335,9 @@ La fase se considera **cerrada para producción estática** cuando se cumplen lo
 - [x] SEO técnico inicial según `15-assets-strategy` (§12): títulos, canonical, OG, robots, sitemap — **100/100** en auditoría
 - [~] Fase 2.5 (QA) — parcial; auditoría de producción (§2.75) cubre parte del alcance con limitaciones documentadas
 - [ ] **Formulario de contacto operativo** — pendiente: estático tiene `action="#"` sin handler (FUNC-001); ver §2.75 y `docs/archive/contacto-formulario-estatico/`
-- [ ] **Descargas `.ics` de eventos** — pendiente: archivos `/ical/*.ics` referenciados pero inexistentes (FUNC-002)
+- [~] **Descargas `.ics` de eventos** — existen dos archivos en el estático. En WordPress, Círculos
+  se genera mientras siga vigente y Encuentro 2026 responde 410; no se importan como media
+  (OWN-009/012/013).
 
 ---
 
@@ -360,7 +386,10 @@ Probar en la versión estable más reciente de:
 
 ## Fase 2.75: Auditoría de producción (2026-07-19)
 
-Auditoría de solo lectura sobre https://caminodeldharma.org y el código fuente (commit auditado `be896db2`; paridad deploy 14/14). **No implementó cambios.** Workspace completo en [`.audit/`](../.audit/README.md).
+Auditoría de solo lectura sobre
+[https://caminodeldharma.org](https://caminodeldharma.org) y el código fuente (commit auditado
+`be896db2`; paridad deploy 14/14). **No implementó cambios.** Workspace completo en
+[`.audit/`](../.audit/README.md).
 
 ### Resultado resumido
 
@@ -370,7 +399,7 @@ Auditoría de solo lectura sobre https://caminodeldharma.org y el código fuente
 | Score global | **84/100** |
 | Hallazgos | 0 CRÍTICO · 2 ALTO · 4 MEDIO · 3 BAJO · 1 INFORMATIVO |
 | SEO / SEO técnico | **100/100** — sin hallazgos accionables |
-| Decisión HSTS | **ACTIVATE NOW — Fase 1** `max-age=604800` (7 d) → **Fase 2** `31536000` post-WordPress — `.audit/hsts-decision.md`, **ADR 0018** |
+| Decisión HSTS | **HISTÓRICA:** la auditoría recomendó activarlo por fases; ADR 0020 lo aplazó hasta ≥30 días después del corte WordPress |
 
 ### Hallazgos que afectan operación (prioridad de remediación)
 
@@ -378,12 +407,12 @@ Auditoría de solo lectura sobre https://caminodeldharma.org y el código fuente
 | -- | --------- | ---- | ------------------ | ----- |
 | FUNC-001 | ALTA | Formulario contacto no entrega (`action="#"`) | CTAs WhatsApp/correo (corto plazo) o backend real (WordPress) | TASK-0002 READY · TASK-0003 BLOCKED |
 | FUNC-002 | ALTA | Descargas `.ics` → 404 | Crear `ical/*.ics` para ambos eventos | TASK-0001 READY |
-| SEC-001 | MEDIA | HSTS comentado en `.htaccess:103` | Activar Fase 1 (`max-age=604800`) | TASK-0004 + TASK-0005 READY |
-| PRIV-001 | MEDIA | GA4 sin consentimiento ni política | Decisión organizativa + TASK-0006 BLOCKED |
+| SEC-001 | MEDIA | HSTS comentado en `.htaccess:103` | No activar durante la transición; reevaluar según ADR 0020 | TASK-0004 + TASK-0005 SUPERSEDED |
+| PRIV-001 | MEDIA | GA4 sin consentimiento ni política | Decisión organizativa | TASK-0006 BLOCKED |
 | PERF-001 | MEDIA | Imágenes sobredimensionadas | Logo + srcset galería | TASK-0007 READY |
-| PERF-002 | BAJA | CSS/JS sin versionado `?v=` | TASK-0011 READY |
+| PERF-002 | BAJA | CSS/JS sin versionado `?v=` | Versionar assets | TASK-0011 READY |
 | SEC-002 | MEDIA | CSP mínima | Report-Only → enforce | TASK-0008 READY |
-| SEC-003 | BAJA | Sin `security.txt` | TASK-0009 READY |
+| SEC-003 | BAJA | Sin `security.txt` | Publicar archivo | TASK-0009 READY |
 | AEO-001 | BAJA | Galería solo client-side | Pre-render primera página | TASK-0010 READY |
 
 Detalle completo: `.audit/findings.jsonl`, paquetes en `.audit/remediation/`, tareas atómicas en `.audit/implementation/tasks/`.
@@ -392,14 +421,16 @@ Detalle completo: `.audit/findings.jsonl`, paquetes en `.audit/remediation/`, ta
 
 Orden en `.audit/implementation/waves.md`:
 
-1. **WAVE-1** — HSTS (0004→0005), `.ics` (0001), contacto (0002); gate: HSTS verificado, sin 404 en `/ical/`, `/contacto` sin vía muerta
+1. **WAVE-1 (histórica)** — HSTS (0004→0005), `.ics` (0001), contacto (0002). HSTS quedó
+   sustituido por ADR 0020; no ejecutar esas tareas durante la transición.
 2. **WAVE-2** — Imágenes (0007)
 3. **WAVE-3** — *(vacía: SEO/SD/contenido en verde)*
 4. **WAVE-4** — CSP (0008), `security.txt` (0009), privacidad (0006 BLOCKED), `includeSubDomains` (0012 BLOCKED)
 5. **WAVE-5** — Versionado assets (0011)
 6. **WAVE-6** — Pre-render galería (0010)
 
-**Arranque recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
+**Arranque histórico recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
+La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.2.
 
 Implementar en sesiones separadas; cada tarea incluye criterios de aceptación, validación y rollback. Respetar `conflict-map.md` (no editar `.htaccess`, `contacto/index.html` ni las 14 páginas HTML en paralelo dentro del mismo conflict group).
 
@@ -409,7 +440,9 @@ Antes de TASK-0002 (retiro temporal del formulario) o de cualquier cambio en `/c
 
 **`docs/archive/contacto-formulario-estatico/`**
 
-Contiene página completa, bloque `<main>`, extracto CSS y README con instrucciones para restaurar en estático o replicar en `page-contacto.php` (WordPress).
+Contiene página completa, bloque `<main>`, extracto CSS y README histórico para restaurar el
+estático. En WordPress, adaptar el contrato visual a `templates/page-contacto.html` y usar Contact
+Form 7 según ADR 0026/0028; no crear `page-contacto.php` ni un handler de formulario en el theme.
 
 ### Limitaciones de la auditoría (relevantes para este doc)
 
@@ -420,11 +453,13 @@ Contiene página completa, bloque `<main>`, extracto CSS y README con instruccio
 
 Ver `.audit/limitations.md`.
 
-### Relación con ADR 0010 e ADR 0018 (HSTS)
+### Relación histórica con ADR 0010 e ADR 0018 (HSTS)
 
-La auditoría satisface el checklist de ADR 0010. **ADR 0018** (Aceptada) define el despliegue escalonado: **Fase 1** ahora con `max-age=604800`; **Fase 2** con `max-age=31536000` tras WordPress estable en producción (≥30 días sin incidencias TLS/redirect). Alternativa ultra-conservadora: `max-age=300` o `86400`. Año completo desde el día uno sigue técnicamente válido pero no es la preferencia del proyecto durante la transición.
-
-Implementación Fase 1: TASK-0004; verificación: TASK-0005. Registrar en `CHANGELOG.md`. `includeSubDomains` / preload: rechazados (TASK-0012).
+La auditoría satisfizo el checklist de ADR 0010 y recomendó el despliegue escalonado de ADR 0018.
+**ADR 0020 sustituyó esa acción en lo operativo:** no activar HSTS durante la transición ni el día
+del corte. Reevaluar únicamente tras ≥30 días estables en WordPress y registrar cualquier decisión
+nueva en `CHANGELOG.md`. TASK-0004/TASK-0005 quedan históricas; `includeSubDomains` y preload siguen
+fuera de alcance.
 
 ---
 
@@ -482,7 +517,8 @@ No son equivalentes. Cambios en diseño, estructura, navegación, CSS, JS, a11y 
 
 ### Despliegue durante la transición
 
-**Manual únicamente** (ADR 0015). **CI/CD pospuesto** (ADR 0016).
+**Deploy manual únicamente** (ADR 0015). **Automatización de CD pospuesta** (ADR 0016).
+El workflow de calidad de ADR 0038 no despliega y se crea cuando existan tests PHP.
 
 | Destino | Qué subir | Dónde |
 | ------- | --------- | ----- |
@@ -535,13 +571,27 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
 
 **Justificación:** CMS para terceros (ADR 0012). Ver § Transición estático → WordPress.
 
-1. **Reorganizar repo:** raíz → `static/` (ADR 0014); actualizar README y procedimiento de despliegue
-2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024). El mismo día: kit de pruebas (Composer de raíz, `tests/Support/`, `tests/Unit/`, `tests/WordPress/`, wp-phpunit). TDD desde la primera línea (ADR 0038, `docs/guia-pruebas-plugin-theme-fse.md`). `.sonarcloud.properties` ya apunta al plugin y al theme; no añadir el estático.
-3. Adaptar cada HTML de `static/` **directamente** a `templates/*.html` / `parts/` / `patterns/` (`12-theme-file-structure`). Ruta: maqueta → FSE. **Prohibido** un theme clásico PHP como puente.
-4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`, [matriz](matriz-migracion-static-wordpress.md)
-5. CPT `event` en el plugin; roles editoriales; importador create-missing-only (ADR 0033); ledger `migracion-static-wordpress.md`
-6. WordPress en **staging separado**; Fase 2.5 sobre el theme. Theme activado ≠ Pages creadas.
-7. **Corte final** según [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); static archivada en tag
+1. **WU-00/WU-01:** preflight durable y reorganización raíz → `static/` (ADR 0014). Detenerse antes
+   de Docker.
+2. **WU-02, sesión separada:** entorno local Docker (ADR 0023). Validar y detenerse antes de código
+   de aplicación.
+3. **WU-03:** scaffold de `camino-del-dharma-core` y kit Composer/PHPUnit/wp-phpunit. El primer PHP
+   nace después de una prueba roja (ADR 0038). Sonar cubre solo plugin + theme.
+4. **WU-04:** scaffold del theme FSE `camino-del-dharma`, `theme.json` y baseline visual. No crear
+   un theme PHP clásico como puente (ADR 0029).
+5. **WU-05:** dominio y rutas de `event`, `gallery_album`, `blog_author`, calendario e `.ics`
+   generado (ADR 0035–0037, OWN-009/012–015).
+6. **WU-06:** extractor y WP-CLI `validate → plan → import → verify`, idempotente y
+   create-missing-only (ADR 0033/0034).
+7. **WU-07/WU-08:** Pages, posts, autores, media, templates, galería, comportamiento,
+   accesibilidad, SEO y redirects. Template ≠ objeto editorial.
+8. **WU-09:** implementar y probar Contact Form 7 localmente y en staging con datos sintéticos.
+   Mantenerlo ausente o deshabilitado en producción hasta cumplir el gate de privacidad
+   (ADR 0026/0028).
+9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
+   solo con autorización expresa (OWN-005).
+10. **Corte final:** ejecutar
+    [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); archivar el estático en tag.
 
 ### Criterios de aceptación — Fase 3
 
@@ -550,7 +600,9 @@ La fase se considera **cerrada** cuando:
 - [ ] Theme refleja la maqueta congelada (§2.6): mismas URLs, bloques, copy y paridad visual inicial (ADR 0001, ADR 0029)
 - [ ] Plantillas de bloques mapeadas según `12-theme-file-structure` y la [matriz](matriz-migracion-static-wordpress.md)
 - [ ] Pages institucionales **existen en la BD** (un template en disco no basta)
-- [ ] CPT `event` operativo; archive + single con HTTP real; estados con/sin evento validados
+- [ ] CPT `event` operativo: archivo + 10 singles HTTP, estados automáticos y `.ics` vigente/410
+- [ ] Taxonomía `gallery_album` y CPT `blog_author` operativos, con rutas/noindex según ADR 0036/0037
+- [ ] Importador real idempotente; conteos y relaciones reconciliados contra producción
 - [ ] Contenido editable desde WordPress sin romper layout
 - [ ] Cinco entregables del contrato (ADR 0032) cubiertos, no solo el theme desplegado
 - [ ] Kit de pruebas del día uno: `composer test` verde; wp-phpunit para CPT/meta/rewrites; dominio nuevo con TDD (ADR 0038)
@@ -563,7 +615,8 @@ La fase se considera **cerrada** cuando:
 
 ### Vigente: despliegue manual (transición)
 
-ADR 0015, ADR 0016. **No hay pipelines de CI/CD activos** para despliegue.
+ADR 0015, ADR 0016. **No hay pipelines activos de despliegue.** El CI de calidad
+`.github/workflows/test.yml` es independiente y se activa con los tests PHP (ADR 0038).
 
 **Sitio estático en producción:**
 
@@ -575,11 +628,13 @@ ADR 0015, ADR 0016. **No hay pipelines de CI/CD activos** para despliegue.
 
 **WordPress:** despliegue manual del theme a **staging** hasta el corte final.
 
-### Futuro: automatización (pospuesta)
+### CI de calidad y futura automatización de despliegue
 
-Cuando la estructura esté estable (ADR 0016):
+Al existir tests PHP, crear `.github/workflows/test.yml` para ejecutar lint CSS + `composer test`
+en push a `main` y pull requests, sin secretos, deploy ni SonarScanner (ADR 0038).
 
-- Validación en PR (`lint.yml` u equivalente, a crear)
+La automatización de despliegue permanece pospuesta hasta que la estructura esté estable (ADR 0016):
+
 - Deploy acotado: estático pre-corte; theme post-corte (ADR 0013)
 - SSH + rsync con `--delete` solo en directorios versionados (ADR 0007)
 
@@ -597,18 +652,28 @@ Cuando la estructura esté estable (ADR 0016):
 ## Prioridad de páginas
 
 1. **Inicio** — Hero, meditación semanal, caminos de participación
-2. **Contacto** — Formulario (markup listo; **envío pendiente** — FUNC-001) + bloque Redes sociales + WhatsApp/correo. Respaldo: `docs/archive/contacto-formulario-estatico/`. En WordPress: formulario funcional vía plugin o handler del theme.
+2. **Contacto** — Formulario (markup listo; **envío pendiente** — FUNC-001) + bloque Redes sociales
+   junto con WhatsApp/correo. Respaldo: `docs/archive/contacto-formulario-estatico/`. En WordPress: Contact
+   Form 7 (ADR 0026), probado localmente/staging; su publicación en producción queda sujeta al gate
+   de privacidad ADR 0028. Nunca un handler del theme.
 3. **La comunidad** — Quiénes somos, fundador
-4. **Práctica** — Meditación, recitación comida, mantras (audio), talleres, retiros, videos
+4. **Práctica** — Meditación, mantras (audio), talleres, retiros y videos. El PDF de recitación está
+   retirado (OWN-002).
 5. **El linaje** — Tradición, Chan, Tierra Pura
-6. **Galería** — Página dedicada con álbumes titulados por año, evento o actividad; cada álbum tiene grid y paginación independiente de 12 imágenes por página. En Inicio se mantiene la fila de imágenes + enlace «Ver galería completa».
-7. **Eventos** — Condicional; implementar cuando haya eventos vigentes
+6. **Galería** — Hub `/galeria` con los tres álbumes actuales y bloque Galería/lightbox nativo.
+   Cada álbum muestra todas sus imágenes con lazy-load; sin paginación numerada en el corte
+   (ADR 0021, ADR 0036, OWN-011).
+7. **Eventos** — Archivo y 10 singles siempre disponibles. Solo la promoción, inscripción y
+   calendario del evento vigente son condicionales (ADR 0035, OWN-012/013).
 
 ---
 
 ## Regla
 
-No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté validada (Fase 2 + Fase 2.5). **Excepción operativa:** remediación post-auditoría (§2.75) sobre el estático en producción está permitida y priorizada (HSTS, `.ics`, contacto, rendimiento) sin iniciar Fase 3.
+No escribir código de theme WordPress ni subir a servidor final hasta que la maqueta estática esté
+validada (Fase 2 + Fase 2.5). **Excepción operativa:** la remediación post-auditoría (§2.75) sobre el
+estático en producción está permitida sin iniciar Fase 3, siempre respetando decisiones posteriores;
+HSTS permanece aplazado por ADR 0020.
 
 ---
 
@@ -644,7 +709,8 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 - [x] SEO técnico (`15` §12): `<title>`, canonical, OG por página; `robots.txt` y `sitemap.xml` actualizados (auditoría 100/100)
 - [x] Sin `<link rel="manifest">` ni PWA (15 §11)
 - [x] Eventos con URL propia: JSON-LD `Event` completo según §12.3; listado `/eventos/` sin microdata duplicada
-- [ ] Descargas `.ics` de calendario operativas (FUNC-002)
+- [~] Descargas `.ics`: dos archivos existen en el estático; el destino WordPress genera solo las
+  vigentes y devuelve 410 para finalizadas (OWN-009/012/013)
 - [ ] HSTS — **aplazado** hasta después del corte WordPress (ADR 0020). Los ítems ADR 0018 Fase 1/2 quedan históricos en lo operativo.
 - [ ] Política de privacidad aplazada (ADR 0028). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente.
 - [ ] Google Search Console: sitemap enviado; solicitar indexación de URLs modificadas tras cada despliegue relevante
@@ -658,7 +724,7 @@ Tareas periódicas una vez el sitio está en producción. No son desarrollo de f
 | Frecuencia | Tarea |
 | ---------- | ----- |
 | **Tras cada despliegue** | Smoke test de URLs clave; verificar enlaces del footer; si hay formulario, probar envío end-to-end |
-| **Post-auditoría (2026-07-19)** | Ejecutar olas §2.75 según `.audit/implementation/backlog.md`; registrar en `CHANGELOG.md` |
+| **Post-auditoría (2026-07-19)** | Ejecutar solo tareas §2.75 no sustituidas por ADR posteriores; registrar en `CHANGELOG.md` |
 | **Mensual** | Revisión de enlaces rotos (internos y externos) |
 | **Mensual** | Comprobar que `sitemap.xml` refleja el inventario de URLs indexables |
 | **Trimestral** | Auditoría Lighthouse (home + una página interior) |
@@ -669,7 +735,9 @@ Tareas periódicas una vez el sitio está en producción. No son desarrollo de f
 | **Según necesidad** | Limpieza de contenido obsoleto (eventos pasados, entradas de blog desactualizadas) |
 | **Según necesidad** | Actualización de dependencias de desarrollo (`npm`; Stylelint) |
 
-Incidencias detectadas en mantenimiento siguen la **política de cambios**: documentar si afectan arquitectura o navegación; corregir directamente si son bugs o contenido editorial alineado con `content-source/`.
+Incidencias detectadas en mantenimiento siguen la **política de cambios**: documentar si afectan
+arquitectura o navegación; corregir directamente si son bugs o contenido editorial alineado con el
+sitio publicado.
 
 ---
 
@@ -679,10 +747,12 @@ Este documento define el **orden oficial de implementación** y el **ciclo de vi
 
 **Documentación y diseño → maqueta estática validada → QA → auditoría producción (§2.75) → remediación → transición (static/ + wordpress/) → corte WordPress → mantenimiento.**
 
-Durante la transición: un solo repo, despliegues manuales del estático, WordPress en staging, registro en `migracion-static-wordpress.md`. CI/CD pospuesto (ADR 0016).
+Durante la transición: un solo repo, despliegues manuales del estático, WordPress en staging y
+registro en `migracion-static-wordpress.md`. El CD sigue pospuesto (ADR 0016); el CI de calidad se
+activa con los tests PHP (ADR 0038).
 
 A partir de la versión 3.0, **priorizar implementación** sobre ampliación de documentación de alto nivel (ver § Congelamiento de documentación base). La versión 3.1 incorpora el estado real post-auditoría: el estático puede recibir mejoras de §2.75 sin bloquear la planificación de Fase 3.
 
 ---
 
-**Versión:** 3.6 · **Fecha:** 2026-08-29 · **Estado:** Vigente
+**Versión:** 3.7 · **Fecha:** 2026-08-29 · **Estado:** Vigente

@@ -2,14 +2,15 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.1
+**Prompt version:** 2.2
 **Status:** CURRENT — use this prompt for execution
 **Date:** 2026-08-29
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
 or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0038,
-plus the closed owner-decision backlog v1.18.
+plus the closed owner-decision backlog v1.18. Version 2.2 supersedes the temporary governance gate
+in version 2.1 after the always-applied content rules were reconciled with OWN-007.
 
 ---
 
@@ -67,7 +68,7 @@ This prompt authorizes:
 - the root-to-`static/` monorepo reorganization;
 - local Docker operations;
 - creation of the theme, plugin, migration tools, tests, and durable execution artifacts;
-- local fixture import; real reviewed-payload import only after §4.2's governance gate is resolved;
+- local fixture import and reviewed real-content payload import;
 - small, coherent local Git commits after relevant checks pass.
 
 This prompt does **not** authorize:
@@ -110,28 +111,22 @@ security, or deployment decision requires a new ADR before implementation.
 
 There is no single source hierarchy for every content type:
 
-- **Institutional copy, page structure, section order, hierarchy, and design guidance have a known
-  governance conflict:** OWN-007 and the migration contract say the published HTML wins, while the
-  currently always-applied `.cursor/rules/content-source-priority.mdc` and
-  `.cursor/rules/contenido-web-canonical.mdc` say `content-source/` wins. Repository rules rank above
-  this prompt and current docs.
-- **Until those rules are explicitly reconciled:** inventory both sources and record exact
-  divergences, but do not implement or apply real WordPress content, media relationships, or
-  presentation from the static source. Continue only work independent of the conflict: architecture,
-  Git reorganization, local environment, generic tooling, domain schemas, and non-content routing.
-- **Events, blog posts, gallery JSON, dates, cards, and their media relationships:** ADR 0034,
-  OWN-007, and the migration docs classify live static HTML/JSON as production content, but the
-  currently active repository rule does not permit it as an editorial source or fallback. It may be
-  inventoried and extracted into a reviewable payload, but not imported or applied until governance
-  is reconciled.
-- **Presentation and behavior:** the static HTML/CSS/JS is the visual and behavioral contract only
-  where it does not conflict with the higher-priority content rules or an accepted ADR replacement.
+- **Published production:** `https://caminodeldharma.org` is authoritative for current institutional
+  copy, content, page structure, section order, hierarchy, and styles until cutover (OWN-007).
+- **Extraction input:** use the latest repository `VERSION` and exact commit/tag (OWN-006). Compare
+  it against published production before import. Record every repo/Hostinger delta and reconcile
+  conflicting fields explicitly; never assume parity or silently choose.
+- **Events, blog posts, gallery JSON, dates, cards, and media relationships:** static HTML/JSON is
+  real production content under ADR 0034. Hardcoded does not mean fixture.
+- **`content-source/`:** protected provenance and reference material that may be outdated relative to
+  production. Never modify it and never use it to overwrite published production.
+- **Presentation and behavior:** published static HTML/CSS/JS is the visual and behavioral contract
+  unless an accepted ADR records a replacement.
 - **URLs:** `sitemap.xml`, ADR 0008, the redirect ledger, and incoming HTTP behavior.
 - **After cutover:** WordPress owns editorial content; Git owns theme/plugin code.
 
-Do not silently resolve the content/presentation governance conflict. A documentation statement does
-not override an always-applied repository rule. Block only the affected areas and record their exact
-scope in the execution state.
+If published production and the latest repository diverge, record the affected object, field, route,
+and proposed resolution in the execution state and migration ledger before applying the payload.
 
 ### 4.3 Mandatory reading
 
@@ -140,7 +135,7 @@ Before implementation, read:
 - `.cursor/rules/`, `CLAUDE.md`, `AGENTS.md`;
 - `docs/17-orden-implementacion.md`;
 - `docs/adr/README.md`;
-- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0037;
+- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0038;
 - `docs/contrato-migracion-static-wordpress.md`;
 - `docs/inventario-contenido-produccion-static.md`;
 - `docs/conteos-reconciliacion-migracion.md`;
@@ -158,7 +153,7 @@ Before implementation, read:
 - `docs/20-layout-principles.md`;
 - `docs/docker-wordpress-playbook.md`.
 
-Check the ADR index for decisions newer than ADR 0037 and read any that affect this scope.
+Check the ADR index for decisions newer than ADR 0038 and read any that affect this scope.
 
 ---
 
@@ -376,12 +371,8 @@ WordPress database + Media Library
 
 The payload must identify its source commit/version and preserve stable source keys. Prefer
 programmatic parsing over manual transcription. Extract from the latest repository `VERSION`, then
-compare copy, content, and styles against the published site and record any repo/Hostinger delta.
-
-Do not implement or apply real content, media relationships, or presentation from static HTML/JSON
-while §4.2's repository-rule conflict remains. Read-only extraction into a versioned review payload
-may continue, but real-content import may not. Importer behavior may be developed and tested only
-with clearly marked disposable local fixtures until the gate is resolved.
+compare copy, content, structure, styles, and media relationships against the published site. Resolve
+or explicitly approve every repo/Hostinger delta before import.
 
 ### 8.2 WP-CLI importer
 
@@ -413,7 +404,7 @@ objects created by that fixture system. Do not build a fixture framework merely 
 
 ### 8.3 Required WordPress objects
 
-After §4.2's governance gate is resolved, create/import real objects and settings for:
+Create/import real objects and settings for:
 
 - front page and Reading settings;
 - Comunidad;
@@ -446,7 +437,7 @@ Do not create or publish `/privacidad` copy. That content requires owner/legal r
 
 ### 9.1 No redesign
 
-Subject to §4.2's higher-priority governance gate, preserve:
+Preserve:
 
 - page and section order;
 - visual hierarchy;
@@ -458,8 +449,8 @@ Subject to §4.2's higher-priority governance gate, preserve:
 - states with and without current events.
 
 Any intentional static-to-WordPress substitution must be recorded in the migration matrix and ledger.
-If a listed item conflicts with `content-source/`, inventory and block that affected view rather than
-choosing a source silently.
+If the repo differs from published production, record and reconcile that delta before implementing
+the affected view.
 
 ### 9.2 Template and route mapping
 
@@ -640,6 +631,10 @@ and ADR 0038. Create the PHPUnit + wp-phpunit kit the same day first-party PHP e
 QA levels below are *migration evidence*; they map to those runners (QA 1 = cheap gate, QA 2 =
 unit + wp-phpunit, QA 3 = wp-phpunit + isolated harnesses, QA 4 = manual + staging).
 
+When PHP tests exist, add `.github/workflows/test.yml` for quality only: run static CSS lint and
+`composer test` on pushes to `main` and pull requests. Do not add deploy secrets, deployment steps,
+SonarScanner, or any CD workflow.
+
 ### QA level 1 — static checks
 
 - PHP syntax;
@@ -680,7 +675,7 @@ unit + wp-phpunit, QA 3 = wp-phpunit + isolated harnesses, QA 4 = manual + stagi
 - screen-reader-relevant labels/headings/ARIA;
 - visual comparison against `static/`;
 - copy, content, structure, and style comparison against `https://caminodeldharma.org`, with
-  repo/live/content-source deltas recorded; do not bypass §4.2's governance blocker;
+  repo/live/content-source deltas recorded and published production used as the acceptance baseline;
 - staging PHP/Apache/HTTPS behavior;
 - actual Contact Form 7 delivery;
 - network requests and absence of unexpected tracking;
@@ -749,10 +744,6 @@ implementation begins in a later session after rerunning the WU-02 QA gate. Keep
 separate commits/work units. Make small, reviewable commits after applicable QA passes. Use concise
 English conventional commit messages. Do not push.
 
-While §4.2's governance conflict remains, WU-00 through WU-03 may proceed within their normal
-session boundaries. Stop before WU-04: do not establish a visual-token baseline, implement
-content-bearing templates, apply the real migration payload, or claim CONTENT/PRESENTATION parity.
-
 Do not stop after planning. Continue through safe, unblocked work units, except for ADR 0023's
 mandatory boundaries before and after WU-02. Otherwise stop only when:
 
@@ -807,8 +798,9 @@ and continue from `Next exact action`. Repository state outranks chat memory.
 Repository/local work is ready for staging only when:
 
 - the monorepo is correctly separated;
-- the content/presentation governance conflict in §4.2 is reconciled before affected content or views
-  are implemented and before staging is declared content- or presentation-complete;
+- the source hierarchy in §4.2 is followed and every repo/Hostinger delta is reconciled or explicitly
+  accepted by the owner with a field-level ledger entry before staging is declared content- or
+  presentation-complete;
 - theme and plugin activate locally without warnings/fatals;
 - every required WordPress object has an explicit import strategy;
 - importer dry-run and idempotency checks pass locally;
@@ -873,7 +865,8 @@ Report:
 8. **Privacy gate:** `/privacidad` status and Contact Form 7 release eligibility.
 9. **Governance:** ADR/doc conflicts found, defaults used, ledger/matrix updates.
 10. **Out-of-scope confirmation:** no `sangha`, search, analytics, PWA, HSTS, event-city/type
-    archives, custom gallery system, unapproved plugin, CI/CD workflow, or production cutover.
+    archives, custom gallery system, unapproved plugin, deployment/CD workflow, or production
+    cutover. ADR 0038's quality-only `test.yml` remains required.
 11. **Continuity:** working-tree state, last verified commit, current execution-state file, and exact
     resume action.
 12. **Recommended next action:** exactly one.
