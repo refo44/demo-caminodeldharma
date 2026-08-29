@@ -267,6 +267,9 @@ Reglas editoriales de pantalla (detalle en `02`, `19`, `20`):
 
 ## 10. Idiomas
 
+Hoy el sitio es **monolingüe en español**. Un segundo idioma es fase posterior (`POST-001`–`POST-007`
+en `backlog-decisiones-owner-migracion.md`). Cuando existan idiomas activos:
+
 - Estructura del sitio igual en todos los idiomas activos.
 - Contenido canónico y páginas fijas traducidas con criterio comunitario.
 - Términos buddhistas: consistencia según `21-manual-voz-copywriting-editorial` §7.

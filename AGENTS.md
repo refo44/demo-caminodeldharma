@@ -59,8 +59,10 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   scaffold a classic PHP theme (`front-page.php`, `page-*.php`) as a bridge.
 - CPT `sangha` is out of initial Fase 3 scope unless the owner reopens it (ADR 0024).
 - Privacy page copy is not invented (ADR 0028).
-- Owner audit backlog is **closed** (`docs/backlog-decisiones-owner-migracion.md`, v1.18). Do not
-  reopen A/B/C for authors, gallery, ICS, or pagination without a new owner decision.
+- Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
+  v1.18). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
+  decision. Later-phase rows (`POST-*`, v1.19) are i18n/English after cutover: do not implement
+  them in Fase 3.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
   volume (ADR 0036). No numbered pagination at cutover (OWN-011).
 - Every event has a public single (ADR 0035). Past: no signup, no add-to-calendar, no `.ics`

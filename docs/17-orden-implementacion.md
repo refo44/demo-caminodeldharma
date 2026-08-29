@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.7 |
+| **Versión** | 3.8 |
 | **Fecha** | 2026-08-29 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.8)
+
+- Backlog de dueño v1.19: Fase 3 sigue cerrada (0 abiertas). Se añaden `POST-001`–`POST-007`
+  (inglés / i18n) como decisiones de **fases posteriores**; no bloquean ni se implementan en el
+  corte (`docs/backlog-decisiones-owner-migracion.md`).
 
 ### Cambios principales (3.7)
 
@@ -84,7 +90,7 @@ Tres tiempos (no mezclar):
 | **Fase activa** | Fase 2 **en producción** (sitio estático live); mantenimiento; Fase 3 **no iniciada** |
 | **URL producción** | [https://caminodeldharma.org](https://caminodeldharma.org) |
 | **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
-| **WordPress** | No iniciado (Fase 3 pendiente y decisiones cerradas). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. FABLE5 v2.2 puede iniciar WU-00/WU-01 cuando el propietario lo autorice. Activar un theme futuro **no** crea Pages (ADR 0032). |
+| **WordPress** | No iniciado (Fase 3 pendiente; decisiones de **corte** cerradas). i18n/inglés = `POST-*` (fases posteriores, no el corte). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. FABLE5 v2.2 puede iniciar WU-00/WU-01 cuando el propietario lo autorice. Activar un theme futuro **no** crea Pages (ADR 0032). |
 | **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` + inventario ADR 0034 |
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |
@@ -755,4 +761,4 @@ A partir de la versión 3.0, **priorizar implementación** sobre ampliación de 
 
 ---
 
-**Versión:** 3.7 · **Fecha:** 2026-08-29 · **Estado:** Vigente
+**Versión:** 3.8 · **Fecha:** 2026-08-29 · **Estado:** Vigente

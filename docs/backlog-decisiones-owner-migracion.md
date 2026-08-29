@@ -1,10 +1,17 @@
 # Backlog — decisiones del propietario (migración static → FSE)
 
-Preguntas abiertas de la auditoría 2026-08-19 (ADR 0034). **No son ADR.**
+Preguntas de dueño. **No son ADR.**
 
-Hasta que el propietario las cierre, el trabajo de documentación y (más adelante) de extracción
-sigue con los **defaults** de la columna «Mientras tanto». Nada de esto bloquea guardar el
-inventario ni construir FSE en staging.
+Hay dos bloques que no se mezclan:
+
+| Bloque | Alcance | Estado |
+| ------ | ------- | ------ |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-016 sin decisión nueva. |
+| **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
+
+Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
+implementar esas filas en el corte. Si una respuesta cambia URLs o arquitectura, **entonces** se
+escribe un ADR.
 
 ---
 
@@ -39,11 +46,11 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 
 ---
 
-## Abiertas
+## Fase 3 — Abiertas
 
 Ninguna.
 
-## Decididas
+## Fase 3 — Decididas
 
 | ID | Fecha | Decisión |
 | -- | ----- | -------- |
@@ -65,14 +72,54 @@ Ninguna.
 | OWN-010 | 2026-08-29 | **D — CPT de autor.** El «Por…» del blog sale de fichas `blog_author`, no de copy ni del usuario WP. Perfil `/author/{slug}` (ADR 0037). Semilla: Zheng Gong (`zheng-gong`), Comunidad Camino del Dharma (`comunidad-camino-del-dharma`). Buscador al asignar; publicar exige ≥1 ficha. `query_var` ≠ `author`. Archivos de users = 404. Eventos no usan este CPT. `/comunidad` no se mueve. |
 | OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
 
-Al cerrar una fila: fecha, decisión en una frase, y actualizar
+Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
 `redirect-ledger.md`.
 
 ---
 
-**Reconciliación docs (2026-08-29):** backlog **cerrado**. Alineados AGENTS/CLAUDE, contrato, playbook,
-FABLE5 v2, docs 03/04/12/15/17, inventario, matriz, ledger, ADR 0035–0037. FABLE5 v1 sigue
-HISTORICAL (tabla de supersesiones actualizada). Fase 3 no iniciada.
+## Fases posteriores — Abiertas
 
-**Versión:** 1.18 · **Fecha:** 2026-08-29 · **Estado:** 0 abiertas · 17 decididas (Fase 3 no iniciada)
+Estas filas salen de lo ya escrito (sitio monolingüe, selector solo UI, cadenas translation-ready)
+y **no** forman parte del corte. El inglés no se implementa «por si acaso».
+
+| ID | Tema | Pregunta | Mientras tanto | Disparador |
+| -- | ---- | -------- | -------------- | ---------- |
+| POST-001 | Publicar inglés | ¿Se publica una versión en inglés? ¿Cuándo? ¿Quién da el OK editorial? | Sitio **solo en español**. El botón EN del header permanece deshabilitado («Próximamente en inglés»). No hay páginas `/en`, ni `.po` de contenido, ni `hreflang`. | Decisión comunitaria de tener contenido inglés listo para publicar. |
+| POST-002 | Mecanismo i18n | ¿Cómo se implementa el segundo idioma en WordPress: solo gettext del theme/plugin, WordPress core, Polylang, WPML u otro? El `main.js` del switcher **no** migra (decisión 2026-07-20). | Cadenas de PHP de cara al usuario envueltas en `__()` / `_e()` con text domain propio (ADR 0027). **Sin** plugin multilingual. **Sin** switcher activo. | POST-001 = sí, y hay copy inglés (POST-005). Entonces ADR. |
+| POST-003 | URLs al activar idiomas | `docs/11` ya reserva `/es/` como prefijo del español **si** hay multilingualismo. ¿Se confirma? ¿El inglés es `/en/…`? ¿Las URLs actuales sin prefijo hacen 301 a `/es/…`? | URLs **sin** prefijo de idioma (`/` , `/comunidad`, …). KEEP en el ledger. No crear `/es` ni `/en` en el corte. | POST-002 decidido. Cualquier prefijo nuevo exige ADR + filas KEEP/301 en `redirect-ledger.md`. |
+| POST-004 | Selector ES \| EN | Con inglés real: ¿el control del header lo pone el plugin/core, o se rediseña? ¿Se oculta hasta entonces o se mantiene el EN disabled como hoy? | Paridad del estático live (OWN-007): el control **visual** ES activo / EN disabled es STRUCTURAL COPY. No hay i18n real. La persistencia `localStorage` ya se retiró. No sobrescribir `html lang` desde el cliente. | POST-002. No activar EN hasta POST-001. |
+| POST-005 | Alcance de la traducción | ¿Qué se traduce: UI, páginas fijas, blog, eventos, galería, `.ics`, autores? ¿Todo a la vez o por oleadas? Términos budistas según `21` §7; un texto no mezcla idiomas (`23` §10). | Copy canónico **español** (OWN-007). `23` §10 aplica solo cuando haya idiomas activos. No encargar ni importar traducciones en Fase 3. | POST-001. Cierre editorial de la comunidad. |
+| POST-006 | SEO multilingual | ¿`hreflang`? ¿sitemaps por idioma? ¿`og:locale` por versión (`es_CO` vs `en_*`)? | `hreflang` **no aplica** (informe SEO: un solo idioma). `og:locale` del estático (mayoría `es_CO`). Sitemap único en español. | POST-003. Entra en el ADR de i18n, no en el corte. |
+| POST-007 | Quién traduce y paridad | ¿Quién produce y mantiene el inglés (comunidad, profesional, mixto)? ¿Cómo se evita que una lengua se desactualice? | No hay flujo de traducción. El español es la fuente editorial hasta POST-001. | POST-001 + POST-005. |
+
+## Fases posteriores — Decididas
+
+Ninguna.
+
+## Ya aplazado (no duplicar aquí)
+
+Tienen ADR o decisión de dueño y un disparador propio. No son `POST-*` nuevos:
+
+| Tema | Dónde | Disparador |
+| ---- | ----- | ---------- |
+| HSTS | ADR 0020 | ≥30 días estables **después** del corte WordPress |
+| Copy de `/privacidad` | ADR 0028 | Texto legal aportado; no inventar |
+| Automatización de deploy/CD | ADR 0016 | Estructura estable; no crear workflows de deploy ahora |
+| CPT `sangha` | ADR 0024 | Fuera del corte inicial; reabrir solo con decisión nueva |
+| Paginación numerada de galería | OWN-011 | Solo si un álbum crece mucho **después** del corte |
+
+Al cerrar una fila `POST-*`: fecha, decisión en una frase, y —si cambia URLs o el motor i18n—
+ADR + `redirect-ledger.md` + matriz.
+
+---
+
+**Reconciliación docs (2026-08-29):** bloque Fase 3 **cerrado** (v1.18). Alineados AGENTS/CLAUDE,
+contrato, playbook, FABLE5 v2, docs 03/04/12/15/17, inventario, matriz, ledger, ADR 0035–0037.
+FABLE5 v1 sigue HISTORICAL. Fase 3 no iniciada.
+
+**v1.19 (2026-08-29):** se añaden `POST-001`–`POST-007` (i18n / inglés) como backlog de **fases
+posteriores**. No reabren Fase 3. No se implementan en el corte.
+
+**Versión:** 1.19 · **Fecha:** 2026-08-29 · **Estado:** Fase 3: 0 abiertas · 17 decididas (no
+iniciada). Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.

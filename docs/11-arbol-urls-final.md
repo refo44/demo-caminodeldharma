@@ -10,7 +10,7 @@ Define todas las rutas del sitio. Traducción directa de 03 (modelo de contenido
 
 ## 1. Regla base
 
-Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade multilingualismo más adelante, usar `/es/` como prefijo.
+Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade multilingualismo más adelante, usar `/es/` como prefijo. Confirmar con `POST-003` en `backlog-decisiones-owner-migracion.md` (fases posteriores; no forma parte del corte).
 
 ---
 

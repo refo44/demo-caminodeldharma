@@ -141,7 +141,7 @@ Ejemplo:
 
 ## Documentación
 
-En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Inventario de producción y contrato de migración: `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`. Decisiones de dueño (auditoría, **cerradas**): `docs/backlog-decisiones-owner-migracion.md`. Agentes: `AGENTS.md`, `CLAUDE.md`.
+En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Inventario de producción y contrato de migración: `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`. Decisiones de dueño: `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada; `POST-*` fases posteriores). Agentes: `AGENTS.md`, `CLAUDE.md`.
 
 Colaboración, lint, pruebas y despliegue: `CONTRIBUTING.md`. Guía de pruebas (TDD, wp-phpunit,
 FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md)

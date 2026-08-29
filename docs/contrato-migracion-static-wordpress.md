@@ -153,7 +153,7 @@ Inventario de scripts de la maqueta (CURRENT STATE):
 
 | Archivo | Dónde se carga | Rol |
 | ------- | -------------- | --- |
-| `assets/js/main.js` | Todas las páginas + 404 | Menú móvil (`#nav-toggle` / `#nav-menus`); switcher de idioma solo UI (el sitio sigue en español) |
+| `assets/js/main.js` | Todas las páginas + 404 | Menú móvil (`#nav-toggle` / `#nav-menus`); switcher de idioma solo UI (el sitio sigue en español; i18n real = `POST-001`–`POST-004`, no el corte) |
 | `assets/js/gallery.js` | `/galeria` | Paginación por álbum (12 imágenes), query params, JSON en `#gallery-data` / `#gallery-albums-data` |
 | `assets/js/share.js` | singles de eventos y de blog | Diálogo «Compartir» (`[data-share-title]`) |
 | `assets/js/calendar.js` | `/eventos` y ficha de evento vigente | Diálogo «Añadir al calendario» + tooltips/toque del grid `.eventos-calendar-grid` |

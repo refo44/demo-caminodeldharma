@@ -9,7 +9,8 @@
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
 or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0038,
-plus the closed owner-decision backlog v1.18. Version 2.2 supersedes the temporary governance gate
+plus the closed Fase 3 owner-decision backlog (v1.18). `POST-*` later-phase i18n rows
+(v1.19) must not be implemented at cutover. Version 2.2 supersedes the temporary governance gate
 in version 2.1 after the always-applied content rules were reconciled with OWN-007.
 
 ---
@@ -298,8 +299,10 @@ Verify these values against the current commit before relying on them:
 - 1 historical recitation PDF path, now retired from the website by OWN-002.
 - 0 production fixtures.
 
-Owner backlog is **closed** (`docs/backlog-decisiones-owner-migracion.md` v1.18). Use those
-decisions; do not treat the rows below as still open:
+Owner backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md` v1.18).
+Use those decisions; do not treat the rows below as still open. Later-phase `POST-*` rows
+(v1.19, i18n/English) stay out of this cutover: translation-ready PHP strings only (ADR 0027);
+no multilingual plugin, no `/es` or `/en` prefix, no active language switcher.
 
 - Per OWN-001, import `galeria-04.jpg` exactly once as Media Library content for `/practica`; never
   add it to `/galeria`.

@@ -85,4 +85,5 @@ comportamiento. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
 - ADR [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD, niveles de test y Sonar (complementa, no sustituye)
 - `docs/docker-wordpress-playbook.md` §4 — nivel 1 de QA (`php -l`, sintaxis)
 - `docs/03-wordpress-content-model.md` — criterio "evita scope creep" ya vigente en el proyecto
-- `.audit/decisions.md` (2026-07-20) — retiro del selector de idioma hasta que exista versión en inglés
+- `.audit/decisions.md` (2026-07-20) — retiro de la persistencia del selector de idioma hasta que exista versión en inglés
+- `docs/backlog-decisiones-owner-migracion.md` — `POST-001`–`POST-007` (i18n; fases posteriores, no el corte)

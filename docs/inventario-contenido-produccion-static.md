@@ -11,9 +11,10 @@ eso es deuda de deploy, no la fuente del extracto.
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
-Ítems UNCLEAR de esa auditoría: **cerrados** (backlog v1.18, 0 abiertas). El archivo
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.18, 0 abiertas). El archivo
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) queda como
-registro de decisiones (no ADR).
+registro de decisiones (no ADR). Las filas `POST-*` (v1.19) son fases posteriores (i18n); no
+bloquean el corte.
 
 ---
 
@@ -115,7 +116,7 @@ de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importa
 | Home hero, caminos, cómo practicamos | **HTML live** | `index.html` | REAL PRODUCTION + STRUCTURAL COPY |
 | Datos bancarios footer | **HTML live** | todas las páginas | REAL PRODUCTION |
 | Nav / skip link / labels | docs 09 | HTML | STRUCTURAL COPY |
-| Language switcher (solo UI, sitio en español) | `main.js` | header | STRUCTURAL COPY (no i18n real) |
+| Language switcher (solo UI, sitio en español) | `main.js` | header | STRUCTURAL COPY (no i18n real; `POST-001`–`POST-004`) |
 | Formulario contacto | markup live; envío no opera | `/contacto` | REAL PRODUCTION (campos); backend = ADR 0026 |
 
 Si `content-source/` y HTML divergen: **gana el HTML live** (OWN-007). No restaurar el doc sobre producción.

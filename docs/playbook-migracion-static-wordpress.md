@@ -9,7 +9,8 @@ Playbook operativo de **este** repositorio para Fase 3. Complementa —no sustit
 Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio con forma parecida
 (estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
 pipelines de otros proyectos. El backlog de dueño de la auditoría 2026-08-19 está **cerrado**
-(`backlog-decisiones-owner-migracion.md` v1.18). No reabrir autores/galería/ICS sin decisión nueva.
+(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.18; `POST-*` v1.19 no se implementan
+en el corte). No reabrir autores/galería/ICS sin decisión nueva.
 
 **Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción → FSE** (sin theme PHP clásico).
 Theme activado ≠ migración completa. Template ≠ Page. Deploy success ≠ application success.
