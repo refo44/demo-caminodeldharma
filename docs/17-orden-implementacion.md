@@ -67,7 +67,7 @@ Tres tiempos (no mezclar):
 
 | Tiempo | Hecho |
 | ------ | ----- |
-| **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). `static/` y `wordpress/` **no existen**. WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
+| **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). `static/` **no existe**. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
 | **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. El nombre «maqueta» en docs antiguos no significa prototipo desechable (ADR 0001). |
 | **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Estático de producción → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Extracción + import (ADR 0033/0034). WP en **otra instancia Hostinger sin dominio custom** (staging, OWN-005) hasta el switch. Corte: `docs/cutover-checklist-wordpress.md`. Producción estática **sigue** hasta el corte. |
 
@@ -76,7 +76,7 @@ Tres tiempos (no mezclar):
 | **Fase activa** | Fase 2 **en producción** (sitio estático live); mantenimiento; Fase 3 **no iniciada** |
 | **URL producción** | https://caminodeldharma.org |
 | **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
-| **WordPress** | No iniciado (Fase 3 pendiente). Activar un theme futuro **no** crea Pages (ADR 0032). |
+| **WordPress** | No iniciado (Fase 3 pendiente). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. Activar un theme futuro **no** crea Pages (ADR 0032). |
 | **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` + inventario ADR 0034 |
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |

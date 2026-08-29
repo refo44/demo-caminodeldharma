@@ -9,7 +9,7 @@ pipelines.
 
 - Production: static HTML on Hostinger (`https://caminodeldharma.org`) with real visitors. Not a disposable mockup.
 - Hardcoded events (10 cards), blog posts (2), gallery JSON (35 + 3 albums) are **production content** (ADR 0034).
-- Repo layout: site at **root**. `static/` and `wordpress/` do **not** exist yet.
+- Repo layout: site at **root**. `static/` does **not** exist. `wordpress/` holds empty plugin/theme trees (README only) for Sonar; no FSE implementation yet.
 - Institutional copy: **live HTML wins** (OWN-007). `content-source/` is reference; do not overwrite production from the doc.
 - Deploy: manual ZIP (ADR 0015). WordPress: **not started**.
 
@@ -39,8 +39,9 @@ pipelines.
 - Compare copy, content, and styles to published production (`https://caminodeldharma.org`), not only the local repo (OWN-007).
 - Target: **static production → FSE** (ADR 0029). No classic PHP theme as a bridge.
 - Update durable docs after verified implementation.
-- New plugin domain: TDD. Do not mock WordPress. Sonar scope is `.sonarcloud.properties`
-  (Automatic Analysis ON). Guide: `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).
+- New plugin/theme domain: TDD from the first line of FSE. Do not mock WordPress. Sonar
+  scope is plugin + theme only (not the static site). Guide:
+  `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).
 
 ## Docs-only vs implementation
 

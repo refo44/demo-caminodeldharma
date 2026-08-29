@@ -11,9 +11,9 @@ FSE solo ensambla · Sonar no sustituye PHPUnit.
 
 | Tiempo | Qué hay que probar | Gate |
 | --- | --- | --- |
-| **Hoy (Fase 2)** | Sitio estático en la raíz. HTML/JSON de producción (ADR 0034). Cuatro scripts en `assets/js/`. CSS con Stylelint. | `npm run lint:css`. Verificación en navegador para JS/a11y. No hay PHP propio. |
-| **Fase 3 (cuando el owner la arranque)** | Plugin + block theme. El kit PHPUnit se crea **el mismo día** que la primera línea PHP. TDD en dominio nuevo. | `composer test` (barato) + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. |
-| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. El alcance de Sonar pasa a plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0016) hasta otra decisión. |
+| **Hoy (Fase 2)** | Sitio estático en la raíz. HTML/JSON de producción (ADR 0034). CSS con Stylelint. Árboles `wordpress/…` vacíos de código (placeholders para Sonar). | `npm run lint:css`. Verificación en navegador para JS/a11y. Sonar **no** mira el estático. |
+| **Fase 3 (cuando el owner la arranque)** | Plugin + block theme. **TDD desde la primera línea** (plugin y theme). El kit PHPUnit nace con esa primera línea. | `composer test` (barato) + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. |
+| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0016) hasta otra decisión. |
 
 Git **hoy:** push directo a `main` (la rama no está protegida). **Futuro:** feature branches +
 PR obligatorios. El diseño del gate sirve en ambos modos: el workflow, cuando exista, corre en
@@ -31,11 +31,13 @@ El proyecto es testeable cuando:
    volumen del desarrollador.
 4. El gate de CI es barato: sintaxis (`php -l`), audit del lockfile de Composer, suite unitaria,
    Stylelint.
-5. SonarQube Cloud (GitHub App, Automatic Analysis) tiene alcance explícito en
-   `.sonarcloud.properties`.
+5. SonarQube Cloud (GitHub App, Automatic Analysis) tiene alcance explícito **solo
+   WordPress** (plugin + theme) en `.sonarcloud.properties`. El estático no se analiza.
 
-Full Site Editing no mueve el dominio al theme: solo añade contratos de presentación
-(`theme.json`, `templates/`, `parts/`, markup de bloques).
+WordPress FSE se desarrolla con TDD **desde la primera línea** (plugin y theme). Full Site
+Editing no mueve el dominio al theme: solo añade contratos de presentación (`theme.json`,
+`templates/`, `parts/`, markup de bloques), y esos contratos también se especifican con un
+test antes del archivo de producción.
 
 ---
 
@@ -53,7 +55,8 @@ test por conveniencia.
 | Publish / REST / wp-admin / CLI | hooks del plugin (importador, «Eliminar huérfanos», ajustes) | Sí — ese es el contrato | Harness Docker aislado; nunca producción |
 | Theme / FSE | `theme.json`, `templates/`, `parts/`, CSS complementario | Sí al renderizar; no en helpers puros | HTTP semántico en sitio aislado; no píxeles |
 
-Rutas de Fase 3 (ADR 0014, ADR 0024, ADR 0029):
+Rutas de primer partido (ADR 0014, ADR 0024, ADR 0029). Los directorios existen hoy como
+placeholders (README, sin código). La reorg raíz → `static/` **no** se adelanta:
 
 ```text
 wordpress/wp-content/plugins/camino-del-dharma-core/
@@ -62,8 +65,6 @@ tests/Unit/
 tests/WordPress/
 tests/Features/
 ```
-
-Esas carpetas **no existen todavía**. No adelantarlas a la reorg `static/` + `wordpress/`.
 
 Colaboradores **internos** (política, orquestador, mappers, validadores) se cablean reales.
 Colaboradores **externos** (renderer, filesystem, HTTP, reloj, cola, entorno) se doblan.
@@ -249,10 +250,11 @@ verificación, se reabre esta norma con un ADR.
 
 ## 4. Extensión FSE (theme `camino-del-dharma`)
 
-Los bloques de dominio se registran en **`camino-del-dharma-core`**. El theme ensambla
-`templates/` y `parts/`. Global Styles posee la paleta (`theme.json`); no hex sueltos en
-Git. No hay theme clásico PHP de puente (ADR 0029): no testear `front-page.php` /
-`page-*.php` porque no deben existir.
+El theme se escribe con TDD desde el inicio: no aterrizar `theme.json`, `templates/` ni
+`functions.php` sin un test en rojo que nombre el contrato. Los bloques de dominio se
+registran en **`camino-del-dharma-core`**. El theme ensambla `templates/` y `parts/`.
+Global Styles posee la paleta (`theme.json`); no hex sueltos en Git. No hay theme clásico
+PHP de puente (ADR 0029): no testear `front-page.php` / `page-*.php` porque no deben existir.
 
 | Superficie FSE | Qué asertar | Nivel |
 | --- | --- | --- |
@@ -303,43 +305,29 @@ branch**. Un PR que solo lo añade no cambia el análisis hasta el merge; con pu
 | 1. Comprobar el método | En SonarQube Cloud: **Administration → Analysis Method**. Automatic Analysis **ON**. | Project information → Last analysis method = *Analyzed by SonarQube Cloud* |
 | 2. No mezclar métodos | No añadir SonarScanner en `test.yml` ni crear `sonar-project.properties`. | Un solo análisis por push/PR; el check de PHPUnit/Stylelint es otro job |
 | 3. Alcance en `main` | `.sonarcloud.properties` en `main`. | Tras aterrizar, el siguiente análisis usa `sonar.sources` / `sonar.tests` |
-| 4. Solo código de primer partido | Hoy: JS/CSS/scripts. En Fase 3: añadir plugin + theme. Excluir `vendor/`, Core, terceros, `node_modules`, HTML editorial, `main.min.css`. | La UI de Sonar no lista `wp-includes`, `vendor` ni las páginas HTML de copy |
+| 4. Solo WordPress de primer partido | `sonar.sources` = plugin + theme. El estático (`assets/`, HTML, `scripts/`) no entra. Excluir `vendor/` del plugin. | La UI de Sonar no lista `index.html`, `assets/`, `wp-includes` ni `vendor` |
 | 5. Sin comodines | En `.sonarcloud.properties` no se permiten `*`, `**` ni `?`. | El archivo parsea |
 | 6. Tests aparte | `sonar.tests=tests`. Si se omite, Sonar puede tratar `tests/` como producción. | Los `*Test.php` no generan issues de «código muerto» de producción |
 | 7. Cobertura 0.0 % | Automatic Analysis **no** importa cobertura PHPUnit. El Quality Gate por defecto omite la condición de cobertura cuando no hay datos. | Nadie «arregla» el 0 % instalando un scanner |
-| 8. Verificar el alcance | **Administration → Background Tasks → Show SonarScanner Context**, y **Code**. | Hoy: `assets/js`, `assets/css`, `scripts`. Fase 3: también plugin + theme |
+| 8. Verificar el alcance | **Administration → Background Tasks → Show SonarScanner Context**, y **Code**. | Plugin + theme sí; estático, Core y vendor no |
 
 Documentación: [Automatic analysis](https://docs.sonarsource.com/sonarqube-cloud/analyzing-source-code/automatic-analysis).
 
-### Alcance actual (Fase 2)
+### Alcance (solo WordPress)
 
-Rutas relativas a la raíz. Encoding UTF-8. Sin globs. Solo directorios que **existen hoy**
-(un `sonar.sources` que apunta a `wordpress/…` aún no creado hace fallar el análisis).
+Rutas relativas a la raíz. Encoding UTF-8. Sin globs. El sitio estático **no** se declara
+en `sonar.sources` y no se añadirá más tarde.
 
 ```properties
-sonar.sources=assets/js,assets/css,scripts
+sonar.sources=wordpress/wp-content/plugins/camino-del-dharma-core,wordpress/wp-content/themes/camino-del-dharma
 sonar.tests=tests
-sonar.exclusions=assets/css/main.min.css
+sonar.exclusions=wordpress/wp-content/plugins/camino-del-dharma-core/vendor
 sonar.sourceEncoding=UTF-8
 ```
 
-No se analizan las páginas HTML de producción: son contenido editorial, no lógica. El
-copy no se «corrige» desde Sonar.
-
-### Alcance en Fase 3 (actualizar el mismo archivo, en `main`)
-
-Cuando existan las carpetas del monorepo, **añadir** plugin y theme. No borrar el JS/CSS
-estático mientras `static/` (o la raíz) siga siendo producción:
-
-```properties
-sonar.sources=assets/js,assets/css,scripts,wordpress/wp-content/plugins/camino-del-dharma-core,wordpress/wp-content/themes/camino-del-dharma
-sonar.tests=tests
-sonar.exclusions=assets/css/main.min.css,wordpress/wp-content/plugins/camino-del-dharma-core/vendor
-sonar.sourceEncoding=UTF-8
-```
-
-Tras el corte, cuando el estático deje de mantenerse, se puede retirar `assets/js`,
-`assets/css` y `scripts` (o `static/…` si ya se reorganizó) en un commit explícito.
+Hasta que haya PHP/JSON/HTML de theme, Sonar verá poco o nada en **Code** — es el
+comportamiento correcto, no un fallo de configuración. Stylelint cubre el CSS estático;
+Sonar no lo duplica.
 
 ### SonarQube for IDE
 
@@ -351,26 +339,30 @@ CI. Un hallazgo solo-IDE no es gate de merge.
 - `sonar-project.properties` con Automatic Analysis ON (se ignora).
 - SonarScanner en `test.yml` con Automatic Analysis ON (análisis duplicados, check rojo).
 - Medir el éxito de PHPUnit por el % de cobertura de Sonar.
-- Incluir WordPress Core, `vendor/`, HTML editorial o `content-source/` en `sonar.sources`.
+- Incluir el sitio estático, WordPress Core, `vendor/` o `content-source/` en `sonar.sources`.
 - Globs en `.sonarcloud.properties`.
 - Instalar PHPStan «porque Sonar no basta» sin un seam que `php -l` no cubra.
 
 ---
 
-## 6. Kit mínimo (se crea el día uno del PHP propio)
+## 6. Kit mínimo (se crea el día uno del código FSE)
 
-No scaffoldear esto antes de que el owner arranque Fase 3.
+No escribir PHP, `theme.json` ni plantillas del theme antes de que el owner arranque Fase 3.
+Los árboles bajo `wordpress/` son placeholders para Sonar, no implementación.
+
+Cuando Fase 3 arranque, el **primer** commit de código del plugin o del theme va precedido
+del kit y de un test en rojo.
 
 | Artefacto | Rol |
 | --- | --- |
 | ADR 0038 + esta guía | Niveles, CI, comandos, oficio. Git es la fuente durable; `.cursor/rules/testing-tdd.mdc` es espejo. |
 | `composer.json` de raíz (`require-dev` PHPUnit 9.x + wp-phpunit) | `composer test` = lint PHP + audit `--locked` + units. `platform.php` = 8.3. `composer test:wp` para nivel 2. |
-| `tests/Unit/` + bootstrap con `ABSPATH` dummy | `require_once` de los PHP del plugin bajo prueba. Sin boot de WordPress. |
-| `tests/WordPress/` + `phpunit-wp.xml.dist` + `run-phpunit-wp.sh` | Obligatorio el día uno del plugin. Compose aislado, tablas `wptests_`, `down -v`. |
+| `tests/Unit/` + bootstrap con `ABSPATH` dummy | `require_once` de los PHP del plugin o helpers del theme. Sin boot de WordPress. Incluye lectura de `theme.json`. |
+| `tests/WordPress/` + `phpunit-wp.xml.dist` + `run-phpunit-wp.sh` | Obligatorio el día uno del plugin **y** de bloques con `render_callback`. Compose aislado, tablas `wptests_`, `down -v`. |
 | `tests/Features/*.feature` | Especificación en español. Sin Behat hasta que el volumen lo pida. |
 | `tools/php-lint.sh` + `run-phpunit.sh` + `qa-<slice>.sh` | Portátil sin PHP nativo (vía Docker). Harness: proyecto compose, puerto propio, `trap down -v`, nunca producción. |
 | `.github/workflows/test.yml` | Push a `main` + PR. `npm run lint:css` + `composer test`. Sin secretos de deploy. Sin scanner de Sonar. |
-| `.sonarcloud.properties` | Ya existe. Actualizar `sonar.sources` el día que nazcan plugin y theme. |
+| `.sonarcloud.properties` | Ya existe: solo plugin + theme. No añadir el estático. |
 
 PHPCS/WPCS (ADR 0027) entra en el job de estilo cuando exista PHP, no como sustituto de
 PHPUnit. No forma parte de `composer test:unit`.
@@ -398,7 +390,8 @@ ni PHPUnit.
 
 ### Qué no crear todavía
 
-- `wordpress/` ni el plugin (Fase 3 no iniciada).
+- Código de plugin o theme (`theme.json`, `templates/`, PHP). Los README bajo `wordpress/`
+  no son implementación.
 - `composer.json` / `vendor/` / `phpunit.xml.dist` sin PHP que probar.
 - `.github/workflows/test.yml` vacío de sujeto (ADR 0016 pospone Actions de *deploy*; el
   `test.yml` nace con el primer PHP, no como teatro).

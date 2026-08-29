@@ -32,7 +32,8 @@ Hasta entonces:
 
 ## Transición estático → WordPress
 
-**Estado actual:** producción estática; Fase 3 no iniciada (`wordpress/` aún no existe).
+**Estado actual:** producción estática; Fase 3 no iniciada. `wordpress/` tiene árboles
+placeholder (README, sin código) para Sonar; no hay theme ni plugin implementados.
 
 **Ruta de Fase 3:** maqueta estática → **FSE** (ADR 0029). No construir un theme clásico PHP como puente.
 

@@ -26,7 +26,8 @@ demo-caminodeldharma/
 ├── assets/
 ├── scripts/                   No se despliegan
 ├── tests/                     Taxonomía de pruebas (ADR 0038); suites en Fase 3
-└── .sonarcloud.properties      Alcance SonarQube Cloud
+├── wordpress/                 Placeholders plugin + theme (README, sin código); Sonar only
+└── .sonarcloud.properties      Alcance Sonar: plugin + theme FSE; no el estático
 ```
 
 La **raíz** es el sitio desplegado en Hostinger. Ver README y Fase 4 en `17-orden-implementacion`.
@@ -82,6 +83,7 @@ demo-caminodeldharma/
 | **wordpress/…/camino-del-dharma/** | Theme; assets en `assets/` del theme. |
 | **scripts/** | Mantenimiento local. |
 | **tests/** | PHPUnit / Gherkin (ADR 0038). No se despliega. Vacío de suites hasta Fase 3. |
+| **wordpress/** | Placeholders de plugin y theme (ADR 0038). Sin código hasta Fase 3. No se despliega. |
 
 ### Fuentes de verdad (post-corte WordPress)
 

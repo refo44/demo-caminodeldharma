@@ -20,7 +20,7 @@ despliegue.
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. |
-| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. No hay `wordpress/`, ni `docker-compose.yml`, ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
+| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). No hay `docker-compose.yml` ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
 | **FUTURE PLAN** | Fase 3: reorg a `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE** (ADR 0029), sin theme clásico PHP. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado; corte según [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md). |
 
 Afirmaciones como «WordPress not started» y «deploy HTML to production» describen el **estado

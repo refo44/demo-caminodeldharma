@@ -10,5 +10,8 @@ Taxonomía y oficio: [`docs/guia-pruebas-plugin-theme-fse.md`](../docs/guia-prue
 | `Features/` | Contratos HTTP / wp-admin / CLI (Gherkin) | Con el primer harness |
 
 Esta carpeta existe hoy para que SonarQube Cloud trate `tests/` como tests
-(`sonar.tests=tests`) y no como producción. No scaffoldear PHPUnit, Composer ni
-Docker QA hasta que el owner arranque Fase 3.
+(`sonar.tests=tests`) y no como producción. El alcance de Sonar es **solo** plugin +
+theme FSE; el estático no se analiza.
+
+No scaffoldear PHPUnit, Composer ni Docker QA hasta que el owner arranque Fase 3. Ese
+arranque es TDD: primer test en rojo, después el código.

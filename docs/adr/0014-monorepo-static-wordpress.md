@@ -120,10 +120,19 @@ antes de ADR 0029. **No se reescribe el árbol histórico.** Los archivos objeti
 `templates/*.html` (block theme). El resto de esta decisión (monorepo `static/` + `wordpress/`)
 sigue **Aceptada**.
 
+## Nota (2026-08-29)
+
+ADR [0038](0038-pruebas-tdd-phpunit-sonar.md) crea árboles **vacíos de código** bajo
+`wordpress/wp-content/plugins/camino-del-dharma-core/` y
+`wordpress/wp-content/themes/camino-del-dharma/` para el alcance de SonarQube Cloud. Eso
+**no** es el primer paso de Fase 3: la reorg raíz → `static/` no se adelanta; no hay
+`theme.json` ni PHP de plugin. El resto de esta decisión sigue **Aceptada**.
+
 ## Referencias
 
 - Sustituye layout de rutas de ADR 0011 (estado → Sustituida)
 - ADR 0012, ADR 0013
 - ADR 0024 — resuelve la condicionalidad del plugin propio (ver nota arriba)
+- ADR 0038 — árboles placeholder bajo `wordpress/` para Sonar; no es el arranque de Fase 3
 - `docs/13-static-file-structure`
 - `docs/17-orden-implementacion` §2.7, Fase 3
