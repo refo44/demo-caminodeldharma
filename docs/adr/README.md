@@ -149,7 +149,7 @@ Documentos, issues, commits o ADR relacionados.
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
 | Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
-| Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — tres niveles; kit el día uno del PHP; Automatic Analysis + `.sonarcloud.properties` |
+| Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
 
 ---
 

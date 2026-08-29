@@ -5,7 +5,8 @@ Taxonomía y oficio: [`docs/guia-pruebas-plugin-theme-fse.md`](../docs/guia-prue
 
 | Directorio | Nivel | Cuándo se llena |
 | --- | --- | --- |
-| `Unit/` | PHPUnit sin WordPress | Día uno del PHP propio (Fase 3) |
+| `Support/` | Bootstrap unitario (`ABSPATH` dummy). No es una suite. | Día uno del PHP propio |
+| `Unit/` | PHPUnit sin WordPress | El mismo día |
 | `WordPress/` | wp-phpunit | El mismo día |
 | `Features/` | Contratos HTTP / wp-admin / CLI (Gherkin) | Con el primer harness |
 

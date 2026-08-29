@@ -536,7 +536,7 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
 **Justificación:** CMS para terceros (ADR 0012). Ver § Transición estático → WordPress.
 
 1. **Reorganizar repo:** raíz → `static/` (ADR 0014); actualizar README y procedimiento de despliegue
-2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024). El mismo día: kit de pruebas (Composer de raíz, `tests/Unit/`, `tests/WordPress/`, wp-phpunit). TDD en dominio nuevo (ADR 0038, `docs/guia-pruebas-plugin-theme-fse.md`). Actualizar `.sonarcloud.properties` con las rutas del plugin y del theme.
+2. Crear theme de bloques en `wordpress/wp-content/themes/camino-del-dharma/` (ADR 0029) y plugin `camino-del-dharma-core` (ADR 0024). El mismo día: kit de pruebas (Composer de raíz, `tests/Support/`, `tests/Unit/`, `tests/WordPress/`, wp-phpunit). TDD desde la primera línea (ADR 0038, `docs/guia-pruebas-plugin-theme-fse.md`). `.sonarcloud.properties` ya apunta al plugin y al theme; no añadir el estático.
 3. Adaptar cada HTML de `static/` **directamente** a `templates/*.html` / `parts/` / `patterns/` (`12-theme-file-structure`). Ruta: maqueta → FSE. **Prohibido** un theme clásico PHP como puente.
 4. Ajustar a `03-wordpress-content-model`, `11-arbol-urls-final`, `15-assets-strategy`, [matriz](matriz-migracion-static-wordpress.md)
 5. CPT `event` en el plugin; roles editoriales; importador create-missing-only (ADR 0033); ledger `migracion-static-wordpress.md`

@@ -8,7 +8,7 @@
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
-or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0037,
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0038,
 plus the closed owner-decision backlog v1.18.
 
 ---

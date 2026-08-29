@@ -8,10 +8,10 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 
 **No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
 
-**CURRENT STATE:** Fase 3 no iniciada. No existe `static/` ni `wordpress/`. Las filas de abajo registran
+**CURRENT STATE:** Fase 3 no iniciada. No existe `static/`. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). Las filas de abajo registran
 cambios del estático en producción y deudas hacia el theme futuro.
 
-Decisiones del propietario aún abiertas (no ADR):
+Decisiones del propietario (**cerradas** v1.18; no reabrir sin decisión nueva):
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
 
 ---

@@ -235,6 +235,7 @@ manual. Un transfer verde no cierra el corte.
 - [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md), [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md), [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md), [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
 - ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0029](adr/0029-theme-bloques-full-site-editing.md), [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md), [0034](adr/0034-static-live-como-fuente-contenido-produccion.md)
 - ADR [0014](adr/0014-monorepo-static-wordpress.md), [0024](adr/0024-plugin-dominio-theme-presentacion.md)
+- ADR [0038](adr/0038-pruebas-tdd-phpunit-sonar.md) y `docs/guia-pruebas-plugin-theme-fse.md`
 - ADR [0015](adr/0015-despliegue-manual-temporal.md), [0016](adr/0016-automatizacion-ci-cd-pospuesta.md)
 - ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y `docker-wordpress-playbook.md`
 - ADR [0025](adr/0025-politica-plugins-terceros.md), [0026](adr/0026-contact-form-7.md)

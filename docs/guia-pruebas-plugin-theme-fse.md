@@ -357,7 +357,7 @@ del kit y de un test en rojo.
 | --- | --- |
 | ADR 0038 + esta guía | Niveles, CI, comandos, oficio. Git es la fuente durable; `.cursor/rules/testing-tdd.mdc` es espejo. |
 | `composer.json` de raíz (`require-dev` PHPUnit 9.x + wp-phpunit) | `composer test` = lint PHP + audit `--locked` + units. `platform.php` = 8.3. `composer test:wp` para nivel 2. |
-| `tests/Unit/` + bootstrap con `ABSPATH` dummy | `require_once` de los PHP del plugin o helpers del theme. Sin boot de WordPress. Incluye lectura de `theme.json`. |
+| `tests/Unit/` + `tests/Support/bootstrap.php` | `ABSPATH` dummy en Support (no en Unit: PHPUnit lo recogería como test). `require_once` de PHP plano del plugin o helpers del theme. Sin boot de WordPress. Incluye lectura de `theme.json`. |
 | `tests/WordPress/` + `phpunit-wp.xml.dist` + `run-phpunit-wp.sh` | Obligatorio el día uno del plugin **y** de bloques con `render_callback`. Compose aislado, tablas `wptests_`, `down -v`. |
 | `tests/Features/*.feature` | Especificación en español. Sin Behat hasta que el volumen lo pida. |
 | `tools/php-lint.sh` + `run-phpunit.sh` + `qa-<slice>.sh` | Portátil sin PHP nativo (vía Docker). Harness: proyecto compose, puerto propio, `trap down -v`, nunca producción. |
@@ -396,6 +396,52 @@ ni PHPUnit.
 - `.github/workflows/test.yml` vacío de sujeto (ADR 0016 pospone Actions de *deploy*; el
   `test.yml` nace con el primer PHP, no como teatro).
 - Behat, Playwright, PHPStan, Pest, wp-env.
+
+---
+
+## 7. Kit concreto el día uno de Fase 3
+
+Oficio ya ejecutado en otro monorepo del mismo autor (plugin + theme + PHPUnit +
+wp-phpunit + harnesses). **Copiar taxonomía y archivos de tooling; no copiar dominio,
+slugs, CPTs, puertos, hosts ni harnesses de PDF.**
+
+### Archivos a crear (nombres de *este* repo)
+
+| Artefacto | Detalle que sí copiar |
+| --- | --- |
+| `composer.json` raíz | `require-dev`: `phpunit/phpunit` ^9.6, `wp-phpunit/wp-phpunit` (versión = WordPress del compose, no 7.1 de otro proyecto), `yoast/phpunit-polyfills` (hace falta para `WP_UnitTestCase`). `platform.php` = **8.3** (Hostinger, ADR 0023). Scripts: `lint:php`, `audit:deps`, `test` = lint → audit → unit, `test:wp`. |
+| `phpunit.xml.dist` | Bootstrap `tests/Support/bootstrap.php`. Suite `tests/Unit`. `beStrictAboutOutputDuringTests`, `failOnRisky`, `failOnWarning`, `cacheResult=false`. |
+| `phpunit-wp.xml.dist` | Bootstrap `tests/WordPress/bootstrap.php`. Suite `tests/WordPress`. |
+| `tests/Support/bootstrap.php` | `ABSPATH` dummy. `require_once` de PHP plano del plugin y helpers del theme **sin** boot de WP. |
+| `tests/WordPress/bootstrap.php` | Autoload de raíz. `tests_add_filter( 'muplugins_loaded', … )` carga `camino-del-dharma-core.php`. Luego el bootstrap de wp-phpunit. |
+| `tests/WordPress/wp-tests-config.php` | `ABSPATH` del contenedor, credenciales del compose, `$table_prefix = 'wptests_'`, `WP_ENVIRONMENT_TYPE=local`. |
+| `tools/php-lint.sh` | `php -l` sobre plugin, theme y `tests/`; excluye `vendor/`. **No añadirlo mientras no haya `.php`:** con cero archivos el script canónico **falla**. Fallback Docker `wordpress:cli-php8.3` si no hay PHP nativo. |
+| `tools/run-phpunit.sh` | `composer install` si falta `vendor/bin/phpunit`; corre `--testsuite unit`. Mismo fallback Docker. |
+| `tools/run-phpunit-wp.sh` | `docker compose -p cdd-wp-phpunit`, puerto **distinto de 8080**, `trap … down -v`, espera a `wp core version`, monta el repo en `wpcli`. |
+| `.github/workflows/test.yml` | Dos jobs: PHP (`composer test`) y Stylelint. `pull_request` + `push` a `main`. Sin secretos, sin deploy, sin SonarScanner. `npm ci --ignore-scripts`. Stylelint sobre **los dos** árboles CSS cuando el theme exista. |
+
+`tests/Support/` es el bootstrap unitario; no meterlo en `tests/Unit/` (PHPUnit lo recogería como test). Helpers `make_*` privados en la clase de test están permitidos si son puros y devuelven objetos frescos. El doble de grabación vive **en el mismo archivo** hasta que un segundo test lo reutilice.
+
+### Oficio que falta en esta guía y sí hay que traer
+
+- **Sociable por defecto.** Colaboradores internos reales. Solitario solo si la ramificación lo exige.
+- **Sin SUT en `setUp()`.** Cada método construye sus objetos.
+- **Docblock del método:** qué comportamiento protege, no una paráfrasis del nombre.
+- **Frontera de un upgrade:** si se actualiza un adaptador (generador `.ics`, cliente HTTP, renderer), el test de aceptación debe **ejecutar esa frontera**, no sustituirla por un doble. Un recording double no acepta un bump de librería.
+- PHPUnit observa invocaciones en la costura **externa** cuando esa es la regla («no generar `.ics` si el evento ya terminó»). No `expects()` sobre la política.
+
+### Qué no traer
+
+| De ese repo | Por qué no |
+| --- | --- |
+| Harnesses `qa-article-pdf-*.sh`, Gherkin de PDF, Dompdf, CPTs `article`/`issue`/`author` | Dominio de una revista académica |
+| `wp-phpunit` 7.1 y WordPress 7.1 | Camino pincha la versión de Hostinger (ADR 0023), no la de otro hosting |
+| `platform.php` 8.2 y `Requires PHP: 7.4` | Aquí el runtime canónico es 8.3; no inventar una matriz de cuatro PHP |
+| «Sin PHPCS» | ADR 0027 ya exige WPCS; es estilo, no un nivel de PHPUnit |
+| `qa-author-permalinks.sh` sobre volúmenes primarios | Excepción documentada como anti-patrón; no copiarla |
+| Protección de `main`, Dependabot, deploy FTPS, Pages | Otro git-flow y otro hosting (ADR 0016) |
+| Cabecera «WordPress clásico» de su estándar de oficio | Camino es FSE desde el día uno (ADR 0029) |
+| Composer runtime dentro del plugin «porque ellos tienen Dompdf» | Solo si *este* plugin necesita una librería de producción |
 
 ---
 
