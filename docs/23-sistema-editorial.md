@@ -236,7 +236,7 @@ Reglas completas en **`15-assets-strategy` §12.3**. Resumen editorial:
 | Superficie | Reglas de presentación |
 |------------|------------------------|
 | Meditación semanal | Bloque fijo repetido (Inicio + Práctica); horario y modalidad canónicos |
-| Recitación de la comida | Texto + enlace PDF; no sustituir PDF por HTML extenso |
+| Recitación de la comida | *(HISTORICAL: texto + PDF.)* **CURRENT (OWN-002, 2026-08-28):** omitida; el PDF no forma parte del sitio. |
 | Mantras | Texto + audio local por mantra; extensible |
 | Videos | Embed (YouTube/Vimeo); acompañan, no constituyen el centro del sitio (`03` §6) |
 | Subpágina videos | Listado de embeds; enlace desde Práctica |

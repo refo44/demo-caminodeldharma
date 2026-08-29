@@ -4,8 +4,9 @@ Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**. No es un extracto e
 baseline documental. ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
 
 **Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática:** raíz del repo (no hay
-`static/` todavía). **Deploy:** ZIP manual (ADR 0015). `CHANGELOG.md`: v1.0.34 puede estar
-**pendiente** de ZIP; v1.0.33 figura desplegada. Extraer siempre indicando el tag/commit.
+`static/` todavía). **Deploy:** ZIP manual (ADR 0015). Extraer **lo más reciente del repo**
+(`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
+eso es deuda de deploy, no la fuente del extracto.
 
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
@@ -50,16 +51,16 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 
 | # | Título en listado | Single | Estado UI | Poster (disco) | Clase | WP previsto |
 | - | ----------------- | ------ | --------- | -------------- | ----- | ----------- |
-| 1 | Círculos de Presencia Consciente | sí `/eventos/circulos-de-presencia-consciente` | vigente + featured | `evento-circulos-de-presencia-consciente.jpg` | REAL PRODUCTION | CPT `event` |
-| 2 | 7.º Encuentro Nacional Buddhista – 2026 | sí `/eventos/encuentro-nacional-2026` | finalizado | `evento-7-encuentro-nacional-2026.jpg` | HISTORICAL | CPT `event` |
-| 3 | Meditación Presencial en Barranquilla | **no** (solo card) | finalizado | `evento-meditacion-presencial-barranquilla-jul-2026.jpeg` | HISTORICAL | CPT `event` (listado; sin single a menos que el owner pida URL) |
-| 4 | Meditación Budista – Festival Calma en la Ciudad | no | finalizado | `evento-festival-calma-en-la-ciudad-jun-2026.jpeg` | HISTORICAL | CPT `event` |
-| 5 | Pausa Profunda – Medellín | no | finalizado | `evento-taller-pausa-profunda-medellin-may-2026.jpeg` | HISTORICAL | CPT `event` |
-| 6 | Ansiedad, agotamiento y crisis de atención… | no | finalizado | `evento-uniremington-ansiedad-agotamiento-may-2026.jpeg` | HISTORICAL | CPT `event` |
-| 7 | Vesak 2026 – Colombia Cuida la Vida | no | finalizado | `evento-vesak-2026-bogota.jpeg` | HISTORICAL | CPT `event` |
-| 8 | Pausa Profunda – Cali | sí `/eventos/pausa-profunda-cali` | finalizado | `evento-taller-pausa-profunda-feb-2026.jpeg` | HISTORICAL | CPT `event` |
-| 9 | Buddhismo para tiempos de cansancio | no | finalizado | `evento-buddhismo-tiempos-cansancio.jpeg` | HISTORICAL | CPT `event` |
-| 10 | 6.º Encuentro Nacional Buddhista – 2025 | no | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT `event` |
+| 1 | Círculos de Presencia Consciente | sí `/eventos/circulos-de-presencia-consciente` | vigente + featured | `evento-circulos-de-presencia-consciente.jpg` | REAL PRODUCTION | CPT `event`; inscripción solo si sigue vigente |
+| 2 | 7.º Encuentro Nacional Buddhista – 2026 | sí `/eventos/encuentro-nacional-2026` | finalizado | `evento-7-encuentro-nacional-2026.jpg` | HISTORICAL | CPT `event`; **sin** inscripción |
+| 3 | Meditación Presencial en Barranquilla | **PLANNED** `/eventos/meditacion-presencial-barranquilla` | finalizado | `evento-meditacion-presencial-barranquilla-jul-2026.jpeg` | HISTORICAL | CPT `event` + single (ADR 0035); **sin** inscripción |
+| 4 | Meditación Budista – Festival Calma en la Ciudad | PLANNED `/eventos/festival-calma-en-la-ciudad` | finalizado | `evento-festival-calma-en-la-ciudad-jun-2026.jpeg` | HISTORICAL | CPT + single; sin inscripción |
+| 5 | Pausa Profunda – Medellín | PLANNED `/eventos/pausa-profunda-medellin` | finalizado | `evento-taller-pausa-profunda-medellin-may-2026.jpeg` | HISTORICAL | CPT + single; sin inscripción |
+| 6 | Ansiedad, agotamiento y crisis de atención… | PLANNED `/eventos/ansiedad-agotamiento-crisis-de-atencion` | finalizado | `evento-uniremington-ansiedad-agotamiento-may-2026.jpeg` | HISTORICAL | CPT + single; sin inscripción |
+| 7 | Vesak 2026 – Colombia Cuida la Vida | PLANNED `/eventos/vesak-2026` | finalizado | `evento-vesak-2026-bogota.jpeg` | HISTORICAL | CPT + single; sin inscripción |
+| 8 | Pausa Profunda – Cali | sí `/eventos/pausa-profunda-cali` | finalizado | `evento-taller-pausa-profunda-feb-2026.jpeg` | HISTORICAL | CPT `event`; sin inscripción |
+| 9 | Buddhismo para tiempos de cansancio | PLANNED `/eventos/buddhismo-tiempos-cansancio` | finalizado | `evento-buddhismo-tiempos-cansancio.jpeg` | HISTORICAL | CPT + single; sin inscripción |
+| 10 | 6.º Encuentro Nacional Buddhista – 2025 | PLANNED `/eventos/6-encuentro-nacional-2025` | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 
 Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la misma
 #1 (`event_featured`). Extraer una sola vez.
@@ -93,8 +94,11 @@ Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 | ---- | ----- | -- |
 | 35 imágenes del JSON + alt | REAL PRODUCTION | Media Library + relación de galería |
 | 3 álbumes | REAL PRODUCTION | taxonomía o parent/galería editorial |
-| `galeria-04.jpg` en disco, ausente del JSON | **UNCLEAR** | no borrar; owner decide KEEP hidden vs incluir |
+| `galeria-04.jpg` (ilustración de `/practica`) | REAL PRODUCTION (página, **no** galería) | Media de la Page Práctica. **OWN-001:** no añadir al álbum. |
 | thumbs | GENERATED/derivados | regenerar o importar según estrategia media |
+
+Regla (OWN-001, 2026-08-28): ilustración de otra página ≠ ítem de `/galeria`. El preview del inicio
+de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importan al álbum.
 
 `gallery.js` es comportamiento; en WP se sustituye (ADR 0021). Los **datos** JSON sí se migran.
 
@@ -119,23 +123,24 @@ Si `content-source/` y HTML divergen: **UNCLEAR**, no pisar el live en silencio.
 
 | Ubicación | Conteo aprox. (disco) | Uso | Estrategia por defecto |
 | --------- | --------------------- | --- | ---------------------- |
-| `assets/images/galeria/` | 36 | galería | IMPORT TO MEDIA LIBRARY (JSON manda el conjunto público) |
-| `assets/images/galeria/thumbs/` | 108 | derivadas | REGENERATE o IMPORT; no 404 |
-| `assets/images/eventos/` | 10 | carteles | IMPORT; featured image del CPT |
-| `assets/images/blog/` | 2 | thumbs posts | IMPORT |
-| `assets/images/inicio/` | 14 | hero, ambiente, preview galería | IMPORT o KEEP path theme según uso |
-| `assets/images/comunidad-linaje/` | 8 | páginas | IMPORT |
-| `assets/images/fundador/` | 1 | comunidad | IMPORT |
-| `assets/images/contacto/` | 1 | contacto | IMPORT |
-| `assets/images/practica/` | 1 | meditación | IMPORT |
-| `assets/images/celebraciones/` | 3 | posible uso puntual | **UNCLEAR** si no están enlazadas |
+| `assets/images/galeria/` | 36 | galería + 1 ilustración `/practica` | **Seed → Media Library.** 35 al álbum; `galeria-04` a la Page (OWN-001) |
+| `assets/images/galeria/thumbs/` | 108 | derivadas | **REGENERAR** en WP; no importar `thumbs/` |
+| `assets/images/eventos/` | 10 | carteles | Seed → Media Library; featured del CPT |
+| `assets/images/blog/` | 2 | thumbs posts | Seed → Media Library |
+| `assets/images/inicio/` | 14 | hero, ambiente | Seed → Media Library (no theme path) |
+| `assets/images/comunidad-linaje/` | 8 | páginas | Seed → Media Library |
+| `assets/images/fundador/` | 1 | comunidad | Seed → Media Library |
+| `assets/images/contacto/` | 1 | contacto | Seed → Media Library |
+| `assets/images/practica/` | 1 | meditación | Seed → Media Library |
+| `assets/images/celebraciones/` | ~3 | 1 en `/practica` (`diwali`); resto huérfano | **OWN-003:** usadas = media de Page; huérfanas = seed **oculto** (no se ven en el sitio) |
 | `assets/audio/` | 2 mp3 | mantras en `/practica` | IMPORT o KEEP download path |
-| `assets/documents/recitacion-practica-comida.pdf` | 1 | documentado en doc 16; **no** hay `<a>` al PDF en `practica/index.html` actual | **UNCLEAR** — no borrar |
+| `assets/documents/recitacion-practica-comida.pdf` | — | **RETIRE (OWN-002).** Excluido de la web; no es archivo del sitio. | No importar; no enlace; no URL |
 | `eventos/ical/*.ics` | 2 | descargas calendario | KEEP path o attachment |
 | favicon / OG default | varios | SEO | KEEP o Site Icon |
 
-Por cada archivo: **KEEP LEGACY PATH** / **IMPORT TO MEDIA LIBRARY** / **REPLACE** / **RETIRE**.
-Default: IMPORT lo referenciado; RETIRE solo con evidencia; UNCLEAR no se borra.
+**Imágenes (OWN-009-img + OWN-003, 2026-08-28):** seed → Media Library (contenido real, no fixture).
+Referenciadas: visibles según uso (álbum, Page, featured). **Huérfanas:** mismo seed, **ocultas**
+(no álbum, no Page, no teaser). Thumbs: regenerar. Audio/`.ics` abiertos. **PDF (OWN-002):** RETIRE.
 
 ---
 

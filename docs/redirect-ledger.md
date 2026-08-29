@@ -27,7 +27,14 @@ Forma canónica: **sin barra final**.
 | `/eventos` | `/eventos` | KEEP | archive CPT; **no** Page `eventos` | |
 | `/eventos/circulos-de-presencia-consciente` | misma | KEEP | single `event` | |
 | `/eventos/encuentro-nacional-2026` | misma | KEEP | single `event` | |
-| `/eventos/pausa-profunda-cali` | misma | KEEP | single `event` | |
+| `/eventos/pausa-profunda-cali` | misma | KEEP | single `event` | sin inscripción (pasado) |
+| `/eventos/meditacion-presencial-barranquilla` | misma | **PLANNED KEEP** | single `event` | no existe en static; corte WP (ADR 0035) |
+| `/eventos/festival-calma-en-la-ciudad` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/pausa-profunda-medellin` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/ansiedad-agotamiento-crisis-de-atencion` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/vesak-2026` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/buddhismo-tiempos-cansancio` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
+| `/eventos/6-encuentro-nacional-2025` | misma | **PLANNED KEEP** | single `event` | nueva en corte |
 | `/blog` | `/blog` | KEEP | posts page | |
 | `/blog/circulos-de-presencia-consciente` | misma | KEEP | `post` | |
 | `/blog/sangha-refugio-hiperconexion` | misma | KEEP | `post` | |

@@ -49,7 +49,7 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 | `/` | `index.html` | `content-source/` + copy de home; nota de un evento vigente (datos de `/eventos`) | Ajuste lectura: página de inicio | `/` | `templates/front-page.html` | `main.js` (menú) | Hero WebP/JPEG, preview galería, OG default | Page + front-page settings; create-missing-only | HTTP 200; hero; nota de evento o ausencia; menú teclado; canonical |
 | `/comunidad` | `comunidad/index.html` | `content-source/` (quiénes somos, fundador) | Page `comunidad` | `/comunidad` | `templates/page-comunidad.html` | `main.js` | Foto fundador | Page institucional | 200; H1; foto; enlace blog; no 404 |
 | `/linaje` | `linaje/index.html` | `content-source/` | Page `linaje` | `/linaje` | `templates/page-linaje.html` | `main.js` | Imágenes Chan / Tierra Pura | Page institucional | 200; secciones tradición |
-| `/practica` | `practica/index.html` | `content-source/` | Page `practica` | `/practica` | `templates/page-practica.html` | `main.js` | Audio mantras; PDF recitación (doc 16) | Page institucional | 200; audio; enlace PDF; enlaces a videos y meditación |
+| `/practica` | `practica/index.html` | `content-source/` | Page `practica` | `/practica` | `templates/page-practica.html` | `main.js` | Audio mantras; **sin** PDF (OWN-002 RETIRE) | Page institucional | 200; audio; **no** enlace PDF; enlaces a videos y meditación |
 | `/practica/videos` | `practica/videos/index.html` | Lista YouTube en `content-source/` | Page `videos` (hija o slug acordado) | `/practica/videos` | `page-practica` o `page.html` si no hay plantilla propia | `main.js` | Embeds (youtube-nocookie pendiente de paridad) | Page secundaria; **no** está en navbar | 200; embeds; no 404; slug anidado |
 | `/practica/meditacion-semanal-en-linea` | `practica/meditacion-semanal-en-linea/index.html` | `content-source/` + horario | Page | `/practica/meditacion-semanal-en-linea` | `page.html` o plantilla específica si el diseño lo exige | `main.js` | — | Page secundaria (enlazada desde Inicio, Práctica y calendario) | 200; copy de Zoom/horario |
 | `/galeria` | `galeria/index.html` | `assets/images/galeria/` + JSON en HTML | Page `galeria` | `/galeria` | `templates/page-galeria.html` | `gallery.js` en static; **no se migra** (ADR 0021) → bloque Gutenberg + lightbox nativo | Originales + `thumbs/` | Page + media library; álbumes editoriales (doc 16) | 200; álbumes; lightbox nativo; teclado; no depender de `#gallery-data` |
@@ -82,14 +82,14 @@ SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT.
 |---|---|---|---|---|---|---|---|---|---|---|
 | `/eventos` (card) | `eventos/index.html` #circulos… | Círculos de Presencia Consciente | card + single | CPT `event` | `/eventos/circulos-de-presencia-consciente` | `single-event.html` | cartel + `.ics` | share, calendar | Inventario | 1 objeto; featured home no duplica |
 | `/eventos/encuentro-nacional-2026` | HTML ficha + card | 7.º Encuentro 2026 | card + single | CPT `event` | KEEP | `single-event.html` | cartel + `.ics` | share | Inventario | finalizado |
-| `/eventos` card only | listado | Meditación Presencial Barranquilla | card listado | CPT `event` | **sin** single nuevo salvo owner | archive | cartel jul-2026 | — | Inventario | no inventar slug |
-| `/eventos` card only | listado | Festival Calma en la Ciudad | card | CPT `event` | listado | archive | cartel | — | Inventario | |
-| `/eventos` card only | listado | Pausa Profunda – Medellín | card | CPT `event` | listado | archive | cartel | — | Inventario | |
-| `/eventos` card only | listado | Ansiedad, agotamiento… | card | CPT `event` | listado | archive | cartel | — | Inventario | |
-| `/eventos` card only | listado | Vesak 2026 | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| *(nueva en WP)* | listado | Meditación Presencial Barranquilla | card → single | CPT `event` | `/eventos/meditacion-presencial-barranquilla` | `single-event.html` | cartel | — | Inventario | 200; **sin** Inscribirme (ADR 0035) |
+| *(nueva en WP)* | listado | Festival Calma en la Ciudad | card → single | CPT `event` | `/eventos/festival-calma-en-la-ciudad` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
+| *(nueva en WP)* | listado | Pausa Profunda – Medellín | card → single | CPT `event` | `/eventos/pausa-profunda-medellin` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
+| *(nueva en WP)* | listado | Ansiedad, agotamiento… | card → single | CPT `event` | `/eventos/ansiedad-agotamiento-crisis-de-atencion` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
+| *(nueva en WP)* | listado | Vesak 2026 | card → single | CPT `event` | `/eventos/vesak-2026` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
 | `/eventos/pausa-profunda-cali` | ficha + card | Pausa Profunda – Cali | card + single | CPT `event` | KEEP | `single-event.html` | cartel | share | Inventario | |
-| `/eventos` card only | listado | Buddhismo para tiempos de cansancio | card | CPT `event` | listado | archive | cartel | — | Inventario | |
-| `/eventos` card only | listado | 6.º Encuentro Nacional 2025 | card | CPT `event` | listado | archive | cartel | — | Inventario | |
+| *(nueva en WP)* | listado | Buddhismo para tiempos de cansancio | card → single | CPT `event` | `/eventos/buddhismo-tiempos-cansancio` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
+| *(nueva en WP)* | listado | 6.º Encuentro Nacional 2025 | card → single | CPT `event` | `/eventos/6-encuentro-nacional-2025` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
 | `/` aside | `index.html` | nota featured = evento #1 | duplicado de presentación | **no** CPT extra | — | `front-page.html` Query | mismo cartel | — | Inventario | conteo eventos sigue en 10 |
 
 Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas ya arriba. Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).

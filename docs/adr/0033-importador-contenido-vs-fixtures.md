@@ -70,6 +70,11 @@ como demo. Tras el corte, wp-admin es la SoT editorial (ADR 0013).
   backup (coherente con ADR 0005).
 - QA posterior al import (matriz + checklist de cutover).
 
+*(Nota 2026-08-28, propietario: las **imágenes** se cargan a la Media Library con un comando
+llamado **seed**. Ese seed es el **importador de media real**, no un fixture. Sin `_cdd_fixture`.
+Sin teardown de attachments de producción. Mismas reglas: dry-run, `--apply`, idempotente,
+create-missing-only. OWN-009-img. Huérfanas: mismo seed, **ocultas** en el sitio (OWN-003).)*
+
 ### Pages institucionales
 
 Antes del cutover debe existir una estrategia explícita para crear o importar al menos:

@@ -97,8 +97,9 @@ Baseline (auditoría 2026-08-19, repo `VERSION` 1.0.34): ver ese documento.
 
 Mientras se construye WordPress en Docker/staging, **producción sigue siendo el estático**.
 
-El estático **sigue cambiando** (`CHANGELOG.md`: v1.0.34 pendiente de ZIP mientras v1.0.33 está
-desplegada). Estrategia por defecto de este proyecto (el propietario puede sustituirla):
+El estático **sigue cambiando**. Extraer **lo más reciente del repo** (`VERSION` vigente; OWN-006,
+2026-08-28), no un ZIP anterior en Hostinger. Estrategia de freeze/delta (el propietario puede
+sustituirla):
 
 - Durante el desarrollo: **ledger de cambios** (opción C) en `docs/migracion-static-wordpress.md`.
 - Ventana corta de **content freeze** (opción A) inmediatamente antes del corte.

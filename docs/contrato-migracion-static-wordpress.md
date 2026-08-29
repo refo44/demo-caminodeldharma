@@ -349,7 +349,7 @@ redes, donaciones, datos bancarios).
 - `sitemap.xml` + `sitemap.xsl`
 - `llms.txt`
 - `.htaccess` (canonicalización, redirects, caché, seguridad; HSTS **comentado**, ADR 0020)
-- Favicon, fuentes, imágenes (JPEG/WebP), audio documentado en `16`, PDF de recitación documentado en `16`, `.ics` en `eventos/ical/`
+- Favicon, fuentes, imágenes (JPEG/WebP), audio documentado en `16`, `.ics` en `eventos/ical/`. PDF de recitación: **RETIRE** (OWN-002); no migrar.
 
 Todo esto forma parte del contrato. No hace falta un equivalente WordPress en esta tarea de
 documentación; hace falta no olvidarlo en Fase 3.

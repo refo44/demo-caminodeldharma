@@ -69,7 +69,7 @@ Las carpetas en `content-source` se llaman «Pestaña N». Todos los archivos es
 
 | Archivo en `assets/documents/` | Uso |
 |--------------------------------|-----|
-| `recitacion-practica-comida.pdf` | Recitación práctica de la comida (página Práctica). Enlace «Descargar PDF». |
+| `recitacion-practica-comida.pdf` | *(HISTORICAL)* Recitación práctica de la comida. **CURRENT (OWN-002, 2026-08-28):** excluido de la web; no es archivo del sitio; no importar. |
 
 Los PDFs se colocan en `assets/documents/` en la raíz del repo; no en `content-source/`. Ver 15.
 

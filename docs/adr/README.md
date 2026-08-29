@@ -113,6 +113,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0032](0032-contrato-migracion-static-wordpress.md) | Contrato de migración static → WordPress (cinco entregables) | Aceptada |
 | [0033](0033-importador-contenido-vs-fixtures.md) | Importador de contenido institucional vs fixtures | Aceptada |
 | [0034](0034-static-live-como-fuente-contenido-produccion.md) | Sitio estático live como fuente de contenido de producción hasta el corte | Aceptada |
+| [0035](0035-todos-los-eventos-tienen-single.md) | Todo evento tiene ficha pública; los pasados no se inscriben | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -142,6 +143,7 @@ Documentos, issues, commits o ADR relacionados.
 | Contrato de migración static → WordPress | [0032](0032-contrato-migracion-static-wordpress.md) — cinco entregables; ruta **static → FSE** (sin theme clásico intermedio); template ≠ Page; deploy success ≠ application success |
 | Importación de contenido vs fixtures | [0033](0033-importador-contenido-vs-fixtures.md) — WP-CLI, create-missing-only; copy institucional vs `content-source/`; eventos/blog/galería live = HTML hasta extraer (ADR 0034) |
 | Estático live como contenido de producción | [0034](0034-static-live-como-fuente-contenido-produccion.md) — hardcoded ≠ dummy; extracción; conteos; freeze/delta; patterns ≠ content |
+| Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 
 ---
 

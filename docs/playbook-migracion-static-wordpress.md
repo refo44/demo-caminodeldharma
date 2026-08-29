@@ -98,12 +98,17 @@ HTML / JSON live         →  extractor read-only (eventos, posts, galería, med
                    validate / dry-run
                             ↓
                    importador WP-CLI en camino-del-dharma-core  (ADR 0033)
+                   + seed de imágenes → Media Library (OWN-009-img)
                             ↓
                    WordPress (BD + Media Library)
 ```
 
 El extractor **no está implementado**. Preferir parseo determinista a reescribir a mano.
 Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
+
+**Seed de imágenes:** sube attachments reales (galería, carteles, fotos de página **y huérfanas**).
+Huérfanas: en la biblioteca, **ocultas** (OWN-003) — no álbum, no Page. No es `seed/teardown` de
+fixtures. No marcar `_cdd_fixture`. No borrar media de producción al re-ejecutar.
 
 Reglas de este proyecto (ADR 0033):
 
@@ -118,8 +123,9 @@ Reglas de este proyecto (ADR 0033):
 | Texto canónico verbatim | El generador falla si el texto importado diverge de `content-source/` — protege contra el mismo tipo de error que causó el dato de fundación incorrecto (ver `.audit/decisions.md`, 2026-07-28) |
 
 **Separar fixtures de datos reales:** si se usan datos de prueba para desarrollar el theme/plugin,
-marcarlos (`_cdd_fixture = 1`) y usar comandos `seed/verify/teardown` idempotentes. Nunca mezclar datos
-demo con contenido institucional real.
+marcarlos (`_cdd_fixture = 1`) y usar comandos `seed/verify/teardown` **solo de esos fixtures**.
+El seed de **imágenes de producción** (OWN-009-img) no entra en ese teardown. Nunca mezclar demo
+con contenido institucional real.
 
 ---
 

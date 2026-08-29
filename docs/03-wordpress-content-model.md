@@ -71,6 +71,8 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 - **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, enlace a la ficha si existe («Ver evento →»), botón Inscribirme / Preinscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); título y cartel enlazan a `/eventos/{slug}/` cuando hay página propia; separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
 - Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme (o Preinscribirme), URL de la ficha cuando el evento tiene `single-event`
 
+*(Nota 2026-08-28, ADR 0035 / OWN-004: **todo** evento tiene `single` `/eventos/{slug}`. Inscribirme / Preinscribirme **solo** si está vigente y hay inscripción real. Los finalizados no muestran ese CTA.)*
+
 ### Contacto (page)
 
 - Formulario: Nombre, Correo, Mensaje

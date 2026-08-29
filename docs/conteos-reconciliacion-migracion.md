@@ -28,7 +28,7 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 | Thumbs galería | **108** | disco | derivadas |
 | Carteles eventos | **10** | `assets/images/eventos/` | |
 | Audio mantras | **2** | `assets/audio/` | |
-| PDF recitación | **1** en disco | `assets/documents/` | no enlazado en HTML actual |
+| PDF recitación | **0** (sitio) | RETIRE OWN-002 | excluido de la web; no es archivo del sitio |
 | `.ics` | **2** | `eventos/ical/` | |
 | Embeds videos page | **5** | 4 YouTube + 1 Vimeo | |
 | Formulario | **1** | `/contacto` markup | envío no live |
@@ -42,13 +42,14 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 | --------- | -------- | -------------- |
 | Pages (institucionales + secundarias + blog page si aplica) | 10 (±1 si front-page no es Page) | `wp post list --post_type=page --format=count` |
 | CPT `event` | **10** | incluye las 7 sin single |
-| `event` con permalink público extra | **3** (o 10 si se publican todos los singles) | mismatch permitido **solo** si el ledger dice «7 listing-only» |
+| `event` con permalink público | **10** | ADR 0035 / OWN-004; 3 KEEP + 7 PLANNED |
 | `post` | **2** | |
-| Media de galería pública | **35** (o 36 si el owner incluye `galeria-04`) | |
+| Media de galería pública | **35** | no incluir ilustraciones ni huérfanas (OWN-001, OWN-003) |
+| Media huérfana (oculta) | N = imágenes en disco no referenciadas | seed; **0** URLs públicas; listar en el payload |
 | Álbumes / términos de galería | **3** | |
 | Featured images de eventos | **10** | |
 | Attachments audio | **2** | |
-| PDF | 0 o 1 según UNCLEAR | |
+| PDF | **0** | OWN-002: no importar recitación |
 | Fixtures públicos | **0** | |
 
 Cualquier otra cifra exige fila en «Mismatches».
@@ -59,11 +60,12 @@ Cualquier otra cifra exige fila en «Mismatches».
 
 | Static | WP si se importa «a ciegas» | Explicación | Acción |
 | ------ | --------------------------- | ----------- | ------ |
-| 36 JPG galería vs 35 JSON | 36 media vs 35 en galería | `galeria-04` no publicado | UNCLEAR — owner |
-| 10 events vs 3 URLs | 10 CPT vs 3 visibles en permalink | listado-only es válido (doc 03) | importar 10; no inventar slugs |
+| 36 JPG en `galeria/` vs 35 JSON | 35 en álbum + 1 media de `/practica` | `galeria-04` es ilustración de Práctica | **OWN-001:** no es ítem de galería |
+| Imágenes en disco sin `<img>`/`src` | attachments ocultos | reserva editorial | **OWN-003:** seed; no se ven en el sitio |
+| 10 events vs 3 URLs en el estático | 10 singles en WP | 7 URLs nuevas en el corte | **ADR 0035:** PLANNED KEEP; slugs fijos |
 | 10 posters vs 10 events | OK si el mapeo de filenames es 1:1 | verificar al extraer | |
-| PDF en disco, 0 enlaces HTML | 1 attachment huérfano o 0 | posible retirada silenciosa | UNCLEAR — no borrar disco |
-| Repo 1.0.34 vs prod 1.0.33 | conteos distintos | CHANGELOG | extraer el artefacto **desplegado** o freeze+delta |
+| Docs 16 mencionan PDF | 0 en WP | excluido a propósito | **OWN-002 RETIRE** — no mismatch |
+| Repo más nuevo vs ZIP en Hostinger | conteos o HTML distintos | deploy atrasado | **OWN-006:** extraer el repo vigente (`VERSION`); el ZIP viejo no es la fuente |
 | `content-source/` vs HTML | copy institucional distinto | dos SoT | UNCLEAR por campo |
 
 ---

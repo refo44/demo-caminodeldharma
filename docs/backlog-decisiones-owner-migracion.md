@@ -27,7 +27,7 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 - `/privacidad` aplazada, copy no inventado — ADR 0028
 - CPT `sangha` fuera del corte inicial — ADR 0024
 - Freeze por defecto: ledger durante el build + freeze corto al corte — ADR 0034
-- 7 eventos sin single: importar como CPT; **no inventar slugs** salvo decisión nueva — inventario + doc 03
+- Todo evento tiene single; pasados sin inscripción — ADR 0035 (OWN-004)
 
 ---
 
@@ -35,16 +35,22 @@ Ya resuelto por ADR (no repetir aquí como pregunta):
 
 | ID | Pregunta | Tipo | Mientras tanto (default) | ¿Podría volverse ADR? |
 | -- | -------- | ---- | ------------------------ | --------------------- |
-| OWN-001 | `galeria-04.jpg` (disco, no está en `#gallery-data`): ¿incluir en la galería pública o dejar oculta? | Media | No borrar. Conteos: 35 públicos / 36 en disco. Mismatch explicado. | No. Cierra en inventario + conteos. |
-| OWN-002 | PDF `assets/documents/recitacion-practica-comida.pdf`: ¿enlazar, importar huérfano o retirar? | Media | No borrar disco. No inventar enlace. | No, salvo que se cree una URL pública nueva. |
-| OWN-003 | `assets/images/celebraciones/`: ¿están en uso o se retiran? | Media | No borrar hasta verificar referencias. | No. |
-| OWN-004 | Los 7 eventos solo-listado: ¿permanecen sin permalink o se publican singles? | URLs | Importar 10 CPT; **sin** slugs nuevos. KEEP las 3 URLs que ya existen. | **Sí**, solo si se deciden URLs públicas nuevas (KEEP/301). |
 | OWN-005 | ¿Confirmar freeze C+A o usar delta continuo (B) durante Fase 3? | Operación | ADR 0034 ya eligió C+A como default. | Solo si se **cambia** esa default. |
-| OWN-006 | Extraer el artefacto **desplegado** (p. ej. 1.0.33) o el repo actual (1.0.34) + delta? | Timing | Extraer indicando tag/commit. Reconciliar conteos del mismo commit. | No. |
 | OWN-007 | Divergencias `content-source/` vs HTML publicado (copy institucional), campo a campo | Editorial | UNCLEAR; no pisar el live en silencio. | No. Es revisión editorial, no arquitectura. |
 | OWN-008 | Álbumes de galería (3): ¿taxonomía, padre/hijo u otro? | Modelo CMS | 3 colecciones reales; no hardcodear en patterns. Elegir al implementar el plugin. | **Sí**, si el modelo no queda cubierto por docs 03/16 al implementar. |
-| OWN-009 | Audio, `.ics`, imágenes de layout: ¿KEEP path legacy o Media Library? | Media | IMPORT lo referenciado; no 404. Decidir por tipo al extraer. | No. Matriz + inventario. |
+| OWN-009 | Audio y `.ics`: ¿Media Library o path de descarga? | Media | Imágenes ya decididas (seed → Media Library). Audio/`.ics` siguen abiertos. | No. |
 | OWN-010 | Autores en cards (Comunidad / Zheng Gong): ¿seguir como copy o Users de WP? | Modelo CMS | Atribución en copy; no forzar CPT author ni `/author/`. | **Sí**, solo si se crean rutas `/author/` (entonces KEEP/301). |
+
+## Decididas
+
+| ID | Fecha | Decisión |
+| -- | ----- | -------- |
+| OWN-001 | 2026-08-28 | **Foto de página ≠ ítem de galería.** Una imagen usada como ilustración en otra página no entra en `/galeria`. `galeria-04.jpg` se importa como media de `/practica`, no al álbum. Conteos: 35 galería + 1 media de página. El preview del inicio (`galeria-01`–`03`) es teaser de la galería, no ilustración de otra sección: esas tres **sí** siguen en `#gallery-data`. |
+| OWN-006 | 2026-08-28 | Extraer **lo más reciente del repo** (`VERSION` vigente, hoy 1.0.34), no el ZIP más viejo que aún esté en Hostinger. Indicar tag/commit en el payload. Si producción se atrasó, el delta es «desplegar o reconciliar», no extraer el artefacto viejo. |
+| OWN-009-img | 2026-08-28 | **Imágenes → Media Library vía seed.** Todas las imágenes referenciadas (galería, carteles, páginas, hero, fundador, etc.) se suben como attachments. El seed es **contenido real** (ADR 0033): idempotente, create-missing-only, sin `_cdd_fixture`, **sin teardown**. Thumbs estáticos: WordPress regenera tamaños. No hardcodear fotos en `templates/` ni en el theme. |
+| OWN-002 | 2026-08-28 | **RETIRE.** El PDF de recitación de la comida queda **excluido de la web**. No forma parte de los archivos del sitio. No enlazar, no importar, no seed, no URL. Docs 04/16/23 que lo mencionan son HISTORICAL. |
+| OWN-003 | 2026-08-28 | **Huérfanas → seed oculto.** Toda imagen del repo no enlazada en HTML (p. ej. `celebracion-vesak-2019` y el resto no usado de `celebraciones/`) se sube a Media Library con el seed, **sin** mostrarse en el sitio: no álbum, no Page, no teaser. Quedan en la biblioteca por si se usan después. `celebracion-diwali.jpg` **sí** está en `/practica` → media de página (OWN-001), no huérfana. El PDF no es imagen (OWN-002). |
+| OWN-004 | 2026-08-28 | **Todo evento tiene single.** Los 10 CPT tienen `/eventos/{slug}`. Los 7 que hoy no tienen ficha se publican en el corte (slugs en ADR 0035 / ledger). Eventos **pasados: sin Inscribirme / Preinscribirme**. Vigentes: inscripción solo si es real. |
 
 Al cerrar una fila: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -52,4 +58,4 @@ Al cerrar una fila: fecha, decisión en una frase, y actualizar
 
 ---
 
-**Versión:** 1.0 · **Fecha:** 2026-08-19 · **Estado:** abierto (Fase 3 no iniciada)
+**Versión:** 1.6 · **Fecha:** 2026-08-28 · **Estado:** 5 abiertas · 6 decididas (Fase 3 no iniciada)

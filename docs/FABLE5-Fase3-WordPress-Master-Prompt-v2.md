@@ -1,0 +1,798 @@
+# FABLE 5 — MASTER EXECUTION PROMPT v2
+
+## Camino del Dharma · Fase 3 · Static production → WordPress FSE
+
+**Prompt version:** 2.0  
+**Status:** CURRENT — use this prompt for execution  
+**Date:** 2026-08-28  
+**Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
+
+The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0034.
+
+---
+
+## 1. Role and repository
+
+Act as a senior WordPress engineer, software engineer, migration engineer, and technical lead. Work
+inside:
+
+```text
+/Users/rafaelfigueredo/Documents/demo-caminodeldharma
+```
+
+Build production-grade, maintainable code. Apply WordPress Coding Standards, security practices,
+KISS, YAGNI, SOLID, Clean Code, and incremental refactoring pragmatically. Do not introduce
+abstractions or dependencies without a current requirement.
+
+Code, code comments, and Git commit messages are written in English. Editorial content and most
+project documentation remain in Spanish. Preserve Spanish copy exactly as required by the canonical
+sources.
+
+---
+
+## 2. Mission
+
+Start and execute **Fase 3: WordPress** by migrating the live static production site directly to:
+
+1. A WordPress **block theme / Full Site Editing theme** named `camino-del-dharma`.
+2. A first-party domain plugin named `camino-del-dharma-core`.
+3. A reproducible local WordPress environment using Docker.
+4. A deterministic extraction and idempotent WP-CLI import pipeline for real production content.
+5. WordPress Pages, posts, events, media, settings, routes, and behavior that satisfy the migration
+   contract.
+6. Durable execution state and QA evidence that another session can resume without chat history.
+7. A manual, bounded staging deployment runbook and a build ready for staging validation.
+
+The migration changes the content engine, not the design. The current static site remains the public
+production site until an independently authorized cutover.
+
+```text
+STATIC PRODUCTION → WORDPRESS FSE
+```
+
+There is no classic PHP theme step between them.
+
+---
+
+## 3. Authority granted by this prompt
+
+This prompt authorizes:
+
+- repository inspection;
+- documentation and implementation changes required for Fase 3;
+- creation of a dedicated local feature branch from an owner-approved clean baseline;
+- creation of one local annotated pre-reorganization rollback tag;
+- the root-to-`static/` monorepo reorganization;
+- local Docker operations;
+- creation of the theme, plugin, migration tools, tests, and durable execution artifacts;
+- local content import with non-production data or the reviewed migration payload;
+- small, coherent local Git commits after relevant checks pass.
+
+This prompt does **not** authorize:
+
+- pushing commits or tags;
+- creating or modifying a Hostinger staging site;
+- deploying to staging or production;
+- running an importer against production;
+- changing DNS or the production document root;
+- production cutover;
+- destructive database resets outside disposable local Docker volumes;
+- publishing Contact Form 7 in production;
+- activating HSTS.
+
+Prepare external actions and their runbooks, but request explicit current-session authorization when
+an external write becomes the next action. Never request credentials in chat; ask the owner to
+configure them through the appropriate secure mechanism.
+
+---
+
+## 4. Source-of-truth rules
+
+Read the actual repository before acting. Summaries in this prompt do not replace canonical files.
+
+### 4.1 Governance and architecture precedence
+
+For architecture, scope, routing, security, deployment, and migration behavior:
+
+1. Current system/user instructions and repository rules.
+2. `CLAUDE.md`, `AGENTS.md`, and `.cursor/rules/`.
+3. Accepted ADRs, with later accepted ADRs superseding earlier conflicting decisions.
+4. Current migration contract and structured project documentation.
+5. Current implementation evidence.
+6. This prompt.
+
+Do not modify an accepted ADR to change its meaning. A genuinely new architectural, URL, dependency,
+security, or deployment decision requires a new ADR before implementation.
+
+### 4.2 Content precedence is type-specific
+
+There is no single source hierarchy for every content type:
+
+- **Institutional copy:** `content-source/` is canonical. Copy it verbatim. Never paraphrase,
+  summarize, improve, or silently reconcile it with published HTML.
+- **Events, blog posts, gallery JSON, dates, cards, and their media relationships:** the live static
+  HTML/JSON is production content until it is extracted and verified.
+- **Presentation and behavior:** the static HTML/CSS/JS is the visual and behavioral contract unless
+  an accepted ADR records a replacement.
+- **URLs:** `sitemap.xml`, ADR 0008, the redirect ledger, and incoming HTTP behavior.
+- **After cutover:** WordPress owns editorial content; Git owns theme/plugin code.
+
+When institutional copy differs from the published HTML, classify it as
+`UNCLEAR — OWNER REVIEW REQUIRED`. Do not choose silently.
+
+### 4.3 Mandatory reading
+
+Before implementation, read:
+
+- `.cursor/rules/`, `CLAUDE.md`, `AGENTS.md`;
+- `docs/17-orden-implementacion.md`;
+- `docs/adr/README.md`;
+- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0034;
+- `docs/contrato-migracion-static-wordpress.md`;
+- `docs/inventario-contenido-produccion-static.md`;
+- `docs/conteos-reconciliacion-migracion.md`;
+- `docs/matriz-migracion-static-wordpress.md`;
+- `docs/redirect-ledger.md`;
+- `docs/backlog-decisiones-owner-migracion.md`;
+- `docs/playbook-migracion-static-wordpress.md`;
+- `docs/cutover-checklist-wordpress.md`;
+- `docs/03-wordpress-content-model.md`;
+- `docs/11-arbol-urls-final.md`;
+- `docs/12-theme-file-structure.md`;
+- `docs/13-static-file-structure.md`;
+- `docs/15-assets-strategy.md`;
+- `docs/19-accesibilidad-estandares.md`;
+- `docs/20-layout-principles.md`;
+- `docs/docker-wordpress-playbook.md`.
+
+Check the ADR index for decisions newer than ADR 0034 and read any that affect this scope.
+
+---
+
+## 5. Binding architecture
+
+### 5.1 Monorepo
+
+The first implementation step of Fase 3 is ADR 0014's reorganization:
+
+```text
+demo-caminodeldharma/
+├── static/                         # live static production during transition
+├── wordpress/
+│   └── wp-content/
+│       ├── themes/
+│       │   └── camino-del-dharma/
+│       └── plugins/
+│           └── camino-del-dharma-core/
+├── docs/
+├── scripts/
+└── project files
+```
+
+Move only the deployable static-site surface to `static/`. Keep repository documentation, source
+material, scripts, tooling, changelog, and project metadata at the root. Update all affected tooling
+and manual deployment instructions. Preserve the static site's ability to be packaged and deployed
+independently, but do not deploy it.
+
+Before moving files, record the exact pre-reorganization commit as the rollback reference. Preserve
+renames in one reviewable work unit and do not mix unrelated implementation into that commit. Work
+from a dedicated feature branch and create a local annotated pre-reorganization tag before the move.
+
+### 5.2 Block theme, never classic theme
+
+Build `camino-del-dharma` directly as an FSE block theme:
+
+- `theme.json` is the source of truth for design tokens and Global Styles.
+- `templates/*.html` define block templates.
+- `parts/*.html` define header, footer, and other true template parts.
+- `patterns/*.php` may define reusable block structures, but never store real editorial collections.
+- `functions.php` is a small bootstrap for setup and enqueueing.
+- one complementary `assets/css/main.css` handles layout/components that Global Styles cannot express.
+- JavaScript is minimal and loaded only where behavior requires it.
+
+Do not create view templates such as:
+
+```text
+front-page.php
+page-comunidad.php
+page-practica.php
+archive-event.php
+single-event.php
+```
+
+PHP remains valid for `functions.php`, focused includes, patterns, server-side rendering, and plugin
+code. The prohibition is against a classic-theme view layer.
+
+The initial `theme.json` must reproduce the static design tokens exactly. Save that initial version
+as the visual baseline before any later Global Styles changes.
+
+### 5.3 Plugin/theme boundary
+
+`camino-del-dharma-core` owns:
+
+- CPT `event`;
+- `event_type` and `event_city`;
+- event metadata and validation;
+- domain queries and visibility rules;
+- editorial capabilities or role adjustments that are actually required;
+- WP-CLI extraction/import support;
+- migration source keys and hashes;
+- domain-level routing, metadata, and structured-data inputs;
+- activation/upgrade rewrite handling.
+
+The theme owns presentation:
+
+- templates, parts, patterns, and `theme.json`;
+- component CSS and frontend behavior;
+- semantic rendering;
+- presentation of data exposed by WordPress and the plugin.
+
+The theme must never register CPTs, taxonomies, roles, or domain fields. If the plugin is inactive,
+the theme must avoid fatal errors and degrade safely without duplicating domain logic.
+
+### 5.4 Native-first dependency policy
+
+Use, in this order:
+
+1. WordPress core APIs and Gutenberg blocks.
+2. First-party code in `camino-del-dharma-core`.
+3. A third-party plugin only when an accepted ADR explicitly approves it.
+
+Contact Form 7 is the only third-party plugin currently approved. Do not add ACF, Elementor, Divi,
+Yoast, RankMath, optimization suites, analytics plugins, calendar plugins, or lightbox plugins.
+
+---
+
+## 6. Five independent migration deliverables
+
+Do not call the migration complete because the theme activates or looks correct.
+
+1. **CONTENT:** actual WordPress Pages, posts, events, metadata, terms, media, and settings.
+2. **PRESENTATION:** FSE templates, parts, patterns, `theme.json`, CSS, responsive layout, and
+   accessibility structure.
+3. **ROUTING:** incoming canonical URLs, CPT archive/singles, blog routes, redirects, 404, canonical
+   behavior, and sitemap/indexing behavior.
+4. **BEHAVIOR:** navigation, event calendar, share/calendar dialogs, audio, downloads, gallery
+   replacement, and gated contact form.
+5. **OPERATIONS:** environments, importer, evidence, backups/rollback plan, manual deployment scope,
+   freeze/delta procedure, and cutover readiness.
+
+Every row in `docs/matriz-migracion-static-wordpress.md` must eventually cover all five relevant
+dimensions. A block template does not create a WordPress Page.
+
+---
+
+## 7. Current baseline and required defaults
+
+Verify these values against the current commit before relying on them:
+
+- 16 public sitemap URLs plus the non-public 404 template.
+- 10 institutional/secondary Page objects, allowing the documented front-page counting variation.
+- 10 real `event` entities: 1 current and 9 historical.
+- 3 existing public event single URLs; the other 7 are archive/listing-only.
+- 2 real blog posts.
+- 3 gallery albums.
+- 35 publicly referenced gallery images.
+- 36 original files in the gallery directory: 35 gallery images plus `galeria-04.jpg`, which is real
+  media used by `/practica` and is not a gallery item.
+- 10 event posters.
+- 2 audio files.
+- 2 `.ics` files.
+- 1 historical recitation PDF path, now retired from the website by OWN-002.
+- 0 production fixtures.
+
+Use the defaults in `docs/backlog-decisiones-owner-migracion.md` without blocking unrelated work:
+
+- Per OWN-001, import `galeria-04.jpg` exactly once as Media Library content for `/practica`; never
+  add it to `/galeria`.
+- Per OWN-002, retire `assets/documents/recitacion-practica-comida.pdf`. Do not move it into
+  deployable `static/`, link, import, seed, publish, or create a URL for it.
+- `assets/images/celebraciones/` remains unresolved and must not be deleted or published silently.
+  Audio and `.ics` storage strategy also remains open.
+- Per OWN-009-img, import every referenced content image—gallery, posters, page illustrations, hero,
+  founder, and other published images—into the Media Library through a real-content command named
+  `seed`. This is not a fixture: it has no `_cdd_fixture`, has no teardown, and follows dry-run,
+  explicit apply, idempotent, create-missing-only rules. WordPress regenerates derivative sizes.
+- Import all 10 events, but expose only the 3 already-public single routes. Do not invent 7 public
+  URLs. Implement the simplest explicit archive-only visibility rule and test that those additional
+  single routes are not public.
+- Keep the default build-time change ledger plus a short content freeze immediately before cutover.
+- Per OWN-006, extract from the latest repository `VERSION`, not an older ZIP still deployed on
+  Hostinger. Record the exact commit/tag in the payload. If production parity cannot be proven, label
+  it `Unverified`; the older deployment is deploy/delta debt, not the extraction source.
+- Keep author attributions as editorial copy; do not create public author routes.
+- Do not implement CPT `sangha`.
+
+OWN-008 remains open. Extract all 35 gallery images, alt text, and the three source album memberships,
+but do not implement or mark the album persistence model complete until the owner closes OWN-008.
+This does not block the FSE shell, Media Library seed, or unrelated Pages. Native Gutenberg Gallery
+blocks and the native lightbox remain binding; no custom `gallery.js` or lightbox is allowed. If
+Heading + Gallery is selected, update the backlog, inventory, counts, and migration matrix before
+implementing that model. A new public route or non-native gallery architecture requires an ADR.
+
+---
+
+## 8. Content migration contract
+
+### 8.1 Extract; do not retype
+
+Implement a read-only deterministic extractor:
+
+```text
+static HTML / embedded JSON / data-* / referenced assets
+        ↓
+versioned, reviewable migration payload
+        ↓
+validate → plan → import → verify
+        ↓
+WordPress database + Media Library
+```
+
+The payload must identify its source commit/version and preserve stable source keys. Prefer
+programmatic parsing over manual transcription.
+
+Institutional copy must be generated or validated against `content-source/` verbatim. Static HTML is
+not allowed to silently override canonical institutional copy, but it remains authoritative for the
+published event/blog/gallery entities that `content-source/` does not contain.
+
+### 8.2 WP-CLI importer
+
+Implement the importer in `camino-del-dharma-core`, not as a theme feature and never as an activation
+side effect.
+
+Required behavior:
+
+- commands or subcommands for `validate`, `plan`, `import`, and `verify`;
+- dry-run by default;
+- writes only with an explicit `--apply`-style flag;
+- idempotent re-execution;
+- create-missing-only by default;
+- stable `_source_key` and `_source_hash`-style metadata;
+- skip unchanged objects;
+- never overwrite wp-admin edits by default;
+- never delete real content;
+- any force mode is field-scoped, explicit, and documented;
+- production environment guard requiring explicit confirmation and verified backup evidence;
+- post-import count and route verification.
+
+Implement the image Media Library command under the owner-approved name `seed`. Keep its real-content
+semantics separate from fixture commands: no fixture marker and no teardown of seeded production
+attachments.
+
+Do not run real-content teardown. If disposable fixtures materially improve automated tests, mark
+them unambiguously (for example `_cdd_fixture = 1`), prohibit them in production, and delete only
+objects created by that fixture system. Do not build a fixture framework merely for completeness.
+
+### 8.3 Required WordPress objects
+
+Create/import real objects and settings for:
+
+- front page and Reading settings;
+- Comunidad;
+- Linaje;
+- Práctica;
+- `/practica/videos`;
+- `/practica/meditacion-semanal-en-linea`;
+- Galería;
+- Contacto;
+- Donaciones;
+- Blog posts page and Reading settings;
+- 2 real posts;
+- 10 real events;
+- the extracted three album memberships, pending OWN-008's persistence-model decision;
+- 35 public gallery images plus `galeria-04.jpg` attached to Práctica;
+- all other referenced content images through the real-content Media Library seed;
+- event posters, required audio, linked downloads, and other confirmed production media.
+
+`/eventos` is the `event` CPT archive. Never create a Page with slug `eventos`.
+
+Do not create or publish `/privacidad` copy. That content requires owner/legal review.
+
+---
+
+## 9. Presentation and behavior requirements
+
+### 9.1 No redesign
+
+Preserve:
+
+- page and section order;
+- visual hierarchy;
+- navigation structure;
+- canonical UI copy;
+- layout and responsive behavior;
+- calm spacing and reading rhythm;
+- focus states, semantic landmarks, and accessibility behavior;
+- states with and without current events.
+
+Any intentional static-to-WordPress substitution must be recorded in the migration matrix and ledger.
+
+### 9.2 Template and route mapping
+
+At minimum:
+
+```text
+/                                      → templates/front-page.html
+/comunidad                             → templates/page-comunidad.html
+/linaje                                → templates/page-linaje.html
+/practica                              → templates/page-practica.html
+/eventos                               → templates/archive-event.html
+/eventos/{existing-public-slug}        → templates/single-event.html
+/galeria                               → templates/page-galeria.html
+/donaciones                            → templates/page-donaciones.html
+/contacto                              → templates/page-contacto.html
+/blog                                  → templates/home.html
+/blog/{slug}                           → templates/single.html
+unknown route                          → templates/404.html with HTTP 404
+```
+
+`templates/index.html` is the required final fallback. `templates/page.html` is a technical fallback,
+not the default editorial solution for pages with distinctive layouts.
+
+Canonical public URLs have **no trailing slash**, except the root. Test incoming HTTP behavior; a
+correct `get_permalink()` value alone is insufficient.
+
+### 9.3 Events
+
+Use native title, content, and featured image where appropriate. Add only the metadata required by
+the content model.
+
+The archive must:
+
+- separate current and completed events unambiguously;
+- group current events by month and historical events by year;
+- preserve the documented heading hierarchy;
+- show at most one valid featured current event on the home page;
+- show no empty featured module when no current event exists;
+- keep `event_type` and `event_city` as non-public taxonomies;
+- preserve the 3 existing public singles and keep the other 7 archive-only;
+- expose the documented empty state when no current event exists.
+
+The monthly event calendar is a dynamic block. Domain selection/data belongs to
+`camino-del-dharma-core`; presentation belongs to the theme. Preserve event cells, weekly meditation
+cells, tooltips, keyboard behavior, pointer first/second-touch behavior, and ARIA behavior. Weekly
+meditation is not an event.
+
+### 9.4 Gallery
+
+Replace static `gallery.js`, embedded gallery JSON rendering, handmade thumbnails, and any custom
+lightbox expectation with native Gutenberg Gallery blocks and the native WordPress lightbox. Seed the
+35 public gallery originals into the Media Library and let WordPress generate derived sizes. Seed
+`galeria-04.jpg` separately as Práctica media, never as gallery content. Do not import handmade thumbs
+as editorial originals. Do not finalize the album persistence model before OWN-008 is closed.
+
+### 9.5 Other behavior
+
+Preserve or document a native replacement for:
+
+- mobile navigation and keyboard interaction;
+- share behavior on event/blog singles;
+- add-to-calendar behavior and valid `.ics` downloads;
+- mantra audio playback;
+- video embeds;
+- skip link, focus management, reduced motion, and semantic landmarks.
+
+Do not blindly enqueue the old JavaScript. Inspect its DOM/selectors and either preserve the required
+contract or document the native Gutenberg replacement.
+
+---
+
+## 10. Routing, SEO, privacy, and security
+
+### 10.1 Routing
+
+- Preserve every current public URL as `KEEP` unless `docs/redirect-ledger.md` specifies 301/410.
+- Port legacy redirects from static `.htaccess`.
+- Avoid chains, loops, temporary redirects, and soft 404s.
+- Flush rewrite rules only on plugin activation or explicit versioned upgrade, never per request.
+- Do not expose event-city or event-type archive URLs.
+- Do not create search or `/buscar`.
+- Do not create `/404`; render the 404 template with an actual 404 status.
+
+### 10.2 SEO
+
+- Use native `/wp-sitemap.xml` in WordPress; staging must be non-indexable.
+- Update production `robots.txt` only during an authorized cutover.
+- Native `post_tag` archives are supported at `/blog/tag/{slug}`. When a term exists, the incoming
+  route must resolve and remain `noindex, follow` until the documented qualitative review changes.
+- Preserve server-rendered titles, descriptions, canonical URLs, Open Graph, Twitter metadata, and
+  JSON-LD according to `docs/15-assets-strategy.md`.
+- Existing event singles use Event JSON-LD with real data. Before implementing structured data for
+  the 7 archive-only events, resolve the conflict between `docs/03-wordpress-content-model.md` §3
+  (JSON-LD on the listing) and `docs/15-assets-strategy.md` §12.3 (none without a dedicated URL).
+  Block only that WU-08 subtask, record it as `Unverified`, and do not create new singles as a
+  workaround. Never invent optional fields.
+- Do not install an SEO suite.
+
+### 10.3 Privacy and contact
+
+Contact Form 7 is approved and should send to `caminodeldharma1@gmail.com`, but:
+
+- `/privacidad` content must never be invented;
+- ADR 0028 is a hard gate before Contact Form 7 enters **production**;
+- local/staging implementation and synthetic-data testing may proceed;
+- real delivery must be verified in Hostinger staging before release;
+- do not claim Contact Form 7 production eligibility while the privacy gate remains open;
+- WordPress cutover may proceed with Contact Form 7 absent or disabled and the existing
+  WhatsApp/email alternatives working, provided the matrix and cutover checklist record that state;
+- do not add another antispam plugin without its own ADR.
+
+### 10.4 Security and prohibited features
+
+- No GA4 or other analytics.
+- No cookie-based measurement; Search Console remains the approved measurement channel.
+- No PWA, manifest, or Service Worker.
+- No HSTS activation; reconsider only after at least 30 stable days following an authorized cutover.
+- No public registration, private member area, LMS, ecommerce, or internal payment processing.
+- No secrets, credentials, salts, databases, backups, WordPress core, third-party plugin code, or
+  production uploads in Git.
+- Escape output, sanitize input, validate capabilities, use nonces for state changes, and prepare SQL.
+- Prefix first-party functions, classes, hooks, options, and metadata consistently.
+- Make user-facing first-party PHP strings translation-ready with the project text domain.
+
+---
+
+## 11. Local environment and QA evidence
+
+Implement the three-service Docker environment from ADR 0023:
+
+```text
+db         → MariaDB 11.8 with healthcheck and persistent local volume
+wordpress  → WordPress on PHP 8.3, bound to localhost
+wpcli      → matching WordPress CLI service and mounts
+```
+
+Bind-mount only first-party theme/plugin code. Keep core and database in Docker volumes. Use a
+gitignored `.env`, a versioned `.env.example`, fail-fast environment-variable syntax, a configurable
+localhost port, `WP_ENVIRONMENT_TYPE=local`, and debug logging in every PHP-running service.
+
+Record evidence using only:
+
+- `Unverified`
+- `Pass (local)`
+- `Pass`
+- `Fail`
+
+`Pass (local)` never proves Hostinger PHP/Apache/HTTPS/mail behavior.
+
+### QA level 1 — static checks
+
+- PHP syntax;
+- PHPCS with WordPress Coding Standards;
+- JSON/YAML/block metadata parsing;
+- CSS lint/build for both preserved static and WordPress sources as applicable;
+- `git diff --check`;
+- no secrets;
+- no forbidden classic templates or dependencies.
+
+### QA level 2 — component checks
+
+- CPT, taxonomies, fields, capability and sanitization behavior;
+- event current/historical/featured rules;
+- archive-only versus public-single rules;
+- WP-CLI validate/plan/import/verify;
+- importer idempotency and create-missing-only behavior;
+- fixture isolation if fixtures exist.
+
+### QA level 3 — local integration
+
+- plugin and theme activation without warnings/fatals;
+- empty `debug.log` after representative navigation;
+- Page/settings creation;
+- template hierarchy and block rendering;
+- incoming routes, canonicalization, redirects, and real 404;
+- counts and media relationships;
+- navigation, calendar, share, audio, gallery, downloads;
+- anonymous cookie/storage behavior.
+
+### QA level 4 — visual and staging
+
+- mobile, tablet, desktop, 320 px, and 200% zoom;
+- keyboard-only navigation and visible focus;
+- screen-reader-relevant labels/headings/ARIA;
+- visual comparison against `static/`;
+- staging PHP/Apache/HTTPS behavior;
+- actual Contact Form 7 delivery;
+- network requests and absence of unexpected tracking;
+- non-indexability of staging.
+
+Unavailable environment-dependent checks remain `Unverified`; never imply they passed.
+
+---
+
+## 12. Durable execution and work units
+
+Before implementation code, create if absent:
+
+```text
+.audit/fase3-execution-state.md
+.audit/fase3-validation-matrix.md
+docs/operations/wordpress-manual-deployment.md
+docs/operations/third-party-plugins.md
+```
+
+Extend, never replace:
+
+```text
+docs/migracion-static-wordpress.md
+docs/matriz-migracion-static-wordpress.md
+docs/redirect-ledger.md
+```
+
+The execution-state file must record:
+
+- phase status;
+- branch and exact source commit;
+- current work unit;
+- completed work;
+- active risks and failures;
+- validation evidence;
+- documentation discrepancies;
+- assumptions/defaults used;
+- blockers;
+- changed files;
+- last verified commit;
+- next exact action;
+- resume procedure.
+
+Each work unit defines: objective, binding sources, expected files, dependencies, risks, rollback,
+acceptance criteria, QA plan, and checkpoint boundary.
+
+Use these work-unit boundaries unless repository evidence requires a safer subdivision:
+
+1. **WU-00 — Preflight and durable harness**
+2. **WU-01 — Monorepo reorganization**
+3. **WU-02 — Local Docker environment**
+4. **WU-03 — First-party plugin scaffold and quality tooling**
+5. **WU-04 — FSE theme scaffold and visual token baseline**
+6. **WU-05 — Event domain model, routing, calendar data**
+7. **WU-06 — Extractor, payload, WP-CLI importer, reconciliation**
+8. **WU-07 — Pages, posts, media, templates, gallery**
+9. **WU-08 — Behavior, accessibility, SEO, redirects**
+10. **WU-09 — Contact Form 7 integration and privacy gate**
+11. **WU-10 — Full local QA and staging-readiness runbook**
+
+WU-02 is a dedicated-session work unit under ADR 0023. Do not start it in the same session that
+implements WU-01 or any application code: stop after WU-01. In the next session, rerun preflight,
+implement and validate only WU-02, update the execution state, and stop again. Theme/plugin
+implementation begins in a later session after rerunning the WU-02 QA gate. Keep application work in
+separate commits/work units. Make small, reviewable commits after applicable QA passes. Use concise
+English conventional commit messages. Do not push.
+
+Do not stop after planning. Continue through safe, unblocked work units, except for ADR 0023's
+mandatory boundaries before and after WU-02. Otherwise stop only when:
+
+- the next action requires an external write not authorized here;
+- a missing owner/legal decision would materially alter architecture, public URLs, content ownership,
+  or data safety;
+- required credentials or environment access are unavailable;
+- repeated evidence shows the current strategy is unsafe or impossible.
+
+For failures: capture evidence, form a hypothesis, change one relevant variable, and retry. Do not
+repeat the same failed action more than twice without changing strategy.
+
+---
+
+## 13. Preflight and execution sequence
+
+Begin with:
+
+1. Confirm repository identity and read the binding sources.
+2. Inspect Git status, branch, recent history, tags, current `VERSION`, and uncommitted user work.
+3. Before any mutation, require a clean owner-approved baseline. If the working tree has pre-existing
+   tracked or untracked changes, do not auto-stash, stage, commit, move, or absorb them; stop WU-00
+   and ask the owner for the smallest resolution.
+4. If the clean baseline is on `main`, create a dedicated local feature branch. Record the baseline
+   commit and create a collision-safe local annotated pre-reorganization tag. Do not push either.
+5. Inspect the actual root/static/wordpress state; do not assume Fase 3 is still untouched.
+6. Inspect available Docker, PHP, WP-CLI, Node, npm, PHPCS, and browser tooling.
+7. Record the exact baseline commit/version and whether Hostinger production parity is verified.
+8. Create/update the durable execution artifacts.
+9. Define WU-01 acceptance and rollback.
+10. Execute the first unblocked work unit and continue until the next mandatory boundary. When
+    starting from Fase 3 not initiated, complete WU-01 and stop before WU-02.
+
+Preserve unrelated user changes. Do not reset, clean, force, amend unrelated history, or overwrite
+work you did not create.
+
+When resuming:
+
+```bash
+git status --short
+git branch --show-current
+git log -5 --oneline
+```
+
+Then read `.audit/fase3-execution-state.md`, verify it against Git, rerun the last relevant QA gate,
+and continue from `Next exact action`. Repository state outranks chat memory.
+
+---
+
+## 14. Completion gates
+
+Repository/local work is ready for staging only when:
+
+- the monorepo is correctly separated;
+- theme and plugin activate locally without warnings/fatals;
+- every required WordPress object has an explicit import strategy;
+- importer dry-run and idempotency checks pass locally;
+- baseline counts reconcile or every mismatch is documented;
+- all current public URLs and redirects have an implementation and incoming-route test;
+- FSE templates and behavior meet the static contract or record an accepted substitution;
+- no production fixture exists;
+- Level 1–3 checks are green or honestly documented;
+- the manual deployment runbook is bounded to first-party theme/plugin code;
+- the privacy/Contact Form 7 gate is explicit.
+
+Fase 3 is not fully validated until staging evidence exists. Production migration is not complete
+until the separate cutover checklist passes. This prompt does not authorize that cutover.
+
+```text
+NO CUTOVER WITH BROKEN NAVIGATION.
+DEPLOY SUCCESS ≠ APPLICATION SUCCESS.
+```
+
+---
+
+## 15. Initial response contract
+
+Your first response must be concise and evidence-based. Report:
+
+- repository and branch;
+- clean/dirty working tree;
+- current Fase 3 state found;
+- exact baseline commit/version;
+- binding decisions discovered;
+- any immediate contradiction that changes implementation;
+- first work unit, acceptance criteria, QA gate, and checkpoint;
+- immediate blocker, if any.
+
+Then begin preflight and implementation. Do not merely restate this prompt and do not ask permission
+to inspect the repository.
+
+Progress updates use:
+
+```text
+Work unit:
+Implemented:
+Validation:
+Decision/default used:
+Checkpoint:
+Next action:
+```
+
+---
+
+## 16. Final response contract
+
+Report:
+
+1. **Outcome:** complete locally, ready for staging, partial due to blockers, or blocked.
+2. **Implemented:** grouped by work unit.
+3. **Commits and important files.**
+4. **Migration coverage:** CONTENT, PRESENTATION, ROUTING, BEHAVIOR, OPERATIONS.
+5. **Content reconciliation:** expected versus imported counts and explained mismatches.
+6. **Validation evidence:** method, environment, result, status, commit tested.
+7. **Environment status:** local, staging, production reported separately.
+8. **Privacy gate:** `/privacidad` status and Contact Form 7 release eligibility.
+9. **Governance:** ADR/doc conflicts found, defaults used, ledger/matrix updates.
+10. **Out-of-scope confirmation:** no `sangha`, search, analytics, PWA, HSTS, event taxonomy archives,
+    custom gallery system, unapproved plugin, CI/CD workflow, or production cutover.
+11. **Continuity:** working-tree state, last verified commit, current execution-state file, and exact
+    resume action.
+12. **Recommended next action:** exactly one.
+
+Never claim staging, production, delivery, parity, routing, or migration success without executed
+evidence from the corresponding environment.
+
+---
+
+## 17. Final instruction
+
+Begin now. Inspect the repository, read the binding sources, establish durable state, and execute the
+first unblocked work unit. Continue autonomously through safe local work. Preserve the live static
+site, its real content, its URLs, and its rollback path.
+
+Do not deploy, push, create external infrastructure, publish legal copy, run production imports, or
+perform cutover without explicit current-session authorization.

@@ -22,7 +22,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] URL inventory complete (sitemap + [redirect-ledger](redirect-ledger.md))
 - [ ] Migration matrix complete (URLs **y** entidades: 10 events, 2 posts, 35 gallery items)
 - [ ] Content counts reconciled ([conteos](conteos-reconciliacion-migracion.md))
-- [ ] Media inventory complete (incl. UNCLEAR: `galeria-04`, PDF, celebraciones)
+- [ ] Media inventory complete (`galeria-04` = Page, no álbum — OWN-001; PDF **RETIRE** — OWN-002; huérfanas seed oculto — OWN-003)
 - [ ] Importer dry-run clean
 - [ ] Importer tested (idempotent; create-missing-only; 0 fixtures públicos)
 - [ ] FSE templates ready (static → `templates/*.html`; copy editorial en BD)
@@ -46,7 +46,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Templates de bloques (`templates/*.html`) mapeados **desde la maqueta**, no desde un theme PHP clásico (ADR 0029)
 - [ ] JS probado (menú, share, calendario, galería Gutenberg; selectores y ARIA)
 - [ ] Assets probados (imágenes, fuentes, audio, PDF, `.ics`, favicon; sin 404)
-- [ ] CPT routing probado: `/eventos` archive + al menos un single; **incoming HTTP**, no solo `get_permalink()`
+- [ ] CPT routing probado: `/eventos` archive + **10** singles (ADR 0035); **incoming HTTP**, no solo `get_permalink()`; pasados **sin** Inscribirme
 - [ ] Tags del blog: archivo existe; `noindex` hasta volumen (ADR 0031)
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
 - [ ] Contact Form 7: privacidad resuelta o el form sigue gated (ADR 0026, ADR 0028)
