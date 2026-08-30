@@ -20,7 +20,8 @@ El proyecto ya versiona HTML, CSS, JS, assets, documentación y configuración A
 El **repositorio Git** es la **única fuente de verdad** para código, assets del sitio, configuración de despliegue y documentación técnica.
 
 - Todo cambio debe originarse en el repositorio (rama de feature → PR → `main`).
-- `content-source/` es la fuente canónica del **copy editorial**; el sitio implementado en repo debe reflejarlo sin parafrasear.
+- Copy editorial pre-corte: **producción publicada** (`https://caminodeldharma.org`); post-corte:
+  WordPress (ADR 0040). *(Histórico 2026-07-19: esta viñeta citaba `content-source/`; sustituida.)*
 - El servidor de producción es un **destino de despliegue**, no un entorno de edición (complementa ADR 0005).
 - Releases de producción se asocian a commits/tags en `main` y a entradas en `VERSION` / `CHANGELOG.md`.
 

@@ -127,5 +127,5 @@ consolida producción publicada como fuente pre-corte.
 
 **Higiene 2026-08-30:** OWN-006 actualiza el ejemplo de `VERSION` a 1.0.35; no reabre decisiones.
 
-**Versión:** 1.20 · **Fecha:** 2026-08-29 · **Estado:** Fase 3: 0 abiertas · 18 decididas (no
+**Versión:** 1.20 · **Fecha:** 2026-08-30 · **Estado:** Fase 3: 0 abiertas · 18 decididas (no
 iniciada). Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.

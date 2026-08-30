@@ -162,4 +162,4 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.0 · **Fecha:** 2026-08-19 · **Estado de filas:** inventario (Fase 3 no iniciada)
+**Versión:** 1.1 · **Fecha:** 2026-08-30 · **Estado de filas:** inventario (Fase 3 no iniciada)

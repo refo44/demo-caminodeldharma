@@ -16,11 +16,11 @@ Aceptada
 Parte del contenido que en WordPress será dinámico (eventos, entradas de blog, álbumes de galería,
 fechas, carteles, JSON de imágenes, atribuciones) está **hardcodeado** en HTML, JSON embebido y
 atributos `data-*`. Para esos tipos, el HTML publicado es a menudo la **única** representación
-completa. `content-source/` cubre copy institucional; no sustituye el listado vivo de `/eventos` ni
-`#gallery-data`.
+completa. En 2026-08-19, `content-source/` aún cubría copy institucional y no sustituía el listado
+vivo de `/eventos` ni `#gallery-data`.
 
-ADR 0033 estableció que el HTML no debe convertirse en una segunda redacción institucional frente a
-`content-source/`. Sin esta decisión complementaria, un agente podría:
+ADR 0033 estableció entonces que el HTML no debía convertirse en una segunda redacción
+institucional frente a `content-source/`. Sin esta decisión complementaria, un agente podría:
 
 - tratar cards/JSON como demo y no importarlos;
 - reescribir a mano lo que se puede extraer;
@@ -55,7 +55,7 @@ Until migration is complete, the live static repository is a production content 
 | **STRUCTURAL COPY** | Microcopy de UI, nav, labels (docs 07/09); no es una entidad CMS |
 | **DESIGN / DEMO** | Solo si hay evidencia de que nunca se publicó (este repo **casi no** tiene demo) |
 | **OBSOLETE** | Superado con redirect o 410 documentado |
-| **UNCLEAR — OWNER REVIEW REQUIRED** | Diverge entre `content-source/`, HTML y disco; no elegir en silencio |
+| **UNCLEAR — OWNER REVIEW REQUIRED** | Diverge entre repo, Hostinger/HTML publicado y disco; no elegir en silencio |
 
 Inventario vigente: [`docs/inventario-contenido-produccion-static.md`](../inventario-contenido-produccion-static.md).
 
@@ -65,7 +65,7 @@ No hay una jerarquía única para todo.
 
 | Tipo | SOURCE OF TRUTH hoy | GENERATED / PRESENTATION |
 | ---- | ------------------- | ------------------------ |
-| Copy institucional (comunidad, linaje, práctica, footer, donaciones) | **HTML live** (OWN-007, 2026-08-29). `content-source/` = referencia; no pisa el live | HTML/CSS |
+| Copy institucional (comunidad, linaje, práctica, footer, donaciones) | **HTML live** (OWN-007, ADR 0040) | HTML/CSS |
 | Eventos (10 cards en `/eventos`, 3 singles) | **HTML live** (`eventos/index.html` y fichas) | CSS/JS de cards y calendario |
 | Entradas de blog (2) | **HTML live** (`blog/{slug}/`) | listado/home |
 | Galería (35 ítems JSON, 3 álbumes) | **JSON embebido** en `galeria/index.html` + archivos en `assets/images/galeria/` | `gallery.js` |
@@ -76,7 +76,7 @@ No hay una jerarquía única para todo.
 Tras el corte: contenido editorial → WordPress (ADR 0013). El theme FSE es presentación, no almacén.
 
 QA (OWN-007): comparar copy, contenido **y estilos** con `https://caminodeldharma.org`, no solo con
-el checkout local ni con `content-source/`.
+el checkout local.
 
 ### 4. Extracción programática (cuando se implemente)
 
@@ -127,7 +127,7 @@ en la BD, no hardcodeadas en `templates/*.html` ni en patterns.
 | Alternativa | Motivo de descarte |
 | ----------- | ------------------ |
 | Tratar el estático solo como contrato visual y reescribir eventos/blog en wp-admin | Pierde histórico, alt text, fechas y URLs; no es determinista. |
-| Usar solo `content-source/` e ignorar HTML live | `content-source/` no contiene el archivo de eventos ni `#gallery-data`. |
+| Usar solo materiales legacy e ignorar HTML live | No contienen el archivo de eventos ni `#gallery-data`; ADR 0040 los retiró. |
 | Congelar el estático el día uno de Fase 3 | Contradice el CHANGELOG: producción sigue parcheándose. |
 | Dar la migración por cerrada cuando el theme FSE renderiza | ADR 0032: cinco entregables; este ADR añade conteos y extracción. |
 
@@ -135,8 +135,8 @@ en la BD, no hardcodeadas en `templates/*.html` ni en patterns.
 
 **Beneficios:** el histórico publicado entra en WordPress; hay un dueño para mismatches.
 
-**Riesgos:** HTML y `content-source/` pueden divergir (copy institucional). Esos casos son UNCLEAR,
-no se resuelven en el extractor.
+**Riesgos:** repo y Hostinger pueden divergir. Esos casos son UNCLEAR (OWN-006/007), no se resuelven
+en silencio en el extractor.
 
 **Trabajo futuro:** extractores e importador en Fase 3. No en la sesión de este ADR.
 Ítems UNCLEAR del propietario: [`docs/backlog-decisiones-owner-migracion.md`](../backlog-decisiones-owner-migracion.md)

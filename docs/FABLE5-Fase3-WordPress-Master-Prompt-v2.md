@@ -4,7 +4,7 @@
 
 **Prompt version:** 2.3
 **Status:** CURRENT — use this prompt for execution
-**Date:** 2026-08-29
+**Date:** 2026-08-30
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,

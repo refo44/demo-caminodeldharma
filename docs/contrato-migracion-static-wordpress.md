@@ -380,4 +380,4 @@ documentación; hace falta no olvidarlo en Fase 3.
 
 ---
 
-**Versión:** 1.1 · **Fecha:** 2026-08-29
+**Versión:** 1.1 · **Fecha:** 2026-08-30

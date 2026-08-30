@@ -117,4 +117,5 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 ## Referencias
 
 - `docs/17-orden-implementacion.md` § Transición (pasos históricos de corte; este checklist los detalla)
-- ADR 0013, 0015, 0020, 0029, 0032, 0033, 0034
+- ADR 0013, 0015, 0020, 0026, 0029, 0032–0040
+- `docs/backlog-decisiones-owner-migracion.md` (OWN + POST)

@@ -74,16 +74,15 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
 
 **Lo que esta decisión NO resuelve**
 
-- **Embeds de vídeo:** el sitio incrusta 8 reproductores de YouTube y 2 de Vimeo, ninguno con
-  `youtube-nocookie` (verificado 2026-07-20). Al reproducir, esos terceros pueden fijar cookies.
-  Migrar los embeds a `youtube-nocookie.com` sigue pendiente y permanece dentro de TASK-0006.
-- **Política de privacidad:** sigue siendo recomendable. La [Ley 1581 de 2012](https://www.sic.gov.co/recursos_user/documentos/normatividad/Leyes/2012/Ley_1581_2012.pdf) cubre el tratamiento de
-  datos personales en general —no solo cookies—, y el sitio recoge datos por canales de contacto.
-  La conclusión jurídica corresponde a asesoría, no a esta decisión técnica.
+- **Embeds de vídeo (histórico 2026-07-20):** al firmar este ADR, 8 YouTube y 2 Vimeo aún no usaban
+  `youtube-nocookie` / `dnt=1`. **Vigente 2026-08-30:** esos embeds ya están migrados en el
+  estático (CHANGELOG ≥1.0.13). Al reproducir, terceros pueden fijar cookies; el aviso de
+  `/privacidad` lo describe.
+- **Política de privacidad:** `/privacidad` está **publicada** de forma provisional (ADR 0039).
+  Siguen abiertos la revisión legal y el gate de Contact Form 7 (actualizar el aviso antes de CF7
+  en producción).
 
-*(Nota de vigencia 2026-08-30: los embeds ya usan `youtube-nocookie.com` / Vimeo `dnt=1`
-(CHANGELOG v1.0.13+). `/privacidad` está publicada de forma provisional — ADR 0039. La revisión
-legal y el gate de Contact Form 7 siguen abiertos.)*
+*(La nota de vigencia anterior a esta sección se consolidó aquí el 2026-08-30.)*
 
 **Costos aceptados**
 

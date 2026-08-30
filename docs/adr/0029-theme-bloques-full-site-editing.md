@@ -43,13 +43,11 @@ de WordPress, no como theme clásico PHP.
    page-linaje, page-practica, page-eventos/archive-event, single-event, page-contacto, page-galeria,
    page-donaciones, page, 404, index) y `parts/*.html` (header, footer, navigation) sustituyen a los
    equivalentes `.php` de `docs/12-theme-file-structure.md` §1 y §5 (versión previa). El contenido
-   editorial de cada página sigue viniendo de `content-source/` a través del bloque **Contenido de la
-   entrada** (`<!-- wp:post-content /-->`), equivalente en bloques de `the_content()` — no cambia de
-   dónde sale el copy, solo el mecanismo de plantilla.
+   editorial de cada página se renderiza con el bloque **Contenido de la entrada**
+   (`<!-- wp:post-content /-->`), equivalente a `the_content()`. El copy inicial se extrae de
+   producción publicada (ADR 0040); tras el corte, WordPress es la SoT editorial.
 
-   *(Nota de vigencia 2026-08-29: ADR 0040 sustituyó únicamente el origen editorial descrito aquí.
-   El contenido inicial se extrae de producción publicada; `wp:post-content` sigue siendo el
-   mecanismo FSE.)*
+   *(Histórico 2026-08-01: esta viñeta citaba `content-source/` como origen. Sustituido por ADR 0040.)*
 3. **Sigue existiendo una hoja de estilos complementaria** (p. ej. `assets/css/main.css` o
    `style.css` cargado como estilo del theme) para todo lo que Global Styles no expresa: layout de
    componentes, ritmo de lectura, breakpoints, estados de foco, reglas de accesibilidad. Esa hoja

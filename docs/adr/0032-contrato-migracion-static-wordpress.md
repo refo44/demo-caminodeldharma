@@ -47,16 +47,17 @@ Ninguno implica a los demás.
 
 | Entregable | Qué cubre en este proyecto |
 | ---------- | -------------------------- |
-| **CONTENT** | Pages institucionales, posts del blog, CPT `event` (y `sangha` solo si se implementa más adelante), taxonomías, metadata, media, copy institucional desde `content-source/` |
+| **CONTENT** | Pages institucionales, posts del blog, CPT `event` (y `sangha` solo si se implementa más adelante), taxonomías, metadata, media, y copy/datos extraídos del HTML/JSON/media de producción publicada (ADR 0034/0040) |
 | **PRESENTATION** | Theme de bloques (`templates/*.html`, `parts/*.html`, `patterns/`), CSS complementario, comportamiento responsive, estructura de accesibilidad |
 | **ROUTING** | Slugs y permalinks alineados con ADR 0008 y `docs/11-arbol-urls-final.md`, archives/singles de CPT, taxonomías públicas, redirects legacy de `.htaccess`, 404, canonicales |
 | **BEHAVIOR** | JavaScript real (`main.js`, y paridad o sustitución documentada de `gallery.js` / `share.js` / `calendar.js`), formulario de contacto (ADR 0026), menú, diálogos, calendario de `/eventos`, audio, descargas |
 | **OPERATIONS** | Despliegue acotado, environments, backups, rollback, importadores, fixtures, política de indexación, QA con evidencia, ownership |
 
-*(Nota 2026-08-19, ADR 0034: CONTENT también cubre entidades **hardcodeadas en el HTML live** — 10 eventos, 2 posts, 35 ítems de galería + 3 álbumes. Esos datos son producción. El HTML no sustituye `content-source/` para copy institucional.)*
+*(Nota 2026-08-19, ADR 0034: CONTENT también cubre entidades hardcodeadas en el HTML live — 10
+eventos, 2 posts, 35 ítems de galería + 3 álbumes.)*
 
-*(Nota de vigencia 2026-08-29: ADR 0040 sustituyó esa última regla editorial. La fuente legacy fue
-eliminada; CONTENT se extrae del HTML/JSON y media de producción publicada.)*
+*(Histórico 2026-08-19: una redacción previa citaba `content-source/` para copy institucional.
+ADR 0040 la sustituyó: la fuente legacy fue eliminada.)*
 
 **Reglas:**
 

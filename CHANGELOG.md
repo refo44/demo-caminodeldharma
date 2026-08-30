@@ -19,6 +19,12 @@ Página nueva en el estático, enlazada en el pie de todas las páginas. El text
 - Estilos `.privacy-notice` en `main.css`.
 - ZIP de despliegue: incluir carpeta `privacidad/` (README).
 
+### Documentación (sin cambio de artefacto de despliegue)
+
+- ADR 0040 / OWN-017: `content-source/` retirado; producción publicada gobierna pre-corte.
+- FABLE5 v2.3, orden v3.9, backlog v1.20 y docs de migración alineados.
+- `package-lock.json` sincronizado a 1.0.35.
+
 ### Estado
 
 - Desarrollo: Finalizado

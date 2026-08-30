@@ -81,4 +81,4 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 
 ---
 
-**Versión:** 1.0
+**Versión:** 1.1 · **Fecha:** 2026-08-30

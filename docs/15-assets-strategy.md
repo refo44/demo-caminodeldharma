@@ -435,7 +435,11 @@ En WordPress, `author` sale de las fichas asignadas (ADR 0037). El HTML live de
 
 ## Cierre
 
-Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes, favicon, PDF, imágenes, videos, audio, scripts, SEO técnico y datos estructurados. Alineado con la identidad (02), el inventario (16), la estructura del theme (12), la estructura de archivos estáticos (13) y la arquitectura CSS (14).
+Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes, favicon, PDF,
+imágenes, videos, audio, scripts, SEO técnico y datos estructurados. Alineado con la identidad (02),
+el inventario operativo (`inventario-contenido-produccion-static`), la estructura del theme (12), la
+estructura de archivos estáticos (13) y la arquitectura CSS (14). El doc 16 es solo histórico
+(ADR 0040).
 
 ---
 

@@ -17,7 +17,7 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 | **11–12** | Navegación y theme | Árbol de URLs y estructura de archivos del theme. Dependen de pantallas, copy y recorridos. |
 | **13** | Estructura de archivos estáticos | Geografía del proyecto: docs, sitio, theme y assets. Dónde viven los archivos estáticos. |
 | **14** | Arquitectura CSS | Capas (theme.json, main.css), tokens, naming, especificidad, accesibilidad en estilos. |
-| **15–17** | Implementación técnica | Assets, inventario de contenido, orden de implementación. Convierten la arquitectura en código. |
+| **15–17** | Implementación técnica | Assets, inventario histórico (16, retirado), orden de implementación. El inventario operativo vive en `inventario-contenido-produccion-static`. |
 | **adr/** | Decisiones arquitectónicas | ADR: registro inmutable de decisiones técnicas (despliegue, PWA, URLs, CSS, HSTS, etc.). Ver `adr/README.md`. |
 | **18** | Criterios contemporáneos | Tendencias UX/UI aplicadas al sistema. Filtro estratégico para validación de diseño e implementación. |
 | **19** | Accesibilidad | Estándares únicos de accesibilidad: estrategia, diseño, HTML semántico, ARIA, contenido editorial, checklist y testing. WCAG 2.1/2.2 AA. |

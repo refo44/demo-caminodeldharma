@@ -42,28 +42,24 @@ Este ADR no implementa el importador. Fija el contrato para cuando se escriba.
 No mezclar ambos en el mismo comando. No usar un teardown genérico (`wp post delete --force` masivo,
 reset de BD, `wp site empty`) contra contenido real.
 
-### Fuente canónica del copy
+### Fuente canónica del copy (vigente)
 
-Precedencia de **contenido editorial** (no sustituye el orden docs vs ADR para arquitectura):
+Precedencia de **contenido editorial** pre-corte (ADR 0034 + ADR 0040; no sustituye el orden docs vs
+ADR para arquitectura):
 
 ```text
-content-source/          (copy institucional aprobado)
-  > contenido estructurado del proyecto (docs/03, 09, 16; payload versionado del importador)
-    > HTML estático generado (maqueta: contrato de presentación, no fuente editorial)
+producción publicada (https://caminodeldharma.org)
+  ≈ repo VERSION/commit comparado con Hostinger (OWN-006)
+    → payload versionado del importador (docs/03, 09, inventario)
+      → WordPress (post-corte: SoT editorial, ADR 0013)
 ```
 
-El HTML de producción **no** debe convertirse en una segunda redacción *institucional* frente a
-`content-source/`. **Complemento (ADR 0034, 2026-08-19):** para eventos, posts, JSON de galería y
-cards publicadas, el HTML live **sí** es la fuente de producción actual hasta extraerse. No tratarlo
-como demo. Tras el corte, wp-admin es la SoT editorial (ADR 0013).
+El importador extrae HTML/JSON y media publicados. Hardcoded ≠ demo. QA: comparar copy, contenido y
+estilos con producción publicada, no solo el checkout local. No recrear ni usar la fuente legacy
+retirada.
 
-*(Nota 2026-08-29, OWN-007: el propietario eligió el **HTML live** como copy correcto de producción.
-Si `content-source/` y el sitio divergen, el importador usa el HTML. QA: comparar copy, contenido y
-estilos con `https://caminodeldharma.org`, no solo el repo.)*
-
-*(Nota de vigencia 2026-08-29: ADR 0040 sustituyó «Fuente canónica del copy» y ordenó eliminar
-permanentemente la fuente legacy. Operativamente, el importador extrae HTML/JSON y media publicados.
-Las decisiones de este ADR sobre idempotencia, fixtures y protección de wp-admin siguen vigentes.)*
+*(Histórico 2026-08-19: la jerarquía original era `content-source/` → docs → HTML. OWN-007 y
+ADR 0040 la sustituyeron. Idempotencia, fixtures y protección de wp-admin de este ADR siguen.)*
 
 ### Preferencia de implementación (cuando se construya)
 
@@ -102,7 +98,7 @@ Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se 
 | ----------- | ------------------ |
 | Crear Pages a mano solo en wp-admin, sin importador | Frágil, no repetible entre local/staging, fácil de olvidar una ruta. Admisible como respaldo, no como única estrategia. |
 | Ejecutar la carga en la activación del plugin | Impredecible; contradice el playbook de este repo y ADR 0005. |
-| Usar el HTML estático como fuente editorial del importador | Convierte el artefacto de presentación en copy *institucional*; `content-source/` pierde prioridad. **Nota 2026-08-19 (ADR 0034):** esta alternativa se refiere al copy institucional. Extraer eventos/posts/galería del HTML live **sí** está decidido. |
+| Ignorar el HTML live y reescribir a mano | Pierde histórico y no es determinista. Extraer HTML/JSON/media publicados **sí** está decidido (ADR 0034/0040). |
 | Fixtures sin marcador, o teardown de «todos los posts» | Contamina o destruye contenido real. |
 | ACF / page builder como almacén de contenido institucional | Vetado por ADR 0025. |
 
@@ -116,9 +112,9 @@ Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se 
 
 **Riesgos:**
 
-- create-missing-only no actualiza copy si `content-source/` cambia después del primer import: hace
-  falta un procedimiento editorial (editar en wp-admin o un `--force` acotado y documentado, nunca
-  por defecto).
+- create-missing-only no actualiza copy si producción o el payload cambian después del primer
+  import: hace falta un procedimiento editorial (editar en wp-admin o un `--force` acotado y
+  documentado, nunca por defecto).
 - El marcador de fixture y los nombres de comandos WP-CLI se eligen al implementar; este ADR no los
   congela más allá del ejemplo `_cdd_fixture`.
 

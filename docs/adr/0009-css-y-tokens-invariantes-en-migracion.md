@@ -27,10 +27,12 @@ Durante la migración a WordPress (y en mantenimiento posterior salvo ADR nuevo)
 
 WordPress puede aportar `theme.json` para alinear paleta y tipografías del editor de bloques, pero el CSS público sigue siendo `main.css` heredado de la maqueta.
 
-Cambios permitidos sin ADR: correcciones de bugs, accesibilidad (contraste, focus) y ajustes alineados con `content-source/`. Cambios de identidad o arquitectura CSS requieren actualizar `02`, `14` y posiblemente un ADR sustitutorio.
+Cambios permitidos sin ADR: correcciones de bugs, accesibilidad (contraste, focus) y ajustes
+alineados con producción publicada / identidad versionada. Cambios de identidad o arquitectura CSS
+requieren actualizar `02`, `14` y posiblemente un ADR sustitutorio.
 
-*(Nota de vigencia 2026-08-29: `content-source/` fue retirado por ADR 0040. Para el estático, esos
-ajustes se validan contra producción publicada; para WordPress, ADR 0029 gobierna.)*
+*(Histórico 2026-07-19: esta frase citaba `content-source/`. ADR 0040 la sustituyó. Para WordPress,
+ADR 0029 gobierna.)*
 
 ## Alternativas consideradas
 

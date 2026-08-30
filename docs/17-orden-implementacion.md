@@ -9,7 +9,7 @@ Este documento define el orden oficial de implementación, validación, migraci�
 | | |
 | --- | --- |
 | **Versión** | 3.9 |
-| **Fecha** | 2026-08-29 |
+| **Fecha** | 2026-08-30 |
 | **Estado** | Vigente |
 
 ### Cambios principales (3.9)
@@ -461,7 +461,7 @@ Antes de TASK-0002 (retiro temporal del formulario) o de cualquier cambio en `/c
 
 Contiene página completa, bloque `<main>`, extracto CSS y README histórico para restaurar el
 estático. En WordPress, adaptar el contrato visual a `templates/page-contacto.html` y usar Contact
-Form 7 según ADR 0026/0028; no crear `page-contacto.php` ni un handler de formulario en el theme.
+Form 7 según ADR 0026/0039; no crear `page-contacto.php` ni un handler de formulario en el theme.
 
 ### Limitaciones de la auditoría (relevantes para este doc)
 
@@ -606,7 +606,7 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
    accesibilidad, SEO y redirects. Template ≠ objeto editorial.
 8. **WU-09:** implementar y probar Contact Form 7 localmente y en staging con datos sintéticos.
    Mantenerlo ausente o deshabilitado en producción hasta cumplir el gate de privacidad
-   (ADR 0026/0028).
+   (ADR 0026/0039).
 9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
    solo con autorización expresa (OWN-005).
 10. **Corte final:** ejecutar
@@ -774,4 +774,4 @@ A partir de la versión 3.0, **priorizar implementación** sobre ampliación de 
 
 ---
 
-**Versión:** 3.9 · **Fecha:** 2026-08-29 · **Estado:** Vigente
+**Versión:** 3.9 · **Fecha:** 2026-08-30 · **Estado:** Vigente
