@@ -339,7 +339,7 @@ CI. Un hallazgo solo-IDE no es gate de merge.
 - `sonar-project.properties` con Automatic Analysis ON (se ignora).
 - SonarScanner en `test.yml` con Automatic Analysis ON (análisis duplicados, check rojo).
 - Medir el éxito de PHPUnit por el % de cobertura de Sonar.
-- Incluir el sitio estático, WordPress Core, `vendor/` o `content-source/` en `sonar.sources`.
+- Incluir el sitio estático, WordPress Core, `vendor/` o documentación en `sonar.sources`.
 - Globs en `.sonarcloud.properties`.
 - Instalar PHPStan «porque Sonar no basta» sin un seam que `php -l` no cubra.
 

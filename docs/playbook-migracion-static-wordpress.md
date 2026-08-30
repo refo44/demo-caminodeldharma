@@ -9,7 +9,7 @@ Playbook operativo de **este** repositorio para Fase 3. Complementa —no sustit
 Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio con forma parecida
 (estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
 pipelines de otros proyectos. El backlog de dueño de la auditoría 2026-08-19 está **cerrado**
-(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.18; `POST-*` v1.19 no se implementan
+(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.20; `POST-*` no se implementan
 en el corte). No reabrir autores/galería/ICS sin decisión nueva.
 
 **Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción → FSE** (sin theme PHP clásico).
@@ -74,26 +74,24 @@ No hay un único árbol para todo (ADR 0034).
 
 | Tipo | SOURCE OF TRUTH hoy | PRESENTATION / GENERATED |
 | ---- | ------------------- | ------------------------ |
-| Copy institucional | **HTML live** (OWN-007). `content-source/` = referencia | HTML/CSS |
+| Copy institucional | **HTML live** (OWN-007, ADR 0040) | HTML/CSS |
 | Eventos, posts, JSON de galería | **HTML / JSON embebido live** | cards, listados, `gallery.js` |
 | Arquitectura | ADR, luego `docs/01`–`24` | — |
 | CSS servido | `assets/css/main.css` | `main.min.css` |
 | URLs | `sitemap.xml` + ADR 0008 | — |
 
-**Regla:** si algo diverge, **registrar** (UNCLEAR o ledger) — no resolver en silencio.
-El HTML no es una segunda *redacción institucional* frente a `content-source/` (ADR 0033).
-El HTML **sí** es la base de datos temporal de entidades publicadas (ADR 0034).
+**Regla:** si repo y producción divergen, **registrar** (UNCLEAR o ledger) — no resolver en
+silencio. El HTML/JSON publicado es la base temporal de contenido pre-corte (ADR 0034/0040).
 
 ---
 
-## 6. Migración de contenido: generador + importador
+## 6. Migración de contenido: extractor + importador
 
 **Decisión:** ADR 0033. No implementado. CPT `sangha` sigue fuera del alcance inicial de Fase 3
 (ADR 0024). Arquitectura prevista, de dos pasos:
 
 ```text
-content-source/          →  generador (copy institucional)
-HTML / JSON live         →  extractor read-only (eventos, posts, galería, media refs)
+HTML / JSON live         →  extractor read-only (Pages, eventos, posts, galería, media refs)
                             ↓
                    payload versionado revisable (migration-payload.json)
                             ↓
@@ -122,7 +120,7 @@ Reglas de este proyecto (ADR 0033):
 | Metadatos `_source_key`, `_source_hash` | Detecta si alguien editó a mano en WordPress algo que también vive en el payload versionado |
 | `--force` solo en campos "owned" por la migración | No pisa ediciones editoriales hechas directamente en WordPress tras el corte |
 | Guard de producción (`--confirm-production` + evidencia de backup) | Coherente con ADR 0005 (producción sin edición manual) |
-| Texto canónico verbatim | El generador falla si el texto importado diverge de `content-source/` — protege contra el mismo tipo de error que causó el dato de fundación incorrecto (ver `.audit/decisions.md`, 2026-07-28) |
+| Texto publicado verbatim | La validación falla si el payload diverge del HTML publicado sin una diferencia aprobada en el ledger; protege contra errores editoriales silenciosos |
 
 **Separar fixtures de datos reales:** si se usan datos de prueba para desarrollar el theme/plugin,
 marcarlos (`_cdd_fixture = 1`) y usar comandos `seed/verify/teardown` **solo de esos fixtures**.

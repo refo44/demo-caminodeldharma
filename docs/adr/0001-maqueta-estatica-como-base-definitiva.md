@@ -24,6 +24,9 @@ La **maqueta estática HTML/CSS/JS** en la raíz del repositorio es la **primera
 
 *(Nota 2026-08-19, ADR 0034: el estático **ya es producción con visitas**. El HTML/JSON hardcodeado de eventos, blog y galería es contenido real, no demo. El «congelamiento» de diseño no autoriza a descartar ese contenido. El CHANGELOG muestra que el estático sigue recibiendo parches; ver freeze/delta en ADR 0034.)*
 
+*(Nota de vigencia 2026-08-29: las referencias a `content-source/` describen el contexto original.
+ADR 0040 eliminó esa carpeta y estableció producción publicada como baseline pre-corte.)*
+
 ## Alternativas consideradas
 
 | Alternativa | Motivo de descarte |

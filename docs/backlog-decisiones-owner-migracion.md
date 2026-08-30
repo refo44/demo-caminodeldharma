@@ -6,7 +6,7 @@ Hay dos bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
-| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-016 sin decisión nueva. |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-017 sin decisión nueva. |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
@@ -61,7 +61,8 @@ Ninguna.
 | OWN-003 | 2026-08-28 | **Huérfanas → seed oculto.** Toda imagen del repo no enlazada en HTML (p. ej. `celebracion-vesak-2019` y el resto no usado de `celebraciones/`) se sube a Media Library con el seed, **sin** mostrarse en el sitio: no álbum, no Page, no teaser. Quedan en la biblioteca por si se usan después. `celebracion-diwali.jpg` **sí** está en `/practica` → media de página (OWN-001), no huérfana. El PDF no es imagen (OWN-002). |
 | OWN-004 | 2026-08-28 | **Todo evento tiene single.** Los 10 CPT tienen `/eventos/{slug}`. Los 7 que hoy no tienen ficha se publican en el corte (slugs en ADR 0035 / ledger). Eventos **pasados: sin Inscribirme / Preinscribirme**. Vigentes: inscripción solo si es real. |
 | OWN-005 | 2026-08-29 | **C+A confirmado.** Producción = estático en `caminodeldharma.org`. WordPress se despliega en **otra instancia Hostinger, sin dominio custom**, hasta el switch. Esa instancia es **STAGING**: noindex; no pisa `public_html` del estático. Ledger durante el build; freeze corto al corte. Delta (B) solo si el freeze no es viable. |
-| OWN-007 | 2026-08-29 | **Gana el HTML live.** El copy y el contenido de producción en `caminodeldharma.org` son los correctos. Si `content-source/` diverge, **no** se usa para pisar Pages. **QA obligatorio:** revisar y comparar copy, contenido **y estilos** contra la versión **publicada** (`https://caminodeldharma.org`), no solo contra el repo local o `content-source/`. Si repo y Hostinger no coinciden, anotar el delta (OWN-006 + ledger); no asumir paridad. |
+| OWN-007 | 2026-08-29 | **Gana el HTML live.** El copy y el contenido de producción en `caminodeldharma.org` son los correctos. **QA obligatorio:** revisar y comparar copy, contenido **y estilos** contra la versión **publicada**, no solo contra el repo local. Si repo y Hostinger no coinciden, anotar el delta (OWN-006 + ledger); no asumir paridad. |
+| OWN-017 | 2026-08-29 | **Retiro definitivo de la fuente legacy.** El propietario ordena eliminar permanentemente `content-source/` **sin copia de respaldo** porque está desactualizado y genera ambigüedad. No participa en migración ni QA. Producción publicada gobierna antes del corte; WordPress, después (ADR 0040). |
 | OWN-008 | 2026-08-29 | **Agrupar como en producción** en `/galeria` (General, 2023, 2021). **Además** se permiten URLs `/galeria/{slug}` (taxonomía, no CPT). Hub `/galeria` = SEO principal (KEEP). Términos **`noindex, follow` hasta volumen** (ADR 0036), igual espíritu que tags (ADR 0031). Hoy 2023/2021 tienen 5 fotos: no indexar en el corte. |
 | OWN-011 | 2026-08-29 | **Taxonomía confirmada; sin paginación numerada en el corte.** El álbum es término `gallery_album`, no Page hija ni CPT. En WordPress el bloque Galería muestra **todas** las fotos del álbum (lazy-load nativo). No se porta `?galeria-*-page=` ni `/galeria/{slug}/page/2`. La paginación de 12 de la maqueta (`gallery.js`, `06` §6) es HISTORICAL para el destino FSE. Revisar solo si un álbum crece mucho; entonces, si acaso, solo en la URL del álbum. |
 | OWN-009 | 2026-08-29 | **mp3 → Media Library. `.ics` no.** Los 2 mantras se suben como attachments (bloque Audio). El `.ics` lo **genera** `camino-del-dharma-core` al vuelo desde los campos del evento (título, fechas, lugar, URL). URL estable `/eventos/ical/{slug}.ics` mientras esté vigente (Círculos KEEP). No se guarda en la biblioteca: no se desactualiza ni cambia de ruta. Vista previa en wp-admin = descargar el generado, no reescribir un archivo. |
@@ -121,5 +122,8 @@ FABLE5 v1 sigue HISTORICAL. Fase 3 no iniciada.
 **v1.19 (2026-08-29):** se añaden `POST-001`–`POST-007` (i18n / inglés) como backlog de **fases
 posteriores**. No reabren Fase 3. No se implementan en el corte.
 
-**Versión:** 1.19 · **Fecha:** 2026-08-29 · **Estado:** Fase 3: 0 abiertas · 17 decididas (no
+**v1.20 (2026-08-29):** OWN-017 retira permanentemente `content-source/` sin respaldo; ADR 0040
+consolida producción publicada como fuente pre-corte.
+
+**Versión:** 1.20 · **Fecha:** 2026-08-29 · **Estado:** Fase 3: 0 abiertas · 18 decididas (no
 iniciada). Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.

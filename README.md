@@ -4,7 +4,10 @@ Sitio **estático en producción** de la **Comunidad Buddhista Camino del Dharma
 
 El nombre histórico «maqueta» en ADRs antiguos (ADR 0001) significa **base definitiva**, no prototipo desechable. Eventos, posts y galería hardcodeados en HTML/JSON son **contenido de producción** (ADR 0034).
 
-El copy institucional sigue `content-source/` y `docs/`. Base para una futura migración **directa** a WordPress Full Site Editing (block theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
+Hasta el corte, el sitio publicado gobierna el copy, contenido y presentación; el `VERSION` y commit
+vigentes del repo son el insumo de extracción y deben compararse con Hostinger (OWN-006/007,
+ADR 0034/0040). Base para una futura migración **directa** a WordPress Full Site Editing (block
+theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 
 ## Tecnologías
 
@@ -102,7 +105,7 @@ git tag -a "v$(cat VERSION)" -m "Release v$(cat VERSION)"
 
 Para publicar el tag en el remoto: `git push origin "v$(cat VERSION)"`.
 
-5. Generar ZIP de producción (**solo en el Escritorio**, no dentro del repositorio):
+1. Generar ZIP de producción (**solo en el Escritorio**, no dentro del repositorio):
 
 ```bash
 VERSION=$(cat VERSION)
@@ -114,7 +117,7 @@ zip -r "$HOME/Desktop/camino-del-dharma-v${VERSION}.zip" \
 
 Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni commitearlos al repo.
 
-6. Subir y extraer en `public_html` (File Manager de Hostinger).
+1. Subir y extraer en `public_html` (File Manager de Hostinger).
 
 ### Fase 3 (tras reorg): sitio en `static/`
 

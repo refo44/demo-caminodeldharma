@@ -15,7 +15,7 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 | **07–09** | Voz y copy | Guía de voz, diccionario de términos, UI copy sheet. El copy depende de identidad; la navegación los usa después. |
 | **10** | Experiencia del visitante | User journey. Cómo se recorre el sitio y cómo la persona llega a la práctica. |
 | **11–12** | Navegación y theme | Árbol de URLs y estructura de archivos del theme. Dependen de pantallas, copy y recorridos. |
-| **13** | Estructura de archivos estáticos | Geografía del proyecto: docs, content-source, theme, assets. Dónde viven los archivos estáticos. |
+| **13** | Estructura de archivos estáticos | Geografía del proyecto: docs, sitio, theme y assets. Dónde viven los archivos estáticos. |
 | **14** | Arquitectura CSS | Capas (theme.json, main.css), tokens, naming, especificidad, accesibilidad en estilos. |
 | **15–17** | Implementación técnica | Assets, inventario de contenido, orden de implementación. Convierten la arquitectura en código. |
 | **adr/** | Decisiones arquitectónicas | ADR: registro inmutable de decisiones técnicas (despliegue, PWA, URLs, CSS, HSTS, etc.). Ver `adr/README.md`. |
@@ -49,7 +49,7 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 13. `13-static-file-structure`
 14. `14-css-architecture`
 15. `15-assets-strategy`
-16. `16-content-source-inventario`
+16. `16-inventario-historico-fuente-retirada` — inventario **histórico**, no operativo
 17. `17-orden-implementacion`
 18. `18-tendencias-ux-ui-sistema-editorial`
 19. `19-accesibilidad-estandares`
@@ -60,26 +60,27 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 
 **Informes SEO (entregables):** `informes-seo/README.md` — dos informes autosuficientes derivados de `.audit/` y redactados para entrega externa: `00-informe-auditoria-seo.md` (general y ejecutivo, para el liderazgo) y `02-auditoria-seo-tecnica.md` (estado de salud del sitio, para el equipo de publicación web). Se entregan junto a `24-brief-editorial-blog-y-visibilidad.md`, que cubre lo editorial. Se re-emiten con cadencia trimestral, por lo que **no llevan prefijo en la cadena lineal**: no son documentos de diseño del proyecto sino mediciones fechadas. Dependen de la auditoría, no de los docs numerados.
 
-**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0038). **Pruebas:** `guia-pruebas-plugin-theme-fse.md` (ADR 0038); alcance SonarQube Cloud en `.sonarcloud.properties`. **Migración:** `contrato-migracion-static-wordpress.md` (ADR 0032), `inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md` + `redirect-ledger.md` (ADR 0034), `backlog-decisiones-owner-migracion.md` (decisiones de dueño; Fase 3 **cerrada** v1.18; `POST-*` fases posteriores v1.19; no son ADR), `matriz-migracion-static-wordpress.md`, `cutover-checklist-wordpress.md`, `migracion-static-wordpress.md` (ledger de diferencias). **Entorno local Docker:** `docker-wordpress-playbook.md` (ADR 0023); compose **aún no está en el repo**. **Playbook:** `playbook-migracion-static-wordpress.md`. **Archivo:** `archive/contacto-formulario-estatico/`. No llevan prefijo numérico en `00`; se referencian desde `17-orden-implementacion`.
+**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0040). **Pruebas:** `guia-pruebas-plugin-theme-fse.md` (ADR 0038); alcance SonarQube Cloud en `.sonarcloud.properties`. **Migración:** `contrato-migracion-static-wordpress.md` (ADR 0032), `inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md` + `redirect-ledger.md` (ADR 0034/0040), `backlog-decisiones-owner-migracion.md` (decisiones de dueño; Fase 3 **cerrada** v1.20; `POST-*` fases posteriores; no son ADR), `matriz-migracion-static-wordpress.md`, `cutover-checklist-wordpress.md`, `migracion-static-wordpress.md` (ledger de diferencias). **Entorno local Docker:** `docker-wordpress-playbook.md` (ADR 0023); compose **aún no está en el repo**. **Playbook:** `playbook-migracion-static-wordpress.md`. **Archivo:** `archive/contacto-formulario-estatico/`. No llevan prefijo numérico en `00`; se referencian desde `17-orden-implementacion`.
 
 **Nota sobre `21-manual-voz-*.docx`:** los `.docx` en `docs/` son exportaciones para compartir; el documento editable principal es `21-manual-voz-copywriting-editorial.md`.
 
 ---
 
-## Fuentes de contenido
+## Fuentes vigentes de contenido
 
-Todo el contenido proviene de:
+Hasta el corte, el contenido y la presentación se extraen del sitio estático vigente y se comparan
+con `https://caminodeldharma.org` (OWN-006/007, ADR 0034/0040):
 
-- `content-source/Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx`
-- `content-source/Pagina web Camino del Dharma/Lluvia de ideas para la página web de la comunidad.docx`
-- `content-source/Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf` (manual de marca)
-- `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (imágenes y videos por pestaña)
+- HTML/JSON, metadata y media referenciada en la versión publicada;
+- el `VERSION` y commit vigentes del repo como input determinista de extracción;
+- `assets/` y la documentación versionada para identidad y especificaciones técnicas.
 
 ---
 
-## Trazabilidad: Lluvia de ideas → docs
+## Trazabilidad histórica: fuente legacy → docs
 
-Cada ítem de la Lluvia de ideas está cubierto en al menos un documento.
+La tabla conserva la procedencia histórica de decisiones ya incorporadas. La fuente legacy fue
+eliminada permanentemente y no es un input operativo (ADR 0040).
 
 | Lluvia de ideas | Doc(s) |
 |-----------------|--------|

@@ -55,6 +55,9 @@ Ninguno implica a los demás.
 
 *(Nota 2026-08-19, ADR 0034: CONTENT también cubre entidades **hardcodeadas en el HTML live** — 10 eventos, 2 posts, 35 ítems de galería + 3 álbumes. Esos datos son producción. El HTML no sustituye `content-source/` para copy institucional.)*
 
+*(Nota de vigencia 2026-08-29: ADR 0040 sustituyó esa última regla editorial. La fuente legacy fue
+eliminada; CONTENT se extrae del HTML/JSON y media de producción publicada.)*
+
 **Reglas:**
 
 1. **La migración no está completa** porque el theme esté desplegado o activado.

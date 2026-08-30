@@ -158,9 +158,11 @@ Ninguna página es un callejón sin salida.
 
 ---
 
-## 8. Regla de validación (Lluvia de ideas)
+## 8. Regla de validación (antecedente histórico)
 
-La idea de la Lluvia de ideas —"llevar de la mano" a la persona hacia formación o meditación— se interpreta como **orientación clara**, no como animación visual. El proyecto evita animaciones decorativas (06, 18); la “mano” es la estructura del sitio: menú, bloques y CTAs que guían sin perderse.
+La idea ya incorporada de "llevar de la mano" a la persona hacia formación o meditación se interpreta
+como **orientación clara**, no como animación visual. El proyecto evita animaciones decorativas
+(06, 18); la “mano” es la estructura del sitio: menú, bloques y CTAs que guían sin perderse.
 
 **Un recorrido es correcto si:**
 

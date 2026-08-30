@@ -1,7 +1,9 @@
 # Inventario de contenido de producción (sitio estático live)
 
-Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**, actualizado a **1.0.35** (`/privacidad`, ADR 0039). No es un extracto ejecutado: es el
-baseline documental. ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
+Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**, actualizado a **1.0.35** (`/privacidad`,
+ADR 0039). No es un extracto ejecutado: es el baseline documental. ADR
+[0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
+[0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 
 **Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática:** raíz del repo (no hay
 `static/` todavía). **Deploy:** ZIP manual (ADR 0015). Extraer **lo más reciente del repo**
@@ -11,9 +13,9 @@ eso es deuda de deploy, no la fuente del extracto.
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
-Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.18, 0 abiertas). El archivo
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.20, 0 abiertas). El archivo
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) queda como
-registro de decisiones (no ADR). Las filas `POST-*` (v1.19) son fases posteriores (i18n); no
+registro de decisiones (no ADR). Las filas `POST-*` son fases posteriores (i18n); no
 bloquean el corte.
 
 ---
@@ -120,7 +122,8 @@ de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importa
 | Language switcher (solo UI, sitio en español) | `main.js` | header | STRUCTURAL COPY (no i18n real; `POST-001`–`POST-004`) |
 | Formulario contacto | markup live; envío no opera | `/contacto` | REAL PRODUCTION (campos); backend = ADR 0026 |
 
-Si `content-source/` y HTML divergen: **gana el HTML live** (OWN-007). No restaurar el doc sobre producción.
+Si un material legacy externo y el HTML divergen, **gana el HTML live** (OWN-007/017). No restaurar
+fuentes retiradas sobre producción.
 
 ---
 
@@ -204,4 +207,4 @@ Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER 
 
 ---
 
-**Versión inventario:** 1.1 · **Repo:** 1.0.35 · **Fecha:** 2026-08-29
+**Versión inventario:** 1.2 · **Repo:** 1.0.35 · **Fecha:** 2026-08-29

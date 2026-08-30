@@ -11,8 +11,8 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 **CURRENT STATE:** Fase 3 no iniciada. No existe `static/`. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). Las filas de abajo registran
 cambios del estático en producción y deudas hacia el theme futuro.
 
-Decisiones del propietario (**Fase 3 cerrada** v1.18; no reabrir OWN-* sin decisión nueva).
-Fases posteriores (`POST-*`, v1.19) no entran en el corte:
+Decisiones del propietario (**Fase 3 cerrada** v1.20; no reabrir OWN-* sin decisión nueva).
+Fases posteriores (`POST-*`) no entran en el corte:
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
 
 ---
@@ -57,7 +57,7 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 - Estructura de bloques, navegación, URLs.
 - CSS, JavaScript, tokens, identidad visual.
 - Accesibilidad, SEO técnico, comportamiento de componentes.
-- Copy permanente alineado con `content-source/`.
+- Copy permanente alineado con producción publicada (OWN-007, ADR 0040).
 
 ---
 

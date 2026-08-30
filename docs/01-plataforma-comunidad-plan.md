@@ -1,6 +1,6 @@
 # Camino del Dharma — Plan Maestro de la Plataforma de Comunidad
 
-**Versión 1.1**
+**Versión 1.2**
 
 La identidad corporativa definida en `02-identidad-corporativa` constituye una capa visual cerrada desde el manual de marca.
 
@@ -15,11 +15,8 @@ El problema que aborda este plan no es estético, sino estructural y orientativo
 - ¿Qué es la práctica?
 - ¿Cómo se llega a ella sin perder orientación?
 
-**Fuentes canónicas obligatorias:**
-
-- `content-source/Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx`
-- `content-source/Pagina web Camino del Dharma/Lluvia de ideas para la página web de la comunidad.docx` (existe también versión `.md`)
-- `content-source/Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf` (manual de identidad visual)
+**Fuentes vigentes:** producción publicada para contenido y presentación; `02`, `06` y `09` para
+identidad, estructura y microcopy técnico (OWN-007, ADR 0040).
 
 ---
 
@@ -306,9 +303,10 @@ Este tipo de documento es raro. Está más cerca de un manifiesto de diseño que
 
 ---
 
-## Referencias (content-source)
+## Procedencia histórica
 
-Todas bajo `content-source/Pagina web Camino del Dharma/`:
+Estos materiales originaron el plan, pero fueron retirados permanentemente y ya no son fuentes
+operativas (ADR 0040):
 
 | Fuente | Contenido |
 |--------|-----------|
@@ -329,7 +327,7 @@ Con los ajustes realizados:
 - Es más técnico
 - Es más ejecutable
 - Mantiene su profundidad simbólica
-- No altera ninguna fuente canónica
+- No altera el contenido publicado
 
 La tecnología ya sabe todo lo que necesita saber. Lo único que queda abierto es lo único que importa:
 
@@ -337,5 +335,5 @@ Cómo la comunidad sigue orientando hacia la práctica y acogiendo a quienes lle
 
 ---
 
-**Versión del documento:** 1.1  
-**Depende de:** content-source (Contenido_Web, Lluvia de ideas, Identidad PDF)
+**Versión del documento:** 1.2
+**Depende de:** producción publicada, `02-identidad-corporativa`, `06-wireframes`, `09-ui-copy-sheet`

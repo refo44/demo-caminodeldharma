@@ -1,6 +1,9 @@
 # Camino del Dharma — WordPress Content Model
 
-Modelo de contenido oficial para la implementación WordPress del sitio de la Comunidad Buddhista Camino del Dharma. Basado en Contenido_Web_Camino_del_Dharma.docx y Lluvia de ideas. Contenido canónico: seguir estrictamente `content-source/.../Contenido_Web_Camino_del_Dharma` (docx/md); inventario en 13.
+Modelo de contenido oficial para la implementación WordPress del sitio de la Comunidad Buddhista
+Camino del Dharma. El contenido pre-corte se extrae del HTML/JSON publicado y se valida contra
+`https://caminodeldharma.org` (OWN-007, ADR 0034/0040); inventario en
+`inventario-contenido-produccion-static`.
 
 **Depende de:** `01-plataforma-comunidad-plan`, `02-identidad-corporativa`, `04-mapa-pantallas`. **Referencia:** `09-ui-copy-sheet` (textos de interfaz), `11-arbol-urls-final` (rutas), `12-theme-file-structure` (plantillas)
 
@@ -15,7 +18,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | page | Páginas | Nativo | según cada página | Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Contribuir (donaciones), Contacto, Blog |
 | event | Eventos | Custom | /eventos/ | Eventos especiales vigentes (retiros, talleres, Vesak, etc.) |
 | blog_author | Autores (blog) | Custom | /author/ | Ficha de quien firma una entrada. URL `/author/{slug}`. No es el usuario WP (ADR 0037). |
-| sangha | Sanghas | Custom | /sanghas/ | Contacto por sangha (Lluvia de ideas: conectar con cada sangha). Ver §3.1. |
+| sangha | Sanghas | Custom | /sanghas/ | Contacto por sangha (antecedente histórico: conectar con cada sangha). Ver §3.1. |
 | testimonial | Testimonios | Custom o bloque | /testimonios/ o bloque | Por defecto: bloque en página; si CPT, ver §3.2. |
 
 ### Contenido fijo vs. dinámico
@@ -27,7 +30,7 @@ Modelo de contenido oficial para la implementación WordPress del sitio de la Co
 | Meditación semanal | Bloque fijo en Inicio y Práctica (Lunes 7:30 p.m., Zoom) |
 | Formulario de contacto | Página Contacto |
 | **Videos** | Embed YouTube/Vimeo en páginas y bloques (conferencias, enseñanzas, indicaciones para meditar) |
-| **Cómo hacer parte / formación** | Página o sección: espacios de formación, alcance y propósito de cada uno (Lluvia de ideas). |
+| **Cómo hacer parte / formación** | Página o sección: espacios de formación, alcance y propósito de cada uno (antecedente histórico). |
 
 **Edición editorial:** El contenido textual principal (comunidad, linaje, práctica, narrativas) se gestiona directamente en el editor Gutenberg; no se crean campos personalizados para textos espirituales o narrativos.
 
@@ -150,7 +153,8 @@ Los encabezados de agrupación deben ser **encabezados reales** (`h3`, con los t
 
 **Escalado:** con el ritmo actual (~8–12 eventos/año) el listado único con agrupación por año es suficiente hasta unos 25–30 eventos. A partir de ahí, archivos por año (`/eventos/2025/`) usando los archivos de fecha nativos de WordPress. **No usar paginación numerada ni carga por JavaScript:** la primera entierra el contenido y la segunda no se indexa de forma fiable, lo que anularía el punto 1.
 
-**Cronograma de eventos (Lluvia de ideas):** vista de calendario solo si hay masa crítica de eventos vigentes simultáneos.
+**Cronograma de eventos (antecedente histórico):** vista de calendario solo si hay masa crítica de
+eventos vigentes simultáneos.
 
 **Calendario del mes:** los días de un `event` se marcan rellenos (`.has-event`, `brand-2-deep`) y enlazan a esa tarjeta. Cada lunes **sin otro evento ese día** se marca con el mismo fondo que un día vacío y borde `brand-2` (`.has-practice`) y enlaza a `/practica/meditacion-semanal-en-linea`. Tooltip propio (`data-tooltip`) al hover, al foco de teclado y, con puntero grueso, al primer toque (bajo la cuadrícula aparece «Toca de nuevo para ver el evento.» con `aria-hidden`; el segundo sigue el enlace; Enter no se intercepta); no usar `title` nativo (duplicaría el aviso). No es un evento: no va al listado, no tiene ficha ni JSON-LD `Event`. Si ese lunes ya tiene un evento, solo se marca el evento. El mes mostrado es el del próximo vigente (en la maqueta: septiembre 2026).
 
@@ -293,8 +297,10 @@ Los videos acompañan la enseñanza; no constituyen el contenido central del sit
 
 - **Embed:** Las páginas y bloques deben permitir incrustar videos por URL (YouTube, Vimeo).
 - **Uso:** Conferencias, enseñanzas del maestro, indicaciones para meditar, canal de YouTube conectado a la página.
-- **Lista canónica de URLs:** `content-source/Pagina web Camino del Dharma/Link-videos-youtube.md` (4 videos: Encontrando la Plenitud…, La sabiduría del no hacer, ¿Cómo el Budismo puede ayudarnos…?, La Sabiduría del Buddhismo Chan). Misma lista en `Link videos subidos en Youtube.docx`. Implementación debe usar estas URLs para los embeds de conferencias/enseñanzas.
-- **Lluvia de ideas:** "Espacio para subir videos de las conferencias, conectar el canal de youtube a la página", "Video sobre indicaciones para meditar".
+- **Lista vigente de URLs:** embeds publicados en `practica/videos/index.html`. La implementación debe
+  extraer esas URLs y compararlas con la página publicada antes de importarlas.
+- **Antecedente histórico ya incorporado:** "Espacio para subir videos de las conferencias, conectar
+  el canal de youtube a la página", "Video sobre indicaciones para meditar".
 
 Implementación: bloque o campo de tipo «video embed» (URL); editor no sube archivo de video, solo pega enlace.
 
@@ -305,9 +311,9 @@ Implementación: bloque o campo de tipo «video embed» (URL); editor no sube ar
 | Recurso | Implementación |
 |---------|----------------|
 | Meditación semanal | Botón "Participar" → WhatsApp (+57 320 662 7608) |
-| **WhatsApp** | Link en cabecera/footer (Lluvia de ideas: "Link para ir al whatsapp de Camino del Dharma") |
+| **WhatsApp** | Link en cabecera/footer (antecedente histórico: "Link para ir al whatsapp de Camino del Dharma") |
 | Formulario contacto | Envío a caminodeldharma1@gmail.com o plugin |
-| **Donaciones** | Botón + datos bancarios en footer (Banco Popular, cuenta 220065151425) — Lluvia de ideas: "Incluir botón de donaciones" |
+| **Donaciones** | Botón + datos bancarios en footer (Banco Popular, cuenta 220065151425) — antecedente histórico: "Incluir botón de donaciones" |
 | Blog | Enlace interno a `/blog/` |
 | Redes sociales | Facebook, Instagram en footer |
 
@@ -334,7 +340,7 @@ Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el p
 
 ---
 
-## Referencia: Lluvia de ideas cubierta en este modelo
+## Trazabilidad histórica ya incorporada en este modelo
 
 | Idea | Dónde |
 |------|--------|
@@ -358,4 +364,4 @@ Este documento define el **modelo de contenido oficial** del sitio: post types (
 
 ---
 
-**Versión:** 2.22 — Calendario: aviso táctil `aria-hidden`; Enter sin doble activación.
+**Versión:** 2.23 — Fuente editorial pre-corte alineada con ADR 0040.

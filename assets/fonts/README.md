@@ -1,6 +1,6 @@
 # Fuentes — Camino del Dharma
 
-Referencia: **Identidad CAMINO DEL DHARMA** (manual de marca) y `docs/02-identidad-corporativa.md`.
+Referencia vigente: `docs/02-identidad-corporativa.md` y tipografías servidas en producción.
 
 ## Estructura
 

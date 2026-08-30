@@ -58,6 +58,6 @@ abrirlo.
   como referencia: A4 con sus márgenes, portada con logo + nombre, ficha de datos,
   índice y pie con número de página.
 - **El logo** se toma de la variante oficial sobre fondo de marca
-  (`content-source/.../logo-camino-del-dharma-fondo-marca-oscuro.png`). El logo suelto
+  (`assets/images/logo-docx-cover.png`). El logo suelto
   es un trazo blanco sobre transparencia: sobre página blanca resulta invisible, y el
   manual de identidad prohíbe recolorearlo.

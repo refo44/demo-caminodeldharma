@@ -26,6 +26,9 @@ En Fase 3:
 
 *(Nota 2026-08-19: el mecanismo de plantillas pasó a theme de bloques / FSE en ADR 0029. El sentido de este ADR no cambia: WordPress no rediseña. La tabla §2.2 de `17` se anota como histórica → bloques.)*
 
+*(Nota de vigencia 2026-08-29: la referencia a `content-source/` es histórica. ADR 0040 retiró esa
+carpeta; el mandato de migración sin rediseño se valida contra producción publicada.)*
+
 ## Alternativas consideradas
 
 | Alternativa | Motivo de descarte |

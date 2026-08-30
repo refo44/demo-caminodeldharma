@@ -46,11 +46,11 @@ En el sitio conviven tres niveles claramente separados:
 
 ### 1.1 Contenido canónico
 
-Textos fijos definidos en `content-source/.../Contenido_Web_Camino_del_Dharma`.
+Textos fijos publicados en `https://caminodeldharma.org` (OWN-007, ADR 0040).
 
 - Inicio, Comunidad, Linaje, Práctica, footer, CTAs canónicos.
 - Se implementan **tal cual**; no se parafrasea ni se adapta sacrificando sentido o jerarquía.
-- Inventario en `16-content-source-inventario`.
+- Inventario en `inventario-contenido-produccion-static`.
 
 ### 1.2 Contenido editorial
 
@@ -93,7 +93,7 @@ La longitud **no es el eje** de la política editorial. Es una **consecuencia** 
 | Contribuir | Marco de generosidad; datos bancarios; no transaccional |
 | Contacto | Formulario + redes; sin lógica de CRM |
 
-Copy exacto: `content-source`. Estructura de bloques: `06-wireframes`.
+Copy exacto: producción publicada. Estructura de bloques: `06-wireframes`.
 
 ---
 
@@ -114,7 +114,8 @@ La extensión (§4.3) y la estructura (§4.5) dependen del **tema**. La **intenc
 **Reglas:**
 
 - El título puede formularse como **pregunta** cuando la pieza responde una duda real (`21` §6.1: orientar antes que atraer). No es un truco de posicionamiento: la respuesta debe estar en el primer párrafo, con voz de la comunidad.
-- No duplicar páginas institucionales canónicas (`content-source`): el blog **complementa**, no sustituye Inicio, Linaje ni Práctica.
+- No duplicar páginas institucionales publicadas: el blog **complementa**, no sustituye Inicio,
+  Linaje ni Práctica.
 - Temas prioritarios: `24-brief-editorial-blog-y-visibilidad` §6. **Ritmo de publicación sugerido: §6.1** del mismo documento (una pieza cada 3–4 semanas, con la evidencia que lo sustenta). Ambos son propuesta para acuerdo comunitario.
 
 Al compartir en redes, la línea de contexto usa el tipo de pieza (`21` §11).
@@ -327,6 +328,6 @@ Este documento concentra el **sistema editorial** del sitio: niveles de texto, r
 
 ---
 
-**Versión:** 0.4 (borrador revisado 2026-07-20)  
+**Versión:** 0.5 (borrador revisado 2026-08-29)
 **Estado:** en análisis — alineado con `24-brief-editorial-blog-y-visibilidad`; pendiente ratificación comunitaria final  
 **Referencias de copy:** `07-guia-voz-microcopy-ux`, `08-voice-dictionary`, `09-ui-copy-sheet`, `21-manual-voz-copywriting-editorial`, `24-brief-editorial-blog-y-visibilidad`

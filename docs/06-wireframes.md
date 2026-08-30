@@ -6,7 +6,10 @@ Define la arquitectura visible de cada pantalla: bloques en orden vertical, jera
 
 Los bloques definidos aquí se organizan dentro de un **grid editorial flexible** descrito en `20-layout-principles` (Principios de layout). En los wireframes se indica dónde hay 2 columnas, texto + imagen o ancho completo; la implementación del grid es responsabilidad de 14 (CSS). El grid no redefine el orden de bloques; solo organiza su disposición cuando se presentan en columnas.
 
-**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:** `02-identidad-corporativa`, `09-ui-copy-sheet`, `18-tendencias-ux-ui-sistema-editorial`, `20-layout-principles` (grid). **Contenido canónico:** estructura y orden de bloques alineados con `content-source/.../Contenido_Web_Camino_del_Dharma` (Páginas 1–6 y Footer).
+**Depende de:** `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`. **Referencia:**
+`02-identidad-corporativa`, `09-ui-copy-sheet`, `18-tendencias-ux-ui-sistema-editorial`,
+`20-layout-principles` (grid). **Contenido canónico pre-corte:** estructura y orden de bloques del
+sitio publicado (OWN-007, ADR 0040).
 
 **Regla (18):** El objetivo de cada página debe ser evidente. Experiencia contemplativa: ritmo pausado, cero animaciones decorativas en área de lectura.
 
@@ -21,11 +24,11 @@ Bloques en orden vertical:
 - **Cabecera** (logo, menú principal 4–6 ítems + subnav: Galería, Blog, Contribuir, Contacto; ver 05)
 - **Hero** (mensaje de acogida, CTA “Practica con nosotros”; posible imagen)
 - **Del blog** (opcional: fila de entradas destacadas + “Ver todas las entradas”; según implementación)
-- **Comunidad** (breve: quiénes somos, enlace a La comunidad; según Contenido_Web “Un poco de nuestra comunidad”). En escritorio, el texto y «Conocer la comunidad» comparten fila con **una nota** del evento vigente (rótulo «Próximo evento · Curso» encima del cartel, cartel a ancho de columna `medium` y atajo de puntero a la ficha, título, fecha, lugar, «Ver evento»), alineada al `h2`, sin caja. Las fotos de la sección quedan debajo, a ancho de lectura. Solo eventos no finalizados; un destacado que ya terminó no se muestra. Si no hay evento vigente, no se muestra la nota. No es un segundo listado de Eventos; es un atajo a ese evento. Ver `03` (regla Inicio) y `09`.
-- **Cómo practicamos** (Estudio consciente, Práctica vivencial, Vida cotidiana; según Contenido_Web)
+- **Comunidad** (breve: quiénes somos, enlace a La comunidad; bloque “Un poco de nuestra comunidad” publicado). En escritorio, el texto y «Conocer la comunidad» comparten fila con **una nota** del evento vigente (rótulo «Próximo evento · Curso» encima del cartel, cartel a ancho de columna `medium` y atajo de puntero a la ficha, título, fecha, lugar, «Ver evento»), alineada al `h2`, sin caja. Las fotos de la sección quedan debajo, a ancho de lectura. Solo eventos no finalizados; un destacado que ya terminó no se muestra. Si no hay evento vigente, no se muestra la nota. No es un segundo listado de Eventos; es un atajo a ese evento. Ver `03` (regla Inicio) y `09`.
+- **Cómo practicamos** (Estudio consciente, Práctica vivencial, Vida cotidiana; según el home publicado)
 - **Linaje breve** (micro-bloque opcional: “Nuestro linaje”, 2 líneas, enlace a /linaje/)
 - **Meditación semanal** (horario, modalidad, CTA “Participar” → WhatsApp)
-- **Caminos de participación** (Iniciarse, Profundizar, Practicar en comunidad; según Contenido_Web)
+- **Caminos de participación** (Iniciarse, Profundizar, Practicar en comunidad; según el home publicado)
 - **Galería** (fila de imágenes + enlace “Ver galería completa”; según 04)
 - **Contacto / Practica con nosotros** (CTA principal hacia Contacto o WhatsApp)
 - **Pie** (identidad, contacto, redes, donaciones, Blog)
@@ -58,7 +61,7 @@ Bloques:
 
 - Cabecera
 - Título / introducción
-- Tradición viva (Mahāyāna, Chan, Tierra Pura según Contenido_Web)
+- Tradición viva (Mahāyāna, Chan, Tierra Pura según `/linaje` publicado)
 - Enlaces secundarios: Práctica, La comunidad
 - Pie
 
@@ -77,13 +80,14 @@ Bloques (orden en la maqueta):
 - **Mantras para la práctica** (uno o más mantras; Amitābha y Guān Shì Yīn Púsà con texto breve y reproductor `<audio controls>`)
 - **Caminos de profundización:** talleres vivenciales, retiro de iniciación, retiros de meditación
 - **Videos y enseñanzas** (embeds + enlace «Ver más videos» → `/practica/videos/`)
-- **Vida comunitaria y celebraciones** (Encuentro nacional, Vesak, conferencias; según Contenido_Web P4)
+- **Vida comunitaria y celebraciones** (Encuentro nacional, Vesak, conferencias; según `/practica` publicado)
 - Enlaces «Eventos · Contacto»
 - Pie
 
 **Maqueta estática:** `.recitation-section` (recitación comida); `.mantra-section` con `.mantra-text` y `.mantra-audio` por mantra. Audio en `assets/audio/amitabha.mp3` (19: controles visibles, `preload="metadata"`, sin autoplay).
 
-**Nota editorial:** Recitación de la comida y mantras son **extensiones de la maqueta** no listadas en Contenido_Web canónico; se mantienen como recursos de práctica en `/practica/`.
+**Nota editorial:** el contenido vigente de estos recursos es el publicado en `/practica`; el PDF
+de recitación está retirado (OWN-002) y los mantras se mantienen.
 
 ---
 
@@ -182,7 +186,7 @@ Bloques:
 
 - **Progresión:** La lectura de cada página debe llevar naturalmente hacia la práctica o el contacto. Refuerza la intención del sistema.
 - **Bloques estructurales:** Cabecera y Pie (presentes en todas las pantallas; enmarcan la vista). **Bloques editoriales:** el resto (Hero, Comunidad, contenido por página); su orden define la jerarquía de lectura.
-- **Pie:** presente en todas las pantallas (identidad, Personería, Contacto | redes, Blog, redes sociales, contacto directo WhatsApp/correo, sostener la comunidad/donaciones; según Contenido_Web “Footer en todas las páginas”). Definido en 04.
+- **Pie:** presente en todas las pantallas (identidad, Personería, Contacto | redes, Blog, redes sociales, contacto directo WhatsApp/correo, sostener la comunidad/donaciones; según producción publicada). Definido en 04.
 - **Cabecera:** consistente; menú alineado con 05 (4–6 ítems, Eventos condicional).
 - **Sin:** carruseles innecesarios, “lo más visto”, bloques de marketing. Experiencia sobria y orientada (01, 18).
 
@@ -190,8 +194,12 @@ Bloques:
 
 ## Cierre
 
-Este documento define la **estructura en bloque** de cada pantalla para Camino del Dharma. Orden de bloques y función editorial; no layout pixel a pixel. **Coherente con content-source:** Contenido_Web (Páginas 1–6 y Footer) es la fuente canónica para nombres de secciones y orden de bloques; FOTOS PAGINA WEB (Pestañas 1–8) mapea imágenes por sección (16). Alineado con 04 (mapa de pantallas), 05 (navegación) y 09 (copy). La implementación en plantillas y partes corresponde a 12.
+Este documento define la **estructura en bloque** de cada pantalla para Camino del Dharma. Orden de
+bloques y función editorial; no layout pixel a pixel. La producción publicada gobierna nombres,
+orden, imágenes y relaciones de media antes del corte (ADR 0040). Alineado con 04 (mapa de
+pantallas), 05 (navegación), 09 (copy) e
+`inventario-contenido-produccion-static`. La implementación en plantillas y partes corresponde a 12.
 
 ---
 
-**Versión:** 1.15 — Eventos: aviso táctil bajo la cuadrícula; teclado sin doble activación.
+**Versión:** 1.16 — Fuente de contenido y estructura alineada con ADR 0040.

@@ -282,7 +282,8 @@ CPTs, taxonomías y roles no van aquí: son responsabilidad de `camino-del-dharm
 - **Todo en un solo archivo:** `functions.php` como lugar donde “vive todo”.
 - **Lógica en plantillas de bloques:** intentar simular PHP dentro de `templates/*.html` con shortcodes o hacks; si hace falta lógica, es una señal de que se necesita un bloque dinámico o un patrón, no un parche en el HTML de la plantilla.
 - **Hardcodear URLs:** no escribir rutas absolutas a mano ni en PHP (`home_url()`, `get_permalink()`) ni en bloques (usar los bloques de enlace/navegación nativos, que resuelven permalinks).
-- **Hardcodear textos editoriales:** no fijar copy dentro de plantillas; usar contenido gestionado desde WordPress (09, content-source) a través del bloque Contenido de la entrada.
+- **Hardcodear textos editoriales:** no fijar copy dentro de plantillas; importar el contenido
+  publicado y gestionarlo en WordPress a través del bloque Contenido de la entrada.
 - **Inline styles:** no usar `style=""` para maquetación (los bloques núcleo ya evitan esto cuando se configuran vía `theme.json`).
 - **CSS fragmentado sin control:** múltiples archivos de estilos complementarios sin necesidad. Un solo entry (`assets/css/main.css`) además de `theme.json`.
 - **Plugins para resolver lo ya definido:** no añadir plugins para layout, navegación, grids o estilos que ya están definidos por 06, 14 y 20, ni para lo que el Editor de sitio nativo ya resuelve.
@@ -309,7 +310,8 @@ La traducción a WordPress es un cambio de motor y de mecanismo de plantillas, n
 
 - No cambiar orden de bloques definido en `06-wireframes`.
 - No cambiar layout, grid y responsive definidos en `20-layout-principles`.
-- No cambiar microcopy sin pasar por `09-ui-copy-sheet` y content-source.
+- No cambiar microcopy publicado sin una diferencia aprobada y registrada; `09-ui-copy-sheet`
+  documenta cadenas estructurales.
 - El `theme.json` inicial replica exactamente los tokens de la maqueta; solo cambios posteriores y deliberados vía Editor de sitio pueden diverger (ADR 0029), nunca la migración misma.
 
 ---

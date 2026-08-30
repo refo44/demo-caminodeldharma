@@ -2,16 +2,16 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.2
+**Prompt version:** 2.3
 **Status:** CURRENT — use this prompt for execution
 **Date:** 2026-08-29
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
-or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0038,
-plus the closed Fase 3 owner-decision backlog (v1.18). `POST-*` later-phase i18n rows
-(v1.19) must not be implemented at cutover. Version 2.2 supersedes the temporary governance gate
-in version 2.1 after the always-applied content rules were reconciled with OWN-007.
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0040,
+plus the closed Fase 3 owner-decision backlog (v1.20). `POST-*` later-phase i18n rows must not be
+implemented at cutover. Version 2.3 incorporates the permanent removal of the legacy source folder
+under OWN-017 and ADR 0040.
 
 ---
 
@@ -29,8 +29,8 @@ KISS, YAGNI, SOLID, Clean Code, and incremental refactoring pragmatically. Do no
 abstractions or dependencies without a current requirement.
 
 Code, code comments, and Git commit messages are written in English. Editorial content and most
-project documentation remain in Spanish. Preserve Spanish copy exactly as required by the canonical
-sources.
+project documentation remain in Spanish. Preserve published Spanish copy exactly unless an approved
+difference is recorded.
 
 ---
 
@@ -119,8 +119,8 @@ There is no single source hierarchy for every content type:
   conflicting fields explicitly; never assume parity or silently choose.
 - **Events, blog posts, gallery JSON, dates, cards, and media relationships:** static HTML/JSON is
   real production content under ADR 0034. Hardcoded does not mean fixture.
-- **`content-source/`:** protected provenance and reference material that may be outdated relative to
-  production. Never modify it and never use it to overwrite published production.
+- **Retired legacy material:** the former source folder was permanently removed under OWN-017 and
+  ADR 0040. Do not recreate it or use external legacy copies as migration input.
 - **Presentation and behavior:** published static HTML/CSS/JS is the visual and behavioral contract
   unless an accepted ADR records a replacement.
 - **URLs:** `sitemap.xml`, ADR 0008, the redirect ledger, and incoming HTTP behavior.
@@ -136,7 +136,7 @@ Before implementation, read:
 - `.cursor/rules/`, `CLAUDE.md`, `AGENTS.md`;
 - `docs/17-orden-implementacion.md`;
 - `docs/adr/README.md`;
-- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0038;
+- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0040;
 - `docs/contrato-migracion-static-wordpress.md`;
 - `docs/inventario-contenido-produccion-static.md`;
 - `docs/conteos-reconciliacion-migracion.md`;
@@ -154,7 +154,7 @@ Before implementation, read:
 - `docs/20-layout-principles.md`;
 - `docs/docker-wordpress-playbook.md`.
 
-Check the ADR index for decisions newer than ADR 0038 and read any that affect this scope.
+Check the ADR index for decisions newer than ADR 0040 and read any that affect this scope.
 
 ---
 
@@ -299,9 +299,9 @@ Verify these values against the current commit before relying on them:
 - 1 historical recitation PDF path, now retired from the website by OWN-002.
 - 0 production fixtures.
 
-Owner backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md` v1.18).
+Owner backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md` v1.20).
 Use those decisions; do not treat the rows below as still open. Later-phase `POST-*` rows
-(v1.19, i18n/English) stay out of this cutover: translation-ready PHP strings only (ADR 0027);
+(i18n/English) stay out of this cutover: translation-ready PHP strings only (ADR 0027);
 no multilingual plugin, no `/es` or `/en` prefix, no active language switcher.
 
 - Per OWN-001, import `galeria-04.jpg` exactly once as Media Library content for `/practica`; never
@@ -682,7 +682,7 @@ SonarScanner, or any CD workflow.
 - screen-reader-relevant labels/headings/ARIA;
 - visual comparison against `static/`;
 - copy, content, structure, and style comparison against `https://caminodeldharma.org`, with
-  repo/live/content-source deltas recorded and published production used as the acceptance baseline;
+  repo/live deltas recorded and published production used as the acceptance baseline;
 - staging PHP/Apache/HTTPS behavior;
 - actual Contact Form 7 delivery;
 - network requests and absence of unexpected tracking;

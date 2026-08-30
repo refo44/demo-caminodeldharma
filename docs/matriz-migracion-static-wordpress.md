@@ -29,7 +29,7 @@ Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escr
 | ------- | ----------- |
 | Static URL | URL pública canónica actual |
 | Static source | Archivo HTML en el repo (raíz, Fase 2) |
-| Content source | De dónde sale el copy/media |
+| Content source | HTML/JSON/media de producción que aporta copy o datos |
 | WP object | Page / post / CPT / ajuste / N/A |
 | WP route | Ruta WordPress prevista |
 | Template | Archivo en `templates/` (doc 12) |
@@ -46,18 +46,18 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
 |---|---|---|---|---|---|---|---|---|---|
-| `/` | `index.html` | `content-source/` + copy de home; nota de un evento vigente (datos de `/eventos`) | Ajuste lectura: página de inicio | `/` | `templates/front-page.html` | `main.js` (menú) | Hero WebP/JPEG, preview galería, OG default | Page + front-page settings; create-missing-only | HTTP 200; hero; nota de evento o ausencia; menú teclado; canonical |
+| `/` | `index.html` | HTML live; nota de un evento vigente (datos de `/eventos`) | Ajuste lectura: página de inicio | `/` | `templates/front-page.html` | `main.js` (menú) | Hero WebP/JPEG, preview galería, OG default | Page + front-page settings; create-missing-only | HTTP 200; hero; nota de evento o ausencia; menú teclado; canonical |
 | `/comunidad` | `comunidad/index.html` | HTML live (OWN-007) | Page `comunidad` | `/comunidad` | `templates/page-comunidad.html` | `main.js` | Foto fundador | Page; **añadir** enlaces a fichas autor en WP (OWN-016); no editar static ahora | 200; H1; foto; enlace blog; enlaces `/author/zheng-gong` y ficha Comunidad **solo en WP** |
-| `/linaje` | `linaje/index.html` | `content-source/` | Page `linaje` | `/linaje` | `templates/page-linaje.html` | `main.js` | Imágenes Chan / Tierra Pura | Page institucional | 200; secciones tradición |
-| `/practica` | `practica/index.html` | `content-source/` | Page `practica` | `/practica` | `templates/page-practica.html` | `main.js` | Audio mantras; **sin** PDF (OWN-002 RETIRE) | Page institucional | 200; audio; **no** enlace PDF; enlaces a videos y meditación |
-| `/practica/videos` | `practica/videos/index.html` | Lista YouTube en `content-source/` | Page `videos` (hija o slug acordado) | `/practica/videos` | `page-practica` o `page.html` si no hay plantilla propia | `main.js` | Embeds (youtube-nocookie pendiente de paridad) | Page secundaria; **no** está en navbar | 200; embeds; no 404; slug anidado |
-| `/practica/meditacion-semanal-en-linea` | `practica/meditacion-semanal-en-linea/index.html` | `content-source/` + horario | Page | `/practica/meditacion-semanal-en-linea` | `page.html` o plantilla específica si el diseño lo exige | `main.js` | — | Page secundaria (enlazada desde Inicio, Práctica y calendario) | 200; copy de Zoom/horario |
+| `/linaje` | `linaje/index.html` | HTML live | Page `linaje` | `/linaje` | `templates/page-linaje.html` | `main.js` | Imágenes Chan / Tierra Pura | Page institucional | 200; secciones tradición |
+| `/practica` | `practica/index.html` | HTML live | Page `practica` | `/practica` | `templates/page-practica.html` | `main.js` | Audio mantras; **sin** PDF (OWN-002 RETIRE) | Page institucional | 200; audio; **no** enlace PDF; enlaces a videos y meditación |
+| `/practica/videos` | `practica/videos/index.html` | Embeds del HTML live | Page `videos` (hija o slug acordado) | `/practica/videos` | `page-practica` o `page.html` si no hay plantilla propia | `main.js` | Embeds (youtube-nocookie pendiente de paridad) | Page secundaria; **no** está en navbar | 200; embeds; no 404; slug anidado |
+| `/practica/meditacion-semanal-en-linea` | `practica/meditacion-semanal-en-linea/index.html` | HTML live + horario | Page | `/practica/meditacion-semanal-en-linea` | `page.html` o plantilla específica si el diseño lo exige | `main.js` | — | Page secundaria (enlazada desde Inicio, Práctica y calendario) | 200; copy de Zoom/horario |
 | `/galeria` | `galeria/index.html` | JSON live (OWN-007) | Page `galeria` | `/galeria` | `templates/page-galeria.html` | `gallery.js` no se migra (ADR 0021); **sin** paginación numerada (OWN-011) | 35 en álbumes | Page + seed; hub SEO (ADR 0036) | 200; General/2023/2021; lightbox; **Page no robada**; álbum entero (lazy-load) |
 | `/galeria/2023` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2023` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex; mismas fotos que el grupo 2023 |
 | `/galeria/2021` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2021` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex |
 | `/galeria/general` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/general` | taxonomía | — | 25 fotos | PLANNED; **noindex** al corte | 200; noindex |
-| `/donaciones` | `donaciones/index.html` | `content-source/` (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
-| `/contacto` | `contacto/index.html` | `content-source/` + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de actualizar `/privacidad` (ADR 0039) | 200; envío real en staging; WhatsApp/correo; a11y labels |
+| `/donaciones` | `donaciones/index.html` | HTML live (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
+| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de actualizar `/privacidad` (ADR 0039) | 200; envío real en staging; WhatsApp/correo; a11y labels |
 | `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar el HTML live; no reescribir. Seguir marcado provisional hasta asesoría legal | 200; enlace footer en todas las páginas |
 
 `templates/page-*.html` **no** crea la Page. Ver ADR 0032 / 0033.

@@ -46,6 +46,10 @@ de WordPress, no como theme clásico PHP.
    editorial de cada página sigue viniendo de `content-source/` a través del bloque **Contenido de la
    entrada** (`<!-- wp:post-content /-->`), equivalente en bloques de `the_content()` — no cambia de
    dónde sale el copy, solo el mecanismo de plantilla.
+
+   *(Nota de vigencia 2026-08-29: ADR 0040 sustituyó únicamente el origen editorial descrito aquí.
+   El contenido inicial se extrae de producción publicada; `wp:post-content` sigue siendo el
+   mecanismo FSE.)*
 3. **Sigue existiendo una hoja de estilos complementaria** (p. ej. `assets/css/main.css` o
    `style.css` cargado como estilo del theme) para todo lo que Global Styles no expresa: layout de
    componentes, ritmo de lectura, breakpoints, estados de foco, reglas de accesibilidad. Esa hoja

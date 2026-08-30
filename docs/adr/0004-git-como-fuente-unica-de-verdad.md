@@ -2,7 +2,8 @@
 
 ## Estado
 
-Aceptada
+Aceptada. La regla de copy en la segunda viñeta de «Decisión» fue sustituida por
+[ADR 0040](0040-retirar-content-source-produccion-como-fuente.md); el resto sigue vigente.
 
 ## Fecha
 

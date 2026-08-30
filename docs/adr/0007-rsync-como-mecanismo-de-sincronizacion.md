@@ -31,6 +31,9 @@ rsync -avz --delete \
   ./ user@host:~/domains/caminodeldharma.org/public_html/
 ```
 
+*Nota histórica 2026-08-29: la exclusión `content-source/` quedó sin efecto al retirarse esa carpeta
+por ADR 0040. Se conserva para no reescribir el ejemplo original.*
+
 Principios:
 
 - **`--delete`:** elimina en destino lo que ya no existe en origen (dentro del scope del sync).

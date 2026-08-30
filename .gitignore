@@ -58,9 +58,6 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 
-# Content source: reference material from author (heavy; use assets/ for site files)
-/content-source/
-
 # Local video files — use YouTube embeds only (avoid repo size / 100 MB limit)
 *.mp4
 *.webm

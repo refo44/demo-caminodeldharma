@@ -1,11 +1,13 @@
 # Camino del Dharma — Estrategia de assets
 
 **Iconos, fuentes, favicon, SVG, PDF, imágenes, audio, SEO técnico, datos estructurados**  
-**Versión 2.6**
+**Versión 2.7**
 
-Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, content-source, theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
+Define qué assets existen, dónde viven y cómo se usan. La geografía del proyecto (docs, sitio,
+theme) está en 13; la arquitectura CSS (capas, tokens, main.css) en 14.
 
-**Depende de:** `02-identidad-corporativa`, `16-content-source-inventario`. **Referencia:** `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`
+**Depende de:** `02-identidad-corporativa`, `inventario-contenido-produccion-static`.
+**Referencia:** `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`
 
 ---
 
@@ -19,7 +21,7 @@ Define qué assets existen, dónde viven y cómo se usan. La geografía del proy
 | **Tipografía**     | Definida: MarloweEscapade (display), Fjalla One (headings; reemplaza a Downtown DEMO Regular del manual, ver 02), Inter (body). Según 02; uso en 14.                                                        |
 | **Favicon**        | Set en `assets/favicon/` y raíz: `favicon.ico`, `favicon.svg`, `favicon-48x48.png`, `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180×180). En `<head>`: `<meta name="theme-color" content="#8c2b3d">` (02). **Sin Web App Manifest** — ver §11. |
 | **SVG**            | Iconos en `assets/icons/` (inline o sprite). Favicon en `assets/favicon/favicon.svg`. Sin icon fonts.                                                             |
-| **PDF**            | En content-source: solo referencia (manual de marca, no se despliega). Si el sitio ofrece PDFs descargables, usar `assets/documents/` y enlazar desde el sitio.  |
+| **PDF**            | No hay PDF público vigente (OWN-002). Si en el futuro se aprueba uno, usar Media Library en WordPress o `assets/documents/` mientras siga el estático. |
 | **Audio**          | Si aplica: `assets/audio/`. Formatos: MP3 y/o Opus/WebM para streaming. Uso: meditación guiada, enseñanzas, podcasts.                                             |
 | **JS**             | Solo navegación, formularios, accesibilidad. Sin frameworks. **Sin Service Worker ni flujo de instalación PWA.** Scripts en footer; `defer` opcional mediante `script_loader_tag` solo para scripts no críticos.      |
 | **CSS**            | `style.css` solo cabecera del theme (obligatorio WP). Estilos reales en `assets/css/main.css`; encolar en functions.php. theme.json para tokens. Capas, variables y criterios en 12 §7 y 14. |
@@ -39,7 +41,7 @@ assets/
 │   ├── share.js      Panel para compartir: templates WhatsApp, X y Threads.
 │   └── calendar.js   Panel para añadir eventos a Google Calendar, Outlook o .ics; tooltips del calendario del mes (primer toque en puntero grueso).
 ├── icons/          SVGs (inline o sprite, según reglas de 1. Resumen)
-├── images/         Fotos por sección (desde content-source)
+├── images/         Fotos por sección usadas por el sitio
 ├── fonts/          Tipografías autohospedadas: Inter (body, woff2), Fjalla One (headings), MarloweEscapade (display). Ver 02 y assets/fonts/README.md.
 ├── favicon/        ico, svg, png (48, 32, 16, apple-touch 180). Sin webmanifest.
 ├── audio/          Archivos de audio (si aplica): meditación, enseñanzas
@@ -59,7 +61,10 @@ En WordPress, esta estructura va dentro del theme (`wordpress/wp-content/themes/
 
 ### 3.0 Script de optimización (sitio estático)
 
-En la raíz del repo, el script `scripts/optimize-images.sh` optimiza todas las imágenes en `assets/images/` para web (requiere ImageMagick: `brew install imagemagick`). Acciones: redimensionar a máximo 1600 px en el lado largo, calidad JPEG 85, eliminar metadatos. Ejecutar desde la raíz: `./scripts/optimize-images.sh`. Útil al añadir fotos nuevas o tras copiar desde content-source.
+En la raíz del repo, el script `scripts/optimize-images.sh` optimiza todas las imágenes en
+`assets/images/` para web (requiere ImageMagick: `brew install imagemagick`). Acciones:
+redimensionar a máximo 1600 px en el lado largo, calidad JPEG 85, eliminar metadatos. Ejecutar desde
+la raíz: `./scripts/optimize-images.sh`. Útil al añadir fotos nuevas aprobadas.
 
 ### 3.1 Fuentes: carga y licencia
 
@@ -86,7 +91,8 @@ En **todas** las páginas HTML, declarar favicons con URL absoluta canónica y `
 
 ## 4. Imágenes por sección
 
-Según `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/` (mapeo detallado en `16-content-source-inventario`). Tamaños recomendados: `16-content-source-inventario` (§4).
+Según las relaciones del HTML/JSON publicado y el inventario
+`inventario-contenido-produccion-static`. Tamaños recomendados: tabla siguiente.
 
 | Carpeta | Uso |
 |---------|-----|
@@ -121,7 +127,8 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 
 ## 5. Logo
 
-- **Origen:** `FOTOS PAGINA WEB/logo 1.png`
+- **Origen web:** `assets/images/logo.png`
+- **Portadas DOCX:** `assets/images/logo-docx-cover.png`
 - **Uso:** Cabecera.
 - **Favicon:** Derivar desde el logo, idealmente desde versión vectorial o un master de alta resolución (evitar favicon borroso desde PNG pequeño).
 - **Versión vectorial:** Si el logo existe solo en PNG, valorar en el futuro una versión SVG para la cabecera (mejora nitidez y escalado). Mientras tanto, usar PNG a 2x para cabecera y favicon; evitar escalar PNG pequeños más allá de su tamaño real.
@@ -139,7 +146,7 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 
 ## 7. PDF
 
-- **En content-source:** El manual de marca (`Identidad CAMINO DEL DHARMA- (1).pdf`) y otros PDFs son **solo referencia**. No se despliegan ni se enlazan desde el sitio.
+- **Estado actual:** no hay PDF público vigente; el documento de recitación está retirado (OWN-002).
 - **PDFs públicos:** Si el sitio ofrece documentos descargables (ej. información de donaciones, folletos), colocarlos en `assets/documents/` y enlazarlos desde las páginas correspondientes.
 - **Accesibilidad (19):** Todo PDF público debe cumplir mínimo: título, orden de lectura, contraste. Si no se garantiza, ofrecer alternativa en HTML. Detalle en `19-accesibilidad-estandares`.
 
@@ -147,10 +154,13 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 
 ## 8. Videos
 
-- **Origen:** `FOTOS PAGINA WEB/Pestaña 5/` (MP4 locales: ¿Qué es Meditar?, Conectar con nuestro planeta, Redes de Compasión) + **YouTube:** lista canónica en `content-source/.../Link-videos-youtube.md` (4 conferencias/enseñanzas; ver inventario 16).
-- **Estrategia:** Por defecto, embed de YouTube (los 4 videos listados son la fuente oficial para enseñanzas; 03 §6) e integración del canal. Videos locales solo cuando haya necesidad editorial clara (p. ej. sección de meditación).
+- **Origen pre-corte:** embeds publicados en `practica/videos/index.html`.
+- **Estrategia:** extraer y preservar los embeds publicados; priorizar
+  `youtube-nocookie.com` cuando la paridad y privacidad lo permitan. Videos locales solo con una
+  necesidad editorial aprobada.
 - **Videos locales:** Usar `<video controls>` con `preload="metadata"`; incluir poster (imagen de preview); evitar autoplay. Impacta rendimiento y accesibilidad (19).
-- **Lluvia de ideas:** "Conectar el canal de youtube a la página", "Video sobre indicaciones para meditar".
+- **Antecedente histórico ya incorporado:** "Conectar el canal de youtube a la página", "Video sobre
+  indicaciones para meditar".
 
 ---
 
@@ -159,14 +169,17 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 - **Ubicación:** `assets/audio/` (si el sitio incluye contenido sonoro).
 - **Formatos:** MP3 (compatibilidad amplia); Opus o WebM para streaming con menor peso. Ofrecer al menos un formato con buena compatibilidad.
 - **Uso posible:** Meditación guiada, indicaciones para meditar, enseñanzas en audio, podcasts, recitación de mantras. Si el contenido viene de YouTube u otra fuente externa, priorizar embed o enlace; usar archivos locales cuando se necesite reproducción directa en el sitio.
-- **Implementado en la maqueta:** `assets/audio/amitabha.mp3` — recitación de Amitābha en `/practica/` (origen en `content-source/Amitabha.mp3`; copiado con nombre kebab-case). `assets/audio/namo-guan-shi-yin-pusa.mp3` — recitación de Guān Shì Yīn Púsà (origen en `content-source/NamoGuanShiYinPusa.mp3`).
+- **Implementado en producción:** `assets/audio/amitabha.mp3` — recitación de Amitābha en
+  `/practica/`; `assets/audio/namo-guan-shi-yin-pusa.mp3` — recitación de Guān Shì Yīn Púsà.
 - **Accesibilidad:** Usar `<audio controls>` (no ocultar controles). Incluir transcripción o descripción cuando sea contenido informativo. El texto del mantra y una breve explicación en HTML cubren la alternativa al audio.
 
 ---
 
 ## 10. Regla de migración
 
-`content-source/` **no se despliega**. Copiar assets necesarios a `assets/` en la raíz (sitio estático, Fase 2) o al theme en `wordpress/wp-content/themes/camino-del-dharma/assets/` (Fase 3). No enlazar nunca a `content-source/` desde el código. Detalle del flujo en 13.
+Los assets estáticos vigentes viven en `assets/`. En WordPress, las imágenes, carteles y audios de
+contenido se importan a Media Library; el theme conserva solo assets de presentación. Validar las
+relaciones contra producción publicada (ADR 0040). Detalle del flujo en 13.
 
 ---
 
@@ -227,7 +240,7 @@ Metadatos, canonical, Open Graph y JSON-LD viven en el `<head>` de cada página 
 |------|---------|--------|
 | `<title>` | Pestaña del navegador y señal para buscadores | Puede incluir keywords de búsqueda; formato `Tema \| Camino del Dharma` |
 | `<meta name="description">` | Snippet en resultados | Una oración clara; no duplicar el `<title>` |
-| H1 visible | Encabezado que ve la persona | Copy institucional del content-source; **no forzar keywords** |
+| H1 visible | Encabezado que ve la persona | Copy publicado; **no forzar keywords** |
 
 **Intención semántica por página (titles SEO, H1 sin cambiar):**
 
@@ -239,7 +252,8 @@ Metadatos, canonical, Open Graph y JSON-LD viven en el `<head>` de cada página 
 | `/linaje` | Linaje Chan y Tierra Pura \| Camino del Dharma | El linaje |
 | Evento (detalle) | Nombre del evento — Camino del Dharma | Nombre del evento |
 
-En `<title>` y description usar **“budista”** (forma habitual de búsqueda). En cuerpo y footer conservar **“Comunidad Buddhista Camino del Dharma”** (nombre institucional del content-source).
+En `<title>` y description usar **“budista”** (forma habitual de búsqueda). En cuerpo y footer
+conservar **“Comunidad Buddhista Camino del Dharma”** (nombre institucional publicado).
 
 Subtítulo semántico en Inicio (visible, no sustituye al H1): *Comunidad budista Chan y Tierra Pura en Colombia*.
 
@@ -272,7 +286,7 @@ implementaciones.
 
 | Campo | Regla |
 |-------|--------|
-| `name`, `description`, `startDate`, `endDate` | Obligatorios; copy del content-source |
+| `name`, `description`, `startDate`, `endDate` | Obligatorios; datos del evento publicado |
 | `eventStatus` | `EventScheduled` (próximo) o `EventCompleted` (realizado) |
 | `eventAttendanceMode` | `OfflineEventAttendanceMode` o `OnlineEventAttendanceMode` según modalidad |
 | `location` + `address` | Solo eventos presenciales; `PostalAddress` con localidad y país (`CO`) |
@@ -425,4 +439,4 @@ Este documento define la **estrategia oficial de assets**: iconos, SVG, fuentes,
 
 ---
 
-**Versión:** 2.6 — `calendar.js`: tooltips del calendario del mes además del panel .ics.
+**Versión:** 2.7 — Fuentes de assets y media alineadas con ADR 0040.

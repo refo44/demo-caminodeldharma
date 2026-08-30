@@ -1,10 +1,12 @@
 # Camino del Dharma — Identidad corporativa
 
-**Versión 2.2**
+**Versión 2.3**
 
-Este documento define el sistema de identidad visual y tipográfica del sitio web de la Comunidad Buddhista Camino del Dharma. Los valores provienen estrictamente del manual de marca.
+Este documento define el sistema de identidad visual y tipográfica del sitio web de la Comunidad
+Buddhista Camino del Dharma. Los valores ya extraídos están materializados aquí, en el CSS de
+producción y en los assets versionados.
 
-**Fuente canónica:** `content-source/Pagina web Camino del Dharma/Identidad CAMINO DEL DHARMA- (1).pdf`
+**Baseline vigente:** producción publicada + `assets/images/logo.png` (OWN-007, ADR 0040).
 
 ---
 
@@ -89,7 +91,8 @@ Solo dos familias definidas en el manual de marca.
 
 ## 3. Logo
 
-- **Archivo:** `content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/logo 1.png`
+- **Archivo web:** `assets/images/logo.png`
+- **Portadas DOCX:** `assets/images/logo-docx-cover.png`
 - **Favicon:** Derivar del logo.
 - **Uso:** Cabecera, favicon, materiales digitales.
 - **Regla:** No alterar proporciones, color ni composición del logo.
@@ -154,5 +157,5 @@ Nada visual se decide fuera de este sistema. Los colores y fuentes del PDF son l
 
 ---
 
-**Versión del documento:** 2.2  
-**Fuente:** Identidad CAMINO DEL DHARMA- (1).pdf
+**Versión del documento:** 2.3
+**Baseline:** producción publicada, CSS y assets versionados (ADR 0040)

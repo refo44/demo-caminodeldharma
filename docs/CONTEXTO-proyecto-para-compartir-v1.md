@@ -205,7 +205,7 @@ no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
 - Reorganizar el repo (raíz → `static/` + `wordpress/`)
 - Theme `camino-del-dharma` + plugin `camino-del-dharma-core`
 - CPT `event` con sus taxonomías
-- Migración de las páginas institucionales (contenido verbatim desde `content-source/`)
+- Migración de las páginas institucionales (extracción verbatim del HTML publicado; ADR 0040)
 - Contact Form 7 (con el gate de privacidad del punto 9)
 - QA de accesibilidad (WCAG 2.1/2.2 AA) y de SEO/datos estructurados
 

@@ -2,9 +2,12 @@
 
 **Geografía del proyecto: repositorio y archivos estáticos**
 
-Define dónde viven los archivos del proyecto: documentación, contenido fuente, implementación estática, theme WordPress y assets.
+Define dónde viven los archivos del proyecto: documentación, implementación estática, theme
+WordPress y assets.
 
-**Depende de:** `12-theme-file-structure`, `15-assets-strategy`. **Referencia:** `16-content-source-inventario`, `adr/0014-monorepo-static-wordpress`, `adr/0013-fuentes-de-verdad-duales-y-alcance-despliegue`
+**Depende de:** `12-theme-file-structure`, `15-assets-strategy`. **Referencia:**
+`inventario-contenido-produccion-static`, `adr/0014-monorepo-static-wordpress`,
+`adr/0013-fuentes-de-verdad-duales-y-alcance-despliegue`, ADR 0040.
 
 ---
 
@@ -17,7 +20,6 @@ El layout del repo **evoluciona** según la fase (ADR 0014). No mezclar HTML est
 ```
 demo-caminodeldharma/
 ├── docs/                      Documentación (01–23, adr/)
-├── content-source/            Fuentes editoriales; no se despliega (16)
 ├── index.html, 404.html       Sitio estático en la raíz
 ├── robots.txt, sitemap.xml, llms.txt
 ├── .htaccess
@@ -77,7 +79,6 @@ demo-caminodeldharma/
 | Ubicación | Regla |
 |-----------|--------|
 | **docs/** | Markdown y `adr/`. No se despliega. |
-| **content-source/** | Referencia editorial. No enlazar desde el sitio. |
 | **Raíz (Fase 2)** | Sitio estático en producción. |
 | **static/ (Fase 3+)** | Sitio público en producción durante transición; recibe mantenimiento. Referencia de paridad con theme. |
 | **wordpress/…/camino-del-dharma/** | Theme; assets en `assets/` del theme. |
@@ -92,7 +93,9 @@ demo-caminodeldharma/
 | Código (theme, CSS, JS, plantillas de bloques) | Git |
 | Contenido (entradas, eventos, Pages, medios subidos) | WordPress (BD + `uploads/`) |
 
-Copy institucional: `content-source/` no se convierte en HTML-como-fuente (ADR 0033). Detalle en ADR 0013 y `docs/contrato-migracion-static-wordpress.md`.
+Antes del corte, copy y presentación se extraen del sitio publicado (ADR 0034/0040). Después del
+corte, WordPress gobierna el contenido. Detalle en ADR 0013 y
+`docs/contrato-migracion-static-wordpress.md`.
 
 ### Environments (nombres de este repo)
 
@@ -108,11 +111,11 @@ No mezclar credenciales, BD, uploads, fixtures ni política de indexación entre
 
 ## 3. Flujo de assets
 
-1. **Referencia:** `content-source/` (16).
+1. **Fuente pre-corte:** media referenciada por el HTML/JSON publicado.
 2. **Estrategia:** `15-assets-strategy`.
 3. **Estático:** `assets/` en raíz (Fase 2) o `static/assets/` (Fase 3).
-4. **Theme:** `wordpress/…/camino-del-dharma/assets/`.
-5. Sincronizar estático → theme durante migración; nunca enlazar a `content-source/`.
+4. **WordPress:** seed a Media Library para contenido; assets del theme solo para presentación.
+5. Sincronizar y verificar relaciones de media durante la migración.
 
 ---
 
@@ -127,8 +130,10 @@ No mezclar credenciales, BD, uploads, fixtures ni política de indexación entre
 
 ## Cierre
 
-Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/` (Fase 3) → theme único (post-corte). Alineado con 12, 15, 16, ADR 0013, ADR 0014 y `17-orden-implementacion` §2.7.
+Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/` (Fase 3) → theme único
+(post-corte). Alineado con 12, 15, ADR 0013, ADR 0014, ADR 0040 y
+`17-orden-implementacion` §2.7.
 
 ---
 
-**Versión:** 2.3
+**Versión:** 2.4

@@ -22,12 +22,13 @@ plans, or adding tests.
 ## Canonical content
 
 Until cutover, **live static HTML/JSON is the production content source** for events, posts, gallery,
-and institutional copy (ADR 0034, OWN-007). `content-source/` is reference only; if it diverges, **live
-HTML wins**. After cutover, WordPress owns editorial content.
+and institutional copy (ADR 0034, ADR 0040, OWN-007). After cutover, WordPress owns editorial
+content.
 
-Do not overwrite live copy from `content-source/`. Do not discard hardcoded HTML as dummy. Prefer
-deterministic extraction over retyping. Counts must reconcile. Before cutover, compare copy, content,
-and styles to the **published** site (`https://caminodeldharma.org`), not only the local repo.
+Do not recreate or restore the retired legacy source folder. Do not discard hardcoded HTML as dummy.
+Prefer deterministic extraction over retyping. Counts must reconcile. Before cutover, compare copy,
+content, and styles to the **published** site (`https://caminodeldharma.org`), not only the local
+repo.
 
 ## Static site is production + visual contract
 
@@ -60,8 +61,8 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
 - CPT `sangha` is out of initial Fase 3 scope unless the owner reopens it (ADR 0024).
 - Privacy page is published at `/privacidad` (ADR 0039). Copy is provisional until legal review; do not rewrite it. Contact Form 7 stays gated until the notice is updated to describe a server-side form.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
-  v1.18). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
-  decision. Later-phase rows (`POST-*`, v1.19) are i18n/English after cutover: do not implement
+  v1.20). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
+  decision. Later-phase rows (`POST-*`) are i18n/English after cutover: do not implement
   them in Fase 3.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
   volume (ADR 0036). No numbered pagination at cutover (OWN-011).

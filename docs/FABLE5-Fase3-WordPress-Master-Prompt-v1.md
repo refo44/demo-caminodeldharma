@@ -20,6 +20,7 @@ Supersessions after this prompt was written:
 | Autores = copy / Users | **ADR 0037** — CPT `blog_author`; `/author/{slug}` |
 | `event_status` solo manual | **OWN-013** — manda la fecha de fin |
 | `.ics` como archivo a importar | **OWN-009 / 012 / 014** — generado; pasados 410; noindex |
+| `content-source/` como canon | **OWN-017 / ADR 0040** — carpeta retirada permanentemente; manda producción publicada |
 
 Keep this file as a historical agent brief. For current architecture use ADR 0029, doc 12, and the
 migration contract. Do not copy classic-theme steps into new implementation work.

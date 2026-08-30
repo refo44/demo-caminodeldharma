@@ -82,7 +82,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0001](0001-maqueta-estatica-como-base-definitiva.md) | Maqueta estática como base definitiva | Aceptada |
 | [0002](0002-wordpress-como-adaptacion-sin-rediseno.md) | WordPress como adaptación sin rediseño | Aceptada |
 | [0003](0003-eliminar-pwa-y-web-app-manifest.md) | Eliminar PWA y Web App Manifest | Aceptada |
-| [0004](0004-git-como-fuente-unica-de-verdad.md) | Git como fuente única de verdad | Aceptada |
+| [0004](0004-git-como-fuente-unica-de-verdad.md) | Git como fuente única de verdad | Aceptada; regla editorial sustituida → [0040](0040-retirar-content-source-produccion-como-fuente.md) |
 | [0005](0005-produccion-sin-edicion-manual.md) | Producción sin edición manual | Aceptada |
 | [0006](0006-github-actions-para-despliegue.md) | GitHub Actions para CI/CD | Aceptada |
 | [0007](0007-rsync-como-mecanismo-de-sincronizacion.md) | rsync como mecanismo de sincronización | Aceptada |
@@ -118,6 +118,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0037](0037-cpt-autor-blog-url-author.md) | CPT de autor del blog; perfil `/author/{slug}` | Aceptada |
 | [0038](0038-pruebas-tdd-phpunit-sonar.md) | Pruebas TDD, wp-phpunit y SonarQube Cloud | Aceptada |
 | [0039](0039-aviso-privacidad-provisional-estatico.md) | Aviso de privacidad provisional en el estático | Aceptada |
+| [0040](0040-retirar-content-source-produccion-como-fuente.md) | Retirar `content-source`; producción publicada gobierna el contenido | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -145,13 +146,14 @@ Documentos, issues, commits o ADR relacionados.
 | Sitemap en WordPress | [0030](0030-sitemap-nativo-wordpress.md) — `/wp-sitemap.xml` nativo reemplaza al `sitemap.xml` manual solo para WordPress; `static/` no cambia |
 | Tags del blog | [0031](0031-tags-blog-noindex-hasta-volumen.md) — `post_tag` habilitado para editores; archivo de tag existe pero noindex hasta volumen suficiente, criterio cualitativo |
 | Contrato de migración static → WordPress | [0032](0032-contrato-migracion-static-wordpress.md) — cinco entregables; ruta **static → FSE** (sin theme clásico intermedio); template ≠ Page; deploy success ≠ application success |
-| Importación de contenido vs fixtures | [0033](0033-importador-contenido-vs-fixtures.md) — WP-CLI, create-missing-only; copy institucional vs `content-source/`; eventos/blog/galería live = HTML hasta extraer (ADR 0034) |
+| Importación de contenido vs fixtures | [0033](0033-importador-contenido-vs-fixtures.md) — WP-CLI, create-missing-only; contenido real ≠ fixtures; HTML/JSON live hasta extraer (ADR 0034/0040) |
 | Estático live como contenido de producción | [0034](0034-static-live-como-fuente-contenido-produccion.md) — hardcoded ≠ dummy; extracción; conteos; freeze/delta; patterns ≠ content |
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
 | Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
 | Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
 | Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; CF7 gated |
+| Fuente editorial pre-corte | [0040](0040-retirar-content-source-produccion-como-fuente.md) — `content-source/` retirado; producción publicada gobierna contenido y presentación |
 
 ---
 
@@ -160,7 +162,8 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.18); `POST-*` de fases posteriores (v1.19); no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.20);
+  `POST-*` de fases posteriores; no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

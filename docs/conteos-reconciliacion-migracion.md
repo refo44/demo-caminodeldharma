@@ -1,6 +1,8 @@
 # Conteos de reconciliación static → WordPress
 
-Baseline 2026-08-19, repo `VERSION` 1.0.34; actualizado 2026-08-29 a 1.0.35 (`/privacidad`). ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
+Baseline 2026-08-19, repo `VERSION` 1.0.34; actualizado 2026-08-29 a 1.0.35 (`/privacidad`).
+ADR [0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
+[0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 Detalle: [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md).
 
 ```text
@@ -65,10 +67,10 @@ Cualquier otra cifra exige fila en «Mismatches».
 | Imágenes en disco sin `<img>`/`src` | attachments ocultos | reserva editorial | **OWN-003:** seed; no se ven en el sitio |
 | 10 events vs 3 URLs en el estático | 10 singles en WP | 7 URLs nuevas en el corte | **ADR 0035:** PLANNED KEEP; slugs fijos |
 | 10 posters vs 10 events | OK si el mapeo de filenames es 1:1 | verificar al extraer | |
-| Docs 16 mencionan PDF | 0 en WP | excluido a propósito | **OWN-002 RETIRE** — no mismatch |
+| Inventario histórico 16 menciona PDF | 0 en WP | excluido a propósito | **OWN-002 RETIRE** — no mismatch |
 | Repo más nuevo vs ZIP en Hostinger | conteos o HTML distintos | deploy atrasado | **OWN-006:** extraer el repo vigente (`VERSION`); el ZIP viejo no es la fuente |
-| `content-source/` vs HTML | copy institucional distinto | live es el correcto | **OWN-007:** extraer HTML; no mismatch si el doc queda atrás |
+| Material legacy externo vs HTML | copy institucional distinto | live es el correcto | **OWN-007/017:** extraer HTML; no restaurar fuentes retiradas |
 
 ---
 
-**Versión:** 1.1
+**Versión:** 1.2

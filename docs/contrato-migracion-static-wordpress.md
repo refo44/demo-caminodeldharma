@@ -7,7 +7,8 @@ despliegue.
 
 **Decisión:** [ADR 0032](adr/0032-contrato-migracion-static-wordpress.md),
 [ADR 0033](adr/0033-importador-contenido-vs-fixtures.md),
-[ADR 0034](adr/0034-static-live-como-fuente-contenido-produccion.md).
+[ADR 0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
+[ADR 0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 
 **No sustituye:** ADR, `17-orden-implementacion`, `11-arbol-urls-final`, `12-theme-file-structure`.
 **Complementa:** `migracion-static-wordpress.md` (ledger de diferencias) y
@@ -20,7 +21,7 @@ despliegue.
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. |
-| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). No hay `docker-compose.yml` ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
+| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. La fuente legacy fue eliminada (ADR 0040). `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). No hay `docker-compose.yml` ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
 | **FUTURE PLAN** | Fase 3: reorg a `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE** (ADR 0029), sin theme clásico PHP. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado; corte según [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md). |
 
 Afirmaciones como «WordPress not started» y «deploy HTML to production» describen el **estado
@@ -61,15 +62,15 @@ El contenido editorial debe **sobrevivir** a un cambio de theme.
 | | CONTENT | PRESENTATION |
 | --- | ------- | ------------ |
 | Vive en | BD WordPress + `wp-content/uploads/` (tras el corte) | Theme (Git) |
-| Fuente de verdad actual (pre-corte) | `content-source/` → HTML de la maqueta (copy ya publicado) | HTML/CSS/JS de la maqueta |
+| Fuente de verdad actual (pre-corte) | HTML/JSON y media de producción publicada | HTML/CSS/JS publicado |
 | Fuente de verdad futura (post-corte) | WordPress (ADR 0013) | Git / theme de bloques |
 | Puede cambiar el theme sin reescribir | Sí, si el copy no está hardcodeado en plantillas | N/A |
 
-Precedencia **por tipo** (ADR 0033 + ADR 0034). No hay una jerarquía única:
+Precedencia pre-corte (ADR 0033 + ADR 0034 + ADR 0040):
 
 | Tipo | SOURCE OF TRUTH (hoy) | Tras el corte |
 | ---- | --------------------- | ------------- |
-| Copy institucional | **HTML live** (OWN-007). `content-source/` no pisa producción | WP |
+| Copy institucional | **HTML live** (OWN-007) | WP |
 | Eventos, posts, JSON galería, fechas, cards | **HTML/JSON live** (única representación completa) | WP |
 | `main.min.css` | generado desde `main.css` | theme |
 | Presentación | HTML/CSS/JS de la maqueta (contrato visual) | theme FSE |
@@ -207,7 +208,7 @@ STATIC DEPLOY  ≠  WORDPRESS CODE DEPLOY  ≠  WORDPRESS CONTENT
 
 | Operación | Qué mueve | Qué no mueve |
 | --------- | --------- | ------------ |
-| Static deploy (CURRENT) | HTML, CSS, JS, assets, `.htaccess`, `robots.txt`, `sitemap.xml` → `public_html` | `docs/`, `content-source/`, `scripts/` |
+| Static deploy (CURRENT) | HTML, CSS, JS, assets, `.htaccess`, `robots.txt`, `sitemap.xml` → `public_html` | `docs/`, `scripts/` |
 | WP code deploy (FUTURE) | Solo `wordpress/wp-content/themes/camino-del-dharma/` y `plugins/camino-del-dharma-core/` | core, `wp-config.php`, uploads, plugins de terceros, BD |
 | WP content | Importador WP-CLI / edición wp-admin | Código del theme |
 
@@ -264,8 +265,8 @@ Smoke HTTP mínimo (tras cutover, sobre el hostname del environment bajo prueba)
 
 **Paridad vs producción publicada (OWN-007):** antes de dar por buena una Page, un import o el
 corte, comparar copy, contenido **y** estilos con `https://caminodeldharma.org`. El repo local o
-`content-source/` no bastan. Si ZIP en Hostinger y `VERSION` del repo no coinciden, registrar el
-delta; no asumir que son el mismo artefacto.
+materiales legacy no bastan. Si ZIP en Hostinger y `VERSION` del repo no coinciden, registrar el
+delta; no asumir que son el mismo artefacto (ADR 0040).
 
 Honestidad probatoria ya adoptada: `Unverified` / `Pass (local)` / `Pass`. `Pass (local)` no
 sustituye a `Pass` para PHP/Apache/HTTPS/correo reales de Hostinger (ADR 0023).
@@ -379,4 +380,4 @@ documentación; hace falta no olvidarlo en Fase 3.
 
 ---
 
-**Versión:** 1.0 · **Fecha:** 2026-08-19
+**Versión:** 1.1 · **Fecha:** 2026-08-29

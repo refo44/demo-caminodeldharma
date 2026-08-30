@@ -10,7 +10,8 @@ pipelines.
 - Production: static HTML on Hostinger (`https://caminodeldharma.org`) with real visitors. Not a disposable mockup.
 - Hardcoded events (10 cards), blog posts (2), gallery JSON (35 + 3 albums) are **production content** (ADR 0034).
 - Repo layout: site at **root**. `static/` does **not** exist. `wordpress/` holds empty plugin/theme trees (README only) for Sonar; no FSE implementation yet.
-- Institutional copy: **live HTML wins** (OWN-007). `content-source/` is reference; do not overwrite production from the doc.
+- Institutional copy and presentation: **published production wins** until cutover (OWN-007,
+  ADR 0040). The legacy source folder was permanently removed; do not recreate it.
 - Deploy: manual ZIP (ADR 0015). WordPress: **not started**.
 - `/privacidad` is published (ADR 0039, provisional). Do not rewrite the live notice. Contact Form 7
   stays gated until that notice describes a server-side form.
@@ -21,7 +22,7 @@ pipelines.
 2. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
 3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
 4. `docs/cutover-checklist-wordpress.md`
-5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0038**
+5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0040**
 6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, 0 abiertas; `POST-*` = fases posteriores, no bloquear el corte)
 7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 8. `docs/guia-pruebas-plugin-theme-fse.md` — TDD, wp-phpunit, FSE, Sonar (ADR 0038)

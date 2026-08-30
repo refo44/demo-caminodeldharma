@@ -27,6 +27,10 @@ ADR 0033 estableció que el HTML no debe convertirse en una segunda redacción i
 - usar fixtures en lugar del histórico;
 - dar por cerrada la migración porque el block theme «se ve bien».
 
+*(Nota de vigencia 2026-08-29: ADR 0040 retiró permanentemente `content-source/` y amplió la
+autoridad del sitio publicado a copy institucional y presentación. Las referencias posteriores a la
+carpeta en este ADR describen el contexto anterior.)*
+
 Este ADR no implementa extractores ni importadores.
 
 ## Decisión

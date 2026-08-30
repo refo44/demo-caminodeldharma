@@ -61,6 +61,10 @@ como demo. Tras el corte, wp-admin es la SoT editorial (ADR 0013).
 Si `content-source/` y el sitio divergen, el importador usa el HTML. QA: comparar copy, contenido y
 estilos con `https://caminodeldharma.org`, no solo el repo.)*
 
+*(Nota de vigencia 2026-08-29: ADR 0040 sustituyó «Fuente canónica del copy» y ordenó eliminar
+permanentemente la fuente legacy. Operativamente, el importador extrae HTML/JSON y media publicados.
+Las decisiones de este ADR sobre idempotencia, fixtures y protección de wp-admin siguen vigentes.)*
+
 ### Preferencia de implementación (cuando se construya)
 
 - Comando WP-CLI en `camino-del-dharma-core` (ADR 0024), no como side-effect de `register_activation_hook`.
@@ -129,5 +133,5 @@ Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se 
 - ADR [0024](0024-plugin-dominio-theme-presentacion.md), [0028](0028-privacidad-aplazada-conscientemente.md)
 - ADR [0032](0032-contrato-migracion-static-wordpress.md)
 - `docs/contrato-migracion-static-wordpress.md`
-- `docs/16-content-source-inventario.md`
-- `content-source/Pagina web Camino del Dharma/Contenido_Web_Camino_del_Dharma.docx`
+- `docs/16-inventario-historico-fuente-retirada.md`
+- Fuente editorial original retirada permanentemente por ADR 0040; ya no existe una ruta operativa.

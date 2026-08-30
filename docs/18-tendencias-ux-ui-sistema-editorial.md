@@ -1,7 +1,7 @@
 # Camino del Dharma — Tendencias UX/UI aplicadas al sistema editorial
 
 **Qué tendencias adoptar y cuáles evitar para proteger calma, claridad y acogida.**  
-**Versión 1.1**
+**Versión 1.2**
 
 Este documento actúa como **filtro** (no como driver): refuerza lectura, accesibilidad y performance; evita personalización, ruido visual y comportamiento invasivo. Referencia obligatoria para validar la maqueta estática (véase `17-orden-implementacion`, Fase 2).
 
@@ -26,7 +26,8 @@ El diseño contemporáneo se mueve en dos direcciones:
 
 Camino del Dharma pertenece deliberadamente al segundo grupo.
 
-La prioridad es: **calma, claridad, coherencia** (Contenido_Web), **tipografía legible**, **espacios amplios**, **ritmo visual pausado**, performance y **coherencia visual a largo plazo**.
+La prioridad vigente en producción es: **calma, claridad, coherencia**, **tipografía legible**,
+**espacios amplios**, **ritmo visual pausado**, performance y **coherencia visual a largo plazo**.
 
 ---
 
@@ -78,7 +79,8 @@ Menos opciones = menos fricción cognitiva.
 
 La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesitan gráficos ni recursos decorativos. Se necesitan: jerarquía, aire, continuidad visual.
 
-**Contenido_Web:** "Diseño sobrio, con amplios espacios en blanco, tipografías legibles y un ritmo visual pausado."
+**Principio materializado en producción:** diseño sobrio, con amplios espacios en blanco, tipografías
+legibles y un ritmo visual pausado.
 
 **Responsive (criterio UX, no norma técnica):** Priorizar lectura en móvil; evitar layouts complejos en pantallas pequeñas; evitar sobrecarga visual. Este doc actúa como filtro para validar decisiones. El sistema de layout y breakpoints se define en `20-layout-principles` y su implementación en `14-css-architecture`.
 
@@ -88,7 +90,7 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 |--------|---------------------------|
 | **Minimalismo sin personalidad** | La identidad se sostiene en tipografía, ritmo, tono y composición. **No en efectos.** |
 | **Simplificar y perder información** | **La claridad nunca puede sacrificar el acceso al contenido.** |
-| **CTAs agresivos** | Contenido_Web: "evitando los llamados a la acción agresivos". |
+| **CTAs agresivos** | Contradicen el tono de acogida publicado. |
 
 ### 2.5 Reglas operativas
 
@@ -118,7 +120,7 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 |-----------|--------|---------------------------|----------------|
 | Design tokens (roles semánticos) | Adoptar | Consistencia, control editorial | `:root` + roles semánticos; `theme.json` bloquea paleta y tipografías |
 | Performance-first | Adoptar | Lectura rápida, menos fricción | 1 CSS, JS mínimo con defer, imágenes con dimensiones |
-| Accesibilidad-first | Adoptar | Lectura inclusiva; **Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información)" | Contraste AA, focus visible, headings correctos, teclado completo, reduced motion |
+| Accesibilidad-first | Adoptar | Lectura inclusiva; **antecedente histórico:** "Accesibilidad para personas con discapacidad visual (Sandra tiene información)" | Contraste AA, focus visible, headings correctos, teclado completo, reduced motion |
 | Micro-interacciones | Adoptar con cuidado | Solo feedback, no espectáculo | Hover, focus, estados de botón, menú móvil |
 | Dark mode | Opcional | Útil si no rompe contraste | `prefers-color-scheme` reasigna roles |
 | Parallax, 3D, AR/VR | Evitar | Compite con calma y claridad | No aplica |
@@ -149,7 +151,8 @@ La **tipografía** es la voz; el **espacio en blanco** es el ritmo. No se necesi
 
 ## 5. Accesibilidad (regla fija)
 
-**Lluvia de ideas:** "Accesibilidad para personas con discapacidad visual (información experta específica para el proyecto)."
+**Antecedente histórico ya incorporado:** "Accesibilidad para personas con discapacidad visual
+(información experta específica para el proyecto)."
 
 **Aplicación concreta:**
 
@@ -233,5 +236,6 @@ Este documento es el **filtro oficial de tendencias UX/UI** del proyecto: adopta
 
 ---
 
-**Versión:** 1.1  
-**Referencias:** `02-identidad-corporativa`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `12-theme-file-structure`, `17-orden-implementacion`, content-source (Contenido_Web, Lluvia de ideas)
+**Versión:** 1.2
+**Referencias:** producción publicada, `02-identidad-corporativa`, `04-mapa-pantallas`,
+`05-arquitectura-informacion-navegacion`, `12-theme-file-structure`, `17-orden-implementacion`

@@ -44,7 +44,8 @@ Este documento cierra el sistema visual del sitio: define ancho de lectura, ritm
 - **Proporción:** Cuando texto e imagen comparten bloque, definir proporción clara (50/50, 2/3–1/3, etc.) según 06-wireframes. No improvisar.
 - **Nivel editorial:** El layout no debe imponer dramatismo visual. Coherente con el espíritu sobrio del sitio.
 - **Legibilidad sobre imagen:** Si hay texto sobre imagen, asegurar contraste (overlay, sombra o zona sólida). Criterios de contraste en `19-accesibilidad-estandares`.
-- **Alt y contexto:** Toda imagen con `alt` significativo; la relación texto/imagen también es semántica (contenido editorial en content-source).
+- **Alt y contexto:** Toda imagen con `alt` significativo; la relación texto/imagen también es
+  semántica y debe preservarse desde el HTML publicado.
 
 ---
 
@@ -101,4 +102,4 @@ Estos principios:
 
 ---
 
-**Versión:** 1.1 — Inicio: nota del evento alineada al hero; rótulo encima del cartel `medium`.
+**Versión:** 1.2 — Fuente de relaciones editoriales alineada con ADR 0040.

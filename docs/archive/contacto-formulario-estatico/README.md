@@ -23,7 +23,8 @@ Copia de referencia para **restaurar o replicar** la página `/contacto` y su fo
 
 ## Formulario — especificación
 
-Copy canónico (content-source): intro «La práctica se fortalece cuando se comparte»; campos **Nombre**, **Correo electrónico**, **Mensaje**; botón **Enviar**.
+Copy publicado: intro «La práctica se fortalece cuando se comparte»; campos **Nombre**,
+**Correo electrónico**, **Mensaje**; botón **Enviar**.
 
 Markup actual (líneas 127–147 de `contacto/index.html`):
 

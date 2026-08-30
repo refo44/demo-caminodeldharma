@@ -27,7 +27,7 @@ const REPO = path.resolve(__dirname, '..', '..');
 // aplanado sobre blanco, es decir, un cuadro liso.)
 const LOGO = fs.readFileSync(path.join(
   REPO,
-  'content-source/Pagina web Camino del Dharma/FOTOS PAGINA WEB/logo-camino-del-dharma-fondo-marca-oscuro.png',
+  'assets/images/logo-docx-cover.png',
 ));
 
 /* ---------------------------------------------------------------- portada */

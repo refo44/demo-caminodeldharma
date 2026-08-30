@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.8 |
+| **Versión** | 3.9 |
 | **Fecha** | 2026-08-29 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.9)
+
+- OWN-017 y ADR 0040 retiran permanentemente la fuente legacy sin respaldo. Producción publicada es
+  el único baseline pre-corte; el repo `VERSION` se compara con Hostinger.
+- FABLE5 v2.3, backlog v1.20 y documentación operativa quedan alineados con ese retiro.
 
 ### Cambios principales (3.8)
 
@@ -21,8 +27,8 @@ Este documento define el orden oficial de implementación, validación, migraci�
 ### Cambios principales (3.7)
 
 - Reglas `.cursor` de fuentes editoriales alineadas con OWN-007 y ADR 0034: el sitio publicado gana
-  antes del corte; `content-source/` queda como referencia protegida y potencialmente desactualizada.
-- FABLE5 v2.2 elimina el gate documental ya resuelto. Fase 3 queda lista para iniciar WU-00/WU-01
+  antes del corte. El tratamiento como referencia protegida fue sustituido después por ADR 0040.
+- FABLE5 v2.2 eliminó el gate documental de ese momento. Fase 3 quedó lista para iniciar WU-00/WU-01
   cuando el propietario lo autorice; WordPress continúa sin implementación.
 
 ### Cambios principales (3.6)
@@ -71,7 +77,7 @@ Este documento define el orden oficial de implementación, validación, migraci�
   pasa a ser obligatorio al existir tests PHP (ADR 0038).
 - Congelamiento de documentación base (§ más abajo)
 
-**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `16-content-source-inventario`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `migracion-static-wordpress`, `docs/adr/README.md`, `.audit/` (auditoría de producción 2026-07-19)
+**Depende de:** `02-identidad-corporativa`, `03-wordpress-content-model`, `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `06-wireframes`, `09-ui-copy-sheet`, `11-arbol-urls-final`, `12-theme-file-structure`, `13-static-file-structure`, `14-css-architecture`, `15-assets-strategy`, `18-tendencias-ux-ui-sistema-editorial`, `19-accesibilidad-estandares`, `inventario-contenido-produccion-static`, `migracion-static-wordpress`, `docs/adr/README.md`, `.audit/` (auditoría de producción 2026-07-19)
 
 ---
 
@@ -81,7 +87,7 @@ Tres tiempos (no mezclar):
 
 | Tiempo | Hecho |
 | ------ | ----- |
-| **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). `static/` **no existe**. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
+| **CURRENT STATE** | Fase 2 **live** (`https://caminodeldharma.org`, visitas reales). HTML en la **raíz**. Eventos (10), posts (2) y galería JSON (35+3) en HTML son producción (ADR 0034). La fuente legacy fue eliminada (ADR 0040). `static/` **no existe**. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). WordPress **no iniciado**. ZIP manual (ADR 0015). `VERSION` en la raíz. |
 | **HISTORICAL STATE** | Auditoría 2026-07-19 (Fase 2.75). Docs previos a ADR 0029 describían un theme clásico PHP (`docs/04` conserva esa tabla como histórico). Restos de un WordPress anterior en `.htaccess`. El nombre «maqueta» en docs antiguos no significa prototipo desechable (ADR 0001). |
 | **FUTURE PLAN** | Fase 3: reorg ADR 0014. **Estático de producción → FSE** (ADR 0029); no hay theme PHP intermedio. Plugin ADR 0024. Extracción + import (ADR 0033/0034). WP en **otra instancia Hostinger sin dominio custom** (staging, OWN-005) hasta el switch. Corte: `docs/cutover-checklist-wordpress.md`. Producción estática **sigue** hasta el corte. |
 
@@ -90,7 +96,7 @@ Tres tiempos (no mezclar):
 | **Fase activa** | Fase 2 **en producción** (sitio estático live); mantenimiento; Fase 3 **no iniciada** |
 | **URL producción** | [https://caminodeldharma.org](https://caminodeldharma.org) |
 | **Estructura repo** | HTML en **raíz** (carpeta `static/` aún no existe) |
-| **WordPress** | No iniciado (Fase 3 pendiente; decisiones de **corte** cerradas). i18n/inglés = `POST-*` (fases posteriores, no el corte). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. FABLE5 v2.2 puede iniciar WU-00/WU-01 cuando el propietario lo autorice. Activar un theme futuro **no** crea Pages (ADR 0032). |
+| **WordPress** | No iniciado (Fase 3 pendiente; decisiones de **corte** cerradas). i18n/inglés = `POST-*` (fases posteriores, no el corte). Árboles placeholder bajo `wordpress/` para Sonar (ADR 0038); sin `theme.json` ni PHP. FABLE5 v2.3 puede iniciar WU-00/WU-01 cuando el propietario lo autorice. Activar un theme futuro **no** crea Pages (ADR 0032). |
 | **Contrato de migración** | `docs/contrato-migracion-static-wordpress.md` + inventario ADR 0034 |
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |
@@ -111,7 +117,7 @@ visible hasta el corte (OWN-007).**
 
 - Todo cambio debe realizarse en el repositorio. No se editarán archivos directamente en el servidor de producción.
 - El servidor (Hostinger) es un **destino de despliegue**, no un entorno de edición.
-- Copy institucional de producción: **HTML live** (OWN-007). `content-source/` es referencia; si diverge, no pisa el sitio.
+- Copy institucional y presentación: **sitio publicado** (OWN-007, ADR 0040).
 - Eventos, posts y JSON de galería: el HTML live es la fuente de producción **hasta extraerse** (ADR 0034). No descartarlo como maqueta.
 - El código y los assets viven en el repo según `13-static-file-structure` y `15-assets-strategy`.
 - Cambios manuales en el servidor se pierden en el siguiente ZIP y no deben realizarse.
@@ -170,7 +176,8 @@ Evitar ciclos de refinamiento permanente que retrasen la implementación. Priori
 
 ## Fase 1: Documentación y diseño
 
-1. **Completar identidad:** Extraer paleta y tipografía del PDF `Identidad CAMINO DEL DHARMA- (1).pdf` → actualizar `02-identidad-corporativa.md`
+1. **Completar identidad (histórico, realizado):** la paleta y tipografía se extrajeron a
+   `02-identidad-corporativa.md`; la fuente legacy fue retirada después por ADR 0040.
 2. **Wireframes:** Estructura de bloques por pantalla según `06-wireframes` (y `04-mapa-pantallas`); en papel, Figma o HTML
 3. **Validar documentación:** Revisar que todos los docs estén alineados
 4. **Consultar tendencias UX/UI:** `18-tendencias-ux-ui-sistema-editorial` como filtro para decisiones de diseño
@@ -195,7 +202,10 @@ La fase se considera **cerrada** cuando:
    - CSS3 (tokens de identidad, roles semánticos)
    - JS mínimo con `defer` (navegación, formularios, accesibilidad)
 2. Contenido según: `04-mapa-pantallas`, `05-arquitectura-informacion-navegacion`, `09-ui-copy-sheet`, `02-identidad-corporativa`
-3. Assets desde `content-source/` copiados a `assets/` en la raíz del repo (regla en `15-assets-strategy`, inventario en `16-content-source-inventario`). Imágenes optimizadas con `scripts/optimize-images.sh`; galería con nombres unificados vía `scripts/rename-gallery-to-kebab.sh`.
+3. Assets versionados en `assets/` en la raíz del repo (regla en `15-assets-strategy`; inventario
+   vigente en `inventario-contenido-produccion-static`). Imágenes optimizadas con
+   `scripts/optimize-images.sh`; galería con nombres unificados vía
+   `scripts/rename-gallery-to-kebab.sh`.
 4. **Validar contra checklist** de `18-tendencias-ux-ui-sistema-editorial` (§8) antes de dar por cerrada la fase
 5. **Validar responsive:** Comportamiento en móvil, tablet y desktop antes de pasar a WordPress
 6. **Validar CSS:** Ejecutar `npm run lint:css` después de cada cambio en `assets/css/` y antes de cerrar una tarea, crear un commit o desplegar. No se acepta una entrega con errores de Stylelint.
@@ -437,7 +447,7 @@ Orden en `.audit/implementation/waves.md`:
 6. **WAVE-6** — Pre-render galería (0010)
 
 **Arranque histórico recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
-La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.2.
+La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.3.
 
 Implementar en sesiones separadas; cada tarea incluye criterios de aceptación, validación y rollback. Respetar `conflict-map.md` (no editar `.htaccess`, `contacto/index.html` ni las 14 páginas HTML en paralelo dentro del mismo conflict group).
 
@@ -762,4 +772,4 @@ A partir de la versión 3.0, **priorizar implementación** sobre ampliación de 
 
 ---
 
-**Versión:** 3.8 · **Fecha:** 2026-08-29 · **Estado:** Vigente
+**Versión:** 3.9 · **Fecha:** 2026-08-29 · **Estado:** Vigente

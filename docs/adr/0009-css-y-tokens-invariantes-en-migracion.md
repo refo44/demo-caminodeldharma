@@ -29,6 +29,9 @@ WordPress puede aportar `theme.json` para alinear paleta y tipografías del edit
 
 Cambios permitidos sin ADR: correcciones de bugs, accesibilidad (contraste, focus) y ajustes alineados con `content-source/`. Cambios de identidad o arquitectura CSS requieren actualizar `02`, `14` y posiblemente un ADR sustitutorio.
 
+*(Nota de vigencia 2026-08-29: `content-source/` fue retirado por ADR 0040. Para el estático, esos
+ajustes se validan contra producción publicada; para WordPress, ADR 0029 gobierna.)*
+
 ## Alternativas consideradas
 
 | Alternativa | Motivo de descarte |
