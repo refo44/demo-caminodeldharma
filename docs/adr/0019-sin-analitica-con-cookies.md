@@ -81,6 +81,10 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
   datos personales en general —no solo cookies—, y el sitio recoge datos por canales de contacto.
   La conclusión jurídica corresponde a asesoría, no a esta decisión técnica.
 
+*(Nota de vigencia 2026-08-30: los embeds ya usan `youtube-nocookie.com` / Vimeo `dnt=1`
+(CHANGELOG v1.0.13+). `/privacidad` está publicada de forma provisional — ADR 0039. La revisión
+legal y el gate de Contact Form 7 siguen abiertos.)*
+
 **Costos aceptados**
 
 - No habrá datos de comportamiento dentro del sitio (recorridos, permanencia, puntos de abandono).

@@ -55,7 +55,7 @@ Ninguna.
 | ID | Fecha | Decisión |
 | -- | ----- | -------- |
 | OWN-001 | 2026-08-28 | **Foto de página ≠ ítem de galería.** Una imagen usada como ilustración en otra página no entra en `/galeria`. `galeria-04.jpg` se importa como media de `/practica`, no al álbum. Conteos: 35 galería + 1 media de página. El preview del inicio (`galeria-01`–`03`) es teaser de la galería, no ilustración de otra sección: esas tres **sí** siguen en `#gallery-data`. |
-| OWN-006 | 2026-08-28 | Extraer **lo más reciente del repo** (`VERSION` vigente, hoy 1.0.34), no el ZIP más viejo que aún esté en Hostinger. Indicar tag/commit en el payload. Si producción se atrasó, el delta es «desplegar o reconciliar», no extraer el artefacto viejo. |
+| OWN-006 | 2026-08-28 | Extraer **lo más reciente del repo** (`VERSION` vigente, hoy 1.0.35), no el ZIP más viejo que aún esté en Hostinger. Indicar tag/commit en el payload. Si producción se atrasó, el delta es «desplegar o reconciliar», no extraer el artefacto viejo. |
 | OWN-009-img | 2026-08-28 | **Imágenes → Media Library vía seed.** Todas las imágenes referenciadas (galería, carteles, páginas, hero, fundador, etc.) se suben como attachments. El seed es **contenido real** (ADR 0033): idempotente, create-missing-only, sin `_cdd_fixture`, **sin teardown**. Thumbs estáticos: WordPress regenera tamaños. No hardcodear fotos en `templates/` ni en el theme. |
 | OWN-002 | 2026-08-28 | **RETIRE.** El PDF de recitación de la comida queda **excluido de la web**. No forma parte de los archivos del sitio. No enlazar, no importar, no seed, no URL. Docs 04/16/23 que lo mencionan son HISTORICAL. |
 | OWN-003 | 2026-08-28 | **Huérfanas → seed oculto.** Toda imagen del repo no enlazada en HTML (p. ej. `celebracion-vesak-2019` y el resto no usado de `celebraciones/`) se sube a Media Library con el seed, **sin** mostrarse en el sitio: no álbum, no Page, no teaser. Quedan en la biblioteca por si se usan después. `celebracion-diwali.jpg` **sí** está en `/practica` → media de página (OWN-001), no huérfana. El PDF no es imagen (OWN-002). |
@@ -124,6 +124,8 @@ posteriores**. No reabren Fase 3. No se implementan en el corte.
 
 **v1.20 (2026-08-29):** OWN-017 retira permanentemente `content-source/` sin respaldo; ADR 0040
 consolida producción publicada como fuente pre-corte.
+
+**Higiene 2026-08-30:** OWN-006 actualiza el ejemplo de `VERSION` a 1.0.35; no reabre decisiones.
 
 **Versión:** 1.20 · **Fecha:** 2026-08-29 · **Estado:** Fase 3: 0 abiertas · 18 decididas (no
 iniciada). Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.

@@ -1,12 +1,8 @@
 # Camino del Dharma — Contexto del proyecto
 
-Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no tiene
-acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y lo que
-está en curso, a fecha **2026-08-13**.
-
-**Addenda 2026-08-29:** `/privacidad` está publicada (aviso provisional, ADR 0039). El aplazamiento de
-ADR 0028 queda sustituido. Contact Form 7 sigue gated hasta actualizar el aviso y la revisión legal.
-La versión del repositorio es **1.0.35**. Fase 3 (FSE) sigue sin iniciar.
+Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no
+tiene acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y
+lo que está en curso, a fecha **2026-08-30**.
 
 ---
 
@@ -21,236 +17,232 @@ Especial – Ministerio del Interior). En palabras del propio plan del proyecto:
 No es una landing page, ni un sitio comercial, ni un CMS orientado a marketing. No tiene funnels, no
 tiene presión de conversión, no tiene analítica de comportamiento. Es una plataforma comunitaria.
 
-El sitio orienta hacia: la comunidad, el linaje (tradición Chan y Tierra Pura), la práctica (meditación
-semanal, retiros, mantras), eventos, una galería, cómo contribuir (donaciones, nunca como transacción) y
-cómo contactar (WhatsApp, correo, y en el futuro un formulario funcional).
+El sitio orienta hacia: la comunidad, el linaje (tradición Chan y Tierra Pura), la práctica
+(meditación semanal, retiros, mantras), eventos, una galería, cómo contribuir (donaciones, nunca
+como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formulario funcional).
 
 ---
 
-## 2. Estado actual (2026-08-13)
+## 2. Estado actual (2026-08-30)
 
 | Aspecto | Estado |
 |---|---|
-| **Producción** | Sitio estático (HTML/CSS/JS, sin build step de servidor) en `https://caminodeldharma.org`, alojado en **Hostinger** (hosting compartido) |
-| **Versión desplegada** | v1.0.23 |
-| **Versión en el repositorio** | v1.0.28 (pendiente de despliegue) |
-| **Fase activa** | Transición a **Fase 3 (WordPress)** — el repo aún no se ha reorganizado (`static/` todavía no existe; el HTML sigue en la raíz) |
-| **Repo** | Monorepo único durante toda la transición (Git como fuente única de verdad) |
-| **Despliegue** | Manual (ZIP → File Manager de Hostinger). CI/CD explícitamente pospuesto |
-| **Corte a WordPress (reemplazo del sitio estático)** | **No antes del 10 de agosto de 2026** — decisión de la comunidad para no migrar justo antes del 7.º Encuentro Nacional Buddhista (7–9 agosto 2026, Puerto Colombia) |
-| **Auditoría de producción (2026-07-19)** | Score 84/100; SEO técnico 100/100; 0 hallazgos críticos; formulario de contacto sin backend real es el hallazgo más relevante pendiente |
+| **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
+| **Versión en el repositorio** | **1.0.35** (`VERSION`) |
+| **Versión en Hostinger** | Puede ir atrasada; no asumir paridad. Comparar contra live (OWN-006/007) |
+| **Fase activa** | Fase 2 **en producción**; Fase 3 (WordPress FSE) **documentada y lista**, **no iniciada** |
+| **Estructura del repo** | HTML en la **raíz**. `static/` aún no existe. `wordpress/` solo placeholders para Sonar |
+| **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
+| **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
+| **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
+| **Auditoría de producción** | Completa (2026-07-19). Formulario sin backend real sigue pendiente hasta WordPress |
+| **Backlog de dueño (corte)** | **Cerrado** (v1.20): 0 abiertas, 18 decididas (OWN-001–OWN-017) |
+| **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n); **no** se implementan en el corte |
 
 ---
 
 ## 3. Principios de producto (qué es y qué NO es)
 
-**El sitio SÍ permite:** actualizar la meditación semanal, publicar/ocultar eventos, mantener un
-cronograma, incrustar videos (YouTube/Vimeo), conectar sanghas, compartir testimonios — todo sin tocar
-código ni servidor, una vez WordPress esté implementado.
+**El sitio SÍ permite (cuando exista WordPress):** actualizar la meditación semanal, publicar/ocultar
+eventos, mantener un cronograma, incrustar videos, compartir testimonios y editar Pages — sin tocar
+código ni servidor para el contenido editorial.
 
 **El sitio NO tiene, por decisión explícita:**
 - Buscador
 - Área privada / registro de usuarios
 - Sistema de cursos
 - Pagos internos (cualquier inscripción con costo redirige a una plataforma externa)
-- Analítica con cookies, de ningún tipo (ni siquiera "privacy-friendly" por defecto)
-- PWA / manifest / Service Worker, en ninguna fase
-- Un lightbox de galería propio (se usa el nativo de Gutenberg)
+- Analítica con cookies, de ningún tipo
+- PWA / manifest / Service Worker
+- Un lightbox de galería propio (en WP: nativo de Gutenberg)
+- Paginación numerada de galería en el corte (OWN-011)
 
 **Tono editorial:** sobrio, cálido, sin urgencia. CTAs como "Practica con nosotros", "Participar",
-"Inscribirme", "Preinscribirme", "Ver evento" (Inicio, a esa ficha), "Ver evento →" (listado), "Donar" — nunca lenguaje de venta.
+"Inscribirme", "Preinscribirme", "Ver evento", "Donar" — nunca lenguaje de venta.
+
+**Migración imperceptible:** el cambio static → WordPress no debe notarse para los visitantes, salvo
+funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 
 ---
 
 ## 4. Arquitectura de decisiones (ADR) — resumen
 
-El proyecto documenta cada decisión estructural como ADR (`docs/adr/`), 28 hasta la fecha. Resumen de
-las más relevantes para cualquier trabajo futuro:
+Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
 |---|---|---|
-| 0001 | La maqueta estática es la base **definitiva**, no un prototipo desechable | WordPress no rediseña; solo cambia el motor |
-| 0002 | WordPress = adaptación, no rediseño | Mismo CSS, mismos bloques, mismas URLs |
-| 0003 | **Sin PWA nunca**, sin `manifest`, sin Service Worker | Sitio web tradicional, no app instalable |
-| 0004 / 0005 | Git es la única fuente de verdad; **prohibida** la edición manual en producción | Todo cambio pasa por el repo |
-| 0006 / 0007 | GitHub Actions + SSH/rsync es el mecanismo **objetivo** de CI/CD | Pero ver ADR 0016 — está pospuesto |
-| 0008 | URLs de la maqueta son definitivas; enlaces internos **siempre absolutos de raíz**, nunca relativos | Ya rompió producción dos veces (incidentes reales documentados) |
-| 0009 | CSS y tokens de diseño son invariantes durante la migración | Un solo `main.css`, sin frameworks, sin reescritura |
-| 0010 / 0018 / 0020 | HSTS **desactivado**, aplazado hasta ≥30 días después del corte a WordPress | Tráfico casi nulo (~9 clics/28 días); no vale el riesgo de romper TLS a mitad de migración |
-| 0012 | WordPress es el motor de contenido elegido (frente a otras opciones) | — |
-| 0014 | Monorepo con `static/` + `wordpress/` al iniciar Fase 3 | — |
-| 0015 / 0016 | Despliegue manual **temporal**; automatización **pospuesta**, no solo "no activada todavía" | No crear workflows de GitHub Actions aún |
-| 0019 | **Sin analítica con cookies, nunca** — GA4 descartado definitivamente | El tráfico es tan bajo que la analítica sería ruido, no información; medición vía Search Console (gratis, sin cookies) |
-| 0021 | Sin lightbox propio de galería — se usa el nativo de WordPress/Gutenberg | Menos JS propio que mantener |
-| 0022 | La ciudad de un evento es **taxonomía, no URL** — sin `/eventos/cali` ni archivos por ciudad | Evita páginas doorway / navegación facetada |
-| 0023 | Entorno de desarrollo local con **Docker**, replicando versiones reales de Hostinger | **PHP 8.3 y MariaDB 11.8 ya confirmados** esta semana. Tarea separada de implementar el theme (decisión expresa del propietario) |
-| 0024 | Plugin propio `camino-del-dharma-core` desde el inicio; el theme `camino-del-dharma` **solo presenta** | El dominio (CPTs, taxonomías, roles) vive en el plugin, nunca en el theme |
-| 0025 | Plugins de terceros solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno | — |
-| 0026 | **Contact Form 7** para el formulario de contacto, buzón `caminodeldharma1@gmail.com` | Primer y único plugin de terceros aprobado |
-| 0027 | Estándares de ingeniería para Fase 3: criterio senior + SOLID/KISS/YAGNI **cuando aplique** (no dogmático); WPCS y seguridad de WordPress **no negociables** | Guardrail explícito anti-sobre-ingeniería para un plugin de ~2 CPTs |
-| 0028 | Política de privacidad **aplazada** hasta asesoría legal, pero es **gate obligatorio antes de publicar Contact Form 7** | No es un "algún día"; es una condición de release concreta |
+| 0001 / 0002 | Estático = base definitiva; WordPress adapta, no rediseña | Paridad visual y de comportamiento |
+| 0003 | Sin PWA nunca | Web tradicional |
+| 0004 / 0005 | Git gobierna código; producción no se edita a mano | Trazabilidad |
+| 0008 | URLs públicas **sin barra final** | Ya rompió producción dos veces con rutas relativas |
+| 0012 | WordPress es el motor de contenido | — |
+| 0013 | Código en Git; contenido editorial en WP tras el corte | Tres deploys distintos |
+| 0014 | Monorepo `static/` + `wordpress/` al iniciar Fase 3 | — |
+| 0015 / 0016 | Deploy manual temporal; automatización de CD pospuesta | No crear workflows de deploy aún |
+| 0019 | Sin analítica con cookies; GA4 descartado | Search Console |
+| 0020 | HSTS aplazado hasta ≥30 días tras el corte | — |
+| 0021 | Lightbox nativo de Gutenberg; no migrar `gallery.js` | — |
+| 0022 | Ciudad = taxonomía, no URL de filtro | Sin doorway pages |
+| 0023 | Local Docker: PHP 8.3 + MariaDB 11.8 | Paridad Hostinger |
+| 0024 | Plugin `camino-del-dharma-core` = dominio; theme = presentación | — |
+| 0025 / 0026 | Plugins de terceros solo con ADR; CF7 aprobado y gated | — |
+| 0027 | Estándares de ingeniería; WPCS y seguridad no negociables | — |
+| 0029 | Theme **FSE / block theme** — **sin** theme clásico PHP intermedio | Sustituye la arquitectura clásica |
+| 0030 / 0031 | Sitemap nativo WP; tags de blog noindex hasta volumen | — |
+| 0032 | Contrato: CONTENT + PRESENTATION + ROUTING + BEHAVIOR + OPERATIONS | Theme activado ≠ migración completa |
+| 0033 / 0034 | Importador ≠ fixtures; HTML/JSON live = contenido de producción | Extraer, no reescribir |
+| 0035 | Todo evento tiene single; pasados sin inscripción | 10 `/eventos/{slug}` |
+| 0036 | Álbumes `/galeria/{slug}` vía taxonomía; noindex hasta volumen | Hub `/galeria` KEEP |
+| 0037 | CPT `blog_author` en `/author/{slug}`; no Users WP | — |
+| 0038 | TDD + wp-phpunit; Sonar solo plugin + theme | — |
+| 0039 | `/privacidad` publicada (provisional); CF7 gated | — |
+| 0040 | `content-source/` retirado; producción publicada gobierna pre-corte | — |
+
+ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda histórico para WordPress
+(sustituido por 0029); sigue describiendo el CSS del estático.
 
 ---
 
 ## 5. Modelo de contenido y URLs
 
-**Post types:** `page` (nativo, para las páginas institucionales) + CPT **`event`** (el único CPT en
-alcance ahora mismo).
+**Objetos en el corte:**
+- Pages institucionales (home, comunidad, linaje, práctica, videos, meditación, galería, donaciones,
+  contacto, blog archivo, privacidad)
+- CPT `event` (10) — todos con single público (ADR 0035)
+- CPT `blog_author` (2 semillas) + 2 posts
+- Taxonomía `gallery_album` (General / 2023 / 2021) — URLs `/galeria/{slug}` noindex al corte
+- Media real vía seed (OWN-009-img); mp3 a Media Library; `.ics` **generado** por el plugin (OWN-009)
 
-**CPT `sangha` está fuera de alcance** — aplazado por decisión expresa del propietario (2026-07-31) hasta
-tener ciudades confirmadas y un wireframe, que todavía no existen. No implementarlo "ya que la
-arquitectura del plugin lo soporta fácilmente".
+**Fuera del corte inicial:** CPT `sangha` (ADR 0024).
 
-**Taxonomías:** `event_type` (jerárquica: Curso, Taller, Retiro, Conferencia, Encuentro, Celebración) y
-`event_city` (plana). **Ninguna tiene archivo público** — son solo etiquetas, nunca URLs, para evitar
-páginas casi-duplicadas sin contenido real (doorway pages).
+**Política de URL pública:** **sin barra final** (ADR 0008). El doc 11 puede mostrar barras por
+convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`.
 
-**Regla clave de `/eventos/`:** siempre existe. Muestra dos bloques distintos — eventos **vigentes**
-(agrupados por mes) y un **archivo de finalizados** (agrupados por año). Los finalizados **sí** se
-muestran (decisión revertida el 2026-07-21): son la única señal geográfica honesta que tiene la
-comunidad, ya que ninguna ciudad tiene sede fija ni es elegible para Google Business Profile.
-
-El calendario de un mes en `/eventos/` marca los días de evento y, si un lunes no tiene otro evento,
-la meditación semanal en línea (borde, no relleno; no es un ítem del listado).
-
-**Inicio:** como máximo un evento **vigente** junto a «Un poco de nuestra comunidad» (rótulo
-«Próximo evento», cartel WordPress `medium` (atajo de puntero a la ficha), «Ver evento» a esa ficha). Un destacado ya terminado
-no aparece. Si no hay vigentes, el módulo se omite. No es un segundo listado.
-
-**Árbol de URLs completo (todas indexables):**
+**Árbol canónico (sin barra final):**
 ```
 /
-/comunidad/
-/linaje/
-/practica/
-/practica/videos/
-/practica/meditacion-semanal-en-linea/
-/eventos/
-/eventos/{slug}/
-/galeria/
-/donaciones/
-/contacto/
-/blog/
-/blog/{slug}/
-/privacidad/          (publicada; aviso provisional — ADR 0039)
+/comunidad
+/linaje
+/practica
+/practica/videos
+/practica/meditacion-semanal-en-linea
+/eventos
+/eventos/{slug}
+/galeria
+/galeria/{slug}          (nueva en WP; noindex hasta volumen)
+/donaciones
+/contacto
+/blog
+/blog/{slug}
+/author/{slug}           (nueva en WP; CPT blog_author)
+/privacidad
+/eventos/ical/{slug}.ics (solo vigentes; noindex; generado)
 ```
 
-**Sin buscador, sin páginas de filtro, sin URLs creadas solo por SEO.**
+**Sin buscador, sin páginas de filtro por ciudad/tipo, sin URLs creadas solo por SEO.**
 
 ---
 
 ## 6. Arquitectura técnica (theme + plugin WordPress)
 
-- **Theme:** `camino-del-dharma` — WordPress clásico (PHP, no Full Site Editing), 13 plantillas
-  aproximadamente. Solo presenta: templates, template parts, encolado de assets, render de metadatos
-  (Open Graph, JSON-LD).
-- **Plugin:** `camino-del-dharma-core` — dueño de todo el dominio: CPT `event`, taxonomías, roles
-  editoriales, meta fields, cualquier comando WP-CLI propio. El theme nunca registra nada de esto.
-- **CSS:** un solo archivo real, `assets/css/main.css` (heredado byte a byte de la maqueta estática
-  donde sea posible). `style.css` del theme solo lleva metadata (obligatorio para WordPress, sin
-  reglas). `theme.json` solo aporta tokens al editor de bloques. Sin frameworks, sin `!important`.
-- **Galería:** bloque nativo de Gutenberg con lightbox nativo ("Ampliar al clic", WP 6.4+); `gallery.js`
-  de la maqueta no se migra.
-- **Estándares de código:** WordPress Coding Standards (PHPCS), prefijo único (`cdd_` o
-  `camino_del_dharma_`) en toda función/hook/clase, escaping/sanitización/nonces siempre, cadenas
-  preparadas para traducción aunque el sitio sea monolingüe español hoy.
+- **Ruta única:** estático de producción → **FSE / block theme** (ADR 0029). **No** hay theme
+  clásico PHP (`front-page.php`, `page-*.php`) como puente.
+- **Theme:** `camino-del-dharma` — `theme.json`, `templates/*.html`, `parts/*.html`, CSS
+  complementario. Solo presenta.
+- **Plugin:** `camino-del-dharma-core` — CPTs, taxonomías, meta, ICS, limpieza de huérfanos ICS,
+  importador/seed, WP-CLI.
+- **CSS:** tokens iniciales alineados con la maqueta; Global Styles editable por Administrador;
+  hoja complementaria para layout/a11y. Sin frameworks, sin `!important`.
+- **Galería:** bloque Gutenberg + lightbox nativo; sin paginación numerada en el corte.
+- **Pruebas:** TDD desde el primer PHP propio; `composer test` (gate barato); wp-phpunit para
+  contratos in-process; Sonar Automatic Analysis **solo** plugin + theme (ADR 0038).
+- **Estándares:** WPCS, prefijo único, escaping/sanitización/nonces; cadenas translation-ready
+  aunque el sitio sea monolingüe hoy.
 
 ---
 
 ## 7. Infraestructura
 
-- **Hosting:** Hostinger, hosting compartido, dominio `caminodeldharma.org`.
-- **PHP:** confirmado **8.3.30** (rango disponible en el plan: 8.2–8.5; recomendado por Hostinger: 8.3
-  como más estable).
-- **Base de datos:** confirmado **MariaDB 11.8.8** (obtenido vía `SELECT VERSION();` en phpMyAdmin,
-  usando una base temporal creada solo para el chequeo).
-- **Entorno local de desarrollo:** Docker Compose, 3 servicios (`db` con healthcheck, `wordpress`,
-  `wpcli`), imágenes fijadas a `mariadb:11.8` + `wordpress:php8.3` para paridad real con Hostinger —
-  no una versión "reciente genérica" por comodidad. Bind-mount limitado solo al theme y plugin propios;
-  core de WordPress y BD viven en volúmenes Docker, nunca en Git.
-- **Staging:** todavía no existe. El plan es crearlo en Hostinger como un sitio nuevo **sin dominio
-  propio** (subdominio temporal tipo `algo.hostingersite.com`), pero **después** de tener una primera
-  versión del theme funcionando en local — no como paso administrativo aislado al inicio.
-- **SSH:** disponible en la cuenta de Hostinger pero inactivo; no se ha necesitado activar todavía.
+- **Hosting:** Hostinger, `caminodeldharma.org`.
+- **PHP / MariaDB objetivo:** 8.3 / 11.8 (ADR 0023).
+- **Local:** Docker Compose (playbook listo; compose aún no versionado en el repo).
+- **Staging (OWN-005):** otra instancia Hostinger **sin dominio custom**, noindex, en paralelo al
+  estático hasta el switch. No pisa `public_html` de producción.
+- **SSH:** disponible en la cuenta; no es el canal de deploy hoy.
 
 ---
 
 ## 8. Despliegue
 
-- **Hoy:** completamente manual. Sitio estático: ZIP generado a mano (`static/` tras la reorganización)
-  → subido por File Manager de Hostinger.
-- **CI/CD:** la dirección técnica ya está decidida (GitHub Actions + SSH/rsync, ADR 0006/0007), pero la
-  **implementación queda pospuesta** (ADR 0016) — no se crean workflows todavía, ni siquiera con
-  trigger manual (`workflow_dispatch`). Se retomará cuando: (1) la estructura `static/`+`wordpress/`
-  esté estable, (2) WordPress esté validado en staging, (3) los alcances de sincronización estén bien
-  documentados.
-- **WordPress:** se despliega manualmente al staging (cuando exista) hasta el corte final.
+- **Hoy (estático):** ZIP manual desde la raíz del repo (README). No incluir `docs/`, `scripts/`,
+  `wordpress/`, `tests/`.
+- **Fase 3:** el ZIP estático saldrá de `static/` tras la reorganización ADR 0014.
+- **WordPress code deploy ≠ content deploy ≠ static deploy** (ADR 0013). Tras el corte, un ZIP
+  estático **nunca** escribe sobre el document root de WordPress.
+- **CD:** pospuesto (ADR 0016). **CI de calidad:** sí, cuando exista PHP de prueba (ADR 0038).
 
 ---
 
 ## 9. Seguridad y privacidad
 
-- **Sin cookies de analítica, nunca** (ADR 0019). Search Console es el único canal de medición.
-- **HSTS desactivado**, aplazado hasta ≥30 días después de que WordPress esté estable en producción.
-- **Política de privacidad (`/privacidad/`) publicada** (ADR 0039, aviso provisional hasta asesoría
-  legal). **Gate de Contact Form 7:** actualizar este aviso (hoy dice que el formulario no envía) y
-  la revisión legal **antes** de que CF7 entre en producción.
-- Hoy el único canal de contacto es humano (WhatsApp/correo), sin recolección automatizada de datos.
+- Sin cookies de analítica (ADR 0019). Medición: Search Console.
+- HSTS aplazado (ADR 0020).
+- `/privacidad` publicada (ADR 0039, provisional). Contact Form 7 **gated** hasta actualizar el aviso
+  (hoy dice que el formulario no envía) y revisión legal.
+- Canales humanos actuales: WhatsApp y correo.
 
 ---
 
-## 10. Alcance de Fase 3 (WordPress) — dentro y fuera
+## 10. Alcance de Fase 3 — dentro y fuera
 
-**Dentro de alcance:**
-- Reorganizar el repo (raíz → `static/` + `wordpress/`)
-- Theme `camino-del-dharma` + plugin `camino-del-dharma-core`
-- CPT `event` con sus taxonomías
-- Migración de las páginas institucionales (extracción verbatim del HTML publicado; ADR 0040)
-- Contact Form 7 (con el gate de privacidad del punto 9)
-- QA de accesibilidad (WCAG 2.1/2.2 AA) y de SEO/datos estructurados
+**Dentro (corte):**
+- Reorg monorepo `static/` + `wordpress/`
+- Theme FSE + plugin de dominio
+- Extracción e import de contenido real (Pages, 10 eventos, 2 posts, autores, galería, media)
+- Contact Form 7 (con gate de privacidad)
+- QA de los cinco entregables (ADR 0032) + paridad vs producción publicada
+- Prompt de ejecución vigente: `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` (**v2.3**)
 
-**Fuera de alcance (explícitamente, no por omisión):**
-- CPT `sangha` (fase separada posterior)
-- Buscador
-- Cualquier analítica
-- HSTS
-- PWA
-- URLs de filtro por ciudad o tipo de evento
-- Sistema de fixtures/datos de demo (no hace falta a esta escala; los eventos reales ya existen)
-- Automatización de despliegue (workflows de GitHub Actions)
-- El corte de producción en sí (reemplazar el sitio estático) — eso es una fase posterior, no antes del
-  10 de agosto de 2026
+**Fuera del corte:**
+- CPT `sangha`
+- Inglés / i18n (`POST-*`)
+- Buscador, analítica, HSTS, PWA
+- URLs de filtro por ciudad/tipo
+- Automatización de deploy
+- Recrear `content-source/`
 
 ---
 
-## 11. Pendientes y bloqueadores conocidos
+## 11. Pendientes reales (no incongruencias de gobernanza)
 
-- Confirmar si la política canónica de URLs es con o sin barra final — hay una tensión documentada entre
-  ADR 0008 (dice "sin barra final") y el árbol de URLs oficial `11-arbol-urls-final.md` (todas las rutas
-  llevan barra final). Se resuelve revisando el `.htaccess` real, no asumiendo.
-- Redactar y publicar `/privacidad/` — **hecho** el 2026-08-29 (ADR 0039, provisional). Sigue la
-  revisión legal y, antes de Contact Form 7, actualizar el aviso.
-- Migrar los embeds de YouTube a `youtube-nocookie.com` (pendiente, independiente de la decisión de
-  analítica).
-- Descargas `.ics` de eventos devuelven 404 en el estático (hallazgo de auditoría, prioridad alta).
-- Formulario de contacto del sitio estático no entrega (se resuelve en WordPress con Contact Form 7, no
-  se toca el estático mientras tanto).
+| Ítem | Estado |
+|---|---|
+| Autorizar inicio de Fase 3 (WU-00/WU-01) | Decisión del propietario |
+| Desplegar `1.0.35` a Hostinger (incluye `/privacidad`) | Operativo |
+| Verificar paridad repo ↔ Hostinger | OWN-006/007 |
+| Formulario de contacto end-to-end | Se resuelve en WP con CF7 |
+| Revisar copy legal de `/privacidad` | Abierto; CF7 gated |
+| HSTS | Aplazado post-corte |
+| Inglés / i18n | `POST-001`–`POST-007` |
+
+Ya resuelto y no debe reabrirse como duda:
+- Política de barra final → **sin barra** (ADR 0008)
+- Embeds YouTube → `youtube-nocookie.com` (ya en el estático)
+- Gobernanza de copy → producción publicada (ADR 0040); `content-source/` eliminado
 
 ---
 
-## 12. Documentos de referencia en el repositorio
+## 12. Documentos de referencia
 
-- `docs/adr/README.md` — índice completo de las 28 decisiones arquitectónicas
-- `docs/17-orden-implementacion.md` — orden oficial de fases, criterios de cierre, checklist
-- `docs/03-wordpress-content-model.md` — modelo de contenido completo
-- `docs/11-arbol-urls-final.md` — árbol de URLs oficial
-- `docs/12-theme-file-structure.md` — estructura de archivos del theme
-- `docs/14-css-architecture.md` — arquitectura CSS
-- `docs/docker-wordpress-playbook.md` — entorno local Docker (con versiones ya confirmadas)
-- `docs/migracion-static-wordpress.md` — registro vivo de diferencias estático/WordPress durante la
-  transición
-- `docs/FABLE5-Fase3-WordPress-Master-Prompt-v1.md` — prompt de ejecución completo para un agente que
-  implemente Fase 3, con todo este contexto aplicado en detalle operativo
+- `docs/adr/README.md` — índice ADR 0001–0040
+- `docs/17-orden-implementacion.md` — fases y criterios (v3.9)
+- `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.20)
+- `docs/contrato-migracion-static-wordpress.md` — contrato de aceptación
+- `docs/inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md`
+- `docs/matriz-migracion-static-wordpress.md` + `redirect-ledger.md` + `cutover-checklist-wordpress.md`
+- `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` — prompt **vigente** (v1 es HISTORICAL)
+- `docs/guia-pruebas-plugin-theme-fse.md` — TDD / wp-phpunit / Sonar
+- `AGENTS.md` / `CLAUDE.md` — reglas para agentes
 
 ---
 

@@ -154,10 +154,10 @@ Tamaños recomendados (elegir según la calidad de la foto de origen y el uso pr
 
 ## 8. Videos
 
-- **Origen pre-corte:** embeds publicados en `practica/videos/index.html`.
-- **Estrategia:** extraer y preservar los embeds publicados; priorizar
-  `youtube-nocookie.com` cuando la paridad y privacidad lo permitan. Videos locales solo con una
-  necesidad editorial aprobada.
+- **Origen pre-corte:** embeds publicados en `practica/videos/index.html` (YouTube ya en
+  `youtube-nocookie.com`; Vimeo con `dnt=1`).
+- **Estrategia:** extraer y preservar esos embeds. Videos locales solo con necesidad editorial
+  aprobada.
 - **Videos locales:** Usar `<video controls>` con `preload="metadata"`; incluir poster (imagen de preview); evitar autoplay. Impacta rendimiento y accesibilidad (19).
 - **Antecedente histórico ya incorporado:** "Conectar el canal de youtube a la página", "Video sobre
   indicaciones para meditar".

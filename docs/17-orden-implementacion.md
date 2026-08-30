@@ -63,7 +63,9 @@ Este documento define el orden oficial de implementación, validación, migraci�
 - Criterios de aceptación de Fase 2 y checklist pre-lanzamiento actualizados según evidencia de la auditoría.
 - **ADR 0018:** HSTS escalonado — sustituida en lo operativo por ADR 0020.
 - **ADR 0020:** HSTS aplazado hasta después del corte a WordPress. Motivo: sitio de 2 días, ~9 clics/28 días (EVID-0052) y migración inminente que puede tocar TLS y redirects.
-- **ADR 0019:** sin analítica con cookies. GA4 descartado definitivamente; medición por Search Console. Quedan fuera de esa decisión los embeds de vídeo (pendiente `youtube-nocookie`) y la política de privacidad.
+- **ADR 0019:** sin analítica con cookies. GA4 descartado definitivamente; medición por Search Console.
+  *(Nota de vigencia 2026-08-30: los embeds ya usan `youtube-nocookie.com`; `/privacidad` está
+  publicada — ADR 0039.)*
 - Mantenimiento: incorporación de tareas post-auditoría y revisión trimestral ampliada.
 
 ### Cambios principales (3.0)
