@@ -10,6 +10,20 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-03: scaffold del plugin y kit de calidad TDD (sin cambio del artefacto desplegado)
+
+Primer PHP propio del proyecto, con TDD desde la primera línea (ADR 0038):
+`wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php` (bootstrap
+mínimo: guard `ABSPATH`, `CDD_CORE_VERSION`, `CDD_CORE_PLUGIN_FILE`) nació tras un test en
+rojo. Kit de calidad en la raíz: `composer.json` (PHPUnit 9.6, wp-phpunit 7.1.0 —igual que el
+WordPress del compose—, polyfills, WPCS 3.4; `platform.php` 8.3.30), `phpunit.xml.dist` +
+`tests/Unit/`, `phpunit-wp.xml.dist` + `tests/WordPress/` (harness Docker **efímero**
+`cdd-wp-phpunit`, tablas `wptests_`, `down -v` al salir), `phpcs.xml.dist` (WPCS, prefijo
+`cdd_core`, ADR 0027), `tools/` (`php-lint.sh`, `run-phpunit.sh`, `run-phpunit-wp.sh`,
+`wp-tests.env` desechable) y `.github/workflows/test.yml` solo-calidad (composer test + PHPCS +
+Stylelint; sin deploy, sin secretos, sin SonarScanner). El theme FSE sigue sin código (WU-04).
+Evidencia `Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-03.
+
 ### Fase 3 — WU-02: entorno local Docker (sin cambio del artefacto desplegado)
 
 Entorno WordPress local de 3 servicios según ADR 0023 y `docs/docker-wordpress-playbook.md`:

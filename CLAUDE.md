@@ -9,10 +9,10 @@ pipelines.
 
 - Production: static HTML on Hostinger (`https://caminodeldharma.org`) with real visitors. Not a disposable mockup.
 - Hardcoded events (10 cards), blog posts (2), gallery JSON (35 + 3 albums) are **production content** (ADR 0034).
-- Repo layout: **monorepo** (ADR 0014, since Fase 3 WU-01). Deployable static site lives in `static/`. `wordpress/` holds first-party plugin/theme trees (still README-only; no FSE implementation yet).
+- Repo layout: **monorepo** (ADR 0014, since Fase 3 WU-01). Deployable static site lives in `static/`. `wordpress/` holds first-party plugin/theme trees: `camino-del-dharma-core` is scaffolded (WU-03, TDD kit: Composer + PHPUnit/wp-phpunit + PHPCS/WPCS); the FSE theme tree is still README-only.
 - Institutional copy and presentation: **published production wins** until cutover (OWN-007,
   ADR 0040). The legacy source folder was permanently removed; do not recreate it.
-- Deploy: manual ZIP from `static/` (ADR 0015). WordPress: **Fase 3 started** (WU-00/WU-01 done; next unit is WU-02, Docker, in its own session). Durable state: `.audit/fase3-execution-state.md`.
+- Deploy: manual ZIP from `static/` (ADR 0015). WordPress: **Fase 3 started** (WU-00–WU-03 done; next unit is WU-04, FSE theme scaffold). Durable state: `.audit/fase3-execution-state.md`.
 - `/privacidad` is published (ADR 0039, provisional). Do not rewrite the live notice. Contact Form 7
   stays gated until that notice describes a server-side form.
 

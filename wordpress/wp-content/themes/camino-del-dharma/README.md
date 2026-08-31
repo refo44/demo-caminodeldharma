@@ -1,9 +1,9 @@
 # camino-del-dharma
 
-Block theme / Full Site Editing (ADR 0029). **Sin código todavía.**
+Block theme / Full Site Editing (ADR 0029). **Sin código todavía** — llega en WU-04.
 
-Fase 3 no ha empezado. Esta carpeta existe para que SonarQube Cloud tenga un
-`sonar.sources` que no es el sitio estático, y para aterrizar TDD el día uno.
+Fase 3 está en marcha (el kit TDD y el plugin ya existen, WU-03), pero este árbol sigue
+vacío de código hasta su work unit.
 
 No crear `theme.json`, `templates/` ni `functions.php` sin un test en rojo antes.
 El theme ensambla; no registra CPTs ni taxonomías. Guía:

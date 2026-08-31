@@ -1,0 +1,9 @@
+# Override for the EPHEMERAL wp-phpunit harness only. Used exclusively by
+# tools/run-phpunit-wp.sh together with docker-compose.yml under the separate
+# compose project cdd-wp-phpunit (own volumes, own port via tools/wp-tests.env,
+# `down -v` on exit). Not part of the developer environment (ADR 0023).
+services:
+  wpcli:
+    working_dir: /repo
+    volumes:
+      - .:/repo

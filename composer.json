@@ -1,0 +1,42 @@
+{
+    "name": "camino-del-dharma/test-tooling",
+    "description": "Root test/quality tooling for first-party WordPress code (ADR 0038). Not a runtime package.",
+    "license": "GPL-2.0-or-later",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "wp-phpunit/wp-phpunit": "~7.1.0",
+        "yoast/phpunit-polyfills": "^4.0",
+        "wp-coding-standards/wpcs": "^3.2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.1"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.30"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint:php": "tools/php-lint.sh",
+        "lint:phpcs": "phpcs",
+        "audit:deps": "@composer audit --locked",
+        "test:unit": "phpunit -c phpunit.xml.dist",
+        "test:wp": "tools/run-phpunit-wp.sh",
+        "test": [
+            "@lint:php",
+            "@audit:deps",
+            "@test:unit"
+        ]
+    },
+    "scripts-descriptions": {
+        "lint:php": "QA 1: php -l over first-party PHP (plugin, theme, tests).",
+        "lint:phpcs": "QA 1: WordPress Coding Standards (ADR 0027).",
+        "audit:deps": "QA 1: advisories against composer.lock.",
+        "test:unit": "Level 1 unit suite (no WordPress boot).",
+        "test:wp": "Level 2 wp-phpunit suite in an ephemeral Docker project (not CI).",
+        "test": "Cheap default gate: lint -> audit -> unit."
+    }
+}

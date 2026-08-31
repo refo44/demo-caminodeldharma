@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 |
+| **Última actualización** | 2026-08-31 (sesión WU-03) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00, WU-01 y WU-02 **cerrados**; frontera obligatoria antes de WU-03 (ADR 0023) |
+| **Work unit activo** | Ninguno — WU-00…WU-03 **cerrados**; checkpoint antes de WU-04 |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -21,89 +21,105 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   `docs/operations/wordpress-manual-deployment.md`, `docs/operations/third-party-plugins.md`.
 - **WU-01 — Reorganización monorepo** (commits `bfb6dc0` + tooling): superficie desplegable
   (receta ZIP, 238 archivos) movida raíz → `static/` con renames 100%; PDF OWN-002 archivado en
-  `docs/archive/recitacion-practica-comida/` (nunca en `static/`). Tooling actualizado:
-  `package.json` (lint/build CSS), `.stylelintignore`, `scripts/*.sh`, `scripts/build-docx/build.js`,
-  README (receta ZIP desde `static/`), CLAUDE.md, AGENTS.md,
-  `.cursor/rules/wordpress-migration-safety.mdc`, `docs/13` v2.5, ledger de migración, CHANGELOG
-  (Unreleased). QA gate: ver matriz WU-01 — todo Pass (local); sin despliegue.
-- **WU-02 — Entorno local Docker** (sesión dedicada 2026-08-31, ADR 0023): `docker-compose.yml`
-  raíz (name `camino-del-dharma`; db MariaDB 11.8 + healthcheck; wordpress PHP 8.3 en
-  `127.0.0.1:${WORDPRESS_PORT:-8080}`; wpcli `user 33:33`), `.env.example` versionado, `.env`
-  gitignored (regla nueva en `.gitignore`), fail-fast `${VAR:?}`, `WP_ENVIRONMENT_TYPE=local` +
-  debug log en ambos servicios PHP. Core WordPress 7.1 instalado vía wpcli (admin solo en
-  volumen/`.env` locales). Gotcha corregido y documentado: `WP_DEBUG` debe activarse con
-  `WORDPRESS_DEBUG: 1`, no en `WORDPRESS_CONFIG_EXTRA` (playbook actualizado). QA gate: matriz
-  WU-02 todo Pass (local); paridad local PHP 8.3.33 / MariaDB 11.8.9 vs Hostinger 8.3.30 /
-  11.8.8 (misma serie menor).
+  `docs/archive/recitacion-practica-comida/` (nunca en `static/`). Tooling y docs actualizados.
+  QA gate: matriz WU-01 todo Pass (local); sin despliegue.
+- **WU-02 — Entorno local Docker** (commit `b9c9eb8`, ADR 0023): `docker-compose.yml` raíz
+  (db MariaDB 11.8 healthcheck, wordpress PHP 8.3 en `127.0.0.1:${WORDPRESS_PORT:-8080}`,
+  wpcli `33:33`), `.env.example` versionado, `.env` gitignored, fail-fast `${VAR:?}`,
+  `WP_ENVIRONMENT_TYPE=local` + debug log. Core WordPress 7.1 instalado vía wpcli. Gotcha
+  `WORDPRESS_DEBUG` documentado en el playbook. QA: matriz WU-02 todo Pass (local).
+- **WU-03 — Scaffold del plugin y kit de calidad TDD** (sesión 2026-08-31, ADR 0038/0027,
+  TDD honesto: RED documentado antes del primer PHP):
+  - Primer PHP propio: `wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php`
+    (guard `ABSPATH`, `CDD_CORE_VERSION` 0.1.0, `CDD_CORE_PLUGIN_FILE`; text domain
+    `camino-del-dharma-core`). Activa en el entorno local sin warnings/fatals.
+  - Kit raíz: `composer.json` + `composer.lock` (PHPUnit 9.6.36, **wp-phpunit 7.1.0** = WP del
+    compose, polyfills 4.0.0, WPCS 3.4.1; `platform.php` 8.3.30), `phpunit.xml.dist` (suite
+    `tests/Unit`, bootstrap `tests/Support/bootstrap.php` con `ABSPATH` dummy),
+    `phpunit-wp.xml.dist` (suite `tests/WordPress`, bootstrap wp-phpunit + `wp-tests-config.php`).
+  - Harness efímero nivel 2: `tools/run-phpunit-wp.sh` → compose `-p cdd-wp-phpunit`
+    (`docker-compose.wp-tests.yml` monta el repo en wpcli; `tools/wp-tests.env` desechable,
+    puerto 8083, tablas `wptests_`, `trap down -v`). Nunca el volumen del desarrollador.
+  - Estilo: `phpcs.xml.dist` (WordPress-Extra; prefijo `cdd_core` — WPCS rechaza `cdd` por
+    corto; theme usará `camino_del_dharma`; sniff de prefijos excluido en `tests/`).
+  - `tools/php-lint.sh`, `tools/run-phpunit.sh` (fallback Docker sin PHP nativo).
+  - CI solo-calidad: `.github/workflows/test.yml` (jobs php: `composer test` + `composer
+    lint:phpcs`; css: `npm run lint:css`; sin deploy, sin secretos, sin SonarScanner).
+  - Docs: CLAUDE.md, AGENTS.md, guía de pruebas §comandos, READMEs de `wordpress/`, plugin,
+    theme y `tests/`, CHANGELOG. QA: matriz WU-03 todo Pass (local); CI/Sonar `Unverified`
+    (sin push).
 
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger no verificada (ver arriba). Registrar el delta al extraer (WU-06).
-- `descargas/Resumen programa EVF.mp4` existe en la raíz, **no trazado** en git (`*.mp4` en
-  `.gitignore`) y **fuera** de la receta ZIP de despliegue. No es superficie desplegable: se
-  preserva intacto en la raíz, no se mueve a `static/` ni se commitea. Clasificarlo en el
-  inventario si aparece referenciado (a la fecha no está en el ZIP ni en sitemap).
-- `_config.yml` y `.nojekyll` son restos de GitHub Pages (desactivado 2026-07-28), trazados,
-  fuera del ZIP. Se dejan en la raíz sin cambios; su retiro es una limpieza separada, no parte
-  de WU-01.
+- `descargas/Resumen programa EVF.mp4` en la raíz, no trazado y fuera de la receta ZIP: se
+  preserva intacto; clasificar en el inventario si aparece referenciado.
+- `_config.yml` y `.nojekyll` son restos de GitHub Pages (desactivado 2026-07-28), fuera del
+  ZIP; su retiro es una limpieza separada.
+- `test.yml` y el análisis Sonar del plugin quedan `Unverified` hasta que exista push (la rama
+  es local por diseño del master prompt).
 
 ## Decisiones/asunciones usadas
 
-- Autorización del propietario para iniciar WU-00/WU-01: mensaje «Implementar» sobre
-  FABLE5 v2.3 (2026-08-31), habilitado por `17-orden-implementacion` v3.9.
-- Superficie desplegable = lista exacta de la receta ZIP del README (index.html, 404.html,
-  robots.txt, sitemap.xml, sitemap.xsl, llms.txt, .htaccess, favicon.ico, favicon.svg,
-  assets/, comunidad/, linaje/, practica/, eventos/, galeria/, contacto/, donaciones/, blog/,
-  privacidad/). Todo lo demás permanece en la raíz.
-- WU-01 se parte en dos commits para revisión: (a) `git mv` puro que preserva renames,
-  (b) actualización de tooling/docs afectados (package.json, .stylelintignore, scripts/,
-  README, CLAUDE.md, AGENTS.md, docs/13). Sin implementación no relacionada.
+- Autorización del propietario para Fase 3: mensaje «Implementar» sobre FABLE5 v2.3
+  (2026-08-31); esta sesión ejecuta solo WU-03 por orden explícita del owner.
+- Prefijo de primer partido del plugin: `cdd_core` (ADR 0027 proponía `cdd_` o
+  `camino_del_dharma_`; el sniff `PrefixAllGlobals` de WPCS 3.x rechaza prefijos de 3
+  caracteres). El theme usará `camino_del_dharma`. Registrado en `phpcs.xml.dist` y matriz.
+- `tools/wp-tests.env` versiona credenciales **desechables** del harness efímero (localhost,
+  `down -v`); no son secretos. El `.env` del entorno de desarrollo sigue gitignored.
+- PHPCS corre como paso propio del job PHP de `test.yml` (la guía lo sitúa en el job de
+  estilo; se mantiene en el job PHP por ser tooling Composer, sin cambiar el alcance).
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md`. Estados permitidos: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-03. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno para WU-00/WU-01/WU-02.
-- WU-03 (código de aplicación) requiere **sesión separada** tras WU-02 (ADR 0023, FABLE5 §12):
-  frontera obligatoria.
+- Ninguno. WU-04 (theme FSE) es el siguiente work unit; puede arrancar en la próxima sesión
+  tras rerun del preflight y de los gates (§ Reanudación).
 
-## Archivos cambiados en la sesión actual (WU-02)
+## Archivos cambiados en la sesión actual (WU-03)
 
-- `docker-compose.yml` (nuevo)
-- `.env.example` (nuevo); `.env` local creado, gitignored, fuera de Git
-- `.gitignore` (regla `/.env`)
-- `docs/docker-wordpress-playbook.md` (CURRENT STATE + gotcha `WORDPRESS_DEBUG`)
-- `.audit/fase3-validation-matrix.md` (filas WU-02)
-- `CHANGELOG.md` (Unreleased)
-- este archivo
+- `wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php` (nuevo, primer PHP)
+- `composer.json`, `composer.lock` (nuevos)
+- `phpunit.xml.dist`, `phpunit-wp.xml.dist`, `phpcs.xml.dist` (nuevos)
+- `tests/Support/bootstrap.php`, `tests/Unit/Plugin_BootstrapTest.php`,
+  `tests/WordPress/bootstrap.php`, `tests/WordPress/wp-tests-config.php`,
+  `tests/WordPress/Plugin_LoadedTest.php` (nuevos)
+- `tools/php-lint.sh`, `tools/run-phpunit.sh`, `tools/run-phpunit-wp.sh`, `tools/wp-tests.env` (nuevos)
+- `docker-compose.wp-tests.yml` (nuevo, override solo del harness efímero)
+- `.github/workflows/test.yml` (nuevo, solo calidad)
+- CLAUDE.md, AGENTS.md, `docs/guia-pruebas-plugin-theme-fse.md` (§ comandos),
+  `wordpress/README.md`, READMEs de plugin/theme, `tests/README.md`, `CHANGELOG.md`,
+  `.audit/fase3-validation-matrix.md`, este archivo
 
 ## Último commit verificado
 
-`b9c9eb8` — cierre de WU-02 (QA local verde). Historial en `fase3-wordpress`:
-`5088e32` (WU-00) → `bfb6dc0` + `54cd09f` (WU-01) → `11237a1` (cierre WU-01) →
-`b9c9eb8` (WU-02).
+Pendiente de registrar tras el commit de cierre de WU-03 (esta sesión). Historial previo en
+`fase3-wordpress`: `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8`
+(WU-02) → `81d7547`.
 
 ## Estado del entorno local
 
-Contenedores levantados al cierre de la sesión WU-02 (`docker compose stop` para pararlos;
-`up -d` los devuelve). Volúmenes `db_data`/`wp_data` persisten el core y la BD locales;
-`docker compose down -v` los destruye (entorno desechable, re-instalable con
-`wp core install`). WordPress local: `http://localhost:8081` (puerto en `.env`; 8080 estaba
-ocupado por otro proyecto). Credenciales admin: solo en `.env` local y el volumen.
+Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
+para pararlos). WordPress local: `http://localhost:8081` (puerto en `.env`). Plugin
+`camino-del-dharma-core` **activo** (v0.1.0) en el entorno local. El harness efímero
+`cdd-wp-phpunit` no deja contenedores ni volúmenes (`down -v` verificado).
 
 ## Próxima acción exacta
 
-WU-02 está cerrado. **La sesión actual se detiene aquí** (frontera obligatoria ADR 0023: el
-código de aplicación empieza en otra sesión). La siguiente sesión: rerun del preflight
-(§ Reanudación) **incluido el gate WU-02** (`docker compose config` fail-fast sin `.env`;
-con `.env`: `up -d`, db healthy, `wp eval wp_get_environment_type()` = `local`), luego
-implementar y validar **solo WU-03** — scaffold del plugin `camino-del-dharma-core` y tooling
-de calidad (PHPCS/WPCS, kit PHPUnit + wp-phpunit el mismo día que exista PHP propio, ADR 0038,
-`docs/guia-pruebas-plugin-theme-fse.md`) — actualizar este archivo y detenerse en el checkpoint
-de WU-03.
+WU-03 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
+siguiente sesión: rerun del preflight (§ Reanudación), rerun de los gates WU-02 (compose
+fail-fast / db healthy / `wp_get_environment_type()` = `local`) **y WU-03**
+(`./tools/php-lint.sh`, unit suite verde, `vendor/bin/phpcs` limpio — con
+`composer install` previo si falta `vendor/`), luego implementar y validar **solo WU-04** —
+scaffold del theme FSE `camino-del-dharma` y baseline de tokens visuales (`theme.json`
+reproduciendo exactamente los tokens del estático, ADR 0029; TDD desde la primera línea,
+bloques de dominio en el plugin, no en el theme) — actualizar este archivo y detenerse en el
+checkpoint de WU-04.
 
 ## Procedimiento de reanudación
 
@@ -113,6 +129,6 @@ git branch --show-current   # esperar: fase3-wordpress
 git log -5 --oneline
 ```
 
-Leer este archivo, verificarlo contra Git (¿existe `static/`? ¿qué commits hay en
+Leer este archivo, verificarlo contra Git (¿existe `composer.lock`? ¿qué commits hay en
 `fase3-wordpress`?), rerun del último gate QA relevante de la matriz, y continuar desde
 «Próxima acción exacta». El estado del repositorio prevalece sobre la memoria de chat.
