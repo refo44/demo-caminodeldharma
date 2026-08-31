@@ -10,6 +10,21 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-04: scaffold del theme FSE y baseline de tokens visuales (sin cambio del artefacto desplegado)
+
+Primer código del theme `camino-del-dharma`, nacido con TDD (RED documentado en unit y
+wp-phpunit antes del primer archivo, ADR 0038): `style.css` (solo metadata, text domain
+`camino-del-dharma`), `theme.json` v3 como **baseline de paridad visual** (ADR 0029) —
+paleta de marca + tints AA, roles semánticos como `settings.custom.color` con la misma
+indirección del estático, familias tipográficas, escala `--space-*`, `contentSize` 65ch /
+`wideSize` 70rem, ritmo y line-heights, todo verificado por `Theme_TokensTest` contra el
+`:root` de `static/assets/css/main.css` extraído programáticamente —, `templates/index.html`
+(fallback técnico), `parts/header|footer.html` (placeholders), `functions.php` (bootstrap:
+supports + encolado de `assets/css/main.css` complementario). Política paleta-only en el
+editor (sin color libre). Test guard contra plantillas PHP clásicas. `lint:css` ahora cubre
+los dos árboles CSS. Theme activo en el entorno local sin warnings/fatals. Evidencia
+`Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-04.
+
 ### Fase 3 — WU-03: scaffold del plugin y kit de calidad TDD (sin cambio del artefacto desplegado)
 
 Primer PHP propio del proyecto, con TDD desde la primera línea (ADR 0038):

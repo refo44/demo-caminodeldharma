@@ -1,0 +1,10 @@
+/*
+  Camino del Dharma (theme FSE) — complementary stylesheet (ADR 0029, docs/12 §7)
+  Scope: layout de componentes, ritmo de lectura, estados de foco y accesibilidad —
+  todo lo que Global Styles no expresa. Los tokens de diseño NO viven aquí:
+  theme.json es la fuente de verdad y este archivo solo consume los presets
+  (var(--wp--preset--*), var(--wp--custom--*)). Sin hex directos, sin !important,
+  sin frameworks (se mantiene lo sustantivo de ADR 0009).
+  El contenido llega con las plantillas reales (WU-07+); el scaffold solo fija
+  el contrato de encolado.
+*/

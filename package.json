@@ -9,7 +9,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "lint:css": "stylelint \"static/assets/css/**/*.css\"",
+    "lint:css": "stylelint \"static/assets/css/**/*.css\" \"wordpress/wp-content/themes/camino-del-dharma/assets/css/**/*.css\"",
     "build:css": "cleancss -O2 -o static/assets/css/main.min.css static/assets/css/main.css",
     "build:docx": "node scripts/build-docx/build.js",
     "check:docx": "python3 scripts/build-docx/check.py"

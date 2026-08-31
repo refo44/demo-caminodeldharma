@@ -1,0 +1,45 @@
+<?php
+/**
+ * Theme bootstrap: setup and asset enqueueing only (docs/12 §7, §11.2).
+ *
+ * Domain (CPTs, taxonomies, roles, fields) lives in camino-del-dharma-core
+ * (ADR 0024); design tokens live in theme.json (ADR 0029). If this file
+ * grows beyond bootstrap duties, split it into inc/.
+ *
+ * @package Camino_Del_Dharma
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Theme supports that theme.json does not cover.
+ */
+function camino_del_dharma_setup() {
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support(
+		'html5',
+		array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' )
+	);
+	add_theme_support( 'editor-styles' );
+	add_editor_style( 'assets/css/main.css' );
+}
+add_action( 'after_setup_theme', 'camino_del_dharma_setup' );
+
+/**
+ * Enqueue the complementary stylesheet: layout, reading rhythm, and focus
+ * states that Global Styles cannot express (docs/12 §7). Versioned by
+ * mtime so deploys bust caches without manual bumps.
+ */
+function camino_del_dharma_enqueue_assets() {
+	$stylesheet = get_template_directory() . '/assets/css/main.css';
+
+	wp_enqueue_style(
+		'camino-del-dharma-main',
+		get_template_directory_uri() . '/assets/css/main.css',
+		array(),
+		(string) filemtime( $stylesheet )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'camino_del_dharma_enqueue_assets' );

@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (sesión WU-03) |
+| **Última actualización** | 2026-08-31 (sesión WU-04) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…WU-03 **cerrados**; checkpoint antes de WU-04 |
+| **Work unit activo** | Ninguno — WU-00…WU-04 **cerrados**; checkpoint antes de WU-05 |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -28,26 +28,33 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   wpcli `33:33`), `.env.example` versionado, `.env` gitignored, fail-fast `${VAR:?}`,
   `WP_ENVIRONMENT_TYPE=local` + debug log. Core WordPress 7.1 instalado vía wpcli. Gotcha
   `WORDPRESS_DEBUG` documentado en el playbook. QA: matriz WU-02 todo Pass (local).
-- **WU-03 — Scaffold del plugin y kit de calidad TDD** (sesión 2026-08-31, ADR 0038/0027,
-  TDD honesto: RED documentado antes del primer PHP):
-  - Primer PHP propio: `wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php`
-    (guard `ABSPATH`, `CDD_CORE_VERSION` 0.1.0, `CDD_CORE_PLUGIN_FILE`; text domain
-    `camino-del-dharma-core`). Activa en el entorno local sin warnings/fatals.
-  - Kit raíz: `composer.json` + `composer.lock` (PHPUnit 9.6.36, **wp-phpunit 7.1.0** = WP del
-    compose, polyfills 4.0.0, WPCS 3.4.1; `platform.php` 8.3.30), `phpunit.xml.dist` (suite
-    `tests/Unit`, bootstrap `tests/Support/bootstrap.php` con `ABSPATH` dummy),
-    `phpunit-wp.xml.dist` (suite `tests/WordPress`, bootstrap wp-phpunit + `wp-tests-config.php`).
-  - Harness efímero nivel 2: `tools/run-phpunit-wp.sh` → compose `-p cdd-wp-phpunit`
-    (`docker-compose.wp-tests.yml` monta el repo en wpcli; `tools/wp-tests.env` desechable,
-    puerto 8083, tablas `wptests_`, `trap down -v`). Nunca el volumen del desarrollador.
-  - Estilo: `phpcs.xml.dist` (WordPress-Extra; prefijo `cdd_core` — WPCS rechaza `cdd` por
-    corto; theme usará `camino_del_dharma`; sniff de prefijos excluido en `tests/`).
-  - `tools/php-lint.sh`, `tools/run-phpunit.sh` (fallback Docker sin PHP nativo).
-  - CI solo-calidad: `.github/workflows/test.yml` (jobs php: `composer test` + `composer
-    lint:phpcs`; css: `npm run lint:css`; sin deploy, sin secretos, sin SonarScanner).
-  - Docs: CLAUDE.md, AGENTS.md, guía de pruebas §comandos, READMEs de `wordpress/`, plugin,
-    theme y `tests/`, CHANGELOG. QA: matriz WU-03 todo Pass (local); CI/Sonar `Unverified`
-    (sin push).
+- **WU-03 — Scaffold del plugin y kit de calidad TDD** (commit `fe33b96`, ADR 0038/0027):
+  primer PHP propio (`camino-del-dharma-core.php`, guard `ABSPATH`, `CDD_CORE_VERSION` 0.1.0),
+  kit raíz Composer (PHPUnit 9.6.36, wp-phpunit 7.1.0, WPCS 3.4.1), suites `tests/Unit` +
+  `tests/WordPress` (harness efímero `cdd-wp-phpunit`, `down -v`), `phpcs.xml.dist` (prefijos
+  `cdd_core` / `camino_del_dharma`), `tools/`, CI solo-calidad `test.yml`. QA: matriz WU-03
+  todo Pass (local); CI/Sonar `Unverified` (sin push).
+- **WU-04 — Scaffold del theme FSE y baseline de tokens visuales** (sesión 2026-08-31,
+  ADR 0029/0038, TDD honesto: RED documentado en unit **y** wp-phpunit antes del primer
+  archivo del theme):
+  - Reanudación verificada: preflight limpio + rerun gates WU-02 (fail-fast / db healthy /
+    `wp_get_environment_type()` = `local`) y WU-03 (php-lint, unit 2/2, phpcs limpio).
+  - Tests primero: `tests/Unit/Theme_ScaffoldTest.php` (style.css/header, index.html, parts,
+    theme.json v3 + templateParts, bootstrap + hoja complementaria, **guard contra plantillas
+    PHP clásicas**), `tests/Unit/Theme_TokensTest.php` (paridad de tokens contra el `:root`
+    de `static/assets/css/main.css` **extraído programáticamente**: paleta 6 brand +
+    text-on-dark, 11 roles semánticos con la misma indirección, 3 familias, 5 espaciados,
+    65ch/70rem, ritmo, line-heights, política paleta-only),
+    `tests/WordPress/Theme_RegisteredTest.php` (theme sin errores, `is_block_theme()`).
+  - Scaffold: `wordpress/wp-content/themes/camino-del-dharma/` — `style.css` (metadata, text
+    domain `camino-del-dharma`, v0.1.0), `theme.json` v3 (baseline de paridad visual),
+    `templates/index.html` (fallback técnico con query loop mínimo),
+    `parts/header|footer.html` (placeholders site-title), `functions.php` (supports +
+    encolado `assets/css/main.css` versionado por mtime), hoja complementaria placeholder.
+  - `package.json` `lint:css` ampliado a los dos árboles CSS (guía §7).
+  - Theme **activo** en el entorno local: sin warnings/fatals, `debug.log` inexistente,
+    presets en el HTML, sin cookies anónimas. QA: matriz WU-04 todo Pass (local);
+    QA 4 visual y CI/Sonar `Unverified`.
 
 ## Riesgos y hallazgos activos
 
@@ -56,70 +63,73 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   preserva intacto; clasificar en el inventario si aparece referenciado.
 - `_config.yml` y `.nojekyll` son restos de GitHub Pages (desactivado 2026-07-28), fuera del
   ZIP; su retiro es una limpieza separada.
-- `test.yml` y el análisis Sonar del plugin quedan `Unverified` hasta que exista push (la rama
-  es local por diseño del master prompt).
+- `test.yml` y el análisis Sonar de plugin+theme quedan `Unverified` hasta que exista push (la
+  rama es local por diseño del master prompt).
+- El front local con el theme activo muestra el scaffold sin las vistas reales — esperado
+  hasta WU-07+; la comparación visual contra el estático (QA 4) queda `Unverified`.
 
 ## Decisiones/asunciones usadas
 
 - Autorización del propietario para Fase 3: mensaje «Implementar» sobre FABLE5 v2.3
-  (2026-08-31); esta sesión ejecuta solo WU-03 por orden explícita del owner.
-- Prefijo de primer partido del plugin: `cdd_core` (ADR 0027 proponía `cdd_` o
-  `camino_del_dharma_`; el sniff `PrefixAllGlobals` de WPCS 3.x rechaza prefijos de 3
-  caracteres). El theme usará `camino_del_dharma`. Registrado en `phpcs.xml.dist` y matriz.
+  (2026-08-31); esta sesión ejecuta solo WU-04 por orden explícita del owner.
+- Prefijos primer partido (ADR 0027 + sniff WPCS): plugin `cdd_core`, theme
+  `camino_del_dharma`. Registrado en `phpcs.xml.dist`.
+- WU-04: (1) sin `fontSizes` en el baseline — el `:root` del estático no define tokens de
+  tamaño tipográfico; se añadirán cuando las plantillas los necesiten, sin inventar escala.
+  (2) woff2 no copiados aún al theme; `fontFace` llega con las plantillas reales (WU-07+).
+  (3) parts header/footer son placeholders mínimos para registrar `templateParts`.
+  (4) `register_nav_menus()` pospuesto: block theme gestiona menús con el bloque Navigation;
+  revisar al construir el header real. (5) Política paleta-only en el editor
+  (`settings.color.custom/defaultPalette/... = false`, docs/12 §8), asertada por test.
 - `tools/wp-tests.env` versiona credenciales **desechables** del harness efímero (localhost,
   `down -v`); no son secretos. El `.env` del entorno de desarrollo sigue gitignored.
-- PHPCS corre como paso propio del job PHP de `test.yml` (la guía lo sitúa en el job de
-  estilo; se mantiene en el job PHP por ser tooling Composer, sin cambiar el alcance).
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-03. Estados: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-04. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. WU-04 (theme FSE) es el siguiente work unit; puede arrancar en la próxima sesión
-  tras rerun del preflight y de los gates (§ Reanudación).
+- Ninguno. WU-05 (modelos de dominio en el plugin: event, gallery_album, blog_author,
+  routing, datos calendario/ICS) es el siguiente work unit; puede arrancar en la próxima
+  sesión tras rerun del preflight y de los gates (§ Reanudación).
 
-## Archivos cambiados en la sesión actual (WU-03)
+## Archivos cambiados en la sesión actual (WU-04)
 
-- `wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php` (nuevo, primer PHP)
-- `composer.json`, `composer.lock` (nuevos)
-- `phpunit.xml.dist`, `phpunit-wp.xml.dist`, `phpcs.xml.dist` (nuevos)
-- `tests/Support/bootstrap.php`, `tests/Unit/Plugin_BootstrapTest.php`,
-  `tests/WordPress/bootstrap.php`, `tests/WordPress/wp-tests-config.php`,
-  `tests/WordPress/Plugin_LoadedTest.php` (nuevos)
-- `tools/php-lint.sh`, `tools/run-phpunit.sh`, `tools/run-phpunit-wp.sh`, `tools/wp-tests.env` (nuevos)
-- `docker-compose.wp-tests.yml` (nuevo, override solo del harness efímero)
-- `.github/workflows/test.yml` (nuevo, solo calidad)
-- CLAUDE.md, AGENTS.md, `docs/guia-pruebas-plugin-theme-fse.md` (§ comandos),
-  `wordpress/README.md`, READMEs de plugin/theme, `tests/README.md`, `CHANGELOG.md`,
-  `.audit/fase3-validation-matrix.md`, este archivo
+- `tests/Unit/Theme_ScaffoldTest.php`, `tests/Unit/Theme_TokensTest.php`,
+  `tests/WordPress/Theme_RegisteredTest.php` (nuevos, RED antes del scaffold)
+- `wordpress/wp-content/themes/camino-del-dharma/`: `style.css`, `theme.json`,
+  `templates/index.html`, `parts/header.html`, `parts/footer.html`, `functions.php`,
+  `assets/css/main.css` (nuevos), `README.md` (actualizado)
+- `package.json` (glob `lint:css` ampliado al theme)
+- CLAUDE.md, AGENTS.md, `CHANGELOG.md`, `.audit/fase3-validation-matrix.md`, este archivo
 
 ## Último commit verificado
 
-`fe33b96` — implementación de WU-03 (QA local verde). Historial en
+`PENDIENTE-WU04` — se actualiza con el commit de cierre de WU-04. Historial previo en
 `fase3-wordpress`: `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8`
-(WU-02) → `81d7547` → `fe33b96` (WU-03).
+(WU-02) → `81d7547` → `fe33b96` (WU-03) → `36d368b`.
 
 ## Estado del entorno local
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081` (puerto en `.env`). Plugin
-`camino-del-dharma-core` **activo** (v0.1.0) en el entorno local. El harness efímero
-`cdd-wp-phpunit` no deja contenedores ni volúmenes (`down -v` verificado).
+`camino-del-dharma-core` **activo** (v0.1.0). Theme `camino-del-dharma` **activo** (v0.1.0,
+block theme verificado). El harness efímero `cdd-wp-phpunit` no deja contenedores ni
+volúmenes (`down -v`).
 
 ## Próxima acción exacta
 
-WU-03 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
-siguiente sesión: rerun del preflight (§ Reanudación), rerun de los gates WU-02 (compose
-fail-fast / db healthy / `wp_get_environment_type()` = `local`) **y WU-03**
-(`./tools/php-lint.sh`, unit suite verde, `vendor/bin/phpcs` limpio — con
-`composer install` previo si falta `vendor/`), luego implementar y validar **solo WU-04** —
-scaffold del theme FSE `camino-del-dharma` y baseline de tokens visuales (`theme.json`
-reproduciendo exactamente los tokens del estático, ADR 0029; TDD desde la primera línea,
-bloques de dominio en el plugin, no en el theme) — actualizar este archivo y detenerse en el
-checkpoint de WU-04.
+WU-04 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
+siguiente sesión: rerun del preflight (§ Reanudación), rerun de los gates WU-03
+(`./tools/php-lint.sh`, unit suite verde — ahora 15 tests —, `vendor/bin/phpcs` limpio)
+**y WU-04** (`tools/run-phpunit-wp.sh` verde; theme activo como block theme sin
+warnings/fatals en el entorno local), luego implementar y validar **solo WU-05** — modelos
+de dominio en `camino-del-dharma-core` (CPT `event`, taxonomías `event_type`/`event_city`
+no públicas, `gallery_album`, CPT `blog_author` + relación `authors`, routing sin barra
+final, estado del evento en `America/Bogota` a tiempo de request, datos de calendario/ICS)
+con TDD wp-phpunit — actualizar este archivo y detenerse en el checkpoint de WU-05.
 
 ## Procedimiento de reanudación
 
@@ -129,6 +139,6 @@ git branch --show-current   # esperar: fase3-wordpress
 git log -5 --oneline
 ```
 
-Leer este archivo, verificarlo contra Git (¿existe `composer.lock`? ¿qué commits hay en
-`fase3-wordpress`?), rerun del último gate QA relevante de la matriz, y continuar desde
-«Próxima acción exacta». El estado del repositorio prevalece sobre la memoria de chat.
+Leer este archivo, verificarlo contra Git (¿existe el theme con `theme.json`? ¿qué commits
+hay en `fase3-wordpress`?), rerun del último gate QA relevante de la matriz, y continuar
+desde «Próxima acción exacta». El estado del repositorio prevalece sobre la memoria de chat.

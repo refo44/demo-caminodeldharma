@@ -93,3 +93,38 @@ lo rechaza el sniff de WPCS por tener 3 caracteres; el plugin usa `cdd_core`
 Gotcha documentado: con `working_dir: /repo` en el override, `wp core version` debe
 invocarse con `--path=/var/www/html` (WP-CLI busca la instalación desde el cwd); el primer
 intento del harness falló por eso y quedó corregido en `tools/run-phpunit-wp.sh`.
+
+## WU-04 — Scaffold del theme FSE y baseline de tokens visuales (sesión separada tras WU-03)
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-02 y WU-03
+rerun en esta sesión antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`36d368b`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gate WU-02 | compose fail-fast sin `.env` (error interpolación); `ps` → db `(healthy)`; `wp eval wp_get_environment_type()` = `local` | OK | Pass (local) |
+| Rerun gate WU-03 | `tools/php-lint.sh` OK; unit suite OK (2 tests); `vendor/bin/phpcs` limpio (vía Docker) | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo del theme | Unit: 15 tests, **12 failures** (theme.json/style.css/templates ausentes). wp-phpunit: 4 tests, **2 failures** (`theme_no_stylesheet`, `is_block_theme()` false) — ambos ejecutados antes de crear archivo alguno del theme | OK | Pass (local) |
+| Nivel 1 verde tras scaffold | `phpunit -c phpunit.xml.dist` → OK (15 tests, 117 assertions) | OK | Pass (local) |
+| Nivel 2 verde en harness efímero | `tools/run-phpunit-wp.sh` → OK (4 tests, 7 assertions): `wp_get_theme()` sin errores, `is_block_theme()` true, text domain correcto | OK | Pass (local) |
+| Tokens = estático (extracción programática) | `Theme_TokensTest` parsea el `:root` de `static/assets/css/main.css` y compara paleta (6 brand + text-on-dark), indirecciones semánticas (11 roles), 3 familias tipográficas, 5 espaciados, `contentSize`/`wideSize`, ritmo y line-heights — igualdad exacta | OK | Pass (local) |
+| Política de color paleta-only | `settings.color.custom/customGradient/defaultPalette/defaultGradients` = false, asertado por test (docs/12 §8) | OK | Pass (local) |
+| Sin plantillas PHP clásicas (ADR 0029) | Test `test_no_classic_view_templates_exist` (glob `front-page.php`, `page*.php`, `single*.php`, `archive*.php`, `index.php`) → vacío | OK | Pass (local) |
+| QA 1: `php -l` | `tools/php-lint.sh` (ahora incluye `functions.php` del theme) | OK | Pass (local) |
+| QA 1: PHPCS/WPCS | `vendor/bin/phpcs` → 0 errores (theme con prefijo `camino_del_dharma`, text domain `camino-del-dharma`) | OK | Pass (local) |
+| QA 1: Stylelint ambos árboles CSS | `npm run lint:css` con glob ampliado al theme (guía §7) → exit 0 | OK | Pass (local) |
+| QA 1: `git diff --check` | Limpio | OK | Pass (local) |
+| QA 3: theme activa sin warnings/fatals | `wp theme activate camino-del-dharma` → Success, activo v0.1.0; `wp_is_block_theme()` = true en el entorno local | OK | Pass (local) |
+| QA 3: navegación representativa limpia | GET `/` 200 (presets `--wp--preset--color--brand-1: #8c2b3d`, familia body y `main.css` encolado presentes), `/?p=1` 200, `/wp-login.php` 200; `debug.log` no existe; sin `Set-Cookie` anónimo | OK | Pass (local) |
+| Ruta inexistente | 301 canónico de permalinks *plain* (observación heredada de WU-02; rutas reales y 404 se implementan en WU-05/WU-08) | — | Unverified |
+| Paridad visual con el estático (QA 4) | El scaffold no renderiza aún las vistas reales; comparación visual llega con plantillas (WU-07+) | — | Unverified |
+| `test.yml` / Sonar sobre el theme | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones registradas: (1) `fontSizes` no se definen en el baseline — el `:root` del
+estático no tiene tokens de tamaño tipográfico; se añadirán cuando las plantillas los
+necesiten, sin inventar escala. (2) Los woff2 (MarloweEscapade/Fjalla One/Inter) no se
+copian aún al theme: los tokens son las pilas de familia; `fontFace` llega con las
+plantillas reales (WU-07+). (3) `parts/header|footer.html` son placeholders mínimos
+(bloque site-title) para registrar `templateParts`; el markup real es de WU-07+.
+(4) `register_nav_menus()` (docs/12 §11.1) se pospone: un block theme gestiona menús con
+el bloque Navigation; se revisará al construir `parts/header.html` real.
