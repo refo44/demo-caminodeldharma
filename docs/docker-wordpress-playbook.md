@@ -3,8 +3,15 @@
 Referencia operativa de **este** proyecto para cuando se implemente ADR 0023. Complementa la
 decisión; no la sustituye.
 
-**CURRENT STATE:** no hay `docker-compose.yml` en el repo. No ejecutar ni desplegar nada desde este
-documento.
+**CURRENT STATE:** implementado en Fase 3 WU-02 (2026-08-31): `docker-compose.yml` en la raíz +
+`.env.example` (plantilla; `.env` gitignored). Evidencia en `.audit/fase3-validation-matrix.md`
+§ WU-02. Este entorno es solo banco de pruebas local; no participa en ningún despliegue.
+
+Gotcha adicional descubierto en WU-02 (se suma a §3): la plantilla `wp-config.php` de la imagen
+oficial define `WP_DEBUG` desde la variable `WORDPRESS_DEBUG` **antes** de evaluar
+`WORDPRESS_CONFIG_EXTRA`; un `define('WP_DEBUG', …)` dentro del extra es un no-op con warning
+(«already defined»). Activar debug con `WORDPRESS_DEBUG: 1` en cada servicio PHP y dejar en el
+extra solo `WP_ENVIRONMENT_TYPE`, `WP_DEBUG_LOG` y `WP_DEBUG_DISPLAY`.
 
 Environments de este repo: **LOCAL** (este playbook), **STAGING** (Hostinger, hostname no versionado),
 **PRODUCTION** (`https://caminodeldharma.org`, hoy estático). No mezclar credenciales, BD, uploads,

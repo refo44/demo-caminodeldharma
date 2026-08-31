@@ -78,6 +78,9 @@ wp-config.php
 .cursorrules.jsonc
 .cursorrules.json5
 
+# Local Docker environment credentials (ADR 0023) — .env.example is the versioned template
+/.env
+
 # Node.js tooling
 /node_modules/
 

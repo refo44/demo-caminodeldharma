@@ -7,7 +7,7 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 | --- | --- |
 | **Última actualización** | 2026-08-31 |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00 y WU-01 **cerrados**; frontera obligatoria antes de WU-02 (ADR 0023) |
+| **Work unit activo** | Ninguno — WU-00, WU-01 y WU-02 **cerrados**; frontera obligatoria antes de WU-03 (ADR 0023) |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -26,6 +26,15 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   README (receta ZIP desde `static/`), CLAUDE.md, AGENTS.md,
   `.cursor/rules/wordpress-migration-safety.mdc`, `docs/13` v2.5, ledger de migración, CHANGELOG
   (Unreleased). QA gate: ver matriz WU-01 — todo Pass (local); sin despliegue.
+- **WU-02 — Entorno local Docker** (sesión dedicada 2026-08-31, ADR 0023): `docker-compose.yml`
+  raíz (name `camino-del-dharma`; db MariaDB 11.8 + healthcheck; wordpress PHP 8.3 en
+  `127.0.0.1:${WORDPRESS_PORT:-8080}`; wpcli `user 33:33`), `.env.example` versionado, `.env`
+  gitignored (regla nueva en `.gitignore`), fail-fast `${VAR:?}`, `WP_ENVIRONMENT_TYPE=local` +
+  debug log en ambos servicios PHP. Core WordPress 7.1 instalado vía wpcli (admin solo en
+  volumen/`.env` locales). Gotcha corregido y documentado: `WP_DEBUG` debe activarse con
+  `WORDPRESS_DEBUG: 1`, no en `WORDPRESS_CONFIG_EXTRA` (playbook actualizado). QA gate: matriz
+  WU-02 todo Pass (local); paridad local PHP 8.3.33 / MariaDB 11.8.9 vs Hostinger 8.3.30 /
+  11.8.8 (misma serie menor).
 
 ## Riesgos y hallazgos activos
 
@@ -57,30 +66,43 @@ Ver `.audit/fase3-validation-matrix.md`. Estados permitidos: `Unverified`, `Pass
 
 ## Bloqueos
 
-- Ninguno para WU-00/WU-01.
-- WU-02 (Docker) requiere **sesión separada** (ADR 0023, FABLE5 §12): frontera obligatoria.
+- Ninguno para WU-00/WU-01/WU-02.
+- WU-03 (código de aplicación) requiere **sesión separada** tras WU-02 (ADR 0023, FABLE5 §12):
+  frontera obligatoria.
 
-## Archivos cambiados en la sesión actual
+## Archivos cambiados en la sesión actual (WU-02)
 
-- `.audit/fase3-execution-state.md` (nuevo)
-- `.audit/fase3-validation-matrix.md` (nuevo)
-- `docs/operations/wordpress-manual-deployment.md` (nuevo)
-- `docs/operations/third-party-plugins.md` (nuevo)
-- WU-01: renames raíz → `static/` + tooling (ver commits en `fase3-wordpress`)
+- `docker-compose.yml` (nuevo)
+- `.env.example` (nuevo); `.env` local creado, gitignored, fuera de Git
+- `.gitignore` (regla `/.env`)
+- `docs/docker-wordpress-playbook.md` (CURRENT STATE + gotcha `WORDPRESS_DEBUG`)
+- `.audit/fase3-validation-matrix.md` (filas WU-02)
+- `CHANGELOG.md` (Unreleased)
+- este archivo
 
 ## Último commit verificado
 
-`54cd09f` — cierre de WU-01 (QA local verde). Historial de la sesión en `fase3-wordpress`:
-`5088e32` (WU-00) → `bfb6dc0` (renames WU-01) → `54cd09f` (tooling/docs WU-01).
+Ver commit de cierre de WU-02 en `fase3-wordpress` (tras `11237a1`). Historial:
+`5088e32` (WU-00) → `bfb6dc0` + `54cd09f` (WU-01) → `11237a1` (cierre WU-01) → WU-02.
+
+## Estado del entorno local
+
+Contenedores levantados al cierre de la sesión WU-02 (`docker compose stop` para pararlos;
+`up -d` los devuelve). Volúmenes `db_data`/`wp_data` persisten el core y la BD locales;
+`docker compose down -v` los destruye (entorno desechable, re-instalable con
+`wp core install`). WordPress local: `http://localhost:8081` (puerto en `.env`; 8080 estaba
+ocupado por otro proyecto). Credenciales admin: solo en `.env` local y el volumen.
 
 ## Próxima acción exacta
 
-WU-01 está cerrado. **La sesión actual se detiene aquí** (frontera obligatoria ADR 0023).
-La siguiente sesión: rerun del preflight (§ Reanudación), luego implementar y validar **solo
-WU-02** — entorno local Docker según ADR 0023 y `docs/docker-wordpress-playbook.md`
-(MariaDB 11.8 + WordPress PHP 8.3 + wpcli; `.env` gitignored + `.env.example`;
-`WP_ENVIRONMENT_TYPE=local`) — actualizar este archivo y detenerse de nuevo antes de
-código de aplicación (WU-03).
+WU-02 está cerrado. **La sesión actual se detiene aquí** (frontera obligatoria ADR 0023: el
+código de aplicación empieza en otra sesión). La siguiente sesión: rerun del preflight
+(§ Reanudación) **incluido el gate WU-02** (`docker compose config` fail-fast sin `.env`;
+con `.env`: `up -d`, db healthy, `wp eval wp_get_environment_type()` = `local`), luego
+implementar y validar **solo WU-03** — scaffold del plugin `camino-del-dharma-core` y tooling
+de calidad (PHPCS/WPCS, kit PHPUnit + wp-phpunit el mismo día que exista PHP propio, ADR 0038,
+`docs/guia-pruebas-plugin-theme-fse.md`) — actualizar este archivo y detenerse en el checkpoint
+de WU-03.
 
 ## Procedimiento de reanudación
 

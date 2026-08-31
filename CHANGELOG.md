@@ -10,6 +10,16 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-02: entorno local Docker (sin cambio del artefacto desplegado)
+
+Entorno WordPress local de 3 servicios según ADR 0023 y `docs/docker-wordpress-playbook.md`:
+`docker-compose.yml` en la raíz (MariaDB 11.8 con healthcheck, WordPress PHP 8.3 en
+`127.0.0.1:${WORDPRESS_PORT:-8080}`, `wpcli` como www-data) con bind-mount solo del theme y
+plugin propios; core y BD en volúmenes Docker. `.env.example` versionado, `.env` gitignored,
+variables fail-fast, `WP_ENVIRONMENT_TYPE=local` y debug log en ambos servicios PHP. Banco de
+pruebas local únicamente; no participa en ningún despliegue (ADR 0015). Evidencia
+`Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-02.
+
 ### Fase 3 iniciada — WU-00/WU-01 (sin cambio del artefacto desplegado)
 
 Reorganización monorepo (ADR 0014) en la rama `fase3-wordpress`: la superficie desplegable se
