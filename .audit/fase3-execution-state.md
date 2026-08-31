@@ -82,8 +82,9 @@ Ver `.audit/fase3-validation-matrix.md`. Estados permitidos: `Unverified`, `Pass
 
 ## Último commit verificado
 
-Ver commit de cierre de WU-02 en `fase3-wordpress` (tras `11237a1`). Historial:
-`5088e32` (WU-00) → `bfb6dc0` + `54cd09f` (WU-01) → `11237a1` (cierre WU-01) → WU-02.
+`b9c9eb8` — cierre de WU-02 (QA local verde). Historial en `fase3-wordpress`:
+`5088e32` (WU-00) → `bfb6dc0` + `54cd09f` (WU-01) → `11237a1` (cierre WU-01) →
+`b9c9eb8` (WU-02).
 
 ## Estado del entorno local
 
