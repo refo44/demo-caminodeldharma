@@ -361,3 +361,90 @@ Decisiones y deltas registrados (WU-08A):
 8. **Fixture de `/practica` con kses levantado**: el importador corre bajo WP-CLI, donde los
    filtros kses no están activos y el `<source>` publicado sobrevive; `source` no es tag
    permitido por kses, así que el test debe reproducir la ruta real y no una empobrecida.
+
+---
+
+## WU-08B — SEO first-party, noindex, redirects, OWN-015 y a11y
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §9.5 + §10 únicamente;
+reanudación: preflight + rerun de los gates WU-03…WU-08A antes de tocar nada). Sin PHP/Composer
+nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`d73fecd`, implementación WU-08A en `c94635f`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gates WU-03…WU-08A | php-lint OK; unit 119/119; phpcs limpio; wp-phpunit 75/75; plugin 0.5.0 y theme 0.3.0 activos | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo | Unit: 148 tests, **17 errors + 12 failures** (`Cdd_Core_Seo_Extractor`, `Cdd_Core_Seo_Document`, `Cdd_Core_Json_Ld`, `wordpress/.htaccess`, `inc/seo.php` inexistentes). wp-phpunit: 98 tests, **17 errors + 3 failures** (`cdd_core_seo_context`, `cdd_core_seo_robots`, meta de cabecera, proveedores del sitemap, herramienta de huérfanos). Los preexistentes siguieron verdes | OK | Pass (local) |
+| Nivel 1 verde | `phpunit` → OK (**156 tests, 808 assertions**): extracción de la cabecera publicada carácter a carácter (título, description, keywords, OG, `rel=related`, `@graph` del Inicio, `addressRegion` por ciudad, extras JSON-LD del evento); documento de cabeza (valor vacío = etiqueta ausente, `alternate` solo si se pasa); grafo (EventCompleted sin oferta, campos opcionales omitidos, extras nunca pisan lo generado, autores `Thing`, publisher Organization, rebase de la base de producción); `.htaccess` contra el ledger; contrato del theme | OK | Pass (local) |
+| Nivel 2 verde | `run-phpunit-wp.sh` → OK (**106 tests, 649 assertions**): meta de cabecera registrada en `page`/`post`/`event` con REST; resolución por tipo de request (Page, portada, evento vigente/finalizado, entrada, ficha de autor, archivo `/author`, término de álbum, tag, 404, archivo `/eventos`); `noindex,follow` sin `nofollow`; `wp_robots` coherente con el contexto; sitemap sin proveedor de usuarios ni taxonomías, con el archivo `/eventos` una sola vez; herramienta de huérfanos (alcance, dry-run, apply, capacidad, pantalla en Herramientas); importador (meta, opción de sitio, regiones, `tag_base`, zona horaria, idioma) y `convert` add-only e idempotente | OK | Pass (local) |
+| QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings** (81 archivos); `npm run lint:css` verde; sin secretos | OK | Pass (local) |
+| Payload regenerado | `tools/extract-payload.sh` → mismos `counts` (11/10/2/2/3/35/81/5) y misma `source` (VERSION 1.0.35, commit `bfb6dc0`). Deltas verificados objeto a objeto: `seo` sustituye a `head_title`/`meta_description` en pages y posts, los eventos ganan `seo` + `attendance_mode` + `jsonld_extra`, y aparece la sección **no contada** `site` | OK | Pass (local) |
+| QA 3: pipeline en el entorno local | `import --apply` → settings `timezone_string`/`tag_base` + `site_seo` (opción + 3 `cdd_region`); `convert` dry-run → 16 pendientes (11 pages + 3 singles + 2 posts; los 7 eventos solo-tarjeta no tienen copy y se saltan), `--apply` → 16, 2.º apply → 0 | OK | Pass (local) |
+| QA 3: cabeza HTTP entrante | `/`, `/eventos`, los 2 singles, `/blog`, entrada, `/author`, ficha, `/galeria/2023`, `/privacidad`: un solo `<title>`, un solo `robots`, un solo `canonical`, todos con el copy publicado y el canónico del entorno (nunca `caminodeldharma.org`) | OK | Pass (local) |
+| QA 3: JSON-LD | Portada: `@graph` publicado (Organization, 2 Person, WebSite, WebPage) rebasado, sin segundo `Event`, con `mentions` al evento vigente. Evento vigente: BreadcrumbList + Event con `EventScheduled`, `MixedEventAttendanceMode`, VirtualLocation + 2 Places con `addressRegion`, `offers` = precio publicado + `validFrom` + URL y disponibilidad vivas. Finalizado: `EventCompleted`, **sin** `offers`. Entrada: `BlogPosting` con autores `Thing` de la relación `authors`, publisher Organization, `mainEntityOfPage` sin `url` redundante. Ficha: `Thing` con nombre y URL canónica | OK | Pass (local) |
+| QA 3: noindex | `/author`, `/galeria/{album}`, `/blog/tag/{slug}` y el 404 sirven `noindex,follow` (nunca `nofollow`); las fichas de autor y el resto siguen `index,follow,max-image-preview:large` | OK | Pass (local) |
+| QA 3: `.ics` | Vigente 200 con `X-Robots-Tag: noindex, nofollow`, `text/calendar` y `Content-Disposition`; finalizado **410** con el mismo header; `rel="alternate" type="text/calendar"` solo en el single vigente (0 ocurrencias en el finalizado) | OK | Pass (local) |
+| QA 3: sitemap nativo | `/wp-sitemap.xml` sin proveedor de usuarios ni taxonomías; páginas, entradas, eventos (con `/eventos` primero) y fichas de autor. Las únicas URL fuera del árbol son el contenido demo del install local (`/sample-page`, `/blog/hello-world`); el staging parte limpio | OK | Pass (local) |
+| QA 3: `.htaccess` sobre Apache real | Archivo copiado al document root del contenedor y probado con `curl` (Host y `X-Forwarded-Proto` de producción): legacy singles → 301 de un salto con y sin barra final; `/prueba` y `/site.webmanifest` → **410**; `/category`, `/category/general` → `/blog` 301; `?page_id=10` → `/comunidad`, otro `page_id` → `/`; `sitemap.xml` → `/wp-sitemap.xml`; `/comunidad/` → `/comunidad`; `/wp-admin/` y `/wp-json` intactos. Sin cadenas, sin loops, sin 404 blandos. `.htaccess` local restaurado al terminar | OK | Pass (local) |
+| QA 3: «Eliminar huérfanos» (OWN-015) | Con un `.ics` de evento finalizado y otro de evento vigente en la biblioteca: lista solo el primero, `--apply` borra 1 y conserva el vigente; fotos y mp3 nunca aparecen. Pantalla de Herramientas renderizada con `h1`, tabla `widefat` con `scope="col"`, nonce y botón de envío | OK | Pass (local) |
+| QA 4: a11y docs/19 (navegador real) | 13 rutas auditadas: `lang="es-CO"`, un `h1` por página, jerarquía de encabezados sin saltos, 0 imágenes sin `alt`, 0 enlaces sin nombre accesible, 0 `tabindex` positivos, 0 contenedores `aria-hidden` con foco dentro. 320px y 640px (zoom 200 %): sin scroll horizontal ni elemento desbordado. Skip link único, primero en el orden de tabulación, visible al foco y con destino `#main`; `nav-toggle` con `aria-expanded` dinámico; 11 celdas del calendario con `aria-label` y ninguna con `title`; 9/9 SVG decorativos con `aria-hidden` **y** `focusable="false"`; `:focus-visible` con contraste y `prefers-reduced-motion` respetado | OK | Pass (local) |
+| QA 3: higiene | `debug.log` sin entradas de código propio | OK | Pass (local) |
+| QA 4 visual completo (lector de pantalla real) | No ejecutado en esta sesión | — | Unverified |
+| Staging Hostinger | Sin crear (OWN-005) | — | Unverified |
+| CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones y deltas registrados (WU-08B):
+
+1. **La cabeza publicada es contenido, no texto generado** (ADR 0034, OWN-007): título,
+   description, keywords y copy de Open Graph viajan en el payload (`seo`) y viven como meta
+   editable `seo_title`/`seo_description`/`seo_keywords`/`og_title`/`og_description` en `page`,
+   `post` y `event`. Un objeto sin copy publicado —los 7 eventos ADR 0035 que solo existen como
+   tarjeta— no imprime una cabeza inventada: cae al título real y omite la description.
+2. **`/eventos` no es una Page**: su cabeza publicada, los defaults sociales y el `@graph` del
+   Inicio viajan en una sección **`site` no contada** del payload y se siembran como la opción
+   `cdd_core_seo_site` (add-only). Los `counts` de reconciliación no cambian. La sección no tiene
+   UI propia todavía: se edita por WP-CLI hasta que exista una pantalla (fase posterior).
+3. **Todo URL almacenado se rebasa a `home_url()`** al renderizar. El payload guarda las URL de
+   producción; un staging jamás publica `caminodeldharma.org` como identidad propia. La imagen
+   social por defecto además se resuelve contra la biblioteca al sembrar la opción, para no
+   hotlinkear producción.
+4. **Nunca se inventa un campo opcional**: sin ciudades no hay `location`, sin fin no hay
+   `endDate`, sin cartel no hay `image`. La modalidad publicada es texto libre (OWN-007) y no se
+   parsea: el `eventAttendanceMode` sale de un campo propio `event_attendance_mode` extraído del
+   JSON-LD publicado, y queda vacío —campo omitido— en los eventos sin single.
+5. **La riqueza publicada que WordPress no puede re-derivar** (`additionalType`, `alternateName`,
+   `audience`, `performer`, `subjectOf`, precio y `validFrom` de la oferta) viaja como
+   `seo_jsonld_extra` y se fusiona **por debajo** del nodo generado: un campo generado siempre
+   gana, así que nada se queda obsoleto, y un evento finalizado descarta la oferta guardada
+   (§10.2). El `addressRegion` de cada ciudad es meta del término `event_city`.
+6. **Deltas aceptados frente al JSON-LD publicado**: `startDate`/`endDate` son fechas sin hora ni
+   offset (el modelo WU-05 guarda `Y-m-d`); la `description` del Event es la meta description
+   publicada (el estático publica una tercera cadena propia que ningún campo del modelo carga);
+   `/comunidad` emite BreadcrumbList en vez del `WebPage`+`Organization`+`Person` que publica el
+   estático (doc 15 §12.5 pide BreadcrumbList en subpáginas).
+7. **`rel="alternate" type="text/calendar"`** usa el título del evento; el estático publica un
+   título hand-written («… — sesión de bienvenida») que ningún campo carga. Se emite solo
+   mientras el evento es vigente (OWN-014).
+8. **`tag_base` = `blog/tag`** (docs/11 §3.2): sin ese ajuste WordPress publicaría `/tag/{slug}`,
+   una URL que el árbol no contiene. Lo aplica el importador, como el resto de los settings.
+9. **El idioma del documento es un filtro, no un ajuste**: WordPress rechaza guardar en `WPLANG`
+   un locale cuyos archivos de traducción no están instalados, así que un entorno recién creado
+   servía `<html lang="en-US">` (fallo WCAG 3.1.1). `cdd_core_default_locale()` declara `es_CO`
+   y se aparta en cuanto una administradora elige idioma en Ajustes.
+10. **El `.htaccess` de WordPress corrige un bucle latente del estático**: la condición HTTPS
+    publicada usa `[OR]`, que tras un proxy con TLS terminado (HTTPS != on, `X-Forwarded-Proto` =
+    https) redirige una petición que ya es segura a una URL que vuelve a cumplir la condición. En
+    producción no se dispara porque Hostinger fija las dos señales. No se porta el bucle (§10.1)
+    y **no se toca el estático**.
+11. **Reglas solo-estáticas que no viajan**: `DirectoryIndex`, la reescritura de `index.html` y
+    `ErrorDocument 404` sombrearían el front controller de WordPress y fabricarían 404 blandos.
+    El ledger lo registra.
+12. **El sitemap pierde proveedores enteros**: usuarios (los archivos de autor de WP son 404,
+    ADR 0037 §5) y **todas** las taxonomías (categorías fuera del árbol; tags y álbumes
+    `noindex`). `/eventos` se añade subclasificando el proveedor de entradas, porque el núcleo no
+    expone filtro sobre la lista terminada.
+13. **Defectos de accesibilidad heredados del estático y corregidos solo en WordPress**: cuatro
+    SVG decorativos sin `focusable="false"`, y los archivos `/author` y `/blog/tag/{slug}` sin
+    `h1` (caían a `index.html`). Se añade `templates/archive.html` y
+    `templates/archive-blog_author.html`. Además se retira el skip link que el núcleo inyecta en
+    los block themes, duplicado del publicado y en el idioma del admin.

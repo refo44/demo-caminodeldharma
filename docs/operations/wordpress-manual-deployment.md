@@ -6,15 +6,16 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 
 | | |
 | --- | --- |
-| **Versión** | 1.0 |
+| **Versión** | 1.1 |
 | **Fecha** | 2026-08-31 |
-| **Estado** | Vigente — staging aún no creado |
+| **Estado** | Vigente — staging aún no creado; `.htaccess` añadido al alcance en WU-08B |
 
 ## Alcance
 
 - **Qué se despliega a WordPress:** únicamente código first-party versionado:
-  `wordpress/wp-content/themes/camino-del-dharma/` y
-  `wordpress/wp-content/plugins/camino-del-dharma-core/`.
+  `wordpress/wp-content/themes/camino-del-dharma/`,
+  `wordpress/wp-content/plugins/camino-del-dharma-core/` y, desde WU-08B,
+  `wordpress/.htaccess` al document root.
 - **Qué nunca se despliega desde este repo:** core de WordPress, `wp-config.php`,
   credenciales, base de datos, `uploads/`, `docs/`, `scripts/`, `tests/`, `static/`
   sobre un document root WordPress (ADR 0013, ADR 0032).
@@ -27,6 +28,10 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 2. Empaquetar **solo** los dos directorios first-party (ZIP por directorio o File Manager).
 3. Subir a `wp-content/themes/` y `wp-content/plugins/` del staging.
 4. Activar plugin, luego theme. Verificar sin warnings/fatals y `debug.log` limpio.
+4b. Copiar `wordpress/.htaccess` al document root **conservando el bloque
+   `# BEGIN WordPress` que ese servidor ya tenga**: las reglas propias van encima y WordPress
+   reescribe el suyo al guardar enlaces permanentes. Comprobar después con `curl` las entradas
+   del ledger (un salto por regla, sin cadenas ni loops).
 5. Verificar noindex del staging (ajuste de lectura de WordPress + ausencia de dominio).
 6. Registrar evidencia como `Pass` (staging) en la matriz; `Pass (local)` no la sustituye.
 

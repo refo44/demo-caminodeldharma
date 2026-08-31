@@ -32,7 +32,18 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   calendario» y del `.ics` generado, y dos pasos nuevos de `migrate convert`: `practica`
   (reproductores de mantras → bloques `core/audio` nativos) y la siembra add-only de la
   meta de compartir cuando se pasa `--payload=<path>`.
-- La capa wp-admin (metabox de autores, «Eliminar huérfanos» OWN-015) llega en WU-08B —
-  siempre test en rojo primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
+- SEO y mantenimiento desde WU-08B (v0.6.0): `includes/seo/` (clases puras
+  `Cdd_Core_Seo_Document` y `Cdd_Core_Json_Ld`) e `includes/seo.php` resuelven la cabeza de
+  cada petición — título, description, keywords, canonical, Open Graph, Twitter, breadcrumbs y
+  JSON-LD `Event`/`BlogPosting`/`Thing` — sin suite de terceros (ADR 0025/0030, doc 15 §12). El
+  copy publicado es meta editable (`seo_title`, `seo_description`, `seo_keywords`, `og_title`,
+  `og_description`) en `page`, `post` y `event`, más `event_attendance_mode`, `seo_jsonld_extra`
+  y `seo_related_url` en `event` y `cdd_region` en los términos `event_city`. Política
+  `noindex, follow` para `/author`, álbumes, tags y 404; sitemap nativo recortado al árbol de
+  docs/11; `cdd_core_default_locale()` declara `es_CO`. `includes/admin.php` añade la pantalla
+  de Herramientas **«Eliminar huérfanos»** (OWN-015): solo `.ics`, dry-run primero, borrado con
+  nonce y capacidad de edición de eventos.
+- El metabox de autores en wp-admin sigue pendiente — siempre test en rojo primero. Guía:
+  `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

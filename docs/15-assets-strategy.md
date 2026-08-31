@@ -274,6 +274,24 @@ núcleo de WordPress (`/wp-sitemap.xml`) como única fuente de verdad; `robots.t
 `docs/11-arbol-urls-final.md`. `llms.txt` y `.htaccess` siguen aplicando igual en ambas
 implementaciones.
 
+**Implementación en WordPress (WU-08B, 2026-08-31).** Sin suite de SEO (§10.2 del prompt maestro):
+el plugin `camino-del-dharma-core` resuelve la cabeza de cada petición y el theme la imprime.
+Detalle en `.audit/fase3-validation-matrix.md` § WU-08B; lo esencial:
+
+- El copy publicado (título, description, keywords, Open Graph) es **contenido**, no texto
+  generado: viaja en el payload y vive como meta editable (`seo_title`, `seo_description`,
+  `seo_keywords`, `og_title`, `og_description`) en `page`, `post` y `event`. Un objeto sin copy
+  publicado cae a su título real y omite la description; nunca se inventa.
+- La cabeza del archivo `/eventos`, los defaults sociales y el `@graph` del Inicio viven en la
+  opción `cdd_core_seo_site`, sembrada por el importador desde el estático.
+- Toda URL guardada se rebasa a `home_url()` al renderizar: un staging no publica
+  `caminodeldharma.org` como identidad propia, y la imagen social por defecto se sirve desde la
+  biblioteca del entorno.
+- `noindex, follow`: `/author`, términos `gallery_album`, `post_tag` y el 404. Todo lo demás,
+  `index,follow,max-image-preview:large`, como publica el estático.
+- El sitemap nativo pierde el proveedor de usuarios y **todas** las taxonomías, y gana la URL del
+  archivo `/eventos`.
+
 **Google Search Console:** propiedad verificada; sitemap enviado; tras cambios relevantes en `<head>` o JSON-LD, solicitar indexación de las URLs afectadas. Usar **Rendimiento** e **Indexación** para guiar mejoras; no es un paso de configuración único.
 
 ### 12.3 Event — JSON-LD (`Event`)
@@ -443,4 +461,4 @@ estructura de archivos estáticos (13) y la arquitectura CSS (14). El doc 16 es 
 
 ---
 
-**Versión:** 2.7 — Fuentes de assets y media alineadas con ADR 0040.
+**Versión:** 2.8 — §12.2: implementación first-party del SEO en WordPress (WU-08B).

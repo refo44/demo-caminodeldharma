@@ -33,5 +33,11 @@ Reglas:
 - `theme.json` es la fuente de verdad de tokens; sin hex directos en CSS.
 - No crear plantillas PHP clásicas (`front-page.php`, `page-*.php`…): hay un
   test que lo prohíbe (`Theme_ScaffoldTest`).
-- SEO dinámico, redirects y el pase de accesibilidad llegan en WU-08B con test
-  en rojo antes. Guía: `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).
+- Cabeza del documento desde WU-08B (v0.4.0): `inc/seo.php` **imprime y escapa** el
+  documento que resuelve `cdd_core_seo_document()`; ninguna política de SEO vive
+  aquí (ADR 0024). Retira el `<title>`, el `canonical` y el `robots` del núcleo —y
+  el segundo skip link que WordPress inyecta en los block themes— para que la
+  página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
+  `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
+  (docs/19 §9).
+- Guía de pruebas: `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).

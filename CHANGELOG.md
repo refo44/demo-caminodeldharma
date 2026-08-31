@@ -10,6 +10,38 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — WU-08B: SEO, redirects, huérfanos y a11y (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.6.0** y theme `camino-del-dharma` **0.4.0**. El estático de
+producción no se toca.
+
+- **SEO first-party, sin plugin de terceros** (ADR 0025/0030, doc 15 §12): el plugin resuelve
+  título, description, keywords, canonical, Open Graph, Twitter y JSON-LD de cada petición; el
+  theme lo imprime y lo escapa. El copy publicado deja de ser HTML congelado y pasa a meta
+  editable (`seo_title`, `seo_description`, `seo_keywords`, `og_title`, `og_description`) en
+  `page`, `post` y `event`; la cabeza del archivo `/eventos`, los defaults sociales y el `@graph`
+  del Inicio viven en la opción `cdd_core_seo_site`. Todo URL guardada se rebasa a `home_url()`.
+- **JSON-LD con datos reales**: los 10 eventos emiten `Event`; los finalizados usan
+  `EventCompleted` y **no** anuncian inscripción. Las entradas emiten `BlogPosting` con autores
+  `Thing` de la relación `authors` (ADR 0037) y la Organization del sitio como publisher; las
+  fichas emiten `Thing`. Ningún campo opcional se inventa.
+- **noindex, follow** en `/author`, términos de álbum, tags del blog y el 404 (ADR 0031/0036/0037).
+  El `.ics` mantiene `X-Robots-Tag: noindex, nofollow` y se enlaza `rel="alternate"
+  type="text/calendar"` solo mientras el evento es vigente (OWN-014).
+- **Sitemap nativo** `/wp-sitemap.xml` sin proveedor de usuarios ni taxonomías, con la URL del
+  archivo `/eventos` añadida.
+- **`wordpress/.htaccess`**: ledger de redirecciones portado encima del bloque que WordPress
+  reescribe, verificado sobre Apache real. Añade el 301 de `sitemap.xml`; no porta las reglas
+  solo-estáticas ni el bucle latente de la condición HTTPS.
+- **wp-admin «Eliminar huérfanos»** (OWN-015): lista los `.ics` que ningún evento vigente respalda
+  y los borra tras confirmar, con nonce y capacidad. Fotos, audios y carteles nunca entran.
+- **Accesibilidad (docs/19)**: `<html lang="es-CO">` en cualquier entorno, `h1` en los archivos
+  `/author` y `/blog/tag/{slug}`, un solo skip link (se retira el del núcleo) y `focusable="false"`
+  en los SVG decorativos.
+- `migration/payload.json` regenerado: mismos `counts` y misma fuente (VERSION 1.0.35, commit
+  `bfb6dc0`); `seo` sustituye a `head_title`/`meta_description`, los eventos ganan
+  `attendance_mode` y `jsonld_extra`, y aparece la sección no contada `site`.
+
 ### WordPress Fase 3 — WU-08A: comportamiento front (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.5.0** y theme `camino-del-dharma` **0.3.0**. El estático de

@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (WU-08A implementado y validado) |
+| **Última actualización** | 2026-08-31 (WU-08B implementado y validado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…**WU-08A cerrados**; checkpoint antes de **WU-08B** |
+| **Work unit activo** | Ninguno — WU-00…**WU-08B cerrados**; checkpoint antes de **WU-09** |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -157,6 +157,44 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
     biblioteca con nombre accesible, y **0 bloques inválidos** en el editor de `/practica`.
     Matriz § WU-08A. QA 4 visual completo y staging siguen `Unverified`.
 
+- **WU-08B — SEO first-party, noindex, redirects, OWN-015 y a11y** (sesión 2026-08-31, FABLE5
+  §9.5 + §10 únicamente; ADR 0025/0030/0031/0034/0036/0037/0038, OWN-007/013/014/015; TDD
+  honesto: RED documentado en unit (17 E + 12 F) **y** wp-phpunit (17 E + 3 F) antes del primer
+  archivo de SEO):
+  - Reanudación verificada: preflight limpio + rerun de los gates (unit 119, phpcs, wp-phpunit
+    75, plugin 0.5.0 y theme 0.3.0 activos).
+  - Plugin **0.6.0**: `includes/seo/class-cdd-core-seo-document.php` y `class-cdd-core-json-ld.php`
+    (puras: la cabeza y el grafo como datos, «nunca inventar un campo opcional»);
+    `includes/seo.php` (contexto por request, `noindex,follow` de `/author`/álbumes/tags/404,
+    `rel=alternate` del `.ics` solo vigente, rebase de toda URL guardada a `home_url()`,
+    `cdd_core_default_locale()`); `includes/seo/class-cdd-core-sitemap-posts.php` (el archivo
+    `/eventos` en el sitemap; el núcleo no expone filtro sobre la lista terminada);
+    `includes/admin.php` («Eliminar huérfanos», OWN-015, solo `.ics`, dry-run + nonce +
+    capacidad); meta editable `seo_*`/`og_*`/`event_attendance_mode`/`seo_jsonld_extra`/
+    `seo_related_url` y term meta `cdd_region`;
+    `includes/migration/class-cdd-core-seo-extractor.php` + payload (`seo` por objeto y sección
+    **no contada** `site`), importador (meta, opción `cdd_core_seo_site`, regiones, `tag_base`,
+    zona horaria) y `migrate convert` (siembra add-only de la cabeza).
+  - Theme **0.4.0**: `inc/seo.php` imprime y escapa el documento y retira el `<title>`, el
+    `canonical`, el `robots` y el skip link duplicado del núcleo; `templates/archive.html` y
+    `templates/archive-blog_author.html` dan su `h1` a `/blog/tag/{slug}` y a `/author`;
+    `focusable="false"` en los 4 SVG decorativos que producción publica sin él.
+  - `wordpress/.htaccess`: ledger portado **encima** del bloque que WordPress reescribe,
+    verificado con `curl` sobre el Apache real del contenedor (un salto por regla, 410 reales,
+    sin cadenas ni loops). No portan las reglas solo-estáticas; la condición HTTPS pasa de `[OR]`
+    a AND para no heredar un bucle latente. El estático no se toca.
+  - Cinco defectos cazados por la verificación HTTP real (no por la suite): `<title>` y `robots`
+    duplicados del núcleo (el block theme registra su printer de título **dentro** de
+    `locate_block_template()`, después de `wp` y de `template_redirect`; y el núcleo engancha
+    ambos en prioridad 1, no 10); JSON escapado perdiendo las barras invertidas al sembrarse sin
+    `wp_slash()` («Círculos» → «Cu00edrculos»); imagen social por defecto apuntando a producción;
+    `<html lang="en-US">` (WCAG 3.1.1); y el bucle latente del `[OR]`.
+  - QA: unit 156/156 (808 asserts), wp-phpunit 106/106 (649 asserts), phpcs 0/0 sobre 81
+    archivos, stylelint verde, `php -l` OK, `debug.log` sin entradas propias. Pipeline aplicado
+    en el entorno local (16 objetos sembrados; 2.º apply = 0). Pase docs/19 en navegador real
+    sobre 13 rutas, 320px y 640px. Matriz § WU-08B. QA 4 con lector de pantalla y staging siguen
+    `Unverified`.
+
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger **verificada** (WU-06, delta 0). Re-verificar en el freeze pre-corte.
@@ -174,9 +212,16 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   copy de compartir viajara — en una importación limpia la meta ya viene del importador).
 - QA 4 visual solo parcial (escritorio home/eventos + breakpoint móvil); el pase completo
   (320px, zoom 200%, teclado, lector de pantalla) y staging quedan `Unverified`.
-- Comportamiento pendiente para **WU-08B**: SEO dinámico (title/meta/OG/JSON-LD, noindex de
-  `/author`, términos de álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos»
-  (OWN-015) y el pase completo de docs/19. Los diálogos y el audio ya están (WU-08A).
+- **WU-08B cerrado.** Queda `Unverified` el pase con lector de pantalla real y todo lo que
+  exige staging. La sección `site` del payload (defaults sociales, cabeza de `/eventos`, `@graph`
+  del Inicio) **no tiene UI en wp-admin**: se edita por WP-CLI (`wp option get/update
+  cdd_core_seo_site`) hasta que una fase posterior le dé pantalla.
+- **Commit ajeno en el historial:** `3c3d513` («feat: enhance SEO functionality and improve event
+  handling») se creó fuera de esta sesión y capturó una instantánea a medias del árbol de trabajo
+  de WU-08B; el resto de esos mismos arreglos quedó en `9a00f97`. El árbol final es correcto y
+  todos los gates están verdes, pero el mensaje no sigue la convención del repositorio. La rama
+  es local: si se quiere historial limpio, `git rebase -i d73fecd` para fundir `3c3d513` en
+  `9a00f97` antes de cualquier push.
 - **BUG-001 (Círculos `.ics`):** el exportado debe incluir **todas las sesiones**. Hoy el
   estático publica un solo VEVENT de la bienvenida; WordPress emite un solo VEVENT de rango.
   **Sesión propia inmediatamente antes de WU-10** (después de WU-09). No se mezcla con 08B.
@@ -225,14 +270,37 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-08A. Estados: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-08B. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. Siguiente implementación: **WU-08B**, sesión aparte (Opus + FABLE5 §9.5 y §10
-  solamente). Orden restante: WU-08B → WU-09 (CF7) → **BUG-001** (`.ics` todas las sesiones)
-  → WU-10.
+- Ninguno. Siguiente implementación: **WU-09** (Contact Form 7), sesión aparte. Orden restante:
+  WU-09 → **BUG-001** (`.ics` todas las sesiones) → WU-10.
+
+## Archivos cambiados en WU-08B
+
+- Tests nuevos (RED antes de la implementación): `tests/Unit/Seo_ExtractorTest.php`,
+  `Seo_DocumentTest.php`, `Htaccess_LedgerTest.php`, `Theme_SeoTest.php`,
+  `tests/WordPress/Seo_HeadTest.php`, `Seo_SitemapTest.php`, `Orphans_ToolTest.php`; ampliados
+  `tests/Unit/Page_ExtractorTest.php`, `Blog_ExtractorTest.php`, `Event_ExtractorTest.php`,
+  `Payload_BuilderTest.php`, `Theme_TemplatesTest.php`, `tests/WordPress/ImporterTest.php`,
+  `ConvertTest.php`.
+- Plugin `camino-del-dharma-core` 0.5.0 → **0.6.0**: `includes/seo.php`, `includes/admin.php`,
+  `includes/seo/class-cdd-core-seo-document.php`, `class-cdd-core-json-ld.php`,
+  `class-cdd-core-sitemap-posts.php`,
+  `includes/migration/class-cdd-core-seo-extractor.php` (nuevos); `includes/meta.php`,
+  `class-cdd-core-page-extractor.php`, `class-cdd-core-blog-extractor.php`,
+  `class-cdd-core-event-extractor.php`, `class-cdd-core-payload-builder.php`,
+  `class-cdd-core-importer.php`, `class-cdd-core-convert-service.php`, bootstrap.
+- Theme `camino-del-dharma` 0.3.0 → **0.4.0**: `inc/seo.php`, `templates/archive.html`,
+  `templates/archive-blog_author.html` (nuevos); `functions.php`, `patterns/footer.php`,
+  `inc/class-camino-del-dharma-renderers.php`, `style.css`.
+- `wordpress/.htaccess` (nuevo, artefacto desplegable), `tools/extract-payload.php`,
+  `migration/payload.json` regenerado.
+- Docs: `docs/15-assets-strategy.md`, `docs/11-arbol-urls-final.md`, `docs/redirect-ledger.md`,
+  `docs/operations/wordpress-manual-deployment.md`, READMEs de plugin y theme, `CLAUDE.md`,
+  `AGENTS.md`, `CHANGELOG.md`, `.audit/fase3-validation-matrix.md`, este archivo.
 
 ## Archivos cambiados en WU-08A
 
@@ -294,37 +362,38 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 ## Último commit verificado
 
-`c94635f` — implementación de WU-08A (QA local verde). Baseline visual del theme:
+`081b2f8` — cierre de WU-08B (QA local verde: unit 156, wp-phpunit 106, phpcs 0/0). Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
 `e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07) → `2bd733d` → `150d8b8` (gobernanza) →
-`c94635f` (WU-08A).
+`c94635f` (WU-08A) → `5354449` → `d73fecd` (estado) → `e5dbab0` → `e14ef8e` → `3c3d513`
+(ajeno) → `9a00f97` → `081b2f8` (WU-08B).
 
 ## Estado del entorno local
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.5.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.3.0,
-vistas reales + comportamiento). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
+**activo** (v0.6.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.4.0,
+vistas reales + comportamiento + cabeza). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
 convertido** por `wp cdd-core migrate convert --payload=/repo/migration/payload.json --apply`
 (inicio con bloques dinámicos y `<picture>` desenvueltos; galeria con 3 galerías nativas;
 comunidad con enlaces OWN-016; practica con 2 `core/audio` nativos; copy de compartir
-sembrado en el evento vigente y los 2 posts). Permalinks
-`/blog/%postname%`; front page `inicio`, posts page `blog`. Contenido demo del install
+sembrado en el evento vigente y los 2 posts). También sembrado el SEO publicado (16 objetos) y la opción `cdd_core_seo_site`. Permalinks
+`/blog/%postname%`; `tag_base` `blog/tag`; zona horaria `America/Bogota`; front page `inicio`,
+posts page `blog`. El `.htaccess` del contenedor se restauró al de WordPress por defecto tras
+verificar el artefacto desplegable (el de producción redirige a https y rompería el localhost). Contenido demo del install
 («Sample Page», «Hello world!») sigue presente; el staging partirá limpio. El harness
 efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-08A está cerrado (checkpoint alcanzado; sin push ni despliegue).
+WU-08B está cerrado (checkpoint alcanzado; sin push ni despliegue).
 
-**WU-08B — SEO, redirects, OWN-015, a11y** (Claude 4.6 Opus, **sesión nueva**): pegar el
-resume corto **y** FABLE5 **§9.5 + §10 únicamente** (no el archivo entero). Title/meta/OG/
-JSON-LD, `noindex,follow`, redirects del `.htaccess`, «Eliminar huérfanos», pase docs/19.
-
-WU-09 (Contact Form 7 + párrafos del formulario en `/privacidad`) queda después, sin gate
-jurídico (ADR 0041 / OWN-018).
+**WU-09 — Contact Form 7 y los párrafos del formulario en `/privacidad`** (Opus, **sesión
+nueva**): sin gate jurídico (ADR 0041 / OWN-018). El delta de copy se aplica solo en la Page de
+WordPress; el HTML estático no se toca mientras producción siga sirviendo `action="#"`. La
+entrega real de correo debe verificarse en staging Hostinger: `Pass (local)` no basta.
 
 **BUG-001** (`.ics` de Círculos con todas las sesiones): sesión propia **inmediatamente
 antes de WU-10**, después de WU-09. Opus, resume corto, TDD. No mezclar con WU-10.

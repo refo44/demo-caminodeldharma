@@ -76,15 +76,34 @@ Forma canónica: **sin barra final**.
 
 WordPress reescribe `.htaccess`: estas reglas deben **reimplementarse** (plugin de dominio o bloque documentado), no asumirse.
 
+**Portado en WU-08B (2026-08-31):** `wordpress/.htaccess` es el artefacto desplegable. Las reglas
+propias viven **encima** del bloque `# BEGIN WordPress`, que el núcleo reescribe al guardar
+enlaces permanentes. Verificado sobre Apache real con `curl`: un solo salto por regla, sin
+cadenas ni loops (`.audit/fase3-validation-matrix.md` § WU-08B).
+
+Dos desviaciones deliberadas respecto del `.htaccess` estático, ambas documentadas en el propio
+archivo:
+
+- **No viajan** `DirectoryIndex`, la reescritura de `*/index.html` ni `ErrorDocument 404
+  /404.html`: en un document root de WordPress sombrearían el front controller y fabricarían
+  404 blandos. WordPress sirve su plantilla 404 con estado 404 real.
+- La condición HTTPS pasa de `[OR]` a **AND**. Con `[OR]`, una petición que llega segura por un
+  proxy con TLS terminado (`%{HTTPS}` != `on` pero `X-Forwarded-Proto` = `https`) se redirige a
+  una URL que vuelve a cumplir la condición: bucle. En producción no se dispara porque Hostinger
+  fija las dos señales, pero el bucle latente no se porta. **El estático no se toca.**
+
+Añadido en WU-08B: `sitemap.xml` → `/wp-sitemap.xml` (301), porque el sitemap manual queda
+deprecado (ADR 0030) y la URL vieja sigue indexada.
+
 ---
 
 ## Sitemap / robots
 
 | Recurso static | Plan WP |
 | -------------- | ------- |
-| `sitemap.xml` manual | `/wp-sitemap.xml` (ADR 0030); redirigir o retirar el XML viejo para no duplicar |
+| `sitemap.xml` manual | `/wp-sitemap.xml` (ADR 0030); **301 desde `sitemap.xml`** ya portado en `wordpress/.htaccess` (WU-08B) |
 | `robots.txt` → sitemap manual | actualizar a sitemap nativo en producción; staging noindex |
 
 ---
 
-**Versión:** 1.2
+**Versión:** 1.3 — WU-08B: `.htaccess` de WordPress versionado y verificado; 301 del sitemap manual.
