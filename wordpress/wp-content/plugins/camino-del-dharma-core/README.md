@@ -12,8 +12,12 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   evento a tiempo de request en `America/Bogota` (OWN-013), datos del calendario mensual y
   ruta `.ics` generada `/eventos/ical/{slug}.ics` (OWN-009/OWN-012). Clases puras en
   `includes/class-cdd-core-*.php`; registro/hooks en los demás `includes/*.php`.
-- El importador WP-CLI (validate/plan/import/verify + `seed`) aterriza en WU-06; la capa
-  wp-admin (metabox de autores, «Eliminar huérfanos») en WU-07/08 — siempre test en rojo
-  primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
+- Migración desde WU-06 (v0.3.0, ADR 0032/0033): extractores puros en
+  `includes/migration/`, payload versionado `migration/payload.json`
+  (`tools/extract-payload.sh`) e importador WP-CLI `wp cdd-core migrate
+  validate|plan|import|verify` + `wp cdd-core seed` — dry-run por defecto, `--apply`
+  explícito, idempotente, create-missing-only, guard de producción.
+- La capa wp-admin (metabox de autores, «Eliminar huérfanos») llega en WU-07/08 — siempre
+  test en rojo primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

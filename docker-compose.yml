@@ -75,6 +75,10 @@ services:
       - wp_data:/var/www/html
       - ./wordpress/wp-content/themes/camino-del-dharma:/var/www/html/wp-content/themes/camino-del-dharma
       - ./wordpress/wp-content/plugins/camino-del-dharma-core:/var/www/html/wp-content/plugins/camino-del-dharma-core
+      # Read-only migration inputs for `wp cdd-core migrate` / `seed`
+      # (ADR 0032): the payload and the static tree it was extracted from.
+      - ./migration:/repo/migration:ro
+      - ./static:/repo/static:ro
 
 volumes:
   db_data:

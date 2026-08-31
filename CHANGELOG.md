@@ -10,6 +10,25 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-06: extractor, payload versionado, importador WP-CLI y reconciliación (sin cambio del artefacto desplegado)
+
+`camino-del-dharma-core` 0.2.0 → **0.3.0**, con TDD (RED en ambas suites antes de
+`includes/migration/`, ADR 0038). Extractor determinista de solo lectura sobre `static/`
+(ADR 0032 §8.1): fechas en español, 10 eventos con los slugs ADR 0035 (JSON-LD publicado →
+texto de card; cronograma de Círculos → `event_calendar_dates`; excerpt = copy `.ics` de
+producción), 2 posts con bylines→fichas (ADR 0037) y hero→featured, 3 álbumes + 35 imágenes
+con alt (OWN-001), 11 páginas con URLs raíz-relativas, inventario de 81 medios (71 públicos,
+10 ocultos OWN-003; thumbs/PDF/`.ics` excluidos) y 5 embeds. `migration/payload.json`
+versionado y determinista con `_source_key`/`_source_hash` (fuente VERSION 1.0.35, commit
+`bfb6dc0`). Importador `wp cdd-core migrate validate|plan|import|verify` + `wp cdd-core
+seed` (ADR 0033): dry-run por defecto, `--apply` explícito, idempotente,
+create-missing-only, ediciones wp-admin intactas, guard de producción con
+`--confirm-production` + `--backup-evidence`, settings de lectura y permalinks
+`/blog/%postname%` (ADR 0008). Pipeline verificado contra el entorno local (109 objetos,
+verify 0 missing, rutas 200/301/404/410, conteos reconciliados) y **paridad
+repo↔producción verificada byte a byte (17/17 superficies, OWN-006/007: delta 0)**.
+Suites: 74 unit + 43 wp-phpunit. Evidencia: `.audit/fase3-validation-matrix.md` § WU-06.
+
 ### Fase 3 — WU-05: modelos de dominio, routing y datos de calendario/ICS (sin cambio del artefacto desplegado)
 
 `camino-del-dharma-core` 0.1.0 → **0.2.0**, nacido con TDD (RED documentado en unit y

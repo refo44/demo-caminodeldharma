@@ -73,4 +73,25 @@ Cualquier otra cifra exige fila en «Mismatches».
 
 ---
 
-**Versión:** 1.2
+## Ejecuciones registradas
+
+### 2026-08-31 — Import local WU-06 (entorno Docker, no staging)
+
+Payload `migration/payload.json` (VERSION 1.0.35, commit `bfb6dc0`, generación determinista).
+`wp cdd-core migrate import --apply` + `verify` → **0 missing**; segundo `--apply` → 0 creados.
+
+| Colección | Esperado | Local | Nota |
+| --------- | -------- | ----- | ---- |
+| Pages | 11 | 12 | +1 «Sample Page» del install demo local; no viaja a staging |
+| CPT `event` | 10 | 10 | 10 publish; los 10 singles responden 200 |
+| `post` | 2 | 3 | +1 «Hello world!» del install demo local |
+| CPT `blog_author` | 2 | 2 | `authors` asignado en las 2 entradas |
+| Attachments | 81 | 81 | 71 públicas + 10 ocultas (OWN-003); 35 en álbum; 2 audio; 0 PDF; 0 `.ics` |
+| Álbumes | 3 | 3 | general / 2023 / 2021 |
+
+Paridad repo↔producción verificada el mismo día (17/17 superficies idénticas, delta 0 —
+OWN-006/007). Evidencia completa: `.audit/fase3-validation-matrix.md` § WU-06.
+
+---
+
+**Versión:** 1.3 — registro de la ejecución local WU-06.

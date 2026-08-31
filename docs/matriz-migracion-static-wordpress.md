@@ -35,7 +35,7 @@ Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escr
 | Template | Archivo en `templates/` (doc 12) |
 | JS | Scripts de la maqueta o sustitución documentada |
 | Assets | Imágenes, audio, PDF, `.ics`, fuentes relevantes |
-| Import strategy | Vacío hasta ADR 0033 implementado |
+| Import strategy | Implementada en WU-06 (ADR 0033): payload `migration/payload.json` + `wp cdd-core migrate validate|plan|import|verify` y `seed` de medios; create-missing-only, dry-run por defecto |
 | QA | Qué prueba cierra la fila |
 
 Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada` | `No aplica` | `Excepción ADR`.

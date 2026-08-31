@@ -8,10 +8,14 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 
 **No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
 
-**CURRENT STATE:** Fase 3 **iniciada** (2026-08-31, WU-00…WU-04). El sitio desplegable vive en
-`static/` (reorg ADR 0014 ejecutada, rama `fase3-wordpress`). `wordpress/` ya tiene código de
-primer partido: plugin `camino-del-dharma-core` (WU-03) y theme FSE `camino-del-dharma`
-scaffolded con baseline de tokens (WU-04). Estado durable: `.audit/fase3-execution-state.md`.
+**CURRENT STATE:** Fase 3 **iniciada** (2026-08-31, WU-00…WU-06). El sitio desplegable vive en
+`static/` (reorg ADR 0014, rama `fase3-wordpress`). Plugin `camino-del-dharma-core` v0.3.0:
+modelos de dominio (WU-05) y pipeline de migración (WU-06) — payload versionado
+`migration/payload.json` (extraído de VERSION 1.0.35; paridad live verificada, delta 0) e
+importador `wp cdd-core migrate validate|plan|import|verify` + `seed` (ADR 0032/0033).
+Contenido importado en el entorno local. Theme FSE `camino-del-dharma` sigue en scaffold con
+baseline de tokens (WU-04); plantillas reales en WU-07. Estado durable:
+`.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme futuro.
 
 Decisiones del propietario (**Fase 3 cerrada** v1.20; no reabrir OWN-* sin decisión nueva).

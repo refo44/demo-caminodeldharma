@@ -189,3 +189,20 @@ entregando de verdad a caminodeldharma1@gmail.com se valida en staging, no solo 
 - `.audit/audit-schedule.md` — Hito 2
 - `docs/13-static-file-structure.md`, ADR [0014](adr/0014-monorepo-static-wordpress.md)
 - TASK-0003 (`.audit/implementation/tasks/TASK-0003.md`) — Contact Form 7
+
+## Anexo WU-06 — Entradas de migración en el entorno local
+
+Desde WU-06 el servicio `wpcli` monta en **solo lectura** las entradas del importador
+(ADR 0032/0033): `./migration:/repo/migration:ro` y `./static:/repo/static:ro`. Comandos:
+
+```bash
+./tools/extract-payload.sh   # regenera migration/payload.json (determinista, solo lectura)
+docker compose run --rm wpcli wp cdd-core migrate validate --payload=/repo/migration/payload.json
+docker compose run --rm wpcli wp cdd-core migrate import   --payload=/repo/migration/payload.json          # dry-run
+docker compose run --rm wpcli wp cdd-core migrate import   --payload=/repo/migration/payload.json --apply
+docker compose run --rm wpcli wp cdd-core migrate verify   --payload=/repo/migration/payload.json
+docker compose run --rm wpcli wp cdd-core seed             --payload=/repo/migration/payload.json          # solo medios
+```
+
+El importador nunca escribe en `migration/` ni en `static/`. En producción, `--apply` exige
+además `--confirm-production` y `--backup-evidence` (ADR 0033).

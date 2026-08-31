@@ -191,3 +191,54 @@ Decisiones registradas (WU-05):
    registrado (solo sobreviven los hooks de sanitización por el backup de hooks) y
    `register_post_type` solo añade permastructs si hay estructura de permalinks al
    registrarse — los tests de rutas re-registran los objetos tras `set_permalink_structure`.
+
+## WU-06 — Extractor, payload, importador WP-CLI y reconciliación (sesión separada tras WU-05)
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-03/04/05
+rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`c270a37`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gates WU-03/04/05 | php-lint OK; unit 44/44; phpcs limpio; `run-phpunit-wp.sh` 34/34; plugin 0.2.0 y theme activos; front 200 sin warnings | OK | Pass (local) |
+| Hallazgo al reanudar: `debug.log` con 1 warning | `wp_update_themes()` sin salida de red a WordPress.org desde el contenedor — ruido del entorno, no código propio; log limpiado | OK (no bloquea) | Pass (local) |
+| TDD honesto: RED antes del primer archivo | Unit: 74 tests, **30 errors** (clases de extracción ausentes). wp-phpunit: **8 errors** (`Cdd_Core_Importer` ausente) — ambos antes de `includes/migration/` | OK | Pass (local) |
+| Nivel 1 verde (extractores sobre archivos reales) | `phpunit` → OK (**74 tests, 290 assertions**): fechas en español de producción, 10 eventos con slugs ADR 0035 (precedencia JSON-LD → texto), Círculos con cronograma (10 sesiones; subset sep = calendario publicado) y excerpt = descripción `.ics` de producción, blog con bylines/fechas/hero→thumbnail, galería 3 álbumes + 35 imágenes sin `galeria-04` (OWN-001), páginas con URLs raíz-relativas, inventario de medios (thumbs/`.DS_Store`/pdf/ics excluidos; huérfanas ocultas OWN-003), payload con claves/hashes/counts y JSON determinista | OK | Pass (local) |
+| Payload real generado y determinista | `tools/extract-payload.sh` (lectura pura de `static/`, commit fuente = último commit que tocó `static/` = `bfb6dc0`, VERSION 1.0.35): dos ejecuciones → MD5 idéntico. Counts: pages 11 · events 10 · posts 2 · blog_authors 2 · albums 3 · gallery_images 35 · media 81 (71 públicas + 10 ocultas; 2 audio) · embeds 5 | OK | Pass (local) |
+| Nivel 2 verde (importador) | `run-phpunit-wp.sh` → OK (**43 tests, 313 assertions**): validate rechaza archivos ausentes/autores desconocidos; payload real valida limpio contra `static/`; dry-run no escribe; apply crea fichas/medios (alt de producción, término de álbum, posición)/eventos (meta, términos no públicos, cartel como featured)/posts (relación `authors` ordenada)/páginas (jerarquía + URLs de medios reescritas a la biblioteca); idempotente (2.º apply crea 0); una edición wp-admin sobrevive re-import; evento con fecha futura importa `publish` (no `future`); settings (front page, posts page, permalinks ADR 0008) con flush **con** permastructs re-registrados; guard de producción exige `--confirm-production` + `--backup-evidence`; verify reconcilia | OK | Pass (local) |
+| QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings**; `composer audit --locked` sin advisories; `git diff --check` limpio | OK | Pass (local) |
+| QA 2/3: pipeline real contra el entorno local | Mounts RO `migration/` + `static/` en wpcli. `wp cdd-core migrate validate` → válido; `import` (dry) → plan 109 create; `import --apply` → 2+81+3+10+2+11 creados, 35 asignaciones de álbum, settings aplicados; `verify` → 0 missing, 6/6 colecciones reconcilian; 2.º `--apply` → 0 created / 109 skipped | OK | Pass (local) |
+| Bugs cazados por el QA (test de regresión + fix) | (1) Evento vigente con `event_date` futura quedaba `future` (invisible) — fix: sin `post_date` de evento; recreado vía create-missing-only (borrado puntual + re-import → created 1/skipped 9). (2) El flush del importador corría sin permastructs de CPT (proceso CLI arrancado con permalinks *plain*) → rutas CPT 404 — fix: re-registro de dominio antes del flush; el env se corrigió con `wp rewrite flush --hard` único (semántica de upgrade) | OK | Pass (local) |
+| QA 3: conteos reconcilian (baseline `docs/conteos-reconciliacion-migracion.md`) | pages 12 = 11 + «Sample Page» preexistente del install; events 10/10 (todas publish); posts 3 = 2 + «Hello world!» preexistente; blog_authors 2/2; attachments 81/81; álbumes 3/3; event_type 7 términos / event_city 5 (no públicos). Mismatches explicados = contenido demo del install local, no del payload; no existirá en el staging limpio | OK | Pass (local) |
+| QA 3: rutas HTTP entrantes (curl) | 200: `/`, 9 pages, `/eventos`, 10 singles probados (3+2 muestreados), `/galeria/{general,2023,2021}`, `/author` + 2 fichas, `/blog` + 2 posts, `.ics` vigente. **410**: `.ics` finalizado. **404 real**: ruta inexistente y `/?author=1`. **301** `/eventos/` → `/eventos` (sin barra final, ADR 0008) | OK | Pass (local) |
+| QA 3: `.ics` generado con paridad | Cabeceras `text/calendar` + `Content-Disposition` + `X-Robots-Tag: noindex, nofollow`; PRODID de producción; DTEND exclusivo (fin 2026-10-24 → 20261025); DESCRIPTION = copy editorial extraído (excerpt); host del UID/URL = entorno local (correcto: URLs del sitio que responde) | OK | Pass (local) |
+| QA 3: higiene | `debug.log` inexistente tras el pipeline y la navegación; sin `Set-Cookie` anónimo; front 200 sin warnings | OK | Pass (local) |
+| OWN-006/OWN-007: delta repo↔producción publicada | `curl` + `diff` byte a byte contra `https://caminodeldharma.org`: **17/17 superficies idénticas** (10 páginas, 3 singles de evento, 2 posts, 2 páginas secundarias) + `sitemap.xml` + `.ics` de Círculos. El ZIP desplegado corresponde a `VERSION` 1.0.35: **delta = 0**; la extracción usa el mismo contenido que ve el público | OK | Pass (local) |
+| Render completo de las vistas | El theme sigue siendo el scaffold WU-04 (query loop mínimo): el contenido importado se almacena íntegro pero no se pinta entero — plantillas reales en WU-07 | — | Unverified |
+| CI/Sonar sobre `includes/migration/` | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones registradas (WU-06):
+
+1. **Fuente de fechas por precedencia**: JSON-LD ya publicado (single > listado) → texto español
+   de la card (`Cdd_Core_Spanish_Date`). Los slugs de cards sin enlace se resuelven por tabla
+   cartel→slug (constante del extractor, valores = ADR 0035; nunca se inventan).
+2. **`event_calendar_dates` de Círculos = cronograma del single** (10 sesiones sep–oct); el test
+   asegura que el subset de septiembre coincide exactamente con el calendario publicado.
+3. **Excerpt del evento** = descripción del control de calendario (con `{{EVENT_URL}}` resuelto)
+   cuando existe (paridad `.ics`), si no el lead de la card. **Hero del blog → featured image**
+   (fuera del contenido). **Contenido**: single filtrado > card filtrada (sin chrome).
+4. **Contenido importado como bloque `wp:html`** con URLs de medios reescritas a la biblioteca:
+   fiel al copy publicado, editable, y la conversión a bloques reales queda para WU-07 (si exige
+   tocar contenido importado, será update con force explícito de campo o edición wp-admin —
+   el hash `_cdd_source_hash` delata qué sigue intacto).
+5. **Página `blog` se importa con contenido vacío** (es la posts page; el listado lo hace la query).
+6. **`seed`**: `wp cdd-core seed` = solo colección media (nombre aprobado OWN-009-img); `migrate
+   import` incluye el mismo paso. Sin marcador de fixture, sin teardown. Huérfanas = attachments
+   sin adjuntar ni referenciar (OWN-003). Favicons/OG quedan fuera del seed (Site Icon es ajuste
+   de WU-07/08); `og-default.jpg` sí se siembra (referenciada vía meta).
+7. **Settings del import**: front page `inicio`, posts page `blog`, permalinks `/blog/%postname%`
+   (árbol docs/11, sin barra final). Solo en `--apply`.
+8. **Mounts RO** `./migration` y `./static` en el servicio wpcli (docker-compose.yml): el
+   importador lee, nunca escribe, la fuente.
+9. La sonda de paridad live usó red de solo lectura (GET públicos a `caminodeldharma.org`);
+   ninguna suite de tests depende de red.
