@@ -2,12 +2,13 @@
 
 Preguntas de dueño. **No son ADR.**
 
-Hay dos bloques que no se mezclan:
+Hay tres bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-018 sin decisión nueva. |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
+| **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | Abiertas. **BUG-001** se ejecuta **justo antes de WU-10**. |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
 implementar esas filas en el corte. Si una respuesta cambia URLs o arquitectura, **entonces** se
@@ -99,6 +100,16 @@ y **no** forman parte del corte. El inglés no se implementa «por si acaso».
 
 Ninguna.
 
+## Defectos conocidos — Abiertos
+
+No son `POST-*` (i18n) ni reaperturas de OWN-*. **Sesión propia inmediatamente antes de WU-10**
+(después de WU-09). No se mezclan con WU-08B ni con WU-10. El corte puede seguir si el
+propietario aplaza el arreglo otra vez.
+
+| ID | Fecha | Defecto | Mientras tanto | Arreglo previsto |
+| -- | ----- | ------- | -------------- | ---------------- |
+| BUG-001 | 2026-08-31 | El `.ics` exportado de Círculos **debe incluir todas las sesiones**. El estático publicado emite un solo VEVENT de la **bienvenida** (3–4 sep, «sesión de bienvenida», «Virtual (hora de Colombia)»). WordPress (WU-06/08A) emite un solo VEVENT del **rango** 3 sep → 25 oct (`SUMMARY` = título, `LOCATION` = `event_place`). Ninguno lista las fechas de `event_calendar_dates` (ya extraídas). | Diálogo y `.ics` de WP siguen el rango único hasta esa sesión. No copiar la bienvenida del estático. | **Justo antes de WU-10.** Generador + diálogo: un VEVENT (o equivalente RFC 5545) **por sesión** desde `event_calendar_dates`; si no hay sesiones sueltas, el rango `event_date`/`event_end` como hoy. Tests de regresión contra el cronograma, no contra el `.ics` estático de un solo día. Opus, resume corto, TDD. |
+
 ## Ya aplazado (no duplicar aquí)
 
 Tienen ADR o decisión de dueño y un disparador propio. No son `POST-*` nuevos:
@@ -132,5 +143,10 @@ consolida producción publicada como fuente pre-corte.
 asesoría legal. El disclaimer de `/privacidad` basta para lanzar. En WordPress se actualizan
 solo los párrafos del formulario.
 
-**Versión:** 1.21 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
+**v1.22 (2026-08-31):** BUG-001 — el `.ics` de Círculos debe incluir todas las sesiones; ni el
+estático (solo bienvenida) ni el WP actual (un VEVENT de rango) lo hacen. **Sesión propia
+inmediatamente antes de WU-10** (después de WU-09). No se mezcla con WU-08B.
+
+**Versión:** 1.22 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
+Defectos conocidos: 1 abierto (`BUG-001`) · 0 cerrados.

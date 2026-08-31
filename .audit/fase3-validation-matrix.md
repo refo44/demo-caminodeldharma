@@ -342,9 +342,8 @@ Decisiones y deltas registrados (WU-08A):
    diálogo hereda los deltas ya aceptados en WU-06 del `.ics` de WordPress frente al `.ics`
    publicado — `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida»),
    `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)») y `DTEND` = fin del
-   rango del evento, 20261025 (publicado: 20260904, solo la bienvenida). **Delta abierto para
-   el propietario**: si el calendario debe describir la sesión de bienvenida y no el curso
-   completo, hace falta un campo editorial propio; no se inventa aquí.
+   rango del evento, 20261025 (publicado: 20260904, solo la bienvenida). **BUG-001** (sesión
+   propia **justo antes de WU-10**): el `.ics` exportado **debe incluir todas las sesiones**.
 4. **`data-share-description` no se emite**: `share.js` lo lee pero no lo usa en ningún punto
    del diálogo. Su contenido (para el blog) coincide con la meta description, que es superficie
    de **WU-08B**; migrarlo ahora sería duplicar ese trabajo.

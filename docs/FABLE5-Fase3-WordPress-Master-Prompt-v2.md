@@ -2,7 +2,7 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.5
+**Prompt version:** 2.6
 **Status:** CURRENT — use this prompt for execution
 **Date:** 2026-08-31
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
@@ -15,7 +15,9 @@ under OWN-017 and ADR 0040. Version 2.4 incorporates ADR 0041 / OWN-018: Contact
 at cutover without waiting for legal review; the published `/privacidad` disclaimer is sufficient
 for launch; WordPress updates only the form paragraphs of that notice. Version 2.5 splits WU-08
 into 08A (front-end behavior; Opus, no full prompt) and 08B (SEO, redirects, OWN-015, a11y; attach
-only §9.5 and §10). Do not paste this entire file to start either session.
+only §9.5 and §10). Version 2.6 schedules BUG-001 (Círculos `.ics` = every session) as its own
+session **immediately before WU-10**, after WU-09. Do not paste this entire file to start those
+sessions.
 
 ---
 
@@ -757,7 +759,11 @@ Use these work-unit boundaries unless repository evidence requires a safer subdi
     Claude 4.6 Opus. Prompt: short resume **plus** this file’s §9.5 and §10 only (not §1–§8, not
     the first-response contract). Stop after 08A; do not continue into 08B in the same session.
 11. **WU-09 — Contact Form 7 integration and `/privacidad` form-copy update (ADR 0041)**
-12. **WU-10 — Full local QA and staging-readiness runbook**
+12. **BUG-001 — Círculos `.ics` includes every session.** Separate session **immediately before
+    WU-10** (after WU-09). Model: Claude 4.6 Opus. Short resume; TDD (ADR 0038). One VEVENT per
+    `event_calendar_dates` entry (range fallback if none). Same payload for the dialog and the
+    file. Do not copy the static welcome-only `.ics`. Do not mix with WU-10.
+13. **WU-10 — Full local QA and staging-readiness runbook**
 
 WU-02 is a dedicated-session work unit under ADR 0023. Do not start it in the same session that
 implements WU-01 or any application code: stop after WU-01. In the next session, rerun preflight,

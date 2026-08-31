@@ -1,6 +1,6 @@
 # Fase 3 — Estado de ejecución durable
 
-Artefacto de continuidad exigido por FABLE5 v2.5 §12. Otra sesión debe poder retomar el trabajo
+Artefacto de continuidad exigido por FABLE5 v2.6 §12. Otra sesión debe poder retomar el trabajo
 leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
@@ -177,13 +177,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 - Comportamiento pendiente para **WU-08B**: SEO dinámico (title/meta/OG/JSON-LD, noindex de
   `/author`, términos de álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos»
   (OWN-015) y el pase completo de docs/19. Los diálogos y el audio ya están (WU-08A).
-- **Delta abierto para el propietario (WU-08A):** el diálogo «Añadir al calendario» y el
-  `.ics` de WordPress describen el **rango completo del evento** (Círculos: 3 sep → 25 oct
-  exclusivo) con `SUMMARY` = título y `LOCATION` = `event_place`. El estático publicado
-  describe solo la **sesión de bienvenida** (3 → 4 sep, «Curso … — sesión de bienvenida»,
-  «Virtual (hora de Colombia)»). Es el modelo de dominio aceptado en WU-06; si el calendario
-  debe seguir apuntando a la bienvenida hace falta un campo editorial nuevo. No se inventó
-  ninguno.
+- **BUG-001 (Círculos `.ics`):** el exportado debe incluir **todas las sesiones**. Hoy el
+  estático publica un solo VEVENT de la bienvenida; WordPress emite un solo VEVENT de rango.
+  **Sesión propia inmediatamente antes de WU-10** (después de WU-09). No se mezcla con 08B.
 - **ADR 0041 / OWN-018 (2026-08-31):** Contact Form 7 es elegible en el corte. La revisión
   legal **no** bloquea WU-09 ni el lanzamiento. WU-09 actualiza en WordPress solo los
   párrafos del formulario de `/privacidad`; el HTML estático no se toca.
@@ -193,6 +189,10 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Decisiones/asunciones usadas
 
+- Autorización del propietario 2026-08-31: el `.ics` de Círculos que solo cubre la bienvenida
+  (estático) **y** el VEVENT único de rango (WP) son **BUG-001**. El exportado debe incluir
+  todas las sesiones. Sesión propia **justo antes de WU-10**. No se inventa un campo de
+  «bienvenida».
 - Autorización del propietario 2026-08-31: CF7 en el corte **sin** espera de asesoría legal
   (OWN-018, ADR 0041, FABLE5 v2.4). El disclaimer de `/privacidad` basta para lanzar. Copy
   WordPress del formulario = delta field-scoped; estático intacto.
@@ -231,7 +231,8 @@ Ver `.audit/fase3-validation-matrix.md` § WU-08A. Estados: `Unverified`, `Pass 
 ## Bloqueos
 
 - Ninguno. Siguiente implementación: **WU-08B**, sesión aparte (Opus + FABLE5 §9.5 y §10
-  solamente). WU-09 (CF7) no espera asesoría legal (ADR 0041 / OWN-018).
+  solamente). Orden restante: WU-08B → WU-09 (CF7) → **BUG-001** (`.ics` todas las sesiones)
+  → WU-10.
 
 ## Archivos cambiados en WU-08A
 
@@ -324,6 +325,9 @@ JSON-LD, `noindex,follow`, redirects del `.htaccess`, «Eliminar huérfanos», p
 
 WU-09 (Contact Form 7 + párrafos del formulario en `/privacidad`) queda después, sin gate
 jurídico (ADR 0041 / OWN-018).
+
+**BUG-001** (`.ics` de Círculos con todas las sesiones): sesión propia **inmediatamente
+antes de WU-10**, después de WU-09. Opus, resume corto, TDD. No mezclar con WU-10.
 
 ## Procedimiento de reanudación
 
