@@ -180,6 +180,35 @@ final class Theme_BehaviorTest extends TestCase {
 	}
 
 	/**
+	 * Protects docs/12 §2 (WU-09): the contact form is a block of the
+	 * theme, so the page content carries no third-party shortcode and the
+	 * page keeps rendering if Contact Form 7 is ever switched off.
+	 */
+	public function test_the_contact_form_block_is_registered() {
+		$blocks = $this->theme_file( 'inc/blocks.php' );
+
+		$this->assertStringContainsString( "'contacto-formulario'", $blocks );
+		$this->assertStringContainsString( 'camino_del_dharma_render_contacto_formulario', $blocks );
+	}
+
+	/**
+	 * Protects the operational fallback of ADR 0041 point 5: with CF7
+	 * disabled the block prints the WhatsApp/email notice, never a raw
+	 * shortcode string and never a form that cannot deliver.
+	 */
+	public function test_the_contact_form_block_degrades_to_the_published_channels() {
+		$blocks = $this->theme_file( 'inc/blocks.php' );
+
+		$at = strpos( $blocks, 'function camino_del_dharma_render_contacto_formulario' );
+		$this->assertNotFalse( $at );
+		$render = substr( $blocks, $at, 1400 );
+
+		$this->assertStringContainsString( 'cdd_core_contact_form_available', $render );
+		$this->assertStringContainsString( 'contact-form-unavailable', $render );
+		$this->assertStringContainsString( 'WhatsApp', $render );
+	}
+
+	/**
 	 * One theme file's content, relative to the theme root.
 	 *
 	 * @param string $relative Path inside the theme.

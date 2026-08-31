@@ -80,4 +80,15 @@ final class Spanish_DateTest extends TestCase {
 		);
 		$this->assertNull( Cdd_Core_Spanish_Date::first_date( 'Sin fecha alguna aquí.' ) );
 	}
+
+	/**
+	 * Protects the WU-09 privacy delta: the notice prints its «Última
+	 * actualización» in Spanish long form, and the date must not depend on
+	 * whatever locale a WordPress environment happens to run.
+	 */
+	public function test_long_form_prints_the_spanish_date_of_the_notice() {
+		$this->assertSame( '31 de agosto de 2026', Cdd_Core_Spanish_Date::long_form( '2026-08-31' ) );
+		$this->assertSame( '1 de septiembre de 2026', Cdd_Core_Spanish_Date::long_form( '2026-09-01' ) );
+		$this->assertSame( '29 de agosto de 2026', Cdd_Core_Spanish_Date::long_form( '2026-08-29' ) );
+	}
 }

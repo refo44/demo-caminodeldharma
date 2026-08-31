@@ -232,4 +232,144 @@ final class Content_ConverterTest extends TestCase {
 		// Idempotent.
 		$this->assertNull( ( new Cdd_Core_Content_Converter() )->convert_comunidad( $converted ) );
 	}
+
+	/**
+	 * Protects ADR 0026/0041: the published form that never delivered
+	 * (`action="#"`, FUNC-001) becomes the theme block that renders the
+	 * Contact Form 7 form — and nothing else on the page moves.
+	 */
+	public function test_contacto_swaps_the_dead_form_for_the_form_block() {
+		$original  = self::page( 'contacto' );
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_contacto( $original );
+
+		$this->assertIsString( $converted );
+		$this->assertStringNotContainsString( 'action="#"', $converted );
+		$this->assertStringNotContainsString( '<form', $converted );
+		$this->assertStringNotContainsString( 'id="contact-name"', $converted );
+		$this->assertStringContainsString( '<!-- wp:camino-del-dharma/contacto-formulario /-->', $converted );
+
+		// The published copy around the form is untouched, including the
+		// WhatsApp/email channels TASK-0002 added beside it.
+		$this->assertStringContainsString( 'La práctica se fortalece cuando se comparte.', $converted );
+		$this->assertStringContainsString( 'https://wa.me/573206627608', $converted );
+		$this->assertStringContainsString( 'caminodeldharma1@gmail.com', $converted );
+		$this->assertStringContainsString( 'contact-social-heading', $converted );
+	}
+
+	/**
+	 * Protects idempotency: a second pass has no dead form left to swap.
+	 */
+	public function test_contacto_conversion_is_idempotent() {
+		$converter = new Cdd_Core_Content_Converter();
+		$converted = $converter->convert_contacto( self::page( 'contacto' ) );
+
+		$this->assertNull( $converter->convert_contacto( $converted ) );
+	}
+
+	/**
+	 * Protects the ADR 0041 copy delta: on WordPress the form does submit,
+	 * so the notice must say so. Field-scoped — the summary bullet, §2.2,
+	 * the provisional box clause, the §8 trigger and the date. Nothing
+	 * else in the notice is rewritten.
+	 */
+	public function test_privacidad_applies_the_approved_form_copy_delta() {
+		$original  = self::page( 'privacidad' );
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_privacidad( $original, '31 de agosto de 2026' );
+
+		$this->assertIsString( $converted );
+
+		// The four claims that stopped being true.
+		$this->assertStringNotContainsString( 'El formulario de contacto de la página no envía nada a nuestro servidor.', $converted );
+		$this->assertStringNotContainsString( 'En esta versión del sitio, el formulario de contacto no envía nada a nuestro servidor.', $converted );
+		$this->assertStringNotContainsString( 'cuando el formulario de contacto pase a enviarse a un servidor', $converted );
+		$this->assertStringNotContainsString( 'cuando el formulario de contacto pase a procesarse en un servidor', $converted );
+
+		// The approved replacements, verbatim (ADR 0041).
+		$this->assertStringContainsString(
+			'<li>El formulario de contacto envía tu mensaje al correo de la comunidad. WhatsApp y el correo directo siguen disponibles.</li>',
+			$converted
+		);
+		$this->assertStringContainsString(
+			'El formulario de la página Contacto se procesa en el servidor del sitio (Contact Form 7) y entrega el mensaje a caminodeldharma1@gmail.com. Tratamos el nombre, el correo y el contenido que envíes, con la finalidad de leer y responder tu consulta. No publicamos esos envíos en el sitio. WhatsApp y el correo directo siguen siendo canales operativos.',
+			$converted
+		);
+		$this->assertStringContainsString( 'Última actualización: 31 de agosto de 2026.', $converted );
+	}
+
+	/**
+	 * Protects ADR 0041 point 2: the notice stays provisional. The box
+	 * keeps its seal and keeps saying a later legal review may change the
+	 * wording — only the form clause goes.
+	 */
+	public function test_privacidad_keeps_the_provisional_disclaimer() {
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_privacidad( self::page( 'privacidad' ), '31 de agosto de 2026' );
+
+		$this->assertStringContainsString( '<strong>Documento provisional.</strong>', $converted );
+		$this->assertStringContainsString( 'aún no ha sido validada por asesoría legal', $converted );
+		$this->assertStringContainsString( 'Su redacción podrá cambiar tras esa revisión.', $converted );
+		$this->assertStringContainsString( 'Cada apartado indica lo que ya está activo.', $converted );
+
+		// §8 keeps every other trigger, legal review included.
+		$this->assertStringContainsString( 'cuando una asesoría legal valide o corrija el texto;', $converted );
+		$this->assertStringContainsString( 'si se cambia de proveedor de alojamiento o de correo.', $converted );
+	}
+
+	/**
+	 * Protects the rest of the notice: cookies, analytics, embeds,
+	 * donations, rights and Ley 1581 are not rewritten (ADR 0041 point 3).
+	 */
+	public function test_privacidad_does_not_rewrite_the_rest_of_the_notice() {
+		$original  = self::page( 'privacidad' );
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_privacidad( $original, '31 de agosto de 2026' );
+
+		foreach ( array( 'cookies-heading', 'analitica-heading', 'terceros-heading', 'destinatarios-heading', 'derechos-heading', 'Ley 1581 de 2012' ) as $kept ) {
+			$this->assertStringContainsString( $kept, $converted );
+		}
+
+		// Sections 2.3 to 2.6 are untouched between their own headings.
+		$slice = static function ( string $html ): string {
+			$from = strpos( $html, '2.3. Al escribirnos por WhatsApp' );
+			$to   = strpos( $html, '3. Cookies' );
+
+			return substr( $html, $from, $to - $from );
+		};
+		$this->assertSame( $slice( $original ), $slice( $converted ) );
+	}
+
+	/**
+	 * Protects the markup around the delta: removing a paragraph and a
+	 * list item takes their whole line with them, so the notice gains no
+	 * stray blank lines where a claim used to be.
+	 */
+	public function test_privacidad_leaves_no_blank_lines_behind() {
+		$original  = self::page( 'privacidad' );
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_privacidad( $original, '31 de agosto de 2026' );
+
+		$blank = static function ( string $html ): int {
+			return preg_match_all( '#\n[ \t]+\n#', $html );
+		};
+
+		$this->assertSame( $blank( $original ), $blank( $converted ) );
+		$this->assertSame(
+			substr_count( $original, "\n" ) - 2,
+			substr_count( $converted, "\n" ),
+			'Exactly the two removed lines are gone.'
+		);
+	}
+
+	/**
+	 * Protects idempotency: with the delta applied there is nothing left
+	 * to convert, and the gate that guards CF7 activation says so.
+	 */
+	public function test_privacidad_conversion_is_idempotent_and_reports_the_delta() {
+		$converter = new Cdd_Core_Content_Converter();
+		$original  = self::page( 'privacidad' );
+
+		$this->assertFalse( $converter::privacidad_delta_applied( $original ) );
+
+		$converted = $converter->convert_privacidad( $original, '31 de agosto de 2026' );
+
+		$this->assertTrue( $converter::privacidad_delta_applied( $converted ) );
+		$this->assertNull( $converter->convert_privacidad( $converted, '1 de septiembre de 2026' ) );
+	}
 }
