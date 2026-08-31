@@ -25,6 +25,16 @@ final class Camino_Del_Dharma_Renderers {
 
 	const SECTION_ICON_PAST = '<svg class="eventos-section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>';
 
+	const ICON_CALENDAR = '<svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>';
+
+	const ICON_SHARE = '<svg class="lucide-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>';
+
+	/**
+	 * Share platforms in the published dialog order, with the meta key
+	 * holding each message template.
+	 */
+	const SHARE_PLATFORMS = array( 'whatsapp', 'x', 'threads' );
+
 	/**
 	 * The month calendar grid, matching the published markup of
 	 * static/eventos/index.html cell by cell (doc 03 §3).
@@ -203,6 +213,133 @@ final class Camino_Del_Dharma_Renderers {
 			esc_html__( 'Preinscribirme', 'camino-del-dharma' ) .
 			' <span class="visually-hidden">' . esc_html__( '(abre en nueva pestaña)', 'camino-del-dharma' ) . '</span></a>' . "\n" .
 			'</p>';
+	}
+
+	/**
+	 * The dialog triggers of an event, as published: «Añadir al
+	 * calendario» plus «Compartir», preceded by the message templates
+	 * share.js reads. Only while the event is current — a completed
+	 * event invites nobody (OWN-012), exactly as the published past
+	 * singles do.
+	 *
+	 * @param WP_Post $event    Event post.
+	 * @param bool    $current  Whether the event is current at request time.
+	 * @param array   $calendar Calendar payload from
+	 *                          cdd_core_event_calendar_payload().
+	 */
+	public static function event_actions( WP_Post $event, bool $current, array $calendar ): string {
+		if ( ! $current ) {
+			return '';
+		}
+
+		$calendar_button = '';
+		if ( ! empty( $calendar ) ) {
+			$calendar_button = '<button' . "\n" .
+				'type="button"' . "\n" .
+				'class="btn btn-secondary calendar-trigger"' . "\n" .
+				'data-calendar-title="' . esc_attr( (string) $calendar['title'] ) . '"' . "\n" .
+				'data-calendar-start="' . esc_attr( (string) $calendar['start'] ) . '"' . "\n" .
+				'data-calendar-end="' . esc_attr( (string) $calendar['end'] ) . '"' . "\n" .
+				'data-calendar-description="' . esc_attr( (string) $calendar['description'] ) . '"' . "\n" .
+				'data-calendar-event-url="' . esc_attr( (string) $calendar['url'] ) . '"' . "\n" .
+				'data-calendar-location="' . esc_attr( (string) $calendar['location'] ) . '"' . "\n" .
+				'data-calendar-ics="' . esc_attr( (string) $calendar['ics_url'] ) . '"' . "\n" .
+				'>' . "\n" . self::ICON_CALENDAR . "\n" .
+				esc_html__( 'Añadir al calendario', 'camino-del-dharma' ) . "\n" .
+				'</button>' . "\n";
+		}
+
+		return self::share_templates( $event ) .
+			'<div class="evento-actions">' . "\n" .
+			$calendar_button .
+			'<p class="share-actions">' . "\n" .
+			self::share_trigger( $event, self::share_title( $event ) ) . "\n" .
+			'</p>' . "\n" .
+			'</div>';
+	}
+
+	/**
+	 * The share control of a blog entry, as published: the message
+	 * templates followed by the trigger.
+	 *
+	 * @param WP_Post $post Blog post.
+	 */
+	public static function entry_share( WP_Post $post ): string {
+		return self::share_templates( $post ) .
+			'<p class="share-actions">' . "\n" .
+			self::share_trigger( $post, get_the_title( $post ) ) . "\n" .
+			'</p>';
+	}
+
+	/**
+	 * The <template> bodies of the stored share messages. A platform
+	 * without stored copy prints nothing: share.js then falls back to
+	 * title + URL instead of sharing an empty message.
+	 *
+	 * @param WP_Post $post Event or blog post.
+	 */
+	private static function share_templates( WP_Post $post ): string {
+		$html = '';
+		foreach ( self::SHARE_PLATFORMS as $platform ) {
+			$template = (string) get_post_meta( $post->ID, 'share_' . $platform, true );
+			if ( '' === $template ) {
+				continue;
+			}
+			$html .= '<template id="' . esc_attr( $platform . '-' . $post->post_name ) . '">' . "\n" .
+				esc_html( $template ) . "\n" . '</template>' . "\n";
+		}
+
+		return $html;
+	}
+
+	/**
+	 * The share trigger button, carrying the URL to share and the ids of
+	 * the templates that exist for this object.
+	 *
+	 * @param WP_Post $post  Event or blog post.
+	 * @param string  $title Title the dialog shows and shares.
+	 */
+	private static function share_trigger( WP_Post $post, string $title ): string {
+		$templates = '';
+		foreach ( self::SHARE_PLATFORMS as $platform ) {
+			if ( '' === (string) get_post_meta( $post->ID, 'share_' . $platform, true ) ) {
+				continue;
+			}
+			$templates .= 'data-share-' . $platform . '-template="' . esc_attr( $platform . '-' . $post->post_name ) . '"' . "\n";
+		}
+
+		return '<button' . "\n" .
+			'type="button"' . "\n" .
+			'class="btn btn-secondary share-trigger"' . "\n" .
+			'data-share-title="' . esc_attr( $title ) . '"' . "\n" .
+			'data-share-url="' . esc_attr( (string) get_permalink( $post ) ) . '"' . "\n" .
+			$templates .
+			'>' . "\n" . self::ICON_SHARE . "\n" .
+			esc_html__( 'Compartir', 'camino-del-dharma' ) . "\n" .
+			'</button>';
+	}
+
+	/**
+	 * The calendar payload of an event, or nothing when the domain plugin
+	 * is inactive (the views degrade, they never fatal).
+	 *
+	 * @param WP_Post $event Event post.
+	 */
+	private static function calendar_payload( WP_Post $event ): array {
+		return function_exists( 'cdd_core_event_calendar_payload' ) ? cdd_core_event_calendar_payload( $event ) : array();
+	}
+
+	/**
+	 * The title an event is shared under: the published dialog names the
+	 * event with its type first («Curso Círculos de Presencia
+	 * Consciente»).
+	 *
+	 * @param WP_Post $event Event post.
+	 */
+	private static function share_title( WP_Post $event ): string {
+		$type = self::event_type_name( $event );
+
+		return '' === $type ? get_the_title( $event ) : $type . ' ' . get_the_title( $event );
 	}
 
 	/**
@@ -414,6 +551,7 @@ final class Camino_Del_Dharma_Renderers {
 			self::event_meta( $event ) . "\n" .
 			'<p class="evento-detail-link"><a href="' . esc_url( $url ) . '">' . esc_html__( 'Ver evento →', 'camino-del-dharma' ) . '</a></p>' . "\n" .
 			self::event_cta( $event, true ) . "\n" .
+			self::event_actions( $event, true, self::calendar_payload( $event ) ) . "\n" .
 			'</article>';
 	}
 

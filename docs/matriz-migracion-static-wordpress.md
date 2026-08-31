@@ -122,17 +122,17 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 
 ---
 
-## Estado de implementación WU-07 (2026-08-31)
+## Estado de implementación WU-08A (2026-08-31)
 
 Las filas de arriba conservan el inventario; este bloque registra el avance por dimensión
-tras WU-07 (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07):
+tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08A):
 
 | Dimensión | Estado | Detalle |
 |---|---|---|
-| CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) |
-| PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 11 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
-| ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08 |
-| BEHAVIOR | **Parcial** | Nav móvil (main.js) y tooltips del calendario portados; share/añadir-al-calendario/audio → WU-08; formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
+| CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) + WU-08A (`practica` con audio nativo; copy de compartir sembrado como meta) |
+| PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 13 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
+| ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08B |
+| BEHAVIOR | **Parcial** | Nav móvil, tooltips del calendario, **diálogo Compartir, diálogo Añadir al calendario y audio de mantras nativo** portados (WU-08A); formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
 | OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción); staging pendiente (OWN-005) |
 
 Sustituciones static→WordPress registradas en WU-07 (§9.1 del master prompt; detalle y

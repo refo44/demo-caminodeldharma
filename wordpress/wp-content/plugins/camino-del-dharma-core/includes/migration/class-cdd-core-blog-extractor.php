@@ -59,6 +59,7 @@ final class Cdd_Core_Blog_Extractor {
 			'thumbnail_alt'    => $hero['alt'],
 			'meta_description' => $meta instanceof DOMElement ? $meta->getAttribute( 'content' ) : '',
 			'content_html'     => $this->content_html( $article ),
+			'share'            => ( new Cdd_Core_Share_Extractor() )->extract( $xpath ),
 			'tags'             => array(),
 		);
 	}

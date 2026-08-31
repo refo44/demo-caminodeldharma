@@ -299,3 +299,66 @@ Decisiones y sustituciones registradas (WU-07) — ver también la matriz de mig
     en las plantillas/bloques: la posts page y el archive no leen contenido de una Page.
 13. Harness wp-phpunit con `WP_DEFAULT_THEME=camino-del-dharma` + `register_theme_directory`
     en el bootstrap: los 60 tests corren con el theme real activo.
+
+## WU-08A — Comportamiento front: compartir, añadir al calendario, audio de mantras
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, sin FABLE5 pegado; reanudación:
+preflight + rerun de los gates WU-03…WU-07 antes de tocar nada). Sin PHP/Composer nativos:
+comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`150d8b8`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gates WU-03…WU-07 | unit 105/105; phpcs limpio; `run-phpunit-wp.sh` 60/60; plugin 0.4.0 y theme 0.2.0 activos | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo de comportamiento | Unit: 119 tests, **5 errors + 8 failures** (extracción de share, `convert_practica`, scripts y bloques ausentes). wp-phpunit: 75 tests, **2 errors + 11 failures** (meta `share_*`, `cdd_core_event_calendar_payload`, bloques `evento-acciones`/`entrada-compartir`, seeding de share, audio nativo); los 60 preexistentes siguieron verdes | OK | Pass (local) |
+| Nivel 1 verde | `phpunit` → OK (**119 tests, 586 assertions**): las 3 plantillas de mensaje de Círculos y de los 2 posts extraídas **carácter a carácter** de `static/` (normalización idéntica a `share.js`, `{{SHARE_URL}}` intacto), eventos sin control de compartir → copy vacío (nada inventado), `convert_practica` (bloque `core/audio` con id/preload/caption, sin `</source>`, idempotente, no-op sin attachment), contrato DOM/copy de los dos scripts portados, orden de bloques en `single-event.html` y `single.html`, no duplicación del tooltip, port completo de `calendar.js` | OK | Pass (local) |
+| Nivel 2 verde | `run-phpunit-wp.sh` → OK (**75 tests, 524 assertions**): meta `share_whatsapp`/`share_x`/`share_threads` registrada en `event` y `post` con REST y saneo (saltos de línea y placeholder sobreviven; markup no; no-string → `''`); `cdd_core_event_calendar_payload` alimenta diálogo **y** `.ics` (mismos título/fechas/descripción/lugar; fin exclusivo; evento de un día cierra al día siguiente); bloque `evento-acciones` con ambos disparadores y `<template>` solo de lo que hay guardado, **vacío en finalizados** (OWN-012); `entrada-compartir` en el blog; listado con acciones solo en vigentes; `aria-label` restaurado en `core/audio`; convert siembra share sin pisar ediciones wp-admin e idempotente | OK | Pass (local) |
+| QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings**; `npm run lint:css` verde; sin secretos | OK | Pass (local) |
+| Payload regenerado | `tools/extract-payload.sh` → mismos `counts` (11/10/2/2/3/35/81/5) y misma `source` (VERSION 1.0.35, commit `bfb6dc0`); **el único delta es el campo `share`** (+ hashes de events/posts). Diff verificado objeto a objeto | OK | Pass (local) |
+| QA 3: conversión aplicada en el entorno local | `convert --payload=… ` dry-run → pending `practica` + 3 claves `share:`; `--apply` → converted los 4; 2.º `--apply` → 0 (idempotente) | OK | Pass (local) |
+| QA 3: diálogo Compartir (navegador real) | `/eventos/circulos-…`: título del diálogo «Curso Círculos de Presencia Consciente»; intents WhatsApp/X/Threads con el copy publicado **carácter a carácter** y `{{SHARE_URL}}` sustituido por el permalink; Facebook con `?u=` del permalink; botón «Copiar enlace» presente; foco vuelve al disparador al cerrar. `/blog/sangha-…`: mismo contrato con el copy del post | OK | Pass (local) |
+| QA 3: diálogo Añadir al calendario (navegador real) | Google `dates=20260903/20261025`, Outlook `startdt`/`enddt` con fin inclusivo, Apple → `/eventos/ical/{slug}.ics`, descarga con `download="{slug}.ics"`. **Coincide exactamente con el `.ics` que sirve WordPress** (DTSTART/DTEND/SUMMARY/LOCATION) | OK | Pass (local) |
+| QA 3: audio de mantras | `/practica`: 2 `<audio>` nativos desde la biblioteca (`audio/mpeg`, HTTP 200, 28,8 MB), `preload="metadata"`, `class="wp-block-audio mantra-audio"`, `figcaption` publicado y `aria-label` restaurado por el filtro del theme | OK | Pass (local) |
+| QA 3: editable desde wp-admin (ADR 0029) | Editor de bloques de `/practica`: **0 bloques inválidos**; los 2 `core/audio` con `isValid: true` y atributos `id`/`className`/`preload`/`src` correctos | OK | Pass (local) |
+| QA 3: encolado condicional | `share.js` y `calendar-dialog.js` solo en las vistas que renderizan los disparadores (single vigente, `/eventos` con vigentes, single de blog); el single finalizado no encola ninguno de los dos ni pinta controles | OK | Pass (local) |
+| QA 3: higiene | `debug.log` sin entradas de código propio (solo el ruido conocido de `wp_update_themes()` sin red) | OK | Pass (local) |
+| QA 4 visual (parcial, local) | Sin cambios respecto a WU-07; el pase completo (320px, zoom 200%, teclado, lector de pantalla) sigue pendiente | Parcial | Unverified |
+| SEO dinámico, redirects, OWN-015, a11y | Alcance **WU-08B** | — | Unverified |
+| CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones y deltas registrados (WU-08A):
+
+1. **El copy de compartir es contenido de producción, no texto generado** (ADR 0034): las 9
+   plantillas `<template>` hand-written viajan por el payload (`share.whatsapp|x|threads`) y
+   viven como meta editable `share_whatsapp`/`share_x`/`share_threads` en `event` y `post`.
+   Nada se regenera desde el título: un objeto sin copy publicado no imprime `<template>`
+   alguno y `share.js` cae a su fallback (título + URL).
+2. **Ruta de datos doble**: el importador escribe la meta al crear (staging parte con ella) y
+   `wp cdd-core migrate convert --payload=<path>` la siembra en objetos ya importados. La
+   siembra es **add-only**: una clave existente —incluida una que la editora vació a
+   propósito— nunca se reescribe (ADR 0033).
+3. **Diálogo de calendario y `.ics` comparten fuente** (`cdd_core_event_calendar_payload`): el
+   enlace de Google/Outlook y el archivo descargado no pueden divergir. Consecuencia: el
+   diálogo hereda los deltas ya aceptados en WU-06 del `.ics` de WordPress frente al `.ics`
+   publicado — `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida»),
+   `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)») y `DTEND` = fin del
+   rango del evento, 20261025 (publicado: 20260904, solo la bienvenida). **Delta abierto para
+   el propietario**: si el calendario debe describir la sesión de bienvenida y no el curso
+   completo, hace falta un campo editorial propio; no se inventa aquí.
+4. **`data-share-description` no se emite**: `share.js` lo lee pero no lo usa en ningún punto
+   del diálogo. Su contenido (para el blog) coincide con la meta description, que es superficie
+   de **WU-08B**; migrarlo ahora sería duplicar ese trabajo.
+5. **Diálogos solo en vigentes** (contrato §4 / OWN-012), como publica producción: el single
+   finalizado no ofrece compartir ni calendario. El blog siempre ofrece compartir.
+6. **Los mantras pasan a `core/audio` nativo** (mismo criterio que ADR 0021 con la galería). Se
+   pierden el texto de respaldo («Tu navegador no permite reproducir este audio.») y el
+   `aria-label` del markup guardado; el nombre accesible se restaura en presentación con un
+   filtro `render_block` del theme a partir del `figcaption`. Efecto colateral saneado: el
+   artefacto `</source>` que dejaba DOMDocument desaparece del contenido.
+7. **`calendar.js` queda partido en dos archivos del theme** (`calendar-dialog.js` +
+   `calendar-tooltips.js`), encolados por separado y solo cuando el bloque correspondiente
+   renderiza. Un test protege que el tooltip no se duplique y que ningún comportamiento del
+   original se haya perdido.
+8. **Fixture de `/practica` con kses levantado**: el importador corre bajo WP-CLI, donde los
+   filtros kses no están activos y el `<source>` publicado sobrevive; `source` no es tag
+   permitido por kses, así que el test debe reproducir la ruta real y no una empobrecida.

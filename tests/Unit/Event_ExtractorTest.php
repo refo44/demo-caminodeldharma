@@ -172,6 +172,57 @@ final class Event_ExtractorTest extends TestCase {
 	}
 
 	/**
+	 * Protects the published share copy of the current event (WU-08A):
+	 * the three hand-written message templates travel as data, already
+	 * normalized the way share.js reads them, with the {{SHARE_URL}}
+	 * placeholder intact.
+	 */
+	public function test_circulos_carries_the_published_share_templates() {
+		$share = $this->event( 'circulos-de-presencia-consciente' )['share'];
+
+		$this->assertSame(
+			"Comparto esta invitación de Camino del Dharma:\n\n"
+			. "*Curso Círculos de Presencia Consciente*\n\n"
+			. "Un espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n"
+			. "Bienvenida, orientación, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali.\n"
+			. "Becas completas. Cupos limitados.\n\n"
+			. "📅 Septiembre – octubre 2026\n"
+			. "📍 Bogotá y Cali\n\n"
+			. '{{SHARE_URL}}',
+			$share['whatsapp']
+		);
+		$this->assertSame(
+			"Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\n📅 sep–oct 2026 · 📍 Bogotá y Cali",
+			$share['x']
+		);
+		$this->assertSame(
+			"Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\n"
+			. "Un espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n"
+			. "📅 Septiembre – octubre 2026\n📍 Bogotá y Cali",
+			$share['threads']
+		);
+	}
+
+	/**
+	 * Protects the honest empty case: events for which production
+	 * publishes no share controls carry no invented copy — the dialog
+	 * falls back to title + URL (share.js).
+	 */
+	public function test_events_without_published_share_controls_carry_no_copy() {
+		foreach ( array( 'vesak-2026', 'encuentro-nacional-2026' ) as $slug ) {
+			$this->assertSame(
+				array(
+					'whatsapp' => '',
+					'x'        => '',
+					'threads'  => '',
+				),
+				$this->event( $slug )['share'],
+				$slug
+			);
+		}
+	}
+
+	/**
 	 * Runs the extractor over the real repo sources.
 	 */
 	private function extract_events(): array {

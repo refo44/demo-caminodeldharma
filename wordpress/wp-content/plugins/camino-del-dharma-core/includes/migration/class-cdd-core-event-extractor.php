@@ -115,8 +115,32 @@ final class Cdd_Core_Event_Extractor {
 			'excerpt'           => $this->excerpt( $listing, $card, $slug ),
 			'content_html'      => $this->content_html( $single, $listing, $card ),
 			'calendar_dates'    => $this->calendar_dates( $single ),
+			'share'             => $this->share( $single, $listing, $card ),
 			'has_single_source' => null !== $single,
 		);
+	}
+
+	/**
+	 * The published share copy of one event (WU-08A): the single wins when
+	 * it publishes a share control, else the listing card. Events for
+	 * which production publishes no share control carry empty copy — the
+	 * dialog falls back to title + URL, and nothing is invented.
+	 *
+	 * @param DOMXPath|null $single  Single page XPath, when it exists.
+	 * @param DOMXPath      $listing Listing XPath.
+	 * @param DOMElement    $card    Listing card element.
+	 */
+	private function share( ?DOMXPath $single, DOMXPath $listing, DOMElement $card ): array {
+		$extractor = new Cdd_Core_Share_Extractor();
+
+		if ( null !== $single ) {
+			$from_single = $extractor->extract( $single );
+			if ( ! Cdd_Core_Share_Extractor::is_empty( $from_single ) ) {
+				return $from_single;
+			}
+		}
+
+		return $extractor->extract( $listing, $card );
 	}
 
 	/**

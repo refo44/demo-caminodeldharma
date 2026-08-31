@@ -151,6 +151,51 @@ final class ImporterTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the share copy on a fresh import (WU-08A): the published
+	 * message templates land as editable meta on the created objects, so
+	 * staging never needs the convert backfill.
+	 */
+	public function test_import_stores_the_share_templates_as_meta() {
+		$payload = $this->payload(
+			array(
+				'events' => array(
+					array(
+						'slug'           => 'evento-con-copy',
+						'title'          => 'Evento con copy',
+						'type'           => 'Curso',
+						'status'         => 'vigente',
+						'featured'       => false,
+						'start'          => gmdate( 'Y-m-d', time() + 30 * DAY_IN_SECONDS ),
+						'end'            => null,
+						'place'          => 'Bogotá',
+						'modality'       => 'virtual',
+						'cities'         => array(),
+						'signup_url'     => null,
+						'poster'         => '',
+						'poster_alt'     => '',
+						'excerpt'        => '',
+						'content_html'   => '<p>Próximamente.</p>',
+						'calendar_dates' => array(),
+						'share'          => array(
+							'whatsapp' => "Comparto esta invitación:\n\n{{SHARE_URL}}",
+							'x'        => 'Curso · Camino del Dharma',
+							'threads'  => '',
+						),
+					),
+				),
+			)
+		);
+
+		$this->importer( $payload )->import( true );
+
+		$event = $this->post_by_source_key( 'event:evento-con-copy' );
+
+		$this->assertSame( "Comparto esta invitación:\n\n{{SHARE_URL}}", get_post_meta( $event->ID, 'share_whatsapp', true ) );
+		$this->assertSame( 'Curso · Camino del Dharma', get_post_meta( $event->ID, 'share_x', true ) );
+		$this->assertSame( '', get_post_meta( $event->ID, 'share_threads', true ) );
+	}
+
+	/**
 	 * Protects idempotency and create-missing-only (ADR 0032 §8.2): a
 	 * second apply creates nothing new, and a wp-admin edit survives
 	 * re-import untouched.

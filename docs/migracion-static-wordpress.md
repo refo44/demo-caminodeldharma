@@ -13,10 +13,11 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 modelos de dominio (WU-05), pipeline de migración (WU-06) — payload versionado
 `migration/payload.json` (VERSION 1.0.35; paridad live verificada, delta 0), importador
 `wp cdd-core migrate validate|plan|import|verify` + `seed` — y conversión field-scoped
-`migrate convert` (WU-07). Theme FSE `camino-del-dharma` v0.2.0 con las **vistas reales**
-(plantillas, parts, bloques dinámicos, CSS portado, fuentes autohospedadas). Contenido
-importado y convertido en el entorno local. Pendiente WU-08: comportamiento
-(share/calendario/audio), SEO dinámico, redirects, OWN-015. Estado durable:
+`migrate convert` (WU-07/WU-08A). Theme FSE `camino-del-dharma` v0.3.0 con las **vistas
+reales** (plantillas, parts, bloques dinámicos, CSS portado, fuentes autohospedadas) y el
+**comportamiento portado** (diálogos Compartir y Añadir al calendario, audio de mantras como
+bloque nativo). Contenido importado y convertido en el entorno local. Pendiente WU-08B: SEO
+dinámico, redirects, OWN-015 y el pase de accesibilidad. Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme futuro.
 

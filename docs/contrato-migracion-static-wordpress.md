@@ -160,6 +160,12 @@ Inventario de scripts de la maqueta (CURRENT STATE):
 | `assets/js/share.js` | singles de eventos y de blog | Diálogo «Compartir» (`[data-share-title]`) |
 | `assets/js/calendar.js` | `/eventos` y ficha de evento vigente | Diálogo «Añadir al calendario» + tooltips/toque del grid `.eventos-calendar-grid` |
 
+Estado del porte (WU-07/WU-08A): `main.js` y `calendar.js` viven ya en el theme —
+`assets/js/main.js`, `assets/js/calendar-tooltips.js` y `assets/js/calendar-dialog.js`, este
+último la mitad del diálogo—, y `share.js` se portó literal. Los tres se encolan solo en las
+vistas cuyo bloque los necesita. El copy de los mensajes de compartir viaja como meta editable
+(`share_whatsapp`/`share_x`/`share_threads`), no como HTML congelado.
+
 CSS: fuente `assets/css/main.css` → servido `assets/css/main.min.css` (`npm run build:css`). En
 WordPress: `theme.json` + hoja complementaria (ADR 0029). La maqueta estática sigue con un solo
 `main.css` (ADR 0009 vigente solo para static).

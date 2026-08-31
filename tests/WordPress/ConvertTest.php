@@ -114,6 +114,152 @@ final class ConvertTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the mantra players (WU-08A): /practica converts only when
+	 * the imported audio attachments exist, and the resulting blocks point
+	 * at the Library, never at the static path.
+	 */
+	public function test_apply_converts_the_mantra_players_of_practica() {
+		$page  = $this->create_practica_page();
+		$audio = $this->create_audio_attachment( 'amitabha' );
+		$this->create_audio_attachment( 'namo-guan-shi-yin-pusa' );
+
+		$report = ( new Cdd_Core_Convert_Service() )->run( true );
+
+		$this->assertContains( 'practica', $report['converted'] );
+
+		$content = get_post( $page )->post_content;
+		$this->assertStringContainsString( '<!-- wp:audio {"id":' . $audio . ',"className":"mantra-audio","preload":"metadata"} -->', $content );
+		$this->assertStringContainsString( '<figure class="wp-block-audio mantra-audio">', $content );
+		$this->assertStringContainsString( 'Recitación de Amitābha.', $content );
+		$this->assertStringNotContainsString( '<figure class="mantra-audio">', $content );
+		$this->assertStringNotContainsString( 'assets/audio/', $content );
+
+		$this->assertNotContains( 'practica', ( new Cdd_Core_Convert_Service() )->run( true )['converted'] );
+	}
+
+	/**
+	 * Protects the share copy of already-imported objects (WU-08A): the
+	 * pass seeds the published message templates as meta from the payload
+	 * without ever overwriting what an editor rewrote in wp-admin.
+	 */
+	public function test_apply_seeds_the_share_templates_without_overwriting_edits() {
+		$payload = $this->payload();
+		$event   = self::factory()->post->create(
+			array(
+				'post_type'  => 'event',
+				'post_name'  => 'circulos-de-presencia-consciente',
+				'meta_input' => array( '_cdd_source_key' => 'event:circulos-de-presencia-consciente' ),
+			)
+		);
+		$post    = self::factory()->post->create(
+			array(
+				'post_name'  => 'sangha-refugio-hiperconexion',
+				'meta_input' => array(
+					'_cdd_source_key' => 'post:sangha-refugio-hiperconexion',
+					'share_x'         => 'Texto reescrito por la editora',
+				),
+			)
+		);
+
+		$report = ( new Cdd_Core_Convert_Service( array( 'payload' => $payload ) ) )->run( true );
+
+		$this->assertContains( 'share:event:circulos-de-presencia-consciente', $report['converted'] );
+		$this->assertStringContainsString( '{{SHARE_URL}}', get_post_meta( $event, 'share_whatsapp', true ) );
+		$this->assertStringContainsString( 'Camino del Dharma', get_post_meta( $event, 'share_threads', true ) );
+		$this->assertSame(
+			'Texto reescrito por la editora',
+			get_post_meta( $post, 'share_x', true ),
+			'A wp-admin edit is never overwritten (ADR 0033).'
+		);
+		$this->assertStringContainsString( 'Zheng Gong', get_post_meta( $post, 'share_whatsapp', true ) );
+
+		// Idempotent: a second pass has nothing left to seed.
+		$second = ( new Cdd_Core_Convert_Service( array( 'payload' => $payload ) ) )->run( true );
+
+		foreach ( $second['converted'] as $item ) {
+			$this->assertStringStartsNotWith( 'share:', $item );
+		}
+	}
+
+	/**
+	 * Protects the optional input: without a payload the pass still runs
+	 * the content conversions and simply seeds no share copy.
+	 */
+	public function test_share_seeding_is_skipped_without_a_payload() {
+		self::factory()->post->create(
+			array(
+				'post_type'  => 'event',
+				'post_name'  => 'circulos-de-presencia-consciente',
+				'meta_input' => array( '_cdd_source_key' => 'event:circulos-de-presencia-consciente' ),
+			)
+		);
+
+		$report = ( new Cdd_Core_Convert_Service() )->run( true );
+
+		foreach ( $report['converted'] as $item ) {
+			$this->assertStringStartsNotWith( 'share:', $item );
+		}
+	}
+
+	/**
+	 * The versioned payload as the CLI passes it.
+	 */
+	private function payload(): array {
+		return json_decode(
+			file_get_contents( dirname( __DIR__, 2 ) . '/migration/payload.json' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repository fixture read inside the ephemeral harness.
+			true
+		);
+	}
+
+	/**
+	 * Creates the imported /practica page from the real payload.
+	 *
+	 * kses is lifted around the insert because the importer runs under
+	 * WP-CLI, where kses filters are not active: the stored content keeps
+	 * the published <source> element (kses drops it, since `source` is not
+	 * an allowed post tag). Without this the fixture would not be the
+	 * content the converter meets in a real environment.
+	 */
+	private function create_practica_page(): int {
+		foreach ( $this->payload()['pages'] as $page ) {
+			if ( 'practica' !== $page['slug'] ) {
+				continue;
+			}
+
+			kses_remove_filters();
+			$page_id = self::factory()->post->create(
+				array(
+					'post_type'    => 'page',
+					'post_name'    => 'practica',
+					'post_title'   => $page['title'],
+					'post_content' => "<!-- wp:html -->\n" . $page['content_html'] . "\n<!-- /wp:html -->",
+				)
+			);
+			kses_init_filters();
+
+			return $page_id;
+		}
+
+		$this->fail( 'The payload has no practica page.' );
+	}
+
+	/**
+	 * Creates one imported mp3 attachment named like the static file.
+	 *
+	 * @param string $name File base name without extension.
+	 */
+	private function create_audio_attachment( string $name ): int {
+		return self::factory()->attachment->create_object(
+			array(
+				'file'           => '2026/08/' . $name . '.mp3',
+				'post_mime_type' => 'audio/mpeg',
+				'post_title'     => $name,
+				'post_name'      => $name,
+			)
+		);
+	}
+
+	/**
 	 * Protects idempotency: a second apply finds nothing pending and
 	 * rewrites nothing.
 	 */

@@ -33,6 +33,8 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 			'camino-del-dharma/blog-recientes',
 			'camino-del-dharma/autor-ficha',
 			'camino-del-dharma/album-galeria',
+			'camino-del-dharma/evento-acciones',
+			'camino-del-dharma/entrada-compartir',
 		);
 
 		foreach ( $expected as $name ) {
@@ -383,6 +385,127 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'footer-donate', $footer );
 		$this->assertStringContainsString( '220065151425', $footer );
 		$this->assertStringContainsString( esc_url( home_url( '/privacidad' ) ), $footer );
+	}
+
+	/**
+	 * Protects the published event actions (WU-08A): a current event
+	 * offers «Añadir al calendario» and «Compartir», the calendar trigger
+	 * carries the same payload as the generated .ics, and the share
+	 * trigger points at the stored message templates.
+	 */
+	public function test_event_actions_block_renders_the_published_triggers() {
+		$event = $this->create_event(
+			'circulos',
+			gmdate( 'Y-m-d', strtotime( '+10 days' ) ),
+			gmdate( 'Y-m-d', strtotime( '+20 days' ) ),
+			array(
+				'event_place'    => 'Bogotá y Cali',
+				'share_whatsapp' => "Comparto esta invitación:\n\n{{SHARE_URL}}",
+				'share_x'        => 'Curso · Camino del Dharma',
+			)
+		);
+		$this->go_to_event( $event );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/evento-acciones /-->' );
+
+		$this->assertStringContainsString( 'class="evento-actions"', $html );
+		$this->assertStringContainsString( 'calendar-trigger', $html );
+		$this->assertStringContainsString( 'Añadir al calendario', $html );
+		$this->assertStringContainsString( 'data-calendar-location="Bogotá y Cali"', $html );
+		$this->assertStringContainsString( 'data-calendar-ics="' . esc_attr( home_url( '/eventos/ical/circulos.ics' ) ) . '"', $html );
+		$this->assertStringContainsString( 'data-calendar-start="' . gmdate( 'Ymd', strtotime( '+10 days' ) ) . '"', $html );
+		$this->assertStringContainsString( 'data-calendar-end="' . gmdate( 'Ymd', strtotime( '+21 days' ) ) . '"', $html );
+
+		$this->assertStringContainsString( 'share-trigger', $html );
+		$this->assertStringContainsString( 'data-share-whatsapp-template="whatsapp-circulos"', $html );
+		$this->assertStringContainsString( '<template id="whatsapp-circulos">', $html );
+		$this->assertStringContainsString( '{{SHARE_URL}}', $html );
+		$this->assertStringContainsString( '<template id="x-circulos">', $html );
+		$this->assertStringNotContainsString( 'data-share-threads-template', $html, 'No stored copy, no dangling template reference.' );
+
+		$this->assertTrue( wp_script_is( 'camino-del-dharma-share', 'enqueued' ) );
+		$this->assertTrue( wp_script_is( 'camino-del-dharma-calendar-dialog', 'enqueued' ) );
+	}
+
+	/**
+	 * Protects OWN-012 for behavior too: a completed event never invites
+	 * anyone to add it to a calendar or to share it — exactly as the
+	 * published past-event singles do.
+	 */
+	public function test_event_actions_block_is_silent_for_completed_events() {
+		$event = $this->create_event( 'pasado', '2020-01-01', '2020-01-02' );
+		$this->go_to_event( $event );
+
+		$this->assertSame( '', do_blocks( '<!-- wp:camino-del-dharma/evento-acciones /-->' ) );
+	}
+
+	/**
+	 * Protects the blog share control: every entry offers it, with the
+	 * stored templates when the editor wrote them.
+	 */
+	public function test_blog_share_block_renders_the_published_trigger() {
+		$post = self::factory()->post->create(
+			array(
+				'post_name'  => 'sangha-refugio-hiperconexion',
+				'post_title' => 'Estamos conectados, pero seguimos solos',
+				'meta_input' => array( 'share_whatsapp' => "Reflexión\n\n{{SHARE_URL}}" ),
+			)
+		);
+		$this->go_to( get_permalink( $post ) );
+		$GLOBALS['post'] = get_post( $post );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/entrada-compartir /-->' );
+
+		$this->assertStringContainsString( 'class="share-actions"', $html );
+		$this->assertStringContainsString( 'data-share-title="Estamos conectados, pero seguimos solos"', $html );
+		$this->assertStringContainsString( 'data-share-url="' . esc_attr( get_permalink( $post ) ) . '"', $html );
+		$this->assertStringContainsString( '<template id="whatsapp-sangha-refugio-hiperconexion">', $html );
+		$this->assertTrue( wp_script_is( 'camino-del-dharma-share', 'enqueued' ) );
+	}
+
+	/**
+	 * Protects the published listing: the current-event card carries the
+	 * same two controls, while the compact past cards carry none.
+	 */
+	public function test_events_listing_carries_the_actions_for_current_events_only() {
+		$current = $this->create_event( 'vigente', gmdate( 'Y-m-d', strtotime( '+5 days' ) ), null );
+		$past    = $this->create_event( 'finalizado', '2020-01-01', '2020-01-02' );
+
+		$html = Camino_Del_Dharma_Renderers::events_listing( array( get_post( $current ) ), array( get_post( $past ) ) );
+
+		$this->assertSame( 1, substr_count( $html, 'calendar-trigger' ) );
+		$this->assertSame( 1, substr_count( $html, 'share-trigger' ) );
+		$this->assertStringContainsString( 'data-calendar-event-url="' . esc_attr( get_permalink( $current ) ) . '"', $html );
+
+		$past_card = substr( $html, (int) strpos( $html, 'eventos-realizados-heading' ) );
+		$this->assertStringNotContainsString( 'share-trigger', $past_card );
+	}
+
+	/**
+	 * Protects the accessible name of the mantra players (docs/19): the
+	 * native audio block has no aria-label attribute, so the theme adds
+	 * the published one from the caption.
+	 */
+	public function test_audio_block_takes_its_accessible_name_from_the_caption() {
+		$html = do_blocks(
+			'<!-- wp:audio {"id":41,"className":"mantra-audio","preload":"metadata"} -->' . "\n" .
+			'<figure class="wp-block-audio mantra-audio"><audio controls src="https://example.test/amitabha.mp3" preload="metadata"></audio>' .
+			'<figcaption class="wp-element-caption">Recitación de Amitābha.</figcaption></figure>' . "\n" .
+			'<!-- /wp:audio -->'
+		);
+
+		$this->assertStringContainsString( 'aria-label="Recitación de Amitābha"', $html );
+		$this->assertStringContainsString( 'preload="metadata"', $html );
+	}
+
+	/**
+	 * Puts the main query on one event single.
+	 *
+	 * @param int $event Event post ID.
+	 */
+	private function go_to_event( int $event ) {
+		$this->go_to( get_permalink( $event ) );
+		$GLOBALS['post'] = get_post( $event );
 	}
 
 	/**

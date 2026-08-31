@@ -5,13 +5,15 @@
  * one documented fragment and returns the new content, or null when
  * there is nothing left to convert (idempotent by construction).
  *
- * The conversions are the three recorded in the migration matrix:
+ * The conversions are the ones recorded in the migration matrix:
  * - inicio: hardcoded featured-event aside and blog cards become the
  *   theme's dynamic blocks (doc 03 §3);
  * - galeria: the empty #gallery-albums JS mount point becomes native
  *   Gutenberg Gallery blocks per album (ADR 0021 / ADR 0036);
  * - comunidad: profile links to the blog_author fichas are added
- *   without touching the published biography (OWN-016).
+ *   without touching the published biography (OWN-016);
+ * - practica: the hand-written mantra players become native core/audio
+ *   blocks bound to the imported attachments (WU-08A).
  *
  * @package Camino_Del_Dharma_Core
  */
@@ -169,6 +171,65 @@ final class Cdd_Core_Content_Converter {
 		}
 
 		return $changed ? $converted : null;
+	}
+
+	/**
+	 * Converts the practica page: the two hand-written mantra players
+	 * become native core/audio blocks bound to the imported attachments,
+	 * keeping the published caption, the preload hint and the
+	 * .mantra-audio class the stylesheet paints. A player whose file has
+	 * no imported attachment is left exactly as published — a block
+	 * pointing at a static path WordPress does not serve would be worse
+	 * than the markup already there. Null when nothing is pending.
+	 *
+	 * @param string $content   Stored post_content (wp:html wrapped).
+	 * @param array  $audio_map Source src => {id, url} of the attachment.
+	 */
+	public function convert_practica( string $content, array $audio_map ): ?string {
+		$changed   = false;
+		$converted = preg_replace_callback(
+			'#<figure class="mantra-audio">.*?</figure>#s',
+			function ( array $found ) use ( $audio_map, &$changed ): string {
+				$block = $this->audio_block( $found[0], $audio_map );
+				if ( null === $block ) {
+					return $found[0];
+				}
+				$changed = true;
+
+				return $block;
+			},
+			$content
+		);
+
+		return $changed ? $converted : null;
+	}
+
+	/**
+	 * One published mantra player as a serialized core/audio block, or
+	 * null when its file has no imported attachment.
+	 *
+	 * @param string $figure    Published figure markup.
+	 * @param array  $audio_map Source src => {id, url} of the attachment.
+	 */
+	private function audio_block( string $figure, array $audio_map ): ?string {
+		if ( ! preg_match( '#<source[^>]+src="([^"]+)"#', $figure, $source ) ) {
+			return null;
+		}
+		if ( ! isset( $audio_map[ $source[1] ] ) ) {
+			return null;
+		}
+
+		$attachment = $audio_map[ $source[1] ];
+		$id         = (int) $attachment['id'];
+		$caption    = preg_match( '#<figcaption[^>]*>(.*?)</figcaption>#s', $figure, $found ) ? trim( $found[1] ) : '';
+
+		return self::BLOCK_BREAK_OPEN .
+			'<!-- wp:audio {"id":' . $id . ',"className":"mantra-audio","preload":"metadata"} -->' . "\n" .
+			'<figure class="wp-block-audio mantra-audio"><audio controls src="' . $this->attr( (string) $attachment['url'] ) . '" preload="metadata"></audio>' .
+			( '' === $caption ? '' : '<figcaption class="wp-element-caption">' . $caption . '</figcaption>' ) .
+			'</figure>' . "\n" .
+			'<!-- /wp:audio -->' .
+			self::BLOCK_BREAK_CLOSE;
 	}
 
 	/**

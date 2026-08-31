@@ -25,7 +25,14 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   el hash del contenido deja de coincidir con `_cdd_source_hash`: así se marca lo editado
   y el importador nunca lo pisa. Queries de presentación para el theme:
   `cdd_core_past_events`, `cdd_core_posts_by_blog_author`, `cdd_core_album_attachments`.
-- La capa wp-admin (metabox de autores, «Eliminar huérfanos» OWN-015) llega en WU-08 —
+- Comportamiento desde WU-08A (v0.5.0): meta editable de compartir
+  `share_whatsapp`/`share_x`/`share_threads` en `event` y `post` (texto plano con el
+  placeholder `{{SHARE_URL}}`; extraída del estático por `Cdd_Core_Share_Extractor`),
+  `cdd_core_event_calendar_payload()` como **fuente única** del diálogo «Añadir al
+  calendario» y del `.ics` generado, y dos pasos nuevos de `migrate convert`: `practica`
+  (reproductores de mantras → bloques `core/audio` nativos) y la siembra add-only de la
+  meta de compartir cuando se pasa `--payload=<path>`.
+- La capa wp-admin (metabox de autores, «Eliminar huérfanos» OWN-015) llega en WU-08B —
   siempre test en rojo primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

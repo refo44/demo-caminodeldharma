@@ -10,6 +10,27 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — WU-08A: comportamiento front (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.5.0** y theme `camino-del-dharma` **0.3.0**. El estático de
+producción no se toca.
+
+- **Diálogo «Compartir»**: `share.js` portado literal al theme; nuevos bloques dinámicos
+  `camino-del-dharma/evento-acciones` y `camino-del-dharma/entrada-compartir`. El copy
+  hand-written de WhatsApp/X/Threads que publica el estático deja de ser HTML congelado y pasa
+  a meta editable `share_whatsapp`/`share_x`/`share_threads` en `event` y `post`, extraída al
+  payload y sembrada por el importador (al crear) o por `migrate convert --payload=<path>`
+  (add-only, nunca pisa una edición de wp-admin).
+- **Diálogo «Añadir al calendario»**: mitad restante de `calendar.js` portada como
+  `calendar-dialog.js`. Diálogo y `.ics` leen el mismo `cdd_core_event_calendar_payload()`, así
+  que los enlaces de Google/Outlook y el archivo descargado no pueden divergir. Ambos controles
+  solo aparecen en eventos vigentes (OWN-012).
+- **Audio de mantras**: `/practica` convierte sus dos reproductores hechos a mano en bloques
+  `core/audio` nativos ligados a la biblioteca; el nombre accesible se restaura en presentación
+  desde el `figcaption`.
+- `migration/payload.json` regenerado: mismos `counts` y misma fuente (VERSION 1.0.35, commit
+  `bfb6dc0`); el único delta es el nuevo campo `share`.
+
 ### Gobernanza — WU-08 partido en 08A / 08B (FABLE5 v2.5, sin cambio del artefacto desplegado)
 
 WU-08 se parte: 08A comportamiento front (Opus, sin pegar FABLE5); 08B SEO/redirects/OWN-015/a11y

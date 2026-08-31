@@ -83,6 +83,23 @@ function cdd_core_register_meta() {
 		)
 	);
 
+	foreach ( array( 'event', 'post' ) as $shareable ) {
+		foreach ( array( 'share_whatsapp', 'share_x', 'share_threads' ) as $share_key ) {
+			register_post_meta(
+				$shareable,
+				$share_key,
+				array(
+					'type'              => 'string',
+					'single'            => true,
+					'default'           => '',
+					'sanitize_callback' => 'cdd_core_sanitize_share_template',
+					'auth_callback'     => 'cdd_core_meta_auth',
+					'show_in_rest'      => true,
+				)
+			);
+		}
+	}
+
 	register_post_meta(
 		'post',
 		'authors',
@@ -174,6 +191,24 @@ function cdd_core_sanitize_event_calendar_dates( $value ): array {
 	}
 
 	return array_values( array_filter( $value, 'cdd_core_is_ymd' ) );
+}
+
+/**
+ * Sanitizes one share message template (WU-08A). The value is plain text
+ * injected into share intent URLs, never into HTML: markup goes, but the
+ * line breaks and the {{SHARE_URL}} placeholder are the message's own
+ * structure and survive untouched (static/assets/js/share.js).
+ *
+ * @param mixed $value Raw meta value.
+ */
+function cdd_core_sanitize_share_template( $value ): string {
+	if ( ! is_string( $value ) ) {
+		return '';
+	}
+
+	$text = str_replace( array( "\r\n", "\r" ), "\n", $value );
+
+	return trim( wp_strip_all_tags( $text ) );
 }
 
 /**

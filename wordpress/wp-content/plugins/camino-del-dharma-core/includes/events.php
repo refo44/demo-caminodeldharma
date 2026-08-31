@@ -211,6 +211,47 @@ function cdd_core_calendar_month_data( ?DateTimeImmutable $now = null ): array {
 }
 
 /**
+ * Everything a calendar surface needs about one event, resolved once
+ * (WU-08A). The «Añadir al calendario» dialog and the generated
+ * /eventos/ical/{slug}.ics both read this array, so the Google/Outlook
+ * deep links a visitor follows and the file they download can never
+ * describe different dates.
+ *
+ * Dates come in two forms: the stored Y-m-d pair the ICS generator
+ * consumes, and the compact Ymd pair the dialog needs, with the
+ * exclusive end (day after the last day) that all-day entries use.
+ *
+ * @param WP_Post $event Event post.
+ */
+function cdd_core_event_calendar_payload( WP_Post $event ): array {
+	$start = (string) get_post_meta( $event->ID, 'event_date', true );
+	$end   = (string) get_post_meta( $event->ID, 'event_end', true );
+
+	if ( ! cdd_core_is_ymd( $start ) ) {
+		return array();
+	}
+	if ( ! cdd_core_is_ymd( $end ) || $end < $start ) {
+		$end = '';
+	}
+
+	$last      = '' !== $end ? $end : $start;
+	$exclusive = ( new DateTimeImmutable( $last ) )->modify( '+1 day' );
+
+	return array(
+		'title'        => get_the_title( $event ),
+		'start_date'   => $start,
+		'end_date'     => '' !== $end ? $end : null,
+		'start'        => ( new DateTimeImmutable( $start ) )->format( 'Ymd' ),
+		'end'          => $exclusive->format( 'Ymd' ),
+		'description'  => $event->post_excerpt ? wp_strip_all_tags( $event->post_excerpt ) : '',
+		'location'     => (string) get_post_meta( $event->ID, 'event_place', true ),
+		'url'          => (string) get_permalink( $event ),
+		'ics_url'      => home_url( '/eventos/ical/' . $event->post_name . '.ics' ),
+		'ics_filename' => $event->post_name . '.ics',
+	);
+}
+
+/**
  * The response for /eventos/ical/{slug}.ics as data: 200 with generated
  * calendar content for a current event, 410 for a completed/cancelled
  * one (OWN-012; no orphan files — the payload is generated, never
@@ -220,9 +261,9 @@ function cdd_core_calendar_month_data( ?DateTimeImmutable $now = null ): array {
  * @param DateTimeImmutable|null $now  Request-time instant.
  */
 function cdd_core_event_ics_response( string $slug, ?DateTimeImmutable $now = null ): array {
-	$now     = $now ?? cdd_core_now();
-	$noindex = array( 'X-Robots-Tag' => 'noindex, nofollow' );
-	$events  = get_posts(
+	$now      = $now ?? cdd_core_now();
+	$noindex  = array( 'X-Robots-Tag' => 'noindex, nofollow' );
+	$events   = get_posts(
 		array(
 			'post_type'   => 'event',
 			'post_status' => 'publish',
@@ -230,10 +271,10 @@ function cdd_core_event_ics_response( string $slug, ?DateTimeImmutable $now = nu
 			'numberposts' => 1,
 		)
 	);
-	$event   = $events[0] ?? null;
-	$start   = $event ? (string) get_post_meta( $event->ID, 'event_date', true ) : '';
+	$event    = $events[0] ?? null;
+	$calendar = $event ? cdd_core_event_calendar_payload( $event ) : array();
 
-	if ( ! $event || ! cdd_core_is_ymd( $start ) ) {
+	if ( empty( $calendar ) ) {
 		return array(
 			'status'  => 404,
 			'headers' => $noindex,
@@ -249,20 +290,19 @@ function cdd_core_event_ics_response( string $slug, ?DateTimeImmutable $now = nu
 		);
 	}
 
-	$end       = (string) get_post_meta( $event->ID, 'event_end', true );
 	$generator = new Cdd_Core_Ics_Generator();
 	$body      = $generator->generate(
 		array(
 			'uid'             => $slug . '@' . wp_parse_url( home_url(), PHP_URL_HOST ),
-			'summary'         => get_the_title( $event ),
-			'description'     => $event->post_excerpt ? wp_strip_all_tags( $event->post_excerpt ) : '',
-			'location'        => (string) get_post_meta( $event->ID, 'event_place', true ),
-			'url'             => get_permalink( $event ),
+			'summary'         => $calendar['title'],
+			'description'     => $calendar['description'],
+			'location'        => $calendar['location'],
+			'url'             => $calendar['url'],
 			'attach'          => (string) get_the_post_thumbnail_url( $event, 'full' ),
 			'organizer_name'  => 'Comunidad Buddhista Camino del Dharma',
 			'organizer_email' => 'caminodeldharma1@gmail.com',
-			'start'           => $start,
-			'end'             => cdd_core_is_ymd( $end ) ? $end : null,
+			'start'           => $calendar['start_date'],
+			'end'             => $calendar['end_date'],
 			'dtstamp'         => $now,
 		)
 	);

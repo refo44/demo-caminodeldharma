@@ -389,20 +389,23 @@ final class Cdd_Core_Importer {
 						'post_status'  => 'publish',
 						'post_excerpt' => (string) $payload_object['excerpt'],
 						'post_content' => $this->wrap_content( $payload_object['content_html'] ),
-						'meta_input'   => array_filter(
-							array(
-								'event_date'           => (string) ( $payload_object['start'] ?? '' ),
-								'event_end'            => (string) ( $payload_object['end'] ?? '' ),
-								'event_place'          => (string) $payload_object['place'],
-								'event_modality'       => (string) $payload_object['modality'],
-								'event_status'         => (string) $payload_object['status'],
-								'event_featured'       => ! empty( $payload_object['featured'] ),
-								'event_signup_url'     => (string) ( $payload_object['signup_url'] ?? '' ),
-								'event_calendar_dates' => (array) $payload_object['calendar_dates'],
+						'meta_input'   => array_merge(
+							array_filter(
+								array(
+									'event_date'           => (string) ( $payload_object['start'] ?? '' ),
+									'event_end'            => (string) ( $payload_object['end'] ?? '' ),
+									'event_place'          => (string) $payload_object['place'],
+									'event_modality'       => (string) $payload_object['modality'],
+									'event_status'         => (string) $payload_object['status'],
+									'event_featured'       => ! empty( $payload_object['featured'] ),
+									'event_signup_url'     => (string) ( $payload_object['signup_url'] ?? '' ),
+									'event_calendar_dates' => (array) $payload_object['calendar_dates'],
+								),
+								static function ( $value ): bool {
+									return array() !== $value && '' !== $value;
+								}
 							),
-							static function ( $value ): bool {
-								return array() !== $value && '' !== $value;
-							}
+							self::share_meta( $payload_object )
 						),
 					)
 				);
@@ -422,8 +425,9 @@ final class Cdd_Core_Importer {
 						'post_date'    => $payload_object['date'] . ' 12:00:00',
 						'post_excerpt' => (string) $payload_object['deck'],
 						'post_content' => $this->wrap_content( $payload_object['content_html'] ),
-						'meta_input'   => array(
-							'authors' => $this->author_ids( (array) $payload_object['authors'] ),
+						'meta_input'   => array_merge(
+							array( 'authors' => $this->author_ids( (array) $payload_object['authors'] ) ),
+							self::share_meta( $payload_object )
 						),
 					)
 				);
@@ -467,6 +471,28 @@ final class Cdd_Core_Importer {
 		}
 
 		return (int) wp_insert_post( wp_slash( $post_args ) );
+	}
+
+	/**
+	 * The share message templates of one payload object as meta (WU-08A).
+	 * Empty when the object publishes no share copy — the dialog then
+	 * falls back to title + URL instead of an empty message.
+	 *
+	 * @param array $payload_object Event or post payload object.
+	 */
+	public static function share_meta( array $payload_object ): array {
+		$share = (array) ( $payload_object['share'] ?? array() );
+		$meta  = array();
+
+		foreach ( Cdd_Core_Share_Extractor::PLATFORMS as $platform ) {
+			$template = (string) ( $share[ $platform ] ?? '' );
+			if ( '' === $template ) {
+				continue;
+			}
+			$meta[ 'share_' . $platform ] = $template;
+		}
+
+		return $meta;
 	}
 
 	/**

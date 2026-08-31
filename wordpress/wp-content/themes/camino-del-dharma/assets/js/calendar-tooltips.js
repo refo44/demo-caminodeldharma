@@ -1,7 +1,8 @@
 /**
  * Camino del Dharma (theme FSE) - eventos calendar grid tooltips.
  * Ported verbatim from static/assets/js/calendar.js (WU-07); the
- * add-to-calendar dialog half of that file arrives with WU-08.
+ * add-to-calendar dialog half of that file lives in calendar-dialog.js
+ * (WU-08A).
  */
 /**
  * Month-grid tooltips (eventos). Hover and :focus-visible are CSS-only.

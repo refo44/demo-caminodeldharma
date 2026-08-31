@@ -18,17 +18,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function camino_del_dharma_register_blocks() {
 	$blocks = array(
-		'eventos-calendar' => 'camino_del_dharma_render_eventos_calendar',
-		'eventos-listado'  => 'camino_del_dharma_render_eventos_listado',
-		'evento-destacado' => 'camino_del_dharma_render_evento_destacado',
-		'evento-tipo'      => 'camino_del_dharma_render_evento_tipo',
-		'evento-meta'      => 'camino_del_dharma_render_evento_meta',
-		'evento-cta'       => 'camino_del_dharma_render_evento_cta',
-		'entrada-cabecera' => 'camino_del_dharma_render_entrada_cabecera',
-		'blog-listado'     => 'camino_del_dharma_render_blog_listado',
-		'blog-recientes'   => 'camino_del_dharma_render_blog_recientes',
-		'autor-ficha'      => 'camino_del_dharma_render_autor_ficha',
-		'album-galeria'    => 'camino_del_dharma_render_album_galeria',
+		'eventos-calendar'  => 'camino_del_dharma_render_eventos_calendar',
+		'eventos-listado'   => 'camino_del_dharma_render_eventos_listado',
+		'evento-destacado'  => 'camino_del_dharma_render_evento_destacado',
+		'evento-tipo'       => 'camino_del_dharma_render_evento_tipo',
+		'evento-meta'       => 'camino_del_dharma_render_evento_meta',
+		'evento-cta'        => 'camino_del_dharma_render_evento_cta',
+		'evento-acciones'   => 'camino_del_dharma_render_evento_acciones',
+		'entrada-cabecera'  => 'camino_del_dharma_render_entrada_cabecera',
+		'entrada-compartir' => 'camino_del_dharma_render_entrada_compartir',
+		'blog-listado'      => 'camino_del_dharma_render_blog_listado',
+		'blog-recientes'    => 'camino_del_dharma_render_blog_recientes',
+		'autor-ficha'       => 'camino_del_dharma_render_autor_ficha',
+		'album-galeria'     => 'camino_del_dharma_render_album_galeria',
 	);
 
 	foreach ( $blocks as $name => $render_callback ) {
@@ -84,7 +86,12 @@ function camino_del_dharma_render_eventos_listado(): string {
 		return '';
 	}
 
-	return Camino_Del_Dharma_Renderers::events_listing( cdd_core_current_events(), cdd_core_past_events() );
+	$current = cdd_core_current_events();
+	if ( ! empty( $current ) ) {
+		camino_del_dharma_enqueue_behavior( array( 'share', 'calendar-dialog' ) );
+	}
+
+	return Camino_Del_Dharma_Renderers::events_listing( $current, cdd_core_past_events() );
 }
 
 /**
@@ -126,6 +133,45 @@ function camino_del_dharma_render_evento_cta(): string {
 	}
 
 	return Camino_Del_Dharma_Renderers::event_cta( $event, cdd_core_event_is_current( $event ) );
+}
+
+/**
+ * The dialog triggers of the current single: «Añadir al calendario» and
+ * «Compartir». Only a current event renders them (OWN-012), and the two
+ * dialog scripts are enqueued only when they do.
+ */
+function camino_del_dharma_render_evento_acciones(): string {
+	$event = get_post();
+	if ( ! $event instanceof WP_Post || ! function_exists( 'cdd_core_event_is_current' ) ) {
+		return '';
+	}
+
+	$current = cdd_core_event_is_current( $event );
+	if ( ! $current ) {
+		return '';
+	}
+
+	camino_del_dharma_enqueue_behavior( array( 'share', 'calendar-dialog' ) );
+
+	return Camino_Del_Dharma_Renderers::event_actions(
+		$event,
+		true,
+		function_exists( 'cdd_core_event_calendar_payload' ) ? cdd_core_event_calendar_payload( $event ) : array()
+	);
+}
+
+/**
+ * The share control of the current blog entry.
+ */
+function camino_del_dharma_render_entrada_compartir(): string {
+	$post = get_post();
+	if ( ! $post instanceof WP_Post ) {
+		return '';
+	}
+
+	camino_del_dharma_enqueue_behavior( array( 'share' ) );
+
+	return Camino_Del_Dharma_Renderers::entry_share( $post );
 }
 
 /**
@@ -193,3 +239,59 @@ function camino_del_dharma_render_album_galeria(): string {
 
 	return Camino_Del_Dharma_Renderers::album_gallery( $term, $attachments );
 }
+
+/**
+ * Enqueues the behavior scripts a rendered block needs, by file name
+ * (docs/12 §7: nothing global that only one view uses).
+ *
+ * @param array $scripts Script base names under assets/js.
+ */
+function camino_del_dharma_enqueue_behavior( array $scripts ) {
+	foreach ( $scripts as $script ) {
+		$path = get_template_directory() . '/assets/js/' . $script . '.js';
+		if ( ! file_exists( $path ) ) {
+			continue;
+		}
+
+		wp_enqueue_script(
+			'camino-del-dharma-' . $script,
+			get_template_directory_uri() . '/assets/js/' . $script . '.js',
+			array(),
+			(string) filemtime( $path ),
+			true
+		);
+	}
+}
+
+/**
+ * Restores the accessible name of the mantra players (docs/19). The
+ * native core/audio block carries no aria-label, and the published
+ * players name themselves («Recitación de Amitābha»); the caption holds
+ * that name, so the theme puts it back on the element a screen reader
+ * announces. Audio blocks without a caption are left alone.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @param array  $block         Parsed block.
+ */
+function camino_del_dharma_name_audio_blocks( $block_content, $block ) {
+	if ( 'core/audio' !== ( $block['blockName'] ?? '' ) || false !== strpos( $block_content, 'aria-label' ) ) {
+		return $block_content;
+	}
+
+	if ( ! preg_match( '#<figcaption[^>]*>(.*?)</figcaption>#s', $block_content, $caption ) ) {
+		return $block_content;
+	}
+
+	$name = trim( wp_strip_all_tags( $caption[1] ), " \t\n\r\0\x0B." );
+	if ( '' === $name ) {
+		return $block_content;
+	}
+
+	return preg_replace(
+		'#<audio\b#',
+		'<audio aria-label="' . esc_attr( $name ) . '"',
+		$block_content,
+		1
+	);
+}
+add_filter( 'render_block', 'camino_del_dharma_name_audio_blocks', 10, 2 );

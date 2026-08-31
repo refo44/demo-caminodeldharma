@@ -170,10 +170,15 @@
                 "2026-10-17",
                 "2026-10-24"
             ],
+            "share": {
+                "whatsapp": "Comparto esta invitación de Camino del Dharma:\n\n*Curso Círculos de Presencia Consciente*\n\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\nBienvenida, orientación, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali.\nBecas completas. Cupos limitados.\n\n📅 Septiembre – octubre 2026\n📍 Bogotá y Cali\n\n{{SHARE_URL}}",
+                "x": "Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\n📅 sep–oct 2026 · 📍 Bogotá y Cali",
+                "threads": "Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n📅 Septiembre – octubre 2026\n📍 Bogotá y Cali"
+            },
             "has_single_source": true,
             "source_path": "static/eventos/circulos-de-presencia-consciente/index.html",
             "_source_key": "event:circulos-de-presencia-consciente",
-            "_source_hash": "e42bbbdffd121f835167ac1bbac115aae17f21cfd1e34f9dcfa40790883d328f"
+            "_source_hash": "c00dfe808d8c71461f4cef312c0fc0090bc507a3e86019ec797d66dea3baf424"
         },
         {
             "slug": "encuentro-nacional-2026",
@@ -194,10 +199,15 @@
             "excerpt": "Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Un regalo para vivir con claridad, práctica y comunidad.",
             "content_html": "<p class=\"evento-lead\">Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Un regalo para vivir con claridad, práctica y comunidad.</p>\n      <p>Este encuentro fue un espacio de práctica, claridad y comunidad.</p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": true,
             "source_path": "static/eventos/encuentro-nacional-2026/index.html",
             "_source_key": "event:encuentro-nacional-2026",
-            "_source_hash": "25f025a257e263f6887313f27c8421dfe8a327ab0d92374b951f1eb4d529e12b"
+            "_source_hash": "3dc1ea2f0349716a3b3b5dab96c7b2fa39fa2a45059e46b13225c3afc106da60"
         },
         {
             "slug": "meditacion-presencial-barranquilla",
@@ -218,10 +228,15 @@
             "excerpt": "Un espacio para detenernos, respirar y reconectar con lo esencial.",
             "content_html": "<p class=\"evento-lead\">Un espacio para detenernos, respirar y reconectar con lo esencial.</p>\n      <p>Barranquilla, hagamos una pausa. A veces un momento de silencio puede cambiar el rumbo de toda una semana.</p>\n      <p>Un encuentro de meditación presencial, guiado en vivo de forma virtual por el Maestro Zheng Gong: la comunidad se reunió en un mismo lugar para practicar acompañada a distancia. Un espacio para respirar, recuperar claridad y volver a lo esencial.</p>\n\n      \n\n      <p><strong>Guiada por el Maestro Zheng Gong.</strong></p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:meditacion-presencial-barranquilla",
-            "_source_hash": "d6e8d7a2c8f0b9e52e6cfe2bdb6d3389cc98b0354a74b320b9b2e89343411642"
+            "_source_hash": "53aa421113930720528af3aee3797ba5c61dadd78677e7fae06f52bcf0c955e7"
         },
         {
             "slug": "festival-calma-en-la-ciudad",
@@ -242,10 +257,15 @@
             "excerpt": "Hay momentos en los que lo más valioso no es hacer más, sino detenernos un instante.",
             "content_html": "<p class=\"evento-lead\">Hay momentos en los que lo más valioso no es hacer más, sino detenernos un instante.</p>\n      <p>En el marco del Festival <em>Calma en la Ciudad — Tu retiro en Bogotá</em> y de la feria de emprendimiento <em>Hecho en Bogotá</em>, acompañamos a la ciudad con una meditación budista al aire libre en el Parque de los Novios. Una pausa abierta a todos para respirar, aquietar la mente y volver a lo esencial en medio del ritmo urbano.</p>\n\n      \n\n      <p>Se recomendaba llevar ropa cómoda, hidratación y colchoneta o mat de yoga.</p>\n\n      <p><strong>Dirigido por el Monje Buddhista Zheng Gong.</strong></p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:festival-calma-en-la-ciudad",
-            "_source_hash": "0afcc5323883f862cb87dafe6139cc9a61391879016c46fb5279dcd9fb51c2dc"
+            "_source_hash": "65c5e24dd6f7d2a64d2c54f0117249a456bb186ed236242e123384876250967f"
         },
         {
             "slug": "pausa-profunda-medellin",
@@ -266,10 +286,15 @@
             "excerpt": "Un espacio para detenerte, escucharte y volver a lo esencial.",
             "content_html": "<p class=\"evento-lead\">Un espacio para detenerte, escucharte y volver a lo esencial.</p>\n      <p>Pausa Profunda fue un taller de un día creado como un espacio de detención consciente, para quienes sienten la necesidad de bajar el ritmo, escuchar con mayor claridad y volver a lo esencial.</p>\n      <p>A lo largo de la jornada exploramos prácticas contemplativas desde la perspectiva buddhista que permiten habitar el cansancio con mayor presencia, soltar la autoexigencia innecesaria y cultivar una relación más amable y lúcida con la experiencia cotidiana.</p>\n\n      \n\n      <p><strong>Dirigido por el Maestro Buddhista Zheng Gong.</strong></p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:pausa-profunda-medellin",
-            "_source_hash": "b24a261e1ac40d9d92d18b2a5b3219c0c3e9365b41b3f921bcc97dae6172654c"
+            "_source_hash": "44b938372b65c23a1a37fd7a600883e8563a06f1d057a084ae9b7889d88b912d"
         },
         {
             "slug": "ansiedad-agotamiento-crisis-de-atencion",
@@ -290,10 +315,15 @@
             "excerpt": "Una reflexión para cuidar nuestra salud mental.",
             "content_html": "<p class=\"evento-lead\">Una reflexión para cuidar nuestra salud mental.</p>\n      <p>Conferencia convocada por la Dirección de Bienestar Institucional de Uniremington, dentro de su programa <em>Espacios de arte y cultura</em>. Un espacio de reflexión sobre los desafíos que la hiperconectividad, la presión social y el ritmo acelerado generan en nuestra salud mental.</p>\n      <p>La charla abordó la ansiedad, el agotamiento emocional, la dispersión de la atención y el bienestar en la vida universitaria, integrando pensamiento contemporáneo y prácticas contemplativas.</p>\n\n      <ul class=\"evento-highlights\">\n        <li>Conferencia magistral</li>\n        <li>Reflexión guiada y prácticas contemplativas</li>\n        <li>Espacio de preguntas y diálogo</li>\n      </ul>\n\n      \n\n      <p><strong>Orientada por el Maestro Zheng Gong</strong>, maestro buddhista con experiencia en formación humana y atención consciente.</p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:ansiedad-agotamiento-crisis-de-atencion",
-            "_source_hash": "9d2ca18009c8718d8aac27983cc09cfda4c8fa8dd8d9ffec4bb57c78b5e03b73"
+            "_source_hash": "96a83ec471fa87e0ac66fb0062afc321d556a5924617524464386b484baf2fb1"
         },
         {
             "slug": "vesak-2026",
@@ -314,10 +344,15 @@
             "excerpt": "Una mañana de meditación colectiva, música, mantras y conversatorio para cultivar paz interior y el cuidado consciente de la vida.",
             "content_html": "<p class=\"evento-lead\">Una mañana de meditación colectiva, música, mantras y conversatorio para cultivar paz interior y el cuidado consciente de la vida.</p>\n      <p>Una invitación a hacer una pausa en medio del ritmo cotidiano y regalarse una mañana de calma, meditación y conexión. Nuestra celebración del Vesak, con el acompañamiento de <em>Bogotá Cultura + Consciente</em>.</p>\n\n      <ul class=\"evento-highlights\">\n        <li>Meditación guiada</li>\n        <li>Música y mantras</li>\n        <li>Conversatorio</li>\n        <li>Concierto de música colombiana en vivo</li>\n      </ul>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:vesak-2026",
-            "_source_hash": "fb16e230ffd50b81966b2e9323d8d17c76a2fe41ae10992a550662647dbd24ba"
+            "_source_hash": "77873fad823c8e07294849260c46becd27196cde0a1bb06bc44af2c5dbba27c9"
         },
         {
             "slug": "pausa-profunda-cali",
@@ -338,10 +373,15 @@
             "excerpt": "¿Sientes que necesitas bajar el ritmo, respirar con más calma y volver a lo esencial?",
             "content_html": "<p class=\"evento-lead\">¿Sientes que necesitas bajar el ritmo, respirar con más calma y volver a lo esencial?</p>\n      <p>Pausa Profunda fue un taller de un día para detenerse, escuchar y habitar el presente con mayor claridad. Un espacio para soltar el cansancio, calmar el ruido interior y reconectar, guiado desde una perspectiva budista, sencilla y profunda.</p>\n      <p class=\"evento-tagline\"><em>Pausa no es escapar… es aprender a estar.</em></p>\n\n      \n\n      <p><strong>Dirigido por el Maestro Zheng Gong.</strong></p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": true,
             "source_path": "static/eventos/pausa-profunda-cali/index.html",
             "_source_key": "event:pausa-profunda-cali",
-            "_source_hash": "cec882d58b1d5e41bf3ee6c3773beecc9a2c91d096e24d5dfe19a48e15f526d2"
+            "_source_hash": "fbf89f6e8a1e691d67719e9c41cf15347fc71d94936969336c27c2edf8d54525"
         },
         {
             "slug": "buddhismo-tiempos-cansancio",
@@ -360,10 +400,15 @@
             "excerpt": "Conferencia guiada por el Maestro Zheng Gong. Un espacio de enseñanza, reflexión y práctica, transmitido en vivo por Zoom y YouTube, con participación internacional.",
             "content_html": "<p class=\"evento-lead\">Conferencia guiada por el Maestro Zheng Gong. Un espacio de enseñanza, reflexión y práctica, transmitido en vivo por Zoom y YouTube, con participación internacional.</p>\n      <p>Desde nuestra comunidad les invitamos a acompañarnos y a compartir esta actividad con quienes puedan beneficiarse de ella. Que esta enseñanza sea descanso y claridad.</p>\n\n      \n\n      <p><strong>Zoom</strong> — ID de reunión: 859 0106 4155 · Código de acceso: 123456</p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:buddhismo-tiempos-cansancio",
-            "_source_hash": "636676111c5da408876cbb6b2f398dcfa8765d83c49ce1af1dd18db68bf4eee8"
+            "_source_hash": "1638e526785a7453b89755b64b4680d22a300956e6e830b3846cc2449fac3807"
         },
         {
             "slug": "6-encuentro-nacional-2025",
@@ -384,10 +429,15 @@
             "excerpt": "Meditación, compasión y diálogo para sanar juntos.",
             "content_html": "<p class=\"evento-lead\">Meditación, compasión y diálogo para sanar juntos.</p>\n      <p>¿Sientes que necesitas una pausa para reconectar contigo mismo y con lo esencial de la vida? Este encuentro fue una oportunidad para cultivar serenidad, profundizar en la práctica espiritual y compartir con una comunidad comprometida con el despertar.</p>\n      <ul class=\"evento-highlights\">\n        <li>Cupos limitados</li>\n        <li>Ambiente seguro y amoroso</li>\n        <li>Meditación guiada, escucha profunda y prácticas de compasión</li>\n      </ul>\n\n      \n\n      <p>También podías escribir al WhatsApp <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">+57 320 662 7608</a> para información o apoyo en la inscripción.</p>",
             "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:6-encuentro-nacional-2025",
-            "_source_hash": "1828fbb0ff2b56479bd07c516225ac4a832c007a0b422e8c58460aa7baeb033d"
+            "_source_hash": "70a51ef0a18826a9f896b4cfc70f106a69a32acd2b428f52a2be43e334a363fc"
         }
     ],
     "posts": [
@@ -403,13 +453,18 @@
             "thumbnail_alt": "Grupo de personas sentadas en círculo en un espacio iluminado, con una vela en el centro. Círculos de Presencia Consciente.",
             "meta_description": "Enfoque, cronograma, becas y preguntas frecuentes del curso Círculos de Presencia Consciente, una iniciativa de salud mental comunitaria en Bogotá y Cali.",
             "content_html": "<p>Círculos de Presencia Consciente es un proceso de formación dirigido a personas adultas de Bogotá y Cali que deseen fortalecer su bienestar emocional, cultivar una mayor presencia en la vida cotidiana y aprender herramientas de escucha y cuidado comunitario.</p>\n      <p>Durante el curso exploraremos prácticas sencillas y aplicables para reconocer nuestras emociones, relacionarnos de una manera más consciente con el estrés y construir espacios seguros de escucha y apoyo mutuo.</p>\n      <p>No necesitas tener experiencia previa en meditación ni pertenecer a una tradición espiritual.</p>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Quiero preinscribirme <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n      </p>\n\n      <h2>¿Qué encontrarás en este proceso?</h2>\n      <p>A lo largo de seis sesiones virtuales y un encuentro presencial en tu ciudad, abordaremos:</p>\n      <ul>\n        <li>Presencia consciente y atención en la vida cotidiana.</li>\n        <li>Herramientas básicas de regulación emocional.</li>\n        <li>Reconocimiento del estrés y el agotamiento.</li>\n        <li>Autocompasión y cuidado personal.</li>\n        <li>Relaciones y escucha consciente.</li>\n        <li>Redes de apoyo y resiliencia comunitaria.</li>\n      </ul>\n      <p>No se trata de conferencias aisladas. Es un proceso progresivo en el que cada sesión prepara la siguiente e integra momentos de aprendizaje, práctica y participación.</p>\n\n      <h2>¿A quién está dirigido?</h2>\n      <p>A personas mayores de 18 años que vivan en Bogotá o Cali y tengan interés en participar en un proceso de bienestar emocional, escucha y fortalecimiento comunitario.</p>\n      <p>El curso puede ser especialmente valioso para:</p>\n      <ul>\n        <li>Personas interesadas en su bienestar y crecimiento personal.</li>\n        <li>Líderes y lideresas comunitarias.</li>\n        <li>Mujeres cuidadoras y personas que acompañan a otros.</li>\n        <li>Docentes y profesionales del ámbito social.</li>\n        <li>Integrantes de fundaciones, colectivos y organizaciones.</li>\n        <li>Servidores públicos y coordinadores de proyectos comunitarios.</li>\n        <li>Personas que experimentan estrés o agotamiento emocional.</li>\n      </ul>\n      <p>Círculos de Presencia Consciente tiene un enfoque preventivo, formativo y comunitario. No es un proceso de psicoterapia ni reemplaza la atención médica, psicológica o psiquiátrica cuando esta sea necesaria.</p>\n\n      <h2>Becas completas</h2>\n      <p>El curso ofrece un número limitado de becas completas para personas de Bogotá y Cali.</p>\n      <p>Las personas seleccionadas tendrán acceso a:</p>\n      <ul>\n        <li>Seis sesiones virtuales.</li>\n        <li>Un encuentro presencial en su ciudad.</li>\n        <li>Orientación para el uso de Google Classroom.</li>\n        <li>Materiales de formación.</li>\n        <li>Certificación, de acuerdo con los criterios de participación establecidos.</li>\n      </ul>\n      <p>La preinscripción no garantiza automáticamente la asignación de una beca. Las personas interesadas serán invitadas a una sesión virtual de bienvenida, en la que conocerán la metodología, el calendario y los compromisos del curso. Después podrán decidir si desean completar su inscripción definitiva.</p>\n\n      <h2>Cronograma</h2>\n      <p>Todas las actividades virtuales se realizarán a las 7:00 p. m., hora de Colombia.</p>\n\n      <h3>Sesión virtual de bienvenida</h3>\n      <p>Jueves 3 de septiembre de 2026<br>7:00 p. m.</p>\n      <p>Durante este encuentro conocerás la metodología, el cronograma y los compromisos del curso. Al finalizar, las personas interesadas podrán realizar su inscripción definitiva y continuar con el proceso de asignación de las becas.</p>\n\n      <h3>Orientación sobre Google Classroom</h3>\n      <p>Jueves 10 de septiembre de 2026<br>7:00 p. m.</p>\n      <p>Esta sesión permitirá conocer el funcionamiento de la plataforma, acceder a los materiales y resolver inquietudes técnicas antes de comenzar el curso.</p>\n\n      <h3>Sesiones virtuales</h3>\n      <ul>\n        <li>Sesión 1: martes 15 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 2: jueves 17 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 3: martes 22 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 4: jueves 24 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 5: martes 29 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 6: jueves 1 de octubre, 7:00 p. m.</li>\n      </ul>\n\n      <h3>Encuentro presencial en Bogotá</h3>\n      <p>Sábado 17 de octubre de 2026<br>8:00 a. m. a 12:00 m.</p>\n\n      <h3>Encuentro presencial en Cali</h3>\n      <p>Sábado 24 de octubre de 2026<br>8:00 a. m. a 12:00 m.</p>\n      <p>Cada participante asistirá únicamente al encuentro presencial correspondiente a la ciudad seleccionada. El lugar será informado oportunamente a las personas admitidas.</p>\n\n      <h2>¿Cómo participar?</h2>\n      <ol>\n        <li>\n          <p><strong>Realiza tu preinscripción</strong></p>\n          <p>Completa el formulario con tus datos básicos y selecciona la ciudad en la que participarías.</p>\n        </li>\n        <li>\n          <p><strong>Participa en la sesión de bienvenida</strong></p>\n          <p>Recibirás por WhatsApp o correo electrónico la invitación a una sesión virtual en la que conocerás todos los detalles del curso.</p>\n        </li>\n        <li>\n          <p><strong>Completa tu inscripción</strong></p>\n          <p>Al finalizar la bienvenida, las personas interesadas recibirán el enlace para completar la inscripción definitiva.</p>\n        </li>\n        <li>\n          <p><strong>Confirma tu beca</strong></p>\n          <p>Las personas admitidas recibirán la confirmación de su beca y la información para ingresar a Google Classroom.</p>\n        </li>\n        <li>\n          <p><strong>Comienza el proceso</strong></p>\n          <p>Participarás en las seis sesiones virtuales y en el encuentro presencial correspondiente a tu ciudad.</p>\n        </li>\n      </ol>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Realizar mi preinscripción <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n      </p>\n\n      <h2>Preguntas frecuentes</h2>\n\n      <h3>¿El curso tiene algún costo?</h3>\n      <p>No. Las personas admitidas recibirán una beca completa que cubre su participación en el proceso, los materiales de formación y la certificación.</p>\n\n      <h3>¿La preinscripción garantiza mi cupo?</h3>\n      <p>No. La preinscripción permite manifestar tu interés y recibir la invitación a la sesión de bienvenida. La beca se confirmará después de completar el proceso de inscripción definitiva.</p>\n\n      <h3>¿Debo tener experiencia en meditación?</h3>\n      <p>No. El curso está diseñado para personas con o sin experiencia previa.</p>\n\n      <h3>¿Puedo participar si vivo en otra ciudad?</h3>\n      <p>Sí. Aunque el proceso está dirigido principalmente a personas de Bogotá y Cali, puedes participar si resides en otra ciudad y te comprometes a asistir al encuentro presencial en la ciudad que selecciones al momento de inscribirte.</p>\n\n      <h3>¿Cuántas actividades incluye el proceso?</h3>\n      <p>El proceso incluye una sesión de bienvenida, una orientación sobre Google Classroom, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali, según la ciudad seleccionada.</p>\n\n      <h3>¿Recibiré un certificado?</h3>\n      <p>Sí. La certificación estará sujeta al cumplimiento de los criterios de asistencia y participación informados durante la sesión de bienvenida.</p>\n\n      <h3>¿Qué ocurre si no puedo asistir a todas las sesiones?</h3>\n      <p>La beca implica un compromiso con el proceso completo. Si conoces anticipadamente que no podrás participar en la mayoría de las sesiones o en el encuentro presencial, te recomendamos no formalizar todavía la inscripción y permitir que otra persona pueda aprovechar el cupo.</p>\n\n      <h2>Una oportunidad para aprender a cuidarnos juntos</h2>\n      <p>En medio de la prisa cotidiana, muchas personas necesitan un espacio donde puedan detenerse, reconocer lo que están viviendo y sentirse escuchadas.</p>\n      <p>Círculos de Presencia Consciente nace como una invitación a recuperar ese espacio y a descubrir que el cuidado emocional no tiene que vivirse en soledad.</p>\n      <p>Los cupos son limitados.</p>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Quiero preinscribirme <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n        <a href=\"/eventos/circulos-de-presencia-consciente\" class=\"btn btn-secondary\">Ver evento</a>\n      </p>\n\n      <p>Para resolver inquietudes puedes comunicarte con la Comunidad Buddhista Camino del Dharma:</p>\n      <p>WhatsApp: <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">320 662 7608 <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></p>\n      <p>Correo: <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a></p>\n      <p>Nota: La programación, los contenidos y las condiciones operativas del curso podrán ser revisados o ajustados de acuerdo con las necesidades pedagógicas y logísticas del proceso. Cualquier cambio será informado oportunamente a las personas participantes.</p>",
+            "share": {
+                "whatsapp": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n{{SHARE_URL}}",
+                "x": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente",
+                "threads": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad."
+            },
             "tags": [],
             "source_path": "static/blog/circulos-de-presencia-consciente/index.html",
             "authors": [
                 "comunidad-camino-del-dharma"
             ],
             "_source_key": "post:circulos-de-presencia-consciente",
-            "_source_hash": "bce028f9aec09dcfb42df7581e9da26d7c74f1e8819eae0a6de08691e0c19f06"
+            "_source_hash": "116330181363a912a2134190361f42ecb42dbbaf10d2f27b424a0d9dad2cbf33"
         },
         {
             "slug": "sangha-refugio-hiperconexion",
@@ -423,13 +478,18 @@
             "thumbnail_alt": "Persona sentada en un banco al atardecer, frente a un lago y la ciudad",
             "meta_description": "La Sangha como refugio en tiempos de hiperconexión. Reflexión de Zheng Gong sobre soledad, presencia y comunidad de práctica.",
             "content_html": "<p>Al terminar el día, muchas personas dejan el teléfono sobre la mesa y, por primera vez en horas, la pantalla deja de reclamar su atención. Es entonces cuando aparece una sensación difícil de nombrar. Han respondido mensajes, revisado las redes sociales, participado en reuniones virtuales y permanecido, aparentemente, conectadas con el mundo. Sin embargo, en ese breve silencio descubren que hace tiempo no sostienen una conversación que realmente las haya conmovido.</p>\n      <p>No les faltaron mensajes. Les faltó encuentro.</p>\n      <p>Cada vez escuchamos con más frecuencia historias parecidas. Personas que hablan con mucha gente durante el día, pero que sienten que hace semanas nadie les pregunta, con verdadero interés, cómo están. Personas que sonríen en una videollamada y, al cerrarla, vuelven a experimentar una silenciosa sensación de vacío. Es una paradoja difícil de ignorar ya que nunca habíamos contado con tantas formas de comunicarnos y, sin embargo, cada vez parece más difícil encontrarnos.</p>\n      <p>No se trata solo de una percepción. La Organización Mundial de la Salud advirtió que una de cada seis personas en el mundo experimenta soledad y que el aislamiento social constituye un factor de riesgo para la salud física, mental y el bienestar. No estamos, por tanto, ante un problema exclusivamente emocional, sino frente a un desafío social que comienza a transformar la manera en que vivimos, trabajamos y nos relacionamos (Organización Mundial de la Salud, 2025).</p>\n      <p>Tal vez no hablamos poco. Tal vez hemos olvidado cómo encontrarnos.</p>\n\n      <h2>La paradoja de la hiperconexión</h2>\n      <p>Casi sin darnos cuenta, hemos empezado a vivir con prisa incluso cuando no existe ninguna urgencia. Respondemos mensajes mientras caminamos, escuchamos a alguien mientras revisamos otra conversación y compartimos fotografías antes de haber vivido plenamente aquello que deseábamos recordar. La velocidad ha dejado de ser únicamente una característica de nuestro tiempo; poco a poco se ha convertido en una forma de habitar el mundo.</p>\n      <p>En ese contexto, resulta fácil confundir disponibilidad con presencia.</p>\n      <p>Pero estar disponibles no significa estar presentes.</p>\n      <p>La presencia no depende de una aplicación ni de una mejor conexión a internet. Nace cuando dejamos de mirar la pantalla para mirar realmente a quien tenemos delante. Requiere atención, escucha y la disposición de permitir que la experiencia del otro también transforme la nuestra.</p>\n      <p>En ocasiones pensamos que la respuesta consiste simplemente en aprender a estar solos. Sin duda, existe una soledad que puede ser profundamente fecunda. Es la del retiro voluntario, la del silencio que permite observar la mente con mayor claridad y descubrir que no necesitamos llenar cada instante con estímulos para sentirnos vivos. El budismo ha reconocido desde sus orígenes el valor de ese espacio interior, y muchos de sus grandes maestros/as encontraron allí una fuente de sabiduría.</p>\n      <p>Pero esa no es la única forma de estar solos.</p>\n      <p>Existe también una soledad que no libera, sino que pesa. La experimenta quien siente que no tiene con quién compartir sus preguntas, sus miedos o sus alegrías; quien permanece rodeado de personas y, aun así, siente que nadie conoce verdaderamente lo que ocurre en su interior.</p>\n      <p>No toda persona que está sola sufre. Pero nadie debería acostumbrarse a vivir sin sentirse visto por otro ser humano.</p>\n      <p>Confundir estas dos experiencias puede llevarnos a idealizar el aislamiento como si fuera siempre una oportunidad espiritual. No lo es. Hay momentos en los que el camino hacia una vida más consciente comienza, precisamente, cuando aceptamos volver a encontrarnos con los demás.</p>\n\n      <h2>La Sangha como un refugio para nuestro tiempo</h2>\n      <p>Cuando una persona toma refugio en el budismo lo hace en el Buda, el Dharma y la Sangha. Habitualmente comprendemos con facilidad los dos primeros. El Buda representa la posibilidad del despertar y el Dharma el camino que orienta nuestra práctica. La Sangha, en cambio, suele entenderse simplemente como \"la comunidad\".</p>\n      <p>La traducción es correcta, pero resulta insuficiente.</p>\n      <p>Una Sangha no es cualquier grupo de personas. Es una comunidad que decide ayudarse mutuamente a no olvidar el Camino. Un lugar donde la práctica deja de ser un proyecto exclusivamente individual para convertirse en una experiencia compartida.</p>\n      <p>Nuestra cultura suele valorar la autosuficiencia. Aprendemos que debemos resolver solos nuestras dificultades, gestionar nuestras emociones sin depender de nadie y demostrar fortaleza incluso cuando por dentro nos sentimos frágiles. Sin embargo, el budismo recuerda una verdad mucho más sencilla y, al mismo tiempo más profunda y es que nada existe de manera aislada.</p>\n      <p>Nuestra vida depende del aire que respiramos, del alimento que otros cultivaron, del lenguaje que aprendimos de quienes nos precedieron y del cuidado recibido mucho antes de que pudiéramos valernos por nosotros mismos. También depende de las personas que hoy nos acompañan, nos cuestionan, nos escuchan y, a veces, incluso nos muestran aquello que todavía necesitamos aprender.</p>\n      <p>La interdependencia no es una teoría budista. Es la manera en que la vida sucede.</p>\n      <p>Desde esa comprensión, reconocer que necesitamos de los demás deja de ser un signo de debilidad para convertirse en una expresión de sabiduría.</p>\n      <p>Por supuesto, ninguna comunidad es perfecta. Toda Sangha está formada por seres humanos y, allí donde hay seres humanos, existen diferencias, desacuerdos y aprendizajes pendientes. Su valor no radica en la ausencia de conflictos, sino en la posibilidad de atravesarlos sin renunciar al vínculo. Permanecer, escuchar, dialogar, pedir perdón cuando es necesario y alegrarnos sinceramente por el bienestar de los demás también forman parte del entrenamiento espiritual.</p>\n      <p>En tiempos en los que se nos invita a resolverlo todo solos, la Sangha resulta casi contracultural. Nos recuerda que nadie despierta completamente solo y que la práctica encuentra una profundidad distinta cuando puede sostenerse junto a otros.</p>\n\n      <h2>Volver a encontrarnos</h2>\n      <p>Quizá el mayor desafío de nuestra época no consista en aumentar el número de personas con las que nos comunicamos, sino en recuperar la capacidad de encontrarnos verdaderamente con ellas.</p>\n      <p>Todos necesitamos un lugar donde el silencio no resulte incómodo, donde las preguntas puedan formularse sin miedo y donde no sea necesario aparentar que todo está bien para sentirnos acogidos. Necesitamos espacios donde la escucha tenga tanto valor como la palabra y donde el crecimiento espiritual no se mida por los logros individuales, sino también por la manera en que aprendemos a cuidar la vida compartida.</p>\n      <p>La Sangha ofrece precisamente esa posibilidad. No elimina el sufrimiento ni evita las dificultades propias de la existencia. Lo que hace es recordarnos que el camino nunca estuvo pensado para recorrerse completamente solos. Quizá el opuesto de la soledad no sea simplemente estar acompañados. Quizá sea descubrir que pertenecemos. Que nuestra vida siempre ha estado entrelazada con otras vidas, aunque con frecuencia lo olvidemos.</p>\n      <p>El budismo llama Sangha a esa experiencia de caminar junto a otros. No porque el camino se vuelva más corto o fácil, sino porque, cuando alguien camina a nuestro lado, incluso el silencio deja de sentirse vacío.</p>\n      <p>Si esta reflexión resonó contigo, te invitamos a conocer los espacios de meditación, estudio y práctica de la Comunidad Buddhista Camino del Dharma. A veces basta un lugar donde podamos sentarnos juntos, guardar silencio y recordar que el Camino también se aprende en comunidad.</p>\n\n      <section class=\"article-references\" aria-labelledby=\"article-references-heading\">\n        <h2 id=\"article-references-heading\">Referencias consultadas</h2>\n        <ol>\n          <li>Holt-Lunstad, J. (2024). La conexión social como prioridad de salud pública. <em>Annual Review of Public Health</em>, 45, 193-210.</li>\n          <li>Organización Mundial de la Salud. (2025). Comisión de la OMS sobre Conexión Social. Ginebra: Organización Mundial de la Salud. Disponible en: <a href=\"https://www.who.int/groups/commission-on-social-connection\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.who.int/groups/commission-on-social-connection <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></li>\n          <li>Organización Mundial de la Salud. (2025). De la soledad a la conexión social: trazando un camino hacia sociedades más saludables. Ginebra: Organización Mundial de la Salud.</li>\n        </ol>\n      </section>",
+            "share": {
+                "whatsapp": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos\nLa Sangha como refugio en tiempos de hiperconexión\n\n{{SHARE_URL}}",
+                "x": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos",
+                "threads": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos\nLa Sangha como refugio en tiempos de hiperconexión"
+            },
             "tags": [],
             "source_path": "static/blog/sangha-refugio-hiperconexion/index.html",
             "authors": [
                 "zheng-gong"
             ],
             "_source_key": "post:sangha-refugio-hiperconexion",
-            "_source_hash": "d12415a18153d46480157bb1d298a7c9a2602685cd8cb9603e59058a789438d8"
+            "_source_hash": "5cc0a3cba18c655893a13ca60429278e6fbf50347a6c3f7bbdb6849eed30f7cb"
         }
     ],
     "blog_authors": [

@@ -35,8 +35,10 @@ final class Cdd_Core_CLI {
 	 * : validate, plan, import, verify or convert.
 	 *
 	 * [--payload=<path>]
-	 * : Path to migration/payload.json (required for every action except
-	 *   convert, which operates on the imported content).
+	 * : Path to migration/payload.json. Required for every action except
+	 *   convert, which operates on the imported content; convert accepts
+	 *   it to seed the published share templates on objects imported
+	 *   before that copy travelled (WU-08A).
 	 *
 	 * [--source-root=<path>]
 	 * : Repo root holding the payload's static tree (default: two levels
@@ -62,6 +64,7 @@ final class Cdd_Core_CLI {
 				array(
 					'confirm_production' => isset( $assoc_args['confirm-production'] ),
 					'backup_evidence'    => (string) ( $assoc_args['backup-evidence'] ?? '' ),
+					'payload'            => self::optional_payload( $assoc_args ),
 				)
 			);
 			$report  = $service->run( isset( $assoc_args['apply'] ) );
@@ -147,6 +150,26 @@ final class Cdd_Core_CLI {
 			WP_CLI::error( $report['error'] );
 		}
 		WP_CLI::success( ! empty( $report['dry_run'] ) ? 'Dry run only — nothing written (use --apply).' : 'Seed applied.' );
+	}
+
+	/**
+	 * The decoded payload when the caller passed one, else an empty array
+	 * (convert works without it; the share seeding is then skipped).
+	 *
+	 * @param array $assoc_args Named args.
+	 */
+	private static function optional_payload( array $assoc_args ): array {
+		$payload_path = (string) ( $assoc_args['payload'] ?? '' );
+		if ( '' === $payload_path ) {
+			return array();
+		}
+		if ( ! file_exists( $payload_path ) ) {
+			WP_CLI::error( 'Unreadable --payload=<path>.' );
+		}
+
+		$payload = json_decode( (string) file_get_contents( $payload_path ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local payload file in a CLI command.
+
+		return is_array( $payload ) ? $payload : array();
 	}
 
 	/**

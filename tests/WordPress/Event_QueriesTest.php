@@ -161,6 +161,62 @@ final class Event_QueriesTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the WU-08A invariant: the «Añadir al calendario» dialog and
+	 * the .ics a visitor downloads describe the same event. Both read one
+	 * calendar payload, so title, dates, description and location can
+	 * never drift apart, and the compact dates are the exclusive-end form
+	 * Google and Outlook expect.
+	 */
+	public function test_calendar_payload_feeds_both_the_dialog_and_the_ics() {
+		$now   = $this->bogota( '2026-09-01 09:00:00' );
+		$event = $this->create_event(
+			'circulos',
+			'2026-09-03',
+			'2026-10-24',
+			array( 'event_place' => 'Bogotá y Cali' )
+		);
+		wp_update_post(
+			array(
+				'ID'           => $event,
+				'post_title'   => 'Círculos de Presencia Consciente',
+				'post_excerpt' => 'Sesión virtual de bienvenida.',
+			)
+		);
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ) );
+
+		$this->assertSame( 'Círculos de Presencia Consciente', $payload['title'] );
+		$this->assertSame( '20260903', $payload['start'] );
+		$this->assertSame( '20261025', $payload['end'], 'Exclusive end, as the published dialog encodes it.' );
+		$this->assertSame( 'Sesión virtual de bienvenida.', $payload['description'] );
+		$this->assertSame( 'Bogotá y Cali', $payload['location'] );
+		$this->assertStringEndsWith( '/eventos/ical/circulos.ics', $payload['ics_url'] );
+		$this->assertSame( 'circulos.ics', $payload['ics_filename'] );
+		$this->assertSame( get_permalink( $event ), $payload['url'] );
+
+		$ics = cdd_core_event_ics_response( 'circulos', $now )['body'];
+
+		$this->assertStringContainsString( 'SUMMARY:' . $payload['title'], $ics );
+		$this->assertStringContainsString( 'DTSTART;VALUE=DATE:' . $payload['start'], $ics );
+		$this->assertStringContainsString( 'DTEND;VALUE=DATE:' . $payload['end'], $ics );
+		$this->assertStringContainsString( 'LOCATION:' . $payload['location'], $ics );
+	}
+
+	/**
+	 * Protects the single-day case: without an end date the exclusive end
+	 * is the day after the start, so a one-day event does not collapse to
+	 * a zero-length calendar entry.
+	 */
+	public function test_calendar_payload_closes_a_single_day_event_on_the_next_day() {
+		$event = $this->create_event( 'un-dia', '2026-09-03', null );
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ) );
+
+		$this->assertSame( '20260903', $payload['start'] );
+		$this->assertSame( '20260904', $payload['end'] );
+	}
+
+	/**
 	 * Creates a published event with dates and extra meta.
 	 *
 	 * @param string      $slug  Post slug.

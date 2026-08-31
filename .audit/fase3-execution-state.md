@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (WU-08 partido en 08A/08B; FABLE5 v2.5) |
+| **Última actualización** | 2026-08-31 (WU-08A implementado y validado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…WU-07 **cerrados**; checkpoint antes de **WU-08A** |
+| **Work unit activo** | Ninguno — WU-00…**WU-08A cerrados**; checkpoint antes de **WU-08B** |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -130,6 +130,33 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
     stylelint verde, conversión aplicada en el entorno local, rutas y render verificados,
     `debug.log` limpio. Matriz § WU-07. QA 4 visual parcial; share/calendario/SEO → WU-08.
 
+- **WU-08A — Comportamiento front: compartir, calendario, audio de mantras** (sesión
+  2026-08-31, sin FABLE5 pegado; ADR 0021/0029/0033/0034/0038, OWN-007/012; TDD honesto:
+  RED documentado en unit (5 E + 8 F) **y** wp-phpunit (2 E + 11 F) antes del primer archivo
+  de comportamiento):
+  - Reanudación verificada: preflight limpio + rerun de los gates (unit 105, phpcs,
+    wp-phpunit 60, plugin 0.4.0 y theme 0.2.0 activos).
+  - Plugin **0.5.0**: `Cdd_Core_Share_Extractor` (las 9 plantillas `<template>` publicadas,
+    normalizadas igual que `share.js`, `{{SHARE_URL}}` intacto); meta editable
+    `share_whatsapp`/`share_x`/`share_threads` en `event` y `post` (REST + saneo de texto
+    plano multilínea); `cdd_core_event_calendar_payload()` como **fuente única** del diálogo
+    y del `.ics` (la ruta ICS se refactorizó para leerla); importador escribe la meta al
+    crear; `migrate convert` gana `practica` (mantras → `core/audio`) y la siembra add-only
+    del copy de compartir con `--payload=<path>`.
+  - Theme **0.3.0**: `share.js` portado literal y `calendar-dialog.js` (mitad restante de
+    `calendar.js`); bloques `camino-del-dharma/evento-acciones` y `entrada-compartir`
+    (13 en total), presentes en `single-event.html`, `single.html` y en la card vigente del
+    listado; scripts encolados solo por el bloque que los usa; filtro `render_block` que
+    devuelve el `aria-label` a los `core/audio` desde el `figcaption` (docs/19).
+  - `migration/payload.json` regenerado: mismos `counts` y misma fuente (VERSION 1.0.35,
+    commit `bfb6dc0`); **el único delta es el campo `share`** (verificado objeto a objeto).
+  - QA: unit 119/119 (586 asserts), wp-phpunit 75/75 (524 asserts), phpcs limpio, stylelint
+    verde, `php -l` OK. Conversión aplicada en el entorno local (4 items; 2.º apply = 0).
+    Verificado en navegador real: ambos diálogos con el copy publicado carácter a carácter,
+    enlaces de Google/Outlook idénticos al `.ics` servido, audio nativo sonando desde la
+    biblioteca con nombre accesible, y **0 bloques inválidos** en el editor de `/practica`.
+    Matriz § WU-08A. QA 4 visual completo y staging siguen `Unverified`.
+
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger **verificada** (WU-06, delta 0). Re-verificar en el freeze pre-corte.
@@ -142,13 +169,21 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 - El entorno local ya usa la estructura definitiva `/blog/%postname%` (aplicada por el
   importador). Contenido demo del install local («Sample Page», «Hello world!») convive con
   el contenido importado; el staging partirá limpio. En staging: `import --apply` →
-  `seed` → `convert --apply` (la conversión es parte del pipeline documentado).
+  `seed` → `convert --payload=<path> --apply` (la conversión es parte del pipeline
+  documentado; el `--payload` solo hace falta si algún objeto se importó antes de que el
+  copy de compartir viajara — en una importación limpia la meta ya viene del importador).
 - QA 4 visual solo parcial (escritorio home/eventos + breakpoint móvil); el pase completo
   (320px, zoom 200%, teclado, lector de pantalla) y staging quedan `Unverified`.
-- Comportamiento pendiente para WU-08: diálogos compartir/añadir al calendario (mitad
-  restante de `calendar.js` + `share.js`), audio de mantras (contenido importado, sin QA
-  específico aún), SEO dinámico (title/meta/OG/JSON-LD, noindex de `/author`, términos de
-  álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos» (OWN-015).
+- Comportamiento pendiente para **WU-08B**: SEO dinámico (title/meta/OG/JSON-LD, noindex de
+  `/author`, términos de álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos»
+  (OWN-015) y el pase completo de docs/19. Los diálogos y el audio ya están (WU-08A).
+- **Delta abierto para el propietario (WU-08A):** el diálogo «Añadir al calendario» y el
+  `.ics` de WordPress describen el **rango completo del evento** (Círculos: 3 sep → 25 oct
+  exclusivo) con `SUMMARY` = título y `LOCATION` = `event_place`. El estático publicado
+  describe solo la **sesión de bienvenida** (3 → 4 sep, «Curso … — sesión de bienvenida»,
+  «Virtual (hora de Colombia)»). Es el modelo de dominio aceptado en WU-06; si el calendario
+  debe seguir apuntando a la bienvenida hace falta un campo editorial nuevo. No se inventó
+  ninguno.
 - **ADR 0041 / OWN-018 (2026-08-31):** Contact Form 7 es elegible en el corte. La revisión
   legal **no** bloquea WU-09 ni el lanzamiento. WU-09 actualiza en WordPress solo los
   párrafos del formulario de `/privacidad`; el HTML estático no se toca.
@@ -190,14 +225,40 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-07. Estados: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-08A. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. Siguiente implementación: **WU-08A** (Opus, sin FABLE5). Después, sesión aparte:
-  **WU-08B** (Opus + FABLE5 §9.5 y §10 solamente). WU-09 (CF7) no espera asesoría legal
-  (ADR 0041 / OWN-018).
+- Ninguno. Siguiente implementación: **WU-08B**, sesión aparte (Opus + FABLE5 §9.5 y §10
+  solamente). WU-09 (CF7) no espera asesoría legal (ADR 0041 / OWN-018).
+
+## Archivos cambiados en WU-08A
+
+- Tests nuevos/ampliados (RED antes de la implementación): `tests/Unit/Theme_BehaviorTest.php`
+  y `tests/WordPress/Share_MetaTest.php` (nuevos); ampliados `tests/Unit/Event_ExtractorTest.php`,
+  `tests/Unit/Blog_ExtractorTest.php`, `tests/Unit/Content_ConverterTest.php`,
+  `tests/WordPress/Event_QueriesTest.php`, `tests/WordPress/ThemeRenderTest.php`,
+  `tests/WordPress/ConvertTest.php`, `tests/WordPress/ImporterTest.php`.
+- Plugin `camino-del-dharma-core` 0.4.0 → **0.5.0**:
+  `includes/migration/class-cdd-core-share-extractor.php` (nuevo), `includes/meta.php`
+  (meta `share_*` + saneo), `includes/events.php` (`cdd_core_event_calendar_payload`, ruta
+  `.ics` refactorizada para leerla), `includes/migration/class-cdd-core-event-extractor.php`,
+  `class-cdd-core-blog-extractor.php`, `class-cdd-core-importer.php` (`share_meta`),
+  `class-cdd-core-content-converter.php` (`convert_practica`),
+  `class-cdd-core-convert-service.php` (paso `practica` + siembra de share),
+  `class-cdd-core-cli.php` (`--payload` opcional en convert), bootstrap.
+- Theme `camino-del-dharma` 0.2.0 → **0.3.0**: `assets/js/share.js` y
+  `assets/js/calendar-dialog.js` (nuevos, porte literal), `assets/js/calendar-tooltips.js`
+  (cabecera), `inc/blocks.php` (2 bloques, encolado condicional, filtro `render_block` del
+  audio), `inc/class-camino-del-dharma-renderers.php` (acciones de evento, compartir de
+  entrada, plantillas de mensaje), `templates/single-event.html`, `templates/single.html`,
+  `style.css`.
+- `migration/payload.json` regenerado (delta = campo `share`).
+- Docs: `docs/03-wordpress-content-model.md`, `docs/contrato-migracion-static-wordpress.md`,
+  `docs/matriz-migracion-static-wordpress.md`, `docs/migracion-static-wordpress.md`, READMEs
+  de plugin y theme, `CLAUDE.md`, `AGENTS.md`, `CHANGELOG.md`,
+  `.audit/fase3-validation-matrix.md`, este archivo.
 
 ## Archivos cambiados en la sesión de gobernanza (ADR 0041, 2026-08-31)
 
@@ -242,26 +303,26 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.4.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.2.0,
-vistas reales). Contenido importado (payload 1.0.35/`bfb6dc0`) **y convertido** por
-`wp cdd-core migrate convert --apply` (inicio con bloques dinámicos y `<picture>`
-desenvueltos; galeria con 3 galerías nativas; comunidad con enlaces OWN-016). Permalinks
+**activo** (v0.5.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.3.0,
+vistas reales + comportamiento). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
+convertido** por `wp cdd-core migrate convert --payload=/repo/migration/payload.json --apply`
+(inicio con bloques dinámicos y `<picture>` desenvueltos; galeria con 3 galerías nativas;
+comunidad con enlaces OWN-016; practica con 2 `core/audio` nativos; copy de compartir
+sembrado en el evento vigente y los 2 posts). Permalinks
 `/blog/%postname%`; front page `inicio`, posts page `blog`. Contenido demo del install
 («Sample Page», «Hello world!») sigue presente; el staging partirá limpio. El harness
 efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-07 está cerrado. WU-08 está **partido** (FABLE5 v2.5):
+WU-08A está cerrado (checkpoint alcanzado; sin push ni despliegue).
 
-1. **WU-08A — comportamiento front** (Claude 4.6 Opus, **sin** pegar FABLE5): diálogos
-   Compartir y Añadir al calendario (portar `share.js` + la mitad restante de `calendar.js`),
-   audio de mantras en `/practica`. TDD (ADR 0038). Parar en el checkpoint 08A.
-2. **WU-08B — SEO, redirects, OWN-015, a11y** (Claude 4.6 Opus, **sesión nueva**): pegar el
-   resume corto **y** FABLE5 **§9.5 + §10 únicamente** (no el archivo entero). Title/meta/OG/
-   JSON-LD, `noindex,follow`, redirects del `.htaccess`, «Eliminar huérfanos», pase docs/19.
+**WU-08B — SEO, redirects, OWN-015, a11y** (Claude 4.6 Opus, **sesión nueva**): pegar el
+resume corto **y** FABLE5 **§9.5 + §10 únicamente** (no el archivo entero). Title/meta/OG/
+JSON-LD, `noindex,follow`, redirects del `.htaccess`, «Eliminar huérfanos», pase docs/19.
 
-No mezclar 08A y 08B en el mismo chat. WU-09 queda después, sin gate jurídico.
+WU-09 (Contact Form 7 + párrafos del formulario en `/privacidad`) queda después, sin gate
+jurídico (ADR 0041 / OWN-018).
 
 ## Procedimiento de reanudación
 

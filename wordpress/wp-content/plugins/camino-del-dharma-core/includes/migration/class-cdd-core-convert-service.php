@@ -15,7 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Runs the convert pass over the three documented pages.
+ * Runs the convert pass over the documented pages and, when a payload is
+ * supplied, seeds the published share templates (WU-08A).
  */
 final class Cdd_Core_Convert_Service {
 
@@ -29,7 +30,8 @@ final class Cdd_Core_Convert_Service {
 	/**
 	 * Constructor.
 	 *
-	 * @param array $options environment / confirm_production / backup_evidence.
+	 * @param array $options environment / confirm_production /
+	 *                       backup_evidence / payload.
 	 */
 	public function __construct( array $options = array() ) {
 		$this->options = array_merge(
@@ -37,6 +39,7 @@ final class Cdd_Core_Convert_Service {
 				'environment'        => wp_get_environment_type(),
 				'confirm_production' => false,
 				'backup_evidence'    => '',
+				'payload'            => array(),
 			),
 			$options
 		);
@@ -63,7 +66,7 @@ final class Cdd_Core_Convert_Service {
 
 		$converter = new Cdd_Core_Content_Converter();
 
-		foreach ( array( 'inicio', 'galeria', 'comunidad' ) as $slug ) {
+		foreach ( array( 'inicio', 'galeria', 'comunidad', 'practica' ) as $slug ) {
 			$page = get_page_by_path( $slug, OBJECT, 'page' );
 			if ( ! $page instanceof WP_Post ) {
 				continue;
@@ -75,6 +78,9 @@ final class Cdd_Core_Convert_Service {
 					break;
 				case 'galeria':
 					$converted = $converter->convert_galeria( $page->post_content, $this->albums() );
+					break;
+				case 'practica':
+					$converted = $converter->convert_practica( $page->post_content, $this->audio_media_map( $page->post_content ) );
 					break;
 				default:
 					$converted = $converter->convert_comunidad( $page->post_content );
@@ -98,7 +104,118 @@ final class Cdd_Core_Convert_Service {
 			$report['converted'][] = $slug;
 		}
 
+		$this->seed_share_templates( $apply, $report );
+
 		return $report;
+	}
+
+	/**
+	 * Seeds the published share message templates as meta on the objects
+	 * the importer already created (WU-08A). A fresh import writes them
+	 * on create; this pass is what converges an environment imported
+	 * before the templates travelled. Add-only by construction: a key
+	 * that already exists — including one an editor emptied on purpose —
+	 * is never rewritten (ADR 0033).
+	 *
+	 * @param bool  $apply  Write the meta; false = dry run.
+	 * @param array $report Report to extend, by reference.
+	 */
+	private function seed_share_templates( bool $apply, array &$report ) {
+		$payload = (array) $this->options['payload'];
+
+		foreach ( array( 'events', 'posts' ) as $collection ) {
+			foreach ( (array) ( $payload[ $collection ] ?? array() ) as $object ) {
+				$share = Cdd_Core_Importer::share_meta( $object );
+				if ( empty( $share ) ) {
+					continue;
+				}
+
+				$post_id = $this->post_by_source_key( (string) ( $object['_source_key'] ?? '' ) );
+				if ( null === $post_id ) {
+					continue;
+				}
+
+				$pending = array();
+				foreach ( $share as $meta_key => $value ) {
+					if ( ! metadata_exists( 'post', $post_id, $meta_key ) ) {
+						$pending[ $meta_key ] = $value;
+					}
+				}
+				if ( empty( $pending ) ) {
+					continue;
+				}
+
+				$item = 'share:' . $object['_source_key'];
+				if ( ! $apply ) {
+					$report['pending'][] = $item;
+					continue;
+				}
+
+				foreach ( $pending as $meta_key => $value ) {
+					add_post_meta( $post_id, $meta_key, $value, true );
+				}
+				$report['converted'][] = $item;
+			}
+		}
+	}
+
+	/**
+	 * The imported post carrying one payload source key, or null.
+	 *
+	 * @param string $source_key Payload _source_key.
+	 */
+	private function post_by_source_key( string $source_key ): ?int {
+		if ( '' === $source_key ) {
+			return null;
+		}
+
+		$posts = get_posts(
+			array(
+				'post_type'   => 'any',
+				'post_status' => 'any',
+				'numberposts' => 1,
+				'meta_key'    => Cdd_Core_Importer::SOURCE_KEY_META, // phpcs:ignore WordPress.DB.SlowMetaQuery.slow_db_query -- migration bookkeeping lookup, CLI only.
+				'meta_value'  => $source_key, // phpcs:ignore WordPress.DB.SlowMetaQuery.slow_db_query -- migration bookkeeping lookup, CLI only.
+			)
+		);
+
+		return empty( $posts ) ? null : (int) $posts[0]->ID;
+	}
+
+	/**
+	 * Maps each audio src the content references to the imported
+	 * attachment behind it, matched by file name. Players whose file was
+	 * never imported are simply absent, and stay as published.
+	 *
+	 * @param string $content Page content.
+	 */
+	private function audio_media_map( string $content ): array {
+		if ( ! preg_match_all( '#<source[^>]+src="([^"]+\.mp3)"#', $content, $matches, PREG_SET_ORDER ) ) {
+			return array();
+		}
+
+		$map = array();
+		foreach ( $matches as $match ) {
+			$name        = basename( $match[1], '.mp3' );
+			$attachments = get_posts(
+				array(
+					'post_type'   => 'attachment',
+					'post_status' => 'inherit',
+					'name'        => $name,
+					'numberposts' => 1,
+				)
+			);
+			if ( empty( $attachments ) ) {
+				continue;
+			}
+
+			$map[ $match[1] ] = array(
+				'id'  => (int) $attachments[0]->ID,
+				'url' => (string) wp_get_attachment_url( $attachments[0]->ID ),
+			);
+		}
+
+		return $map;
 	}
 
 	/**

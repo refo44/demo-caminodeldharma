@@ -160,6 +160,60 @@ final class Content_ConverterTest extends TestCase {
 	}
 
 	/**
+	 * Protects the mantra players (WU-08A): the two hand-written audio
+	 * figures of /practica become native core/audio blocks bound to the
+	 * imported Library attachments, keeping the published caption, the
+	 * preload hint and the .mantra-audio hook the stylesheet paints.
+	 */
+	public function test_practica_converts_the_mantra_players_to_native_audio_blocks() {
+		$original  = self::page( 'practica' );
+		$converted = ( new Cdd_Core_Content_Converter() )->convert_practica(
+			$original,
+			array(
+				'/assets/audio/amitabha.mp3'               => array(
+					'id'  => 41,
+					'url' => 'https://example.test/wp-content/uploads/2026/08/amitabha.mp3',
+				),
+				'/assets/audio/namo-guan-shi-yin-pusa.mp3' => array(
+					'id'  => 42,
+					'url' => 'https://example.test/wp-content/uploads/2026/08/namo-guan-shi-yin-pusa.mp3',
+				),
+			)
+		);
+
+		$this->assertIsString( $converted );
+		$this->assertStringNotContainsString( '<figure class="mantra-audio">', $converted );
+		$this->assertStringNotContainsString( '</source>', $converted );
+		$this->assertStringContainsString( '<!-- wp:audio {"id":41,"className":"mantra-audio","preload":"metadata"} -->', $converted );
+		$this->assertStringContainsString(
+			'<figure class="wp-block-audio mantra-audio"><audio controls src="https://example.test/wp-content/uploads/2026/08/amitabha.mp3" preload="metadata"></audio>'
+			. '<figcaption class="wp-element-caption">Recitación de Amitābha.</figcaption></figure>',
+			$converted
+		);
+		$this->assertStringContainsString( '"id":42', $converted );
+		$this->assertStringContainsString( 'Recitación de Guān Shì Yīn Púsà.', $converted );
+
+		// The surrounding published copy is untouched.
+		$this->assertStringContainsString( 'Mantras para la práctica', $converted );
+		$this->assertStringContainsString( 'Luz Infinita (o Luz Inconmensurable)', $converted );
+
+		// Idempotent: no handmade player left to convert.
+		$this->assertNull( ( new Cdd_Core_Content_Converter() )->convert_practica( $converted, array() ) );
+	}
+
+	/**
+	 * Protects the honest no-op: without an imported attachment for a
+	 * player, the published markup stays exactly as it is rather than
+	 * becoming a block pointing at a static path that WordPress does not
+	 * serve.
+	 */
+	public function test_practica_leaves_players_without_an_imported_attachment_alone() {
+		$original = self::page( 'practica' );
+
+		$this->assertNull( ( new Cdd_Core_Content_Converter() )->convert_practica( $original, array() ) );
+	}
+
+	/**
 	 * Protects OWN-016: /comunidad gains links to both blog_author profiles
 	 * without replacing a single word of its published biography.
 	 */
