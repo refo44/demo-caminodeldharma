@@ -7,7 +7,7 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 | --- | --- |
 | **Última actualización** | 2026-08-31 |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | WU-01 — Reorganización monorepo (en ejecución) |
+| **Work unit activo** | Ninguno — WU-00 y WU-01 **cerrados**; frontera obligatoria antes de WU-02 (ADR 0023) |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -15,11 +15,17 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Trabajo completado
 
-- **WU-00 — Preflight y harness durable**: preflight ejecutado (repo limpio en `main`,
-  Fase 3 no iniciada, `static/` inexistente, `wordpress/` solo READMEs placeholder,
-  `.audit/` sin artefactos de Fase 3). Rama y tag creados. Artefactos durables creados:
-  este archivo, `.audit/fase3-validation-matrix.md`,
+- **WU-00 — Preflight y harness durable** (commit `5088e32`): preflight ejecutado (repo limpio
+  en `main`, Fase 3 no iniciada). Rama `fase3-wordpress` y tag `fase3-pre-reorg-v1.0.35`
+  creados. Artefactos durables: este archivo, `.audit/fase3-validation-matrix.md`,
   `docs/operations/wordpress-manual-deployment.md`, `docs/operations/third-party-plugins.md`.
+- **WU-01 — Reorganización monorepo** (commits `bfb6dc0` + tooling): superficie desplegable
+  (receta ZIP, 238 archivos) movida raíz → `static/` con renames 100%; PDF OWN-002 archivado en
+  `docs/archive/recitacion-practica-comida/` (nunca en `static/`). Tooling actualizado:
+  `package.json` (lint/build CSS), `.stylelintignore`, `scripts/*.sh`, `scripts/build-docx/build.js`,
+  README (receta ZIP desde `static/`), CLAUDE.md, AGENTS.md,
+  `.cursor/rules/wordpress-migration-safety.mdc`, `docs/13` v2.5, ledger de migración, CHANGELOG
+  (Unreleased). QA gate: ver matriz WU-01 — todo Pass (local); sin despliegue.
 
 ## Riesgos y hallazgos activos
 
@@ -68,10 +74,12 @@ Se actualiza al cierre de cada work unit (ver historial de `fase3-wordpress`).
 
 ## Próxima acción exacta
 
-1. Si WU-01 no está commiteado: completar los dos commits de WU-01 y pasar el gate QA
-   (ver matriz, filas WU-01).
-2. Si WU-01 está cerrado: **detenerse**. La siguiente sesión ejecuta **solo WU-02**
-   (entorno Docker, ADR 0023, `docs/docker-wordpress-playbook.md`), tras rerun del preflight.
+WU-01 está cerrado. **La sesión actual se detiene aquí** (frontera obligatoria ADR 0023).
+La siguiente sesión: rerun del preflight (§ Reanudación), luego implementar y validar **solo
+WU-02** — entorno local Docker según ADR 0023 y `docs/docker-wordpress-playbook.md`
+(MariaDB 11.8 + WordPress PHP 8.3 + wpcli; `.env` gitignored + `.env.example`;
+`WP_ENVIRONMENT_TYPE=local`) — actualizar este archivo y detenerse de nuevo antes de
+código de aplicación (WU-03).
 
 ## Procedimiento de reanudación
 

@@ -5,7 +5,7 @@
 
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-GAL="${ROOT}/assets/images/galeria"
+GAL="${ROOT}/static/assets/images/galeria"
 cd "$GAL"
 
 # List files that are NOT already galeria-NN.(jpg|jpeg), sort by name

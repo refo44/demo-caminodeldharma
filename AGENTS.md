@@ -16,8 +16,8 @@ plans, or adding tests.
 | | |
 | --- | --- |
 | **Historical** | Older docs may mention classic PHP templates (`*.php`) or a previous WordPress on this domain (`.htaccess` leftovers). Do not rewrite those as if they were never true. |
-| **Current** | Production is the **live static** site at `https://caminodeldharma.org` (real visitors). HTML at repo root is production data, not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON are REAL PRODUCTION CONTENT. `wordpress/` plugin/theme trees exist as empty placeholders for Sonar (ADR 0038), not as FSE implementation. |
-| **Future** | Fase 3: `static/` + `wordpress/` (ADR 0014). Path: **live static production → FSE block theme** (ADR 0029). No classic PHP theme in between. Plugin `camino-del-dharma-core` (ADR 0024). |
+| **Current** | Production is the **live static** site at `https://caminodeldharma.org` (real visitors). The monorepo reorg (ADR 0014) is done: deployable HTML lives in `static/` and is production data, not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON are REAL PRODUCTION CONTENT. `wordpress/` plugin/theme trees are still README-only; no FSE implementation yet. Fase 3 durable state: `.audit/fase3-execution-state.md`. |
+| **Future** | Rest of Fase 3: **live static production → FSE block theme** (ADR 0029). No classic PHP theme in between. Plugin `camino-del-dharma-core` (ADR 0024). Next work unit: WU-02 local Docker (ADR 0023, separate session). |
 
 ## Canonical content
 

@@ -15,7 +15,7 @@ WordPress y assets.
 
 El layout del repo **evoluciona** según la fase (ADR 0014). No mezclar HTML estático y plantillas del theme en el mismo directorio. No desplegar el ZIP estático sobre un document root WordPress después del corte (ADR 0032).
 
-### 1.1 Fase 2 — Sitio estático en producción (estado actual)
+### 1.1 Fase 2 — Sitio estático en producción (histórico hasta v1.0.35)
 
 ```
 demo-caminodeldharma/
@@ -32,11 +32,14 @@ demo-caminodeldharma/
 └── .sonarcloud.properties      Alcance Sonar: plugin + theme FSE; no el estático
 ```
 
-La **raíz** es el sitio desplegado en Hostinger. Ver README y Fase 4 en `17-orden-implementacion`.
+En Fase 2 la **raíz** era el sitio desplegado en Hostinger. Ver README y Fase 4 en `17-orden-implementacion`.
 
-### 1.2 Fase 3 — Monorepo (static/ + wordpress/)
+### 1.2 Fase 3 — Monorepo (static/ + wordpress/) — **estado actual**
 
-**Primer paso de Fase 3:** mover el sitio estático de la raíz a `static/` (ADR 0014).
+**Primer paso de Fase 3** (ejecutado en WU-01, 2026-08-31): mover el sitio estático de la raíz a
+`static/` (ADR 0014). Excepción registrada: `assets/documents/recitacion-practica-comida.pdf`
+está retirado (OWN-002) y se archivó en `docs/archive/recitacion-practica-comida/`, fuera de la
+superficie desplegable.
 
 ```
 demo-caminodeldharma/
@@ -136,4 +139,4 @@ Geografía oficial por fase: raíz (Fase 2) → monorepo `static/` + `wordpress/
 
 ---
 
-**Versión:** 2.4
+**Versión:** 2.5 — 2026-08-31: reorganización raíz → `static/` ejecutada (Fase 3 WU-01); §1.1 pasa a histórico.

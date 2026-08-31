@@ -8,6 +8,18 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [Unreleased]
+
+### Fase 3 iniciada — WU-00/WU-01 (sin cambio del artefacto desplegado)
+
+Reorganización monorepo (ADR 0014) en la rama `fase3-wordpress`: la superficie desplegable se
+movió de la raíz a `static/` con renames puros; el contenido del ZIP de producción es idéntico,
+solo cambia el directorio desde el que se genera (README actualizado). El PDF retirado por
+OWN-002 (`assets/documents/recitacion-practica-comida.pdf`) quedó archivado en
+`docs/archive/recitacion-practica-comida/`, fuera de la superficie desplegable. Harness durable
+de Fase 3 en `.audit/fase3-execution-state.md` y `.audit/fase3-validation-matrix.md`; runbooks en
+`docs/operations/`. Tag de rollback: `fase3-pre-reorg-v1.0.35`.
+
 ## [1.0.35] - 2026-08-29
 
 ### `/privacidad` — aviso de privacidad provisional

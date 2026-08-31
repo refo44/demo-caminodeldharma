@@ -8,8 +8,10 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 
 **No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
 
-**CURRENT STATE:** Fase 3 no iniciada. No existe `static/`. `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). Las filas de abajo registran
-cambios del estático en producción y deudas hacia el theme futuro.
+**CURRENT STATE:** Fase 3 **iniciada** (2026-08-31, WU-00/WU-01). El sitio desplegable vive en
+`static/` (reorg ADR 0014 ejecutada, rama `fase3-wordpress`). `wordpress/` sigue con árboles
+placeholder (README, sin código). Estado durable: `.audit/fase3-execution-state.md`. Las filas de
+abajo registran cambios del estático en producción y deudas hacia el theme futuro.
 
 Decisiones del propietario (**Fase 3 cerrada** v1.20; no reabrir OWN-* sin decisión nueva).
 Fases posteriores (`POST-*`) no entran en el corte:
@@ -39,7 +41,7 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 | 2026-07-21 | `normalize.css` incorporado a `main.css`; `main.min.css` vía `npm run build:css`; MarloweEscapade subsetada | Sí | Pendiente portar al theme (encolado de `main.min.css` y subset de la fuente) | Pendiente (WordPress) |
 | 2026-07-31 | Formulario de contacto (FUNC-001/TASK-0003): decidido resolverlo con **Contact Form 7** en el theme WordPress | **No** — `contacto/index.html` conserva el `<form action="#">` no funcional junto a los CTAs de WhatsApp/correo, por decisión expresa de no tocar el estático | Pendiente (WordPress), a implementar al iniciar Fase 3 | Pendiente (WordPress) |
 | 2026-08-29 | `/privacidad` publicada (aviso provisional; ADR 0039). Pie de todas las páginas. CF7 sigue gated | Sí | Page `privacidad` + enlace en `parts/footer.html`; importar HTML live | Completo (static); pendiente WordPress |
-| — | *(añadir filas al iniciar Fase 3)* | — | — | — |
+| 2026-08-31 | **Reorg monorepo (WU-01, ADR 0014):** superficie desplegable movida raíz → `static/` (renames puros, 0 cambios de contenido/URLs). PDF retirado (OWN-002) archivado en `docs/archive/recitacion-practica-comida/`, fuera del ZIP. Tooling actualizado (package.json, stylelint, scripts, README) | Sí (sin despliegue; próximo ZIP se genera desde `static/`) | No aplica (cambio de repo, no de contenido) | Completo (repo) |
 
 **Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`, `Cerrado`.
 

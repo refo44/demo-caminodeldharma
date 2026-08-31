@@ -22,15 +22,16 @@ QA 3 = integración local · QA 4 = manual + staging (ver
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
-| Solo superficie desplegable movida | `git ls-files static/` vs receta ZIP | pendiente | Unverified |
-| Renames preservados | `git log --stat -M` del commit de movimiento | pendiente | Unverified |
-| Nada perdido ni duplicado | conteo de archivos trazados antes/después idéntico | pendiente | Unverified |
-| `npm run lint:css` verde con nuevas rutas | ejecución local | pendiente | Unverified |
-| `npm run build:css` regenera `static/assets/css/main.min.css` | ejecución local | pendiente | Unverified |
-| `git diff --check` sin whitespace errors | ejecución local | pendiente | Unverified |
-| Docs/README actualizados a layout Fase 3 | revisión de diff | pendiente | Unverified |
-| ZIP empaquetable desde `static/` | dry-run del comando ZIP (listado, sin desplegar) | pendiente | Unverified |
-| URLs públicas sin cambio | el movimiento no toca contenido ni rutas; sin deploy | N/A (sin despliegue) | Unverified |
+| Solo superficie desplegable movida | `git ls-files static/` = 238 archivos, exactamente la receta ZIP; PDF OWN-002 excluido a `docs/archive/` | OK | Pass (local) |
+| Renames preservados | commit `bfb6dc0`: 240 cambios, todos rename 100% | OK | Pass (local) |
+| Nada perdido ni duplicado | 532 archivos trazados antes y después del movimiento | OK | Pass (local) |
+| `npm run lint:css` verde con nuevas rutas | ejecutado 2026-08-31, exit 0 | OK | Pass (local) |
+| `npm run build:css` regenera `static/assets/css/main.min.css` | ejecutado; md5 idéntico antes/después (build estable, sin drift) | OK | Pass (local) |
+| `git diff --check` sin whitespace errors | ejecutado, limpio | OK | Pass (local) |
+| Docs/README actualizados a layout Fase 3 | README, CLAUDE.md, AGENTS.md, regla cursor, docs/13, ledger, CHANGELOG | OK | Pass (local) |
+| ZIP empaquetable desde `static/` | `zip -sf` dry-run desde `static/`: 277 entradas, sin desplegar | OK | Pass (local) |
+| URLs públicas sin cambio | renames de repo; contenido HTML intacto; **sin deploy en esta sesión** | Sin cambio | Pass (local) |
+| Comportamiento en Hostinger tras próximo deploy | requiere despliegue real | — | Unverified |
 
 ## WU-02 — Entorno Docker local (sesión separada, ADR 0023)
 

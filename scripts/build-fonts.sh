@@ -11,7 +11,7 @@
 
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-FONT_DIR="${ROOT}/assets/fonts/marlowe-escapade"
+FONT_DIR="${ROOT}/static/assets/fonts/marlowe-escapade"
 SOURCE="${FONT_DIR}/marlowe-escapade.woff2"
 OUTPUT="${FONT_DIR}/marlowe-escapade-subset.woff2"
 SUBSET_TEXT="Camino del Dharma"

@@ -6,7 +6,7 @@
 
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-IMAGES_DIR="${ROOT}/assets/images"
+IMAGES_DIR="${ROOT}/static/assets/images"
 MAX_PX=1600
 JPEG_QUALITY=85
 
