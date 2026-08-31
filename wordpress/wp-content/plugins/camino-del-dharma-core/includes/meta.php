@@ -136,14 +136,17 @@ function cdd_core_sanitize_event_date( $value ): string {
 }
 
 /**
- * Sanitizes the modality against the doc 03 list.
+ * Sanitizes the modality as the published free-text copy (plain text,
+ * no markup). The doc 03 select (presencial/virtual/híbrido) does not
+ * fit the descriptive modalities production publishes — «Híbrida —
+ * bienvenida, orientación, seis sesiones virtuales y un encuentro
+ * presencial» — and OWN-007 makes that copy authoritative (WU-07;
+ * discrepancy recorded in the execution state).
  *
  * @param mixed $value Raw meta value.
  */
 function cdd_core_sanitize_event_modality( $value ): string {
-	$allowed = array( 'presencial', 'virtual', 'híbrido' );
-
-	return in_array( $value, $allowed, true ) ? $value : '';
+	return is_string( $value ) ? sanitize_text_field( $value ) : '';
 }
 
 /**

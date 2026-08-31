@@ -32,10 +32,11 @@ final class Cdd_Core_CLI {
 	 * ## OPTIONS
 	 *
 	 * <action>
-	 * : validate, plan, import or verify.
+	 * : validate, plan, import, verify or convert.
 	 *
-	 * --payload=<path>
-	 * : Path to migration/payload.json.
+	 * [--payload=<path>]
+	 * : Path to migration/payload.json (required for every action except
+	 *   convert, which operates on the imported content).
 	 *
 	 * [--source-root=<path>]
 	 * : Repo root holding the payload's static tree (default: two levels
@@ -54,7 +55,25 @@ final class Cdd_Core_CLI {
 	 * @param array $assoc_args Named args.
 	 */
 	public static function migrate( array $args, array $assoc_args ) {
-		$action   = $args[0] ?? '';
+		$action = $args[0] ?? '';
+
+		if ( 'convert' === $action ) {
+			$service = new Cdd_Core_Convert_Service(
+				array(
+					'confirm_production' => isset( $assoc_args['confirm-production'] ),
+					'backup_evidence'    => (string) ( $assoc_args['backup-evidence'] ?? '' ),
+				)
+			);
+			$report  = $service->run( isset( $assoc_args['apply'] ) );
+			self::render_json( $report );
+			if ( isset( $report['error'] ) ) {
+				WP_CLI::error( $report['error'] );
+			}
+			WP_CLI::success( ! empty( $report['dry_run'] ) ? 'Dry run only — nothing written (use --apply).' : 'Conversion applied.' );
+
+			return;
+		}
+
 		$importer = self::importer( $assoc_args );
 
 		switch ( $action ) {

@@ -1,10 +1,2861 @@
 /*
   Camino del Dharma (theme FSE) — complementary stylesheet (ADR 0029, docs/12 §7)
-  Scope: layout de componentes, ritmo de lectura, estados de foco y accesibilidad —
-  todo lo que Global Styles no expresa. Los tokens de diseño NO viven aquí:
-  theme.json es la fuente de verdad y este archivo solo consume los presets
-  (var(--wp--preset--*), var(--wp--custom--*)). Sin hex directos, sin !important,
-  sin frameworks (se mantiene lo sustantivo de ADR 0009).
-  El contenido llega con las plantillas reales (WU-07+); el scaffold solo fija
-  el contrato de encolado.
+  Ported from static/assets/css/main.css (VERSION 1.0.35) for WU-07: same
+  components, reading rhythm, focus states and responsive behavior as the
+  published production site (OWN-007). Design tokens do NOT live here:
+  theme.json is the source of truth and this file only consumes the
+  generated presets/custom properties (var(--wp--preset--*),
+  var(--wp--custom--*), var(--wp--style--global--*)). Fonts are declared
+  as theme.json fontFace entries. The final section adapts the same
+  components to WordPress block markup (wp-block-* wrappers) and adds the
+  WU-07 compact past-event card (doc 03 §3 «Densidad»).
 */
+
+/* ==========================================================================
+   0.0 Normalize (inlined from normalize.css v8.0.1 to avoid a second
+   render-blocking stylesheet request; must stay first in the cascade)
+   ========================================================================== */
+
+/* stylelint-disable property-no-vendor-prefix, font-family-no-duplicate-names -- vendor file, kept verbatim */
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/* stylelint-enable property-no-vendor-prefix, font-family-no-duplicate-names */
+
+/* ==========================================================================
+   2. Base / reset mínimo
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- intentional override of normalize base */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- intentional override of normalize base */
+body {
+  margin: 0;
+  padding-top: var(--wp--custom--header-offset);
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 1rem;
+  line-height: var(--wp--custom--line-height--body);
+  color: var(--wp--custom--color--text);
+  background-color: var(--wp--custom--color--bg);
+  position: relative;
+}
+
+/* Logo as subtle background texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../images/logo.png");
+  background-repeat: repeat;
+  background-size: 140px auto;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- intentional override of normalize base */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- intentional override of normalize base */
+a {
+  color: var(--wp--custom--color--link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--wp--custom--color--link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   3. Layout
+   ========================================================================== */
+.layout-container {
+  width: 100%;
+  max-width: var(--wp--style--global--wide-size);
+  margin-inline: auto;
+  padding-inline: var(--wp--custom--gutter);
+}
+
+.read-width {
+  max-width: var(--wp--style--global--content-size);
+}
+
+.page-main {
+  padding-block: var(--wp--preset--spacing--xl);
+  scroll-margin-top: var(--wp--custom--header-offset);
+}
+
+@media (width <= 767px) {
+  .page-main {
+    padding-top: var(--wp--preset--spacing--sm);
+  }
+}
+
+.section-gap {
+  margin-bottom: var(--wp--custom--section-gap);
+}
+
+.section-gap:last-child {
+  margin-bottom: 0;
+}
+
+/* Grid for multi-column blocks (e.g. Cómo practicamos, Caminos) */
+.grid-auto {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+}
+
+@media (width >= 768px) {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  }
+}
+
+@media (width >= 1024px) {
+  .grid-auto.grid-three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   4. Components
+   ========================================================================== */
+
+/* --- Skip link --- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--wp--custom--gutter);
+  z-index: 100;
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+  background: var(--wp--custom--color--primary);
+  color: var(--wp--custom--color--text-on-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  z-index: 1001; /* above fixed header */
+  outline: 2px solid var(--wp--custom--color--text-on-dark);
+  outline-offset: 2px;
+}
+
+/* --- Site header --- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--wp--custom--color--header-bg);
+  color: var(--wp--custom--color--text-on-dark);
+}
+
+.site-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus-visible {
+  color: var(--wp--custom--color--text-on-dark);
+  opacity: 0.9;
+}
+
+.site-header .layout-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--md);
+  padding-block: var(--wp--preset--spacing--sm);
+  padding-inline: max(var(--wp--custom--gutter), env(safe-area-inset-left, 0px)) max(var(--wp--custom--gutter), env(safe-area-inset-right, 0px));
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--sm);
+  height: 2.75rem;
+  margin-inline-end: var(--wp--preset--spacing--md);
+}
+
+.site-logo img {
+  height: 100%;
+  width: auto;
+}
+
+.site-name {
+  font-family: var(--wp--preset--font-family--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+@media (width >= 768px) {
+  .site-logo {
+    height: 3rem;
+  }
+
+  .site-name {
+    font-size: 1.375rem;
+  }
+}
+
+/* --- Navigation --- */
+.nav-main {
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--wp--custom--color--text-on-dark);
+  border-radius: 4px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: rgb(255 255 255 / 15%);
+  outline: 2px solid var(--wp--custom--color--text-on-dark);
+  outline-offset: 2px;
+}
+
+.nav-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Nav collapses to a hamburger through tablet widths: the 5-item main
+   menu + subnav + logo + language switcher don't fit in one row until
+   the "Large" tier (1280px, see the --container-max note above and
+   docs/14, docs/20 — single responsive system, no per-page grids). */
+@media (width >= 1280px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.nav-menus {
+  display: none;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.nav-menus.is-open {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--wp--custom--color--header-bg);
+  padding: var(--wp--preset--spacing--md);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+@media (width >= 1280px) {
+  .nav-menus,
+  .nav-menus.is-open {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    gap: 2px var(--wp--preset--spacing--sm);
+    background: transparent;
+  }
+}
+
+.nav-menu,
+.nav-sub {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (width >= 1280px) {
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 2px var(--wp--preset--spacing--xs);
+  }
+
+  .nav-sub {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+    padding-top: 2px;
+    border-top: 1px solid rgb(255 255 255 / 25%);
+    font-size: 0.875rem;
+  }
+}
+
+.nav-menu a,
+.nav-sub a {
+  display: flex;
+  align-items: center;
+  padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+  min-height: 44px;
+  padding-block: 0;
+}
+
+/* Header background equals --primary, so the default focus-visible outline
+   (also --primary) is invisible here; override to match .nav-toggle/.lang-btn */
+.nav-menu a:focus-visible,
+.nav-sub a:focus-visible {
+  outline: 2px solid var(--wp--custom--color--text-on-dark);
+  outline-offset: 2px;
+}
+
+@media (width >= 1280px) {
+  .nav-menu a,
+  .nav-sub a {
+    min-height: 36px;
+    padding: var(--wp--preset--spacing--xs);
+  }
+}
+
+/* --- Language switcher (non-functional in this version) --- */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--xs);
+  font-size: 0.9375rem;
+}
+
+.lang-btn {
+  padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+  min-height: 44px;
+  min-width: 44px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.lang-btn:hover,
+.lang-btn:focus-visible {
+  background: rgb(255 255 255 / 15%);
+  outline: 2px solid var(--wp--custom--color--text-on-dark);
+  outline-offset: 2px;
+}
+
+.lang-btn[aria-current="true"] {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.lang-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lang-btn:disabled:hover,
+.lang-btn:disabled:focus-visible {
+  background: transparent;
+  outline: none;
+}
+
+.lang-switcher-sep {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Below the large nav tier, logo + hamburger + language switcher share one row.
+   Hide the wordmark so ES|EN is never clipped on narrow phones (e.g. ~360px). */
+@media (width <= 1279px) {
+  .site-name {
+    display: none;
+  }
+
+  .site-logo {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-inline-end: 0;
+  }
+
+  .nav-main,
+  .lang-switcher {
+    flex-shrink: 0;
+  }
+}
+
+@media (width <= 479px) {
+  .site-header .layout-container {
+    gap: var(--wp--preset--spacing--xs);
+    padding-inline: max(var(--wp--preset--spacing--sm), env(safe-area-inset-left, 0px)) max(var(--wp--preset--spacing--sm), env(safe-area-inset-right, 0px));
+  }
+
+  .lang-switcher {
+    gap: 0.125rem;
+  }
+
+  .lang-btn {
+    min-width: 2.75rem;
+    padding-inline: 0.375rem;
+  }
+}
+
+/* --- Lucide-style icons (inline SVG) --- */
+.lucide-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: -0.25em;
+  stroke: currentcolor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lucide-icon--sm {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.2em;
+}
+
+.btn .lucide-icon {
+  margin-right: var(--wp--preset--spacing--xs);
+  vertical-align: -0.35em;
+}
+
+/* Decorative large icons in body (styling only) */
+.deco-icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--wp--preset--spacing--lg) 0;
+  pointer-events: none;
+}
+
+.lucide-icon--deco {
+  width: 4rem;
+  height: 4rem;
+  opacity: 0.35;
+  stroke: var(--wp--preset--color--brand-1);
+}
+
+.lucide-icon--deco-lg {
+  width: 5rem;
+  height: 5rem;
+  opacity: 0.28;
+  stroke: var(--wp--preset--color--brand-1);
+}
+
+/* --- Figures and media (20: tipografía primero; imagen apoya) --- */
+.section-figure {
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.section-figure img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.section-figure figcaption {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin-top: var(--wp--preset--spacing--xs);
+}
+
+/* --- Video block (15: preload metadata, no autoplay) --- */
+.media-block {
+  margin-bottom: var(--wp--custom--section-gap);
+}
+
+.media-block video {
+  width: 100%;
+  max-width: 50rem;
+  border-radius: 4px;
+  background: var(--wp--preset--color--brand-4);
+}
+
+.media-block .video-caption {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin-top: var(--wp--preset--spacing--xs);
+}
+
+/* Vimeo: help text as tooltip on hover */
+.media-block--vimeo {
+  position: relative;
+}
+
+.video-embed-help {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  font-size: 0.8125rem;
+  color: var(--wp--custom--color--text);
+  margin: 0;
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+  background: var(--wp--custom--color--surface);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.media-block--vimeo:hover .video-embed-help,
+.media-block--vimeo:focus-within .video-embed-help {
+  opacity: 1;
+  visibility: visible;
+}
+
+.practica-videos-more {
+  margin-top: var(--wp--preset--spacing--lg);
+  margin-bottom: 0;
+}
+
+/* --- Home: videos preview (mirrors home-blog pattern) --- */
+.home-videos-intro {
+  margin-bottom: var(--wp--preset--spacing--lg);
+  color: var(--wp--custom--color--text-muted);
+}
+
+.home-videos-grid {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  grid-template-columns: 1fr;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+@media (width >= 768px) {
+  .home-videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.home-videos-grid .media-block {
+  margin-bottom: 0;
+}
+
+.home-videos-more {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.home-videos-more a {
+  color: var(--wp--custom--color--link);
+}
+
+.practica-videos-more a {
+  color: var(--wp--custom--color--link);
+}
+
+.page-back {
+  margin-bottom: var(--wp--preset--spacing--md);
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.page-back a {
+  color: var(--wp--custom--color--link);
+}
+
+.embed-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin-bottom: var(--wp--preset--spacing--md);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--wp--preset--color--brand-4);
+}
+
+.embed-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Gallery grid --- */
+.gallery-albums {
+  display: grid;
+  gap: var(--wp--custom--section-gap);
+  margin-block: var(--wp--custom--section-gap);
+}
+
+.gallery-album {
+  scroll-margin-top: var(--wp--custom--header-offset);
+}
+
+.gallery-album + .gallery-album {
+  padding-top: var(--wp--custom--section-gap);
+  border-top: 1px solid var(--wp--custom--color--border);
+}
+
+.gallery-album h2 {
+  margin-top: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (width >= 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-grid img,
+.gallery-row img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- Gallery pagination --- */
+.gallery-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--md);
+  margin-top: var(--wp--preset--spacing--xl);
+  padding-block: var(--wp--preset--spacing--lg);
+}
+
+.gallery-pagination-prev,
+.gallery-pagination-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--wp--custom--color--text-muted);
+  font-weight: 500;
+}
+
+.gallery-pagination-prev:hover,
+.gallery-pagination-next:hover {
+  color: var(--wp--custom--color--link);
+  text-decoration: underline;
+}
+
+.gallery-pagination-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.gallery-pagination-info {
+  color: var(--wp--custom--color--text-muted);
+  font-size: 0.9375rem;
+}
+
+.gallery-pagination-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--xs);
+  justify-content: center;
+}
+
+.gallery-pagination-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--sm);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--wp--custom--color--link);
+  font-weight: 500;
+}
+
+.gallery-pagination-num:hover {
+  text-decoration: underline;
+}
+
+.gallery-pagination-num.is-current {
+  background-color: var(--wp--preset--color--brand-2-deep);
+  color: var(--wp--custom--color--text-on-dark);
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.gallery-row {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (width >= 768px) {
+  .gallery-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- Linaje --- */
+.linaje-tradition-focus {
+  margin: 0 0 var(--wp--preset--spacing--md);
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.linaje-masters {
+  margin: var(--wp--preset--spacing--md) 0 var(--wp--preset--spacing--lg);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--wp--custom--color--border);
+}
+
+.linaje-masters li {
+  padding: var(--wp--preset--spacing--sm) 0;
+  border-bottom: 1px solid var(--wp--custom--color--border);
+  font-size: 0.9375rem;
+  line-height: var(--wp--custom--line-height--body);
+}
+
+/* --- Linaje: vertical timeline (legacy) --- */
+.linaje-timeline-wrap {
+  margin-top: var(--wp--preset--spacing--xl);
+}
+
+.linaje-timeline-intro {
+  margin-bottom: var(--wp--preset--spacing--lg);
+  color: var(--wp--custom--color--text-muted);
+}
+
+.linaje-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: var(--wp--preset--spacing--lg);
+  border-left: 2px solid var(--wp--custom--color--border);
+  position: relative;
+}
+
+.linaje-timeline-item {
+  position: relative;
+  padding-bottom: var(--wp--preset--spacing--xl);
+}
+
+.linaje-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.linaje-timeline-marker {
+  position: absolute;
+  left: calc(-1 * (var(--wp--preset--spacing--lg) + 6px));
+  top: 0.35em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--wp--custom--color--primary);
+  border: 2px solid var(--wp--custom--color--bg);
+  box-shadow: 0 0 0 2px var(--wp--custom--color--primary);
+}
+
+.linaje-timeline-content {
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+  padding: var(--wp--preset--spacing--md);
+}
+
+.linaje-timeline-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.125rem;
+  margin: 0 0 var(--wp--preset--spacing--sm);
+  color: var(--wp--preset--color--brand-1-deep);
+}
+
+.linaje-timeline-content p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: var(--wp--custom--line-height--body);
+}
+
+.linaje-timeline-content p + p {
+  margin-top: var(--wp--preset--spacing--sm);
+}
+
+/* --- Hero --- */
+.site-title {
+  font-family: var(--wp--preset--font-family--display);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 var(--wp--preset--spacing--sm);
+  color: var(--wp--preset--color--brand-1);
+  letter-spacing: 0.02em;
+  line-height: var(--wp--custom--line-height--tight);
+}
+
+.site-tagline {
+  margin: 0 auto var(--wp--preset--spacing--sm);
+  max-width: 36rem;
+  text-align: center;
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  line-height: var(--wp--custom--line-height--body);
+  color: var(--wp--custom--color--text-muted);
+}
+
+.site-intro-link {
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  padding: var(--wp--preset--spacing--xl) var(--wp--custom--gutter);
+  text-align: center;
+  color: var(--wp--custom--color--text-on-dark);
+  background-color: var(--wp--preset--color--brand-2);
+  border-radius: 8px;
+  border: 1px solid rgb(255 255 255 / 25%);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 15%);
+}
+
+.hero-figure {
+  margin: 0 auto var(--wp--preset--spacing--md);
+  max-width: 42rem;
+  max-height: 28vh;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.hero-figure picture,
+.section-figure picture {
+  display: block;
+}
+
+.hero-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero .hero-title,
+.hero .hero-lead {
+  color: var(--wp--custom--color--text-on-dark);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 40%);
+}
+
+.hero .hero-lead {
+  opacity: 0.95;
+}
+
+.hero-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: var(--wp--custom--line-height--tight);
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+.hero-lead {
+  font-size: 1.125rem;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+.hero .btn-primary {
+  background-color: var(--wp--preset--color--brand-1);
+  color: #fff;
+}
+
+.hero .btn-primary:hover {
+  background-color: var(--wp--preset--color--brand-2-deep);
+  color: #fff;
+}
+
+/* --- Home: community copy + one event (2/3–1/3 from 768px; photos stay read-width) --- */
+.home-community-row {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  margin-bottom: var(--wp--preset--spacing--lg);
+}
+
+@media (width >= 768px) {
+  .home-community-row {
+    grid-template-columns: minmax(0, var(--wp--style--global--content-size)) 18.75rem;
+    justify-content: space-between;
+    align-items: start;
+  }
+}
+
+.home-community-copy h2 {
+  margin-top: 0;
+}
+
+.home-featured-event {
+  padding-top: var(--wp--preset--spacing--md);
+  border-top: 1px solid var(--wp--preset--color--brand-2);
+}
+
+@media (width >= 768px) {
+  .home-featured-event {
+    padding-top: 0;
+    border-top: none;
+    border-left: 1px solid var(--wp--preset--color--brand-2);
+    padding-left: var(--wp--preset--spacing--sm);
+  }
+}
+
+.home-featured-event .evento-figure-link {
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+.home-featured-event-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.home-featured-event-kicker {
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+.home-featured-event-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.125rem;
+  margin: 0 0 var(--wp--preset--spacing--xs);
+  line-height: var(--wp--custom--line-height--tight);
+}
+
+.home-featured-event-title a {
+  text-decoration-thickness: 1px;
+}
+
+.home-featured-event-meta {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+.home-featured-event-actions {
+  margin: 0;
+}
+
+.home-community-figures .section-figure:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Home: blog preview (3 articles with thumbnails) --- */
+.home-blog-grid {
+  list-style: none;
+  margin: 0 0 var(--wp--preset--spacing--md);
+  padding: 0;
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 768px) {
+  .home-blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Shared article-card primitives (home preview + blog list share the same
+   card shell, thumbnail treatment and hover behavior; only layout differs) */
+.home-blog-card,
+.blog-list-item {
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.home-blog-thumb,
+.blog-list-thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.home-blog-thumb img,
+.blog-list-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-blog-link:hover .home-blog-title,
+.home-blog-link:focus-visible .home-blog-title,
+.blog-list-link:hover .blog-list-title,
+.blog-list-link:focus-visible .blog-list-title {
+  color: var(--wp--custom--color--link);
+}
+
+.home-blog-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-blog-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.125rem;
+  margin: 0;
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+  padding-bottom: var(--wp--preset--spacing--xs);
+}
+
+.home-blog-excerpt {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0;
+  padding: 0 var(--wp--preset--spacing--md) var(--wp--preset--spacing--md);
+  line-height: var(--wp--custom--line-height--body);
+}
+
+.home-blog-more {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/* --- Blog list (blog index) --- */
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--wp--custom--section-gap);
+}
+
+.blog-list-link {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--md);
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (width >= 768px) {
+  .blog-list-link {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.blog-list-body {
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+  padding-right: var(--wp--preset--spacing--md);
+}
+
+@media (width >= 768px) {
+  .blog-list-body {
+    padding: var(--wp--preset--spacing--md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.blog-list-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.25rem;
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.blog-list-excerpt {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0;
+  line-height: var(--wp--custom--line-height--body);
+}
+
+.article-meta {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.article-meta a {
+  color: var(--wp--custom--color--link);
+}
+
+.article-deck {
+  font-size: 1.125rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--md);
+  line-height: var(--wp--custom--line-height--body);
+}
+
+.article-byline {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--lg);
+  line-height: var(--wp--custom--line-height--body);
+}
+
+.article-byline p {
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.article-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--sm);
+  align-items: center;
+  margin: var(--wp--preset--spacing--lg) 0;
+}
+
+.read-width ul,
+.read-width ol {
+  margin: 0 0 var(--wp--preset--spacing--md);
+  padding-left: 1.25rem;
+}
+
+.read-width li + li {
+  margin-top: var(--wp--preset--spacing--xs);
+}
+
+.read-width ol li p {
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.read-width ol li p:last-child {
+  margin-bottom: 0;
+}
+
+.article-references {
+  margin-top: var(--wp--preset--spacing--xl);
+  padding-top: var(--wp--preset--spacing--md);
+  border-top: 1px solid var(--wp--custom--color--border);
+}
+
+.article-references h2 {
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+.article-references ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.article-references li + li {
+  margin-top: var(--wp--preset--spacing--sm);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--wp--custom--color--text);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--wp--custom--color--primary);
+  color: var(--wp--custom--color--text-on-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--wp--custom--color--primary-hover);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--wp--custom--color--text-on-dark);
+}
+
+/* Secondary action: same shape/size as primary, lower visual weight.
+   Implements the primary/secondary link taxonomy from the IA doc. */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--wp--preset--color--brand-1-deep);
+  border: 1.5px solid var(--wp--custom--color--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--wp--custom--color--primary);
+  color: var(--wp--custom--color--text-on-dark);
+}
+
+.btn-secondary:focus-visible {
+  outline-color: var(--wp--custom--color--primary);
+}
+
+/* --- Share controls (event and blog items) --- */
+.share-actions {
+  margin: var(--wp--preset--spacing--md) 0 0;
+}
+
+.evento-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--sm);
+  align-items: center;
+  margin: var(--wp--preset--spacing--md) 0 0;
+}
+
+.evento-actions .share-actions {
+  margin: 0;
+}
+
+.evento-actions .btn-secondary {
+  gap: var(--wp--preset--spacing--xs);
+}
+
+.calendar-trigger {
+  gap: var(--wp--preset--spacing--xs);
+}
+
+.evento-actions .btn-secondary .lucide-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.blog-list-item .share-actions {
+  padding: 0 var(--wp--preset--spacing--md) var(--wp--preset--spacing--md);
+}
+
+.share-trigger {
+  gap: var(--wp--preset--spacing--xs);
+}
+
+.share-trigger .lucide-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.share-dialog {
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: var(--wp--preset--spacing--lg);
+  color: var(--wp--custom--color--text);
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--primary);
+  border-radius: 8px;
+  box-shadow: 0 1rem 3rem rgb(62 66 75 / 28%);
+}
+
+.share-dialog::backdrop {
+  background: rgb(62 66 75 / 65%);
+}
+
+.share-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--md);
+  margin-bottom: var(--wp--preset--spacing--sm);
+}
+
+.share-dialog-header h2 {
+  margin: 0;
+}
+
+.share-dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--wp--custom--color--text);
+  background: transparent;
+  border: 1px solid var(--wp--custom--color--primary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.share-dialog-close:hover,
+.share-dialog-close:focus-visible {
+  color: var(--wp--custom--color--text-on-dark);
+  background: var(--wp--custom--color--primary);
+}
+
+.share-dialog-close:focus-visible,
+.share-option:focus-visible {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+.share-dialog-close .lucide-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.share-dialog-content-title {
+  margin: 0 0 var(--wp--preset--spacing--md);
+  color: var(--wp--custom--color--text-muted);
+}
+
+.share-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wp--preset--spacing--xs);
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  width: 100%;
+  padding: var(--wp--preset--spacing--sm) var(--wp--preset--spacing--md);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+  color: var(--wp--preset--color--brand-1-deep);
+  background: transparent;
+  border: 1px solid var(--wp--custom--color--primary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.share-option:hover {
+  color: var(--wp--custom--color--text-on-dark);
+  background: var(--wp--custom--color--primary);
+}
+
+.share-status {
+  min-height: 1.5em;
+  margin: var(--wp--preset--spacing--md) 0 0;
+  color: var(--wp--custom--color--text-muted);
+}
+
+@media (width >= 768px) {
+  .share-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Meditation block --- */
+.meditation-block {
+  background-color: var(--wp--preset--color--brand-3);
+  padding: var(--wp--preset--spacing--lg);
+  border-radius: 4px;
+  margin-bottom: var(--wp--custom--section-gap);
+  color: var(--wp--custom--color--text);
+}
+
+/* --- Mantras para la práctica (Práctica) --- */
+.mantra-card {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.mantra-section .mantra-card + .mantra-card {
+  margin-block-start: 2.5rem;
+}
+
+.mantra-card h3,
+.mantra-card h4,
+.mantra-card p,
+.mantra-card figure,
+.mantra-card dl,
+.mantra-card dd {
+  margin: 0;
+}
+
+.mantra-reading {
+  width: fit-content;
+  max-width: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid currentcolor;
+  border-radius: 0.9rem;
+}
+
+.mantra-reading-label {
+  margin-bottom: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.mantra-ruby {
+  font-size: 1.25rem;
+  line-height: 2.15;
+  letter-spacing: 0.035em;
+}
+
+.mantra-ruby ruby {
+  ruby-align: center;
+  ruby-position: over;
+}
+
+.mantra-ruby rt {
+  font-size: 0.62em;
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  opacity: 1;
+}
+
+.mantra-language-data {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid currentcolor;
+  font-size: 0.85rem;
+}
+
+.mantra-language-data div {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.mantra-language-data dt {
+  font-weight: 700;
+}
+
+.mantra-language-data dd {
+  opacity: 0.78;
+}
+
+.mantra-audio audio {
+  display: block;
+  width: min(100%, 32rem);
+}
+
+.mantra-audio figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+@media (width <= 36rem) {
+  .mantra-reading {
+    width: 100%;
+  }
+
+  .mantra-ruby {
+    font-size: 1.1rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .mantra-reading {
+    border-color: CanvasText;
+  }
+
+  .mantra-language-data {
+    border-top-color: CanvasText;
+  }
+}
+
+.meditation-block h2 {
+  margin-top: 0;
+  color: var(--wp--custom--color--text);
+}
+
+.meditation-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+.meditation-block li {
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+/* --- Founder block (divisor suave) --- */
+.founder-block {
+  padding: var(--wp--preset--spacing--lg) 0;
+  border-top: 1px solid var(--wp--custom--color--border);
+  margin-top: var(--wp--preset--spacing--lg);
+}
+
+.founder-block .founder-blog-link {
+  font-size: 0.9375rem;
+  margin-top: var(--wp--preset--spacing--md);
+}
+
+.founder-block .founder-blog-link a {
+  font-weight: 600;
+}
+
+/* --- Evento (página Eventos cuando hay evento vigente) --- */
+.eventos-section {
+  margin-bottom: var(--wp--preset--spacing--xl);
+}
+
+.eventos-section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* --- Eventos: calendario estático (un mes) --- */
+.eventos-calendar {
+  margin-inline: auto;
+}
+
+.eventos-calendar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 var(--wp--preset--spacing--md);
+  color: var(--wp--custom--color--text);
+}
+
+.eventos-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  max-width: 20rem;
+  margin-inline: auto;
+  font-size: 0.875rem;
+  overflow: visible;
+}
+
+/* Row grouping for valid ARIA grid structure without breaking the CSS grid layout */
+.eventos-calendar-row {
+  display: contents;
+}
+
+.eventos-calendar-weekday {
+  text-align: center;
+  font-weight: 600;
+  color: var(--wp--custom--color--text-muted);
+  padding: var(--wp--preset--spacing--xs) 0;
+}
+
+.eventos-calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+  color: var(--wp--custom--color--text);
+  position: relative;
+}
+
+.eventos-calendar-day.has-event {
+  background: var(--wp--preset--color--brand-2-deep);
+  border-color: var(--wp--preset--color--brand-2-deep);
+  color: var(--wp--custom--color--text-on-dark);
+  font-weight: 600;
+}
+
+.eventos-calendar-day.has-practice {
+  background: var(--wp--custom--color--bg);
+  border-color: var(--wp--preset--color--brand-2);
+  border-width: 2px;
+  color: var(--wp--custom--color--text);
+  font-weight: 600;
+}
+
+/* The event day is a <span role="gridcell"> wrapping a real <a> (rather than
+   role="gridcell" on the link itself), so the link keeps its native role
+   while the grid structure stays valid for assistive tech. */
+.eventos-calendar-day a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: visible;
+}
+
+.eventos-calendar-day a[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.4rem);
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(11rem, calc(100vw - 2 * var(--wp--custom--gutter)));
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  background: var(--wp--preset--color--brand-4);
+  color: var(--wp--custom--color--text-on-dark);
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.12s ease, visibility 0.12s ease;
+}
+
+/* Monday (and Sunday) sit on the left edge: grow the tooltip rightward so
+   “Meditación semanal en línea” is not clipped by the viewport on phones. */
+.eventos-calendar-day:nth-child(-n+2) a[data-tooltip]::after {
+  left: 0;
+  transform: none;
+}
+
+.eventos-calendar-day:nth-child(n+6) a[data-tooltip]::after {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.eventos-calendar-day a[data-tooltip]:hover::after,
+.eventos-calendar-day a[data-tooltip]:focus-visible::after,
+.eventos-calendar-day a[data-tooltip].is-tooltip-visible::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.eventos-calendar-day:has(a[data-tooltip]:hover),
+.eventos-calendar-day:has(a[data-tooltip]:focus-visible),
+.eventos-calendar-day:has(a[data-tooltip].is-tooltip-visible) {
+  z-index: 2;
+}
+
+.eventos-calendar-hint {
+  display: none;
+  margin: var(--wp--preset--spacing--sm) 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--wp--custom--color--text);
+}
+
+@media (hover: none), (width <= 767px) {
+  .eventos-calendar-day a[data-tooltip]::after {
+    bottom: auto;
+    top: calc(100% + 0.4rem);
+  }
+}
+
+@media (pointer: coarse), (hover: none) and (width <= 767px) {
+  .eventos-calendar-hint {
+    display: block;
+    visibility: hidden;
+  }
+
+  .eventos-calendar:has(.is-tooltip-visible) .eventos-calendar-hint {
+    visibility: visible;
+  }
+}
+
+.eventos-calendar-day a:hover,
+.eventos-calendar-day a:focus-visible {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+.eventos-calendar-day.has-event a:hover,
+.eventos-calendar-day.has-event a:focus-visible {
+  background: var(--wp--preset--color--brand-1);
+  color: var(--wp--custom--color--text-on-dark);
+}
+
+.eventos-calendar-day.has-practice a:hover,
+.eventos-calendar-day.has-practice a:focus-visible {
+  background: transparent;
+  color: var(--wp--preset--color--brand-1-deep);
+}
+
+.eventos-card-divider {
+  border: 0;
+  border-top: 1px solid var(--wp--custom--color--border);
+  margin: var(--wp--preset--spacing--xl) 0;
+  max-width: var(--wp--style--global--content-size);
+}
+
+.eventos-divider {
+  border: 0;
+  border-top: 1px solid var(--wp--custom--color--text-muted);
+  margin: var(--wp--preset--spacing--xl) 0;
+}
+
+.eventos-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--sm);
+  font-family: var(--wp--preset--font-family--body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--md);
+  padding-bottom: var(--wp--preset--spacing--xs);
+  border-bottom: 1px solid var(--wp--custom--color--text-muted);
+}
+
+.eventos-section-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: var(--wp--custom--color--primary);
+}
+
+.evento-card {
+  margin: 0 0 var(--wp--custom--section-gap);
+  padding: var(--wp--preset--spacing--xl);
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+  scroll-margin-top: var(--wp--custom--header-offset);
+}
+
+.evento-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.evento-type {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wp--custom--color--text-muted);
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.evento-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.5rem;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+.evento-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.evento-title a:hover {
+  color: var(--wp--custom--color--link);
+}
+
+.evento-figure {
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.evento-figure img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.evento-figure-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.evento-figure-link img {
+  transition: opacity 0.2s;
+}
+
+.evento-figure-link:hover img {
+  opacity: 0.9;
+}
+
+.evento-card--past .evento-figure-link:hover img,
+.evento-card--finalizado .evento-figure-link:hover img {
+  opacity: 0.75;
+}
+
+.evento-cta {
+  margin: 0;
+}
+
+.evento-detail-link {
+  margin: 0 0 var(--wp--preset--spacing--md);
+  font-size: 1.125rem;
+}
+
+.evento-detail-link a {
+  color: var(--wp--custom--color--link);
+}
+
+.evento-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12rem;
+  padding: var(--wp--preset--spacing--xl);
+  background: var(--wp--custom--color--bg);
+  border: 1px dashed var(--wp--custom--color--border);
+  border-radius: 4px;
+}
+
+.evento-placeholder img {
+  width: auto;
+  max-width: 160px;
+  height: auto;
+  opacity: 0.5;
+}
+
+.evento-lead {
+  font-size: 1.125rem;
+  margin-bottom: var(--wp--preset--spacing--md);
+}
+
+.evento-tagline {
+  color: var(--wp--custom--color--text-muted);
+  margin-bottom: var(--wp--preset--spacing--lg);
+}
+
+.evento-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--wp--preset--spacing--xs) var(--wp--preset--spacing--md);
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.evento-meta dt {
+  font-weight: 600;
+  margin: 0;
+}
+
+.evento-meta dd {
+  margin: 0;
+}
+
+.evento-incluye {
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+  font-weight: normal;
+}
+
+.evento-links {
+  margin-top: var(--wp--preset--spacing--lg);
+  margin-bottom: 0;
+}
+
+.eventos-section-links {
+  margin: var(--wp--preset--spacing--lg) 0 0;
+  padding-top: var(--wp--preset--spacing--md);
+  border-top: 1px solid var(--wp--custom--color--border);
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.eventos-section-links a {
+  color: var(--wp--custom--color--link);
+}
+
+.evento-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.evento-badge--finalizado {
+  color: var(--wp--custom--color--text-muted);
+}
+
+
+/* Agrupación por año en el archivo de eventos */
+.eventos-anio {
+  margin-block: var(--wp--preset--spacing--xl) var(--wp--preset--spacing--md);
+  padding-bottom: var(--space-2xs);
+  border-bottom: 1px solid var(--wp--custom--color--border, currentColor);
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.eventos-anio-grupo > .evento-card:first-of-type {
+  margin-top: 0;
+}
+
+.evento-card--past .evento-figure img,
+.evento-card--finalizado .evento-figure img {
+  opacity: 0.5;
+}
+
+.evento-card--finalizado .evento-title,
+.evento-card--past .evento-title {
+  margin-top: 0;
+}
+
+/* Single event (single-event.php / eventos/{slug}/) */
+.single-event .single-event-title {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 2rem;
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.single-event-nav {
+  margin-top: var(--wp--preset--spacing--xl);
+  padding-top: var(--wp--preset--spacing--lg);
+  border-top: 1px solid var(--wp--custom--color--border);
+  font-size: 0.9375rem;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.single-event-nav a {
+  color: var(--wp--custom--color--link);
+}
+
+.single-event-nav p {
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+.single-event-nav p:last-child {
+  margin-bottom: 0;
+}
+
+.evento-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--wp--preset--spacing--lg);
+}
+
+.evento-highlights li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.evento-highlights li::before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: var(--wp--custom--color--primary);
+}
+
+/* --- Cards (caminos, cómo practicamos) --- */
+.card {
+  padding: var(--wp--preset--spacing--lg);
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}
+
+/* --- Footer --- */
+.site-footer {
+  background-color: var(--wp--custom--color--footer-bg);
+  color: var(--wp--custom--color--text-on-dark);
+  padding-block: var(--wp--preset--spacing--xl);
+  margin-top: var(--wp--custom--section-gap);
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.site-footer a:hover {
+  color: var(--wp--custom--color--text-on-dark);
+  opacity: 0.9;
+}
+
+/* Footer background is brand-2; the default focus-visible outline (--primary)
+   only reaches ~2.2:1 against it. Override for the 3:1 non-text minimum. */
+.site-footer a:focus-visible {
+  outline: 2px solid var(--wp--custom--color--text-on-dark);
+  outline-offset: 2px;
+}
+
+.site-footer .layout-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--xl);
+}
+
+/* Top row: identity, links, contact */
+.footer-top {
+  display: grid;
+  gap: var(--wp--preset--spacing--lg);
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 768px) {
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--wp--preset--spacing--xl);
+  }
+}
+
+@media (width >= 1024px) {
+  .footer-top {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.footer-block {
+  min-width: 0;
+}
+
+.footer-heading {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 var(--wp--preset--spacing--sm);
+  color: var(--wp--custom--color--text-on-dark);
+}
+
+.footer-org {
+  font-weight: 600;
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.footer-block p {
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.footer-block p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.footer-links li:last-child {
+  margin-bottom: 0;
+}
+
+/* Donate section: full-width block with separator */
+.footer-donate {
+  padding-top: var(--wp--preset--spacing--lg);
+  border-top: 1px solid rgb(255 255 255 / 20%);
+}
+
+.footer-donate .footer-heading {
+  margin-top: var(--wp--preset--spacing--sm);
+}
+
+.footer-donate .footer-heading:first-child {
+  margin-top: 0;
+}
+
+.footer-donate p {
+  margin: 0 0 var(--wp--preset--spacing--sm);
+  max-inline-size: 52ch;
+}
+
+.footer-table {
+  width: 100%;
+  max-width: 24rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: var(--wp--preset--spacing--sm) 0 var(--wp--preset--spacing--md);
+}
+
+.footer-table th,
+.footer-table td {
+  text-align: left;
+  padding: var(--wp--preset--spacing--xs) 0;
+  border-bottom: 1px solid rgb(255 255 255 / 25%);
+}
+
+.footer-table th {
+  font-weight: 600;
+  width: 40%;
+}
+
+/* Donaciones page: table on light background */
+.donate-lead {
+  font-size: 1.125rem;
+  margin-bottom: var(--wp--preset--spacing--md);
+}
+
+.donate-table {
+  width: 100%;
+  max-width: 24rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin: var(--wp--preset--spacing--sm) 0 var(--wp--preset--spacing--md);
+}
+
+.donate-table th,
+.donate-table td {
+  text-align: left;
+  padding: var(--wp--preset--spacing--xs) 0;
+  border-bottom: 1px solid var(--wp--custom--color--text-muted);
+  color: var(--wp--custom--color--text);
+}
+
+.donate-table th {
+  font-weight: 600;
+  width: 40%;
+  color: var(--wp--custom--color--text-muted);
+}
+
+/* Credits block */
+.footer-credits {
+  padding-top: var(--wp--preset--spacing--lg);
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  font-size: 0.8125rem;
+}
+
+.footer-credits p {
+  margin: 0 0 var(--wp--preset--spacing--xs);
+}
+
+.footer-credits p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-copyright {
+  margin: 0;
+  padding-top: var(--wp--preset--spacing--lg);
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  font-size: 0.875rem;
+}
+
+/* Privacy page: provisional notice, same calm register as donate copy */
+.privacy-notice {
+  margin-bottom: var(--wp--preset--spacing--lg);
+  padding: var(--wp--preset--spacing--md);
+  border-inline-start: 3px solid var(--wp--preset--color--brand-1);
+  background: rgb(255 255 255 / 22%);
+}
+
+.privacy-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-updated {
+  font-size: 0.9375rem;
+}
+
+/* --- Forms --- */
+.form-group {
+  margin-bottom: var(--wp--preset--spacing--md);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--wp--preset--spacing--xs);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--wp--preset--spacing--sm);
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1px solid var(--wp--preset--color--brand-2);
+  border-radius: 4px;
+  background: var(--wp--custom--color--bg);
+  color: var(--wp--custom--color--text);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 0;
+}
+
+.form-group textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   5. Page-specific (minimal)
+   ========================================================================== */
+.page-contact .read-width {
+  margin-inline: 0;
+}
+
+.contact-social {
+  padding: var(--wp--preset--spacing--lg);
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+}
+
+.contact-social-heading {
+  margin-top: 0;
+  margin-bottom: var(--wp--preset--spacing--xs);
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+}
+
+.contact-social-lead {
+  margin-bottom: var(--wp--preset--spacing--lg);
+  color: var(--wp--custom--color--text-muted);
+  font-size: 0.9375rem;
+}
+
+.contact-social-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--sm);
+}
+
+.contact-social-links li {
+  display: flex;
+}
+
+.contact-social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--xs);
+  font-weight: 500;
+}
+
+.contact-social-links .lucide-icon {
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   6. Utilities
+   ========================================================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center-block {
+  margin-inline: auto;
+}
+
+.mt-0 { margin-top: 0; }
+.mb-lg { margin-bottom: var(--wp--preset--spacing--lg); }
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. States and accessibility
+   ========================================================================== */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Pressed / active feedback (functional, not decorative) --- */
+.btn:active {
+  filter: brightness(0.92);
+}
+
+a:active {
+  color: var(--wp--custom--color--link-hover);
+}
+
+.nav-toggle:active,
+.lang-btn:active {
+  background: rgb(255 255 255 / 25%);
+}
+
+.gallery-pagination-prev:active,
+.gallery-pagination-next:active,
+.gallery-pagination-num:active {
+  color: var(--wp--custom--color--link-hover);
+}
+
+.eventos-calendar-day a:active {
+  outline: 2px solid var(--wp--custom--color--primary);
+  outline-offset: 2px;
+}
+
+/* --- Form validation state --- */
+.form-group.is-error input,
+.form-group.is-error textarea {
+  border-color: var(--wp--preset--color--brand-1);
+  border-width: 2px;
+}
+
+.form-error-message {
+  display: block;
+  margin-top: var(--wp--preset--spacing--xs);
+  font-size: 0.875rem;
+  color: var(--wp--preset--color--brand-1);
+}
+
+/* Typography scale for headings */
+h1, h2, h3 {
+  line-height: var(--wp--custom--line-height--tight);
+  color: var(--wp--custom--color--text);
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors -- intentional override of normalize base */
+h1 {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+h2 {
+  font-family: var(--wp--preset--font-family--heading);
+  font-size: 1.375rem;
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+h3 {
+  font-size: 1.125rem;
+  margin: 0 0 var(--wp--preset--spacing--sm);
+}
+
+p {
+  margin: 0 0 var(--wp--preset--spacing--md);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   8. WordPress adaptations (WU-07)
+   ========================================================================== */
+
+/* Template-part wrappers must not affect layout or stacking. */
+.wp-block-template-part {
+  display: contents;
+}
+
+/* Post Content wrapper behaves like the transparent container it is. */
+.wp-block-post-content {
+  display: block;
+}
+
+/* Core featured-image figure reuses the static figure rhythm via its
+   className (.section-figure / .evento-figure) set in the templates. */
+.wp-block-post-featured-image img {
+  height: auto;
+}
+
+/* Compact past-event card (doc 03 §3 «Densidad»: thumbnail, title, city,
+   date, detail link). Uses the same tokens as the full card. */
+.evento-card--compact {
+  padding-block: var(--wp--preset--spacing--md);
+}
+
+.evento-card--compact .evento-compact-row {
+  display: flex;
+  gap: var(--wp--preset--spacing--md);
+  align-items: flex-start;
+}
+
+.evento-card--compact .evento-compact-thumb {
+  flex: 0 0 auto;
+  display: block;
+}
+
+.evento-card--compact .evento-compact-thumb img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.evento-card--compact .evento-compact-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.evento-card--compact .evento-title {
+  margin-block: 0 var(--wp--preset--spacing--xs);
+}
+
+.evento-card--compact .evento-compact-meta {
+  margin-block: 0 var(--wp--preset--spacing--xs);
+  color: var(--wp--custom--color--text-muted);
+}
+
+.evento-card--compact .evento-detail-link {
+  margin-block: 0;
+}
+
+/* Empty state of the events listing (docs/09). */
+.eventos-empty {
+  margin-block: var(--wp--preset--spacing--lg);
+}
+
+/* Author profile view (ADR 0037) reuses the article rhythm. */
+.autor-ficha .autor-entradas {
+  margin-top: var(--wp--custom--section-gap);
+}

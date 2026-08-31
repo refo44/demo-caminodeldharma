@@ -94,6 +94,33 @@ function cdd_core_current_events( ?DateTimeImmutable $now = null ): array {
 }
 
 /**
+ * The events that are not current at request time (completed or
+ * cancelled), newest start first — the archive block of memory
+ * (doc 03 §3, WU-07).
+ *
+ * @param DateTimeImmutable|null $now Request-time instant.
+ */
+function cdd_core_past_events( ?DateTimeImmutable $now = null ): array {
+	$now = $now ?? cdd_core_now();
+
+	$past = array();
+	foreach ( cdd_core_events() as $event ) {
+		if ( ! cdd_core_event_is_current( $event, $now ) ) {
+			$past[] = $event;
+		}
+	}
+
+	usort(
+		$past,
+		static function ( WP_Post $a, WP_Post $b ): int {
+			return strcmp( (string) get_post_meta( $b->ID, 'event_date', true ), (string) get_post_meta( $a->ID, 'event_date', true ) );
+		}
+	);
+
+	return $past;
+}
+
+/**
  * The single event the home page may show, or null (doc 03 §3: a current
  * featured event wins; else the nearest current start; completed featured
  * events are ignored; no current event renders nothing).

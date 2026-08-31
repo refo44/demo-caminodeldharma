@@ -122,6 +122,37 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 
 ---
 
+## Estado de implementación WU-07 (2026-08-31)
+
+Las filas de arriba conservan el inventario; este bloque registra el avance por dimensión
+tras WU-07 (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07):
+
+| Dimensión | Estado | Detalle |
+|---|---|---|
+| CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) |
+| PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 11 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
+| ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08 |
+| BEHAVIOR | **Parcial** | Nav móvil (main.js) y tooltips del calendario portados; share/añadir-al-calendario/audio → WU-08; formulario CF7 → WU-09 |
+| OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción); staging pendiente (OWN-005) |
+
+Sustituciones static→WordPress registradas en WU-07 (§9.1 del master prompt; detalle y
+remedios en `.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
+
+1. Eventos finalizados en tarjeta compacta (doc 03 §3 «Densidad») en vez de la card completa.
+2. Fecha de evento generada desde `event_date`/`event_end` (reglas calibradas; filas `Hora`
+   y `Aporte` de la maqueta no viven en el modelo — remedio: contenido del evento wp-admin).
+3. Card vigente del listado = intro del single + meta + CTA (label «Preinscribirme»).
+4. Excerpt del listado del blog = deck editorial; tiempo de lectura calculado (round /200).
+5. Byline «Por …» enlazada a `/author/{slug}` (ADR 0037; el estático no enlaza).
+6. `<picture>`/WebP/miniaturas hechas a mano no migran: la biblioteca sirve JPG + derivados.
+7. `event_modality` es texto libre (copy publicado descriptivo; sustituye el select doc 03).
+8. Galería: bloque Gutenberg nativo + lightbox, sin paginación (ADR 0021/0036, OWN-011);
+   headings de álbum enlazan al término (opcional ADR 0036).
+9. Copy nuevo mínimo OWN-016 en `/comunidad`: «Entradas del Maestro Zheng Gong en el blog» /
+   «Entradas de la Comunidad en el blog».
+
+---
+
 ## Redirects y restos (ROUTING / OPERATIONS)
 
 Portar desde `.htaccess` actual; no son Pages.
@@ -162,4 +193,4 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.1 · **Fecha:** 2026-08-30 · **Estado de filas:** inventario (Fase 3 no iniciada)
+**Versión:** 1.2 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07 (§ Estado de implementación)

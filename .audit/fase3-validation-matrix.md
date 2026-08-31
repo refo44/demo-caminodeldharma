@@ -242,3 +242,60 @@ Decisiones registradas (WU-06):
    importador lee, nunca escribe, la fuente.
 9. La sonda de paridad live usó red de solo lectura (GET públicos a `caminodeldharma.org`);
    ninguna suite de tests depende de red.
+
+## WU-07 — Pages, posts, autores, media, plantillas FSE y galería (sesión separada tras WU-06)
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + rerun de todos los
+gates WU-02…WU-06 antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`044f7d6`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gates WU-03…WU-06 | php-lint OK; unit 74/74; phpcs limpio; `run-phpunit-wp.sh` 43/43; plugin 0.3.0 y theme activos; `wp cdd-core migrate verify` → 0 missing | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo de vistas | Unit: 104 tests, **15 errors + 14 failures** (plantillas/formato/convertidor ausentes). wp-phpunit: 60 tests, **13 errors + 4 failures** (bloques/renderers/servicio ausentes); los 43 preexistentes siguieron verdes con el theme activo en el harness | OK | Pass (local) |
+| Nivel 1 verde | `phpunit` → OK (**105 tests, 516 assertions**): contrato de las 16 plantillas (parts, `main#main`, post-content, sin `page-eventos`, sin URLs absolutas), fontFace con archivos presentes, lightbox nativo habilitado, CSS solo presets (sin `:root` ni tokens legados), contrato DOM del nav (ids de main.js), formato español calibrado contra el copy publicado (fechas, «Por A y B», tiempo de lectura), convertidor sobre el payload real (aside→bloque, cards→bloque, `<picture>` unwrap, thumbs remapeadas, galería por álbum, enlaces OWN-016 reversibles, idempotencia) | OK | Pass (local) |
+| Nivel 2 verde | `run-phpunit-wp.sh` → OK (**60 tests, 435 assertions**): 11 bloques registrados; **calendario = markup publicado byte a byte** (grid septiembre 2026 de `static/eventos/index.html`, normalizado); listado vigentes/finalizados (agrupación por año desc, badge, tarjeta compacta, sin CTA en finalizados); aside destacado + estado vacío; tipo/meta/CTA de single; byline ADR 0037 enlazada + bio + tiempo de lectura; listados de blog; ficha de autor solo con entradas de la relación `authors`; galería nativa por término; resolución de plantillas; patterns header/footer con URLs generadas; `convert` dry-run/apply/idempotente/guard de producción; `cdd_core_past_events` orden correcto | OK | Pass (local) |
+| QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings**; `npm run lint:css` verde en ambos árboles (`custom-property-pattern` ampliado a nombres `--wp--*`); `git diff --check` limpio; sin secretos | OK | Pass (local) |
+| QA 3: conversión aplicada en el entorno local | `wp cdd-core migrate convert` dry-run → pending 3; `--apply` → converted `inicio`,`galeria`,`comunidad`; 2.º `--apply` → 0 (idempotente). Contenido: aside y cards dinámicos, 3 galerías nativas con IDs reales de la biblioteca (25/5/5), 2 enlaces OWN-016 | OK | Pass (local) |
+| QA 3: rutas HTTP entrantes (curl) | **200**: `/`, 8 pages, `/practica/videos`, `/practica/meditacion-semanal-en-linea`, `/eventos`, singles muestreados (vigente + 2 finalizados), `/galeria` + 2 términos, `/blog` + single, `/author` + 2 fichas, `.ics` vigente. **410** `.ics` finalizado. **404 real** ruta inexistente. **301** `/eventos/` → `/eventos` | OK | Pass (local) |
+| QA 3: render de las vistas | Home: aside dinámico con «Septiembre – octubre 2026<br>Bogotá y Cali» (idéntico a producción) + cards del blog; `/eventos`: título «Septiembre 2026», grid con 7 días de evento + lunes de práctica, secciones Próximos/Realizados, compactas con badge; single vigente con tipo/meta/CTA y finalizado **sin** CTA; byline «Por Zheng Gong» enlazada a la ficha; `/galeria` 3 álbumes nativos con lightbox; término con galería; ficha de autor con sus entradas; `/comunidad` con 2 enlaces de ficha; 404 con copy publicado | OK | Pass (local) |
+| QA 3: higiene | `debug.log` inexistente tras navegar todas las vistas; sin `Set-Cookie` anónimo; sin warnings/fatals de código propio (el único warning previo era `wp_update_themes()` sin red, ruido del entorno) | OK | Pass (local) |
+| QA 3: comportamiento | Toggle del nav abre/cierra con `aria-expanded` (main.js portado); tooltips del grid con `calendar-tooltips.js` encolado por el bloque; 4 fuentes autohospedadas cargadas (`document.fonts`); sin overflow horizontal | OK | Pass (local) |
+| Bugs latentes de WU-05/06 cazados por el QA (regresión + fix) | (1) `event_modality` se saneaba contra el select de doc 03 y **descartaba el copy publicado** («Híbrida — …» quedaba vacío en BD) — fix: texto plano libre (OWN-007), test actualizado. (2) El importador reescribía `<img src>` pero no los `<source srcset>` de `<picture>` ni las thumbs hechas a mano → hero e imágenes del Inicio rotas — fix: conversión WU-07 desenvuelve `<picture>` y remapea thumbs a la biblioteca | OK | Pass (local) |
+| QA 4 visual (parcial, local) | Escritorio: home y `/eventos` visualmente equivalentes a `https://caminodeldharma.org` (header, hero, tipografías display/heading/body, calendario). Breakpoint móvil correcto (toggle visible, menús ocultos a 400px). Pase completo (320px, zoom 200%, teclado, lector) pendiente | Parcial | Unverified |
+| QA 4: staging / Hostinger | Sin staging aún (OWN-005) | — | Unverified |
+| SEO dinámico (head, JSON-LD, noindex de términos/tags/author) | Alcance WU-08 | — | Unverified |
+| Share / añadir al calendario / audio (diálogos JS) | Alcance WU-08 (mitad de `calendar.js` + `share.js`) | — | Unverified |
+| CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones y sustituciones registradas (WU-07) — ver también la matriz de migración:
+
+1. **Tarjeta compacta para finalizados** (doc 03 §3 «Densidad»): sustitución deliberada de las
+   cards completas del estático (miniatura, tipo, título, ciudad · fecha, «Ver evento →», badge).
+2. **Fechas de evento generadas** desde `event_date`/`event_end` con reglas calibradas contra
+   el copy publicado (7 de 10 idénticas; enumeración `07, 08 y 09` con cero a la izquierda).
+   Las filas `Hora` y `Aporte` de algunas cards estáticas no viven en el modelo doc 03 y no se
+   renderizan — remedio editorial: añadirlas al contenido del evento vía wp-admin si se desean.
+3. **Card vigente del listado** = intro del single (contenido hasta el primer `h2`) + dl + CTA;
+   el resumen manual de la card estática no existe como campo.
+4. **CTA de inscripción** con label fijo «Preinscribirme» (coincide con el único evento vigente
+   publicado); revisar en WU-08 si un evento futuro necesita «Inscribirme».
+5. **Excerpt del listado del blog** = deck editorial (post_excerpt), no el recorte manual del
+   primer párrafo del estático. Tiempo de lectura = round(palabras/200): Círculos 5′ = publicado;
+   Sangha 6′ vs 8′ publicado (delta registrado, valor manual no derivable).
+6. **Byline enlazada** a `/author/{slug}` (ADR 0037; el estático la publica sin enlace).
+7. **`<picture>`/WebP/thumbs hechos a mano no migran** (doc 03 §5.1): la biblioteca sirve JPG
+   y derivados; conversión documentada.
+8. **Encabezados de álbum enlazan al término** (opcional permitido por ADR 0036) y el término
+   pinta galería nativa con h1 «Galería · {título}» y volver al hub.
+9. **Discrepancia doc 03 resuelta a favor de producción**: `event_modality` pasa de select
+   (presencial/virtual/híbrido) a texto libre saneado — el copy publicado es descriptivo.
+10. **Copy nuevo mínimo con OWN-016**: «Entradas del Maestro Zheng Gong en el blog» y
+    «Entradas de la Comunidad en el blog» (ajustable en wp-admin; conversión reversible).
+11. **Header/footer como patterns PHP** referenciados desde las parts (URLs generadas con
+    `home_url()`; logo como asset del theme); bloque Navigation nativo reevaluable después del
+    corte sin tocar contenido.
+12. **Strings estructurales de listados** («Blog», intro, «Eventos», copy 404 de docs/08-09) viven
+    en las plantillas/bloques: la posts page y el archive no leen contenido de una Page.
+13. Harness wp-phpunit con `WP_DEFAULT_THEME=camino-del-dharma` + `register_theme_directory`
+    en el bootstrap: los 60 tests corren con el theme real activo.

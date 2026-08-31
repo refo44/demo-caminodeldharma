@@ -17,7 +17,15 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   (`tools/extract-payload.sh`) e importador WP-CLI `wp cdd-core migrate
   validate|plan|import|verify` + `wp cdd-core seed` — dry-run por defecto, `--apply`
   explícito, idempotente, create-missing-only, guard de producción.
-- La capa wp-admin (metabox de autores, «Eliminar huérfanos») llega en WU-07/08 — siempre
-  test en rojo primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
+- Conversión desde WU-07 (v0.4.0): `wp cdd-core migrate convert` — edición field-scoped
+  del contenido importado (dry-run por defecto, `--apply`, idempotente, guard de
+  producción): inicio (aside destacado y cards del blog → bloques dinámicos del theme;
+  `<picture>`/miniaturas hechas a mano → biblioteca), galeria (galerías Gutenberg por
+  álbum, ADR 0021/0036), comunidad (enlaces a fichas de autor, OWN-016). Tras convertir,
+  el hash del contenido deja de coincidir con `_cdd_source_hash`: así se marca lo editado
+  y el importador nunca lo pisa. Queries de presentación para el theme:
+  `cdd_core_past_events`, `cdd_core_posts_by_blog_author`, `cdd_core_album_attachments`.
+- La capa wp-admin (metabox de autores, «Eliminar huérfanos» OWN-015) llega en WU-08 —
+  siempre test en rojo primero. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

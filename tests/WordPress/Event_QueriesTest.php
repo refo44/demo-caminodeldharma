@@ -116,6 +116,24 @@ final class Event_QueriesTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the archive block of memory (doc 03 §3, WU-07): completed
+	 * and cancelled events come back newest start first, and no current
+	 * event leaks into the archive.
+	 */
+	public function test_past_events_query_returns_completed_events_newest_first() {
+		$now = $this->bogota( '2026-09-10 09:00:00' );
+
+		$older_id     = $this->create_event( 'seis-encuentro', '2025-08-16', '2025-08-18' );
+		$newer_id     = $this->create_event( 'encuentro-2026', '2026-08-07', '2026-08-09' );
+		$cancelled_id = $this->create_event( 'cancelado', '2026-09-20', null, array( 'event_status' => 'cancelado' ) );
+		$this->create_event( 'vigente', '2026-09-15', null );
+
+		$past_ids = wp_list_pluck( cdd_core_past_events( $now ), 'ID' );
+
+		$this->assertSame( array( $cancelled_id, $newer_id, $older_id ), $past_ids );
+	}
+
+	/**
 	 * Protects OWN-009/OWN-012 response data: a current event's ICS route
 	 * yields generated calendar data with the noindex header; a completed
 	 * event yields 410 gone; an unknown slug yields 404.

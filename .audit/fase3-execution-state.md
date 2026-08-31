@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (sesión WU-06) |
+| **Última actualización** | 2026-08-31 (sesión WU-07) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…WU-06 **cerrados**; checkpoint antes de WU-07 |
+| **Work unit activo** | Ninguno — WU-00…WU-07 **cerrados**; checkpoint antes de WU-08 |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -101,6 +101,35 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
     permastructs de CPT. Plugin 0.2.0 → **0.3.0**. Paridad live verificada (ver arriba).
   - QA: matriz WU-06 todo Pass (local); render de vistas (WU-07) y CI/Sonar `Unverified`.
 
+- **WU-07 — Pages, posts, autores, media, plantillas FSE y galería** (sesión 2026-08-31,
+  ADR 0021/0029/0035/0036/0037, OWN-007/011/012/016; TDD honesto: RED documentado en unit
+  (15 E + 14 F) **y** wp-phpunit (13 E + 4 F) antes del primer archivo de vistas):
+  - Reanudación verificada: preflight limpio + rerun de todos los gates (unit 74, phpcs,
+    wp-phpunit 43, plugin 0.3.0/theme activos, `migrate verify` 0 missing).
+  - Theme **0.2.0** — vistas reales: 16 plantillas de bloques (front-page, 7 `page-*`,
+    `page.html`, home, single, single-event, archive-event, single-blog_author,
+    taxonomy-gallery_album, 404, index), parts header/footer vía patterns PHP (URLs
+    generadas, contrato DOM de main.js intacto), 11 bloques dinámicos
+    (`camino-del-dharma/eventos-calendar` con **paridad byte a byte** contra el grid
+    publicado, eventos-listado con tarjeta compacta doc 03 §3, evento-destacado con
+    estado vacío, evento-tipo/meta/cta, entrada-cabecera ADR 0037, blog-listado/recientes,
+    autor-ficha, album-galeria nativa), CSS estático portado a presets
+    (`--wp--preset/custom/style--*`, sin `:root`), fontFace autohospedadas en theme.json,
+    lightbox nativo habilitado, main.js portado + calendar-tooltips.js (mitad grid).
+  - Plugin **0.4.0**: `cdd_core_past_events`, `cdd_core_posts_by_blog_author`,
+    `cdd_core_album_attachments`, convertidor puro `Cdd_Core_Content_Converter` +
+    `Cdd_Core_Convert_Service` y `wp cdd-core migrate convert` (dry-run por defecto,
+    `--apply`, idempotente, guard de producción): inicio (aside y cards → bloques
+    dinámicos; `<picture>`/thumbs hechas a mano → biblioteca), galeria (mount JS → 3
+    galerías Gutenberg por álbum con headings enlazados al término), comunidad (2 enlaces
+    de ficha OWN-016, reversibles).
+  - Dos bugs latentes cazados con regresión+fix: `event_modality` descartaba el copy
+    publicado (select doc 03 → texto libre, OWN-007) y los `<source srcset>`/thumbs sin
+    reescribir rompían las imágenes del Inicio.
+  - QA: unit 105/105, wp-phpunit 60/60 (theme activo en el harness), phpcs limpio,
+    stylelint verde, conversión aplicada en el entorno local, rutas y render verificados,
+    `debug.log` limpio. Matriz § WU-07. QA 4 visual parcial; share/calendario/SEO → WU-08.
+
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger **verificada** (WU-06, delta 0). Re-verificar en el freeze pre-corte.
@@ -110,13 +139,19 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   ZIP; su retiro es una limpieza separada.
 - `test.yml` y el análisis Sonar de plugin+theme quedan `Unverified` hasta que exista push (la
   rama es local por diseño del master prompt).
-- El front local con el theme activo muestra el scaffold sin las vistas reales — esperado
-  hasta WU-07+; la comparación visual contra el estático (QA 4) queda `Unverified`.
 - El entorno local ya usa la estructura definitiva `/blog/%postname%` (aplicada por el
   importador). Contenido demo del install local («Sample Page», «Hello world!») convive con
-  el contenido importado; el staging partirá limpio.
-- El contenido importado se almacena íntegro (bloques `wp:html`, medios reescritos a la
-  biblioteca) pero el theme scaffold no lo pinta entero — plantillas reales en WU-07.
+  el contenido importado; el staging partirá limpio. En staging: `import --apply` →
+  `seed` → `convert --apply` (la conversión es parte del pipeline documentado).
+- QA 4 visual solo parcial (escritorio home/eventos + breakpoint móvil); el pase completo
+  (320px, zoom 200%, teclado, lector de pantalla) y staging quedan `Unverified`.
+- Comportamiento pendiente para WU-08: diálogos compartir/añadir al calendario (mitad
+  restante de `calendar.js` + `share.js`), audio de mantras (contenido importado, sin QA
+  específico aún), SEO dinámico (title/meta/OG/JSON-LD, noindex de `/author`, términos de
+  álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos» (OWN-015).
+- Deltas de copy registrados (matriz WU-07): fechas generadas, filas `Hora`/`Aporte` fuera
+  del modelo, resumen de card vigente = intro del single, excerpt del listado = deck,
+  tiempo de lectura de Sangha 6′ vs 8′, label «Preinscribirme», byline enlazada.
 
 ## Decisiones/asunciones usadas
 
@@ -133,6 +168,11 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   (`settings.color.custom/defaultPalette/... = false`, docs/12 §8), asertada por test.
 - `tools/wp-tests.env` versiona credenciales **desechables** del harness efímero (localhost,
   `down -v`); no son secretos. El `.env` del entorno de desarrollo sigue gitignored.
+- WU-07: 13 decisiones/sustituciones registradas en la matriz de validación § WU-07 (tarjeta
+  compacta doc 03 §3, fechas generadas calibradas, CTA «Preinscribirme», deck como excerpt,
+  byline enlazada, `<picture>`/thumbs no migran, headings de álbum enlazados, strings
+  estructurales en plantillas, harness con theme activo). **Discrepancia doc 03 resuelta**:
+  `event_modality` es texto libre (el copy publicado es descriptivo; OWN-007 > select doc 03).
 - WU-05: (1) nombres de meta = doc 03 y `authors` sin prefijo (contrato ADR 0037 §6);
   (2) `event_signup_payment` boolean (el pago siempre vía `event_signup_url`);
   (3) `event_calendar_dates` (sesiones sueltas) añadido por el contrato del calendario
@@ -144,69 +184,78 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-05. Estados: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-07. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. WU-06 (extractor determinista, payload versionado, importador WP-CLI
-  validate/plan/import/verify, `seed` de medios, reconciliación de conteos) es el
-  siguiente work unit; puede arrancar en la próxima sesión tras rerun del preflight y de
-  los gates (§ Reanudación).
+- Ninguno. WU-08 (comportamiento — diálogos compartir/añadir al calendario, audio —,
+  accesibilidad, SEO dinámico first-party, redirects del `.htaccess`, «Eliminar huérfanos»
+  OWN-015) es el siguiente work unit; puede arrancar en la próxima sesión tras rerun del
+  preflight y de los gates (§ Reanudación).
 
-## Archivos cambiados en la sesión actual (WU-06)
+## Archivos cambiados en la sesión actual (WU-07)
 
-- Tests nuevos (RED antes de la implementación): `tests/Unit/Spanish_DateTest.php`,
-  `tests/Unit/Event_ExtractorTest.php`, `tests/Unit/Blog_ExtractorTest.php`,
-  `tests/Unit/Gallery_ExtractorTest.php`, `tests/Unit/Page_ExtractorTest.php`,
-  `tests/Unit/Media_InventoryTest.php`, `tests/Unit/Payload_BuilderTest.php`,
-  `tests/WordPress/ImporterTest.php`
-- Plugin `camino-del-dharma-core` 0.2.0 → **0.3.0**: `includes/migration/` nuevo
-  (`class-cdd-core-spanish-date.php`, `class-cdd-core-dom.php`,
-  `class-cdd-core-event-extractor.php`, `class-cdd-core-blog-extractor.php`,
-  `class-cdd-core-gallery-extractor.php`, `class-cdd-core-page-extractor.php`,
-  `class-cdd-core-media-inventory.php`, `class-cdd-core-payload-builder.php`,
-  `class-cdd-core-importer.php`, `class-cdd-core-cli.php`), bootstrap con requires + registro
-  WP-CLI, `README.md`
-- `migration/payload.json` (nuevo, versionado), `tools/extract-payload.php|sh` (nuevos)
-- `docker-compose.yml` (mounts RO `migration/` + `static/` en wpcli)
-- `docs/migracion-static-wordpress.md`, `docs/conteos-reconciliacion-migracion.md`,
-  `docs/matriz-migracion-static-wordpress.md`, `docs/docker-wordpress-playbook.md`
-- CLAUDE.md, AGENTS.md, `CHANGELOG.md`, `.audit/fase3-validation-matrix.md`, este archivo
+- Tests nuevos (RED antes de la implementación): `tests/Unit/Theme_TemplatesTest.php`,
+  `tests/Unit/Theme_FormatTest.php`, `tests/Unit/Content_ConverterTest.php`,
+  `tests/WordPress/ThemeRenderTest.php`, `tests/WordPress/ConvertTest.php`; ampliados
+  `tests/WordPress/Event_QueriesTest.php` (past events) y `Event_ModelTest.php` (modalidad
+  texto libre). Harness: `tests/WordPress/bootstrap.php` + `wp-tests-config.php`
+  (`WP_DEFAULT_THEME` = camino-del-dharma).
+- Theme `camino-del-dharma` 0.1.0 → **0.2.0**: `templates/` (16), `parts/`, `patterns/`
+  (header, footer, single-event-nav, blog-single-nav), `inc/`
+  (`class-camino-del-dharma-format.php`, `class-camino-del-dharma-renderers.php`,
+  `blocks.php`), `functions.php`, `theme.json` (fontFace + lightbox),
+  `assets/css/main.css` (porte completo del estático a presets), `assets/js/main.js` +
+  `calendar-tooltips.js`, `assets/fonts/`, `assets/images/logo.png`, `style.css`.
+- Plugin `camino-del-dharma-core` 0.3.0 → **0.4.0**:
+  `includes/migration/class-cdd-core-content-converter.php` y
+  `class-cdd-core-convert-service.php` (nuevos), CLI `migrate convert`,
+  `includes/events.php` (`cdd_core_past_events`), `includes/authors-guard.php`
+  (`cdd_core_posts_by_blog_author`), `includes/taxonomies.php`
+  (`cdd_core_album_attachments`), `includes/meta.php` (modalidad texto libre), bootstrap.
+- `.stylelintrc.json` (`custom-property-pattern` acepta `--wp--*`)
+- `docs/migracion-static-wordpress.md`, `docs/matriz-migracion-static-wordpress.md`,
+  READMEs de plugin y theme, CLAUDE.md, AGENTS.md, `CHANGELOG.md`,
+  `.audit/fase3-validation-matrix.md`, este archivo
 
 ## Último commit verificado
 
-`e9f4234` — implementación de WU-06 (QA local verde). Baseline visual del theme:
+*(pendiente: se actualiza con el commit de cierre de WU-07)*. Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
-`e9f4234` (WU-06).
+`e9f4234` (WU-06) → `044f7d6`.
 
 ## Estado del entorno local
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.3.0). Theme `camino-del-dharma` **activo** (v0.1.0, scaffold). **Contenido
-importado** por `wp cdd-core migrate import --apply` (payload 1.0.35/`bfb6dc0`): 11 páginas
-+ 10 eventos + 2 posts + 2 fichas + 3 álbumes + 81 medios; permalinks `/blog/%postname%`;
-front page `inicio`, posts page `blog`. Además contenido demo del install («Sample Page»,
-«Hello world!»). El harness efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
+**activo** (v0.4.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.2.0,
+vistas reales). Contenido importado (payload 1.0.35/`bfb6dc0`) **y convertido** por
+`wp cdd-core migrate convert --apply` (inicio con bloques dinámicos y `<picture>`
+desenvueltos; galeria con 3 galerías nativas; comunidad con enlaces OWN-016). Permalinks
+`/blog/%postname%`; front page `inicio`, posts page `blog`. Contenido demo del install
+(«Sample Page», «Hello world!») sigue presente; el staging partirá limpio. El harness
+efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-06 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
-siguiente sesión: rerun del preflight (§ Reanudación) y de los gates (php-lint, unit — ahora
-74 tests —, phpcs limpio, `run-phpunit-wp.sh` — ahora 43 tests —, plugin 0.3.0 y theme
-activos sin warnings; `wp cdd-core migrate verify` → 0 missing en el entorno local), luego
-implementar y validar **solo WU-07** — Pages, posts, autores, media, plantillas FSE y
-galería: plantillas reales del theme (`front-page`, `page-*`, `archive-event`,
-`single-event`, `home`, `single`, `single-blog_author`, `taxonomy-gallery_album`, `404`),
-partes header/footer reales, conversión del contenido `wp:html` a bloques donde aplique
-(force explícito de campo o edición wp-admin; el `_cdd_source_hash` delata lo intacto),
-bloque dinámico del calendario (datos ya en `cdd_core_calendar_month_data`), galería con
-bloque nativo + lightbox, bylines «Por …» desde la relación `authors` — comparando copy y
-estructura contra `https://caminodeldharma.org` (OWN-007) — actualizar este archivo y
-detenerse en el checkpoint de WU-07.
+WU-07 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
+siguiente sesión: rerun del preflight (§ Reanudación) y de los gates (php-lint; unit —
+ahora **105** tests —; phpcs limpio; `run-phpunit-wp.sh` — ahora **60** tests, con el theme
+activo en el harness —; plugin 0.4.0 y theme 0.2.0 activos sin warnings/fatals;
+`wp cdd-core migrate verify` → 0 missing; `wp cdd-core migrate convert` → 0 pending),
+luego implementar y validar **solo WU-08** — Comportamiento, accesibilidad, SEO y
+redirects: diálogos de compartir y añadir al calendario (portar la mitad restante de
+`calendar.js` + `share.js` respetando su contrato DOM), verificación del audio de
+mantras, SEO dinámico first-party (title/meta description/canonical/OG/Twitter según
+`docs/15-assets-strategy.md`, JSON-LD `Event`/`EventCompleted` en las 10 fichas y en el
+listado, `BlogPosting`, `Thing` por ficha de autor, favicons/Site Icon), `noindex,follow`
+en `/author`, términos de álbum y tags (ADR 0031/0036/0037), `rel="alternate"
+type="text/calendar"` solo en vigentes, redirects del `.htaccess` (matriz § Redirects),
+herramienta wp-admin «Eliminar huérfanos» (OWN-015) y pase de accesibilidad (docs/19) —
+actualizar este archivo y detenerse en el checkpoint de WU-08.
 
 ## Procedimiento de reanudación
 

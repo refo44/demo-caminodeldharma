@@ -50,17 +50,65 @@
 				{
 					"slug": "display",
 					"name": "MarloweEscapade (display)",
-					"fontFamily": "\"MarloweEscapade\", serif"
+					"fontFamily": "\"MarloweEscapade\", serif",
+					"fontFace": [
+						{
+							"fontFamily": "MarloweEscapade",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/marlowe-escapade/marlowe-escapade-subset.woff2",
+								"file:./assets/fonts/marlowe-escapade/marlowe-escapade.woff",
+								"file:./assets/fonts/marlowe-escapade/marlowe-escapade.ttf"
+							]
+						}
+					]
 				},
 				{
 					"slug": "heading",
 					"name": "Fjalla One (títulos)",
-					"fontFamily": "\"Fjalla One\", serif"
+					"fontFamily": "\"Fjalla One\", serif",
+					"fontFace": [
+						{
+							"fontFamily": "Fjalla One",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [
+								"file:./assets/fonts/fjalla-one/fjalla-one-latin-400-normal.woff2",
+								"file:./assets/fonts/fjalla-one/fjalla-one.ttf"
+							]
+						}
+					]
 				},
 				{
 					"slug": "body",
 					"name": "Inter (cuerpo)",
-					"fontFamily": "\"Inter\", system-ui, -apple-system, sans-serif"
+					"fontFamily": "\"Inter\", system-ui, -apple-system, sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [ "file:./assets/fonts/inter/inter-latin-400-normal.woff2" ]
+						},
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"fontDisplay": "swap",
+							"src": [ "file:./assets/fonts/inter/inter-latin-600-normal.woff2" ]
+						},
+						{
+							"fontFamily": "Inter",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"fontDisplay": "swap",
+							"src": [ "file:./assets/fonts/inter/inter-latin-400-italic.woff2" ]
+						}
+					]
 				}
 			]
 		},
@@ -97,6 +145,14 @@
 		"layout": {
 			"contentSize": "65ch",
 			"wideSize": "70rem"
+		},
+		"blocks": {
+			"core/image": {
+				"lightbox": {
+					"enabled": true,
+					"allowEditing": true
+				}
+			}
 		},
 		"custom": {
 			"color": {

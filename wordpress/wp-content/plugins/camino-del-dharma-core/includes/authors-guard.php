@@ -167,3 +167,37 @@ function cdd_core_protect_published_authors_delete( $check, $object_id, $meta_ke
 
 	return $check;
 }
+
+/**
+ * The published blog posts related to one blog_author ficha through the
+ * authors meta (ADR 0037 — never post_author), newest first.
+ *
+ * @param int $author_id Published blog_author post ID.
+ */
+function cdd_core_posts_by_blog_author( int $author_id ): array {
+	$posts = get_posts(
+		array(
+			'post_type'   => 'post',
+			'post_status' => 'publish',
+			'numberposts' => -1,
+			'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- small catalog; the serialized-int LIKE is the documented lookup for the authors relation.
+				array(
+					'key'     => 'authors',
+					'value'   => 'i:' . $author_id . ';',
+					'compare' => 'LIKE',
+				),
+			),
+		)
+	);
+
+	// The LIKE over the serialized array is only a prefilter; the stored
+	// relation stays authoritative.
+	return array_values(
+		array_filter(
+			$posts,
+			static function ( WP_Post $post ) use ( $author_id ): bool {
+				return in_array( $author_id, cdd_core_stored_authors( $post->ID ), true );
+			}
+		)
+	);
+}

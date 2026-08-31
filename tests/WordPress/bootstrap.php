@@ -23,6 +23,10 @@ require_once $cdd_tests_dir . '/includes/functions.php';
 tests_add_filter(
 	'muplugins_loaded',
 	static function () use ( $cdd_root ) {
+		// Register the repo theme tree early so WP_DEFAULT_THEME
+		// (camino-del-dharma) resolves and its functions.php loads (WU-07).
+		register_theme_directory( $cdd_root . '/wordpress/wp-content/themes' );
+
 		require $cdd_root . '/wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php';
 	}
 );

@@ -76,23 +76,26 @@ final class Event_ModelTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Protects data integrity: dates are Y-m-d or empty, the modality and
-	 * status enums reject values outside the doc 03 lists, and the signup
-	 * URL is sanitized as a URL.
+	 * Protects data integrity: dates are Y-m-d or empty, the status enum
+	 * rejects values outside the doc 03 list, the modality keeps the
+	 * published free-text copy but never markup (WU-07: the static site
+	 * publishes descriptive modalities like «Híbrida — seis sesiones»,
+	 * so a doc 03 select would silently discard production copy), and
+	 * the signup URL is sanitized as a URL.
 	 */
 	public function test_event_meta_is_sanitized_on_write() {
 		$event_id = self::factory()->post->create( array( 'post_type' => 'event' ) );
 
 		update_post_meta( $event_id, 'event_date', '2026-13-40' );
 		update_post_meta( $event_id, 'event_end', '2026-09-04' );
-		update_post_meta( $event_id, 'event_modality', 'banana' );
+		update_post_meta( $event_id, 'event_modality', 'Híbrida — <strong>seis</strong> sesiones' );
 		update_post_meta( $event_id, 'event_status', 'archivado' );
 		update_post_meta( $event_id, 'event_signup_url', 'javascript:alert(1)' );
 		update_post_meta( $event_id, 'event_calendar_dates', array( '2026-09-03', 'bad', '2026-09-10' ) );
 
 		$this->assertSame( '', get_post_meta( $event_id, 'event_date', true ) );
 		$this->assertSame( '2026-09-04', get_post_meta( $event_id, 'event_end', true ) );
-		$this->assertSame( '', get_post_meta( $event_id, 'event_modality', true ) );
+		$this->assertSame( 'Híbrida — seis sesiones', get_post_meta( $event_id, 'event_modality', true ) );
 		$this->assertSame( 'vigente', get_post_meta( $event_id, 'event_status', true ) );
 		$this->assertStringNotContainsString( 'javascript:', get_post_meta( $event_id, 'event_signup_url', true ) );
 		$this->assertSame( array( '2026-09-03', '2026-09-10' ), get_post_meta( $event_id, 'event_calendar_dates', true ) );
@@ -108,7 +111,7 @@ final class Event_ModelTest extends WP_UnitTestCase {
 				'post_type'  => 'event',
 				'meta_input' => array(
 					'event_date'     => '2026-09-03',
-					'event_modality' => 'presencial',
+					'event_modality' => 'Híbrida — bienvenida, orientación, seis sesiones virtuales y un encuentro presencial',
 					'event_status'   => 'cancelado',
 					'event_place'    => 'Casa Retiro San Pablo, Puerto Colombia',
 				),
@@ -116,7 +119,7 @@ final class Event_ModelTest extends WP_UnitTestCase {
 		);
 
 		$this->assertSame( '2026-09-03', get_post_meta( $event_id, 'event_date', true ) );
-		$this->assertSame( 'presencial', get_post_meta( $event_id, 'event_modality', true ) );
+		$this->assertSame( 'Híbrida — bienvenida, orientación, seis sesiones virtuales y un encuentro presencial', get_post_meta( $event_id, 'event_modality', true ) );
 		$this->assertSame( 'cancelado', get_post_meta( $event_id, 'event_status', true ) );
 		$this->assertSame( 'Casa Retiro San Pablo, Puerto Colombia', get_post_meta( $event_id, 'event_place', true ) );
 	}

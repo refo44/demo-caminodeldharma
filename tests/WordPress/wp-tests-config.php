@@ -30,3 +30,8 @@ define( 'WP_TESTS_TITLE', 'Camino del Dharma wp-phpunit' );
 define( 'WP_PHP_BINARY', 'php' );
 
 define( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH', dirname( __DIR__, 2 ) . '/vendor/yoast/phpunit-polyfills' );
+
+// WU-07: the suite runs with the first-party theme active so its blocks,
+// patterns and templates are the ones under test (registered from the repo
+// tree in tests/WordPress/bootstrap.php).
+define( 'WP_DEFAULT_THEME', 'camino-del-dharma' );

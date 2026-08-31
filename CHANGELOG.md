@@ -10,6 +10,30 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-07: plantillas FSE reales, bloques dinámicos y conversión de contenido (sin cambio del artefacto desplegado)
+
+Theme `camino-del-dharma` 0.1.0 → **0.2.0** y `camino-del-dharma-core` 0.3.0 → **0.4.0**,
+con TDD (RED en ambas suites antes del primer archivo de vistas, ADR 0038). Theme: 16
+plantillas de bloques (docs/12 §5–§6), parts header/footer vía patterns PHP con el markup
+publicado, 11 bloques dinámicos (calendario de eventos con paridad byte a byte contra el
+grid publicado; listado vigentes/finalizados con tarjeta compacta doc 03 §3; nota destacada
+del Inicio con su estado vacío; tipo/meta/CTA de evento; byline «Por …» enlazada a las
+fichas ADR 0037 con bio y tiempo de lectura; listados del blog; ficha de autor con sus
+entradas vía relación `authors`; galería nativa por álbum con lightbox), CSS estático
+portado íntegro a presets (`--wp--preset/custom/style--*`), fuentes autohospedadas como
+`fontFace` (incluye subset MarloweEscapade), `main.js` portado y tooltips del calendario.
+Plugin: `wp cdd-core migrate convert` (edición field-scoped del contenido importado,
+dry-run por defecto, idempotente, guard de producción — inicio dinámico + `<picture>`
+desenvueltos, galerías Gutenberg por álbum ADR 0021/0036, enlaces OWN-016) y queries de
+presentación (`cdd_core_past_events`, `cdd_core_posts_by_blog_author`,
+`cdd_core_album_attachments`). Dos bugs latentes corregidos con regresión:
+`event_modality` pasa a texto libre (el select doc 03 descartaba el copy publicado,
+OWN-007) y las imágenes del Inicio rotas por `<source srcset>`/thumbs sin reescribir.
+QA local verde: unit 105/105, wp-phpunit 60/60 (theme activo en el harness), PHPCS y
+stylelint limpios, rutas y render verificados, `debug.log` limpio. Sustituciones y deltas
+registrados en `.audit/fase3-validation-matrix.md` § WU-07. Sin despliegue: el estático
+publicado no cambia.
+
 ### Fase 3 — WU-06: extractor, payload versionado, importador WP-CLI y reconciliación (sin cambio del artefacto desplegado)
 
 `camino-del-dharma-core` 0.2.0 → **0.3.0**, con TDD (RED en ambas suites antes de

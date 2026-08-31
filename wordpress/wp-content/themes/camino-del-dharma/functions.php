@@ -13,6 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/inc/class-camino-del-dharma-format.php';
+require_once __DIR__ . '/inc/class-camino-del-dharma-renderers.php';
+require_once __DIR__ . '/inc/blocks.php';
+
 /**
  * Theme supports that theme.json does not cover.
  */
@@ -40,6 +44,16 @@ function camino_del_dharma_enqueue_assets() {
 		get_template_directory_uri() . '/assets/css/main.css',
 		array(),
 		(string) filemtime( $stylesheet )
+	);
+
+	$script = get_template_directory() . '/assets/js/main.js';
+
+	wp_enqueue_script(
+		'camino-del-dharma-main',
+		get_template_directory_uri() . '/assets/js/main.js',
+		array(),
+		(string) filemtime( $script ),
+		true
 	);
 }
 add_action( 'wp_enqueue_scripts', 'camino_del_dharma_enqueue_assets' );

@@ -3,7 +3,7 @@
  * Plugin Name: Camino del Dharma Core
  * Plugin URI: https://caminodeldharma.org
  * Description: Domain plugin for Comunidad Buddhista Camino del Dharma — content model, routing and migration tooling (ADR 0024).
- * Version: 0.3.0
+ * Version: 0.4.0
  * Requires at least: 7.1
  * Requires PHP: 8.3
  * Author: Comunidad Buddhista Camino del Dharma
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CDD_CORE_VERSION', '0.3.0' );
+define( 'CDD_CORE_VERSION', '0.4.0' );
 define( 'CDD_CORE_PLUGIN_FILE', __FILE__ );
 
 // Pure domain classes (no WordPress APIs; unit-testable without a boot).
@@ -38,6 +38,8 @@ require_once __DIR__ . '/includes/migration/class-cdd-core-page-extractor.php';
 require_once __DIR__ . '/includes/migration/class-cdd-core-media-inventory.php';
 require_once __DIR__ . '/includes/migration/class-cdd-core-payload-builder.php';
 require_once __DIR__ . '/includes/migration/class-cdd-core-importer.php';
+require_once __DIR__ . '/includes/migration/class-cdd-core-content-converter.php';
+require_once __DIR__ . '/includes/migration/class-cdd-core-convert-service.php';
 
 // WordPress-facing functions (definitions only; safe to load without WP).
 require_once __DIR__ . '/includes/post-types.php';

@@ -86,3 +86,28 @@ function cdd_core_include_attachments_in_album_archives( $query ) {
 	$query->set( 'post_type', 'attachment' );
 	$query->set( 'post_status', 'inherit' );
 }
+
+/**
+ * The attachments of one gallery_album term in the published order
+ * (ascending file name: galeria-01 … galeria-36).
+ *
+ * @param WP_Term $term gallery_album term.
+ */
+function cdd_core_album_attachments( WP_Term $term ): array {
+	return get_posts(
+		array(
+			'post_type'   => 'attachment',
+			'post_status' => 'inherit',
+			'numberposts' => -1,
+			'orderby'     => 'name',
+			'order'       => 'ASC',
+			'tax_query'   => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- the album listing is the term lookup by design (ADR 0036).
+				array(
+					'taxonomy' => 'gallery_album',
+					'field'    => 'term_id',
+					'terms'    => $term->term_id,
+				),
+			),
+		)
+	);
+}
