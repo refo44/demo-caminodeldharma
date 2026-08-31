@@ -31,6 +31,8 @@ final class Theme_TemplatesTest extends TestCase {
 		'single-event',
 		'archive-event',
 		'single-blog_author',
+		'archive-blog_author',
+		'archive',
 		'taxonomy-gallery_album',
 		'404',
 	);
@@ -267,6 +269,50 @@ final class Theme_TemplatesTest extends TestCase {
 		$path = $this->theme_dir() . '/templates/' . $name . '.html';
 
 		return is_readable( $path ) ? file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+	}
+
+	/**
+	 * docs/19 §9: one H1 per page. The archives that fall back to
+	 * `index.html` — /author and /blog/tag/{slug} — had none, so a screen
+	 * reader reached a list of links with no page heading. Every archive
+	 * template names itself with the query title as an H1.
+	 */
+	public function test_archive_templates_carry_a_single_h1() {
+		foreach ( array( 'archive', 'archive-blog_author' ) as $name ) {
+			$html = $this->template( $name );
+
+			$this->assertStringContainsString( 'wp:query-title', $html, $name );
+			$this->assertStringContainsString( '"level":1', $html, $name );
+			$this->assertSame( 1, substr_count( $html, '"level":1' ), $name );
+		}
+	}
+
+	/**
+	 * docs/19 §8: a decorative SVG must carry BOTH `aria-hidden="true"`
+	 * and `focusable="false"`. Production ships four icons with only the
+	 * first (two section icons and the two footer contact icons), so
+	 * without this the port inherits a real defect. The attribute is
+	 * invisible and additive: no copy and no layout changes (OWN-007
+	 * protects the published copy, not an accessibility omission).
+	 */
+	public function test_decorative_svgs_are_hidden_and_unfocusable() {
+		$sources = array(
+			'patterns/header.php',
+			'patterns/footer.php',
+			'inc/class-camino-del-dharma-renderers.php',
+		);
+
+		foreach ( $sources as $source ) {
+			$code = (string) file_get_contents( $this->theme_dir() . '/' . $source ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo files in a unit test without WordPress.
+
+			preg_match_all( '/<svg\b[^>]*>/', $code, $matches );
+			$this->assertNotEmpty( $matches[0], $source );
+
+			foreach ( $matches[0] as $svg ) {
+				$this->assertStringContainsString( 'aria-hidden="true"', $svg, $source );
+				$this->assertStringContainsString( 'focusable="false"', $svg, $source );
+			}
+		}
 	}
 
 	/**

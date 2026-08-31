@@ -58,3 +58,18 @@ function camino_del_dharma_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'camino_del_dharma_enqueue_assets' );
+
+/**
+ * Drops core's block-template skip link (docs/19 §10).
+ *
+ * A block theme is given one automatically, pointing at the same
+ * `#main` the header pattern's published «Saltar al contenido» already
+ * targets — so a keyboard user tabs through two identical controls, the
+ * first of them in the admin language rather than the site's. The
+ * published one stays; core's markup and its stylesheet go.
+ */
+function camino_del_dharma_remove_core_skip_link() {
+	remove_action( 'wp_footer', 'the_block_template_skip_link' );
+	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' );
+}
+add_action( 'after_setup_theme', 'camino_del_dharma_remove_core_skip_link' );

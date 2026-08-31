@@ -74,6 +74,20 @@ final class Theme_SeoTest extends TestCase {
 	}
 
 	/**
+	 * docs/19 §10: one skip link. A block theme gets core's own — in the
+	 * site's admin language, pointing at the same `#main` — on top of the
+	 * published one the header pattern renders, so a keyboard user tabs
+	 * twice through the same control. The theme keeps its own and drops
+	 * core's two halves (the markup filter and its stylesheet).
+	 */
+	public function test_core_block_template_skip_link_is_removed() {
+		$functions = $this->theme_file( 'functions.php' );
+
+		$this->assertStringContainsString( "remove_action( 'wp_footer', 'the_block_template_skip_link' )", $functions );
+		$this->assertStringContainsString( "remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' )", $functions );
+	}
+
+	/**
 	 * Reads one theme file.
 	 *
 	 * @param string $path Path under the theme root.
