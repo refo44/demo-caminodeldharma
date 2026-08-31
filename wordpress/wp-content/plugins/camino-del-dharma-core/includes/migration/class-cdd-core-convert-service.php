@@ -67,7 +67,10 @@ final class Cdd_Core_Convert_Service {
 
 		$converter = new Cdd_Core_Content_Converter();
 
-		foreach ( array( 'inicio', 'galeria', 'comunidad', 'practica' ) as $slug ) {
+		// privacidad before contacto: the notice must describe a form
+		// that submits BEFORE the form block reaches /contacto in this
+		// environment (ADR 0041 point 3).
+		foreach ( array( 'inicio', 'galeria', 'comunidad', 'practica', 'privacidad', 'contacto' ) as $slug ) {
 			$page = get_page_by_path( $slug, OBJECT, 'page' );
 			if ( ! $page instanceof WP_Post ) {
 				continue;
@@ -82,6 +85,15 @@ final class Cdd_Core_Convert_Service {
 					break;
 				case 'practica':
 					$converted = $converter->convert_practica( $page->post_content, $this->audio_media_map( $page->post_content ) );
+					break;
+				case 'privacidad':
+					$converted = $converter->convert_privacidad(
+						$page->post_content,
+						Cdd_Core_Spanish_Date::long_form( current_time( 'Y-m-d' ) )
+					);
+					break;
+				case 'contacto':
+					$converted = $converter->convert_contacto( $page->post_content );
 					break;
 				default:
 					$converted = $converter->convert_comunidad( $page->post_content );

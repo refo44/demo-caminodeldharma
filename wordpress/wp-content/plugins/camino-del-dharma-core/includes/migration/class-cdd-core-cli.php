@@ -24,6 +24,7 @@ final class Cdd_Core_CLI {
 	public static function register() {
 		WP_CLI::add_command( 'cdd-core migrate', array( self::class, 'migrate' ) );
 		WP_CLI::add_command( 'cdd-core seed', array( self::class, 'seed' ) );
+		WP_CLI::add_command( 'cdd-core contact', array( self::class, 'contact' ) );
 	}
 
 	/**
@@ -150,6 +151,44 @@ final class Cdd_Core_CLI {
 			WP_CLI::error( $report['error'] );
 		}
 		WP_CLI::success( ! empty( $report['dry_run'] ) ? 'Dry run only — nothing written (use --apply).' : 'Seed applied.' );
+	}
+
+	/**
+	 * Provisions the contact form into Contact Form 7 (WU-09).
+	 *
+	 * Create-missing-only and idempotent, like the importer. Refuses while
+	 * CF7 is inactive, or while the /privacidad notice still describes a
+	 * form that does not submit (ADR 0041 point 3): the notice is updated
+	 * by `wp cdd-core migrate convert --apply` first.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <action>
+	 * : provision.
+	 *
+	 * [--apply]
+	 * : Actually create the form. Without it this is a dry run.
+	 *
+	 * @param array $args       Positional args.
+	 * @param array $assoc_args Named args.
+	 */
+	public static function contact( array $args, array $assoc_args ) {
+		if ( 'provision' !== ( $args[0] ?? '' ) ) {
+			WP_CLI::error( 'Unknown action. Use: wp cdd-core contact provision [--apply]' );
+		}
+
+		$report = cdd_core_provision_contact_form( isset( $assoc_args['apply'] ) );
+		self::render_json( $report );
+
+		if ( '' !== $report['error'] ) {
+			WP_CLI::error( $report['error'] );
+		}
+
+		WP_CLI::success(
+			! empty( $report['dry_run'] )
+				? 'Dry run only — nothing written (use --apply).'
+				: sprintf( 'Contact form provisioned (id %d).', $report['form_id'] )
+		);
 	}
 
 	/**

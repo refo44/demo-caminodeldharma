@@ -3,7 +3,7 @@
  * Plugin Name: Camino del Dharma Core
  * Plugin URI: https://caminodeldharma.org
  * Description: Domain plugin for Comunidad Buddhista Camino del Dharma — content model, routing and migration tooling (ADR 0024).
- * Version: 0.6.0
+ * Version: 0.7.0
  * Requires at least: 7.1
  * Requires PHP: 8.3
  * Author: Comunidad Buddhista Camino del Dharma
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CDD_CORE_VERSION', '0.6.0' );
+define( 'CDD_CORE_VERSION', '0.7.0' );
 define( 'CDD_CORE_PLUGIN_FILE', __FILE__ );
 
 // Pure domain classes (no WordPress APIs; unit-testable without a boot).
@@ -27,6 +27,7 @@ require_once __DIR__ . '/includes/class-cdd-core-ics-generator.php';
 require_once __DIR__ . '/includes/class-cdd-core-calendar-data.php';
 require_once __DIR__ . '/includes/class-cdd-core-featured-event-policy.php';
 require_once __DIR__ . '/includes/class-cdd-core-authors-list.php';
+require_once __DIR__ . '/includes/class-cdd-core-contact-form-template.php';
 require_once __DIR__ . '/includes/seo/class-cdd-core-json-ld.php';
 require_once __DIR__ . '/includes/seo/class-cdd-core-seo-document.php';
 
@@ -53,6 +54,7 @@ require_once __DIR__ . '/includes/authors-guard.php';
 require_once __DIR__ . '/includes/events.php';
 require_once __DIR__ . '/includes/routing.php';
 require_once __DIR__ . '/includes/seo.php';
+require_once __DIR__ . '/includes/contact.php';
 require_once __DIR__ . '/includes/admin.php';
 
 // Hook wiring only when WordPress is present (the unit bootstrap loads
@@ -76,6 +78,9 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_sitemaps_add_provider', 'cdd_core_seo_sitemap_provider', 10, 2 );
 	add_filter( 'wp_sitemaps_taxonomies', 'cdd_core_seo_sitemap_taxonomies' );
 	add_action( 'admin_menu', 'cdd_core_register_admin_pages' );
+
+	// Contact Form 7 wiring (WU-09, ADR 0026/0041). Inert without CF7.
+	add_filter( 'wpcf7_autop_or_not', 'cdd_core_contact_form_autop', 10, 2 );
 
 	add_filter( 'wp_insert_post_data', 'cdd_core_guard_post_publish', 10, 2 );
 	add_filter( 'rest_pre_insert_post', 'cdd_core_rest_guard_post_publish', 10, 2 );

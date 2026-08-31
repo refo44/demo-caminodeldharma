@@ -31,6 +31,14 @@ final class Cdd_Core_Content_Converter {
 	const BLOCK_BREAK_CLOSE = "\n\n<!-- wp:html -->";
 
 	/**
+	 * The two paragraphs of /privacidad approved by ADR 0041, verbatim.
+	 * They are constants because the §2.2 sentence is also the gate that
+	 * tells first-party code the notice is up to date.
+	 */
+	const PRIVACY_SUMMARY_BULLET = 'El formulario de contacto envía tu mensaje al correo de la comunidad. WhatsApp y el correo directo siguen disponibles.';
+	const PRIVACY_FORM_SECTION   = 'El formulario de la página Contacto se procesa en el servidor del sitio (Contact Form 7) y entrega el mensaje a caminodeldharma1@gmail.com. Tratamos el nombre, el correo y el contenido que envíes, con la finalidad de leer y responder tu consulta. No publicamos esos envíos en el sitio. WhatsApp y el correo directo siguen siendo canales operativos.';
+
+	/**
 	 * Converts the inicio page: the featured-event aside and the home
 	 * blog grid become dynamic blocks, the static <picture> wrappers
 	 * (handmade WebP variants that do not migrate — doc 03 §5.1) unwrap
@@ -298,5 +306,102 @@ final class Cdd_Core_Content_Converter {
 	 */
 	private function text( string $value ): string {
 		return htmlspecialchars( $value, ENT_NOQUOTES, 'UTF-8', false );
+	}
+
+	/**
+	 * Converts the contacto page: the published form that never delivered
+	 * (`action="#"`, FUNC-001) becomes the theme block that renders
+	 * Contact Form 7. Everything else on the page — the intro, the
+	 * WhatsApp/email channels TASK-0002 added beside the form, the social
+	 * block — stays exactly as published. Null when nothing is pending.
+	 *
+	 * @param string $content Stored post_content (wp:html wrapped).
+	 */
+	public function convert_contacto( string $content ): ?string {
+		return $this->replace_element(
+			$content,
+			'<form class="section-gap"',
+			'</form>',
+			self::BLOCK_BREAK_OPEN . '<!-- wp:camino-del-dharma/contacto-formulario /-->' . self::BLOCK_BREAK_CLOSE
+		);
+	}
+
+	/**
+	 * Applies the ADR 0041 copy delta to the privacidad page.
+	 *
+	 * Field-scoped by construction: five documented substitutions on the
+	 * paragraphs that describe the contact form, plus the date of the
+	 * change. The notice stays provisional, and cookies, analytics,
+	 * embeds, donations, rights and Ley 1581 are not rewritten — on
+	 * WordPress the form does submit, and that is the only fact that
+	 * changed. The static notice is not touched while production still
+	 * serves `action="#"` (ADR 0041 point 4).
+	 *
+	 * @param string $content      Stored post_content (wp:html wrapped).
+	 * @param string $updated_date Day of the change, Spanish long form.
+	 */
+	public function convert_privacidad( string $content, string $updated_date ): ?string {
+		if ( self::privacidad_delta_applied( $content ) ) {
+			return null;
+		}
+
+		$replacements = array(
+			// The provisional seal stays; only the clause about a form
+			// that does not yet submit goes.
+			'Su redacción podrá cambiar tras esa revisión y cuando el formulario de contacto pase a enviarse a un servidor.'
+				=> 'Su redacción podrá cambiar tras esa revisión.',
+
+			// Summary bullet.
+			'<li>El formulario de contacto de la página no envía nada a nuestro servidor.</li>'
+				=> '<li>' . self::PRIVACY_SUMMARY_BULLET . '</li>',
+
+			// §2.2: the first published paragraph carries the new text.
+			'<p><strong>En esta versión del sitio, el formulario de contacto no envía nada a nuestro servidor.</strong> El botón de envío no entrega el mensaje. Los datos que escribas en esos campos no se almacenan en este sitio web.</p>'
+				=> '<p>' . self::PRIVACY_FORM_SECTION . '</p>',
+		);
+
+		// Whole lines that go, indentation included: what the second §2.2
+		// paragraph and the §8 trigger announced has already happened.
+		$removals = array(
+			'<p>Cuando el formulario pase a procesarse en un servidor, este aviso se actualizará <strong>antes</strong> de activarlo.</p>',
+			'<li>cuando el formulario de contacto pase a procesarse en un servidor;</li>',
+		);
+
+		$converted = $content;
+		foreach ( $replacements as $from => $to ) {
+			$at = strpos( $converted, $from );
+			if ( false === $at ) {
+				return null;
+			}
+			$converted = substr_replace( $converted, $to, $at, strlen( $from ) );
+		}
+
+		foreach ( $removals as $line ) {
+			$without = preg_replace( '#\n[ \t]*' . preg_quote( $line, '#' ) . '#', '', $converted, 1 );
+			if ( null === $without || $without === $converted ) {
+				return null;
+			}
+			$converted = $without;
+		}
+
+		$converted = preg_replace(
+			'#(<p class="privacy-updated">Última actualización: )[^<]*(</p>)#u',
+			'${1}' . $updated_date . '.${2}',
+			$converted,
+			1
+		);
+
+		return $converted;
+	}
+
+	/**
+	 * Whether a privacidad content already describes a contact form that
+	 * submits server-side. The gate first-party code reads before letting
+	 * an environment enable Contact Form 7 (ADR 0041 point 3).
+	 *
+	 * @param string $content Stored post_content.
+	 */
+	public static function privacidad_delta_applied( string $content ): bool {
+		return false !== strpos( $content, self::PRIVACY_FORM_SECTION );
 	}
 }

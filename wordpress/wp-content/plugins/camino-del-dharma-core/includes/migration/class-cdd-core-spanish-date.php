@@ -73,4 +73,24 @@ final class Cdd_Core_Spanish_Date {
 
 		return null !== $range ? $range['start'] : null;
 	}
+
+	/**
+	 * A Y-m-d date as the Spanish long form the published pages print
+	 * («31 de agosto de 2026»). The inverse of parse_range, and the reason
+	 * it lives here: no WordPress locale is involved, so the string reads
+	 * the same in every environment. Returns an empty string for anything
+	 * that is not a calendar date.
+	 *
+	 * @param string $ymd Date in Y-m-d.
+	 */
+	public static function long_form( string $ymd ): string {
+		$date = DateTimeImmutable::createFromFormat( '!Y-m-d', $ymd, new DateTimeZone( 'UTC' ) );
+		if ( ! $date instanceof DateTimeImmutable || $date->format( 'Y-m-d' ) !== $ymd ) {
+			return '';
+		}
+
+		$month = array_search( $date->format( 'm' ), self::MONTHS, true );
+
+		return sprintf( '%d de %s de %d', (int) $date->format( 'j' ), $month, (int) $date->format( 'Y' ) );
+	}
 }
