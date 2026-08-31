@@ -40,4 +40,12 @@ Reglas:
   página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
   `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
   (docs/19 §9).
+- Formulario de contacto desde WU-09 (v0.5.0): el bloque
+  `camino-del-dharma/contacto-formulario` rinde el formulario que provisiona
+  camino-del-dharma-core en Contact Form 7. El contenido de la Page guarda el
+  bloque, no un shortcode de terceros, y con CF7 apagado el bloque imprime los
+  canales WhatsApp y correo — el fallback operativo de ADR 0041 punto 5, no un
+  error. El CSS solo cubre lo que CF7 añade al maquetado publicado; los colores
+  de estado siguen siendo los de CF7, porque el estático nunca tuvo un
+  formulario que enviara y no hay token publicado de error.
 - Guía de pruebas: `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038).

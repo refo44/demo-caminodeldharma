@@ -56,6 +56,9 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] `/comunidad` (WP): enlaces a `/author/zheng-gong` y a la ficha Comunidad (OWN-016); copy live no pisado; estático no cambiado por esto
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
 - [ ] Contact Form 7: Page `/privacidad` en WordPress con los párrafos del formulario según ADR 0041 / OWN-018; entrega verificada en staging. La revisión legal **no** es prerrequisito (ADR 0041). Fallback operativo: CF7 deshabilitado + WhatsApp/correo, registrado aquí y en la matriz
+  - El orden lo impone el código: `wp cdd-core contact provision` rehúsa mientras `/privacidad` no describa un envío real. Secuencia por entorno: `plugin install contact-form-7 --activate` → `migrate convert --apply` → `contact provision --apply` (`docs/operations/third-party-plugins.md`)
+  - Anotar la versión de CF7 instalada en ese entorno en `docs/operations/third-party-plugins.md`
+  - `Pass (local)` no cuenta: en Docker `wp_mail()` falla por falta de MTA. Enviar una prueba con datos sintéticos desde staging y **confirmar la recepción** en `caminodeldharma1@gmail.com`
 - [ ] Rollback definido (volver a estático versionado **o** restaurar BD+files WP; dueño y ventana)
 - [ ] Indexing policy definida: staging no indexable; producción: `robots.txt` + sitemap nativo (ADR 0030); no dejar «Disuadir motores de búsqueda» en producción
 - [ ] Deploy scope auditado: theme + plugin propio solamente; no core, no `wp-config.php`, no uploads, no plugins de terceros sobrescritos

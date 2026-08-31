@@ -6,7 +6,7 @@ Registro durable exigido por FABLE5 v2.4 §12. Política: **native-first** (ADR 
 
 | | |
 | --- | --- |
-| **Versión** | 1.1 |
+| **Versión** | 1.2 |
 | **Fecha** | 2026-08-31 |
 | **Estado** | Vigente |
 
@@ -15,6 +15,31 @@ Registro durable exigido por FABLE5 v2.4 §12. Política: **native-first** (ADR 
 | Plugin | ADR | Estado | Condiciones |
 | --- | --- | --- | --- |
 | Contact Form 7 | ADR 0026 | Aprobado; **elegible en el corte** (ADR 0041 / OWN-018) | Destino `caminodeldharma1@gmail.com`. Local/staging con datos sintéticos en WU-09. Antes de activarlo en un entorno WordPress: aplicar el delta de `/privacidad` (párrafos del formulario). Revisión legal **no** es prerrequisito. Entrega real verificada en staging Hostinger antes del release. Fallback operativo: CF7 deshabilitado + WhatsApp/correo, registrado en matriz y checklist. |
+
+## Versiones instaladas por entorno
+
+Registro exigido por la regla de versionado de abajo: el código no está en Git, así que la
+versión que corre cada entorno solo consta aquí.
+
+| Entorno | Plugin | Versión | Fecha | Notas |
+| --- | --- | --- | --- | --- |
+| Local (Docker, ADR 0023) | Contact Form 7 | **6.1.7** | 2026-08-31 (WU-09) | Instalado con `wp plugin install contact-form-7 --activate`; vive en el volumen `wp_data`, nunca en el árbol del repositorio. Formulario provisionado con `wp cdd-core contact provision --apply`. `wp_mail()` devuelve `false` (sin MTA en el contenedor): la validación está probada, la **entrega no**. |
+| Staging Hostinger | Contact Form 7 | — | — | Pendiente (OWN-005). Aquí se verifica la entrega real antes del release. |
+| Producción | Contact Form 7 | — | — | Pendiente del corte. |
+
+## Procedimiento por entorno (WU-09)
+
+El orden importa: ADR 0041 punto 3 exige que el aviso describa un envío real **antes** de
+activar el formulario. `wp cdd-core contact provision` lo comprueba y rehúsa si no se cumplió.
+
+```bash
+wp plugin install contact-form-7 --activate
+wp cdd-core migrate convert --apply   # actualiza /privacidad y pone el bloque en /contacto
+wp cdd-core contact provision --apply # crea el formulario y su correo
+```
+
+`provision` es create-missing-only: lo que un editor cambie luego en wp-admin no se pisa. Tras
+instalarlo, anotar la versión en la tabla de arriba.
 
 ## Prohibidos sin ADR nueva
 
@@ -33,3 +58,4 @@ plugins de calendario, plugins de lightbox, y cualquier antispam adicional a CF7
 | --- | --- |
 | 2026-08-31 | Creación del registro (WU-00). CF7 único aprobado; sin entornos WordPress aún. |
 | 2026-08-31 | ADR 0041 / OWN-018: CF7 deja de estar gated por revisión legal; elegible en el corte. |
+| 2026-08-31 | WU-09: CF7 **6.1.7** instalado y provisionado en el entorno local; registro de versiones por entorno y procedimiento de instalación. Entrega real sigue `Unverified`. |

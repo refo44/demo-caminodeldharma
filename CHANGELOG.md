@@ -10,6 +10,31 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — WU-09: Contact Form 7 y los párrafos del formulario en `/privacidad` (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.0** y theme `camino-del-dharma` **0.5.0**. El estático de
+producción no se toca: sigue sirviendo `action="#"` y su aviso sin modificar (ADR 0041 punto 4).
+
+- **El formulario de contacto envía** (FUNC-001 / TASK-0003, abierto desde la auditoría de
+  producción). Contact Form 7 6.1.7 es el único plugin de terceros aprobado (ADR 0025/0026) y su
+  código **no** viaja en Git: el repositorio versiona la *definición* que el plugin propio
+  provisiona — el maquetado publicado con los tres controles como form-tags, el correo a
+  `caminodeldharma1@gmail.com` con `Reply-To` del visitante, y los mensajes en español.
+- **El botón publicado sobrevive**: `[submit]` de CF7 solo imprime un `<input>`, así que se
+  conserva el `<button>` con su icono de envío, que acciona CF7 igual por el evento `submit`.
+- **`wp cdd-core contact provision`**: create-missing-only e idempotente. Rehúsa mientras CF7 esté
+  inactivo o mientras `/privacidad` no describa un envío real — el gate de ADR 0041 punto 3 es
+  código, no una nota.
+- **Delta de copy de `/privacidad` (solo WordPress, ADR 0041)**: recuadro provisional sin la
+  cláusula del formulario, viñeta del resumen, §2.2 reescrita a los hechos, el disparador ya
+  cumplido fuera de §8 y la fecha del cambio. El sello «Documento provisional» se conserva y el
+  resto del aviso —cookies, analítica, embeds, donaciones, derechos, Ley 1581— no se toca.
+- **Fallback operativo implementado** (ADR 0041 punto 5): con CF7 apagado, `/contacto` imprime los
+  canales WhatsApp y correo en vez de un shortcode en crudo.
+- **La entrega real sigue sin verificar**: en Docker `wp_mail()` falla por falta de MTA. La
+  validación está probada de extremo a extremo con datos sintéticos; la recepción en
+  `caminodeldharma1@gmail.com` se comprueba en staging Hostinger antes del release.
+
 ### WordPress Fase 3 — WU-08B: SEO, redirects, huérfanos y a11y (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.6.0** y theme `camino-del-dharma` **0.4.0**. El estático de

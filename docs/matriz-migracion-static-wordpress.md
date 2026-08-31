@@ -57,8 +57,8 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 | `/galeria/2021` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2021` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex |
 | `/galeria/general` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/general` | taxonomía | — | 25 fotos | PLANNED; **noindex** al corte | 200; noindex |
 | `/donaciones` | `donaciones/index.html` | HTML live (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
-| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) en el corte (ADR 0041); copy de `/privacidad` § formulario en WU-09 | 200; envío real en staging; WhatsApp/correo; a11y labels |
-| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar HTML live; en WP, delta field-scoped ADR 0041 (párrafos del formulario). Disclaimer provisional se conserva. Revisión legal no es gate | 200; enlace footer; copy del form alineado con CF7 en WP |
+| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | **WU-09 hecho:** el `<form action="#">` es el bloque `camino-del-dharma/contacto-formulario`, que rinde Contact Form 7 (definición y correo en el plugin) o, con CF7 apagado, los canales WhatsApp/correo | 200; DOM publicado verificado (labels, ids, `name`, `autocomplete`, iconos, botón); validación probada con datos sintéticos; **envío real solo en staging** |
+| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | **WU-09 hecho:** delta field-scoped ADR 0041 aplicado solo en WordPress (recuadro, viñeta del resumen, §2.2, disparador de §8, fecha). Disclaimer provisional conservado; el resto del aviso sin tocar; el estático intacto | 200; enlace footer; `diff` de 4 hunks, ninguno fuera de alcance; §2.3–§2.6 idénticas |
 
 `templates/page-*.html` **no** crea la Page. Ver ADR 0032 / 0033.
 
@@ -193,4 +193,4 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.3 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7/privacidad alineados con ADR 0041
+**Versión:** 1.4 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7 y el delta de `/privacidad` **implementados** en WU-09 (entrega de correo pendiente de staging)

@@ -5,9 +5,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (WU-08B implementado y validado) |
+| **Última actualización** | 2026-08-31 (WU-09 implementado y validado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…**WU-08B cerrados**; checkpoint antes de **WU-09** |
+| **Work unit activo** | Ninguno — WU-00…**WU-09 cerrados**; checkpoint antes de **BUG-001** |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -195,6 +195,41 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
     sobre 13 rutas, 320px y 640px. Matriz § WU-08B. QA 4 con lector de pantalla y staging siguen
     `Unverified`.
 
+- **WU-09 — Contact Form 7 y los párrafos del formulario en `/privacidad`** (sesión 2026-08-31,
+  FABLE5 §10.3 + §10.4 únicamente; ADR 0025/0026/0038/0041, OWN-007/018; TDD honesto: RED
+  documentado en unit (15 E + 2 F) **y** wp-phpunit (5 E + 3 F) antes del primer archivo):
+  - Reanudación verificada: preflight limpio (HEAD `f860561`) + rerun de los gates (unit 156,
+    wp-phpunit 106, php-lint, plugin 0.6.0 y theme 0.4.0 activos).
+  - **CF7 6.1.7** instalado y activado en el entorno local. Su código vive en el volumen
+    `wp_data`, **nunca** en el árbol del repositorio (`git status` limpio tras instalarlo);
+    versión y procedimiento por entorno en `docs/operations/third-party-plugins.md`.
+  - Plugin **0.7.0**: `includes/class-cdd-core-contact-form-template.php` (pura: plantilla del
+    formulario = maquetado publicado con `[text*]`/`[email*]`/`[textarea*]`, conservando labels,
+    `for`/`id`, `name`, `autocomplete`, los iconos y el `<button>` con el suyo; plantilla del
+    correo a `caminodeldharma1@gmail.com` con `Reply-To: [correo]` y texto plano; los 8 mensajes
+    en español; decisión de `autop`); `includes/contact.php` (opción `cdd_core_contact_form_id`,
+    `cdd_core_contact_form_available/html/recipient`, `cdd_core_privacy_delta_applied`,
+    `cdd_core_provision_contact_form` con **todos** los bloqueos a la vez, filtro
+    `wpcf7_autop_or_not` acotado a este formulario); CLI `wp cdd-core contact provision [--apply]`;
+    `Cdd_Core_Content_Converter::convert_contacto/convert_privacidad` + `privacidad_delta_applied`
+    y las dos constantes con el copy aprobado; `Cdd_Core_Spanish_Date::long_form()`; el servicio
+    de conversión recorre **`privacidad` antes que `contacto`**.
+  - Theme **0.5.0**: bloque `camino-del-dharma/contacto-formulario` (14 en total) que rinde CF7 o,
+    con CF7 apagado, los canales WhatsApp/correo publicados; CSS para lo que CF7 añade al
+    maquetado (el wrapper de control pasa a `display:block`) y para el aviso degradado.
+  - Orden ADR 0041 respetado en el entorno: con CF7 **desactivado**, `contact provision` rehúsa
+    con los dos bloqueos → `migrate convert --apply` (privacidad + contacto; 2.º apply = 0) →
+    activar CF7 → `contact provision --apply` (2.º = rehúsa). El `diff` del aviso son **4 hunks**,
+    ninguno fuera del alcance aprobado; el estático no se toca (`git diff -- static/` vacío).
+  - Verificado en navegador real: DOM del formulario = el publicado (labels, ids, `name`,
+    `autocomplete`, iconos, botón, `section-gap`, `aria-label`), **0 `<p>` espurios**; los 3
+    estados de envío en español (vacío, correo inválido, datos válidos); el fallback con CF7
+    apagado sin shortcode en crudo; a11y y 320px sin desbordes; consola limpia.
+  - **La entrega de correo no está demostrada**: el contenedor local no tiene MTA y `wp_mail()`
+    devuelve `false` (comprobado directamente). La validación sí está probada de extremo a extremo.
+  - QA: unit 175/175 (913 asserts), wp-phpunit 114/114 (677 asserts), phpcs 0/0 sobre 85 archivos,
+    stylelint verde, `php -l` OK, `debug.log` sin entradas propias. Matriz § WU-09.
+
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger **verificada** (WU-06, delta 0). Re-verificar en el freeze pre-corte.
@@ -224,10 +259,17 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   `9a00f97` antes de cualquier push.
 - **BUG-001 (Círculos `.ics`):** el exportado debe incluir **todas las sesiones**. Hoy el
   estático publica un solo VEVENT de la bienvenida; WordPress emite un solo VEVENT de rango.
-  **Sesión propia inmediatamente antes de WU-10** (después de WU-09). No se mezcla con 08B.
-- **ADR 0041 / OWN-018 (2026-08-31):** Contact Form 7 es elegible en el corte. La revisión
-  legal **no** bloquea WU-09 ni el lanzamiento. WU-09 actualiza en WordPress solo los
-  párrafos del formulario de `/privacidad`; el HTML estático no se toca.
+  **Siguiente sesión** (WU-09 ya está cerrado). No se mezcla con WU-10.
+- **ADR 0041 / OWN-018 — cerrado en WU-09.** El delta de copy está aplicado en la Page de
+  WordPress y el estático sigue intacto. Queda **una sola cosa abierta y es bloqueante para el
+  release, no para el corte**: la **entrega real** a `caminodeldharma1@gmail.com` desde staging
+  Hostinger. `Pass (local)` no basta (ADR 0026/0041 punto 5). Si allí falla, el corte puede
+  seguir con CF7 deshabilitado y WhatsApp/correo — el bloque del theme ya rinde ese estado— y se
+  registra en matriz y checklist. **Fallo operativo, no gate jurídico.**
+- **CF7 no está en Git y por eso el harness no lo ejecuta.** La rama «CF7 presente» se prueba
+  contra un entorno real, no en la suite; la suite cubre lo propio en ambos estados. Al
+  provisionar un entorno nuevo hay que anotar la versión instalada en
+  `docs/operations/third-party-plugins.md`.
 - Deltas de copy registrados (matriz WU-07): fechas generadas, filas `Hora`/`Aporte` fuera
   del modelo, resumen de card vigente = intro del single, excerpt del listado = deck,
   tiempo de lectura de Sangha 6′ vs 8′, label «Preinscribirme», byline enlazada.
@@ -240,7 +282,17 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   «bienvenida».
 - Autorización del propietario 2026-08-31: CF7 en el corte **sin** espera de asesoría legal
   (OWN-018, ADR 0041, FABLE5 v2.4). El disclaimer de `/privacidad` basta para lanzar. Copy
-  WordPress del formulario = delta field-scoped; estático intacto.
+  WordPress del formulario = delta field-scoped; estático intacto. **Ejecutado en WU-09.**
+- WU-09: 12 decisiones/deltas registrados en la matriz § WU-09. Los cinco que condicionan trabajo
+  futuro: (1) el repositorio posee la *definición* de CF7, no su código, y `contact provision` es
+  create-missing-only —lo que un editor cambie en wp-admin no se pisa; (2) se conserva el
+  `<button>` publicado en vez de `[submit]` (CF7 escucha el evento `submit`), a costa del spinner
+  que el DOM publicado tampoco tenía; (3) el formulario es un **bloque del theme**, no un
+  shortcode en el contenido, lo que además protege `/contacto` de KSES; (4) los mensajes que lee
+  un visitante son propios porque el locale sale de `cdd_core_default_locale()` y WordPress no
+  instala paquete de traducción de CF7 —«spam» y «fallo de envío» comparten texto a propósito;
+  (5) no se inventa una pareja de colores error/éxito: el estático nunca tuvo un formulario que
+  enviara, así que los colores de estado siguen siendo los de CF7.
 - Autorización del propietario para Fase 3: mensaje «Implementar» sobre FABLE5 v2.3
   (2026-08-31); esta sesión ejecuta solo WU-04 por orden explícita del owner.
 - Prefijos primer partido (ADR 0027 + sniff WPCS): plugin `cdd_core`, theme
@@ -270,13 +322,31 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-08B. Estados: `Unverified`, `Pass (local)`,
+Ver `.audit/fase3-validation-matrix.md` § WU-09. Estados: `Unverified`, `Pass (local)`,
 `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. Siguiente implementación: **WU-09** (Contact Form 7), sesión aparte. Orden restante:
-  WU-09 → **BUG-001** (`.ics` todas las sesiones) → WU-10.
+- Ninguno. Siguiente implementación: **BUG-001** (`.ics` con todas las sesiones), sesión aparte.
+  Orden restante: BUG-001 → WU-10.
+
+## Archivos cambiados en WU-09
+
+- Tests nuevos (RED antes de la implementación): `tests/Unit/Contact_Form_TemplateTest.php`,
+  `tests/WordPress/Contact_FormTest.php`; ampliados `tests/Unit/Content_ConverterTest.php`,
+  `tests/Unit/Spanish_DateTest.php`, `tests/Unit/Theme_BehaviorTest.php`.
+- Plugin `camino-del-dharma-core` 0.6.0 → **0.7.0**:
+  `includes/class-cdd-core-contact-form-template.php` e `includes/contact.php` (nuevos);
+  `includes/migration/class-cdd-core-content-converter.php`, `class-cdd-core-convert-service.php`,
+  `class-cdd-core-cli.php`, `class-cdd-core-spanish-date.php`, bootstrap.
+- Theme `camino-del-dharma` 0.4.0 → **0.5.0**: `inc/blocks.php`, `assets/css/main.css`,
+  `style.css`.
+- Docs: `docs/operations/third-party-plugins.md` (versión instalada + procedimiento por entorno),
+  `docs/cutover-checklist-wordpress.md`, `docs/matriz-migracion-static-wordpress.md`,
+  READMEs de plugin y theme, `CLAUDE.md`, `AGENTS.md`, `CHANGELOG.md`,
+  `.audit/fase3-validation-matrix.md`, este archivo.
+- **Sin cambios** en `static/`, en `migration/payload.json` (WU-09 no altera contenido extraído)
+  ni en `wordpress/.htaccess`.
 
 ## Archivos cambiados en WU-08B
 
@@ -362,20 +432,23 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 ## Último commit verificado
 
-`081b2f8` — cierre de WU-08B (QA local verde: unit 156, wp-phpunit 106, phpcs 0/0). Baseline visual del theme:
+`9793a3c` — última implementación de WU-09 (QA local verde: unit 175, wp-phpunit 114, phpcs 0/0); el commit de documentación va justo después. Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
 `e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07) → `2bd733d` → `150d8b8` (gobernanza) →
 `c94635f` (WU-08A) → `5354449` → `d73fecd` (estado) → `e5dbab0` → `e14ef8e` → `3c3d513`
-(ajeno) → `9a00f97` → `081b2f8` (WU-08B).
+(ajeno) → `9a00f97` → `081b2f8` → `f860561` (WU-08B) → `1492d01` → `0ee2e3a` →
+`9793a3c` (WU-09) → commit de docs de cierre.
 
 ## Estado del entorno local
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.6.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.4.0,
-vistas reales + comportamiento + cabeza). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
+**activo** (v0.7.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.5.0,
+vistas reales + comportamiento + cabeza + formulario). **Contact Form 7 6.1.7 activo** con el
+formulario provisionado (`wp cdd-core contact provision --apply`); `/privacidad` lleva el delta
+de ADR 0041 y `/contacto` el bloque del formulario. Akismet sigue inactivo (sin antispam extra). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
 convertido** por `wp cdd-core migrate convert --payload=/repo/migration/payload.json --apply`
 (inicio con bloques dinámicos y `<picture>` desenvueltos; galeria con 3 galerías nativas;
 comunidad con enlaces OWN-016; practica con 2 `core/audio` nativos; copy de compartir
@@ -388,15 +461,17 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-08B está cerrado (checkpoint alcanzado; sin push ni despliegue).
+WU-09 está cerrado (checkpoint alcanzado; sin push ni despliegue).
 
-**WU-09 — Contact Form 7 y los párrafos del formulario en `/privacidad`** (Opus, **sesión
-nueva**): sin gate jurídico (ADR 0041 / OWN-018). El delta de copy se aplica solo en la Page de
-WordPress; el HTML estático no se toca mientras producción siga sirviendo `action="#"`. La
-entrega real de correo debe verificarse en staging Hostinger: `Pass (local)` no basta.
+**BUG-001** (`.ics` de Círculos con todas las sesiones): **sesión propia siguiente**, antes de
+WU-10. Opus, resume corto, TDD. Hoy el estático publica un solo VEVENT de la bienvenida y
+WordPress emite un solo VEVENT de rango; el exportado debe incluir todas las sesiones. No
+inventar un campo de «bienvenida». No mezclar con WU-10.
 
-**BUG-001** (`.ics` de Círculos con todas las sesiones): sesión propia **inmediatamente
-antes de WU-10**, después de WU-09. Opus, resume corto, TDD. No mezclar con WU-10.
+Pendiente que **no** bloquea la siguiente unidad pero sí el release: verificar en staging
+Hostinger que el formulario entrega en `caminodeldharma1@gmail.com` (WU-09 dejó la validación
+probada y la entrega `Unverified`). Si falla, corte con CF7 deshabilitado + WhatsApp/correo,
+registrado en matriz y checklist.
 
 ## Procedimiento de reanudación
 

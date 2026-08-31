@@ -43,6 +43,18 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   docs/11; `cdd_core_default_locale()` declara `es_CO`. `includes/admin.php` añade la pantalla
   de Herramientas **«Eliminar huérfanos»** (OWN-015): solo `.ics`, dry-run primero, borrado con
   nonce y capacidad de edición de eventos.
+- Formulario de contacto desde WU-09 (v0.7.0): Contact Form 7 es el único plugin de terceros
+  aprobado (ADR 0025/0026) y su código **no** viaja en Git, así que lo versionado es la
+  *definición* — `Cdd_Core_Contact_Form_Template` guarda la plantilla del formulario (el copy
+  publicado de `static/contacto/index.html` con los tres controles como form-tags de CF7), la
+  del correo a `caminodeldharma1@gmail.com` (`Reply-To` del visitante, texto plano) y los
+  mensajes en español, porque el locale lo fija `cdd_core_default_locale()` y WordPress nunca
+  instala el paquete de traducción de CF7. `wp cdd-core contact provision [--apply]` los escribe
+  una vez, create-missing-only, y **rehúsa** mientras CF7 esté inactivo o mientras `/privacidad`
+  no describa un envío real (ADR 0041 punto 3). `migrate convert` gana dos pasos field-scoped,
+  `privacidad` **antes** que `contacto`, para que el aviso sea cierto antes de que el formulario
+  llegue a la página. Sin CF7 todo esto es inerte: nada fatal, y el theme rinde los canales
+  WhatsApp/correo.
 - El metabox de autores en wp-admin sigue pendiente — siempre test en rojo primero. Guía:
   `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),

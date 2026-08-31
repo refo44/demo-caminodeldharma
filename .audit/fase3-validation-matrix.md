@@ -448,3 +448,93 @@ Decisiones y deltas registrados (WU-08B):
     `h1` (caían a `index.html`). Se añade `templates/archive.html` y
     `templates/archive-blog_author.html`. Además se retira el skip link que el núcleo inyecta en
     los block themes, duplicado del publicado y en el idioma del admin.
+
+## WU-09 — Contact Form 7 y los párrafos del formulario en `/privacidad`
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §10.3 + §10.4 únicamente;
+reanudación: preflight + rerun de los gates WU-03…WU-08B antes de tocar nada). Sin PHP/Composer
+nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; HEAD `f860561` = estado durable | OK | Pass (local) |
+| Rerun gates WU-03…WU-08B | php-lint OK; unit 156/156; wp-phpunit 106/106; plugin 0.6.0 y theme 0.4.0 activos | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo | Unit: 173 tests, **15 errors + 2 failures** (`Cdd_Core_Contact_Form_Template`, `convert_contacto`, `convert_privacidad`, `Cdd_Core_Spanish_Date::long_form`, bloque del theme inexistentes). wp-phpunit: 114 tests, **5 errors + 3 failures** (`cdd_core_contact_form_available`, `cdd_core_provision_contact_form`, `cdd_core_privacy_delta_applied`, render degradado, orden del `convert`). Los preexistentes siguieron verdes | OK | Pass (local) |
+| Nivel 1 verde | `phpunit` → OK (**175 tests, 913 assertions**): definición CF7 contra el formulario publicado leído de `static/contacto/index.html` (labels, `for`, ids, `name`, `autocomplete`, los 4 `path` de los iconos, los 3 `.form-group`, el `<button>` con su icono); mail al buzón con `Reply-To` del visitante; mensajes en español; autop desactivado solo para este formulario; las 5 sustituciones de `/privacidad` verbatim, el sello provisional conservado, §2.3–§2.6 idénticas byte a byte, sin líneas en blanco residuales, idempotencia y gate `privacidad_delta_applied()` | OK | Pass (local) |
+| Nivel 2 verde | `run-phpunit-wp.sh` → OK (**114 tests, 677 assertions**): sin CF7 el formulario no está disponible, el bloque imprime los canales publicados (nunca `[contact-form-7`, nunca un `<form>`), y `provision` **rehúsa** informando todos los bloqueos a la vez; gate de `/privacidad` cerrado sin aviso y sin delta, abierto tras la conversión; `convert` ordena privacidad **antes** que contacto, aplica ambas y el 2.º apply no toca nada; la fecha del aviso es la del día en la zona del sitio | OK | Pass (local) |
+| QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings** (85 archivos); `npm run lint:css` verde; sin secretos; sin código de CF7 en Git (`git status` limpio tras instalarlo) | OK | Pass (local) |
+| Orden ADR 0041 respetado en el entorno | Con CF7 **desactivado**: `contact provision` rehúsa con los dos bloqueos. Después `migrate convert --apply` → `privacidad` + `contacto`; 2.º apply → 0. Solo entonces se activa CF7 y se provisiona | OK | Pass (local) |
+| Delta de copy en `/privacidad` (WordPress) | `diff` del `post_content` antes/después: **4 hunks, ninguno fuera del alcance** — cláusula del recuadro, fecha, viñeta del resumen, §2.2 (2 párrafos → 1) y el disparador de §8 (línea completa, sin blanco residual). Cookies, analítica, embeds, donaciones, derechos y Ley 1581 sin tocar | OK | Pass (local) |
+| Render de `/privacidad` | HTTP entrante: sello «Documento provisional» presente, «Su redacción podrá cambiar tras esa revisión.», «Última actualización: 31 de agosto de 2026.», viñeta y §2.2 aprobadas, 0 ocurrencias de «pase a enviarse/procesarse en un servidor», §8 con sus 4 disparadores restantes incluida la revisión legal | OK | Pass (local) |
+| Provisión CF7 idempotente | `contact provision` (dry-run) → sin bloqueos, nada escrito; `--apply` → form id creado; 2.º `--apply` → rehúsa («already exists»). Propiedades almacenadas: `recipient` = `caminodeldharma1@gmail.com`, `Reply-To: [correo]`, `use_html` false, cuerpo con `[nombre]`/`[correo]`/`[mensaje]`, `sender` derivado de `home_url()`, locale `es_CO` | OK | Pass (local) |
+| Paridad DOM del formulario publicado | Render real: `class="wpcf7-form init section-gap"`, `aria-label="Formulario de contacto"`, `method="post"`; los 3 `label` con su `for` apuntando a `contact-name`/`contact-email`/`contact-message`; `name` `nombre`/`correo`/`mensaje`; `autocomplete` `name`/`email`; iconos en las etiquetas de correo y mensaje; `<button type="submit" class="btn btn-primary">` con su icono y «Enviar»; **0 `<p>` espurios** (autop desactivado) | OK | Pass (local) |
+| Envío con datos sintéticos | 3 estados verificados en navegador real: vacío → `invalid` + «Este campo es obligatorio.» ×3; correo inválido → `invalid` + «Escribe una dirección de correo válida.»; datos válidos → **validación superada**, `data-status="failed"` en `wp_mail()` | Validación OK; entrega no | Pass (local) parcial |
+| Entrega real del correo | El contenedor local no tiene MTA: `wp_mail()` devuelve `false` (comprobado directamente, no solo vía CF7). **No prueba nada sobre Hostinger** | No demostrable en local | Unverified |
+| Fallback operativo (ADR 0041 punto 5) | Con CF7 desactivado, `/contacto` sirve `<p class="contact-form-unavailable">` con WhatsApp y el correo de la comunidad; 0 ocurrencias de `[contact-form-7`; 0 `<form>` en `main` | OK | Pass (local) |
+| Mensajes en español | El locale del sitio viene de `cdd_core_default_locale()` y no de `WPLANG`, así que WordPress no instala paquete de traducción de CF7: los 8 mensajes que este formulario puede producir son propios y se verificaron renderizados en español | OK | Pass (local) |
+| QA 4: a11y del formulario (navegador real) | `label`/control asociados por `for`/`id`; `aria-required="true"` en los 3 controles; `.screen-reader-response` presente y recortado (`position:absolute`, 1px); a 320px sin scroll horizontal, controles a 272px de ancho, botón 140×52 px (≥44); sin errores de consola | OK | Pass (local) |
+| Estático intacto | `git diff -- static/` vacío; producción sigue sirviendo `action="#"` y su aviso sin tocar (ADR 0041 punto 4) | OK | Pass (local) |
+| CF7 fuera de Git | Instalado en el volumen `wp_data`, nunca en el árbol del repo; versión registrada en `docs/operations/third-party-plugins.md` | OK | Pass (local) |
+| Sin antispam adicional | Ningún plugin más instalado; Akismet sigue **inactivo** como venía del install | OK | Pass (local) |
+| QA 4 visual completo (lector de pantalla real) | No ejecutado en esta sesión | — | Unverified |
+| Entrega real en staging Hostinger | Sin crear (OWN-005). `Pass (local)` **no basta** (ADR 0026/0041 punto 5) | — | Unverified |
+| CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones y deltas registrados (WU-09):
+
+1. **El repositorio posee la *definición*, no el plugin.** CF7 6.1.7 se instala por entorno y su
+   código nunca viaja en Git (ADR 0025). Lo versionado es
+   `Cdd_Core_Contact_Form_Template`: la plantilla del formulario, la del correo y los mensajes.
+   `wp cdd-core contact provision` los escribe una vez, create-missing-only: lo que un editor
+   cambie después en wp-admin no se pisa (misma semántica que el importador, ADR 0033).
+2. **El botón publicado sobrevive.** `[submit]` de CF7 solo sabe imprimir un `<input>`, y
+   producción publica un `<button>` con el icono de envío. CF7 escucha el evento `submit` del
+   formulario, así que el `<button>` publicado lo acciona igual y conserva su icono. Coste: sin
+   el spinner de CF7 — que el DOM publicado tampoco tenía.
+3. **Deltas de DOM aceptados frente al formulario publicado** (inevitables, los imprime CF7):
+   `action="#"` pasa a la URL real; el `<form>` gana `novalidate`, `data-status` y las clases
+   `wpcf7-form init`; cada control queda envuelto en `<span class="wpcf7-form-control-wrap">` y
+   gana `size`, `maxlength` y `aria-required` en lugar del `required` nativo (CF7 valida en
+   servidor y en JS); aparecen el contenedor `.wpcf7` y `.screen-reader-response`. Todo lo demás
+   —clases, ids, `name`, `autocomplete`, etiquetas, iconos, botón— es el copy publicado.
+4. **El formulario es un bloque del theme, no un shortcode en el contenido.** Así la Page no
+   guarda un identificador de un plugin de terceros, y con CF7 apagado el visitante lee los
+   canales que sí funcionan en vez de la cadena `[contact-form-7 …]` en crudo. Es el fallback
+   operativo de ADR 0041 punto 5, implementado, no solo documentado. Efecto lateral útil: tras la
+   conversión `/contacto` ya no guarda `<form>`, así que KSES no puede mutilarla si la edita un
+   perfil sin `unfiltered_html`.
+5. **Los mensajes que lee un visitante son propios.** El locale del sitio lo fija
+   `cdd_core_default_locale()`, no `WPLANG`, así que WordPress nunca instala el paquete de
+   traducción de CF7 y sus cadenas saldrían en inglés. Se poseen los 8 mensajes que un formulario
+   de tres campos de texto puede producir; el resto (ficheros, fechas, números, quiz, captcha)
+   conserva los de CF7 porque ningún campo de este formulario puede provocarlos.
+   «Spam» y «fallo de envío» comparten texto a propósito: a un falso positivo no se le dice que
+   parecía spam.
+6. **Sin token de error en el sistema visual.** El maquetado estático nunca tuvo un formulario que
+   enviara, así que no hay color publicado para un estado de error. Se alinea el ritmo (márgenes,
+   radio) al resto de la página y se dejan los colores de estado de CF7 en vez de inventar una
+   pareja error/éxito que producción no especifica.
+7. **`autop` desactivado solo para este formulario.** CF7 autoformatea la plantilla y envolvería
+   las etiquetas, los `div` y el botón escritos a mano en `<p>` sueltos. El filtro compara con el
+   id provisionado: un formulario que un editor cree más adelante conserva el comportamiento por
+   defecto de CF7.
+8. **El gate de ADR 0041 punto 3 es código, no una nota.** `contact provision` lee la Page
+   `/privacidad` publicada y rehúsa mientras el §2.2 no describa un envío real, señalando
+   `wp cdd-core migrate convert --apply`. Y `convert` recorre `privacidad` **antes** que
+   `contacto`, de modo que el aviso es cierto antes de que el formulario llegue a la página.
+9. **La cláusula del recuadro se retira, no se reescribe.** ADR 0041 aprueba quitar «cuando el
+   formulario de contacto pase a enviarse a un servidor»; la frase publicada se conserva íntegra
+   menos esa cláusula («Su redacción podrá cambiar tras esa revisión.»), que es la lectura más
+   fiel de «no reescribir el resto del aviso».
+10. **El correo de §2.2 va en texto plano**, sin `mailto:`, porque el copy aprobado es texto: el
+    enlace sería marcado añadido, no copy aprobado. §6 sigue enlazándolo como ya lo publicaba.
+11. **El harness hermético no ejecuta CF7 y así se declara.** El código de terceros no viaja en
+    Git, así que la rama «CF7 presente» no se prueba en la suite: se prueba lo propio en ambos
+    estados y la integración real se verifica contra un entorno real. En el harness, además, KSES
+    borra `<form>` de cualquier fixture, así que el test de WU-09 retira esos filtros para
+    almacenar el contenido publicado tal cual (WP-CLI, que es por donde importan los entornos
+    reales, no los instala).
+12. **`Pass (local)` ≠ entrega.** La validación del formulario está probada de extremo a extremo;
+    `wp_mail()` falla en Docker por falta de MTA. La entrega a `caminodeldharma1@gmail.com` se
+    verifica en staging Hostinger antes del release; si allí falla, el corte puede seguir con CF7
+    deshabilitado y WhatsApp/correo — fallo operativo, no gate jurídico.
