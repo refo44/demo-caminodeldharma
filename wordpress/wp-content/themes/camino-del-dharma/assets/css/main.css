@@ -2602,6 +2602,39 @@ a:focus-visible {
   resize: vertical;
 }
 
+/* Contact Form 7 (WU-09) wraps every control in a span. The published
+   layout is label above, control filling the row, so the wrapper has to
+   be a block; everything else the control needs is already inherited
+   from .form-group above. */
+.form-group .wpcf7-form-control-wrap {
+  display: block;
+}
+
+/* CF7's own stylesheet paints the validation tip and the response box in
+   its admin colors. The static mockup never had a submitting form, so
+   there is no published token for an error state: only the rhythm is
+   aligned to the page here, the status colors stay CF7's. */
+.wpcf7-not-valid-tip {
+  margin-top: var(--wp--preset--spacing--xs);
+  font-size: 0.9375rem;
+}
+
+.wpcf7 form .wpcf7-response-output {
+  margin-inline: 0;
+  margin-block: var(--wp--preset--spacing--md);
+  padding: var(--wp--preset--spacing--sm);
+  border-radius: 4px;
+}
+
+/* Contact Form 7 disabled: the visitor is pointed at the channels that
+   do work (ADR 0041 point 5). */
+.contact-form-unavailable {
+  padding: var(--wp--preset--spacing--md);
+  background: var(--wp--custom--color--bg);
+  border: 1px solid var(--wp--custom--color--border);
+  border-radius: 4px;
+}
+
 /* ==========================================================================
    5. Page-specific (minimal)
    ========================================================================== */
