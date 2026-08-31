@@ -58,8 +58,15 @@ function camino_del_dharma_print_seo() {
 add_action( 'wp_head', 'camino_del_dharma_print_seo', 1 );
 
 /**
- * The document title comes from the plugin, so core must not print a
- * second one.
+ * Title, canonical and robots come from the plugin, so core must not
+ * print a second one of each.
+ *
+ * Runs on `wp_head` itself, at priority 0: a block theme registers its
+ * unconditional title printer inside locate_block_template(), which
+ * happens after `wp` and after `template_redirect`, so an earlier hook
+ * would remove a callback that is not there yet. Core's own robots and
+ * title callbacks sit at priority 1, which is why the priority is given
+ * explicitly — removing them at the default 10 silently does nothing.
  */
 function camino_del_dharma_suppress_core_head() {
 	if ( ! camino_del_dharma_has_seo() ) {
@@ -67,6 +74,8 @@ function camino_del_dharma_suppress_core_head() {
 	}
 
 	remove_action( 'wp_head', 'rel_canonical' );
+	remove_action( 'wp_head', 'wp_robots', 1 );
 	remove_action( 'wp_head', '_wp_render_title_tag', 1 );
+	remove_action( 'wp_head', '_block_template_render_title_tag', 1 );
 }
-add_action( 'wp', 'camino_del_dharma_suppress_core_head' );
+add_action( 'wp_head', 'camino_del_dharma_suppress_core_head', 0 );

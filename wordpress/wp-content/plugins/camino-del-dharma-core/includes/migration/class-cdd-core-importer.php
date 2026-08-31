@@ -644,6 +644,13 @@ final class Cdd_Core_Importer {
 		$regions = (array) ( $site['seo']['city_regions'] ?? array() );
 		unset( $site['seo']['city_regions'] );
 
+		// The default social image is a production URL in the payload; the
+		// environment must serve its own copy from the Media Library, or a
+		// staging instance would hotlink production.
+		$site['seo']['image'] = $this->rewrite_media_urls(
+			str_replace( 'https://caminodeldharma.org/', '/', (string) ( $site['seo']['image'] ?? '' ) )
+		);
+
 		if ( false === get_option( CDD_CORE_SEO_OPTION, false ) ) {
 			update_option( CDD_CORE_SEO_OPTION, $site );
 			$applied[] = CDD_CORE_SEO_OPTION;

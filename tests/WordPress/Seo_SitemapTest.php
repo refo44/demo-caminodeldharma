@@ -66,6 +66,26 @@ final class Seo_SitemapTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * `/eventos` is a real, indexable URL of docs/11 but has no post
+	 * object, so WordPress would never list it. The archive belongs in
+	 * the sitemap next to its singles.
+	 */
+	public function test_event_archive_is_listed_once_on_the_first_page() {
+		self::factory()->post->create( array( 'post_type' => 'event', 'post_name' => 'evento' ) );
+
+		$provider = wp_sitemaps_get_server()->registry->get_provider( 'posts' );
+
+		$first = wp_list_pluck( $provider->get_url_list( 1, 'event' ), 'loc' );
+		$this->assertSame( get_post_type_archive_link( 'event' ), $first[0] );
+
+		$second = wp_list_pluck( $provider->get_url_list( 2, 'event' ), 'loc' );
+		$this->assertNotContains( get_post_type_archive_link( 'event' ), $second );
+
+		$pages = wp_list_pluck( $provider->get_url_list( 1, 'page' ), 'loc' );
+		$this->assertNotContains( get_post_type_archive_link( 'event' ), $pages );
+	}
+
+	/**
 	 * A staging environment must not publish a sitemap at all: with
 	 * `blog_public` off, WordPress disables it and the site stays
 	 * non-indexable (deployment runbook §5).

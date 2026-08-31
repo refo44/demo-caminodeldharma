@@ -156,7 +156,10 @@ final class Cdd_Core_Convert_Service {
 				}
 
 				foreach ( $pending as $meta_key => $value ) {
-					add_post_meta( $post_id, $meta_key, $value, true );
+					// The meta API unslashes what it stores: JSON written
+					// raw would lose every backslash, turning \u00ed into
+					// u00ed and «Círculos» into «Cu00edrculos».
+					add_post_meta( $post_id, $meta_key, wp_slash( $value ), true );
 				}
 				$report['converted'][] = $item;
 			}

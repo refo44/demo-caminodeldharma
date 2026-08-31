@@ -391,7 +391,10 @@ function cdd_core_seo_event_node( WP_Post $post, string $permalink, string $imag
 	return Cdd_Core_Json_Ld::event(
 		array(
 			'name'           => get_the_title( $post ),
-			'description'    => wp_strip_all_tags( (string) $post->post_excerpt ),
+			// The published meta description is the event's own editorial
+			// summary; the excerpt is the calendar description (WU-06) and
+			// only stands in when no head copy was written.
+			'description'    => cdd_core_seo_meta( $post, 'seo_description', wp_strip_all_tags( (string) $post->post_excerpt ) ),
 			'url'            => $permalink,
 			'image'          => $image,
 			'start'          => (string) get_post_meta( $post->ID, 'event_date', true ),
@@ -528,6 +531,25 @@ function cdd_core_seo_document(): array {
  */
 function cdd_core_seo_sitemap_provider( $provider, $name ) {
 	return 'users' === $name ? false : $provider;
+}
+
+/**
+ * Adds the event archive to the sitemap. `/eventos` is an indexable URL
+ * of docs/11 with no post object of its own, so WordPress would never
+ * list it; it goes first, on the first page only.
+ *
+ * @param array  $url_list  Sitemap entries.
+ * @param string $post_type Post type of this list.
+ * @param int    $page_num  1-based sitemap page.
+ */
+function cdd_core_seo_sitemap_posts( $url_list, $post_type, $page_num ) {
+	if ( 'event' !== $post_type || 1 !== (int) $page_num ) {
+		return $url_list;
+	}
+
+	array_unshift( $url_list, array( 'loc' => (string) get_post_type_archive_link( 'event' ) ) );
+
+	return $url_list;
 }
 
 /**

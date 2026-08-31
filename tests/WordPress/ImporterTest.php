@@ -487,6 +487,11 @@ final class ImporterTest extends WP_UnitTestCase {
 
 		$stored = get_option( 'cdd_core_seo_site' );
 		$this->assertSame( 'Camino del Dharma', $stored['seo']['site_name'] );
+		$this->assertStringNotContainsString(
+			'caminodeldharma.org',
+			(string) $stored['seo']['image'],
+			'The default social image is served by this environment, never hotlinked.'
+		);
 		$this->assertSame( 'Organization', $stored['jsonld']['home_graph'][0]['@type'] );
 
 		$city = get_term_by( 'name', 'Bogotá', 'event_city' );
@@ -613,6 +618,7 @@ final class ImporterTest extends WP_UnitTestCase {
 			array(
 				'seo'    => array(
 					'site_name'    => 'Camino del Dharma',
+					'image'        => 'https://caminodeldharma.org/assets/images/og-default.jpg',
 					'city_regions' => array( 'Bogotá' => 'Bogotá D.C.' ),
 				),
 				'jsonld' => array( 'home_graph' => array( array( '@type' => 'Organization' ) ) ),

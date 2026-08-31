@@ -326,6 +326,42 @@ final class ConvertTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Regression (WU-08B): the meta API unslashes what it stores, so JSON
+	 * seeded without wp_slash() loses every backslash — `\u00ed` becomes
+	 * `u00ed` and «Círculos» reaches the page as «Cu00edrculos».
+	 */
+	public function test_convert_seeds_json_ld_extras_without_losing_escapes() {
+		$event = self::factory()->post->create(
+			array(
+				'post_type'  => 'event',
+				'post_name'  => 'circulos',
+				'post_title' => 'Círculos',
+				'meta_input' => array( '_cdd_source_key' => 'event:circulos' ),
+			)
+		);
+
+		$extra = array( 'alternateName' => 'Curso Círculos de Presencia Consciente' );
+
+		( new Cdd_Core_Convert_Service(
+			array(
+				'environment' => 'local',
+				'payload'     => array(
+					'events' => array(
+						array(
+							'_source_key'  => 'event:circulos',
+							'seo'          => array( 'title' => 'Círculos — Camino del Dharma' ),
+							'jsonld_extra' => $extra,
+						),
+					),
+				),
+			)
+		) )->run( true );
+
+		$this->assertSame( $extra, json_decode( get_post_meta( $event, 'seo_jsonld_extra', true ), true ) );
+		$this->assertSame( 'Círculos — Camino del Dharma', get_post_meta( $event, 'seo_title', true ) );
+	}
+
+	/**
 	 * Protects the production guard (ADR 0033): in a production
 	 * environment the service refuses to write without explicit
 	 * confirmation plus backup evidence.

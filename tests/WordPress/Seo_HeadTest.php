@@ -171,7 +171,15 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	 * breadcrumbs Inicio → Eventos → evento.
 	 */
 	public function test_current_event_single_links_its_calendar_and_publishes_event_json_ld() {
-		$event = $this->create_event( 'evento-vigente', '+10 days', '+12 days', array( 'event_signup_url' => 'https://forms.example/x' ) );
+		$event = $this->create_event(
+			'evento-vigente',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url' => 'https://forms.example/x',
+				'seo_description'  => 'La descripción publicada.',
+			)
+		);
 
 		$this->go_to( get_permalink( $event ) );
 		$context = cdd_core_seo_context();
@@ -185,6 +193,7 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 		$this->assertSame( 'https://schema.org/EventScheduled', $graph['Event']['eventStatus'] );
 		$this->assertSame( get_permalink( $event ), $graph['Event']['url'] );
 		$this->assertSame( 'https://forms.example/x', $graph['Event']['offers']['url'] );
+		$this->assertSame( 'La descripción publicada.', $graph['Event']['description'] );
 		$this->assertCount( 3, $graph['BreadcrumbList']['itemListElement'] );
 	}
 

@@ -37,6 +37,13 @@ final class Theme_SeoTest extends TestCase {
 
 		$this->assertStringContainsString( "add_action( 'wp_head', 'camino_del_dharma_print_seo', 1 )", $seo );
 		$this->assertStringContainsString( "remove_action( 'wp_head', 'rel_canonical' )", $seo );
+		// Core registers robots and title at priority 1: removing them at
+		// the default 10 silently does nothing.
+		$this->assertStringContainsString( "remove_action( 'wp_head', 'wp_robots', 1 )", $seo );
+		$this->assertStringContainsString( "add_action( 'wp_head', 'camino_del_dharma_suppress_core_head', 0 )", $seo );
+		// A block theme swaps core's title printer for its own.
+		$this->assertStringContainsString( "remove_action( 'wp_head', '_wp_render_title_tag', 1 )", $seo );
+		$this->assertStringContainsString( "remove_action( 'wp_head', '_block_template_render_title_tag', 1 )", $seo );
 	}
 
 	/**
