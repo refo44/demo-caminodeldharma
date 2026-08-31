@@ -1,11 +1,11 @@
 # Fase 3 — Estado de ejecución durable
 
-Artefacto de continuidad exigido por FABLE5 v2.3 §12. Otra sesión debe poder retomar el trabajo
+Artefacto de continuidad exigido por FABLE5 v2.4 §12. Otra sesión debe poder retomar el trabajo
 leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (sesión WU-07) |
+| **Última actualización** | 2026-08-31 (gobernanza ADR 0041 / OWN-018; WU-07 sigue cerrado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…WU-07 **cerrados**; checkpoint antes de WU-08 |
 | **Rama** | `fase3-wordpress` (local, sin push) |
@@ -149,12 +149,18 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   restante de `calendar.js` + `share.js`), audio de mantras (contenido importado, sin QA
   específico aún), SEO dinámico (title/meta/OG/JSON-LD, noindex de `/author`, términos de
   álbum y tags), redirects del `.htaccess`, «Eliminar huérfanos» (OWN-015).
+- **ADR 0041 / OWN-018 (2026-08-31):** Contact Form 7 es elegible en el corte. La revisión
+  legal **no** bloquea WU-09 ni el lanzamiento. WU-09 actualiza en WordPress solo los
+  párrafos del formulario de `/privacidad`; el HTML estático no se toca.
 - Deltas de copy registrados (matriz WU-07): fechas generadas, filas `Hora`/`Aporte` fuera
   del modelo, resumen de card vigente = intro del single, excerpt del listado = deck,
   tiempo de lectura de Sangha 6′ vs 8′, label «Preinscribirme», byline enlazada.
 
 ## Decisiones/asunciones usadas
 
+- Autorización del propietario 2026-08-31: CF7 en el corte **sin** espera de asesoría legal
+  (OWN-018, ADR 0041, FABLE5 v2.4). El disclaimer de `/privacidad` basta para lanzar. Copy
+  WordPress del formulario = delta field-scoped; estático intacto.
 - Autorización del propietario para Fase 3: mensaje «Implementar» sobre FABLE5 v2.3
   (2026-08-31); esta sesión ejecuta solo WU-04 por orden explícita del owner.
 - Prefijos primer partido (ADR 0027 + sniff WPCS): plugin `cdd_core`, theme
@@ -189,12 +195,16 @@ Ver `.audit/fase3-validation-matrix.md` § WU-07. Estados: `Unverified`, `Pass (
 
 ## Bloqueos
 
-- Ninguno. WU-08 (comportamiento — diálogos compartir/añadir al calendario, audio —,
-  accesibilidad, SEO dinámico first-party, redirects del `.htaccess`, «Eliminar huérfanos»
-  OWN-015) es el siguiente work unit; puede arrancar en la próxima sesión tras rerun del
-  preflight y de los gates (§ Reanudación).
+- Ninguno. WU-08 sigue siendo el siguiente work unit. WU-09 (CF7) **ya no espera** asesoría
+  legal (ADR 0041 / OWN-018). La sesión actual de gobernanza no implementa WU-08.
 
-## Archivos cambiados en la sesión actual (WU-07)
+## Archivos cambiados en la sesión de gobernanza (ADR 0041, 2026-08-31)
+
+ADR 0041, OWN-018, FABLE5 v2.4, AGENTS/CLAUDE/reglas, backlog v1.21, contrato, matriz,
+checklist, docs 17, operations, ledger, inventario, redirect-ledger, CHANGELOG Unreleased,
+este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
+
+## Archivos cambiados en WU-07 (histórico de esa sesión)
 
 - Tests nuevos (RED antes de la implementación): `tests/Unit/Theme_TemplatesTest.php`,
   `tests/Unit/Theme_FormatTest.php`, `tests/Unit/Content_ConverterTest.php`,
@@ -241,21 +251,10 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-07 está cerrado. **La sesión actual se detiene aquí** (checkpoint FABLE5 §12). La
-siguiente sesión: rerun del preflight (§ Reanudación) y de los gates (php-lint; unit —
-ahora **105** tests —; phpcs limpio; `run-phpunit-wp.sh` — ahora **60** tests, con el theme
-activo en el harness —; plugin 0.4.0 y theme 0.2.0 activos sin warnings/fatals;
-`wp cdd-core migrate verify` → 0 missing; `wp cdd-core migrate convert` → 0 pending),
-luego implementar y validar **solo WU-08** — Comportamiento, accesibilidad, SEO y
-redirects: diálogos de compartir y añadir al calendario (portar la mitad restante de
-`calendar.js` + `share.js` respetando su contrato DOM), verificación del audio de
-mantras, SEO dinámico first-party (title/meta description/canonical/OG/Twitter según
-`docs/15-assets-strategy.md`, JSON-LD `Event`/`EventCompleted` en las 10 fichas y en el
-listado, `BlogPosting`, `Thing` por ficha de autor, favicons/Site Icon), `noindex,follow`
-en `/author`, términos de álbum y tags (ADR 0031/0036/0037), `rel="alternate"
-type="text/calendar"` solo en vigentes, redirects del `.htaccess` (matriz § Redirects),
-herramienta wp-admin «Eliminar huérfanos» (OWN-015) y pase de accesibilidad (docs/19) —
-actualizar este archivo y detenerse en el checkpoint de WU-08.
+WU-07 está cerrado. Gobernanza ADR 0041 aplicada (WU-09 ya no espera legal). **La sesión
+actual se detiene aquí.** La siguiente sesión de implementación: rerun del preflight
+(§ Reanudación) y de los gates, luego **solo WU-08**. WU-09 (CF7 + copy del formulario en
+`/privacidad` WP) queda desbloqueado para cuando toque, sin gate jurídico.
 
 ## Procedimiento de reanudación
 

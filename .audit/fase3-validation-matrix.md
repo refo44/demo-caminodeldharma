@@ -1,6 +1,6 @@
 # Fase 3 — Matriz de validación
 
-Evidencia QA por work unit (FABLE5 v2.3 §11). Estados permitidos: `Unverified`,
+Evidencia QA por work unit (FABLE5 v2.4 §11). Estados permitidos: `Unverified`,
 `Pass (local)`, `Pass`, `Fail`. `Pass (local)` nunca prueba comportamiento
 PHP/Apache/HTTPS/mail de Hostinger.
 

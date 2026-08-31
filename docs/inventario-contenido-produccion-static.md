@@ -13,7 +13,7 @@ eso es deuda de deploy, no la fuente del extracto.
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
-Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.20, 0 abiertas). El archivo
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.21, 0 abiertas). El archivo
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) queda como
 registro de decisiones (no ADR). Las filas `POST-*` son fases posteriores (i18n); no
 bloquean el corte.
@@ -44,7 +44,7 @@ bloquean el corte.
 | `/blog/circulos-de-presencia-consciente` | ficha | Post | REAL PRODUCTION |
 | `/blog/sangha-refugio-hiperconexion` | ficha | Post | REAL PRODUCTION |
 
-`404.html` no es URL pública. `/privacidad` está publicada (ADR 0039); el copy es provisional hasta asesoría legal. No reescribirlo al importar.
+`404.html` no es URL pública. `/privacidad` está publicada (ADR 0039, provisional). El importer trae el HTML live. En WordPress, WU-09 aplica el delta del formulario (ADR 0041 / OWN-018); no reescribir el resto. La revisión legal no bloquea el corte.
 
 Búsqueda: **no existe** (doc 04). No crear.
 

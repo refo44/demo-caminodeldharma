@@ -57,8 +57,8 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 | `/galeria/2021` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2021` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex |
 | `/galeria/general` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/general` | taxonomía | — | 25 fotos | PLANNED; **noindex** al corte | 200; noindex |
 | `/donaciones` | `donaciones/index.html` | HTML live (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
-| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de actualizar `/privacidad` (ADR 0039) | 200; envío real en staging; WhatsApp/correo; a11y labels |
-| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar el HTML live; no reescribir. Seguir marcado provisional hasta asesoría legal | 200; enlace footer en todas las páginas |
+| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) en el corte (ADR 0041); copy de `/privacidad` § formulario en WU-09 | 200; envío real en staging; WhatsApp/correo; a11y labels |
+| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar HTML live; en WP, delta field-scoped ADR 0041 (párrafos del formulario). Disclaimer provisional se conserva. Revisión legal no es gate | 200; enlace footer; copy del form alineado con CF7 en WP |
 
 `templates/page-*.html` **no** crea la Page. Ver ADR 0032 / 0033.
 
@@ -132,7 +132,7 @@ tras WU-07 (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07):
 | CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) |
 | PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 11 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
 | ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08 |
-| BEHAVIOR | **Parcial** | Nav móvil (main.js) y tooltips del calendario portados; share/añadir-al-calendario/audio → WU-08; formulario CF7 → WU-09 |
+| BEHAVIOR | **Parcial** | Nav móvil (main.js) y tooltips del calendario portados; share/añadir-al-calendario/audio → WU-08; formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
 | OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción); staging pendiente (OWN-005) |
 
 Sustituciones static→WordPress registradas en WU-07 (§9.1 del master prompt; detalle y
@@ -193,4 +193,4 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.2 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07 (§ Estado de implementación)
+**Versión:** 1.3 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7/privacidad alineados con ADR 0041

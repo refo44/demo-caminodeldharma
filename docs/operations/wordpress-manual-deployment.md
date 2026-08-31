@@ -1,6 +1,6 @@
 # Operaciones — Despliegue manual WordPress (acotado)
 
-Runbook durable exigido por FABLE5 v2.3 §12. **Ningún despliegue está autorizado por este
+Runbook durable exigido por FABLE5 v2.4 §12. **Ningún despliegue está autorizado por este
 documento**: cada escritura externa (staging u hosting) requiere autorización expresa del
 propietario en la sesión vigente (OWN-005, ADR 0015).
 

@@ -86,8 +86,10 @@ Antes del cutover debe existir una estrategia explícita para crear o importar a
 Inicio (ajustes de lectura / front page), Comunidad, Linaje, Práctica, Práctica/videos, Meditación
 semanal, Galería, Contacto, Donaciones, Blog (página de entradas si aplica). `/eventos` es archivo
 del CPT `event` — **no** publicar una Page con slug `eventos` (`docs/12-theme-file-structure.md`).
-`/privacidad` está publicada (ADR 0039); el copy se importa del HTML live y no se reescribe. Sigue
-provisional hasta asesoría legal.
+`/privacidad` está publicada (ADR 0039); el copy se importa del HTML live. El sello provisional
+se conserva. En WordPress, WU-09 aplica el delta field-scoped de ADR 0041 (párrafos del
+formulario); el importer no debe pisarlo en un re-import create-missing-only. La revisión legal
+no bloquea el corte.
 
 Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se importan como CPT
 `event` y `post`, no como Pages genéricas, salvo diferencia registrada.
@@ -127,7 +129,7 @@ Eventos y entradas de blog vigentes en la maqueta tienen filas en la matriz; se 
 
 - ADR [0012](0012-wordpress-como-motor-de-contenido.md), [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md)
 - ADR [0024](0024-plugin-dominio-theme-presentacion.md), [0028](0028-privacidad-aplazada-conscientemente.md)
-- ADR [0032](0032-contrato-migracion-static-wordpress.md)
+- ADR [0032](0032-contrato-migracion-static-wordpress.md), [0039](0039-aviso-privacidad-provisional-estatico.md), [0041](0041-cf7-corte-sin-asesoria-legal.md)
 - `docs/contrato-migracion-static-wordpress.md`
 - `docs/16-inventario-historico-fuente-retirada.md`
 - Fuente editorial original retirada permanentemente por ADR 0040; ya no existe una ruta operativa.

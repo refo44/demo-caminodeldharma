@@ -2,7 +2,7 @@
 
 Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no
 tiene acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y
-lo que está en curso, a fecha **2026-08-30**.
+lo que está en curso, a fecha **2026-08-31**.
 
 ---
 
@@ -36,7 +36,7 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
 | **Auditoría de producción** | Completa (2026-07-19). Formulario sin backend real sigue pendiente hasta WordPress |
-| **Backlog de dueño (corte)** | **Cerrado** (v1.20): 0 abiertas, 18 decididas (OWN-001–OWN-017) |
+| **Backlog de dueño (corte)** | **Cerrado** (v1.21): 0 abiertas, 19 decididas (OWN-001–OWN-018). CF7 en el corte: OWN-018 / ADR 0041 |
 | **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n); **no** se implementan en el corte |
 
 ---
@@ -85,7 +85,7 @@ Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0022 | Ciudad = taxonomía, no URL de filtro | Sin doorway pages |
 | 0023 | Local Docker: PHP 8.3 + MariaDB 11.8 | Paridad Hostinger |
 | 0024 | Plugin `camino-del-dharma-core` = dominio; theme = presentación | — |
-| 0025 / 0026 | Plugins de terceros solo con ADR; CF7 aprobado y gated | — |
+| 0025 / 0026 | Plugins de terceros solo con ADR; CF7 aprobado; producción en el corte: ADR 0041 | — |
 | 0027 | Estándares de ingeniería; WPCS y seguridad no negociables | — |
 | 0029 | Theme **FSE / block theme** — **sin** theme clásico PHP intermedio | Sustituye la arquitectura clásica |
 | 0030 / 0031 | Sitemap nativo WP; tags de blog noindex hasta volumen | — |
@@ -95,7 +95,8 @@ Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0036 | Álbumes `/galeria/{slug}` vía taxonomía; noindex hasta volumen | Hub `/galeria` KEEP |
 | 0037 | CPT `blog_author` en `/author/{slug}`; no Users WP | — |
 | 0038 | TDD + wp-phpunit; Sonar solo plugin + theme | — |
-| 0039 | `/privacidad` publicada (provisional); CF7 gated | — |
+| 0039 | `/privacidad` publicada (provisional) | — |
+| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
 | 0040 | `content-source/` retirado; producción publicada gobierna pre-corte | — |
 
 ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda histórico para WordPress
@@ -187,8 +188,9 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 - Sin cookies de analítica (ADR 0019). Medición: Search Console.
 - HSTS aplazado (ADR 0020).
-- `/privacidad` publicada (ADR 0039, provisional). Contact Form 7 **gated** hasta actualizar el aviso
-  (hoy dice que el formulario no envía) y revisión legal.
+- `/privacidad` publicada (ADR 0039, provisional). Contact Form 7 **elegible en el corte**
+  (ADR 0041 / OWN-018): el disclaimer basta para lanzar; en WordPress se actualizan solo los
+  párrafos del formulario. Revisión legal = trabajo posterior, no gate.
 - Canales humanos actuales: WhatsApp y correo.
 
 ---
@@ -220,8 +222,8 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 | Autorizar inicio de Fase 3 (WU-00/WU-01) | Decisión del propietario |
 | Desplegar `1.0.35` a Hostinger (incluye `/privacidad`) | Operativo |
 | Verificar paridad repo ↔ Hostinger | OWN-006/007 |
-| Formulario de contacto end-to-end | Se resuelve en WP con CF7 |
-| Revisar copy legal de `/privacidad` | Abierto; CF7 gated |
+| Formulario de contacto end-to-end | WU-09; CF7 elegible en el corte (ADR 0041) |
+| Copy de `/privacidad` en WP | Delta del formulario (ADR 0041); revisión legal = posterior, no gate |
 | HSTS | Aplazado post-corte |
 | Inglés / i18n | `POST-001`–`POST-007` |
 
@@ -234,9 +236,9 @@ Ya resuelto y no debe reabrirse como duda:
 
 ## 12. Documentos de referencia
 
-- `docs/adr/README.md` — índice ADR 0001–0040
-- `docs/17-orden-implementacion.md` — fases y criterios (v3.9)
-- `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.20)
+- `docs/adr/README.md` — índice ADR 0001–0041
+- `docs/17-orden-implementacion.md` — fases y criterios (v3.10)
+- `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.21)
 - `docs/contrato-migracion-static-wordpress.md` — contrato de aceptación
 - `docs/inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md`
 - `docs/matriz-migracion-static-wordpress.md` + `redirect-ledger.md` + `cutover-checklist-wordpress.md`

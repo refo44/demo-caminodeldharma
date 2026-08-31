@@ -2,16 +2,18 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.3
+**Prompt version:** 2.4
 **Status:** CURRENT — use this prompt for execution
-**Date:** 2026-08-30
+**Date:** 2026-08-31
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
-or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0040,
-plus the closed Fase 3 owner-decision backlog (v1.20). `POST-*` later-phase i18n rows must not be
-implemented at cutover. Version 2.3 incorporates the permanent removal of the legacy source folder
-under OWN-017 and ADR 0040.
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0041,
+plus the closed Fase 3 owner-decision backlog (v1.21). `POST-*` later-phase i18n rows must not be
+implemented at cutover. Version 2.3 incorporated the permanent removal of the legacy source folder
+under OWN-017 and ADR 0040. Version 2.4 incorporates ADR 0041 / OWN-018: Contact Form 7 is eligible
+at cutover without waiting for legal review; the published `/privacidad` disclaimer is sufficient
+for launch; WordPress updates only the form paragraphs of that notice.
 
 ---
 
@@ -81,8 +83,10 @@ This prompt does **not** authorize:
 - changing DNS or the production document root;
 - production cutover;
 - destructive database resets outside disposable local Docker volumes;
-- publishing Contact Form 7 in production;
 - activating HSTS.
+
+Contact Form 7 is in scope for WU-09 and for an authorized cutover (ADR 0041). This prompt still
+does not itself perform that cutover.
 
 Prepare external actions and their runbooks, but request explicit current-session authorization when
 an external write becomes the next action. Never request credentials in chat; ask the owner to
@@ -136,7 +140,7 @@ Before implementation, read:
 - `.cursor/rules/`, `CLAUDE.md`, `AGENTS.md`;
 - `docs/17-orden-implementacion.md`;
 - `docs/adr/README.md`;
-- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0040;
+- ADR 0001, 0002, 0003, 0008, 0013–0016, 0019–0041;
 - `docs/contrato-migracion-static-wordpress.md`;
 - `docs/inventario-contenido-produccion-static.md`;
 - `docs/conteos-reconciliacion-migracion.md`;
@@ -154,7 +158,7 @@ Before implementation, read:
 - `docs/20-layout-principles.md`;
 - `docs/docker-wordpress-playbook.md`.
 
-Check the ADR index for decisions newer than ADR 0040 and read any that affect this scope.
+Check the ADR index for decisions newer than ADR 0041 and read any that affect this scope.
 
 ---
 
@@ -270,7 +274,7 @@ Do not call the migration complete because the theme activates or looks correct.
 3. **ROUTING:** incoming canonical URLs, CPT archive/singles, blog routes, redirects, 404, canonical
    behavior, and sitemap/indexing behavior.
 4. **BEHAVIOR:** navigation, event calendar, share/calendar dialogs, audio, downloads, gallery
-   replacement, and gated contact form.
+   replacement, and Contact Form 7 (ADR 0041).
 5. **OPERATIONS:** environments, importer, evidence, backups/rollback plan, manual deployment scope,
    freeze/delta procedure, and cutover readiness.
 
@@ -299,10 +303,11 @@ Verify these values against the current commit before relying on them:
 - 1 historical recitation PDF path, now retired from the website by OWN-002.
 - 0 production fixtures.
 
-Owner backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md` v1.20).
+Owner backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md` v1.21).
 Use those decisions; do not treat the rows below as still open. Later-phase `POST-*` rows
 (i18n/English) stay out of this cutover: translation-ready PHP strings only (ADR 0027);
-no multilingual plugin, no `/es` or `/en` prefix, no active language switcher.
+no multilingual plugin, no `/es` or `/en` prefix, no active language switcher. OWN-018 (ADR 0041)
+makes Contact Form 7 eligible at cutover without legal review.
 
 - Per OWN-001, import `galeria-04.jpg` exactly once as Media Library content for `/practica`; never
   add it to `/galeria`.
@@ -432,9 +437,10 @@ Create/import real objects and settings for:
 
 `/eventos` is the `event` CPT archive. Never create a Page with slug `eventos`.
 
-Import `/privacidad` from live HTML (`privacidad/index.html`, ADR 0039). Do not rewrite the
-notice. It is provisional until legal review. Contact Form 7 in production still requires updating
-that notice (it currently states the form does not submit) plus legal review.
+Import `/privacidad` from live HTML (`privacidad/index.html`, ADR 0039). Keep the provisional
+disclaimer. Do not rewrite the notice except the field-scoped form paragraphs in ADR 0041 / OWN-018
+(WordPress only; static stays accurate while the live form does not submit). Legal review is not a
+cutover or WU-09 blocker. Contact Form 7 is eligible for production at cutover.
 
 ---
 
@@ -583,16 +589,18 @@ Organization.
 
 ### 10.3 Privacy and contact
 
-Contact Form 7 is approved and should send to `caminodeldharma1@gmail.com`, but:
+Contact Form 7 is approved, sends to `caminodeldharma1@gmail.com`, and is **eligible for production
+at cutover** (ADR 0041 / OWN-018):
 
-- `/privacidad` is published (ADR 0039); import the live notice; do not rewrite it;
-- Contact Form 7 in **production** stays gated until that notice is updated to describe a
-  server-side form and legal review is done (ADR 0039);
-- local/staging implementation and synthetic-data testing may proceed;
-- real delivery must be verified in Hostinger staging before release;
-- do not claim Contact Form 7 production eligibility while the form-processing gate remains open;
-- WordPress cutover may proceed with Contact Form 7 absent or disabled and the existing
-  WhatsApp/email alternatives working, provided the matrix and cutover checklist record that state;
+- `/privacidad` is published (ADR 0039); import the live notice; keep the provisional disclaimer;
+- legal review is recommended later and **does not block** WU-09, staging, or cutover;
+- before enabling CF7 in a WordPress environment, apply the ADR 0041 copy delta on that environment's
+  `/privacidad` Page (form now submits server-side). Do not change static HTML while production still
+  uses `action="#"`;
+- local/staging implementation and synthetic-data testing may proceed in WU-09;
+- real delivery must be verified in Hostinger staging before release (`Pass (local)` is not enough);
+- if staging mail fails, cutover may proceed with CF7 disabled and WhatsApp/email working, recorded
+  in the matrix and checklist — that is an operational fallback, not a legal gate;
 - do not add another antispam plugin without its own ADR.
 
 ### 10.4 Security and prohibited features
@@ -741,7 +749,7 @@ Use these work-unit boundaries unless repository evidence requires a safer subdi
 7. **WU-06 — Extractor, payload, WP-CLI importer, reconciliation**
 8. **WU-07 — Pages, posts, authors, media, templates, gallery**
 9. **WU-08 — Behavior, accessibility, SEO, redirects**
-10. **WU-09 — Contact Form 7 integration and privacy gate**
+10. **WU-09 — Contact Form 7 integration and `/privacidad` form-copy update (ADR 0041)**
 11. **WU-10 — Full local QA and staging-readiness runbook**
 
 WU-02 is a dedicated-session work unit under ADR 0023. Do not start it in the same session that
@@ -817,7 +825,8 @@ Repository/local work is ready for staging only when:
 - no production fixture exists;
 - Level 1–3 checks are green or honestly documented;
 - the manual deployment runbook is bounded to first-party theme/plugin code;
-- the privacy/Contact Form 7 gate is explicit.
+- Contact Form 7 is implemented or an operational fallback is recorded; the ADR 0041 `/privacidad`
+  form-copy delta is applied in WordPress; legal review is not required.
 
 Fase 3 is not fully validated until staging evidence exists. Production migration is not complete
 until the separate cutover checklist passes. This prompt does not authorize that cutover.
@@ -869,7 +878,8 @@ Report:
 5. **Content reconciliation:** expected versus imported counts and explained mismatches.
 6. **Validation evidence:** method, environment, result, status, commit tested.
 7. **Environment status:** local, staging, production reported separately.
-8. **Privacy gate:** `/privacidad` status and Contact Form 7 release eligibility.
+8. **Privacy / CF7:** `/privacidad` status (provisional disclaimer kept; form paragraphs updated per
+   ADR 0041 in WordPress) and Contact Form 7 release eligibility (legal review is not a blocker).
 9. **Governance:** ADR/doc conflicts found, defaults used, ledger/matrix updates.
 10. **Out-of-scope confirmation:** no `sangha`, search, analytics, PWA, HSTS, event-city/type
     archives, custom gallery system, unapproved plugin, deployment/CD workflow, or production
@@ -889,5 +899,7 @@ Begin now. Inspect the repository, read the binding sources, establish durable s
 first unblocked work unit. Continue autonomously through safe local work. Preserve the live static
 site, its real content, its URLs, and its rollback path.
 
-Do not deploy, push, create external infrastructure, publish legal copy, run production imports, or
-perform cutover without explicit current-session authorization.
+Do not deploy, push, create external infrastructure, run production imports, or perform cutover
+without explicit current-session authorization. The ADR 0041 `/privacidad` form-copy delta is
+authorized for the WordPress Page in WU-09; do not change the live static notice while the static
+form still does not submit.

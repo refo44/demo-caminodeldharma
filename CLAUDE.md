@@ -13,8 +13,10 @@ pipelines.
 - Institutional copy and presentation: **published production wins** until cutover (OWN-007,
   ADR 0040). The legacy source folder was permanently removed; do not recreate it.
 - Deploy: manual ZIP from `static/` (ADR 0015). WordPress: **Fase 3 started** (WU-00–WU-07 done; next unit is WU-08, behavior/accessibility/SEO/redirects). Migration pipeline: versioned `migration/payload.json` (VERSION 1.0.35; live parity verified, delta 0) + `wp cdd-core migrate validate|plan|import|verify|convert` and `seed` (dry-run by default, create-missing-only). Local env has the content imported **and converted** (dynamic home note, native album galleries, OWN-016 links). Durable state: `.audit/fase3-execution-state.md`.
-- `/privacidad` is published (ADR 0039, provisional). Do not rewrite the live notice. Contact Form 7
-  stays gated until that notice describes a server-side form.
+- `/privacidad` is published (ADR 0039, provisional). Contact Form 7 is eligible at cutover
+  (ADR 0041 / OWN-018); legal review does not block launch. WordPress updates only the form
+  paragraphs of that notice. Do not change the live static notice while the static form does not
+  submit.
 
 ## Must-read before WordPress or migration work
 
@@ -22,8 +24,8 @@ pipelines.
 2. `docs/contrato-migracion-static-wordpress.md` (ADR 0032)
 3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
 4. `docs/cutover-checklist-wordpress.md`
-5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0040**
-6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, 0 abiertas; `POST-*` = fases posteriores, no bloquear el corte)
+5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0041**
+6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, v1.21; `POST-*` = fases posteriores, no bloquear el corte)
 7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 8. `docs/guia-pruebas-plugin-theme-fse.md` — TDD, wp-phpunit, FSE, Sonar (ADR 0038)
 
@@ -39,7 +41,7 @@ pipelines.
 - Do not deploy while auditing. No cutover with broken navigation.
 - Test incoming HTTP routes, not only `get_permalink()`. No trailing slash (ADR 0008).
 - Preserve JS/DOM contracts, accessibility (`docs/19`), media relationships.
-- Compare copy, content, and styles to published production (`https://caminodeldharma.org`), not only the local repo (OWN-007).
+- Compare copy, content, and styles to published production (`https://caminodeldharma.org`), not only the local repo (OWN-007). Exception: WordPress `/privacidad` form paragraphs per ADR 0041 / OWN-018.
 - Target: **static production → FSE** (ADR 0029). No classic PHP theme as a bridge.
 - Update durable docs after verified implementation.
 - New plugin/theme domain: TDD from the first line of FSE. Do not mock WordPress. Sonar

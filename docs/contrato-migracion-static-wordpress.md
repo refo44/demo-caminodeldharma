@@ -142,7 +142,8 @@ No basta con que exista `assets/js/main.js` encolado. Comprobar:
 - `data-*` attributes;
 - estado ARIA (`aria-expanded`, `aria-current`, `aria-hidden` del hint del calendario);
 - eventos (click, Escape, resize, primer/segundo toque en puntero grueso);
-- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, gated por ADR 0039);
+- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, elegible
+  en el corte — ADR 0041; actualizar párrafos del formulario en `/privacidad`);
 - comportamiento dinámico (diálogo de calendario, `.ics`; galería: bloque Gutenberg, **sin**
   paginación numerada — OWN-011).
 

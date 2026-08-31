@@ -17,7 +17,7 @@ plans, or adding tests.
 | --- | --- |
 | **Historical** | Older docs may mention classic PHP templates (`*.php`) or a previous WordPress on this domain (`.htaccess` leftovers). Do not rewrite those as if they were never true. |
 | **Current** | Production is the **live static** site at `https://caminodeldharma.org` (real visitors). The monorepo reorg (ADR 0014) is done: deployable HTML lives in `static/` and is production data, not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON are REAL PRODUCTION CONTENT. Local Docker environment exists (WU-02, ADR 0023). Plugin `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme `camino-del-dharma` (v0.2.0) has the real views since WU-07 (ADR 0029): 16 block templates, header/footer parts via PHP patterns, 11 dynamic blocks (events calendar with byte parity against the published grid, current/past listing with compact archive cards, home featured note, ADR 0037 bylines, native per-album galleries), the full static CSS ported to presets, self-hosted fontFaces and the native lightbox. The plugin owns the domain models since WU-05: CPT `event` + non-public `event_type`/`event_city`, `gallery_album` taxonomy, CPT `blog_author` + ordered `authors` relation with publication guard, request-time event status in `America/Bogota`, monthly calendar data and the generated `/eventos/ical/{slug}.ics` route (200 current / 410 completed) — all test-protected (105 unit + 60 wp-phpunit tests as of WU-07, with the theme active in the harness). Fase 3 durable state: `.audit/fase3-execution-state.md`. |
-| **Future** | Rest of Fase 3: **live static production → FSE block theme** (ADR 0029). No classic PHP theme in between. The migration pipeline landed in WU-06 and WU-07 (plugin v0.4.0): pure extractors, deterministic `migration/payload.json` (source VERSION 1.0.35; live parity verified byte-for-byte, delta 0), WP-CLI `wp cdd-core migrate validate|plan|import|verify|convert` + `seed` (dry-run by default, create-missing-only, production guard); content imported and converted in the local env (staging order: import --apply → seed → convert --apply). Next work unit: WU-08 — behavior (share/add-to-calendar dialogs, audio), accessibility pass, first-party dynamic SEO (head/OG/JSON-LD, noindex policies), `.htaccess` redirects, OWN-015 orphan-ics admin tool. |
+| **Future** | Rest of Fase 3: **live static production → FSE block theme** (ADR 0029). No classic PHP theme in between. The migration pipeline landed in WU-06 and WU-07 (plugin v0.4.0): pure extractors, deterministic `migration/payload.json` (source VERSION 1.0.35; live parity verified byte-for-byte, delta 0), WP-CLI `wp cdd-core migrate validate|plan|import|verify|convert` + `seed` (dry-run by default, create-missing-only, production guard); content imported and converted in the local env (staging order: import --apply → seed → convert --apply). Next work unit: WU-08 — behavior (share/add-to-calendar dialogs, audio), accessibility pass, first-party dynamic SEO (head/OG/JSON-LD, noindex policies), `.htaccess` redirects, OWN-015 orphan-ics admin tool. WU-09 (Contact Form 7) is **not** blocked by legal review (ADR 0041 / OWN-018). |
 
 ## Canonical content
 
@@ -59,9 +59,12 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
 - Future theme is **FSE / block theme built directly from the static mockup** (ADR 0029). Do **not**
   scaffold a classic PHP theme (`front-page.php`, `page-*.php`) as a bridge.
 - CPT `sangha` is out of initial Fase 3 scope unless the owner reopens it (ADR 0024).
-- Privacy page is published at `/privacidad` (ADR 0039). Copy is provisional until legal review; do not rewrite it. Contact Form 7 stays gated until the notice is updated to describe a server-side form.
+- Privacy page is published at `/privacidad` (ADR 0039, provisional disclaimer). Contact Form 7 is
+  eligible at cutover (ADR 0041 / OWN-018); legal review does not block WU-09 or launch. In WordPress,
+  update only the form paragraphs of that notice. Do not change static HTML while the live form still
+  uses `action="#"`.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
-  v1.20). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
+  v1.21). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. Later-phase rows (`POST-*`) are i18n/English after cutover: do not implement
   them in Fase 3.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until

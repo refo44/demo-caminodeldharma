@@ -6,7 +6,7 @@ Hay dos bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
-| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-017 sin decisión nueva. |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-018 sin decisión nueva. |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
@@ -31,7 +31,7 @@ listado. No mezclar.
 
 Ya resuelto por ADR (no repetir aquí como pregunta):
 
-- `/privacidad` publicada (provisional) — ADR 0039; [0028](adr/0028-privacidad-aplazada-conscientemente.md) sustituida
+- `/privacidad` publicada (provisional) — ADR 0039; [0028](adr/0028-privacidad-aplazada-conscientemente.md) sustituida. CF7 en el corte: ADR 0041 / OWN-018
 - CPT `sangha` fuera del corte inicial — ADR 0024
 - Freeze por defecto: ledger durante el build + freeze corto al corte — ADR 0034
 - Todo evento tiene single; pasados sin inscripción ni «Añadir al calendario» — ADR 0035 (OWN-004, OWN-012)
@@ -72,6 +72,7 @@ Ninguna.
 | OWN-015 | 2026-08-29 | **wp-admin tiene «Eliminar huérfanos»** (forzar a mano). Vive en `camino-del-dharma-core` (herramientas del plugin, no un plugin de terceros). Alcance: **solo `.ics`** — attachments `text/calendar` y archivos sueltos que no correspondan a un evento **vigente**. Primero lista (dry-run); luego aplica con nonce. Quien puede: editar eventos. No borra fotos huérfanas (OWN-003), mp3 ni carteles. El pase automático (OWN-013) sigue valiendo; este botón es por si quedó un resto o se quiere limpiar ya. **Aceptado 2026-08-29:** no hay otro tipo de archivo que valga la pena borrar. PDF de recitación no se importa (OWN-002). mp3 son los mantras. Thumbs no se importan. Embeds no son archivos. La papelera y las revisiones de WP no entran en este botón. |
 | OWN-010 | 2026-08-29 | **D — CPT de autor.** El «Por…» del blog sale de fichas `blog_author`, no de copy ni del usuario WP. Perfil `/author/{slug}` (ADR 0037). Semilla: Zheng Gong (`zheng-gong`), Comunidad Camino del Dharma (`comunidad-camino-del-dharma`). Buscador al asignar; publicar exige ≥1 ficha. `query_var` ≠ `author`. Archivos de users = 404. Eventos no usan este CPT. `/comunidad` no se mueve. |
 | OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
+| OWN-018 | 2026-08-31 | **CF7 entra al corte sin esperar asesoría legal.** El disclaimer publicado en `/privacidad` basta para lanzar. La revisión jurídica queda recomendada para más adelante, no este año, y **no** bloquea WU-09 ni el corte. En WordPress se actualizan solo los párrafos del formulario (ADR 0041). El HTML estático no se toca mientras el form de producción siga siendo `action="#"`. |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -105,7 +106,7 @@ Tienen ADR o decisión de dueño y un disparador propio. No son `POST-*` nuevos:
 | Tema | Dónde | Disparador |
 | ---- | ----- | ---------- |
 | HSTS | ADR 0020 | ≥30 días estables **después** del corte WordPress |
-| Copy de `/privacidad` | ADR 0039 | Publicada (provisional). Revisión legal sigue abierta; CF7 gated a actualizar el aviso |
+| Copy de `/privacidad` | ADR 0039 + [0041](adr/0041-cf7-corte-sin-asesoria-legal.md) | Publicada (provisional). Disclaimer basta para el corte (OWN-018). Revisión legal = trabajo **posterior**, no gate. En WP: solo párrafos del formulario |
 | Automatización de deploy/CD | ADR 0016 | Estructura estable; no crear workflows de deploy ahora |
 | CPT `sangha` | ADR 0024 | Fuera del corte inicial; reabrir solo con decisión nueva |
 | Paginación numerada de galería | OWN-011 | Solo si un álbum crece mucho **después** del corte |
@@ -127,5 +128,9 @@ consolida producción publicada como fuente pre-corte.
 
 **Higiene 2026-08-30:** OWN-006 actualiza el ejemplo de `VERSION` a 1.0.35; no reabre decisiones.
 
-**Versión:** 1.20 · **Fecha:** 2026-08-30 · **Estado:** Fase 3: 0 abiertas · 18 decididas (no
-iniciada). Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
+**v1.21 (2026-08-31):** OWN-018 / ADR 0041 — Contact Form 7 entra al corte sin esperar
+asesoría legal. El disclaimer de `/privacidad` basta para lanzar. En WordPress se actualizan
+solo los párrafos del formulario.
+
+**Versión:** 1.21 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
+Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.

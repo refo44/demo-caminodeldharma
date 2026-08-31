@@ -50,7 +50,7 @@ Forma canónica: **sin barra final**.
 | `/author/{user}` nativo WP | — | **404** | no es perfil | apagar rewrite de users |
 | *(404 genérico)* | plantilla 404 | KEEP behavior | HTTP 404 | no URL `/404` |
 
-`/privacidad`: **live** (ADR 0039). Enlace en el pie; no 301 desde nada. Copy provisional hasta asesoría legal.
+`/privacidad`: **live** (ADR 0039). Enlace en el pie; no 301 desde nada. Disclaimer provisional se conserva. En WordPress, delta del formulario (ADR 0041); revisión legal no es gate.
 
 `/blog/tag/{slug}`: no existe en static; en WP existirá con noindex (ADR 0031). No es 301 desde el estático.
 
