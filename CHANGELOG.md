@@ -10,12 +10,17 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Gobernanza — WU-08 partido en 08A / 08B (FABLE5 v2.5, sin cambio del artefacto desplegado)
+
+WU-08 se parte: 08A comportamiento front (Opus, sin pegar FABLE5); 08B SEO/redirects/OWN-015/a11y
+(Opus + FABLE5 §9.5 y §10 solamente). No mezclar en el mismo chat.
+
 ### Gobernanza — CF7 en el corte sin espera legal (ADR 0041 / OWN-018, sin cambio del artefacto desplegado)
 
 Contact Form 7 es elegible en el corte a WordPress. El disclaimer publicado en `/privacidad`
 basta para lanzar; la revisión legal queda como trabajo posterior, no como gate. En WordPress
 (WU-09) se actualizan solo los párrafos del formulario. El HTML estático no cambia: allí el
-formulario sigue sin enviar. FABLE5 v2.4. Backlog v1.21.
+formulario sigue sin enviar. FABLE5 v2.5. Backlog v1.21.
 
 ### Fase 3 — WU-07: plantillas FSE reales, bloques dinámicos y conversión de contenido (sin cambio del artefacto desplegado)
 

@@ -1,13 +1,13 @@
 # Fase 3 — Estado de ejecución durable
 
-Artefacto de continuidad exigido por FABLE5 v2.4 §12. Otra sesión debe poder retomar el trabajo
+Artefacto de continuidad exigido por FABLE5 v2.5 §12. Otra sesión debe poder retomar el trabajo
 leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (gobernanza ADR 0041 / OWN-018; WU-07 sigue cerrado) |
+| **Última actualización** | 2026-08-31 (WU-08 partido en 08A/08B; FABLE5 v2.5) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…WU-07 **cerrados**; checkpoint antes de WU-08 |
+| **Work unit activo** | Ninguno — WU-00…WU-07 **cerrados**; checkpoint antes de **WU-08A** |
 | **Rama** | `fase3-wordpress` (local, sin push) |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
@@ -195,8 +195,9 @@ Ver `.audit/fase3-validation-matrix.md` § WU-07. Estados: `Unverified`, `Pass (
 
 ## Bloqueos
 
-- Ninguno. WU-08 sigue siendo el siguiente work unit. WU-09 (CF7) **ya no espera** asesoría
-  legal (ADR 0041 / OWN-018). La sesión actual de gobernanza no implementa WU-08.
+- Ninguno. Siguiente implementación: **WU-08A** (Opus, sin FABLE5). Después, sesión aparte:
+  **WU-08B** (Opus + FABLE5 §9.5 y §10 solamente). WU-09 (CF7) no espera asesoría legal
+  (ADR 0041 / OWN-018).
 
 ## Archivos cambiados en la sesión de gobernanza (ADR 0041, 2026-08-31)
 
@@ -251,10 +252,16 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-07 está cerrado. Gobernanza ADR 0041 aplicada (WU-09 ya no espera legal). **La sesión
-actual se detiene aquí.** La siguiente sesión de implementación: rerun del preflight
-(§ Reanudación) y de los gates, luego **solo WU-08**. WU-09 (CF7 + copy del formulario en
-`/privacidad` WP) queda desbloqueado para cuando toque, sin gate jurídico.
+WU-07 está cerrado. WU-08 está **partido** (FABLE5 v2.5):
+
+1. **WU-08A — comportamiento front** (Claude 4.6 Opus, **sin** pegar FABLE5): diálogos
+   Compartir y Añadir al calendario (portar `share.js` + la mitad restante de `calendar.js`),
+   audio de mantras en `/practica`. TDD (ADR 0038). Parar en el checkpoint 08A.
+2. **WU-08B — SEO, redirects, OWN-015, a11y** (Claude 4.6 Opus, **sesión nueva**): pegar el
+   resume corto **y** FABLE5 **§9.5 + §10 únicamente** (no el archivo entero). Title/meta/OG/
+   JSON-LD, `noindex,follow`, redirects del `.htaccess`, «Eliminar huérfanos», pase docs/19.
+
+No mezclar 08A y 08B en el mismo chat. WU-09 queda después, sin gate jurídico.
 
 ## Procedimiento de reanudación
 

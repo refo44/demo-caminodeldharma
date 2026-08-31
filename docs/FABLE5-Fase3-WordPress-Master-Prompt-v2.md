@@ -2,7 +2,7 @@
 
 ## Camino del Dharma · Fase 3 · Static production → WordPress FSE
 
-**Prompt version:** 2.4
+**Prompt version:** 2.5
 **Status:** CURRENT — use this prompt for execution
 **Date:** 2026-08-31
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
@@ -13,7 +13,9 @@ plus the closed Fase 3 owner-decision backlog (v1.21). `POST-*` later-phase i18n
 implemented at cutover. Version 2.3 incorporated the permanent removal of the legacy source folder
 under OWN-017 and ADR 0040. Version 2.4 incorporates ADR 0041 / OWN-018: Contact Form 7 is eligible
 at cutover without waiting for legal review; the published `/privacidad` disclaimer is sufficient
-for launch; WordPress updates only the form paragraphs of that notice.
+for launch; WordPress updates only the form paragraphs of that notice. Version 2.5 splits WU-08
+into 08A (front-end behavior; Opus, no full prompt) and 08B (SEO, redirects, OWN-015, a11y; attach
+only §9.5 and §10). Do not paste this entire file to start either session.
 
 ---
 
@@ -748,9 +750,14 @@ Use these work-unit boundaries unless repository evidence requires a safer subdi
 6. **WU-05 — Event, gallery-album, and blog-author domain models, routing, calendar/ICS data**
 7. **WU-06 — Extractor, payload, WP-CLI importer, reconciliation**
 8. **WU-07 — Pages, posts, authors, media, templates, gallery**
-9. **WU-08 — Behavior, accessibility, SEO, redirects**
-10. **WU-09 — Contact Form 7 integration and `/privacidad` form-copy update (ADR 0041)**
-11. **WU-10 — Full local QA and staging-readiness runbook**
+9. **WU-08A — Front-end behavior** (share dialog, add-to-calendar dialog, mantra audio). Separate
+    session. Model: Claude 4.6 Opus. Prompt: short resume from the execution state. Do **not**
+    paste this master prompt.
+10. **WU-08B — SEO, redirects, OWN-015, accessibility pass.** Separate session after 08A. Model:
+    Claude 4.6 Opus. Prompt: short resume **plus** this file’s §9.5 and §10 only (not §1–§8, not
+    the first-response contract). Stop after 08A; do not continue into 08B in the same session.
+11. **WU-09 — Contact Form 7 integration and `/privacidad` form-copy update (ADR 0041)**
+12. **WU-10 — Full local QA and staging-readiness runbook**
 
 WU-02 is a dedicated-session work unit under ADR 0023. Do not start it in the same session that
 implements WU-01 or any application code: stop after WU-01. In the next session, rerun preflight,
