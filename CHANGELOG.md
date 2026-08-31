@@ -10,6 +10,27 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Fase 3 — WU-05: modelos de dominio, routing y datos de calendario/ICS (sin cambio del artefacto desplegado)
+
+`camino-del-dharma-core` 0.1.0 → **0.2.0**, nacido con TDD (RED documentado en unit y
+wp-phpunit antes del primer archivo de `includes/`, ADR 0038). Dominio puro: política de
+estado del evento a tiempo de request en `America/Bogota` (OWN-013: el día final sigue
+vigente, `cancelado` es editorial e inmutable, extender la fecha revierte), generador
+`.ics` con paridad con los archivos de producción, datos del calendario mensual (celdas de
+evento con URL/tooltip, lunes de meditación semanal, mes del próximo vigente), selección
+del evento del Inicio (doc 03 §3) y normalización de la relación `authors`. Registro
+WordPress: CPT `event` (`/eventos`, singles sin barra final, ADR 0035/0008), taxonomías
+`event_type`/`event_city` sin archivo público (ADR 0022), `gallery_album` sobre la
+biblioteca de medios con `/galeria/{slug}` sin robar la Page `/galeria` (ADR 0036), CPT
+`blog_author` con `query_var` aislado, rewrite `author` y capacidades propias (ADR 0037),
+archivos de usuario WP en 404, meta de evento saneado (+ `event_calendar_dates` para las
+sesiones que marca el calendario publicado), relación `authors` con guard de publicación
+(≥1 ficha publicada; un post publicado nunca queda a cero; los legados no se despublican),
+ruta generada `/eventos/ical/{slug}.ics` (200 vigente · 410 finalizado · 404 desconocido,
+`X-Robots-Tag: noindex, nofollow`) y flush de rewrites solo en activación/upgrade
+versionado. Suites: 44 tests unit + 34 wp-phpunit, PHPCS/WPCS limpio. Evidencia:
+`.audit/fase3-validation-matrix.md` § WU-05.
+
 ### Fase 3 — WU-04: scaffold del theme FSE y baseline de tokens visuales (sin cambio del artefacto desplegado)
 
 Primer código del theme `camino-del-dharma`, nacido con TDD (RED documentado en unit y

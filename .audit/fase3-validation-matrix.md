@@ -128,3 +128,66 @@ plantillas reales (WU-07+). (3) `parts/header|footer.html` son placeholders mín
 (bloque site-title) para registrar `templateParts`; el markup real es de WU-07+.
 (4) `register_nav_menus()` (docs/12 §11.1) se pospone: un block theme gestiona menús con
 el bloque Navigation; se revisará al construir `parts/header.html` real.
+
+## WU-05 — Modelos de dominio, routing y datos de calendario/ICS (sesión separada tras WU-04)
+
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-03 y WU-04
+rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Rerun preflight al reanudar | `git status --short` vacío; rama `fase3-wordpress`; historial = estado durable (`196ef78`); `VERSION` 1.0.35 | OK | Pass (local) |
+| Rerun gate WU-03 | `tools/php-lint.sh` OK; unit suite OK (15 tests, 117 assertions); `vendor/bin/phpcs` limpio (Docker) | OK | Pass (local) |
+| Rerun gate WU-04 | `tools/run-phpunit-wp.sh` OK (4 tests); theme activo como block theme (`wp_is_block_theme()` = true), `wp_get_environment_type()` = `local`, `debug.log` inexistente, GET `/` 200 sin warnings | OK | Pass (local) |
+| TDD honesto: RED antes del primer archivo de dominio | Unit: 44 tests, **29 errors** (clases de política ausentes). wp-phpunit: 34 tests, **9 errors + 18 failures** (CPTs/meta/rutas/guards ausentes) — ambos ejecutados antes del primer archivo de `includes/` | OK | Pass (local) |
+| Nivel 1 verde tras implementación | `phpunit -c phpunit.xml.dist` → OK (**44 tests, 177 assertions**): política de estado OWN-013 (día final vigente, `America/Bogota` no UTC, cancelado inmutable, extensión revierte), generador ICS (paridad con los `.ics` de producción: PRODID, DTEND exclusivo, escaping RFC 5545, CRLF, omisión honesta), datos de calendario (celdas de evento, lunes de práctica, colisión lunes+evento, mes del próximo vigente), selección del destacado del Inicio (5 reglas doc 03 §3), normalización `authors` | OK | Pass (local) |
+| Nivel 2 verde en harness efímero | `tools/run-phpunit-wp.sh` → OK (**34 tests, 258 assertions**) | OK | Pass (local) |
+| CPT `event` + rutas ADR 0035/0008 | Registro público, archive `eventos`, rewrite sin `with_front`; `/eventos/{slug}` resuelve desde la ruta entrante (`go_to`), permalink **sin barra final**; `/eventos` = archive del CPT | OK | Pass (local) |
+| Taxonomías `event_type`/`event_city` sin archivo público (ADR 0022) | `public`/`publicly_queryable` = false, `rewrite` = false, `show_ui`/`show_in_rest` = true, jerárquica/plana según doc 03 §4 | OK | Pass (local) |
+| Meta de evento saneado (doc 03 §3) | Fechas Y-m-d reales o vacío; enums modalidad/estado; URL de inscripción saneada; `event_calendar_dates` filtra fechas inválidas; valores válidos sobreviven `wp_insert_post` | OK | Pass (local) |
+| Estado a tiempo de request (OWN-013) | `cdd_core_event_status` sobre meta real: fechas mandan, flag guardado solo gana como `cancelado`; split vigentes/pasados ignora flags obsoletos | OK | Pass (local) |
+| Destacado del Inicio | `cdd_core_featured_home_event`: destacado pasado ignorado, vigente más próximo como fallback, null sin vigentes | OK | Pass (local) |
+| Datos de calendario | `cdd_core_calendar_month_data`: sesiones explícitas (`event_calendar_dates`, contrato del calendario estático) o rango; permalink por celda; lunes de práctica | OK | Pass (local) |
+| Ruta y respuesta `.ics` (OWN-009/OWN-012) | `/eventos/ical/{slug}.ics` → query var propia (regla `top`); respuesta: 200 `text/calendar` + `X-Robots-Tag: noindex, nofollow` con VEVENT generado para vigente; **410** finalizado; 404 desconocido | OK | Pass (local) |
+| CPT `blog_author` (ADR 0037) | `query_var` = `blog_author` (nunca `author`), rewrite `author` sin front, caps propias `blog_author(s)` + `map_meta_cap`; `/author/{slug}` single y `/author` archive resuelven; grant de caps a administrator/editor verificado | OK | Pass (local) |
+| Archivos de usuario WP apagados (ADR 0037 §5) | `/?author={id}` → 404 real; ninguna regla rewrite apunta a `author_name=` | OK | Pass (local) |
+| Relación `authors` + guard de publicación (ADR 0037 §6–§7) | Meta ordenado/único/solo fichas publicadas; publicar sin autor → draft (programático) / error 400 (REST); borrador sin autor OK; post publicado no puede quedar en cero (update y delete rechazados); activación no despublica legados; REST publish con meta en el mismo request OK; buscador REST solo fichas publicadas | OK | Pass (local) |
+| `gallery_album` (ADR 0036) | Taxonomía plana sobre attachments, rewrite `galeria` sin front; `/galeria` sigue siendo la Page (no robada); `/galeria/{slug}` resuelve el término y lista sus attachments (fix `inherit` en `pre_get_posts`) | OK | Pass (local) |
+| QA 1: `php -l` | `tools/php-lint.sh` (plugin con `includes/`, theme, tests) | OK | Pass (local) |
+| QA 1: PHPCS/WPCS | `vendor/bin/phpcs` → 0 errores (32 archivos) tras `phpcbf` de alineación | OK | Pass (local) |
+| QA 1: audit de dependencias | `composer audit --locked` → sin advisories | OK | Pass (local) |
+| QA 1: `git diff --check` | Limpio | OK | Pass (local) |
+| QA 3: plugin 0.2.0 en el entorno local | Upgrade versionado (`cdd_core_maybe_upgrade`): `cdd_core_version` = 0.2.0, flush en upgrade (no por request); `wp post-type list` → `event`/`blog_author` públicos; `event_type`/`event_city` no públicos; `gallery_album` público; GET `/` 200 sin warnings; `debug.log` inexistente | OK | Pass (local) |
+| QA 3: HTTP real de rutas bonitas (curl 200/404/410, redirects) | El entorno local sigue con permalinks *plain* (la estructura `/blog/%postname%` es ajuste de sitio de WU-06/07); verificación HTTP entrante completa = harness nivel 3 / staging | — | Unverified |
+| noindex de `/author`, álbumes y tags; JSON-LD; sitemap | Superficie SEO de WU-08 (los inputs de dominio ya existen) | — | Unverified |
+| `test.yml` / Sonar sobre `includes/` | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones registradas (WU-05):
+
+1. **Nombres de meta = doc 03** (`event_date`, `event_end`, `event_place`, `event_modality`,
+   `event_status`, `event_featured`, `event_signup_url`, `event_signup_payment`) y meta del
+   post `authors` **sin prefijo** — es el contrato literal de ADR 0037 §6 y del modelo de
+   contenido; el prefijo `cdd_core` aplica a funciones/clases/hooks/opciones (la opción es
+   `cdd_core_version`). `event_name`/`event_description` no existen como meta: título y
+   contenido nativos (doc 03 §3).
+2. **`event_signup_payment` es boolean** (doc 03 lo dejaba «boolean o url»): el pago siempre
+   redirige vía `event_signup_url`; una segunda URL sería redundante.
+3. **`event_calendar_dates` (array Y-m-d, opcional)**: el calendario publicado marca días de
+   sesión sueltos (Círculos: 3, 10, 15, 17, 22, 24, 29 sep), no un rango contiguo — el rango
+   `event_date..event_end` solo es el fallback. Campo derivado del contrato de producción
+   (ADR 0034); el extractor de WU-06 debe poblarlo para Círculos.
+4. **DESCRIPTION del `.ics` = excerpt editorial** (omitida si no hay): los `.ics` vivos llevan
+   copy editorial por evento; el extractor WU-06 trae ese copy, el plugin no lo inventa.
+   ORGANIZER = comunidad + `caminodeldharma1@gmail.com` (paridad con producción).
+5. **Guard REST del publish** (`rest_pre_insert_post` + stash por request): REST aplica el
+   meta después del insert; sin el stash, publicar con autores en el mismo request fallaría.
+   Path programático: demote a draft; path REST: error 400 explícito.
+6. **Archivos de usuario WP**: filtro `author_rewrite_rules` → vacío + filtro `request`
+   (`author`/`author_name` → `error=404`). Sin tocar el query var `blog_author`.
+7. **Herramienta «Eliminar huérfanos» (OWN-015) pospuesta a WU-08**: el `.ics` de WordPress
+   se genera bajo demanda y no escribe archivos — el único huérfano posible es el legado del
+   estático, que se resuelve en el corte; la pantalla wp-admin llega con la capa de admin.
+8. Gotcha wp-phpunit documentado en los tests: `tear_down` desregistra **todo** el meta
+   registrado (solo sobreviven los hooks de sanitización por el backup de hooks) y
+   `register_post_type` solo añade permastructs si hay estructura de permalinks al
+   registrarse — los tests de rutas re-registran los objetos tras `set_permalink_structure`.
