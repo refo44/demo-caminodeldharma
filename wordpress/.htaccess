@@ -23,8 +23,13 @@ AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # HTTPS si el servidor o el proxy no indican conexión segura
-  RewriteCond %{HTTPS} !=on [OR]
+  # HTTPS solo si NI el servidor NI el proxy indican conexión segura.
+  # El estático usa [OR] aquí: con TLS terminado en el proxy (HTTPS != on
+  # pero X-Forwarded-Proto = https) esa forma redirige una petición que ya
+  # es segura, y el destino vuelve a cumplir la condición — bucle. En
+  # producción no se dispara porque Hostinger fija las dos señales, pero
+  # no se porta un bucle latente a WordPress (§10.1: sin loops).
+  RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
   RewriteRule ^ https://caminodeldharma.org%{REQUEST_URI} [R=301,L]
 

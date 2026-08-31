@@ -149,6 +149,22 @@ final class Htaccess_LedgerTest extends TestCase {
 	}
 
 	/**
+	 * The HTTPS conditions must be ANDed. With `[OR]`, a request that
+	 * arrives secure through a TLS-terminating proxy (HTTPS is not `on`,
+	 * X-Forwarded-Proto is `https`) is redirected to a URL that satisfies
+	 * the same condition again: a redirect loop.
+	 */
+	public function test_https_conditions_cannot_loop_behind_a_proxy() {
+		$htaccess = $this->htaccess();
+
+		$https = strpos( $htaccess, '%{HTTPS} !=on' );
+		$this->assertNotFalse( $https );
+
+		$line = substr( $htaccess, $https, strpos( $htaccess, "\n", $https ) - $https );
+		$this->assertStringNotContainsString( '[OR]', $line );
+	}
+
+	/**
 	 * The deployable WordPress `.htaccess`.
 	 */
 	private function htaccess(): string {

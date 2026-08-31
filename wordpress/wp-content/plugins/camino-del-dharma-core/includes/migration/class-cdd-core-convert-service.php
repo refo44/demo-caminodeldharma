@@ -228,7 +228,7 @@ final class Cdd_Core_Convert_Service {
 				}
 
 				foreach ( $pending as $meta_key => $value ) {
-					add_post_meta( $post_id, $meta_key, $value, true );
+					add_post_meta( $post_id, $meta_key, wp_slash( $value ), true );
 				}
 				$report['converted'][] = $item;
 			}

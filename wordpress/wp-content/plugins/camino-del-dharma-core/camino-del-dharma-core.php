@@ -75,7 +75,6 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_robots', 'cdd_core_seo_robots' );
 	add_filter( 'wp_sitemaps_add_provider', 'cdd_core_seo_sitemap_provider', 10, 2 );
 	add_filter( 'wp_sitemaps_taxonomies', 'cdd_core_seo_sitemap_taxonomies' );
-	add_filter( 'wp_sitemaps_posts_url_list', 'cdd_core_seo_sitemap_posts', 10, 3 );
 	add_action( 'admin_menu', 'cdd_core_register_admin_pages' );
 
 	add_filter( 'wp_insert_post_data', 'cdd_core_guard_post_publish', 10, 2 );

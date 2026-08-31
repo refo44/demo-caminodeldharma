@@ -71,7 +71,12 @@ final class Seo_SitemapTest extends WP_UnitTestCase {
 	 * the sitemap next to its singles.
 	 */
 	public function test_event_archive_is_listed_once_on_the_first_page() {
-		self::factory()->post->create( array( 'post_type' => 'event', 'post_name' => 'evento' ) );
+		self::factory()->post->create(
+			array(
+				'post_type' => 'event',
+				'post_name' => 'evento',
+			)
+		);
 
 		$provider = wp_sitemaps_get_server()->registry->get_provider( 'posts' );
 

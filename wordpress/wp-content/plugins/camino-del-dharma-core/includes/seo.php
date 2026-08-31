@@ -530,26 +530,19 @@ function cdd_core_seo_document(): array {
  * @param string               $name     Provider name.
  */
 function cdd_core_seo_sitemap_provider( $provider, $name ) {
-	return 'users' === $name ? false : $provider;
-}
-
-/**
- * Adds the event archive to the sitemap. `/eventos` is an indexable URL
- * of docs/11 with no post object of its own, so WordPress would never
- * list it; it goes first, on the first page only.
- *
- * @param array  $url_list  Sitemap entries.
- * @param string $post_type Post type of this list.
- * @param int    $page_num  1-based sitemap page.
- */
-function cdd_core_seo_sitemap_posts( $url_list, $post_type, $page_num ) {
-	if ( 'event' !== $post_type || 1 !== (int) $page_num ) {
-		return $url_list;
+	if ( 'users' === $name ) {
+		return false;
 	}
 
-	array_unshift( $url_list, array( 'loc' => (string) get_post_type_archive_link( 'event' ) ) );
+	// Swapped here, not at load time: the parent class only exists once
+	// WordPress has built its sitemap server.
+	if ( 'posts' === $name ) {
+		require_once __DIR__ . '/seo/class-cdd-core-sitemap-posts.php';
 
-	return $url_list;
+		return new Cdd_Core_Sitemap_Posts();
+	}
+
+	return $provider;
 }
 
 /**
