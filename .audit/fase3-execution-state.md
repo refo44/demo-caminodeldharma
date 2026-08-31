@@ -149,11 +149,11 @@ Ver `.audit/fase3-validation-matrix.md` § WU-05. Estados: `Unverified`, `Pass (
 
 ## Último commit verificado
 
-`PENDIENTE-WU05` — implementación de WU-05 (QA local verde). El baseline de paridad visual
+`e8c52c9` — implementación de WU-05 (QA local verde). El baseline de paridad visual
 del `theme.json` sigue siendo `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`:
 `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) →
 `81d7547` → `fe33b96` (WU-03) → `36d368b` → `d3b30f5` (WU-04) → `196ef78` →
-`PENDIENTE-WU05` (WU-05).
+`e8c52c9` (WU-05).
 
 ## Estado del entorno local
 
