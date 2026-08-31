@@ -8,7 +8,7 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 | **Última actualización** | 2026-08-31 (WU-09 implementado y validado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-09 cerrados**; checkpoint antes de **BUG-001** |
-| **Rama** | `fase3-wordpress` (local, sin push) |
+| **Rama** | `fase3-wordpress` — **existe en `origin`** en `f860561` (WU-08B); los 4 commits de WU-09 están **solo en local**, sin push |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
 | **Paridad producción** | **Verificada 2026-08-31 (WU-06)**: `curl`+`diff` byte a byte contra `https://caminodeldharma.org` — 17/17 superficies idénticas al repo (`static/`, VERSION 1.0.35) + sitemap + `.ics`. Delta repo↔Hostinger = 0 (OWN-006/007); la extracción usa el mismo contenido publicado. |
@@ -237,8 +237,8 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   preserva intacto; clasificar en el inventario si aparece referenciado.
 - `_config.yml` y `.nojekyll` son restos de GitHub Pages (desactivado 2026-07-28), fuera del
   ZIP; su retiro es una limpieza separada.
-- `test.yml` y el análisis Sonar de plugin+theme quedan `Unverified` hasta que exista push (la
-  rama es local por diseño del master prompt).
+- `test.yml` y el análisis Sonar de plugin+theme siguen `Unverified` **en esta sesión** porque no
+  se ha revisado el remoto; ver el hallazgo de WU-09 sobre la rama ya publicada.
 - El entorno local ya usa la estructura definitiva `/blog/%postname%` (aplicada por el
   importador). Contenido demo del install local («Sample Page», «Hello world!») convive con
   el contenido importado; el staging partirá limpio. En staging: `import --apply` →
@@ -255,8 +255,8 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   handling») se creó fuera de esta sesión y capturó una instantánea a medias del árbol de trabajo
   de WU-08B; el resto de esos mismos arreglos quedó en `9a00f97`. El árbol final es correcto y
   todos los gates están verdes, pero el mensaje no sigue la convención del repositorio. La rama
-  es local: si se quiere historial limpio, `git rebase -i d73fecd` para fundir `3c3d513` en
-  `9a00f97` antes de cualquier push.
+  ya está **publicada** en `origin` hasta `f860561`, así que fundir `3c3d513` en `9a00f97`
+  exigiría un force-push: decisión del propietario, no una limpieza silenciosa.
 - **BUG-001 (Círculos `.ics`):** el exportado debe incluir **todas las sesiones**. Hoy el
   estático publica un solo VEVENT de la bienvenida; WordPress emite un solo VEVENT de rango.
   **Siguiente sesión** (WU-09 ya está cerrado). No se mezcla con WU-10.
@@ -266,6 +266,14 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   Hostinger. `Pass (local)` no basta (ADR 0026/0041 punto 5). Si allí falla, el corte puede
   seguir con CF7 deshabilitado y WhatsApp/correo — el bloque del theme ya rinde ese estado— y se
   registra en matriz y checklist. **Fallo operativo, no gate jurídico.**
+- **La rama ya no es solo local (hallazgo de WU-09).** `git ls-remote --heads origin
+  fase3-wordpress` devuelve `f860561`: la rama se subió en algún momento anterior a esta sesión,
+  pese a que este archivo la describía como «local, sin push». Consecuencia: la nota de que
+  «CI/Sonar quedan `Unverified` hasta que exista push» está **obsoleta** para todo lo anterior a
+  WU-09 — puede haber ejecuciones de `test.yml` en el remoto que nadie ha revisado. Los 4 commits
+  de WU-09 siguen sin subir, por instrucción. Antes del siguiente push conviene mirar el estado
+  de CI en el remoto y decidir qué hacer con `3c3d513` (el commit ajeno), que **ya está
+  publicado**: reescribirlo obligaría a un force-push.
 - **CF7 no está en Git y por eso el harness no lo ejecuta.** La rama «CF7 presente» se prueba
   contra un entorno real, no en la suite; la suite cubre lo propio en ambos estados. Al
   provisionar un entorno nuevo hay que anotar la versión instalada en
