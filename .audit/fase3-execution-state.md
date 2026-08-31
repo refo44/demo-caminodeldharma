@@ -98,9 +98,9 @@ Ver `.audit/fase3-validation-matrix.md` § WU-03. Estados: `Unverified`, `Pass (
 
 ## Último commit verificado
 
-Pendiente de registrar tras el commit de cierre de WU-03 (esta sesión). Historial previo en
+`fe33b96` — implementación de WU-03 (QA local verde). Historial en
 `fase3-wordpress`: `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8`
-(WU-02) → `81d7547`.
+(WU-02) → `81d7547` → `fe33b96` (WU-03).
 
 ## Estado del entorno local
 
