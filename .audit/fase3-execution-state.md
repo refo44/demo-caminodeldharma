@@ -293,11 +293,12 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 ## Último commit verificado
 
-`6dffb0d` — implementación de WU-07 (QA local verde). Baseline visual del theme:
+`c94635f` — implementación de WU-08A (QA local verde). Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
-`e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07).
+`e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07) → `2bd733d` → `150d8b8` (gobernanza) →
+`c94635f` (WU-08A).
 
 ## Estado del entorno local
 
