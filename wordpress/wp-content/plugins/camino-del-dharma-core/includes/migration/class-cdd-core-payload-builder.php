@@ -39,8 +39,13 @@ final class Cdd_Core_Payload_Builder {
 	 *
 	 * @param array $collections Map collection name => list of objects.
 	 * @param array $source      Source identity (version, commit, root).
+	 * @param array $site        Site-wide data (WU-08B). Not a
+	 *                           collection: no slug, no source key and no
+	 *                           count, so the reconciliation totals of
+	 *                           docs/conteos-reconciliacion-migracion.md
+	 *                           stay untouched.
 	 */
-	public function build( array $collections, array $source ): array {
+	public function build( array $collections, array $source, array $site = array() ): array {
 		$payload = array(
 			'schema' => self::SCHEMA,
 			'source' => array(
@@ -60,6 +65,10 @@ final class Cdd_Core_Payload_Builder {
 			}
 			$payload[ $name ]           = $keyed;
 			$payload['counts'][ $name ] = count( $keyed );
+		}
+
+		if ( array() !== $site ) {
+			$payload['site'] = $site;
 		}
 
 		return $payload;

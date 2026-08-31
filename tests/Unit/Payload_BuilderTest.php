@@ -95,4 +95,43 @@ final class Payload_BuilderTest extends TestCase {
 			)
 		);
 	}
+	/**
+	 * WU-08B: site-wide SEO is not a collection. It has no slug, no
+	 * source key and no count of its own — adding it must not disturb the
+	 * reconciliation counts (docs/conteos-reconciliacion-migracion.md).
+	 */
+	public function test_site_section_travels_outside_the_counted_collections() {
+		$payload = ( new Cdd_Core_Payload_Builder() )->build(
+			array( 'pages' => array( array( 'slug' => 'inicio' ) ) ),
+			array(
+				'version' => '1.0.35',
+				'commit'  => 'abc1234',
+				'root'    => 'static',
+			),
+			array(
+				'seo'    => array( 'site_name' => 'Camino del Dharma' ),
+				'jsonld' => array( 'home_graph' => array( array( '@type' => 'Organization' ) ) ),
+			)
+		);
+
+		$this->assertSame( array( 'pages' => 1 ), $payload['counts'] );
+		$this->assertSame( 'Camino del Dharma', $payload['site']['seo']['site_name'] );
+		$this->assertArrayNotHasKey( '_source_key', $payload['site'] );
+	}
+
+	/**
+	 * Omitting the site section keeps the payload shape it had before.
+	 */
+	public function test_site_section_is_optional() {
+		$payload = ( new Cdd_Core_Payload_Builder() )->build(
+			array( 'pages' => array() ),
+			array(
+				'version' => '1.0.35',
+				'commit'  => 'abc1234',
+				'root'    => 'static',
+			)
+		);
+
+		$this->assertArrayNotHasKey( 'site', $payload );
+	}
 }

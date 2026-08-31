@@ -275,6 +275,57 @@ final class ConvertTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * WU-08B: an environment imported before the head copy travelled
+	 * converges through `convert --payload`, add-only — a value an editor
+	 * already wrote, or deliberately emptied, is never rewritten.
+	 */
+	public function test_convert_seeds_head_seo_add_only() {
+		$page = self::factory()->post->create(
+			array(
+				'post_type'  => 'page',
+				'post_name'  => 'linaje',
+				'post_title' => 'El linaje',
+				'meta_input' => array( '_cdd_source_key' => 'page:linaje' ),
+			)
+		);
+		update_post_meta( $page, 'seo_title', 'Título ya editado' );
+
+		$payload = array(
+			'pages' => array(
+				array(
+					'_source_key' => 'page:linaje',
+					'seo'         => array(
+						'title'          => 'Linaje Chan y Tierra Pura | Camino del Dharma',
+						'description'    => 'El linaje.',
+						'keywords'       => '',
+						'og_title'       => '',
+						'og_description' => '',
+						'related'        => '',
+					),
+				),
+			),
+		);
+
+		$service = new Cdd_Core_Convert_Service(
+			array(
+				'environment' => 'local',
+				'payload'     => $payload,
+			)
+		);
+
+		$dry = $service->run( false );
+		$this->assertContains( 'seo:page:linaje', $dry['pending'] );
+		$this->assertSame( 'Título ya editado', get_post_meta( $page, 'seo_title', true ) );
+
+		$applied = $service->run( true );
+		$this->assertContains( 'seo:page:linaje', $applied['converted'] );
+		$this->assertSame( 'Título ya editado', get_post_meta( $page, 'seo_title', true ) );
+		$this->assertSame( 'El linaje.', get_post_meta( $page, 'seo_description', true ) );
+
+		$this->assertNotContains( 'seo:page:linaje', $service->run( true )['converted'], 'Seeding is idempotent.' );
+	}
+
+	/**
 	 * Protects the production guard (ADR 0033): in a production
 	 * environment the service refuses to write without explicit
 	 * confirmation plus backup evidence.

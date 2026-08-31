@@ -455,6 +455,172 @@ final class ImporterTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * WU-08B: the published head copy is written on create, so a clean
+	 * staging import already carries it — no follow-up pass needed.
+	 */
+	public function test_import_writes_the_published_head_meta() {
+		$this->import_fixture();
+
+		$page = get_page_by_path( 'linaje' );
+		$this->assertSame( 'Linaje Chan y Tierra Pura | Camino del Dharma', get_post_meta( $page->ID, 'seo_title', true ) );
+		$this->assertSame( 'El linaje.', get_post_meta( $page->ID, 'seo_description', true ) );
+
+		$event = get_page_by_path( 'evento-seo', OBJECT, 'event' );
+		$this->assertSame( 'Evento — Camino del Dharma', get_post_meta( $event->ID, 'seo_title', true ) );
+		$this->assertSame( 'mixed', get_post_meta( $event->ID, 'event_attendance_mode', true ) );
+		$this->assertSame(
+			'https://caminodeldharma.org/blog/entrada-seo',
+			get_post_meta( $event->ID, 'seo_related_url', true )
+		);
+		$this->assertSame(
+			array( 'additionalType' => 'https://schema.org/Course' ),
+			json_decode( get_post_meta( $event->ID, 'seo_jsonld_extra', true ), true )
+		);
+	}
+
+	/**
+	 * The site-wide SEO data becomes an option, and the published
+	 * addressRegion of each city becomes term metadata.
+	 */
+	public function test_import_seeds_the_site_seo_option_and_city_regions() {
+		$this->import_fixture();
+
+		$stored = get_option( 'cdd_core_seo_site' );
+		$this->assertSame( 'Camino del Dharma', $stored['seo']['site_name'] );
+		$this->assertSame( 'Organization', $stored['jsonld']['home_graph'][0]['@type'] );
+
+		$city = get_term_by( 'name', 'Bogotá', 'event_city' );
+		$this->assertInstanceOf( WP_Term::class, $city );
+		$this->assertSame( 'Bogotá D.C.', get_term_meta( $city->term_id, 'cdd_region', true ) );
+	}
+
+	/**
+	 * docs/11 §3.2: blog tags live under /blog/tag/{slug}; OWN-013
+	 * resolves event status in America/Bogota.
+	 */
+	public function test_import_applies_the_timezone_and_tag_base() {
+		$this->import_fixture();
+
+		$this->assertSame( 'blog/tag', get_option( 'tag_base' ) );
+		$this->assertSame( 'America/Bogota', get_option( 'timezone_string' ) );
+	}
+
+	/**
+	 * WCAG 3.1.1 / docs/19 §10: the document language is es-CO in every
+	 * environment, including one whose translation files were never
+	 * downloaded — and an administrator's own choice still wins.
+	 */
+	public function test_document_language_is_colombian_spanish() {
+		$this->assertSame( 'es_CO', get_locale() );
+		$this->assertSame( 'es-CO', get_bloginfo( 'language' ) );
+
+		// An administrator who has chosen a language in Settings keeps it.
+		// Asserted on the filter itself: WordPress refuses to *store* a
+		// locale whose translation files this offline harness never
+		// downloaded, which is the very reason the filter exists.
+		$this->assertSame( 'es_CO', cdd_core_default_locale( 'en_US' ) );
+
+		update_option( 'WPLANG', 'es_ES' );
+		add_filter( 'option_WPLANG', static fn() => 'es_ES' );
+		$this->assertSame( 'es_ES', cdd_core_default_locale( 'es_ES' ) );
+	}
+
+	/**
+	 * Re-importing never rewrites head copy an editor has changed.
+	 */
+	public function test_import_does_not_overwrite_edited_head_meta() {
+		$this->import_fixture();
+
+		$page = get_page_by_path( 'linaje' );
+		update_post_meta( $page->ID, 'seo_title', 'Título editado a mano' );
+
+		$this->import_fixture();
+
+		$this->assertSame( 'Título editado a mano', get_post_meta( $page->ID, 'seo_title', true ) );
+	}
+
+	/**
+	 * Runs the WU-08B fixture payload through a real import.
+	 */
+	private function import_fixture() {
+		$importer = new Cdd_Core_Importer(
+			$this->seo_payload(),
+			dirname( __DIR__, 2 ) . '/static',
+			array( 'environment' => 'local' )
+		);
+		$importer->import( true );
+	}
+
+	/**
+	 * A minimal payload exercising every WU-08B write path.
+	 */
+	private function seo_payload(): array {
+		return ( new Cdd_Core_Payload_Builder() )->build(
+			array(
+				'pages'  => array(
+					array(
+						'slug'         => 'linaje',
+						'title'        => 'El linaje',
+						'parent'       => '',
+						'content_html' => '<p>Linaje.</p>',
+						'seo'          => array(
+							'title'          => 'Linaje Chan y Tierra Pura | Camino del Dharma',
+							'description'    => 'El linaje.',
+							'keywords'       => 'linaje, chan',
+							'og_title'       => 'Linaje Chan y Tierra Pura',
+							'og_description' => 'El linaje.',
+							'related'        => '',
+						),
+					),
+				),
+				'events' => array(
+					array(
+						'slug'            => 'evento-seo',
+						'title'           => 'Evento',
+						'type'            => 'Curso',
+						'status'          => 'vigente',
+						'featured'        => false,
+						'start'           => '2026-09-03',
+						'end'             => '2026-09-04',
+						'place'           => 'Virtual',
+						'modality'        => 'Híbrida',
+						'cities'          => array( 'Bogotá' ),
+						'signup_url'      => '',
+						'poster'          => '',
+						'poster_alt'      => '',
+						'excerpt'         => 'Excerpt.',
+						'content_html'    => '<p>Evento.</p>',
+						'calendar_dates'  => array(),
+						'share'           => array(),
+						'attendance_mode' => 'mixed',
+						'jsonld_extra'    => array( 'additionalType' => 'https://schema.org/Course' ),
+						'seo'             => array(
+							'title'          => 'Evento — Camino del Dharma',
+							'description'    => 'Evento.',
+							'keywords'       => '',
+							'og_title'       => '',
+							'og_description' => '',
+							'related'        => 'https://caminodeldharma.org/blog/entrada-seo',
+						),
+					),
+				),
+			),
+			array(
+				'version' => '1.0.35',
+				'commit'  => 'abc1234',
+				'root'    => 'static',
+			),
+			array(
+				'seo'    => array(
+					'site_name'    => 'Camino del Dharma',
+					'city_regions' => array( 'Bogotá' => 'Bogotá D.C.' ),
+				),
+				'jsonld' => array( 'home_graph' => array( array( '@type' => 'Organization' ) ) ),
+			)
+		);
+	}
+
+	/**
 	 * A post payload object.
 	 *
 	 * @param array $overrides Field overrides.

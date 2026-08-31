@@ -22,8 +22,10 @@ final class Page_ExtractorTest extends TestCase {
 
 		$this->assertSame( 'practica', $practica['slug'] );
 		$this->assertNotSame( '', $practica['title'] );
-		$this->assertStringContainsString( 'Práctica', $practica['head_title'] );
-		$this->assertNotSame( '', $practica['meta_description'] );
+		$this->assertStringContainsString( 'Práctica', $practica['seo']['title'] );
+		$this->assertNotSame( '', $practica['seo']['description'] );
+		$this->assertArrayNotHasKey( 'head_title', $practica, 'Head SEO travels as one object (WU-08B).' );
+		$this->assertArrayNotHasKey( 'meta_description', $practica );
 	}
 
 	/**

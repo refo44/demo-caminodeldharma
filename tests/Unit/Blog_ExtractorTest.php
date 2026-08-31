@@ -82,6 +82,21 @@ final class Blog_ExtractorTest extends TestCase {
 	 * hand-written message templates travel as data, normalized the way
 	 * share.js reads them, with the placeholder intact.
 	 */
+	/**
+	 * WU-08B: the published head copy of an entry travels with it. The
+	 * <title> and the Open Graph title are different strings on purpose
+	 * and neither is derived from the other.
+	 */
+	public function test_posts_carry_the_published_head_seo() {
+		$posts = $this->extract_posts();
+		$seo   = $posts['sangha-refugio-hiperconexion']['seo'];
+
+		$this->assertSame( 'Estamos conectados, pero seguimos solos — Blog — Camino del Dharma', $seo['title'] );
+		$this->assertSame( 'Estamos conectados, pero seguimos solos', $seo['og_title'] );
+		$this->assertNotSame( '', $seo['description'] );
+		$this->assertArrayNotHasKey( 'meta_description', $posts['sangha-refugio-hiperconexion'] );
+	}
+
 	public function test_posts_carry_the_published_share_templates() {
 		$posts = $this->extract_posts();
 

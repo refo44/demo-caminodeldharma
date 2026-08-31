@@ -16,7 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Runs the convert pass over the documented pages and, when a payload is
- * supplied, seeds the published share templates (WU-08A).
+ * supplied, seeds the published share templates (WU-08A) and the
+ * published head SEO copy (WU-08B).
  */
 final class Cdd_Core_Convert_Service {
 
@@ -105,8 +106,80 @@ final class Cdd_Core_Convert_Service {
 		}
 
 		$this->seed_share_templates( $apply, $report );
+		$this->seed_head_seo( $apply, $report );
 
 		return $report;
+	}
+
+	/**
+	 * Seeds the published head copy on the objects the importer already
+	 * created (WU-08B). Same contract as the share templates: a fresh
+	 * import writes it on create, and this pass converges an environment
+	 * imported before it travelled. Add-only — a key an editor already
+	 * wrote, or deliberately emptied, is never rewritten (ADR 0033).
+	 *
+	 * @param bool  $apply  Write the meta; false = dry run.
+	 * @param array $report Report to extend, by reference.
+	 */
+	private function seed_head_seo( bool $apply, array &$report ) {
+		$payload = (array) $this->options['payload'];
+
+		foreach ( array( 'pages', 'events', 'posts' ) as $collection ) {
+			foreach ( (array) ( $payload[ $collection ] ?? array() ) as $object ) {
+				$seo = Cdd_Core_Importer::seo_meta( $object );
+				if ( 'events' === $collection ) {
+					$seo = array_merge( $seo, $this->event_seo_meta( $object ) );
+				}
+				if ( empty( $seo ) ) {
+					continue;
+				}
+
+				$post_id = $this->post_by_source_key( (string) ( $object['_source_key'] ?? '' ) );
+				if ( null === $post_id ) {
+					continue;
+				}
+
+				$pending = array();
+				foreach ( $seo as $meta_key => $value ) {
+					if ( ! metadata_exists( 'post', $post_id, $meta_key ) ) {
+						$pending[ $meta_key ] = $value;
+					}
+				}
+				if ( empty( $pending ) ) {
+					continue;
+				}
+
+				$item = 'seo:' . $object['_source_key'];
+				if ( ! $apply ) {
+					$report['pending'][] = $item;
+					continue;
+				}
+
+				foreach ( $pending as $meta_key => $value ) {
+					add_post_meta( $post_id, $meta_key, $value, true );
+				}
+				$report['converted'][] = $item;
+			}
+		}
+	}
+
+	/**
+	 * The event-only structured-data meta of one payload object.
+	 *
+	 * @param array $payload_object Event payload object.
+	 */
+	private function event_seo_meta( array $payload_object ): array {
+		return array_filter(
+			array(
+				'event_attendance_mode' => (string) ( $payload_object['attendance_mode'] ?? '' ),
+				'seo_jsonld_extra'      => array() !== (array) ( $payload_object['jsonld_extra'] ?? array() )
+					? (string) wp_json_encode( $payload_object['jsonld_extra'] )
+					: '',
+			),
+			static function ( string $value ): bool {
+				return '' !== $value;
+			}
+		);
 	}
 
 	/**

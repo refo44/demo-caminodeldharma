@@ -28,15 +28,12 @@ final class Cdd_Core_Page_Extractor {
 		$xpath = Cdd_Core_Dom::load( $html );
 		$main  = $xpath->query( '//main' )->item( 0 );
 		$h1    = $xpath->query( '//main//h1' )->item( 0 );
-		$title = $xpath->query( '//title' )->item( 0 );
-		$meta  = $xpath->query( '//meta[@name="description"]' )->item( 0 );
 
 		return array(
-			'slug'             => $slug,
-			'title'            => null !== $h1 ? Cdd_Core_Dom::text( $h1 ) : '',
-			'head_title'       => null !== $title ? Cdd_Core_Dom::text( $title ) : '',
-			'meta_description' => $meta instanceof DOMElement ? $meta->getAttribute( 'content' ) : '',
-			'content_html'     => null !== $main ? $this->content_html( $main ) : '',
+			'slug'         => $slug,
+			'title'        => null !== $h1 ? Cdd_Core_Dom::text( $h1 ) : '',
+			'seo'          => ( new Cdd_Core_Seo_Extractor() )->extract( $html ),
+			'content_html' => null !== $main ? $this->content_html( $main ) : '',
 		);
 	}
 

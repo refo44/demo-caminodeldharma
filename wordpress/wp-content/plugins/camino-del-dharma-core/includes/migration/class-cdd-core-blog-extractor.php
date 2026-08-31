@@ -45,22 +45,21 @@ final class Cdd_Core_Blog_Extractor {
 		$hero    = $this->hero( $xpath, $article );
 
 		$deck = Cdd_Core_Dom::by_class( $xpath, 'article-deck', $article );
-		$meta = $xpath->query( '//meta[@name="description"]' )->item( 0 );
 
 		return array(
-			'slug'             => $slug,
-			'title'            => Cdd_Core_Dom::text( $xpath->query( './/h1', $article )->item( 0 ) ),
-			'deck'             => empty( $deck ) ? '' : Cdd_Core_Dom::text( $deck[0] ),
-			'date'             => $this->published_date( $xpath ),
-			'author_name'      => $byline['name'],
-			'author_slug'      => Cdd_Core_Dom::slugify( $byline['name'] ),
-			'author_bio'       => $byline['bio'],
-			'thumbnail'        => $hero['file'],
-			'thumbnail_alt'    => $hero['alt'],
-			'meta_description' => $meta instanceof DOMElement ? $meta->getAttribute( 'content' ) : '',
-			'content_html'     => $this->content_html( $article ),
-			'share'            => ( new Cdd_Core_Share_Extractor() )->extract( $xpath ),
-			'tags'             => array(),
+			'slug'          => $slug,
+			'title'         => Cdd_Core_Dom::text( $xpath->query( './/h1', $article )->item( 0 ) ),
+			'deck'          => empty( $deck ) ? '' : Cdd_Core_Dom::text( $deck[0] ),
+			'date'          => $this->published_date( $xpath ),
+			'author_name'   => $byline['name'],
+			'author_slug'   => Cdd_Core_Dom::slugify( $byline['name'] ),
+			'author_bio'    => $byline['bio'],
+			'thumbnail'     => $hero['file'],
+			'thumbnail_alt' => $hero['alt'],
+			'seo'           => ( new Cdd_Core_Seo_Extractor() )->extract( $html ),
+			'content_html'  => $this->content_html( $article ),
+			'share'         => ( new Cdd_Core_Share_Extractor() )->extract( $xpath ),
+			'tags'          => array(),
 		);
 	}
 

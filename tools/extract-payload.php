@@ -181,6 +181,23 @@ foreach ( $cdd_posts as $cdd_post_row ) {
 
 $cdd_media = ( new Cdd_Core_Media_Inventory() )->classify( $cdd_files, array_keys( $cdd_referenced ) );
 
+// --- Site-wide SEO (WU-08B): the social defaults every page repeats, the
+// head of the /eventos archive (a CPT archive, not a Page) and the
+// published home @graph. Institutional data, not markup (ADR 0034).
+$cdd_seo_extractor = new Cdd_Core_Seo_Extractor();
+$cdd_site          = $cdd_seo_extractor->extract_site(
+	cdd_read( 'index.html' ),
+	array( 'event' => cdd_read( 'eventos/index.html' ) )
+);
+$cdd_site['seo']['city_regions'] = $cdd_seo_extractor->extract_city_regions(
+	array_map( 'cdd_read', array_map(
+		static function ( string $slug ): string {
+			return 'eventos/' . $slug . '/index.html';
+		},
+		$cdd_single_slugs
+	) )
+);
+
 // --- Video embeds (inventory §7).
 $cdd_embeds = $cdd_page_extractor->extract_embeds( cdd_read( 'practica/videos/index.html' ) );
 foreach ( $cdd_embeds as &$cdd_embed ) {
@@ -204,7 +221,8 @@ $cdd_payload = ( new Cdd_Core_Payload_Builder() )->build(
 		'version' => trim( (string) file_get_contents( $cdd_root . '/VERSION' ) ),
 		'commit'  => $cdd_commit,
 		'root'    => 'static',
-	)
+	),
+	$cdd_site
 );
 
 if ( ! is_dir( $cdd_root . '/migration' ) ) {

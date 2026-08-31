@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once __DIR__ . '/inc/class-camino-del-dharma-format.php';
 require_once __DIR__ . '/inc/class-camino-del-dharma-renderers.php';
 require_once __DIR__ . '/inc/blocks.php';
+require_once __DIR__ . '/inc/seo.php';
 
 /**
  * Theme supports that theme.json does not cover.

@@ -116,8 +116,50 @@ final class Cdd_Core_Event_Extractor {
 			'content_html'      => $this->content_html( $single, $listing, $card ),
 			'calendar_dates'    => $this->calendar_dates( $single ),
 			'share'             => $this->share( $single, $listing, $card ),
+			'seo'               => $this->seo( $singles_by_slug[ $slug ] ?? '' ),
+			'attendance_mode'   => $this->attendance_mode( $structured, null !== $single ),
+			'jsonld_extra'      => '' !== ( $singles_by_slug[ $slug ] ?? '' )
+				? ( new Cdd_Core_Seo_Extractor() )->extract_event_extra( $singles_by_slug[ $slug ] )
+				: array(),
 			'has_single_source' => null !== $single,
 		);
+	}
+
+	/**
+	 * The published head SEO of one event (WU-08B). Only the three events
+	 * with a real single have one; the ADR 0035 events that live as
+	 * listing cards carry the empty object, and WordPress falls back to
+	 * their own title instead of inventing head copy.
+	 *
+	 * @param string $single_html Single page HTML, or '' when there is none.
+	 */
+	private function seo( string $single_html ): array {
+		return '' !== $single_html
+			? ( new Cdd_Core_Seo_Extractor() )->extract( $single_html )
+			: Cdd_Core_Seo_Extractor::EMPTY_SEO;
+	}
+
+	/**
+	 * The schema.org attendance mode published in the single's JSON-LD.
+	 * The free-text modality is editorial copy (OWN-007) and is never
+	 * parsed into a machine value: an unknown mode stays empty and the
+	 * JSON-LD omits the field.
+	 *
+	 * @param array|null $structured Structured Event node, when present.
+	 * @param bool       $has_single Whether the node came from a single.
+	 */
+	private function attendance_mode( ?array $structured, bool $has_single ): string {
+		if ( ! $has_single || null === $structured ) {
+			return '';
+		}
+
+		$modes = array(
+			'https://schema.org/OfflineEventAttendanceMode' => 'offline',
+			'https://schema.org/OnlineEventAttendanceMode' => 'online',
+			'https://schema.org/MixedEventAttendanceMode'  => 'mixed',
+		);
+
+		return $modes[ $structured['eventAttendanceMode'] ?? '' ] ?? '';
 	}
 
 	/**

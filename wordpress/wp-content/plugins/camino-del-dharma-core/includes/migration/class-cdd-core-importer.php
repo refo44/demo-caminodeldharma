@@ -201,6 +201,7 @@ final class Cdd_Core_Importer {
 
 		if ( $apply ) {
 			$report['settings'] = $this->apply_settings();
+			$report['site_seo'] = $this->apply_site_seo();
 		}
 
 		return $report;
@@ -405,7 +406,16 @@ final class Cdd_Core_Importer {
 									return array() !== $value && '' !== $value;
 								}
 							),
-							self::share_meta( $payload_object )
+							self::share_meta( $payload_object ),
+							self::seo_meta( $payload_object ),
+							array_filter(
+								array(
+									'event_attendance_mode' => (string) ( $payload_object['attendance_mode'] ?? '' ),
+									'seo_jsonld_extra' => array() !== (array) ( $payload_object['jsonld_extra'] ?? array() )
+										? (string) wp_json_encode( $payload_object['jsonld_extra'] )
+										: '',
+								)
+							)
 						),
 					)
 				);
@@ -427,7 +437,8 @@ final class Cdd_Core_Importer {
 						'post_content' => $this->wrap_content( $payload_object['content_html'] ),
 						'meta_input'   => array_merge(
 							array( 'authors' => $this->author_ids( (array) $payload_object['authors'] ) ),
-							self::share_meta( $payload_object )
+							self::share_meta( $payload_object ),
+							self::seo_meta( $payload_object )
 						),
 					)
 				);
@@ -446,6 +457,7 @@ final class Cdd_Core_Importer {
 						'post_parent'  => $parent_id,
 						'post_status'  => 'publish',
 						'post_content' => $this->wrap_content( $payload_object['content_html'] ),
+						'meta_input'   => self::seo_meta( $payload_object ),
 					)
 				);
 				break;
@@ -493,6 +505,34 @@ final class Cdd_Core_Importer {
 		}
 
 		return $meta;
+	}
+
+	/**
+	 * The published head copy of one payload object as meta (WU-08B).
+	 * Empty fields are dropped, never written as empty strings: an
+	 * absent key is what lets the theme fall back to real data, and what
+	 * keeps `convert` add-only.
+	 *
+	 * @param array $payload_object Page, post or event payload object.
+	 */
+	public static function seo_meta( array $payload_object ): array {
+		$seo = (array) ( $payload_object['seo'] ?? array() );
+
+		$meta = array(
+			'seo_title'       => (string) ( $seo['title'] ?? '' ),
+			'seo_description' => (string) ( $seo['description'] ?? '' ),
+			'seo_keywords'    => (string) ( $seo['keywords'] ?? '' ),
+			'og_title'        => (string) ( $seo['og_title'] ?? '' ),
+			'og_description'  => (string) ( $seo['og_description'] ?? '' ),
+			'seo_related_url' => (string) ( $seo['related'] ?? '' ),
+		);
+
+		return array_filter(
+			$meta,
+			static function ( string $value ): bool {
+				return '' !== $value;
+			}
+		);
 	}
 
 	/**
@@ -589,14 +629,57 @@ final class Cdd_Core_Importer {
 	}
 
 	/**
+	 * Site-wide SEO (WU-08B): the published social defaults, the head of
+	 * the CPT archives and the home `@graph` become one option, and the
+	 * published `addressRegion` of each city becomes term metadata. Both
+	 * are add-only — an edited value is never rewritten (ADR 0033).
+	 */
+	private function apply_site_seo(): array {
+		$site = (array) ( $this->payload['site'] ?? array() );
+		if ( array() === $site ) {
+			return array();
+		}
+
+		$applied = array();
+		$regions = (array) ( $site['seo']['city_regions'] ?? array() );
+		unset( $site['seo']['city_regions'] );
+
+		if ( false === get_option( CDD_CORE_SEO_OPTION, false ) ) {
+			update_option( CDD_CORE_SEO_OPTION, $site );
+			$applied[] = CDD_CORE_SEO_OPTION;
+		}
+
+		foreach ( $regions as $city => $region ) {
+			$term = get_term_by( 'name', (string) $city, 'event_city' );
+			if ( $term instanceof WP_Term && ! metadata_exists( 'term', $term->term_id, 'cdd_region' ) ) {
+				add_term_meta( $term->term_id, 'cdd_region', (string) $region, true );
+				$applied[] = 'cdd_region:' . $city;
+			}
+		}
+
+		return $applied;
+	}
+
+	/**
 	 * Reading settings and the ADR 0008 permalink structure.
 	 */
 	private function apply_settings(): array {
 		global $wp_rewrite;
 
 		$applied = array();
-		$front   = get_page_by_path( 'inicio' );
-		$posts   = get_page_by_path( 'blog' );
+
+		// OWN-013 resolves event status in America/Bogota; the site
+		// timezone must say so too. (The document language is not a
+		// setting the importer can write: WordPress rejects a locale
+		// whose translation files are absent — see
+		// cdd_core_default_locale().)
+		if ( 'America/Bogota' !== get_option( 'timezone_string' ) ) {
+			update_option( 'timezone_string', 'America/Bogota' );
+			update_option( 'gmt_offset', '' );
+			$applied[] = 'timezone_string';
+		}
+		$front = get_page_by_path( 'inicio' );
+		$posts = get_page_by_path( 'blog' );
 
 		if ( $front instanceof WP_Post ) {
 			update_option( 'show_on_front', 'page' );
@@ -620,6 +703,16 @@ final class Cdd_Core_Importer {
 			cdd_core_register_rewrites();
 			flush_rewrite_rules();
 			$applied[] = 'permalink_structure';
+		}
+
+		// docs/11 §3.2: tag archives live under /blog/tag/{slug}. The
+		// default base would publish /tag/{slug}, a URL the tree does not
+		// contain.
+		if ( 'blog/tag' !== get_option( 'tag_base' ) ) {
+			update_option( 'tag_base', 'blog/tag' );
+			$wp_rewrite->init();
+			flush_rewrite_rules();
+			$applied[] = 'tag_base';
 		}
 
 		return $applied;

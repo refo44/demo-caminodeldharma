@@ -246,6 +246,37 @@ final class Event_ExtractorTest extends TestCase {
 	}
 
 	/**
+	 * WU-08B: the three events with a published single carry their head
+	 * copy, their schema.org attendance mode and the optional JSON-LD
+	 * fields WordPress cannot re-derive. The seven ADR 0035 events that
+	 * only exist as listing cards carry empty values — nothing invented.
+	 */
+	public function test_singles_carry_head_seo_attendance_and_json_ld_extras() {
+		$circulos = $this->event( 'circulos-de-presencia-consciente' );
+		$this->assertSame(
+			'Curso Círculos de Presencia Consciente en Bogotá y Cali | Camino del Dharma',
+			$circulos['seo']['title']
+		);
+		$this->assertSame( 'Curso Círculos de Presencia Consciente', $circulos['seo']['og_title'] );
+		$this->assertSame(
+			'https://caminodeldharma.org/blog/circulos-de-presencia-consciente',
+			$circulos['seo']['related']
+		);
+		$this->assertSame( 'mixed', $circulos['attendance_mode'] );
+		$this->assertSame( 'https://schema.org/Course', $circulos['jsonld_extra']['additionalType'] );
+		$this->assertSame( 'Venerable Maestro Zheng Gong', $circulos['jsonld_extra']['performer']['name'] );
+		$this->assertSame( '0', $circulos['jsonld_extra']['offers']['price'] );
+		$this->assertArrayNotHasKey( 'availability', $circulos['jsonld_extra']['offers'], 'Availability is live model data.' );
+
+		$this->assertSame( 'offline', $this->event( 'encuentro-nacional-2026' )['attendance_mode'] );
+
+		$card_only = $this->event( 'vesak-2026' );
+		$this->assertSame( '', $card_only['seo']['title'] );
+		$this->assertSame( '', $card_only['attendance_mode'] );
+		$this->assertSame( array(), $card_only['jsonld_extra'] );
+	}
+
+	/**
 	 * One extracted event by slug.
 	 *
 	 * @param string $slug Approved slug.
