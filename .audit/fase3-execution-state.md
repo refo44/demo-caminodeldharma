@@ -70,7 +70,8 @@ Ver `.audit/fase3-validation-matrix.md`. Estados permitidos: `Unverified`, `Pass
 
 ## Último commit verificado
 
-Se actualiza al cierre de cada work unit (ver historial de `fase3-wordpress`).
+`54cd09f` — cierre de WU-01 (QA local verde). Historial de la sesión en `fase3-wordpress`:
+`5088e32` (WU-00) → `bfb6dc0` (renames WU-01) → `54cd09f` (tooling/docs WU-01).
 
 ## Próxima acción exacta
 
