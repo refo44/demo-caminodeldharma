@@ -107,9 +107,10 @@ Ver `.audit/fase3-validation-matrix.md` § WU-04. Estados: `Unverified`, `Pass (
 
 ## Último commit verificado
 
-`PENDIENTE-WU04` — se actualiza con el commit de cierre de WU-04. Historial previo en
-`fase3-wordpress`: `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8`
-(WU-02) → `81d7547` → `fe33b96` (WU-03) → `36d368b`.
+`d3b30f5` — implementación de WU-04 (QA local verde; **baseline de paridad visual** del
+`theme.json`, docs/12 §8 — comparar cualquier ajuste posterior de Global Styles contra este
+commit). Historial en `fase3-wordpress`: `5088e32` (WU-00) → `bfb6dc0`/`54cd09f` (WU-01) →
+`11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03) → `36d368b` → `d3b30f5` (WU-04).
 
 ## Estado del entorno local
 
