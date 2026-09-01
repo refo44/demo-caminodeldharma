@@ -37,8 +37,8 @@ not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON
 PRODUCTION CONTENT. Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
-`camino-del-dharma` (v0.2.0) has the real views since WU-07 (ADR 0029): 16 block templates,
-header/footer parts via PHP patterns, 11 dynamic blocks (events calendar with byte parity
+`camino-del-dharma` (v0.5.1) has the real views since WU-07 (ADR 0029): 18 block templates,
+header/footer parts via PHP patterns, 14 dynamic blocks (events calendar with byte parity
 against the published grid, current/past listing with compact archive cards, home featured note,
 ADR 0037 bylines, native per-album galleries), the full static CSS ported to presets,
 self-hosted fontFaces and the native lightbox. The plugin owns the domain models since WU-05:

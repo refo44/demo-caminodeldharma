@@ -89,12 +89,12 @@ La guía operativa es [`docs/guia-pruebas-plugin-theme-fse.md`](../guia-pruebas-
 
 ### Contrapartidas aceptadas
 
-- Hasta el primer PHP de Fase 3 no hay `composer test` que ejecutar. Los árboles bajo
-  `wordpress/` son placeholders (README), no implementación.
+- Fase 3 ya tiene PHP first-party y `composer test` operativo; los árboles bajo `wordpress/`
+  ya no son placeholders.
 - Automatic Analysis no importa cobertura PHPUnit; nadie «arregla» el 0 % instalando un
   scanner.
-- Mientras `main` no esté protegida, el gate de CI (cuando exista) es informativo, no un
-  bloqueo de merge.
+- Desde [ADR 0043](0043-trunk-based-conventional-branch-commits.md), `main` está protegida y
+  el merge queda bloqueado sin checks `php` + `css` verdes (ver nota operativa abajo).
 
 ## Nota operativa (2026-09-01)
 

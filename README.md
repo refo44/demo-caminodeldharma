@@ -170,7 +170,7 @@ FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-
 
 | | |
 | --- | --- |
-| **Actual (producción)** | Sitio **estático live**. HTML en `static/` (monorepo ADR 0014, Fase 3 iniciada). Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **en desarrollo** (`wordpress/` first-party; sin implementación FSE aún). |
+| **Actual (producción)** | Sitio **estático live**. HTML en `static/` (monorepo ADR 0014, Fase 3 iniciada). Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **en desarrollo** (`wordpress/` first-party: plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma`; pendiente corte a producción). |
 | **Fase 3 (en curso)** | Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado hasta el corte. Estado durable: `.audit/fase3-execution-state.md`. |
 
 La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Inventario: [`docs/inventario-contenido-produccion-static.md`](docs/inventario-contenido-produccion-static.md). Matriz: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).

@@ -112,7 +112,7 @@ Tras merge: borrar la rama remota y local.
 ## Etiquetas del Pull Request
 
 **Obligatorio:** al menos **una** etiqueta relevante en cada PR. **Varias** cuando el cambio
-abarcar más de un tipo (p. ej. `enhancement` + `documentation`).
+abarca más de un tipo (p. ej. `enhancement` + `documentation`).
 
 | Etiqueta | Cuándo |
 | -------- | ------ |
