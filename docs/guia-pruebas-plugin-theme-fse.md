@@ -11,15 +11,15 @@ FSE solo ensambla · Sonar no sustituye PHPUnit.
 
 | Tiempo | Qué hay que probar | Gate |
 | --- | --- | --- |
-| **Hoy (Fase 2)** | Sitio estático en la raíz. HTML/JSON de producción (ADR 0034). CSS con Stylelint. Árboles `wordpress/…` vacíos de código (placeholders para Sonar). | `npm run lint:css`. Verificación en navegador para JS/a11y. Sonar **no** mira el estático. |
-| **Fase 3 (cuando el owner la arranque)** | Plugin + block theme. **TDD desde la primera línea** (plugin y theme). El kit PHPUnit nace con esa primera línea. | `composer test` (barato) + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. |
-| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0016) hasta otra decisión. |
+| **Hoy (pre-corte)** | Producción sigue en el estático publicado (`static/` en el monorepo; ADR 0034). Plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` (Fase 3 activa). CSS con Stylelint. | `composer test` + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. Sonar **no** mira el estático. |
+| **Fase 3 (en curso)** | Plugin + block theme con **TDD desde la primera línea**. Contratos wp-phpunit y harness Docker aislado. | Mismo gate; ver `.audit/fase3-execution-state.md`. |
+| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0015) hasta otra decisión. |
 
 Git **`main` protegida** (ADR 0043): PR obligatorio desde ramas
 [Conventional Branch](https://conventionalbranch.org/); commits
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés.
 Gate de merge: `php` + `css` en `.github/workflows/test.yml`. Guía:
-`docs/git-workflow.md`. El despliegue sigue manual (ADR 0016).
+`docs/git-workflow.md`. El despliegue sigue manual (ADR 0015).
 
 ---
 

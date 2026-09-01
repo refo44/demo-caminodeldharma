@@ -7,7 +7,7 @@
 ```text
 main (protected trunk)
   ↑
-  PR only ← feature/fix/chore/…/short-description
+  PR only ← <type>/short-description
 ```
 
 - **`main`** es el tronco. Integración **solo por Pull Request**.

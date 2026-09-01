@@ -13,8 +13,8 @@ Read `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-
 
 ## Current vs future
 
-- **Current:** live static production; deployable HTML in `static/` (monorepo ADR 0014, Fase 3 WU-01 done); hardcoded events/posts/gallery JSON are production data (ADR 0034). `wordpress/` plugin/theme trees are still README-only. WordPress FSE is not implemented.
-- **Future:** static production → **FSE block theme** (ADR 0029) + plugin `camino-del-dharma-core` (ADR 0024). No classic PHP theme in between.
+- **Current:** live static production on Hostinger; deployable HTML in `static/` (ADR 0014); hardcoded events/posts/gallery JSON are production data (ADR 0034). First-party plugin `camino-del-dharma-core` and FSE theme `camino-del-dharma` are implemented in `wordpress/` (Fase 3 WU-00–WU-10; see `docs/17-orden-implementacion.md` and `.audit/fase3-execution-state.md`).
+- **Future:** cutover from static production to WordPress on Hostinger; post-cutover editorial content owned by WordPress. No classic PHP theme in between (ADR 0029).
 
 Distinguish HISTORICAL STATE, CURRENT STATE, and FUTURE PLAN. Do not rewrite history.
 
@@ -59,4 +59,4 @@ constraints, not pre-staging defects). Testing
 guide: `docs/guia-pruebas-plugin-theme-fse.md`.
 Do not mock WordPress APIs. Do not write FSE production code before a failing test. Sonar is WordPress-only (not the static site).
 
-Fase 3 implementation starts only when the owner asks. Until then, docs-only for migration work.
+Pre-cutover migration work still follows create-missing-only and production-safety rules above; do not deploy or run destructive imports without owner direction.

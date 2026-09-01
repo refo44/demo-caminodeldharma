@@ -84,8 +84,8 @@ Guía operativa: [`docs/git-workflow.md`](../git-workflow.md).
 
 **Trabajo futuro:**
 
-- Opcional: [commit-check-action](https://conventionalbranch.org/) en CI para rechazar
-  ramas/commits inválidos antes del merge.
+- Opcional: [commit-check-action](https://github.com/marketplace/actions/commit-check-action)
+  en CI para rechazar ramas/commits inválidos antes del merge.
 
 ## Referencias
 

@@ -21,7 +21,7 @@ Canonical guide: `docs/guia-pruebas-plugin-theme-fse.md`. Decision: ADR 0038.
 
 ## Do not
 
-- Do not treat `wordpress/` READMEs as Fase 3. Do not write production theme/plugin code until the owner starts Fase 3, and then only after a red test.
+- Do not write production theme/plugin code without a red test first (Fase 3 is active in `wordpress/`).
 - Do not invent `tests/Integration/` or a second WordPress bootstrap.
 - Do not add SonarScanner or `sonar-project.properties` while Automatic Analysis is ON.
 - Do not add the static site (`assets/`, HTML, `scripts/`) to `sonar.sources`. Sonar is WordPress-only.
