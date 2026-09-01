@@ -733,7 +733,9 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
 9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
    320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.
    **Producción desborda exactamente igual (339 vs 320)**: es un porte fiel de un defecto ya
-   publicado, no una regresión. No se toca `static/`.
+   publicado, no una regresión. **Cerrado 2026-09-01 (OWN-021):** no se toca `static/`; no se
+   «arregla» WordPress en el corte. Wrap **después** del corte, WP en el dominio canónico:
+   POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
 10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
     `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
     alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no

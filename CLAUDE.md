@@ -29,7 +29,7 @@ pipelines.
 3. `docs/matriz-migracion-static-wordpress.md`, `docs/redirect-ledger.md`
 4. `docs/cutover-checklist-wordpress.md`
 5. `docs/adr/README.md` — 0001, 0008, 0012, 0013, 0024, 0029, **0032–0042**
-6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, v1.26; OWN-020 / D-08 decidido, implementación pendiente issue #5; `POST-*` = fases posteriores, no bloquear el corte)
+6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, v1.27; OWN-020 / D-08 pendiente issue #5; OWN-021 / D-09 overflow Sangha dejado al corte, wrap post-corte issue #7; `POST-*` = fases posteriores, no bloquear el corte)
 7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 8. `docs/guia-pruebas-plugin-theme-fse.md` — TDD, wp-phpunit, FSE, Sonar (ADR 0038)
 9. `docs/git-workflow.md` — trunk-based, Conventional Branch/Commits (ADR 0043)

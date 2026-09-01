@@ -10,6 +10,12 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Gobernanza — D-09 / OWN-021: overflow Sangha en el corte; wrap post-corte (POST-008)
+
+El propietario deja el desbordamiento 339 vs 320 px de `/blog/sangha-refugio-hiperconexion`
+(paridad con producción). Wrap **solo en WordPress** después de que WP sirva
+`caminodeldharma.org`: [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). Backlog v1.27.
+
 ### Gobernanza — D-08 / OWN-020: SEO de fichas de autor (pendiente de implementar)
 
 El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las

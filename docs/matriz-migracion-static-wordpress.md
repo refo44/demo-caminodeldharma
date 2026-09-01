@@ -105,7 +105,7 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 |---|---|---|---|---|---|---|---|---|---|
 | `/blog` | `blog/index.html` | Listado estático | Página de entradas / `home` | `/blog` | `templates/home.html` | `main.js` | — | Ajuste «página de entradas» + posts | 200; listado; no 404 |
 | `/blog/circulos-de-presencia-consciente` | `blog/circulos-de-presencia-consciente/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | Imagen de entrada si aplica | post + meta `authors` → ficha Comunidad | 200; byline CPT (ADR 0037) |
-| `/blog/sangha-refugio-hiperconexion` | `blog/sangha-refugio-hiperconexion/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | — | post + meta `authors` → ficha Zheng Gong | 200; byline CPT (ADR 0037) |
+| `/blog/sangha-refugio-hiperconexion` | `blog/sangha-refugio-hiperconexion/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | — | post + meta `authors` → ficha Zheng Gong | 200; byline CPT (ADR 0037); overflow 320 px **igual que live** (OWN-021); wrap WP-only post-corte [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
 | `/author/zheng-gong` *(nueva)* | *no existe en static* | ficha | `blog_author` | `/author/zheng-gong` | `single-blog_author.html` | `main.js` | `foto-biografia-fundador.jpg` (OWN-020) | seed CPT + `seo` + bio corta + thumb **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) | 200; `query_var` ≠ `author`; no es user; `index,follow` + meta description publicada |
 | `/author/comunidad-camino-del-dharma` *(nueva)* | *no existe en static* | ficha | `blog_author` | `/author/comunidad-camino-del-dharma` | `single-blog_author.html` | `main.js` | `comunidad-quienes-somos.jpg` (OWN-020) | seed CPT + `seo` + bio corta + thumb **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) | 200; mismo tipo que Zheng Gong; `index,follow` + meta description publicada |
 | `/blog/tag/{slug}` | *no existe en static* | Tags nativos | `post_tag` archive | `/blog/tag/{slug}` | jerarquía nativa; `taxonomy-post_tag.html` opcional | `main.js` | — | N/A en corte inicial si no hay tags | Existe (no 404); `noindex,follow` hasta volumen (ADR 0031) |
@@ -216,7 +216,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | --- | --- | --- | --- |
 | 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | Unverified | no desborda |
 | 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
-| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | Unverified | **también 339 px** |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel; OWN-021)* | Unverified | **también 339 px**; wrap WP-only **post-corte** POST-008 [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
 | Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | depende de `wp language core install es_CO` — Unverified | no aplica |
 | Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | Unverified | comillas rectas |
 | Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |

@@ -14,9 +14,10 @@ Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **ST
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
 Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El archivo
-[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.26) queda
+[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.27) queda
 como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
-pendiente. Las filas `POST-*` son fases posteriores (i18n); no bloquean el corte.
+pendiente. OWN-021 / D-09: overflow Sangha dejado al corte. Las filas `POST-*` son fases
+posteriores (i18n + wrap POST-008); no bloquean el corte.
 
 ---
 

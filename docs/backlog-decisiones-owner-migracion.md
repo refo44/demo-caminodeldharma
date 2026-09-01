@@ -8,7 +8,7 @@ Hay cinco bloques que no se mezclan:
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 sin decisión nueva. |
 | **Pre-staging** (`D-08` / OWN-020) | SEO/AEO de fichas `/author/{slug}` | **Decidido 2026-09-01.** Implementación **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No reabrir noindex en singles (ADR 0037). |
-| **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
+| **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n; wrap D-09) | i18n abiertas. **POST-008 decidido**, no implementar hasta WordPress en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 | **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
 
@@ -78,6 +78,7 @@ Ninguna.
 | OWN-018 | 2026-08-31 | **CF7 entra al corte sin esperar asesoría legal.** El disclaimer publicado en `/privacidad` basta para lanzar. La revisión jurídica queda recomendada para más adelante, no este año, y **no** bloquea WU-09 ni el corte. En WordPress se actualizan solo los párrafos del formulario (ADR 0041). El HTML estático no se toca mientras el form de producción siga siendo `action="#"`. |
 | OWN-019 | 2026-09-01 | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. |
 | OWN-020 | 2026-09-01 | **D-08 cerrado.** Las fichas `/author/{slug}` siguen **indexables** (ADR 0037). No hay meta en el estático porque esas URLs no existían: reutilizar **copy corto y fotos ya publicados**, no inventar, no duplicar el ensayo largo del fundador (queda en `/comunidad`, KEEP). Zheng Gong: description JSON-LD + `assets/images/fundador/foto-biografia-fundador.jpg`. Comunidad: primer párrafo de «Quiénes somos» o la meta de `/comunidad` + `assets/images/comunidad-linaje/comunidad-quienes-somos.jpg`. En ambas, enlace a `/comunidad` para el texto largo. Código **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). |
+| OWN-021 | 2026-09-01 | **D-09 cerrado: dejar el desbordamiento en el corte.** `/blog/sangha-refugio-hiperconexion` a 320 px mide 339 px; **producción publicada desborda igual**. No se toca `static/`. No se «arregla» solo en WordPress antes del corte (inventaría un delta frente al live). Wrap **después** del corte, WordPress ya en `caminodeldharma.org`: POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -119,7 +120,9 @@ y **no** forman parte del corte. El inglés no se implementa «por si acaso».
 
 ## Fases posteriores — Decididas
 
-Ninguna.
+| ID | Fecha | Decisión | Issue |
+| -- | ----- | -------- | ----- |
+| POST-008 | 2026-09-01 | **Después del corte**, con WordPress ya sirviendo producción en **`https://caminodeldharma.org`**, envolver/partir la URL larga de `/blog/sangha-refugio-hiperconexion` **solo en el theme WordPress** (320 px sin scroll horizontal). Hasta entonces: paridad con el estático live (OWN-021 / D-09). No editar `static/` para esto. | [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
 
 ## Defectos conocidos — Abiertos
 
@@ -198,8 +201,12 @@ corte. Son restricciones para UI wp-admin futura. Staging no construye metaboxes
 corto y fotos ya publicados; no noindex; implementación pendiente
 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 
-**Versión:** 1.26 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 21 decididas.
+**v1.27 (2026-09-01):** OWN-021 / D-09 **cerrado** (dejar overflow en el corte). POST-008:
+wrap WordPress-only **después** de que WP sea producción en el dominio canónico
+([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
+
+**Versión:** 1.27 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 22 decididas.
 Pre-staging: 1 decidida, implementación pendiente (`D-08` / OWN-020).
-Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
+Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 1 decidida (`POST-008`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
 Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).

@@ -127,11 +127,13 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   Real delivery to `caminodeldharma1@gmail.com` must be proven in Hostinger staging before release:
   `Pass (local)` is not enough.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
-  v1.26). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
+  v1.27). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. **OWN-020 / D-08** is decided (author entity SEO); implementation is pending
   ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)) — do not `noindex`
-  singles and do not invent copy. Later-phase rows (`POST-*`) are i18n/English after cutover:
-  do not implement them in Fase 3.
+  singles and do not invent copy. **OWN-021 / D-09:** leave the Sangha 320px overflow at
+  cutover; WordPress-only wrap **after** WP is production on the canonical domain
+  ([issue #7](https://github.com/refo44/demo-caminodeldharma/issues/7)). Later-phase rows
+  (`POST-*`) are i18n/English after cutover plus that wrap: do not implement them in Fase 3.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
   volume (ADR 0036). No numbered pagination at cutover (OWN-011).
 - Every event has a public single (ADR 0035). Past: no signup, no add-to-calendar, no `.ics`
