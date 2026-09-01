@@ -19,6 +19,7 @@ plans, or adding tests.
   `feature/…`, `fix/…`, `chore/…`, `cursor/…` (for Cursor agent work), etc.
 - **Commit messages:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   in **English**.
+- **PR labels:** at least one relevant GitHub label per PR; multiple when applicable.
 - Guide: `docs/git-workflow.md`. Required merge checks: `php`, `css` (`test.yml`).
 
 ## Three times

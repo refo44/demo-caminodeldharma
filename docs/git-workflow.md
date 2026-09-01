@@ -104,18 +104,38 @@ git add …
 git commit -m "fix(scope): describe the change"
 git push -u origin feature/short-description
 
-gh pr create --base main --title "fix(scope): describe the change" --body "…"
+gh pr create --base main --title "fix(scope): describe the change" --body "…" --label bug
 ```
 
 Tras merge: borrar la rama remota y local.
+
+## Etiquetas del Pull Request
+
+**Obligatorio:** al menos **una** etiqueta relevante en cada PR. **Varias** cuando el cambio
+abarcar más de un tipo (p. ej. `enhancement` + `documentation`).
+
+| Etiqueta | Cuándo |
+| -------- | ------ |
+| `documentation` | Docs, ADR, README, guías, `.cursor/rules` |
+| `enhancement` | Feature nueva (`feature/…`, `feat/…`) |
+| `bug` | Fix (`fix/…`, `bugfix/…`, `hotfix/…`) |
+| `help wanted` | Falta revisión o input del maintainer |
+| `question` | Decisión pendiente antes del merge |
+
+```bash
+gh pr create --label documentation …
+gh pr edit <n> --add-label enhancement,documentation
+gh label list
+```
 
 ## Agentes (Cursor, Copilot, etc.)
 
 1. **Nunca** commitear ni pushear directamente a `main`.
 2. Crear rama con prefijo adecuado (`cursor/…` para Cursor).
 3. Commits Conventional Commits en inglés.
-4. Abrir PR hacia `main`; esperar `php` + `css` verdes.
-5. Resolver hilos de review antes del merge.
+4. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (más de una si aplica).
+5. Esperar `php` + `css` verdes.
+6. Resolver hilos de review antes del merge.
 
 ## Validación local antes del PR
 

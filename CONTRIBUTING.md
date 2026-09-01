@@ -51,10 +51,31 @@ Ejemplos: `feat(theme): add safe asset version helper`, `fix(migrate): exclude b
 2. `git checkout -b feature/short-description`
 3. Implementar; validaciones locales (abajo).
 4. Commits Conventional Commits; push de la rama.
-5. Abrir PR hacia `main`; esperar checks `php` y `css`; resolver conversaciones.
+5. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (varias si aplica);
+   esperar checks `php` y `css`; resolver conversaciones.
 6. Merge; borrar la rama.
 
 **Prohibido:** push directo a `main`.
+
+### Etiquetas del Pull Request
+
+Cada PR debe llevar **al menos una** etiqueta de GitHub que describa el cambio. Usa **varias**
+cuando el PR toca más de un ámbito (p. ej. código WordPress + documentación).
+
+| Etiqueta | Cuándo usarla |
+| -------- | ------------- |
+| `documentation` | Docs, ADR, README, CONTRIBUTING, guías, reglas Cursor |
+| `enhancement` | Funcionalidad nueva (`feature/…`, `feat/…`) |
+| `bug` | Corrección (`fix/…`, `bugfix/…`, `hotfix/…`) |
+| `help wanted` | Necesitas revisión o input extra del maintainer |
+| `question` | El PR depende de una decisión antes del merge |
+
+```bash
+gh pr create --base main --label documentation --title "docs: …" --body "…"
+gh pr edit 4 --add-label documentation,enhancement   # varias etiquetas
+```
+
+Listar etiquetas disponibles: `gh label list`.
 
 ## Transición estático → WordPress
 

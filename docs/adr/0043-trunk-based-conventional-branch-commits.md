@@ -50,7 +50,10 @@ Para que humanos, agentes y CI lean la intención del cambio, los nombres de ram
 5. **Gate de merge en `main`:** checks obligatorios `php` y `css` de `.github/workflows/test.yml`;
    conversaciones del PR resueltas. Revisiones aprobatorias: 0 (repositorio unipersonal;
    el PR sigue siendo obligatorio).
-6. **Despliegue de producción estática** sigue manual desde `main` (ADR 0015). La protección
+6. **Etiquetas del PR:** cada Pull Request lleva **al menos una** etiqueta de GitHub relevante
+   al cambio; **varias** cuando el PR abarca más de un ámbito. Guía de mapeo en
+   [`docs/git-workflow.md`](../git-workflow.md).
+7. **Despliegue de producción estática** sigue manual desde `main` (ADR 0015). La protección
    de rama no activa CD automático (ADR 0016).
 
 Guía operativa: [`docs/git-workflow.md`](../git-workflow.md).

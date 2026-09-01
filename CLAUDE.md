@@ -39,7 +39,8 @@ pipelines.
 - **Git:** trunk-based on protected `main` (ADR 0043). Always branch first
   ([Conventional Branch](https://conventionalbranch.org/)); commits
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English; merge
-  only via PR with green `php`/`css`. See `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.
+  only via PR with green `php`/`css` and **at least one relevant PR label**. See
+  `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.
 - Inspect before modify. Inventory before WordPress modeling.
 - Live static content is production data (ADR 0034). Never discard hardcoded content without classification.
 - Prefer programmatic extraction over manual retyping when deterministic.

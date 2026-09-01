@@ -24,6 +24,7 @@ theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 - **Ramas:** [Conventional Branch](https://conventionalbranch.org/) — `feature/…`, `fix/…`, `chore/…`, `cursor/…`, etc.
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés — `feat(scope): summary`
 - **CI obligatorio en merge:** jobs `php` y `css` de `.github/workflows/test.yml`
+- **Etiquetas del PR:** al menos una relevante por PR; varias si el cambio abarca más de un ámbito
 
 Guía completa: [`docs/git-workflow.md`](docs/git-workflow.md). Contribución: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 

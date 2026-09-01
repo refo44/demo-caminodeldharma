@@ -17,6 +17,7 @@ Canonical guide: `docs/git-workflow.md`. Decision: ADR 0043.
   - Do not invent unprefixed names (e.g. `fase3-wordpress`) for new branches.
 - **Commit messages** follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in **English**: `type(scope): imperative summary`.
 - **Before opening a PR:** run the relevant local gates (`npm run lint:css` for CSS; `composer test` + `composer lint:phpcs` for PHP).
+- **Every PR needs at least one relevant GitHub label**; add multiple when the change spans more than one area (e.g. `enhancement` + `documentation`). See `docs/git-workflow.md` § PR labels.
 - **Merge only when** GitHub checks `php` and `css` pass and review threads are resolved.
 
 ## Examples
@@ -25,11 +26,12 @@ Canonical guide: `docs/git-workflow.md`. Decision: ADR 0043.
 git checkout main && git pull
 git checkout -b feature/payload-hash-bookkeeping
 git commit -m "fix(migrate): exclude _source_key from content hash"
-gh pr create --base main
+gh pr create --base main --label bug
 ```
 
 ## Do not
 
 - Do not push to `main`, even for “small” or docs-only fixes.
+- Do not open a PR without at least one relevant label.
 - Do not use branch names with uppercase, underscores, spaces, or consecutive hyphens.
 - Do not use non-conventional commit subjects (`updated stuff`, `WIP`, `fix bug`).
