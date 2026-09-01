@@ -193,4 +193,73 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.4 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7 y el delta de `/privacidad` **implementados** en WU-09 (entrega de correo pendiente de staging)
+## Estado de verificación WU-10 (2026-08-31)
+
+QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
+`docs/operations/wordpress-manual-deployment.md` v2.0. Evidencia detallada en
+`.audit/fase3-validation-matrix.md` § WU-10.
+
+### CONTENT
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Conteos por colección (11/10/2/2/3/35/81) | `verify` con `missing: []` — Pass (local) | Unverified | línea base OWN-007 |
+| Fila «Modalidad» en `/eventos/{slug}` | **ausente** en los 9 eventos con modalidad (entorno importado con payload previo; importador create-missing-only) — Fail (local) | debe aparecer en una importación limpia — Unverified | publicada |
+| Contenido demo del install | «Hello world!» desplaza una entrada real en el Inicio y `/blog` — Fail (local) | requisito duro: instalación limpia — Unverified | no aplica |
+| Copy institucional | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` idénticos (1.000) — Pass (local) | Unverified | línea base |
+| Delta `/privacidad` (ADR 0041) | aplicado solo en WordPress — Pass (local) | Unverified | estático intacto |
+| `.ics` de Círculos | 10 VEVENT — Pass (local) | Unverified | 1 VEVENT (delta aceptado) |
+
+### PRESENTATION
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | Unverified | no desborda |
+| 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | Unverified | **también 339 px** |
+| Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | depende de `wp language core install es_CO` — Unverified | no aplica |
+| Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | Unverified | comillas rectas |
+| Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |
+| Lector de pantalla real | no ejecutable | Unverified | — |
+
+### ROUTING
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| 41 rutas entrantes (200/301/404) | todas correctas — Pass (local) | Unverified | línea base |
+| Sin barra final (ADR 0008) | 301 en las 5 probadas — Pass (local) | Unverified | igual |
+| 404 real (no soft-404) | 5/5 — Pass (local) | Unverified | igual |
+| Archivos de usuario WP en 404 (ADR 0037) | `/author/admin`, `/?author=1` → 404 — Pass (local) | Unverified | no aplica |
+| Rutas `.ics` (200/410/404) | correctas — Pass (local) | Unverified | 200 solo el vigente |
+| Reglas del `.htaccess` desplegable | **no ejercitadas**: el contenedor usa el `.htaccess` por defecto | Unverified | vigentes |
+| Feeds `/feed`, `/blog/feed`, `/comments/feed` | **200** (fuera de docs/11) | Unverified | **404** |
+| Políticas noindex (álbum, `/author`, tag) | correctas — Pass (local) | Unverified | no aplica |
+
+### BEHAVIOR
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Diálogo de calendario + enlaces profundos | próxima sesión (3 sep 2026) y nota BUG-001 — Pass (local) | Unverified | rango único |
+| Escape cierra el diálogo | inconcluso (el panel de automatización consume la tecla); `cancel` no se previene | Unverified | — |
+| Formulario CF7 en `/contacto` | renderiza y postea — Pass (local) | Unverified | `action="#"` |
+| Entrega de correo a `caminodeldharma1@gmail.com` | `wp_mail()` **FALSE** (sin MTA, remitente inválido) | **Unverified — bloqueante de release** | no aplica |
+| Cookies anónimas | ninguna en 11 superficies — Pass (local) | Unverified | ninguna |
+| `sessionStorage` de `wp-emoji` | presente (el estático no usaba almacenamiento) | Unverified | ninguno |
+| Seguimiento / analítica | ausente — Pass (local) | Unverified | ausente |
+
+### OPERATIONS
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Niveles 1–3 de QA | verdes contra `e377c46` — Pass (local) | Unverified | — |
+| `debug.log` tras navegación | 0 bytes — Pass (local) | Unverified | — |
+| Idempotencia del pipeline | `import`/`seed`/`convert`/`contact provision` no reescriben — Pass (local) | Unverified | — |
+| Runbook de staging | v2.0, acotado a theme + plugin + `.htaccess` — Pass (local) | Unverified | — |
+| Guard de producción | cubierto por wp-phpunit; no ejercitado contra un entorno `production` real | Unverified | — |
+| `blog_public` | `1` en local; staging **debe** ir a `0` | Unverified | — |
+| CI `test.yml` | **nunca ejecutado**: dispara solo en `main` y `pull_request`, y no hay PR | Unverified | — |
+| Sonar (plugin + theme) | no revisado | Unverified | — |
+
+---
+
+**Versión:** 1.5 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7 y el delta de `/privacidad` **implementados** en WU-09; **QA local completa en WU-10** (staging sin crear; entrega de correo pendiente)
