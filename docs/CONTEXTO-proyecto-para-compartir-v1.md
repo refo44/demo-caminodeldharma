@@ -178,9 +178,9 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 ## 8. Despliegue
 
-- **Hoy (estático):** ZIP manual desde la raíz del repo (README). No incluir `docs/`, `scripts/`,
-  `wordpress/`, `tests/`.
-- **Fase 3:** el ZIP estático saldrá de `static/` tras la reorganización ADR 0014.
+- **Hoy (estático):** ZIP manual del contenido de `static/` (ADR 0014/0015). No incluir `docs/`,
+  `scripts/`, `wordpress/`, `tests/`.
+- **Fase 3:** WordPress en staging separado (OWN-005); corte al dominio canónico cuando pase QA.
 - **WordPress code deploy ≠ content deploy ≠ static deploy** (ADR 0013). Tras el corte, un ZIP
   estático **nunca** escribe sobre el document root de WordPress.
 - **CD:** pospuesto (ADR 0016). **CI de calidad:** sí, cuando exista PHP de prueba (ADR 0038).

@@ -5,9 +5,9 @@ ADR 0039). No es un extracto ejecutado: es el baseline documental. ADR
 [0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
 [0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 
-**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática:** raíz del repo (no hay
-`static/` todavía). **Deploy:** ZIP manual (ADR 0015). Extraer **lo más reciente del repo**
-(`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
+**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática en el repo:** `static/`
+(monorepo ADR 0014). **Deploy:** ZIP manual del contenido de `static/` (ADR 0015). Extraer **lo más
+reciente del repo** (`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
 eso es deuda de deploy, no la fuente del extracto.
 
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
@@ -69,7 +69,7 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 | 10 | 6.º Encuentro Nacional Buddhista – 2025 | PLANNED `/eventos/6-encuentro-nacional-2025` | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 
 Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la misma
-#1 (`event_featured`). Extraer una sola vez.
+ítem 1 (`event_featured`). Extraer una sola vez.
 
 Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
 La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
