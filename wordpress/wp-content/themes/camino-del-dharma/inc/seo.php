@@ -35,22 +35,34 @@ function camino_del_dharma_print_seo() {
 	}
 
 	foreach ( cdd_core_seo_document() as $tag ) {
+		if ( ! is_array( $tag ) || ! isset( $tag['tag'] ) ) {
+			continue;
+		}
+
 		switch ( $tag['tag'] ) {
 			case 'title':
-				echo "\t<title>" . esc_html( $tag['text'] ) . "</title>\n";
+				$text = $tag['text'] ?? '';
+				if ( '' === $text ) {
+					break;
+				}
+				echo "\t<title>" . esc_html( $text ) . "</title>\n";
 				break;
 
 			case 'meta':
 			case 'link':
 				$attributes = '';
-				foreach ( $tag['attr'] as $name => $value ) {
+				foreach ( (array) ( $tag['attr'] ?? array() ) as $name => $value ) {
 					$attributes .= ' ' . esc_attr( $name ) . '="' . esc_attr( $value ) . '"';
 				}
 				echo "\t<" . esc_html( $tag['tag'] ) . $attributes . ">\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- every name and value is escaped as an attribute above.
 				break;
 
 			case 'jsonld':
-				echo "\t<script type=\"application/ld+json\">" . wp_json_encode( $tag['document'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+				$json = wp_json_encode( $tag['document'] ?? array(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+				if ( false === $json ) {
+					break;
+				}
+				echo "\t<script type=\"application/ld+json\">" . $json . "</script>\n";
 				break;
 		}
 	}

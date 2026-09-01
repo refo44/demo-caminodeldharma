@@ -33,6 +33,31 @@ function camino_del_dharma_setup() {
 add_action( 'after_setup_theme', 'camino_del_dharma_setup' );
 
 /**
+ * Cache-busting version for a theme asset. Uses mtime when the file is
+ * readable; otherwise falls back to the theme Version header so enqueue
+ * never calls filemtime() on a missing path or passes an empty version.
+ *
+ * @param string $path Absolute filesystem path.
+ */
+function camino_del_dharma_asset_version( string $path ): string {
+	if ( is_readable( $path ) ) {
+		$mtime = filemtime( $path );
+		if ( false !== $mtime ) {
+			return (string) $mtime;
+		}
+	}
+
+	if ( function_exists( 'wp_get_theme' ) ) {
+		$version = wp_get_theme()->get( 'Version' );
+		if ( is_string( $version ) && '' !== $version ) {
+			return $version;
+		}
+	}
+
+	return '0.5.1';
+}
+
+/**
  * Enqueue the complementary stylesheet: layout, reading rhythm, and focus
  * states that Global Styles cannot express (docs/12 §7). Versioned by
  * mtime so deploys bust caches without manual bumps.
@@ -44,7 +69,7 @@ function camino_del_dharma_enqueue_assets() {
 		'camino-del-dharma-main',
 		get_template_directory_uri() . '/assets/css/main.css',
 		array(),
-		(string) filemtime( $stylesheet )
+		camino_del_dharma_asset_version( $stylesheet )
 	);
 
 	$script = get_template_directory() . '/assets/js/main.js';
@@ -53,7 +78,7 @@ function camino_del_dharma_enqueue_assets() {
 		'camino-del-dharma-main',
 		get_template_directory_uri() . '/assets/js/main.js',
 		array(),
-		(string) filemtime( $script ),
+		camino_del_dharma_asset_version( $script ),
 		true
 	);
 }

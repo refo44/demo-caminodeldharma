@@ -71,7 +71,7 @@ function camino_del_dharma_render_eventos_calendar(): string {
 		'camino-del-dharma-calendar',
 		get_template_directory_uri() . '/assets/js/calendar-tooltips.js',
 		array(),
-		(string) filemtime( get_template_directory() . '/assets/js/calendar-tooltips.js' ),
+		camino_del_dharma_asset_version( get_template_directory() . '/assets/js/calendar-tooltips.js' ),
 		true
 	);
 
@@ -258,7 +258,7 @@ function camino_del_dharma_enqueue_behavior( array $scripts ) {
 			'camino-del-dharma-' . $script,
 			get_template_directory_uri() . '/assets/js/' . $script . '.js',
 			array(),
-			(string) filemtime( $path ),
+			camino_del_dharma_asset_version( $path ),
 			true
 		);
 	}

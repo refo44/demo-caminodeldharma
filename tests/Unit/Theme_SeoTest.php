@@ -59,6 +59,32 @@ final class Theme_SeoTest extends TestCase {
 	}
 
 	/**
+	 * Malformed tags and a failed JSON-LD encode must not emit PHP warnings
+	 * or print the literal string "false" into the document.
+	 */
+	public function test_seo_printer_guards_malformed_tags_and_failed_json_encode() {
+		$seo = $this->theme_file( 'inc/seo.php' );
+
+		$this->assertStringContainsString( "\$tag['attr'] ?? array()", $seo );
+		$this->assertStringContainsString( 'false === $json', $seo );
+	}
+
+	/**
+	 * Asset versions must not call bare filemtime() on paths that may be
+	 * missing during a partial deploy.
+	 */
+	public function test_asset_enqueue_uses_safe_version_helper() {
+		$functions = $this->theme_file( 'functions.php' );
+		$blocks    = $this->theme_file( 'inc/blocks.php' );
+
+		$this->assertStringContainsString( 'function camino_del_dharma_asset_version', $functions );
+		$this->assertStringContainsString( 'camino_del_dharma_asset_version', $functions );
+		$this->assertStringNotContainsString( '(string) filemtime', $functions );
+		$this->assertStringContainsString( 'camino_del_dharma_asset_version', $blocks );
+		$this->assertStringNotContainsString( '(string) filemtime', $blocks );
+	}
+
+	/**
 	 * The theme loads the file from its bootstrap, like the rest of inc/.
 	 */
 	public function test_seo_is_wired_from_functions_php() {
