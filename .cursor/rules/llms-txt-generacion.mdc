@@ -1,0 +1,125 @@
+---
+description: Metodología de auditoría dual (repositorio + producción) para generar o actualizar llms.txt
+globs: llms.txt
+alwaysApply: false
+---
+
+# Generación de llms.txt — Auditoría dual
+
+El análisis debe basarse en **DOS fuentes de información** que se cruzan entre sí.
+
+## Fuente A. Repositorio
+
+Analiza exhaustivamente el repositorio completo.
+
+Incluye, cuando existan:
+
+- Código fuente (HTML, CSS, JS).
+- README, CHANGELOG, VERSION.
+- Documentación en `/docs`.
+- Markdown, scripts, tests, configuración.
+- `robots.txt`, `sitemap.xml`, `.htaccess`.
+- No restaurar ni usar la carpeta legacy eliminada por ADR 0040.
+- Cualquier otro archivo público o de despliegue.
+
+No te limites a leer los README. Extrae conocimiento directamente del código cuando sea necesario.
+
+## Fuente B. Sitio web publicado
+
+Analiza el sitio en producción:
+**[https://caminodeldharma.org/](https://caminodeldharma.org/)**
+
+El análisis debe comenzar obteniendo y procesando el sitemap del sitio (`https://caminodeldharma.org/sitemap.xml`).
+
+Descubre automáticamente todos los sitemaps secundarios si existen.
+
+Recorre todas las URLs públicas encontradas.
+
+Para cada página identifica:
+
+- título
+- URL canónica
+- descripción
+- tipo de contenido
+- idioma
+- importancia
+- profundidad dentro del sitio
+- enlaces internos
+- relación con otras páginas
+
+Clasifica automáticamente cada URL como:
+
+- documentación, guía, artículo, enseñanza, práctica, retiro, programa, curso, recurso, preguntas frecuentes, página institucional, contacto, comunidad, otro
+
+Descarta automáticamente:
+
+- páginas duplicadas
+- páginas sin contenido
+- páginas de archivo
+- resultados de búsqueda
+- etiquetas
+- categorías sin valor documental
+- contenido obsoleto
+
+## Comparación entre repositorio y sitio publicado
+
+Compara ambas fuentes. Detecta:
+
+- documentación existente pero no publicada
+- páginas públicas sin documentación
+- enlaces rotos
+- documentación obsoleta
+- diferencias entre el código y el sitio
+- funcionalidades implementadas pero no documentadas
+- documentación que ya no corresponde al comportamiento real del sitio
+
+Genera un informe indicando todas las diferencias encontradas.
+
+El sitio publicado gana bajo OWN-007. No describas ni incluyas material legacy retirado en
+`llms.txt`.
+
+## Selección del contenido para llms.txt
+
+El archivo **NO** debe ser una copia del sitemap.
+
+Debe ser una **selección curada**. Prioriza únicamente las páginas que permitan a un agente comprender rápidamente el sitio.
+
+Cada enlace debe responder al menos a uno de estos objetivos:
+
+- comprender qué ofrece el sitio
+- comprender la filosofía del proyecto
+- entender la estructura del contenido
+- acceder a documentación importante
+- encontrar recursos fundamentales
+- responder preguntas frecuentes
+- descubrir los contenidos principales
+
+No incluyas páginas únicamente por existir. Cada URL incluida debe estar justificada por su valor para un agente de IA.
+
+## Formato (convención llmstxt.org)
+
+- Ubicación: `/llms.txt` en la raíz del dominio.
+- H1 con el nombre del sitio (obligatorio).
+- Blockquote con resumen de una oración (recomendado).
+- Párrafo de contexto libre (opcional).
+- Secciones H2 con listas `- [Título](URL): descripción`.
+- Sección `## Optional` para enlaces secundarios que un agente puede omitir bajo restricción de contexto.
+- URLs absolutas canónicas (`https://caminodeldharma.org/...`), sin barra final salvo la raíz según `.htaccess`.
+- Idioma del contenido: español (Colombia).
+
+## Validación final
+
+Antes de generar `/llms.txt`, verifica que:
+
+- todas las URLs existen y responden correctamente (HTTP 200)
+- ninguna URL devuelve error
+- las URLs son canónicas
+- el contenido realmente coincide con el proyecto actual
+- no existen enlaces duplicados
+- no existen enlaces de bajo valor en secciones principales
+
+Si detectas contenido importante que debería existir pero no está publicado, indícalo en las recomendaciones finales.
+
+## Despliegue
+
+Incluir `llms.txt` en el ZIP de producción junto con `robots.txt` y `sitemap.xml`. Tras desplegar, confirmar que `https://caminodeldharma.org/llms.txt` responde 200.

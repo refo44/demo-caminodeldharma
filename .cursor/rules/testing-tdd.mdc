@@ -1,0 +1,39 @@
+---
+description: TDD and test taxonomy for Camino del Dharma (plugin domain, wp-phpunit, FSE theme, Sonar)
+alwaysApply: true
+---
+
+# Testing and TDD
+
+Canonical guide: `docs/guia-pruebas-plugin-theme-fse.md`. Decision: ADR 0038.
+
+## Do
+
+- WordPress FSE (plugin **and** theme) starts with a failing test (RED → smallest production change → REFACTOR). No `theme.json`, `templates/`, or plugin PHP “to cover later”.
+- A bug starts with a regression test.
+- Plugin owns domain. The FSE theme only assembles (`theme.json`, `templates/`, `parts/`).
+- Internal collaborators stay real. Double only renderer, filesystem, HTTP, clock, queue, env.
+- WordPress in-process contracts (CPT, meta, rewrites, `render_callback`) use wp-phpunit (`tests/WordPress/`). Do not mock WordPress APIs.
+- HTTP, wp-admin, and plugin CLI use an isolated Docker harness (`trap … down -v`). Never production. Never the developer’s persistent WP volume.
+- `composer test` is the cheap gate: `php -l` + `composer audit --locked` + units. Not `test:wp`. Not `qa-*.sh`.
+- Tests couple to behavior and decouple from structure. Method name: `test_<observable_behavior>`.
+- Recording doubles are handwritten on public interfaces. No Mockery, Brain Monkey, Pest.
+
+## Do not
+
+- Do not write production theme/plugin code without a red test first (Fase 3 is active in `wordpress/`).
+- Do not invent `tests/Integration/` or a second WordPress bootstrap.
+- Do not add SonarScanner or `sonar-project.properties` while Automatic Analysis is ON.
+- Do not add the static site (`assets/`, HTML, `scripts/`) to `sonar.sources`. Sonar is WordPress-only.
+- Do not treat Sonar 0.0% coverage as a missing suite.
+- Do not install Behat, Playwright, PHPStan, wp-env, or a JS test runner unless a seam no longer fits this stack.
+- Do not treat a green “template file exists” test as CONTENT or ROUTING (ADR 0032).
+- Do not use live HTML or production content as PHPUnit fixtures (ADR 0033).
+
+## Current git (ADR 0043)
+
+`main` is **protected**: no direct pushes; integration only via Pull Request from a
+short-lived [Conventional Branch](https://conventionalbranch.org/) name. Commits follow
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English.
+Required merge checks: `php` and `css` (`.github/workflows/test.yml`). Deploy stays manual
+(ADR 0015/0016). Guide: `docs/git-workflow.md`. Cursor rule: `.cursor/rules/git-workflow.mdc`.

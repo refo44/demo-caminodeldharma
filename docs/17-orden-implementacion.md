@@ -148,8 +148,8 @@ publicado, bugs de accesibilidad y ajustes de performance que no alteren la arqu
 
 | Aspecto | Regla |
 | -------- | ------ |
-| **Ramas** | Desarrollo en ramas de feature; `main` es la rama de producción. |
-| **Integración** | Hoy se permite push a `main`; ramas feature y PR obligatorios se activarán más adelante. El CI de calidad corre en ambos cuando exista (ADR 0038). |
+| **Ramas** | [Conventional Branch](https://conventionalbranch.org/) en ramas cortas (`feature/…`, `fix/…`, `chore/…`, `cursor/…`). Ver `docs/git-workflow.md`. |
+| **Integración** | **`main` protegida** (ADR 0043): solo Pull Request; checks `php` + `css` obligatorios. CI en push a `main` y en PR (ADR 0038). |
 | **Etiquetas** | Releases etiquetados (`v1.0.0`, `v1.1.0`, …) al desplegar a producción. |
 | **Versión en repo** | Archivo `VERSION` y entrada en `CHANGELOG.md` (ver README). |
 | **Producción** | Solo desde `main` (o tag asociado a un commit de `main`). |

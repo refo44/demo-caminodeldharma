@@ -11,13 +11,15 @@ FSE solo ensambla · Sonar no sustituye PHPUnit.
 
 | Tiempo | Qué hay que probar | Gate |
 | --- | --- | --- |
-| **Hoy (Fase 2)** | Sitio estático en la raíz. HTML/JSON de producción (ADR 0034). CSS con Stylelint. Árboles `wordpress/…` vacíos de código (placeholders para Sonar). | `npm run lint:css`. Verificación en navegador para JS/a11y. Sonar **no** mira el estático. |
-| **Fase 3 (cuando el owner la arranque)** | Plugin + block theme. **TDD desde la primera línea** (plugin y theme). El kit PHPUnit nace con esa primera línea. | `composer test` (barato) + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. |
-| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0016) hasta otra decisión. |
+| **Hoy (pre-corte)** | Producción sigue en el estático publicado (`static/` en el monorepo; ADR 0034). Plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` (Fase 3 activa). CSS con Stylelint. | `composer test` + `composer lint:phpcs` + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. Sonar **no** mira el estático. |
+| **Fase 3 (en curso)** | Plugin + block theme con **TDD desde la primera línea**. Contratos wp-phpunit y harness Docker aislado. | Mismo gate; ver `.audit/fase3-execution-state.md`. |
+| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0015) hasta otra decisión. |
 
-Git **hoy:** push directo a `main` (la rama no está protegida). **Futuro:** feature branches +
-PR obligatorios. El diseño del gate sirve en ambos modos: el workflow, cuando exista, corre en
-push a `main` *y* en PR. No se exige PR en esta guía hasta que el owner proteja `main`.
+Git **`main` protegida** (ADR 0043): PR obligatorio desde ramas
+[Conventional Branch](https://conventionalbranch.org/); commits
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés.
+Gate de merge: `php` + `css` en `.github/workflows/test.yml`. Guía:
+`docs/git-workflow.md`. El despliegue sigue manual (ADR 0015).
 
 ---
 
@@ -201,6 +203,7 @@ escenario Gherkin: **español**.
 El reloj es un colaborador externo de este dominio: el estado vigente/pasado del evento
 sigue la fecha de fin en `America/Bogota` (OWN-013). No se usa el reloj de pared.
 
+<!-- markdownlint-disable MD010 -->
 ```php
 class Recording_Clock implements Clock {
 
@@ -213,6 +216,7 @@ class Recording_Clock implements Clock {
 	}
 }
 ```
+<!-- markdownlint-enable MD010 -->
 
 Tipado al contrato público. Instancia **nueva** en cada test. Observar invocaciones en la
 costura externa está permitido cuando *esa* es la regla de dominio («no debe generar `.ics`
@@ -295,8 +299,8 @@ auditoría de seguridad del producto.
 
 La App ya escanea `refo44/demo-caminodeldharma`. Faltaba el archivo de alcance: ahora es
 `.sonarcloud.properties`. Automatic Analysis **solo lee ese archivo desde el default
-branch**. Un PR que solo lo añade no cambia el análisis hasta el merge; con push directo a
-`main`, el siguiente análisis tras el push ya lo usa.
+branch**. Un PR que solo lo añade no cambia el análisis hasta el merge; tras integrar en
+`main`, el siguiente análisis ya usa el archivo.
 
 ### Método (no mezclar)
 

@@ -68,7 +68,10 @@ wp-config.php
 .vscode
 *.code-*
 .idea
-.cursor
+# Cursor — track shared rules; ignore local IDE state
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
 .cursorrules
 .cursorrules.md
 .cursorrules.txt

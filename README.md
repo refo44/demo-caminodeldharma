@@ -17,6 +17,17 @@ theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 - Stylelint como validación obligatoria del CSS
 - Un único paso de build: `npm run build:css` minifica `static/assets/css/main.css` → `static/assets/css/main.min.css` (lo que enlazan las páginas). El resto son archivos estáticos listos para servir; npm se usa solo para herramientas de desarrollo
 
+## Git y contribución
+
+**Trunk-based development** (ADR 0043): `main` está **protegida**; no hay push directo. Todo cambio entra por **Pull Request** desde una rama corta.
+
+- **Ramas:** [Conventional Branch](https://conventionalbranch.org/) — `feature/…`, `fix/…`, `chore/…`, `cursor/…`, etc.
+- **Commits:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés — `feat(scope): summary`
+- **CI obligatorio en merge:** jobs `php` y `css` de `.github/workflows/test.yml`
+- **Etiquetas del PR:** al menos una relevante por PR; varias si el cambio abarca más de un ámbito
+
+Guía completa: [`docs/git-workflow.md`](docs/git-workflow.md). Contribución: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Cómo ver el sitio
 
 Abrir `static/index.html` en el navegador o servir la carpeta `static/` con un servidor local:
@@ -150,7 +161,8 @@ Ejemplo:
 
 En `docs/` están la identidad corporativa, mapa de pantallas, arquitectura de información, copy, árbol de URLs, estructura de archivos estáticos, el **orden de implementación** (incl. fases WordPress) y el registro de **decisiones arquitectónicas** (`docs/adr/`). Índice: `docs/00-orden-documentos.md`. Inventario de producción y contrato de migración: `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`. Decisiones de dueño: `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada; `POST-*` fases posteriores). Agentes: `AGENTS.md`, `CLAUDE.md`.
 
-Colaboración, lint, pruebas y despliegue: `CONTRIBUTING.md`. Guía de pruebas (TDD, wp-phpunit,
+Colaboración, lint, pruebas y despliegue: `CONTRIBUTING.md`. **Git (trunk-based, Conventional Branch/Commits):**
+[`docs/git-workflow.md`](docs/git-workflow.md) (ADR 0043). Guía de pruebas (TDD, wp-phpunit,
 FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md)
 (ADR 0038). Licencia del código: `LICENSE`. Seguridad: `SECURITY.md`.
 
@@ -158,7 +170,7 @@ FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-
 
 | | |
 | --- | --- |
-| **Actual (producción)** | Sitio **estático live**. HTML en `static/` (monorepo ADR 0014, Fase 3 iniciada). Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **en desarrollo** (`wordpress/` first-party; sin implementación FSE aún). |
+| **Actual (producción)** | Sitio **estático live**. HTML en `static/` (monorepo ADR 0014, Fase 3 iniciada). Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **en desarrollo** (`wordpress/` first-party: plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma`; pendiente corte a producción). |
 | **Fase 3 (en curso)** | Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado hasta el corte. Estado durable: `.audit/fase3-execution-state.md`. |
 
 La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Inventario: [`docs/inventario-contenido-produccion-static.md`](docs/inventario-contenido-produccion-static.md). Matriz: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).

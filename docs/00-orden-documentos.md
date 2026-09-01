@@ -7,7 +7,7 @@ Los documentos en `docs/` llevan prefijo de dos dígitos (`01-`, `02-`, …) par
 ## Justificación del orden
 
 | Rango | Criterio | Motivo |
-|-------|----------|--------|
+| ----- | -------- | ------ |
 | **01** | Plan maestro | El plan de plataforma define el territorio; precede y orienta todo lo demás. |
 | **02** | Identidad | Paleta, tipografía y manual de marca definen el criterio visual. |
 | **03–05** | Qué existe | Modelo WordPress, mapa de pantallas y arquitectura de información. Definen *qué* contenido y *qué* pantallas existen. |
@@ -55,12 +55,15 @@ Ningún documento debe depender de uno con número mayor. Las referencias cruzad
 19. `19-accesibilidad-estandares`
 20. `20-layout-principles`
 21. `21-manual-voz-copywriting-editorial`
+
+<!-- markdownlint-disable-next-line MD029 -->
 23. `23-sistema-editorial`
+<!-- markdownlint-disable-next-line MD029 -->
 24. `24-brief-editorial-blog-y-visibilidad` — brief para el equipo editorial (hallazgo de visibilidad, sugerencia de temas y ritmo de publicación). La voz la define `21`: el brief remite a él en lugar de repetirlo, así que se entrega **junto con** el manual. Del formato recoge lo imprescindible en su §5, para no depender de `23`, que es interno y no está ratificado
 
 **Informes SEO (entregables):** `informes-seo/README.md` — dos informes autosuficientes derivados de `.audit/` y redactados para entrega externa: `00-informe-auditoria-seo.md` (general y ejecutivo, para el liderazgo) y `02-auditoria-seo-tecnica.md` (estado de salud del sitio, para el equipo de publicación web). Se entregan junto a `24-brief-editorial-blog-y-visibilidad.md`, que cubre lo editorial. Se re-emiten con cadencia trimestral, por lo que **no llevan prefijo en la cadena lineal**: no son documentos de diseño del proyecto sino mediciones fechadas. Dependen de la auditoría, no de los docs numerados.
 
-**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0041). **Pruebas:** `guia-pruebas-plugin-theme-fse.md` (ADR 0038); alcance SonarQube Cloud en `.sonarcloud.properties`. **Migración:** `contrato-migracion-static-wordpress.md` (ADR 0032), `inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md` + `redirect-ledger.md` (ADR 0034/0040), `backlog-decisiones-owner-migracion.md` (decisiones de dueño; Fase 3 **cerrada** v1.21; `POST-*` fases posteriores; no son ADR), `matriz-migracion-static-wordpress.md`, `cutover-checklist-wordpress.md`, `migracion-static-wordpress.md` (ledger de diferencias). **Entorno local Docker:** `docker-wordpress-playbook.md` (ADR 0023). **Playbook:** `playbook-migracion-static-wordpress.md`. **Archivo:** `archive/contacto-formulario-estatico/`. No llevan prefijo numérico en `00`; se referencian desde `17-orden-implementacion`.
+**ADR (decisiones arquitectónicas):** `adr/README.md` (0001–0043). **Git:** `git-workflow.md` (ADR 0043). **Pruebas:** `guia-pruebas-plugin-theme-fse.md` (ADR 0038); alcance SonarQube Cloud en `.sonarcloud.properties`. **Migración:** `contrato-migracion-static-wordpress.md` (ADR 0032), `inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md` + `redirect-ledger.md` (ADR 0034/0040), `backlog-decisiones-owner-migracion.md` (decisiones de dueño; Fase 3 **cerrada** v1.21; `POST-*` fases posteriores; no son ADR), `matriz-migracion-static-wordpress.md`, `cutover-checklist-wordpress.md`, `migracion-static-wordpress.md` (ledger de diferencias). **Entorno local Docker:** `docker-wordpress-playbook.md` (ADR 0023). **Playbook:** `playbook-migracion-static-wordpress.md`. **Archivo:** `archive/contacto-formulario-estatico/`. No llevan prefijo numérico en `00`; se referencian desde `17-orden-implementacion`.
 
 **Nota sobre `21-manual-voz-*.docx`:** los `.docx` en `docs/` son exportaciones para compartir; el documento editable principal es `21-manual-voz-copywriting-editorial.md`.
 
@@ -83,7 +86,7 @@ La tabla conserva la procedencia histórica de decisiones ya incorporadas. La fu
 eliminada permanentemente y no es un input operativo (ADR 0040).
 
 | Lluvia de ideas | Doc(s) |
-|-----------------|--------|
+| --------------- | ------ |
 | Estilo sencillo y sobrio | 01, 02, 07, 18 |
 | Seguir paleta de colores actual | 02 |
 | Agregar cronograma de eventos | 01, 03, 04 |
