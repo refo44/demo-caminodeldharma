@@ -2,7 +2,7 @@
 
 Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no
 tiene acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y
-lo que está en curso, a fecha **2026-08-31**.
+lo que está en curso, a fecha **2026-09-01**.
 
 ---
 
@@ -23,15 +23,15 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 
 ---
 
-## 2. Estado actual (2026-08-30)
+## 2. Estado actual (2026-09-01)
 
 | Aspecto | Estado |
 | --- | --- |
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Puede ir atrasada; no asumir paridad. Comparar contra live (OWN-006/007) |
-| **Fase activa** | Fase 2 **en producción**; Fase 3 (WordPress FSE) **documentada y lista**, **no iniciada** |
-| **Estructura del repo** | HTML en la **raíz**. `static/` aún no existe. `wordpress/` solo placeholders para Sonar |
+| **Fase activa** | Fase 2 **en producción** (estático live); Fase 3 (WordPress FSE) **en curso** en `wordpress/` (WU-00–WU-10 cerrados localmente; pendiente staging/corte) |
+| **Estructura del repo** | Monorepo (ADR 0014): HTML de producción en `static/`; plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` |
 | **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
