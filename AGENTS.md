@@ -73,7 +73,8 @@ before WU-10 (plugin v0.7.1 / theme v0.5.1): the generated file carries **one VE
 exclusive end, an event without a schedule keeps the published range entry and UID, and —
 since a Google/Outlook deep link carries a single entry — the dialog names the **next
 session**, a date the file contains, and says the file holds them all. The published static
-`.ics` still carries only the welcome session and is untouched. Next: **WU-10**.
+`.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31);
+next: Hostinger staging (OWN-005) and cutover prep — see `.audit/fase3-execution-state.md`.
 
 ## Canonical content
 

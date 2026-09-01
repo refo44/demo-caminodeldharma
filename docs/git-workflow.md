@@ -38,8 +38,8 @@ Forma: `<type>/<description>`
 | `chore/` | Docs, CI, deps, tooling |
 | `cursor/`, `copilot/`, `claude/`, `codex/`, `ai/` | Trabajo iniciado por un agente IA |
 
-**Reglas:** minúsculas; solo `a-z`, `0-9`, guiones; sin espacios ni `_`. En `release/` se
-permiten puntos en la versión.
+**Reglas:** minúsculas; solo `a-z`, `0-9`, guiones; sin espacios, `_` ni guiones consecutivos. En
+`release/` se permiten puntos en la versión.
 
 **Ejemplos válidos:**
 

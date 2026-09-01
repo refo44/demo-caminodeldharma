@@ -29,7 +29,7 @@ Para que humanos, agentes y CI lean la intención del cambio, los nombres de ram
 2. **Trunk-based:** una rama de feature/fix/chore por unidad de trabajo; merge a `main`
    cuando el gate pasa; la rama se borra tras el merge.
 3. **Conventional Branch** — forma `<type>/<description>` en minúsculas, guiones, sin
-   espacios ni guiones bajos:
+   espacios, guiones bajos ni guiones consecutivos:
    - `feature/` o `feat/` — funcionalidad nueva
    - `fix/` o `bugfix/` — corrección
    - `hotfix/` — urgente sobre producción
