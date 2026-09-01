@@ -17,7 +17,8 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
   marcado editorial featured sigue ganando. Plugin `camino-del-dharma-core` **0.7.1**.
 - **Payload:** `_source_hash` excluye `_source_key` además de sí mismo (el contrato
   del builder). `migration/payload.json` se regeneró; create-missing-only no
-  reescribe contenido ya importado.
+  reescribe contenido ya importado. `json_encode` lanza `JsonException` si el
+  canónico no se puede producir (no escribe el literal `false`).
 
 ### Gobernanza — META Gutenberg no es defecto de corte (ADR 0042 / OWN-019)
 

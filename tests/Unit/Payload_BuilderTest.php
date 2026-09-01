@@ -86,6 +86,16 @@ final class Payload_BuilderTest extends TestCase {
 	}
 
 	/**
+	 * Protects extraction from a silent false JSON blob: invalid UTF-8
+	 * must throw instead of hashing or writing the string "false".
+	 */
+	public function test_payload_json_rejects_invalid_utf8() {
+		$this->expectException( JsonException::class );
+
+		Cdd_Core_Payload_Builder::to_json( array( 'title' => "\xB1\x31" ) );
+	}
+
+	/**
 	 * Protects the reconciliation surface: the payload publishes its own
 	 * counts so validate/verify can compare them against the documented
 	 * baseline without re-deriving them.

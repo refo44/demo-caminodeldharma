@@ -83,7 +83,7 @@ final class Cdd_Core_Payload_Builder {
 	public static function hash_object( array $payload_object ): string {
 		unset( $payload_object['_source_hash'], $payload_object['_source_key'] );
 
-		return hash( 'sha256', json_encode( $payload_object, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- deterministic canonical form; pure class usable without WordPress loaded.
+		return hash( 'sha256', self::encode( $payload_object, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) );
 	}
 
 	/**
@@ -92,7 +92,17 @@ final class Cdd_Core_Payload_Builder {
 	 * @param array $payload Payload array.
 	 */
 	public static function to_json( array $payload ): string {
-		return json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "\n"; // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- pure class usable without WordPress loaded.
+		return self::encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "\n";
+	}
+
+	/**
+	 * Canonical JSON; throws instead of returning false.
+	 *
+	 * @param array $value Value to encode.
+	 * @param int   $flags json_encode flags.
+	 */
+	private static function encode( array $value, int $flags ): string {
+		return json_encode( $value, $flags | JSON_THROW_ON_ERROR ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- deterministic canonical form; pure class usable without WordPress loaded.
 	}
 
 	/**
