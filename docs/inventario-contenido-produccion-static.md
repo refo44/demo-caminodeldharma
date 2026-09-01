@@ -71,7 +71,7 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la misma
 ítem 1 (`event_featured`). Extraer una sola vez.
 
-Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
+Calendario de septiembre 2026: celdas hardcodeadas que apuntan al ítem 1 y a meditación semanal.
 La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
 
 `.ics`: 2 archivos en disco. Destino WP: **generados**, no Media Library (OWN-009). Encuentro 2026 **RETIRE** (OWN-012). Círculos KEEP hasta que `hoy >` su fecha de fin; entonces 410 y se borra el huérfano (OWN-013). Pausa Cali **sin** `.ics`.
