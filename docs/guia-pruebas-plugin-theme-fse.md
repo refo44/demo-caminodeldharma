@@ -203,18 +203,20 @@ escenario Gherkin: **español**.
 El reloj es un colaborador externo de este dominio: el estado vigente/pasado del evento
 sigue la fecha de fin en `America/Bogota` (OWN-013). No se usa el reloj de pared.
 
+<!-- markdownlint-disable MD010 -->
 ```php
 class Recording_Clock implements Clock {
 
-    public $invocations = 0;
-    public $now;
+	public $invocations = 0;
+	public $now;
 
-    public function now() {
-        $this->invocations++;
-        return $this->now;
-    }
+	public function now() {
+		$this->invocations++;
+		return $this->now;
+	}
 }
 ```
+<!-- markdownlint-enable MD010 -->
 
 Tipado al contrato público. Instancia **nueva** en cada test. Observar invocaciones en la
 costura externa está permitido cuando *esa* es la regla de dominio («no debe generar `.ics`
