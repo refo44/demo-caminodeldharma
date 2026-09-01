@@ -6,15 +6,17 @@
 #   docker compose run --rm wpcli wp <command>
 #   docker compose down         # stop; add -v to destroy DB/core volumes (disposable)
 #
-# Image tags mirror Hostinger production parity confirmed 2026-08-01:
-# PHP 8.3.30 and MariaDB 11.8.8 (see docs/docker-wordpress-playbook.md §2).
+# Image tags pinned to Hostinger production parity confirmed 2026-08-01:
+# WordPress 7.1 on PHP 8.3 (Hostinger PHP 8.3.30) and MariaDB 11.8.8
+# (see docs/docker-wordpress-playbook.md §2). Official WordPress images do
+# not publish PHP patch-level tags; re-verify after `docker compose pull`.
 # Local test bench only — this file plays no role in any deployment (ADR 0015).
 
 name: camino-del-dharma
 
 services:
   db:
-    image: mariadb:11.8
+    image: mariadb:11.8.8
     environment:
       MARIADB_DATABASE: ${MARIADB_DATABASE:?define MARIADB_DATABASE en .env}
       MARIADB_USER: ${MARIADB_USER:?define MARIADB_USER en .env}
@@ -29,7 +31,7 @@ services:
       retries: 12
 
   wordpress:
-    image: wordpress:php8.3
+    image: wordpress:7.1-php8.3-apache
     depends_on:
       db:
         condition: service_healthy
@@ -56,7 +58,7 @@ services:
       - ./wordpress/wp-content/plugins/camino-del-dharma-core:/var/www/html/wp-content/plugins/camino-del-dharma-core
 
   wpcli:
-    image: wordpress:cli-php8.3
+    image: wordpress:cli-2.12-php8.3
     user: "33:33"
     depends_on:
       db:

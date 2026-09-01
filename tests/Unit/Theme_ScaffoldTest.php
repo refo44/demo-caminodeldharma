@@ -27,6 +27,7 @@ final class Theme_ScaffoldTest extends TestCase {
 		$header = file_get_contents( $style ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
 
 		$this->assertMatchesRegularExpression( '/^Theme Name:\s*Camino del Dharma$/m', $header );
+		$this->assertMatchesRegularExpression( '/^Requires at least:\s*7\.1$/m', $header );
 		$this->assertMatchesRegularExpression( '/^Text Domain:\s*camino-del-dharma$/m', $header );
 		$this->assertMatchesRegularExpression( '/^Version:\s*\d+\.\d+\.\d+$/m', $header );
 	}
