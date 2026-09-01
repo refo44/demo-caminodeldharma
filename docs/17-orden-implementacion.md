@@ -619,6 +619,10 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
    la próxima sesión y lo dice. El `.ics` estático de la sola bienvenida no se copió ni se tocó.
 9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
    solo con autorización expresa (OWN-005).
+9b. **D-08 / OWN-020 (después de WU-10, pendiente):** SEO/AEO de `/author/{slug}` con copy corto
+    y fotos publicados. Decidido; **no implementado**. Issue
+    [#5](https://github.com/refo44/demo-caminodeldharma/issues/5). TDD (ADR 0038). No `noindex`
+    en singles. No dummy.
 10. **Corte final:** ejecutar
     [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); archivar el estático en tag.
 

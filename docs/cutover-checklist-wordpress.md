@@ -53,6 +53,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] wp-admin: herramienta «Eliminar huérfanos» (OWN-015) — dry-run + apply; solo `.ics`; no borra fotos OWN-003
 - [ ] Tags del blog: archivo existe; `noindex` hasta volumen (ADR 0031)
 - [ ] Autores (ADR 0037): `/author/zheng-gong` **200** (CPT, no user); `query_var === 'blog_author'`; users `/author/{login}` **404**; byline ≠ usuario WP; publicar post exige ficha; archivo `/author` noindex
+- [ ] Autores SEO/AEO (OWN-020 / D-08, [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)): singles **index,follow** con `seo.description` y foto reutilizados de producción (no copy inventado; no noindex; bio larga sigue en `/comunidad`)
 - [ ] `/comunidad` (WP): enlaces a `/author/zheng-gong` y a la ficha Comunidad (OWN-016); copy live no pisado; estático no cambiado por esto
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
 - [ ] Contact Form 7: Page `/privacidad` en WordPress con los párrafos del formulario según ADR 0041 / OWN-018; entrega verificada en staging. La revisión legal **no** es prerrequisito (ADR 0041). Fallback operativo: CF7 deshabilitado + WhatsApp/correo, registrado aquí y en la matriz

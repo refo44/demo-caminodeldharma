@@ -44,8 +44,8 @@ Forma canónica: **sin barra final**.
 | `/blog` | `/blog` | KEEP | posts page | |
 | `/blog/circulos-de-presencia-consciente` | misma | KEEP | `post` | |
 | `/blog/sangha-refugio-hiperconexion` | misma | KEEP | `post` | |
-| `/author/zheng-gong` | misma | **PLANNED KEEP** | CPT `blog_author` | no existe en static; corte WP (ADR 0037); indexable |
-| `/author/comunidad-camino-del-dharma` | misma | **PLANNED KEEP** | CPT `blog_author` | slug cambiable **antes** del corte; luego KEEP/301 |
+| `/author/zheng-gong` | misma | **PLANNED KEEP** | CPT `blog_author` | no existe en static; corte WP (ADR 0037); indexable; `seo`/bio/thumb OWN-020 **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) |
+| `/author/comunidad-camino-del-dharma` | misma | **PLANNED KEEP** | CPT `blog_author` | slug cambiable **antes** del corte; luego KEEP/301; mismo OWN-020 |
 | `/author` (archivo de fichas) | misma | **PLANNED KEEP** | archive CPT | **noindex** hasta volumen (ADR 0037) |
 | `/author/{user}` nativo WP | — | **404** | no es perfil | apagar rewrite de users |
 | *(404 genérico)* | plantilla 404 | KEEP behavior | HTTP 404 | no URL `/404` |

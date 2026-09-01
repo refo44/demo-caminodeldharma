@@ -2,11 +2,12 @@
 
 Preguntas de dueño. **No son ADR.**
 
-Hay cuatro bloques que no se mezclan:
+Hay cinco bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 sin decisión nueva. |
+| **Pre-staging** (`D-08` / OWN-020) | SEO/AEO de fichas `/author/{slug}` | **Decidido 2026-09-01.** Implementación **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No reabrir noindex en singles (ADR 0037). |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 | **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
@@ -76,10 +77,28 @@ Ninguna.
 | OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
 | OWN-018 | 2026-08-31 | **CF7 entra al corte sin esperar asesoría legal.** El disclaimer publicado en `/privacidad` basta para lanzar. La revisión jurídica queda recomendada para más adelante, no este año, y **no** bloquea WU-09 ni el corte. En WordPress se actualizan solo los párrafos del formulario (ADR 0041). El HTML estático no se toca mientras el form de producción siga siendo `action="#"`. |
 | OWN-019 | 2026-09-01 | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. |
+| OWN-020 | 2026-09-01 | **D-08 cerrado.** Las fichas `/author/{slug}` siguen **indexables** (ADR 0037). No hay meta en el estático porque esas URLs no existían: reutilizar **copy corto y fotos ya publicados**, no inventar, no duplicar el ensayo largo del fundador (queda en `/comunidad`, KEEP). Zheng Gong: description JSON-LD + `assets/images/fundador/foto-biografia-fundador.jpg`. Comunidad: primer párrafo de «Quiénes somos» o la meta de `/comunidad` + `assets/images/comunidad-linaje/comunidad-quienes-somos.jpg`. En ambas, enlace a `/comunidad` para el texto largo. Código **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
 `redirect-ledger.md`.
+
+---
+
+## Pre-staging — implementación pendiente
+
+Pregunta **cerrada**. El código no está. No tratar D-08 como copy sin dueño ni como `noindex`.
+
+| ID | Decisión | Issue | Estado |
+| -- | -------- | ----- | ------ |
+| D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). No dummy / `_cdd_fixture`. |
+
+Copy y fotos a reutilizar (producción publicada, OWN-007):
+
+| Ficha | `seo.description` / bio corta | Foto |
+| ----- | ----------------------------- | ---- |
+| `zheng-gong` | JSON-LD publicado: «Maestro buddhista contemporáneo, fundador de la Comunidad Buddhista Camino del Dharma. Su enseñanza integra la sabiduría del Buddhismo Chan y Tierra Pura con los desafíos de la vida moderna.» On-page: esa frase o el byline corto de Sangha, más enlace a `/comunidad`. | `static/assets/images/fundador/foto-biografia-fundador.jpg` |
+| `comunidad-camino-del-dharma` | Meta de `/comunidad`: «Conoce Camino del Dharma, una comunidad budista en Colombia dedicada a la práctica del budismo Chan y Tierra Pura.» On-page: primer párrafo de «Quiénes somos» o esa meta, posts relacionados, enlace a `/comunidad`. | `static/assets/images/comunidad-linaje/comunidad-quienes-somos.jpg` |
 
 ---
 
@@ -175,7 +194,12 @@ patrón revistalogos #30.
 **v1.25 (2026-09-01):** OWN-019 / ADR 0042 — el propietario **no** acepta META-* como defectos de
 corte. Son restricciones para UI wp-admin futura. Staging no construye metaboxes clásicos.
 
-**Versión:** 1.25 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 20 decididas.
+**v1.26 (2026-09-01):** OWN-020 / D-08 **cerrado**. Fichas `/author/{slug}` indexables con copy
+corto y fotos ya publicados; no noindex; implementación pendiente
+([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
+
+**Versión:** 1.26 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 21 decididas.
+Pre-staging: 1 decidida, implementación pendiente (`D-08` / OWN-020).
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
 Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).
