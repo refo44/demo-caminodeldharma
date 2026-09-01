@@ -21,7 +21,7 @@ El propietario deja el desbordamiento 339 vs 320 px de `/blog/sangha-refugio-hip
 El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las
 fichas reutilizan copy corto y fotos ya publicados; no se inventa texto ni se duplica el ensayo
 largo de `/comunidad`. Código **no** entra en este registro: cola
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Backlog v1.26.
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Registrado en backlog v1.26.
 
 ### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
 
