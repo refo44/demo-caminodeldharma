@@ -212,18 +212,23 @@ function cdd_core_calendar_month_data( ?DateTimeImmutable $now = null ): array {
 
 /**
  * Everything a calendar surface needs about one event, resolved once
- * (WU-08A). The «Añadir al calendario» dialog and the generated
- * /eventos/ical/{slug}.ics both read this array, so the Google/Outlook
- * deep links a visitor follows and the file they download can never
- * describe different dates.
+ * (WU-08A / BUG-001). The «Añadir al calendario» dialog and the
+ * generated /eventos/ical/{slug}.ics both read this array, so the
+ * Google/Outlook deep links a visitor follows and the file they download
+ * can never describe different dates.
  *
- * Dates come in two forms: the stored Y-m-d pair the ICS generator
- * consumes, and the compact Ymd pair the dialog needs, with the
- * exclusive end (day after the last day) that all-day entries use.
+ * Dates come in three forms: the course span as stored (start_date /
+ * end_date), the published session schedule the file exports one VEVENT
+ * each (occurrences), and the compact Ymd pair with the exclusive end
+ * the dialog deep-links (start / end). A deep link carries a single
+ * entry, so it names the next session — a date the file contains —
+ * rather than a range that appears in no VEVENT. Without a schedule all
+ * three describe the same event_date..event_end range, as WU-08A shipped.
  *
- * @param WP_Post $event Event post.
+ * @param WP_Post                $event Event post.
+ * @param DateTimeImmutable|null $now   Request-time instant.
  */
-function cdd_core_event_calendar_payload( WP_Post $event ): array {
+function cdd_core_event_calendar_payload( WP_Post $event, ?DateTimeImmutable $now = null ): array {
 	$start = (string) get_post_meta( $event->ID, 'event_date', true );
 	$end   = (string) get_post_meta( $event->ID, 'event_end', true );
 
@@ -234,20 +239,101 @@ function cdd_core_event_calendar_payload( WP_Post $event ): array {
 		$end = '';
 	}
 
-	$last      = '' !== $end ? $end : $start;
-	$exclusive = ( new DateTimeImmutable( $last ) )->modify( '+1 day' );
+	$occurrences = cdd_core_event_calendar_occurrences( $event );
+	$deep_link   = cdd_core_event_calendar_deep_link( $occurrences, $start, $end, $now ?? cdd_core_now() );
 
 	return array(
-		'title'        => get_the_title( $event ),
-		'start_date'   => $start,
-		'end_date'     => '' !== $end ? $end : null,
-		'start'        => ( new DateTimeImmutable( $start ) )->format( 'Ymd' ),
-		'end'          => $exclusive->format( 'Ymd' ),
-		'description'  => $event->post_excerpt ? wp_strip_all_tags( $event->post_excerpt ) : '',
-		'location'     => (string) get_post_meta( $event->ID, 'event_place', true ),
-		'url'          => (string) get_permalink( $event ),
-		'ics_url'      => home_url( '/eventos/ical/' . $event->post_name . '.ics' ),
-		'ics_filename' => $event->post_name . '.ics',
+		'title'         => get_the_title( $event ),
+		'start_date'    => $start,
+		'end_date'      => '' !== $end ? $end : null,
+		'occurrences'   => $occurrences,
+		'session_count' => count( $occurrences ),
+		'next'          => $deep_link,
+		'start'         => $deep_link['start'],
+		'end'           => $deep_link['end'],
+		'description'   => $event->post_excerpt ? wp_strip_all_tags( $event->post_excerpt ) : '',
+		'location'      => (string) get_post_meta( $event->ID, 'event_place', true ),
+		'url'           => (string) get_permalink( $event ),
+		'ics_url'       => home_url( '/eventos/ical/' . $event->post_name . '.ics' ),
+		'ics_filename'  => $event->post_name . '.ics',
+	);
+}
+
+/**
+ * The published sessions of an event as calendar occurrences, in order
+ * (BUG-001). An event without an explicit schedule has none: its single
+ * range entry is built by the caller.
+ *
+ * @param WP_Post $event Event post.
+ */
+function cdd_core_event_calendar_occurrences( WP_Post $event ): array {
+	$sessions = get_post_meta( $event->ID, 'event_calendar_dates', true );
+	if ( ! is_array( $sessions ) ) {
+		return array();
+	}
+
+	$sessions = array_values( array_filter( $sessions, 'cdd_core_is_ymd' ) );
+	sort( $sessions );
+
+	return array_map( 'cdd_core_calendar_occurrence', $sessions );
+}
+
+/**
+ * One all-day calendar occurrence in both forms the surfaces need: the
+ * stored inclusive dates and the compact pair with the exclusive end.
+ *
+ * @param string      $start Start date (Y-m-d).
+ * @param string|null $end   Inclusive end date (Y-m-d), or null for one day.
+ */
+function cdd_core_calendar_occurrence( string $start, ?string $end = null ): array {
+	$last = ( null !== $end && '' !== $end ) ? $end : $start;
+
+	return array(
+		'start_date' => $start,
+		'end_date'   => ( null !== $end && '' !== $end ) ? $end : null,
+		'start'      => ( new DateTimeImmutable( $start ) )->format( 'Ymd' ),
+		'end'        => ( new DateTimeImmutable( $last ) )->modify( '+1 day' )->format( 'Ymd' ),
+	);
+}
+
+/**
+ * The occurrence the Google/Outlook deep links add (BUG-001): the first
+ * session that has not happened yet in America/Bogota, the last one when
+ * every session is behind us, and the whole event range when there is no
+ * schedule at all.
+ *
+ * @param array             $occurrences Published sessions, in order.
+ * @param string            $start       Event start date (Y-m-d).
+ * @param string            $end         Inclusive event end date (Y-m-d) or ''.
+ * @param DateTimeImmutable $now         Request-time instant.
+ */
+function cdd_core_event_calendar_deep_link( array $occurrences, string $start, string $end, DateTimeImmutable $now ): array {
+	if ( empty( $occurrences ) ) {
+		return cdd_core_calendar_occurrence( $start, '' !== $end ? $end : null );
+	}
+
+	$today = Cdd_Core_Event_Status::today( $now );
+	foreach ( $occurrences as $occurrence ) {
+		if ( ( $occurrence['end_date'] ?? $occurrence['start_date'] ) >= $today ) {
+			return $occurrence;
+		}
+	}
+
+	return end( $occurrences );
+}
+
+/**
+ * One calendar occurrence in the inclusive form the ICS generator
+ * consumes. The payload also carries the compact pair with the
+ * exclusive end the dialog deep-links; handing that one to the
+ * generator would push every DTEND a day too far.
+ *
+ * @param array $occurrence Occurrence from the calendar payload.
+ */
+function cdd_core_ics_occurrence( array $occurrence ): array {
+	return array(
+		'start' => $occurrence['start_date'],
+		'end'   => $occurrence['end_date'],
 	);
 }
 
@@ -272,7 +358,7 @@ function cdd_core_event_ics_response( string $slug, ?DateTimeImmutable $now = nu
 		)
 	);
 	$event    = $events[0] ?? null;
-	$calendar = $event ? cdd_core_event_calendar_payload( $event ) : array();
+	$calendar = $event ? cdd_core_event_calendar_payload( $event, $now ) : array();
 
 	if ( empty( $calendar ) ) {
 		return array(
@@ -303,6 +389,7 @@ function cdd_core_event_ics_response( string $slug, ?DateTimeImmutable $now = nu
 			'organizer_email' => 'caminodeldharma1@gmail.com',
 			'start'           => $calendar['start_date'],
 			'end'             => $calendar['end_date'],
+			'occurrences'     => array_map( 'cdd_core_ics_occurrence', $calendar['occurrences'] ),
 			'dtstamp'         => $now,
 		)
 	);
