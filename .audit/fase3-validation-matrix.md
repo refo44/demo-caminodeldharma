@@ -591,3 +591,175 @@ Decisiones y deltas registrados (BUG-001):
 7. **El estático no se toca** (memoria del proyecto + decisión del dueño):
    `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue publicando su VEVENT único
    de la bienvenida hasta el corte. El delta queda registrado aquí, no arreglado allí.
+
+## WU-10 — QA local completa y runbook de staging
+
+Sesión propia tras BUG-001. **No es una escritura en Hostinger**: WU-10 produce evidencia y un
+runbook; no crea, despliega ni importa en ninguna instancia (OWN-005). Los niveles 1–3 se
+re-ejecutaron **contra el árbol actual** (`e377c46`), no heredados de sesiones anteriores.
+
+Verificación de reanudación: `HEAD` = `origin/fase3-wordpress` = `e377c46`, árbol limpio,
+**0 ahead / 0 behind**. Esto **corrige** el encabezado del estado durable, que describía la rama
+en `78db8f7` con los commits de BUG-001 «solo en local»: ya estaban publicados. El repositorio
+manda sobre el archivo.
+
+### Nivel 1 — Comprobaciones estáticas
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| `php -l` sobre PHP propio | `tools/php-lint.sh` (plugin + theme + tests, sin `vendor/`) | `php-lint: OK` | Pass (local) |
+| Suite unit | `tools/run-phpunit.sh` | OK — **183 tests, 1023 assertions** | Pass (local) |
+| WPCS | `phpcs` con `phpcs.xml.dist` | **85 archivos, 0 errores, 0 avisos** | Pass (local) |
+| Advisories de dependencias | `composer audit --locked` | `No security vulnerability advisories found` | Pass (local) |
+| Lint CSS de ambos árboles | `npm run lint:css` (`static/` + theme) | exit 0 | Pass (local) |
+| `git diff --check` | ejecutado | limpio | Pass (local) |
+| Parseo JSON | `payload.json`, `theme.json`, `composer.json`, `package.json`, `.stylelintrc.json` | todos válidos | Pass (local) |
+| Parseo YAML | `test.yml`, `docker-compose.yml`, `docker-compose.wp-tests.yml`, `_config.yml` | todos válidos | Pass (local) |
+| Sin secretos | `git grep` de patrones (AWS, claves privadas, tokens `ghp_`/`sk-`/`xox`) sobre archivos versionados; `.env` no versionado | 0 coincidencias; `tools/wp-tests.env` son credenciales desechables documentadas | Pass (local) |
+| Sin plantillas PHP clásicas en el theme | `find` de `single.php`/`page.php`/`archive.php`/`header.php`/`footer.php`/`index.php` en la raíz del theme | ninguna (solo `functions.php`, `inc/`, `patterns/`) | Pass (local) |
+
+### Nivel 2 — Comprobaciones de componente
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Suite wp-phpunit | `tools/run-phpunit-wp.sh` (harness efímero) | OK — **121 tests, 723 assertions** | Pass (local) |
+| `migrate validate` | contra `migration/payload.json` | `Payload valid` | Pass (local) |
+| `migrate verify` | 6 colecciones | pages 11/11, events 10/10, posts 2/2, blog_authors 2/2, gallery_albums 3/3, media 81/81; **`missing: []`** | Pass (local) |
+| Idempotencia del importador | `migrate import` sin `--apply` | **0 created**, todo `skipped` en las 6 colecciones | Pass (local) |
+| Dry-run por defecto | `import`, `seed`, `convert` sin `--apply` | los tres devuelven `dry_run: true` y no escriben | Pass (local) |
+| `seed` idempotente | dry-run | `media: created 0, skipped 81` | Pass (local) |
+| `convert` idempotente | dry-run | `pending: []`, `converted: []` | Pass (local) |
+| `contact provision` create-missing-only | dry-run | se niega: «The contact form already exists in this environment» (form id 129) | Pass (local) |
+| Rutas `.ics` | `curl` sobre las 10 | 200 `text/calendar` en el vigente; **410** en los 9 finalizados; 404 en slug inexistente | Pass (local) |
+| BUG-001 en la salida real | `.ics` de Círculos descargado | **10 VEVENT**, 10 UID únicos `…-Ymd@localhost`, cada `DTEND` = `DTSTART`+1 día | Pass (local) |
+
+### Nivel 3 — Integración local
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Activación sin warnings/fatals | `wp plugin list` / `wp theme list` | plugin `camino-del-dharma-core` **0.7.1** activo; theme `camino-del-dharma` **0.5.1** activo; CF7 **6.1.7** activo; core **7.1** | Pass (local) |
+| `debug.log` tras navegación representativa | truncado a 0, luego 41 rutas + `.ics` + sitemap + archivo de tag | **0 bytes** | Pass (local) |
+| Rutas entrantes | `curl` sobre 41 rutas | 12 páginas 200 · 10 singles de evento 200 · 2 entradas 200 · 2 fichas de autor + archivo 200 · 3 álbumes 200 · sitemap 200 | Pass (local) |
+| Canonicalización sin barra final (ADR 0008) | 5 rutas con barra | **301** a la forma sin barra en todas | Pass (local) |
+| 404 real | 5 rutas inexistentes | **404** (no soft-404) | Pass (local) |
+| Archivos de usuario WP en 404 (ADR 0037) | `/author/admin`, `/?author=1` | 404 en ambos | Pass (local) |
+| Ajustes | `wp option get` | permalinks `/blog/%postname%`, zona `America/Bogota`, front page 100, posts page 109 | Pass (local) |
+| Políticas noindex | meta `robots` por ruta | álbum `noindex,follow` (ADR 0036); `/author` archivo `noindex,follow` y ficha `index,follow` (ADR 0037); tag `noindex,follow` (ADR 0031); páginas públicas `index,follow,max-image-preview:large` | Pass (local) |
+| Cabeza SEO | canonical + description + OG + JSON-LD | presentes y correctos en las rutas públicas | Pass (local) |
+| Cookies anónimas | `Set-Cookie` en 10 rutas + `.ics` | **ninguna** | Pass (local) |
+| Ausencia de seguimiento | hosts externos en el HTML anónimo | solo `wa.me`, redes sociales, `youtube-nocookie`, `player.vimeo`, atribución de iconos; **sin analítica** | Pass (local) |
+| Conteos y relaciones de medios | `verify` + consulta por término | 81 medios; **35 asignaciones** a álbum (general 25 + 2023 5 + 2021 5) = `gallery_images` del payload | Pass (local) |
+| Relación `authors` | meta de las 2 entradas | `[5]` y `[6]`, correctas | Pass (local) |
+| Formulario CF7 en `/contacto` | HTML renderizado | `<form action="/contacto#wpcf7-f129-p108-o1" method="post">`, `aria-label` y clase `section-gap` del estático preservados | Pass (local) |
+
+### Nivel 4 — Visual y accesibilidad (lo que un navegador local alcanza)
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 17 limpias; 2 con desbordamiento — ver D-04 y D-09 | Fail (local) *(solo `/practica`)* |
+| 640 px (= zoom 200 % sobre 1280) | las mismas 19 rutas | **0 desbordamientos** | Pass (local) |
+| Foco visible | 21 reglas `:focus-visible` en las hojas del theme | presentes | Pass (local) |
+| Navegación por teclado | single de evento | 32 elementos enfocables, **todos con nombre accesible**; primer tabulable = «Saltar al contenido» | Pass (local) |
+| Diálogo de calendario (a11y) | apertura real en el navegador | `<dialog>` **modal** (`:modal`), `aria-labelledby` + `aria-describedby="calendar-dialog-note"`, foco entra al diálogo y `close()` lo devuelve al disparador; el evento `cancel` **no** se previene (la ruta nativa de Escape queda intacta) | Pass (local) |
+| Escape cierra el diálogo | pulsación real de Escape | **inconcluso**: el panel de automatización consume la tecla. Por código no hay `preventDefault` sobre `cancel` | Unverified |
+| BUG-001 en el diálogo | enlaces del diálogo abierto | Google `dates=20260903/20260904` = **próxima sesión** (jueves 3 sep 2026, verificado); Apple y descarga apuntan al `.ics` de las 10 | Pass (local) |
+| Paridad de copy vs producción publicada (OWN-007) | diff de texto visible local ↔ `https://caminodeldharma.org` | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` = **1.000**; el resto explicado en D-01…D-10 | Pass (local) *(con deltas)* |
+| Lector de pantalla real | no ejecutable en esta sesión | — | Unverified |
+| PHP/Apache/HTTPS de staging | no existe instancia | — | Unverified |
+| No indexabilidad del staging | no existe instancia | — | Unverified |
+| Entrega real de CF7 a `caminodeldharma1@gmail.com` | `wp_mail()` local | **FALSE** — `Invalid address: (From): wordpress@localhost`, sin MTA en el contenedor. No prueba nada sobre Hostinger | Unverified |
+
+### CI y Sonar
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| `test.yml` sobre esta rama | `gh run list` | **nunca se ha ejecutado**. Los únicos runs del repo son `pages-build-deployment` en `main` (jul 2026) | Unverified |
+| Motivo (corregido) | `.github/workflows/test.yml` | dispara solo en `push: branches: [main]` y `pull_request`. La rama **sí está publicada**, pero un push de rama no la dispara y **no existe PR** | — |
+| Sonar de plugin + theme | Automatic Analysis vía GitHub App | no revisado en esta sesión | Unverified |
+
+**Corrección de sesiones anteriores:** las filas «CI/Sonar — Requiere push (rama local por
+diseño)» de WU-03…BUG-001 son **inexactas**. La rama está publicada desde WU-09; lo que falta es
+un disparador, no un push. Para obtener evidencia de CI hace falta un PR (o ampliar los
+triggers) — decisión del propietario, no una limpieza silenciosa.
+
+### Deltas y hallazgos registrados (WU-10)
+
+1. **D-01 — `event_modality` vacío en los 9 eventos que tienen modalidad (entorno local).**
+   Producción publica una fila «Modalidad» («Híbrida — bienvenida, orientación, seis sesiones
+   virtuales y un encuentro presencial», «En línea (Zoom y YouTube)», …); el WordPress local no
+   muestra ninguna. **No es un defecto de código:** el payload trae `modality` en 9/10 eventos,
+   el extractor la extrae, el importador la escribe (`class-cdd-core-importer.php:399`) y el
+   renderizador la pinta — verificado inyectando el valor en una sola petición, la fila
+   «Modalidad» aparece correctamente. Lo que falla es el **entorno local**: su contenido se
+   importó con un payload anterior a ese campo, y el importador es **create-missing-only**, así
+   que `import --apply` **no lo rellena** (dry-run: `created: 0`, todo `skipped`). Comprobado
+   además que `event_date` y el `alt` de los carteles **sí** coinciden con el payload en los 10
+   eventos: `event_modality` es el único campo desalineado. Consecuencia operativa en el
+   runbook §4b: **staging se importa una sola vez, desde cero**. Riesgo si se ignora: staging
+   heredaría el mismo vacío y `/eventos/{slug}` perdería una fila que producción publica.
+2. **D-02 — El contenido demo del install desplaza contenido real.** «Hello world!» (post 1)
+   aparece en la sección «Del blog» del Inicio y en `/blog`, y **empuja fuera** a la entrada real
+   «Estamos conectados, pero seguimos solos». Es la única diferencia de copy del Inicio frente a
+   producción (similitud 0.987). También siguen presentes «Sample Page» (publicada) y «Privacy
+   Policy» (borrador). Runbook §2.2 lo convierte en requisito duro de provisión.
+3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` responden **200**
+   en WordPress y **404** en producción publicada. No están en `docs/11-arbol-urls-final.md`, que
+   dice «si una URL no está aquí, no existe». Superficie nueva indexable: **decisión de
+   propietario** (aceptarlas y añadirlas al árbol, o cerrarlas), no un arreglo de WU-10.
+4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320: el `<audio>` del
+   bloque nativo `core/audio` toma su ancho intrínseco (~300 px) más el relleno del contenedor.
+   **Producción no desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Es la única
+   regresión visual encontrada y es **first-party corregible** (falta un ancho al bloque
+   convertido); queda registrada, no arreglada, por estar fuera del alcance de WU-10.
+5. **D-05 — Lightbox nativo en inglés.** `/galeria` rotula «Close / Previous / Next» y
+   `aria-label="Enlarged images"` sobre una página `lang="es-CO"`. **Causa ambiental, no de
+   código:** `get_locale()` ya devuelve `es_CO`, pero el contenedor no alcanza WordPress.org y
+   solo tiene instalado `en_US`. Runbook §2.4 añade `wp language core install es_CO --activate`
+   y exige volver a verificar estas cadenas. En staging queda `Unverified` hasta entonces.
+6. **D-06 — `wptexturize` cambia las comillas.** En `/practica`, producción publica
+   `"Homenaje al Bodhisattva Guān Shì Yīn"` (comillas rectas) y WordPress rinde `«…»`
+   tipográficas. Delta de copy menor frente a la línea base OWN-007; se registra, no se fuerza.
+7. **D-07 — El bloque nativo de audio no rinde texto alternativo.** Producción incluye «Tu
+   navegador no permite reproducir este audio.» dentro de cada `<audio>`; `core/audio` no lo
+   emite. Dos ocurrencias en `/practica`.
+8. **D-08 — Fichas de autor indexables sin `meta description`.** `/author/{slug}` sirve
+   `index,follow` (ADR 0037) pero el payload no trae objeto `seo` para `blog_authors` ni para
+   `gallery_albums` (0/2 y 0/3; páginas 11/11, eventos 10/10, entradas 2/2 sí lo traen). Es
+   coherente con OWN-007 —el estático no publica fichas de autor, así que no hay copy que
+   portar— pero deja una ruta indexable sin descripción. Los álbumes no se ven afectados por ser
+   `noindex`. Requiere copy del propietario.
+9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
+   320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.
+   **Producción desborda exactamente igual (339 vs 320)**: es un porte fiel de un defecto ya
+   publicado, no una regresión. No se toca `static/`.
+10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
+    `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
+    alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no
+    hay cookies. Se registra por completitud del contrato «sin almacenamiento anónimo».
+11. **D-11 — `wp term list gallery_album` muestra `count = 0`.** Cosmético: la taxonomía vive
+    sobre adjuntos (`post_status = inherit`) y el contador del núcleo solo cuenta `publish`. Las
+    asignaciones reales son 35 y el theme consulta los adjuntos directamente. Se verá un 0 junto
+    a cada álbum en wp-admin.
+12. **D-12 — `<html lang>`:** WordPress sirve `es-CO`, producción `es`. Delta deliberado (locale
+    más específico), sin impacto conocido.
+
+### Deltas aceptados que WU-10 vuelve a confirmar, no a corregir
+
+- **`.ics` publicado solo con la bienvenida.** `static/eventos/ical/circulos-de-presencia-consciente.ics`
+  sigue con **1 VEVENT** (UID `circulos-de-presencia-consciente@caminodeldharma.org`) frente a
+  los **10** de WordPress. Confirmado con `curl` contra producción. No se arregla en `static/`
+  (BUG-001 §7).
+- **Párrafos del formulario en `/privacidad` (ADR 0041).** El diff local↔producción muestra
+  exactamente el delta autorizado: WordPress dice que el formulario se procesa con CF7 y entrega
+  al correo de la comunidad; el estático mantiene que no envía nada. Fecha de actualización
+  31 ago (WP) vs 29 ago (producción). Correcto.
+- **Nota del diálogo de calendario (BUG-001).** Copy nuevo sin equivalente estático, presente y
+  correcto: «El archivo .ics incluye las 10 sesiones del curso. Google Calendar y Outlook añaden
+  la próxima: Jueves 3 de septiembre de 2026.»
+- **Tarjeta compacta de eventos pasados (WU-07, doc 03 §3).** `/eventos` mide similitud 0.663
+  frente a producción: WordPress rinde `Ciudad · Fecha` + «Ver evento →» donde producción publica
+  descripción completa y filas Fecha/Hora/Lugar/Modalidad. Son **134 líneas menos de copy** en
+  esa página. Sustitución aceptada en WU-07; se deja constancia de la magnitud medida.
+- **Byline enlazada (ADR 0037)** en `/comunidad` y en las entradas, y **tiempo de lectura 6′ vs
+  8′** en `sangha-refugio-hiperconexion`: deltas ya registrados en WU-07.
+- **Deck como excerpt** en `/blog`: delta ya registrado en WU-07.
