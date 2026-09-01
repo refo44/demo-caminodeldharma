@@ -68,7 +68,7 @@ funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 
 ## 4. Arquitectura de decisiones (ADR) — resumen
 
-Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
+Hay **43 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
 | --- | --- | --- |
@@ -97,8 +97,10 @@ Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0037 | CPT `blog_author` en `/author/{slug}`; no Users WP | — |
 | 0038 | TDD + wp-phpunit; Sonar solo plugin + theme | — |
 | 0039 | `/privacidad` publicada (provisional) | — |
-| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
 | 0040 | `content-source/` retirado; producción publicada gobierna pre-corte | — |
+| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
+| 0042 | Meta Gutenberg sin metabox clásico sin sync; no blocker de corte | META-* |
+| 0043 | `main` protegida; PR; Conventional Branch + Commits | — |
 
 ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda histórico para WordPress
 (sustituido por 0029); sigue describiendo el CSS del estático.
@@ -242,7 +244,7 @@ Ya resuelto y no debe reabrirse como duda:
 
 ## 12. Documentos de referencia
 
-- `docs/adr/README.md` — índice ADR 0001–0041
+- `docs/adr/README.md` — índice ADR 0001–0043
 - `docs/17-orden-implementacion.md` — fases y criterios (v3.10)
 - `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.27)
 - `docs/contrato-migracion-static-wordpress.md` — contrato de aceptación
