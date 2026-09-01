@@ -1,0 +1,62 @@
+---
+description: Static → WordPress migration safety for Camino del Dharma; template ≠ Page; five deliverables; no foreign WP architecture
+alwaysApply: true
+---
+
+# WordPress migration safety (this repo only)
+
+This project is **Camino del Dharma**. Production is a **live static site** with visitors. Independent of other WordPress repos.
+
+## Inspect before modify
+
+Read `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-static-wordpress.md`, and the current phase in `docs/17-orden-implementacion.md`.
+
+## Current vs future
+
+- **Current:** live static production; deployable HTML in `static/` (monorepo ADR 0014, Fase 3 WU-01 done); hardcoded events/posts/gallery JSON are production data (ADR 0034). `wordpress/` plugin/theme trees are still README-only. WordPress FSE is not implemented.
+- **Future:** static production → **FSE block theme** (ADR 0029) + plugin `camino-del-dharma-core` (ADR 0024). No classic PHP theme in between.
+
+Distinguish HISTORICAL STATE, CURRENT STATE, and FUTURE PLAN. Do not rewrite history.
+
+## Production content
+
+- Never discard hardcoded HTML/JSON as dummy without classification (ADR 0034).
+- Inventory before WordPress modeling. Prefer extraction over retyping.
+- Counts must reconcile. Importer ≠ fixtures.
+- Preserve URLs or define 301. No cutover with broken navigation.
+- FSE templates/patterns are presentation, not editorial storage.
+
+## Contract
+
+A migration is not complete because a theme is deployed or activated.
+
+Five independent deliverables: **CONTENT**, **PRESENTATION**, **ROUTING**, **BEHAVIOR**, **OPERATIONS** (ADR 0032).
+
+- A template does not create a WordPress Page.
+- Do not assume every Page can use a generic `page.html`.
+- Live HTML is the production copy (OWN-007, ADR 0040). The retired legacy source folder must not be
+  recreated and is not a migration or validation input.
+- Distinguish fixtures from real content (ADR 0033). Preserve wp-admin edits. create-missing-only by default.
+- Never overwrite production content implicitly. No destructive DB reset in production.
+- `STATIC DEPLOY ≠ WORDPRESS CODE DEPLOY ≠ WORDPRESS CONTENT`. No static ZIP over a WordPress document root after cutover.
+- Test incoming routes (HTTP), not only `get_permalink()`. Public URLs have no trailing slash (ADR 0008).
+- Check JS selectors, DOM, data attributes, ARIA, and events when migrating markup. Enqueued `main.js` is not parity.
+- Preserve accessibility behaviour.
+- No on-site search. `/privacidad` is published (ADR 0039, provisional). Contact Form 7 is eligible
+  at cutover (ADR 0041 / OWN-018); legal review does not block launch. WordPress updates only the
+  form paragraphs of that notice. Do not change static HTML while the live form uses `action="#"`.
+- Flush rewrite rules only on activation/upgrade, never on every request.
+- Do not deploy, migrate databases, create CMS content, commit, or push while only auditing or documenting.
+- After verified implementation, update the migration matrix and durable docs.
+- Do not create a classic PHP theme as a stepping stone. Fase 3 is static HTML → `templates/*.html`.
+
+Owner audit backlog is closed for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`).
+`POST-*` rows are later-phase (i18n); do not implement them at cutover. Binding later ADRs:
+0035 (event singles), 0036 (gallery album URLs), 0037 (blog author CPT / `/author/{slug}`),
+0038 (TDD, wp-phpunit, Sonar scope), 0041 (CF7 at cutover without legal-review wait),
+0042 (Gutenberg meta UI: no unsynced classic metabox at cutover; META-* are design
+constraints, not pre-staging defects). Testing
+guide: `docs/guia-pruebas-plugin-theme-fse.md`.
+Do not mock WordPress APIs. Do not write FSE production code before a failing test. Sonar is WordPress-only (not the static site).
+
+Fase 3 implementation starts only when the owner asks. Until then, docs-only for migration work.

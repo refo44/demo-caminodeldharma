@@ -1,0 +1,35 @@
+---
+description: Trunk-based Git on main with Conventional Branch names and Conventional Commits (ADR 0043)
+alwaysApply: true
+---
+
+# Git workflow (trunk-based)
+
+Canonical guide: `docs/git-workflow.md`. Decision: ADR 0043.
+
+## Always
+
+- **`main` is protected.** Never commit, push, or merge directly to `main`. All integration goes through a Pull Request from a short-lived branch.
+- **Create a feature branch first** before any code, docs, CI, or config change intended for `main`.
+- **Branch names** follow [Conventional Branch](https://conventionalbranch.org/): `<type>/<description>` in lowercase with hyphens only.
+  - Use `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  - Agent work from Cursor: prefer `cursor/<description>`. Other agents: `copilot/`, `claude/`, `codex/`, or generic `ai/`.
+  - Do not invent unprefixed names (e.g. `fase3-wordpress`) for new branches.
+- **Commit messages** follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in **English**: `type(scope): imperative summary`.
+- **Before opening a PR:** run the relevant local gates (`npm run lint:css` for CSS; `composer test` + `composer lint:phpcs` for PHP).
+- **Merge only when** GitHub checks `php` and `css` pass and review threads are resolved.
+
+## Examples
+
+```bash
+git checkout main && git pull
+git checkout -b feature/payload-hash-bookkeeping
+git commit -m "fix(migrate): exclude _source_key from content hash"
+gh pr create --base main
+```
+
+## Do not
+
+- Do not push to `main`, even for “small” or docs-only fixes.
+- Do not use branch names with uppercase, underscores, spaces, or consecutive hyphens.
+- Do not use non-conventional commit subjects (`updated stuff`, `WIP`, `fix bug`).

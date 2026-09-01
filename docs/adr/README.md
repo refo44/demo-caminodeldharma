@@ -121,6 +121,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0040](0040-retirar-content-source-produccion-como-fuente.md) | Retirar `content-source`; producción publicada gobierna el contenido | Aceptada |
 | [0041](0041-cf7-corte-sin-asesoria-legal.md) | Contact Form 7 en el corte sin esperar asesoría legal | Aceptada |
 | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) | Meta en Gutenberg: sin metabox clásico sin sync; no es defecto de corte | Aceptada |
+| [0043](0043-trunk-based-conventional-branch-commits.md) | Trunk-based en `main`; Conventional Branch + Conventional Commits | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -158,6 +159,7 @@ Documentos, issues, commits o ADR relacionados.
 | Fuente editorial pre-corte | [0040](0040-retirar-content-source-produccion-como-fuente.md) — `content-source/` retirado; producción publicada gobierna contenido y presentación |
 | CF7 en el corte | [0041](0041-cf7-corte-sin-asesoria-legal.md) — sin espera de asesoría legal; disclaimer publicado basta; copy WordPress del formulario |
 | Meta wp-admin / Gutenberg | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) — restricciones META-*; no blocker de corte |
+| Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 
 ---
 

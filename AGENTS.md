@@ -11,6 +11,16 @@ Read `README.md`, `docs/17-orden-implementacion.md` (current phase), `docs/adr/R
 and `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038) before changing architecture, WordPress
 plans, or adding tests.
 
+## Git (trunk-based — ADR 0043)
+
+- **`main` is protected.** Never push directly to `main`. Always create a short-lived branch
+  and open a PR.
+- **Branch names:** [Conventional Branch](https://conventionalbranch.org/) —
+  `feature/…`, `fix/…`, `chore/…`, `cursor/…` (for Cursor agent work), etc.
+- **Commit messages:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+  in **English**.
+- Guide: `docs/git-workflow.md`. Required merge checks: `php`, `css` (`test.yml`).
+
 ## Three times
 
 | | |

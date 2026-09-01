@@ -1,0 +1,26 @@
+---
+description: Published static production is the sole pre-cutover source of truth for content and presentation
+alwaysApply: true
+---
+
+# Published Production Source of Truth
+
+Before WordPress cutover, `https://caminodeldharma.org` governs all visitor-facing copy, content,
+structure, media relationships, styles, and behavior (OWN-007, ADR 0034, ADR 0040).
+
+## Rules
+
+1. Preserve the published visitor experience. The engine migration must be imperceptible except for
+   explicitly approved features and content.
+2. Use the latest repository `VERSION` as deterministic extraction input, then compare it against the
+   published site. Record and resolve every repo/Hostinger delta before import (OWN-006).
+3. Treat static HTML/JSON and referenced media as real production data, never fixtures.
+4. The legacy source folder was permanently removed on 2026-08-29 (ADR 0040). Do not recreate it
+   or use legacy documents to restore or overwrite production.
+5. After cutover, WordPress owns editorial content; Git owns first-party theme and plugin code.
+
+## Required evidence
+
+- Content and visual comparison against the published site.
+- Incoming-route, behavior, accessibility, and metadata parity.
+- Explicit ledger entries for every approved static-to-WordPress difference.

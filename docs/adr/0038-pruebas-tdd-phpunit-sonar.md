@@ -96,9 +96,17 @@ La guía operativa es [`docs/guia-pruebas-plugin-theme-fse.md`](../guia-pruebas-
 - Mientras `main` no esté protegida, el gate de CI (cuando exista) es informativo, no un
   bloqueo de merge.
 
+## Nota operativa (2026-09-01)
+
+La política de push directo a `main` descrita en **Contexto** y **Consecuencias** quedó
+**sustituida en operación** por [ADR 0043](0043-trunk-based-conventional-branch-commits.md):
+`main` protegida, PR obligatorio, Conventional Branch/Commits. El diseño del gate (CI en
+push y PR) sigue vigente; el merge queda bloqueado sin checks verdes.
+
 ## Referencias
 
 - Guía: [`docs/guia-pruebas-plugin-theme-fse.md`](../guia-pruebas-plugin-theme-fse.md)
+- Git: [ADR 0043](0043-trunk-based-conventional-branch-commits.md), [`docs/git-workflow.md`](../git-workflow.md)
 - ADR [0014](0014-monorepo-static-wordpress.md), [0024](0024-plugin-dominio-theme-presentacion.md), [0027](0027-estandares-ingenieria-codigo.md),
   [0029](0029-theme-bloques-full-site-editing.md), [0016](0016-automatizacion-ci-cd-pospuesta.md),
   [0023](0023-entorno-local-wordpress-docker.md)

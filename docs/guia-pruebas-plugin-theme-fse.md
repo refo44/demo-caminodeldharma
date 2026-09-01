@@ -15,9 +15,11 @@ FSE solo ensambla · Sonar no sustituye PHPUnit.
 | **Fase 3 (cuando el owner la arranque)** | Plugin + block theme. **TDD desde la primera línea** (plugin y theme). El kit PHPUnit nace con esa primera línea. | `composer test` (barato) + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. |
 | **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0016) hasta otra decisión. |
 
-Git **hoy:** push directo a `main` (la rama no está protegida). **Futuro:** feature branches +
-PR obligatorios. El diseño del gate sirve en ambos modos: el workflow, cuando exista, corre en
-push a `main` *y* en PR. No se exige PR en esta guía hasta que el owner proteja `main`.
+Git **`main` protegida** (ADR 0043): PR obligatorio desde ramas
+[Conventional Branch](https://conventionalbranch.org/); commits
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés.
+Gate de merge: `php` + `css` en `.github/workflows/test.yml`. Guía:
+`docs/git-workflow.md`. El despliegue sigue manual (ADR 0016).
 
 ---
 
@@ -295,8 +297,8 @@ auditoría de seguridad del producto.
 
 La App ya escanea `refo44/demo-caminodeldharma`. Faltaba el archivo de alcance: ahora es
 `.sonarcloud.properties`. Automatic Analysis **solo lee ese archivo desde el default
-branch**. Un PR que solo lo añade no cambia el análisis hasta el merge; con push directo a
-`main`, el siguiente análisis tras el push ya lo usa.
+branch**. Un PR que solo lo añade no cambia el análisis hasta el merge; tras integrar en
+`main`, el siguiente análisis ya usa el archivo.
 
 ### Método (no mezclar)
 

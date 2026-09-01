@@ -1,0 +1,29 @@
+---
+description: docs govern architecture; published static production governs pre-cutover content and presentation
+alwaysApply: true
+---
+
+# Docs and Production Priority
+
+`docs/` contains the accepted architecture, migration contract, implementation order, and QA
+requirements. The published static site contains current production content and presentation.
+
+## Rules
+
+1. Current system/user instructions and repository rules apply first.
+2. For architecture, URLs, security, migration behavior, and testing: later accepted ADRs, owner
+   decisions, and current structured docs govern.
+3. For pre-cutover copy, content, structure, and styles: published production wins (OWN-007).
+4. The latest repository `VERSION` is the extraction input; compare it with Hostinger and record
+   differences before import (OWN-006).
+5. The legacy source folder was permanently removed (ADR 0040). Do not recreate it.
+6. After cutover, WordPress owns editorial content; Git owns first-party code.
+
+## Application
+
+- Consult the relevant content model, URL tree, migration matrix, ledger, testing guide, and accepted
+  ADRs before implementation.
+- Treat static HTML/JSON as real production data and a presentation/behavior contract, not fixtures.
+- Prefer deterministic extraction over retyping.
+- When sources disagree, record the exact delta; never reconcile content silently.
+- WordPress migration contract: `docs/contrato-migracion-static-wordpress.md` (ADR 0032).

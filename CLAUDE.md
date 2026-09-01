@@ -32,9 +32,14 @@ pipelines.
 6. `docs/backlog-decisiones-owner-migracion.md` (Fase 3 cerrada, v1.21; `POST-*` = fases posteriores, no bloquear el corte)
 7. `docs/11-arbol-urls-final.md`, `docs/12-theme-file-structure.md`, `docs/17-orden-implementacion.md`
 8. `docs/guia-pruebas-plugin-theme-fse.md` — TDD, wp-phpunit, FSE, Sonar (ADR 0038)
+9. `docs/git-workflow.md` — trunk-based, Conventional Branch/Commits (ADR 0043)
 
 ## Hard rules
 
+- **Git:** trunk-based on protected `main` (ADR 0043). Always branch first
+  ([Conventional Branch](https://conventionalbranch.org/)); commits
+  [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English; merge
+  only via PR with green `php`/`css`. See `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.
 - Inspect before modify. Inventory before WordPress modeling.
 - Live static content is production data (ADR 0034). Never discard hardcoded content without classification.
 - Prefer programmatic extraction over manual retyping when deterministic.

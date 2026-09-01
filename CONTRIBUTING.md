@@ -14,22 +14,47 @@ Gracias por contribuir al sitio web de la Comunidad Buddhista Camino del Dharma.
 
 ## Flujo Git
 
-**Hoy:** `main` no está protegida; se permite push directo a `main`. Producción solo se
-despliega desde `main` (ADR 0004, ADR 0015).
+**Vigente desde 2026-09-01 (ADR 0043):** trunk-based development. **`main` está protegida**;
+integración **solo por Pull Request**. Producción estática se despliega manual desde `main`
+(ADR 0015); merge ≠ deploy.
 
-**Futuro:** ramas `feature/descripcion-corta` o `fix/descripcion-corta` y Pull Request
-obligatorio hacia `main`. El gate de CI será Stylelint + `composer test` (cuando exista
-PHP). El despliegue sigue siendo **manual** (ADR 0016).
+Guía operativa: [`docs/git-workflow.md`](docs/git-workflow.md).
 
-Hasta entonces:
+### Ramas — [Conventional Branch](https://conventionalbranch.org/)
 
-1. Implementar cambios en el repositorio (nunca editar producción directamente — ADR 0005).
-2. Ejecutar validaciones locales (ver abajo). TDD en dominio nuevo: ADR 0038 y
-   [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md).
-3. Push a `main` (hoy) o PR (cuando la protección de rama esté activa).
-4. **Despliegue manual** según README y ADR 0015.
+Forma `<type>/<description>` en minúsculas, con guiones:
 
-**Producción solo desde `main`**, asociada a `VERSION` y `CHANGELOG.md`.
+| Prefijo | Uso |
+| ------- | --- |
+| `feature/` o `feat/` | Funcionalidad nueva |
+| `fix/` o `bugfix/` | Corrección |
+| `hotfix/` | Urgente |
+| `release/` | Versión (`release/v1.2.0`) |
+| `chore/` | Docs, CI, deps |
+| `cursor/`, `copilot/`, `claude/`, `codex/`, `ai/` | Trabajo de agente IA |
+
+Ejemplo: `git checkout -b feature/add-login-page`
+
+### Commits — [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+Mensajes en **inglés**:
+
+```text
+<type>[optional scope]: <imperative description>
+```
+
+Ejemplos: `feat(theme): add safe asset version helper`, `fix(migrate): exclude bookkeeping keys from hash`, `docs: record git workflow in ADR 0043`.
+
+### Flujo
+
+1. `git checkout main && git pull`
+2. `git checkout -b feature/short-description`
+3. Implementar; validaciones locales (abajo).
+4. Commits Conventional Commits; push de la rama.
+5. Abrir PR hacia `main`; esperar checks `php` y `css`; resolver conversaciones.
+6. Merge; borrar la rama.
+
+**Prohibido:** push directo a `main`.
 
 ## Transición estático → WordPress
 
@@ -99,7 +124,7 @@ Theme y plugin propio desplegados manualmente a **staging separado** hasta el co
 
 ## Commits
 
-- Mensajes en español o inglés, claros y en imperativo cuando sea posible.
+- [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) en **inglés**.
 - Un commit por unidad lógica de cambio.
 - No incluir `node_modules/`, ZIPs de despliegue ni secretos.
 
