@@ -10,6 +10,12 @@
       {
         "message": "Expected class selector to use kebab-case or BEM modifiers"
       }
+    ],
+    "custom-property-pattern": [
+      "^(wp--[a-z0-9-]+(?:--[a-z0-9-]+)*|[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$",
+      {
+        "message": "Expected custom property to be kebab-case or a WordPress preset/custom property (--wp--*)"
+      }
     ]
   }
 }

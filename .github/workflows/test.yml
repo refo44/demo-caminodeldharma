@@ -1,0 +1,33 @@
+# Quality-only CI (ADR 0038). No deploy steps, no secrets, no SonarScanner
+# (SonarQube Cloud Automatic Analysis runs separately via the GitHub App).
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+      # Cheap gate: php -l -> composer audit --locked -> unit suite.
+      - run: composer test
+      # Style (WPCS, ADR 0027) — not part of composer test:unit.
+      - run: composer lint:phpcs
+
+  css:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+      - run: npm ci --ignore-scripts
+      - run: npm run lint:css

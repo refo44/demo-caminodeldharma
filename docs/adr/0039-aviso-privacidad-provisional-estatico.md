@@ -2,7 +2,10 @@
 
 ## Estado
 
-Aceptada
+Aceptada. El gate de Contact Form 7 y la espera de revisión legal (puntos 4–5 de «Decisión»)
+fueron sustituidos por
+[ADR 0041](0041-cf7-corte-sin-asesoria-legal.md). La publicación de `/privacidad` y el carácter
+provisional del aviso siguen vigentes.
 
 ## Fecha
 
@@ -37,12 +40,17 @@ jurídica: este ADR no la responde.
    de que el formulario se procese en un servidor hay que actualizar este aviso (el texto actual
    dice que el formulario no envía) y contar con la revisión legal. El disparador de ADR 0028 se
    conserva con ese matiz.
+   *(Histórico 2026-08-29. Sustituido el 2026-08-31 por ADR 0041: CF7 entra al corte; la
+   revisión legal no es prerrequisito; en WordPress se actualizan solo los párrafos del
+   formulario.)*
 5. En WordPress (Fase 3) la página es una Page `privacidad` con `templates/page.html`; el enlace
    vive en `parts/footer.html`. No hace falta plantilla propia. El copy se importa del HTML live,
    no se reescribe.
 
 Este ADR **sustituye** el aplazamiento de publicación de ADR 0028. Conserva el gate de Contact
 Form 7 y la necesidad de asesoría legal para dar por cerrado PRIV-001b.
+*(El gate y esa espera jurídica los sustituye ADR 0041; PRIV-001b queda como trabajo posterior,
+no como lanzamiento.)*
 
 ## Alternativas consideradas
 
@@ -57,6 +65,7 @@ Form 7 y la necesidad de asesoría legal para dar por cerrado PRIV-001b.
 
 - `/privacidad` pasa a ser URL pública KEEP (ADR 0008, sin barra final).
 - PRIV-001b deja de ser «página ausente»; permanece abierto en lo jurídico hasta la revisión legal.
+  *(ADR 0041: esa revisión ya no es gate de lanzamiento; PRIV-001b es trabajo posterior.)*
 - El pie de todas las páginas HTML incluye el enlace. Criterio PRIV-001 de la auditoría SEO.
 - La matriz de migración, el inventario, el ledger y el árbol de URLs se actualizan: el copy ya no
   está «por definir».
@@ -66,6 +75,7 @@ Form 7 y la necesidad de asesoría legal para dar por cerrado PRIV-001b.
 
 - ADR [0028](0028-privacidad-aplazada-conscientemente.md) — aplazamiento que este ADR sustituye
 - ADR [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica
-- ADR [0026](0026-contact-form-7.md) — sigue gated a actualizar este aviso
+- ADR [0026](0026-contact-form-7.md) — plugin; elegibilidad de producción en ADR 0041
+- ADR [0041](0041-cf7-corte-sin-asesoria-legal.md) — sustituye el gate de CF7 y la espera legal
 - `docs/informes-seo/02-auditoria-seo-tecnica.md` §9
 - `privacidad/index.html`

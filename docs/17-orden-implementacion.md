@@ -8,9 +8,15 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.9 |
-| **Fecha** | 2026-08-30 |
+| **Versión** | 3.10 |
+| **Fecha** | 2026-08-31 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.10)
+
+- ADR 0041 / OWN-018: Contact Form 7 es elegible en el corte sin esperar asesoría legal. El
+  disclaimer de `/privacidad` basta para lanzar. En WordPress se actualizan solo los párrafos del
+  formulario. FABLE5 v2.4.
 
 ### Cambios principales (3.9)
 
@@ -256,7 +262,7 @@ La maqueta define el layout definitivo. En Fase 3 se adapta a FSE **sin rediseñ
 | `/practica/index.html` | `templates/page-practica.html` |
 | `/eventos/index.html` | `templates/archive-event.html` (no Page slug `eventos`) |
 | `/galeria/index.html` | `templates/page-galeria.html` — bloque Gutenberg; `gallery.js` no se migra (ADR 0021) |
-| `/contacto/index.html` | `templates/page-contacto.html` + Contact Form 7 (ADR 0026), gated ADR 0039 |
+| `/contacto/index.html` | `templates/page-contacto.html` + Contact Form 7 (ADR 0026), elegible en el corte (ADR 0041) |
 | `/privacidad/index.html` | `templates/page.html` (fallback; ADR 0039) |
 | `/donaciones/index.html` | `templates/page-donaciones.html` |
 | `/blog/index.html` | `templates/home.html` |
@@ -449,7 +455,7 @@ Orden en `.audit/implementation/waves.md`:
 6. **WAVE-6** — Pre-render galería (0010)
 
 **Arranque histórico recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
-La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.3.
+La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.4.
 
 Implementar en sesiones separadas; cada tarea incluye criterios de aceptación, validación y rollback. Respetar `conflict-map.md` (no editar `.htaccess`, `contacto/index.html` ni las 14 páginas HTML en paralelo dentro del mismo conflict group).
 
@@ -605,8 +611,12 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
 7. **WU-07/WU-08:** Pages, posts, autores, media, templates, galería, comportamiento,
    accesibilidad, SEO y redirects. Template ≠ objeto editorial.
 8. **WU-09:** implementar y probar Contact Form 7 localmente y en staging con datos sintéticos.
-   Mantenerlo ausente o deshabilitado en producción hasta cumplir el gate de privacidad
-   (ADR 0026/0039).
+   Elegible en producción al corte (ADR 0041 / OWN-018). Actualizar en WordPress los párrafos del
+   formulario en `/privacidad`. La revisión legal no es prerrequisito.
+8b. **BUG-001 (justo antes de WU-10) — cerrado 2026-08-31:** el `.ics` de Círculos incluye
+   **todas las sesiones** (`event_calendar_dates`), un VEVENT con UID propio cada una; diálogo y
+   archivo comparten fuente, y como un enlace profundo lleva una sola entrada, el diálogo nombra
+   la próxima sesión y lo dice. El `.ics` estático de la sola bienvenida no se copió ni se tocó.
 9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
    solo con autorización expresa (OWN-005).
 10. **Corte final:** ejecutar
@@ -671,10 +681,10 @@ La automatización de despliegue permanece pospuesta hasta que la estructura est
 ## Prioridad de páginas
 
 1. **Inicio** — Hero, meditación semanal, caminos de participación
-2. **Contacto** — Formulario (markup listo; **envío pendiente** — FUNC-001) + bloque Redes sociales
+2. **Contacto** — Formulario (markup listo; **envío pendiente en el estático** — FUNC-001) + bloque Redes sociales
    junto con WhatsApp/correo. Respaldo: `docs/archive/contacto-formulario-estatico/`. En WordPress: Contact
-   Form 7 (ADR 0026), probado localmente/staging; su publicación en producción queda sujeta al gate
-   de privacidad ADR 0039 (actualizar el aviso: el texto actual dice que el formulario no envía). Nunca un handler del theme.
+   Form 7 (ADR 0026), elegible en el corte (ADR 0041). Actualizar en WP los párrafos del formulario en
+   `/privacidad` (OWN-018). Nunca un handler del theme.
 3. **La comunidad** — Quiénes somos, fundador
 4. **Práctica** — Meditación, mantras (audio), talleres, retiros y videos. El PDF de recitación está
    retirado (OWN-002).
@@ -731,7 +741,7 @@ La implementación y la documentación general del proyecto deben mantenerse ali
 - [~] Descargas `.ics`: dos archivos existen en el estático; el destino WordPress genera solo las
   vigentes y devuelve 410 para finalizadas (OWN-009/012/013)
 - [ ] HSTS — **aplazado** hasta después del corte WordPress (ADR 0020). Los ítems ADR 0018 Fase 1/2 quedan históricos en lo operativo.
-- [x] Política de privacidad publicada (ADR 0039, provisional). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente. Revisión legal y CF7 siguen abiertos.
+- [x] Política de privacidad publicada (ADR 0039, provisional). GA4 descartado (ADR 0019); no hay consentimiento de analítica pendiente. CF7 elegible en el corte (ADR 0041); revisión legal = trabajo posterior, no gate.
 - [ ] Google Search Console: sitemap enviado; solicitar indexación de URLs modificadas tras cada despliegue relevante
 
 ---

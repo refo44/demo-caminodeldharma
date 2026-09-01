@@ -35,7 +35,7 @@ Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escr
 | Template | Archivo en `templates/` (doc 12) |
 | JS | Scripts de la maqueta o sustitución documentada |
 | Assets | Imágenes, audio, PDF, `.ics`, fuentes relevantes |
-| Import strategy | Vacío hasta ADR 0033 implementado |
+| Import strategy | Implementada en WU-06 (ADR 0033): payload `migration/payload.json` + `wp cdd-core migrate validate|plan|import|verify` y `seed` de medios; create-missing-only, dry-run por defecto |
 | QA | Qué prueba cierra la fila |
 
 Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada` | `No aplica` | `Excepción ADR`.
@@ -57,8 +57,8 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 | `/galeria/2021` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/2021` | taxonomía | — | 5 fotos | PLANNED; **noindex** | 200; noindex |
 | `/galeria/general` *(nueva)* | JSON álbum | término | `gallery_album` | `/galeria/general` | taxonomía | — | 25 fotos | PLANNED; **noindex** al corte | 200; noindex |
 | `/donaciones` | `donaciones/index.html` | HTML live (banco, NIT) | Page `donaciones` | `/donaciones` | `templates/page-donaciones.html` | `main.js` | — | Page institucional | 200; datos bancarios; no hardcode solo en theme |
-| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | Page + Contact Form 7 (ADR 0026) **después** de actualizar `/privacidad` (ADR 0039) | 200; envío real en staging; WhatsApp/correo; a11y labels |
-| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | Importar el HTML live; no reescribir. Seguir marcado provisional hasta asesoría legal | 200; enlace footer en todas las páginas |
+| `/contacto` | `contacto/index.html` | HTML live + UI copy 09 | Page `contacto` | `/contacto` | `templates/page-contacto.html` | `main.js`; form static `action="#"` **no envía** | Imagen contacto | **WU-09 hecho:** el `<form action="#">` es el bloque `camino-del-dharma/contacto-formulario`, que rinde Contact Form 7 (definición y correo en el plugin) o, con CF7 apagado, los canales WhatsApp/correo | 200; DOM publicado verificado (labels, ids, `name`, `autocomplete`, iconos, botón); validación probada con datos sintéticos; **envío real solo en staging** |
+| `/privacidad` | `privacidad/index.html` | HTML live (ADR 0039); aviso **provisional** | Page `privacidad` | `/privacidad` | `templates/page.html` | `main.js` | — | **WU-09 hecho:** delta field-scoped ADR 0041 aplicado solo en WordPress (recuadro, viñeta del resumen, §2.2, disparador de §8, fecha). Disclaimer provisional conservado; el resto del aviso sin tocar; el estático intacto | 200; enlace footer; `diff` de 4 hunks, ninguno fuera de alcance; §2.3–§2.6 idénticas |
 
 `templates/page-*.html` **no** crea la Page. Ver ADR 0032 / 0033.
 
@@ -71,7 +71,7 @@ No crear Page con slug `eventos`.
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
 |---|---|---|---|---|---|---|---|---|---|
 | `/eventos` | `eventos/index.html` | Eventos vigentes + archivo en HTML; calendario del mes | Archive CPT `event` | `/eventos` | `templates/archive-event.html` | `main.js`, `share.js`, `calendar.js` (diálogo + tooltips grid) | Carteles; bloque calendario (datos desde `camino-del-dharma-core`) | Import CPT, no Page; calendario no es plugin de terceros | 200; vigentes vs finalizados; grid + hint táctil; JSON-LD Event; menú condicional |
-| `/eventos/circulos-de-presencia-consciente` | `eventos/circulos-de-presencia-consciente/index.html` | Ficha + `eventos/ical/circulos-de-presencia-consciente.ics` | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js`, `calendar.js` | Cartel; `.ics` | CPT create-missing-only | 200; share; añadir calendario; `.ics` 200; JSON-LD |
+| `/eventos/circulos-de-presencia-consciente` | `eventos/circulos-de-presencia-consciente/index.html` | Ficha + `eventos/ical/circulos-de-presencia-consciente.ics` (estático: un VEVENT de la bienvenida) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js`, `calendar.js` | Cartel; `.ics` **generado con las 10 sesiones** (BUG-001) | CPT create-missing-only | 200; share; añadir calendario (enlace profundo = próxima sesión + nota); `.ics` 200 con 10 VEVENT y 10 UID únicos; JSON-LD |
 | `/eventos/encuentro-nacional-2026` | `eventos/encuentro-nacional-2026/index.html` | Ficha; `.ics` en disco **RETIRE** (OWN-012) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share; **sin** calendario; **sin** `.ics`; JSON-LD `EventCompleted` |
 | `/eventos/pausa-profunda-cali` | `eventos/pausa-profunda-cali/index.html` | Ficha (sin `.ics` en repo al auditar) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share |
 
@@ -122,6 +122,37 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 
 ---
 
+## Estado de implementación WU-08A (2026-08-31)
+
+Las filas de arriba conservan el inventario; este bloque registra el avance por dimensión
+tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08A):
+
+| Dimensión | Estado | Detalle |
+|---|---|---|
+| CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) + WU-08A (`practica` con audio nativo; copy de compartir sembrado como meta) |
+| PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 13 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
+| ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08B |
+| BEHAVIOR | **Parcial** | Nav móvil, tooltips del calendario, **diálogo Compartir, diálogo Añadir al calendario y audio de mantras nativo** portados (WU-08A); formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
+| OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción); staging pendiente (OWN-005) |
+
+Sustituciones static→WordPress registradas en WU-07 (§9.1 del master prompt; detalle y
+remedios en `.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
+
+1. Eventos finalizados en tarjeta compacta (doc 03 §3 «Densidad») en vez de la card completa.
+2. Fecha de evento generada desde `event_date`/`event_end` (reglas calibradas; filas `Hora`
+   y `Aporte` de la maqueta no viven en el modelo — remedio: contenido del evento wp-admin).
+3. Card vigente del listado = intro del single + meta + CTA (label «Preinscribirme»).
+4. Excerpt del listado del blog = deck editorial; tiempo de lectura calculado (round /200).
+5. Byline «Por …» enlazada a `/author/{slug}` (ADR 0037; el estático no enlaza).
+6. `<picture>`/WebP/miniaturas hechas a mano no migran: la biblioteca sirve JPG + derivados.
+7. `event_modality` es texto libre (copy publicado descriptivo; sustituye el select doc 03).
+8. Galería: bloque Gutenberg nativo + lightbox, sin paginación (ADR 0021/0036, OWN-011);
+   headings de álbum enlazan al término (opcional ADR 0036).
+9. Copy nuevo mínimo OWN-016 en `/comunidad`: «Entradas del Maestro Zheng Gong en el blog» /
+   «Entradas de la Comunidad en el blog».
+
+---
+
 ## Redirects y restos (ROUTING / OPERATIONS)
 
 Portar desde `.htaccess` actual; no son Pages.
@@ -162,4 +193,73 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 
 ---
 
-**Versión:** 1.1 · **Fecha:** 2026-08-30 · **Estado de filas:** inventario (Fase 3 no iniciada)
+## Estado de verificación WU-10 (2026-08-31)
+
+QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
+`docs/operations/wordpress-manual-deployment.md` v2.0. Evidencia detallada en
+`.audit/fase3-validation-matrix.md` § WU-10.
+
+### CONTENT
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Conteos por colección (11/10/2/2/3/35/81) | `verify` con `missing: []` — Pass (local) | Unverified | línea base OWN-007 |
+| Fila «Modalidad» en `/eventos/{slug}` | **ausente** en los 9 eventos con modalidad (entorno importado con payload previo; importador create-missing-only) — Fail (local) | debe aparecer en una importación limpia — Unverified | publicada |
+| Contenido demo del install | «Hello world!» desplaza una entrada real en el Inicio y `/blog` — Fail (local) | requisito duro: instalación limpia — Unverified | no aplica |
+| Copy institucional | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` idénticos (1.000) — Pass (local) | Unverified | línea base |
+| Delta `/privacidad` (ADR 0041) | aplicado solo en WordPress — Pass (local) | Unverified | estático intacto |
+| `.ics` de Círculos | 10 VEVENT — Pass (local) | Unverified | 1 VEVENT (delta aceptado) |
+
+### PRESENTATION
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | Unverified | no desborda |
+| 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | Unverified | **también 339 px** |
+| Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | depende de `wp language core install es_CO` — Unverified | no aplica |
+| Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | Unverified | comillas rectas |
+| Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |
+| Lector de pantalla real | no ejecutable | Unverified | — |
+
+### ROUTING
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| 41 rutas entrantes (200/301/404) | todas correctas — Pass (local) | Unverified | línea base |
+| Sin barra final (ADR 0008) | 301 en las 5 probadas — Pass (local) | Unverified | igual |
+| 404 real (no soft-404) | 5/5 — Pass (local) | Unverified | igual |
+| Archivos de usuario WP en 404 (ADR 0037) | `/author/admin`, `/?author=1` → 404 — Pass (local) | Unverified | no aplica |
+| Rutas `.ics` (200/410/404) | correctas — Pass (local) | Unverified | 200 solo el vigente |
+| Reglas del `.htaccess` desplegable | **no ejercitadas**: el contenedor usa el `.htaccess` por defecto | Unverified | vigentes |
+| Feeds `/feed`, `/blog/feed`, `/comments/feed` | **200** (fuera de docs/11) | Unverified | **404** |
+| Políticas noindex (álbum, `/author`, tag) | correctas — Pass (local) | Unverified | no aplica |
+
+### BEHAVIOR
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Diálogo de calendario + enlaces profundos | próxima sesión (3 sep 2026) y nota BUG-001 — Pass (local) | Unverified | rango único |
+| Escape cierra el diálogo | inconcluso (el panel de automatización consume la tecla); `cancel` no se previene | Unverified | — |
+| Formulario CF7 en `/contacto` | renderiza y postea — Pass (local) | Unverified | `action="#"` |
+| Entrega de correo a `caminodeldharma1@gmail.com` | `wp_mail()` **FALSE** (sin MTA, remitente inválido) | **Unverified — bloqueante de release** | no aplica |
+| Cookies anónimas | ninguna en 11 superficies — Pass (local) | Unverified | ninguna |
+| `sessionStorage` de `wp-emoji` | presente (el estático no usaba almacenamiento) | Unverified | ninguno |
+| Seguimiento / analítica | ausente — Pass (local) | Unverified | ausente |
+
+### OPERATIONS
+
+| Superficie | Local | Staging | Producción |
+| --- | --- | --- | --- |
+| Niveles 1–3 de QA | verdes contra `e377c46` — Pass (local) | Unverified | — |
+| `debug.log` tras navegación | 0 bytes — Pass (local) | Unverified | — |
+| Idempotencia del pipeline | `import`/`seed`/`convert`/`contact provision` no reescriben — Pass (local) | Unverified | — |
+| Runbook de staging | v2.0, acotado a theme + plugin + `.htaccess` — Pass (local) | Unverified | — |
+| Guard de producción | cubierto por wp-phpunit; no ejercitado contra un entorno `production` real | Unverified | — |
+| `blog_public` | `1` en local; staging **debe** ir a `0` | Unverified | — |
+| CI `test.yml` | **nunca ejecutado**: dispara solo en `main` y `pull_request`, y no hay PR | Unverified | — |
+| Sonar (plugin + theme) | no revisado | Unverified | — |
+
+---
+
+**Versión:** 1.5 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7 y el delta de `/privacidad` **implementados** en WU-09; **QA local completa en WU-10** (staging sin crear; entrega de correo pendiente)

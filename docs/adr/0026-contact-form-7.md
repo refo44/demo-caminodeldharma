@@ -42,11 +42,15 @@ confirmado **caminodeldharma1@gmail.com**.
   `Pass (local)` ≠ `Pass` (`docs/docker-wordpress-playbook.md` §4): la entrega efectiva a
   caminodeldharma1@gmail.com se valida en staging real antes de publicar.
 - Contact Form 7 es el primer plugin de terceros aprobado bajo la política de ADR 0025.
+- Elegibilidad de producción: [ADR 0041](0041-cf7-corte-sin-asesoria-legal.md). No espera
+  asesoría legal. En WordPress se actualizan los párrafos del formulario en `/privacidad`
+  (OWN-018). El HTML estático no se toca mientras el form siga sin enviar.
 
 ## Referencias
 
 - ADR [0025](0025-politica-plugins-terceros.md) — política que formaliza esta aprobación
 - ADR [0024](0024-plugin-dominio-theme-presentacion.md) — por qué no se reintrodujo un endpoint propio
+- ADR [0041](0041-cf7-corte-sin-asesoria-legal.md) — CF7 en el corte sin espera legal
 - `.audit/implementation/tasks/TASK-0003.md`
 - `.audit/decisions.md` — 2026-07-31 (decisión original y confirmación de buzón)
 - `docs/docker-wordpress-playbook.md` §4 — distinción `Pass (local)` vs `Pass`

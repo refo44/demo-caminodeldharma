@@ -1,0 +1,17 @@
+# Override for the EPHEMERAL wp-phpunit harness only. Used exclusively by
+# tools/run-phpunit-wp.sh together with docker-compose.yml under the separate
+# compose project cdd-wp-phpunit (own volumes, own port via tools/wp-tests.env,
+# `down -v` on exit). Not part of the developer environment (ADR 0023).
+#
+# Compose replaces list fields rather than merging them, so every base wpcli
+# volume must be repeated here alongside the repo mount the harness needs.
+services:
+  wpcli:
+    working_dir: /repo
+    volumes:
+      - wp_data:/var/www/html
+      - ./wordpress/wp-content/themes/camino-del-dharma:/var/www/html/wp-content/themes/camino-del-dharma
+      - ./wordpress/wp-content/plugins/camino-del-dharma-core:/var/www/html/wp-content/plugins/camino-del-dharma-core
+      - ./migration:/repo/migration:ro
+      - ./static:/repo/static:ro
+      - .:/repo

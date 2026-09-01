@@ -142,7 +142,8 @@ No basta con que exista `assets/js/main.js` encolado. Comprobar:
 - `data-*` attributes;
 - estado ARIA (`aria-expanded`, `aria-current`, `aria-hidden` del hint del calendario);
 - eventos (click, Escape, resize, primer/segundo toque en puntero grueso);
-- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, gated por ADR 0039);
+- formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, elegible
+  en el corte — ADR 0041; actualizar párrafos del formulario en `/privacidad`);
 - comportamiento dinámico (diálogo de calendario, `.ics`; galería: bloque Gutenberg, **sin**
   paginación numerada — OWN-011).
 
@@ -158,6 +159,12 @@ Inventario de scripts de la maqueta (CURRENT STATE):
 | `assets/js/gallery.js` | `/galeria` | Paginación por álbum (12 imágenes), query params, JSON en `#gallery-data` / `#gallery-albums-data` |
 | `assets/js/share.js` | singles de eventos y de blog | Diálogo «Compartir» (`[data-share-title]`) |
 | `assets/js/calendar.js` | `/eventos` y ficha de evento vigente | Diálogo «Añadir al calendario» + tooltips/toque del grid `.eventos-calendar-grid` |
+
+Estado del porte (WU-07/WU-08A): `main.js` y `calendar.js` viven ya en el theme —
+`assets/js/main.js`, `assets/js/calendar-tooltips.js` y `assets/js/calendar-dialog.js`, este
+último la mitad del diálogo—, y `share.js` se portó literal. Los tres se encolan solo en las
+vistas cuyo bloque los necesita. El copy de los mensajes de compartir viaja como meta editable
+(`share_whatsapp`/`share_x`/`share_threads`), no como HTML congelado.
 
 CSS: fuente `assets/css/main.css` → servido `assets/css/main.min.css` (`npm run build:css`). En
 WordPress: `theme.json` + hoja complementaria (ADR 0029). La maqueta estática sigue con un solo

@@ -1,5 +1,16 @@
 # Decision log
 
+- 2026-09-01 Decisión del propietario, formalizada en **ADR 0042** / **OWN-019**: las filas
+  `META-001`–`META-005` (auditoría Gutenberg + metabox clásico) **no** son bugs de corte ni
+  cola de pre-staging. Restricciones para UI wp-admin futura: panel nativo o clásico con sync
+  REST; `custom-fields` en `blog_author` solo al registrar meta; no relajar el guard de autores.
+  Backlog v1.25.
+- 2026-08-31 Decisión del propietario, formalizada en **ADR 0041** / **OWN-018**: Contact Form 7
+  **entra al corte** sin esperar asesoría legal. El disclaimer publicado en `/privacidad` basta
+  para lanzar. PRIV-001b queda como trabajo jurídico posterior, no gate de WU-09 ni del corte.
+  En WordPress se actualizan solo los párrafos del formulario (el HTML estático no se toca
+  mientras el form de producción siga `action="#"`). FABLE5 v2.4. TASK-0003: el gate legal se
+  retira; resta implementar CF7 en WU-09.
 - 2026-07-19 Phase 0: Workspace created; commit be896db2 matches expected_commit; full-scope audit proceeds.
 - 2026-07-19 Phase 1: Lighthouse/axe unavailable and not installed (audit-only rule); browser API + scripted checks substitute, recorded in limitations.
 - 2026-07-19 Phase 2: 13 URLs ≪ max_urls → full coverage instead of sampling; probes added for 404, entry points, machine files.

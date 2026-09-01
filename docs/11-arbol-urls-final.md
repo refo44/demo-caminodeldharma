@@ -59,6 +59,10 @@ Esta URL **sí existe** (no es 404), a diferencia de `event_city`/`event_type` q
 Se sirve `noindex, follow` por defecto hasta que el tag tenga volumen suficiente de contenido — ver
 **ADR 0031** y `docs/03-wordpress-content-model.md` §4.
 
+Implementado en WU-08B: el importador fija `tag_base` = `blog/tag` (sin ese ajuste WordPress
+publicaría `/tag/{slug}`, fuera de este árbol) y la plantilla `templates/archive.html` da al
+archivo su propio `h1` (docs/19 §9).
+
 ---
 
 ## 4. Árbol completo

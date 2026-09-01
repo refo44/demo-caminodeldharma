@@ -111,10 +111,12 @@ cambia hasta el corte). El archivo `/author` con dos fichas es delgado → noind
 
 **Trabajo futuro:** plugin (CPT, meta, metabox, JS, guardas); semilla de 2 fichas; asignar
 las 2 entradas; templates `single-blog_author.html` / archivo; no implementar en esta
-sesión.
+sesión. La UI de asignación en Gutenberg queda acotada por ADR
+[0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) (panel nativo o clásico **con**
+sync REST; el guard no se relaja).
 
 ## Referencias
 
-- OWN-010 · ADR [0008](0008-urls-estables-desde-la-maqueta.md), [0024](0024-plugin-dominio-theme-presentacion.md), [0025](0025-politica-plugins-terceros.md), [0031](0031-tags-blog-noindex-hasta-volumen.md)
+- OWN-010 · ADR [0008](0008-urls-estables-desde-la-maqueta.md), [0024](0024-plugin-dominio-theme-presentacion.md), [0025](0025-politica-plugins-terceros.md), [0031](0031-tags-blog-noindex-hasta-volumen.md), [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md)
 - [`docs/15-assets-strategy.md`](../15-assets-strategy.md) §12.4
 - [`docs/redirect-ledger.md`](../redirect-ledger.md)

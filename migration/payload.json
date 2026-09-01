@@ -1,0 +1,1888 @@
+{
+    "schema": "cdd-migration/1",
+    "source": {
+        "version": "1.0.35",
+        "commit": "bfb6dc03cd2403782b7a48eab572905003f48eba",
+        "root": "static"
+    },
+    "counts": {
+        "pages": 11,
+        "events": 10,
+        "posts": 2,
+        "blog_authors": 2,
+        "gallery_albums": 3,
+        "gallery_images": 35,
+        "media": 81,
+        "video_embeds": 5
+    },
+    "pages": [
+        {
+            "slug": "inicio",
+            "title": "Camino del Dharma",
+            "seo": {
+                "title": "Budismo Chan y Tierra Pura en Colombia | Camino del Dharma",
+                "description": "Comunidad budista en Colombia dedicada al budismo Chan y Tierra Pura. Meditación, estudio, cursos y retiros con Camino del Dharma.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista, cursos budistas",
+                "og_title": "Budismo Chan y Tierra Pura en Colombia | Camino del Dharma",
+                "og_description": "Comunidad budista en Colombia dedicada al budismo Chan y Tierra Pura. Meditación, estudio, cursos y retiros.",
+                "related": "https://caminodeldharma.org/eventos/circulos-de-presencia-consciente"
+            },
+            "content_html": "<h1 class=\"site-title\">Camino del Dharma</h1>\n    <p class=\"site-tagline read-width center-block\">Comunidad Buddhista Chan y Tierra Pura en Colombia</p>\n    <p class=\"site-intro-link text-center\"><a href=\"/comunidad\">Conoce nuestra comunidad budista en Colombia</a></p>\n    <section class=\"hero section-gap\" aria-label=\"Presentación\">\n      <figure class=\"hero-figure\" aria-hidden=\"true\">\n        <picture>\n          <source srcset=\"assets/images/inicio/hero-estatua-buda-montanas.webp\" type=\"image/webp\">\n          <img src=\"/assets/images/inicio/hero-estatua-buda-montanas.jpg\" alt=\"\" width=\"626\" height=\"417\" fetchpriority=\"high\" decoding=\"async\">\n        </source></picture>\n      </figure>\n      <h2 class=\"hero-title\">Transforma tu vida.</h2>\n      <p class=\"hero-lead read-width center-block\">Asume los desafíos de la vida cotidiana mediante la práctica buddhista.</p>\n      <a href=\"/contacto\" class=\"btn btn-primary\">\n        <svg class=\"lucide-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"></path></svg>\n        Practica con nosotros</a>\n    </section>\n\n    <section class=\"section-gap home-community\">\n      <!-- Home event: Círculos de Presencia Consciente has event_featured. Only vigente events are eligible; featured+finished is ignored. Prefer featured among vigentes; else soonest start. A newer vigente does not replace this note while event_featured remains true. Omit the aside if none are vigente. -->\n      <div class=\"home-community-row\">\n        <div class=\"home-community-copy\">\n          <h2>Un poco de nuestra comunidad</h2>\n          <p>Somos una comunidad de aprendizaje y práctica inspirada en el Buddhismo, fundada en Colombia en 2019, con presencia en distintas ciudades del país y expansión hacia Latinoamérica. Acompañamos a personas que desean comprender su mente, cuidar sus emociones y vivir con mayor claridad, compasión y equilibrio en su vida cotidiana.</p>\n          <p>Practicamos juntos porque sabemos que la transformación interior no ocurre en soledad y que, al cuidar nuestra experiencia interna, también contribuimos a transformar el mundo que habitamos.</p>\n          <p><a href=\"/comunidad\">Conocer la comunidad</a></p>\n        </div>\n        <aside class=\"home-featured-event\" aria-labelledby=\"home-featured-event-title\" data-event-status=\"vigente\" data-event-featured=\"true\">\n          <p class=\"home-featured-event-kicker\">Próximo evento · Curso</p>\n          <a href=\"/eventos/circulos-de-presencia-consciente\" class=\"evento-figure-link\" tabindex=\"-1\" aria-hidden=\"true\">\n            <img class=\"home-featured-event-thumb\" src=\"/assets/images/eventos/evento-circulos-de-presencia-consciente.jpg\" alt=\"\" width=\"1024\" height=\"1024\" loading=\"lazy\" decoding=\"async\">\n          </a>\n          <h3 id=\"home-featured-event-title\" class=\"home-featured-event-title\"><a href=\"/eventos/circulos-de-presencia-consciente\">Círculos de Presencia Consciente</a></h3>\n          <p class=\"home-featured-event-meta\">Septiembre – octubre 2026<br>Bogotá y Cali</p>\n          <p class=\"home-featured-event-actions\"><a href=\"/eventos/circulos-de-presencia-consciente\">Ver evento</a></p>\n        </aside>\n      </div>\n      <div class=\"home-community-figures read-width\">\n        <figure class=\"section-figure\">\n          <picture>\n            <source srcset=\"assets/images/inicio/inicio-encuentro-comunidad-768.webp 768w,\n                      assets/images/inicio/inicio-encuentro-comunidad-1280.webp 1280w\" sizes=\"(min-width: 680px) 620px, calc(100vw - 3rem)\" type=\"image/webp\">\n            <img src=\"/assets/images/inicio/inicio-encuentro-comunidad.jpg\" alt=\"Encuentro de la comunidad Camino del Dharma\" width=\"800\" height=\"534\" loading=\"lazy\" decoding=\"async\">\n          </source></picture>\n        </figure>\n        <figure class=\"section-figure\">\n          <picture>\n            <source srcset=\"assets/images/inicio/inicio-ambiente.webp\" type=\"image/webp\">\n            <img src=\"/assets/images/inicio/inicio-ambiente.jpg\" alt=\"Ambiente de práctica\" width=\"417\" height=\"626\" loading=\"lazy\" decoding=\"async\">\n          </source></picture>\n        </figure>\n        <figure class=\"section-figure\">\n          <picture>\n            <source srcset=\"assets/images/inicio/inicio-kuan-yin-768.webp 768w,\n                      assets/images/inicio/inicio-kuan-yin.webp 945w\" sizes=\"(min-width: 680px) 620px, calc(100vw - 3rem)\" type=\"image/webp\">\n            <img src=\"/assets/images/inicio/inicio-kuan-yin.jpg\" alt=\"Kuan Yin — compasión\" width=\"945\" height=\"945\" loading=\"lazy\" decoding=\"async\">\n          </source></picture>\n        </figure>\n      </div>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3\"></path><path d=\"M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4\"></path><path d=\"M5 21h14\"></path></svg>\n      </div>\n    </section>\n\n    <section class=\"section-gap\">\n      <h2>Cómo practicamos</h2>\n      <div class=\"grid-auto grid-three\">\n        <article class=\"card\">\n          <h3>Estudio consciente</h3>\n          <p>Exploramos las enseñanzas buddhistas como una guía práctica para comprender la mente y la experiencia humana de manera clara, cercana y accesible.</p>\n        </article>\n        <article class=\"card\">\n          <h3>Práctica vivencial</h3>\n          <p>La meditación, la atención plena y la recitación consciente se cultivan como experiencias directas, encarnadas en el cuerpo y en la vida, no como ideas abstractas.</p>\n        </article>\n        <article class=\"card\">\n          <h3>Vida cotidiana</h3>\n          <p>La práctica no se separa de la vida. El trabajo, las relaciones, las decisiones y el descanso forman parte del camino de despertar.</p>\n        </article>\n      </div>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco lucide-icon--deco-lg\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"></path><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"></path></svg>\n      </div>\n    </section>\n\n    <section class=\"meditation-block section-gap\">\n      <div class=\"read-width\">\n        <h2>Meditación semanal en línea</h2>\n        <figure class=\"section-figure\">\n          <img src=\"/assets/images/practica/meditacion-semanal-en-linea.jpg\" alt=\"Espacio de meditación con cojines y portátil preparado para la práctica en línea\" width=\"1024\" height=\"682\" loading=\"lazy\">\n        </figure>\n        <p>La meditación es el corazón de nuestra comunidad.</p>\n        <p>Cada semana abrimos un espacio de práctica para pausar, respirar y cultivar presencia en medio de la vida diaria. Es un encuentro abierto, pensado tanto para quienes se inician como para quienes desean sostener una práctica continua.</p>\n        <p>No se requiere experiencia previa.</p>\n        <ul>\n          <li><strong>Todos los lunes</strong> 7:30 p. m. (hora Colombia)</li>\n          <li><strong>Modalidad:</strong> virtual (Zoom)</li>\n        </ul>\n        <a href=\"https://wa.me/573206627608\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Participar</a>\n          <p><a href=\"/practica/meditacion-semanal-en-linea\">Más sobre la meditación semanal en línea</a></p>\n      </div>\n    </section>\n\n    <section class=\"section-gap\">\n      <h2>Caminos de participación</h2>\n      <p>El camino se recorre paso a paso, en comunidad.</p>\n      <div class=\"grid-auto\">\n        <article class=\"card\">\n          <h3>Iniciarse</h3>\n          <p>Un primer contacto con la práctica buddhista, desde la experiencia directa y el acompañamiento.</p>\n        </article>\n        <article class=\"card\">\n          <h3>Profundizar</h3>\n          <p>Talleres y retiros que permiten ampliar la comprensión, fortalecer la práctica y cuidar los procesos personales.</p>\n        </article>\n        <article class=\"card\">\n          <h3>Practicar en comunidad</h3>\n          <p>Vida compartida, celebraciones y encuentros que sostienen el camino y fortalecen los lazos humanos.</p>\n        </article>\n      </div>\n    </section>\n\n    <section class=\"section-gap home-blog\" aria-labelledby=\"home-blog-heading\">\n      <h2 id=\"home-blog-heading\">Del blog</h2>\n      <ul class=\"home-blog-grid\" role=\"list\">\n        <li>\n          <article class=\"home-blog-card\">\n            <a href=\"/blog/circulos-de-presencia-consciente\" class=\"home-blog-link\">\n              <span class=\"home-blog-thumb\">\n                <img src=\"/assets/images/blog/circulos-de-presencia-consciente.jpg\" alt=\"\" width=\"400\" height=\"300\" loading=\"lazy\">\n              </span>\n              <h3 class=\"home-blog-title\">Círculos de Presencia Consciente</h3>\n              <p class=\"home-blog-excerpt\">Un espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad. Por Comunidad Camino del Dharma.</p>\n            </a>\n          </article>\n        </li>\n        <li>\n          <article class=\"home-blog-card\">\n            <a href=\"/blog/sangha-refugio-hiperconexion\" class=\"home-blog-link\">\n              <span class=\"home-blog-thumb\">\n                <img src=\"/assets/images/blog/sangha-refugio-hiperconexion.jpg\" alt=\"\" width=\"400\" height=\"300\" loading=\"lazy\">\n              </span>\n              <h3 class=\"home-blog-title\">Estamos conectados, pero seguimos solos</h3>\n              <p class=\"home-blog-excerpt\">La Sangha como refugio en tiempos de hiperconexión. Por Zheng Gong.</p>\n            </a>\n          </article>\n        </li>\n      </ul>\n      <p class=\"home-blog-more text-center\">\n        <a href=\"/blog\">Ver todas las entradas</a>\n      </p>\n    </section>\n\n    <section class=\"section-gap home-videos\" aria-labelledby=\"home-videos-heading\">\n      <h2 id=\"home-videos-heading\">Videos y enseñanzas</h2>\n      <p class=\"home-videos-intro\">Conferencias y enseñanzas del Venerable Maestro Zheng Gong y la comunidad.</p>\n      <div class=\"home-videos-grid\">\n        <div class=\"media-block\">\n          <div class=\"embed-wrap\">\n            <iframe src=\"https://www.youtube-nocookie.com/embed/xbAUEmf_Wks\" title=\"Encontrando la Plenitud y la Consciencia en la Vida\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\n          </div>\n          <p class=\"video-caption\">Encontrando la Plenitud y la Consciencia en la Vida</p>\n        </div>\n        <div class=\"media-block\">\n          <div class=\"embed-wrap\">\n            <iframe src=\"https://www.youtube-nocookie.com/embed/JxyHdXhW_nc\" title=\"La sabiduría del no hacer\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\n          </div>\n          <p class=\"video-caption\">La sabiduría del no hacer</p>\n        </div>\n      </div>\n      <p class=\"home-videos-more text-center\">\n        <a href=\"/practica/videos\">Ver más videos</a>\n      </p>\n    </section>\n\n    <section class=\"section-gap\">\n      <h2>Galería comunitaria</h2>\n      <p>Algunos momentos de nuestra práctica y encuentros.</p>\n      <div class=\"gallery-row\">\n        <picture>\n          <source srcset=\"assets/images/galeria/thumbs/galeria-01.webp\" type=\"image/webp\">\n          <img src=\"/assets/images/galeria/thumbs/galeria-01.jpg\" alt=\"Grupo numeroso meditando sentado en el suelo de un gimnasio, guiado por un monje con túnica naranja.\" width=\"600\" height=\"600\" loading=\"lazy\" decoding=\"async\">\n        </source></picture>\n        <picture>\n          <source srcset=\"assets/images/galeria/thumbs/galeria-02.webp\" type=\"image/webp\">\n          <img src=\"/assets/images/galeria/thumbs/galeria-02.jpg\" alt=\"Grupo de practicantes de pie y sentados en un salón, con las manos juntas en gesto de meditación, junto a un monje.\" width=\"600\" height=\"600\" loading=\"lazy\" decoding=\"async\">\n        </source></picture>\n        <picture>\n          <source srcset=\"assets/images/galeria/thumbs/galeria-03.webp\" type=\"image/webp\">\n          <img src=\"/assets/images/galeria/thumbs/galeria-03.jpg\" alt=\"Grupo sentado en forma de U sobre un piso de madera, frente a un monje con túnica naranja en un salón de paredes de ladrillo.\" width=\"600\" height=\"600\" loading=\"lazy\" decoding=\"async\">\n        </source></picture>\n      </div>\n      <p><a href=\"/galeria\">Ver galería completa</a></p>\n    </section>\n\n    <section class=\"section-gap text-center\">\n      <p><a href=\"/contacto\" class=\"btn btn-primary\">Practica con nosotros</a></p>\n    </section>",
+            "source_path": "static/index.html",
+            "parent": "",
+            "_source_key": "page:inicio",
+            "_source_hash": "772cfef055d7eac651be63356f1e1e45aa958e1a81b649d8f4d28c1f79568750"
+        },
+        {
+            "slug": "comunidad",
+            "title": "La comunidad",
+            "seo": {
+                "title": "Comunidad Budista en Colombia | Camino del Dharma",
+                "description": "Conoce Camino del Dharma, una comunidad budista en Colombia dedicada a la práctica del budismo Chan y Tierra Pura.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Comunidad Budista en Colombia | Camino del Dharma",
+                "og_description": "Conoce Camino del Dharma, una comunidad budista en Colombia dedicada a la práctica del budismo Chan y Tierra Pura.",
+                "related": ""
+            },
+            "content_html": "<h1>La comunidad</h1>\n\n    <section class=\"read-width section-gap\">\n      <h2>Quiénes somos</h2>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/comunidad-linaje/comunidad-quienes-somos.jpg\" alt=\"Comunidad Buddhista Camino del Dharma\" width=\"800\" height=\"600\">\n      </figure>\n      <p>La Comunidad Buddhista Camino del Dharma es un espacio de aprendizaje, práctica y acompañamiento inspirado en la sabiduría buddhista. Fundada en Colombia en 2019, nace del deseo de ofrecer condiciones cuidadas para que las personas puedan comprender su mente, relacionarse de manera más amable con su experiencia interior y vivir con mayor libertad y sentido, y hoy acompaña a practicantes de distintas ciudades de Colombia.</p>\n      <p>Entendemos el Buddhismo como una ciencia de la mente y una vía de transformación personal y colectiva, profundamente conectada con la vida cotidiana y con los desafíos humanos del mundo contemporáneo.</p>\n      <p><a href=\"/linaje\">Conoce nuestro linaje Chan y Tierra Pura</a></p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"></path><path d=\"M16 3.128a4 4 0 0 1 0 7.744\"></path><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"></path><circle cx=\"9\" cy=\"7\" r=\"4\"></circle></svg>\n      </div>\n    </section>\n\n    <section class=\"founder-block read-width section-gap\">\n      <h2>Nuestro fundador</h2>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/fundador/foto-biografia-fundador.jpg\" alt=\"Venerable Maestro Zheng Gong\" width=\"600\" height=\"800\">\n      </figure>\n      <h3>Venerable Maestro Zheng Gong</h3>\n      <p>El Venerable Maestro Zheng Gong es un maestro buddhista contemporáneo cuya enseñanza se caracteriza por integrar la sabiduría ancestral del Buddhismo con los desafíos reales de la vida moderna. Su camino espiritual no surge del aislamiento ni de la idealización, sino de una experiencia profunda y directa con el sufrimiento humano, que lo llevó a cultivar la paz interior, la compasión y la claridad de la mente como formas concretas de transformación.</p>\n      <p>A partir de vivencias personales marcadas por la adversidad emocional y existencial, encontró en el Buddhismo no solo un refugio espiritual, sino una vía práctica para comprender la mente, sanar el corazón y habitar la vida cotidiana con mayor conciencia. Desde entonces, su enseñanza se ha orientado a acompañar a otras personas en procesos reales de transformación interior, sin separar la práctica espiritual de la vida familiar, social y profesional.</p>\n      <p>Cuenta con una sólida formación en las tradiciones Buddhistas Chan y Tierra Pura, las cuales integra de manera viva y complementaria, poniendo énfasis tanto en la meditación y la experiencia directa como en la recitación consciente, la ética del corazón y la compasión encarnada. Esta integración refleja una comprensión profunda del Buddhismo como una práctica completa que involucra mente, cuerpo y relación con los demás.</p>\n      <p>Además de su formación espiritual, el Venerable Maestro Zheng Gong es Doctor en Educación, lo que le ha permitido desarrollar un enfoque pedagógico claro, cuidadoso y accesible. Su manera de enseñar se distingue por un lenguaje cercano, una escucha atenta y una profunda sensibilidad hacia los contextos culturales y humanos de Colombia y América Latina.</p>\n      <p>Como Abad y Presidente de la Comunidad Buddhista Camino del Dharma, ha impulsado la creación de un espacio de aprendizaje y práctica orientado a personas que buscan vivir con mayor equilibrio, sentido y responsabilidad ética en el mundo contemporáneo. Bajo su guía, la comunidad ha desarrollado procesos de meditación, retiros, talleres y encuentros que han acompañado a personas de diversas trayectorias vitales, dentro y fuera de Colombia.</p>\n      <p>Ha compartido el Dharma en espacios académicos, comunitarios y culturales, y ha representado a Colombia en encuentros y congresos internacionales en Asia y otros contextos, promoviendo una visión del Buddhismo comprometida con la vida, el cuidado de la experiencia humana y la construcción de una cultura de paz.</p>\n      <p>Su enseñanza parte de una convicción sencilla y profunda: la práctica no consiste en apartarse del mundo, sino en aprender a habitarlo con mayor claridad, compasión y responsabilidad. En ese sentido, su vida y su palabra invitan a una espiritualidad encarnada, humilde y profundamente humana.</p>\n      <p class=\"founder-blog-link\">Convencido de que el Buddhismo tiene mucho que aportar a los desafíos de nuestro tiempo, el Venerable Maestro Zheng Gong continúa desarrollando espacios de formación, diálogo, investigación y escritura, con el propósito de acercar la sabiduría del Dharma a la vida cotidiana y contribuir a la construcción de una sociedad más consciente, compasiva y en paz.</p>\n      <p><a href=\"/blog\">Visitar el blog</a></p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Experiencia y propósito</h2>\n      <p>Desarrollamos procesos de estudio y práctica del Buddhismo, así como acompañamiento individual y grupal, orientados a fortalecer una relación más consciente con la mente, las emociones y la vida cotidiana.</p>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/comunidad-linaje/comunidad-desarrollo-camino-dharma.jpg\" alt=\"Desarrollo de la comunidad Camino del Dharma\" width=\"800\" height=\"600\">\n      </figure>\n      <p>Promovemos una cultura de paz, no-violencia, educación consciente y transformación interior, entendiendo que el cuidado de la vida comienza por la manera en que cada persona se relaciona consigo misma y con los demás.</p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"></path><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"></path></svg>\n      </div>\n      <p><a href=\"/contacto\" class=\"btn btn-primary\">Practica con nosotros</a></p>\n    </section>",
+            "source_path": "static/comunidad/index.html",
+            "parent": "",
+            "_source_key": "page:comunidad",
+            "_source_hash": "d3daf0ca286a93da29aae9a2c80f0f0f17c0161ede636c34fa602e1786dbbd95"
+        },
+        {
+            "slug": "linaje",
+            "title": "El linaje",
+            "seo": {
+                "title": "Linaje Chan y Tierra Pura | Camino del Dharma",
+                "description": "budismo Mahāyāna en Colombia: linaje Chan y Tierra Pura de la Comunidad Buddhista Camino del Dharma.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Linaje Chan y Tierra Pura | Camino del Dharma",
+                "og_description": "budismo Mahāyāna en Colombia: linaje Chan y Tierra Pura de la Comunidad Buddhista Camino del Dharma.",
+                "related": ""
+            },
+            "content_html": "<h1>El linaje</h1>\n\n    <section class=\"read-width section-gap\">\n      <h2>Nuestra tradición</h2>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/comunidad-linaje/linaje-shakyamuni-origen-buddhismo.jpg\" alt=\"Buda Śākyamuni y origen del Budismo\" width=\"800\" height=\"600\">\n      </figure>\n      <p>La Comunidad Buddhista Camino del Dharma forma parte de la gran tradición del Buddhismo, cuyo origen se remonta al despertar del Buda Śākyamuni hace más de 2.600 años. Desde entonces el Dharma —las enseñanzas del Buda— ha sido preservado y transmitido de generación en generación como un camino para comprender el sufrimiento humano, cultivar la sabiduría y desarrollar una vida basada en la compasión.</p>\n      <p>Para nuestra comunidad, el linaje no representa únicamente una continuidad histórica. Es una transmisión viva que se expresa en la práctica, la ética, el estudio y la manera en que habitamos la vida cotidiana. Más que conservar una tradición del pasado, buscamos mantener vivo su sentido en el contexto contemporáneo.</p>\n      <h3>Sobre la palabra Buddhismo</h3>\n      <p>En esta comunidad escribimos <em>Buddhismo</em> y <em>buddhista</em> con doble d. Es una elección editorial vinculada al término sánscrito <em>buddha</em>. <em>Buddha</em>, o <em>Buda</em> en español, no es un nombre propio, sino un título o epíteto que significa «el despierto» o «quien ha despertado».</p>\n      <p>En español, <em>budismo</em> y <em>budista</em> son las formas más extendidas y nombran la misma tradición. La convivencia de estas grafías refleja la transmisión de las enseñanzas <em>buddhistas</em> entre distintas lenguas y culturas.</p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 7v14\"></path><path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\"></path></svg>\n      </div>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Mahāyāna: un camino de sabiduría y compasión</h2>\n      <p>Camino del Dharma se inscribe dentro de la rama Mahāyāna, una de las grandes corrientes del Budismo.</p>\n      <p>El Mahāyāna sitúa en el centro de la práctica el cultivo inseparable de la sabiduría y la compasión, entendiendo que el despertar personal cobra sentido cuando contribuye también al bienestar de los demás. Desde esta perspectiva, la práctica espiritual no implica alejarse del mundo, sino aprender a vivir en él con mayor claridad, responsabilidad y apertura hacia todos los seres.</p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Dos tradiciones, un mismo camino</h2>\n      <p>Nuestra comunidad integra de manera armónica dos grandes tradiciones desarrolladas históricamente en China: Chan y Tierra Pura.</p>\n      <p>Durante siglos, ambas escuelas han coexistido y se han enriquecido mutuamente dentro del Budismo chino. Mientras una enfatiza la experiencia directa mediante la meditación, la otra fortalece la confianza, la compasión y el cultivo del corazón. En Camino del Dharma entendemos estas dos vías como expresiones complementarias de una misma enseñanza.</p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Budismo Chan</h2>\n      <p class=\"linaje-tradition-focus\">Meditación · Atención consciente · Experiencia directa</p>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/comunidad-linaje/linaje-budismo-chan.jpg\" alt=\"Budismo Chan — meditación y experiencia directa\" width=\"800\" height=\"600\">\n      </figure>\n      <p>El Budismo Chan pone el énfasis en la experiencia directa del despertar mediante la meditación, la observación de la mente y la integración de la práctica en la vida cotidiana.</p>\n      <p>Nuestro linaje espiritual se remonta al Buda Śākyamuni, quien transmitió el Dharma a sus discípulos hace más de 2.600 años. A través de una sucesión ininterrumpida de maestras y maestros, estas enseñanzas llegaron a China con Bodhidharma (Da Mo), reconocido como el 28.º maestro del linaje budista en la India y el primer maestro del Budismo Chan en China.</p>\n      <p>Desde entonces, la transmisión del Dharma ha continuado preservando no solo las enseñanzas, sino también la experiencia viva de la práctica contemplativa.</p>\n      <h3>Algunos maestros representativos del linaje Chan</h3>\n      <p>A lo largo de más de dos milenios, el Dharma ha sido transmitido por innumerables maestras y maestros. Los siguientes nombres corresponden a algunas de las figuras que desempeñaron un papel decisivo en la consolidación de la tradición Chan.</p>\n      <ul class=\"linaje-masters\">\n        <li>Bodhidharma (菩提达摩 | Da Mo) († 536)</li>\n        <li>Huike (慧可) (487–593)</li>\n        <li>Sengcan (僧璨) (520–612)</li>\n        <li>Daoxin (道信) (580–651)</li>\n        <li>Hongren (弘忍) (600–674)</li>\n        <li>Huineng (慧能) (638–713)</li>\n      </ul>\n      <p>A partir del maestro Huineng, la tradición Chan continuó desarrollándose mediante numerosas generaciones de maestras y maestros, expandiéndose posteriormente hacia Japón, Corea y Vietnam, donde dio origen al Zen, el Seon y el Thiền, respectivamente.</p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Budismo Tierra Pura</h2>\n      <p class=\"linaje-tradition-focus\">Compasión · Recitación consciente · Transformación interior</p>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/comunidad-linaje/linaje-budismo-tierra-pura.jpg\" alt=\"Budismo Tierra Pura — recitación y compasión\" width=\"800\" height=\"600\">\n      </figure>\n      <p>La Escuela de la Tierra Pura constituye una de las grandes tradiciones del Budismo Mahāyāna y representa, junto con el Chan, uno de los pilares espirituales de nuestra comunidad.</p>\n      <p>Su práctica encuentra inspiración en el Buda Amitābha, símbolo de la luz infinita y la compasión ilimitada. Desde nuestra comprensión, la Tierra Pura puede entenderse también como el cultivo de un estado de conciencia caracterizado por la serenidad, la claridad, la confianza y la compasión. En este sentido, la recitación consciente del nombre de Amitābha constituye un método para desarrollar la atención, transformar la mente y despertar las cualidades más nobles del ser humano.</p>\n      <h3>Algunos maestros representativos del linaje de la Tierra Pura</h3>\n      <p>Diversas generaciones de maestras y maestros preservaron y desarrollaron esta tradición. Entre quienes desempeñaron un papel fundamental en su consolidación se encuentran:</p>\n      <ul class=\"linaje-masters\">\n        <li>Huiyuan (慧遠) (334–416)</li>\n        <li>Tanluan (曇鸞) (476–542)</li>\n        <li>Daochuo (道綽) (562–645)</li>\n        <li>Shandao (善導) (613–681)</li>\n      </ul>\n      <p>Desde China, esta tradición continuó expandiéndose hacia Japón, Corea y Vietnam, inspirando a millones de practicantes. Más allá de las diferencias culturales, todas estas escuelas comparten una misma convicción: la posibilidad de cultivar una mente libre del miedo, el odio y la confusión, haciendo de la propia existencia una auténtica Tierra Pura, aquí y ahora.</p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Una tradición viva para el mundo contemporáneo</h2>\n      <p>La Comunidad Buddhista Camino del Dharma integra las tradiciones Chan y Tierra Pura como expresiones complementarias de una misma enseñanza.</p>\n      <p>La meditación, la recitación consciente, el estudio del Dharma, la ética y el servicio constituyen prácticas que se fortalecen mutuamente y permiten desarrollar una vida más consciente, compasiva y equilibrada.</p>\n      <p>Hoy continuamos esta transmisión en Colombia y América Latina, promoviendo un Budismo fiel a sus raíces y, al mismo tiempo, abierto al diálogo con los desafíos del mundo contemporáneo. A través de la práctica comunitaria, la formación, los retiros, la educación y el compromiso con el bienestar colectivo, buscamos hacer del Dharma una experiencia viva, accesible y transformadora para todas las personas.</p>\n      <p><a href=\"/practica\">Conoce cómo practicamos la meditación</a> · <a href=\"/comunidad\">La comunidad</a></p>\n    </section>",
+            "source_path": "static/linaje/index.html",
+            "parent": "",
+            "_source_key": "page:linaje",
+            "_source_hash": "4da49ee8b1e52a3e47f9a07edda41c416908eeb20b6ad948ba23f94321933208"
+        },
+        {
+            "slug": "practica",
+            "title": "Práctica y actividades",
+            "seo": {
+                "title": "Meditación Budista y Práctica Chan | Camino del Dharma",
+                "description": "Meditación budista semanal, talleres, retiros y vida comunitaria con Camino del Dharma en Colombia.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Meditación Budista y Práctica Chan | Camino del Dharma",
+                "og_description": "Meditación budista semanal, talleres, retiros y vida comunitaria con Camino del Dharma en Colombia.",
+                "related": ""
+            },
+            "content_html": "<h1>Práctica y actividades</h1>\n\n    <section class=\"read-width section-gap\">\n      <h2>Aprende en la práctica</h2>\n      <p>Alégrate, porque todo lugar es aquí y todo momento es ahora.</p>\n      <p>En la Comunidad Buddhista Camino del Dharma comprendemos la práctica como una experiencia viva, integrada a la vida cotidiana. No se trata de apartarse del mundo, sino de aprender a habitarlo con mayor presencia, claridad y cuidado.</p>\n      <p>Nuestros espacios están orientados a acompañar procesos reales de transformación interior mediante la meditación, la atención plena, la reflexión consciente y la vida comunitaria.</p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\"></path></svg>\n      </div>\n    </section>\n\n    <section class=\"meditation-block section-gap\">\n      <div class=\"read-width\">\n        <h2>Meditación semanal en línea</h2>\n        <figure class=\"section-figure\">\n          <img src=\"/assets/images/practica/meditacion-semanal-en-linea.jpg\" alt=\"Espacio de meditación con cojines y portátil preparado para la práctica en línea\" width=\"1024\" height=\"682\" loading=\"lazy\">\n        </figure>\n        <p>La meditación es el corazón de nuestra comunidad y el punto de encuentro más constante de nuestra práctica.</p>\n        <p>Cada semana ofrecemos un espacio abierto para pausar, respirar y cultivar presencia en medio de las exigencias de la vida diaria. La práctica es guiada y accesible, pensada tanto para quienes se inician como para quienes desean sostener una práctica continua en el tiempo.</p>\n        <p>No se requiere experiencia previa.</p>\n        <ul>\n          <li><strong>Todos los lunes</strong> 7:30 p. m. (hora Colombia)</li>\n          <li><strong>Modalidad:</strong> virtual (Zoom)</li>\n        </ul>\n        <a href=\"https://wa.me/573206627608\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Participar</a>\n        <p class=\"read-width\"><a href=\"/practica/meditacion-semanal-en-linea\">Más sobre la meditación semanal en línea</a></p>\n      </div>\n    </section>\n\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z\"></path><path d=\"M7 21h10\"></path><path d=\"M19.5 12 22 6\"></path><path d=\"M16.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.73 1.62\"></path><path d=\"M11.25 3c.27.1.8.53.74 1.36-.05.83-.93 1.2-.98 2.02-.06.78.33 1.24.72 1.62\"></path><path d=\"M6.25 3c.27.1.8.53.75 1.36-.06.83-.93 1.2-1 2.02-.05.78.34 1.24.74 1.62\"></path></svg>\n      </div>\n\n    <section class=\"read-width section-gap mantra-section\" aria-labelledby=\"mantras-heading\">\n      <h2 id=\"mantras-heading\">Mantras para la práctica</h2>\n      <article class=\"mantra-card\" aria-labelledby=\"mantra-amitabha-heading\">\n        <h3 id=\"mantra-amitabha-heading\">\n          <span lang=\"sa\" translate=\"no\" aria-describedby=\"mantra-amitabha-language\">Amitābha</span>\n        </h3>\n        <p id=\"mantra-amitabha-language\">Amitābha es el Buda de la Luz Infinita, una de las figuras centrales del Budismo Mahāyāna y, especialmente, de la tradición de la Tierra Pura. Su nombre expresa la luz ilimitada de la sabiduría que ilumina a todos los seres sin distinción.</p>\n        <figure class=\"mantra-audio\">\n          <audio controls preload=\"metadata\" aria-label=\"Recitación de Amitābha\">\n            <source src=\"/assets/audio/amitabha.mp3\" type=\"audio/mpeg\">\n            Tu navegador no permite reproducir este audio.\n          </source></audio>\n          <figcaption>Recitación de Amitābha.</figcaption>\n        </figure>\n        <aside class=\"mantra-reading\" aria-labelledby=\"mantra-amitabha-reading-heading\">\n          <h4 id=\"mantra-amitabha-reading-heading\" class=\"mantra-reading-label\">Pronunciación</h4>\n          <p class=\"mantra-ruby\">\n            <ruby lang=\"sa\" translate=\"no\">\n              A-MI-TA-BA\n              <rt lang=\"sa\" translate=\"no\">A · MI · TĀ · BHA</rt>\n            </ruby>\n            <br>\n            <span>(aproximación al sánscrito)</span>\n          </p>\n          <dl class=\"mantra-language-data\">\n            <div>\n              <dt>Origen</dt>\n              <dd>Sánscrito</dd>\n            </div>\n            <div>\n              <dt>Significado</dt>\n              <dd>Luz Infinita (o Luz Inconmensurable)</dd>\n            </div>\n            <div>\n              <dt>Forma</dt>\n              <dd>Nombre del Buda Amitābha</dd>\n            </div>\n            <div>\n              <dt>Escritura</dt>\n              <dd>Alfabeto latino (Amitābha; Amitabha sin signos diacríticos)</dd>\n            </div>\n          </dl>\n        </aside>\n      </article>\n      <article class=\"mantra-card\" aria-labelledby=\"mantra-guanyin-heading\">\n        <h3 id=\"mantra-guanyin-heading\">\n          <span lang=\"zh-Latn\" translate=\"no\" aria-describedby=\"mantra-guanyin-language\">Guān Shì Yīn Púsà</span>\n        </h3>\n        <p id=\"mantra-guanyin-language\">Guān Shì Yīn Púsà es el nombre chino del Bodhisattva de la Compasión, conocido en sánscrito como Avalokiteśvara. En la tradición del Budismo Chan su recitación expresa confianza, refugio y el cultivo de la compasión hacia todos los seres.</p>\n        <figure class=\"mantra-audio\">\n          <audio controls preload=\"metadata\" aria-label=\"Recitación de Guān Shì Yīn Púsà\">\n            <source src=\"/assets/audio/namo-guan-shi-yin-pusa.mp3\" type=\"audio/mpeg\">\n            Tu navegador no permite reproducir este audio.\n          </source></audio>\n          <figcaption>Recitación de Guān Shì Yīn Púsà.</figcaption>\n        </figure>\n        <aside class=\"mantra-reading\" aria-labelledby=\"mantra-guanyin-reading-heading\">\n          <h4 id=\"mantra-guanyin-reading-heading\" class=\"mantra-reading-label\">Pronunciación</h4>\n          <p class=\"mantra-ruby\">\n            <ruby lang=\"zh-Latn\" translate=\"no\">\n              NA-MO GUAN SHI YIN PU-SA\n              <rt lang=\"zh-Latn\" translate=\"no\">NA-MO · GUAN · SHI · YIN · PU-SA</rt>\n            </ruby>\n          </p>\n          <dl class=\"mantra-language-data\">\n            <div>\n              <dt>Origen</dt>\n              <dd>Chino</dd>\n            </div>\n            <div>\n              <dt>Significado</dt>\n              <dd>\"Homenaje al Bodhisattva Guān Shì Yīn\" o \"Me refugio en el Bodhisattva que escucha los sonidos (clamores) del mundo.\"</dd>\n            </div>\n            <div>\n              <dt>Forma</dt>\n              <dd>Pronunciación china (mandarín)</dd>\n            </div>\n            <div>\n              <dt>Escritura</dt>\n              <dd>Alfabeto latino (Namo Guan Shi Yin Pusa)</dd>\n            </div>\n          </dl>\n        </aside>\n      </article>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Caminos de profundización</h2>\n\n      <h3>Talleres vivenciales presenciales</h3>\n      <p>A lo largo del año realizamos talleres presenciales de un día, orientados a profundizar en distintos aspectos del camino buddhista y su aplicación en la vida cotidiana.</p>\n      <p>Estos espacios integran meditación, reflexión y práctica consciente, permitiendo una experiencia directa y situada de los temas abordados. Están pensados para personas que desean ampliar su comprensión y fortalecer su práctica de manera concreta y realista.</p>\n\n      <h3>Retiro de iniciación en la práctica buddhista</h3>\n      <p>El retiro de iniciación es un espacio especialmente diseñado para personas que desean conocer y experimentar, de manera vivencial, los fundamentos de la práctica buddhista.</p>\n      <p>Durante dos días, las y los participantes se introducen en la meditación, la atención plena, la ética cotidiana y la comprensión de la mente, en un entorno cuidado y acompañado.</p>\n      <p>No se requiere experiencia previa.</p>\n\n      <h3>Retiros de meditación</h3>\n      <p>Los retiros de meditación de dos o tres días están orientados a personas que ya cuentan con una práctica básica y desean profundizar su experiencia.</p>\n      <p>Estos espacios privilegian el silencio, la práctica sostenida y la observación directa de la mente, ofreciendo condiciones cuidadas para cultivar estabilidad, claridad y presencia.</p>\n      <p>No se busca forzar experiencias extraordinarias, sino acompañar procesos reales de profundización.</p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z\"></path><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"></path></svg>\n      </div>\n    </section>\n\n    <section class=\"read-width section-gap practica-videos-preview\" aria-labelledby=\"videos-heading\">\n      <h2 id=\"videos-heading\">Videos y enseñanzas</h2>\n      <p>Conferencias y enseñanzas del Venerable Maestro Zheng Gong y la comunidad.</p>\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/xbAUEmf_Wks\" title=\"Encontrando la Plenitud y la Consciencia en la Vida\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">Encontrando la Plenitud y la Consciencia en la Vida</p>\n      </div>\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/JxyHdXhW_nc\" title=\"La sabiduría del no hacer\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">La sabiduría del no hacer</p>\n      </div>\n      <div class=\"media-block media-block--vimeo\">\n        <div class=\"media-block--vimeo-video-wrap\">\n          <div class=\"embed-wrap\">\n            <iframe src=\"https://player.vimeo.com/video/1164143915?dnt=1\" title=\"Conectar con nuestro planeta\" allow=\"fullscreen; picture-in-picture\" allowfullscreen></iframe>\n          </div>\n          <p class=\"video-embed-help\">Si ves «Inicie sesión en Vimeo para ver este video»: no hace falta tener cuenta. Solo haz clic y pulsa «Permitir» para las cookies para conectar y ver el vídeo.</p>\n        </div>\n        <p class=\"video-caption\">Conectar con nuestro planeta</p>\n      </div>\n      <p class=\"practica-videos-more\">\n        <a href=\"/practica/videos\">Ver más videos</a>\n      </p>\n    </section>\n\n    <section class=\"read-width section-gap\">\n      <h2>Vida comunitaria y celebraciones</h2>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/galeria/galeria-04.jpg\" alt=\"Grupo de personas de pie leyendo hojas en un auditorio, guiadas por un hombre con túnica amarilla y micrófono.\" width=\"800\" height=\"600\">\n      </figure>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/celebraciones/celebracion-diwali.jpg\" alt=\"Celebración de luz y tradición\" width=\"800\" height=\"600\">\n      </figure>\n      <h3>Encuentro nacional Camino del Dharma</h3>\n      <p>Una vez al año realizamos el Encuentro Nacional de la Comunidad Buddhista Camino del Dharma.</p>\n      <p>Este espacio reúne a personas de distintas regiones para compartir práctica, reflexión y convivencia, fortaleciendo los lazos comunitarios y la experiencia colectiva del camino.</p>\n\n      <h3>Celebración de Vesak</h3>\n      <p>Cada año celebramos Vesak, conmemorando el nacimiento, la iluminación y el parinirvāṇa del Buda Śākyamuni.</p>\n      <p>La celebración se vive como un espacio de práctica, recogimiento y reflexión colectiva, abierto a la comunidad.</p>\n\n      <h3>Conferencias y charlas</h3>\n      <p>A lo largo del año realizamos conferencias y charlas sobre Buddhismo y temas contemporáneos, orientadas a tender puentes entre la práctica espiritual y los desafíos de la vida actual.</p>\n      <p>Estos espacios se anuncian de acuerdo con su programación vigente.</p>\n    </section>\n\n    <p><a href=\"/eventos\">Consulta los próximos encuentros y retiros</a> · <a href=\"/contacto\">Contacto</a></p>",
+            "source_path": "static/practica/index.html",
+            "parent": "",
+            "_source_key": "page:practica",
+            "_source_hash": "f06d855074c7d1f58755b7d2f7c543c44222c5fa6831534eae7b808eaafaf288"
+        },
+        {
+            "slug": "practica/videos",
+            "title": "Videos y enseñanzas",
+            "seo": {
+                "title": "Videos y enseñanzas — Camino del Dharma",
+                "description": "Conferencias y enseñanzas en video del Venerable Maestro Zheng Gong y la Comunidad Buddhista Camino del Dharma.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Videos y enseñanzas — Camino del Dharma",
+                "og_description": "Conferencias y enseñanzas en video del Venerable Maestro Zheng Gong y la Comunidad Buddhista Camino del Dharma.",
+                "related": ""
+            },
+            "content_html": "<p class=\"page-back\"><a href=\"/practica\">← Volver a Práctica</a></p>\n    <h1>Videos y enseñanzas</h1>\n    <p class=\"read-width\">Conferencias y enseñanzas del Venerable Maestro Zheng Gong y la comunidad.</p>\n\n    <section class=\"read-width section-gap page-videos-list\" aria-label=\"Listado de videos\">\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/xbAUEmf_Wks\" title=\"Encontrando la Plenitud y la Consciencia en la Vida\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">Encontrando la Plenitud y la Consciencia en la Vida</p>\n      </div>\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/JxyHdXhW_nc\" title=\"La sabiduría del no hacer\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">La sabiduría del no hacer</p>\n      </div>\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/lzn5XLJd0Is\" title=\"¿Cómo el Budismo puede ayudarnos a ver el Mundo con claridad?\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">¿Cómo el Budismo puede ayudarnos a ver el Mundo con claridad?</p>\n      </div>\n      <div class=\"media-block\">\n        <div class=\"embed-wrap\">\n          <iframe src=\"https://www.youtube-nocookie.com/embed/SBOG0lqzj1Y\" title=\"La Sabiduría del Buddhismo Chan\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n        <p class=\"video-caption\">La Sabiduría del Buddhismo Chan</p>\n      </div>\n      <div class=\"media-block media-block--vimeo\">\n        <div class=\"media-block--vimeo-video-wrap\">\n          <div class=\"embed-wrap\">\n            <iframe src=\"https://player.vimeo.com/video/1164143915?dnt=1\" title=\"Conectar con nuestro planeta\" allow=\"fullscreen; picture-in-picture\" allowfullscreen></iframe>\n          </div>\n          <p class=\"video-embed-help\">Si ves «Inicie sesión en Vimeo para ver este video»: no hace falta tener cuenta. Solo haz clic y pulsa «Permitir» para las cookies para conectar y ver el vídeo.</p>\n        </div>\n        <p class=\"video-caption\">Conectar con nuestro planeta</p>\n      </div>\n    </section>\n\n    <p class=\"page-back\"><a href=\"/practica\">← Volver a Práctica</a></p>",
+            "source_path": "static/practica/videos/index.html",
+            "parent": "practica",
+            "_source_key": "page:practica/videos",
+            "_source_hash": "c92d1a02bcf2b40d87171d0a6c8294cc6c2427c1a98aa7b4c7c5190d76abd31c"
+        },
+        {
+            "slug": "practica/meditacion-semanal-en-linea",
+            "title": "Meditación semanal en línea",
+            "seo": {
+                "title": "Meditación semanal en línea — Camino del Dharma",
+                "description": "Meditación budista en línea, todos los lunes a las 7:30 p. m. (hora de Colombia). Gratuita y abierta a quienes nunca han meditado.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Meditación semanal en línea — Camino del Dharma",
+                "og_description": "Meditación budista en línea, todos los lunes a las 7:30 p. m. (hora de Colombia). Gratuita y abierta a quienes nunca han meditado.",
+                "related": ""
+            },
+            "content_html": "<p class=\"page-back\"><a href=\"/practica\">← Volver a Práctica</a></p>\n    <h1>Meditación semanal en línea</h1>\n    <p class=\"read-width\">Cada lunes nos sentamos juntos, desde donde cada quien esté. Una hora para detenerse, respirar y volver a lo esencial.</p>\n\n    <figure class=\"read-width section-gap\">\n      <img src=\"/assets/images/practica/meditacion-semanal-en-linea.jpg\" alt=\"Práctica de meditación de la Comunidad Buddhista Camino del Dharma\" width=\"1000\" height=\"666\" loading=\"eager\" decoding=\"async\" style=\"width:100%;border-radius:4px;\">\n    </figure>\n\n    <section class=\"read-width section-gap\" aria-labelledby=\"cuando-heading\">\n      <h2 id=\"cuando-heading\">Cuándo y cómo participar</h2>\n      <dl class=\"evento-meta\">\n        <dt>Día</dt>\n        <dd>Todos los lunes</dd>\n        <dt>Hora</dt>\n        <dd>7:30 p. m. <span class=\"evento-incluye\">(hora de Colombia)</span></dd>\n        <dt>Modalidad</dt>\n        <dd>En línea, desde cualquier lugar</dd>\n        <dt>Aporte</dt>\n        <dd>Gratuita</dd>\n      </dl>\n      <p>Para acompañar a quien llega por primera vez, el acceso se coordina por WhatsApp. Escríbenos y te compartimos el enlace de la sesión.</p>\n      <p><a class=\"btn btn-primary\" href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">Escribir por WhatsApp</a></p>\n    </section>\n\n    <section class=\"read-width section-gap\" aria-labelledby=\"para-quien-heading\">\n      <h2 id=\"para-quien-heading\">Para quién es</h2>\n      <p>Para cualquier persona que quiera practicar, conozca o no el Buddhismo. No se requiere experiencia previa, ni pertenecer a la comunidad, ni haber meditado antes.</p>\n      <p>Vienen personas que llevan años practicando y personas que se sientan por primera vez. La sesión está pensada para que ambas encuentren su lugar.</p>\n    </section>\n\n    <section class=\"read-width section-gap\" aria-labelledby=\"como-es-heading\">\n      <h2 id=\"como-es-heading\">Cómo transcurre la sesión</h2>\n      <p>La sesión tiene tres momentos.</p>\n      <p>Comenzamos con unos diez minutos de meditación de atención plena, en silencio compartido.</p>\n      <p>Después compartimos una lectura que escuchamos con atención plena.</p>\n      <p>Al final abrimos un espacio para preguntas, reflexiones y comentarios de quienes participan. Nadie está obligado a hablar ni a encender la cámara.</p>\n    </section>\n\n    <section class=\"read-width section-gap\" aria-labelledby=\"primera-vez-heading\">\n      <h2 id=\"primera-vez-heading\">Si nunca has meditado</h2>\n      <p>Basta con un lugar donde puedas estar tranquilo el rato que dure la sesión. Puedes sentarte en una silla, en un cojín o en el suelo: no hace falta ninguna postura particular ni ningún objeto.</p>\n      <p>Tampoco hace falta llegar «preparado». La meditación no es dejar la mente en blanco ni conseguir un estado especial: es aprender a estar presente con lo que hay, y eso se practica, no se logra de una vez.</p>\n    </section>\n\n    <section class=\"read-width section-gap\" aria-labelledby=\"tradicion-heading\">\n      <h2 id=\"tradicion-heading\">En qué tradición se inscribe</h2>\n      <p>Nuestra práctica proviene del Buddhismo Chan y de la Tierra Pura, dentro de la tradición Mahāyāna. La meditación semanal es su puerta más sencilla: no exige adherirse a nada ni asumir compromiso alguno.</p>\n      <p>Quien quiera conocer de dónde viene esta práctica puede leer sobre <a href=\"/linaje\">el linaje de la comunidad</a>, o ver las <a href=\"/practica\">otras formas de práctica</a> que acompañamos.</p>\n    </section>",
+            "source_path": "static/practica/meditacion-semanal-en-linea/index.html",
+            "parent": "practica",
+            "_source_key": "page:practica/meditacion-semanal-en-linea",
+            "_source_hash": "1bbc78a23974cab9b0e153b6cd73bd2060761f3d5ae846afc8d5e35f7212ba9d"
+        },
+        {
+            "slug": "galeria",
+            "title": "Galería comunitaria",
+            "seo": {
+                "title": "Galería — Camino del Dharma",
+                "description": "Imágenes de la práctica, encuentros y vida comunitaria de la Comunidad Buddhista Camino del Dharma en Colombia.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Galería — Camino del Dharma",
+                "og_description": "Imágenes de la práctica, encuentros y vida comunitaria de la Comunidad Buddhista Camino del Dharma en Colombia.",
+                "related": ""
+            },
+            "content_html": "<h1>Galería comunitaria</h1>\n    <p class=\"read-width\">Algunos momentos de nuestra práctica, encuentros y vida compartida.</p>\n    <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n      <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\"></path><path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\"></path><circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\"></circle><rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\"></rect></svg>\n    </div>\n    \n    \n    <div id=\"gallery-albums\" class=\"gallery-albums\"></div>\n\n    <p><a href=\"/..\">Volver al inicio</a></p>",
+            "source_path": "static/galeria/index.html",
+            "parent": "",
+            "_source_key": "page:galeria",
+            "_source_hash": "d6f65c267d9b3433748e8aafc4156408098154b692094e6b2e334c45feefe40c"
+        },
+        {
+            "slug": "donaciones",
+            "title": "Cómo contribuir",
+            "seo": {
+                "title": "Cómo contribuir — Camino del Dharma",
+                "description": "Sostén la Comunidad Buddhista Camino del Dharma con una donación consciente. Datos bancarios y formas de contribuir.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Cómo contribuir — Camino del Dharma",
+                "og_description": "Sostén la Comunidad Buddhista Camino del Dharma con una donación consciente. Datos bancarios y formas de contribuir.",
+                "related": ""
+            },
+            "content_html": "<h1>Cómo contribuir</h1>\n\n    <section class=\"read-width section-gap donate-content\">\n      <p class=\"donate-lead\">La Comunidad Buddhista Camino del Dharma se sostiene gracias a la práctica, la participación y la generosidad consciente de quienes la acompañan.</p>\n      <p>Las donaciones permiten mantener los espacios de práctica, formación y encuentro, así como el funcionamiento básico de la comunidad y sus actividades presenciales y virtuales. Donar es una forma voluntaria de participar en el sostenimiento de este camino compartido.</p>\n\n      <h2>Datos bancarios</h2>\n      <p>Puedes realizar tu aporte por transferencia o consignación bancaria a la siguiente cuenta:</p>\n      <table class=\"donate-table\">\n        <tr><th scope=\"row\">Titular</th><td>Camino del Dharma</td></tr>\n        <tr><th scope=\"row\">Banco</th><td>Banco Popular</td></tr>\n        <tr><th scope=\"row\">Tipo de cuenta</th><td>Ahorros</td></tr>\n        <tr><th scope=\"row\">Número de cuenta</th><td>220065151425</td></tr>\n        <tr><th scope=\"row\">NIT</th><td>901333226</td></tr>\n      </table>\n\n      <p><strong>Una práctica de generosidad.</strong> Cada aporte, sin importar su monto, contribuye a que la práctica continúe siendo accesible y viva. Si en este momento no puedes donar, tu presencia y tu práctica también son una forma valiosa de sostener la comunidad.</p>\n\n      <p><a href=\"/contacto\">Contacto</a> · <a href=\"/..\">Inicio</a></p>\n    </section>",
+            "source_path": "static/donaciones/index.html",
+            "parent": "",
+            "_source_key": "page:donaciones",
+            "_source_hash": "54191577849cf69fe85562584f0b7747656b3c37082d2cb6f4f4f9c8bc3b4492"
+        },
+        {
+            "slug": "contacto",
+            "title": "Contacto",
+            "seo": {
+                "title": "Contacto — Camino del Dharma",
+                "description": "La práctica se fortalece cuando se comparte. Contacta a la Comunidad Buddhista Camino del Dharma para practicar o recibir información.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Contacto — Camino del Dharma",
+                "og_description": "La práctica se fortalece cuando se comparte. Contacta a la Comunidad Buddhista Camino del Dharma para practicar o recibir información.",
+                "related": ""
+            },
+            "content_html": "<h1>Contacto</h1>\n\n    <section class=\"read-width center-block section-gap\">\n      <p>La práctica se fortalece cuando se comparte.</p>\n      <p>Si deseas practicar con nosotros o recibir información sobre nuestras actividades, puedes escribirnos aquí.</p>\n      <div class=\"deco-icon-wrap\" aria-hidden=\"true\">\n        <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"></rect><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"></path></svg>\n      </div>\n      <figure class=\"section-figure\">\n        <img src=\"/assets/images/contacto/contacto-comunidad.jpg\" alt=\"Contacto con la comunidad Camino del Dharma\" width=\"800\" height=\"600\">\n      </figure>\n      <form class=\"section-gap\" action=\"#\" method=\"post\" aria-label=\"Formulario de contacto\">\n        <div class=\"form-group\">\n          <label for=\"contact-name\">Nombre</label>\n          <input type=\"text\" id=\"contact-name\" name=\"nombre\" autocomplete=\"name\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"contact-email\">\n            <svg class=\"lucide-icon lucide-icon--sm\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"></rect><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"></path></svg>\n            Correo electrónico</label>\n          <input type=\"email\" id=\"contact-email\" name=\"correo\" autocomplete=\"email\" required>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"contact-message\">\n            <svg class=\"lucide-icon lucide-icon--sm\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z\"></path></svg>\n            Mensaje</label>\n          <textarea id=\"contact-message\" name=\"mensaje\" required></textarea>\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">\n          <svg class=\"lucide-icon\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m22 2-7 20-4-9-9-4Z\"></path><path d=\"M22 2 11 13\"></path></svg>\n          Enviar</button>\n      </form>\n\n      <p>También puedes escribirnos por WhatsApp al <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">+57 320 662 7608</a> o al correo <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a>.</p>\n\n      <div class=\"contact-social section-gap\">\n        <div class=\"deco-icon-wrap contact-social-deco\" aria-hidden=\"true\">\n          <svg class=\"lucide-icon lucide-icon--deco\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"18\" cy=\"5\" r=\"3\"></circle><circle cx=\"6\" cy=\"12\" r=\"3\"></circle><circle cx=\"18\" cy=\"19\" r=\"3\"></circle><path d=\"M8.59 13.51l6.83 3.98\"></path><path d=\"M15.41 6.51l-6.82 3.98\"></path></svg>\n        </div>\n        <h2 class=\"contact-social-heading\">Redes sociales</h2>\n        <p class=\"contact-social-lead\">Síguenos para estar al día de actividades, reflexiones y encuentros.</p>\n        <ul class=\"contact-social-links\">\n          <li><a href=\"https://www.facebook.com/caminodeldharmacolombia\" target=\"_blank\" rel=\"noopener noreferrer\"><svg class=\"lucide-icon lucide-icon--sm\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z\"></path></svg> Facebook <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></li>\n          <li><a href=\"https://www.instagram.com/camino_del_dharma/\" target=\"_blank\" rel=\"noopener noreferrer\"><svg class=\"lucide-icon lucide-icon--sm\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"20\" height=\"20\" x=\"2\" y=\"2\" rx=\"5\" ry=\"5\"></rect><path d=\"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z\"></path><path d=\"M17.5 6.5h.01\"></path></svg> Instagram <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></li>\n        </ul>\n      </div>\n\n      <p><a href=\"/..\">Volver al inicio</a></p>\n    </section>",
+            "source_path": "static/contacto/index.html",
+            "parent": "",
+            "_source_key": "page:contacto",
+            "_source_hash": "2f06b6e885e904e46d5866422eee1003704f43c9a340673e7f5d72716c42098e"
+        },
+        {
+            "slug": "blog",
+            "title": "Blog",
+            "seo": {
+                "title": "Blog de Budismo — Reflexiones y Enseñanzas | Camino del Dharma",
+                "description": "Reflexiones sobre budismo en Colombia. Ensayos y noticias de la Comunidad Buddhista Camino del Dharma.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Blog de Budismo — Reflexiones y Enseñanzas | Camino del Dharma",
+                "og_description": "Reflexiones sobre budismo en Colombia. Ensayos y noticias de la Comunidad Buddhista Camino del Dharma.",
+                "related": ""
+            },
+            "content_html": "",
+            "source_path": "static/blog/index.html",
+            "parent": "",
+            "_source_key": "page:blog",
+            "_source_hash": "73437526cbc8a69b7b7d521815f702147ecb53f0bc09ccb5a3e5ffb0f78c2d2f"
+        },
+        {
+            "slug": "privacidad",
+            "title": "Aviso de privacidad",
+            "seo": {
+                "title": "Privacidad — Camino del Dharma",
+                "description": "Aviso de privacidad de la Comunidad Buddhista Camino del Dharma: qué datos se tratan al visitar el sitio, escribirnos o participar, y cómo ejercer tus derechos.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista, privacidad, datos personales, Ley 1581",
+                "og_title": "Privacidad — Camino del Dharma",
+                "og_description": "Aviso de privacidad de la Comunidad Buddhista Camino del Dharma: qué datos se tratan al visitar el sitio, escribirnos o participar, y cómo ejercer tus derechos.",
+                "related": ""
+            },
+            "content_html": "<h1>Aviso de privacidad</h1>\n\n    <section class=\"read-width section-gap privacy-content\">\n      <p class=\"donate-lead\">Qué datos se tratan cuando visitas este sitio, nos escribes o participas en una actividad, y qué derechos tienes sobre ellos.</p>\n\n      <div class=\"privacy-notice\">\n        <p><strong>Documento provisional.</strong> Esta es la primera versión del aviso de privacidad del sitio y aún no ha sido validada por asesoría legal. Su redacción podrá cambiar tras esa revisión y cuando el formulario de contacto pase a enviarse a un servidor. Cada apartado indica lo que ya está activo.</p>\n        <p class=\"privacy-updated\">Última actualización: 29 de agosto de 2026.</p>\n      </div>\n\n      <h2>En resumen</h2>\n      <ul>\n        <li>Sin cookies propias y sin banner de consentimiento.</li>\n        <li>Sin analítica ni rastreo en este sitio.</li>\n        <li>El formulario de contacto de la página no envía nada a nuestro servidor.</li>\n        <li>Los canales operativos son WhatsApp y correo; algunas actividades usan formularios de Google, Zoom o Classroom.</li>\n        <li>Al reproducir un vídeo incrustado, YouTube o Vimeo pueden tratar datos.</li>\n      </ul>\n\n      <section id=\"responsable\" aria-labelledby=\"responsable-heading\">\n        <h2 id=\"responsable-heading\">1. Responsable del tratamiento</h2>\n        <p>El responsable de este sitio web y del tratamiento de los datos que se describen aquí es la <strong>Comunidad Buddhista Camino del Dharma</strong>, con personería jurídica especial ante el Ministerio del Interior de Colombia.</p>\n        <ul>\n          <li><strong>NIT:</strong> 901333226</li>\n          <li><strong>País:</strong> Colombia. La comunidad no tiene una sede física única; acompaña práctica en distintas ciudades y en línea.</li>\n          <li><strong>Correo:</strong> <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a></li>\n          <li><strong>WhatsApp:</strong> <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">+57 320 662 7608 <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></li>\n          <li><strong>Sitio:</strong> <a href=\"https://caminodeldharma.org\">caminodeldharma.org</a></li>\n        </ul>\n        <p>Este aviso se redacta para informar, con claridad, qué datos se tratan, para qué, quién responde y cómo ejercer derechos, de acuerdo con la <a href=\"https://www.sic.gov.co/recursos_user/documentos/normatividad/Leyes/2012/Ley_1581_2012.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Ley 1581 de 2012<span class=\"visually-hidden\"> (abre en nueva pestaña)</span></a>. No sustituye una valoración jurídica. Si una asesoría legal concluye que también aplica otra normativa —por ejemplo, para quienes visitan desde fuera de Colombia—, este texto se actualizará.</p>\n      </section>\n\n      <section id=\"datos\" aria-labelledby=\"datos-heading\">\n        <h2 id=\"datos-heading\">2. Qué datos tratamos</h2>\n\n        <h3 id=\"navegar\">2.1. Al navegar por el sitio</h3>\n        <p>El servidor donde se aloja el sitio registra automáticamente datos técnicos de cada visita: dirección IP, fecha y hora, página solicitada y tipo de navegador y sistema operativo. Es el funcionamiento normal de cualquier servidor web.</p>\n        <ul>\n          <li><strong>Finalidad:</strong> mantener el sitio en funcionamiento, diagnosticar errores y protegerlo frente a abusos.</li>\n          <li><strong>Conservación:</strong> el plazo que aplica el proveedor de alojamiento. <strong>Por confirmar</strong> — publicaremos el plazo exacto cuando lo verifiquemos con el proveedor.</li>\n        </ul>\n\n        <h3 id=\"formulario\">2.2. Al usar el formulario de contacto</h3>\n        <p><strong>En esta versión del sitio, el formulario de contacto no envía nada a nuestro servidor.</strong> El botón de envío no entrega el mensaje. Los datos que escribas en esos campos no se almacenan en este sitio web.</p>\n        <p>Cuando el formulario pase a procesarse en un servidor, este aviso se actualizará <strong>antes</strong> de activarlo.</p>\n\n        <h3 id=\"whatsapp-correo\">2.3. Al escribirnos por WhatsApp o correo</h3>\n        <p>El contacto operativo es humano: WhatsApp y correo electrónico. Si nos escribes, tratamos los datos que hayas incluido: nombre, número de teléfono, dirección de correo y el contenido del mensaje.</p>\n        <ul>\n          <li><strong>Finalidad:</strong> leer y responder tu consulta, coordinar la práctica o enviarte la información que pides.</li>\n          <li><strong>Conservación:</strong> el tiempo necesario para atender la consulta y dejar constancia razonable de la gestión.</li>\n        </ul>\n\n        <h3 id=\"actividades\">2.4. Al preinscribirte o participar en una actividad</h3>\n        <p>Algunas actividades vigentes —hoy, el curso Círculos de Presencia Consciente— recogen datos de preinscripción en un <strong>formulario de Google</strong> que se abre fuera de este sitio. Los datos que escribas allí los recibe Google y, a partir de tus respuestas, también la comunidad, para valorar la preinscripción, coordinar cupos y comunicarse contigo.</p>\n        <p>Quienes son admitidos pueden usar <strong>Google Classroom</strong> para materiales y el aula del curso, y un enlace de videollamada (hoy, Zoom) para las sesiones en línea. Esos servicios tratan los datos según sus propias políticas; la comunidad usa lo estrictamente necesario para organizar la actividad.</p>\n        <p>La meditación semanal en línea se coordina por WhatsApp: te enviamos el enlace de la sesión cuando lo pides.</p>\n        <ul>\n          <li><strong>Finalidad:</strong> gestionar la participación, el cupo y la comunicación propia de cada actividad.</li>\n          <li><strong>Conservación:</strong> el tiempo de la actividad y el que haga falta para dejar constancia razonable de la gestión.</li>\n        </ul>\n\n        <h3 id=\"donaciones\">2.5. Al contribuir con una donación</h3>\n        <p>Este sitio publica los datos bancarios de la comunidad. No hay pasarela de pago ni se recogen números de tarjeta en estas páginas. Si haces una transferencia, tu entidad bancaria trata esa operación; la comunidad puede ver en el extracto los datos que el banco entrega (por ejemplo, el nombre de quien transfiere), para identificar el aporte.</p>\n\n        <h3 id=\"no-hacemos\">2.6. Lo que no hacemos</h3>\n        <p>No elaboramos perfiles comerciales, no tomamos decisiones automatizadas sobre las personas que nos visitan y no vendemos ni cedemos datos a terceros con fines publicitarios.</p>\n      </section>\n\n      <section id=\"cookies\" aria-labelledby=\"cookies-heading\">\n        <h2 id=\"cookies-heading\">3. Cookies</h2>\n        <p><strong>Este sitio no utiliza cookies propias.</strong> No instalamos cookies de analítica ni de publicidad, ni empleamos almacenamiento local del navegador con fines de seguimiento o identificación.</p>\n        <p>Por eso no verás un aviso de cookies al entrar: no hay nada nuestro que consentir. Si en el futuro se incorporase alguna cookie que no sea estrictamente necesaria, se solicitará tu consentimiento antes de instalarla y este aviso se actualizará previamente.</p>\n        <p>Al reproducir un vídeo incrustado, YouTube o Vimeo pueden fijar cookies suyas. Eso ocurre en su reproductor, no en un banner de este sitio. Lo detallamos en el punto 5.</p>\n      </section>\n\n      <section id=\"analitica\" aria-labelledby=\"analitica-heading\">\n        <h2 id=\"analitica-heading\">4. Estadísticas de uso</h2>\n        <p><strong>Este sitio no tiene analítica.</strong> No usamos Google Analytics ni ninguna plataforma de medición de comportamiento, ni propia ni de terceros.</p>\n        <p>Para saber cómo se encuentra el sitio en los buscadores usamos Google Search Console (y, si aplica, herramientas equivalentes del buscador). Esa medición la hace quien administra el sitio, no un script en tu navegador, y no sirve cookies de analítica en estas páginas.</p>\n        <p>Si en el futuro se necesitara medir el uso del sitio, la vía prevista es una herramienta <strong>sin cookies</strong>. No se reactivará Google Analytics. Cualquier cambio se publicará aquí <strong>antes</strong> de activarlo.</p>\n      </section>\n\n      <section id=\"terceros\" aria-labelledby=\"terceros-heading\">\n        <h2 id=\"terceros-heading\">5. Contenido de terceros</h2>\n        <p>Las hojas de estilo, las tipografías y los scripts de este sitio se sirven <strong>desde este mismo dominio</strong>.</p>\n        <p>Hay excepciones, y conviene nombrarlas:</p>\n        <ul>\n          <li><strong>Vídeos incrustados</strong> de YouTube (versión sin cookies de publicidad) y de Vimeo (con la opción de no rastrear). Hasta que pulsas reproducir, el sitio intenta reducir lo que esos reproductores guardan; al reproducir, tu navegador habla con YouTube o Vimeo y aplica su política de privacidad.</li>\n          <li><strong>Formularios y aulas de Google</strong> cuando una actividad vigente enlaza a ellos: al seguir el enlace abandonas este sitio.</li>\n          <li><strong>Enlaces</strong> a páginas externas (Facebook, Instagram, WhatsApp, documentos legales, entre otros). Al seguirlos pasa a aplicarse la política del destino, sobre la que no tenemos control.</li>\n        </ul>\n      </section>\n\n      <section id=\"destinatarios\" aria-labelledby=\"destinatarios-heading\">\n        <h2 id=\"destinatarios-heading\">6. Quién más interviene</h2>\n        <p>No cedemos tus datos para publicidad. Para que el sitio, el correo y algunas actividades funcionen intervienen estos proveedores, cada uno en lo suyo:</p>\n        <ul>\n          <li><strong>Hostinger:</strong> aloja el sitio y genera los registros técnicos del punto 2.1.</li>\n          <li><strong>Google:</strong> el buzón <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a> es una cuenta de Gmail; los formularios de preinscripción y Google Classroom, cuando se usan, residen en servicios de Google.</li>\n          <li><strong>WhatsApp (Meta):</strong> los mensajes que nos escribes por ese canal se tratan en esa plataforma y en los dispositivos donde se leen.</li>\n          <li><strong>Zoom:</strong> si te unes a una sesión en línea con el enlace que te compartimos, Zoom trata los datos de esa videollamada.</li>\n          <li><strong>YouTube y Vimeo:</strong> solo si reproduces un vídeo incrustado.</li>\n          <li><strong>Banco Popular:</strong> si haces una transferencia a la cuenta publicada en <a href=\"/donaciones\">Cómo contribuir</a>.</li>\n        </ul>\n        <p>Estos proveedores tratan esos datos para prestar su servicio, no porque se los cedamos con un fin comercial propio.</p>\n      </section>\n\n      <section id=\"derechos\" aria-labelledby=\"derechos-heading\">\n        <h2 id=\"derechos-heading\">7. Tus derechos</h2>\n        <p>Puedes solicitar en cualquier momento conocer los datos personales que tengamos sobre ti, actualizarlos, rectificarlos o pedir su supresión, y revocar la autorización para tratarlos, en los términos de la Ley 1581 de 2012.</p>\n        <p>Para ejercerlos, escribe a <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a> o al WhatsApp <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">+57 320 662 7608 <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a> indicando qué derecho deseas ejercer. Responderemos en el plazo más breve posible.</p>\n        <p>Si consideras que no hemos atendido correctamente tu solicitud, puedes presentar una queja ante la Superintendencia de Industria y Comercio, autoridad de protección de datos en Colombia.</p>\n      </section>\n\n      <section id=\"cambios\" aria-labelledby=\"cambios-heading\">\n        <h2 id=\"cambios-heading\">8. Cambios en este aviso</h2>\n        <p>Este documento se revisará, como mínimo, en estos supuestos:</p>\n        <ul>\n          <li>cuando una asesoría legal valide o corrija el texto;</li>\n          <li>cuando el formulario de contacto pase a procesarse en un servidor;</li>\n          <li>si se incorpora cualquier cookie, analítica o recurso servido por un tercero nuevo;</li>\n          <li>si cambia el canal de preinscripción, el aula o la videollamada de una actividad;</li>\n          <li>si se cambia de proveedor de alojamiento o de correo.</li>\n        </ul>\n        <p>La fecha de la última actualización figura al principio de esta página.</p>\n      </section>\n\n      <p><a href=\"/contacto\">Contacto</a> · <a href=\"/..\">Inicio</a></p>\n    </section>",
+            "source_path": "static/privacidad/index.html",
+            "parent": "",
+            "_source_key": "page:privacidad",
+            "_source_hash": "b3943eabc16b62157609df35ecb0584eaa93ab61d5e565d1d6f09da1c3dad2f3"
+        }
+    ],
+    "events": [
+        {
+            "slug": "circulos-de-presencia-consciente",
+            "title": "Círculos de Presencia Consciente",
+            "type": "Curso",
+            "status": "vigente",
+            "featured": true,
+            "start": "2026-09-03",
+            "end": "2026-10-24",
+            "place": "Bogotá y Cali (el lugar del encuentro presencial se informa a las personas admitidas)",
+            "modality": "Híbrida — bienvenida, orientación, seis sesiones virtuales y un encuentro presencial",
+            "cities": [
+                "Bogotá",
+                "Cali"
+            ],
+            "signup_url": "https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform",
+            "poster": "assets/images/eventos/evento-circulos-de-presencia-consciente.jpg",
+            "poster_alt": "Cartel del curso Círculos de Presencia Consciente — seis sesiones virtuales y un encuentro presencial en Bogotá y Cali, con becas completas",
+            "excerpt": "Sesión virtual de bienvenida (7:00 p. m., hora de Colombia). El curso incluye orientación, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali. Cronograma: https://caminodeldharma.org/eventos/circulos-de-presencia-consciente",
+            "content_html": "<p class=\"evento-lead\">Un espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.</p>\n      <p>Curso híbrido de salud mental preventiva y comunitaria para personas adultas de Bogotá y Cali: una sesión de bienvenida, orientación sobre Google Classroom, seis sesiones virtuales y un encuentro presencial en la ciudad seleccionada. No se necesita experiencia previa en meditación ni pertenecer a una tradición espiritual.</p>\n      <p>El curso ofrece un número limitado de becas completas. La preinscripción no garantiza automáticamente la asignación de una beca.</p>\n\n      \n\n      <p><strong>Dirigido por el Maestro Zheng Gong.</strong></p>\n\n      <h2>¿Qué encontrarás en este proceso?</h2>\n      <p>Las actividades integran prácticas de presencia consciente, herramientas psicosociales no clínicas y espacios de escucha. El proceso es progresivo: cada sesión prepara la siguiente e incluye momentos de aprendizaje, práctica y participación.</p>\n      <ul>\n        <li>Presencia consciente y atención en la vida cotidiana.</li>\n        <li>Reconocimiento del estrés y el agotamiento psicosocial.</li>\n        <li>Herramientas básicas de regulación emocional.</li>\n        <li>Autocompasión como base del cuidado.</li>\n        <li>Relaciones y escucha consciente.</li>\n        <li>Integración y resiliencia comunitaria.</li>\n      </ul>\n\n      <h2>¿A quién está dirigido?</h2>\n      <p>A personas mayores de 18 años que vivan en Bogotá o Cali y tengan interés en participar en un proceso de bienestar emocional, escucha y fortalecimiento comunitario.</p>\n      <p>También pueden participar personas de otras ciudades que se comprometan a asistir al encuentro presencial en Bogotá o Cali.</p>\n      <p>El proceso tiene un enfoque preventivo, formativo y comunitario. No es psicoterapia ni reemplaza la atención médica, psicológica o psiquiátrica cuando esta sea necesaria.</p>\n\n      <h2>Cronograma</h2>\n      <p>Todas las actividades virtuales se realizarán a las 7:00 p. m., hora de Colombia.</p>\n      <ul>\n        <li><strong>Sesión virtual de bienvenida:</strong> jueves 3 de septiembre de 2026.</li>\n        <li><strong>Orientación sobre Google Classroom:</strong> jueves 10 de septiembre de 2026.</li>\n        <li><strong>Introducción a la Presencia Consciente:</strong> martes 15 de septiembre de 2026.</li>\n        <li><strong>Estrés y Agotamiento Psicosocial:</strong> jueves 17 de septiembre de 2026.</li>\n        <li><strong>Regulación Emocional Básica:</strong> martes 22 de septiembre de 2026.</li>\n        <li><strong>Autocompasión como Base del Cuidado:</strong> jueves 24 de septiembre de 2026.</li>\n        <li><strong>Relaciones y Escucha Consciente:</strong> martes 29 de septiembre de 2026.</li>\n        <li><strong>Integración y Resiliencia Comunitaria:</strong> jueves 1 de octubre de 2026.</li>\n        <li><strong>Encuentro presencial en Bogotá:</strong> sábado 17 de octubre de 2026, de 8:00 a. m. a 12:00 m.</li>\n        <li><strong>Encuentro presencial en Cali:</strong> sábado 24 de octubre de 2026, de 8:00 a. m. a 12:00 m.</li>\n      </ul>\n      <p>Las seis sesiones temáticas virtuales tienen una duración de 90 minutos. Cada participante asistirá únicamente al encuentro presencial correspondiente a la ciudad seleccionada. El lugar será informado oportunamente a las personas admitidas.</p>\n\n      <h2>Becas completas</h2>\n      <p>Las personas admitidas tendrán acceso sin costo a las sesiones virtuales, el encuentro presencial en su ciudad, la orientación para el uso de Google Classroom, los materiales de formación y la certificación, de acuerdo con los criterios de participación establecidos.</p>\n      <p>La beca implica un compromiso con el proceso completo. La preinscripción permite manifestar interés, pero no garantiza automáticamente la asignación de un cupo.</p>\n\n      <h2>¿Cómo participar?</h2>\n      <ol>\n        <li><strong>Realiza tu preinscripción</strong> y selecciona la ciudad en la que participarías.</li>\n        <li><strong>Participa en la sesión de bienvenida</strong> para conocer la metodología, el cronograma y los compromisos del curso.</li>\n        <li><strong>Completa tu inscripción definitiva</strong> después de la sesión de bienvenida.</li>\n        <li><strong>Recibe la confirmación de tu beca</strong> y la información para ingresar a Google Classroom.</li>\n      </ol>\n\n      \n\n      <p>Para conocer el contexto del proyecto y consultar las preguntas frecuentes, puedes leer <a href=\"/blog/circulos-de-presencia-consciente\">Círculos de Presencia Consciente en el blog</a>.</p>",
+            "calendar_dates": [
+                "2026-09-03",
+                "2026-09-10",
+                "2026-09-15",
+                "2026-09-17",
+                "2026-09-22",
+                "2026-09-24",
+                "2026-09-29",
+                "2026-10-01",
+                "2026-10-17",
+                "2026-10-24"
+            ],
+            "share": {
+                "whatsapp": "Comparto esta invitación de Camino del Dharma:\n\n*Curso Círculos de Presencia Consciente*\n\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\nBienvenida, orientación, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali.\nBecas completas. Cupos limitados.\n\n📅 Septiembre – octubre 2026\n📍 Bogotá y Cali\n\n{{SHARE_URL}}",
+                "x": "Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\n📅 sep–oct 2026 · 📍 Bogotá y Cali",
+                "threads": "Curso · Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n📅 Septiembre – octubre 2026\n📍 Bogotá y Cali"
+            },
+            "seo": {
+                "title": "Curso Círculos de Presencia Consciente en Bogotá y Cali | Camino del Dharma",
+                "description": "Curso Círculos de Presencia Consciente en Bogotá y Cali: proceso híbrido de salud mental comunitaria con becas completas. Septiembre–octubre 2026.",
+                "keywords": "curso Círculos de Presencia Consciente, curso salud mental comunitaria, bienestar emocional, regulación emocional, escucha consciente, becas completas, Bogotá, Cali, Camino del Dharma",
+                "og_title": "Curso Círculos de Presencia Consciente",
+                "og_description": "Curso híbrido de salud mental comunitaria en Bogotá y Cali, con seis sesiones virtuales, un encuentro presencial y becas completas.",
+                "related": "https://caminodeldharma.org/blog/circulos-de-presencia-consciente"
+            },
+            "attendance_mode": "mixed",
+            "jsonld_extra": {
+                "additionalType": "https://schema.org/Course",
+                "alternateName": "Curso Círculos de Presencia Consciente",
+                "audience": {
+                    "@type": "Audience",
+                    "audienceType": "Personas adultas de Bogotá y Cali interesadas en bienestar emocional, escucha y fortalecimiento comunitario"
+                },
+                "performer": {
+                    "@type": "Person",
+                    "@id": "https://caminodeldharma.org/#zhenggong",
+                    "name": "Venerable Maestro Zheng Gong",
+                    "alternateName": [
+                        "Maestro Zheng Gong",
+                        "Zheng Gong"
+                    ],
+                    "url": "https://caminodeldharma.org/comunidad"
+                },
+                "subjectOf": {
+                    "@type": "BlogPosting",
+                    "@id": "https://caminodeldharma.org/blog/circulos-de-presencia-consciente#article",
+                    "headline": "Círculos de Presencia Consciente",
+                    "url": "https://caminodeldharma.org/blog/circulos-de-presencia-consciente"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "COP",
+                    "validFrom": "2026-08-13T00:00:00-05:00"
+                }
+            },
+            "has_single_source": true,
+            "source_path": "static/eventos/circulos-de-presencia-consciente/index.html",
+            "_source_key": "event:circulos-de-presencia-consciente",
+            "_source_hash": "3bb35e87e14a74597855408ad587ce0a7a53d4a1f439db0bbfb5053c45201693"
+        },
+        {
+            "slug": "encuentro-nacional-2026",
+            "title": "7.º Encuentro Nacional Buddhista – 2026",
+            "type": "Retiro",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-08-07",
+            "end": "2026-08-09",
+            "place": "Casa Retiro San Pablo – Puerto Colombia (a 30 minutos de Barranquilla)",
+            "modality": "Presencial – retiro",
+            "cities": [
+                "Puerto Colombia"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-7-encuentro-nacional-2026.jpg",
+            "poster_alt": "Cartel del 7.º Encuentro Nacional Buddhista 2026 — Tres días para detenerte, respirar profundo y reencontrarte con lo esencial",
+            "excerpt": "Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Un regalo para vivir con claridad, práctica y comunidad.",
+            "content_html": "<p class=\"evento-lead\">Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Un regalo para vivir con claridad, práctica y comunidad.</p>\n      <p>Este encuentro fue un espacio de práctica, claridad y comunidad.</p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "7.º Encuentro Nacional Buddhista – 2026 — Camino del Dharma",
+                "description": "Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Retiro presencial en Casa Retiro San Pablo, Puerto Colombia.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "7.º Encuentro Nacional Buddhista – 2026",
+                "og_description": "Tres días para detenerte, respirar profundo y reencontrarte con lo esencial. Retiro presencial en Casa Retiro San Pablo, Puerto Colombia.",
+                "related": ""
+            },
+            "attendance_mode": "offline",
+            "jsonld_extra": {
+                "performer": {
+                    "@type": "Person",
+                    "@id": "https://caminodeldharma.org/#zhenggong",
+                    "name": "Venerable Maestro Zheng Gong",
+                    "alternateName": [
+                        "Maestro Zheng Gong",
+                        "Zheng Gong"
+                    ],
+                    "url": "https://caminodeldharma.org/comunidad"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "500000",
+                    "priceCurrency": "COP",
+                    "validFrom": "2026-07-01T00:00:00-05:00"
+                }
+            },
+            "has_single_source": true,
+            "source_path": "static/eventos/encuentro-nacional-2026/index.html",
+            "_source_key": "event:encuentro-nacional-2026",
+            "_source_hash": "49e9d986628e4ace4fe92678e5e38b5ce848840532fb105f2ac8ea08f9144b7a"
+        },
+        {
+            "slug": "meditacion-presencial-barranquilla",
+            "title": "Meditación Presencial en Barranquilla",
+            "type": "Meditación",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-07-09",
+            "end": null,
+            "place": "Barranquilla – Calle 71 # 39-117",
+            "modality": "Presencial en Barranquilla con guía virtual en vivo",
+            "cities": [
+                "Barranquilla"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
+            "poster_alt": "Cartel de Meditación Presencial en Barranquilla — guiada en vivo de forma virtual por el Maestro Zheng Gong",
+            "excerpt": "Un espacio para detenernos, respirar y reconectar con lo esencial.",
+            "content_html": "<p class=\"evento-lead\">Un espacio para detenernos, respirar y reconectar con lo esencial.</p>\n      <p>Barranquilla, hagamos una pausa. A veces un momento de silencio puede cambiar el rumbo de toda una semana.</p>\n      <p>Un encuentro de meditación presencial, guiado en vivo de forma virtual por el Maestro Zheng Gong: la comunidad se reunió en un mismo lugar para practicar acompañada a distancia. Un espacio para respirar, recuperar claridad y volver a lo esencial.</p>\n\n      \n\n      <p><strong>Guiada por el Maestro Zheng Gong.</strong></p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:meditacion-presencial-barranquilla",
+            "_source_hash": "b7c6ce46c99290fd4d0e376ad8a05ef20dad5a060fbccd8d8832e4fabd293f9b"
+        },
+        {
+            "slug": "festival-calma-en-la-ciudad",
+            "title": "Meditación Budista – Festival Calma en la Ciudad",
+            "type": "Meditación",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-06-28",
+            "end": null,
+            "place": "Bogotá – Parque de los Novios, Av. Calle 63 # 45-10",
+            "modality": "Presencial – al aire libre",
+            "cities": [
+                "Bogotá"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
+            "poster_alt": "Cartel de Meditación Budista en el Festival Calma en la Ciudad — Tu retiro en Bogotá, dirigido por el Monje Buddhista Zheng Gong",
+            "excerpt": "Hay momentos en los que lo más valioso no es hacer más, sino detenernos un instante.",
+            "content_html": "<p class=\"evento-lead\">Hay momentos en los que lo más valioso no es hacer más, sino detenernos un instante.</p>\n      <p>En el marco del Festival <em>Calma en la Ciudad — Tu retiro en Bogotá</em> y de la feria de emprendimiento <em>Hecho en Bogotá</em>, acompañamos a la ciudad con una meditación budista al aire libre en el Parque de los Novios. Una pausa abierta a todos para respirar, aquietar la mente y volver a lo esencial en medio del ritmo urbano.</p>\n\n      \n\n      <p>Se recomendaba llevar ropa cómoda, hidratación y colchoneta o mat de yoga.</p>\n\n      <p><strong>Dirigido por el Monje Buddhista Zheng Gong.</strong></p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:festival-calma-en-la-ciudad",
+            "_source_hash": "d572fb87a3f8d66de0bf6303fcabb487c5092b1bde59febad80db1cd0c17a6c8"
+        },
+        {
+            "slug": "pausa-profunda-medellin",
+            "title": "Pausa Profunda – Medellín",
+            "type": "Taller",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-05-23",
+            "end": null,
+            "place": "Medellín – Centro de formación Los Pomos, Calle 37 20A-60, barrio Buenos Aires",
+            "modality": "Presencial",
+            "cities": [
+                "Medellín"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
+            "poster_alt": "Cartel del taller Pausa Profunda en Medellín — Taller de meditación consciente de un día, dirigido por el Maestro Zheng Gong",
+            "excerpt": "Un espacio para detenerte, escucharte y volver a lo esencial.",
+            "content_html": "<p class=\"evento-lead\">Un espacio para detenerte, escucharte y volver a lo esencial.</p>\n      <p>Pausa Profunda fue un taller de un día creado como un espacio de detención consciente, para quienes sienten la necesidad de bajar el ritmo, escuchar con mayor claridad y volver a lo esencial.</p>\n      <p>A lo largo de la jornada exploramos prácticas contemplativas desde la perspectiva buddhista que permiten habitar el cansancio con mayor presencia, soltar la autoexigencia innecesaria y cultivar una relación más amable y lúcida con la experiencia cotidiana.</p>\n\n      \n\n      <p><strong>Dirigido por el Maestro Buddhista Zheng Gong.</strong></p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:pausa-profunda-medellin",
+            "_source_hash": "445b7a60cf2ef4167fa6c619ee2813dbd957a2cc3e2e686069fb12dea7590640"
+        },
+        {
+            "slug": "ansiedad-agotamiento-crisis-de-atencion",
+            "title": "Ansiedad, agotamiento y crisis de atención en el mundo actual",
+            "type": "Conferencia",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-05-22",
+            "end": null,
+            "place": "Medellín – Uniremington, Torre 1, Piso 20",
+            "modality": "Presencial",
+            "cities": [
+                "Medellín"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
+            "poster_alt": "Cartel de la conferencia Ansiedad, agotamiento y crisis de atención en el mundo actual — Una reflexión para cuidar nuestra salud mental, en Uniremington Medellín",
+            "excerpt": "Una reflexión para cuidar nuestra salud mental.",
+            "content_html": "<p class=\"evento-lead\">Una reflexión para cuidar nuestra salud mental.</p>\n      <p>Conferencia convocada por la Dirección de Bienestar Institucional de Uniremington, dentro de su programa <em>Espacios de arte y cultura</em>. Un espacio de reflexión sobre los desafíos que la hiperconectividad, la presión social y el ritmo acelerado generan en nuestra salud mental.</p>\n      <p>La charla abordó la ansiedad, el agotamiento emocional, la dispersión de la atención y el bienestar en la vida universitaria, integrando pensamiento contemporáneo y prácticas contemplativas.</p>\n\n      <ul class=\"evento-highlights\">\n        <li>Conferencia magistral</li>\n        <li>Reflexión guiada y prácticas contemplativas</li>\n        <li>Espacio de preguntas y diálogo</li>\n      </ul>\n\n      \n\n      <p><strong>Orientada por el Maestro Zheng Gong</strong>, maestro buddhista con experiencia en formación humana y atención consciente.</p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:ansiedad-agotamiento-crisis-de-atencion",
+            "_source_hash": "1e0a38914825a204f7c74f414c499232362189a239ca62e2d79e95243a6dfe58"
+        },
+        {
+            "slug": "vesak-2026",
+            "title": "Vesak 2026 – Colombia Cuida la Vida",
+            "type": "Celebración",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-05-09",
+            "end": null,
+            "place": "Bogotá – Biblioteca Pública Virgilio Barco, Sala de Música, Avenida Carrera 60 # 57-60 (con parqueadero)",
+            "modality": "Presencial",
+            "cities": [
+                "Bogotá"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-vesak-2026-bogota.jpeg",
+            "poster_alt": "Cartel de Vesak 2026 – Colombia Cuida la Vida, celebración en la Biblioteca Pública Virgilio Barco de Bogotá",
+            "excerpt": "Una mañana de meditación colectiva, música, mantras y conversatorio para cultivar paz interior y el cuidado consciente de la vida.",
+            "content_html": "<p class=\"evento-lead\">Una mañana de meditación colectiva, música, mantras y conversatorio para cultivar paz interior y el cuidado consciente de la vida.</p>\n      <p>Una invitación a hacer una pausa en medio del ritmo cotidiano y regalarse una mañana de calma, meditación y conexión. Nuestra celebración del Vesak, con el acompañamiento de <em>Bogotá Cultura + Consciente</em>.</p>\n\n      <ul class=\"evento-highlights\">\n        <li>Meditación guiada</li>\n        <li>Música y mantras</li>\n        <li>Conversatorio</li>\n        <li>Concierto de música colombiana en vivo</li>\n      </ul>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:vesak-2026",
+            "_source_hash": "59e0fd5162cb34102102a56344cec4ba19369c39a195f95e61e63997f08cbbcc"
+        },
+        {
+            "slug": "pausa-profunda-cali",
+            "title": "Pausa Profunda – Cali",
+            "type": "Taller",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-02-15",
+            "end": null,
+            "place": "Cali – Barrio Limonar",
+            "modality": "Presencial",
+            "cities": [
+                "Cali"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg",
+            "poster_alt": "Cartel del taller Pausa Profunda — Un día para detenerte, escuchar y volver a lo esencial",
+            "excerpt": "¿Sientes que necesitas bajar el ritmo, respirar con más calma y volver a lo esencial?",
+            "content_html": "<p class=\"evento-lead\">¿Sientes que necesitas bajar el ritmo, respirar con más calma y volver a lo esencial?</p>\n      <p>Pausa Profunda fue un taller de un día para detenerse, escuchar y habitar el presente con mayor claridad. Un espacio para soltar el cansancio, calmar el ruido interior y reconectar, guiado desde una perspectiva budista, sencilla y profunda.</p>\n      <p class=\"evento-tagline\"><em>Pausa no es escapar… es aprender a estar.</em></p>\n\n      \n\n      <p><strong>Dirigido por el Maestro Zheng Gong.</strong></p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "Pausa Profunda – Cali — Camino del Dharma",
+                "description": "Un taller de un día para detenerte, escuchar y habitar el presente con mayor claridad.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Pausa Profunda – Cali",
+                "og_description": "Un taller de un día para detenerte, escuchar y habitar el presente con mayor claridad.",
+                "related": ""
+            },
+            "attendance_mode": "offline",
+            "jsonld_extra": {
+                "performer": {
+                    "@type": "Person",
+                    "@id": "https://caminodeldharma.org/#zhenggong",
+                    "name": "Venerable Maestro Zheng Gong",
+                    "alternateName": [
+                        "Maestro Zheng Gong",
+                        "Zheng Gong"
+                    ],
+                    "url": "https://caminodeldharma.org/comunidad"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "200000",
+                    "priceCurrency": "COP",
+                    "validFrom": "2026-01-01T00:00:00-05:00"
+                }
+            },
+            "has_single_source": true,
+            "source_path": "static/eventos/pausa-profunda-cali/index.html",
+            "_source_key": "event:pausa-profunda-cali",
+            "_source_hash": "67331ba7c03dc55946913f606eaa3f4d87fffef6931658c7bcdc7ccc3e43b59c"
+        },
+        {
+            "slug": "buddhismo-tiempos-cansancio",
+            "title": "Buddhismo para tiempos de cansancio",
+            "type": "Conferencia",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2026-01-23",
+            "end": null,
+            "place": "",
+            "modality": "En línea (Zoom y YouTube)",
+            "cities": [],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg",
+            "poster_alt": "Cartel de Buddhismo para tiempos de cansancio — Conferencia con el Maestro Zheng Gong",
+            "excerpt": "Conferencia guiada por el Maestro Zheng Gong. Un espacio de enseñanza, reflexión y práctica, transmitido en vivo por Zoom y YouTube, con participación internacional.",
+            "content_html": "<p class=\"evento-lead\">Conferencia guiada por el Maestro Zheng Gong. Un espacio de enseñanza, reflexión y práctica, transmitido en vivo por Zoom y YouTube, con participación internacional.</p>\n      <p>Desde nuestra comunidad les invitamos a acompañarnos y a compartir esta actividad con quienes puedan beneficiarse de ella. Que esta enseñanza sea descanso y claridad.</p>\n\n      \n\n      <p><strong>Zoom</strong> — ID de reunión: 859 0106 4155 · Código de acceso: 123456</p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:buddhismo-tiempos-cansancio",
+            "_source_hash": "dbb3ab9b42c06648f68dcd58bd02ea654b865d7cde877973ebb17a45c21cf831"
+        },
+        {
+            "slug": "6-encuentro-nacional-2025",
+            "title": "6.º Encuentro Nacional Buddhista – 2025",
+            "type": "Encuentro",
+            "status": "finalizado",
+            "featured": false,
+            "start": "2025-08-16",
+            "end": "2025-08-18",
+            "place": "Cali",
+            "modality": "",
+            "cities": [
+                "Cali"
+            ],
+            "signup_url": null,
+            "poster": "assets/images/eventos/evento-6-encuentro-nacional.jpeg",
+            "poster_alt": "Cartel del 6.º Encuentro Nacional — Meditación, compasión y diálogo para sanar juntos",
+            "excerpt": "Meditación, compasión y diálogo para sanar juntos.",
+            "content_html": "<p class=\"evento-lead\">Meditación, compasión y diálogo para sanar juntos.</p>\n      <p>¿Sientes que necesitas una pausa para reconectar contigo mismo y con lo esencial de la vida? Este encuentro fue una oportunidad para cultivar serenidad, profundizar en la práctica espiritual y compartir con una comunidad comprometida con el despertar.</p>\n      <ul class=\"evento-highlights\">\n        <li>Cupos limitados</li>\n        <li>Ambiente seguro y amoroso</li>\n        <li>Meditación guiada, escucha profunda y prácticas de compasión</li>\n      </ul>\n\n      \n\n      <p>También podías escribir al WhatsApp <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">+57 320 662 7608</a> para información o apoyo en la inscripción.</p>",
+            "calendar_dates": [],
+            "share": {
+                "whatsapp": "",
+                "x": "",
+                "threads": ""
+            },
+            "seo": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
+            "attendance_mode": "",
+            "jsonld_extra": [],
+            "has_single_source": false,
+            "source_path": "static/eventos/index.html",
+            "_source_key": "event:6-encuentro-nacional-2025",
+            "_source_hash": "637305e88bb27b6705be376ec48e9c96ba36cc9393fdcf29d39ecef46997db0e"
+        }
+    ],
+    "posts": [
+        {
+            "slug": "circulos-de-presencia-consciente",
+            "title": "Círculos de Presencia Consciente",
+            "deck": "Un espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.",
+            "date": "2026-08-13",
+            "author_name": "Comunidad Camino del Dharma",
+            "author_slug": "comunidad-camino-del-dharma",
+            "author_bio": "",
+            "thumbnail": "assets/images/blog/circulos-de-presencia-consciente.jpg",
+            "thumbnail_alt": "Grupo de personas sentadas en círculo en un espacio iluminado, con una vela en el centro. Círculos de Presencia Consciente.",
+            "seo": {
+                "title": "Curso de Presencia Consciente y Salud Mental Comunitaria | Camino del Dharma",
+                "description": "Enfoque, cronograma, becas y preguntas frecuentes del curso Círculos de Presencia Consciente, una iniciativa de salud mental comunitaria en Bogotá y Cali.",
+                "keywords": "curso Círculos de Presencia Consciente, presencia consciente, salud mental comunitaria, bienestar emocional, regulación emocional, autocompasión, escucha consciente, resiliencia comunitaria, Bogotá, Cali",
+                "og_title": "Curso Círculos de Presencia Consciente",
+                "og_description": "Enfoque, cronograma, becas y preguntas frecuentes del curso Círculos de Presencia Consciente, una iniciativa de salud mental comunitaria en Bogotá y Cali.",
+                "related": "https://caminodeldharma.org/eventos/circulos-de-presencia-consciente"
+            },
+            "content_html": "<p>Círculos de Presencia Consciente es un proceso de formación dirigido a personas adultas de Bogotá y Cali que deseen fortalecer su bienestar emocional, cultivar una mayor presencia en la vida cotidiana y aprender herramientas de escucha y cuidado comunitario.</p>\n      <p>Durante el curso exploraremos prácticas sencillas y aplicables para reconocer nuestras emociones, relacionarnos de una manera más consciente con el estrés y construir espacios seguros de escucha y apoyo mutuo.</p>\n      <p>No necesitas tener experiencia previa en meditación ni pertenecer a una tradición espiritual.</p>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Quiero preinscribirme <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n      </p>\n\n      <h2>¿Qué encontrarás en este proceso?</h2>\n      <p>A lo largo de seis sesiones virtuales y un encuentro presencial en tu ciudad, abordaremos:</p>\n      <ul>\n        <li>Presencia consciente y atención en la vida cotidiana.</li>\n        <li>Herramientas básicas de regulación emocional.</li>\n        <li>Reconocimiento del estrés y el agotamiento.</li>\n        <li>Autocompasión y cuidado personal.</li>\n        <li>Relaciones y escucha consciente.</li>\n        <li>Redes de apoyo y resiliencia comunitaria.</li>\n      </ul>\n      <p>No se trata de conferencias aisladas. Es un proceso progresivo en el que cada sesión prepara la siguiente e integra momentos de aprendizaje, práctica y participación.</p>\n\n      <h2>¿A quién está dirigido?</h2>\n      <p>A personas mayores de 18 años que vivan en Bogotá o Cali y tengan interés en participar en un proceso de bienestar emocional, escucha y fortalecimiento comunitario.</p>\n      <p>El curso puede ser especialmente valioso para:</p>\n      <ul>\n        <li>Personas interesadas en su bienestar y crecimiento personal.</li>\n        <li>Líderes y lideresas comunitarias.</li>\n        <li>Mujeres cuidadoras y personas que acompañan a otros.</li>\n        <li>Docentes y profesionales del ámbito social.</li>\n        <li>Integrantes de fundaciones, colectivos y organizaciones.</li>\n        <li>Servidores públicos y coordinadores de proyectos comunitarios.</li>\n        <li>Personas que experimentan estrés o agotamiento emocional.</li>\n      </ul>\n      <p>Círculos de Presencia Consciente tiene un enfoque preventivo, formativo y comunitario. No es un proceso de psicoterapia ni reemplaza la atención médica, psicológica o psiquiátrica cuando esta sea necesaria.</p>\n\n      <h2>Becas completas</h2>\n      <p>El curso ofrece un número limitado de becas completas para personas de Bogotá y Cali.</p>\n      <p>Las personas seleccionadas tendrán acceso a:</p>\n      <ul>\n        <li>Seis sesiones virtuales.</li>\n        <li>Un encuentro presencial en su ciudad.</li>\n        <li>Orientación para el uso de Google Classroom.</li>\n        <li>Materiales de formación.</li>\n        <li>Certificación, de acuerdo con los criterios de participación establecidos.</li>\n      </ul>\n      <p>La preinscripción no garantiza automáticamente la asignación de una beca. Las personas interesadas serán invitadas a una sesión virtual de bienvenida, en la que conocerán la metodología, el calendario y los compromisos del curso. Después podrán decidir si desean completar su inscripción definitiva.</p>\n\n      <h2>Cronograma</h2>\n      <p>Todas las actividades virtuales se realizarán a las 7:00 p. m., hora de Colombia.</p>\n\n      <h3>Sesión virtual de bienvenida</h3>\n      <p>Jueves 3 de septiembre de 2026<br>7:00 p. m.</p>\n      <p>Durante este encuentro conocerás la metodología, el cronograma y los compromisos del curso. Al finalizar, las personas interesadas podrán realizar su inscripción definitiva y continuar con el proceso de asignación de las becas.</p>\n\n      <h3>Orientación sobre Google Classroom</h3>\n      <p>Jueves 10 de septiembre de 2026<br>7:00 p. m.</p>\n      <p>Esta sesión permitirá conocer el funcionamiento de la plataforma, acceder a los materiales y resolver inquietudes técnicas antes de comenzar el curso.</p>\n\n      <h3>Sesiones virtuales</h3>\n      <ul>\n        <li>Sesión 1: martes 15 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 2: jueves 17 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 3: martes 22 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 4: jueves 24 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 5: martes 29 de septiembre, 7:00 p. m.</li>\n        <li>Sesión 6: jueves 1 de octubre, 7:00 p. m.</li>\n      </ul>\n\n      <h3>Encuentro presencial en Bogotá</h3>\n      <p>Sábado 17 de octubre de 2026<br>8:00 a. m. a 12:00 m.</p>\n\n      <h3>Encuentro presencial en Cali</h3>\n      <p>Sábado 24 de octubre de 2026<br>8:00 a. m. a 12:00 m.</p>\n      <p>Cada participante asistirá únicamente al encuentro presencial correspondiente a la ciudad seleccionada. El lugar será informado oportunamente a las personas admitidas.</p>\n\n      <h2>¿Cómo participar?</h2>\n      <ol>\n        <li>\n          <p><strong>Realiza tu preinscripción</strong></p>\n          <p>Completa el formulario con tus datos básicos y selecciona la ciudad en la que participarías.</p>\n        </li>\n        <li>\n          <p><strong>Participa en la sesión de bienvenida</strong></p>\n          <p>Recibirás por WhatsApp o correo electrónico la invitación a una sesión virtual en la que conocerás todos los detalles del curso.</p>\n        </li>\n        <li>\n          <p><strong>Completa tu inscripción</strong></p>\n          <p>Al finalizar la bienvenida, las personas interesadas recibirán el enlace para completar la inscripción definitiva.</p>\n        </li>\n        <li>\n          <p><strong>Confirma tu beca</strong></p>\n          <p>Las personas admitidas recibirán la confirmación de su beca y la información para ingresar a Google Classroom.</p>\n        </li>\n        <li>\n          <p><strong>Comienza el proceso</strong></p>\n          <p>Participarás en las seis sesiones virtuales y en el encuentro presencial correspondiente a tu ciudad.</p>\n        </li>\n      </ol>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Realizar mi preinscripción <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n      </p>\n\n      <h2>Preguntas frecuentes</h2>\n\n      <h3>¿El curso tiene algún costo?</h3>\n      <p>No. Las personas admitidas recibirán una beca completa que cubre su participación en el proceso, los materiales de formación y la certificación.</p>\n\n      <h3>¿La preinscripción garantiza mi cupo?</h3>\n      <p>No. La preinscripción permite manifestar tu interés y recibir la invitación a la sesión de bienvenida. La beca se confirmará después de completar el proceso de inscripción definitiva.</p>\n\n      <h3>¿Debo tener experiencia en meditación?</h3>\n      <p>No. El curso está diseñado para personas con o sin experiencia previa.</p>\n\n      <h3>¿Puedo participar si vivo en otra ciudad?</h3>\n      <p>Sí. Aunque el proceso está dirigido principalmente a personas de Bogotá y Cali, puedes participar si resides en otra ciudad y te comprometes a asistir al encuentro presencial en la ciudad que selecciones al momento de inscribirte.</p>\n\n      <h3>¿Cuántas actividades incluye el proceso?</h3>\n      <p>El proceso incluye una sesión de bienvenida, una orientación sobre Google Classroom, seis sesiones virtuales y un encuentro presencial en Bogotá o Cali, según la ciudad seleccionada.</p>\n\n      <h3>¿Recibiré un certificado?</h3>\n      <p>Sí. La certificación estará sujeta al cumplimiento de los criterios de asistencia y participación informados durante la sesión de bienvenida.</p>\n\n      <h3>¿Qué ocurre si no puedo asistir a todas las sesiones?</h3>\n      <p>La beca implica un compromiso con el proceso completo. Si conoces anticipadamente que no podrás participar en la mayoría de las sesiones o en el encuentro presencial, te recomendamos no formalizar todavía la inscripción y permitir que otra persona pueda aprovechar el cupo.</p>\n\n      <h2>Una oportunidad para aprender a cuidarnos juntos</h2>\n      <p>En medio de la prisa cotidiana, muchas personas necesitan un espacio donde puedan detenerse, reconocer lo que están viviendo y sentirse escuchadas.</p>\n      <p>Círculos de Presencia Consciente nace como una invitación a recuperar ese espacio y a descubrir que el cuidado emocional no tiene que vivirse en soledad.</p>\n      <p>Los cupos son limitados.</p>\n\n      <p class=\"article-cta\">\n        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSe4jq6kw-r7TgYVO1kXefPxCTaPXeQ_X-j1-NJylhiMmDLJRw/viewform\" class=\"btn btn-primary\" target=\"_blank\" rel=\"noopener noreferrer\">Quiero preinscribirme <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a>\n        <a href=\"/eventos/circulos-de-presencia-consciente\" class=\"btn btn-secondary\">Ver evento</a>\n      </p>\n\n      <p>Para resolver inquietudes puedes comunicarte con la Comunidad Buddhista Camino del Dharma:</p>\n      <p>WhatsApp: <a href=\"https://wa.me/573206627608\" target=\"_blank\" rel=\"noopener noreferrer\">320 662 7608 <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></p>\n      <p>Correo: <a href=\"mailto:caminodeldharma1@gmail.com\">caminodeldharma1@gmail.com</a></p>\n      <p>Nota: La programación, los contenidos y las condiciones operativas del curso podrán ser revisados o ajustados de acuerdo con las necesidades pedagógicas y logísticas del proceso. Cualquier cambio será informado oportunamente a las personas participantes.</p>",
+            "share": {
+                "whatsapp": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad.\n\n{{SHARE_URL}}",
+                "x": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente",
+                "threads": "Nota · Comunidad Camino del Dharma\n\nCírculos de Presencia Consciente\nUn espacio para detenernos, escucharnos y aprender a cuidar la vida en comunidad."
+            },
+            "tags": [],
+            "source_path": "static/blog/circulos-de-presencia-consciente/index.html",
+            "authors": [
+                "comunidad-camino-del-dharma"
+            ],
+            "_source_key": "post:circulos-de-presencia-consciente",
+            "_source_hash": "638b523b46cc6ac45a6cd9a2eb4439790f4e4a268678ad76ee54a4a6da2bd181"
+        },
+        {
+            "slug": "sangha-refugio-hiperconexion",
+            "title": "Estamos conectados, pero seguimos solos",
+            "deck": "La Sangha como refugio en tiempos de hiperconexión",
+            "date": "2026-07-16",
+            "author_name": "Zheng Gong",
+            "author_slug": "zheng-gong",
+            "author_bio": "Maestro budista de las tradiciones Chan y Tierra Pura. Abad y presidente de la Comunidad Buddhista Camino del Dharma.",
+            "thumbnail": "assets/images/blog/sangha-refugio-hiperconexion.jpg",
+            "thumbnail_alt": "Persona sentada en un banco al atardecer, frente a un lago y la ciudad",
+            "seo": {
+                "title": "Estamos conectados, pero seguimos solos — Blog — Camino del Dharma",
+                "description": "La Sangha como refugio en tiempos de hiperconexión. Reflexión de Zheng Gong sobre soledad, presencia y comunidad de práctica.",
+                "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista",
+                "og_title": "Estamos conectados, pero seguimos solos",
+                "og_description": "La Sangha como refugio en tiempos de hiperconexión. Reflexión de Zheng Gong sobre soledad, presencia y comunidad de práctica.",
+                "related": ""
+            },
+            "content_html": "<p>Al terminar el día, muchas personas dejan el teléfono sobre la mesa y, por primera vez en horas, la pantalla deja de reclamar su atención. Es entonces cuando aparece una sensación difícil de nombrar. Han respondido mensajes, revisado las redes sociales, participado en reuniones virtuales y permanecido, aparentemente, conectadas con el mundo. Sin embargo, en ese breve silencio descubren que hace tiempo no sostienen una conversación que realmente las haya conmovido.</p>\n      <p>No les faltaron mensajes. Les faltó encuentro.</p>\n      <p>Cada vez escuchamos con más frecuencia historias parecidas. Personas que hablan con mucha gente durante el día, pero que sienten que hace semanas nadie les pregunta, con verdadero interés, cómo están. Personas que sonríen en una videollamada y, al cerrarla, vuelven a experimentar una silenciosa sensación de vacío. Es una paradoja difícil de ignorar ya que nunca habíamos contado con tantas formas de comunicarnos y, sin embargo, cada vez parece más difícil encontrarnos.</p>\n      <p>No se trata solo de una percepción. La Organización Mundial de la Salud advirtió que una de cada seis personas en el mundo experimenta soledad y que el aislamiento social constituye un factor de riesgo para la salud física, mental y el bienestar. No estamos, por tanto, ante un problema exclusivamente emocional, sino frente a un desafío social que comienza a transformar la manera en que vivimos, trabajamos y nos relacionamos (Organización Mundial de la Salud, 2025).</p>\n      <p>Tal vez no hablamos poco. Tal vez hemos olvidado cómo encontrarnos.</p>\n\n      <h2>La paradoja de la hiperconexión</h2>\n      <p>Casi sin darnos cuenta, hemos empezado a vivir con prisa incluso cuando no existe ninguna urgencia. Respondemos mensajes mientras caminamos, escuchamos a alguien mientras revisamos otra conversación y compartimos fotografías antes de haber vivido plenamente aquello que deseábamos recordar. La velocidad ha dejado de ser únicamente una característica de nuestro tiempo; poco a poco se ha convertido en una forma de habitar el mundo.</p>\n      <p>En ese contexto, resulta fácil confundir disponibilidad con presencia.</p>\n      <p>Pero estar disponibles no significa estar presentes.</p>\n      <p>La presencia no depende de una aplicación ni de una mejor conexión a internet. Nace cuando dejamos de mirar la pantalla para mirar realmente a quien tenemos delante. Requiere atención, escucha y la disposición de permitir que la experiencia del otro también transforme la nuestra.</p>\n      <p>En ocasiones pensamos que la respuesta consiste simplemente en aprender a estar solos. Sin duda, existe una soledad que puede ser profundamente fecunda. Es la del retiro voluntario, la del silencio que permite observar la mente con mayor claridad y descubrir que no necesitamos llenar cada instante con estímulos para sentirnos vivos. El budismo ha reconocido desde sus orígenes el valor de ese espacio interior, y muchos de sus grandes maestros/as encontraron allí una fuente de sabiduría.</p>\n      <p>Pero esa no es la única forma de estar solos.</p>\n      <p>Existe también una soledad que no libera, sino que pesa. La experimenta quien siente que no tiene con quién compartir sus preguntas, sus miedos o sus alegrías; quien permanece rodeado de personas y, aun así, siente que nadie conoce verdaderamente lo que ocurre en su interior.</p>\n      <p>No toda persona que está sola sufre. Pero nadie debería acostumbrarse a vivir sin sentirse visto por otro ser humano.</p>\n      <p>Confundir estas dos experiencias puede llevarnos a idealizar el aislamiento como si fuera siempre una oportunidad espiritual. No lo es. Hay momentos en los que el camino hacia una vida más consciente comienza, precisamente, cuando aceptamos volver a encontrarnos con los demás.</p>\n\n      <h2>La Sangha como un refugio para nuestro tiempo</h2>\n      <p>Cuando una persona toma refugio en el budismo lo hace en el Buda, el Dharma y la Sangha. Habitualmente comprendemos con facilidad los dos primeros. El Buda representa la posibilidad del despertar y el Dharma el camino que orienta nuestra práctica. La Sangha, en cambio, suele entenderse simplemente como \"la comunidad\".</p>\n      <p>La traducción es correcta, pero resulta insuficiente.</p>\n      <p>Una Sangha no es cualquier grupo de personas. Es una comunidad que decide ayudarse mutuamente a no olvidar el Camino. Un lugar donde la práctica deja de ser un proyecto exclusivamente individual para convertirse en una experiencia compartida.</p>\n      <p>Nuestra cultura suele valorar la autosuficiencia. Aprendemos que debemos resolver solos nuestras dificultades, gestionar nuestras emociones sin depender de nadie y demostrar fortaleza incluso cuando por dentro nos sentimos frágiles. Sin embargo, el budismo recuerda una verdad mucho más sencilla y, al mismo tiempo más profunda y es que nada existe de manera aislada.</p>\n      <p>Nuestra vida depende del aire que respiramos, del alimento que otros cultivaron, del lenguaje que aprendimos de quienes nos precedieron y del cuidado recibido mucho antes de que pudiéramos valernos por nosotros mismos. También depende de las personas que hoy nos acompañan, nos cuestionan, nos escuchan y, a veces, incluso nos muestran aquello que todavía necesitamos aprender.</p>\n      <p>La interdependencia no es una teoría budista. Es la manera en que la vida sucede.</p>\n      <p>Desde esa comprensión, reconocer que necesitamos de los demás deja de ser un signo de debilidad para convertirse en una expresión de sabiduría.</p>\n      <p>Por supuesto, ninguna comunidad es perfecta. Toda Sangha está formada por seres humanos y, allí donde hay seres humanos, existen diferencias, desacuerdos y aprendizajes pendientes. Su valor no radica en la ausencia de conflictos, sino en la posibilidad de atravesarlos sin renunciar al vínculo. Permanecer, escuchar, dialogar, pedir perdón cuando es necesario y alegrarnos sinceramente por el bienestar de los demás también forman parte del entrenamiento espiritual.</p>\n      <p>En tiempos en los que se nos invita a resolverlo todo solos, la Sangha resulta casi contracultural. Nos recuerda que nadie despierta completamente solo y que la práctica encuentra una profundidad distinta cuando puede sostenerse junto a otros.</p>\n\n      <h2>Volver a encontrarnos</h2>\n      <p>Quizá el mayor desafío de nuestra época no consista en aumentar el número de personas con las que nos comunicamos, sino en recuperar la capacidad de encontrarnos verdaderamente con ellas.</p>\n      <p>Todos necesitamos un lugar donde el silencio no resulte incómodo, donde las preguntas puedan formularse sin miedo y donde no sea necesario aparentar que todo está bien para sentirnos acogidos. Necesitamos espacios donde la escucha tenga tanto valor como la palabra y donde el crecimiento espiritual no se mida por los logros individuales, sino también por la manera en que aprendemos a cuidar la vida compartida.</p>\n      <p>La Sangha ofrece precisamente esa posibilidad. No elimina el sufrimiento ni evita las dificultades propias de la existencia. Lo que hace es recordarnos que el camino nunca estuvo pensado para recorrerse completamente solos. Quizá el opuesto de la soledad no sea simplemente estar acompañados. Quizá sea descubrir que pertenecemos. Que nuestra vida siempre ha estado entrelazada con otras vidas, aunque con frecuencia lo olvidemos.</p>\n      <p>El budismo llama Sangha a esa experiencia de caminar junto a otros. No porque el camino se vuelva más corto o fácil, sino porque, cuando alguien camina a nuestro lado, incluso el silencio deja de sentirse vacío.</p>\n      <p>Si esta reflexión resonó contigo, te invitamos a conocer los espacios de meditación, estudio y práctica de la Comunidad Buddhista Camino del Dharma. A veces basta un lugar donde podamos sentarnos juntos, guardar silencio y recordar que el Camino también se aprende en comunidad.</p>\n\n      <section class=\"article-references\" aria-labelledby=\"article-references-heading\">\n        <h2 id=\"article-references-heading\">Referencias consultadas</h2>\n        <ol>\n          <li>Holt-Lunstad, J. (2024). La conexión social como prioridad de salud pública. <em>Annual Review of Public Health</em>, 45, 193-210.</li>\n          <li>Organización Mundial de la Salud. (2025). Comisión de la OMS sobre Conexión Social. Ginebra: Organización Mundial de la Salud. Disponible en: <a href=\"https://www.who.int/groups/commission-on-social-connection\" target=\"_blank\" rel=\"noopener noreferrer\">https://www.who.int/groups/commission-on-social-connection <span class=\"visually-hidden\">(abre en nueva pestaña)</span></a></li>\n          <li>Organización Mundial de la Salud. (2025). De la soledad a la conexión social: trazando un camino hacia sociedades más saludables. Ginebra: Organización Mundial de la Salud.</li>\n        </ol>\n      </section>",
+            "share": {
+                "whatsapp": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos\nLa Sangha como refugio en tiempos de hiperconexión\n\n{{SHARE_URL}}",
+                "x": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos",
+                "threads": "Reflexión · Zheng Gong · Camino del Dharma\n\nEstamos conectados, pero seguimos solos\nLa Sangha como refugio en tiempos de hiperconexión"
+            },
+            "tags": [],
+            "source_path": "static/blog/sangha-refugio-hiperconexion/index.html",
+            "authors": [
+                "zheng-gong"
+            ],
+            "_source_key": "post:sangha-refugio-hiperconexion",
+            "_source_hash": "89abfe4cd6df5f277f961008cb9654ffc3f50c90b200e405f920baa43121abf5"
+        }
+    ],
+    "blog_authors": [
+        {
+            "slug": "comunidad-camino-del-dharma",
+            "name": "Comunidad Camino del Dharma",
+            "bio": "",
+            "_source_key": "blog_author:comunidad-camino-del-dharma",
+            "_source_hash": "03901085953a443d0054e52adbe1a825489ec22e89a565455e559bd7e10505fe"
+        },
+        {
+            "slug": "zheng-gong",
+            "name": "Zheng Gong",
+            "bio": "Maestro budista de las tradiciones Chan y Tierra Pura. Abad y presidente de la Comunidad Buddhista Camino del Dharma.",
+            "_source_key": "blog_author:zheng-gong",
+            "_source_hash": "43af68b2b7808054103d585784349a5c0c66113f258cbc61121b52e5e8df579e"
+        }
+    ],
+    "gallery_albums": [
+        {
+            "slug": "general",
+            "title": "General",
+            "source_id": "galeria-general",
+            "_source_key": "album:general",
+            "_source_hash": "112dc3a59830756c52b3a84fc1478a0405f1152f1a4f7df8fea6d8617332abd0"
+        },
+        {
+            "slug": "2023",
+            "title": "2023",
+            "source_id": "galeria-2023",
+            "_source_key": "album:2023",
+            "_source_hash": "b4d426056d9edaa0d4aed016e85a8ea3a44db9f19766cc0532d5a404431c9939"
+        },
+        {
+            "slug": "2021",
+            "title": "2021",
+            "source_id": "galeria-2021",
+            "_source_key": "album:2021",
+            "_source_hash": "b4d5418aa972fad53eae0ee08f0ed2f68204d0b9cf5b2c54be10363fc9c880f2"
+        }
+    ],
+    "gallery_images": [
+        {
+            "file": "assets/images/galeria/galeria-01.jpg",
+            "alt": "Grupo numeroso meditando sentado en el suelo de un gimnasio, guiado por un monje con túnica naranja.",
+            "album": "general",
+            "position": 0,
+            "_source_key": "gallery:assets/images/galeria/galeria-01.jpg",
+            "_source_hash": "22a107d7a212eaa6503ebe4c138ecc87106b4ecff30e07453e9cb34d01d7da9b"
+        },
+        {
+            "file": "assets/images/galeria/galeria-02.jpg",
+            "alt": "Grupo de practicantes de pie y sentados en un salón, con las manos juntas en gesto de meditación, junto a un monje.",
+            "album": "general",
+            "position": 1,
+            "_source_key": "gallery:assets/images/galeria/galeria-02.jpg",
+            "_source_hash": "0fb4126dc3c90e87c41e386859b145929e84516100747a0abac251b151c30044"
+        },
+        {
+            "file": "assets/images/galeria/galeria-03.jpg",
+            "alt": "Grupo sentado en forma de U sobre un piso de madera, frente a un monje con túnica naranja en un salón de paredes de ladrillo.",
+            "album": "general",
+            "position": 2,
+            "_source_key": "gallery:assets/images/galeria/galeria-03.jpg",
+            "_source_hash": "3e0789974c28766e5c9ef7de025dddfcd290a400aac0aba7532e890f254d0321"
+        },
+        {
+            "file": "assets/images/galeria/galeria-05.jpg",
+            "alt": "Panel de mujeres en un conversatorio en BibloRed, con altar central con figuras de Buda y flores.",
+            "album": "general",
+            "position": 3,
+            "_source_key": "gallery:assets/images/galeria/galeria-05.jpg",
+            "_source_hash": "2d961ef61bd9c728ff77b133efaea0269e1327e9c1e260c69c8fe3cb61e31e29"
+        },
+        {
+            "file": "assets/images/galeria/galeria-06.jpg",
+            "alt": "Sesión grupal en un salón con puertas abiertas al jardín, guiada por un monje sentado en una estera azul.",
+            "album": "general",
+            "position": 4,
+            "_source_key": "gallery:assets/images/galeria/galeria-06.jpg",
+            "_source_hash": "6014343c883c24f96ac261f751ef4b3681ac04dbceeb8d969198d5241e93dc15"
+        },
+        {
+            "file": "assets/images/galeria/galeria-07.jpg",
+            "alt": "Decenas de personas meditando al aire libre sobre esterillas en un parque, bajo carpas blancas y banderines.",
+            "album": "general",
+            "position": 5,
+            "_source_key": "gallery:assets/images/galeria/galeria-07.jpg",
+            "_source_hash": "f5ada54bf9e0fbac5c3a9e81e7a4ca1b6742e706380d269fa039686bbda8368e"
+        },
+        {
+            "file": "assets/images/galeria/galeria-08.jpg",
+            "alt": "Grupo caminando en fila por un sendero entre árboles y rocas en un entorno natural.",
+            "album": "general",
+            "position": 6,
+            "_source_key": "gallery:assets/images/galeria/galeria-08.jpg",
+            "_source_hash": "0c87bca87fd7c533f7301a67da8fcccce3648563cae167766b073190dc55a885"
+        },
+        {
+            "file": "assets/images/galeria/galeria-09.jpg",
+            "alt": "Selfie grupal de seis personas sentadas en un salón, sonriendo junto a un pendón de Camino del Dharma.",
+            "album": "general",
+            "position": 7,
+            "_source_key": "gallery:assets/images/galeria/galeria-09.jpg",
+            "_source_hash": "67619f0122b81b0a15825b231643217f4034ae506ed39283597c64a10db67f6b"
+        },
+        {
+            "file": "assets/images/galeria/galeria-10.jpg",
+            "alt": "Grupo numeroso posando en un jardín junto a un monje con túnica marrón, con una torre de ladrillo al fondo.",
+            "album": "general",
+            "position": 8,
+            "_source_key": "gallery:assets/images/galeria/galeria-10.jpg",
+            "_source_hash": "1b6deff1fc00e3367b3a5399b1672017ad1e57330a023c3010860a0c5ce5e0f1"
+        },
+        {
+            "file": "assets/images/galeria/galeria-11.jpg",
+            "alt": "Cuatro personas sentadas en fila frente a un altar con figura de Buda, en un salón de paredes de ladrillo.",
+            "album": "general",
+            "position": 9,
+            "_source_key": "gallery:assets/images/galeria/galeria-11.jpg",
+            "_source_hash": "5d306c5c419f88de9b645aa5439ec615eca8e6dce568606e3d0cd5a826c70f5e"
+        },
+        {
+            "file": "assets/images/galeria/galeria-12.jpg",
+            "alt": "Grupo de practicantes posando sobre rocas en un jardín tropical, con un monje con túnica naranja en el centro.",
+            "album": "general",
+            "position": 10,
+            "_source_key": "gallery:assets/images/galeria/galeria-12.jpg",
+            "_source_hash": "56112b23103faf3ff5478d05d4378b2064e2ba47fe7a6fcb61a6390ec4aad27f"
+        },
+        {
+            "file": "assets/images/galeria/galeria-13.jpg",
+            "alt": "Dos monjes budistas posan frente a un templo tradicional tailandés.",
+            "album": "general",
+            "position": 11,
+            "_source_key": "gallery:assets/images/galeria/galeria-13.jpg",
+            "_source_hash": "1c76ff7a3985ca16ac3e90a0073de59c3f272060f53d3e237a444a065e44b402"
+        },
+        {
+            "file": "assets/images/galeria/galeria-14.jpg",
+            "alt": "Grupo de la comunidad reunido en una playa al atardecer, con las manos juntas en gesto de saludo.",
+            "album": "general",
+            "position": 12,
+            "_source_key": "gallery:assets/images/galeria/galeria-14.jpg",
+            "_source_hash": "81b673d691e68a09c390f15f132f3c91614e9c246af8ccb49f93e7800f521d70"
+        },
+        {
+            "file": "assets/images/galeria/galeria-15.jpg",
+            "alt": "Grupo de practicantes de pie en un jardín, con las manos juntas en gesto de meditación.",
+            "album": "general",
+            "position": 13,
+            "_source_key": "gallery:assets/images/galeria/galeria-15.jpg",
+            "_source_hash": "a3c524611473b9ded231b7b061c344849bbac231b74f0ad8d9a4318a5adc935e"
+        },
+        {
+            "file": "assets/images/galeria/galeria-16.jpg",
+            "alt": "Seis personas de pie en una sala, con las manos juntas en gesto de meditación, junto a un monje.",
+            "album": "general",
+            "position": 14,
+            "_source_key": "gallery:assets/images/galeria/galeria-16.jpg",
+            "_source_hash": "76af99eefaf5351afc5c600f4b11956050a7ecf356b7f270d34f7b4e454584a1"
+        },
+        {
+            "file": "assets/images/galeria/galeria-17.jpg",
+            "alt": "Grupo de personas meditando sentadas en cojines de colores sobre césped artificial, con un monje guiando la sesión bajo una carpa.",
+            "album": "general",
+            "position": 15,
+            "_source_key": "gallery:assets/images/galeria/galeria-17.jpg",
+            "_source_hash": "ba2fd1234ca2ce32eddf6c7794f658a0925ebce019d877aca4e2dbb452d16935"
+        },
+        {
+            "file": "assets/images/galeria/galeria-18.jpg",
+            "alt": "Tres monjes budistas de pie frente a un palacio o templo tailandés.",
+            "album": "general",
+            "position": 16,
+            "_source_key": "gallery:assets/images/galeria/galeria-18.jpg",
+            "_source_hash": "de17bebb080298ee0e50c961e2ce968117efdc3d6ae01f38aaa715454cc80ac2"
+        },
+        {
+            "file": "assets/images/galeria/galeria-19.jpg",
+            "alt": "Cinco personas de pie con las manos juntas en gesto de meditación junto a un monje, frente a un pendón de Camino del Dharma.",
+            "album": "general",
+            "position": 17,
+            "_source_key": "gallery:assets/images/galeria/galeria-19.jpg",
+            "_source_hash": "d98477f0aab8e993937077e55fbc98d54d0aa12859d8f86ebc746b8cde9a3957"
+        },
+        {
+            "file": "assets/images/galeria/galeria-20.jpg",
+            "alt": "Grupo de personas meditando sentadas con los ojos cerrados en una sala, con un mural de mandala al fondo.",
+            "album": "general",
+            "position": 18,
+            "_source_key": "gallery:assets/images/galeria/galeria-20.jpg",
+            "_source_hash": "4bb3ec27a0627d7aca76317170c9e68ffc324109b65a2c8fcb4971a984437b39"
+        },
+        {
+            "file": "assets/images/galeria/galeria-21.jpg",
+            "alt": "Tres mujeres meditando sentadas en el suelo bajo un techo de bambú, rodeadas de vegetación.",
+            "album": "general",
+            "position": 19,
+            "_source_key": "gallery:assets/images/galeria/galeria-21.jpg",
+            "_source_hash": "9a138cb7ef5838c57a87f88257ccc560163a53e6d4833f607262ad8ad9ac0ec0"
+        },
+        {
+            "file": "assets/images/galeria/galeria-22.jpg",
+            "alt": "Grupo de personas de pie con las manos juntas en el pecho, caminando en fila sobre una terraza de bambú.",
+            "album": "general",
+            "position": 20,
+            "_source_key": "gallery:assets/images/galeria/galeria-22.jpg",
+            "_source_hash": "7cc87a96b6576ab0cffdfd045a500db78878a294c250447bc6f9674145bea8bd"
+        },
+        {
+            "file": "assets/images/galeria/galeria-23.jpg",
+            "alt": "Diez monjes budistas de pie frente a un edificio moderno.",
+            "album": "general",
+            "position": 21,
+            "_source_key": "gallery:assets/images/galeria/galeria-23.jpg",
+            "_source_hash": "bd69d6a9afefca6bef2f38032a3c752df8aeb725e3be05ebefdfcf4686b54d27"
+        },
+        {
+            "file": "assets/images/galeria/galeria-24.jpg",
+            "alt": "Dos monjes budistas sentados ante una mesa con té y frutas, acompañados de otras personas con las manos juntas, frente a un mural con caligrafía china.",
+            "album": "general",
+            "position": 22,
+            "_source_key": "gallery:assets/images/galeria/galeria-24.jpg",
+            "_source_hash": "1c487e550c3cd9c4d6322e05625c0cdf85e8f1d9a029138ec7908d0721653b2e"
+        },
+        {
+            "file": "assets/images/galeria/galeria-25.jpg",
+            "alt": "Grupo de siete personas y un niño con las manos juntas, junto a un monje, en una sala con cortinas oscuras.",
+            "album": "general",
+            "position": 23,
+            "_source_key": "gallery:assets/images/galeria/galeria-25.jpg",
+            "_source_hash": "51381a021be3ec8f425ace613dae6ad7cac885cc3df226b494783ba3fd6d330d"
+        },
+        {
+            "file": "assets/images/galeria/galeria-26.jpg",
+            "alt": "Dos monjes sostienen juntos un thangka con la imagen de Amitābha rodeado de otros budas.",
+            "album": "general",
+            "position": 24,
+            "_source_key": "gallery:assets/images/galeria/galeria-26.jpg",
+            "_source_hash": "75a869de61b1810e4907baf264a1a30a1089174e098c034612730f26af44932a"
+        },
+        {
+            "file": "assets/images/galeria/galeria-27.jpg",
+            "alt": "Un monje inclinado en reverencia ante un pequeño altar con una figura de Buda, flores y una vela encendida.",
+            "album": "2023",
+            "position": 25,
+            "_source_key": "gallery:assets/images/galeria/galeria-27.jpg",
+            "_source_hash": "ce3a5a60544134b11965ace883bf4f8227bc177fbd9dedee0a6fa0dce69464ee"
+        },
+        {
+            "file": "assets/images/galeria/galeria-28.jpg",
+            "alt": "Grupo de personas sentadas conversando y sonriendo en un patio con paredes de color naranja.",
+            "album": "2023",
+            "position": 26,
+            "_source_key": "gallery:assets/images/galeria/galeria-28.jpg",
+            "_source_hash": "2779c93f61345d2a0024a3937b028fbfb0427143666202791dc554df31e2b493"
+        },
+        {
+            "file": "assets/images/galeria/galeria-29.jpg",
+            "alt": "Un monje de espaldas frente a un grupo de personas sentadas en sillas y esteras en un salón con cortinas amarillas.",
+            "album": "2023",
+            "position": 27,
+            "_source_key": "gallery:assets/images/galeria/galeria-29.jpg",
+            "_source_hash": "c093c6b535222e24d28746dfc2d91c7fcc737d49406a90db130136377960e67b"
+        },
+        {
+            "file": "assets/images/galeria/galeria-30.jpg",
+            "alt": "Grupo de personas sentadas en sillas y cojines en un salón, con un monje meditando al fondo junto a un altar con flores y una vela.",
+            "album": "2023",
+            "position": 28,
+            "_source_key": "gallery:assets/images/galeria/galeria-30.jpg",
+            "_source_hash": "53ee18c93f45fa108c86a773766c30df6b1568b74050337ed560dfc5e30b0831"
+        },
+        {
+            "file": "assets/images/galeria/galeria-31.jpg",
+            "alt": "Cuatro personas de pie con los ojos cerrados en meditación, en un jardín frente a una casa.",
+            "album": "2023",
+            "position": 29,
+            "_source_key": "gallery:assets/images/galeria/galeria-31.jpg",
+            "_source_hash": "b31e92e2b347369f96ee0894cdacb667dd5ddf7302899477e93faa5ec7340d4c"
+        },
+        {
+            "file": "assets/images/galeria/galeria-32.jpg",
+            "alt": "Grupo de personas meditando sentadas con las manos juntas, bajo un techo de tejas al aire libre.",
+            "album": "2021",
+            "position": 30,
+            "_source_key": "gallery:assets/images/galeria/galeria-32.jpg",
+            "_source_hash": "005a79afe516b0063a74d85e648bc6dfe7f24f384f9fdd4f92b6ffe53e0a9159"
+        },
+        {
+            "file": "assets/images/galeria/galeria-33.jpg",
+            "alt": "Una mujer arrodillada con las manos juntas recibe una bendición de un monje inclinado hacia ella, en una terraza al aire libre.",
+            "album": "2021",
+            "position": 31,
+            "_source_key": "gallery:assets/images/galeria/galeria-33.jpg",
+            "_source_hash": "4eaf48f3bb643dc76fc1113b78d22ed42d59c379f6639b0fdd3d5a5a34dd1c8b"
+        },
+        {
+            "file": "assets/images/galeria/galeria-34.jpg",
+            "alt": "Vista trasera de una figura de Buda en un altar rodeada de flores blancas, con personas meditando al fondo.",
+            "album": "2021",
+            "position": 32,
+            "_source_key": "gallery:assets/images/galeria/galeria-34.jpg",
+            "_source_hash": "72c82efadd5c3e6809d0284050136b24c93be6f473c5ccb8c02cc25baa849ed2"
+        },
+        {
+            "file": "assets/images/galeria/galeria-35.jpg",
+            "alt": "Una mujer meditando con las manos juntas en el pecho, rodeada de otras personas sentadas.",
+            "album": "2021",
+            "position": 33,
+            "_source_key": "gallery:assets/images/galeria/galeria-35.jpg",
+            "_source_hash": "39bb0d4411ae25229cddfc9b42081231a5bec5a25c2e2874fc181dc56fb71758"
+        },
+        {
+            "file": "assets/images/galeria/galeria-36.jpg",
+            "alt": "Un monje meditando sentado frente a un altar con flores y una figura de Buda, con personas sentadas de espaldas en primer plano.",
+            "album": "2021",
+            "position": 34,
+            "_source_key": "gallery:assets/images/galeria/galeria-36.jpg",
+            "_source_hash": "79210b87682d9da5b5047f9bc42c369734202923f84783c389d9c1cc5f001313"
+        }
+    ],
+    "media": [
+        {
+            "file": "assets/audio/amitabha.mp3",
+            "kind": "audio",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/audio/amitabha.mp3",
+            "_source_hash": "3445bff42493e7c8057651b322c670a1a88c560a02ac5306e0096c027b47cff0"
+        },
+        {
+            "file": "assets/audio/namo-guan-shi-yin-pusa.mp3",
+            "kind": "audio",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/audio/namo-guan-shi-yin-pusa.mp3",
+            "_source_hash": "5e9151184fdb01627102c37720b2a453af6f0f45db00097718c6dd9afcd5343c"
+        },
+        {
+            "file": "assets/images/blog/circulos-de-presencia-consciente.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/blog/circulos-de-presencia-consciente.jpg",
+            "_source_hash": "ae20fd9e7007274658150bfbf4bf423b212c6dfd56e021a59dd01be5724f9c6f"
+        },
+        {
+            "file": "assets/images/blog/sangha-refugio-hiperconexion.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/blog/sangha-refugio-hiperconexion.jpg",
+            "_source_hash": "f8dfa825d651a49df23268ccde4ba7012bf27912355203fd9625088dd99d6804"
+        },
+        {
+            "file": "assets/images/celebraciones/celebracion-diwali.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/celebraciones/celebracion-diwali.jpg",
+            "_source_hash": "3d2b5c5bcd6953646ebf436068d11716896f1e134b4df967653d8c92099db2e5"
+        },
+        {
+            "file": "assets/images/celebraciones/diwali-festival-lights-tradition.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/celebraciones/diwali-festival-lights-tradition.jpg",
+            "_source_hash": "5b45e11b37bfe30c30fbb2c9f91f3c3617b32e8b60497a80cb3d1e4904171e37"
+        },
+        {
+            "file": "assets/images/celebraciones/vesak-2019.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/celebraciones/vesak-2019.jpg",
+            "_source_hash": "7fe2b03a3f2f4a136c31d8df1d495a4a6347aee9bf1c29107362f886ec049918"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/comunidad-desarrollo-camino-dharma.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/comunidad-linaje/comunidad-desarrollo-camino-dharma.jpg",
+            "_source_hash": "d05daa735cb368ffaf934f48e02c99c61e7afdff471bd05869764e87a0159ad8"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/comunidad-quienes-somos.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/comunidad-linaje/comunidad-quienes-somos.jpg",
+            "_source_hash": "e553051e1d52f6fa51aece921034c9a43db87c77badb90df7f5c2c4f06c7766f"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/foto-desarrollo-camino-dharma.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/comunidad-linaje/foto-desarrollo-camino-dharma.jpg",
+            "_source_hash": "93456e1038d3f06f4096b1043c42f36c9caa81e81326a54ba59d5630da7b27c8"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/foto-quienes-somos.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/comunidad-linaje/foto-quienes-somos.jpg",
+            "_source_hash": "4ae109c63c27e2b4705f7ac03ffcabe33f6037dcc78e4f117ed49e01d6995c78"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/imagen-shakyamuni-origen-buddhismo.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/comunidad-linaje/imagen-shakyamuni-origen-buddhismo.jpg",
+            "_source_hash": "2d37d422d196b14335f3e925626201ff778878627b3ad12dd681fb039ee96291"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/linaje-budismo-chan.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/comunidad-linaje/linaje-budismo-chan.jpg",
+            "_source_hash": "829daa33b409aed2c5e5c4f2b6fc898938c94696d5121e47196bf60ca9e0b521"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/linaje-budismo-tierra-pura.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/comunidad-linaje/linaje-budismo-tierra-pura.jpg",
+            "_source_hash": "3eb9c6ca02f373c60ec949451ce4a6beb79f8760118184e07f6d30eeeeba802a"
+        },
+        {
+            "file": "assets/images/comunidad-linaje/linaje-shakyamuni-origen-buddhismo.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/comunidad-linaje/linaje-shakyamuni-origen-buddhismo.jpg",
+            "_source_hash": "27d5c26e31d908c224febc650996a76d6ef3e0c0b2e144cbe0a1074421494a55"
+        },
+        {
+            "file": "assets/images/contacto/contacto-comunidad.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/contacto/contacto-comunidad.jpg",
+            "_source_hash": "62448ab7fce3e98c44180d6c2f2b5b8cee06c91e4311130edebf5bfe367d7f99"
+        },
+        {
+            "file": "assets/images/eventos/evento-6-encuentro-nacional.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-6-encuentro-nacional.jpeg",
+            "_source_hash": "6d23f4ccc0b72340da37fc3f40744ded0173459956e5d75c7e26831098991e34"
+        },
+        {
+            "file": "assets/images/eventos/evento-7-encuentro-nacional-2026.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-7-encuentro-nacional-2026.jpg",
+            "_source_hash": "eabdf3ec9f2a237cf1e34051b2e6ce146e993e4c164161308276fc6ef7b42771"
+        },
+        {
+            "file": "assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg",
+            "_source_hash": "0aa081cdd4586996ee8445294dd53211c8e3747148943814ddfeba1232c11c66"
+        },
+        {
+            "file": "assets/images/eventos/evento-circulos-de-presencia-consciente.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-circulos-de-presencia-consciente.jpg",
+            "_source_hash": "bb17e92bea54ea8f4bd3852efb0259c1c5686b968d74504281204238c7c464f6"
+        },
+        {
+            "file": "assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
+            "_source_hash": "59f0036b5e326d1dedd74888ebd1e1b82a6034fe5082566765eecdde3d850813"
+        },
+        {
+            "file": "assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
+            "_source_hash": "40b2c2228612c43ad1eb7c82445ed993d00aa5e2414cf3b304f00f5a2ca1a8fb"
+        },
+        {
+            "file": "assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg",
+            "_source_hash": "33668dfa4f0c05b48ef1b855b614041d6d73a21c96d6fe64cdaf6f7af895e60f"
+        },
+        {
+            "file": "assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
+            "_source_hash": "337fc3b0b436c46b4e22c4241995f946a47e917c59e41a3fdfe29d9dbe391f1f"
+        },
+        {
+            "file": "assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
+            "_source_hash": "e6a3ec2a8dc80b0661fe463697997eda811436a29ea344822035a95ee3d32b5d"
+        },
+        {
+            "file": "assets/images/eventos/evento-vesak-2026-bogota.jpeg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/eventos/evento-vesak-2026-bogota.jpeg",
+            "_source_hash": "608e3836bde873c4190b7a7f9d6c6ce94078b8ebbb9a6ffa1f770cb7e2026e02"
+        },
+        {
+            "file": "assets/images/fundador/foto-biografia-fundador.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/fundador/foto-biografia-fundador.jpg",
+            "_source_hash": "c755c35172b26a6e73d0e310f96a4c1364fa37dba98add78defaa084eee3b151"
+        },
+        {
+            "file": "assets/images/galeria/galeria-01.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-01.jpg",
+            "_source_hash": "f47fd5917979452b389a00f2c8f8bcc71acdeaf717d2db4268d3cf1dd71e2684"
+        },
+        {
+            "file": "assets/images/galeria/galeria-02.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-02.jpg",
+            "_source_hash": "3c4fe5ce6bcf374819864e7b5427ba9e94ac18d48e6c0b46f9b2106e07314a23"
+        },
+        {
+            "file": "assets/images/galeria/galeria-03.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-03.jpg",
+            "_source_hash": "86b7c27516620fc289d8b6d678b57774d1767e8979e5abf1f86702254b1f7836"
+        },
+        {
+            "file": "assets/images/galeria/galeria-04.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-04.jpg",
+            "_source_hash": "eafc2246d68ef5fa74ef81b9cd84f7c6ad821473896c5b9a7f0d7fad2c687a62"
+        },
+        {
+            "file": "assets/images/galeria/galeria-05.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-05.jpg",
+            "_source_hash": "2f2026992ce146aa08901edc3970bffb5528d0052e830514634fa55dcfa6deb2"
+        },
+        {
+            "file": "assets/images/galeria/galeria-06.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-06.jpg",
+            "_source_hash": "51b3970287d922ddaabf7165d971b709abde542351635691788bc5f49feefdcf"
+        },
+        {
+            "file": "assets/images/galeria/galeria-07.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-07.jpg",
+            "_source_hash": "69731917ae37520de0b60ab93f4a047d5dba862d6dd79bf2d11928cc3c7600a4"
+        },
+        {
+            "file": "assets/images/galeria/galeria-08.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-08.jpg",
+            "_source_hash": "8325267ba4f4ddd336097d0eca49cd4d589228a548a0270328d7f99d6601bc4b"
+        },
+        {
+            "file": "assets/images/galeria/galeria-09.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-09.jpg",
+            "_source_hash": "fec8553af0e3fc3a3d2bb140504d19aefe9eccdb1aa1af45da2d03f68ee97039"
+        },
+        {
+            "file": "assets/images/galeria/galeria-10.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-10.jpg",
+            "_source_hash": "74dc4dd079e199fddc4632def7218a9ceefd7805f004f2dc234262bc350906b7"
+        },
+        {
+            "file": "assets/images/galeria/galeria-11.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-11.jpg",
+            "_source_hash": "387d0b3c63cfd42d75b240e96120eeeb750e678ebbd0ae5324842141569e8a38"
+        },
+        {
+            "file": "assets/images/galeria/galeria-12.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-12.jpg",
+            "_source_hash": "83f4b296ef79b7a8c2cb106b72ad62eda2cf58a2d6ab649604b2463bc7cf5f88"
+        },
+        {
+            "file": "assets/images/galeria/galeria-13.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-13.jpg",
+            "_source_hash": "ff1b281da533c14c66631ffb218452865a43c61e988d9463ec568281998f34a3"
+        },
+        {
+            "file": "assets/images/galeria/galeria-14.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-14.jpg",
+            "_source_hash": "77788a8a2c9a4ca1ad49d274c06e8e3554282d467ebc182e50d2504d04e61023"
+        },
+        {
+            "file": "assets/images/galeria/galeria-15.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-15.jpg",
+            "_source_hash": "024bc7fc8b8f7729868dc36e1241d5c22fe63c98899fe64d4767743d5c1af081"
+        },
+        {
+            "file": "assets/images/galeria/galeria-16.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-16.jpg",
+            "_source_hash": "812a440574fb6c5bc7c993fdec132c7a8522bd39b322927554a7116cbac3ee7a"
+        },
+        {
+            "file": "assets/images/galeria/galeria-17.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-17.jpg",
+            "_source_hash": "e35b5caa74fc04523a5b0efc9368fc313a23a8997945230bfedafa4241c82337"
+        },
+        {
+            "file": "assets/images/galeria/galeria-18.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-18.jpg",
+            "_source_hash": "62c5d4cc267da706c8a6f0f9048d21a5d5e7ad4bcd32e144a08664b13545b4f3"
+        },
+        {
+            "file": "assets/images/galeria/galeria-19.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-19.jpg",
+            "_source_hash": "aca75d5d75fcccd7cbc2e2ab8aabcdaa20aa514e3496f2583d854987c163d4af"
+        },
+        {
+            "file": "assets/images/galeria/galeria-20.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-20.jpg",
+            "_source_hash": "3ad17771e20adc89253466940899393d520e309b25245ccf0516633d7c12c964"
+        },
+        {
+            "file": "assets/images/galeria/galeria-21.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-21.jpg",
+            "_source_hash": "329f9f8b650fe2c3c2effff83a32eb4d464924c082d2743e419b50c0036022c2"
+        },
+        {
+            "file": "assets/images/galeria/galeria-22.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-22.jpg",
+            "_source_hash": "c26c864dd96fb9137cd67e5106195383e2f57864c0a20bc66d73a36fbf0b783a"
+        },
+        {
+            "file": "assets/images/galeria/galeria-23.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-23.jpg",
+            "_source_hash": "daf2eaa80a787c76f33a688063d3489f0842e2a617b4edb35aeff96cc3893f5f"
+        },
+        {
+            "file": "assets/images/galeria/galeria-24.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-24.jpg",
+            "_source_hash": "a9422c8f4b7ca4e3d2d7f85a4888817a67089c0d31358dfbf21dc610ef3183e9"
+        },
+        {
+            "file": "assets/images/galeria/galeria-25.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-25.jpg",
+            "_source_hash": "9f346fdd13f9313e22ba9c9af8d2f075ca207ed60b10c7aec144501d07009e2c"
+        },
+        {
+            "file": "assets/images/galeria/galeria-26.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-26.jpg",
+            "_source_hash": "2d611ccf8d8ffd801512b84db86442fb2559046ace2014d3853076742d901db7"
+        },
+        {
+            "file": "assets/images/galeria/galeria-27.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-27.jpg",
+            "_source_hash": "1ecb5f13b1e67d51e540e7b83a4da1389f78102156fc5b01178b2e9db5b30bb6"
+        },
+        {
+            "file": "assets/images/galeria/galeria-28.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-28.jpg",
+            "_source_hash": "eb170b6f659189bf61c0d1c6f7a48857c0f03e3758da091050ca0bb55d2441fc"
+        },
+        {
+            "file": "assets/images/galeria/galeria-29.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-29.jpg",
+            "_source_hash": "43ed59b84a30d190b0fc5758389ebeeaee4d0f4c024265e8fdbe059e3a40531e"
+        },
+        {
+            "file": "assets/images/galeria/galeria-30.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-30.jpg",
+            "_source_hash": "650f279a237bc847a977cfa20d48154d9fcadc516951b5bc7f51f376df0d199d"
+        },
+        {
+            "file": "assets/images/galeria/galeria-31.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-31.jpg",
+            "_source_hash": "63a30026b7799fbe3a2330004ed3d91726a6eef24f1b7f756abf6209a4ea9f89"
+        },
+        {
+            "file": "assets/images/galeria/galeria-32.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-32.jpg",
+            "_source_hash": "8ebd16c915919c455d2b4afee0e67ad5cc64ccf7603f87255baba87b24fdcd40"
+        },
+        {
+            "file": "assets/images/galeria/galeria-33.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-33.jpg",
+            "_source_hash": "72b5a6957e5c9565c66f17e384ea06023486daf47728c45187c4101a00beef5d"
+        },
+        {
+            "file": "assets/images/galeria/galeria-34.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-34.jpg",
+            "_source_hash": "1b301dd03e0360f277da9648b4c2a446e3c631c63d27e877820a458cfc74adde"
+        },
+        {
+            "file": "assets/images/galeria/galeria-35.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-35.jpg",
+            "_source_hash": "248e8d2142b8d7eed76991eef198f495051cebeb51032d039fb69d75067beb0f"
+        },
+        {
+            "file": "assets/images/galeria/galeria-36.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/galeria/galeria-36.jpg",
+            "_source_hash": "64fb5e27b28122b85e73e0ff0ee9564648e737263346b874b50fe0e33a310f53"
+        },
+        {
+            "file": "assets/images/inicio/ambiente-inicio.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/inicio/ambiente-inicio.jpg",
+            "_source_hash": "996b85d7fac13c0d95524791ffb2c298e3fb8675aabca18b0ecc10ee2173e622"
+        },
+        {
+            "file": "assets/images/inicio/dsc01580.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/inicio/dsc01580.jpg",
+            "_source_hash": "e0189cc50022158026b9628193786fbbbe85262be6dbe4057ddc63e264054e14"
+        },
+        {
+            "file": "assets/images/inicio/hero-estatua-buda-montanas.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/hero-estatua-buda-montanas.jpg",
+            "_source_hash": "c4d066a5e9c872b0816269dc81414f0aad24ea1d07295c1cf1cce59c3a7102b6"
+        },
+        {
+            "file": "assets/images/inicio/hero-estatua-buda-montanas.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/hero-estatua-buda-montanas.webp",
+            "_source_hash": "0f63b809e1f133b37ef3792d4d7989ddf20bd0464fef8f0af25e466caddd552e"
+        },
+        {
+            "file": "assets/images/inicio/inicio-ambiente.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-ambiente.jpg",
+            "_source_hash": "9dbf099c20bcaafd93b1a60bd47b87d2618e875691a2c4c5e7128d7d504a190a"
+        },
+        {
+            "file": "assets/images/inicio/inicio-ambiente.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-ambiente.webp",
+            "_source_hash": "3db8a41c5cf64094034475fa406faa9fc6a1740b754a82813a8f10fdb48ebcc7"
+        },
+        {
+            "file": "assets/images/inicio/inicio-encuentro-comunidad-1280.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad-1280.webp",
+            "_source_hash": "dca52566ba3c9b521d91083766f66d595ee3c36c15008b4f7f95068ca833d373"
+        },
+        {
+            "file": "assets/images/inicio/inicio-encuentro-comunidad-768.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad-768.webp",
+            "_source_hash": "e0a2939193df1c6562bdd6b283779bcea3c22884d621ae3b86a2c098f212e6ea"
+        },
+        {
+            "file": "assets/images/inicio/inicio-encuentro-comunidad.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad.jpg",
+            "_source_hash": "3d6dcc6cc14bf2c41c451c220bb812064d9558159d0721eabe085c4262e1d9fc"
+        },
+        {
+            "file": "assets/images/inicio/inicio-encuentro-comunidad.webp",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad.webp",
+            "_source_hash": "66c8a4e22695615906b5e79231590688a54f150ed99dcdad89e63b8ea48a7008"
+        },
+        {
+            "file": "assets/images/inicio/inicio-kuan-yin-768.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-kuan-yin-768.webp",
+            "_source_hash": "7877b4149669baa43e8503e19a972c89077dc975a80a72aae5d2d104df10b2eb"
+        },
+        {
+            "file": "assets/images/inicio/inicio-kuan-yin.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-kuan-yin.jpg",
+            "_source_hash": "713cba6004e6437925e59b7dc5c8aeff706f8f3de70c4be1abaf08efc95a43a1"
+        },
+        {
+            "file": "assets/images/inicio/inicio-kuan-yin.webp",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/inicio/inicio-kuan-yin.webp",
+            "_source_hash": "cba74b2d914f7965611fc06b2e4b181854cfc804d120da8d6bbadd0f85db203d"
+        },
+        {
+            "file": "assets/images/inicio/kuan-yin-4.jpg",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/inicio/kuan-yin-4.jpg",
+            "_source_hash": "be2af3e35dfa58a9a38cd1c7878129256d491eb90a52b93ea328a086dbb4ec2a"
+        },
+        {
+            "file": "assets/images/logo-docx-cover.png",
+            "kind": "image",
+            "referenced": false,
+            "visibility": "hidden",
+            "_source_key": "media:assets/images/logo-docx-cover.png",
+            "_source_hash": "8389cc18394fc3a99998bbfb49cc9c5cb23230c3873d28618ab75633efb85f02"
+        },
+        {
+            "file": "assets/images/logo.png",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/logo.png",
+            "_source_hash": "d7607f3d573d011d388fa7adf75553d78474ce3dfd9d912e97a828f1a992c13d"
+        },
+        {
+            "file": "assets/images/og-default.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/og-default.jpg",
+            "_source_hash": "6b7ffce5469a7f29cebf77e8a5bad19102a215ffcdb419aceb218b3dbeb5bcd0"
+        },
+        {
+            "file": "assets/images/practica/meditacion-semanal-en-linea.jpg",
+            "kind": "image",
+            "referenced": true,
+            "visibility": "public",
+            "_source_key": "media:assets/images/practica/meditacion-semanal-en-linea.jpg",
+            "_source_hash": "5125d55729f02370506555fc71265758cc9374e3e2f730f34ad318c2fb1c9bd8"
+        }
+    ],
+    "video_embeds": [
+        {
+            "url": "https://www.youtube-nocookie.com/embed/xbAUEmf_Wks",
+            "title": "Encontrando la Plenitud y la Consciencia en la Vida",
+            "page": "practica/videos",
+            "_source_key": "embed:https://www.youtube-nocookie.com/embed/xbAUEmf_Wks",
+            "_source_hash": "2b9ccc7d5fa832b0df5425e7e502159853c5dcd021a73ad82b07ed3770ab58da"
+        },
+        {
+            "url": "https://www.youtube-nocookie.com/embed/JxyHdXhW_nc",
+            "title": "La sabiduría del no hacer",
+            "page": "practica/videos",
+            "_source_key": "embed:https://www.youtube-nocookie.com/embed/JxyHdXhW_nc",
+            "_source_hash": "77380324026d75353a49f58045569c08093e9933a1a62359db476efd62263d1f"
+        },
+        {
+            "url": "https://www.youtube-nocookie.com/embed/lzn5XLJd0Is",
+            "title": "¿Cómo el Budismo puede ayudarnos a ver el Mundo con claridad?",
+            "page": "practica/videos",
+            "_source_key": "embed:https://www.youtube-nocookie.com/embed/lzn5XLJd0Is",
+            "_source_hash": "86ae3916203c0c24c05e417681ca998c1c49b4f58fddb247650f16a97e11b9bf"
+        },
+        {
+            "url": "https://www.youtube-nocookie.com/embed/SBOG0lqzj1Y",
+            "title": "La Sabiduría del Buddhismo Chan",
+            "page": "practica/videos",
+            "_source_key": "embed:https://www.youtube-nocookie.com/embed/SBOG0lqzj1Y",
+            "_source_hash": "a591ae4c1e0665d080e54866c70633d96d1ac98c56d9f573c009e332e72cf749"
+        },
+        {
+            "url": "https://player.vimeo.com/video/1164143915?dnt=1",
+            "title": "Conectar con nuestro planeta",
+            "page": "practica/videos",
+            "_source_key": "embed:https://player.vimeo.com/video/1164143915?dnt=1",
+            "_source_hash": "53dc069a1e05084aff7acf36d6d5745d283485b357740ccfb315ecbfc0df17f6"
+        }
+    ],
+    "site": {
+        "seo": {
+            "base": "https://caminodeldharma.org",
+            "site_name": "Camino del Dharma",
+            "locale": "es_CO",
+            "image": "https://caminodeldharma.org/assets/images/og-default.jpg",
+            "image_alt": "Comunidad Buddhista Camino del Dharma — meditación y budismo en Colombia",
+            "image_width": "1200",
+            "image_height": "630",
+            "twitter_card": "summary_large_image",
+            "archives": {
+                "event": {
+                    "title": "Eventos y Retiros Budistas en Colombia | Camino del Dharma",
+                    "description": "Próximos cursos, encuentros, talleres y retiros budistas en Colombia. El calendario marca también la meditación semanal en línea.",
+                    "keywords": "camino del dharma, budismo colombia, budismo, budista, buddhista, Dharma, Chan, Tierra Pura, meditación, mindfulness, sangha, Colombia, comunidad buddhista, cursos budistas",
+                    "og_title": "Eventos y Retiros Budistas en Colombia | Camino del Dharma",
+                    "og_description": "Próximos cursos, encuentros, talleres y retiros budistas en Colombia. El calendario marca también la meditación semanal en línea.",
+                    "related": "https://caminodeldharma.org/practica/meditacion-semanal-en-linea"
+                }
+            },
+            "city_regions": {
+                "Bogotá": "Bogotá D.C.",
+                "Cali": "Valle del Cauca",
+                "Puerto Colombia": "Atlántico"
+            }
+        },
+        "jsonld": {
+            "home_graph": [
+                {
+                    "@type": "Organization",
+                    "@id": "https://caminodeldharma.org/#organization",
+                    "name": "Comunidad Buddhista Camino del Dharma",
+                    "alternateName": [
+                        "Camino del Dharma",
+                        "Comunidad Budista Camino del Dharma"
+                    ],
+                    "description": "Comunidad Buddhista en Colombia dedicada al budismo Chan y Tierra Pura: meditación, estudio, cursos y práctica.",
+                    "url": "https://caminodeldharma.org",
+                    "foundingDate": "2019",
+                    "foundingLocation": {
+                        "@type": "Country",
+                        "name": "Colombia"
+                    },
+                    "knowsAbout": [
+                        "Budismo Chan",
+                        "Budismo de la Tierra Pura",
+                        "Meditación budista",
+                        "Atención plena",
+                        "Cursos de práctica budista"
+                    ],
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://caminodeldharma.org/assets/favicon/apple-touch-icon.png",
+                        "width": 180,
+                        "height": 180
+                    },
+                    "image": "https://caminodeldharma.org/assets/images/og-default.jpg",
+                    "email": "caminodeldharma1@gmail.com",
+                    "telephone": "+57-320-662-7608",
+                    "sameAs": [
+                        "https://www.facebook.com/caminodeldharmacolombia",
+                        "https://www.instagram.com/camino_del_dharma/"
+                    ],
+                    "areaServed": {
+                        "@type": "Country",
+                        "name": "Colombia"
+                    },
+                    "founder": {
+                        "@id": "https://caminodeldharma.org/#zhenggong"
+                    }
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://caminodeldharma.org/#zhenggong",
+                    "name": "Venerable Maestro Zheng Gong",
+                    "alternateName": [
+                        "Maestro Zheng Gong",
+                        "Zheng Gong"
+                    ],
+                    "description": "Maestro buddhista contemporáneo, fundador de la Comunidad Buddhista Camino del Dharma. Su enseñanza integra la sabiduría del Buddhismo Chan y Tierra Pura con los desafíos de la vida moderna.",
+                    "url": "https://caminodeldharma.org/comunidad",
+                    "image": "https://caminodeldharma.org/assets/images/fundador/foto-biografia-fundador.jpg",
+                    "knowsAbout": [
+                        "Budismo Chan",
+                        "Budismo de la Tierra Pura",
+                        "Meditación budista"
+                    ],
+                    "worksFor": {
+                        "@id": "https://caminodeldharma.org/#organization"
+                    }
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://caminodeldharma.org/#developer",
+                    "name": "Rafael Figueredo Oropeza",
+                    "url": "https://www.linkedin.com/in/rafaelfigueredo/",
+                    "sameAs": [
+                        "https://www.linkedin.com/in/rafaelfigueredo/",
+                        "https://www.instagram.com/ref8chan/"
+                    ]
+                },
+                {
+                    "@type": "WebSite",
+                    "@id": "https://caminodeldharma.org/#website",
+                    "url": "https://caminodeldharma.org",
+                    "name": "Camino del Dharma",
+                    "description": "Comunidad Buddhista en Colombia — budismo Chan y Tierra Pura. Meditación, estudio, cursos y retiros.",
+                    "publisher": {
+                        "@id": "https://caminodeldharma.org/#organization"
+                    },
+                    "creator": [
+                        {
+                            "@id": "https://caminodeldharma.org/#organization"
+                        },
+                        {
+                            "@id": "https://caminodeldharma.org/#developer"
+                        }
+                    ],
+                    "creditText": "Diseño y desarrollo web por Rafael Figueredo Oropeza",
+                    "inLanguage": "es-CO"
+                },
+                {
+                    "@type": "WebPage",
+                    "@id": "https://caminodeldharma.org/#webpage",
+                    "url": "https://caminodeldharma.org",
+                    "name": "Budismo Chan y Tierra Pura en Colombia | Camino del Dharma",
+                    "description": "Comunidad budista en Colombia dedicada al budismo Chan y Tierra Pura. Meditación, estudio, cursos y retiros.",
+                    "isPartOf": {
+                        "@id": "https://caminodeldharma.org/#website"
+                    },
+                    "about": {
+                        "@type": "Thing",
+                        "name": "budismo en Colombia"
+                    },
+                    "mentions": {
+                        "@id": "https://caminodeldharma.org/eventos/circulos-de-presencia-consciente#event"
+                    },
+                    "inLanguage": "es-CO"
+                }
+            ]
+        }
+    }
+}

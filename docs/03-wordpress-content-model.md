@@ -101,6 +101,7 @@ Camino del Dharma. El contenido pre-corte se extrae del HTML/JSON publicado y se
 | event_status | select | vigente / finalizado / cancelado |
 | event_signup_payment | boolean o url | Indica si hay pago/contribución; el pago siempre es externo (redirección vía event_signup_url) |
 | event_featured | boolean | Candidato para el Inicio. **Solo cuenta si el evento está vigente.** Un destacado finalizado se ignora. Marcar como máximo uno. |
+| share_whatsapp / share_x / share_threads | textarea | Mensaje que el diálogo «Compartir» propone en cada red (WU-08A). Texto plano; `{{SHARE_URL}}` se sustituye por la URL del evento al abrir el diálogo. Vacío = el diálogo comparte título + URL. Las mismas tres claves existen en `post` (entradas del blog). |
 
 **Prioridad a campos nativos:** Se prioriza usar campos nativos de WordPress cuando sea posible: **Title** → nombre del evento, **Content** → descripción, **Featured image** → imagen principal. Los campos custom (`event_date`, `event_place`, `event_modality`, `event_status`, `event_featured`, `event_signup_url`, etc.) complementan lo que el core no ofrece.
 

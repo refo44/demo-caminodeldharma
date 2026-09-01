@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<ruleset name="camino-del-dharma">
+	<description>WPCS for first-party WordPress code only (ADR 0027). The static site is out of scope.</description>
+
+	<file>wordpress/wp-content/plugins/camino-del-dharma-core</file>
+	<file>wordpress/wp-content/themes/camino-del-dharma</file>
+	<file>tests</file>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<config name="minimum_wp_version" value="7.1"/>
+
+	<rule ref="WordPress-Extra"/>
+
+	<!-- Single first-party prefix (ADR 0027). WPCS rejects 3-char prefixes,
+	     so the plugin uses cdd_core (constants CDD_CORE_*); the theme will
+	     use camino_del_dharma. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="cdd_core"/>
+				<element value="camino_del_dharma"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Translation-ready strings with the project text domains (ADR 0027). -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="camino-del-dharma-core"/>
+				<element value="camino-del-dharma"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Test classes use PascalCaseTest file names (guide §3), not class-*.php. -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+
+	<!-- The test bootstraps/config legitimately define WordPress's own
+	     constants (ABSPATH, DB_*, WP_TESTS_*); tests are not distributed
+	     plugin code, so the prefix collision rule does not apply there. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+</ruleset>

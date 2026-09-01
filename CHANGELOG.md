@@ -8,6 +8,248 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 **Antes de incrementar la versión:** actualizar `<lastmod>` en [`sitemap.xml`](sitemap.xml) para cada página HTML modificada (ver checklist en [`README.md`](README.md#despliegue-en-hostinger)).
 
+## [Unreleased]
+
+### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
+
+- **Destacado del Inicio:** un evento vigente sin `event_date` ya no gana por
+  `strcmp('')` frente a uno con fecha; las fechas vacías ordenan al final. El
+  marcado editorial featured sigue ganando. Plugin `camino-del-dharma-core` **0.7.1**.
+- **Payload:** `_source_hash` excluye `_source_key` además de sí mismo (el contrato
+  del builder). `migration/payload.json` se regeneró; create-missing-only no
+  reescribe contenido ya importado. `json_encode` lanza `JsonException` si el
+  canónico no se puede producir (no escribe el literal `false`).
+
+### Gobernanza — META Gutenberg no es defecto de corte (ADR 0042 / OWN-019)
+
+El propietario decide (2026-09-01) que `META-001`–`META-005` (auditoría metabox clásico vs
+REST) son **restricciones de diseño** para UI wp-admin futura, no bugs ni trabajo de
+pre-staging. Sin `add_meta_box` hoy; el corte conserva meta importada. Ver
+[`docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md`](docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md).
+
+### WordPress Fase 3 — BUG-001: el `.ics` de Círculos incluye todas las sesiones (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.1** y theme `camino-del-dharma` **0.5.1**. El estático de
+producción no se toca: `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue
+publicando su VEVENT único de la sesión de bienvenida hasta el corte.
+
+- **Un VEVENT por sesión.** El exportado de WordPress emitía una sola entrada del rango 3 sep →
+  25 oct, que ningún calendario puede distinguir de un curso de 52 días seguidos. Ahora emite una
+  entrada por cada fecha de `event_calendar_dates` —las diez del cronograma publicado— con UID
+  propio (`slug-Ymd@host`) y su fin exclusivo de día completo, dentro del mismo sobre VCALENDAR
+  de producción. Un evento sin cronograma conserva el rango `event_date`/`event_end` y el UID que
+  producción ya publicó.
+- **El diálogo y el archivo no pueden divergir.** Un enlace profundo de Google o Outlook lleva una
+  sola entrada, así que «Añadir al calendario» pasa a nombrar la **próxima sesión** —una fecha que
+  el archivo contiene— en lugar de un rango que no aparece en ningún VEVENT, y una nota nueva lo
+  dice: «El archivo .ics incluye las 10 sesiones del curso…». Apple Calendar y la descarga siguen
+  entregando las diez.
+- **Sin cambios en OWN-012**: un evento finalizado sigue devolviendo 410 sin `.ics`, sin
+  inscripción y sin calendario.
+
+### WordPress Fase 3 — WU-09: Contact Form 7 y los párrafos del formulario en `/privacidad` (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.0** y theme `camino-del-dharma` **0.5.0**. El estático de
+producción no se toca: sigue sirviendo `action="#"` y su aviso sin modificar (ADR 0041 punto 4).
+
+- **El formulario de contacto envía** (FUNC-001 / TASK-0003, abierto desde la auditoría de
+  producción). Contact Form 7 6.1.7 es el único plugin de terceros aprobado (ADR 0025/0026) y su
+  código **no** viaja en Git: el repositorio versiona la *definición* que el plugin propio
+  provisiona — el maquetado publicado con los tres controles como form-tags, el correo a
+  `caminodeldharma1@gmail.com` con `Reply-To` del visitante, y los mensajes en español.
+- **El botón publicado sobrevive**: `[submit]` de CF7 solo imprime un `<input>`, así que se
+  conserva el `<button>` con su icono de envío, que acciona CF7 igual por el evento `submit`.
+- **`wp cdd-core contact provision`**: create-missing-only e idempotente. Rehúsa mientras CF7 esté
+  inactivo o mientras `/privacidad` no describa un envío real — el gate de ADR 0041 punto 3 es
+  código, no una nota.
+- **Delta de copy de `/privacidad` (solo WordPress, ADR 0041)**: recuadro provisional sin la
+  cláusula del formulario, viñeta del resumen, §2.2 reescrita a los hechos, el disparador ya
+  cumplido fuera de §8 y la fecha del cambio. El sello «Documento provisional» se conserva y el
+  resto del aviso —cookies, analítica, embeds, donaciones, derechos, Ley 1581— no se toca.
+- **Fallback operativo implementado** (ADR 0041 punto 5): con CF7 apagado, `/contacto` imprime los
+  canales WhatsApp y correo en vez de un shortcode en crudo.
+- **La entrega real sigue sin verificar**: en Docker `wp_mail()` falla por falta de MTA. La
+  validación está probada de extremo a extremo con datos sintéticos; la recepción en
+  `caminodeldharma1@gmail.com` se comprueba en staging Hostinger antes del release.
+
+### WordPress Fase 3 — WU-08B: SEO, redirects, huérfanos y a11y (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.6.0** y theme `camino-del-dharma` **0.4.0**. El estático de
+producción no se toca.
+
+- **SEO first-party, sin plugin de terceros** (ADR 0025/0030, doc 15 §12): el plugin resuelve
+  título, description, keywords, canonical, Open Graph, Twitter y JSON-LD de cada petición; el
+  theme lo imprime y lo escapa. El copy publicado deja de ser HTML congelado y pasa a meta
+  editable (`seo_title`, `seo_description`, `seo_keywords`, `og_title`, `og_description`) en
+  `page`, `post` y `event`; la cabeza del archivo `/eventos`, los defaults sociales y el `@graph`
+  del Inicio viven en la opción `cdd_core_seo_site`. Todo URL guardada se rebasa a `home_url()`.
+- **JSON-LD con datos reales**: los 10 eventos emiten `Event`; los finalizados usan
+  `EventCompleted` y **no** anuncian inscripción. Las entradas emiten `BlogPosting` con autores
+  `Thing` de la relación `authors` (ADR 0037) y la Organization del sitio como publisher; las
+  fichas emiten `Thing`. Ningún campo opcional se inventa.
+- **noindex, follow** en `/author`, términos de álbum, tags del blog y el 404 (ADR 0031/0036/0037).
+  El `.ics` mantiene `X-Robots-Tag: noindex, nofollow` y se enlaza `rel="alternate"
+  type="text/calendar"` solo mientras el evento es vigente (OWN-014).
+- **Sitemap nativo** `/wp-sitemap.xml` sin proveedor de usuarios ni taxonomías, con la URL del
+  archivo `/eventos` añadida.
+- **`wordpress/.htaccess`**: ledger de redirecciones portado encima del bloque que WordPress
+  reescribe, verificado sobre Apache real. Añade el 301 de `sitemap.xml`; no porta las reglas
+  solo-estáticas ni el bucle latente de la condición HTTPS.
+- **wp-admin «Eliminar huérfanos»** (OWN-015): lista los `.ics` que ningún evento vigente respalda
+  y los borra tras confirmar, con nonce y capacidad. Fotos, audios y carteles nunca entran.
+- **Accesibilidad (docs/19)**: `<html lang="es-CO">` en cualquier entorno, `h1` en los archivos
+  `/author` y `/blog/tag/{slug}`, un solo skip link (se retira el del núcleo) y `focusable="false"`
+  en los SVG decorativos.
+- `migration/payload.json` regenerado: mismos `counts` y misma fuente (VERSION 1.0.35, commit
+  `bfb6dc0`); `seo` sustituye a `head_title`/`meta_description`, los eventos ganan
+  `attendance_mode` y `jsonld_extra`, y aparece la sección no contada `site`.
+
+### WordPress Fase 3 — WU-08A: comportamiento front (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.5.0** y theme `camino-del-dharma` **0.3.0**. El estático de
+producción no se toca.
+
+- **Diálogo «Compartir»**: `share.js` portado literal al theme; nuevos bloques dinámicos
+  `camino-del-dharma/evento-acciones` y `camino-del-dharma/entrada-compartir`. El copy
+  hand-written de WhatsApp/X/Threads que publica el estático deja de ser HTML congelado y pasa
+  a meta editable `share_whatsapp`/`share_x`/`share_threads` en `event` y `post`, extraída al
+  payload y sembrada por el importador (al crear) o por `migrate convert --payload=<path>`
+  (add-only, nunca pisa una edición de wp-admin).
+- **Diálogo «Añadir al calendario»**: mitad restante de `calendar.js` portada como
+  `calendar-dialog.js`. Diálogo y `.ics` leen el mismo `cdd_core_event_calendar_payload()`, así
+  que los enlaces de Google/Outlook y el archivo descargado no pueden divergir. Ambos controles
+  solo aparecen en eventos vigentes (OWN-012).
+- **Audio de mantras**: `/practica` convierte sus dos reproductores hechos a mano en bloques
+  `core/audio` nativos ligados a la biblioteca; el nombre accesible se restaura en presentación
+  desde el `figcaption`.
+- `migration/payload.json` regenerado: mismos `counts` y misma fuente (VERSION 1.0.35, commit
+  `bfb6dc0`); el único delta es el nuevo campo `share`.
+
+### Gobernanza — WU-08 partido en 08A / 08B (FABLE5 v2.5, sin cambio del artefacto desplegado)
+
+WU-08 se parte: 08A comportamiento front (Opus, sin pegar FABLE5); 08B SEO/redirects/OWN-015/a11y
+(Opus + FABLE5 §9.5 y §10 solamente). No mezclar en el mismo chat.
+
+### Gobernanza — CF7 en el corte sin espera legal (ADR 0041 / OWN-018, sin cambio del artefacto desplegado)
+
+Contact Form 7 es elegible en el corte a WordPress. El disclaimer publicado en `/privacidad`
+basta para lanzar; la revisión legal queda como trabajo posterior, no como gate. En WordPress
+(WU-09) se actualizan solo los párrafos del formulario. El HTML estático no cambia: allí el
+formulario sigue sin enviar. FABLE5 v2.5. Backlog v1.21.
+
+### Fase 3 — WU-07: plantillas FSE reales, bloques dinámicos y conversión de contenido (sin cambio del artefacto desplegado)
+
+Theme `camino-del-dharma` 0.1.0 → **0.2.0** y `camino-del-dharma-core` 0.3.0 → **0.4.0**,
+con TDD (RED en ambas suites antes del primer archivo de vistas, ADR 0038). Theme: 16
+plantillas de bloques (docs/12 §5–§6), parts header/footer vía patterns PHP con el markup
+publicado, 11 bloques dinámicos (calendario de eventos con paridad byte a byte contra el
+grid publicado; listado vigentes/finalizados con tarjeta compacta doc 03 §3; nota destacada
+del Inicio con su estado vacío; tipo/meta/CTA de evento; byline «Por …» enlazada a las
+fichas ADR 0037 con bio y tiempo de lectura; listados del blog; ficha de autor con sus
+entradas vía relación `authors`; galería nativa por álbum con lightbox), CSS estático
+portado íntegro a presets (`--wp--preset/custom/style--*`), fuentes autohospedadas como
+`fontFace` (incluye subset MarloweEscapade), `main.js` portado y tooltips del calendario.
+Plugin: `wp cdd-core migrate convert` (edición field-scoped del contenido importado,
+dry-run por defecto, idempotente, guard de producción — inicio dinámico + `<picture>`
+desenvueltos, galerías Gutenberg por álbum ADR 0021/0036, enlaces OWN-016) y queries de
+presentación (`cdd_core_past_events`, `cdd_core_posts_by_blog_author`,
+`cdd_core_album_attachments`). Dos bugs latentes corregidos con regresión:
+`event_modality` pasa a texto libre (el select doc 03 descartaba el copy publicado,
+OWN-007) y las imágenes del Inicio rotas por `<source srcset>`/thumbs sin reescribir.
+QA local verde: unit 105/105, wp-phpunit 60/60 (theme activo en el harness), PHPCS y
+stylelint limpios, rutas y render verificados, `debug.log` limpio. Sustituciones y deltas
+registrados en `.audit/fase3-validation-matrix.md` § WU-07. Sin despliegue: el estático
+publicado no cambia.
+
+### Fase 3 — WU-06: extractor, payload versionado, importador WP-CLI y reconciliación (sin cambio del artefacto desplegado)
+
+`camino-del-dharma-core` 0.2.0 → **0.3.0**, con TDD (RED en ambas suites antes de
+`includes/migration/`, ADR 0038). Extractor determinista de solo lectura sobre `static/`
+(ADR 0032 §8.1): fechas en español, 10 eventos con los slugs ADR 0035 (JSON-LD publicado →
+texto de card; cronograma de Círculos → `event_calendar_dates`; excerpt = copy `.ics` de
+producción), 2 posts con bylines→fichas (ADR 0037) y hero→featured, 3 álbumes + 35 imágenes
+con alt (OWN-001), 11 páginas con URLs raíz-relativas, inventario de 81 medios (71 públicos,
+10 ocultos OWN-003; thumbs/PDF/`.ics` excluidos) y 5 embeds. `migration/payload.json`
+versionado y determinista con `_source_key`/`_source_hash` (fuente VERSION 1.0.35, commit
+`bfb6dc0`). Importador `wp cdd-core migrate validate|plan|import|verify` + `wp cdd-core
+seed` (ADR 0033): dry-run por defecto, `--apply` explícito, idempotente,
+create-missing-only, ediciones wp-admin intactas, guard de producción con
+`--confirm-production` + `--backup-evidence`, settings de lectura y permalinks
+`/blog/%postname%` (ADR 0008). Pipeline verificado contra el entorno local (109 objetos,
+verify 0 missing, rutas 200/301/404/410, conteos reconciliados) y **paridad
+repo↔producción verificada byte a byte (17/17 superficies, OWN-006/007: delta 0)**.
+Suites: 74 unit + 43 wp-phpunit. Evidencia: `.audit/fase3-validation-matrix.md` § WU-06.
+
+### Fase 3 — WU-05: modelos de dominio, routing y datos de calendario/ICS (sin cambio del artefacto desplegado)
+
+`camino-del-dharma-core` 0.1.0 → **0.2.0**, nacido con TDD (RED documentado en unit y
+wp-phpunit antes del primer archivo de `includes/`, ADR 0038). Dominio puro: política de
+estado del evento a tiempo de request en `America/Bogota` (OWN-013: el día final sigue
+vigente, `cancelado` es editorial e inmutable, extender la fecha revierte), generador
+`.ics` con paridad con los archivos de producción, datos del calendario mensual (celdas de
+evento con URL/tooltip, lunes de meditación semanal, mes del próximo vigente), selección
+del evento del Inicio (doc 03 §3) y normalización de la relación `authors`. Registro
+WordPress: CPT `event` (`/eventos`, singles sin barra final, ADR 0035/0008), taxonomías
+`event_type`/`event_city` sin archivo público (ADR 0022), `gallery_album` sobre la
+biblioteca de medios con `/galeria/{slug}` sin robar la Page `/galeria` (ADR 0036), CPT
+`blog_author` con `query_var` aislado, rewrite `author` y capacidades propias (ADR 0037),
+archivos de usuario WP en 404, meta de evento saneado (+ `event_calendar_dates` para las
+sesiones que marca el calendario publicado), relación `authors` con guard de publicación
+(≥1 ficha publicada; un post publicado nunca queda a cero; los legados no se despublican),
+ruta generada `/eventos/ical/{slug}.ics` (200 vigente · 410 finalizado · 404 desconocido,
+`X-Robots-Tag: noindex, nofollow`) y flush de rewrites solo en activación/upgrade
+versionado. Suites: 44 tests unit + 34 wp-phpunit, PHPCS/WPCS limpio. Evidencia:
+`.audit/fase3-validation-matrix.md` § WU-05.
+
+### Fase 3 — WU-04: scaffold del theme FSE y baseline de tokens visuales (sin cambio del artefacto desplegado)
+
+Primer código del theme `camino-del-dharma`, nacido con TDD (RED documentado en unit y
+wp-phpunit antes del primer archivo, ADR 0038): `style.css` (solo metadata, text domain
+`camino-del-dharma`), `theme.json` v3 como **baseline de paridad visual** (ADR 0029) —
+paleta de marca + tints AA, roles semánticos como `settings.custom.color` con la misma
+indirección del estático, familias tipográficas, escala `--space-*`, `contentSize` 65ch /
+`wideSize` 70rem, ritmo y line-heights, todo verificado por `Theme_TokensTest` contra el
+`:root` de `static/assets/css/main.css` extraído programáticamente —, `templates/index.html`
+(fallback técnico), `parts/header|footer.html` (placeholders), `functions.php` (bootstrap:
+supports + encolado de `assets/css/main.css` complementario). Política paleta-only en el
+editor (sin color libre). Test guard contra plantillas PHP clásicas. `lint:css` ahora cubre
+los dos árboles CSS. Theme activo en el entorno local sin warnings/fatals. Evidencia
+`Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-04.
+
+### Fase 3 — WU-03: scaffold del plugin y kit de calidad TDD (sin cambio del artefacto desplegado)
+
+Primer PHP propio del proyecto, con TDD desde la primera línea (ADR 0038):
+`wordpress/wp-content/plugins/camino-del-dharma-core/camino-del-dharma-core.php` (bootstrap
+mínimo: guard `ABSPATH`, `CDD_CORE_VERSION`, `CDD_CORE_PLUGIN_FILE`) nació tras un test en
+rojo. Kit de calidad en la raíz: `composer.json` (PHPUnit 9.6, wp-phpunit 7.1.0 —igual que el
+WordPress del compose—, polyfills, WPCS 3.4; `platform.php` 8.3.30), `phpunit.xml.dist` +
+`tests/Unit/`, `phpunit-wp.xml.dist` + `tests/WordPress/` (harness Docker **efímero**
+`cdd-wp-phpunit`, tablas `wptests_`, `down -v` al salir), `phpcs.xml.dist` (WPCS, prefijo
+`cdd_core`, ADR 0027), `tools/` (`php-lint.sh`, `run-phpunit.sh`, `run-phpunit-wp.sh`,
+`wp-tests.env` desechable) y `.github/workflows/test.yml` solo-calidad (composer test + PHPCS +
+Stylelint; sin deploy, sin secretos, sin SonarScanner). El theme FSE sigue sin código (WU-04).
+Evidencia `Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-03.
+
+### Fase 3 — WU-02: entorno local Docker (sin cambio del artefacto desplegado)
+
+Entorno WordPress local de 3 servicios según ADR 0023 y `docs/docker-wordpress-playbook.md`:
+`docker-compose.yml` en la raíz (MariaDB 11.8 con healthcheck, WordPress PHP 8.3 en
+`127.0.0.1:${WORDPRESS_PORT:-8080}`, `wpcli` como www-data) con bind-mount solo del theme y
+plugin propios; core y BD en volúmenes Docker. `.env.example` versionado, `.env` gitignored,
+variables fail-fast, `WP_ENVIRONMENT_TYPE=local` y debug log en ambos servicios PHP. Banco de
+pruebas local únicamente; no participa en ningún despliegue (ADR 0015). Evidencia
+`Pass (local)` en `.audit/fase3-validation-matrix.md` § WU-02.
+
+### Fase 3 iniciada — WU-00/WU-01 (sin cambio del artefacto desplegado)
+
+Reorganización monorepo (ADR 0014) en la rama `fase3-wordpress`: la superficie desplegable se
+movió de la raíz a `static/` con renames puros; el contenido del ZIP de producción es idéntico,
+solo cambia el directorio desde el que se genera (README actualizado). El PDF retirado por
+OWN-002 (`assets/documents/recitacion-practica-comida.pdf`) quedó archivado en
+`docs/archive/recitacion-practica-comida/`, fuera de la superficie desplegable. Harness durable
+de Fase 3 en `.audit/fase3-execution-state.md` y `.audit/fase3-validation-matrix.md`; runbooks en
+`docs/operations/`. Tag de rollback: `fase3-pre-reorg-v1.0.35`.
+
 ## [1.0.35] - 2026-08-29
 
 ### `/privacidad` — aviso de privacidad provisional

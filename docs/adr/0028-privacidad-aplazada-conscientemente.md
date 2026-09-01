@@ -4,8 +4,9 @@
 
 Sustituida → [0039](0039-aviso-privacidad-provisional-estatico.md)
 
-El aplazamiento de **publicar** `/privacidad` queda sustituido. El gate de Contact Form 7 y la
-revisión legal del texto se conservan en ADR 0039.
+El aplazamiento de **publicar** `/privacidad` queda sustituido por ADR 0039. El gate de Contact
+Form 7 y la espera de revisión legal los sustituye
+[ADR 0041](0041-cf7-corte-sin-asesoria-legal.md).
 
 ## Fecha
 
@@ -67,5 +68,6 @@ propio proyecto, no un plazo de calendario.
 - ADR [0020](0020-hsts-aplazado-hasta-wordpress.md) — mismo criterio de aplazamiento consciente, aplicado a HSTS
 - ADR [0026](0026-contact-form-7.md) — evento que dispara la revisión de este ADR
 - ADR [0039](0039-aviso-privacidad-provisional-estatico.md) — sustituye el aplazamiento de publicación
+- ADR [0041](0041-cf7-corte-sin-asesoria-legal.md) — sustituye el gate de CF7 y la espera legal
 - `.audit/implementation/tasks/TASK-0003.md`
 - `.audit/decisions.md`

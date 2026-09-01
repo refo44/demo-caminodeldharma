@@ -117,8 +117,10 @@ Documentos, issues, commits o ADR relacionados.
 | [0036](0036-urls-album-galeria-noindex.md) | URLs de álbum `/galeria/{slug}` permitidas; noindex hasta volumen | Aceptada |
 | [0037](0037-cpt-autor-blog-url-author.md) | CPT de autor del blog; perfil `/author/{slug}` | Aceptada |
 | [0038](0038-pruebas-tdd-phpunit-sonar.md) | Pruebas TDD, wp-phpunit y SonarQube Cloud | Aceptada |
-| [0039](0039-aviso-privacidad-provisional-estatico.md) | Aviso de privacidad provisional en el estático | Aceptada |
+| [0039](0039-aviso-privacidad-provisional-estatico.md) | Aviso de privacidad provisional en el estático | Aceptada; gate CF7 / espera legal sustituidos → [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | [0040](0040-retirar-content-source-produccion-como-fuente.md) | Retirar `content-source`; producción publicada gobierna el contenido | Aceptada |
+| [0041](0041-cf7-corte-sin-asesoria-legal.md) | Contact Form 7 en el corte sin esperar asesoría legal | Aceptada |
+| [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) | Meta en Gutenberg: sin metabox clásico sin sync; no es defecto de corte | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -139,9 +141,9 @@ Documentos, issues, commits o ADR relacionados.
 | Entorno de desarrollo local WordPress | [0023](0023-entorno-local-wordpress-docker.md) — Docker, replicando versiones de Hostinger; tarea separada de implementar el theme |
 | Dominio en plugin, presentación en theme | [0024](0024-plugin-dominio-theme-presentacion.md) — `camino-del-dharma-core` dueño de CPTs/taxonomías/roles desde el inicio de Fase 3 |
 | Plugins de terceros | [0025](0025-politica-plugins-terceros.md) — solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno |
-| Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com |
+| Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón caminodeldharma1@gmail.com; producción en el corte: [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
-| Política de privacidad | [0039](0039-aviso-privacidad-provisional-estatico.md) — `/privacidad` publicada (provisional); [0028](0028-privacidad-aplazada-conscientemente.md) sustituida. Contact Form 7 sigue gated hasta actualizar el aviso y la revisión legal |
+| Política de privacidad | [0039](0039-aviso-privacidad-provisional-estatico.md) — `/privacidad` publicada (provisional); [0028](0028-privacidad-aplazada-conscientemente.md) sustituida. Contact Form 7 en el corte: [0041](0041-cf7-corte-sin-asesoria-legal.md) (sin espera legal; copy WordPress del formulario) |
 | Arquitectura del theme WordPress | [0029](0029-theme-bloques-full-site-editing.md) — theme de bloques (Full Site Editing); paleta, tipografía y espaciado editables desde wp-admin vía `theme.json`/Global Styles; sustituye a [0009](0009-css-y-tokens-invariantes-en-migracion.md) solo para WordPress |
 | Sitemap en WordPress | [0030](0030-sitemap-nativo-wordpress.md) — `/wp-sitemap.xml` nativo reemplaza al `sitemap.xml` manual solo para WordPress; `static/` no cambia |
 | Tags del blog | [0031](0031-tags-blog-noindex-hasta-volumen.md) — `post_tag` habilitado para editores; archivo de tag existe pero noindex hasta volumen suficiente, criterio cualitativo |
@@ -150,10 +152,12 @@ Documentos, issues, commits o ADR relacionados.
 | Estático live como contenido de producción | [0034](0034-static-live-como-fuente-contenido-produccion.md) — hardcoded ≠ dummy; extracción; conteos; freeze/delta; patterns ≠ content |
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
-| Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma |
+| Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma; UI Gutenberg de meta: [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) |
 | Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
-| Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; CF7 gated |
+| Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; gate CF7 sustituido por [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | Fuente editorial pre-corte | [0040](0040-retirar-content-source-produccion-como-fuente.md) — `content-source/` retirado; producción publicada gobierna contenido y presentación |
+| CF7 en el corte | [0041](0041-cf7-corte-sin-asesoria-legal.md) — sin espera de asesoría legal; disclaimer publicado basta; copy WordPress del formulario |
+| Meta wp-admin / Gutenberg | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) — restricciones META-*; no blocker de corte |
 
 ---
 
@@ -162,8 +166,8 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.20);
-  `POST-*` de fases posteriores; no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.25);
+  `POST-*` de fases posteriores; `META-*` decididos como restricciones (ADR 0042); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

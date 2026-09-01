@@ -79,8 +79,8 @@ Mientras el contacto directo con quien llega siga siendo viable, esa vía es pre
   estático (CHANGELOG ≥1.0.13). Al reproducir, terceros pueden fijar cookies; el aviso de
   `/privacidad` lo describe.
 - **Política de privacidad:** `/privacidad` está **publicada** de forma provisional (ADR 0039).
-  Siguen abiertos la revisión legal y el gate de Contact Form 7 (actualizar el aviso antes de CF7
-  en producción).
+  Contact Form 7 es elegible en el corte (ADR 0041); la revisión legal queda como trabajo
+  posterior, no como gate. En WordPress se actualizan solo los párrafos del formulario.
 
 *(La nota de vigencia anterior a esta sección se consolidó aquí el 2026-08-30.)*
 

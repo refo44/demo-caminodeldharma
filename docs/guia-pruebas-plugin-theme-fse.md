@@ -380,7 +380,8 @@ composer test:wp           # PHPUnit/WordPress aislado (Docker); no CI
 ./tools/qa-<slice>.sh      # un harness relevante; down -v al salir
 ```
 
-Hoy, el único comando canónico que existe es `npm run lint:css`.
+Desde WU-03 (2026-08-31) existen todos salvo `qa-<slice>.sh` (nace con el primer harness de
+nivel 3). PHPCS corre con `composer lint:phpcs` (paso propio del job PHP de `test.yml`).
 
 `php -l` comprueba **sintaxis**. `composer audit --locked` comprueba **advisories del
 lockfile**. PHPUnit nivel 1 comprueba **comportamiento puro**. `composer test:wp` comprueba

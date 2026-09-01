@@ -27,7 +27,7 @@ const REPO = path.resolve(__dirname, '..', '..');
 // aplanado sobre blanco, es decir, un cuadro liso.)
 const LOGO = fs.readFileSync(path.join(
   REPO,
-  'assets/images/logo-docx-cover.png',
+  'static/assets/images/logo-docx-cover.png',
 ));
 
 /* ---------------------------------------------------------------- portada */
