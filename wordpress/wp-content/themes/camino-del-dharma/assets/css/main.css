@@ -1726,6 +1726,19 @@ a:focus-visible {
   color: var(--wp--custom--color--text-muted);
 }
 
+/* BUG-001: the calendar dialog of a course explains that the .ics holds
+   every session while the deep links add the next one. */
+.calendar-dialog-note {
+  margin: calc(var(--wp--preset--spacing--md) * -1) 0 var(--wp--preset--spacing--md);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--wp--custom--color--text-muted);
+}
+
+.calendar-dialog-note[hidden] {
+  display: none;
+}
+
 .share-options {
   display: grid;
   grid-template-columns: 1fr;

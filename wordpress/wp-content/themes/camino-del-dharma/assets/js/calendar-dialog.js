@@ -3,6 +3,9 @@
  * Ported verbatim from static/assets/js/calendar.js (WU-08A); the
  * month-grid tooltip half of that file lives in calendar-tooltips.js.
  * The trigger markup comes from the evento-acciones block.
+ * BUG-001 adds the schedule note: a course exports every session in its
+ * .ics, but a Google/Outlook deep link carries one entry, so the dialog
+ * says which session those two add.
  */
 (function () {
   var calendarButtons = document.querySelectorAll('[data-calendar-title]');
@@ -21,6 +24,7 @@
       '</button>' +
     '</div>' +
     '<p class="share-dialog-content-title"></p>' +
+    '<p class="calendar-dialog-note" id="calendar-dialog-note" hidden></p>' +
     '<div class="share-options">' +
       '<a class="share-option" data-calendar-platform="google" target="_blank" rel="noopener noreferrer">Google Calendar <span class="visually-hidden">(abre en nueva pestaña)</span></a>' +
       '<a class="share-option" data-calendar-platform="outlook" target="_blank" rel="noopener noreferrer">Outlook <span class="visually-hidden">(abre en nueva pestaña)</span></a>' +
@@ -31,6 +35,7 @@
 
   var closeButton = dialog.querySelector('.share-dialog-close');
   var contentTitle = dialog.querySelector('.share-dialog-content-title');
+  var note = dialog.querySelector('.calendar-dialog-note');
   var googleLink = dialog.querySelector('[data-calendar-platform="google"]');
   var outlookLink = dialog.querySelector('[data-calendar-platform="outlook"]');
   var appleLink = dialog.querySelector('[data-calendar-platform="apple"]');
@@ -71,7 +76,8 @@
       end: button.getAttribute('data-calendar-end'),
       description: resolveCalendarDescription(button),
       location: button.getAttribute('data-calendar-location') || '',
-      icsPath: button.getAttribute('data-calendar-ics')
+      icsPath: button.getAttribute('data-calendar-ics'),
+      note: button.getAttribute('data-calendar-note') || ''
     };
   }
 
@@ -127,6 +133,14 @@
 
     var icsUrl = absoluteUrl(event.icsPath);
     var filename = icsFilename(event.icsPath);
+
+    note.textContent = event.note;
+    note.hidden = !event.note;
+    if (event.note) {
+      dialog.setAttribute('aria-describedby', 'calendar-dialog-note');
+    } else {
+      dialog.removeAttribute('aria-describedby');
+    }
 
     googleLink.href = buildGoogleCalendarUrl(event);
     outlookLink.href = buildOutlookUrl(event);

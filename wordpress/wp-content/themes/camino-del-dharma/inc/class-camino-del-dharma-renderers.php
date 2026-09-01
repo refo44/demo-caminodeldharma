@@ -244,6 +244,7 @@ final class Camino_Del_Dharma_Renderers {
 				'data-calendar-event-url="' . esc_attr( (string) $calendar['url'] ) . '"' . "\n" .
 				'data-calendar-location="' . esc_attr( (string) $calendar['location'] ) . '"' . "\n" .
 				'data-calendar-ics="' . esc_attr( (string) $calendar['ics_url'] ) . '"' . "\n" .
+				self::calendar_schedule_attributes( $calendar ) .
 				'>' . "\n" . self::ICON_CALENDAR . "\n" .
 				esc_html__( 'Añadir al calendario', 'camino-del-dharma' ) . "\n" .
 				'</button>' . "\n";
@@ -256,6 +257,34 @@ final class Camino_Del_Dharma_Renderers {
 			self::share_trigger( $event, self::share_title( $event ) ) . "\n" .
 			'</p>' . "\n" .
 			'</div>';
+	}
+
+	/**
+	 * The schedule attributes of a course trigger (BUG-001). A Google or
+	 * Outlook deep link carries a single entry, so it adds the next
+	 * session while the .ics carries all of them; the note says so, and
+	 * the dialog is described by it. An event without a published
+	 * schedule prints neither attribute — the trigger stays as WU-08A
+	 * shipped it.
+	 *
+	 * @param array $calendar Calendar payload from
+	 *                        cdd_core_event_calendar_payload().
+	 */
+	private static function calendar_schedule_attributes( array $calendar ): string {
+		$sessions = (int) ( $calendar['session_count'] ?? 0 );
+		if ( $sessions < 2 ) {
+			return '';
+		}
+
+		$note = sprintf(
+			/* translators: 1: number of sessions, 2: date of the next session. */
+			esc_html__( 'El archivo .ics incluye las %1$d sesiones del curso. Google Calendar y Outlook añaden la próxima: %2$s.', 'camino-del-dharma' ),
+			$sessions,
+			Camino_Del_Dharma_Format::event_date_range( (string) $calendar['next']['start_date'], $calendar['next']['end_date'] ?? null )
+		);
+
+		return 'data-calendar-sessions="' . esc_attr( (string) $sessions ) . '"' . "\n" .
+			'data-calendar-note="' . esc_attr( $note ) . '"' . "\n";
 	}
 
 	/**
