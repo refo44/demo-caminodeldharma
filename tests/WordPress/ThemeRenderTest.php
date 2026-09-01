@@ -509,6 +509,63 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * BUG-001: on a course with a published session list the calendar
+	 * trigger deep-links the next session — the range would name dates
+	 * the downloaded file no longer contains — and says out loud that the
+	 * file carries the whole schedule, so a visitor who adds it to Google
+	 * or Outlook knows they got one session of several.
+	 */
+	public function test_calendar_trigger_of_a_course_names_the_next_session() {
+		$past  = gmdate( 'Y-m-d', strtotime( '-5 days' ) );
+		$next  = gmdate( 'Y-m-d', strtotime( '+3 days' ) );
+		$last  = gmdate( 'Y-m-d', strtotime( '+10 days' ) );
+		$event = $this->create_event(
+			'circulos',
+			$past,
+			$last,
+			array( 'event_calendar_dates' => array( $past, $next, $last ) )
+		);
+		$this->go_to_event( $event );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/evento-acciones /-->' );
+
+		$this->assertStringContainsString( 'data-calendar-start="' . str_replace( '-', '', $next ) . '"', $html );
+		$this->assertStringContainsString(
+			'data-calendar-end="' . gmdate( 'Ymd', strtotime( $next . ' +1 day' ) ) . '"',
+			$html
+		);
+		$this->assertStringContainsString( 'data-calendar-sessions="3"', $html );
+		$this->assertStringContainsString( 'data-calendar-note="', $html );
+		$this->assertStringContainsString( '3 sesiones', $html );
+		$this->assertStringContainsString(
+			esc_attr( Camino_Del_Dharma_Format::event_date_range( $next, null ) ),
+			$html,
+			'The note names the session the deep links add.'
+		);
+	}
+
+	/**
+	 * BUG-001 leaves a single-date event alone: no session list, no note
+	 * and no sessions attribute — the trigger stays exactly as WU-08A
+	 * shipped it.
+	 */
+	public function test_calendar_trigger_without_sessions_carries_no_schedule_note() {
+		$event = $this->create_event(
+			'encuentro',
+			gmdate( 'Y-m-d', strtotime( '+10 days' ) ),
+			gmdate( 'Y-m-d', strtotime( '+12 days' ) )
+		);
+		$this->go_to_event( $event );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/evento-acciones /-->' );
+
+		$this->assertStringContainsString( 'data-calendar-start="' . gmdate( 'Ymd', strtotime( '+10 days' ) ) . '"', $html );
+		$this->assertStringContainsString( 'data-calendar-end="' . gmdate( 'Ymd', strtotime( '+13 days' ) ) . '"', $html );
+		$this->assertStringNotContainsString( 'data-calendar-note', $html );
+		$this->assertStringNotContainsString( 'data-calendar-sessions', $html );
+	}
+
+	/**
 	 * Creates a published event with dates and extra meta.
 	 *
 	 * @param string      $slug  Post slug.

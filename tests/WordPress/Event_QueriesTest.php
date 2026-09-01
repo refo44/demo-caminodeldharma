@@ -12,6 +12,23 @@
 final class Event_QueriesTest extends WP_UnitTestCase {
 
 	/**
+	 * The Círculos cronograma as published (payload calendar_dates):
+	 * ten irregularly spaced sessions between September and October.
+	 */
+	const CIRCULOS_SESSIONS = array(
+		'2026-09-03',
+		'2026-09-10',
+		'2026-09-15',
+		'2026-09-17',
+		'2026-09-22',
+		'2026-09-24',
+		'2026-09-29',
+		'2026-10-01',
+		'2026-10-17',
+		'2026-10-24',
+	);
+
+	/**
 	 * Protects OWN-013 wired to real meta: the stored dates decide the
 	 * status at request time; the stored event_status only wins when it
 	 * says cancelled.
@@ -214,6 +231,135 @@ final class Event_QueriesTest extends WP_UnitTestCase {
 
 		$this->assertSame( '20260903', $payload['start'] );
 		$this->assertSame( '20260904', $payload['end'] );
+	}
+
+	/**
+	 * BUG-001: the .ics of a course exports every published session, not
+	 * one entry spanning the whole course. The Círculos cronograma has
+	 * ten sessions; the file a visitor downloads carries ten VEVENTs,
+	 * including the ones already held — the file is the schedule.
+	 */
+	public function test_the_ics_of_a_course_exports_every_session() {
+		$now   = $this->bogota( '2026-09-20 09:00:00' );
+		$event = $this->create_event(
+			'circulos',
+			'2026-09-03',
+			'2026-10-24',
+			array(
+				'event_place'          => 'Bogotá y Cali',
+				'event_calendar_dates' => self::CIRCULOS_SESSIONS,
+			)
+		);
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ), $now );
+
+		$this->assertCount( 10, $payload['occurrences'] );
+		$this->assertSame( 10, $payload['session_count'] );
+		$this->assertSame( '2026-09-03', $payload['occurrences'][0]['start_date'] );
+		$this->assertSame( '20260904', $payload['occurrences'][0]['end'], 'Each session is one all-day entry.' );
+		$this->assertSame( '2026-09-03', $payload['start_date'], 'The course span is untouched.' );
+		$this->assertSame( '2026-10-24', $payload['end_date'] );
+
+		$ics = cdd_core_event_ics_response( 'circulos', $now )['body'];
+
+		$this->assertSame( 10, substr_count( $ics, 'BEGIN:VEVENT' ) );
+		foreach ( self::CIRCULOS_SESSIONS as $session ) {
+			$this->assertStringContainsString(
+				'DTSTART;VALUE=DATE:' . str_replace( '-', '', $session ) . "\r\n",
+				$ics,
+				'Session ' . $session . ' is exported.'
+			);
+		}
+
+		preg_match_all( "/UID:(.*?)\r\n/", $ics, $matches );
+		$this->assertCount( 10, array_unique( $matches[1] ), 'One UID per session, all distinct.' );
+	}
+
+	/**
+	 * BUG-001: the dialog and the file may not describe different dates.
+	 * Google and Outlook deep links carry a single entry, so they name
+	 * the next session — a date the downloaded file actually contains —
+	 * instead of a 52-day range that appears in no VEVENT.
+	 */
+	public function test_the_dialog_deep_link_names_a_session_the_file_contains() {
+		$now   = $this->bogota( '2026-09-20 09:00:00' );
+		$event = $this->create_event(
+			'circulos',
+			'2026-09-03',
+			'2026-10-24',
+			array( 'event_calendar_dates' => self::CIRCULOS_SESSIONS )
+		);
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ), $now );
+
+		$this->assertSame( '20260922', $payload['start'], 'The next session, not the course range.' );
+		$this->assertSame( '20260923', $payload['end'] );
+		$this->assertSame( '2026-09-22', $payload['next']['start_date'] );
+
+		$ics = cdd_core_event_ics_response( 'circulos', $now )['body'];
+
+		$this->assertStringContainsString( 'DTSTART;VALUE=DATE:' . $payload['start'] . "\r\n", $ics );
+		$this->assertStringContainsString( 'DTEND;VALUE=DATE:' . $payload['end'] . "\r\n", $ics );
+	}
+
+	/**
+	 * BUG-001: before the course starts the deep link names the first
+	 * session, so a visitor who adds it lands on the welcome date.
+	 */
+	public function test_the_deep_link_names_the_first_session_before_the_course_starts() {
+		$event = $this->create_event(
+			'circulos',
+			'2026-09-03',
+			'2026-10-24',
+			array( 'event_calendar_dates' => self::CIRCULOS_SESSIONS )
+		);
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ), $this->bogota( '2026-09-01 09:00:00' ) );
+
+		$this->assertSame( '20260903', $payload['start'] );
+		$this->assertSame( '20260904', $payload['end'] );
+	}
+
+	/**
+	 * BUG-001 does not weaken OWN-012: a completed course still returns
+	 * 410 with an empty body, session list or not.
+	 */
+	public function test_a_completed_course_still_returns_410_with_no_sessions_exported() {
+		$this->create_event(
+			'circulos',
+			'2026-09-03',
+			'2026-10-24',
+			array( 'event_calendar_dates' => self::CIRCULOS_SESSIONS )
+		);
+
+		$response = cdd_core_event_ics_response( 'circulos', $this->bogota( '2026-10-26 09:00:00' ) );
+
+		$this->assertSame( 410, $response['status'] );
+		$this->assertSame( '', $response['body'] );
+		$this->assertSame( 'noindex, nofollow', $response['headers']['X-Robots-Tag'] );
+	}
+
+	/**
+	 * BUG-001 leaves single-date events alone: without a session list the
+	 * payload and the file keep the event_date..event_end range of WU-08A.
+	 */
+	public function test_an_event_without_sessions_keeps_the_range_export() {
+		$now   = $this->bogota( '2026-08-01 09:00:00' );
+		$event = $this->create_event( 'encuentro', '2026-08-07', '2026-08-09' );
+
+		$payload = cdd_core_event_calendar_payload( get_post( $event ), $now );
+
+		$this->assertSame( array(), $payload['occurrences'] );
+		$this->assertSame( 0, $payload['session_count'] );
+		$this->assertSame( '20260807', $payload['start'] );
+		$this->assertSame( '20260810', $payload['end'] );
+
+		$ics = cdd_core_event_ics_response( 'encuentro', $now )['body'];
+
+		$this->assertSame( 1, substr_count( $ics, 'BEGIN:VEVENT' ) );
+		$this->assertStringContainsString( 'UID:encuentro@' . wp_parse_url( home_url(), PHP_URL_HOST ) . "\r\n", $ics );
+		$this->assertStringContainsString( "DTSTART;VALUE=DATE:20260807\r\n", $ics );
+		$this->assertStringContainsString( "DTEND;VALUE=DATE:20260810\r\n", $ics );
 	}
 
 	/**

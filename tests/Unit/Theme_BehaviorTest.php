@@ -141,6 +141,27 @@ final class Theme_BehaviorTest extends TestCase {
 	}
 
 	/**
+	 * BUG-001: the dialog prints the schedule note the renderer builds
+	 * for a course, and describes the dialog with it, so the visitor
+	 * reads that the file holds every session while the deep links add
+	 * only the next one. No note, no empty paragraph.
+	 */
+	public function test_calendar_dialog_prints_the_schedule_note() {
+		$js = $this->theme_file( 'assets/js/calendar-dialog.js' );
+
+		foreach (
+			array(
+				'calendar-dialog-note',
+				'data-calendar-note',
+				'aria-describedby',
+				'textContent',
+			) as $hook
+		) {
+			$this->assertStringContainsString( $hook, $js, $hook );
+		}
+	}
+
+	/**
 	 * Protects the split made in WU-07: the month-grid tooltip behavior
 	 * lives in calendar-tooltips.js and is not duplicated by the dialog
 	 * script (one behavior, one file, one enqueue).
