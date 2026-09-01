@@ -77,6 +77,52 @@ final class Featured_Event_PolicyTest extends TestCase {
 	}
 
 	/**
+	 * Protects nearest-start among current events when one has no date:
+	 * an empty start must not sort before a valid Y-m-d (strcmp would).
+	 * Status treats missing dates as current, so this is a real pool.
+	 */
+	public function test_undated_current_event_does_not_beat_a_dated_one() {
+		$selected = ( new Cdd_Core_Featured_Event_Policy() )->select(
+			array(
+				$this->event( 'sin-fecha', true, false, '' ),
+				$this->event( 'pausa', true, false, '2026-09-01' ),
+			)
+		);
+
+		$this->assertSame( 'pausa', $selected['id'] );
+	}
+
+	/**
+	 * Protects the featured mark over start-date order: an editorial
+	 * featured event still wins even when its start is empty.
+	 */
+	public function test_undated_featured_still_wins_over_dated_current() {
+		$selected = ( new Cdd_Core_Featured_Event_Policy() )->select(
+			array(
+				$this->event( 'editorial', true, true, '' ),
+				$this->event( 'pausa', true, false, '2026-09-01' ),
+			)
+		);
+
+		$this->assertSame( 'editorial', $selected['id'] );
+	}
+
+	/**
+	 * Protects nearest-start among current featured events: an empty
+	 * start must not beat a dated featured sibling.
+	 */
+	public function test_undated_featured_loses_to_dated_featured() {
+		$selected = ( new Cdd_Core_Featured_Event_Policy() )->select(
+			array(
+				$this->event( 'sin-fecha', true, true, '' ),
+				$this->event( 'circulos', true, true, '2026-09-03' ),
+			)
+		);
+
+		$this->assertSame( 'circulos', $selected['id'] );
+	}
+
+	/**
 	 * Protects rule 5: with no current event the module does not render —
 	 * the selection is null, never an empty box.
 	 */

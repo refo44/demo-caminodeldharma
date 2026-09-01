@@ -10,6 +10,15 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
+
+- **Destacado del Inicio:** un evento vigente sin `event_date` ya no gana por
+  `strcmp('')` frente a uno con fecha; las fechas vacías ordenan al final. El
+  marcado editorial featured sigue ganando. Plugin `camino-del-dharma-core` **0.7.1**.
+- **Payload:** `_source_hash` excluye `_source_key` además de sí mismo (el contrato
+  del builder). `migration/payload.json` se regeneró; create-missing-only no
+  reescribe contenido ya importado.
+
 ### Gobernanza — META Gutenberg no es defecto de corte (ADR 0042 / OWN-019)
 
 El propietario decide (2026-09-01) que `META-001`–`META-005` (auditoría metabox clásico vs

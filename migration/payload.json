@@ -31,7 +31,7 @@
             "source_path": "static/index.html",
             "parent": "",
             "_source_key": "page:inicio",
-            "_source_hash": "1bc8ddc2977c3620105ce4085b949d5f02b698e8fd99423ed2b7d135d8780ce6"
+            "_source_hash": "772cfef055d7eac651be63356f1e1e45aa958e1a81b649d8f4d28c1f79568750"
         },
         {
             "slug": "comunidad",
@@ -48,7 +48,7 @@
             "source_path": "static/comunidad/index.html",
             "parent": "",
             "_source_key": "page:comunidad",
-            "_source_hash": "c93e5dec60625ce1f94fa33b1189a20aa365b271a17e8d3e22e6226482802d4d"
+            "_source_hash": "d3daf0ca286a93da29aae9a2c80f0f0f17c0161ede636c34fa602e1786dbbd95"
         },
         {
             "slug": "linaje",
@@ -65,7 +65,7 @@
             "source_path": "static/linaje/index.html",
             "parent": "",
             "_source_key": "page:linaje",
-            "_source_hash": "f238e32383d3dbb45ea70c216738a8a46f7250c2bd6fee598f7551431f68338e"
+            "_source_hash": "4da49ee8b1e52a3e47f9a07edda41c416908eeb20b6ad948ba23f94321933208"
         },
         {
             "slug": "practica",
@@ -82,7 +82,7 @@
             "source_path": "static/practica/index.html",
             "parent": "",
             "_source_key": "page:practica",
-            "_source_hash": "1efe91587aa2ea64e95ad4f0db9d9b8ac7c2a345111f5d4344a71ac07ce30d62"
+            "_source_hash": "f06d855074c7d1f58755b7d2f7c543c44222c5fa6831534eae7b808eaafaf288"
         },
         {
             "slug": "practica/videos",
@@ -99,7 +99,7 @@
             "source_path": "static/practica/videos/index.html",
             "parent": "practica",
             "_source_key": "page:practica/videos",
-            "_source_hash": "917ae436165a720e3c0d89c56cd28875eb4655af4ec35375e2c89d5e19976cc7"
+            "_source_hash": "c92d1a02bcf2b40d87171d0a6c8294cc6c2427c1a98aa7b4c7c5190d76abd31c"
         },
         {
             "slug": "practica/meditacion-semanal-en-linea",
@@ -116,7 +116,7 @@
             "source_path": "static/practica/meditacion-semanal-en-linea/index.html",
             "parent": "practica",
             "_source_key": "page:practica/meditacion-semanal-en-linea",
-            "_source_hash": "edd134d97ef5b9a965b0140a327bcd1a74add4f8dc82f7d8b073e83663359792"
+            "_source_hash": "1bbc78a23974cab9b0e153b6cd73bd2060761f3d5ae846afc8d5e35f7212ba9d"
         },
         {
             "slug": "galeria",
@@ -133,7 +133,7 @@
             "source_path": "static/galeria/index.html",
             "parent": "",
             "_source_key": "page:galeria",
-            "_source_hash": "89e6ee5519392de715f4bdc74de13be1c5ed7eb1abee9577776f5bfa0eb05979"
+            "_source_hash": "d6f65c267d9b3433748e8aafc4156408098154b692094e6b2e334c45feefe40c"
         },
         {
             "slug": "donaciones",
@@ -150,7 +150,7 @@
             "source_path": "static/donaciones/index.html",
             "parent": "",
             "_source_key": "page:donaciones",
-            "_source_hash": "073c3d69b81f504b08ed0e06dcd898fc12e4d4e3f5ec7a19370c96cd8cec4b34"
+            "_source_hash": "54191577849cf69fe85562584f0b7747656b3c37082d2cb6f4f4f9c8bc3b4492"
         },
         {
             "slug": "contacto",
@@ -167,7 +167,7 @@
             "source_path": "static/contacto/index.html",
             "parent": "",
             "_source_key": "page:contacto",
-            "_source_hash": "2fe3639efa1628a27eb9ef8d7e0767bd50c321dc1e09fc22d5ebd43d02f50eea"
+            "_source_hash": "2f06b6e885e904e46d5866422eee1003704f43c9a340673e7f5d72716c42098e"
         },
         {
             "slug": "blog",
@@ -184,7 +184,7 @@
             "source_path": "static/blog/index.html",
             "parent": "",
             "_source_key": "page:blog",
-            "_source_hash": "8aa13d4b0850668456cff7024b06781de539e52086fa77fed55d65abab56566d"
+            "_source_hash": "73437526cbc8a69b7b7d521815f702147ecb53f0bc09ccb5a3e5ffb0f78c2d2f"
         },
         {
             "slug": "privacidad",
@@ -201,7 +201,7 @@
             "source_path": "static/privacidad/index.html",
             "parent": "",
             "_source_key": "page:privacidad",
-            "_source_hash": "31016b6a18ef8b77e9d80dee11ab1bb019abc43de58da84f909f4e60d41752e2"
+            "_source_hash": "b3943eabc16b62157609df35ecb0584eaa93ab61d5e565d1d6f09da1c3dad2f3"
         }
     ],
     "events": [
@@ -283,7 +283,7 @@
             "has_single_source": true,
             "source_path": "static/eventos/circulos-de-presencia-consciente/index.html",
             "_source_key": "event:circulos-de-presencia-consciente",
-            "_source_hash": "badf8d9e76427cdd25f582caef21fb5dfe10746933b764a481627ab170222e36"
+            "_source_hash": "3bb35e87e14a74597855408ad587ce0a7a53d4a1f439db0bbfb5053c45201693"
         },
         {
             "slug": "encuentro-nacional-2026",
@@ -339,7 +339,7 @@
             "has_single_source": true,
             "source_path": "static/eventos/encuentro-nacional-2026/index.html",
             "_source_key": "event:encuentro-nacional-2026",
-            "_source_hash": "3472ed953eeaf1ccd60a92b279c4434bf2c0bd7ed7b1d15877ed8682b0c61992"
+            "_source_hash": "49e9d986628e4ace4fe92678e5e38b5ce848840532fb105f2ac8ea08f9144b7a"
         },
         {
             "slug": "meditacion-presencial-barranquilla",
@@ -378,7 +378,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:meditacion-presencial-barranquilla",
-            "_source_hash": "e5954d613d4d03f7871fb554e8fdf41184ba796e11e89f64ce133a49bc47e9ab"
+            "_source_hash": "b7c6ce46c99290fd4d0e376ad8a05ef20dad5a060fbccd8d8832e4fabd293f9b"
         },
         {
             "slug": "festival-calma-en-la-ciudad",
@@ -417,7 +417,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:festival-calma-en-la-ciudad",
-            "_source_hash": "c2dc71f79f42e9512f02f7ab8c0525732a3b6463bfe213e315ef70da74380d6f"
+            "_source_hash": "d572fb87a3f8d66de0bf6303fcabb487c5092b1bde59febad80db1cd0c17a6c8"
         },
         {
             "slug": "pausa-profunda-medellin",
@@ -456,7 +456,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:pausa-profunda-medellin",
-            "_source_hash": "5989b31200b22df6bf36b094a68b0e9a55b30026a984bd1fdff31b7784b3bab3"
+            "_source_hash": "445b7a60cf2ef4167fa6c619ee2813dbd957a2cc3e2e686069fb12dea7590640"
         },
         {
             "slug": "ansiedad-agotamiento-crisis-de-atencion",
@@ -495,7 +495,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:ansiedad-agotamiento-crisis-de-atencion",
-            "_source_hash": "8492f480220cb28f5013be635c1dde4197bfffe828b445c9201f6137cf0a88e5"
+            "_source_hash": "1e0a38914825a204f7c74f414c499232362189a239ca62e2d79e95243a6dfe58"
         },
         {
             "slug": "vesak-2026",
@@ -534,7 +534,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:vesak-2026",
-            "_source_hash": "084a89294b092b01e1b3362925c09a2a8cb506c78d34f18f6cafa57341dc3cf2"
+            "_source_hash": "59e0fd5162cb34102102a56344cec4ba19369c39a195f95e61e63997f08cbbcc"
         },
         {
             "slug": "pausa-profunda-cali",
@@ -590,7 +590,7 @@
             "has_single_source": true,
             "source_path": "static/eventos/pausa-profunda-cali/index.html",
             "_source_key": "event:pausa-profunda-cali",
-            "_source_hash": "5a71ece3b82c27ff582ce8e0761860518bc3d593887208b1b62b73747e7717d6"
+            "_source_hash": "67331ba7c03dc55946913f606eaa3f4d87fffef6931658c7bcdc7ccc3e43b59c"
         },
         {
             "slug": "buddhismo-tiempos-cansancio",
@@ -627,7 +627,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:buddhismo-tiempos-cansancio",
-            "_source_hash": "862f39ac4c0d381311f151ae642f579bec5165474916d87520fa40058a363863"
+            "_source_hash": "dbb3ab9b42c06648f68dcd58bd02ea654b865d7cde877973ebb17a45c21cf831"
         },
         {
             "slug": "6-encuentro-nacional-2025",
@@ -666,7 +666,7 @@
             "has_single_source": false,
             "source_path": "static/eventos/index.html",
             "_source_key": "event:6-encuentro-nacional-2025",
-            "_source_hash": "bb31bc6cc02f032e7416f79e19d9301c90da1223b9edf73c0455ac5ea235c3ff"
+            "_source_hash": "637305e88bb27b6705be376ec48e9c96ba36cc9393fdcf29d39ecef46997db0e"
         }
     ],
     "posts": [
@@ -700,7 +700,7 @@
                 "comunidad-camino-del-dharma"
             ],
             "_source_key": "post:circulos-de-presencia-consciente",
-            "_source_hash": "95cd3526a814090e27f786fb83e3291b82a384b3ba529e5c2489877aaca47d14"
+            "_source_hash": "638b523b46cc6ac45a6cd9a2eb4439790f4e4a268678ad76ee54a4a6da2bd181"
         },
         {
             "slug": "sangha-refugio-hiperconexion",
@@ -732,7 +732,7 @@
                 "zheng-gong"
             ],
             "_source_key": "post:sangha-refugio-hiperconexion",
-            "_source_hash": "e68108374d671bdceb2fa1dd87b8794a504cc976d6ed706b6a0bb8c4d82b6ecf"
+            "_source_hash": "89abfe4cd6df5f277f961008cb9654ffc3f50c90b200e405f920baa43121abf5"
         }
     ],
     "blog_authors": [
@@ -741,14 +741,14 @@
             "name": "Comunidad Camino del Dharma",
             "bio": "",
             "_source_key": "blog_author:comunidad-camino-del-dharma",
-            "_source_hash": "2da3e4f11a77a27b8c7cd49961e1b0fbcd8b3ab189d9db6404ce639331965dd8"
+            "_source_hash": "03901085953a443d0054e52adbe1a825489ec22e89a565455e559bd7e10505fe"
         },
         {
             "slug": "zheng-gong",
             "name": "Zheng Gong",
             "bio": "Maestro budista de las tradiciones Chan y Tierra Pura. Abad y presidente de la Comunidad Buddhista Camino del Dharma.",
             "_source_key": "blog_author:zheng-gong",
-            "_source_hash": "3e38971416293c99c1228d0a18c8ee3c4884f6543fa9cdaae558b41212023b78"
+            "_source_hash": "43af68b2b7808054103d585784349a5c0c66113f258cbc61121b52e5e8df579e"
         }
     ],
     "gallery_albums": [
@@ -757,21 +757,21 @@
             "title": "General",
             "source_id": "galeria-general",
             "_source_key": "album:general",
-            "_source_hash": "6d0f5a014928345532b0c7dbf10459174b879723efa836cb63ae5edf4ff4ab80"
+            "_source_hash": "112dc3a59830756c52b3a84fc1478a0405f1152f1a4f7df8fea6d8617332abd0"
         },
         {
             "slug": "2023",
             "title": "2023",
             "source_id": "galeria-2023",
             "_source_key": "album:2023",
-            "_source_hash": "80b0215d7f7d4f3406f2498937ce2b0093c957e1860f85b9c7d258511314a311"
+            "_source_hash": "b4d426056d9edaa0d4aed016e85a8ea3a44db9f19766cc0532d5a404431c9939"
         },
         {
             "slug": "2021",
             "title": "2021",
             "source_id": "galeria-2021",
             "_source_key": "album:2021",
-            "_source_hash": "4e11facc7ecf67e998f2f0175ded89501016e9b7a8d764388e036cf3b00ce92b"
+            "_source_hash": "b4d5418aa972fad53eae0ee08f0ed2f68204d0b9cf5b2c54be10363fc9c880f2"
         }
     ],
     "gallery_images": [
@@ -781,7 +781,7 @@
             "album": "general",
             "position": 0,
             "_source_key": "gallery:assets/images/galeria/galeria-01.jpg",
-            "_source_hash": "6b2506f043bfaca9b2e9c88a1b79493c7ebdeb519052bd4e484752fd4a6df423"
+            "_source_hash": "22a107d7a212eaa6503ebe4c138ecc87106b4ecff30e07453e9cb34d01d7da9b"
         },
         {
             "file": "assets/images/galeria/galeria-02.jpg",
@@ -789,7 +789,7 @@
             "album": "general",
             "position": 1,
             "_source_key": "gallery:assets/images/galeria/galeria-02.jpg",
-            "_source_hash": "6796b3129921a4e913025cc30b5ea34a4e29254d8c4258e5091bb2f9714e0b6f"
+            "_source_hash": "0fb4126dc3c90e87c41e386859b145929e84516100747a0abac251b151c30044"
         },
         {
             "file": "assets/images/galeria/galeria-03.jpg",
@@ -797,7 +797,7 @@
             "album": "general",
             "position": 2,
             "_source_key": "gallery:assets/images/galeria/galeria-03.jpg",
-            "_source_hash": "67cbbb892408ef05825b1f380b668525671e138ef68f996746dfc3a5dc5dd436"
+            "_source_hash": "3e0789974c28766e5c9ef7de025dddfcd290a400aac0aba7532e890f254d0321"
         },
         {
             "file": "assets/images/galeria/galeria-05.jpg",
@@ -805,7 +805,7 @@
             "album": "general",
             "position": 3,
             "_source_key": "gallery:assets/images/galeria/galeria-05.jpg",
-            "_source_hash": "69fc244a1712c8a3bf60dbb0104cadd9b7b0239fd6892da36698ce7661936aac"
+            "_source_hash": "2d961ef61bd9c728ff77b133efaea0269e1327e9c1e260c69c8fe3cb61e31e29"
         },
         {
             "file": "assets/images/galeria/galeria-06.jpg",
@@ -813,7 +813,7 @@
             "album": "general",
             "position": 4,
             "_source_key": "gallery:assets/images/galeria/galeria-06.jpg",
-            "_source_hash": "e6e899612b7b0a15ccf26eae6fa6eb47eb034f8fee58e78d850a33a61ddfa8bb"
+            "_source_hash": "6014343c883c24f96ac261f751ef4b3681ac04dbceeb8d969198d5241e93dc15"
         },
         {
             "file": "assets/images/galeria/galeria-07.jpg",
@@ -821,7 +821,7 @@
             "album": "general",
             "position": 5,
             "_source_key": "gallery:assets/images/galeria/galeria-07.jpg",
-            "_source_hash": "b1759c617e6b4099472181b2760f639278a9a1747352baa0b701c267713a828e"
+            "_source_hash": "f5ada54bf9e0fbac5c3a9e81e7a4ca1b6742e706380d269fa039686bbda8368e"
         },
         {
             "file": "assets/images/galeria/galeria-08.jpg",
@@ -829,7 +829,7 @@
             "album": "general",
             "position": 6,
             "_source_key": "gallery:assets/images/galeria/galeria-08.jpg",
-            "_source_hash": "c11c6c9d165fa70c14fe3376434457e5a900885cd56c1d32e4838671da0d2fa2"
+            "_source_hash": "0c87bca87fd7c533f7301a67da8fcccce3648563cae167766b073190dc55a885"
         },
         {
             "file": "assets/images/galeria/galeria-09.jpg",
@@ -837,7 +837,7 @@
             "album": "general",
             "position": 7,
             "_source_key": "gallery:assets/images/galeria/galeria-09.jpg",
-            "_source_hash": "88772b80a7a3f359645c7152817350b78a9e61ffd68bddd43a7a8f701f641a84"
+            "_source_hash": "67619f0122b81b0a15825b231643217f4034ae506ed39283597c64a10db67f6b"
         },
         {
             "file": "assets/images/galeria/galeria-10.jpg",
@@ -845,7 +845,7 @@
             "album": "general",
             "position": 8,
             "_source_key": "gallery:assets/images/galeria/galeria-10.jpg",
-            "_source_hash": "fbfe3802cd2162f0e9efc252dcdd71ddd0d94c2844b964087a3789b21379b64a"
+            "_source_hash": "1b6deff1fc00e3367b3a5399b1672017ad1e57330a023c3010860a0c5ce5e0f1"
         },
         {
             "file": "assets/images/galeria/galeria-11.jpg",
@@ -853,7 +853,7 @@
             "album": "general",
             "position": 9,
             "_source_key": "gallery:assets/images/galeria/galeria-11.jpg",
-            "_source_hash": "08b109b360051700007b1d5e0bd67ecd926e8b97be42eb375240068a4b63e06e"
+            "_source_hash": "5d306c5c419f88de9b645aa5439ec615eca8e6dce568606e3d0cd5a826c70f5e"
         },
         {
             "file": "assets/images/galeria/galeria-12.jpg",
@@ -861,7 +861,7 @@
             "album": "general",
             "position": 10,
             "_source_key": "gallery:assets/images/galeria/galeria-12.jpg",
-            "_source_hash": "4edc41503f80a925a1e851288fc470462b13210113c20b4f8949556712347de8"
+            "_source_hash": "56112b23103faf3ff5478d05d4378b2064e2ba47fe7a6fcb61a6390ec4aad27f"
         },
         {
             "file": "assets/images/galeria/galeria-13.jpg",
@@ -869,7 +869,7 @@
             "album": "general",
             "position": 11,
             "_source_key": "gallery:assets/images/galeria/galeria-13.jpg",
-            "_source_hash": "2a3fbcc91c06316f988385d7b39214ffcbacf90845985de5b7377fffb76e6aee"
+            "_source_hash": "1c76ff7a3985ca16ac3e90a0073de59c3f272060f53d3e237a444a065e44b402"
         },
         {
             "file": "assets/images/galeria/galeria-14.jpg",
@@ -877,7 +877,7 @@
             "album": "general",
             "position": 12,
             "_source_key": "gallery:assets/images/galeria/galeria-14.jpg",
-            "_source_hash": "1ebe73dae6246eceb33d67039bbf8ea16b04b5dce2ed98b060120b2553a851d5"
+            "_source_hash": "81b673d691e68a09c390f15f132f3c91614e9c246af8ccb49f93e7800f521d70"
         },
         {
             "file": "assets/images/galeria/galeria-15.jpg",
@@ -885,7 +885,7 @@
             "album": "general",
             "position": 13,
             "_source_key": "gallery:assets/images/galeria/galeria-15.jpg",
-            "_source_hash": "051e72c7067012131280cd5a7e02c30797ef5435d2c64b934b3712c423083003"
+            "_source_hash": "a3c524611473b9ded231b7b061c344849bbac231b74f0ad8d9a4318a5adc935e"
         },
         {
             "file": "assets/images/galeria/galeria-16.jpg",
@@ -893,7 +893,7 @@
             "album": "general",
             "position": 14,
             "_source_key": "gallery:assets/images/galeria/galeria-16.jpg",
-            "_source_hash": "9eeeb96058d913b6f87261dce4608b198b88df93ff34ef2c28e54109d6425af8"
+            "_source_hash": "76af99eefaf5351afc5c600f4b11956050a7ecf356b7f270d34f7b4e454584a1"
         },
         {
             "file": "assets/images/galeria/galeria-17.jpg",
@@ -901,7 +901,7 @@
             "album": "general",
             "position": 15,
             "_source_key": "gallery:assets/images/galeria/galeria-17.jpg",
-            "_source_hash": "a57e8827ac630536c842753b60e35179e1886396d4adfbb4d8937f5450f0c6b5"
+            "_source_hash": "ba2fd1234ca2ce32eddf6c7794f658a0925ebce019d877aca4e2dbb452d16935"
         },
         {
             "file": "assets/images/galeria/galeria-18.jpg",
@@ -909,7 +909,7 @@
             "album": "general",
             "position": 16,
             "_source_key": "gallery:assets/images/galeria/galeria-18.jpg",
-            "_source_hash": "54b9d64ba2c2e761525dbf04d71fee2b2956f69cccc7b71ef2d0a51f6dfd7621"
+            "_source_hash": "de17bebb080298ee0e50c961e2ce968117efdc3d6ae01f38aaa715454cc80ac2"
         },
         {
             "file": "assets/images/galeria/galeria-19.jpg",
@@ -917,7 +917,7 @@
             "album": "general",
             "position": 17,
             "_source_key": "gallery:assets/images/galeria/galeria-19.jpg",
-            "_source_hash": "006af65aae6e8281bc82941d0020769f6547e934938e8239f39125d58b074504"
+            "_source_hash": "d98477f0aab8e993937077e55fbc98d54d0aa12859d8f86ebc746b8cde9a3957"
         },
         {
             "file": "assets/images/galeria/galeria-20.jpg",
@@ -925,7 +925,7 @@
             "album": "general",
             "position": 18,
             "_source_key": "gallery:assets/images/galeria/galeria-20.jpg",
-            "_source_hash": "cb787b31d2b94577071768e0da95c874a167eb4fab8fdc252775cd58f32819cb"
+            "_source_hash": "4bb3ec27a0627d7aca76317170c9e68ffc324109b65a2c8fcb4971a984437b39"
         },
         {
             "file": "assets/images/galeria/galeria-21.jpg",
@@ -933,7 +933,7 @@
             "album": "general",
             "position": 19,
             "_source_key": "gallery:assets/images/galeria/galeria-21.jpg",
-            "_source_hash": "28f80523c80bb98d74fdae4c55a5610f0f2adab9cb4620ae62486545fd03f840"
+            "_source_hash": "9a138cb7ef5838c57a87f88257ccc560163a53e6d4833f607262ad8ad9ac0ec0"
         },
         {
             "file": "assets/images/galeria/galeria-22.jpg",
@@ -941,7 +941,7 @@
             "album": "general",
             "position": 20,
             "_source_key": "gallery:assets/images/galeria/galeria-22.jpg",
-            "_source_hash": "b694d7ffebda7219bd7ae4292a4a8a34ad3fd8981b0e69a990a83548d3cca5b4"
+            "_source_hash": "7cc87a96b6576ab0cffdfd045a500db78878a294c250447bc6f9674145bea8bd"
         },
         {
             "file": "assets/images/galeria/galeria-23.jpg",
@@ -949,7 +949,7 @@
             "album": "general",
             "position": 21,
             "_source_key": "gallery:assets/images/galeria/galeria-23.jpg",
-            "_source_hash": "1140242a72c2eb41dc25e577cfbdb9ef3a4b8599a5a6dab6a1f7e28fce67961b"
+            "_source_hash": "bd69d6a9afefca6bef2f38032a3c752df8aeb725e3be05ebefdfcf4686b54d27"
         },
         {
             "file": "assets/images/galeria/galeria-24.jpg",
@@ -957,7 +957,7 @@
             "album": "general",
             "position": 22,
             "_source_key": "gallery:assets/images/galeria/galeria-24.jpg",
-            "_source_hash": "be21a6d36722c9ca8ce6928cd6758bd134ea55fb4798650f0ae30b549c76e70c"
+            "_source_hash": "1c487e550c3cd9c4d6322e05625c0cdf85e8f1d9a029138ec7908d0721653b2e"
         },
         {
             "file": "assets/images/galeria/galeria-25.jpg",
@@ -965,7 +965,7 @@
             "album": "general",
             "position": 23,
             "_source_key": "gallery:assets/images/galeria/galeria-25.jpg",
-            "_source_hash": "8f61b731e056520c413ff3ba1d1e7bbe83ac06471b16220fcbd39b57b2f31f11"
+            "_source_hash": "51381a021be3ec8f425ace613dae6ad7cac885cc3df226b494783ba3fd6d330d"
         },
         {
             "file": "assets/images/galeria/galeria-26.jpg",
@@ -973,7 +973,7 @@
             "album": "general",
             "position": 24,
             "_source_key": "gallery:assets/images/galeria/galeria-26.jpg",
-            "_source_hash": "0a377cd7efc58c328ca5746271424f63687dbf2e5e82f5b14d93548effad5d9e"
+            "_source_hash": "75a869de61b1810e4907baf264a1a30a1089174e098c034612730f26af44932a"
         },
         {
             "file": "assets/images/galeria/galeria-27.jpg",
@@ -981,7 +981,7 @@
             "album": "2023",
             "position": 25,
             "_source_key": "gallery:assets/images/galeria/galeria-27.jpg",
-            "_source_hash": "bf33abd24ea46f16c3d65767b89439bb13137dac532d5a20a526bddb26fb67dd"
+            "_source_hash": "ce3a5a60544134b11965ace883bf4f8227bc177fbd9dedee0a6fa0dce69464ee"
         },
         {
             "file": "assets/images/galeria/galeria-28.jpg",
@@ -989,7 +989,7 @@
             "album": "2023",
             "position": 26,
             "_source_key": "gallery:assets/images/galeria/galeria-28.jpg",
-            "_source_hash": "3d9953b7e7a46522b66fe237ff7c57258279597b028338e6afa303e33a7ba300"
+            "_source_hash": "2779c93f61345d2a0024a3937b028fbfb0427143666202791dc554df31e2b493"
         },
         {
             "file": "assets/images/galeria/galeria-29.jpg",
@@ -997,7 +997,7 @@
             "album": "2023",
             "position": 27,
             "_source_key": "gallery:assets/images/galeria/galeria-29.jpg",
-            "_source_hash": "07ea1331a247a34c8d4a62fee74f576bc03ff8b36f9bf3e41371629c2fe47bee"
+            "_source_hash": "c093c6b535222e24d28746dfc2d91c7fcc737d49406a90db130136377960e67b"
         },
         {
             "file": "assets/images/galeria/galeria-30.jpg",
@@ -1005,7 +1005,7 @@
             "album": "2023",
             "position": 28,
             "_source_key": "gallery:assets/images/galeria/galeria-30.jpg",
-            "_source_hash": "40faefae83f28f1b18a4256488de6076e5a8cf31efdba0fd121a679f0ac369a8"
+            "_source_hash": "53ee18c93f45fa108c86a773766c30df6b1568b74050337ed560dfc5e30b0831"
         },
         {
             "file": "assets/images/galeria/galeria-31.jpg",
@@ -1013,7 +1013,7 @@
             "album": "2023",
             "position": 29,
             "_source_key": "gallery:assets/images/galeria/galeria-31.jpg",
-            "_source_hash": "ce9b99eb45631cc28de534e0f2174ba2e0d450342df71b7f37d6f856f6edee8f"
+            "_source_hash": "b31e92e2b347369f96ee0894cdacb667dd5ddf7302899477e93faa5ec7340d4c"
         },
         {
             "file": "assets/images/galeria/galeria-32.jpg",
@@ -1021,7 +1021,7 @@
             "album": "2021",
             "position": 30,
             "_source_key": "gallery:assets/images/galeria/galeria-32.jpg",
-            "_source_hash": "e9913f84edc9901ea417f634b0e594243c48db6b13f2d65f27312e6311b474ad"
+            "_source_hash": "005a79afe516b0063a74d85e648bc6dfe7f24f384f9fdd4f92b6ffe53e0a9159"
         },
         {
             "file": "assets/images/galeria/galeria-33.jpg",
@@ -1029,7 +1029,7 @@
             "album": "2021",
             "position": 31,
             "_source_key": "gallery:assets/images/galeria/galeria-33.jpg",
-            "_source_hash": "954c1f77234e94205f55d54b44df35223be08dfb0207a03ce21fb3727adaa494"
+            "_source_hash": "4eaf48f3bb643dc76fc1113b78d22ed42d59c379f6639b0fdd3d5a5a34dd1c8b"
         },
         {
             "file": "assets/images/galeria/galeria-34.jpg",
@@ -1037,7 +1037,7 @@
             "album": "2021",
             "position": 32,
             "_source_key": "gallery:assets/images/galeria/galeria-34.jpg",
-            "_source_hash": "eca99754f3ff61d5136156099ab323be12168c8cbd034bbfd560bf3145e691da"
+            "_source_hash": "72c82efadd5c3e6809d0284050136b24c93be6f473c5ccb8c02cc25baa849ed2"
         },
         {
             "file": "assets/images/galeria/galeria-35.jpg",
@@ -1045,7 +1045,7 @@
             "album": "2021",
             "position": 33,
             "_source_key": "gallery:assets/images/galeria/galeria-35.jpg",
-            "_source_hash": "b01837fc6ad0089ff3b55f351de28020e6b8919a05692f9468429197fcc4ca2f"
+            "_source_hash": "39bb0d4411ae25229cddfc9b42081231a5bec5a25c2e2874fc181dc56fb71758"
         },
         {
             "file": "assets/images/galeria/galeria-36.jpg",
@@ -1053,7 +1053,7 @@
             "album": "2021",
             "position": 34,
             "_source_key": "gallery:assets/images/galeria/galeria-36.jpg",
-            "_source_hash": "fa9878bd6894dbedb7b8806ee0b65641efef68cb00c2b5b78b91a4ef0f63faf8"
+            "_source_hash": "79210b87682d9da5b5047f9bc42c369734202923f84783c389d9c1cc5f001313"
         }
     ],
     "media": [
@@ -1063,7 +1063,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/audio/amitabha.mp3",
-            "_source_hash": "c42694d075431bae2e9f56f44c82f30c06f1f4fb278418e6b4ca4dbf8207ab18"
+            "_source_hash": "3445bff42493e7c8057651b322c670a1a88c560a02ac5306e0096c027b47cff0"
         },
         {
             "file": "assets/audio/namo-guan-shi-yin-pusa.mp3",
@@ -1071,7 +1071,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/audio/namo-guan-shi-yin-pusa.mp3",
-            "_source_hash": "dc5829ef84932f4b5d47b79c880cc54be86f661cda0c9bdbac28740d59e0d09f"
+            "_source_hash": "5e9151184fdb01627102c37720b2a453af6f0f45db00097718c6dd9afcd5343c"
         },
         {
             "file": "assets/images/blog/circulos-de-presencia-consciente.jpg",
@@ -1079,7 +1079,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/blog/circulos-de-presencia-consciente.jpg",
-            "_source_hash": "fe845ed5f31493459e8d4abe68b3c0645ffd04de82bff2feea6f869ccf8021e1"
+            "_source_hash": "ae20fd9e7007274658150bfbf4bf423b212c6dfd56e021a59dd01be5724f9c6f"
         },
         {
             "file": "assets/images/blog/sangha-refugio-hiperconexion.jpg",
@@ -1087,7 +1087,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/blog/sangha-refugio-hiperconexion.jpg",
-            "_source_hash": "7b2792493699d106f1b33017967bac8cd5bf1260cd1975744b966bbe97661f94"
+            "_source_hash": "f8dfa825d651a49df23268ccde4ba7012bf27912355203fd9625088dd99d6804"
         },
         {
             "file": "assets/images/celebraciones/celebracion-diwali.jpg",
@@ -1095,7 +1095,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/celebraciones/celebracion-diwali.jpg",
-            "_source_hash": "190a0027147e36ba93deaf2c245fd5a2a788f9a206d1184f4ebb0e6fca8dd45e"
+            "_source_hash": "3d2b5c5bcd6953646ebf436068d11716896f1e134b4df967653d8c92099db2e5"
         },
         {
             "file": "assets/images/celebraciones/diwali-festival-lights-tradition.jpg",
@@ -1103,7 +1103,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/celebraciones/diwali-festival-lights-tradition.jpg",
-            "_source_hash": "b152be1a56156ebc296fc001598d0f2eb29e556c472e920c876a1e1036740b68"
+            "_source_hash": "5b45e11b37bfe30c30fbb2c9f91f3c3617b32e8b60497a80cb3d1e4904171e37"
         },
         {
             "file": "assets/images/celebraciones/vesak-2019.jpg",
@@ -1111,7 +1111,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/celebraciones/vesak-2019.jpg",
-            "_source_hash": "5ef219e66a733b70b598aa107c132d713f8e50f8002706148314292c1f4dc373"
+            "_source_hash": "7fe2b03a3f2f4a136c31d8df1d495a4a6347aee9bf1c29107362f886ec049918"
         },
         {
             "file": "assets/images/comunidad-linaje/comunidad-desarrollo-camino-dharma.jpg",
@@ -1119,7 +1119,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/comunidad-linaje/comunidad-desarrollo-camino-dharma.jpg",
-            "_source_hash": "61651d2ef82a60a3fbdc348a42e6901d0c887e890172b70dbcc2528f0da78d49"
+            "_source_hash": "d05daa735cb368ffaf934f48e02c99c61e7afdff471bd05869764e87a0159ad8"
         },
         {
             "file": "assets/images/comunidad-linaje/comunidad-quienes-somos.jpg",
@@ -1127,7 +1127,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/comunidad-linaje/comunidad-quienes-somos.jpg",
-            "_source_hash": "34bac88c8d32b4b67e6a535a3f6eeafa9ee5f764b7e63e03e8d0f0d7ae87d2e4"
+            "_source_hash": "e553051e1d52f6fa51aece921034c9a43db87c77badb90df7f5c2c4f06c7766f"
         },
         {
             "file": "assets/images/comunidad-linaje/foto-desarrollo-camino-dharma.jpg",
@@ -1135,7 +1135,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/comunidad-linaje/foto-desarrollo-camino-dharma.jpg",
-            "_source_hash": "bad1772f6e4786d7d7ed1b27a963f52abb0a3285a967fb4525f4e739b6da47ae"
+            "_source_hash": "93456e1038d3f06f4096b1043c42f36c9caa81e81326a54ba59d5630da7b27c8"
         },
         {
             "file": "assets/images/comunidad-linaje/foto-quienes-somos.jpg",
@@ -1143,7 +1143,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/comunidad-linaje/foto-quienes-somos.jpg",
-            "_source_hash": "babf7493aa9d1b485e213cb1b571794562c7b6525f42a0ca33c35d02a095627c"
+            "_source_hash": "4ae109c63c27e2b4705f7ac03ffcabe33f6037dcc78e4f117ed49e01d6995c78"
         },
         {
             "file": "assets/images/comunidad-linaje/imagen-shakyamuni-origen-buddhismo.jpg",
@@ -1151,7 +1151,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/comunidad-linaje/imagen-shakyamuni-origen-buddhismo.jpg",
-            "_source_hash": "e6b1d28f7553baaa3f65aa5f4c7545dadd05a4a2810c565ca89c27f4d712cd99"
+            "_source_hash": "2d37d422d196b14335f3e925626201ff778878627b3ad12dd681fb039ee96291"
         },
         {
             "file": "assets/images/comunidad-linaje/linaje-budismo-chan.jpg",
@@ -1159,7 +1159,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/comunidad-linaje/linaje-budismo-chan.jpg",
-            "_source_hash": "b16a2681b2810326c7338a7eb9f832a7c0d59000a5878564ef7e78a59e88895d"
+            "_source_hash": "829daa33b409aed2c5e5c4f2b6fc898938c94696d5121e47196bf60ca9e0b521"
         },
         {
             "file": "assets/images/comunidad-linaje/linaje-budismo-tierra-pura.jpg",
@@ -1167,7 +1167,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/comunidad-linaje/linaje-budismo-tierra-pura.jpg",
-            "_source_hash": "72a9c4a9e2b01522fbcf8ae33d08579a89608e0e8868e4448d257a04ba7b973f"
+            "_source_hash": "3eb9c6ca02f373c60ec949451ce4a6beb79f8760118184e07f6d30eeeeba802a"
         },
         {
             "file": "assets/images/comunidad-linaje/linaje-shakyamuni-origen-buddhismo.jpg",
@@ -1175,7 +1175,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/comunidad-linaje/linaje-shakyamuni-origen-buddhismo.jpg",
-            "_source_hash": "d0c3dbae20788de941836eeefcc7a844f9cf0584bceb394ad2fbe681b945806c"
+            "_source_hash": "27d5c26e31d908c224febc650996a76d6ef3e0c0b2e144cbe0a1074421494a55"
         },
         {
             "file": "assets/images/contacto/contacto-comunidad.jpg",
@@ -1183,7 +1183,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/contacto/contacto-comunidad.jpg",
-            "_source_hash": "6f602180e2543575c2b3e476e722403f0f660380b95088ef4784b71b6810b1f6"
+            "_source_hash": "62448ab7fce3e98c44180d6c2f2b5b8cee06c91e4311130edebf5bfe367d7f99"
         },
         {
             "file": "assets/images/eventos/evento-6-encuentro-nacional.jpeg",
@@ -1191,7 +1191,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-6-encuentro-nacional.jpeg",
-            "_source_hash": "fd3416a8b6d485902fd16967060a45828047fb0c3d0bedaa6898a9cffaf57639"
+            "_source_hash": "6d23f4ccc0b72340da37fc3f40744ded0173459956e5d75c7e26831098991e34"
         },
         {
             "file": "assets/images/eventos/evento-7-encuentro-nacional-2026.jpg",
@@ -1199,7 +1199,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-7-encuentro-nacional-2026.jpg",
-            "_source_hash": "526e1de5434287840713fc93d2a01b2dbc53a94bc5df2de7794c5a2c802ce80b"
+            "_source_hash": "eabdf3ec9f2a237cf1e34051b2e6ce146e993e4c164161308276fc6ef7b42771"
         },
         {
             "file": "assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg",
@@ -1207,7 +1207,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-buddhismo-tiempos-cansancio.jpeg",
-            "_source_hash": "4fd85cdcbe782cfb543308b2c242224af94b63af7f29596ce95bb2deac3fc851"
+            "_source_hash": "0aa081cdd4586996ee8445294dd53211c8e3747148943814ddfeba1232c11c66"
         },
         {
             "file": "assets/images/eventos/evento-circulos-de-presencia-consciente.jpg",
@@ -1215,7 +1215,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-circulos-de-presencia-consciente.jpg",
-            "_source_hash": "e9fdc86a9e9191119c83a19d22c4f7e5064208cc4de0a0cdc51fbda6cef39f92"
+            "_source_hash": "bb17e92bea54ea8f4bd3852efb0259c1c5686b968d74504281204238c7c464f6"
         },
         {
             "file": "assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
@@ -1223,7 +1223,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-festival-calma-en-la-ciudad-jun-2026.jpeg",
-            "_source_hash": "b8e3d47bf8241510523314f5cdc6ae2d024280d9d9cf464b8f3d2be0778c860d"
+            "_source_hash": "59f0036b5e326d1dedd74888ebd1e1b82a6034fe5082566765eecdde3d850813"
         },
         {
             "file": "assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
@@ -1231,7 +1231,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-meditacion-presencial-barranquilla-jul-2026.jpeg",
-            "_source_hash": "d8df62dac266c79b5186599a7c46c3e7f52951b6d3e1dab74defcb7dd8ac3b48"
+            "_source_hash": "40b2c2228612c43ad1eb7c82445ed993d00aa5e2414cf3b304f00f5a2ca1a8fb"
         },
         {
             "file": "assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg",
@@ -1239,7 +1239,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-taller-pausa-profunda-feb-2026.jpeg",
-            "_source_hash": "6c8d71c04be3cd327fc193070c01357f6fa93d4a05b97accf0418ba83c2630be"
+            "_source_hash": "33668dfa4f0c05b48ef1b855b614041d6d73a21c96d6fe64cdaf6f7af895e60f"
         },
         {
             "file": "assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
@@ -1247,7 +1247,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-taller-pausa-profunda-medellin-may-2026.jpeg",
-            "_source_hash": "c821be7a8c3e98313ef1c9255a6d998a8acfe07d9dc7d690d6c9536b18338526"
+            "_source_hash": "337fc3b0b436c46b4e22c4241995f946a47e917c59e41a3fdfe29d9dbe391f1f"
         },
         {
             "file": "assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
@@ -1255,7 +1255,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-uniremington-ansiedad-agotamiento-may-2026.jpeg",
-            "_source_hash": "054e564a11d24188860c92eefcfbcfe44a277fa4dd07e177da5d8b0520333331"
+            "_source_hash": "e6a3ec2a8dc80b0661fe463697997eda811436a29ea344822035a95ee3d32b5d"
         },
         {
             "file": "assets/images/eventos/evento-vesak-2026-bogota.jpeg",
@@ -1263,7 +1263,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/eventos/evento-vesak-2026-bogota.jpeg",
-            "_source_hash": "8af54596ec7298841b39e7b7c6e6d60f4199470331916b3591ebe9404a46f71f"
+            "_source_hash": "608e3836bde873c4190b7a7f9d6c6ce94078b8ebbb9a6ffa1f770cb7e2026e02"
         },
         {
             "file": "assets/images/fundador/foto-biografia-fundador.jpg",
@@ -1271,7 +1271,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/fundador/foto-biografia-fundador.jpg",
-            "_source_hash": "ff40e4cade3c110e9854d6cd060166db0dd0d1b4bc4d00331b5d767f9de7438e"
+            "_source_hash": "c755c35172b26a6e73d0e310f96a4c1364fa37dba98add78defaa084eee3b151"
         },
         {
             "file": "assets/images/galeria/galeria-01.jpg",
@@ -1279,7 +1279,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-01.jpg",
-            "_source_hash": "5a9a41fdcd02142609796c820bdb2294a0b91fe9483f23d8388dad3ac58b9526"
+            "_source_hash": "f47fd5917979452b389a00f2c8f8bcc71acdeaf717d2db4268d3cf1dd71e2684"
         },
         {
             "file": "assets/images/galeria/galeria-02.jpg",
@@ -1287,7 +1287,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-02.jpg",
-            "_source_hash": "63a9c734e383598241bd3d9e79b0a58e0f99c19728fc237b9870e55ecf5f444b"
+            "_source_hash": "3c4fe5ce6bcf374819864e7b5427ba9e94ac18d48e6c0b46f9b2106e07314a23"
         },
         {
             "file": "assets/images/galeria/galeria-03.jpg",
@@ -1295,7 +1295,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-03.jpg",
-            "_source_hash": "099c5b2d17a6526043e6b52ce368081a7d5b347c8725a2d4d8e3faa216b06103"
+            "_source_hash": "86b7c27516620fc289d8b6d678b57774d1767e8979e5abf1f86702254b1f7836"
         },
         {
             "file": "assets/images/galeria/galeria-04.jpg",
@@ -1303,7 +1303,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-04.jpg",
-            "_source_hash": "f5858cd24b22e48a15b9939b42e3d8d46a2138e3f36b0c4dd6a16ae2734598bf"
+            "_source_hash": "eafc2246d68ef5fa74ef81b9cd84f7c6ad821473896c5b9a7f0d7fad2c687a62"
         },
         {
             "file": "assets/images/galeria/galeria-05.jpg",
@@ -1311,7 +1311,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-05.jpg",
-            "_source_hash": "530e1c50382ba9b9eda0838390b165866f15eebd95f0bc543b4c86fce43705f1"
+            "_source_hash": "2f2026992ce146aa08901edc3970bffb5528d0052e830514634fa55dcfa6deb2"
         },
         {
             "file": "assets/images/galeria/galeria-06.jpg",
@@ -1319,7 +1319,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-06.jpg",
-            "_source_hash": "01eab8a3a2e4378f60cd3b7ac09216a90d19dfc6523d4432438f1dbd468c5b78"
+            "_source_hash": "51b3970287d922ddaabf7165d971b709abde542351635691788bc5f49feefdcf"
         },
         {
             "file": "assets/images/galeria/galeria-07.jpg",
@@ -1327,7 +1327,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-07.jpg",
-            "_source_hash": "6baa7a8a6711a34226f6778a4c3163a567fd806ffd1b231db127a98da96e4747"
+            "_source_hash": "69731917ae37520de0b60ab93f4a047d5dba862d6dd79bf2d11928cc3c7600a4"
         },
         {
             "file": "assets/images/galeria/galeria-08.jpg",
@@ -1335,7 +1335,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-08.jpg",
-            "_source_hash": "1ade19736f57ca4ce67c7eadcccf6a56f40b59146ba968cbba716f213b354301"
+            "_source_hash": "8325267ba4f4ddd336097d0eca49cd4d589228a548a0270328d7f99d6601bc4b"
         },
         {
             "file": "assets/images/galeria/galeria-09.jpg",
@@ -1343,7 +1343,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-09.jpg",
-            "_source_hash": "2659c0f7e4d70ad102842e3db00f3fe1fcfee106add6d335527647818ae3627d"
+            "_source_hash": "fec8553af0e3fc3a3d2bb140504d19aefe9eccdb1aa1af45da2d03f68ee97039"
         },
         {
             "file": "assets/images/galeria/galeria-10.jpg",
@@ -1351,7 +1351,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-10.jpg",
-            "_source_hash": "9dd42cfe360957ffb56132ca4e2613ab6dcb67b65ddfe12aff69da7ffb844eaa"
+            "_source_hash": "74dc4dd079e199fddc4632def7218a9ceefd7805f004f2dc234262bc350906b7"
         },
         {
             "file": "assets/images/galeria/galeria-11.jpg",
@@ -1359,7 +1359,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-11.jpg",
-            "_source_hash": "96d7ea5081dfac1a7114a23a0bcbf4741b4fcf5f11f3543e49dd84e52af53214"
+            "_source_hash": "387d0b3c63cfd42d75b240e96120eeeb750e678ebbd0ae5324842141569e8a38"
         },
         {
             "file": "assets/images/galeria/galeria-12.jpg",
@@ -1367,7 +1367,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-12.jpg",
-            "_source_hash": "6c41899e7a3459db159bc08b984f4250b64904289170006c27e7c4a2e67bf535"
+            "_source_hash": "83f4b296ef79b7a8c2cb106b72ad62eda2cf58a2d6ab649604b2463bc7cf5f88"
         },
         {
             "file": "assets/images/galeria/galeria-13.jpg",
@@ -1375,7 +1375,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-13.jpg",
-            "_source_hash": "500d9cf77c8f70b8c0e158841ba595f8be9f1c220d1928e51079966b4b83fa47"
+            "_source_hash": "ff1b281da533c14c66631ffb218452865a43c61e988d9463ec568281998f34a3"
         },
         {
             "file": "assets/images/galeria/galeria-14.jpg",
@@ -1383,7 +1383,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-14.jpg",
-            "_source_hash": "6aca7158b2a6d20023cbfe170d31bfcc9068ce5a37e487d90d9c9f8dcb698f34"
+            "_source_hash": "77788a8a2c9a4ca1ad49d274c06e8e3554282d467ebc182e50d2504d04e61023"
         },
         {
             "file": "assets/images/galeria/galeria-15.jpg",
@@ -1391,7 +1391,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-15.jpg",
-            "_source_hash": "b842760ad79822d4c170c03ee981f35a313092e20463ab1c4f7d264b511a9469"
+            "_source_hash": "024bc7fc8b8f7729868dc36e1241d5c22fe63c98899fe64d4767743d5c1af081"
         },
         {
             "file": "assets/images/galeria/galeria-16.jpg",
@@ -1399,7 +1399,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-16.jpg",
-            "_source_hash": "19e5b573723502b907f6f2c8abb778cd85e15aca865c32bed3e9de0d009416c5"
+            "_source_hash": "812a440574fb6c5bc7c993fdec132c7a8522bd39b322927554a7116cbac3ee7a"
         },
         {
             "file": "assets/images/galeria/galeria-17.jpg",
@@ -1407,7 +1407,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-17.jpg",
-            "_source_hash": "476227ccf16dd26e8d8de1ca22121b3ca9491fd11af70b7705830efe5f3c1c26"
+            "_source_hash": "e35b5caa74fc04523a5b0efc9368fc313a23a8997945230bfedafa4241c82337"
         },
         {
             "file": "assets/images/galeria/galeria-18.jpg",
@@ -1415,7 +1415,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-18.jpg",
-            "_source_hash": "b908f661981013169d7e4c8fb499652de904acd147a24295c529cfa0514d9556"
+            "_source_hash": "62c5d4cc267da706c8a6f0f9048d21a5d5e7ad4bcd32e144a08664b13545b4f3"
         },
         {
             "file": "assets/images/galeria/galeria-19.jpg",
@@ -1423,7 +1423,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-19.jpg",
-            "_source_hash": "cd7d025cf3840a66f11903039c1402fea3ba1757f838354c0891aa37c8ee17dc"
+            "_source_hash": "aca75d5d75fcccd7cbc2e2ab8aabcdaa20aa514e3496f2583d854987c163d4af"
         },
         {
             "file": "assets/images/galeria/galeria-20.jpg",
@@ -1431,7 +1431,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-20.jpg",
-            "_source_hash": "9c3617a1d562e577ac5ac34352808632535df012ba280cc157e8f17e3f890292"
+            "_source_hash": "3ad17771e20adc89253466940899393d520e309b25245ccf0516633d7c12c964"
         },
         {
             "file": "assets/images/galeria/galeria-21.jpg",
@@ -1439,7 +1439,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-21.jpg",
-            "_source_hash": "93149b6208eed9806ba1065c6af9962f28ba8870fed1650a41d9c8af2cb03c05"
+            "_source_hash": "329f9f8b650fe2c3c2effff83a32eb4d464924c082d2743e419b50c0036022c2"
         },
         {
             "file": "assets/images/galeria/galeria-22.jpg",
@@ -1447,7 +1447,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-22.jpg",
-            "_source_hash": "85cb49f8670f51101de6c5475dce959236f65ce84044d06338ddd897581bafda"
+            "_source_hash": "c26c864dd96fb9137cd67e5106195383e2f57864c0a20bc66d73a36fbf0b783a"
         },
         {
             "file": "assets/images/galeria/galeria-23.jpg",
@@ -1455,7 +1455,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-23.jpg",
-            "_source_hash": "25266971473e1d5ed906a62b538bb2cf0e07f2c4aeeb606417fce72f1e087451"
+            "_source_hash": "daf2eaa80a787c76f33a688063d3489f0842e2a617b4edb35aeff96cc3893f5f"
         },
         {
             "file": "assets/images/galeria/galeria-24.jpg",
@@ -1463,7 +1463,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-24.jpg",
-            "_source_hash": "0c1c0cfbcc367046675873f18bf09f7b275b22263c9db5cd1d577178e2877230"
+            "_source_hash": "a9422c8f4b7ca4e3d2d7f85a4888817a67089c0d31358dfbf21dc610ef3183e9"
         },
         {
             "file": "assets/images/galeria/galeria-25.jpg",
@@ -1471,7 +1471,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-25.jpg",
-            "_source_hash": "f0f9721d93be0e37339119b2ccb9e43d0bd5e7c0be6aac1826ba3079c7dc62db"
+            "_source_hash": "9f346fdd13f9313e22ba9c9af8d2f075ca207ed60b10c7aec144501d07009e2c"
         },
         {
             "file": "assets/images/galeria/galeria-26.jpg",
@@ -1479,7 +1479,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-26.jpg",
-            "_source_hash": "b5c876131320959c9f7212d43760d41049146d3a5e88db2acf116cbc2b5e6b42"
+            "_source_hash": "2d611ccf8d8ffd801512b84db86442fb2559046ace2014d3853076742d901db7"
         },
         {
             "file": "assets/images/galeria/galeria-27.jpg",
@@ -1487,7 +1487,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-27.jpg",
-            "_source_hash": "a8db5a3ba6a2582772edb45cdd79ceda3851889443ccf25582a0977c6d6311e5"
+            "_source_hash": "1ecb5f13b1e67d51e540e7b83a4da1389f78102156fc5b01178b2e9db5b30bb6"
         },
         {
             "file": "assets/images/galeria/galeria-28.jpg",
@@ -1495,7 +1495,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-28.jpg",
-            "_source_hash": "74d11ddff8b205f7440a067a695609302a28743af3ce6ee181ecf19668a57d00"
+            "_source_hash": "eb170b6f659189bf61c0d1c6f7a48857c0f03e3758da091050ca0bb55d2441fc"
         },
         {
             "file": "assets/images/galeria/galeria-29.jpg",
@@ -1503,7 +1503,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-29.jpg",
-            "_source_hash": "3736718dbbc60efa14d97563740ce2d13084db4a3f415a0b10e2a04dbb83b738"
+            "_source_hash": "43ed59b84a30d190b0fc5758389ebeeaee4d0f4c024265e8fdbe059e3a40531e"
         },
         {
             "file": "assets/images/galeria/galeria-30.jpg",
@@ -1511,7 +1511,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-30.jpg",
-            "_source_hash": "c91e7c291365a3e99c87402b9364d1416f17b8d9a5567bf8ef601494de24fb15"
+            "_source_hash": "650f279a237bc847a977cfa20d48154d9fcadc516951b5bc7f51f376df0d199d"
         },
         {
             "file": "assets/images/galeria/galeria-31.jpg",
@@ -1519,7 +1519,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-31.jpg",
-            "_source_hash": "534e7e03ea410c50668ba9c41b8990cf384da7ab98e1921a6ee53550cf0e9c8a"
+            "_source_hash": "63a30026b7799fbe3a2330004ed3d91726a6eef24f1b7f756abf6209a4ea9f89"
         },
         {
             "file": "assets/images/galeria/galeria-32.jpg",
@@ -1527,7 +1527,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-32.jpg",
-            "_source_hash": "6d610e14ff68d235ecb6f4b290f91d5e57f9c3abff17e0afdb158796096b3d7c"
+            "_source_hash": "8ebd16c915919c455d2b4afee0e67ad5cc64ccf7603f87255baba87b24fdcd40"
         },
         {
             "file": "assets/images/galeria/galeria-33.jpg",
@@ -1535,7 +1535,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-33.jpg",
-            "_source_hash": "e5e3950b4bc043da538403f869893a232627be087eaaedb16fedd98496d70efb"
+            "_source_hash": "72b5a6957e5c9565c66f17e384ea06023486daf47728c45187c4101a00beef5d"
         },
         {
             "file": "assets/images/galeria/galeria-34.jpg",
@@ -1543,7 +1543,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-34.jpg",
-            "_source_hash": "fa806c2d0c18b64eeb384069b93c2e08de720a52d540cc99d853cdffedb1275c"
+            "_source_hash": "1b301dd03e0360f277da9648b4c2a446e3c631c63d27e877820a458cfc74adde"
         },
         {
             "file": "assets/images/galeria/galeria-35.jpg",
@@ -1551,7 +1551,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-35.jpg",
-            "_source_hash": "c919003be40ddae0b03bf1abd50e21fd92363c2b40d93cfbd0a9ae473a92dc14"
+            "_source_hash": "248e8d2142b8d7eed76991eef198f495051cebeb51032d039fb69d75067beb0f"
         },
         {
             "file": "assets/images/galeria/galeria-36.jpg",
@@ -1559,7 +1559,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/galeria/galeria-36.jpg",
-            "_source_hash": "041005ef0dae2158f57eac91bcf4cb59c8be9df00a736aeb013449df40b0def0"
+            "_source_hash": "64fb5e27b28122b85e73e0ff0ee9564648e737263346b874b50fe0e33a310f53"
         },
         {
             "file": "assets/images/inicio/ambiente-inicio.jpg",
@@ -1567,7 +1567,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/inicio/ambiente-inicio.jpg",
-            "_source_hash": "7ce2a68818a8950a79533dad5ca26cc56d9eca8f4cec3695a6ff16b983a5ecba"
+            "_source_hash": "996b85d7fac13c0d95524791ffb2c298e3fb8675aabca18b0ecc10ee2173e622"
         },
         {
             "file": "assets/images/inicio/dsc01580.jpg",
@@ -1575,7 +1575,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/inicio/dsc01580.jpg",
-            "_source_hash": "955f54e384399ac876e59e6203dbd43716e8fdc9cb10f3b9c75273d46438c2ac"
+            "_source_hash": "e0189cc50022158026b9628193786fbbbe85262be6dbe4057ddc63e264054e14"
         },
         {
             "file": "assets/images/inicio/hero-estatua-buda-montanas.jpg",
@@ -1583,7 +1583,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/hero-estatua-buda-montanas.jpg",
-            "_source_hash": "1a577fa2ddaf0960e3db3f2dde6aa662364fdf43780cf8047000bb3dbbb3261c"
+            "_source_hash": "c4d066a5e9c872b0816269dc81414f0aad24ea1d07295c1cf1cce59c3a7102b6"
         },
         {
             "file": "assets/images/inicio/hero-estatua-buda-montanas.webp",
@@ -1591,7 +1591,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/hero-estatua-buda-montanas.webp",
-            "_source_hash": "5f1cb47806b1c0950b7c2f1c1b4dfdc7492518a4686d6697d74fabe567a73511"
+            "_source_hash": "0f63b809e1f133b37ef3792d4d7989ddf20bd0464fef8f0af25e466caddd552e"
         },
         {
             "file": "assets/images/inicio/inicio-ambiente.jpg",
@@ -1599,7 +1599,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-ambiente.jpg",
-            "_source_hash": "a290e70c313206ac99a720d074d5868bf8ebed422863cb4a52c68372bb3f97bf"
+            "_source_hash": "9dbf099c20bcaafd93b1a60bd47b87d2618e875691a2c4c5e7128d7d504a190a"
         },
         {
             "file": "assets/images/inicio/inicio-ambiente.webp",
@@ -1607,7 +1607,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-ambiente.webp",
-            "_source_hash": "f531c9a1f12c65171e87c5d2e2c58434cb75933456f0cdbcd2d6bd289fcd8443"
+            "_source_hash": "3db8a41c5cf64094034475fa406faa9fc6a1740b754a82813a8f10fdb48ebcc7"
         },
         {
             "file": "assets/images/inicio/inicio-encuentro-comunidad-1280.webp",
@@ -1615,7 +1615,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad-1280.webp",
-            "_source_hash": "c3a1f65afd5901751c469272236cafb59e32ff8348dbcc807bbd6fb0be82a72d"
+            "_source_hash": "dca52566ba3c9b521d91083766f66d595ee3c36c15008b4f7f95068ca833d373"
         },
         {
             "file": "assets/images/inicio/inicio-encuentro-comunidad-768.webp",
@@ -1623,7 +1623,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad-768.webp",
-            "_source_hash": "62cbf99ec17b6abd01472970aab9ec8c66cc8699837b05c7e911d5b643faa70e"
+            "_source_hash": "e0a2939193df1c6562bdd6b283779bcea3c22884d621ae3b86a2c098f212e6ea"
         },
         {
             "file": "assets/images/inicio/inicio-encuentro-comunidad.jpg",
@@ -1631,7 +1631,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad.jpg",
-            "_source_hash": "f48cfd36a8a22b4a08b2a3b6730453cdd2f3bd97ce614cfde71ee956f5e41ff7"
+            "_source_hash": "3d6dcc6cc14bf2c41c451c220bb812064d9558159d0721eabe085c4262e1d9fc"
         },
         {
             "file": "assets/images/inicio/inicio-encuentro-comunidad.webp",
@@ -1639,7 +1639,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/inicio/inicio-encuentro-comunidad.webp",
-            "_source_hash": "9a69def04bad70b6689d318f7bacf48de53e50e6405aea02f6018432ba1d0a18"
+            "_source_hash": "66c8a4e22695615906b5e79231590688a54f150ed99dcdad89e63b8ea48a7008"
         },
         {
             "file": "assets/images/inicio/inicio-kuan-yin-768.webp",
@@ -1647,7 +1647,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-kuan-yin-768.webp",
-            "_source_hash": "16d3225595ce9902dac09d0b15f97503d0672b96f3b3be176b351db49a029d8e"
+            "_source_hash": "7877b4149669baa43e8503e19a972c89077dc975a80a72aae5d2d104df10b2eb"
         },
         {
             "file": "assets/images/inicio/inicio-kuan-yin.jpg",
@@ -1655,7 +1655,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-kuan-yin.jpg",
-            "_source_hash": "8eea82cf09498bae6a29f43cd7068dee0f9d8f1c6f0e6a6d8fffd6e38022e69f"
+            "_source_hash": "713cba6004e6437925e59b7dc5c8aeff706f8f3de70c4be1abaf08efc95a43a1"
         },
         {
             "file": "assets/images/inicio/inicio-kuan-yin.webp",
@@ -1663,7 +1663,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/inicio/inicio-kuan-yin.webp",
-            "_source_hash": "005d654cf626e417687ef1645808dc68e78e1fcbf73ed293d8d5c0d55746d60a"
+            "_source_hash": "cba74b2d914f7965611fc06b2e4b181854cfc804d120da8d6bbadd0f85db203d"
         },
         {
             "file": "assets/images/inicio/kuan-yin-4.jpg",
@@ -1671,7 +1671,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/inicio/kuan-yin-4.jpg",
-            "_source_hash": "1bc9b5a1641381b731656ee0606010518629870ce348f19072082d088d7f79b0"
+            "_source_hash": "be2af3e35dfa58a9a38cd1c7878129256d491eb90a52b93ea328a086dbb4ec2a"
         },
         {
             "file": "assets/images/logo-docx-cover.png",
@@ -1679,7 +1679,7 @@
             "referenced": false,
             "visibility": "hidden",
             "_source_key": "media:assets/images/logo-docx-cover.png",
-            "_source_hash": "5bc4b395e3969078994d35dd38449311df9b4de843183275c60a2ed59a600629"
+            "_source_hash": "8389cc18394fc3a99998bbfb49cc9c5cb23230c3873d28618ab75633efb85f02"
         },
         {
             "file": "assets/images/logo.png",
@@ -1687,7 +1687,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/logo.png",
-            "_source_hash": "25e806f88b65ada5063bcc4a3abd3c88bdfee124a5e228c6dc2926021428de3c"
+            "_source_hash": "d7607f3d573d011d388fa7adf75553d78474ce3dfd9d912e97a828f1a992c13d"
         },
         {
             "file": "assets/images/og-default.jpg",
@@ -1695,7 +1695,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/og-default.jpg",
-            "_source_hash": "18ecef148234e8c35f70427b0ef29b1e8bc0c316e9dc53a2d9532daf9697666b"
+            "_source_hash": "6b7ffce5469a7f29cebf77e8a5bad19102a215ffcdb419aceb218b3dbeb5bcd0"
         },
         {
             "file": "assets/images/practica/meditacion-semanal-en-linea.jpg",
@@ -1703,7 +1703,7 @@
             "referenced": true,
             "visibility": "public",
             "_source_key": "media:assets/images/practica/meditacion-semanal-en-linea.jpg",
-            "_source_hash": "511bea46e5c1248fe1227369ef7bb117619d7d67ece6d0ef11020055c77538f1"
+            "_source_hash": "5125d55729f02370506555fc71265758cc9374e3e2f730f34ad318c2fb1c9bd8"
         }
     ],
     "video_embeds": [
@@ -1712,35 +1712,35 @@
             "title": "Encontrando la Plenitud y la Consciencia en la Vida",
             "page": "practica/videos",
             "_source_key": "embed:https://www.youtube-nocookie.com/embed/xbAUEmf_Wks",
-            "_source_hash": "90a3c17a681d3f668d115f7a4798afa36da7a24f794ec3a05eeb4b4628c054ca"
+            "_source_hash": "2b9ccc7d5fa832b0df5425e7e502159853c5dcd021a73ad82b07ed3770ab58da"
         },
         {
             "url": "https://www.youtube-nocookie.com/embed/JxyHdXhW_nc",
             "title": "La sabiduría del no hacer",
             "page": "practica/videos",
             "_source_key": "embed:https://www.youtube-nocookie.com/embed/JxyHdXhW_nc",
-            "_source_hash": "6c43470398e2e2accebbeafe987282715e338dd382f20ddef6920ee8cca62263"
+            "_source_hash": "77380324026d75353a49f58045569c08093e9933a1a62359db476efd62263d1f"
         },
         {
             "url": "https://www.youtube-nocookie.com/embed/lzn5XLJd0Is",
             "title": "¿Cómo el Budismo puede ayudarnos a ver el Mundo con claridad?",
             "page": "practica/videos",
             "_source_key": "embed:https://www.youtube-nocookie.com/embed/lzn5XLJd0Is",
-            "_source_hash": "eb117b0e9c384c6d8f078b466f3c515781cd9de9f3356be22563b587e9567ed8"
+            "_source_hash": "86ae3916203c0c24c05e417681ca998c1c49b4f58fddb247650f16a97e11b9bf"
         },
         {
             "url": "https://www.youtube-nocookie.com/embed/SBOG0lqzj1Y",
             "title": "La Sabiduría del Buddhismo Chan",
             "page": "practica/videos",
             "_source_key": "embed:https://www.youtube-nocookie.com/embed/SBOG0lqzj1Y",
-            "_source_hash": "856cef6157112574d69400072c34768360f7814649d2bb1a511f2ad9405de9ee"
+            "_source_hash": "a591ae4c1e0665d080e54866c70633d96d1ac98c56d9f573c009e332e72cf749"
         },
         {
             "url": "https://player.vimeo.com/video/1164143915?dnt=1",
             "title": "Conectar con nuestro planeta",
             "page": "practica/videos",
             "_source_key": "embed:https://player.vimeo.com/video/1164143915?dnt=1",
-            "_source_hash": "3cd380a832b90c37c887d1ab218c1f1b61bd3365bff83649a731cc0185775ec5"
+            "_source_hash": "53dc069a1e05084aff7acf36d6d5745d283485b357740ccfb315ecbfc0df17f6"
         }
     ],
     "site": {

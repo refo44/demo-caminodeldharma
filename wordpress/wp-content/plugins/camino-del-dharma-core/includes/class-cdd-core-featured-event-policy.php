@@ -50,10 +50,27 @@ final class Cdd_Core_Featured_Event_Policy {
 		usort(
 			$pool,
 			static function ( array $a, array $b ): int {
-				return strcmp( (string) ( $a['start'] ?? '' ), (string) ( $b['start'] ?? '' ) );
+				return self::compare_start( (string) ( $a['start'] ?? '' ), (string) ( $b['start'] ?? '' ) );
 			}
 		);
 
 		return $pool[0];
+	}
+
+	/**
+	 * Nearest start date: valid Y-m-d before empty. strcmp would put '' first.
+	 *
+	 * @param string $left  Start date (Y-m-d or empty).
+	 * @param string $right Start date (Y-m-d or empty).
+	 */
+	private static function compare_start( string $left, string $right ): int {
+		$left_empty  = ( '' === $left );
+		$right_empty = ( '' === $right );
+
+		if ( $left_empty === $right_empty ) {
+			return strcmp( $left, $right );
+		}
+
+		return $left_empty ? 1 : -1;
 	}
 }

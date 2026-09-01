@@ -81,7 +81,7 @@ final class Cdd_Core_Payload_Builder {
 	 * @param array $payload_object Payload object.
 	 */
 	public static function hash_object( array $payload_object ): string {
-		unset( $payload_object['_source_hash'] );
+		unset( $payload_object['_source_hash'], $payload_object['_source_key'] );
 
 		return hash( 'sha256', json_encode( $payload_object, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode -- deterministic canonical form; pure class usable without WordPress loaded.
 	}

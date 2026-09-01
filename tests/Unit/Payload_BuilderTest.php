@@ -56,6 +56,36 @@ final class Payload_BuilderTest extends TestCase {
 	}
 
 	/**
+	 * Protects the hash contract: bookkeeping keys (_source_key and
+	 * _source_hash) are not part of the canonical content hash, so a
+	 * prefix/format change does not rewrite every object's hash.
+	 */
+	public function test_source_hash_excludes_bookkeeping_keys() {
+		$content = array(
+			'slug'  => 'vesak-2026',
+			'title' => 'Vesak 2026 – Colombia Cuida la Vida',
+		);
+
+		$this->assertSame(
+			Cdd_Core_Payload_Builder::hash_object( $content ),
+			Cdd_Core_Payload_Builder::hash_object(
+				$content + array(
+					'_source_key'  => 'event:vesak-2026',
+					'_source_hash' => 'deadbeef',
+				)
+			)
+		);
+		$this->assertSame(
+			Cdd_Core_Payload_Builder::hash_object( $content + array( '_source_key' => 'event:vesak-2026' ) ),
+			Cdd_Core_Payload_Builder::hash_object( $content + array( '_source_key' => 'page:vesak-2026' ) )
+		);
+		$this->assertSame(
+			Cdd_Core_Payload_Builder::hash_object( $content ),
+			$this->build_payload()['events'][0]['_source_hash']
+		);
+	}
+
+	/**
 	 * Protects the reconciliation surface: the payload publishes its own
 	 * counts so validate/verify can compare them against the documented
 	 * baseline without re-deriving them.
