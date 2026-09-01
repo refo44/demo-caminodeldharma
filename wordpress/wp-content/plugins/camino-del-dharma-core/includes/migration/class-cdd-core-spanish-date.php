@@ -47,8 +47,11 @@ final class Cdd_Core_Spanish_Date {
 
 		if ( preg_match( '/(\d{1,2}(?:\s*,\s*\d{1,2})*(?:\s*y\s*\d{1,2})?)\s+de\s+(' . $month_pattern . ')\s+(?:de\s+)?(\d{4})/iu', $text, $matches ) ) {
 			preg_match_all( '/\d{1,2}/', $matches[1], $days );
-			$month = self::MONTHS[ mb_strtolower( $matches[2], 'UTF-8' ) ];
-			$year  = $matches[3];
+			$month = self::MONTHS[ self::lower( $matches[2] ) ] ?? null;
+			if ( null === $month ) {
+				return null;
+			}
+			$year = $matches[3];
 
 			$first = str_pad( $days[0][0], 2, '0', STR_PAD_LEFT );
 			$last  = str_pad( end( $days[0] ), 2, '0', STR_PAD_LEFT );
@@ -92,5 +95,18 @@ final class Cdd_Core_Spanish_Date {
 		$month = array_search( $date->format( 'm' ), self::MONTHS, true );
 
 		return sprintf( '%d de %s de %d', (int) $date->format( 'j' ), $month, (int) $date->format( 'Y' ) );
+	}
+
+	/**
+	 * Lowercases month names without requiring the mbstring extension.
+	 *
+	 * @param string $text Month token from a production Fecha value.
+	 */
+	private static function lower( string $text ): string {
+		if ( function_exists( 'mb_strtolower' ) ) {
+			return mb_strtolower( $text, 'UTF-8' );
+		}
+
+		return strtolower( $text );
 	}
 }
