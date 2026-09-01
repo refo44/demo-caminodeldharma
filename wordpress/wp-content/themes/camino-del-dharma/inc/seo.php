@@ -65,7 +65,7 @@ function camino_del_dharma_print_seo() {
 				if ( false === $json ) {
 					break;
 				}
-				echo "\t<script type=\"application/ld+json\">" . $json . "</script>\n";
+				echo "\t<script type=\"application/ld+json\">" . $json . "</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode with JSON_HEX_TAG/JSON_HEX_AMP is safe inside a script block.
 				break;
 		}
 	}
