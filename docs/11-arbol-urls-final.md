@@ -83,7 +83,7 @@ archivo su propio `h1` (docs/19 §9).
 /blog/
 /blog/{slug}/
 /blog/tag/{slug}/          (existe; noindex hasta volumen suficiente — ADR 0031)
-/author/{slug}/            (ficha CPT blog_author; indexable — ADR 0037)
+/author/{slug}/            (ficha CPT blog_author; indexable — ADR 0037; seo/bio OWN-020 pendiente [#5](https://github.com/refo44/demo-caminodeldharma/issues/5))
 /author/                   (archivo de fichas; noindex hasta volumen — ADR 0037)
 /privacidad/               (publicada; enlace en el pie de todas las páginas; ADR 0039)
 ```
@@ -119,7 +119,7 @@ Ver `docs/12-theme-file-structure.md` §5–§6 para el árbol completo.
 | `/blog/` | `templates/home.html` (página de entradas) |
 | `/blog/{slug}/` | `templates/single.html` |
 | `/blog/tag/{slug}/` | resuelve por la jerarquía nativa de plantillas de WordPress (`templates/taxonomy-post_tag.html` si existe, si no `templates/archive.html`/`templates/index.html`); noindex por defecto (ADR 0031), no requiere plantilla propia |
-| `/author/{slug}/` | `templates/single-blog_author.html`; **query_var ≠ `author`** (ADR 0037) |
+| `/author/{slug}/` | `templates/single-blog_author.html`; **query_var ≠ `author`** (ADR 0037); `seo` + bio corta + thumb OWN-020 **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) |
 | `/author/` | archivo CPT; **noindex** hasta volumen |
 | `/privacidad/` | `templates/page.html` (fallback; no requiere plantilla propia) |
 

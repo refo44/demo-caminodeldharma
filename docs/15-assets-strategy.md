@@ -282,6 +282,10 @@ Detalle en `.audit/fase3-validation-matrix.md` § WU-08B; lo esencial:
   generado: viaja en el payload y vive como meta editable (`seo_title`, `seo_description`,
   `seo_keywords`, `og_title`, `og_description`) en `page`, `post` y `event`. Un objeto sin copy
   publicado cae a su título real y omite la description; nunca se inventa.
+- **OWN-020 / D-08 (pendiente [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):**
+  `blog_author` también lleva `seo_*` y bio corta **reutilizados** de copy ya publicado (JSON-LD
+  del fundador; meta / primer párrafo de `/comunidad`) más thumbnail de fotos existentes. Los
+  singles `/author/{slug}` siguen `index,follow`. No inventar. No `noindex` el single.
 - La cabeza del archivo `/eventos`, los defaults sociales y el `@graph` del Inicio viven en la
   opción `cdd_core_seo_site`, sembrada por el importador desde el estático.
 - Toda URL guardada se rebasa a `home_url()` al renderizar: un staging no publica

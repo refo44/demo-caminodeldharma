@@ -21,7 +21,9 @@ dinámico, redirects, OWN-015 y el pase de accesibilidad. Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme futuro.
 
-Decisiones del propietario (**Fase 3 cerrada** v1.21; no reabrir OWN-* sin decisión nueva).
+Decisiones del propietario (**Fase 3 cerrada** v1.26; no reabrir OWN-* sin decisión nueva).
+OWN-020 / D-08 está decidido; el código de SEO de fichas de autor sigue **pendiente**
+([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 Fases posteriores (`POST-*`) no entran en el corte:
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
 

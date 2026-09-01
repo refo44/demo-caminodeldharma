@@ -66,6 +66,9 @@ issues ni rol Author de WP).
     o resumirlo es editorial, no un 301.
     *(OWN-016: en WordPress, la Page `/comunidad` **añade enlaces** a `/author/zheng-gong` y
     a la ficha de la Comunidad. El estático no se cambia ahora.)*
+    *(OWN-020 / D-08, 2026-09-01: la bio de corte **reutiliza** copy corto y fotos ya
+    publicados; no se inventa ni se pega el ensayo largo. Código pendiente
+    [#5](https://github.com/refo44/demo-caminodeldharma/issues/5).)*
 13. **SEO del archivo de fichas** (`/author`, listado): `noindex, follow` hasta volumen
     (mismo espíritu que ADR 0031 / 0036). Los **singles** `/author/{slug}` sí se indexan
     (nombre, bio, foto, entradas). No Co-Authors Plus (ADR 0025).
@@ -113,10 +116,12 @@ cambia hasta el corte). El archivo `/author` con dos fichas es delgado → noind
 las 2 entradas; templates `single-blog_author.html` / archivo; no implementar en esta
 sesión. La UI de asignación en Gutenberg queda acotada por ADR
 [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) (panel nativo o clásico **con**
-sync REST; el guard no se relaja).
+sync REST; el guard no se relaja). **OWN-020 / D-08:** payload `blog_authors` con `seo`, bio
+corta y thumbnail desde copy y fotos publicados — implementación pendiente
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). No reabrir `noindex` en singles.
 
 ## Referencias
 
-- OWN-010 · ADR [0008](0008-urls-estables-desde-la-maqueta.md), [0024](0024-plugin-dominio-theme-presentacion.md), [0025](0025-politica-plugins-terceros.md), [0031](0031-tags-blog-noindex-hasta-volumen.md), [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md)
+- OWN-010 · OWN-020 · ADR [0008](0008-urls-estables-desde-la-maqueta.md), [0024](0024-plugin-dominio-theme-presentacion.md), [0025](0025-politica-plugins-terceros.md), [0031](0031-tags-blog-noindex-hasta-volumen.md), [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md)
 - [`docs/15-assets-strategy.md`](../15-assets-strategy.md) §12.4
 - [`docs/redirect-ledger.md`](../redirect-ledger.md)

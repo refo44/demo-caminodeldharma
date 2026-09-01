@@ -153,7 +153,7 @@ Documentos, issues, commits o ADR relacionados.
 | Estático live como contenido de producción | [0034](0034-static-live-como-fuente-contenido-produccion.md) — hardcoded ≠ dummy; extracción; conteos; freeze/delta; patterns ≠ content |
 | Fichas de todos los eventos | [0035](0035-todos-los-eventos-tienen-single.md) — 10 singles; pasados sin inscripción; slugs en ledger |
 | URLs de álbum de galería | [0036](0036-urls-album-galeria-noindex.md) — `/galeria/{slug}` existe; noindex hasta volumen; hub `/galeria` KEEP |
-| Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma; UI Gutenberg de meta: [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) |
+| Autores del blog | [0037](0037-cpt-autor-blog-url-author.md) — CPT `blog_author`; `/author/{slug}`; usuario WP no firma; singles indexables con copy corto publicado (OWN-020 / D-08, implementación [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)); UI Gutenberg de meta: [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) |
 | Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
 | Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; gate CF7 sustituido por [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | Fuente editorial pre-corte | [0040](0040-retirar-content-source-produccion-como-fuente.md) — `content-source/` retirado; producción publicada gobierna contenido y presentación |
@@ -168,8 +168,9 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.25);
-  `POST-*` de fases posteriores; `META-*` decididos como restricciones (ADR 0042); no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.26);
+  OWN-020 / D-08 decidido, implementación pendiente; `POST-*` de fases posteriores; `META-*`
+  decididos como restricciones (ADR 0042); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

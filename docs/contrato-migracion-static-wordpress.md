@@ -45,7 +45,7 @@ A migration is NOT complete merely because the WordPress theme is deployed or ac
 
 | # | Entregable | Definición |
 | - | ---------- | ---------- |
-| 1 | **CONTENT** | Objetos en la base de datos y media: Pages, posts, CPT `event`, CPT `blog_author` (ADR 0037), taxonomía de álbum (ADR 0036), `sangha` solo si una decisión posterior lo activa, metadata, biblioteca de medios, copy institucional. |
+| 1 | **CONTENT** | Objetos en la base de datos y media: Pages, posts, CPT `event`, CPT `blog_author` (ADR 0037; `seo`/bio/thumb de ficha OWN-020 **pendiente** [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)), taxonomía de álbum (ADR 0036), `sangha` solo si una decisión posterior lo activa, metadata, biblioteca de medios, copy institucional. |
 | 2 | **PRESENTATION** | Theme de bloques: `templates/*.html`, `parts/*.html`, `patterns/`, `theme.json`, CSS complementario, layout responsive, estructura de accesibilidad. |
 | 3 | **ROUTING** | Slugs, permalinks, archives/singles, taxonomías con archivo público, redirects, 404, canonicales. Las URLs públicas deben coincidir con ADR 0008 y `11-arbol-urls-final`. |
 | 4 | **BEHAVIOR** | JavaScript, formulario, menú móvil, diálogos (compartir / añadir al calendario en **vigentes**), tooltips del calendario de `/eventos`, galería Gutenberg **sin** paginación numerada (ADR 0021, OWN-011), audio de mantras, `.ics` **generado** (OWN-009). |

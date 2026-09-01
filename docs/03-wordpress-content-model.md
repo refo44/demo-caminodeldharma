@@ -177,6 +177,12 @@ orden = byline). Publicar exige ≥1 ficha publicada. `query_var` = `blog_author
 Eventos no usan este CPT. `/comunidad` no se sustituye por `/author/zheng-gong`. En WP se
 **enlaza** desde esa Page a las fichas (OWN-016); el HTML estático no se toca ahora.
 
+*(OWN-020 / D-08, 2026-09-01; implementación pendiente [#5](https://github.com/refo44/demo-caminodeldharma/issues/5).)*
+Las fichas son páginas de entidad **indexables**. Bio y `seo_*` reutilizan copy corto y fotos
+ya publicados (JSON-LD del fundador; primer párrafo / meta de `/comunidad`). No duplicar el
+ensayo largo del fundador. No `noindex` en el single. Payload `blog_authors` debe llevar `seo`,
+contenido y thumbnail cuando se implemente.
+
 ---
 
 ## 3.1. Sangha (Custom Post Type, si se implementa)

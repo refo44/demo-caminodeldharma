@@ -128,6 +128,14 @@ gh pr edit <n> --add-label enhancement,documentation
 gh label list
 ```
 
+## Issues
+
+**Obligatorio:** al menos **una** etiqueta relevante en cada issue (mismas etiquetas que el PR).
+
+```bash
+gh issue create --label enhancement --label documentation --title "…"
+```
+
 ## Agentes (Cursor, Copilot, etc.)
 
 1. **Nunca** commitear ni pushear directamente a `main`.

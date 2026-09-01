@@ -13,10 +13,10 @@ eso es deuda de deploy, no la fuente del extracto.
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
 **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
 
-Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3 v1.21, 0 abiertas). El archivo
-[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) queda como
-registro de decisiones (no ADR). Las filas `POST-*` son fases posteriores (i18n); no
-bloquean el corte.
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El archivo
+[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.26) queda
+como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
+pendiente. Las filas `POST-*` son fases posteriores (i18n); no bloquean el corte.
 
 ---
 
@@ -86,7 +86,10 @@ La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/pra
 
 Autores en el **estático:** copy (no hay `/author/`). **Destino WP (ADR 0037):** CPT
 `blog_author`; semilla Zheng Gong + Comunidad Camino del Dharma; las 2 entradas se asignan
-por meta. No Users, no copy hardcodeado.
+por meta. No Users, no copy hardcodeado. **OWN-020 / D-08 (pendiente
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):** bio corta, `seo` y foto de
+cada ficha salen de copy y assets ya publicados (JSON-LD del fundador; meta / «Quiénes somos»
+de `/comunidad`); no se inventa el ensayo largo.
 Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 
 ---

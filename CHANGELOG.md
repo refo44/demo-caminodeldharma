@@ -10,6 +10,13 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Gobernanza — D-08 / OWN-020: SEO de fichas de autor (pendiente de implementar)
+
+El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las
+fichas reutilizan copy corto y fotos ya publicados; no se inventa texto ni se duplica el ensayo
+largo de `/comunidad`. Código **no** entra en este registro: cola
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Backlog v1.26.
+
 ### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
 
 - **Destacado del Inicio:** un evento vigente sin `event_date` ya no gana por

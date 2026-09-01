@@ -602,6 +602,11 @@ Siguiente hito: **crear la instancia de staging en Hostinger y ejecutar el runbo
 **autorización expresa del propietario en la sesión** (OWN-005); ninguna sesión anterior la
 concede. No mezclar con el corte final, que tiene su propio checklist.
 
+**D-08 / OWN-020 (2026-09-01):** cerrado. Fichas `/author/{slug}` indexables con copy corto y
+fotos publicados. Implementación **pendiente**
+([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No es copy sin dueño ni
+`noindex`. Git: trabajar desde `main` (ADR 0043); no reanudar en `fase3-wordpress`.
+
 Antes de abrir esa sesión conviene decidir tres cosas con el propietario:
 
 1. **D-01 / D-04** (matriz § WU-10): si `event_modality` y el desbordamiento de `/practica` a
@@ -621,10 +626,12 @@ CF7 deshabilitado + WhatsApp/correo, registrado en matriz y checklist.
 
 ```bash
 git status --short
-git branch --show-current   # esperar: fase3-wordpress
+git checkout main && git pull origin main
+git branch --show-current   # esperar: main (no fase3-wordpress; ADR 0043)
 git log -5 --oneline
 ```
 
-Leer este archivo, verificarlo contra Git (¿existe el theme con `theme.json`? ¿qué commits
-hay en `fase3-wordpress`?), rerun del último gate QA relevante de la matriz, y continuar
-desde «Próxima acción exacta». El estado del repositorio prevalece sobre la memoria de chat.
+Leer este archivo, verificarlo contra Git (¿existe el theme con `theme.json`? ¿`main` tiene
+WU-00–WU-10?). Trabajo nuevo: Conventional Branch desde `main`, PR, nunca commit directo al
+tronco. Rerun del último gate QA relevante de la matriz y continuar desde «Próxima acción
+exacta». El estado del repositorio prevalece sobre la memoria de chat.

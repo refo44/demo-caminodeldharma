@@ -46,7 +46,7 @@ Re-ejecutar tras cada import y tras el freeze/delta. Extraer del **mismo commit*
 | CPT `event` | **10** | incluye las 7 sin single |
 | `event` con permalink público | **10** | ADR 0035 / OWN-004; 3 KEEP + 7 PLANNED |
 | `post` | **2** | meta `authors` asignado (ADR 0037) |
-| CPT `blog_author` | **2** | Zheng Gong + Comunidad Camino del Dharma |
+| CPT `blog_author` | **2** | Zheng Gong + Comunidad Camino del Dharma; `seo`/bio/thumb OWN-020 **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) |
 | Media de galería pública | **35** | no incluir ilustraciones ni huérfanas (OWN-001, OWN-003) |
 | Media huérfana (oculta) | N = imágenes en disco no referenciadas | seed; **0** URLs públicas; listar en el payload |
 | Álbumes / términos de galería | **3** | |
