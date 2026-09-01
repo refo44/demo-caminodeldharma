@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- markdownlint-disable MD024 MD060 -->
+
 Historial de versiones publicadas en producción. Hostinger no conserva un registro de despliegues cuando se sube un ZIP manualmente; este archivo es la referencia canónica de qué está en vivo.
 
 La versión actual del repositorio está en [`VERSION`](VERSION).
