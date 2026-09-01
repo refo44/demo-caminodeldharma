@@ -156,5 +156,5 @@ Contenido y recursos de marca: © Comunidad Buddhista Camino del Dharma.
 
 ## Contacto
 
-- Correo: caminodeldharma1@gmail.com
+- Correo: <caminodeldharma1@gmail.com>
 - WhatsApp: +57 320 662 7608

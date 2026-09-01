@@ -80,14 +80,14 @@ La guía operativa es [`docs/guia-pruebas-plugin-theme-fse.md`](../guia-pruebas-
 
 ## Consecuencias
 
-**A favor**
+### A favor
 
 - Cualquier implementador (humano o agente) parte del mismo oficio de test antes de escribir
   el primer PHP de Fase 3.
 - Sonar cubre solo plugin + theme; el HTML/JS/CSS estático no aparece como código propio.
 - El gate futuro de PR es barato y no arrastra Docker.
 
-**Contrapartidas aceptadas**
+### Contrapartidas aceptadas
 
 - Hasta el primer PHP de Fase 3 no hay `composer test` que ejecutar. Los árboles bajo
   `wordpress/` son placeholders (README), no implementación.

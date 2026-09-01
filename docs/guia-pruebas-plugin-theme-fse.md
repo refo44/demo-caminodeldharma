@@ -206,13 +206,13 @@ sigue la fecha de fin en `America/Bogota` (OWN-013). No se usa el reloj de pared
 ```php
 class Recording_Clock implements Clock {
 
-	public $invocations = 0;
-	public $now;
+    public $invocations = 0;
+    public $now;
 
-	public function now() {
-		$this->invocations++;
-		return $this->now;
-	}
+    public function now() {
+        $this->invocations++;
+        return $this->now;
+    }
 }
 ```
 

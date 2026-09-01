@@ -38,13 +38,15 @@ Para que humanos, agentes y CI lean la intención del cambio, los nombres de ram
    - Prefijos de agente IA cuando aplique: `cursor/`, `copilot/`, `claude/`, `codex/`,
      `ai/` ([Conventional Branch § AI Agent Source Prefixes](https://conventionalbranch.org/))
 4. **Conventional Commits** — mensajes en **inglés** (regla del repo para Git):
-   ```
+
+   ```text
    <type>[optional scope]: <description>
 
    [optional body]
 
    [optional footer(s)]
    ```
+
    Tipos habituales: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`,
    `ci`, `chore`. Breaking changes: `!` tras el tipo/scope o pie `BREAKING CHANGE:`.
 5. **Gate de merge en `main`:** checks obligatorios `php` y `css` de `.github/workflows/test.yml`;
