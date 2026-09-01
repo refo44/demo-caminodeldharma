@@ -2,13 +2,14 @@
 
 Preguntas de dueño. **No son ADR.**
 
-Hay tres bloques que no se mezclan:
+Hay cuatro bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
-| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-018 sin decisión nueva. |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 sin decisión nueva. |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
+| **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
 implementar esas filas en el corte. Si una respuesta cambia URLs o arquitectura, **entonces** se
@@ -74,6 +75,7 @@ Ninguna.
 | OWN-010 | 2026-08-29 | **D — CPT de autor.** El «Por…» del blog sale de fichas `blog_author`, no de copy ni del usuario WP. Perfil `/author/{slug}` (ADR 0037). Semilla: Zheng Gong (`zheng-gong`), Comunidad Camino del Dharma (`comunidad-camino-del-dharma`). Buscador al asignar; publicar exige ≥1 ficha. `query_var` ≠ `author`. Archivos de users = 404. Eventos no usan este CPT. `/comunidad` no se mueve. |
 | OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
 | OWN-018 | 2026-08-31 | **CF7 entra al corte sin esperar asesoría legal.** El disclaimer publicado en `/privacidad` basta para lanzar. La revisión jurídica queda recomendada para más adelante, no este año, y **no** bloquea WU-09 ni el corte. En WordPress se actualizan solo los párrafos del formulario (ADR 0041). El HTML estático no se toca mientras el form de producción siga siendo `action="#"`. |
+| OWN-019 | 2026-09-01 | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -104,6 +106,20 @@ Ninguna.
 
 Ninguno.
 
+## Riesgos meta transport (Gutenberg + metabox clásico) — Decididos
+
+Auditoría read-only 2026-09-01 (patrón revistalogos #30). **No eran bugs de producción:** no hay
+`add_meta_box` ni JS admin; el contenido llega por migración/CLI. **Decisión del propietario
+2026-09-01 (OWN-019, ADR 0042):** restricciones de diseño, no cola de Fase 3. Detalle histórico:
+`.audit/gutenberg-meta-transport-audit-2026-09-01.md`.
+
+| ID | Qué es ahora | Disparador (no el corte) |
+| -- | ------------ | ------------------------ |
+| META-001 | Criterio de aceptación de la **sesión de UI de autores** (ADR 0037) | Panel nativo **o** metabox clásico + sync `core/editor` demostrado (TDD). El guard REST se mantiene. |
+| META-002 + META-003 | Misma regla para UI de evento / SEO / compartir | Fusionar en esa unidad; no inventar metaboxes en staging |
+| META-004 | Una línea + test | El mismo commit que el primer `register_post_meta` de `blog_author` |
+| META-005 | Tests REST de persistencia | Esa misma unidad de UI, no una suite preventiva ahora |
+
 ## Defectos conocidos — Cerrados
 
 | ID | Fecha | Defecto | Arreglo aplicado |
@@ -121,6 +137,7 @@ Tienen ADR o decisión de dueño y un disparador propio. No son `POST-*` nuevos:
 | Automatización de deploy/CD | ADR 0016 | Estructura estable; no crear workflows de deploy ahora |
 | CPT `sangha` | ADR 0024 | Fuera del corte inicial; reabrir solo con decisión nueva |
 | Paginación numerada de galería | OWN-011 | Solo si un álbum crece mucho **después** del corte |
+| UI wp-admin de meta (autores, evento, SEO) | ADR 0037 + [0042](adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) | Sesión propia **después** del corte (o cuando el dueño pida editar meta en Gutenberg). Native-first; sin metabox clásico sin sync |
 
 Al cerrar una fila `POST-*`: fecha, decisión en una frase, y —si cambia URLs o el motor i18n—
 ADR + `redirect-ledger.md` + matriz.
@@ -151,6 +168,14 @@ inmediatamente antes de WU-10** (después de WU-09). No se mezcla con WU-08B.
 sesión con UID propio; el diálogo enlaza la próxima sesión y lo dice. Estático intacto, OWN-012
 intacto. Quedan 0 defectos abiertos.
 
-**Versión:** 1.23 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
+**v1.24 (2026-09-01):** Auditoría Gutenberg + metabox clásico — 5 riesgos latentes `META-001`–`META-005`
+(pending owner decision). Sin UI wp-admin de meta hoy; el guard REST de `authors` ya mitiga parte del
+patrón revistalogos #30.
+
+**v1.25 (2026-09-01):** OWN-019 / ADR 0042 — el propietario **no** acepta META-* como defectos de
+corte. Son restricciones para UI wp-admin futura. Staging no construye metaboxes clásicos.
+
+**Versión:** 1.25 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 20 decididas.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
+Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).

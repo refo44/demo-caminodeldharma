@@ -316,6 +316,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 - **D-03 (WU-10)** — `/feed`, `/blog/feed` y `/comments/feed` responden 200 en WordPress y 404 en
   producción, y no están en `docs/11-arbol-urls-final.md`. Superficie nueva indexable pendiente
   de decisión del propietario.
+- **OWN-019 / ADR 0042 (2026-09-01):** `META-001`–`META-005` **no** son cola de pre-staging ni
+  defectos de corte. Restricciones para UI wp-admin futura. Staging no construye metaboxes
+  clásicos. El guard de autores no se relaja.
 - **D-05 (WU-10)** — el lightbox nativo rotula en inglés porque el contenedor no puede instalar
   `es_CO`. Ambiental; el runbook lo cubre y en staging queda `Unverified` hasta verificarlo.
 - **WU-08B cerrado.** Queda `Unverified` el pase con lector de pantalla real y todo lo que
@@ -374,6 +377,9 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 - Autorización del propietario 2026-08-31: CF7 en el corte **sin** espera de asesoría legal
   (OWN-018, ADR 0041, FABLE5 v2.4). El disclaimer de `/privacidad` basta para lanzar. Copy
   WordPress del formulario = delta field-scoped; estático intacto. **Ejecutado en WU-09.**
+- Autorización del propietario 2026-09-01: `META-001`–`META-005` **no** son defectos de corte
+  (OWN-019, ADR 0042). Restricciones para UI wp-admin futura. Staging no construye metaboxes
+  clásicos. El guard de autores no se relaja.
 - WU-09: 12 decisiones/deltas registrados en la matriz § WU-09. Los cinco que condicionan trabajo
   futuro: (1) el repositorio posee la *definición* de CF7, no su código, y `contact provision` es
   create-missing-only —lo que un editor cambie en wp-admin no se pisa; (2) se conserva el

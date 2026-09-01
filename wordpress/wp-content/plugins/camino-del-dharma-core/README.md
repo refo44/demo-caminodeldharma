@@ -64,7 +64,8 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   `privacidad` **antes** que `contacto`, para que el aviso sea cierto antes de que el formulario
   llegue a la página. Sin CF7 todo esto es inerte: nada fatal, y el theme rinde los canales
   WhatsApp/correo.
-- El metabox de autores en wp-admin sigue pendiente — siempre test en rojo primero. Guía:
-  `docs/guia-pruebas-plugin-theme-fse.md`.
+- El metabox de autores en wp-admin sigue pendiente (ADR 0037). La UI Gutenberg queda
+  acotada por ADR 0042: panel nativo **o** clásico con sync REST demostrado; TDD primero;
+  el guard no se relaja. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

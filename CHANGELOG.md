@@ -10,6 +10,13 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Gobernanza — META Gutenberg no es defecto de corte (ADR 0042 / OWN-019)
+
+El propietario decide (2026-09-01) que `META-001`–`META-005` (auditoría metabox clásico vs
+REST) son **restricciones de diseño** para UI wp-admin futura, no bugs ni trabajo de
+pre-staging. Sin `add_meta_box` hoy; el corte conserva meta importada. Ver
+[`docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md`](docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md).
+
 ### WordPress Fase 3 — BUG-001: el `.ics` de Círculos incluye todas las sesiones (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.1** y theme `camino-del-dharma` **0.5.1**. El estático de

@@ -78,6 +78,8 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   Library. wp-admin «Eliminar huérfanos» is `.ics` only (OWN-015).
 - Blog byline is CPT `blog_author` at `/author/{slug}` (ADR 0037). `query_var` must not be
   `author`. WP user archives 404. Do not copy another repo’s author plugin; follow ADR 0037.
+  Gutenberg meta UI for authors/events/SEO is later (ADR 0042): no unsynced classic metabox at
+  cutover.
 - `/comunidad` stays; in WP only, add links to author profiles (OWN-016). Do not edit static HTML
   for that now.
 

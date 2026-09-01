@@ -1,5 +1,10 @@
 # Decision log
 
+- 2026-09-01 Decisión del propietario, formalizada en **ADR 0042** / **OWN-019**: las filas
+  `META-001`–`META-005` (auditoría Gutenberg + metabox clásico) **no** son bugs de corte ni
+  cola de pre-staging. Restricciones para UI wp-admin futura: panel nativo o clásico con sync
+  REST; `custom-fields` en `blog_author` solo al registrar meta; no relajar el guard de autores.
+  Backlog v1.25.
 - 2026-08-31 Decisión del propietario, formalizada en **ADR 0041** / **OWN-018**: Contact Form 7
   **entra al corte** sin esperar asesoría legal. El disclaimer publicado en `/privacidad` basta
   para lanzar. PRIV-001b queda como trabajo jurídico posterior, no gate de WU-09 ni del corte.

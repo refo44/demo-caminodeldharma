@@ -8,7 +8,7 @@
 **Supersedes for execution:** `FABLE5-Fase3-WordPress-Master-Prompt-v1.md`
 
 The v1 prompt remains a historical artifact. Do not execute it, copy its classic-theme architecture,
-or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0041,
+or rewrite it as if it had never been valid. This v2 prompt incorporates ADR 0029 and ADR 0032–0042,
 plus the closed Fase 3 owner-decision backlog (v1.21). `POST-*` later-phase i18n rows must not be
 implemented at cutover. Version 2.3 incorporated the permanent removal of the legacy source folder
 under OWN-017 and ADR 0040. Version 2.4 incorporates ADR 0041 / OWN-018: Contact Form 7 is eligible
