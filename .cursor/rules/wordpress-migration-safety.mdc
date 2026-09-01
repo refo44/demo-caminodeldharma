@@ -50,10 +50,11 @@ Five independent deliverables: **CONTENT**, **PRESENTATION**, **ROUTING**, **BEH
 - After verified implementation, update the migration matrix and durable docs.
 - Do not create a classic PHP theme as a stepping stone. Fase 3 is static HTML → `templates/*.html`.
 
-Owner audit backlog is closed for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`, v1.27).
+Owner audit backlog is closed for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`, v1.28).
 OWN-020 / D-08 (author entity SEO) is **decided**; implementation is pending GitHub issue #5 —
 do not `noindex` author singles and do not invent copy. OWN-021 / D-09: leave Sangha 320px
-overflow at cutover; WordPress-only wrap after WP is production (issue #7). `POST-*` rows are
+overflow at cutover; WordPress-only wrap after WP is production (issue #7). OWN-022 / D-10:
+accept `wp-emoji` `sessionStorage`; do not disable the script. `POST-*` rows are
 later-phase; do not implement them at cutover. Binding later ADRs:
 0035 (event singles), 0036 (gallery album URLs), 0037 (blog author CPT / `/author/{slug}`),
 0038 (TDD, wp-phpunit, Sonar scope), 0041 (CF7 at cutover without legal-review wait),

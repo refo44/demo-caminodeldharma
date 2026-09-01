@@ -18,11 +18,12 @@ Contenido importado y convertido en el entorno local. Pendiente: staging Hosting
 corte. Estado durable: `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme futuro.
 
-Decisiones del propietario (**Fase 3 cerrada** v1.27; no reabrir OWN-* sin decisión nueva).
+Decisiones del propietario (**Fase 3 cerrada** v1.28; no reabrir OWN-* sin decisión nueva).
 OWN-020 / D-08 está decidido; el código de SEO de fichas de autor sigue **pendiente**
 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 OWN-021 / D-09: overflow Sangha **dejado** en el corte; wrap WP-only post-corte
 ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
+OWN-022 / D-10: `sessionStorage` de `wp-emoji` **aceptado**.
 Fases posteriores (`POST-*`) no entran en el corte:
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
 

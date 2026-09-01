@@ -168,9 +168,10 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.27);
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.28);
   OWN-020 / D-08 decidido, implementación pendiente; OWN-021 / D-09 overflow dejado al corte;
-  POST-008 wrap post-corte; `POST-001`–`POST-007` de i18n; `META-*`
+  OWN-022 / D-10 `wp-emoji` `sessionStorage` aceptado; POST-008 wrap post-corte;
+  `POST-001`–`POST-007` de i18n; `META-*`
   decididos como restricciones (ADR 0042); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.

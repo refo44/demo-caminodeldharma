@@ -244,7 +244,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Formulario CF7 en `/contacto` | renderiza y postea — Pass (local) | Unverified | `action="#"` |
 | Entrega de correo a `caminodeldharma1@gmail.com` | `wp_mail()` **FALSE** (sin MTA, remitente inválido) | **Unverified — bloqueante de release** | no aplica |
 | Cookies anónimas | ninguna en 11 superficies — Pass (local) | Unverified | ninguna |
-| `sessionStorage` de `wp-emoji` | presente (el estático no usaba almacenamiento) | Unverified | ninguno |
+| `sessionStorage` de `wp-emoji` | presente — Pass (local) *(delta aceptado OWN-022)* | Unverified | ninguno |
 | Seguimiento / analítica | ausente — Pass (local) | Unverified | ausente |
 
 ### OPERATIONS

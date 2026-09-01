@@ -12,6 +12,11 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Gobernanza — D-10 / OWN-022: `sessionStorage` de `wp-emoji` aceptado
+
+El propietario acepta (2026-09-01, A) la clave `wpEmojiSettingsSupports` del núcleo. No es
+cookie ni analítica; no se desactiva el script. Backlog v1.28.
+
 ### Gobernanza — D-09 / OWN-021: overflow Sangha en el corte; wrap post-corte (POST-008)
 
 El propietario deja el desbordamiento 339 vs 320 px de `/blog/sangha-refugio-hiperconexion`

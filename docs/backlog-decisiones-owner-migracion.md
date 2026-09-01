@@ -79,6 +79,7 @@ Ninguna.
 | OWN-019 | 2026-09-01 | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. |
 | OWN-020 | 2026-09-01 | **D-08 cerrado.** Las fichas `/author/{slug}` siguen **indexables** (ADR 0037). No hay meta en el estático porque esas URLs no existían: reutilizar **copy corto y fotos ya publicados**, no inventar, no duplicar el ensayo largo del fundador (queda en `/comunidad`, KEEP). Zheng Gong: description JSON-LD + `assets/images/fundador/foto-biografia-fundador.jpg`. Comunidad: primer párrafo de «Quiénes somos» o la meta de `/comunidad` + `assets/images/comunidad-linaje/comunidad-quienes-somos.jpg`. En ambas, enlace a `/comunidad` para el texto largo. Código **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). |
 | OWN-021 | 2026-09-01 | **D-09 cerrado: dejar el desbordamiento en el corte.** `/blog/sangha-refugio-hiperconexion` a 320 px mide 339 px; **producción publicada desborda igual**. No se toca `static/`. No se «arregla» solo en WordPress antes del corte (inventaría un delta frente al live). Wrap **después** del corte, WordPress ya en `caminodeldharma.org`: POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). |
+| OWN-022 | 2026-09-01 | **D-10 cerrado: A.** Aceptar `sessionStorage` `wpEmojiSettingsSupports` del `wp-emoji` del núcleo. No es cookie, no es analítica (ADR 0019 intacto), no hay petición a `s.w.org` en navegadores modernos. Delta frente al estático (cero almacenamiento). **No** desactivar el script. Sin issue: no hay código. |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -205,7 +206,10 @@ corto y fotos ya publicados; no noindex; implementación pendiente
 wrap WordPress-only **después** de que WP sea producción en el dominio canónico
 ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
 
-**Versión:** 1.27 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 22 decididas.
+**v1.28 (2026-09-01):** OWN-022 / D-10 **cerrado (A).** `sessionStorage` de `wp-emoji` aceptado;
+no desactivar; no es cookie ni analítica.
+
+**Versión:** 1.28 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 23 decididas.
 Pre-staging: 1 decidida, implementación pendiente (`D-08` / OWN-020).
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 1 decidida (`POST-008`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).

@@ -627,6 +627,7 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
     en el corte (paridad live). Wrap WordPress-only **post-corte** (POST-008,
     [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) cuando WP ya sirva
     `caminodeldharma.org`.
+9d. **D-10 / OWN-022:** `sessionStorage` de `wp-emoji` **aceptado** (A). No desactivar. No issue.
 10. **Corte final:** ejecutar
     [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); archivar el estático en tag.
 
