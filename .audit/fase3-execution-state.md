@@ -5,10 +5,10 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (WU-09 implementado y validado) |
+| **Última actualización** | 2026-08-31 (BUG-001 implementado y validado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…**WU-09 cerrados**; checkpoint antes de **BUG-001** |
-| **Rama** | `fase3-wordpress` — **existe en `origin`** en `f860561` (WU-08B); los 4 commits de WU-09 están **solo en local**, sin push |
+| **Work unit activo** | Ninguno — WU-00…**WU-09 y BUG-001 cerrados**; checkpoint antes de **WU-10** |
+| **Rama** | `fase3-wordpress` — **existe en `origin`** en `78db8f7` (los 5 commits de WU-09 se subieron fuera de esta sesión); los commits de BUG-001 están **solo en local**, sin push |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
 | **Paridad producción** | **Verificada 2026-08-31 (WU-06)**: `curl`+`diff` byte a byte contra `https://caminodeldharma.org` — 17/17 superficies idénticas al repo (`static/`, VERSION 1.0.35) + sitemap + `.ics`. Delta repo↔Hostinger = 0 (OWN-006/007); la extracción usa el mismo contenido publicado. |
@@ -229,6 +229,30 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
     devuelve `false` (comprobado directamente). La validación sí está probada de extremo a extremo.
   - QA: unit 175/175 (913 asserts), wp-phpunit 114/114 (677 asserts), phpcs 0/0 sobre 85 archivos,
     stylelint verde, `php -l` OK, `debug.log` sin entradas propias. Matriz § WU-09.
+- **BUG-001 — El `.ics` de Círculos incluye todas las sesiones** (sesión 2026-08-31, commits
+  `6c8fdb6` tests → `23c1ae4` plugin → `80d752a` theme; el commit de docs va después):
+  - Reanudación verificada: preflight limpio + rerun de los gates previos (unit 175, wp-phpunit
+    114, plugin 0.7.0 y theme 0.5.0 activos). Hallazgo: `origin/fase3-wordpress` ya estaba en
+    `78db8f7`, no en `f860561` — los 5 commits de WU-09 se habían subido fuera de esta sesión.
+  - Tests RED primero: 5 fallos de nivel 1 y 2 errores + 3 fallos de nivel 2 antes de tocar
+    ningún archivo de comportamiento.
+  - Plugin **0.7.1**: `Cdd_Core_Ics_Generator` emite **un VEVENT por sesión** de
+    `event_calendar_dates` (UID propio `slug-Ymd@host`, fin exclusivo de día completo por
+    ocurrencia) dentro del sobre VCALENDAR de producción; sin cronograma, el rango
+    `event_date`/`event_end` con el UID publicado, como hasta hoy.
+    `cdd_core_event_calendar_payload()` gana `occurrences`, `session_count` y `next` y acepta el
+    instante de la petición; `cdd_core_ics_occurrence()` traduce la ocurrencia a la forma
+    inclusiva que consume el generador.
+  - Theme **0.5.1**: el disparador de un curso enlaza la **próxima sesión** en vez del rango, e
+    imprime `data-calendar-sessions` y `data-calendar-note`; `calendar-dialog.js` pinta la nota y
+    la expone como `aria-describedby` del diálogo; `.calendar-dialog-note` en `main.css`. Un
+    evento sin cronograma no imprime nada nuevo.
+  - Verificación real: `curl` sobre `/eventos/ical/circulos-de-presencia-consciente.ics` devuelve
+    200 con **10 VEVENT**; los eventos finalizados siguen en 410 (OWN-012). En el navegador, el
+    diálogo enlaza `dates=20260903/20260904` y muestra la nota.
+  - **El estático no se tocó**: sigue publicando su VEVENT único de la bienvenida hasta el corte.
+  - QA: unit 183/183 (1023 asserts), wp-phpunit 121/121 (723 asserts), phpcs 0/0 sobre 85
+    archivos, stylelint verde, `php -l` OK. Matriz § BUG-001.
 
 ## Riesgos y hallazgos activos
 
@@ -257,23 +281,26 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   todos los gates están verdes, pero el mensaje no sigue la convención del repositorio. La rama
   ya está **publicada** en `origin` hasta `f860561`, así que fundir `3c3d513` en `9a00f97`
   exigiría un force-push: decisión del propietario, no una limpieza silenciosa.
-- **BUG-001 (Círculos `.ics`):** el exportado debe incluir **todas las sesiones**. Hoy el
-  estático publica un solo VEVENT de la bienvenida; WordPress emite un solo VEVENT de rango.
-  **Siguiente sesión** (WU-09 ya está cerrado). No se mezcla con WU-10.
+- **BUG-001 (Círculos `.ics`) — cerrado.** El exportado de WordPress incluye ahora **las diez
+  sesiones** de `event_calendar_dates`, un VEVENT con UID propio cada una; el diálogo enlaza la
+  próxima sesión (una fecha que el archivo contiene) y lo dice. El **estático sigue publicando
+  su VEVENT único de la bienvenida**: no se toca hasta el corte, y ese delta queda registrado en
+  la matriz § BUG-001, no arreglado en `static/`.
 - **ADR 0041 / OWN-018 — cerrado en WU-09.** El delta de copy está aplicado en la Page de
   WordPress y el estático sigue intacto. Queda **una sola cosa abierta y es bloqueante para el
   release, no para el corte**: la **entrega real** a `caminodeldharma1@gmail.com` desde staging
   Hostinger. `Pass (local)` no basta (ADR 0026/0041 punto 5). Si allí falla, el corte puede
   seguir con CF7 deshabilitado y WhatsApp/correo — el bloque del theme ya rinde ese estado— y se
   registra en matriz y checklist. **Fallo operativo, no gate jurídico.**
-- **La rama ya no es solo local (hallazgo de WU-09).** `git ls-remote --heads origin
-  fase3-wordpress` devuelve `f860561`: la rama se subió en algún momento anterior a esta sesión,
-  pese a que este archivo la describía como «local, sin push». Consecuencia: la nota de que
-  «CI/Sonar quedan `Unverified` hasta que exista push» está **obsoleta** para todo lo anterior a
-  WU-09 — puede haber ejecuciones de `test.yml` en el remoto que nadie ha revisado. Los 4 commits
-  de WU-09 siguen sin subir, por instrucción. Antes del siguiente push conviene mirar el estado
-  de CI en el remoto y decidir qué hacer con `3c3d513` (el commit ajeno), que **ya está
-  publicado**: reescribirlo obligaría a un force-push.
+- **La rama se publica fuera de estas sesiones (hallazgo de WU-09, confirmado en BUG-001).**
+  Al abrir la sesión de BUG-001, `origin/fase3-wordpress` estaba en **`78db8f7`**, no en
+  `f860561`: los 5 commits de WU-09 —que este archivo describía como «solo en local»— ya se
+  habían subido. Consecuencia: la nota de que «CI/Sonar quedan `Unverified` hasta que exista
+  push» está **obsoleta** para todo lo anterior a BUG-001 — puede haber ejecuciones de
+  `test.yml` en el remoto que nadie ha revisado. Los 3 commits de BUG-001 (más el de docs) siguen
+  sin subir, por instrucción. Antes del siguiente push conviene mirar el estado de CI en el
+  remoto y decidir qué hacer con `3c3d513` (el commit ajeno), que **ya está publicado**:
+  reescribirlo obligaría a un force-push.
 - **CF7 no está en Git y por eso el harness no lo ejecuta.** La rama «CF7 presente» se prueba
   contra un entorno real, no en la suite; la suite cubre lo propio en ambos estados. Al
   provisionar un entorno nuevo hay que anotar la versión instalada en
@@ -287,7 +314,16 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 - Autorización del propietario 2026-08-31: el `.ics` de Círculos que solo cubre la bienvenida
   (estático) **y** el VEVENT único de rango (WP) son **BUG-001**. El exportado debe incluir
   todas las sesiones. Sesión propia **justo antes de WU-10**. No se inventa un campo de
-  «bienvenida».
+  «bienvenida». **Ejecutado y cerrado el 2026-08-31.**
+- BUG-001: 7 decisiones/deltas registrados en la matriz § BUG-001. Las tres que condicionan
+  trabajo futuro: (1) el UID solo se sufija (`slug-Ymd@host`) cuando hay cronograma, de modo que
+  un evento sin sesiones conserva el UID que producción ya publicó y nadie ve duplicados;
+  (2) un enlace profundo de Google/Outlook lleva una sola entrada, así que el diálogo nombra la
+  **próxima** sesión en lugar de un rango que no existe en ningún VEVENT, y una nota nueva —copy
+  propio, no publicado— lo explica; (3) el payload lleva las ocurrencias en dos formas
+  (inclusiva para el generador, compacta con fin exclusivo para los enlaces) y
+  `cdd_core_ics_occurrence()` es el único punto de traducción: mezclarlas empujaba cada `DTEND`
+  un día de más.
 - Autorización del propietario 2026-08-31: CF7 en el corte **sin** espera de asesoría legal
   (OWN-018, ADR 0041, FABLE5 v2.4). El disclaimer de `/privacidad` basta para lanzar. Copy
   WordPress del formulario = delta field-scoped; estático intacto. **Ejecutado en WU-09.**
@@ -330,13 +366,36 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 ## Evidencia de validación
 
-Ver `.audit/fase3-validation-matrix.md` § WU-09. Estados: `Unverified`, `Pass (local)`,
-`Pass`, `Fail`.
+Ver `.audit/fase3-validation-matrix.md` § BUG-001 (y § WU-09 para la unidad anterior). Estados:
+`Unverified`, `Pass (local)`, `Pass`, `Fail`.
 
 ## Bloqueos
 
-- Ninguno. Siguiente implementación: **BUG-001** (`.ics` con todas las sesiones), sesión aparte.
-  Orden restante: BUG-001 → WU-10.
+- Ninguno. Siguiente implementación: **WU-10** (QA local completa y runbook de staging), sesión
+  aparte. Orden restante: WU-10 → corte.
+
+## Archivos cambiados en BUG-001
+
+- Tests ampliados (RED antes de la implementación): `tests/Unit/Ics_GeneratorTest.php`
+  (cronograma de 10 sesiones, UID por sesión, día completo, sesión multidía, fallback de rango),
+  `tests/Unit/Theme_BehaviorTest.php` (nota del diálogo), `tests/WordPress/Event_QueriesTest.php`
+  (`occurrences`/`session_count`/`next`, enlace profundo a la próxima sesión, 410 con cronograma,
+  fallback de rango), `tests/WordPress/ThemeRenderTest.php` (atributos del disparador con y sin
+  cronograma).
+- Plugin `camino-del-dharma-core` 0.7.0 → **0.7.1**:
+  `includes/class-cdd-core-ics-generator.php` (un VEVENT por ocurrencia, UID por sesión),
+  `includes/events.php` (`cdd_core_event_calendar_occurrences()`,
+  `cdd_core_calendar_occurrence()`, `cdd_core_event_calendar_deep_link()`,
+  `cdd_core_ics_occurrence()`; payload y ruta `.ics` con el instante de la petición),
+  `camino-del-dharma-core.php` (versión).
+- Theme `camino-del-dharma` 0.5.0 → **0.5.1**:
+  `inc/class-camino-del-dharma-renderers.php` (`calendar_schedule_attributes()`),
+  `assets/js/calendar-dialog.js` (nota + `aria-describedby`), `assets/css/main.css`
+  (`.calendar-dialog-note`), `style.css` (versión).
+- `.audit/fase3-execution-state.md`, `.audit/fase3-validation-matrix.md`,
+  `docs/backlog-decisiones-owner-migracion.md`, `docs/migracion-static-wordpress.md`,
+  `docs/17-orden-implementacion.md`, `docs/matriz-migracion-static-wordpress.md`, READMEs de
+  plugin y theme, `CHANGELOG.md`, `CLAUDE.md`, `AGENTS.md`
 
 ## Archivos cambiados en WU-09
 
@@ -440,21 +499,22 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 ## Último commit verificado
 
-`9793a3c` — última implementación de WU-09 (QA local verde: unit 175, wp-phpunit 114, phpcs 0/0); el commit de documentación va justo después. Baseline visual del theme:
+`80d752a` — última implementación de BUG-001 (QA local verde: unit 183, wp-phpunit 121, phpcs 0/0); el commit de documentación va justo después. La implementación anterior fue `9793a3c` (WU-09: unit 175, wp-phpunit 114). Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
 `e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07) → `2bd733d` → `150d8b8` (gobernanza) →
 `c94635f` (WU-08A) → `5354449` → `d73fecd` (estado) → `e5dbab0` → `e14ef8e` → `3c3d513`
 (ajeno) → `9a00f97` → `081b2f8` → `f860561` (WU-08B) → `1492d01` → `0ee2e3a` →
-`9793a3c` (WU-09) → commit de docs de cierre.
+`9793a3c` → `78db8f7` (WU-09) → `6c8fdb6` → `23c1ae4` → `80d752a` (BUG-001) → commit de docs de
+cierre.
 
 ## Estado del entorno local
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.7.0, upgrade automático). Theme `camino-del-dharma` **activo** (v0.5.0,
-vistas reales + comportamiento + cabeza + formulario). **Contact Form 7 6.1.7 activo** con el
+**activo** (v0.7.1, upgrade automático). Theme `camino-del-dharma` **activo** (v0.5.1,
+vistas reales + comportamiento + cabeza + formulario + `.ics` por sesión). **Contact Form 7 6.1.7 activo** con el
 formulario provisionado (`wp cdd-core contact provision --apply`); `/privacidad` lleva el delta
 de ADR 0041 y `/contacto` el bloque del formulario. Akismet sigue inactivo (sin antispam extra). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
 convertido** por `wp cdd-core migrate convert --payload=/repo/migration/payload.json --apply`
@@ -469,12 +529,11 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-09 está cerrado (checkpoint alcanzado; sin push ni despliegue).
+BUG-001 está cerrado (checkpoint alcanzado; sin push ni despliegue).
 
-**BUG-001** (`.ics` de Círculos con todas las sesiones): **sesión propia siguiente**, antes de
-WU-10. Opus, resume corto, TDD. Hoy el estático publica un solo VEVENT de la bienvenida y
-WordPress emite un solo VEVENT de rango; el exportado debe incluir todas las sesiones. No
-inventar un campo de «bienvenida». No mezclar con WU-10.
+**WU-10** (QA local completa y runbook de staging): **sesión propia siguiente**. Desplegar a la
+instancia Hostinger separada solo con autorización expresa (OWN-005). No mezclar con el corte
+final.
 
 Pendiente que **no** bloquea la siguiente unidad pero sí el release: verificar en staging
 Hostinger que el formulario entrega en `caminodeldharma1@gmail.com` (WU-09 dejó la validación

@@ -40,6 +40,12 @@ Reglas:
   página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
   `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
   (docs/19 §9).
+- Diálogo de calendario de un curso desde BUG-001 (v0.5.1): en un evento con
+  cronograma el disparador enlaza la **próxima sesión** en vez del rango del
+  curso, e imprime `data-calendar-sessions` y `data-calendar-note`;
+  `calendar-dialog.js` pinta la nota y la expone como `aria-describedby` del
+  diálogo (docs/19). La nota es copy propio, no publicado: el estático nunca
+  tuvo esta situación. Un evento sin cronograma no imprime nada nuevo.
 - Formulario de contacto desde WU-09 (v0.5.0): el bloque
   `camino-del-dharma/contacto-formulario` rinde el formulario que provisiona
   camino-del-dharma-core en Contact Form 7. El contenido de la Page guarda el

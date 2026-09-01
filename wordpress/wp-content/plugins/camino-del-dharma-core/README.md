@@ -43,6 +43,15 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   docs/11; `cdd_core_default_locale()` declara `es_CO`. `includes/admin.php` añade la pantalla
   de Herramientas **«Eliminar huérfanos»** (OWN-015): solo `.ics`, dry-run primero, borrado con
   nonce y capacidad de edición de eventos.
+- Cronograma en el `.ics` desde BUG-001 (v0.7.1): `Cdd_Core_Ics_Generator` emite **un VEVENT
+  por sesión** de `event_calendar_dates` —UID propio `slug-Ymd@host` y fin exclusivo de día
+  completo por ocurrencia— dentro del mismo sobre VCALENDAR de producción; un evento sin
+  cronograma conserva el rango `event_date`/`event_end` y el UID publicado.
+  `cdd_core_event_calendar_payload()` publica `occurrences`, `session_count` y `next`: como un
+  enlace profundo de Google/Outlook lleva una sola entrada, el diálogo apunta a la próxima
+  sesión —una fecha que el archivo contiene— en vez de a un rango que no aparece en ningún
+  VEVENT. `cdd_core_ics_occurrence()` es el único punto de traducción entre la forma inclusiva
+  que consume el generador y la compacta con fin exclusivo que consumen los enlaces.
 - Formulario de contacto desde WU-09 (v0.7.0): Contact Form 7 es el único plugin de terceros
   aprobado (ADR 0025/0026) y su código **no** viaja en Git, así que lo versionado es la
   *definición* — `Cdd_Core_Contact_Form_Template` guarda la plantilla del formulario (el copy

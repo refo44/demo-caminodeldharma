@@ -613,9 +613,10 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
 8. **WU-09:** implementar y probar Contact Form 7 localmente y en staging con datos sintéticos.
    Elegible en producción al corte (ADR 0041 / OWN-018). Actualizar en WordPress los párrafos del
    formulario en `/privacidad`. La revisión legal no es prerrequisito.
-8b. **BUG-001 (justo antes de WU-10):** el `.ics` de Círculos incluye **todas las sesiones**
-   (`event_calendar_dates`); diálogo y archivo comparten fuente. No copiar el `.ics` estático
-   de la sola bienvenida.
+8b. **BUG-001 (justo antes de WU-10) — cerrado 2026-08-31:** el `.ics` de Círculos incluye
+   **todas las sesiones** (`event_calendar_dates`), un VEVENT con UID propio cada una; diálogo y
+   archivo comparten fuente, y como un enlace profundo lleva una sola entrada, el diálogo nombra
+   la próxima sesión y lo dice. El `.ics` estático de la sola bienvenida no se copió ni se tocó.
 9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
    solo con autorización expresa (OWN-005).
 10. **Corte final:** ejecutar

@@ -340,10 +340,10 @@ Decisiones y deltas registrados (WU-08A):
 3. **Diálogo de calendario y `.ics` comparten fuente** (`cdd_core_event_calendar_payload`): el
    enlace de Google/Outlook y el archivo descargado no pueden divergir. Consecuencia: el
    diálogo hereda los deltas ya aceptados en WU-06 del `.ics` de WordPress frente al `.ics`
-   publicado — `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida»),
-   `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)») y `DTEND` = fin del
-   rango del evento, 20261025 (publicado: 20260904, solo la bienvenida). **BUG-001** (sesión
-   propia **justo antes de WU-10**): el `.ics` exportado **debe incluir todas las sesiones**.
+   publicado — `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida») y
+   `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)»). El tercer delta (`DTEND`
+   = fin del rango, 20261025) era **BUG-001**, cerrado en su sesión propia justo antes de WU-10:
+   el `.ics` exportado incluye ahora **todas las sesiones**. Ver § BUG-001.
 4. **`data-share-description` no se emite**: `share.js` lo lee pero no lo usa en ningún punto
    del diálogo. Su contenido (para el blog) coincide con la meta description, que es superficie
    de **WU-08B**; migrarlo ahora sería duplicar ese trabajo.
@@ -538,3 +538,56 @@ Decisiones y deltas registrados (WU-09):
     `wp_mail()` falla en Docker por falta de MTA. La entrega a `caminodeldharma1@gmail.com` se
     verifica en staging Hostinger antes del release; si allí falla, el corte puede seguir con CF7
     deshabilitado y WhatsApp/correo — fallo operativo, no gate jurídico.
+
+## BUG-001 — El `.ics` de Círculos incluye todas las sesiones
+
+Sesión propia entre WU-09 y WU-10 (backlog de dueño v1.23). Decisión del dueño (2026-08-31): ni
+el estático publicado (un VEVENT de la bienvenida, 3–4 sep) ni la salida de WordPress hasta hoy
+(un VEVENT del rango 3 sep → 25 oct) son el contrato; el exportado debe incluir **todas** las
+sesiones ya extraídas en `event_calendar_dates` / `calendar_dates` del payload.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| TDD honesto: RED antes del primer archivo de comportamiento | Unit: 183 tests, **5 failures** (VEVENT por sesión, fin de día propio, UID por sesión, sesión multidía, nota del diálogo). wp-phpunit: 121 tests, **2 errors + 3 failures** (`occurrences`/`session_count`/`next` en el payload, enlace profundo a la próxima sesión, atributos del disparador); los 175/114 preexistentes siguieron verdes | OK | Pass (local) |
+| Nivel 1 verde | `run-phpunit.sh` → OK (**183 tests, 1023 assertions**): 10 sesiones = 10 VEVENT en un solo sobre VCALENDAR; cada VEVENT cierra al día siguiente de sí mismo (20261024 → 20261025) y ninguno abre el 4 de septiembre; 10 UID distintos `slug-Ymd@host`; identidad compartida (SUMMARY, DESCRIPTION, LOCATION, URL, ATTACH, ORGANIZER, DTSTAMP) repetida en cada uno; evento sin cronograma = un VEVENT de rango con el UID publicado; sesión multidía con su propio fin exclusivo; CRLF sin plegado | OK | Pass (local) |
+| Nivel 2 verde | `run-phpunit-wp.sh` → OK (**121 tests, 723 assertions**): `cdd_core_event_calendar_payload()` publica `occurrences` (10), `session_count` y `next` sin tocar el rango `start_date`/`end_date`; la respuesta HTTP trae 10 VEVENT con las 10 fechas del cronograma y 10 UID únicos; el enlace profundo es la **próxima** sesión en `America/Bogota` (20260922/20260923 el 20 sep; 20260903/20260904 antes de empezar) y esa pareja existe como VEVENT en el archivo; evento sin cronograma conserva rango y UID; el disparador imprime `data-calendar-sessions` y `data-calendar-note`, y no los imprime sin cronograma | OK | Pass (local) |
+| Fuente única diálogo ↔ archivo | Test dedicado: la pareja compacta que leen Google/Outlook se busca como `DTSTART`/`DTEND` en el cuerpo `.ics` de la misma petición | No hay pareja que el archivo no contenga | Pass (local) |
+| OWN-012 intacto | `cdd_core_event_ics_response()` sobre un curso finalizado **con** cronograma | 410, cuerpo vacío, `X-Robots-Tag: noindex, nofollow` | Pass (local) |
+| Salida HTTP real | `curl http://localhost:8081/eventos/ical/circulos-de-presencia-consciente.ics` | 200 `text/calendar`, `Content-Disposition` adjunto, **10 VEVENT** (20260903…20261024) con UID `circulos-de-presencia-consciente-Ymd@localhost`; `encuentro-nacional-2026` y `vesak-2026` (finalizados) siguen en 410 | Pass (local) |
+| Diálogo real | Single de Círculos en el navegador: se abre «Añadir al calendario» y se leen los enlaces | `dates=20260903/20260904` (Google), `startdt=2026-09-03&enddt=2026-09-03` (Outlook), descarga `circulos-de-presencia-consciente.ics`, nota visible y `aria-describedby="calendar-dialog-note"` | Pass (local) |
+| Estático sin tocar | `git status` sobre `static/` | 0 cambios | Pass (local) |
+| WPCS | `phpcs` (plugin + theme + tests) | 0 errores, 0 avisos | Pass (local) |
+| `php -l` / stylelint | `tools/php-lint.sh`, `stylelint` sobre `assets/css/main.css` | OK / 0 | Pass (local) |
+| CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
+
+Decisiones y deltas registrados (BUG-001):
+
+1. **Un VEVENT por sesión, no una regla de repetición.** El cronograma de Círculos es irregular
+   (3, 10, 15, 17, 22, 24, 29 sep; 1, 17, 24 oct): no hay `RRULE` que lo describa sin `RDATE`
+   sueltas. Diez VEVENT con UID propio es la forma RFC 5545 que cualquier cliente almacena como
+   diez entradas separadas.
+2. **El UID solo se sufija cuando hay cronograma.** Un evento sin sesiones conserva
+   `slug@host`, el UID que producción ya publicó: un visitante que añadió el Encuentro Nacional
+   no ve un duplicado. Las sesiones usan `slug-Ymd@host`.
+3. **El archivo es el cronograma completo, también hacia atrás.** Se exportan las sesiones ya
+   celebradas mientras el curso siga vigente; un cliente que lo abra a mitad de curso ve el
+   proceso entero, no solo lo que queda. Cuando el curso termina manda OWN-012: 410 y nada.
+4. **Un enlace profundo lleva una sola entrada.** Google Calendar y Outlook no aceptan diez
+   fechas en una URL, así que el diálogo pasa de describir un rango que no existe en ningún
+   VEVENT a nombrar **la próxima sesión**, una fecha que el archivo sí contiene. Apple Calendar
+   y «Descargar archivo .ics» siguen entregando las diez.
+5. **La nota es copy nuevo, no copy publicado.** El estático nunca tuvo esta situación, así que
+   no hay frase publicada que respetar (OWN-007 no aplica). Se añade una sola línea, en la voz
+   del sitio, y solo cuando hay más de una sesión: «El archivo .ics incluye las 10 sesiones del
+   curso. Google Calendar y Outlook añaden la próxima: Jueves 3 de septiembre de 2026.» Se
+   expone como `aria-describedby` del diálogo (docs/19): quien usa lector de pantalla la oye al
+   abrirlo, no después de elegir.
+6. **La pareja compacta y las fechas del archivo tienen forma distinta a propósito.** El payload
+   lleva las ocurrencias en forma inclusiva (`start_date`/`end_date`, lo que consume el
+   generador) y la pareja compacta con fin exclusivo (`start`/`end`, lo que consumen los enlaces
+   profundos). Mezclarlas empujaba cada `DTEND` un día de más; lo detectó el test de nivel 2
+   antes que ningún cliente de calendario, y `cdd_core_ics_occurrence()` es hoy el único punto
+   de traducción entre ambas.
+7. **El estático no se toca** (memoria del proyecto + decisión del dueño):
+   `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue publicando su VEVENT único
+   de la bienvenida hasta el corte. El delta queda registrado aquí, no arreglado allí.

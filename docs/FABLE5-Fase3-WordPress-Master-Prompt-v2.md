@@ -759,10 +759,11 @@ Use these work-unit boundaries unless repository evidence requires a safer subdi
     Claude 4.6 Opus. Prompt: short resume **plus** this file’s §9.5 and §10 only (not §1–§8, not
     the first-response contract). Stop after 08A; do not continue into 08B in the same session.
 11. **WU-09 — Contact Form 7 integration and `/privacidad` form-copy update (ADR 0041)**
-12. **BUG-001 — Círculos `.ics` includes every session.** Separate session **immediately before
-    WU-10** (after WU-09). Model: Claude 4.6 Opus. Short resume; TDD (ADR 0038). One VEVENT per
-    `event_calendar_dates` entry (range fallback if none). Same payload for the dialog and the
-    file. Do not copy the static welcome-only `.ics`. Do not mix with WU-10.
+12. **BUG-001 — Círculos `.ics` includes every session. Closed 2026-08-31**, in its own session
+    before WU-10. One VEVENT per `event_calendar_dates` entry with its own UID
+    (`slug-Ymd@host`); range fallback and published UID when there is no schedule; one payload
+    behind the dialog and the file, with the deep links naming the next session because a deep
+    link carries a single entry. The static welcome-only `.ics` was neither copied nor touched.
 13. **WU-10 — Full local QA and staging-readiness runbook**
 
 WU-02 is a dedicated-session work unit under ADR 0023. Do not start it in the same session that

@@ -10,6 +10,26 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — BUG-001: el `.ics` de Círculos incluye todas las sesiones (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.1** y theme `camino-del-dharma` **0.5.1**. El estático de
+producción no se toca: `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue
+publicando su VEVENT único de la sesión de bienvenida hasta el corte.
+
+- **Un VEVENT por sesión.** El exportado de WordPress emitía una sola entrada del rango 3 sep →
+  25 oct, que ningún calendario puede distinguir de un curso de 52 días seguidos. Ahora emite una
+  entrada por cada fecha de `event_calendar_dates` —las diez del cronograma publicado— con UID
+  propio (`slug-Ymd@host`) y su fin exclusivo de día completo, dentro del mismo sobre VCALENDAR
+  de producción. Un evento sin cronograma conserva el rango `event_date`/`event_end` y el UID que
+  producción ya publicó.
+- **El diálogo y el archivo no pueden divergir.** Un enlace profundo de Google o Outlook lleva una
+  sola entrada, así que «Añadir al calendario» pasa a nombrar la **próxima sesión** —una fecha que
+  el archivo contiene— en lugar de un rango que no aparece en ningún VEVENT, y una nota nueva lo
+  dice: «El archivo .ics incluye las 10 sesiones del curso…». Apple Calendar y la descarga siguen
+  entregando las diez.
+- **Sin cambios en OWN-012**: un evento finalizado sigue devolviendo 410 sin `.ics`, sin
+  inscripción y sin calendario.
+
 ### WordPress Fase 3 — WU-09: Contact Form 7 y los párrafos del formulario en `/privacidad` (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.0** y theme `camino-del-dharma` **0.5.0**. El estático de

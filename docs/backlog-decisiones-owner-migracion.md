@@ -8,7 +8,7 @@ Hay tres bloques que no se mezclan:
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-018 sin decisión nueva. |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n) | Abiertas. **No bloquean** Fase 3, staging ni el corte. |
-| **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | Abiertas. **BUG-001** se ejecuta **justo antes de WU-10**. |
+| **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
 implementar esas filas en el corte. Si una respuesta cambia URLs o arquitectura, **entonces** se
@@ -102,13 +102,13 @@ Ninguna.
 
 ## Defectos conocidos — Abiertos
 
-No son `POST-*` (i18n) ni reaperturas de OWN-*. **Sesión propia inmediatamente antes de WU-10**
-(después de WU-09). No se mezclan con WU-08B ni con WU-10. El corte puede seguir si el
-propietario aplaza el arreglo otra vez.
+Ninguno.
 
-| ID | Fecha | Defecto | Mientras tanto | Arreglo previsto |
-| -- | ----- | ------- | -------------- | ---------------- |
-| BUG-001 | 2026-08-31 | El `.ics` exportado de Círculos **debe incluir todas las sesiones**. El estático publicado emite un solo VEVENT de la **bienvenida** (3–4 sep, «sesión de bienvenida», «Virtual (hora de Colombia)»). WordPress (WU-06/08A) emite un solo VEVENT del **rango** 3 sep → 25 oct (`SUMMARY` = título, `LOCATION` = `event_place`). Ninguno lista las fechas de `event_calendar_dates` (ya extraídas). | Diálogo y `.ics` de WP siguen el rango único hasta esa sesión. No copiar la bienvenida del estático. | **Justo antes de WU-10.** Generador + diálogo: un VEVENT (o equivalente RFC 5545) **por sesión** desde `event_calendar_dates`; si no hay sesiones sueltas, el rango `event_date`/`event_end` como hoy. Tests de regresión contra el cronograma, no contra el `.ics` estático de un solo día. Opus, resume corto, TDD. |
+## Defectos conocidos — Cerrados
+
+| ID | Fecha | Defecto | Arreglo aplicado |
+| -- | ----- | ------- | ---------------- |
+| BUG-001 | Abierto 2026-08-31 · **Cerrado 2026-08-31** | El `.ics` exportado de Círculos no incluía todas las sesiones. El estático publicado emite un solo VEVENT de la **bienvenida** (3–4 sep); WordPress (WU-06/08A) emitía un solo VEVENT del **rango** 3 sep → 25 oct. Ninguno listaba las fechas de `event_calendar_dates`. | Sesión propia justo antes de WU-10, TDD. `Cdd_Core_Ics_Generator` emite **un VEVENT por sesión** de `event_calendar_dates`, cada uno con UID propio (`slug-Ymd@host`) y su fin exclusivo de día completo, dentro del sobre VCALENDAR de producción; sin lista de sesiones se mantiene el rango `event_date`/`event_end` con el UID publicado. `cdd_core_event_calendar_payload()` resuelve el cronograma una sola vez: el archivo y el diálogo no pueden divergir, y como un enlace profundo lleva una sola entrada, Google/Outlook añaden **la próxima sesión** (fecha que el archivo contiene) con una nota que dice que el `.ics` trae todas. Ni el estático ni OWN-012 cambian. Plugin 0.7.1, theme 0.5.1. |
 
 ## Ya aplazado (no duplicar aquí)
 
@@ -147,6 +147,10 @@ solo los párrafos del formulario.
 estático (solo bienvenida) ni el WP actual (un VEVENT de rango) lo hacen. **Sesión propia
 inmediatamente antes de WU-10** (después de WU-09). No se mezcla con WU-08B.
 
-**Versión:** 1.22 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
+**v1.23 (2026-08-31):** BUG-001 **cerrado** en su sesión propia, antes de WU-10. Un VEVENT por
+sesión con UID propio; el diálogo enlaza la próxima sesión y lo dice. Estático intacto, OWN-012
+intacto. Quedan 0 defectos abiertos.
+
+**Versión:** 1.23 · **Fecha:** 2026-08-31 · **Estado:** Fase 3: 0 abiertas · 19 decididas.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 0 decididas.
-Defectos conocidos: 1 abierto (`BUG-001`) · 0 cerrados.
+Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
