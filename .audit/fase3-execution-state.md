@@ -5,10 +5,10 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (BUG-001 implementado y validado) |
+| **Última actualización** | 2026-08-31 (WU-10: QA local completa y runbook de staging) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
-| **Work unit activo** | Ninguno — WU-00…**WU-09 y BUG-001 cerrados**; checkpoint antes de **WU-10** |
-| **Rama** | `fase3-wordpress` — **existe en `origin`** en `78db8f7` (los 5 commits de WU-09 se subieron fuera de esta sesión); los commits de BUG-001 están **solo en local**, sin push |
+| **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
+| **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |
 | **Commit baseline** | `d96bcbd` (`main`, árbol limpio, VERSION `1.0.35`) |
 | **Tag de rollback** | `fase3-pre-reorg-v1.0.35` (anotado, local, apunta a `d96bcbd`) |
 | **Paridad producción** | **Verificada 2026-08-31 (WU-06)**: `curl`+`diff` byte a byte contra `https://caminodeldharma.org` — 17/17 superficies idénticas al repo (`static/`, VERSION 1.0.35) + sitemap + `.ics`. Delta repo↔Hostinger = 0 (OWN-006/007); la extracción usa el mismo contenido publicado. |
@@ -254,6 +254,34 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   - QA: unit 183/183 (1023 asserts), wp-phpunit 121/121 (723 asserts), phpcs 0/0 sobre 85
     archivos, stylelint verde, `php -l` OK. Matriz § BUG-001.
 
+- **WU-10 — QA local completa y runbook de staging** (sesión 2026-08-31, commits `e801c4a`,
+  `c24023f`, `dfb5055` + este commit de estado). **No es una escritura en Hostinger**: WU-10
+  produce evidencia y runbook; no se creó, desplegó ni importó en ninguna instancia (OWN-005).
+  - Reanudación verificada contra Git: `HEAD` = `origin/fase3-wordpress` = `e377c46`, árbol
+    limpio, 0 ahead / 0 behind. **El archivo estaba desactualizado**: los commits de BUG-001 ya
+    estaban publicados. El repositorio manda.
+  - **Niveles 1–3 re-ejecutados contra el árbol actual**, no heredados: `php -l` OK; unit
+    **183 tests / 1023 assertions**; wp-phpunit **121 tests / 723 assertions**; phpcs **85
+    archivos, 0/0**; `composer audit --locked` sin advisories; stylelint exit 0;
+    `git diff --check` limpio; JSON/YAML válidos; sin secretos; sin plantillas PHP clásicas.
+  - Integración: **41 rutas entrantes** correctas (200/301/404), rutas `.ics` 200/410/404,
+    `debug.log` **0 bytes** tras navegación representativa, **sin cookies anónimas** en 11
+    superficies, sin analítica, `verify` con `missing: []`, 35 asignaciones de álbum,
+    idempotencia de `import`/`seed`/`convert`/`contact provision`.
+  - Nivel 4 hasta donde llega un navegador local: 19 rutas a 320 px y a 640 px (= zoom 200 %),
+    teclado, foco visible, diálogo modal con foco devuelto, y **diff de copy contra
+    `https://caminodeldharma.org`** (OWN-007) en 14 superficies.
+  - **12 deltas/hallazgos** registrados en la matriz § WU-10. Los dos que condicionan staging:
+    **D-01** `event_modality` vacío en los 9 eventos con modalidad (entorno local importado con
+    un payload anterior; el importador es create-missing-only y **no rellena** al reimportar —
+    el código está bien: extractor, importador y renderizador verificados), y **D-04** `/practica`
+    desborda 4 px a 320 px por el `core/audio` nativo, donde **producción no desborda**.
+  - `docs/operations/wordpress-manual-deployment.md` **v1.1 → v2.0**: provisión de staging
+    (instalación limpia, `blog_public 0`, paquete `es_CO`, remitente real), separación
+    código-ZIP / contenido-WP-CLI, orden `validate → import --apply → seed --apply → verify →
+    convert --apply` y después CF7 `plugin install → convert --apply → contact provision
+    --apply`, guard de producción, verificación posterior y rollback.
+
 ## Riesgos y hallazgos activos
 
 - Paridad repo↔Hostinger **verificada** (WU-06, delta 0). Re-verificar en el freeze pre-corte.
@@ -261,16 +289,35 @@ leyendo este archivo y verificándolo contra Git, sin historial de chat.
   preserva intacto; clasificar en el inventario si aparece referenciado.
 - `_config.yml` y `.nojekyll` son restos de GitHub Pages (desactivado 2026-07-28), fuera del
   ZIP; su retiro es una limpieza separada.
-- `test.yml` y el análisis Sonar de plugin+theme siguen `Unverified` **en esta sesión** porque no
-  se ha revisado el remoto; ver el hallazgo de WU-09 sobre la rama ya publicada.
+- **`test.yml` no se ha ejecutado nunca** (verificado en WU-10 con `gh run list`: los únicos runs
+  del repositorio son `pages-build-deployment` en `main`, de julio 2026). El motivo **no** es que
+  falte un push —la rama está publicada— sino que el workflow dispara solo en `push: branches:
+  [main]` y `pull_request`, y **no existe PR**. Obtener evidencia de CI exige abrir un PR o
+  ampliar los triggers: decisión del propietario. Sonar sigue `Unverified` (no revisado).
 - El entorno local ya usa la estructura definitiva `/blog/%postname%` (aplicada por el
   importador). Contenido demo del install local («Sample Page», «Hello world!») convive con
   el contenido importado; el staging partirá limpio. En staging: `import --apply` →
   `seed` → `convert --payload=<path> --apply` (la conversión es parte del pipeline
   documentado; el `--payload` solo hace falta si algún objeto se importó antes de que el
   copy de compartir viajara — en una importación limpia la meta ya viene del importador).
-- QA 4 visual solo parcial (escritorio home/eventos + breakpoint móvil); el pase completo
-  (320px, zoom 200%, teclado, lector de pantalla) y staging quedan `Unverified`.
+- **QA 4 ejecutado en WU-10** hasta donde llega un navegador local: 320 px, 640 px (= zoom 200 %),
+  teclado, foco visible y diff de copy contra producción publicada en 14 superficies. Siguen
+  `Unverified`: **lector de pantalla real**, PHP/Apache/HTTPS de staging, no indexabilidad de
+  staging y entrega real de CF7.
+- **D-01 (WU-10) — el entorno local está desalineado con el payload vigente.** `event_modality`
+  está vacío en los 9 eventos que tienen modalidad: ese contenido se importó con un payload
+  anterior al campo y el importador es **create-missing-only**, así que reimportar no lo rellena.
+  El código está bien (extractor, importador y renderizador verificados uno a uno). Implica que
+  **el QA local subestima la fidelidad** en esa fila y que **staging debe importarse desde cero**
+  (runbook §4b).
+- **D-04 (WU-10) — única regresión visual encontrada:** `/practica` desborda 4 px a 320 px por el
+  `<audio>` del bloque nativo `core/audio`; producción no desborda. Registrada, **no arreglada**
+  (fuera del alcance de WU-10).
+- **D-03 (WU-10)** — `/feed`, `/blog/feed` y `/comments/feed` responden 200 en WordPress y 404 en
+  producción, y no están en `docs/11-arbol-urls-final.md`. Superficie nueva indexable pendiente
+  de decisión del propietario.
+- **D-05 (WU-10)** — el lightbox nativo rotula en inglés porque el contenedor no puede instalar
+  `es_CO`. Ambiental; el runbook lo cubre y en staging queda `Unverified` hasta verificarlo.
 - **WU-08B cerrado.** Queda `Unverified` el pase con lector de pantalla real y todo lo que
   exige staging. La sección `site` del payload (defaults sociales, cabeza de `/eventos`, `@graph`
   del Inicio) **no tiene UI en wp-admin**: se edita por WP-CLI (`wp option get/update
@@ -371,8 +418,21 @@ Ver `.audit/fase3-validation-matrix.md` § BUG-001 (y § WU-09 para la unidad an
 
 ## Bloqueos
 
-- Ninguno. Siguiente implementación: **WU-10** (QA local completa y runbook de staging), sesión
-  aparte. Orden restante: WU-10 → corte.
+- Ninguno para el trabajo de repositorio. Siguiente hito: **crear la instancia de staging en
+  Hostinger** — exige autorización expresa del propietario (OWN-005). Orden restante:
+  staging → corte.
+
+## Archivos cambiados en WU-10
+
+Solo documentación y evidencia. **Sin cambios** en `static/`, en `wordpress/` (plugin y theme
+intactos), en `migration/payload.json` ni en `wordpress/.htaccess`. Ningún test nuevo: WU-10 no
+implementa comportamiento, lo verifica.
+
+- `docs/operations/wordpress-manual-deployment.md` (v1.1 → **v2.0**, runbook listo para staging)
+- `.audit/fase3-validation-matrix.md` (§ WU-10: niveles 1–4, CI, 12 deltas)
+- `docs/matriz-migracion-static-wordpress.md` (v1.4 → **v1.5**, los cinco entregables con
+  columnas separadas local / staging / producción)
+- `.audit/fase3-execution-state.md` (este archivo)
 
 ## Archivos cambiados en BUG-001
 
@@ -499,15 +559,15 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 ## Último commit verificado
 
-`80d752a` — última implementación de BUG-001 (QA local verde: unit 183, wp-phpunit 121, phpcs 0/0); el commit de documentación va justo después. La implementación anterior fue `9793a3c` (WU-09: unit 175, wp-phpunit 114). Baseline visual del theme:
+`e377c46` — cierre de BUG-001 y **punto de partida verificado de WU-10** (QA local re-ejecutada sobre este árbol: unit 183/1023, wp-phpunit 121/723, phpcs 0/0). WU-10 no añade commits de implementación, solo los 4 de documentación/evidencia (`e801c4a`, `c24023f`, `dfb5055` + este). La implementación anterior fue `9793a3c` (WU-09: unit 175, wp-phpunit 114). Baseline visual del theme:
 `d3b30f5` (docs/12 §8). Historial en `fase3-wordpress`: `5088e32` (WU-00) →
 `bfb6dc0`/`54cd09f` (WU-01) → `11237a1` → `b9c9eb8` (WU-02) → `81d7547` → `fe33b96` (WU-03)
 → `36d368b` → `d3b30f5` (WU-04) → `196ef78` → `e8c52c9` (WU-05) → `c270a37` →
 `e9f4234` (WU-06) → `044f7d6` → `6dffb0d` (WU-07) → `2bd733d` → `150d8b8` (gobernanza) →
 `c94635f` (WU-08A) → `5354449` → `d73fecd` (estado) → `e5dbab0` → `e14ef8e` → `3c3d513`
 (ajeno) → `9a00f97` → `081b2f8` → `f860561` (WU-08B) → `1492d01` → `0ee2e3a` →
-`9793a3c` → `78db8f7` (WU-09) → `6c8fdb6` → `23c1ae4` → `80d752a` (BUG-001) → commit de docs de
-cierre.
+`9793a3c` → `78db8f7` (WU-09) → `6c8fdb6` → `23c1ae4` → `80d752a` → `e377c46` (BUG-001) →
+`e801c4a` → `c24023f` → `dfb5055` → commit de estado (WU-10, sin push).
 
 ## Estado del entorno local
 
@@ -529,16 +589,27 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-BUG-001 está cerrado (checkpoint alcanzado; sin push ni despliegue).
+WU-10 está cerrado (checkpoint alcanzado; sin push ni despliegue). **Los gates de repositorio de
+FABLE5 §14 están cubiertos**; lo que falta es, por definición, evidencia de staging.
 
-**WU-10** (QA local completa y runbook de staging): **sesión propia siguiente**. Desplegar a la
-instancia Hostinger separada solo con autorización expresa (OWN-005). No mezclar con el corte
-final.
+Siguiente hito: **crear la instancia de staging en Hostinger y ejecutar el runbook v2.0**. Exige
+**autorización expresa del propietario en la sesión** (OWN-005); ninguna sesión anterior la
+concede. No mezclar con el corte final, que tiene su propio checklist.
 
-Pendiente que **no** bloquea la siguiente unidad pero sí el release: verificar en staging
-Hostinger que el formulario entrega en `caminodeldharma1@gmail.com` (WU-09 dejó la validación
-probada y la entrega `Unverified`). Si falla, corte con CF7 deshabilitado + WhatsApp/correo,
-registrado en matriz y checklist.
+Antes de abrir esa sesión conviene decidir tres cosas con el propietario:
+
+1. **D-01 / D-04** (matriz § WU-10): si `event_modality` y el desbordamiento de `/practica` a
+   320 px se corrigen antes de staging. D-01 se resuelve solo con una importación limpia; D-04
+   necesita un arreglo first-party de una línea en el CSS del bloque de audio.
+2. **D-03**: qué hacer con `/feed`, `/blog/feed` y `/comments/feed`, que responden 200 y no están
+   en `docs/11-arbol-urls-final.md`.
+3. **CI**: abrir un PR (o ampliar los triggers de `test.yml`) si se quiere evidencia de CI antes
+   del corte; y qué hacer con `3c3d513`, ya publicado.
+
+Pendiente bloqueante del **release** (no del corte): verificar en staging que el formulario
+entrega en `caminodeldharma1@gmail.com`. `wp_mail()` falla en local por falta de MTA y por el
+remitente `wordpress@localhost`, así que la entrega solo puede probarse allí. Si falla, corte con
+CF7 deshabilitado + WhatsApp/correo, registrado en matriz y checklist.
 
 ## Procedimiento de reanudación
 
