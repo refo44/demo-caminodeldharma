@@ -26,7 +26,7 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 ## 2. Estado actual (2026-08-30)
 
 | Aspecto | Estado |
-|---|---|
+| --- | --- |
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Puede ir atrasada; no asumir paridad. Comparar contra live (OWN-006/007) |
@@ -36,7 +36,7 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
 | **Auditoría de producción** | Completa (2026-07-19). Formulario sin backend real sigue pendiente hasta WordPress |
-| **Backlog de dueño (corte)** | **Cerrado** (v1.27): 0 abiertas, 22 decididas (OWN-001–OWN-021). OWN-020 / D-08: SEO de fichas de autor **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09: overflow Sangha dejado al corte; wrap post-corte ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). CF7 en el corte: OWN-018 / ADR 0041 |
+| **Backlog de dueño (corte)** | **Cerrado** (v1.27): 0 abiertas, 22 decididas (OWN-001–OWN-021 + sub-ID `OWN-009-img`). OWN-020 / D-08: SEO de fichas de autor **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09: overflow Sangha dejado al corte; wrap post-corte ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). CF7 en el corte: OWN-018 / ADR 0041 |
 | **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n) abiertas. **POST-008** decidido: wrap Sangha **después** de WP en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **No** se implementan en el corte |
 
 ---
@@ -48,6 +48,7 @@ eventos, mantener un cronograma, incrustar videos, compartir testimonios y edita
 código ni servidor para el contenido editorial.
 
 **El sitio NO tiene, por decisión explícita:**
+
 - Buscador
 - Área privada / registro de usuarios
 - Sistema de cursos
@@ -70,7 +71,7 @@ funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
-|---|---|---|
+| --- | --- | --- |
 | 0001 / 0002 | Estático = base definitiva; WordPress adapta, no rediseña | Paridad visual y de comportamiento |
 | 0003 | Sin PWA nunca | Web tradicional |
 | 0004 / 0005 | Git gobierna código; producción no se edita a mano | Trazabilidad |
@@ -107,6 +108,7 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 ## 5. Modelo de contenido y URLs
 
 **Objetos en el corte:**
+
 - Pages institucionales (home, comunidad, linaje, práctica, videos, meditación, galería, donaciones,
   contacto, blog archivo, privacidad)
 - CPT `event` (10) — todos con single público (ADR 0035)
@@ -120,7 +122,8 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`.
 
 **Árbol canónico (sin barra final):**
-```
+
+```text
 /
 /comunidad
 /linaje
@@ -198,6 +201,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 10. Alcance de Fase 3 — dentro y fuera
 
 **Dentro (corte):**
+
 - Reorg monorepo `static/` + `wordpress/`
 - Theme FSE + plugin de dominio
 - Extracción e import de contenido real (Pages, 10 eventos, 2 posts, autores, galería, media)
@@ -206,6 +210,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - Prompt de ejecución vigente: `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` (**v2.3**)
 
 **Fuera del corte:**
+
 - CPT `sangha`
 - Inglés / i18n (`POST-*`)
 - Buscador, analítica, HSTS, PWA
@@ -218,7 +223,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 11. Pendientes reales (no incongruencias de gobernanza)
 
 | Ítem | Estado |
-|---|---|
+| --- | --- |
 | Autorizar inicio de Fase 3 (WU-00/WU-01) | Decisión del propietario |
 | Desplegar `1.0.35` a Hostinger (incluye `/privacidad`) | Operativo |
 | Verificar paridad repo ↔ Hostinger | OWN-006/007 |
@@ -228,6 +233,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 | Inglés / i18n | `POST-001`–`POST-007` |
 
 Ya resuelto y no debe reabrirse como duda:
+
 - Política de barra final → **sin barra** (ADR 0008)
 - Embeds YouTube → `youtube-nocookie.com` (ya en el estático)
 - Gobernanza de copy → producción publicada (ADR 0040); `content-source/` eliminado
