@@ -67,6 +67,7 @@ final class Theme_SeoTest extends TestCase {
 
 		$this->assertStringContainsString( "\$tag['attr'] ?? array()", $seo );
 		$this->assertStringContainsString( 'false === $json', $seo );
+		$this->assertStringContainsString( 'JSON_HEX_TAG', $seo );
 	}
 
 	/**

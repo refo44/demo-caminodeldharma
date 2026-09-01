@@ -58,7 +58,10 @@ function camino_del_dharma_print_seo() {
 				break;
 
 			case 'jsonld':
-				$json = wp_json_encode( $tag['document'] ?? array(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+				$json = wp_json_encode(
+					$tag['document'] ?? array(),
+					JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP
+				);
 				if ( false === $json ) {
 					break;
 				}

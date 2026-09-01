@@ -6,11 +6,15 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-commit="$(git log -1 --format=%H -- static/)"
+commit="$(git rev-list -1 HEAD -- static/ 2>/dev/null || true)"
+if [ -z "$commit" ]; then
+  commit="$(git rev-parse HEAD)"
+  echo "extract-payload: no static/ history found (shallow clone?); using HEAD" >&2
+fi
 
 if command -v php >/dev/null 2>&1; then
   php tools/extract-payload.php "$commit"
 else
-  docker run --rm -v "$PWD":/repo -w /repo wordpress:cli-php8.3 \
+  docker run --rm -v "$PWD":/repo -w /repo wordpress:cli-2.12-php8.3 \
     php tools/extract-payload.php "$commit"
 fi
