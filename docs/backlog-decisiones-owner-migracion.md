@@ -6,7 +6,7 @@ Hay cinco bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
-| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 sin decisión nueva. |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-021 sin decisión nueva. |
 | **Pre-staging** (`D-08` / OWN-020) | SEO/AEO de fichas `/author/{slug}` | **Decidido 2026-09-01.** Implementación **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No reabrir noindex en singles (ADR 0037). |
 | **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n; wrap D-09) | i18n abiertas. **POST-008 decidido**, no implementar hasta WordPress en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **No bloquean** Fase 3, staging ni el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
