@@ -161,6 +161,37 @@ final class Demo_Content_RemovalTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the cleanup query from third-party `the_posts` filters
+	 * (and the other WP_Query result filters `suppress_filters` gates)
+	 * that would otherwise hide the objects this pass must unpublish or purge.
+	 */
+	public function test_installer_demo_query_ignores_third_party_query_filters() {
+		$demos = $this->given_a_wordpress_install_with_demo_content();
+
+		$hide = static function ( array $posts ): array {
+			return array_values(
+				array_filter(
+					$posts,
+					static function ( $post ) {
+						return 'hello-world' !== $post->post_name;
+					}
+				)
+			);
+		};
+		add_filter( 'the_posts', $hide );
+
+		$found = wp_list_pluck( cdd_core_installer_demo_posts(), 'ID' );
+
+		remove_filter( 'the_posts', $hide );
+
+		$expected = array( $demos['hello_world'], $demos['sample_page'], $demos['privacy_policy'] );
+		sort( $found );
+		sort( $expected );
+
+		$this->assertSame( $expected, $found );
+	}
+
+	/**
 	 * Creates the three objects a fresh WordPress install leaves behind and
 	 * points the privacy option at the draft, as the installer does.
 	 */

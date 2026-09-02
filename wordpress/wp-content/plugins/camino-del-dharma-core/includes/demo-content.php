@@ -37,7 +37,7 @@ function cdd_core_installer_demo_posts(): array {
 			'numberposts'      => -1,
 			'orderby'          => 'ID',
 			'order'            => 'ASC',
-			'suppress_filters' => false,
+			'suppress_filters' => true,
 		)
 	);
 
