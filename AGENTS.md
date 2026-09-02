@@ -73,11 +73,12 @@ before WU-10 (plugin v0.7.1 / theme v0.5.1): the generated file carries **one VE
 exclusive end, an event without a schedule keeps the published range entry and UID, and —
 since a Google/Outlook deep link carries a single entry — the dialog names the **next
 session**, a date the file contains, and says the file holds them all. The published static
-`.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31).
-**OWN-020 / D-08** decided (author entity SEO from published short copy + photos; singles stay
-indexable); **implementation pending**
-([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Then Hostinger staging
-(OWN-005) and cutover prep — see `.audit/fase3-execution-state.md`.
+`.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31). Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
+**OWN-035:** create Hostinger staging only after D-02, D-03, D-04 are on `main`
+([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
+**OWN-020 / D-08** implementation pending
+([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)); may follow staging (A2).
+CF7 delivery is a cutover gate (ADR 0045). See `.audit/fase3-execution-state.md`.
 
 ## Canonical content
 
@@ -124,8 +125,9 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   delta is applied **on the WordPress Page only** — static HTML stays untouched while the live form
   uses `action="#"`. Do not rewrite the rest of that notice, and keep the provisional disclaimer.
   Do not vendor CF7's code in Git, and do not add another antispam plugin without its own ADR.
-  Real delivery to `caminodeldharma1@gmail.com` must be proven in Hostinger staging before release:
-  `Pass (local)` is not enough.
+  Real delivery to `caminodeldharma1@gmail.com` must be proven before a CF7-on cutover
+  (ADR 0045 / OWN-033): client confirmation in the community inbox. `Pass (local)` is not enough.
+  Staging technical proof may use `refo44@gmail.com`. The public form never stays on personal Gmail.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
   v1.28). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. **OWN-020 / D-08** is decided (author entity SEO); implementation is pending
@@ -133,8 +135,9 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   singles and do not invent copy. **OWN-021 / D-09:** leave the Sangha 320px overflow at
   cutover; WordPress-only wrap **after** WP is production on the canonical domain
   ([issue #7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **OWN-022 / D-10:**
-  accept core `wp-emoji` `sessionStorage`; do not disable it. Later-phase rows
-  (`POST-*`) are i18n/English after cutover plus that wrap: do not implement them in Fase 3.
+  accept core `wp-emoji` `sessionStorage`; do not disable it. Pre-staging code:
+  D-02/D-03/D-04 (issues #10–#12) before Hostinger (OWN-035). Later-phase rows (`POST-*`)
+  including POST-008–010: do not implement them at cutover except as their gates say.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
   volume (ADR 0036). No numbered pagination at cutover (OWN-011).
 - Every event has a public single (ADR 0035). Past: no signup, no add-to-calendar, no `.ics`

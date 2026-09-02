@@ -1,11 +1,11 @@
 # Fase 3 — Estado de ejecución durable
 
-Artefacto de continuidad exigido por FABLE5 v2.6 §12. Otra sesión debe poder retomar el trabajo
-leyendo este archivo y verificándolo contra Git, sin historial de chat.
+Artefacto de continuidad. Otra sesión debe poder retomar el trabajo leyendo este archivo y
+verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraron (OWN-034).
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-08-31 (WU-10: QA local completa y runbook de staging) |
+| **Última actualización** | 2026-09-01 (cierre dueño WU-10: OWN-021–OWN-035, ADR 0044/0045; FABLE5 retirado) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |
@@ -595,39 +595,22 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
-WU-10 está cerrado (checkpoint alcanzado; sin push ni despliegue). **Los gates de repositorio de
-FABLE5 §14 están cubiertos**; lo que falta es, por definición, evidencia de staging.
+WU-10 está cerrado. Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 
-Siguiente hito: **crear la instancia de staging en Hostinger y ejecutar el runbook v2.0**. Exige
-**autorización expresa del propietario en la sesión** (OWN-005); ninguna sesión anterior la
-concede. No mezclar con el corte final, que tiene su propio checklist.
+**No crear Hostinger** hasta que D-02, D-03 y D-04 estén en `main` (OWN-035, A2). Entonces
+autorización expresa en sesión para crear staging e importar **una vez** en WP limpio.
+D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) puede ir después.
 
-**D-08 / OWN-020 (2026-09-01):** cerrado. Fichas `/author/{slug}` indexables con copy corto y
-fotos publicados. Implementación **pendiente**
-([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No es copy sin dueño ni
-`noindex`. Git: trabajar desde `main` (ADR 0043); no reanudar en `fase3-wordpress`.
+Pre-staging de código (PRs separados, TDD):
 
-**D-09 / OWN-021 (2026-09-01):** cerrado. Dejar el overflow 339 vs 320 px de
-`/blog/sangha-refugio-hiperconexion` en el corte (paridad live). Wrap WordPress-only **después**
-de que WP sea producción en `caminodeldharma.org`: POST-008 /
-[#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
+1. D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)
+2. D-03 — [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044)
+3. D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)
 
-**D-10 / OWN-022 (2026-09-01):** cerrado (A). `sessionStorage` de `wp-emoji` aceptado; no código.
+Seed: SSH + `~/cdd-extract/` (OWN-032); si falla, reabrir. CF7: gate ADR 0045 / OWN-033
+(`refo44@gmail.com` técnico; cliente confirma `caminodeldharma1@gmail.com`).
 
-Antes de abrir esa sesión conviene decidir tres cosas con el propietario:
-
-1. **D-01 / D-04** (matriz § WU-10): si `event_modality` y el desbordamiento de `/practica` a
-   320 px se corrigen antes de staging. D-01 se resuelve solo con una importación limpia; D-04
-   necesita un arreglo first-party de una línea en el CSS del bloque de audio.
-2. **D-03**: qué hacer con `/feed`, `/blog/feed` y `/comments/feed`, que responden 200 y no están
-   en `docs/11-arbol-urls-final.md`.
-3. **CI**: abrir un PR (o ampliar los triggers de `test.yml`) si se quiere evidencia de CI antes
-   del corte; y qué hacer con `3c3d513`, ya publicado.
-
-Pendiente bloqueante del **release** (no del corte): verificar en staging que el formulario
-entrega en `caminodeldharma1@gmail.com`. `wp_mail()` falla en local por falta de MTA y por el
-remitente `wordpress@localhost`, así que la entrega solo puede probarse allí. Si falla, corte con
-CF7 deshabilitado + WhatsApp/correo, registrado en matriz y checklist.
+Git: `main` + Conventional Branch (ADR 0043). No reanudar `fase3-wordpress`.
 
 ## Procedimiento de reanudación
 

@@ -1,14 +1,14 @@
 # Operaciones — Despliegue manual WordPress (acotado)
 
-Runbook durable exigido por FABLE5 v2.4 §12. **Ningún despliegue está autorizado por este
+Runbook durable (OWN-034: ya no hay prompt FABLE5). **Ningún despliegue está autorizado por este
 documento**: cada escritura externa (staging u hosting) requiere autorización expresa del
 propietario en la sesión vigente (OWN-005, ADR 0015).
 
 | | |
 | --- | --- |
-| **Versión** | 2.0 |
-| **Fecha** | 2026-08-31 |
-| **Estado** | Vigente — staging aún no creado. Ampliado en WU-10 a runbook listo para staging (provisión, orden WP-CLI, CF7, guards, rollback) |
+| **Versión** | 2.1 |
+| **Fecha** | 2026-09-01 |
+| **Estado** | Vigente — staging **no** se crea hasta D-02/D-03/D-04 en `main` (OWN-035) más «go» del propietario |
 
 ## Alcance
 
@@ -45,6 +45,15 @@ disponible en el servidor, o el pipeline se ejecuta desde una copia local con `-
 
 ## 2. Provisión del entorno de staging (antes de subir nada)
 
+**Gate OWN-035:** no crear esta instancia hasta que D-02, D-03 y D-04 estén en `main`
+([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
+y el propietario diga **go** en sesión.
+
+**Seed (OWN-032):** el payload y `static/` viven en SSH, directorio privado `~/cdd-extract/`
+**fuera** de `public_html`. File Manager no es el fallback automático. Si SSH queda bloqueado,
+reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** usa
+`--confirm-production`. Probar dry-run → `--apply` → segundo `--apply` = 0 created.
+
 1. Crear la instancia Hostinger separada, **sin dominio custom** (subdominio
    `*.hostingersite.com`).
 2. Instalar WordPress limpio. **Requisito duro: el sitio debe partir vacío.**
@@ -56,8 +65,9 @@ disponible en el servidor, o el pipeline se ejecuta desde una copia local con `-
 
    *Por qué es un requisito y no una recomendación:* en el entorno local la entrada demo
    «Hello world!» aparece en la sección «Del blog» del Inicio y en `/blog`, y **desplaza a
-   una entrada real** («Estamos conectados, pero seguimos solos»). Es la única diferencia de
-   contenido del Inicio frente a producción publicada (WU-10, matriz § WU-10 D-02).
+   una entrada real** («Estamos conectados, pero seguimos solos»). OWN-024 / D-02: cero demo
+   en staging y producción. Código first-party pendiente
+   ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
 
 3. **Marcar el sitio como no indexable** mientras sea staging:
 
@@ -78,8 +88,8 @@ disponible en el servidor, o el pipeline se ejecuta desde una copia local con `-
    WordPress sirve en inglés las cadenas de núcleo que el theme no controla. En el entorno
    local (sin salida a WordPress.org) el lightbox nativo de `/galeria` rotula
    «Close / Previous / Next» y `aria-label="Enlarged images"` sobre una página en español
-   (WU-10, matriz § WU-10 D-05). Tras instalar el paquete hay que **volver a verificar esas
-   cadenas**: hasta entonces quedan `Unverified` en staging.
+   (WU-10, matriz § WU-10 D-05 / OWN-027). Tras instalar el paquete hay que **volver a verificar esas
+   cadenas**. Docker local puede quedarse en inglés.
 
 5. Fijar la zona horaria y comprobar PHP:
 
@@ -165,9 +175,11 @@ eventos que tienen modalidad, aunque el payload actual sí la trae y tanto el im
 el renderizador la manejan bien. Por eso **producción publica una fila «Modalidad» que el
 WordPress local no muestra** (WU-10, matriz § WU-10 D-01).
 
-Regla operativa: **staging se importa una sola vez, desde cero, con el payload vigente.** Si
-hay que corregir contenido ya importado, se edita en wp-admin o se borra el objeto y se
-reimporta — nunca se confía en que un segundo `import --apply` lo arregle.
+Regla operativa (OWN-023): **staging se importa una sola vez, desde cero, con el payload vigente.**
+No hay backfill de `event_modality`. Si el entorno queda a medias, la opción barata es
+reinstalar WordPress limpio, no forzar un update. Si hay que corregir contenido ya importado,
+se edita en wp-admin o se borra el objeto y se reimporta — nunca se confía en que un segundo
+`import --apply` lo arregle.
 
 ---
 
@@ -185,10 +197,14 @@ wp cdd-core contact provision --apply
 de `/privacidad` todavía describe un formulario que no envía (ADR 0041 punto 3). Ese aviso lo
 actualiza `convert --apply`; de ahí el orden.
 
-Después, **probar el envío real** a `caminodeldharma1@gmail.com` desde staging y registrar el
-resultado. Si falla, el corte puede seguir con CF7 deshabilitado más WhatsApp/correo — el
-bloque del theme ya rinde ese estado. Es un **fallo operativo, no un gate jurídico**
-(ADR 0026/0041).
+Después, **probar el envío** (ADR 0045 / OWN-033):
+
+1. Prueba técnica de staging: recepción en `refo44@gmail.com` (no es `Pass`; solo prueba MTA/CF7/Hostinger).
+2. **Gate del corte con CF7 on:** el cliente confirma un mensaje sintético en
+   `caminodeldharma1@gmail.com`.
+3. El formulario público **nunca** queda apuntando al Gmail personal.
+4. Si staging no entrega, **no** se corta con CF7 encendido (ya no es el default de ADR 0041 §5).
+   Esperar, reabrir OWN-033, o acordar por escrito un corte con CF7 apagado.
 
 ---
 
@@ -229,7 +245,7 @@ Repetir en staging, con etiqueta `Pass` (no `Pass (local)`):
 - comportamiento real de PHP/Apache/HTTPS y de las reglas del `.htaccess` (un salto por regla);
 - **no indexabilidad del staging** (`blog_public 0`);
 - cadenas del lightbox en español tras instalar `es_CO` (§2.4);
-- entrega real de CF7 (§5);
+- entrega de CF7: prueba técnica (§5) y, para el corte, confirmación del cliente (ADR 0045);
 - ausencia de cookies anónimas y de peticiones de seguimiento.
 
 `Pass (local)` nunca sustituye a ninguna de estas: no prueba PHP/Apache/HTTPS ni el correo de

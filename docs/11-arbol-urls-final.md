@@ -1,6 +1,6 @@
 # Camino del Dharma — Árbol de URLs
 
-**Geografía oficial del sitio**
+Geografía oficial del sitio.
 
 Define todas las rutas del sitio. Traducción directa de 03 (modelo de contenido), 04 (mapa de pantallas) y 05 (arquitectura de navegación). **Si una URL no está aquí, no existe.**
 
@@ -17,7 +17,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 ## 2. Páginas fijas
 
 | Función | Slug |
-|---------|------|
+| --- | --- |
 | Inicio | `/` |
 | La comunidad | `/comunidad/` |
 | El linaje | `/linaje/` |
@@ -34,7 +34,7 @@ Idioma: español (Colombia). Sin prefijo de idioma por defecto. Si se añade mul
 ## 3. Eventos (CPT)
 
 | Tipo | URL |
-|------|-----|
+| --- | --- |
 | Listado | `/eventos/` |
 | Single | `/eventos/{slug}/` |
 
@@ -45,14 +45,14 @@ El listado enlaza cada evento con ficha propia hacia `/eventos/{slug}/` (título
 ### 3.1. Sanghas (si se implementa CPT)
 
 | Tipo | URL |
-|------|-----|
+| --- | --- |
 | Listado | `/sanghas/` |
 | Single | `/sanghas/{slug}/` |
 
 ### 3.2. Blog — tags (`post_tag`)
 
 | Tipo | URL |
-|------|-----|
+| --- | --- |
 | Archivo de tag | `/blog/tag/{slug}/` |
 
 Esta URL **sí existe** (no es 404), a diferencia de `event_city`/`event_type` que no tienen archivo.
@@ -67,7 +67,7 @@ archivo su propio `h1` (docs/19 §9).
 
 ## 4. Árbol completo
 
-```
+```text
 /
 /comunidad/
 /linaje/
@@ -87,6 +87,7 @@ archivo su propio `h1` (docs/19 §9).
 /author/                   (archivo de fichas; noindex hasta volumen — ADR 0037)
 /privacidad/               (publicada; enlace en el pie de todas las páginas; ADR 0039)
 ```
+
 *(Si se implementa CPT sangha: `/sanghas/`, `/sanghas/{slug}/`.)*
 
 ---
@@ -94,9 +95,10 @@ archivo su propio `h1` (docs/19 §9).
 ## 5. Estados sin URL propia
 
 | Estado | Dónde ocurre |
-|--------|--------------|
+| --- | --- |
 | Sin eventos vigentes | En `/eventos/` se muestra mensaje amable; el ítem Eventos en el menú puede ocultarse. |
-| 404 | Cualquier URL fuera del árbol. No existe ruta pública `/404/`; WordPress sirve la plantilla `404.php` para rutas no definidas aquí. Referencia interna de diseño: estado 404, no URL del árbol. |
+| 404 | Cualquier URL fuera del árbol. No existe ruta pública `/404/`; WordPress sirve `templates/404.html` para rutas no definidas aquí. Referencia interna de diseño: estado 404, no URL del árbol. |
+| Feeds nativos (`/feed`, `/blog/feed`, `/comments/feed`, alias) | **404** en el corte (ADR 0044 / OWN-025). No están en el árbol. RSS futuro: POST-010. |
 
 ---
 
@@ -106,7 +108,7 @@ Plantillas de bloques (`templates/*.html`), no PHP — theme de bloques / Full S
 Ver `docs/12-theme-file-structure.md` §5–§6 para el árbol completo.
 
 | Ruta | Plantilla |
-|------|-----------|
+| --- | --- |
 | `/` | `templates/front-page.html` |
 | `/comunidad/` | `templates/page-comunidad.html` |
 | `/linaje/` | `templates/page-linaje.html` |
@@ -139,4 +141,4 @@ theme no publica la ruta: hace falta el objeto WordPress y rewrite (ADR 0032). C
 
 ---
 
-**Versión:** 1.7 — `/privacidad` publicada (ADR 0039). El listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz: `matriz-migracion-static-wordpress.md`.
+**Versión:** 1.8 — feeds nativos **404** en el corte (ADR 0044 / OWN-025). `/privacidad` publicada (ADR 0039). El listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz: `matriz-migracion-static-wordpress.md`.

@@ -16,9 +16,10 @@ Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **ST
 Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El archivo
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.28) queda
 como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
-pendiente. OWN-021 / D-09: overflow Sangha dejado al corte. OWN-022 / D-10: `wp-emoji`
-`sessionStorage` aceptado. Las filas `POST-*` son fases
-posteriores (i18n + wrap POST-008); no bloquean el corte.
+pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09:
+overflow Sangha dejado al corte. OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado.
+Pre-staging: D-02/D-03/D-04 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
+antes de Hostinger (OWN-035). `POST-008`–`010` son posteriores al corte.
 
 ---
 
@@ -69,10 +70,10 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 | 9 | Buddhismo para tiempos de cansancio | PLANNED `/eventos/buddhismo-tiempos-cansancio` | finalizado | `evento-buddhismo-tiempos-cansancio.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 | 10 | 6.º Encuentro Nacional Buddhista – 2025 | PLANNED `/eventos/6-encuentro-nacional-2025` | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 
-Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la misma
-ítem 1 (`event_featured`). Extraer una sola vez.
+Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la
+misma fila `#1` (`event_featured`). Extraer una sola vez.
 
-Calendario de septiembre 2026: celdas hardcodeadas que apuntan al ítem 1 y a meditación semanal.
+Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
 La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
 
 `.ics`: 2 archivos en disco. Destino WP: **generados**, no Media Library (OWN-009). Encuentro 2026 **RETIRE** (OWN-012). Círculos KEEP hasta que `hoy >` su fecha de fin; entonces 410 y se borra el huérfano (OWN-013). Pausa Cali **sin** `.ics`.

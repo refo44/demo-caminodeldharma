@@ -89,8 +89,8 @@ de WordPress, no como theme clásico PHP.
 **Riesgos:**
 
 - Reescribe la arquitectura de archivos documentada en `docs/12-theme-file-structure.md` (plantillas
-  PHP → plantillas de bloques) y las secciones del master prompt de Fase 3 que asumían theme clásico;
-  ambos se actualizan junto con este ADR.
+  PHP → plantillas de bloques). El master prompt FABLE5 que asumía theme clásico se actualizó
+  junto con este ADR y más tarde se retiró (OWN-034); el registro durable es este ADR y docs/12.
 - Global Styles permite cambios post-lanzamiento; hace falta una captura de referencia del `theme.json`
   inicial como línea base de paridad visual para QA futura (ver Trabajo futuro).
 - Requiere una versión de WordPress con soporte completo de theme de bloques (WP 6.x); ya es la
@@ -125,4 +125,3 @@ clásico PHP como puente. Eso es exactamente esta decisión; no la altera. No im
   1 de esa decisión), no un page builder de terceros; los vetados (Elementor, Divi) siguen vetados.
 - ADR [0014](0014-monorepo-static-wordpress.md) — implementaciones estático/WordPress ya separadas.
 - `docs/12-theme-file-structure.md`, `docs/14-css-architecture.md`, `docs/02-identidad-corporativa.md`
-- `docs/FABLE5-Fase3-WordPress-Master-Prompt-v1.md` §7.2, §9

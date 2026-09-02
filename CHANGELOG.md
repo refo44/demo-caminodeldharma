@@ -1,6 +1,6 @@
 # Changelog
 
-<!-- markdownlint-disable MD024 MD060 -->
+<!-- markdownlint-disable MD024 -->
 
 Historial de versiones publicadas en producción. Hostinger no conserva un registro de despliegues cuando se sube un ZIP manualmente; este archivo es la referencia canónica de qué está en vivo.
 
@@ -12,23 +12,19 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
-### Gobernanza — D-10 / OWN-022: `sessionStorage` de `wp-emoji` aceptado
+### Gobernanza — cierre WU-10 (OWN-021–OWN-035, ADR 0044/0045)
 
-El propietario acepta (2026-09-01, A) la clave `wpEmojiSettingsSupports` del núcleo. No es
-cookie ni analítica; no se desactiva el script. Backlog v1.28.
-
-### Gobernanza — D-09 / OWN-021: overflow Sangha en el corte; wrap post-corte (POST-008)
-
-El propietario deja el desbordamiento 339 vs 320 px de `/blog/sangha-refugio-hiperconexion`
-(paridad con producción). Wrap **solo en WordPress** después de que WP sirva
-`caminodeldharma.org`: [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). Backlog v1.27.
+Registro 2026-09-01: D-01–D-12, seed Hostinger, correo CF7, FABLE5, timing de staging. Código
+pre-staging: issues [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12).
+Backlog v1.28. Los prompts FABLE5 se retiran de `docs/` (OWN-034).
 
 ### Gobernanza — D-08 / OWN-020: SEO de fichas de autor (pendiente de implementar)
 
 El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las
 fichas reutilizan copy corto y fotos ya publicados; no se inventa texto ni se duplica el ensayo
 largo de `/comunidad`. Código **no** entra en este registro: cola
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5).
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Cerrado en v1.26;
+el backlog vigente es v1.28.
 
 ### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
 
@@ -522,7 +518,7 @@ El Maestro Zheng Gong aparecía **8 veces como `Person` suelta con tres nombres 
 La tabla de evidencia procedía del análisis del 19–20 de julio, **anterior al archivo de encuentros**, y estaba desfasada en las cuatro ciudades. Rehecha desde el inventario completo de `/eventos` (9 tarjetas):
 
 | Ciudad | Encuentros presenciales documentados | Decía antes |
-|---|---|---|
+| --- | --- | --- |
 | **Cali** | **2** — 6.º Encuentro Nacional (16–18 ago 2025, 3 días) · Pausa Profunda (15 feb 2026) | «fundación 2012» — dato falso |
 | **Bogotá** | **2** — Vesak 2026 (9 may) · Festival Calma en la Ciudad (28 jun) | «**sin evidencia** en el sitio» |
 | **Medellín** | **2** — «Ansiedad, agotamiento…» (22 may) · Pausa Profunda (23 may) | «solo mención en Facebook» |

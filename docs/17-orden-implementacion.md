@@ -8,15 +8,21 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 | | |
 | --- | --- |
-| **Versión** | 3.10 |
-| **Fecha** | 2026-08-31 |
+| **Versión** | 3.11 |
+| **Fecha** | 2026-09-01 |
 | **Estado** | Vigente |
+
+### Cambios principales (3.11)
+
+- Cierre WU-10 (OWN-021–OWN-035, ADR 0044/0045). Pre-staging: D-02/D-03/D-04 en `main` antes de
+  Hostinger (OWN-035). Entrega CF7 = gate del corte (0045). Feeds nativos 404 (0044). Prompts
+  FABLE5 retirados (OWN-034). Backlog v1.28.
 
 ### Cambios principales (3.10)
 
 - ADR 0041 / OWN-018: Contact Form 7 es elegible en el corte sin esperar asesoría legal. El
   disclaimer de `/privacidad` basta para lanzar. En WordPress se actualizan solo los párrafos del
-  formulario. FABLE5 v2.4.
+  formulario.
 
 ### Cambios principales (3.9)
 
@@ -89,9 +95,10 @@ Este documento define el orden oficial de implementación, validación, migraci�
 
 ---
 
-## Estado actual del proyecto (2026-08-29)
+## Estado actual del proyecto (2026-08-29, snapshot)
 
-Tres tiempos (no mezclar):
+Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado vigente está en
+«Estado actual (2026-09-01)» más abajo y en `.audit/fase3-execution-state.md`.
 
 | Tiempo | Hecho |
 | ------ | ----- |
@@ -109,6 +116,13 @@ Tres tiempos (no mezclar):
 | **Auditoría producción** | **COMPLETE** (2026-07-19) — ver § Fase 2.75 y `.audit/` |
 | **GA4** | **Descartado de forma definitiva** (ADR 0019) |
 | **HSTS** | Aplazado (ADR 0020) |
+
+### Estado actual (2026-09-01)
+
+Producción sigue **estática** en `https://caminodeldharma.org`. El repo es monorepo (`static/` +
+`wordpress/`). Plugin `camino-del-dharma-core` **0.7.1** y theme FSE `camino-del-dharma` **0.5.1**.
+WU-00–WU-10 y BUG-001 **cerrados** en Git. Staging Hostinger **no** creado: primero D-02/D-03/D-04
+en `main` (OWN-035). Continuidad: `.audit/fase3-execution-state.md`.
 
 La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La versión de código vigente está en `VERSION`.
 
@@ -455,7 +469,8 @@ Orden en `.audit/implementation/waves.md`:
 6. **WAVE-6** — Pre-render galería (0010)
 
 **Arranque histórico recomendado por la auditoría:** TASK-0004 → TASK-0005 → TASK-0001 → TASK-0002.
-La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en FABLE5 v2.4.
+La recomendación HSTS fue sustituida por ADR 0020; el orden vigente de Fase 3 está en este
+documento (§ work units) y en `.audit/fase3-execution-state.md`.
 
 Implementar en sesiones separadas; cada tarea incluye criterios de aceptación, validación y rollback. Respetar `conflict-map.md` (no editar `.htaccess`, `contacto/index.html` ni las 14 páginas HTML en paralelo dentro del mismo conflict group).
 
@@ -522,9 +537,11 @@ camino-del-dharma/
 ├── README.md, CHANGELOG.md, VERSION, package.json
 ```
 
-**Estado actual (Fase 2):** HTML en la **raíz** del repo (= producción). La carpeta `static/` se crea al **iniciar Fase 3**.
+**Estado actual (2026-09-01):** HTML desplegable en `static/` (ADR 0014). WordPress first-party
+en `wordpress/`. Producción Hostinger sigue siendo el estático hasta el corte.
 
-> **Nota:** Hasta el inicio de la **Fase 3**, el contenido HTML permanece en la **raíz** del repositorio. La reorganización a `static/` forma parte del primer paso de Fase 3 y **no debe adelantarse**.
+> **Nota histórica:** Hasta WU-01 el HTML vivía en la **raíz** del repositorio. La reorganización
+> a `static/` ya ocurrió; no revertirla.
 
 **No versionar en Git:** core WordPress, `wp-config.php`, credenciales, BD, cachés, backups, `uploads/` de producción.
 
@@ -619,15 +636,18 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
    la próxima sesión y lo dice. El `.ics` estático de la sola bienvenida no se copió ni se tocó.
 9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
    solo con autorización expresa (OWN-005).
-9b. **D-08 / OWN-020 (después de WU-10, pendiente):** SEO/AEO de `/author/{slug}` con copy corto
-    y fotos publicados. Decidido; **no implementado**. Issue
-    [#5](https://github.com/refo44/demo-caminodeldharma/issues/5). TDD (ADR 0038). No `noindex`
-    en singles. No dummy.
+9b. **D-08 / OWN-020 (pendiente):** SEO/AEO de `/author/{slug}`. Issue
+    [#5](https://github.com/refo44/demo-caminodeldharma/issues/5). **A2:** no bloquea el primer
+    import de staging. TDD (ADR 0038). No `noindex` en singles. No dummy.
 9c. **D-09 / OWN-021:** overflow 339 vs 320 px en `/blog/sangha-refugio-hiperconexion` **dejado**
     en el corte (paridad live). Wrap WordPress-only **post-corte** (POST-008,
     [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) cuando WP ya sirva
     `caminodeldharma.org`.
 9d. **D-10 / OWN-022:** `sessionStorage` de `wp-emoji` **aceptado** (A). No desactivar. No issue.
+9e. **Pre-staging (OWN-035):** D-02 [#10](https://github.com/refo44/demo-caminodeldharma/issues/10),
+    D-03 [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044), D-04
+    [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) en `main` **antes** de crear
+    Hostinger. Seed OWN-032. Correo ADR 0045 / OWN-033. FABLE5 retirado (OWN-034).
 10. **Corte final:** ejecutar
     [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); archivar el estático en tag.
 

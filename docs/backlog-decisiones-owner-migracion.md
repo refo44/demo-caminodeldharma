@@ -6,9 +6,9 @@ Hay cinco bloques que no se mezclan:
 
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
-| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019, OWN-021 ni OWN-022 sin decisión nueva (OWN-020 en Pre-staging). |
-| **Pre-staging** (`D-08` / OWN-020) | SEO/AEO de fichas `/author/{slug}` | **Decidido 2026-09-01.** Implementación **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No reabrir noindex en singles (ADR 0037). |
-| **Fases posteriores** (`POST-*`) | Trabajo **después** del corte (p. ej. inglés / i18n; wrap D-09) | i18n abiertas. **POST-008 decidido**, no implementar hasta WordPress en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **No bloquean** Fase 3, staging ni el corte. |
+| **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 ni OWN-021–OWN-035 sin decisión nueva (OWN-020 en Pre-staging). |
+| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01.** D-02/D-03/D-04 **pendientes de código**; D-08 **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Staging **después** de D-02/03/04 en `main` (OWN-035); D-08 puede ir después (A2). |
+| **Fases posteriores** (`POST-*`) | Después del corte (i18n; wrap Sangha; conteo álbum admin; RSS) | i18n abiertas. **POST-008–010 decididos.** No implementan el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 | **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
 
@@ -80,6 +80,19 @@ Ninguna.
 | OWN-020 | 2026-09-01 | **D-08 cerrado.** Las fichas `/author/{slug}` siguen **indexables** (ADR 0037). No hay meta en el estático porque esas URLs no existían: reutilizar **copy corto y fotos ya publicados**, no inventar, no duplicar el ensayo largo del fundador (queda en `/comunidad`, KEEP). Zheng Gong: description JSON-LD + `assets/images/fundador/foto-biografia-fundador.jpg`. Comunidad: primer párrafo de «Quiénes somos» o la meta de `/comunidad` + `assets/images/comunidad-linaje/comunidad-quienes-somos.jpg`. En ambas, enlace a `/comunidad` para el texto largo. Código **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). |
 | OWN-021 | 2026-09-01 | **D-09 cerrado: dejar el desbordamiento en el corte.** `/blog/sangha-refugio-hiperconexion` a 320 px mide 339 px; **producción publicada desborda igual**. No se toca `static/`. No se «arregla» solo en WordPress antes del corte (inventaría un delta frente al live). Wrap **después** del corte, WordPress ya en `caminodeldharma.org`: POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). |
 | OWN-022 | 2026-09-01 | **D-10 cerrado: A.** Aceptar `sessionStorage` `wpEmojiSettingsSupports` del `wp-emoji` del núcleo. No es cookie, no es analítica (ADR 0019 intacto), no hay petición a `s.w.org` en navegadores modernos. Delta frente al estático (cero almacenamiento). **No** desactivar el script. Sin issue: no hay código. |
+| OWN-023 | 2026-09-01 | **D-01 cerrado.** Staging se importa **una vez**, instalación limpia. El importador sigue create-missing-only; **no** backfill de `event_modality`. Dump local solo cuando WP sea producción. |
+| OWN-024 | 2026-09-01 | **D-02 cerrado.** Sin «Hello world!», Sample Page, Privacy Policy demo, dummy, fake ni `_cdd_fixture` en staging/producción. Solo contenido de producción. Código **pendiente** ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)). |
+| OWN-025 | 2026-09-01 | **D-03 cerrado.** Feeds nativos **404** reales; sin `rel=alternate` RSS. ADR 0044. Código **pendiente** ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)). RSS futuro: POST-010. |
+| OWN-026 | 2026-09-01 | **D-04 cerrado.** Arreglar el overflow de `/practica` a 320 px (`core/audio`) **antes** de staging. Producción no desborda. Código **pendiente** ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)). No mezclar con D-09. |
+| OWN-027 | 2026-09-01 | **D-05 cerrado: A.** Staging: `es_CO` + lightbox en español. Docker local puede seguir en inglés. No es bug de código. |
+| OWN-028 | 2026-09-01 | **D-06 cerrado: A.** Aceptar comillas `wptexturize` (`«…»` vs rectas del estático). |
+| OWN-029 | 2026-09-01 | **D-07 cerrado: A.** Aceptar `core/audio` sin la línea «Tu navegador no permite…». |
+| OWN-030 | 2026-09-01 | **D-11 cerrado: B.** El `count = 0` de álbumes en wp-admin se deja en el corte. Después de WP en el dominio canónico: conteo real o nota de admin. POST-009 / [#13](https://github.com/refo44/demo-caminodeldharma/issues/13). |
+| OWN-031 | 2026-09-01 | **D-12 cerrado: A.** Conservar `lang="es-CO"`. Delta deliberado frente a `es` del estático. |
+| OWN-032 | 2026-09-01 | **Seed en Hostinger: A**, con reapertura. SSH + `~/cdd-extract/` (payload + `static/`, **fuera** de `public_html`). Si hay bloqueo, reconsiderar **B** (`wp --ssh` desde el portátil). File Manager solo no es el fallback automático. Staging ≠ `--confirm-production`. Probar dry-run → apply → segundo apply = 0 created. |
+| OWN-033 | 2026-09-01 | **Correo CF7: B** (ADR 0045). El corte con CF7 **on** espera recepción en `caminodeldharma1@gmail.com` (el cliente confirma). Prueba técnica de staging: `refo44@gmail.com`. El form público no queda en el Gmail personal. |
+| OWN-034 | 2026-09-01 | **FABLE5: B.** Borrar los dos prompts de `docs/` **antes de staging** (no archivar). Docs numerados (`06`/`09`/`10` y el resto): higiene **después del corte** (opción 4); lista exacta aún abierta. |
+| OWN-035 | 2026-09-01 | **Timing staging: A + A2.** Crear Hostinger **después** de D-02, D-03 y D-04 en `main`. Importación **una vez** en WP limpio. D-08 **puede** ir después (create-missing-only no rellenará bios/`seo` ya creados). |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -93,7 +106,10 @@ Pregunta **cerrada**. El código no está. No tratar D-08 como copy sin dueño n
 
 | ID | Decisión | Issue | Estado |
 | -- | -------- | ----- | ------ |
-| D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). No dummy / `_cdd_fixture`. |
+| D-02 | OWN-024: sin contenido demo del install | [#10](https://github.com/refo44/demo-caminodeldharma/issues/10) | Pendiente de implementar. En `main` **antes** de staging (OWN-035). |
+| D-03 | OWN-025 / ADR 0044: feeds 404 | [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) | Pendiente de implementar. En `main` **antes** de staging. |
+| D-04 | OWN-026: `/practica` sin overflow a 320 px | [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) | Pendiente de implementar. En `main` **antes** de staging. |
+| D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). **A2:** no bloquea el primer import de staging. |
 
 Copy y fotos a reutilizar (producción publicada, OWN-007):
 
@@ -123,7 +139,9 @@ y **no** forman parte del corte. El inglés no se implementa «por si acaso».
 
 | ID | Fecha | Decisión | Issue |
 | -- | ----- | -------- | ----- |
-| POST-008 | 2026-09-01 | **Después del corte**, con WordPress ya sirviendo producción en **`https://caminodeldharma.org`**, envolver/partir la URL larga de `/blog/sangha-refugio-hiperconexion` **solo en el theme WordPress** (320 px sin scroll horizontal). Hasta entonces: paridad con el estático live (OWN-021 / D-09). No editar `static/` para esto. | [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
+| POST-008 | 2026-09-01 | Wrap WordPress-only de la URL larga en `/blog/sangha-refugio-hiperconexion` **después** de WP en `caminodeldharma.org` (OWN-021 / D-09). | [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
+| POST-009 | 2026-09-01 | Conteo real (o nota) de `gallery_album` en wp-admin **después** de WP en el dominio canónico (OWN-030 / D-11). | [#13](https://github.com/refo44/demo-caminodeldharma/issues/13) |
+| POST-010 | 2026-09-01 | Un RSS público **no** entra en el corte (ADR 0044). Si más adelante se publica, hace falta decisión + `docs/11` + ledger. | — |
 
 ## Defectos conocidos — Abiertos
 
@@ -202,15 +220,12 @@ corte. Son restricciones para UI wp-admin futura. Staging no construye metaboxes
 corto y fotos ya publicados; no noindex; implementación pendiente
 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 
-**v1.27 (2026-09-01):** OWN-021 / D-09 **cerrado** (dejar overflow en el corte). POST-008:
-wrap WordPress-only **después** de que WP sea producción en el dominio canónico
-([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
+**v1.28 (2026-09-01):** Cierre WU-10 en chat: OWN-021–OWN-035, ADR 0044/0045, POST-008–010.
+Pre-staging de código: D-02/D-03/D-04 (#10–#12) antes de Hostinger; D-08 A2. FABLE5 se borra
+en este registro (OWN-034).
 
-**v1.28 (2026-09-01):** OWN-022 / D-10 **cerrado (A).** `sessionStorage` de `wp-emoji` aceptado;
-no desactivar; no es cookie ni analítica.
-
-**Versión:** 1.28 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 23 decididas.
-Pre-staging: 1 decidida, implementación pendiente (`D-08` / OWN-020).
-Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 1 decidida (`POST-008`).
+**Versión:** 1.28 · **Fecha:** 2026-09-01 · **Estado:** Fase 3: 0 abiertas · 36 decididas.
+Pre-staging: 4 decididas, código pendiente (D-02, D-03, D-04, D-08).
+Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
 Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).

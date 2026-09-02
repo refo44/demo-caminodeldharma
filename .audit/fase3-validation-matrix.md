@@ -1,6 +1,6 @@
 # Fase 3 — Matriz de validación
 
-Evidencia QA por work unit (FABLE5 v2.4 §11). Estados permitidos: `Unverified`,
+Evidencia QA por work unit (niveles 1–4; histórico FABLE5 §11). Estados permitidos: `Unverified`,
 `Pass (local)`, `Pass`, `Fail`. `Pass (local)` nunca prueba comportamiento
 PHP/Apache/HTTPS/mail de Hostinger.
 
@@ -258,7 +258,7 @@ gates WU-02…WU-06 antes de tocar nada). Sin PHP/Composer nativos: comandos PHP
 | QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings**; `npm run lint:css` verde en ambos árboles (`custom-property-pattern` ampliado a nombres `--wp--*`); `git diff --check` limpio; sin secretos | OK | Pass (local) |
 | QA 3: conversión aplicada en el entorno local | `wp cdd-core migrate convert` dry-run → pending 3; `--apply` → converted `inicio`,`galeria`,`comunidad`; 2.º `--apply` → 0 (idempotente). Contenido: aside y cards dinámicos, 3 galerías nativas con IDs reales de la biblioteca (25/5/5), 2 enlaces OWN-016 | OK | Pass (local) |
 | QA 3: rutas HTTP entrantes (curl) | **200**: `/`, 8 pages, `/practica/videos`, `/practica/meditacion-semanal-en-linea`, `/eventos`, singles muestreados (vigente + 2 finalizados), `/galeria` + 2 términos, `/blog` + single, `/author` + 2 fichas, `.ics` vigente. **410** `.ics` finalizado. **404 real** ruta inexistente. **301** `/eventos/` → `/eventos` | OK | Pass (local) |
-| QA 3: render de las vistas | Home: aside dinámico con «Septiembre – octubre 2026, Bogotá y Cali» (idéntico a producción) + cards del blog; `/eventos`: título «Septiembre 2026», grid con 7 días de evento + lunes de práctica, secciones Próximos/Realizados, compactas con badge; single vigente con tipo/meta/CTA y finalizado **sin** CTA; byline «Por Zheng Gong» enlazada a la ficha; `/galeria` 3 álbumes nativos con lightbox; término con galería; ficha de autor con sus entradas; `/comunidad` con 2 enlaces de ficha; 404 con copy publicado | OK | Pass (local) |
+| QA 3: render de las vistas | Home: aside dinámico con «Septiembre – octubre 2026 / Bogotá y Cali» (idéntico a producción) + cards del blog; `/eventos`: título «Septiembre 2026», grid con 7 días de evento + lunes de práctica, secciones Próximos/Realizados, compactas con badge; single vigente con tipo/meta/CTA y finalizado **sin** CTA; byline «Por Zheng Gong» enlazada a la ficha; `/galeria` 3 álbumes nativos con lightbox; término con galería; ficha de autor con sus entradas; `/comunidad` con 2 enlaces de ficha; 404 con copy publicado | OK | Pass (local) |
 | QA 3: higiene | `debug.log` inexistente tras navegar todas las vistas; sin `Set-Cookie` anónimo; sin warnings/fatals de código propio (el único warning previo era `wp_update_themes()` sin red, ruido del entorno) | OK | Pass (local) |
 | QA 3: comportamiento | Toggle del nav abre/cierra con `aria-expanded` (main.js portado); tooltips del grid con `calendar-tooltips.js` encolado por el bloque; 4 fuentes autohospedadas cargadas (`document.fonts`); sin overflow horizontal | OK | Pass (local) |
 | Bugs latentes de WU-05/06 cazados por el QA (regresión + fix) | (1) `event_modality` se saneaba contra el select de doc 03 y **descartaba el copy publicado** («Híbrida — …» quedaba vacío en BD) — fix: texto plano libre (OWN-007), test actualizado. (2) El importador reescribía `<img src>` pero no los `<source srcset>` de `<picture>` ni las thumbs hechas a mano → hero e imágenes del Inicio rotas — fix: conversión WU-07 desenvuelve `<picture>` y remapea thumbs a la biblioteca | OK | Pass (local) |
@@ -695,33 +695,37 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    que `import --apply` **no lo rellena** (dry-run: `created: 0`, todo `skipped`). Comprobado
    además que `event_date` y el `alt` de los carteles **sí** coinciden con el payload en los 10
    eventos: `event_modality` es el único campo desalineado. Consecuencia operativa en el
-   runbook §4b: **staging se importa una sola vez, desde cero**. Riesgo si se ignora: staging
-   heredaría el mismo vacío y `/eventos/{slug}` perdería una fila que producción publica.
+   runbook §4b: **staging se importa una sola vez, desde cero**. **Cerrado 2026-09-01 (OWN-023).**
 2. **D-02 — El contenido demo del install desplaza contenido real.** «Hello world!» (post 1)
    aparece en la sección «Del blog» del Inicio y en `/blog`, y **empuja fuera** a la entrada real
    «Estamos conectados, pero seguimos solos». Es la única diferencia de copy del Inicio frente a
    producción (similitud 0.987). También siguen presentes «Sample Page» (publicada) y «Privacy
    Policy» (borrador). Runbook §2.2 lo convierte en requisito duro de provisión.
+   **Cerrado 2026-09-01 (OWN-024):** código pendiente
+   ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
 3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` responden **200**
    en WordPress y **404** en producción publicada. No están en `docs/11-arbol-urls-final.md`, que
-   dice «si una URL no está aquí, no existe». Superficie nueva indexable: **decisión de
-   propietario** (aceptarlas y añadirlas al árbol, o cerrarlas), no un arreglo de WU-10.
+   dice «si una URL no está aquí, no existe». **Cerrado 2026-09-01 (OWN-025 / ADR 0044):** 404
+   real; código pendiente ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)).
+   RSS futuro: POST-010.
 4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320: el `<audio>` del
    bloque nativo `core/audio` toma su ancho intrínseco (~300 px) más el relleno del contenedor.
    **Producción no desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Es la única
    regresión visual encontrada y es **first-party corregible** (falta un ancho al bloque
-   convertido); queda registrada, no arreglada, por estar fuera del alcance de WU-10.
+   convertido); **Cerrado 2026-09-01 (OWN-026):** arreglar **antes** de staging.
+   ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
 5. **D-05 — Lightbox nativo en inglés.** `/galeria` rotula «Close / Previous / Next» y
    `aria-label="Enlarged images"` sobre una página `lang="es-CO"`. **Causa ambiental, no de
    código:** `get_locale()` ya devuelve `es_CO`, pero el contenedor no alcanza WordPress.org y
    solo tiene instalado `en_US`. Runbook §2.4 añade `wp language core install es_CO --activate`
-   y exige volver a verificar estas cadenas. En staging queda `Unverified` hasta entonces.
+   y exige volver a verificar estas cadenas. **Cerrado 2026-09-01 (OWN-027, A):** staging
+   `es_CO`; Docker local puede seguir en inglés.
 6. **D-06 — `wptexturize` cambia las comillas.** En `/practica`, producción publica
    `"Homenaje al Bodhisattva Guān Shì Yīn"` (comillas rectas) y WordPress rinde `«…»`
-   tipográficas. Delta de copy menor frente a la línea base OWN-007; se registra, no se fuerza.
+   tipográficas. **Cerrado 2026-09-01 (OWN-028, A):** delta aceptado.
 7. **D-07 — El bloque nativo de audio no rinde texto alternativo.** Producción incluye «Tu
    navegador no permite reproducir este audio.» dentro de cada `<audio>`; `core/audio` no lo
-   emite. Dos ocurrencias en `/practica`.
+   emite. Dos ocurrencias en `/practica`. **Cerrado 2026-09-01 (OWN-029, A):** se acepta.
 8. **D-08 — Fichas de autor indexables sin `meta description`.** `/author/{slug}` sirve
    `index,follow` (ADR 0037) pero el payload no trae objeto `seo` para `blog_authors` ni para
    `gallery_albums` (0/2 y 0/3; páginas 11/11, eventos 10/10, entradas 2/2 sí lo traen). Es
@@ -732,10 +736,8 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    y no entran en esa cola.
 9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
    320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.
-   **Producción desborda exactamente igual (339 vs 320)**: es un porte fiel de un defecto ya
-   publicado, no una regresión. **Cerrado 2026-09-01 (OWN-021):** no se toca `static/`; no se
-   «arregla» WordPress en el corte. Wrap **después** del corte, WP en el dominio canónico:
-   POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
+   **Producción desborda exactamente igual (339 vs 320)**. **Cerrado 2026-09-01 (OWN-021):**
+   dejar en el corte. Wrap post-corte POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
 10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
     `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
     alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no
@@ -744,9 +746,10 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
 11. **D-11 — `wp term list gallery_album` muestra `count = 0`.** Cosmético: la taxonomía vive
     sobre adjuntos (`post_status = inherit`) y el contador del núcleo solo cuenta `publish`. Las
     asignaciones reales son 35 y el theme consulta los adjuntos directamente. Se verá un 0 junto
-    a cada álbum en wp-admin.
+    a cada álbum en wp-admin. **Cerrado 2026-09-01 (OWN-030, B):** dejar el 0 en el corte;
+    higiene post-corte POST-009 / [#13](https://github.com/refo44/demo-caminodeldharma/issues/13).
 12. **D-12 — `<html lang>`:** WordPress sirve `es-CO`, producción `es`. Delta deliberado (locale
-    más específico), sin impacto conocido.
+    más específico). **Cerrado 2026-09-01 (OWN-031, A):** conservar `es-CO`.
 
 ### Deltas aceptados que WU-10 vuelve a confirmar, no a corregir
 

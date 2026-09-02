@@ -20,13 +20,13 @@ despliegue.
 
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
-| **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. |
-| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML en la **raíz**. Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. La fuente legacy fue eliminada (ADR 0040). `wordpress/` tiene árboles placeholder (README, sin código) para Sonar (ADR 0038). No hay `docker-compose.yml` ni `.github/workflows`. `VERSION`. ZIP manual (ADR 0015). |
-| **FUTURE PLAN** | Fase 3: reorg a `static/` + `wordpress/` (ADR 0014). Ruta **única:** maqueta estática → **FSE** (ADR 0029), sin theme clásico PHP. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado; corte según [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md). |
+| **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
+| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML desplegable en **`static/`** (ADR 0014). Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. Plugin `camino-del-dharma-core` **0.7.1** y theme FSE `camino-del-dharma` **0.5.1** en `wordpress/` (WU-00–WU-10 en Git). Staging Hostinger **no** creado (OWN-035). `docker-compose.yml` y `.github/workflows/test.yml` existen. ZIP manual desde `static/` (ADR 0015). |
+| **FUTURE PLAN** | Staging Hostinger **después** de D-02/D-03/D-04 en `main` (OWN-035). Corte según [cutover-checklist-wordpress.md](cutover-checklist-wordpress.md). Tras el corte, WordPress es la SoT editorial. |
 
-Afirmaciones como «WordPress not started» y «deploy HTML to production» describen el **estado
-actual**. Dejan de aplicar **después** del corte; no se reescriben como si nunca hubieran sido
-ciertas.
+Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el **estado
+histórico** pre-WU-01. Producción publicada sigue estática **hasta el corte**; no se
+reescriben como si nunca hubieran sido ciertas.
 
 ---
 
@@ -143,7 +143,8 @@ No basta con que exista `assets/js/main.js` encolado. Comprobar:
 - estado ARIA (`aria-expanded`, `aria-current`, `aria-hidden` del hint del calendario);
 - eventos (click, Escape, resize, primer/segundo toque en puntero grueso);
 - formulario de contacto (hoy `action="#"` no envía; en WP: Contact Form 7, ADR 0026, elegible
-  en el corte — ADR 0041; actualizar párrafos del formulario en `/privacidad`);
+  en el corte — ADR 0041; actualizar párrafos del formulario en `/privacidad`; entrega al
+  buzón comunitario es gate del corte — ADR 0045);
 - comportamiento dinámico (diálogo de calendario, `.ics`; galería: bloque Gutenberg, **sin**
   paginación numerada — OWN-011).
 

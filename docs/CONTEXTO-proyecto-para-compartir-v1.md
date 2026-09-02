@@ -29,15 +29,15 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 | --- | --- |
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
-| **Versión en Hostinger** | Puede ir atrasada; no asumir paridad. Comparar contra live (OWN-006/007) |
-| **Fase activa** | Fase 2 **en producción** (estático live); Fase 3 (WordPress FSE) **en curso** en `wordpress/` (WU-00–WU-10 cerrados localmente; pendiente staging/corte) |
-| **Estructura del repo** | Monorepo (ADR 0014): HTML de producción en `static/`; plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` |
+| **Versión en Hostinger** | Paridad verificada 2026-08-31 (delta 0); no asumir paridad futura sin comparar (OWN-006/007) |
+| **Fase activa** | Fase 2 **en producción**. Fase 3 **implementada en Git** (WU-00–WU-10, BUG-001). Staging Hostinger **no** creado |
+| **Estructura del repo** | Monorepo: `static/` (HTML desplegable) + `wordpress/` (plugin `camino-del-dharma-core` 0.7.1, theme FSE `camino-del-dharma` 0.5.1) |
 | **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
-| **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
-| **Auditoría de producción** | Completa (2026-07-19). Formulario sin backend real sigue pendiente hasta WordPress |
-| **Backlog de dueño (corte)** | **Cerrado** (v1.28): 0 abiertas, 23 decididas (OWN-001–OWN-022 + sub-ID `OWN-009-img`). OWN-020 / D-08: SEO de fichas de autor **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09: overflow Sangha dejado al corte; wrap post-corte ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado. CF7 en el corte: OWN-018 / ADR 0041 |
-| **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n) abiertas. **POST-008** decidido: wrap Sangha **después** de WP en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **No** se implementan en el corte |
+| **CI de calidad** | `.github/workflows/test.yml` (checks `php` y `css`); no despliega. `main` protegida (ADR 0043) |
+| **Pre-staging** | D-02/D-03/D-04 en `main` **antes** de crear Hostinger (OWN-035, issues #10–#12). D-08 (#5) puede ir después (A2) |
+| **Backlog de dueño** | **Cerrado** (v1.28): OWN-001–OWN-035. CF7: elegibilidad ADR 0041; **entrega** ADR 0045. Feeds 404: ADR 0044 |
+| **Fases posteriores** | `POST-001`–`POST-007` (i18n) abiertas; `POST-008`–`POST-010` decididas. **No** se implementan en el corte |
 
 ---
 
@@ -68,7 +68,7 @@ funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 
 ## 4. Arquitectura de decisiones (ADR) — resumen
 
-Hay **43 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
+Hay **45 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
 | --- | --- | --- |
@@ -86,7 +86,7 @@ Hay **43 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0022 | Ciudad = taxonomía, no URL de filtro | Sin doorway pages |
 | 0023 | Local Docker: PHP 8.3 + MariaDB 11.8 | Paridad Hostinger |
 | 0024 | Plugin `camino-del-dharma-core` = dominio; theme = presentación | — |
-| 0025 / 0026 | Plugins de terceros solo con ADR; CF7 aprobado; producción en el corte: ADR 0041 | — |
+| 0025 / 0026 | Plugins de terceros solo con ADR; CF7 aprobado; producción en el corte: ADR 0041; entrega: ADR 0045 | — |
 | 0027 | Estándares de ingeniería; WPCS y seguridad no negociables | — |
 | 0029 | Theme **FSE / block theme** — **sin** theme clásico PHP intermedio | Sustituye la arquitectura clásica |
 | 0030 / 0031 | Sitemap nativo WP; tags de blog noindex hasta volumen | — |
@@ -98,9 +98,11 @@ Hay **43 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0038 | TDD + wp-phpunit; Sonar solo plugin + theme | — |
 | 0039 | `/privacidad` publicada (provisional) | — |
 | 0040 | `content-source/` retirado; producción publicada gobierna pre-corte | — |
-| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
-| 0042 | Meta Gutenberg sin metabox clásico sin sync; no blocker de corte | META-* |
-| 0043 | `main` protegida; PR; Conventional Branch + Commits | — |
+| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018; punto 5 → 0045 |
+| 0042 | Meta Gutenberg: sin metabox clásico sin sync; no es defecto de corte | OWN-019 |
+| 0043 | `main` protegida; Conventional Branch + Commits; PR | — |
+| 0044 | Feeds nativos **404** en el corte; RSS futuro POST-010 | OWN-025 |
+| 0045 | Entrega CF7 es **gate del corte**; prueba técnica ≠ buzón comunitario | OWN-033 |
 
 ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda histórico para WordPress
 (sustituido por 0029); sigue describiendo el CSS del estático.
@@ -171,7 +173,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 - **Hosting:** Hostinger, `caminodeldharma.org`.
 - **PHP / MariaDB objetivo:** 8.3 / 11.8 (ADR 0023).
-- **Local:** Docker Compose (playbook listo; compose aún no versionado en el repo).
+- **Local:** Docker Compose versionado en el repo (ADR 0023, WU-02).
 - **Staging (OWN-005):** otra instancia Hostinger **sin dominio custom**, noindex, en paralelo al
   estático hasta el switch. No pisa `public_html` de producción.
 - **SSH:** disponible en la cuenta; no es el canal de deploy hoy.
@@ -180,9 +182,8 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 ## 8. Despliegue
 
-- **Hoy (estático):** ZIP manual del contenido de `static/` (ADR 0014/0015). No incluir `docs/`,
-  `scripts/`, `wordpress/`, `tests/`.
-- **Fase 3:** WordPress en staging separado (OWN-005); corte al dominio canónico cuando pase QA.
+- **Hoy (estático):** ZIP manual **desde el contenido de `static/`** (README, ADR 0014/0015).
+  No incluir `docs/`, `scripts/`, `wordpress/`, `tests/`.
 - **WordPress code deploy ≠ content deploy ≠ static deploy** (ADR 0013). Tras el corte, un ZIP
   estático **nunca** escribe sobre el document root de WordPress.
 - **CD:** pospuesto (ADR 0016). **CI de calidad:** sí, cuando exista PHP de prueba (ADR 0038).
@@ -195,7 +196,8 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - HSTS aplazado (ADR 0020).
 - `/privacidad` publicada (ADR 0039, provisional). Contact Form 7 **elegible en el corte**
   (ADR 0041 / OWN-018): el disclaimer basta para lanzar; en WordPress se actualizan solo los
-  párrafos del formulario. Revisión legal = trabajo posterior, no gate.
+  párrafos del formulario. **Entrega** al buzón comunitario es gate del corte (ADR 0045).
+  Revisión legal = trabajo posterior, no gate.
 - Canales humanos actuales: WhatsApp y correo.
 
 ---
@@ -209,12 +211,15 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - Extracción e import de contenido real (Pages, 10 eventos, 2 posts, autores, galería, media)
 - Contact Form 7 (con gate de privacidad)
 - QA de los cinco entregables (ADR 0032) + paridad vs producción publicada
-- Prompt de ejecución vigente: `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` (**v2.3**)
+- D-02/D-03/D-04 en `main` antes de staging (OWN-035)
+- Feeds nativos 404 (ADR 0044)
+- Entrega de correo CF7 demostrada (ADR 0045)
 
 **Fuera del corte:**
 
 - CPT `sangha`
-- Inglés / i18n (`POST-*`)
+- Inglés / i18n (`POST-001`–`POST-007`)
+- Wrap Sangha 320 px (`POST-008`), conteo admin de álbum (`POST-009`), RSS (`POST-010`)
 - Buscador, analítica, HSTS, PWA
 - URLs de filtro por ciudad/tipo
 - Automatización de deploy
@@ -226,11 +231,11 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 | Ítem | Estado |
 | --- | --- |
-| Autorizar inicio de Fase 3 (WU-00/WU-01) | Decisión del propietario |
-| Desplegar `1.0.35` a Hostinger (incluye `/privacidad`) | Operativo |
-| Verificar paridad repo ↔ Hostinger | OWN-006/007 |
-| Formulario de contacto end-to-end | WU-09; CF7 elegible en el corte (ADR 0041) |
-| Copy de `/privacidad` en WP | Delta del formulario (ADR 0041); revisión legal = posterior, no gate |
+| D-02 demo content, D-03 feeds 404, D-04 overflow `/practica` | Código pendiente (#10–#12); **antes** de Hostinger |
+| Crear staging Hostinger | OWN-035: después de esos merges + «go» del propietario |
+| D-08 SEO fichas `/author/{slug}` | Decidido; código pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)); A2 |
+| Seed en Hostinger | OWN-032: SSH + `~/cdd-extract/` |
+| Formulario CF7 end-to-end | Elegible (ADR 0041); gate de entrega ADR 0045 |
 | HSTS | Aplazado post-corte |
 | Inglés / i18n | `POST-001`–`POST-007` |
 
@@ -244,13 +249,12 @@ Ya resuelto y no debe reabrirse como duda:
 
 ## 12. Documentos de referencia
 
-- `docs/adr/README.md` — índice ADR 0001–0043
-- `docs/17-orden-implementacion.md` — fases y criterios (v3.10)
+- `docs/adr/README.md` — índice ADR 0001–0045
+- `docs/17-orden-implementacion.md` — fases y criterios (v3.11)
 - `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.28)
 - `docs/contrato-migracion-static-wordpress.md` — contrato de aceptación
 - `docs/inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md`
 - `docs/matriz-migracion-static-wordpress.md` + `redirect-ledger.md` + `cutover-checklist-wordpress.md`
-- `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` — prompt **vigente** (v1 es HISTORICAL)
 - `docs/guia-pruebas-plugin-theme-fse.md` — TDD / wp-phpunit / Sonar
 - `AGENTS.md` / `CLAUDE.md` — reglas para agentes
 
