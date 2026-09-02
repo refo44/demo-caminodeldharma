@@ -10,7 +10,7 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 
 **CURRENT STATE:** Fase 3 **cerrada en Git** (2026-09-01, WU-00…WU-10 + BUG-001). Producción
 sigue estática en `https://caminodeldharma.org`. El sitio desplegable vive en `static/`
-(reorg ADR 0014). Plugin `camino-del-dharma-core` v0.7.2 y theme FSE `camino-del-dharma`
+(reorg ADR 0014). Plugin `camino-del-dharma-core` v0.7.3 y theme FSE `camino-del-dharma`
 v0.5.1. Contenido importado y convertido en el entorno local. Staging Hostinger **no**
 creado: primero D-02/D-03/D-04 en `main` (OWN-035). Estado durable:
 `.audit/fase3-execution-state.md`.

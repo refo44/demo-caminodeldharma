@@ -31,7 +31,7 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Paridad verificada 2026-08-31 (delta 0); no asumir paridad futura sin comparar (OWN-006/007) |
 | **Fase activa** | Fase 2 **en producción**. Fase 3 **implementada en Git** (WU-00–WU-10, BUG-001). Staging Hostinger **no** creado |
-| **Estructura del repo** | Monorepo: `static/` (HTML desplegable) + `wordpress/` (plugin `camino-del-dharma-core` 0.7.2, theme FSE `camino-del-dharma` 0.5.1) |
+| **Estructura del repo** | Monorepo: `static/` (HTML desplegable) + `wordpress/` (plugin `camino-del-dharma-core` 0.7.3, theme FSE `camino-del-dharma` 0.5.1) |
 | **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | `.github/workflows/test.yml` (checks `php` y `css`); no despliega. `main` protegida (ADR 0043) |

@@ -712,11 +712,19 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    `tests/WordPress/Demo_Content_RemovalTest.php` (8). `Pass (local)`: unit 201/201,
    wp-phpunit 130/130, PHPCS limpio. El **volumen local ya importado** no queda limpio hasta
    que ese WordPress cargue el plugin 0.7.2 (`init` → `maybe_upgrade`).
-3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` responden **200**
+3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` respondían **200**
    en WordPress y **404** en producción publicada. No están en `docs/11-arbol-urls-final.md`, que
    dice «si una URL no está aquí, no existe». **Cerrado 2026-09-01 (OWN-025 / ADR 0044):** 404
-   real; código pendiente ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)).
-   RSS futuro: POST-010.
+   real. **Implementado 2026-09-02** en el plugin **0.7.3**
+   ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)): `cdd_core_block_feed_requests()`
+   convierte cualquier petición con `feed` en la query en un 404 **real** antes de la consulta
+   principal —una sola guarda cubre `feed`/`rdf`/`rss`/`rss2`/`atom`, bonita o `?feed=`, del
+   sitio, de `/blog`, de comentarios, de archivo y de CPT—, y
+   `cdd_core_disable_feed_autodiscovery()` retira `feed_links` (prioridad 2) y `feed_links_extra`
+   (prioridad 3) del `head`. Sin 301 a `/blog`, sin 200 con `noindex`, sin cuerpo RSS con estado
+   404. El `rel=alternate` `text/calendar` del evento vigente (OWN-014) se mantiene. Cubierto por
+   `tests/WordPress/Feed_RoutingTest.php` (6 tests). `Pass (local)`: unit 201/201,
+   wp-phpunit 137/137, PHPCS limpio. RSS futuro: POST-010.
 4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320: el `<audio>` del
    bloque nativo `core/audio` toma su ancho intrínseco (~300 px) más el relleno del contenedor.
    **Producción no desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Es la única

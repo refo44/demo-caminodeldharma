@@ -12,6 +12,32 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — D-03 / OWN-025: los feeds nativos responden 404 (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.3** (ADR [0044](docs/adr/0044-feeds-nativos-404.md),
+[#11](https://github.com/refo44/demo-caminodeldharma/issues/11)). El estático de producción no
+se toca.
+
+- **Paridad de rutas con producción.** El estático publicado responde **404** en `/feed`,
+  `/blog/feed` y `/comments/feed`, y ninguna de esas URLs está en
+  [`docs/11-arbol-urls-final.md`](docs/11-arbol-urls-final.md) — si una URL no está en el árbol,
+  no existe. WordPress las servía con **200**. Ahora cualquier petición que llegue con `feed` en
+  la query es un **404 real** antes de la consulta principal, así que responde la plantilla 404
+  del theme. Una sola guarda cubre todos los alias que registra el núcleo —`feed`, `rdf`, `rss`,
+  `rss2`, `atom`, en URL bonita o como `?feed=`— para el sitio, la página de entradas, los
+  comentarios de una entrada, los archivos y los CPT.
+- **Nada anuncia lo que ya no existe.** Se retiran `feed_links` y `feed_links_extra` del `head`,
+  así que no queda autodiscovery RSS/Atom. El `rel=alternate` `text/calendar` que publica un
+  evento vigente hacia su `.ics` generado (OWN-014) **se mantiene**: es otra representación del
+  recurso, no un feed.
+- **Sin atajos.** No hay 301 a `/blog` (el estático no tiene esa redirección), ni 200 con
+  `noindex` (el documento seguiría existiendo), ni cuerpo RSS con estado 404.
+- **RSS futuro, no RSS nunca.** Un feed público es decisión posterior (`POST-010`) y exige su
+  fila en el árbol de URLs y en el ledger de redirecciones. Reabrirlo es soltar dos hooks.
+- Cubierto por `tests/WordPress/Feed_RoutingTest.php`: rutas entrantes vía `go_to()`, estado 404
+  enviado, ausencia de `rel=alternate` RSS/Atom en el `head` de una Página y de una entrada, y
+  el alternate de calendario intacto en un evento vigente.
+
 ### WordPress Fase 3 — D-02 / OWN-024: fuera el contenido demo del instalador (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.2** ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).

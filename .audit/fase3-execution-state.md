@@ -313,9 +313,10 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 - **D-04 (WU-10) — única regresión visual encontrada:** `/practica` desborda 4 px a 320 px por el
   `<audio>` del bloque nativo `core/audio`; producción no desborda. Registrada, **no arreglada**
   (fuera del alcance de WU-10).
-- **D-03 (WU-10)** — `/feed`, `/blog/feed` y `/comments/feed` responden 200 en WordPress y 404 en
-  producción, y no están en `docs/11-arbol-urls-final.md`. Superficie nueva indexable pendiente
-  de decisión del propietario.
+- **D-03 (WU-10)** — `/feed`, `/blog/feed` y `/comments/feed` respondían 200 en WordPress y 404 en
+  producción, y no están en `docs/11-arbol-urls-final.md`. **Cerrado (OWN-025 / ADR 0044) e
+  implementado 2026-09-02** en el plugin **0.7.3** ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)):
+  404 real en toda la superficie de feeds y sin autodiscovery RSS/Atom en el `head`.
 - **OWN-019 / ADR 0042 (2026-09-01):** `META-001`–`META-005` **no** son cola de pre-staging ni
   defectos de corte. Restricciones para UI wp-admin futura. Staging no construye metaboxes
   clásicos. El guard de autores no se relaja.
@@ -606,8 +607,11 @@ Pre-staging de código (PRs separados, TDD):
 1. ~~D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)~~ **hecho**
    (2026-09-02, plugin **0.7.2**): el contenido demo del instalador se despublica al activar
    o actualizar el plugin, y `wp cdd-core demo purge --apply` lo borra.
-2. **D-03 — [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044) ← siguiente**
-3. D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)
+2. ~~D-03 — [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044)~~ **hecho**
+   (2026-09-02, plugin **0.7.3**): toda petición de feed nativo —y sus alias— es un 404 real, y
+   el `head` ya no anuncia RSS/Atom. El `rel=alternate` de calendario del evento vigente
+   (OWN-014) se mantiene.
+3. **D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) ← siguiente**
 
 Seed: SSH + `~/cdd-extract/` (OWN-032); si falla, reabrir. CF7: gate ADR 0045 / OWN-033
 (`refo44@gmail.com` técnico; cliente confirma `caminodeldharma1@gmail.com`).

@@ -129,7 +129,7 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   (ADR 0045 / OWN-033): client confirmation in the community inbox. `Pass (local)` is not enough.
   Staging technical proof may use `refo44@gmail.com`. The public form never stays on personal Gmail.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
-  v1.28). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
+  v1.30). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. **OWN-020 / D-08** is decided (author entity SEO); implementation is pending
   ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)) — do not `noindex`
   singles and do not invent copy. **OWN-021 / D-09:** leave the Sangha 320px overflow at
