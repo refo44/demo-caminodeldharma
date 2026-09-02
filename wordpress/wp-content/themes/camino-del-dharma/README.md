@@ -40,6 +40,14 @@ Reglas:
   página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
   `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
   (docs/19 §9).
+- Reproductores de mantra desde D-04 (v0.5.2): el núcleo sirve
+  `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo** gana sobre un
+  ancho preferido, así que a 320 px el reproductor estiraba la columna de `/practica`.
+  `.wp-block-audio.mantra-audio audio` levanta el suelo y topa el reproductor en su
+  columna conservando el `width: min(100%, 32rem)` publicado. El selector lleva las dos
+  clases a propósito: gana **por especificidad**, no por el orden en que WordPress imprime
+  `wp-block-audio-inline-css`. No añadir `overflow: hidden` en `html`/`body` para esto:
+  escondería el desbordamiento heredado de D-09, que el owner dejó en el corte (OWN-021).
 - Diálogo de calendario de un curso desde BUG-001 (v0.5.1): en un evento con
   cronograma el disparador enlaza la **próxima sesión** en vez del rango del
   curso, e imprime `data-calendar-sessions` y `data-calendar-note`;

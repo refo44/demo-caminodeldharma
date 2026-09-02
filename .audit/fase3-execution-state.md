@@ -580,7 +580,7 @@ este archivo. Sin PHP, HTML estático ni plugin CF7 en esta sesión.
 
 Contenedores del proyecto `camino-del-dharma` levantados al cierre (`docker compose stop`
 para pararlos). WordPress local: `http://localhost:8081`. Plugin `camino-del-dharma-core`
-**activo** (v0.7.1, upgrade automático). Theme `camino-del-dharma` **activo** (v0.5.1,
+**activo** (v0.7.1, upgrade automático). Theme `camino-del-dharma` **activo** (v0.5.2,
 vistas reales + comportamiento + cabeza + formulario + `.ics` por sesión). **Contact Form 7 6.1.7 activo** con el
 formulario provisionado (`wp cdd-core contact provision --apply`); `/privacidad` lleva el delta
 de ADR 0041 y `/contacto` el bloque del formulario. Akismet sigue inactivo (sin antispam extra). Contenido importado (payload 1.0.35/`bfb6dc0`) **y
@@ -598,11 +598,13 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 WU-10 está cerrado. Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 
-**No crear Hostinger** hasta que D-02, D-03 y D-04 estén en `main` (OWN-035, A2). Entonces
-autorización expresa en sesión para crear staging e importar **una vez** en WP limpio.
-D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) puede ir después.
+**El pre-staging de código está completo.** D-02, D-03 y D-04 están en `main`, que es la
+condición de OWN-035 (A2). **La siguiente acción no es código: es el `go` expreso del owner en
+sesión** para crear el staging de Hostinger e importar **una vez** en un WordPress limpio. No
+crear Hostinger sin esa autorización, y no arrancar D-08 en su lugar:
+D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) va **después** del staging.
 
-Pre-staging de código (PRs separados, TDD):
+Pre-staging de código (PRs separados, TDD) — **cerrado**:
 
 1. ~~D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)~~ **hecho**
    (2026-09-02, plugin **0.7.2**): el contenido demo del instalador se despublica al activar
@@ -611,7 +613,11 @@ Pre-staging de código (PRs separados, TDD):
    (2026-09-02, plugin **0.7.3**): toda petición de feed nativo —y sus alias— es un 404 real, y
    el `head` ya no anuncia RSS/Atom. El `rel=alternate` de calendario del evento vigente
    (OWN-014) se mantiene.
-3. **D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) ← siguiente**
+3. ~~D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)~~ **hecho**
+   (2026-09-02, theme **0.5.2**): `/practica` ya no desborda a 320 px. El suelo
+   `min-width: 300px` que el núcleo pone al `core/audio` se levanta desde el theme y el
+   reproductor mide 272 px, el mismo ancho que publica producción. D-09 sigue como lo dejó
+   OWN-021.
 
 Seed: SSH + `~/cdd-extract/` (OWN-032); si falla, reabrir. CF7: gate ADR 0045 / OWN-033
 (`refo44@gmail.com` técnico; cliente confirma `caminodeldharma1@gmail.com`).

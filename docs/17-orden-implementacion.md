@@ -120,9 +120,9 @@ Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado 
 ### Estado actual (2026-09-01)
 
 Producción sigue **estática** en `https://caminodeldharma.org`. El repo es monorepo (`static/` +
-`wordpress/`). Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.1**.
-WU-00–WU-10 y BUG-001 **cerrados** en Git. Staging Hostinger **no** creado: primero D-02/D-03/D-04
-en `main` (OWN-035). Continuidad: `.audit/fase3-execution-state.md`.
+`wordpress/`). Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2**.
+WU-00–WU-10 y BUG-001 **cerrados** en Git. Staging Hostinger **no** creado: D-02/D-03/D-04 ya
+están en `main`, falta el `go` del owner (OWN-035). Continuidad: `.audit/fase3-execution-state.md`.
 
 La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La versión de código vigente está en `VERSION`.
 

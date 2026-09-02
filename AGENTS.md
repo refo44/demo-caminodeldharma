@@ -37,7 +37,7 @@ not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON
 PRODUCTION CONTENT. Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
-`camino-del-dharma` (v0.5.1) has the real views since WU-07 (ADR 0029): 18 block templates,
+`camino-del-dharma` (v0.5.2) has the real views since WU-07 (ADR 0029): 18 block templates,
 header/footer parts via PHP patterns, 14 dynamic blocks (events calendar with byte parity
 against the published grid, current/past listing with compact archive cards, home featured note,
 ADR 0037 bylines, native per-album galleries), the full static CSS ported to presets,
@@ -74,8 +74,10 @@ exclusive end, an event without a schedule keeps the published range entry and U
 since a Google/Outlook deep link carries a single entry — the dialog names the **next
 session**, a date the file contains, and says the file holds them all. The published static
 `.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31). Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
-**OWN-035:** create Hostinger staging only after D-02, D-03, D-04 are on `main`
-([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
+**OWN-035:** D-02, D-03 and D-04
+([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
+are on `main`, so the pre-staging code is complete; creating Hostinger staging now waits on the
+owner's explicit go, not on more code.
 **OWN-020 / D-08** implementation pending
 ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)); may follow staging (A2).
 CF7 delivery is a cutover gate (ADR 0045). See `.audit/fase3-execution-state.md`.
@@ -136,7 +138,7 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   cutover; WordPress-only wrap **after** WP is production on the canonical domain
   ([issue #7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **OWN-022 / D-10:**
   accept core `wp-emoji` `sessionStorage`; do not disable it. Pre-staging code:
-  D-02/D-03/D-04 (issues #10–#12) before Hostinger (OWN-035). Later-phase rows (`POST-*`)
+  D-02/D-03/D-04 (issues #10–#12) are done; Hostinger waits on the owner (OWN-035). Later-phase rows (`POST-*`)
   including POST-008–010: do not implement them at cutover except as their gates say.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
   volume (ADR 0036). No numbered pagination at cutover (OWN-011).

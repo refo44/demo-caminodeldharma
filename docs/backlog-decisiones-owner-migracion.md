@@ -7,7 +7,7 @@ Hay cinco bloques que no se mezclan:
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 ni OWN-021–OWN-035 sin decisión nueva (OWN-020 en Pre-staging). |
-| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01.** D-02 y D-03 **implementados** (plugin 0.7.3); D-04 **pendiente de código**; D-08 **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Staging **después** de D-02/03/04 en `main` (OWN-035); D-08 puede ir después (A2). |
+| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01.** D-02 y D-03 **implementados** (plugin 0.7.3) y D-04 **implementado** (theme 0.5.2): el código de pre-staging está **cerrado**. D-08 sigue **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) y puede ir después del staging (A2). Con D-02/03/04 en `main`, OWN-035 espera el `go` del owner. |
 | **Fases posteriores** (`POST-*`) | Después del corte (i18n; wrap Sangha; conteo álbum admin; RSS) | i18n abiertas. **POST-008–010 decididos.** No implementan el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 | **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
@@ -102,13 +102,15 @@ Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 
 ## Pre-staging — implementación pendiente
 
-Pregunta **cerrada**. El código no está. No tratar D-08 como copy sin dueño ni como `noindex`.
+Pregunta **cerrada**. Con D-02, D-03 y D-04 en `main`, el pre-staging de código queda completo y
+la condición de OWN-035 se cumple: falta el `go` del owner, no más código. Solo queda D-08, que
+va **después** del staging (A2). No tratar D-08 como copy sin dueño ni como `noindex`.
 
 | ID | Decisión | Issue | Estado |
 | -- | -------- | ----- | ------ |
 | D-02 | OWN-024: sin contenido demo del install | [#10](https://github.com/refo44/demo-caminodeldharma/issues/10) | **Implementado** (plugin 0.7.2): activación/upgrade despublica el demo del instalador y `wp cdd-core demo purge --apply` lo borra. |
 | D-03 | OWN-025 / ADR 0044: feeds 404 | [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) | **Implementado** (plugin 0.7.3): los feeds nativos y sus alias responden 404 real y el `head` ya no anuncia RSS/Atom. |
-| D-04 | OWN-026: `/practica` sin overflow a 320 px | [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) | Pendiente de implementar. En `main` **antes** de staging. |
+| D-04 | OWN-026: `/practica` sin overflow a 320 px | [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) | **Implementado** (theme 0.5.2): el theme levanta el suelo `min-width: 300px` que el núcleo pone al `core/audio` y topa el reproductor en su columna; mide 272 px y `/practica` da `scrollWidth` = `clientWidth` = 320. D-09 sin tocar. |
 | D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). **A2:** no bloquea el primer import de staging. |
 
 Copy y fotos a reutilizar (producción publicada, OWN-007):
@@ -233,8 +235,13 @@ pre-staging: D-03 ([#11](https://github.com/refo44/demo-caminodeldharma/issues/1
 `head` sin autodiscovery RSS/Atom. Siguiente en la cola de pre-staging: D-04
 ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
 
-**Versión:** 1.30 · **Fecha:** 2026-09-02 · **Estado:** Fase 3: 0 abiertas · 36 decididas.
-Pre-staging: 4 decididas; código pendiente en D-04 y D-08 (D-02 y D-03 implementados).
+**v1.31 (2026-09-02):** D-04 / OWN-026 **implementado** (theme 0.5.2,
+[#12](https://github.com/refo44/demo-caminodeldharma/issues/12)): `/practica` ya no desborda a
+320 px. Con esto **el pre-staging de código queda cerrado** y se cumple la condición de OWN-035:
+lo siguiente es el `go` del owner para crear Hostinger, no más código. D-08 va después (A2).
+
+**Versión:** 1.31 · **Fecha:** 2026-09-02 · **Estado:** Fase 3: 0 abiertas · 36 decididas.
+Pre-staging: 4 decididas; código pendiente solo en D-08 (D-02, D-03 y D-04 implementados).
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
 Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).

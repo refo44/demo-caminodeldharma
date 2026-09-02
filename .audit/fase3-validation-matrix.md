@@ -656,7 +656,7 @@ manda sobre el archivo.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 17 limpias; 2 con desbordamiento — ver D-04 y D-09 | Fail (local) *(solo `/practica`)* |
+| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 18 limpias tras el arreglo de D-04 (theme 0.5.2): `/practica` mide 320 = 320 y el reproductor 272 px. Queda 1 desbordamiento, D-09, que el owner dejó en el corte | Pass (local) *(D-09 aceptado)* |
 | 640 px (= zoom 200 % sobre 1280) | las mismas 19 rutas | **0 desbordamientos** | Pass (local) |
 | Foco visible | 21 reglas `:focus-visible` en las hojas del theme | presentes | Pass (local) |
 | Navegación por teclado | single de evento | 32 elementos enfocables, **todos con nombre accesible**; primer tabulable = «Saltar al contenido» | Pass (local) |
@@ -725,12 +725,21 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    404. El `rel=alternate` `text/calendar` del evento vigente (OWN-014) se mantiene. Cubierto por
    `tests/WordPress/Feed_RoutingTest.php` (6 tests). `Pass (local)`: unit 201/201,
    wp-phpunit 137/137, PHPCS limpio. RSS futuro: POST-010.
-4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320: el `<audio>` del
-   bloque nativo `core/audio` toma su ancho intrínseco (~300 px) más el relleno del contenedor.
-   **Producción no desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Es la única
-   regresión visual encontrada y es **first-party corregible** (falta un ancho al bloque
-   convertido); **Cerrado 2026-09-01 (OWN-026):** arreglar **antes** de staging.
-   ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
+4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320. **Producción no
+   desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Era la única regresión
+   visual encontrada. **Cerrado 2026-09-01 (OWN-026):** arreglar **antes** de staging.
+   **Implementado 2026-09-02 (theme 0.5.2, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).**
+   La causa no era el relleno del contenedor sino el núcleo: `wp-block-audio-inline-css` sirve
+   `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo** gana sobre el ancho
+   preferido `min(100%, 32rem)` del theme, así que el reproductor estiraba la columna entera.
+   `.wp-block-audio.mantra-audio audio` levanta el suelo (`min-width: 0`) y lo topa en su columna
+   (`max-width: 100%`, `box-sizing: border-box`) conservando el tope publicado; el selector lleva
+   las dos clases para ganar **por especificidad**, no por el orden en que WordPress imprime la
+   hoja del bloque. Sin tocar el conversor, sin sustituir `core/audio`, sin `overflow: hidden` en
+   `html`/`body`. Cubierto por `tests/Unit/Theme_Audio_ContainmentTest.php` (5 tests, contrato de
+   CSS; sin píxeles en CI). Medido en el navegador contra el Docker local: `scrollWidth` =
+   `clientWidth` = 320, cero elementos fuera del viewport, reproductor a **272 px** — el mismo
+   ancho que publica producción. `Pass (local)`: unit 206/206, PHPCS limpio, Stylelint limpio.
 5. **D-05 — Lightbox nativo en inglés.** `/galeria` rotula «Close / Previous / Next» y
    `aria-label="Enlarged images"` sobre una página `lang="es-CO"`. **Causa ambiental, no de
    código:** `get_locale()` ya devuelve `es_CO`, pero el contenedor no alcanza WordPress.org y
