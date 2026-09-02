@@ -2,7 +2,8 @@
 /**
  * WP-CLI surface of the migration importer (ADR 0032 §8.2): `wp cdd-core
  * migrate <validate|plan|import|verify>` plus the owner-approved media
- * command `wp cdd-core seed` (OWN-009-img). Dry-run by default; writes
+ * command `wp cdd-core seed` (OWN-009-img) and `wp cdd-core demo purge`
+ * (D-02 / OWN-024). Dry-run by default; writes
  * only with --apply; production additionally requires
  * --confirm-production and --backup-evidence.
  *
@@ -25,6 +26,7 @@ final class Cdd_Core_CLI {
 		WP_CLI::add_command( 'cdd-core migrate', array( self::class, 'migrate' ) );
 		WP_CLI::add_command( 'cdd-core seed', array( self::class, 'seed' ) );
 		WP_CLI::add_command( 'cdd-core contact', array( self::class, 'contact' ) );
+		WP_CLI::add_command( 'cdd-core demo', array( self::class, 'demo' ) );
 	}
 
 	/**
@@ -188,6 +190,57 @@ final class Cdd_Core_CLI {
 			! empty( $report['dry_run'] )
 				? 'Dry run only — nothing written (use --apply).'
 				: sprintf( 'Contact form provisioned (id %d).', $report['form_id'] )
+		);
+	}
+
+	/**
+	 * Removes the WordPress installer's demo content (D-02 / OWN-024).
+	 *
+	 * Dry-run by default, like every other write in this pipeline. Only
+	 * objects recognised as installer defaults are deleted, so this is safe
+	 * on a site that already holds imported content — unlike deleting posts
+	 * 1, 2 and 3 by hand. Activating the plugin already unpublishes them;
+	 * this command is how an operator gets rid of them for good.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <action>
+	 * : purge.
+	 *
+	 * [--apply]
+	 * : Actually delete. Without it this is a dry run.
+	 *
+	 * [--confirm-production]
+	 * : Required, together with --backup-evidence, to delete in production.
+	 *
+	 * [--backup-evidence=<text>]
+	 * : Reference to the verified backup taken before a production write.
+	 *
+	 * @param array $args       Positional args.
+	 * @param array $assoc_args Named args.
+	 */
+	public static function demo( array $args, array $assoc_args ) {
+		if ( 'purge' !== ( $args[0] ?? '' ) ) {
+			WP_CLI::error( 'Unknown action. Use: wp cdd-core demo purge [--apply]' );
+		}
+
+		$report = cdd_core_purge_installer_demo_content(
+			isset( $assoc_args['apply'] ),
+			array(
+				'confirm_production' => isset( $assoc_args['confirm-production'] ),
+				'backup_evidence'    => (string) ( $assoc_args['backup-evidence'] ?? '' ),
+			)
+		);
+		self::render_json( $report );
+
+		if ( '' !== $report['error'] ) {
+			WP_CLI::error( $report['error'] );
+		}
+
+		WP_CLI::success(
+			! empty( $report['dry_run'] )
+				? 'Dry run only — nothing deleted (use --apply).'
+				: sprintf( 'Installer demo content removed (%d objects).', count( $report['removed'] ) )
 		);
 	}
 

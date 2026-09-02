@@ -64,6 +64,18 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   `privacidad` **antes** que `contacto`, para que el aviso sea cierto antes de que el formulario
   llegue a la página. Sin CF7 todo esto es inerte: nada fatal, y el theme rinde los canales
   WhatsApp/correo.
+- Sin contenido demo del instalador desde D-02 / OWN-024 (v0.7.2,
+  [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)): un WordPress recién
+  instalado publica «Hello world!» y «Sample Page» y deja un borrador «Privacy Policy», y esa
+  entrada demo desplaza contenido real del Inicio y de `/blog`.
+  `Cdd_Core_Installer_Demo_Content` los reconoce por tipo + slug por defecto (también los
+  traducidos de una instalación en español) + el estado en que los deja el instalador, nunca
+  por ID; cualquier objeto con `_cdd_source_key` es contenido importado y queda intacto.
+  `cdd_core_activate()` y `cdd_core_maybe_upgrade()` los **despublican** —así un entorno
+  provisionado sin el paso manual tampoco los muestra— y `wp cdd-core demo purge [--apply]`
+  los **borra**: dry-run por defecto, idempotente, guard de producción, y limpia
+  `wp_page_for_privacy_policy` si apuntaba al borrador borrado. Borrar no es nunca un efecto
+  secundario de la activación (ADR 0033).
 - El metabox de autores en wp-admin sigue pendiente (ADR 0037). La UI Gutenberg queda
   acotada por ADR 0042: panel nativo **o** clásico con sync REST demostrado; TDD primero;
   el guard no se relaja. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.

@@ -701,8 +701,17 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    «Estamos conectados, pero seguimos solos». Es la única diferencia de copy del Inicio frente a
    producción (similitud 0.987). También siguen presentes «Sample Page» (publicada) y «Privacy
    Policy» (borrador). Runbook §2.2 lo convierte en requisito duro de provisión.
-   **Cerrado 2026-09-01 (OWN-024):** código pendiente
-   ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
+   **Cerrado 2026-09-01 (OWN-024).** **Implementado 2026-09-02** en el plugin **0.7.2**
+   ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)):
+   `Cdd_Core_Installer_Demo_Content` reconoce los defaults del instalador por tipo + slug +
+   estado (no por ID 1/2/3, que no es estable en un sitio con contenido importado) e ignora
+   todo objeto con `_cdd_source_key`; `cdd_core_activate()` y `cdd_core_maybe_upgrade()` los
+   **despublican**, y `wp cdd-core demo purge [--apply]` los **borra** (dry-run por defecto,
+   guard de producción, y limpia `wp_page_for_privacy_policy` si apuntaba al borrador
+   borrado). Cubierto por `tests/Unit/Installer_Demo_ContentTest.php` (11 tests) y
+   `tests/WordPress/Demo_Content_RemovalTest.php` (8). `Pass (local)`: unit 201/201,
+   wp-phpunit 130/130, PHPCS limpio. El **volumen local ya importado** no queda limpio hasta
+   que ese WordPress cargue el plugin 0.7.2 (`init` → `maybe_upgrade`).
 3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` responden **200**
    en WordPress y **404** en producción publicada. No están en `docs/11-arbol-urls-final.md`, que
    dice «si una URL no está aquí, no existe». **Cerrado 2026-09-01 (OWN-025 / ADR 0044):** 404
