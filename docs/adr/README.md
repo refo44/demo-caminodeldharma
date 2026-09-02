@@ -119,9 +119,11 @@ Documentos, issues, commits o ADR relacionados.
 | [0038](0038-pruebas-tdd-phpunit-sonar.md) | Pruebas TDD, wp-phpunit y SonarQube Cloud | Aceptada |
 | [0039](0039-aviso-privacidad-provisional-estatico.md) | Aviso de privacidad provisional en el estático | Aceptada; gate CF7 / espera legal sustituidos → [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | [0040](0040-retirar-content-source-produccion-como-fuente.md) | Retirar `content-source`; producción publicada gobierna el contenido | Aceptada |
-| [0041](0041-cf7-corte-sin-asesoria-legal.md) | Contact Form 7 en el corte sin esperar asesoría legal | Aceptada |
+| [0041](0041-cf7-corte-sin-asesoria-legal.md) | Contact Form 7 en el corte sin esperar asesoría legal | Aceptada; punto 5 → [0045](0045-cf7-entrega-gate-corte.md) |
 | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) | Meta en Gutenberg: sin metabox clásico sin sync; no es defecto de corte | Aceptada |
 | [0043](0043-trunk-based-conventional-branch-commits.md) | Trunk-based en `main`; Conventional Branch + Conventional Commits | Aceptada |
+| [0044](0044-feeds-nativos-404.md) | Feeds nativos de WordPress responden 404 | Aceptada |
+| [0045](0045-cf7-entrega-gate-corte.md) | Entrega de correo CF7 es gate del corte | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -142,7 +144,7 @@ Documentos, issues, commits o ADR relacionados.
 | Entorno de desarrollo local WordPress | [0023](0023-entorno-local-wordpress-docker.md) — Docker, replicando versiones de Hostinger; tarea separada de implementar el theme |
 | Dominio en plugin, presentación en theme | [0024](0024-plugin-dominio-theme-presentacion.md) — `camino-del-dharma-core` dueño de CPTs/taxonomías/roles desde el inicio de Fase 3 |
 | Plugins de terceros | [0025](0025-politica-plugins-terceros.md) — solo con ADR propio; vetados por defecto: ACF, page builders, suites SEO todo-en-uno |
-| Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón <caminodeldharma1@gmail.com>; producción en el corte: [0041](0041-cf7-corte-sin-asesoria-legal.md) |
+| Formulario de contacto en WordPress | [0026](0026-contact-form-7.md) — Contact Form 7, buzón <caminodeldharma1@gmail.com>; producción en el corte: [0041](0041-cf7-corte-sin-asesoria-legal.md); entrega: [0045](0045-cf7-entrega-gate-corte.md) |
 | Estándares de código en Fase 3 | [0027](0027-estandares-ingenieria-codigo.md) — criterio senior + SOLID/KISS/YAGNI/Clean Code cuando aplique; WPCS y seguridad de WordPress no negociables |
 | Política de privacidad | [0039](0039-aviso-privacidad-provisional-estatico.md) — `/privacidad` publicada (provisional); [0028](0028-privacidad-aplazada-conscientemente.md) sustituida. Contact Form 7 en el corte: [0041](0041-cf7-corte-sin-asesoria-legal.md) (sin espera legal; copy WordPress del formulario) |
 | Arquitectura del theme WordPress | [0029](0029-theme-bloques-full-site-editing.md) — theme de bloques (Full Site Editing); paleta, tipografía y espaciado editables desde wp-admin vía `theme.json`/Global Styles; sustituye a [0009](0009-css-y-tokens-invariantes-en-migracion.md) solo para WordPress |
@@ -157,9 +159,11 @@ Documentos, issues, commits o ADR relacionados.
 | Pruebas / TDD / Sonar | [0038](0038-pruebas-tdd-phpunit-sonar.md) — TDD desde el FSE; tres niveles; Automatic Analysis solo plugin + theme |
 | Aviso de privacidad en el estático | [0039](0039-aviso-privacidad-provisional-estatico.md) — página publicada; copy técnico; gate CF7 sustituido por [0041](0041-cf7-corte-sin-asesoria-legal.md) |
 | Fuente editorial pre-corte | [0040](0040-retirar-content-source-produccion-como-fuente.md) — `content-source/` retirado; producción publicada gobierna contenido y presentación |
-| CF7 en el corte | [0041](0041-cf7-corte-sin-asesoria-legal.md) — sin espera de asesoría legal; disclaimer publicado basta; copy WordPress del formulario |
+| CF7 en el corte | [0041](0041-cf7-corte-sin-asesoria-legal.md) — sin espera de asesoría legal; disclaimer publicado basta; copy WordPress del formulario; entrega: [0045](0045-cf7-entrega-gate-corte.md) |
 | Meta wp-admin / Gutenberg | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) — restricciones META-*; no blocker de corte |
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
+| Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
+| Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
 
 ---
 
@@ -168,10 +172,9 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.27);
-  OWN-020 / D-08 decidido, implementación pendiente; OWN-021 / D-09 overflow dejado al corte;
-  POST-008 wrap post-corte; `POST-001`–`POST-007` de i18n; `META-*`
-  decididos como restricciones (ADR 0042); no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.28);
+  cierre WU-10 OWN-021–OWN-035; D-02/D-03/D-04/D-08 pendientes de código; `POST-*`; `META-*`
+  (ADR 0042); no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

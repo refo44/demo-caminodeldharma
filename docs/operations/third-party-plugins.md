@@ -1,20 +1,20 @@
 # Operaciones — Plugins de terceros
 
-Registro durable exigido por FABLE5 v2.4 §12. Política: **native-first** (ADR 0025) —
+Registro durable de plugins de terceros. Política: **native-first** (ADR 0025) —
 1) APIs de WordPress core y bloques Gutenberg; 2) código first-party en
 `camino-del-dharma-core`; 3) plugin de terceros **solo** con ADR aceptada que lo apruebe.
 
 | | |
 | --- | --- |
-| **Versión** | 1.2 |
-| **Fecha** | 2026-08-31 |
+| **Versión** | 1.3 |
+| **Fecha** | 2026-09-01 |
 | **Estado** | Vigente |
 
 ## Aprobados
 
 | Plugin | ADR | Estado | Condiciones |
 | --- | --- | --- | --- |
-| Contact Form 7 | ADR 0026 | Aprobado; **elegible en el corte** (ADR 0041 / OWN-018) | Destino `caminodeldharma1@gmail.com`. Local/staging con datos sintéticos en WU-09. Antes de activarlo en un entorno WordPress: aplicar el delta de `/privacidad` (párrafos del formulario). Revisión legal **no** es prerrequisito. Entrega real verificada en staging Hostinger antes del release. Fallback operativo: CF7 deshabilitado + WhatsApp/correo, registrado en matriz y checklist. |
+| Contact Form 7 | ADR 0026 | Aprobado; **elegible en el corte** (ADR 0041 / OWN-018). **Entrega = gate** (ADR 0045 / OWN-033) | Destino de producción `caminodeldharma1@gmail.com`. Prueba técnica de staging puede ir a `refo44@gmail.com`. El form público no queda en Gmail personal. Revisión legal **no** es prerrequisito. Cortar con CF7 off ya no es el default. |
 
 ## Versiones instaladas por entorno
 
@@ -24,7 +24,7 @@ versión que corre cada entorno solo consta aquí.
 | Entorno | Plugin | Versión | Fecha | Notas |
 | --- | --- | --- | --- | --- |
 | Local (Docker, ADR 0023) | Contact Form 7 | **6.1.7** | 2026-08-31 (WU-09) | Instalado con `wp plugin install contact-form-7 --activate`; vive en el volumen `wp_data`, nunca en el árbol del repositorio. Formulario provisionado con `wp cdd-core contact provision --apply`. `wp_mail()` devuelve `false` (sin MTA en el contenedor): la validación está probada, la **entrega no**. |
-| Staging Hostinger | Contact Form 7 | — | — | Pendiente (OWN-005). Aquí se verifica la entrega real antes del release. |
+| Staging Hostinger | Contact Form 7 | — | — | Pendiente (OWN-035). Prueba técnica: `refo44@gmail.com`. Gate de corte: buzón comunitario (ADR 0045). |
 | Producción | Contact Form 7 | — | — | Pendiente del corte. |
 
 ## Procedimiento por entorno (WU-09)

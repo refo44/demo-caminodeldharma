@@ -2,7 +2,9 @@
 
 ## Estado
 
-Aceptada
+Aceptada. El **punto 5** de la decisión (fallback si el correo de staging falla) está
+**sustituido** por [0045](0045-cf7-entrega-gate-corte.md) (2026-09-01). El resto de este ADR
+sigue vigente.
 
 ## Fecha
 
@@ -43,9 +45,9 @@ aviso.
    El importer sigue trayendo el copy live; la conversión field-scoped de WU-09 aplica el delta
    del punto 3 sobre la Page de WordPress.
 5. **Entrega real** a `caminodeldharma1@gmail.com` se verifica en staging Hostinger antes del
-   corte (`Pass (local)` no basta). Si el correo de staging falla, el corte puede seguir con CF7
-   deshabilitado y WhatsApp/correo, registrado en matriz y checklist — eso es un fallo operativo,
-   no un gate jurídico.
+   corte (`Pass (local)` no basta). **Sustituido 2026-09-01:** el corte con CF7 activo **espera**
+   esa prueba (ADR [0045](0045-cf7-entrega-gate-corte.md) / OWN-033). El fallback «CF7 apagado +
+   WhatsApp/correo» ya no es el camino por defecto.
 6. No se añade otro plugin antispam sin ADR propia.
 
 Copy aprobado para los campos del punto 3 (español de la voz del sitio):
@@ -83,8 +85,8 @@ Este ADR **sustituye** el gate de Contact Form 7 y la espera de revisión legal 
 
 - WU-09 deja de estar bloqueado por PRIV-001b. Gate restante: copy WordPress del §2.2 según este
   ADR + verificación de entrega en staging.
-- OWN-018 registra la decisión de dueño. Matriz, checklist, FABLE5, prompt y reglas de agente se
-  alinean.
+- OWN-018 registra la decisión de dueño. Matriz, checklist y reglas de agente se alinean.
+  Entrega: ADR [0045](0045-cf7-entrega-gate-corte.md).
 - PRIV-001b permanece abierto como trabajo jurídico *posterior* al corte, no como ítem de
   lanzamiento.
 - El importer no pisa el delta de `/privacidad` en re-import (create-missing-only; force de campo
@@ -97,5 +99,6 @@ Este ADR **sustituye** el gate de Contact Form 7 y la espera de revisión legal 
 - ADR [0028](0028-privacidad-aplazada-conscientemente.md) — aplazamiento histórico de publicar
 - ADR [0026](0026-contact-form-7.md) — plugin y buzón
 - ADR [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica
-- `docs/backlog-decisiones-owner-migracion.md` — OWN-018
+- `docs/backlog-decisiones-owner-migracion.md` — OWN-018 · OWN-033
+- ADR [0045](0045-cf7-entrega-gate-corte.md) — gate de entrega (sustituye el punto 5)
 - `static/privacidad/index.html` — copy live hasta el corte

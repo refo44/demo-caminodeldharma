@@ -9,10 +9,10 @@ Playbook operativo de **este** repositorio para Fase 3. Complementa —no sustit
 Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio con forma parecida
 (estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
 pipelines de otros proyectos. El backlog de dueño de la auditoría 2026-08-19 está **cerrado**
-(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.27; OWN-020 / D-08 pendiente de
-código; OWN-021 / D-09 overflow dejado al corte; POST-008 wrap post-corte; `POST-*` i18n no se
-implementan
-en el corte). No reabrir autores/galería/ICS sin decisión nueva. CF7 en el corte: ADR 0041.
+(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.28; D-02/D-03/D-04/D-08 código
+pendiente; `POST-008`–`010` decididos, no se implementan en el corte). No reabrir
+autores/galería/ICS sin decisión nueva. CF7: ADR 0041 (elegibilidad) + ADR 0045 (entrega).
+Staging Hostinger solo después de D-02/D-03/D-04 en `main` (OWN-035).
 
 **Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción → FSE** (sin theme PHP clásico).
 Theme activado ≠ migración completa. Template ≠ Page. Deploy success ≠ application success.

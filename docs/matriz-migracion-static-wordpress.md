@@ -105,7 +105,7 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 |---|---|---|---|---|---|---|---|---|---|
 | `/blog` | `blog/index.html` | Listado estático | Página de entradas / `home` | `/blog` | `templates/home.html` | `main.js` | — | Ajuste «página de entradas» + posts | 200; listado; no 404 |
 | `/blog/circulos-de-presencia-consciente` | `blog/circulos-de-presencia-consciente/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | Imagen de entrada si aplica | post + meta `authors` → ficha Comunidad | 200; byline CPT (ADR 0037) |
-| `/blog/sangha-refugio-hiperconexion` | `blog/sangha-refugio-hiperconexion/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | — | post + meta `authors` → ficha Zheng Gong | 200; byline CPT (ADR 0037); overflow 320 px **igual que live** (OWN-021); wrap WP-only post-corte [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
+| `/blog/sangha-refugio-hiperconexion` | `blog/sangha-refugio-hiperconexion/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | — | post + meta `authors` → ficha Zheng Gong | 200; byline CPT (ADR 0037) |
 | `/author/zheng-gong` *(nueva)* | *no existe en static* | ficha | `blog_author` | `/author/zheng-gong` | `single-blog_author.html` | `main.js` | `foto-biografia-fundador.jpg` (OWN-020) | seed CPT + `seo` + bio corta + thumb **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) | 200; `query_var` ≠ `author`; no es user; `index,follow` + meta description publicada |
 | `/author/comunidad-camino-del-dharma` *(nueva)* | *no existe en static* | ficha | `blog_author` | `/author/comunidad-camino-del-dharma` | `single-blog_author.html` | `main.js` | `comunidad-quienes-somos.jpg` (OWN-020) | seed CPT + `seo` + bio corta + thumb **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) | 200; mismo tipo que Zheng Gong; `index,follow` + meta description publicada |
 | `/blog/tag/{slug}` | *no existe en static* | Tags nativos | `post_tag` archive | `/blog/tag/{slug}` | jerarquía nativa; `taxonomy-post_tag.html` opcional | `main.js` | — | N/A en corte inicial si no hay tags | Existe (no 404); `noindex,follow` hasta volumen (ADR 0031) |
@@ -204,8 +204,8 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Superficie | Local | Staging | Producción |
 | --- | --- | --- | --- |
 | Conteos por colección (11/10/2/2/3/35/81) | `verify` con `missing: []` — Pass (local) | Unverified | línea base OWN-007 |
-| Fila «Modalidad» en `/eventos/{slug}` | **ausente** en los 9 eventos con modalidad (entorno importado con payload previo; importador create-missing-only) — Fail (local) | debe aparecer en una importación limpia — Unverified | publicada |
-| Contenido demo del install | «Hello world!» desplaza una entrada real en el Inicio y `/blog` — Fail (local) | requisito duro: instalación limpia — Unverified | no aplica |
+| Fila «Modalidad» en `/eventos/{slug}` | **ausente** en los 9 eventos con modalidad (entorno importado con payload previo; importador create-missing-only) — Fail (local) | OWN-023: import limpio una vez; create-missing-only; **no** backfill | publicada |
+| Contenido demo del install | «Hello world!» desplaza una entrada real en el Inicio y `/blog` — Fail (local) | OWN-024 / [#10](https://github.com/refo44/demo-caminodeldharma/issues/10): cero demo; código pendiente **antes** de staging | no aplica |
 | Copy institucional | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` idénticos (1.000) — Pass (local) | Unverified | línea base |
 | Delta `/privacidad` (ADR 0041) | aplicado solo en WordPress — Pass (local) | Unverified | estático intacto |
 | `.ics` de Círculos | 10 VEVENT — Pass (local) | Unverified | 1 VEVENT (delta aceptado) |
@@ -214,11 +214,11 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 | Superficie | Local | Staging | Producción |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | Unverified | no desborda |
+| 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | OWN-026 / [#12](https://github.com/refo44/demo-caminodeldharma/issues/12): arreglar **antes** de staging | no desborda |
 | 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
-| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel; OWN-021)* | Unverified | **también 339 px**; wrap WP-only **post-corte** POST-008 [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) |
-| Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | depende de `wp language core install es_CO` — Unverified | no aplica |
-| Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | Unverified | comillas rectas |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | OWN-021: dejar en el corte; wrap POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) | **también 339 px** |
+| Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | OWN-027: staging `es_CO` + lightbox en español; local puede quedar en inglés | no aplica |
+| Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | OWN-028: aceptar | comillas rectas |
 | Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |
 | Lector de pantalla real | no ejecutable | Unverified | — |
 
@@ -232,7 +232,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Archivos de usuario WP en 404 (ADR 0037) | `/author/admin`, `/?author=1` → 404 — Pass (local) | Unverified | no aplica |
 | Rutas `.ics` (200/410/404) | correctas — Pass (local) | Unverified | 200 solo el vigente |
 | Reglas del `.htaccess` desplegable | **no ejercitadas**: el contenedor usa el `.htaccess` por defecto | Unverified | vigentes |
-| Feeds `/feed`, `/blog/feed`, `/comments/feed` | **200** (fuera de docs/11) | Unverified | **404** |
+| Feeds `/feed`, `/blog/feed`, `/comments/feed` | **200** (fuera de docs/11) | ADR 0044 / OWN-025 / [#11](https://github.com/refo44/demo-caminodeldharma/issues/11): **404** real; código pendiente **antes** de staging | **404** |
 | Políticas noindex (álbum, `/author`, tag) | correctas — Pass (local) | Unverified | no aplica |
 
 ### BEHAVIOR
@@ -242,9 +242,9 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Diálogo de calendario + enlaces profundos | próxima sesión (3 sep 2026) y nota BUG-001 — Pass (local) | Unverified | rango único |
 | Escape cierra el diálogo | inconcluso (el panel de automatización consume la tecla); `cancel` no se previene | Unverified | — |
 | Formulario CF7 en `/contacto` | renderiza y postea — Pass (local) | Unverified | `action="#"` |
-| Entrega de correo a `caminodeldharma1@gmail.com` | `wp_mail()` **FALSE** (sin MTA, remitente inválido) | **Unverified — bloqueante de release** | no aplica |
+| Entrega de correo a `caminodeldharma1@gmail.com` | `wp_mail()` **FALSE** (sin MTA, remitente inválido) | ADR 0045 / OWN-033: prueba técnica → `refo44@gmail.com`; **gate del corte** = cliente confirma el buzón comunitario | no aplica |
 | Cookies anónimas | ninguna en 11 superficies — Pass (local) | Unverified | ninguna |
-| `sessionStorage` de `wp-emoji` | presente (el estático no usaba almacenamiento) | Unverified | ninguno |
+| `sessionStorage` de `wp-emoji` | presente (el estático no usaba almacenamiento) | OWN-022: aceptar; no desactivar `wp-emoji` | ninguno |
 | Seguimiento / analítica | ausente — Pass (local) | Unverified | ausente |
 
 ### OPERATIONS
@@ -262,4 +262,4 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 ---
 
-**Versión:** 1.5 · **Fecha:** 2026-08-31 · **Estado de filas:** inventario + avance WU-06/WU-07; CF7 y el delta de `/privacidad` **implementados** en WU-09; **QA local completa en WU-10** (staging sin crear; entrega de correo pendiente)
+**Versión:** 1.6 · **Fecha:** 2026-09-01 · **Estado de filas:** inventario + WU-10 QA local; cierre dueño D-01–D-12 (OWN-021–OWN-035). Staging Hostinger **después** de D-02/D-03/D-04 en `main`. Entrega CF7: ADR 0045.

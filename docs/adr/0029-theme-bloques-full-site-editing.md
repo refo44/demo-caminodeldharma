@@ -125,4 +125,3 @@ clásico PHP como puente. Eso es exactamente esta decisión; no la altera. No im
   1 de esa decisión), no un page builder de terceros; los vetados (Elementor, Divi) siguen vetados.
 - ADR [0014](0014-monorepo-static-wordpress.md) — implementaciones estático/WordPress ya separadas.
 - `docs/12-theme-file-structure.md`, `docs/14-css-architecture.md`, `docs/02-identidad-corporativa.md`
-- `docs/FABLE5-Fase3-WordPress-Master-Prompt-v1.md` §7.2, §9

@@ -97,6 +97,7 @@ archivo su propio `h1` (docs/19 §9).
 |--------|--------------|
 | Sin eventos vigentes | En `/eventos/` se muestra mensaje amable; el ítem Eventos en el menú puede ocultarse. |
 | 404 | Cualquier URL fuera del árbol. No existe ruta pública `/404/`; WordPress sirve la plantilla `404.php` para rutas no definidas aquí. Referencia interna de diseño: estado 404, no URL del árbol. |
+| Feeds nativos (`/feed`, `/blog/feed`, `/comments/feed`, alias) | **404** en el corte (ADR 0044 / OWN-025). No están en el árbol. RSS futuro: POST-010. |
 
 ---
 
@@ -139,4 +140,4 @@ theme no publica la ruta: hace falta el objeto WordPress y rewrite (ADR 0032). C
 
 ---
 
-**Versión:** 1.7 — `/privacidad` publicada (ADR 0039). El listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz: `matriz-migracion-static-wordpress.md`.
+**Versión:** 1.8 — feeds nativos **404** en el corte (ADR 0044 / OWN-025). `/privacidad` publicada (ADR 0039). El listado `/eventos/` enlaza a `/eventos/{slug}/` cuando el evento tiene ficha. Matriz: `matriz-migracion-static-wordpress.md`.

@@ -140,12 +140,11 @@ El playbook Docker (ADR 0023) cubre el entorno de **desarrollo** (volumen persis
 sobrevive?», usa wp-phpunit. Si es una pantalla wp-admin o una ruta HTTP, usa un harness
 aislado. No uses un harness para evitar wp-phpunit.
 
-### Relación con los niveles QA de FABLE5
+### Relación con los niveles QA de evidencia de migración
 
-FABLE5 (master prompt de Fase 3) habla de cuatro niveles de *evidencia de migración*. Esta
-guía habla de *runners*. Se complementan; no se duplican:
+Cuatro niveles de *evidencia* (histórico FABLE5) frente a los *runners* de esta guía:
 
-| FABLE5 | Esta guía |
+| Evidencia | Esta guía |
 | --- | --- |
 | QA 1 static checks | Gate barato: `php -l`, Stylelint, PHPCS/WPCS (ADR 0027), `composer audit --locked` |
 | QA 2 component checks | PHPUnit nivel 1 + wp-phpunit nivel 2 |

@@ -1,7 +1,5 @@
 # Changelog
 
-<!-- markdownlint-disable MD024 MD060 -->
-
 Historial de versiones publicadas en producción. Hostinger no conserva un registro de despliegues cuando se sube un ZIP manualmente; este archivo es la referencia canónica de qué está en vivo.
 
 La versión actual del repositorio está en [`VERSION`](VERSION).
@@ -12,18 +10,18 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
-### Gobernanza — D-09 / OWN-021: overflow Sangha en el corte; wrap post-corte (POST-008)
+### Gobernanza — cierre WU-10 (OWN-021–OWN-035, ADR 0044/0045)
 
-El propietario deja el desbordamiento 339 vs 320 px de `/blog/sangha-refugio-hiperconexion`
-(paridad con producción). Wrap **solo en WordPress** después de que WP sirva
-`caminodeldharma.org`: [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). Backlog v1.27.
+Registro 2026-09-01: D-01–D-12, seed Hostinger, correo CF7, FABLE5, timing de staging. Código
+pre-staging: issues [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12).
+Backlog v1.28. Los prompts FABLE5 se retiran de `docs/` (OWN-034).
 
 ### Gobernanza — D-08 / OWN-020: SEO de fichas de autor (pendiente de implementar)
 
 El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las
 fichas reutilizan copy corto y fotos ya publicados; no se inventa texto ni se duplica el ensayo
 largo de `/comunidad`. Código **no** entra en este registro: cola
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5).
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Backlog v1.26.
 
 ### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
 

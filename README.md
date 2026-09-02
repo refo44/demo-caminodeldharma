@@ -179,7 +179,10 @@ La migración no está completa porque un theme esté desplegado. Contrato: [`do
 
 ## Próximos pasos
 
-Según `docs/17-orden-implementacion.md` (§ Transición): producción = sitio estático (`static/` desde el arranque de Fase 3). WordPress en staging paralelo. Despliegues **manuales**. Ledger de diferencias: [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR: [`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
+Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`: D-02/D-03/D-04 en
+`main` (issues #10–#12) **antes** de crear staging Hostinger (OWN-035). Ledger:
+[`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR:
+[`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
 
 ## Autor
 

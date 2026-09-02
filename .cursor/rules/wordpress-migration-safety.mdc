@@ -50,15 +50,13 @@ Five independent deliverables: **CONTENT**, **PRESENTATION**, **ROUTING**, **BEH
 - After verified implementation, update the migration matrix and durable docs.
 - Do not create a classic PHP theme as a stepping stone. Fase 3 is static HTML → `templates/*.html`.
 
-Owner audit backlog is closed for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`, v1.27).
-OWN-020 / D-08 (author entity SEO) is **decided**; implementation is pending GitHub issue #5 —
-do not `noindex` author singles and do not invent copy. OWN-021 / D-09: leave Sangha 320px
-overflow at cutover; WordPress-only wrap after WP is production (issue #7). `POST-*` rows are
-later-phase; do not implement them at cutover. Binding later ADRs:
+Owner audit backlog is closed for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`, v1.28).
+OWN-020 / D-08 pending issue #5. D-02/D-03/D-04 (issues #10–#12) on `main` before Hostinger
+(OWN-035). CF7 delivery: ADR 0045. Feeds: ADR 0044. `POST-*` later-phase except their stated
+gates. Binding later ADRs:
 0035 (event singles), 0036 (gallery album URLs), 0037 (blog author CPT / `/author/{slug}`),
-0038 (TDD, wp-phpunit, Sonar scope), 0041 (CF7 at cutover without legal-review wait),
-0042 (Gutenberg meta UI: no unsynced classic metabox at cutover; META-* are design
-constraints, not pre-staging defects). Testing
+0038 (TDD, wp-phpunit, Sonar scope), 0041 (CF7 without legal-review wait),
+0042 (Gutenberg meta UI), 0044 (feeds 404), 0045 (CF7 mail cutover gate). Testing
 guide: `docs/guia-pruebas-plugin-theme-fse.md`.
 Do not mock WordPress APIs. Do not write FSE production code before a failing test. Sonar is WordPress-only (not the static site).
 
