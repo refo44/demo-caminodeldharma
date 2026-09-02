@@ -42,6 +42,12 @@ final class Feed_RoutingTest extends WP_UnitTestCase {
 		add_filter( 'status_header', array( $this, 'record_status' ), 10, 2 );
 	}
 
+	public function tear_down() {
+		remove_filter( 'status_header', array( $this, 'record_status' ), 10 );
+
+		parent::tear_down();
+	}
+
 	/**
 	 * Records the status code WordPress sends for the current request.
 	 *
