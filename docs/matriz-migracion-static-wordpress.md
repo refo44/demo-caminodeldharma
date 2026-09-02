@@ -232,7 +232,8 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Archivos de usuario WP en 404 (ADR 0037) | `/author/admin`, `/?author=1` → 404 — Pass (local) | Unverified | no aplica |
 | Rutas `.ics` (200/410/404) | correctas — Pass (local) | Unverified | 200 solo el vigente |
 | Reglas del `.htaccess` desplegable | **no ejercitadas**: el contenedor usa el `.htaccess` por defecto | Unverified | vigentes |
-| Feeds `/feed`, `/blog/feed`, `/comments/feed` | **200** (fuera de docs/11) | ADR 0044 / OWN-025 / [#11](https://github.com/refo44/demo-caminodeldharma/issues/11): **404** real; código pendiente **antes** de staging | **404** |
+| Feeds `/feed`, `/blog/feed`, `/comments/feed` y alias (`rdf`/`rss`/`rss2`/`atom`, `?feed=`, comentarios, autor) | **404** real — Pass (local, plugin 0.7.3; D-03 / ADR 0044 / OWN-025, [#11](https://github.com/refo44/demo-caminodeldharma/issues/11)) | Unverified | **404** |
+| Autodiscovery RSS/Atom en el `head` | **ausente** — Pass (local); el `rel=alternate` de calendario del evento vigente se mantiene (OWN-014) | Unverified | ausente |
 | Políticas noindex (álbum, `/author`, tag) | correctas — Pass (local) | Unverified | no aplica |
 
 ### BEHAVIOR
@@ -262,4 +263,4 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 ---
 
-**Versión:** 1.6 · **Fecha:** 2026-09-01 · **Estado de filas:** inventario + WU-10 QA local; cierre dueño D-01–D-12 (OWN-021–OWN-035). Staging Hostinger **después** de D-02/D-03/D-04 en `main`. Entrega CF7: ADR 0045.
+**Versión:** 1.7 · **Fecha:** 2026-09-02 · **Estado de filas:** inventario + WU-10 QA local; cierre dueño D-01–D-12 (OWN-021–OWN-035). D-02 y D-03 **implementados** (plugin 0.7.3). Staging Hostinger **después** de D-02/D-03/D-04 en `main`. Entrega CF7: ADR 0045.

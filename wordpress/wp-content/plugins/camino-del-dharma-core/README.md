@@ -76,6 +76,17 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   los **borra**: dry-run por defecto, idempotente, guard de producción, y limpia
   `wp_page_for_privacy_policy` si apuntaba al borrador borrado. Borrar no es nunca un efecto
   secundario de la activación (ADR 0033).
+- Sin feeds nativos desde D-03 / OWN-025 (v0.7.3, ADR 0044,
+  [#11](https://github.com/refo44/demo-caminodeldharma/issues/11)): producción publicada
+  responde 404 en `/feed`, `/blog/feed` y `/comments/feed`, y ninguna de esas URLs está en
+  `docs/11-arbol-urls-final.md`. `cdd_core_block_feed_requests()` convierte cualquier petición
+  con `feed` en la query en un 404 **real** antes de la consulta principal —una sola guarda
+  cubre `feed`/`rdf`/`rss`/`rss2`/`atom`, bonita o `?feed=`, del sitio, de `/blog`, de
+  comentarios, de archivo y de CPT— y `cdd_core_disable_feed_autodiscovery()` retira
+  `feed_links` y `feed_links_extra` del `head`. Sin 301 a `/blog` y sin 200 con `noindex`. El
+  `rel=alternate` `text/calendar` del evento vigente (OWN-014) no se toca. Un RSS público es
+  decisión posterior (POST-010): reabrirlo es soltar esos dos hooks, más su fila en el árbol
+  de URLs y en el ledger.
 - El metabox de autores en wp-admin sigue pendiente (ADR 0037). La UI Gutenberg queda
   acotada por ADR 0042: panel nativo **o** clásico con sync REST demostrado; TDD primero;
   el guard no se relaja. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
