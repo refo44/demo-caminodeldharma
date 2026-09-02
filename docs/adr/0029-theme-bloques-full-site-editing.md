@@ -89,8 +89,8 @@ de WordPress, no como theme clásico PHP.
 **Riesgos:**
 
 - Reescribe la arquitectura de archivos documentada en `docs/12-theme-file-structure.md` (plantillas
-  PHP → plantillas de bloques) y las secciones del master prompt de Fase 3 que asumían theme clásico;
-  ambos se actualizan junto con este ADR.
+  PHP → plantillas de bloques). El master prompt FABLE5 que asumía theme clásico se actualizó
+  junto con este ADR y más tarde se retiró (OWN-034); el registro durable es este ADR y docs/12.
 - Global Styles permite cambios post-lanzamiento; hace falta una captura de referencia del `theme.json`
   inicial como línea base de paridad visual para QA futura (ver Trabajo futuro).
 - Requiere una versión de WordPress con soporte completo de theme de bloques (WP 6.x); ya es la
