@@ -94,7 +94,7 @@ final class Theme_Audio_ContainmentTest extends TestCase {
 
 			$floor_lifted = isset( $declarations['min-width'] ) && $this->is_zero( $declarations['min-width'] );
 			$capped       = isset( $declarations['max-width'] ) && '100%' === $declarations['max-width'];
-			$border_box   = ! isset( $declarations['box-sizing'] ) || 'border-box' === $declarations['box-sizing'];
+			$border_box   = isset( $declarations['box-sizing'] ) && 'border-box' === $declarations['box-sizing'];
 
 			if ( $floor_lifted && $capped && $border_box ) {
 				$contained = true;
@@ -103,7 +103,7 @@ final class Theme_Audio_ContainmentTest extends TestCase {
 
 		$this->assertTrue(
 			$contained,
-			'The rule that beats core must set min-width to 0 and max-width to 100% on the player.'
+			'The rule that beats core must set min-width to 0, max-width to 100%, and box-sizing to border-box on the player.'
 		);
 	}
 
