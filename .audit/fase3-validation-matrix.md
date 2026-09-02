@@ -741,7 +741,8 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
 10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
     `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
     alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no
-    hay cookies. **Cerrado 2026-09-01 (OWN-022, A):** delta aceptado.
+    hay cookies. **Cerrado 2026-09-01 (OWN-022, A):** delta aceptado. No desactivar `wp-emoji`.
+    ADR 0019 (sin cookies de analítica) no cambia.
 11. **D-11 — `wp term list gallery_album` muestra `count = 0`.** Cosmético: la taxonomía vive
     sobre adjuntos (`post_status = inherit`) y el contador del núcleo solo cuenta `publish`. Las
     asignaciones reales son 35 y el theme consulta los adjuntos directamente. Se verá un 0 junto

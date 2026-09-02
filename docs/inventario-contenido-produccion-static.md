@@ -5,9 +5,9 @@ ADR 0039). No es un extracto ejecutado: es el baseline documental. ADR
 [0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
 [0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 
-**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática:** raíz del repo (no hay
-`static/` todavía). **Deploy:** ZIP manual (ADR 0015). Extraer **lo más reciente del repo**
-(`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
+**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática en el repo:** `static/`
+(monorepo ADR 0014). **Deploy:** ZIP manual del contenido de `static/` (ADR 0015). Extraer **lo más
+reciente del repo** (`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
 eso es deuda de deploy, no la fuente del extracto.
 
 Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
@@ -16,8 +16,9 @@ Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **ST
 Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El archivo
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.28) queda
 como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
-pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Pre-staging:
-D-02/D-03/D-04 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
+pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09:
+overflow Sangha dejado al corte. OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado.
+Pre-staging: D-02/D-03/D-04 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
 antes de Hostinger (OWN-035). `POST-008`–`010` son posteriores al corte.
 
 ---
@@ -212,4 +213,4 @@ Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER 
 
 ---
 
-**Versión inventario:** 1.2 · **Repo:** 1.0.35 · **Fecha:** 2026-08-29
+**Versión inventario:** 1.2 · **Repo:** 1.0.35 · **Fecha:** 2026-09-01

@@ -10,7 +10,8 @@ Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio 
 (estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
 pipelines de otros proyectos. El backlog de dueño de la auditoría 2026-08-19 está **cerrado**
 (`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.28; D-02/D-03/D-04/D-08 código
-pendiente; `POST-008`–`010` decididos, no se implementan en el corte). No reabrir
+pendiente; OWN-021 / D-09 overflow dejado al corte; OWN-022 / D-10 `wp-emoji` aceptado;
+`POST-008`–`010` decididos, no se implementan en el corte). No reabrir
 autores/galería/ICS sin decisión nueva. CF7: ADR 0041 (elegibilidad) + ADR 0045 (entrega).
 Staging Hostinger solo después de D-02/D-03/D-04 en `main` (OWN-035).
 

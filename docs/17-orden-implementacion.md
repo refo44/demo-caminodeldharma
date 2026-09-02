@@ -632,11 +632,17 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
    **todas las sesiones** (`event_calendar_dates`), un VEVENT con UID propio cada una; diálogo y
    archivo comparten fuente, y como un enlace profundo lleva una sola entrada, el diálogo nombra
    la próxima sesión y lo dice. El `.ics` estático de la sola bienvenida no se copió ni se tocó.
-9. **WU-10:** QA local completa y runbook de staging.
+9. **WU-10:** QA local completa y runbook de staging. Desplegar a la instancia Hostinger separada
+   solo con autorización expresa (OWN-005).
 9b. **D-08 / OWN-020 (pendiente):** SEO/AEO de `/author/{slug}`. Issue
     [#5](https://github.com/refo44/demo-caminodeldharma/issues/5). **A2:** no bloquea el primer
-    import de staging.
-9c. **Pre-staging (OWN-035):** D-02 [#10](https://github.com/refo44/demo-caminodeldharma/issues/10),
+    import de staging. TDD (ADR 0038). No `noindex` en singles. No dummy.
+9c. **D-09 / OWN-021:** overflow 339 vs 320 px en `/blog/sangha-refugio-hiperconexion` **dejado**
+    en el corte (paridad live). Wrap WordPress-only **post-corte** (POST-008,
+    [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) cuando WP ya sirva
+    `caminodeldharma.org`.
+9d. **D-10 / OWN-022:** `sessionStorage` de `wp-emoji` **aceptado** (A). No desactivar. No issue.
+9e. **Pre-staging (OWN-035):** D-02 [#10](https://github.com/refo44/demo-caminodeldharma/issues/10),
     D-03 [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044), D-04
     [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) en `main` **antes** de crear
     Hostinger. Seed OWN-032. Correo ADR 0045 / OWN-033. FABLE5 retirado (OWN-034).

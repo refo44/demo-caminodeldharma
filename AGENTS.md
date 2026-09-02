@@ -130,8 +130,12 @@ ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
   Staging technical proof may use `refo44@gmail.com`. The public form never stays on personal Gmail.
 - Owner audit backlog is **closed** for Fase 3 (`docs/backlog-decisiones-owner-migracion.md`,
   v1.28). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
-  decision. **OWN-020 / D-08** implementation is pending
-  ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Pre-staging code:
+  decision. **OWN-020 / D-08** is decided (author entity SEO); implementation is pending
+  ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)) — do not `noindex`
+  singles and do not invent copy. **OWN-021 / D-09:** leave the Sangha 320px overflow at
+  cutover; WordPress-only wrap **after** WP is production on the canonical domain
+  ([issue #7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **OWN-022 / D-10:**
+  accept core `wp-emoji` `sessionStorage`; do not disable it. Pre-staging code:
   D-02/D-03/D-04 (issues #10–#12) before Hostinger (OWN-035). Later-phase rows (`POST-*`)
   including POST-008–010: do not implement them at cutover except as their gates say.
 - Gallery albums: taxonomy `/galeria/{slug}`, hub `/galeria` KEEP, term archives noindex until
