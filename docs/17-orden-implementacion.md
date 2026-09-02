@@ -623,6 +623,10 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
     y fotos publicados. Decidido; **no implementado**. Issue
     [#5](https://github.com/refo44/demo-caminodeldharma/issues/5). TDD (ADR 0038). No `noindex`
     en singles. No dummy.
+9c. **D-09 / OWN-021:** overflow 339 vs 320 px en `/blog/sangha-refugio-hiperconexion` **dejado**
+    en el corte (paridad live). Wrap WordPress-only **post-corte** (POST-008,
+    [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) cuando WP ya sirva
+    `caminodeldharma.org`.
 10. **Corte final:** ejecutar
     [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md); archivar el estático en tag.
 

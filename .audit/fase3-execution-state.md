@@ -607,6 +607,11 @@ fotos publicados. Implementación **pendiente**
 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No es copy sin dueño ni
 `noindex`. Git: trabajar desde `main` (ADR 0043); no reanudar en `fase3-wordpress`.
 
+**D-09 / OWN-021 (2026-09-01):** cerrado. Dejar el overflow 339 vs 320 px de
+`/blog/sangha-refugio-hiperconexion` en el corte (paridad live). Wrap WordPress-only **después**
+de que WP sea producción en `caminodeldharma.org`: POST-008 /
+[#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
+
 Antes de abrir esa sesión conviene decidir tres cosas con el propietario:
 
 1. **D-01 / D-04** (matriz § WU-10): si `event_modality` y el desbordamiento de `/practica` a

@@ -2,7 +2,7 @@
 
 Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT u otra) que no
 tiene acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y
-lo que está en curso, a fecha **2026-08-31**.
+lo que está en curso, a fecha **2026-09-01**.
 
 ---
 
@@ -23,21 +23,21 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 
 ---
 
-## 2. Estado actual (2026-08-30)
+## 2. Estado actual (2026-09-01)
 
 | Aspecto | Estado |
-|---|---|
+| --- | --- |
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Puede ir atrasada; no asumir paridad. Comparar contra live (OWN-006/007) |
-| **Fase activa** | Fase 2 **en producción**; Fase 3 (WordPress FSE) **documentada y lista**, **no iniciada** |
-| **Estructura del repo** | HTML en la **raíz**. `static/` aún no existe. `wordpress/` solo placeholders para Sonar |
+| **Fase activa** | Fase 2 **en producción** (estático live); Fase 3 (WordPress FSE) **en curso** en `wordpress/` (WU-00–WU-10 cerrados localmente; pendiente staging/corte) |
+| **Estructura del repo** | Monorepo (ADR 0014): HTML de producción en `static/`; plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` |
 | **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | Obligatorio cuando existan tests PHP: `.github/workflows/test.yml` (ADR 0038); no despliega |
 | **Auditoría de producción** | Completa (2026-07-19). Formulario sin backend real sigue pendiente hasta WordPress |
-| **Backlog de dueño (corte)** | **Cerrado** (v1.26): 0 abiertas, 21 decididas (OWN-001–OWN-020). OWN-020 / D-08: SEO de fichas de autor **pendiente de implementar** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). CF7 en el corte: OWN-018 / ADR 0041 |
-| **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n); **no** se implementan en el corte |
+| **Backlog de dueño (corte)** | **Cerrado** (v1.27): 0 abiertas, 22 decididas (OWN-001–OWN-021 + sub-ID `OWN-009-img`). OWN-020 / D-08: SEO de fichas de autor **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09: overflow Sangha dejado al corte; wrap post-corte ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). CF7 en el corte: OWN-018 / ADR 0041 |
+| **Fases posteriores** | `POST-001`–`POST-007` (inglés/i18n) abiertas. **POST-008** decidido: wrap Sangha **después** de WP en el dominio canónico ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **No** se implementan en el corte |
 
 ---
 
@@ -48,6 +48,7 @@ eventos, mantener un cronograma, incrustar videos, compartir testimonios y edita
 código ni servidor para el contenido editorial.
 
 **El sitio NO tiene, por decisión explícita:**
+
 - Buscador
 - Área privada / registro de usuarios
 - Sistema de cursos
@@ -67,10 +68,10 @@ funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 
 ## 4. Arquitectura de decisiones (ADR) — resumen
 
-Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
+Hay **43 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
-|---|---|---|
+| --- | --- | --- |
 | 0001 / 0002 | Estático = base definitiva; WordPress adapta, no rediseña | Paridad visual y de comportamiento |
 | 0003 | Sin PWA nunca | Web tradicional |
 | 0004 / 0005 | Git gobierna código; producción no se edita a mano | Trazabilidad |
@@ -96,8 +97,10 @@ Hay **40 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes ho
 | 0037 | CPT `blog_author` en `/author/{slug}`; no Users WP | — |
 | 0038 | TDD + wp-phpunit; Sonar solo plugin + theme | — |
 | 0039 | `/privacidad` publicada (provisional) | — |
-| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
 | 0040 | `content-source/` retirado; producción publicada gobierna pre-corte | — |
+| 0041 | CF7 en el corte sin espera de asesoría legal; copy WP del formulario | OWN-018 |
+| 0042 | Meta Gutenberg sin metabox clásico sin sync; no blocker de corte | META-* |
+| 0043 | `main` protegida; PR; Conventional Branch + Commits | — |
 
 ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda histórico para WordPress
 (sustituido por 0029); sigue describiendo el CSS del estático.
@@ -107,6 +110,7 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 ## 5. Modelo de contenido y URLs
 
 **Objetos en el corte:**
+
 - Pages institucionales (home, comunidad, linaje, práctica, videos, meditación, galería, donaciones,
   contacto, blog archivo, privacidad)
 - CPT `event` (10) — todos con single público (ADR 0035)
@@ -120,7 +124,8 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`.
 
 **Árbol canónico (sin barra final):**
-```
+
+```text
 /
 /comunidad
 /linaje
@@ -175,9 +180,9 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 ## 8. Despliegue
 
-- **Hoy (estático):** ZIP manual desde la raíz del repo (README). No incluir `docs/`, `scripts/`,
-  `wordpress/`, `tests/`.
-- **Fase 3:** el ZIP estático saldrá de `static/` tras la reorganización ADR 0014.
+- **Hoy (estático):** ZIP manual del contenido de `static/` (ADR 0014/0015). No incluir `docs/`,
+  `scripts/`, `wordpress/`, `tests/`.
+- **Fase 3:** WordPress en staging separado (OWN-005); corte al dominio canónico cuando pase QA.
 - **WordPress code deploy ≠ content deploy ≠ static deploy** (ADR 0013). Tras el corte, un ZIP
   estático **nunca** escribe sobre el document root de WordPress.
 - **CD:** pospuesto (ADR 0016). **CI de calidad:** sí, cuando exista PHP de prueba (ADR 0038).
@@ -198,6 +203,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 10. Alcance de Fase 3 — dentro y fuera
 
 **Dentro (corte):**
+
 - Reorg monorepo `static/` + `wordpress/`
 - Theme FSE + plugin de dominio
 - Extracción e import de contenido real (Pages, 10 eventos, 2 posts, autores, galería, media)
@@ -206,6 +212,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - Prompt de ejecución vigente: `docs/FABLE5-Fase3-WordPress-Master-Prompt-v2.md` (**v2.3**)
 
 **Fuera del corte:**
+
 - CPT `sangha`
 - Inglés / i18n (`POST-*`)
 - Buscador, analítica, HSTS, PWA
@@ -218,7 +225,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 11. Pendientes reales (no incongruencias de gobernanza)
 
 | Ítem | Estado |
-|---|---|
+| --- | --- |
 | Autorizar inicio de Fase 3 (WU-00/WU-01) | Decisión del propietario |
 | Desplegar `1.0.35` a Hostinger (incluye `/privacidad`) | Operativo |
 | Verificar paridad repo ↔ Hostinger | OWN-006/007 |
@@ -228,6 +235,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 | Inglés / i18n | `POST-001`–`POST-007` |
 
 Ya resuelto y no debe reabrirse como duda:
+
 - Política de barra final → **sin barra** (ADR 0008)
 - Embeds YouTube → `youtube-nocookie.com` (ya en el estático)
 - Gobernanza de copy → producción publicada (ADR 0040); `content-source/` eliminado
@@ -236,9 +244,9 @@ Ya resuelto y no debe reabrirse como duda:
 
 ## 12. Documentos de referencia
 
-- `docs/adr/README.md` — índice ADR 0001–0041
+- `docs/adr/README.md` — índice ADR 0001–0043
 - `docs/17-orden-implementacion.md` — fases y criterios (v3.10)
-- `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.26)
+- `docs/backlog-decisiones-owner-migracion.md` — OWN + POST (v1.27)
 - `docs/contrato-migracion-static-wordpress.md` — contrato de aceptación
 - `docs/inventario-contenido-produccion-static.md` + `conteos-reconciliacion-migracion.md`
 - `docs/matriz-migracion-static-wordpress.md` + `redirect-ledger.md` + `cutover-checklist-wordpress.md`
