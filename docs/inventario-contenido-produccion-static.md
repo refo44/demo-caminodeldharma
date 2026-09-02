@@ -70,8 +70,8 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 | 9 | Buddhismo para tiempos de cansancio | PLANNED `/eventos/buddhismo-tiempos-cansancio` | finalizado | `evento-buddhismo-tiempos-cansancio.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 | 10 | 6.º Encuentro Nacional Buddhista – 2025 | PLANNED `/eventos/6-encuentro-nacional-2025` | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 
-Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la misma
-#1 (`event_featured`). Extraer una sola vez.
+Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la
+misma fila `#1` (`event_featured`). Extraer una sola vez.
 
 Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
 La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
