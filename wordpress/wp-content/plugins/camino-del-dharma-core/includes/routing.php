@@ -77,23 +77,26 @@ function cdd_core_serve_event_ics() {
 }
 
 /**
- * Activation: register the domain objects, grant capabilities and flush
- * rewrites once. Never touches existing content (legacy posts without the
- * authors relationship stay published — ADR 0037 §7).
+ * Activation: register the domain objects, grant capabilities, unpublish
+ * the WordPress installer's demo content (D-02 / OWN-024) and flush
+ * rewrites once. Never touches real content (legacy posts without the
+ * authors relationship stay published — ADR 0037 §7; imported objects are
+ * never demo, ADR 0033).
  */
 function cdd_core_activate() {
 	cdd_core_register_post_types();
 	cdd_core_register_taxonomies();
 	cdd_core_register_rewrites();
 	cdd_core_grant_capabilities();
+	cdd_core_unpublish_installer_demo_content();
 	flush_rewrite_rules();
 	update_option( 'cdd_core_version', CDD_CORE_VERSION );
 }
 
 /**
  * Versioned upgrade: when the stored plugin version is behind, re-grant
- * capabilities and flush rewrites once (an already-active install never
- * re-runs activation).
+ * capabilities, unpublish any installer demo content and flush rewrites
+ * once (an already-active install never re-runs activation).
  */
 function cdd_core_maybe_upgrade() {
 	if ( CDD_CORE_VERSION === get_option( 'cdd_core_version' ) ) {
@@ -101,6 +104,7 @@ function cdd_core_maybe_upgrade() {
 	}
 
 	cdd_core_grant_capabilities();
+	cdd_core_unpublish_installer_demo_content();
 	flush_rewrite_rules();
 	update_option( 'cdd_core_version', CDD_CORE_VERSION );
 }

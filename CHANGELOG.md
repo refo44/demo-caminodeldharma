@@ -12,6 +12,29 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — D-02 / OWN-024: fuera el contenido demo del instalador (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.2** ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
+El estático de producción no se toca.
+
+- **El instalador ya no puede publicar demo.** Un WordPress recién instalado publica «Hello
+  world!» y «Sample Page» y deja un borrador «Privacy Policy». En el entorno local esa entrada
+  demo aparece en «Del blog» del Inicio y en `/blog`, y **desplaza** a la entrada real «Estamos
+  conectados, pero seguimos solos». Ahora activar el plugin —y cada actualización de versión—
+  **despublica** ese contenido, así que un staging provisionado sin el paso manual tampoco lo
+  muestra.
+- **Borrarlo es una acción explícita.** `wp cdd-core demo purge` es dry-run por defecto,
+  `--apply` borra, y en `production` exige `--confirm-production` + `--backup-evidence`
+  (ADR 0033). Si el borrador borrado era el de `wp_page_for_privacy_policy`, la opción se
+  limpia para no dejar una referencia colgada.
+- **Reconocimiento por contrato, no por ID.** `Cdd_Core_Installer_Demo_Content` decide por tipo
+  de contenido, slug por defecto (incluidos los traducidos de una instalación en español) y el
+  estado en que los deja el instalador. Cualquier objeto con `_cdd_source_key` es contenido
+  importado y queda intacto: la Página real `/privacidad` (ADR 0039/0041) y las entradas del
+  blog no se tocan. El runbook §2.2 deja de recomendar `wp post delete 1 2 3 --force`.
+- **El importador no cambia:** sigue siendo create-missing-only, sin backfill (ADR 0033,
+  OWN-023). Un segundo `import --apply` sigue creando 0.
+
 ### Gobernanza — cierre WU-10 (OWN-021–OWN-035, ADR 0044/0045)
 
 Registro 2026-09-01: D-01–D-12, seed Hostinger, correo CF7, FABLE5, timing de staging. Código

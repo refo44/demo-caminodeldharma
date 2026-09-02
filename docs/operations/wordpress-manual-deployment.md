@@ -6,8 +6,8 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 
 | | |
 | --- | --- |
-| **Versión** | 2.1 |
-| **Fecha** | 2026-09-01 |
+| **Versión** | 2.2 |
+| **Fecha** | 2026-09-02 |
 | **Estado** | Vigente — staging **no** se crea hasta D-02/D-03/D-04 en `main` (OWN-035) más «go» del propietario |
 
 ## Alcance
@@ -57,16 +57,25 @@ reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** us
 1. Crear la instancia Hostinger separada, **sin dominio custom** (subdominio
    `*.hostingersite.com`).
 2. Instalar WordPress limpio. **Requisito duro: el sitio debe partir vacío.**
-   Si el instalador dejó contenido de demostración, borrarlo antes de importar:
+   Desde el plugin 0.7.2 esto ya no depende de que alguien se acuerde: **activar el plugin
+   (§3.4) despublica** el contenido demo que dejó el instalador («Hello world!», «Sample
+   Page» y el borrador «Privacy Policy»), y el mismo paso corre en cada actualización de
+   versión del plugin. Para **borrarlo** hace falta pedirlo, con el plugin ya activo:
 
    ```bash
-   wp post delete 1 2 3 --force
+   wp cdd-core demo purge            # dry-run: lista lo que borraría
+   wp cdd-core demo purge --apply
    ```
+
+   Es dry-run por defecto e idempotente, como el resto del pipeline (ADR 0033), y sólo toca
+   objetos que reconoce como defaults del instalador — nunca contenido importado. **No usar
+   `wp post delete 1 2 3 --force`:** esos IDs no son estables en un sitio que ya tiene
+   contenido de producción.
 
    *Por qué es un requisito y no una recomendación:* en el entorno local la entrada demo
    «Hello world!» aparece en la sección «Del blog» del Inicio y en `/blog`, y **desplaza a
    una entrada real** («Estamos conectados, pero seguimos solos»). OWN-024 / D-02: cero demo
-   en staging y producción. Código first-party pendiente
+   en staging y producción
    ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
 
 3. **Marcar el sitio como no indexable** mientras sea staging:
@@ -115,7 +124,9 @@ reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** us
    wp theme activate camino-del-dharma
    ```
 
-   El orden importa: el theme renderiza bloques dinámicos que el plugin registra.
+   El orden importa: el theme renderiza bloques dinámicos que el plugin registra. La
+   activación del plugin también despublica el contenido demo del instalador (§2.2); para
+   borrarlo, `wp cdd-core demo purge --apply`.
 5. Verificar ausencia de warnings/fatals y `debug.log` limpio tras navegación representativa.
 6. **`.htaccess`:** copiar `wordpress/.htaccess` al document root **conservando el bloque
    `# BEGIN WordPress … # END WordPress` que ese servidor ya tenga**. Las reglas propias van
@@ -244,6 +255,7 @@ Repetir en staging, con etiqueta `Pass` (no `Pass (local)`):
 - `verify` con `missing: []` y conteos reconciliados;
 - comportamiento real de PHP/Apache/HTTPS y de las reglas del `.htaccess` (un salto por regla);
 - **no indexabilidad del staging** (`blog_public 0`);
+- **cero contenido demo del instalador** (`wp cdd-core demo purge` devuelve `found: []`);
 - cadenas del lightbox en español tras instalar `es_CO` (§2.4);
 - entrega de CF7: prueba técnica (§5) y, para el corte, confirmación del cliente (ADR 0045);
 - ausencia de cookies anónimas y de peticiones de seguimiento.

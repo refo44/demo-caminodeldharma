@@ -603,8 +603,10 @@ D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) puede ir de
 
 Pre-staging de código (PRs separados, TDD):
 
-1. D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)
-2. D-03 — [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044)
+1. ~~D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)~~ **hecho**
+   (2026-09-02, plugin **0.7.2**): el contenido demo del instalador se despublica al activar
+   o actualizar el plugin, y `wp cdd-core demo purge --apply` lo borra.
+2. **D-03 — [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044) ← siguiente**
 3. D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)
 
 Seed: SSH + `~/cdd-extract/` (OWN-032); si falla, reabrir. CF7: gate ADR 0045 / OWN-033
