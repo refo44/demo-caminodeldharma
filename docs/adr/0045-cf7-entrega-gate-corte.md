@@ -27,8 +27,8 @@ La elegibilidad legal de CF7 (0041 puntos 1–4, 6) **no** cambia.
    `caminodeldharma1@gmail.com` (confirmación del cliente: un mensaje sintético recibido).
    `Pass (local)` no cuenta.
 2. **Prueba técnica en staging** (Hostinger): el implementador puede enviar a
-   `refo44@gmail.com`. Eso prueba MTA/CF7/Hostinger (**Pass staging, desarrollador**). No
-   sustituye el punto 1.
+   `refo44@gmail.com`. Eso prueba MTA/CF7/Hostinger en staging (prueba técnica; no es
+   `Pass` y no sustituye el punto 1).
 3. Tras la prueba técnica, el destinatario de producción es otra vez
    `caminodeldharma1@gmail.com`. El formulario público **nunca** queda apuntando al Gmail
    personal.

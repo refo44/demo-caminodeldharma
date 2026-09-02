@@ -199,7 +199,7 @@ actualiza `convert --apply`; de ahí el orden.
 
 Después, **probar el envío** (ADR 0045 / OWN-033):
 
-1. Prueba técnica de staging: recepción en `refo44@gmail.com` (`Pass staging, desarrollador`).
+1. Prueba técnica de staging: recepción en `refo44@gmail.com` (no es `Pass`; solo prueba MTA/CF7/Hostinger).
 2. **Gate del corte con CF7 on:** el cliente confirma un mensaje sintético en
    `caminodeldharma1@gmail.com`.
 3. El formulario público **nunca** queda apuntando al Gmail personal.
