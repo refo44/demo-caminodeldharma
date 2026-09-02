@@ -82,6 +82,8 @@ final class Feed_RoutingTest extends WP_UnitTestCase {
 			'/?feed=rss2',
 			'/?feed=atom',
 			'/?feed=rss2&withcomments=1',
+			'/?feed=',
+			'/?feed',
 		);
 
 		foreach ( $routes as $route ) {

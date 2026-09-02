@@ -27,13 +27,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Every alias core registers — `feed`, `rdf`, `rss`, `rss2`, `atom`,
  * pretty or as `?feed=`, for the site, the posts page, an entry's
  * comments, an archive or a CPT — resolves to the `feed` query var, so
- * one guard covers the surface. Same shape as the WP-user author guard
- * (ADR 0037 §5): the request keeps nothing but the 404.
+ * one guard covers the surface. Presence, not a non-empty value: core
+ * treats `/?feed=` as the default feed. Same shape as the WP-user
+ * author guard (ADR 0037 §5): the request keeps nothing but the 404.
  *
  * @param array $query_vars Parsed request query vars.
  */
 function cdd_core_block_feed_requests( $query_vars ) {
-	if ( ! empty( $query_vars['feed'] ) ) {
+	if ( isset( $query_vars['feed'] ) ) {
 		return array( 'error' => '404' );
 	}
 
