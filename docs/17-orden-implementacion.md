@@ -537,9 +537,11 @@ camino-del-dharma/
 ├── README.md, CHANGELOG.md, VERSION, package.json
 ```
 
-**Estado actual (Fase 2):** HTML en la **raíz** del repo (= producción). La carpeta `static/` se crea al **iniciar Fase 3**.
+**Estado actual (2026-09-01):** HTML desplegable en `static/` (ADR 0014). WordPress first-party
+en `wordpress/`. Producción Hostinger sigue siendo el estático hasta el corte.
 
-> **Nota:** Hasta el inicio de la **Fase 3**, el contenido HTML permanece en la **raíz** del repositorio. La reorganización a `static/` forma parte del primer paso de Fase 3 y **no debe adelantarse**.
+> **Nota histórica:** Hasta WU-01 el HTML vivía en la **raíz** del repositorio. La reorganización
+> a `static/` ya ocurrió; no revertirla.
 
 **No versionar en Git:** core WordPress, `wp-config.php`, credenciales, BD, cachés, backups, `uploads/` de producción.
 

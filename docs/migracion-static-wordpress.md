@@ -8,18 +8,13 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 
 **No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
 
-**CURRENT STATE:** Fase 3 **iniciada** (2026-08-31, WU-00…WU-07). El sitio desplegable vive en
-`static/` (reorg ADR 0014, rama `fase3-wordpress`). Plugin `camino-del-dharma-core` v0.4.0:
-modelos de dominio (WU-05), pipeline de migración (WU-06) — payload versionado
-`migration/payload.json` (VERSION 1.0.35; paridad live verificada, delta 0), importador
-`wp cdd-core migrate validate|plan|import|verify` + `seed` — y conversión field-scoped
-`migrate convert` (WU-07/WU-08A). Theme FSE `camino-del-dharma` v0.3.0 con las **vistas
-reales** (plantillas, parts, bloques dinámicos, CSS portado, fuentes autohospedadas) y el
-**comportamiento portado** (diálogos Compartir y Añadir al calendario, audio de mantras como
-bloque nativo). Contenido importado y convertido en el entorno local. Pendiente WU-08B: SEO
-dinámico, redirects, OWN-015 y el pase de accesibilidad. Estado durable:
+**CURRENT STATE:** Fase 3 **cerrada en Git** (2026-09-01, WU-00…WU-10 + BUG-001). Producción
+sigue estática en `https://caminodeldharma.org`. El sitio desplegable vive en `static/`
+(reorg ADR 0014). Plugin `camino-del-dharma-core` v0.7.1 y theme FSE `camino-del-dharma`
+v0.5.1. Contenido importado y convertido en el entorno local. Staging Hostinger **no**
+creado: primero D-02/D-03/D-04 en `main` (OWN-035). Estado durable:
 `.audit/fase3-execution-state.md`.
-Las filas de abajo registran cambios del estático en producción y deudas hacia el theme futuro.
+Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.
 
 Decisiones del propietario (**Fase 3 cerrada** v1.28; no reabrir OWN-* sin decisión nueva).
 OWN-020 / D-08 está decidido; el código de SEO de fichas de autor sigue **pendiente**

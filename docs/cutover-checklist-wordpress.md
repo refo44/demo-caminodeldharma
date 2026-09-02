@@ -62,7 +62,6 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
   - El orden lo impone el código: `wp cdd-core contact provision` rehúsa mientras `/privacidad` no describa un envío real. Secuencia por entorno: `plugin install contact-form-7 --activate` → `migrate convert --apply` → `contact provision --apply` (`docs/operations/third-party-plugins.md`)
   - Anotar la versión de CF7 instalada en ese entorno en `docs/operations/third-party-plugins.md`
   - `Pass (local)` no cuenta. Prueba técnica de staging: recepción en `refo44@gmail.com`. **Gate del corte con CF7 on:** el cliente confirma un mensaje en `caminodeldharma1@gmail.com`. El form público no queda en el Gmail personal.
-- [ ] `/blog/sangha-refugio-hiperconexion` a 320 px: **sigue desbordando como producción** (OWN-021). Wrap post-corte [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)
 - [ ] Feeds nativos **404** (ADR 0044 / OWN-025, [#11](https://github.com/refo44/demo-caminodeldharma/issues/11))
 - [ ] `/practica` a 320 px **sin** overflow (OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)) — gate **antes** de staging
 - [ ] Sin contenido demo del install (OWN-024, [#10](https://github.com/refo44/demo-caminodeldharma/issues/10))

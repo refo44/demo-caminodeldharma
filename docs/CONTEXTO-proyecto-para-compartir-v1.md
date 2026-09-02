@@ -26,7 +26,7 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 ## 2. Estado actual (2026-09-01)
 
 | Aspecto | Estado |
-|---|---|
+| --- | --- |
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Paridad verificada 2026-08-31 (delta 0); no asumir paridad futura sin comparar (OWN-006/007) |
@@ -48,6 +48,7 @@ eventos, mantener un cronograma, incrustar videos, compartir testimonios y edita
 código ni servidor para el contenido editorial.
 
 **El sitio NO tiene, por decisión explícita:**
+
 - Buscador
 - Área privada / registro de usuarios
 - Sistema de cursos
@@ -70,7 +71,7 @@ funcionalidades y contenido explícitamente aprobados (OWN-007, ADR 0040).
 Hay **45 ADR** aceptados (índice: `docs/adr/README.md`). Los más relevantes hoy:
 
 | ADR | Decisión | Por qué importa |
-|---|---|---|
+| --- | --- | --- |
 | 0001 / 0002 | Estático = base definitiva; WordPress adapta, no rediseña | Paridad visual y de comportamiento |
 | 0003 | Sin PWA nunca | Web tradicional |
 | 0004 / 0005 | Git gobierna código; producción no se edita a mano | Trazabilidad |
@@ -111,6 +112,7 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 ## 5. Modelo de contenido y URLs
 
 **Objetos en el corte:**
+
 - Pages institucionales (home, comunidad, linaje, práctica, videos, meditación, galería, donaciones,
   contacto, blog archivo, privacidad)
 - CPT `event` (10) — todos con single público (ADR 0035)
@@ -124,7 +126,8 @@ ADR 0028 (privacidad aplazada) está **sustituido** por 0039. ADR 0009 queda his
 convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`.
 
 **Árbol canónico (sin barra final):**
-```
+
+```text
 /
 /comunidad
 /linaje
@@ -170,7 +173,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 - **Hosting:** Hostinger, `caminodeldharma.org`.
 - **PHP / MariaDB objetivo:** 8.3 / 11.8 (ADR 0023).
-- **Local:** Docker Compose (playbook listo; compose aún no versionado en el repo).
+- **Local:** Docker Compose versionado en el repo (ADR 0023, WU-02).
 - **Staging (OWN-005):** otra instancia Hostinger **sin dominio custom**, noindex, en paralelo al
   estático hasta el switch. No pisa `public_html` de producción.
 - **SSH:** disponible en la cuenta; no es el canal de deploy hoy.
@@ -179,9 +182,8 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 ## 8. Despliegue
 
-- **Hoy (estático):** ZIP manual desde la raíz del repo (README). No incluir `docs/`, `scripts/`,
-  `wordpress/`, `tests/`.
-- **Fase 3:** el ZIP estático saldrá de `static/` tras la reorganización ADR 0014.
+- **Hoy (estático):** ZIP manual **desde el contenido de `static/`** (README, ADR 0014/0015).
+  No incluir `docs/`, `scripts/`, `wordpress/`, `tests/`.
 - **WordPress code deploy ≠ content deploy ≠ static deploy** (ADR 0013). Tras el corte, un ZIP
   estático **nunca** escribe sobre el document root de WordPress.
 - **CD:** pospuesto (ADR 0016). **CI de calidad:** sí, cuando exista PHP de prueba (ADR 0038).
@@ -203,6 +205,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 10. Alcance de Fase 3 — dentro y fuera
 
 **Dentro (corte):**
+
 - Reorg monorepo `static/` + `wordpress/`
 - Theme FSE + plugin de dominio
 - Extracción e import de contenido real (Pages, 10 eventos, 2 posts, autores, galería, media)
@@ -213,6 +216,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - Entrega de correo CF7 demostrada (ADR 0045)
 
 **Fuera del corte:**
+
 - CPT `sangha`
 - Inglés / i18n (`POST-001`–`POST-007`)
 - Wrap Sangha 320 px (`POST-008`), conteo admin de álbum (`POST-009`), RSS (`POST-010`)
@@ -226,7 +230,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 ## 11. Pendientes reales (no incongruencias de gobernanza)
 
 | Ítem | Estado |
-|---|---|
+| --- | --- |
 | D-02 demo content, D-03 feeds 404, D-04 overflow `/practica` | Código pendiente (#10–#12); **antes** de Hostinger |
 | Crear staging Hostinger | OWN-035: después de esos merges + «go» del propietario |
 | D-08 SEO fichas `/author/{slug}` | Decidido; código pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)); A2 |
@@ -236,6 +240,7 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 | Inglés / i18n | `POST-001`–`POST-007` |
 
 Ya resuelto y no debe reabrirse como duda:
+
 - Política de barra final → **sin barra** (ADR 0008)
 - Embeds YouTube → `youtube-nocookie.com` (ya en el estático)
 - Gobernanza de copy → producción publicada (ADR 0040); `content-source/` eliminado

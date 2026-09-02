@@ -35,7 +35,7 @@ Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escr
 | Template | Archivo en `templates/` (doc 12) |
 | JS | Scripts de la maqueta o sustitución documentada |
 | Assets | Imágenes, audio, PDF, `.ics`, fuentes relevantes |
-| Import strategy | Implementada en WU-06 (ADR 0033): payload `migration/payload.json` + `wp cdd-core migrate validate|plan|import|verify` y `seed` de medios; create-missing-only, dry-run por defecto |
+| Import strategy | Implementada en WU-06 (ADR 0033): payload `migration/payload.json` + `wp cdd-core migrate` (`validate` / `plan` / `import` / `verify`) y `seed` de medios; create-missing-only, dry-run por defecto |
 | QA | Qué prueba cierra la fila |
 
 Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada` | `No aplica` | `Excepción ADR`.
@@ -45,7 +45,7 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 ## Páginas institucionales y home
 
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
-|---|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `/` | `index.html` | HTML live; nota de un evento vigente (datos de `/eventos`) | Ajuste lectura: página de inicio | `/` | `templates/front-page.html` | `main.js` (menú) | Hero WebP/JPEG, preview galería, OG default | Page + front-page settings; create-missing-only | HTTP 200; hero; nota de evento o ausencia; menú teclado; canonical |
 | `/comunidad` | `comunidad/index.html` | HTML live (OWN-007) | Page `comunidad` | `/comunidad` | `templates/page-comunidad.html` | `main.js` | Foto fundador | Page; **añadir** enlaces a fichas autor en WP (OWN-016); no editar static ahora | 200; H1; foto; enlace blog; enlaces `/author/zheng-gong` y ficha Comunidad **solo en WP** |
 | `/linaje` | `linaje/index.html` | HTML live | Page `linaje` | `/linaje` | `templates/page-linaje.html` | `main.js` | Imágenes Chan / Tierra Pura | Page institucional | 200; secciones tradición |
@@ -69,7 +69,7 @@ Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada`
 No crear Page con slug `eventos`.
 
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
-|---|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `/eventos` | `eventos/index.html` | Eventos vigentes + archivo en HTML; calendario del mes | Archive CPT `event` | `/eventos` | `templates/archive-event.html` | `main.js`, `share.js`, `calendar.js` (diálogo + tooltips grid) | Carteles; bloque calendario (datos desde `camino-del-dharma-core`) | Import CPT, no Page; calendario no es plugin de terceros | 200; vigentes vs finalizados; grid + hint táctil; JSON-LD Event; menú condicional |
 | `/eventos/circulos-de-presencia-consciente` | `eventos/circulos-de-presencia-consciente/index.html` | Ficha + `eventos/ical/circulos-de-presencia-consciente.ics` (estático: un VEVENT de la bienvenida) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js`, `calendar.js` | Cartel; `.ics` **generado con las 10 sesiones** (BUG-001) | CPT create-missing-only | 200; share; añadir calendario (enlace profundo = próxima sesión + nota); `.ics` 200 con 10 VEVENT y 10 UID únicos; JSON-LD |
 | `/eventos/encuentro-nacional-2026` | `eventos/encuentro-nacional-2026/index.html` | Ficha; `.ics` en disco **RETIRE** (OWN-012) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share; **sin** calendario; **sin** `.ics`; JSON-LD `EventCompleted` |
@@ -82,7 +82,7 @@ Singles futuros: misma fila-patrón `/eventos/{slug}`. Sin archivos `/eventos/{c
 SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT. No son demo.
 
 | Current URL | Static source | Content item | Current type | Future WP object | Future route | Template/FSE | Media | JS | Migration status | QA |
-|---|---|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `/eventos` (card) | `eventos/index.html` #circulos… | Círculos de Presencia Consciente | card + single | CPT `event` | `/eventos/circulos-de-presencia-consciente` | `single-event.html` | cartel + `.ics` | share, calendar | Inventario | 1 objeto; featured home no duplica |
 | `/eventos/encuentro-nacional-2026` | HTML ficha + card | 7.º Encuentro 2026 | card + single | CPT `event` | KEEP | `single-event.html` | cartel + `.ics` | share | Inventario | finalizado |
 | *(nueva en WP)* | listado | Meditación Presencial Barranquilla | card → single | CPT `event` | `/eventos/meditacion-presencial-barranquilla` | `single-event.html` | cartel | — | Inventario | 200; **sin** Inscribirme (ADR 0035) |
@@ -102,7 +102,7 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 ## Blog (`post` nativo)
 
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
-|---|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `/blog` | `blog/index.html` | Listado estático | Página de entradas / `home` | `/blog` | `templates/home.html` | `main.js` | — | Ajuste «página de entradas» + posts | 200; listado; no 404 |
 | `/blog/circulos-de-presencia-consciente` | `blog/circulos-de-presencia-consciente/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | Imagen de entrada si aplica | post + meta `authors` → ficha Comunidad | 200; byline CPT (ADR 0037) |
 | `/blog/sangha-refugio-hiperconexion` | `blog/sangha-refugio-hiperconexion/index.html` | Ensayo publicado | `post` | mismo slug | `templates/single.html` | `main.js`, `share.js` | — | post + meta `authors` → ficha Zheng Gong | 200; byline CPT (ADR 0037) |
@@ -115,7 +115,7 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 ## 404, búsqueda, CPT aplazados
 
 | Static URL | Static source | Content source | WP object | WP route | Template | JS | Assets | Import strategy | QA |
-|---|---|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | *(cualquier URL fuera del árbol)* | `404.html` | UI copy 09 | Ninguno | no hay `/404` pública | `templates/404.html` | `main.js` | — | N/A | HTTP **404** real + plantilla propia; no 200 disfrazado |
 | Búsqueda | *no existe* | — | **No crear** | no hay `/buscar` | — | — | — | Prohibido (doc 04) | Confirmar ausencia de search form/indexable |
 | `/sanghas`, `/sanghas/{slug}` | *no existe* | Modelo 03; fuera de alcance inicial Fase 3 (ADR 0024) | CPT `sangha` **solo si** se decide después | según doc 11 | `archive-sangha.html` / `single-sangha.html` | — | — | No implementar en el corte inicial | N/A hasta ADR/contenido |
@@ -128,14 +128,14 @@ Las filas de arriba conservan el inventario; este bloque registra el avance por 
 tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08A):
 
 | Dimensión | Estado | Detalle |
-|---|---|---|
+| --- | --- | --- |
 | CONTENT | **Pass (local)** | Importado WU-06 (verify 0 missing) + conversión WU-07 (`migrate convert`: inicio dinámico, galerías por álbum, enlaces OWN-016) + WU-08A (`practica` con audio nativo; copy de compartir sembrado como meta) |
 | PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 13 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
 | ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08B |
 | BEHAVIOR | **Parcial** | Nav móvil, tooltips del calendario, **diálogo Compartir, diálogo Añadir al calendario y audio de mantras nativo** portados (WU-08A); formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
 | OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción); staging pendiente (OWN-005) |
 
-Sustituciones static→WordPress registradas en WU-07 (§9.1 del master prompt; detalle y
+Sustituciones static→WordPress registradas en WU-07 (detalle y
 remedios en `.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
 
 1. Eventos finalizados en tarjeta compacta (doc 03 §3 «Densidad») en vez de la card completa.
