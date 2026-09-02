@@ -612,6 +612,8 @@ fotos publicados. Implementación **pendiente**
 de que WP sea producción en `caminodeldharma.org`: POST-008 /
 [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
 
+**D-10 / OWN-022 (2026-09-01):** cerrado (A). `sessionStorage` de `wp-emoji` aceptado; no código.
+
 Antes de abrir esa sesión conviene decidir tres cosas con el propietario:
 
 1. **D-01 / D-04** (matriz § WU-10): si `event_modality` y el desbordamiento de `/practica` a
