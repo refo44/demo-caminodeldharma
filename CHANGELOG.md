@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- markdownlint-disable MD024 -->
+
 Historial de versiones publicadas en producción. Hostinger no conserva un registro de despliegues cuando se sube un ZIP manualmente; este archivo es la referencia canónica de qué está en vivo.
 
 La versión actual del repositorio está en [`VERSION`](VERSION).
@@ -21,7 +23,8 @@ Backlog v1.28. Los prompts FABLE5 se retiran de `docs/` (OWN-034).
 El propietario cierra D-08 (2026-09-01): `/author/{slug}` sigue **indexable** (ADR 0037). Las
 fichas reutilizan copy corto y fotos ya publicados; no se inventa texto ni se duplica el ensayo
 largo de `/comunidad`. Código **no** entra en este registro: cola
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Backlog v1.26.
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). Cerrado en v1.26;
+el backlog vigente es v1.28.
 
 ### WordPress Fase 3 — revisión Copilot en el PR (sin cambio del artefacto desplegado)
 
@@ -515,7 +518,7 @@ El Maestro Zheng Gong aparecía **8 veces como `Person` suelta con tres nombres 
 La tabla de evidencia procedía del análisis del 19–20 de julio, **anterior al archivo de encuentros**, y estaba desfasada en las cuatro ciudades. Rehecha desde el inventario completo de `/eventos` (9 tarjetas):
 
 | Ciudad | Encuentros presenciales documentados | Decía antes |
-|---|---|---|
+| --- | --- | --- |
 | **Cali** | **2** — 6.º Encuentro Nacional (16–18 ago 2025, 3 días) · Pausa Profunda (15 feb 2026) | «fundación 2012» — dato falso |
 | **Bogotá** | **2** — Vesak 2026 (9 may) · Festival Calma en la Ciudad (28 jun) | «**sin evidencia** en el sitio» |
 | **Medellín** | **2** — «Ansiedad, agotamiento…» (22 may) · Pausa Profunda (23 may) | «solo mención en Facebook» |
