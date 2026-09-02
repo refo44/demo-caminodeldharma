@@ -212,4 +212,4 @@ Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER 
 
 ---
 
-**Versión inventario:** 1.2 · **Repo:** 1.0.35 · **Fecha:** 2026-08-29
+**Versión inventario:** 1.2 · **Repo:** 1.0.35 · **Fecha:** 2026-09-01
