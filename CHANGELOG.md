@@ -12,6 +12,37 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — D-04 / OWN-026: `/practica` deja de desbordar a 320 px (sin cambio del artefacto desplegado)
+
+Theme `camino-del-dharma` **0.5.2** ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
+El estático de producción no se toca.
+
+- **La única regresión visual frente a lo publicado.** WU-10 midió `/practica` a 320 px y encontró
+  `scrollWidth` 324 vs `clientWidth` 320. Producción publicada no desborda: rinde el reproductor a
+  272 px. El resto de las 19 rutas ya estaba limpio.
+- **Causa real, no el `padding`.** El núcleo sirve
+  `.wp-block-audio audio { width: 100%; min-width: 300px }` en `wp-block-audio-inline-css`. Un
+  suelo de 300 px gana sobre un ancho preferido, así que el `width: min(100%, 32rem)` del theme
+  nunca llegaba a aplicarse y el reproductor estiraba toda la columna de contenido.
+- **Corrección en la capa que le corresponde.** Presentación en el theme (ADR
+  [0024](docs/adr/0024-plugin-dominio-theme-presentacion.md)): la regla del reproductor levanta el
+  suelo (`min-width: 0`), lo topa en su columna (`max-width: 100%`, `box-sizing: border-box`) y
+  conserva el tope publicado `width: min(100%, 32rem)`. El selector lleva las dos clases
+  (`.wp-block-audio.mantra-audio audio`) para **ganar por especificidad**, no por el orden en que
+  WordPress imprime la hoja del bloque. No se toca el conversor, no se sustituye `core/audio`, no
+  se oculta el desbordamiento en `html`/`body` y no se ensancha el maquetado.
+- **D-07 y D-09 siguen como los cerró el owner.** El bloque nativo sigue sin la línea «Tu navegador
+  no permite reproducir este audio.» (OWN-029) y el desbordamiento heredado de
+  `/blog/sangha-refugio-hiperconexion` por una URL larga sigue ahí (OWN-021 / `POST-008` /
+  [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)): esa página no tiene ningún
+  `<audio>`, así que la regla no la alcanza.
+- Cubierto por `tests/Unit/Theme_Audio_ContainmentTest.php`: la hoja del theme se parsea y se
+  comprueba el contrato — una regla alcanza el reproductor convertido, **gana en especificidad** a
+  la del núcleo, levanta el suelo y lo topa al 100 %, el tope publicado sobrevive y ninguna regla
+  esconde el desbordamiento en `html`/`body`. Sin aserciones de píxeles en CI
+  ([`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-theme-fse.md)); la medida a
+  320 px es comprobación manual documentada.
+
 ### WordPress Fase 3 — D-03 / OWN-025: los feeds nativos responden 404 (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.3** (ADR [0044](docs/adr/0044-feeds-nativos-404.md),

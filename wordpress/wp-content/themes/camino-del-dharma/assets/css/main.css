@@ -1862,9 +1862,23 @@ a:focus-visible {
   opacity: 0.78;
 }
 
-.mantra-audio audio {
+/*
+ * D-04 / OWN-026: core ships `.wp-block-audio audio { width: 100%; min-width: 300px }`,
+ * and that floor beats a preferred width, so the converted player stretched
+ * /practica 4 px past a 320 px viewport. Published production renders the
+ * player at 272 px and does not overflow. Both selectors are listed on
+ * purpose: the second outranks core's rule on specificity — never on the
+ * order in which WordPress prints the block stylesheet — and the first still
+ * covers a player the converter left unconverted (no imported attachment),
+ * which carries no wp-block-audio class.
+ */
+.mantra-audio audio,
+.wp-block-audio.mantra-audio audio {
   display: block;
+  box-sizing: border-box;
   width: min(100%, 32rem);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .mantra-audio figcaption {

@@ -214,7 +214,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 | Superficie | Local | Staging | Producción |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 17/19 rutas limpias; `/practica` desborda 4 px por el `core/audio` nativo — Fail (local) | OWN-026 / [#12](https://github.com/refo44/demo-caminodeldharma/issues/12): arreglar **antes** de staging | no desborda |
+| 320 px sin scroll horizontal | 18/19 rutas limpias — Pass (local). `/practica` corregido en el theme **0.5.2** (D-04 / OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)): el suelo `min-width: 300px` del `core/audio` del núcleo se levanta y el reproductor mide 272 px, `scrollWidth` = `clientWidth` = 320. La ruta 19 es D-09, ver abajo | OWN-035: volver a medir en staging | no desborda |
 | 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
 | `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | OWN-021: dejar en el corte; wrap POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) | **también 339 px** |
 | Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | OWN-027: staging `es_CO` + lightbox en español; local puede quedar en inglés | no aplica |
