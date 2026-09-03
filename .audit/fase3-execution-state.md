@@ -5,7 +5,7 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-09-01 (cierre dueño WU-10: OWN-021–OWN-035, ADR 0044/0045; FABLE5 retirado) |
+| **Última actualización** | 2026-09-03 (`META-001` / OWN-019 implementada: panel «Autores del blog» en Gutenberg, plugin 0.7.4, [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |
@@ -317,9 +317,13 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
   producción, y no están en `docs/11-arbol-urls-final.md`. **Cerrado (OWN-025 / ADR 0044) e
   implementado 2026-09-02** en el plugin **0.7.3** ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)):
   404 real en toda la superficie de feeds y sin autodiscovery RSS/Atom en el `head`.
-- **OWN-019 / ADR 0042 (2026-09-01):** `META-001`–`META-005` **no** son cola de pre-staging ni
-  defectos de corte. Restricciones para UI wp-admin futura. Staging no construye metaboxes
-  clásicos. El guard de autores no se relaja.
+- **OWN-019 / ADR 0042 (2026-09-01, ampliado 2026-09-02):** `META-001`–`META-005` no eran
+  defectos de corte, sino restricciones para UI wp-admin futura; staging no construye metaboxes
+  clásicos y el guard de autores no se relaja. El 2026-09-02 el propietario **adelantó
+  `META-001` al pre-staging** y quedó **implementada** el 2026-09-03 en el plugin **0.7.4**
+  ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18)) con panel nativo, sync por
+  `core/editor` y guard intacto. `META-002`/`META-003` son
+  [#19](https://github.com/refo44/demo-caminodeldharma/issues/19), **pendiente**.
 - **D-05 (WU-10)** — el lightbox nativo rotula en inglés porque el contenedor no puede instalar
   `es_CO`. Ambiental; el runbook lo cubre y en staging queda `Unverified` hasta verificarlo.
 - **WU-08B cerrado.** Queda `Unverified` el pase con lector de pantalla real y todo lo que
@@ -380,7 +384,9 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
   WordPress del formulario = delta field-scoped; estático intacto. **Ejecutado en WU-09.**
 - Autorización del propietario 2026-09-01: `META-001`–`META-005` **no** son defectos de corte
   (OWN-019, ADR 0042). Restricciones para UI wp-admin futura. Staging no construye metaboxes
-  clásicos. El guard de autores no se relaja.
+  clásicos. El guard de autores no se relaja. **Ampliación 2026-09-02:** `META-001` pasa a ser
+  trabajo de pre-staging ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18)) —solo
+  el timing cambia— y se implementó con el criterio de ADR 0042, no relajándolo.
 - WU-09: 12 decisiones/deltas registrados en la matriz § WU-09. Los cinco que condicionan trabajo
   futuro: (1) el repositorio posee la *definición* de CF7, no su código, y `contact provision` es
   create-missing-only —lo que un editor cambie en wp-admin no se pisa; (2) se conserva el
@@ -425,9 +431,11 @@ Ver `.audit/fase3-validation-matrix.md` § BUG-001 (y § WU-09 para la unidad an
 
 ## Bloqueos
 
-- Ninguno para el trabajo de repositorio. Siguiente hito: **crear la instancia de staging en
-  Hostinger** — exige autorización expresa del propietario (OWN-005). Orden restante:
-  staging → corte.
+- Ninguno para el trabajo de repositorio. Código pendiente de pre-staging:
+  [#19](https://github.com/refo44/demo-caminodeldharma/issues/19) (panel SEO). Siguiente hito
+  tras #19: **crear la instancia de staging en Hostinger** — exige autorización expresa del
+  propietario (OWN-005 / OWN-035), que ahora incluye #18 y #19 en `main`. Orden restante:
+  #19 → staging → corte.
 
 ## Archivos cambiados en WU-10
 
@@ -598,13 +606,19 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 WU-10 está cerrado. Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 
-**El pre-staging de código está completo.** D-02, D-03 y D-04 están en `main`, que es la
-condición de OWN-035 (A2). **La siguiente acción no es código: es el `go` expreso del owner en
-sesión** para crear el staging de Hostinger e importar **una vez** en un WordPress limpio. No
-crear Hostinger sin esa autorización, y no arrancar D-08 en su lugar:
+**El pre-staging de código ya no está cerrado: el propietario lo amplió el 2026-09-02** con dos
+filas de UI wp-admin que faltaban para que un editor pudiera trabajar en staging —la **UI de
+autores** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18), `META-001`) y el
+**panel SEO** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19))—. #18 está
+**hecho** (plugin 0.7.4). **La siguiente acción de código es #19.** Después de #19 en `main`, la
+siguiente acción **no** es código: es el `go` expreso del owner en sesión para crear el staging
+de Hostinger e importar **una vez** en un WordPress limpio. No crear Hostinger sin esa
+autorización —ni «en silencio» por tener el código listo—, y no arrancar D-08 en su lugar:
 D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) va **después** del staging.
+[#20](https://github.com/refo44/demo-caminodeldharma/issues/20) es un spike y **no** bloquea
+salvo que el owner lo diga.
 
-Pre-staging de código (PRs separados, TDD) — **cerrado**:
+Pre-staging de código (PRs separados, TDD):
 
 1. ~~D-02 — [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)~~ **hecho**
    (2026-09-02, plugin **0.7.2**): el contenido demo del instalador se despublica al activar
@@ -618,6 +632,17 @@ Pre-staging de código (PRs separados, TDD) — **cerrado**:
    `min-width: 300px` que el núcleo pone al `core/audio` se levanta desde el theme y el
    reproductor mide 272 px, el mismo ancho que publica producción. D-09 sigue como lo dejó
    OWN-021.
+4. ~~#18 — UI de autores (`META-001` / OWN-019, ADR 0037 §4/§6, ADR 0042)~~ **hecho**
+   (2026-09-03, plugin **0.7.4**): panel nativo «Autores del blog» en `post.php` /
+   `post-new.php`, buscador REST de fichas publicadas desde dos caracteres sin precargar el
+   catálogo, varias fichas en el orden del byline, y escritura por
+   `dispatch( 'core/editor' ).editPost( { meta } )` — `meta.authors` viaja en el **mismo** cuerpo
+   REST que Publicar, que es lo que exigía META-001. Guard **sin relajar** y sin `add_meta_box`.
+   El control «Autor» del editor se retira quitando el enlace REST `wp:action-assign-author`
+   (WordPress 7.1 lo rinde como fila del panel Resumen, no como panel propio); `post_author`, su
+   columna en el listado y las revisiones siguen intactos.
+5. **#19 — panel SEO / evento / compartir** (`META-002` + `META-003`): **pendiente**. Última
+   fila de código antes del `go` de OWN-035.
 
 Seed: SSH + `~/cdd-extract/` (OWN-032); si falla, reabrir. CF7: gate ADR 0045 / OWN-033
 (`refo44@gmail.com` técnico; cliente confirma `caminodeldharma1@gmail.com`).

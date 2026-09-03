@@ -797,3 +797,59 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
 - **Byline enlazada (ADR 0037)** en `/comunidad` y en las entradas, y **tiempo de lectura 6′ vs
   8′** en `sangha-refugio-hiperconexion`: deltas ya registrados en WU-07.
 - **Deck como excerpt** en `/blog`: delta ya registrado en WU-07.
+
+## #18 — Panel «Autores del blog» en Gutenberg (`META-001` / OWN-019)
+
+Sesión propia de pre-staging, ampliación del propietario del 2026-09-02: un editor tiene que
+poder firmar una entrada **antes** de Hostinger. Plugin **0.7.4**; el theme no cambia. **No es
+una escritura en Hostinger** (OWN-005): el `go` de OWN-035 ahora espera #18 **y**
+[#19](https://github.com/refo44/demo-caminodeldharma/issues/19) en `main`, no un staging
+silencioso.
+
+### Nivel 1 — Comprobaciones estáticas
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| `php -l` sobre PHP propio | `tools/php-lint.sh` | `php-lint: OK` | Pass (local) |
+| Sintaxis del script del editor | `node --check assets/js/authors-panel.js` | exit 0 | Pass (local) |
+| WPCS | `phpcs` con `phpcs.xml.dist` | **95 archivos, 0 errores, 0 avisos** | Pass (local) |
+| Advisories de dependencias | `composer audit --locked` | `No security vulnerability advisories found` | Pass (local) |
+| Lint CSS de ambos árboles | `npm run lint:css` (sin CSS tocado en esta unidad) | exit 0 | Pass (local) |
+
+### Nivel 2 — Comprobaciones de componente
+
+Escritas **RED primero**: el archivo del panel no existía, el handle no estaba registrado y el
+enlace `wp:action-assign-author` seguía presente.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| Suite unit | `tools/run-phpunit.sh` | OK — **209 tests, 1114 assertions** | Pass (local) |
+| Suite wp-phpunit | `composer test:wp` (harness efímero `cdd-wp-phpunit`) | OK — **145 tests, 858 assertions** | Pass (local) |
+| Transporte META-001 en el script | `Editor_Authors_PanelTest` | el script sincroniza por `dispatch( 'core/editor' ).editPost( { meta } )` | Pass (local) |
+| Búsqueda solo de publicadas desde 2 caracteres | `Editor_Authors_PanelTest` | `/wp/v2/blog_author`, `status=publish`, `MIN_SEARCH_LENGTH = 2`, sin `per_page=-1` | Pass (local) |
+| Sin metabox clásico en todo el plugin (ADR 0042) | `Editor_Authors_PanelTest` recorre el árbol PHP | 0 ocurrencias de `add_meta_box` | Pass (local) |
+| Dependencias del script | `Editor_AuthorsPanelTest` | `wp-plugins`, `wp-edit-post`, `wp-editor`, `wp-data`, `wp-api-fetch`, `wp-element`, `wp-components`, `wp-i18n` | Pass (local) |
+| Encolado solo en el editor de `post` | `Editor_AuthorsPanelTest` sobre `post` / `event` / `page` / `blog_author` y el front | solo `post` | Pass (local) |
+| Control «Autor» fuera del editor, `post_author` intacto | `Editor_AuthorsPanelTest` | sin `wp:action-assign-author`; `wp:action-publish` presente; `post_type_supports( 'post', 'author' )` sigue `true` | Pass (local) |
+| PUT REST con `meta.authors` persiste en orden | `Post_AuthorsRelationTest` | 200 y orden conservado | Pass (local) |
+| Cambiar `post_author` no cambia la firma | `Post_AuthorsRelationTest` | `authors` intacto | Pass (local) |
+| Búsqueda excluye borradores para un usuario con todas las capacidades | `Post_AuthorsRelationTest` | solo `zheng-gong` | Pass (local) |
+| Guard sin relajar | `Post_AuthorsRelationTest` (contratos previos, sin cambios) | publish REST sin ficha = 400; borrador sin ficha = OK | Pass (local) |
+
+### Nivel 4 — Manual en el editor (Docker local, `http://localhost:8081`)
+
+No hay runner de JS en el repositorio (ADR 0038), así que el render del panel es una comprobación
+manual documentada, no CI.
+
+| Check | Método | Resultado | Estado |
+| --- | --- | --- | --- |
+| El panel aparece en la entrada | `post.php?post=134` (`TEST`), barra lateral **Entrada** | «Autores del blog» presente, plugin `cdd-core-blog-authors` registrado | Pass (local) |
+| Buscador | teclear «Zheng» | una sola opción, «Zheng Gong» (la ficha en borrador de prueba no aparece) | Pass (local) |
+| Sync a `core/editor` | asignar y leer el store | `getEditedPostAttribute( 'meta' ).authors` = `[6]`, documento sucio | Pass (local) |
+| Publicar a la primera | botón Publicar | `status = publish`, sin `400`, `authors` = `[6]` en la base | Pass (local) |
+| Varias fichas y reorden | añadir «Comunidad Camino del Dharma» y «Subir» | `[6,5]` → `[5,6]`, orden reflejado en la lista numerada | Pass (local) |
+| Byline del front | `curl /blog/test` | «Por <a href="…/author/zheng-gong">Zheng Gong» | Pass (local) |
+| JSON-LD | `curl /blog/test` | `BlogPosting.author` = `Thing` con `url` = `/author/zheng-gong`; no el usuario | Pass (local) |
+| Control «Autor» del núcleo | panel Resumen en `post.php` y `post-new.php` | ausente; `post_author` sigue siendo `1` (`cdd_admin`) en la base | Pass (local) |
+| Guard visible en el editor | publicar una entrada nueva sin ficha | «Publishing failed. Para publicar una entrada asigna al menos una ficha de autor publicada.» | Pass (local) |
+| PHP/Apache/HTTPS de staging | no existe instancia | — | Unverified |

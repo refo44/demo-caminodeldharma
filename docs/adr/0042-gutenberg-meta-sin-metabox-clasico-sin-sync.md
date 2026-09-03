@@ -6,7 +6,7 @@ Aceptada
 
 ## Fecha
 
-2026-09-01
+2026-09-01 · **enmendada 2026-09-03** (timing de `META-001`)
 
 ## Contexto
 
@@ -27,6 +27,12 @@ propia (bio = contenido, foto = destacada).
 1. **`META-001`–`META-005` son restricciones de diseño para UI wp-admin futura, no defectos
    abiertos ni trabajo de pre-staging / corte.** No implementar paneles ni JS de sync «por si
    acaso». No relajar el guard REST de autores.
+   *(Enmienda 2026-09-03, OWN-019: el propietario **adelanta `META-001` al pre-staging** —la UI
+   de autores va antes de Hostinger,
+   [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)—. Cambia **solo el timing**:
+   el criterio de aceptación de esta ADR sigue vigente y es el que se cumplió. `META-002`–
+   `META-005` siguen sin ser cola de pre-staging; la UI de evento/SEO es
+   [#19](https://github.com/refo44/demo-caminodeldharma/issues/19).)*
 2. **Hasta el corte:** los editores conservan la meta importada. Gutenberg basta para título y
    cuerpo. **No** construir metaboxes clásicos en la sesión de staging (OWN-005).
 3. **Cuando se construya UI de autores** (ADR 0037): panel nativo de Gutenberg
@@ -34,6 +40,16 @@ propia (bio = contenido, foto = destacada).
    `core/editor` (`editPost({ meta: { authors } })`) en el mismo request que Publicar. Criterio
    de aceptación de esa unidad = META-001 (TDD, ADR 0038). El guard existente **detecta** el
    transporte roto; no lo corrige.
+   *(Cumplido 2026-09-03, plugin 0.7.4,
+   [#18](https://github.com/refo44/demo-caminodeldharma/issues/18): se eligió el
+   `PluginDocumentSettingPanel` nativo, así que la rama «metabox clásico» queda sin usar y el
+   plugin sigue **sin** ningún `add_meta_box` —comprobado por test—. Escritura por
+   `dispatch( 'core/editor' ).editPost( { meta } )`; buscador REST `status=publish` desde dos
+   caracteres, sin precargar el catálogo; **guard intacto**. La otra mitad de ADR 0037 §4 —el
+   control «Autor» del editor no manda— se resolvió retirando el enlace REST
+   `wp:action-assign-author`: WordPress 7.1 rinde esa fila dentro del panel Resumen, no como
+   panel propio, así que no existe nombre que pasar a `removeEditorPanel()`. `post_author`, su
+   columna en el listado y las revisiones quedan intactos como rastro de quién creó y guardó.)*
 4. **Cuando se construya UI de evento / SEO / compartir:** la misma regla; META-002 y META-003
    se fusionan en esa unidad; META-005 son los tests REST de persistencia de **ese** camino, no
    una suite ahora sobre `meta_input` del importador.
@@ -53,7 +69,11 @@ propia (bio = contenido, foto = destacada).
 
 ## Consecuencias
 
-- El corte no espera paneles de meta. Staging no añade `add_meta_box`.
+- El corte no espera paneles de meta de **evento / SEO**. Staging no añade `add_meta_box`
+  —tampoco lo añadió la UI de autores—.
+- Enmienda 2026-09-03: el staging **sí** espera la UI de autores (`META-001`,
+  [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)), por decisión del propietario
+  y con el criterio de aceptación de esta ADR cumplido, no relajado.
 - La sesión futura de autores (y la de evento/SEO) hereda un criterio de aceptación explícito.
 - La auditoría `.audit/gutenberg-meta-transport-audit-2026-09-01.md` queda como etiqueta de
   advertencia, no como cola de implementación de Fase 3.

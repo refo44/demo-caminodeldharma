@@ -154,6 +154,82 @@ final class Post_AuthorsRelationTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects the editor path of META-001 (ADR 0042): the update the
+	 * «Autores del blog» panel sends through `editPost` — `meta.authors`
+	 * inside the same REST body as the save — persists, and the order the
+	 * editor chose is the order the byline keeps.
+	 */
+	public function test_rest_update_persists_the_authors_the_editor_sends() {
+		$zheng     = $this->create_profile( 'zheng-gong', 'publish' );
+		$comunidad = $this->create_profile( 'comunidad-camino-del-dharma', 'publish' );
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		$post_id = self::factory()->post->create(
+			array(
+				'post_status' => 'publish',
+				'meta_input'  => array( 'authors' => array( $zheng ) ),
+			)
+		);
+
+		$update = new WP_REST_Request( 'PUT', '/wp/v2/posts/' . $post_id );
+		$update->set_body_params( array( 'meta' => array( 'authors' => array( $comunidad, $zheng ) ) ) );
+		$response = rest_do_request( $update );
+
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertSame( array( $comunidad, $zheng ), get_post_meta( $post_id, 'authors', true ) );
+	}
+
+	/**
+	 * Protects ADR 0037 §4: the WordPress user is accountability, not the
+	 * byline — reassigning `post_author` leaves the relationship alone.
+	 */
+	public function test_changing_the_wordpress_user_does_not_change_the_byline() {
+		$zheng    = $this->create_profile( 'zheng-gong', 'publish' );
+		$original = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		$other    = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		$post_id  = self::factory()->post->create(
+			array(
+				'post_status' => 'publish',
+				'post_author' => $original,
+				'meta_input'  => array( 'authors' => array( $zheng ) ),
+			)
+		);
+
+		wp_update_post(
+			array(
+				'ID'          => $post_id,
+				'post_author' => $other,
+			)
+		);
+
+		$this->assertSame( $other, (int) get_post_field( 'post_author', $post_id ) );
+		$this->assertSame( array( $zheng ), get_post_meta( $post_id, 'authors', true ) );
+	}
+
+	/**
+	 * Protects ADR 0037 §6 for the signed-in editor: the query the panel
+	 * issues (`status=publish`) keeps drafts out even for a user who holds
+	 * every blog_author capability and could read them elsewhere.
+	 */
+	public function test_rest_search_excludes_drafts_for_a_capable_user() {
+		cdd_core_grant_capabilities();
+		$this->create_profile( 'zheng-gong', 'publish', 'Zheng Gong' );
+		$this->create_profile( 'zheng-borrador', 'draft', 'Zheng Borrador' );
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$search = new WP_REST_Request( 'GET', '/wp/v2/blog_author' );
+		$search->set_query_params(
+			array(
+				'search' => 'Zheng',
+				'status' => 'publish',
+			)
+		);
+		$results = rest_do_request( $search );
+
+		$this->assertSame( 200, $results->get_status() );
+		$this->assertSame( array( 'zheng-gong' ), wp_list_pluck( $results->get_data(), 'slug' ) );
+	}
+
+	/**
 	 * Protects the assignment search (ADR 0037 §6): the REST collection an
 	 * anonymous metabox search hits returns only published profiles.
 	 */

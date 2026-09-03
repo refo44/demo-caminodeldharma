@@ -12,6 +12,51 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — META-001 / OWN-019: panel «Autores del blog» en Gutenberg (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.4** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18)).
+El estático de producción no se toca.
+
+- **El editor ya puede firmar una entrada.** Hasta ahora la relación `authors` (ADR 0037 §6)
+  solo llegaba por migración o WP-CLI: `post.php` no tenía dónde asignar Zheng Gong ni
+  Comunidad Camino del Dharma, y el panel «Autor» de la barra lateral es el **usuario de
+  WordPress** que entró, no la firma pública. El propietario adelantó META-001 al pre-staging
+  (2026-09-02): la UI de autores va **antes** de Hostinger.
+- **Panel nativo, no metabox clásico** (ADR [0025](docs/adr/0025-politica-plugins-terceros.md) /
+  [0042](docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md)). `includes/editor.php`
+  registra `assets/js/authors-panel.js` —handwritten sobre `wp.plugins`, `wp.editor`,
+  `wp.data`, `wp.apiFetch`, `wp.element`, `wp.components`, `wp.i18n`; sin `@wordpress/scripts`,
+  sin webpack, sin JSX (ADR [0038](docs/adr/0038-pruebas-tdd-phpunit-sonar.md))— y lo encola
+  **solo** en `post.php` / `post-new.php` cuando el tipo es `post`.
+- **El transporte es el punto.** El panel escribe con
+  `dispatch( 'core/editor' ).editPost( { meta } )`, así que Publicar/Actualizar envía
+  `meta.authors` **en el mismo cuerpo REST** que lee `rest_pre_insert_post`. Eso es META-001 —el
+  fallo de revistalogos #30—: un picker que solo llena el DOM publica un `400
+  cdd_core_missing_authors` aunque se vea lleno. **El guard no se relaja:** un borrador puede ir
+  sin ficha, publicar sin ficha publicada sigue siendo 400, y una entrada publicada no puede
+  quedar en cero autores.
+- **Buscador, no catálogo.** `GET /wp/v2/blog_author?status=publish` desde dos caracteres, con
+  debounce; nunca precarga la colección y no da de alta fichas en línea (ADR 0037 §6). Las
+  fichas en borrador o privadas no aparecen ni para un administrador. Varias fichas por entrada,
+  en el orden del byline, reordenables y quitables desde el panel.
+- **La firma pública no es el usuario de la sesión** (ADR 0037 §4). WordPress 7.1 rinde el
+  control «Autor» como una fila del panel Resumen, no como un panel propio: no hay nombre que
+  pasar a `removeEditorPanel()`, así que lo que se retira es el enlace REST
+  `wp:action-assign-author` del que el editor hace depender esa fila. `post_author` **no** se
+  toca —el tipo conserva el soporte `author`, con su columna en el listado, la edición rápida y
+  las revisiones— y sigue siendo el rastro de quién creó y guardó. El «Por…» del front y el
+  `author` del JSON-LD siguen leyendo `authors`, nunca `post_author`.
+- Cubierto por `tests/WordPress/Editor_AuthorsPanelTest.php` (dependencias del script, encolado
+  solo en el editor de `post`, ausencia del enlace de asignación, `post_author` intacto),
+  `tests/WordPress/Post_AuthorsRelationTest.php` (PUT con `meta.authors` persiste en orden;
+  cambiar `post_author` no cambia la firma; la búsqueda excluye borradores para un usuario con
+  todas las capacidades) y `tests/Unit/Editor_Authors_PanelTest.php` (el script sincroniza por
+  `core/editor`, busca solo publicadas desde dos caracteres, y el plugin no envía ningún
+  `add_meta_box`). QA 4 manual en el Docker local: `TEST` (post 134) se firmó con Zheng Gong
+  desde el editor y publicó a la primera; el front rinde «Por Zheng Gong» → `/author/zheng-gong`
+  y el JSON-LD `BlogPosting.author` es la ficha; publicar sin ficha muestra «Para publicar una
+  entrada asigna al menos una ficha de autor publicada».
+
 ### WordPress Fase 3 — D-04 / OWN-026: `/practica` deja de desbordar a 320 px (sin cambio del artefacto desplegado)
 
 Theme `camino-del-dharma` **0.5.2** ([#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).

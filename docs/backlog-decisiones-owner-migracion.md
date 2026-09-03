@@ -7,10 +7,10 @@ Hay cinco bloques que no se mezclan:
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 ni OWN-021–OWN-035 sin decisión nueva (OWN-020 en Pre-staging). |
-| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01.** D-02 y D-03 **implementados** (plugin 0.7.3) y D-04 **implementado** (theme 0.5.2): el código de pre-staging está **cerrado**. D-08 sigue **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) y puede ir después del staging (A2). Con D-02/03/04 en `main`, OWN-035 espera el `go` del owner. |
+| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01, ampliado 2026-09-02.** D-02, D-03 (plugin 0.7.3) y D-04 (theme 0.5.2) **implementados**. El propietario añadió al pre-staging la **UI de autores** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18), **implementada**, plugin 0.7.4) y el **panel SEO** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19), pendiente). D-08 sigue **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) y puede ir después del staging (A2). OWN-035 espera #19 en `main` **y** el `go` del owner. |
 | **Fases posteriores** (`POST-*`) | Después del corte (i18n; wrap Sangha; conteo álbum admin; RSS) | i18n abiertas. **POST-008–010 decididos.** No implementan el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
-| **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. |
+| **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. **`META-001` adelantada al pre-staging** el 2026-09-02 y **cumplida** en [#18](https://github.com/refo44/demo-caminodeldharma/issues/18). |
 
 Hasta que el propietario cierre una fila `POST-*`, vale el **default** de «Mientras tanto». No
 implementar esas filas en el corte. Si una respuesta cambia URLs o arquitectura, **entonces** se
@@ -76,7 +76,7 @@ Ninguna.
 | OWN-010 | 2026-08-29 | **D — CPT de autor.** El «Por…» del blog sale de fichas `blog_author`, no de copy ni del usuario WP. Perfil `/author/{slug}` (ADR 0037). Semilla: Zheng Gong (`zheng-gong`), Comunidad Camino del Dharma (`comunidad-camino-del-dharma`). Buscador al asignar; publicar exige ≥1 ficha. `query_var` ≠ `author`. Archivos de users = 404. Eventos no usan este CPT. `/comunidad` no se mueve. |
 | OWN-016 | 2026-08-29 | **Cuando exista WordPress, `/comunidad` enlaza a las fichas de autor.** Fundador → `/author/zheng-gong`. La comunidad (quiénes somos / nombre institucional) → `/author/comunidad-camino-del-dharma` (o el slug que quede). Son enlaces, no se sustituye la Page ni se mueve la bio. **No modificar el HTML estático** ahora; se hace en la Page de WP (o al importar). OWN-007 sigue: el copy live no se pisa; solo se **añaden** esos enlaces. |
 | OWN-018 | 2026-08-31 | **CF7 entra al corte sin esperar asesoría legal.** El disclaimer publicado en `/privacidad` basta para lanzar. La revisión jurídica queda recomendada para más adelante, no este año, y **no** bloquea WU-09 ni el corte. En WordPress se actualizan solo los párrafos del formulario (ADR 0041). El HTML estático no se toca mientras el form de producción siga siendo `action="#"`. |
-| OWN-019 | 2026-09-01 | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. |
+| OWN-019 | 2026-09-01 · **ampliado 2026-09-02** | **`META-001`–`META-005` no son bugs de corte.** Restricciones para UI wp-admin futura (ADR 0042): sin metabox clásico en staging; autores/evento/SEO cuando se construyan = panel nativo o clásico **con** sync REST demostrado; `custom-fields` en `blog_author` solo al registrar meta. No relajar el guard de autores. **2026-09-02: el propietario adelanta `META-001` al pre-staging** —un editor tiene que poder firmar una entrada antes de Hostinger—. Cambia el *timing*, no el criterio: **implementado** con panel nativo en plugin 0.7.4 ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18)), guard intacto y sin `add_meta_box`. `META-002`/`META-003` (evento/SEO) son [#19](https://github.com/refo44/demo-caminodeldharma/issues/19); `META-004`/`META-005` siguen sin disparador. |
 | OWN-020 | 2026-09-01 | **D-08 cerrado.** Las fichas `/author/{slug}` siguen **indexables** (ADR 0037). No hay meta en el estático porque esas URLs no existían: reutilizar **copy corto y fotos ya publicados**, no inventar, no duplicar el ensayo largo del fundador (queda en `/comunidad`, KEEP). Zheng Gong: description JSON-LD + `assets/images/fundador/foto-biografia-fundador.jpg`. Comunidad: primer párrafo de «Quiénes somos» o la meta de `/comunidad` + `assets/images/comunidad-linaje/comunidad-quienes-somos.jpg`. En ambas, enlace a `/comunidad` para el texto largo. Código **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). |
 | OWN-021 | 2026-09-01 | **D-09 cerrado: dejar el desbordamiento en el corte.** `/blog/sangha-refugio-hiperconexion` a 320 px mide 339 px; **producción publicada desborda igual**. No se toca `static/`. No se «arregla» solo en WordPress antes del corte (inventaría un delta frente al live). Wrap **después** del corte, WordPress ya en `caminodeldharma.org`: POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7). |
 | OWN-022 | 2026-09-01 | **D-10 cerrado: A.** Aceptar `sessionStorage` `wpEmojiSettingsSupports` del `wp-emoji` del núcleo. No es cookie, no es analítica (ADR 0019 intacto), no hay petición a `s.w.org` en navegadores modernos. Delta frente al estático (cero almacenamiento). **No** desactivar el script. Sin issue: no hay código. |
@@ -92,7 +92,7 @@ Ninguna.
 | OWN-032 | 2026-09-01 | **Seed en Hostinger: A**, con reapertura. SSH + `~/cdd-extract/` (payload + `static/`, **fuera** de `public_html`). Si hay bloqueo, reconsiderar **B** (`wp --ssh` desde el portátil). File Manager solo no es el fallback automático. Staging ≠ `--confirm-production`. Probar dry-run → apply → segundo apply = 0 created. |
 | OWN-033 | 2026-09-01 | **Correo CF7: B** (ADR 0045). El corte con CF7 **on** espera recepción en `caminodeldharma1@gmail.com` (el cliente confirma). Prueba técnica de staging: `refo44@gmail.com`. El form público no queda en el Gmail personal. |
 | OWN-034 | 2026-09-01 | **FABLE5: B.** Borrar los dos prompts de `docs/` **antes de staging** (no archivar). Docs numerados (`06`/`09`/`10` y el resto): higiene **después del corte** (opción 4); lista exacta aún abierta. |
-| OWN-035 | 2026-09-01 | **Timing staging: A + A2.** Crear Hostinger **después** de D-02, D-03 y D-04 en `main`. Importación **una vez** en WP limpio. D-08 **puede** ir después (create-missing-only no rellenará bios/`seo` ya creados). |
+| OWN-035 | 2026-09-01 · **ampliado 2026-09-02** | **Timing staging: A + A2.** Crear Hostinger **después** de D-02, D-03 y D-04 en `main`. Importación **una vez** en WP limpio. D-08 **puede** ir después (create-missing-only no rellenará bios/`seo` ya creados). **2026-09-02: la condición incluye además la UI wp-admin** — [#18](https://github.com/refo44/demo-caminodeldharma/issues/18) (autores, **en `main`**) y [#19](https://github.com/refo44/demo-caminodeldharma/issues/19) (SEO, pendiente). El staging no se crea «en silencio»: hace falta el `go` expreso del owner. |
 
 Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 `inventario-contenido-produccion-static.md`, `conteos-reconciliacion-migracion.md` y, si hay URL,
@@ -102,15 +102,18 @@ Al cerrar una fila de Fase 3: fecha, decisión en una frase, y actualizar
 
 ## Pre-staging — implementación pendiente
 
-Pregunta **cerrada**. Con D-02, D-03 y D-04 en `main`, el pre-staging de código queda completo y
-la condición de OWN-035 se cumple: falta el `go` del owner, no más código. Solo queda D-08, que
-va **después** del staging (A2). No tratar D-08 como copy sin dueño ni como `noindex`.
+Pregunta cerrada el 2026-09-01 y **reabierta por el propietario el 2026-09-02** para añadir dos
+filas de UI wp-admin: la **UI de autores** (#18, `META-001`) y el **panel SEO** (#19). Con D-02,
+D-03, D-04 y #18 en `main` falta **#19** antes del `go` de OWN-035. D-08 sigue yendo **después**
+del staging (A2); no tratarlo como copy sin dueño ni como `noindex`.
 
 | ID | Decisión | Issue | Estado |
 | -- | -------- | ----- | ------ |
 | D-02 | OWN-024: sin contenido demo del install | [#10](https://github.com/refo44/demo-caminodeldharma/issues/10) | **Implementado** (plugin 0.7.2): activación/upgrade despublica el demo del instalador y `wp cdd-core demo purge --apply` lo borra. |
 | D-03 | OWN-025 / ADR 0044: feeds 404 | [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) | **Implementado** (plugin 0.7.3): los feeds nativos y sus alias responden 404 real y el `head` ya no anuncia RSS/Atom. |
 | D-04 | OWN-026: `/practica` sin overflow a 320 px | [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) | **Implementado** (theme 0.5.2): el theme levanta el suelo `min-width: 300px` que el núcleo pone al `core/audio` y topa el reproductor en su columna; mide 272 px y `/practica` da `scrollWidth` = `clientWidth` = 320. D-09 sin tocar. |
+| #18 | OWN-019 / `META-001`: un editor tiene que poder firmar una entrada desde Gutenberg antes del staging | [#18](https://github.com/refo44/demo-caminodeldharma/issues/18) | **Implementado** (plugin 0.7.4): panel nativo «Autores del blog» en `post.php` / `post-new.php`, buscador REST de fichas publicadas desde dos caracteres, escritura por `dispatch( 'core/editor' ).editPost( { meta } )` —`meta.authors` en el mismo cuerpo que Publicar— y control «Autor» del editor retirado. Guard sin relajar; `post_author` intacto. |
+| #19 | Panel SEO / evento / compartir en wp-admin (`META-002` + `META-003`) | [#19](https://github.com/refo44/demo-caminodeldharma/issues/19) | **Pendiente.** Es la última fila de código antes del `go` de OWN-035. Misma regla de ADR 0042. |
 | D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). **A2:** no bloquea el primer import de staging. |
 
 Copy y fotos a reutilizar (producción publicada, OWN-007):
@@ -158,7 +161,7 @@ Auditoría read-only 2026-09-01 (patrón revistalogos #30). **No eran bugs de pr
 
 | ID | Qué es ahora | Disparador (no el corte) |
 | -- | ------------ | ------------------------ |
-| META-001 | Criterio de aceptación de la **sesión de UI de autores** (ADR 0037) | Panel nativo **o** metabox clásico + sync `core/editor` demostrado (TDD). El guard REST se mantiene. |
+| META-001 | **Cumplida** 2026-09-03 (plugin 0.7.4, [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)): fue el criterio de aceptación de la UI de autores y ya es la **puerta de la UI de autor** del pre-staging | Se construyó con `PluginDocumentSettingPanel` nativo y `dispatch( 'core/editor' ).editPost( { meta } )`; **sin** `add_meta_box` y **sin** relajar el guard REST. |
 | META-002 + META-003 | Misma regla para UI de evento / SEO / compartir | Fusionar en esa unidad; no inventar metaboxes en staging |
 | META-004 | Una línea + test | El mismo commit que el primer `register_post_meta` de `blog_author` |
 | META-005 | Tests REST de persistencia | Esa misma unidad de UI, no una suite preventiva ahora |
@@ -240,8 +243,16 @@ pre-staging: D-03 ([#11](https://github.com/refo44/demo-caminodeldharma/issues/1
 320 px. Con esto **el pre-staging de código queda cerrado** y se cumple la condición de OWN-035:
 lo siguiente es el `go` del owner para crear Hostinger, no más código. D-08 va después (A2).
 
-**Versión:** 1.31 · **Fecha:** 2026-09-02 · **Estado:** Fase 3: 0 abiertas · 36 decididas.
-Pre-staging: 4 decididas; código pendiente solo en D-08 (D-02, D-03 y D-04 implementados).
+**v1.32 (2026-09-03):** `META-001` / OWN-019 **implementada** (plugin 0.7.4,
+[#18](https://github.com/refo44/demo-caminodeldharma/issues/18)): panel nativo «Autores del
+blog» en Gutenberg, `meta.authors` en el mismo cuerpo REST que Publicar, control «Autor» del
+editor retirado y guard sin relajar. El propietario amplió el pre-staging el 2026-09-02 con esta
+fila y con #19; **el `go` de OWN-035 ahora espera #19 en `main`**, no más código de autores.
+
+**Versión:** 1.32 · **Fecha:** 2026-09-03 · **Estado:** Fase 3: 0 abiertas · 36 decididas.
+Pre-staging: 4 decididas + 2 filas de UI wp-admin; código pendiente en #19 y D-08
+(D-02, D-03, D-04 y #18 implementados).
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
-Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`).
+Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`),
+`META-001` **cumplida**.
