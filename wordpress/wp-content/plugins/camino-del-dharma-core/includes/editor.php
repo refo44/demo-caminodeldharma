@@ -27,6 +27,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const CDD_CORE_AUTHORS_PANEL_HANDLE = 'cdd-core-authors-panel';
+const CDD_CORE_SEO_PANEL_HANDLE     = 'cdd-core-seo-panel';
+
+/**
+ * The public types whose head is editable copy (docs/15 §12, WU-08B): the
+ * «SEO y buscadores» panel loads on the block editor of each one, and the
+ * «Datos del evento» panel inside it renders for an event only.
+ */
+function cdd_core_seo_editor_post_types(): array {
+	return array( 'post', 'page', 'event', 'blog_author' );
+}
 
 /**
  * The block-editor packages the panel runs on. Every one of them is a
@@ -43,6 +53,24 @@ function cdd_core_editor_script_dependencies(): array {
 		'wp-editor',
 		'wp-data',
 		'wp-api-fetch',
+		'wp-element',
+		'wp-components',
+		'wp-i18n',
+	);
+}
+
+/**
+ * The block-editor packages the SEO / event panels run on. Same call
+ * sites as the authors panel minus `wp-api-fetch`: the head and event
+ * fields are read from and written to the editor store, never searched
+ * over REST.
+ */
+function cdd_core_seo_editor_script_dependencies(): array {
+	return array(
+		'wp-plugins',
+		'wp-edit-post',
+		'wp-editor',
+		'wp-data',
 		'wp-element',
 		'wp-components',
 		'wp-i18n',
@@ -77,6 +105,18 @@ function cdd_core_register_editor_assets() {
 	);
 
 	wp_set_script_translations( CDD_CORE_AUTHORS_PANEL_HANDLE, 'camino-del-dharma-core' );
+
+	$seo_relative = 'assets/js/seo-panel.js';
+
+	wp_register_script(
+		CDD_CORE_SEO_PANEL_HANDLE,
+		plugins_url( $seo_relative, CDD_CORE_PLUGIN_FILE ),
+		cdd_core_seo_editor_script_dependencies(),
+		cdd_core_asset_version( plugin_dir_path( CDD_CORE_PLUGIN_FILE ) . $seo_relative ),
+		true
+	);
+
+	wp_set_script_translations( CDD_CORE_SEO_PANEL_HANDLE, 'camino-del-dharma-core' );
 }
 
 /**
@@ -93,17 +133,37 @@ function cdd_core_is_post_editor_screen( $screen ): bool {
 }
 
 /**
- * Enqueues the panel on post.php / post-new.php for a blog entry.
+ * Whether a screen is the block editor of a type whose head is editable
+ * copy: post.php / post-new.php for post, page, event or blog_author. Never
+ * the site editor or the widgets screen.
+ *
+ * @param WP_Screen|null $screen Current admin screen.
+ */
+function cdd_core_is_seo_editor_screen( $screen ): bool {
+	return $screen instanceof WP_Screen
+		&& 'post' === $screen->base
+		&& in_array( $screen->post_type, cdd_core_seo_editor_post_types(), true );
+}
+
+/**
+ * Enqueues the editor panels on post.php / post-new.php: the «Autores del
+ * blog» panel for a blog entry, and the «SEO y buscadores» / «Datos del
+ * evento» panels for every public editorial type.
  */
 function cdd_core_enqueue_editor_assets() {
 	if ( ! function_exists( 'get_current_screen' ) ) {
 		return;
 	}
-	if ( ! cdd_core_is_post_editor_screen( get_current_screen() ) ) {
-		return;
+
+	$screen = get_current_screen();
+
+	if ( cdd_core_is_post_editor_screen( $screen ) ) {
+		wp_enqueue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
 	}
 
-	wp_enqueue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+	if ( cdd_core_is_seo_editor_screen( $screen ) ) {
+		wp_enqueue_script( CDD_CORE_SEO_PANEL_HANDLE );
+	}
 }
 
 /**

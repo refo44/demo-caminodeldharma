@@ -522,6 +522,107 @@ function cdd_core_seo_document(): array {
 }
 
 /**
+ * On publish, gives a public entry a truthful `seo_description` when the
+ * editor left the field blank (binding rule #1 of META-002).
+ *
+ * `og_description` falls back to `description`, `og_title` to `title` and
+ * `title` to «{title} — {site}» inside `Cdd_Core_Seo_Document`, so the one
+ * head value with no fallback — and the only one worth persisting — is the
+ * meta `description` tag. It is written once, from the object's own
+ * excerpt or content: stored copy (an editor's, or the importer's
+ * create-missing-only seed) is never touched, and the front never
+ * re-derives it on a later request (WU-08B: stored meta is the source of
+ * truth once saved).
+ *
+ * The migration pipeline is left alone: `wp cdd-core migrate import` and
+ * `convert` run under WP-CLI and seed `seo_description` add-only from the
+ * versioned payload, so a backfill firing on those inserts would pre-empt
+ * the canonical copy with a derived summary. Backfill is for the wp-admin
+ * publish the pipeline never reaches.
+ *
+ * @param int          $post_id Post ID.
+ * @param WP_Post|null $post    Post object, when the hook passes one.
+ */
+function cdd_core_seo_backfill_meta( $post_id, $post = null ) {
+	if ( ( defined( 'WP_CLI' ) && WP_CLI ) || wp_doing_cron() ) {
+		return;
+	}
+
+	if ( ! $post instanceof WP_Post ) {
+		$post = get_post( $post_id );
+	}
+
+	if ( ! $post instanceof WP_Post
+		|| ! in_array( $post->post_type, cdd_core_seo_editor_post_types(), true )
+		|| 'publish' !== $post->post_status
+		|| wp_is_post_revision( $post )
+		|| wp_is_post_autosave( $post )
+	) {
+		return;
+	}
+
+	if ( '' !== (string) get_post_meta( $post->ID, 'seo_description', true ) ) {
+		return;
+	}
+
+	$description = cdd_core_seo_derive_description( $post );
+
+	if ( '' !== $description ) {
+		update_post_meta( $post->ID, 'seo_description', $description );
+	}
+}
+
+/**
+ * A head description derived from an object's own data: its excerpt, or a
+ * trimmed summary of its content — never its title, and never invented
+ * copy. Empty when the object carries nothing to summarize.
+ *
+ * @param WP_Post $post Post.
+ */
+function cdd_core_seo_derive_description( WP_Post $post ): string {
+	$source = trim( wp_strip_all_tags( (string) $post->post_excerpt ) );
+
+	if ( '' === $source ) {
+		$content = (string) $post->post_content;
+
+		if ( function_exists( 'excerpt_remove_blocks' ) ) {
+			$content = excerpt_remove_blocks( $content );
+		}
+
+		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
+		$source  = trim( (string) preg_replace( '/\s+/', ' ', $content ) );
+	}
+
+	if ( '' === $source ) {
+		return '';
+	}
+
+	return cdd_core_seo_truncate( $source, 155 );
+}
+
+/**
+ * Trims a string to a character budget on a word boundary, closing with an
+ * ellipsis. Shorter input is returned untouched.
+ *
+ * @param string $text  Source text.
+ * @param int    $limit Character budget.
+ */
+function cdd_core_seo_truncate( string $text, int $limit ): string {
+	if ( mb_strlen( $text ) <= $limit ) {
+		return $text;
+	}
+
+	$clipped = mb_substr( $text, 0, $limit );
+	$space   = mb_strrpos( $clipped, ' ' );
+
+	if ( false !== $space && $space > 0 ) {
+		$clipped = mb_substr( $clipped, 0, $space );
+	}
+
+	return rtrim( $clipped, " \t\n\r\0\x0B.,;:" ) . '…';
+}
+
+/**
  * Trims the native sitemap to the URL tree of docs/11 (ADR 0030). Native
  * WP-user author archives are 404 (ADR 0037 §5), so listing their
  * provider would publish a sitemap full of soft 404s.

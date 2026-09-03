@@ -56,7 +56,10 @@ function cdd_core_register_post_types() {
 			),
 			'capability_type' => array( 'blog_author', 'blog_authors' ),
 			'map_meta_cap'    => true,
-			'supports'        => array( 'title', 'editor', 'thumbnail' ),
+			// 'custom-fields': the block editor reads and writes the head meta
+			// (META-004) over the REST `meta` object, which the CPT only
+			// exposes with this support.
+			'supports'        => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
 		)
 	);
 }

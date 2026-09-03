@@ -6,7 +6,7 @@ Aceptada
 
 ## Fecha
 
-2026-09-01 · **enmendada 2026-09-03** (timing de `META-001`)
+2026-09-01 · **enmendada 2026-09-03** (timing de `META-001`; cierre de `META-002`–`META-005`)
 
 ## Contexto
 
@@ -30,9 +30,12 @@ propia (bio = contenido, foto = destacada).
    *(Enmienda 2026-09-03, OWN-019: el propietario **adelanta `META-001` al pre-staging** —la UI
    de autores va antes de Hostinger,
    [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)—. Cambia **solo el timing**:
-   el criterio de aceptación de esta ADR sigue vigente y es el que se cumplió. `META-002`–
-   `META-005` siguen sin ser cola de pre-staging; la UI de evento/SEO es
-   [#19](https://github.com/refo44/demo-caminodeldharma/issues/19).)*
+   el criterio de aceptación de esta ADR sigue vigente y es el que se cumplió.)*
+   *(Enmienda 2026-09-03, OWN-035: el propietario **adelanta también `META-002`–`META-005` al
+   pre-staging** —los paneles de SEO y datos del evento en Gutenberg,
+   [#19](https://github.com/refo44/demo-caminodeldharma/issues/19)—. El go a Hostinger espera
+   ahora esa UI además de la de autores. Otra vez cambia **solo el timing**: el criterio de
+   aceptación del punto 4 sigue vigente y es el que se cumplió.)*
 2. **Hasta el corte:** los editores conservan la meta importada. Gutenberg basta para título y
    cuerpo. **No** construir metaboxes clásicos en la sesión de staging (OWN-005).
 3. **Cuando se construya UI de autores** (ADR 0037): panel nativo de Gutenberg
@@ -53,8 +56,24 @@ propia (bio = contenido, foto = destacada).
 4. **Cuando se construya UI de evento / SEO / compartir:** la misma regla; META-002 y META-003
    se fusionan en esa unidad; META-005 son los tests REST de persistencia de **ese** camino, no
    una suite ahora sobre `meta_input` del importador.
+   *(Cumplido 2026-09-03, plugin 0.7.5,
+   [#19](https://github.com/refo44/demo-caminodeldharma/issues/19): dos
+   `PluginDocumentSettingPanel` nativos —«SEO y buscadores» para `post`/`page`/`event`/
+   `blog_author`, «Datos del evento (schema.org)» solo para `event`—. Escritura por
+   `dispatch( 'core/editor' ).editPost( { meta } )`; sin `wp-api-fetch` (no hay búsqueda REST);
+   `includes/editor.php` encola el script **solo** en `post.php` / `post-new.php` de esos tipos.
+   META-005 = round-trip REST real de la cabeza y de los datos del evento en
+   `tests/WordPress/Editor_SeoPanelTest.php`, no `meta_input`. El plugin **sigue sin**
+   `add_meta_box` —comprobado por test—. `seo_jsonld_extra` se difiere del panel v1: la meta y
+   su sanitizador siguen registrados y editables por REST.)*
 5. **META-004:** añadir `custom-fields` a `blog_author` en el **mismo** commit que el primer
    `register_post_meta` de ese CPT, no antes (YAGNI). ADR 0037 no exige meta extra hoy.
+   *(Cumplido 2026-09-03, plugin 0.7.5, [#19](https://github.com/refo44/demo-caminodeldharma/issues/19):
+   `blog_author` gana `custom-fields` **y** el registro `seo_*` de cabeza en el mismo commit. El
+   nodo JSON-LD del perfil **sigue siendo `Thing`** (ADR 0037): cabeza más rica, nunca `@type`
+   promovido. Sin copy sembrado para Zheng Gong ni Comunidad —D-08 /
+   [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) sigue pendiente—: esto solo hace
+   que las fichas nuevas funcionen.)*
 6. **Native-first** (ADR [0025](0025-politica-plugins-terceros.md)): preferir panel Gutenberg
    frente a metabox clásico. ACF u otros constructores de campos siguen vetados.
 
@@ -69,11 +88,14 @@ propia (bio = contenido, foto = destacada).
 
 ## Consecuencias
 
-- El corte no espera paneles de meta de **evento / SEO**. Staging no añade `add_meta_box`
-  —tampoco lo añadió la UI de autores—.
+- Staging no añade `add_meta_box` —no lo añadió la UI de autores ni la de evento/SEO—.
 - Enmienda 2026-09-03: el staging **sí** espera la UI de autores (`META-001`,
-  [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)), por decisión del propietario
-  y con el criterio de aceptación de esta ADR cumplido, no relajado.
+  [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)) **y** la de SEO / datos del
+  evento (`META-002`–`META-005`, [#19](https://github.com/refo44/demo-caminodeldharma/issues/19)),
+  por decisión del propietario (OWN-019 / OWN-035) y con el criterio de aceptación de esta ADR
+  cumplido, no relajado. El backfill de `seo_description` al publicar (binding rule #1) no toca
+  la copia importada ni la del editor y no corre bajo WP-CLI, así que la convergencia add-only
+  de `migrate convert` queda intacta.
 - La sesión futura de autores (y la de evento/SEO) hereda un criterio de aceptación explícito.
 - La auditoría `.audit/gutenberg-meta-transport-audit-2026-09-01.md` queda como etiqueta de
   advertencia, no como cola de implementación de Fase 3.

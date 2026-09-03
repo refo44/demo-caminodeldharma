@@ -103,5 +103,25 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   el enlace REST `wp:action-assign-author` del que depende—. `post_author` queda intacto: el
   tipo conserva el soporte `author`, con su columna en el listado, edición rápida y
   revisiones como rastro de quién creó y guardó.
+- Paneles de SEO y datos del evento en el editor de bloques desde META-002/003/004/005 /
+  OWN-035 (v0.7.5, [#19](https://github.com/refo44/demo-caminodeldharma/issues/19)):
+  `includes/editor.php` registra `assets/js/seo-panel.js` y lo encola **solo** en `post.php` /
+  `post-new.php` para `post`, `page`, `event` y `blog_author`. Dos `PluginDocumentSettingPanel`
+  nativos (ADR 0025/0042; sin metabox clásico, sin ACF, sin Yoast/Rank Math, sin bundler, sin
+  `wp-api-fetch`): «SEO y buscadores» edita los seis campos de cabeza (`seo_title`,
+  `seo_description`, `seo_keywords`, `og_title`, `og_description`, `seo_related_url`) en los
+  cuatro tipos, y «Datos del evento (schema.org)» edita solo en `event` las claves que ya leen
+  el JSON-LD y el `.ics` (`event_date`, `event_end`, `event_place`, `event_modality`,
+  `event_attendance_mode`, `event_status`, `event_signup_url`, `event_signup_payment`,
+  `event_featured`, `event_calendar_dates`) — ninguna clave nueva de dominio. Cada campo escribe
+  con `dispatch( 'core/editor' ).editPost( { meta } )`, así que Publicar/Actualizar lleva la
+  cabeza y los datos del evento **en el mismo cuerpo REST** que los persiste (META-005). En el
+  mismo commit, `blog_author` gana el soporte `custom-fields` y el registro `seo_*`; su JSON-LD
+  **sigue siendo `Thing`** (ADR 0037). `cdd_core_seo_backfill_meta()` (hook
+  `wp_after_insert_post`) rellena `seo_description` al **publicar** desde el extracto o el
+  contenido del propio objeto —nunca el título, nunca copy inventado, nunca bajo WP-CLI— si el
+  editor lo dejó vacío; la copia importada por `migrate convert` o escrita por una persona no se
+  toca (create-missing-only) y el front no la vuelve a derivar. `seo_jsonld_extra` se difiere del
+  panel v1 (la meta y su sanitizador siguen editables por REST).
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.
