@@ -210,6 +210,32 @@
 	}
 
 	/**
+	 * A single-choice meta field bound to the editor store. The first option
+	 * is the value used when the meta is unset.
+	 *
+	 * @param {Object} meta    Current edited meta.
+	 * @param {string} key     Meta key.
+	 * @param {string} label   Field label.
+	 * @param {Array}  options `{ value, label }` choices.
+	 * @param {Object} extra   Extra control props (e.g. `help`).
+	 * @return {Object} Element.
+	 */
+	function metaSelect( meta, key, label, options, extra ) {
+		var props = {
+			label: label,
+			value: meta[ key ] || options[ 0 ].value,
+			options: options,
+			onChange: function ( value ) {
+				commit( meta, key, value );
+			},
+			__nextHasNoMarginBottom: true,
+			__next40pxDefaultSize: true
+		};
+
+		return el( SelectControl, Object.assign( props, extra || {} ) );
+	}
+
+	/**
 	 * A boolean meta field bound to the editor store.
 	 *
 	 * @param {Object} meta  Current edited meta.
@@ -387,35 +413,18 @@
 			metaText( meta, EVENT_MODALITY, __( 'Modalidad (texto publicado)', TEXT_DOMAIN ), {
 				help: __( 'Texto descriptivo tal como se publica. No cambia el JSON-LD.', TEXT_DOMAIN )
 			} ),
-			el( SelectControl, {
-				label: __( 'Modalidad para schema.org', TEXT_DOMAIN ),
-				value: meta[ EVENT_ATTENDANCE_MODE ] || '',
-				options: [
-					{ value: '', label: __( 'Sin especificar', TEXT_DOMAIN ) },
-					{ value: 'offline', label: __( 'Presencial', TEXT_DOMAIN ) },
-					{ value: 'online', label: __( 'Virtual', TEXT_DOMAIN ) },
-					{ value: 'mixed', label: __( 'Híbrida', TEXT_DOMAIN ) }
-				],
-				onChange: function ( value ) {
-					commit( meta, EVENT_ATTENDANCE_MODE, value );
-				},
-				__nextHasNoMarginBottom: true,
-				__next40pxDefaultSize: true
-			} ),
-			el( SelectControl, {
-				label: __( 'Estado editorial', TEXT_DOMAIN ),
-				help: __( 'El estado real se recalcula por fecha en cada visita (OWN-013); solo «cancelado» tiene efecto editorial.', TEXT_DOMAIN ),
-				value: meta[ EVENT_STATUS ] || 'vigente',
-				options: [
-					{ value: 'vigente', label: __( 'Vigente', TEXT_DOMAIN ) },
-					{ value: 'finalizado', label: __( 'Finalizado', TEXT_DOMAIN ) },
-					{ value: 'cancelado', label: __( 'Cancelado', TEXT_DOMAIN ) }
-				],
-				onChange: function ( value ) {
-					commit( meta, EVENT_STATUS, value );
-				},
-				__nextHasNoMarginBottom: true,
-				__next40pxDefaultSize: true
+			metaSelect( meta, EVENT_ATTENDANCE_MODE, __( 'Modalidad para schema.org', TEXT_DOMAIN ), [
+				{ value: '', label: __( 'Sin especificar', TEXT_DOMAIN ) },
+				{ value: 'offline', label: __( 'Presencial', TEXT_DOMAIN ) },
+				{ value: 'online', label: __( 'Virtual', TEXT_DOMAIN ) },
+				{ value: 'mixed', label: __( 'Híbrida', TEXT_DOMAIN ) }
+			] ),
+			metaSelect( meta, EVENT_STATUS, __( 'Estado editorial', TEXT_DOMAIN ), [
+				{ value: 'vigente', label: __( 'Vigente', TEXT_DOMAIN ) },
+				{ value: 'finalizado', label: __( 'Finalizado', TEXT_DOMAIN ) },
+				{ value: 'cancelado', label: __( 'Cancelado', TEXT_DOMAIN ) }
+			], {
+				help: __( 'El estado real se recalcula por fecha en cada visita (OWN-013); solo «cancelado» tiene efecto editorial.', TEXT_DOMAIN )
 			} ),
 			metaText( meta, EVENT_SIGNUP_URL, __( 'URL de inscripción', TEXT_DOMAIN ), {
 				type: 'url',
