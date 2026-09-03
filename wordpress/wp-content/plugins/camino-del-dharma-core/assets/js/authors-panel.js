@@ -87,7 +87,7 @@
 		}
 
 		value.forEach( function ( candidate ) {
-			var id = parseInt( candidate, 10 );
+			var id = Number.parseInt( candidate, 10 );
 
 			if ( id > 0 && -1 === ids.indexOf( id ) ) {
 				ids.push( id );
