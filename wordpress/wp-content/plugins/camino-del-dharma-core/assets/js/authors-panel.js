@@ -394,7 +394,13 @@
 				__( 'La firma pública de la entrada. Es una ficha de Autores del blog, no el usuario de WordPress con el que entraste.', TEXT_DOMAIN )
 			),
 			selectedIds.length
-				? el( 'ol', { className: 'cdd-core-blog-authors__list' }, selectedIds.map( renderSelected ) )
+				? el(
+					'ol',
+					{ className: 'cdd-core-blog-authors__list' },
+					selectedIds.map( function ( id, index ) {
+						return renderSelected( id, index );
+					} )
+				)
 				: el(
 					'p',
 					{ className: 'cdd-core-blog-authors__note' },
