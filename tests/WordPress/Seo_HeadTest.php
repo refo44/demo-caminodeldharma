@@ -82,7 +82,7 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	 * text regenerated from the post title.
 	 */
 	public function test_head_meta_is_registered_on_pages_posts_and_events() {
-		foreach ( array( 'page', 'post', 'event' ) as $post_type ) {
+		foreach ( array( 'page', 'post', 'event', 'blog_author' ) as $post_type ) {
 			$registered = get_registered_meta_keys( 'post', $post_type );
 
 			foreach ( array( 'seo_title', 'seo_description', 'seo_keywords', 'og_title', 'og_description' ) as $key ) {
@@ -128,9 +128,14 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	public function test_page_without_stored_copy_falls_back_to_real_data() {
 		$page = self::factory()->post->create(
 			array(
-				'post_type'  => 'page',
-				'post_name'  => 'sin-seo',
-				'post_title' => 'Sin SEO',
+				'post_type'    => 'page',
+				'post_name'    => 'sin-seo',
+				'post_title'   => 'Sin SEO',
+				// No excerpt, no body: the publish-time backfill has nothing
+				// truthful to derive, so the head still carries no
+				// description — invented copy never appears.
+				'post_content' => '',
+				'post_excerpt' => '',
 			)
 		);
 
@@ -264,6 +269,31 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 		$this->assertStringStartsWith( 'index', $context['robots'] );
 		$this->assertSame( 'Zheng Gong', $graph['Thing']['name'] );
 		$this->assertSame( get_permalink( $author ), $graph['Thing']['url'] );
+	}
+
+	/**
+	 * META-004: a profile prints its stored `seo_description` in the head
+	 * while its JSON-LD stays `Thing` (never promoted to Person/Organization).
+	 */
+	public function test_author_profile_head_uses_the_stored_seo_description() {
+		$author = self::factory()->post->create(
+			array(
+				'post_type'   => 'blog_author',
+				'post_name'   => 'zheng-gong',
+				'post_title'  => 'Zheng Gong',
+				'post_status' => 'publish',
+				'meta_input'  => array( 'seo_description' => 'Maestro del linaje Chan y Tierra Pura.' ),
+			)
+		);
+
+		$this->go_to( get_permalink( $author ) );
+		$context = cdd_core_seo_context();
+		$graph   = array_column( $context['jsonld'], null, '@type' );
+
+		$this->assertSame( 'Maestro del linaje Chan y Tierra Pura.', $context['description'] );
+		$this->assertArrayHasKey( 'Thing', $graph );
+		$this->assertArrayNotHasKey( 'Person', $graph );
+		$this->assertArrayNotHasKey( 'Organization', $graph );
 	}
 
 	/**

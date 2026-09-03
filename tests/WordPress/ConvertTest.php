@@ -282,10 +282,16 @@ final class ConvertTest extends WP_UnitTestCase {
 	public function test_convert_seeds_head_seo_add_only() {
 		$page = self::factory()->post->create(
 			array(
-				'post_type'  => 'page',
-				'post_name'  => 'linaje',
-				'post_title' => 'El linaje',
-				'meta_input' => array( '_cdd_source_key' => 'page:linaje' ),
+				'post_type'    => 'page',
+				'post_name'    => 'linaje',
+				'post_title'   => 'El linaje',
+				// The importer, not the factory, stands in here: an imported
+				// object carries its own excerpt, but this fixture stays bare
+				// so the publish-time `seo_description` backfill has nothing
+				// to derive and cannot pre-empt the add-only payload seed.
+				'post_content' => '',
+				'post_excerpt' => '',
+				'meta_input'   => array( '_cdd_source_key' => 'page:linaje' ),
 			)
 		);
 		update_post_meta( $page, 'seo_title', 'Título ya editado' );

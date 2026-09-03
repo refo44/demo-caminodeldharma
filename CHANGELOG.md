@@ -12,6 +12,64 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — META-002/003/004/005 / #19: paneles de SEO y datos del evento en Gutenberg (sin cambio del artefacto desplegado)
+
+Plugin `camino-del-dharma-core` **0.7.5** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19)).
+El estático de producción no se toca.
+
+- **El editor ya puede escribir la cabeza.** Hasta ahora `seo_title`, `seo_description`,
+  `seo_keywords`, `og_title`, `og_description` y `seo_related_url` (WU-08B) solo llegaban por
+  `migrate convert`: crear una Entrada, un Evento, una Página o un Autor del blog desde wp-admin
+  dejaba la `<meta name="description">` vacía y el JSON-LD `Event` sin fechas ni lugar. Dos
+  `PluginDocumentSettingPanel` nativos lo resuelven (ADR
+  [0025](docs/adr/0025-politica-plugins-terceros.md) /
+  [0042](docs/adr/0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md); sin metabox clásico, sin
+  ACF, sin Yoast/Rank Math, sin bundler):
+  - **«SEO y buscadores»** para `post`, `page`, `event` y `blog_author`: los seis campos de
+    cabeza. La ayuda del campo Descripción muestra en vivo el texto que se guardará al publicar
+    si se deja vacío.
+  - **«Datos del evento (schema.org)»** solo para `event`: `event_date`, `event_end`,
+    `event_place`, `event_modality`, `event_attendance_mode`, `event_status`, `event_signup_url`,
+    `event_signup_payment`, `event_featured` y el cronograma `event_calendar_dates`. Ninguna
+    clave nueva de dominio: son las que ya leen `cdd_core_seo_event_node()` y
+    `cdd_core_event_calendar_payload()`.
+- **El transporte es el punto** (ADR 0042 · META-005). Cada campo escribe con
+  `dispatch( 'core/editor' ).editPost( { meta } )`, así que Publicar/Actualizar envía las claves
+  editadas **en el mismo cuerpo REST** que las persiste. `assets/js/seo-panel.js` es handwritten
+  sobre `wp.plugins`/`wp.editor`/`wp.data`/`wp.element`/`wp.components`/`wp.i18n` (sin
+  `wp-api-fetch`: no hay búsqueda REST) y `includes/editor.php` lo encola **solo** en
+  `post.php` / `post-new.php` de esos cuatro tipos, nunca en el editor de sitio ni en widgets.
+- **Generar y persistir** (binding rule #1). `cdd_core_seo_backfill_meta()` se engancha a
+  `wp_after_insert_post`: al **publicar**, si `seo_description` está vacío, deriva un resumen del
+  propio objeto —su extracto, o el contenido sin bloques recortado a ~155 caracteres en frontera
+  de palabra; nunca el título, nunca copy inventado— y lo guarda por la misma vía de meta. Los
+  seis campos restantes ya tienen respaldo en `Cdd_Core_Seo_Document` (`og_*` cae en
+  `title`/`description`), así que `description` es el único que se persiste. **La copia
+  almacenada nunca se pisa** (create-missing-only): lo que sembró `migrate convert` para Sangha
+  y Círculos, y lo que edite una persona, queda intacto; el front tampoco vuelve a derivarla en
+  cada request (WU-08B).
+- **META-004 en el mismo commit.** `blog_author` gana el soporte `custom-fields` **y** el mismo
+  registro `seo_*` que los demás tipos públicos. Su contexto singular ya leía `seo_*` por el
+  bloque genérico de `cdd_core_seo_singular_context()`, así que la cabeza «simplemente funciona»
+  una vez registrada la meta. El JSON-LD del perfil **sigue siendo `Thing`** (doc 15 §12.4): un
+  perfil recibe una cabeza más rica, nunca un `@type` promovido a `Person`/`Organization`. Sin
+  copy sembrado para Zheng Gong ni Comunidad (D-08 / [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)
+  sigue pendiente): esto solo hace que las **fichas nuevas** funcionen.
+- **Fuera de este PR:** `seo_jsonld_extra` (textarea de JSON crudo — se difiere del panel v1 por
+  el riesgo de validar JSON en la UI; la meta y su sanitizador siguen registrados y editables por
+  REST), los paneles de `share_*` (opcionales, POST) y el spike del catálogo JSON-LD global
+  ([#20](https://github.com/refo44/demo-caminodeldharma/issues/20)). #18 no se toca.
+- Cubierto por `tests/Unit/Editor_Seo_PanelTest.php` (el script sincroniza por `core/editor`,
+  cubre las seis claves de cabeza y las diez del evento, está scoped por tipo y no inventa
+  `@type`), `tests/WordPress/Editor_SeoPanelTest.php` (dependencias y `src` del script; encolado
+  en los cuatro tipos y no en el front; `blog_author` expone la meta por REST; round-trip REST
+  de la cabeza y de los datos del evento — META-005; backfill al publicar desde extracto y desde
+  contenido, respeta la copia almacenada, ignora borradores; fecha y lugar del panel llegan al
+  JSON-LD y al `.ics`), más añadidos a `tests/WordPress/Seo_HeadTest.php` (meta de cabeza
+  registrada también en `blog_author`; el perfil imprime su `seo_description` y mantiene `Thing`)
+  y `tests/WordPress/Blog_AuthorTest.php` (`custom-fields`). QA 4 manual en el Docker local:
+  documentado en el PR.
+
 ### WordPress Fase 3 — META-001 / OWN-019: panel «Autores del blog» en Gutenberg (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.4** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18)).

@@ -245,7 +245,10 @@ function cdd_core_register_seo_meta() {
 		'seo_related_url' => 'esc_url_raw',
 	);
 
-	foreach ( array( 'page', 'post', 'event' ) as $post_type ) {
+	// blog_author carries the same head meta (META-004): its singular
+	// context reads seo_* through the generic block of
+	// cdd_core_seo_singular_context(); the JSON-LD node stays Thing.
+	foreach ( array( 'page', 'post', 'event', 'blog_author' ) as $post_type ) {
 		foreach ( $head_meta as $meta_key => $sanitize_callback ) {
 			register_post_meta(
 				$post_type,

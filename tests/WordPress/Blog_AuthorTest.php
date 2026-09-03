@@ -47,6 +47,9 @@ final class Blog_AuthorTest extends WP_UnitTestCase {
 		$this->assertTrue( post_type_supports( 'blog_author', 'title' ) );
 		$this->assertTrue( post_type_supports( 'blog_author', 'editor' ) );
 		$this->assertTrue( post_type_supports( 'blog_author', 'thumbnail' ) );
+		// META-004: the block editor reads and writes the head meta over the
+		// REST `meta` object, which the CPT only exposes with this support.
+		$this->assertTrue( post_type_supports( 'blog_author', 'custom-fields' ) );
 	}
 
 	/**
