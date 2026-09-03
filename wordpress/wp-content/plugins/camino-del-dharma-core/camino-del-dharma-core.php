@@ -3,7 +3,7 @@
  * Plugin Name: Camino del Dharma Core
  * Plugin URI: https://caminodeldharma.org
  * Description: Domain plugin for Comunidad Buddhista Camino del Dharma — content model, routing and migration tooling (ADR 0024).
- * Version: 0.7.3
+ * Version: 0.7.4
  * Requires at least: 7.1
  * Requires PHP: 8.3
  * Author: Comunidad Buddhista Camino del Dharma
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CDD_CORE_VERSION', '0.7.3' );
+define( 'CDD_CORE_VERSION', '0.7.4' );
 define( 'CDD_CORE_PLUGIN_FILE', __FILE__ );
 
 // Pure domain classes (no WordPress APIs; unit-testable without a boot).
@@ -58,6 +58,7 @@ require_once __DIR__ . '/includes/feeds.php';
 require_once __DIR__ . '/includes/seo.php';
 require_once __DIR__ . '/includes/contact.php';
 require_once __DIR__ . '/includes/demo-content.php';
+require_once __DIR__ . '/includes/editor.php';
 require_once __DIR__ . '/includes/admin.php';
 
 // Hook wiring only when WordPress is present (the unit bootstrap loads
@@ -83,6 +84,12 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_sitemaps_add_provider', 'cdd_core_seo_sitemap_provider', 10, 2 );
 	add_filter( 'wp_sitemaps_taxonomies', 'cdd_core_seo_sitemap_taxonomies' );
 	add_action( 'admin_menu', 'cdd_core_register_admin_pages' );
+
+	// Block editor of a blog entry (ADR 0037 §4/§6): the «Autores del
+	// blog» panel, and the core Author control out of the way.
+	add_action( 'init', 'cdd_core_register_editor_assets' );
+	add_action( 'enqueue_block_editor_assets', 'cdd_core_enqueue_editor_assets' );
+	add_filter( 'rest_prepare_post', 'cdd_core_hide_editor_author_control' );
 
 	// Contact Form 7 wiring (WU-09, ADR 0026/0041). Inert without CF7.
 	add_filter( 'wpcf7_autop_or_not', 'cdd_core_contact_form_autop', 10, 2 );

@@ -87,8 +87,21 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   `rel=alternate` `text/calendar` del evento vigente (OWN-014) no se toca. Un RSS público es
   decisión posterior (POST-010): reabrirlo es soltar esos dos hooks, más su fila en el árbol
   de URLs y en el ledger.
-- El metabox de autores en wp-admin sigue pendiente (ADR 0037). La UI Gutenberg queda
-  acotada por ADR 0042: panel nativo **o** clásico con sync REST demostrado; TDD primero;
-  el guard no se relaja. Guía: `docs/guia-pruebas-plugin-theme-fse.md`.
+- Panel «Autores del blog» en el editor de bloques desde META-001 / OWN-019 (v0.7.4,
+  [#18](https://github.com/refo44/demo-caminodeldharma/issues/18)): `includes/editor.php`
+  registra `assets/js/authors-panel.js` y lo encola **solo** en `post.php` / `post-new.php`
+  cuando el tipo es `post`. Es un `PluginDocumentSettingPanel` nativo (ADR 0025/0042; sin
+  metabox clásico, sin ACF, sin bundler): busca fichas **publicadas** en
+  `GET /wp/v2/blog_author?status=publish` a partir de dos caracteres —nunca precarga el
+  catálogo ni da de alta fichas—, admite varias en el orden del byline, y escribe la
+  relación con `dispatch( 'core/editor' ).editPost( { meta } )`, así que Publicar/Actualizar
+  lleva `meta.authors` **en el mismo cuerpo REST** que lee el guard. Ese transporte es
+  META-001: un picker que solo llena el DOM publica un 400. El guard no se relaja (borrador
+  sin ficha sí; publicar sin ficha sigue siendo 400). La otra mitad de ADR 0037 §4: el
+  control «Autor» del editor desaparece —WordPress 7.1 lo rinde como fila del panel Resumen,
+  no como panel propio, así que no hay `removeEditorPanel()` que quitar y lo que se retira es
+  el enlace REST `wp:action-assign-author` del que depende—. `post_author` queda intacto: el
+  tipo conserva el soporte `author`, con su columna en el listado, edición rápida y
+  revisiones como rastro de quién creó y guardó.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.
