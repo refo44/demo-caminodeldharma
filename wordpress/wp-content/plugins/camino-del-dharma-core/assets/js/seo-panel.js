@@ -130,7 +130,17 @@
 			clipped = clipped.slice( 0, lastSpace );
 		}
 
-		return clipped.replace( /[\s.,;:]+$/, '' ) + '…';
+		// Mirror PHP `rtrim( $clipped, " \t\n\r\0\x0B.,;:" )`: drop trailing
+		// spaces and sentence punctuation with a linear scan, no backtracking
+		// regex.
+		var trailing = ' \t\n\r\x00\x0B.,;:';
+		var end = clipped.length;
+
+		while ( end > 0 && trailing.indexOf( clipped.charAt( end - 1 ) ) !== -1 ) {
+			end -= 1;
+		}
+
+		return clipped.slice( 0, end ) + '…';
 	}
 
 	/**
