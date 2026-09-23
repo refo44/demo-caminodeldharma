@@ -81,6 +81,36 @@ final class Theme_ScaffoldTest extends TestCase {
 	}
 
 	/**
+	 * Protects the Appearance preview (docs/12 §5): screenshot.png sits in
+	 * the theme root and is the standard WordPress 1200×900 PNG.
+	 */
+	public function test_preview_screenshot_is_a_1200_by_900_png() {
+		$path = $this->theme_dir() . '/screenshot.png';
+
+		$this->assertFileExists( $path );
+
+		$info = getimagesize( $path );
+
+		$this->assertIsArray( $info );
+		$this->assertSame( IMAGETYPE_PNG, $info[2] );
+		$this->assertSame( 1200, $info[0] );
+		$this->assertSame( 900, $info[1] );
+	}
+
+	/**
+	 * Protects the enqueue fallback: when an asset mtime is unavailable the
+	 * version string is the theme header, not a stale release.
+	 */
+	public function test_asset_version_fallback_matches_the_theme_header() {
+		$style     = file_get_contents( $this->theme_dir() . '/style.css' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+		$functions = file_get_contents( $this->theme_dir() . '/functions.php' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+
+		$this->assertSame( 1, preg_match( '/^Version:\s*(\S+)\s*$/m', $style, $header ) );
+		$this->assertSame( 1, preg_match( "/return '([^']+)';/", $functions, $fallback ) );
+		$this->assertSame( $header[1], $fallback[1] );
+	}
+
+	/**
 	 * Protects ADR 0029: no classic PHP view layer. front-page.php,
 	 * page-*.php, single-*.php, archive-*.php, and index.php must not exist.
 	 */

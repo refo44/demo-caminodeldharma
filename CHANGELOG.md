@@ -12,6 +12,20 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — vista previa oficial del theme (sin cambio del artefacto desplegado)
+
+Theme `camino-del-dharma` **0.5.3**. El estático de producción no se toca. El plugin
+sigue en **0.7.5**. El WordPress de staging
+(`https://teal-woodpecker-284165.hostingersite.com`) **sigue en el theme 0.5.2**
+hasta el despliegue manual de este paquete.
+
+- **Apariencia ya tiene captura real.** `screenshot.png` (PNG, 1200×900) es la
+  portada del theme en wp-admin. Sale de la portada pública de staging, en un
+  viewport de escritorio 1440×1080, sin cromo de navegador, sin barra de
+  administración y sin anotaciones. No es el logo ni una aproximación.
+- Cubierto por `tests/Unit/Theme_ScaffoldTest.php`: el archivo está en la raíz
+  del theme, es PNG y mide 1200×900.
+
 ### WordPress Fase 3 — META-002/003/004/005 / #19: paneles de SEO y datos del evento en Gutenberg (sin cambio del artefacto desplegado)
 
 Plugin `camino-del-dharma-core` **0.7.5** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19)).

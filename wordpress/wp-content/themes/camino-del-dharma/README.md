@@ -40,6 +40,11 @@ Reglas:
   página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
   `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
   (docs/19 §9).
+- Vista previa de Apariencia desde v0.5.3: `screenshot.png` (PNG 1200×900) es la
+  portada del theme. Es la portada pública de staging
+  (`https://teal-woodpecker-284165.hostingersite.com`) a 1440×1080, reducida
+  en proporción, sin cromo de navegador. El sitio de staging sigue en **0.5.2**
+  hasta el despliegue manual.
 - Reproductores de mantra desde D-04 (v0.5.2): el núcleo sirve
   `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo** gana sobre un
   ancho preferido, así que a 320 px el reproductor estiraba la columna de `/practica`.
