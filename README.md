@@ -138,7 +138,7 @@ Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni 
 > Hasta la v1.0.35 el sitio vivía en la raíz del repo y el ZIP se generaba desde ahí (Fase 2,
 > histórico). La reorganización raíz → `static/` es el primer paso de Fase 3 (ADR 0014).
 
-WordPress se despliega en **otra instancia Hostinger, sin dominio custom** (staging), hasta el switch. Producción sigue siendo el estático en `caminodeldharma.org`. No instalar WordPress sobre ese `public_html` hasta el corte. Activar el theme **no** crea Pages ni sustituye el checklist de cutover.
+WordPress de staging ya existe en `https://teal-woodpecker-284165.hostingersite.com`, **sin dominio custom**, y es el sitio que el corte convertirá en `caminodeldharma.org` (ADR 0046 / OWN-036). No se borra ni se reinstala. Producción sigue siendo el estático en `caminodeldharma.org`. El cambio de dominio es una sesión posterior: antes hay que inventariar correo y subdominios. No instalar WordPress sobre el `public_html` del estático. Activar el theme **no** crea Pages ni sustituye el checklist de cutover.
 
 ## Scripts
 
@@ -171,7 +171,7 @@ FSE, Sonar): [`docs/guia-pruebas-plugin-theme-fse.md`](docs/guia-pruebas-plugin-
 | | |
 | --- | --- |
 | **Actual (producción)** | Sitio **estático live**. HTML en `static/` (monorepo ADR 0014, Fase 3 iniciada). Hostinger via ZIP (ADR 0015). Eventos/blog/galería en HTML = producción (ADR 0034). WordPress **en desarrollo** (`wordpress/` first-party: plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma`; pendiente corte a producción). |
-| **Fase 3 (en curso)** | Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging separado hasta el corte. Estado durable: `.audit/fase3-execution-state.md`. |
+| **Fase 3 (en curso)** | Ruta **única:** maqueta estática → **FSE / block theme** (ADR 0029). **No** hay theme clásico PHP intermedio. Plugin `camino-del-dharma-core` (ADR 0024). Staging en `teal-woodpecker-284165.hostingersite.com`: ese WordPress será producción (ADR 0046). El corte de dominio es posterior. Estado durable: `.audit/fase3-execution-state.md`. |
 
 La migración no está completa porque un theme esté desplegado. Contrato: [`docs/contrato-migracion-static-wordpress.md`](docs/contrato-migracion-static-wordpress.md). Inventario: [`docs/inventario-contenido-produccion-static.md`](docs/inventario-contenido-produccion-static.md). Matriz: [`docs/matriz-migracion-static-wordpress.md`](docs/matriz-migracion-static-wordpress.md). Cutover: [`docs/cutover-checklist-wordpress.md`](docs/cutover-checklist-wordpress.md).
 
@@ -179,8 +179,9 @@ La migración no está completa porque un theme esté desplegado. Contrato: [`do
 
 ## Próximos pasos
 
-Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`: D-02/D-03/D-04 en
-`main` (issues #10–#12) **antes** de crear staging Hostinger (OWN-035). Ledger:
+Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`: el sitio de
+staging ya existe y se conserva (ADR 0046 / OWN-036). El corte de dominio no es esta
+sesión. Ledger:
 [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR:
 [`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
 

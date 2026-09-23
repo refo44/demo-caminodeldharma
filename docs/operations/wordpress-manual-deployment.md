@@ -6,9 +6,9 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 
 | | |
 | --- | --- |
-| **Versión** | 2.2 |
-| **Fecha** | 2026-09-02 |
-| **Estado** | Vigente — staging **no** se crea hasta D-02/D-03/D-04 en `main` (OWN-035) más «go» del propietario |
+| **Versión** | 2.4 |
+| **Fecha** | 2026-09-23 |
+| **Estado** | Vigente — el sitio de staging **existe** y es el futuro WordPress de producción (ADR 0046 / OWN-036). **Este runbook no autoriza el corte de dominio.** |
 
 ## Alcance
 
@@ -22,8 +22,10 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 - **Contact Form 7 no se despliega desde Git.** El repositorio posee la *definición* del
   formulario, no el código del plugin (WU-09). CF7 se instala desde WordPress.org en cada
   entorno y su versión se anota en `docs/operations/third-party-plugins.md`.
-- **Destino durante la transición:** instancia Hostinger **separada, sin dominio custom,
-  no indexable** (OWN-005). Nunca el `public_html` de producción estática antes del corte.
+- **Destino durante la transición:** la instancia Hostinger ya creada,
+  `https://teal-woodpecker-284165.hostingersite.com`, **sin dominio custom y no indexable**
+  (OWN-005). Es el mismo sitio que el corte convertirá en `caminodeldharma.org` (ADR 0046).
+  No se borra ni se crea otra. Nunca el `public_html` del estático antes del corte.
 
 ---
 
@@ -45,17 +47,19 @@ disponible en el servidor, o el pipeline se ejecuta desde una copia local con `-
 
 ## 2. Provisión del entorno de staging (antes de subir nada)
 
-**Gate OWN-035:** no crear esta instancia hasta que D-02, D-03 y D-04 estén en `main`
-([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
-y el propietario diga **go** en sesión.
+**Gate OWN-035:** la instancia ya está creada (2026-09-23), después de D-02, D-03 y D-04
+en `main`
+([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
+No crear una segunda. El corte de dominio no forma parte de esta provisión (ADR 0046).
 
 **Seed (OWN-032):** el payload y `static/` viven en SSH, directorio privado `~/cdd-extract/`
 **fuera** de `public_html`. File Manager no es el fallback automático. Si SSH queda bloqueado,
 reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** usa
 `--confirm-production`. Probar dry-run → `--apply` → segundo `--apply` = 0 created.
 
-1. Crear la instancia Hostinger separada, **sin dominio custom** (subdominio
-   `*.hostingersite.com`).
+1. La instancia Hostinger separada, **sin dominio custom**, ya existe:
+   `https://teal-woodpecker-284165.hostingersite.com`. Trabajar en este sitio. No
+   provisionar otro para «el de producción».
 2. Instalar WordPress limpio. **Requisito duro: el sitio debe partir vacío.**
    Desde el plugin 0.7.2 esto ya no depende de que alguien se acuerde: **activar el plugin
    (§3.4) despublica** el contenido demo que dejó el instalador («Hello world!», «Sample
@@ -78,14 +82,23 @@ reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** us
    en staging y producción
    ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)).
 
-3. **Marcar el sitio como no indexable** mientras sea staging:
+3. **Marcar el entorno como staging y el sitio como no indexable.** Las dos cosas se
+   quedan así mientras se construye y se prueba. El corte, en otra sesión, las cambia
+   a `production` y `blog_public 1` (§9). No adelantar ese cambio.
+
+   `wp-config.php` no viaja en Git. Respaldarlo en el servidor antes de escribir la
+   constante:
 
    ```bash
+   cp wp-config.php wp-config.php.before-staging-env.bak
+   wp config set WP_ENVIRONMENT_TYPE staging --type=constant
+   wp eval 'echo wp_get_environment_type(), PHP_EOL;'   # esperado: staging
    wp option update blog_public 0
    ```
 
-   Verificar después que `/wp-sitemap.xml` y las cabeceras reflejan el estado. En el entorno
-   local `blog_public` vale `1`; ese valor **no** debe replicarse en staging.
+   Verificar después que `/wp-sitemap.xml` y las cabeceras reflejan `blog_public 0`.
+   En el entorno local `WP_ENVIRONMENT_TYPE` es `local` y `blog_public` vale `1`; esos
+   valores **no** se replican en este sitio.
 
 4. **Instalar el paquete de idioma `es_CO`** y activarlo:
 
@@ -254,7 +267,8 @@ Repetir en staging, con etiqueta `Pass` (no `Pass (local)`):
   finalizado / 404 inexistente);
 - `verify` con `missing: []` y conteos reconciliados;
 - comportamiento real de PHP/Apache/HTTPS y de las reglas del `.htaccess` (un salto por regla);
-- **no indexabilidad del staging** (`blog_public 0`);
+- **entorno `staging`** (`wp_get_environment_type()` imprime `staging`) y **no
+  indexabilidad** (`blog_public 0`);
 - **cero contenido demo del instalador** (`wp cdd-core demo purge` devuelve `found: []`);
 - cadenas del lightbox en español tras instalar `es_CO` (§2.4);
 - entrega de CF7: prueba técnica (§5) y, para el corte, confirmación del cliente (ADR 0045);
@@ -279,7 +293,70 @@ El sitio estático sigue desplegándose por ZIP manual desde `static/` según RE
   directorios. El `.htaccess` se revierte reponiendo la copia previa; conservar siempre una
   antes de sobrescribirlo.
 - **Contenido:** el importador no borra, así que un import fallido se revierte restaurando el
-  backup de base de datos tomado antes de `--apply`. En staging, la alternativa barata es
-  reinstalar WordPress limpio y volver a §2.
-- **Corte a producción:** tiene su propio checklist y rollback,
+  backup de base de datos de **este** sitio, tomado antes de `--apply`. No se elimina el
+  sitio de Hostinger ni se crea otro. Una reinstalación limpia, si el propietario la pide,
+  ocurre **sobre el mismo** sitio y solo antes de que el staging esté aprobado.
+- **Corte a producción:** cambio de dominio del mismo sitio (§9) y checklist
   `docs/cutover-checklist-wordpress.md`. **Este runbook no autoriza el corte.**
+
+---
+
+## 9. Corte futuro: este sitio pasa a `caminodeldharma.org`
+
+**No ejecutar esta sección en la sesión de staging.** El propietario la dejó para cuando
+staging esté terminado y aprobado (ADR 0046 / OWN-036).
+
+```text
+AHORA
+
+caminodeldharma.org
+    → sitio estático actual
+
+teal-woodpecker-284165.hostingersite.com
+    → este WordPress
+    WP_ENVIRONMENT_TYPE = staging
+    blog_public = 0
+```
+
+```text
+DESPUÉS DEL CORTE
+
+caminodeldharma.org
+    → este mismo WordPress
+    WP_ENVIRONMENT_TYPE = production
+    blog_public = 1
+
+dominio-temporal-del-estático.hostingersite.com
+    → antiguo sitio estático, conservado como rollback
+```
+
+Orden, solo en la sesión de corte:
+
+1. Staging completo: theme, plugin, importación, medios, formularios, SEO y QA, con
+   backups restaurables.
+2. Inventario de **buzones y subdominios** de `caminodeldharma.org`, y backup de lo
+   necesario. Hostinger advierte que **Cambiar dominio** puede afectarlos. Sin este
+   inventario no se cambia el dominio.
+3. Pasar el sitio estático de `caminodeldharma.org` a un **dominio temporal**. Los
+   archivos se conservan; esa URL es el rollback del estático. No borrarlos.
+4. En **este** WordPress: **Sitios web → ⋮ → Cambiar dominio** y asignar
+   `caminodeldharma.org`. No reinstalar WordPress.
+5. Cuando el dominio definitivo ya apunta a esta instalación, cambiar el interruptor.
+   La importación tiene que estar terminada **antes**: con `production`, `import`,
+   `seed` y `convert` se niegan si faltan `--confirm-production` y la evidencia de
+   backup (§7).
+
+   ```bash
+   wp config set WP_ENVIRONMENT_TYPE production --type=constant
+   wp eval 'echo wp_get_environment_type(), PHP_EOL;'   # esperado: production
+   wp option update blog_public 1
+   ```
+
+6. Verificar bajo la URL definitiva: SSL, `home` y `siteurl`, permalinks, redirects,
+   formularios, canonical, `WP_ENVIRONMENT_TYPE=production`, `blog_public=1` y el
+   resto del checklist. El cambio de dominio no hace solo ninguno de los dos.
+7. El estático se considera retirado solo después de esa verificación, y sigue
+   disponible en el dominio temporal durante la ventana de rollback.
+
+Referencias de Hostinger: [dominio temporal](https://www.hostinger.com/support/how-to-switch-to-a-temporary-domain-in-hostinger-dashboard/)
+y [conectar otro dominio a un sitio existente](https://www.hostinger.com/es/support/6807580-como-conectar-un-dominio-diferente-a-tu-sitio-web-existente-en-hostinger/).

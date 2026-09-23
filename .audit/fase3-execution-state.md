@@ -623,10 +623,14 @@ faltaban para que un editor pudiera trabajar en staging —la **UI de autores**
 ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18), `META-001`) y los **paneles de
 SEO / datos del evento** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19),
 `META-002`–`META-005`)—. **Ambas están hechas** (plugin 0.7.4 y 0.7.5). **Con #19 en `main` el
-código de pre-staging queda cerrado.** La siguiente acción **no** es código: es el `go` expreso
-del owner en sesión para crear el staging de Hostinger e importar **una vez** en un WordPress
-limpio. No crear Hostinger sin esa autorización —ni «en silencio» por tener el código listo—, y
-no arrancar D-08 en su lugar: D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5))
+código de pre-staging queda cerrado.** El sitio de Hostinger **ya existe**
+(`https://teal-woodpecker-284165.hostingersite.com`) y es el WordPress que el corte
+convertirá en `caminodeldharma.org` (ADR 0046 / OWN-036, 2026-09-23). No borrarlo ni
+crear un segundo WordPress. La siguiente acción es construir **este** staging (SSH,
+código, importación una vez en este sitio limpio). Mientras se construye,
+`WP_ENVIRONMENT_TYPE` queda en `staging` y `blog_public` en `0`. El cambio de dominio
+es otra sesión: entonces esta instalación pasa a `production` y `blog_public` `1`.
+Antes, inventario de correo y subdominios. No arrancar D-08 en su lugar: D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5))
 va **después** del staging.
 [#20](https://github.com/refo44/demo-caminodeldharma/issues/20) es un spike y **no** bloquea
 salvo que el owner lo diga.

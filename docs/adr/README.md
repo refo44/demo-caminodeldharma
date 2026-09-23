@@ -164,6 +164,7 @@ Documentos, issues, commits o ADR relacionados.
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
 | Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
+| Identidad del WordPress de corte | [0046](0046-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
 
 ---
 
@@ -172,9 +173,10 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.28);
-  cierre WU-10 OWN-021–OWN-035; D-02/D-03/D-04/D-08 pendientes de código; `POST-*`; `META-*`
-  (ADR 0042); no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.34);
+  OWN-036 / [0046](0046-staging-hostinger-es-el-wordpress-de-produccion.md): el sitio
+  `teal-woodpecker-284165.hostingersite.com` es el WordPress del corte. `POST-*`; `META-*`
+  (ADR 0042) no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 
