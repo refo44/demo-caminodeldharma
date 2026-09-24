@@ -54,7 +54,7 @@ function camino_del_dharma_asset_version( string $path ): string {
 		}
 	}
 
-	return '0.5.2';
+	return '0.5.3';
 }
 
 /**

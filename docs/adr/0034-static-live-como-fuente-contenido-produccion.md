@@ -115,7 +115,7 @@ sustituirla):
 
 *(Nota 2026-08-29, OWN-005: el propietario **confirmó C+A**. WordPress vive en otra instancia
 Hostinger sin dominio custom hasta el switch. El estático en `caminodeldharma.org` sigue siendo
-producción. Nota 2026-09-23, ADR 0046 / OWN-036: el switch es **Cambiar dominio** sobre
+producción. Nota 2026-09-23, ADR 0047 / OWN-036: el switch es **Cambiar dominio** sobre
 `teal-woodpecker-284165.hostingersite.com`, no una reinstalación. El estático se conserva en
 un dominio temporal.)*
 

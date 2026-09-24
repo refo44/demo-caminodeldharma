@@ -84,7 +84,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0003](0003-eliminar-pwa-y-web-app-manifest.md) | Eliminar PWA y Web App Manifest | Aceptada |
 | [0004](0004-git-como-fuente-unica-de-verdad.md) | Git como fuente única de verdad | Aceptada; regla editorial sustituida → [0040](0040-retirar-content-source-produccion-como-fuente.md) |
 | [0005](0005-produccion-sin-edicion-manual.md) | Producción sin edición manual | Aceptada |
-| [0006](0006-github-actions-para-despliegue.md) | GitHub Actions para CI/CD | Aceptada |
+| [0006](0006-github-actions-para-despliegue.md) | GitHub Actions para CI/CD | Aceptada; disparador push→producción sustituido → [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) |
 | [0007](0007-rsync-como-mecanismo-de-sincronizacion.md) | rsync como mecanismo de sincronización | Aceptada |
 | [0008](0008-urls-estables-desde-la-maqueta.md) | URLs estables desde la maqueta | Aceptada |
 | [0009](0009-css-y-tokens-invariantes-en-migracion.md) | CSS y tokens invariantes en la migración | Sustituida (WordPress) → [0029](0029-theme-bloques-full-site-editing.md) |
@@ -93,8 +93,8 @@ Documentos, issues, commits o ADR relacionados.
 | [0012](0012-wordpress-como-motor-de-contenido.md) | WordPress como motor de contenido | Aceptada |
 | [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md) | Fuentes de verdad duales y alcance del despliegue | Aceptada |
 | [0014](0014-monorepo-static-wordpress.md) | Monorepo con carpeta static/ al iniciar Fase 3 | Aceptada |
-| [0015](0015-despliegue-manual-temporal.md) | Despliegue manual temporal | Aceptada |
-| [0016](0016-automatizacion-ci-cd-pospuesta.md) | Automatización CI/CD pospuesta | Aceptada |
+| [0015](0015-despliegue-manual-temporal.md) | Despliegue manual temporal | Aceptada; staging WordPress → [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) |
+| [0016](0016-automatizacion-ci-cd-pospuesta.md) | Automatización CI/CD pospuesta | Aceptada; aplazamiento de staging WordPress sustituido → [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) |
 | [0017](0017-repositorio-unico-durante-transicion.md) | Repositorio único durante la transición | Aceptada |
 | [0018](0018-hsts-despliegue-escalonado.md) | HSTS — despliegue escalonado (transición → año) | Sustituida en lo operativo → [0020](0020-hsts-aplazado-hasta-wordpress.md) |
 | [0019](0019-sin-analitica-con-cookies.md) | Sin analítica con cookies — GA4 descartado definitivamente | Aceptada |
@@ -124,6 +124,8 @@ Documentos, issues, commits o ADR relacionados.
 | [0043](0043-trunk-based-conventional-branch-commits.md) | Trunk-based en `main`; Conventional Branch + Conventional Commits | Aceptada |
 | [0044](0044-feeds-nativos-404.md) | Feeds nativos de WordPress responden 404 | Aceptada |
 | [0045](0045-cf7-entrega-gate-corte.md) | Entrega de correo CF7 es gate del corte | Aceptada |
+| [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) | El despliegue lo inicia solo un tag de versión aprobado | Aceptada |
+| [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) | El WordPress de staging es el de producción | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -135,8 +137,8 @@ Documentos, issues, commits o ADR relacionados.
 | Sin PWA ni manifest | [0003](0003-eliminar-pwa-y-web-app-manifest.md) |
 | Git como fuente de verdad del código | [0004](0004-git-como-fuente-unica-de-verdad.md), [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md) |
 | Producción no se edita directamente | [0005](0005-produccion-sin-edicion-manual.md) |
-| Despliegue manual temporal | [0015](0015-despliegue-manual-temporal.md) |
-| CI/CD pospuesto | [0016](0016-automatizacion-ci-cd-pospuesta.md) (implementación de [0006](0006-github-actions-para-despliegue.md) diferida) |
+| Despliegue manual temporal | [0015](0015-despliegue-manual-temporal.md) — ZIP estático y `public_html` de producción. Staging WordPress: [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) |
+| CI/CD de staging por tag | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — sustituye el disparador de [0006](0006-github-actions-para-despliegue.md) y el aplazamiento de staging de [0016](0016-automatizacion-ci-cd-pospuesta.md). Producción automatizada sigue fuera |
 | HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) y [0018](0018-hsts-despliegue-escalonado.md) (históricos), [0020](0020-hsts-aplazado-hasta-wordpress.md) (vigente) |
 | Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
 | Lightbox de la galería | [0021](0021-lightbox-galeria-nativo-wordpress.md) — visor nativo de Gutenberg; no se implementa uno propio en la maqueta |
@@ -164,7 +166,8 @@ Documentos, issues, commits o ADR relacionados.
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
 | Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
-| Identidad del WordPress de corte | [0046](0046-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
+| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida a la promoción de producción. La implementación del workflow no está hecha |
+| Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
 
 ---
 
@@ -174,7 +177,7 @@ Documentos, issues, commits o ADR relacionados.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
 - **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.34);
-  OWN-036 / [0046](0046-staging-hostinger-es-el-wordpress-de-produccion.md): el sitio
+  OWN-036 / [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md): el sitio
   `teal-woodpecker-284165.hostingersite.com` es el WordPress del corte. `POST-*`; `META-*`
   (ADR 0042) no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.

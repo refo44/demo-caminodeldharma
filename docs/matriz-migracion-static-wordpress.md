@@ -133,7 +133,7 @@ tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08
 | PRESENTATION | **Pass (local)** | 16 plantillas FSE + parts/patterns + 13 bloques dinámicos; CSS portado a presets; fontFace autohospedadas; lightbox nativo |
 | ROUTING | **Pass (local)** | Rutas entrantes verificadas por curl y wp-phpunit (200/301/404/410); sin barra final (ADR 0008). Redirects del `.htaccess` → WU-08B |
 | BEHAVIOR | **Parcial** | Nav móvil, tooltips del calendario, **diálogo Compartir, diálogo Añadir al calendario y audio de mantras nativo** portados (WU-08A); formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
-| OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción). El sitio de staging existe (`teal-woodpecker-284165.hostingersite.com`, ADR 0046); su QA en Hostinger aún no es `Pass` |
+| OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción). El sitio de staging existe (`teal-woodpecker-284165.hostingersite.com`, ADR 0047); su QA en Hostinger aún no es `Pass` |
 
 Sustituciones static→WordPress registradas en WU-07 (detalle y
 remedios en `.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
@@ -257,7 +257,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 | Idempotencia del pipeline | `import`/`seed`/`convert`/`contact provision` no reescriben — Pass (local) | Unverified | — |
 | Runbook de staging | v2.0, acotado a theme + plugin + `.htaccess` — Pass (local) | Unverified | — |
 | Guard de producción | cubierto por wp-phpunit; no ejercitado contra un entorno `production` real | Unverified | — |
-| `blog_public` | `1` en local. En el sitio de Hostinger, `0` mientras `WP_ENVIRONMENT_TYPE=staging`. En el corte, `1` junto con `production` (ADR 0046) | Unverified | — |
+| `blog_public` | `1` en local. En el sitio de Hostinger, `0` mientras `WP_ENVIRONMENT_TYPE=staging`. En el corte, `1` junto con `production` (ADR 0047) | Unverified | — |
 | CI `test.yml` | **nunca ejecutado**: dispara solo en `main` y `pull_request`, y no hay PR | Unverified | — |
 | Sonar (plugin + theme) | no revisado | Unverified | — |
 

@@ -625,7 +625,7 @@ SEO / datos del evento** ([#19](https://github.com/refo44/demo-caminodeldharma/i
 `META-002`–`META-005`)—. **Ambas están hechas** (plugin 0.7.4 y 0.7.5). **Con #19 en `main` el
 código de pre-staging queda cerrado.** El sitio de Hostinger **ya existe**
 (`https://teal-woodpecker-284165.hostingersite.com`) y es el WordPress que el corte
-convertirá en `caminodeldharma.org` (ADR 0046 / OWN-036, 2026-09-23). No borrarlo ni
+convertirá en `caminodeldharma.org` (ADR 0047 / OWN-036, 2026-09-23). No borrarlo ni
 crear un segundo WordPress. La siguiente acción es construir **este** staging (SSH,
 código, importación una vez en este sitio limpio). Mientras se construye,
 `WP_ENVIRONMENT_TYPE` queda en `staging` y `blog_public` en `0`. El cambio de dominio

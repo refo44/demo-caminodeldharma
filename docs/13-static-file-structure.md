@@ -105,7 +105,7 @@ corte, WordPress gobierna el contenido. Detalle en ADR 0013 y
 | Environment | Uso | Estado |
 | ----------- | --- | ------ |
 | LOCAL | Docker WordPress (`WP_ENVIRONMENT_TYPE=local`, ADR 0023) | Playbook listo; compose aún no versionado |
-| STAGING | `https://teal-woodpecker-284165.hostingersite.com` | Existe. Futuro WordPress de `caminodeldharma.org` (ADR 0046). Hoy noindex |
+| STAGING | `https://teal-woodpecker-284165.hostingersite.com` | Existe. Futuro WordPress de `caminodeldharma.org` (ADR 0047). Hoy noindex |
 | PRODUCTION | `https://caminodeldharma.org` | Actual: sitio estático. Tras el corte: el mismo WordPress de staging |
 
 No mezclar credenciales, BD, uploads, fixtures ni política de indexación entre environments.

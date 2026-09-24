@@ -133,7 +133,7 @@ La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La ve
 Producción sigue **estática** en `https://caminodeldharma.org`. El WordPress de Hostinger
 **existe** en `https://teal-woodpecker-284165.hostingersite.com`. Ese sitio es el que el
 corte convertirá en producción por **Cambiar dominio**, después de pasar el estático a un
-dominio temporal (ADR 0046 / OWN-036). Mientras tanto `WP_ENVIRONMENT_TYPE` queda en
+dominio temporal (ADR 0047 / OWN-036). Mientras tanto `WP_ENVIRONMENT_TYPE` queda en
 `staging` y `blog_public` en `0`. En el corte, la misma instalación pasa a `production`
 y `blog_public` `1`. No se borra ni se crea otro. El cambio de dominio
 **no** está autorizado en la sesión de staging: antes hace falta inventario de correo y
@@ -613,7 +613,7 @@ Resumen (detalle en el checklist):
 5. Backup WordPress (BD + medios).
 6. Validar WordPress en staging (Fase 2.5 sobre el theme).
 7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché. **HSTS sigue aplazado** el día del corte (ADR 0020).
-8. Cambio de dominio, no reinstalación (ADR 0046): el estático de `caminodeldharma.org` pasa a un dominio temporal (archivos conservados) y **este** WordPress (`teal-woodpecker-284165.hostingersite.com`) recibe el dominio con **Cambiar dominio**. Antes: inventario de correo y subdominios. Retirar el deploy ZIP estático sobre el document root de WordPress.
+8. Cambio de dominio, no reinstalación (ADR 0047): el estático de `caminodeldharma.org` pasa a un dominio temporal (archivos conservados) y **este** WordPress (`teal-woodpecker-284165.hostingersite.com`) recibe el dominio con **Cambiar dominio**. Antes: inventario de correo y subdominios. Retirar el deploy ZIP estático sobre el document root de WordPress.
 9. Smoke test anónimo del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
 11. **Tras ≥30 días estables:** revisar HSTS (ADR 0020 / 0018) y registrar en `CHANGELOG.md`.

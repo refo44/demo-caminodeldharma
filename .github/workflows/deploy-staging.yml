@@ -1,0 +1,301 @@
+# WordPress STAGING code deploy, started only by an approved component tag (ADR 0046).
+#
+#   theme-vX.Y.Z   -> deploys only the theme
+#   plugin-vX.Y.Z  -> deploys only the plugin
+#
+# Not a trigger: a merge, a push to the trunk, a green CI or a version bump. The
+# static line v* never reaches this file. Nothing here creates, moves or deletes a
+# tag, publishes a release, touches content, or knows a production target.
+# Operator runbook: docs/operations/wordpress-staging-cd.md
+name: deploy-staging
+
+on:
+  push:
+    tags:
+      - 'theme-v*'
+      - 'plugin-v*'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # The trigger glob only narrows the namespace. Everything else is checked here,
+  # against the exact tagged commit, before any gate or secret is involved.
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
+      component: ${{ steps.resolve.outputs.component }}
+      version: ${{ steps.resolve.outputs.version }}
+      source_dir: ${{ steps.resolve.outputs.source_dir }}
+      target_rel: ${{ steps.resolve.outputs.target_rel }}
+      slug: ${{ steps.resolve.outputs.slug }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      # TAGGED_SHA is the commit the tag resolves to: `^{commit}` peels an annotated
+      # tag object to its commit and leaves a lightweight tag (already a commit)
+      # alone. Every later job checks out this value, not the event payload.
+      - name: The tag resolves to the checked-out commit
+        id: commit
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          [ "${GITHUB_REF_TYPE}" = "tag" ] || { echo "::error::not a tag event"; exit 1; }
+          git fetch --no-tags origin "+refs/tags/${TAG}:refs/tags/${TAG}"
+          sha=$(git rev-parse --verify "refs/tags/${TAG}^{commit}")
+          [ "$(git rev-parse HEAD)" = "${sha}" ] || {
+            echo "::error::tag ${TAG} resolves to ${sha}, not the checked-out commit"
+            exit 1
+          }
+          echo "sha=${sha}" >> "${GITHUB_OUTPUT}"
+      - name: Tag namespace, SemVer and component version
+        id: resolve
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          resolved=$(bash tools/release/resolve-release.sh "${TAG}" "${GITHUB_WORKSPACE}")
+          printf '%s\n' "${resolved}" | sed -E 's/^([A-Z_]+)=/\L\1=/' >> "${GITHUB_OUTPUT}"
+          printf '%s\n' "${resolved}"
+      # Read-only and explicit: main is fetched here, not assumed from the checkout.
+      # Ancestry means "contained in main history", not "equal to main's head".
+      - name: The tagged commit belongs to main history
+        env:
+          TAGGED_SHA: ${{ steps.commit.outputs.sha }}
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git rev-parse --verify origin/main >/dev/null || {
+            echo "::error::origin/main is not available for the ancestry check"
+            exit 1
+          }
+          git merge-base --is-ancestor "${TAGGED_SHA}" origin/main || {
+            echo "::error::${TAGGED_SHA} is not contained in main history"
+            exit 1
+          }
+      # Git tree metadata of the exact commit, selected component only.
+      - name: The component holds no symlinks
+        env:
+          TAGGED_SHA: ${{ steps.commit.outputs.sha }}
+          SOURCE_DIR: ${{ steps.resolve.outputs.source_dir }}
+        run: bash tools/release/check-no-symlinks.sh "${TAGGED_SHA}" "${SOURCE_DIR}"
+
+  # Same contract as test.yml (ADR 0038): the tagged commit itself must pass,
+  # an earlier PR result is not evidence. composer test:wp is not a gate here.
+  php:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.validate.outputs.sha }}
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: composer install --prefer-dist --no-progress
+      - run: composer test
+      - run: composer lint:phpcs
+
+  css:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.validate.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+      - run: npm ci --ignore-scripts
+      - run: npm run lint:css
+
+  # Runs only with validation and both gates green. The staging environment holds
+  # the SSH secrets; no other job can read them. Runs are serialized and never
+  # cancelled mid-sync (a cancelled rsync would leave a half-updated component).
+  # GitHub keeps one pending run per group, so a third tag pushed while one runs
+  # and one waits replaces the waiting run: release one tag at a time.
+  deploy:
+    needs: [validate, php, css]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: staging
+    concurrency:
+      group: staging-wordpress-deploy
+      cancel-in-progress: false
+    env:
+      TAG: ${{ github.ref_name }}
+      TAGGED_SHA: ${{ needs.validate.outputs.sha }}
+      COMPONENT: ${{ needs.validate.outputs.component }}
+      VERSION: ${{ needs.validate.outputs.version }}
+      SOURCE_DIR: ${{ needs.validate.outputs.source_dir }}
+      TARGET_REL: ${{ needs.validate.outputs.target_rel }}
+      SLUG: ${{ needs.validate.outputs.slug }}
+      STAGING_URL: https://teal-woodpecker-284165.hostingersite.com
+      SSH_HOST: ${{ vars.STAGING_SSH_HOST }}
+      SSH_PORT: ${{ vars.STAGING_SSH_PORT }}
+      SSH_USER: ${{ vars.STAGING_SSH_USER }}
+      STAGING_WP_ROOT: ${{ vars.STAGING_WP_ROOT }}
+      SSH_CONFIG: ${{ github.workspace }}/../staging_ssh/config
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.validate.outputs.sha }}
+          persist-credentials: false
+
+      # Local, no network: refuse before touching a key or a server.
+      - name: Staging configuration and target guard
+        run: |
+          for name in SSH_HOST SSH_PORT SSH_USER STAGING_WP_ROOT COMPONENT VERSION SOURCE_DIR TARGET_REL SLUG; do
+            [ -n "${!name}" ] || { echo "::error::${name} is empty"; exit 1; }
+          done
+          [[ "${SSH_PORT}" =~ ^[0-9]{1,5}$ ]] || { echo "::error::SSH port is not numeric"; exit 1; }
+          [[ "${SSH_HOST}" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]] || { echo "::error::SSH host is not a plain host name"; exit 1; }
+          [[ "${SSH_USER}" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]] || { echo "::error::SSH user is not a plain user name"; exit 1; }
+          bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}"
+
+      # Only the tagged component, exactly as committed at the tagged SHA. The
+      # tarball is what is checksummed, and what is synced is extracted from it.
+      - name: Component artifact and checksum
+        run: |
+          artifact="${RUNNER_TEMP}/cdd-${COMPONENT}-${VERSION}.tar.gz"
+          stage="${RUNNER_TEMP}/stage"
+          depth=$(awk -F/ '{print NF}' <<< "${SOURCE_DIR}")
+          git archive --format=tar.gz --output="${artifact}" "${TAGGED_SHA}" -- "${SOURCE_DIR}"
+          rm -rf "${stage}"
+          mkdir -p "${stage}"
+          tar -xzf "${artifact}" --strip-components="${depth}" -C "${stage}"
+          [ -f "${stage}/style.css" ] || [ -f "${stage}/camino-del-dharma-core.php" ] || {
+            echo "::error::the artifact does not hold the component entry file"
+            exit 1
+          }
+          sha256=$(sha256sum "${artifact}" | awk '{print $1}')
+          echo "STAGE_DIR=${stage}" >> "${GITHUB_ENV}"
+          {
+            echo "### Staging deploy artifact"
+            echo "- component: ${COMPONENT}"
+            echo "- version: ${VERSION}"
+            echo "- tag: ${TAG}"
+            echo "- commit: ${TAGGED_SHA}"
+            echo "- artifact: $(basename "${artifact}")"
+            echo "- sha256: ${sha256}"
+          } | tee -a "${GITHUB_STEP_SUMMARY}"
+
+      - name: SSH with verified host key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
+        run: |
+          [ -n "${SSH_PRIVATE_KEY}" ] || { echo "::error::STAGING_SSH_PRIVATE_KEY is empty"; exit 1; }
+          [ -n "${SSH_KNOWN_HOSTS}" ] || { echo "::error::STAGING_SSH_KNOWN_HOSTS is empty"; exit 1; }
+          dir=$(dirname "${SSH_CONFIG}")
+          umask 077
+          mkdir -p "${dir}"
+          printf '%s\n' "${SSH_PRIVATE_KEY}" > "${dir}/key"
+          printf '%s\n' "${SSH_KNOWN_HOSTS}" > "${dir}/known_hosts"
+          host_id="${SSH_HOST}"
+          [ "${SSH_PORT}" = "22" ] || host_id="[${SSH_HOST}]:${SSH_PORT}"
+          ssh-keygen -F "${host_id}" -f "${dir}/known_hosts" >/dev/null || {
+            echo "::error::known_hosts has no entry for ${host_id}"
+            exit 1
+          }
+          {
+            echo "Host *"
+            echo "  Port ${SSH_PORT}"
+            echo "  IdentityFile ${dir}/key"
+            echo "  IdentitiesOnly yes"
+            echo "  BatchMode yes"
+            echo "  StrictHostKeyChecking yes"
+            echo "  UserKnownHostsFile ${dir}/known_hosts"
+            echo "  ServerAliveInterval 30"
+          } > "${SSH_CONFIG}"
+
+      # Read-only. No remote write happens before this step passes.
+      - name: Staging preflight
+        id: preflight
+        run: |
+          target_dir=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}" | sed -n 's/^TARGET_DIR=//p')
+          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${target_dir}" "${STAGING_URL}" <<'REMOTE'
+          set -euo pipefail
+          root=$1; target=$2; url=$3
+          fail() { echo "preflight: $*" >&2; exit 1; }
+          [ -d "${root}" ] || fail "WordPress root is missing"
+          [ -d "${target}" ] || fail "component directory is missing"
+          real_root=$(cd "${root}" && pwd -P)
+          real_target=$(cd "${target}" && pwd -P)
+          case "${real_target}" in
+            "${real_root}"/wp-content/themes/* | "${real_root}"/wp-content/plugins/*) ;;
+            *) fail "component directory is outside wp-content of the root" ;;
+          esac
+          # stdin is this script: keep wp from reading it.
+          wp_cli() { wp --path="${root}" --skip-plugins --skip-themes "$@" < /dev/null; }
+          wp_cli core is-installed || fail "no WordPress installation at the root"
+          [ "$(wp_cli eval 'echo wp_get_environment_type();')" = "staging" ] || fail "environment type is not staging"
+          home=$(wp_cli option get home)
+          [ "${home%/}" = "${url}" ] || fail "home URL is not the staging URL"
+          abspath=$(wp_cli eval 'echo ABSPATH;')
+          [ "$(cd "${abspath}" && pwd -P)" = "${real_root}" ] || fail "ABSPATH is not the configured root"
+          if [ -f "${root}/.htaccess" ]; then sha256sum "${root}/.htaccess" | cut -d' ' -f1; else echo absent; fi
+          REMOTE
+          )
+          echo "htaccess_before=${before}" >> "${GITHUB_OUTPUT}"
+          echo "Staging target identified; root .htaccess fingerprint recorded."
+
+      # rsync's --delete boundary is the component directory only. The document
+      # root, its .htaccess, wp-config.php, uploads and every other theme or plugin
+      # are outside the source and the destination.
+      - name: Sync the component to staging
+        run: |
+          target_dir=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}" | sed -n 's/^TARGET_DIR=//p')
+          [ -n "${target_dir}" ] && [ -n "${STAGE_DIR}" ] && [ -d "${STAGE_DIR}" ] || { echo "::error::empty sync path"; exit 1; }
+          rsync --recursive --times --delete --chmod=D755,F644 --itemize-changes \
+            -e "ssh -F ${SSH_CONFIG}" \
+            "${STAGE_DIR}/" "${SSH_USER}@${SSH_HOST}:${target_dir}/"
+
+      - name: Post-deploy verification
+        env:
+          HTACCESS_BEFORE: ${{ steps.preflight.outputs.htaccess_before }}
+        run: |
+          result=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${COMPONENT}" "${SLUG}" <<'REMOTE'
+          set -euo pipefail
+          root=$1; component=$2; slug=$3
+          # stdin is this script: keep wp from reading it.
+          wp_cli() { wp --path="${root}" --skip-plugins --skip-themes "$@" < /dev/null; }
+          echo "environment=$(wp_cli eval 'echo wp_get_environment_type();')"
+          if [ "${component}" = "theme" ]; then
+            echo "installed=$(wp_cli theme get "${slug}" --field=version)"
+            active=no
+            [ "$(wp_cli theme list --status=active --field=name)" != "${slug}" ] || active=yes
+            echo "active=${active}"
+          else
+            echo "installed=$(wp_cli plugin get "${slug}" --field=version)"
+            echo "active=$([ "$(wp_cli plugin get "${slug}" --field=status)" = active ] && echo yes || echo no)"
+          fi
+          if [ -f "${root}/.htaccess" ]; then echo "htaccess=$(sha256sum "${root}/.htaccess" | cut -d' ' -f1)"; else echo "htaccess=absent"; fi
+          REMOTE
+          )
+          echo "${result}"
+          field() { sed -n "s/^$1=//p" <<< "${result}"; }
+          [ "$(field environment)" = "staging" ] || { echo "::error::environment is no longer staging"; exit 1; }
+          [ "$(field installed)" = "${VERSION}" ] || { echo "::error::installed ${COMPONENT} version $(field installed) is not ${VERSION}"; exit 1; }
+          [ "$(field htaccess)" = "${HTACCESS_BEFORE}" ] || { echo "::error::root .htaccess changed"; exit 1; }
+          [ "$(field active)" = "yes" ] || echo "::warning::the ${COMPONENT} ${SLUG} is not active on staging (not changed by this deploy)"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 3 --retry-delay 5 "${STAGING_URL}/")
+          [ "${code}" -ge 200 ] && [ "${code}" -lt 400 ] || { echo "::error::staging answered HTTP ${code}"; exit 1; }
+          echo "Verified ${COMPONENT} ${VERSION} on staging (HTTP ${code})."
+
+      - name: Remove SSH material
+        if: always()
+        run: rm -rf "$(dirname "${SSH_CONFIG}")"

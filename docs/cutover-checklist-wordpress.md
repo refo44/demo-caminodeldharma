@@ -31,7 +31,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Redirects tested (ledger; sin cadenas)
 - [ ] SEO metadata preserved (title, description, canonical, OG, JSON-LD)
 - [ ] Backup verificado (estático en su `public_html` + WP DB + uploads **de** `teal-woodpecker-284165.hostingersite.com`)
-- [ ] Rollback definido: el estático pasa a un dominio temporal **con sus archivos**; este WordPress se restaura por backup de su propia base. No se borra el sitio de Hostinger (ADR 0046)
+- [ ] Rollback definido: el estático pasa a un dominio temporal **con sus archivos**; este WordPress se restaura por backup de su propia base. No se borra el sitio de Hostinger (ADR 0047)
 - [ ] No unresolved content loss
 - [ ] No important URL without KEEP/301
 - [ ] No broken navigation (header, footer, CTAs, cards)
@@ -65,10 +65,10 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Feeds nativos **404** (ADR 0044 / OWN-025, [#11](https://github.com/refo44/demo-caminodeldharma/issues/11))
 - [ ] `/practica` a 320 px **sin** overflow (OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)) — gate **antes** de staging
 - [ ] Sin contenido demo del install (OWN-024, [#10](https://github.com/refo44/demo-caminodeldharma/issues/10))
-- [ ] Rollback definido: estático conservado en dominio temporal de Hostinger (archivos intactos) **y** backup restaurable de la BD y `uploads/` de este WordPress. Dueño y ventana. No reinstalar WordPress para volver atrás (ADR 0046)
-- [ ] Inventario de **buzones y subdominios** de `caminodeldharma.org` antes de «Cambiar dominio». Hostinger advierte que el cambio puede afectarlos. Backup de lo necesario. Sin inventario, no hay corte (ADR 0046 / OWN-036)
+- [ ] Rollback definido: estático conservado en dominio temporal de Hostinger (archivos intactos) **y** backup restaurable de la BD y `uploads/` de este WordPress. Dueño y ventana. No reinstalar WordPress para volver atrás (ADR 0047)
+- [ ] Inventario de **buzones y subdominios** de `caminodeldharma.org` antes de «Cambiar dominio». Hostinger advierte que el cambio puede afectarlos. Backup de lo necesario. Sin inventario, no hay corte (ADR 0047 / OWN-036)
 - [ ] Identidad del sitio: el WordPress de `https://teal-woodpecker-284165.hostingersite.com` es el que recibe `caminodeldharma.org`. No se elimina ni se crea otro
-- [ ] Mientras se construye: `WP_ENVIRONMENT_TYPE` es `staging` y `blog_public` es `0`. No pasar a `production` ni a `blog_public 1` en esta fase (ADR 0046)
+- [ ] Mientras se construye: `WP_ENVIRONMENT_TYPE` es `staging` y `blog_public` es `0`. No pasar a `production` ni a `blog_public 1` en esta fase (ADR 0047)
 - [ ] Indexing policy definida: staging no indexable; producción: `robots.txt` + sitemap nativo (ADR 0030); no dejar «Disuadir motores de búsqueda» en producción
 - [ ] Deploy scope auditado: theme + plugin propio solamente; no core, no `wp-config.php`, no uploads, no plugins de terceros sobrescritos
 - [ ] Flujo ZIP/HTML legacy **incapaz** de escribir sobre el document root WP tras el corte (README/CONTRIBUTING actualizados)
@@ -79,7 +79,7 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 
 ## CUTOVER
 
-El corte **no reinstala** WordPress. Mueve dominios del sitio que ya existe (ADR 0046).
+El corte **no reinstala** WordPress. Mueve dominios del sitio que ya existe (ADR 0047).
 
 - [ ] Staging de `teal-woodpecker-284165.hostingersite.com` aprobado (theme, plugin, contenido, medios, formularios, SEO, QA)
 - [ ] Sitio estático de `caminodeldharma.org` pasado a un **dominio temporal** de Hostinger. Archivos conservados. Anotar esa URL: es el rollback
@@ -138,5 +138,5 @@ El corte **no reinstala** WordPress. Mueve dominios del sitio que ya existe (ADR
 ## Referencias
 
 - `docs/17-orden-implementacion.md` § Transición (pasos históricos de corte; este checklist los detalla)
-- ADR 0013, 0015, 0020, 0026, 0029, 0032–0041, **0046**
+- ADR 0013, 0015, 0020, 0026, 0029, 0032–0041, **0047**
 - `docs/backlog-decisiones-owner-migracion.md` (OWN + POST)

@@ -8,7 +8,12 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 | --- | --- |
 | **Versión** | 2.4 |
 | **Fecha** | 2026-09-23 |
-| **Estado** | Vigente — el sitio de staging **existe** y es el futuro WordPress de producción (ADR 0046 / OWN-036). **Este runbook no autoriza el corte de dominio.** |
+| **Estado** | Vigente — el sitio de staging **existe** y es el futuro WordPress de producción (ADR 0047 / OWN-036). **Este runbook no autoriza el corte de dominio.** |
+
+> **Canal por tag (ADR 0046):** el código first-party a staging puede subirse con el
+> workflow tag-gated descrito en [`wordpress-staging-cd.md`](wordpress-staging-cd.md).
+> Ese canal solo sincroniza el directorio del theme o del plugin; el `.htaccess` raíz, el
+> contenido y todo lo de este runbook fuera del código siguen siendo manuales.
 
 ## Alcance
 
@@ -24,7 +29,7 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
   entorno y su versión se anota en `docs/operations/third-party-plugins.md`.
 - **Destino durante la transición:** la instancia Hostinger ya creada,
   `https://teal-woodpecker-284165.hostingersite.com`, **sin dominio custom y no indexable**
-  (OWN-005). Es el mismo sitio que el corte convertirá en `caminodeldharma.org` (ADR 0046).
+  (OWN-005). Es el mismo sitio que el corte convertirá en `caminodeldharma.org` (ADR 0047).
   No se borra ni se crea otra. Nunca el `public_html` del estático antes del corte.
 
 ---
@@ -50,7 +55,7 @@ disponible en el servidor, o el pipeline se ejecuta desde una copia local con `-
 **Gate OWN-035:** la instancia ya está creada (2026-09-23), después de D-02, D-03 y D-04
 en `main`
 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).
-No crear una segunda. El corte de dominio no forma parte de esta provisión (ADR 0046).
+No crear una segunda. El corte de dominio no forma parte de esta provisión (ADR 0047).
 
 **Seed (OWN-032):** el payload y `static/` viven en SSH, directorio privado `~/cdd-extract/`
 **fuera** de `public_html`. File Manager no es el fallback automático. Si SSH queda bloqueado,
@@ -304,7 +309,7 @@ El sitio estático sigue desplegándose por ZIP manual desde `static/` según RE
 ## 9. Corte futuro: este sitio pasa a `caminodeldharma.org`
 
 **No ejecutar esta sección en la sesión de staging.** El propietario la dejó para cuando
-staging esté terminado y aprobado (ADR 0046 / OWN-036).
+staging esté terminado y aprobado (ADR 0047 / OWN-036).
 
 ```text
 AHORA

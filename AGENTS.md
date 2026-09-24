@@ -37,7 +37,7 @@ not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON
 PRODUCTION CONTENT. Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
-`camino-del-dharma` (v0.5.2) has the real views since WU-07 (ADR 0029): 18 block templates,
+`camino-del-dharma` (v0.5.3) has the real views since WU-07 (ADR 0029): 18 block templates,
 header/footer parts via PHP patterns, 14 dynamic blocks (events calendar with byte parity
 against the published grid, current/past listing with compact archive cards, home featured note,
 ADR 0037 bylines, native per-album galleries), the full static CSS ported to presets,
@@ -78,7 +78,7 @@ session**, a date the file contains, and says the file holds them all. The publi
 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
 are on `main`, so the pre-staging code is complete. The Hostinger website
 **already exists**: `https://teal-woodpecker-284165.hostingersite.com`. That site is the
-WordPress that will become `caminodeldharma.org` (ADR 0046 / OWN-036). Do not delete it
+WordPress that will become `caminodeldharma.org` (ADR 0047 / OWN-036). Do not delete it
 and do not create a second one. The domain switch is a later cutover session: first move
 the static site to a temporary domain (files kept as rollback), then **Change domain** on
 this WordPress. Before that switch, inventory mailboxes and subdomains — Hostinger warns

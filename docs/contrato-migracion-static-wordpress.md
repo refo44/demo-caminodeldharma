@@ -21,8 +21,8 @@ despliegue.
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
-| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML desplegable en **`static/`** (ADR 0014). Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2** en `wordpress/` (WU-00–WU-10 en Git). El WordPress de staging **existe** en `https://teal-woodpecker-284165.hostingersite.com` y es el que el corte convertirá en producción (ADR 0046 / OWN-036); el cambio de dominio **no** está hecho. `docker-compose.yml` y `.github/workflows/test.yml` existen. ZIP manual desde `static/` (ADR 0015). |
-| **FUTURE PLAN** | Terminar **este** staging (código, importación, medios, formularios, SEO, QA). El corte, en otra sesión (ADR 0046): el estático pasa a un dominio temporal y este WordPress recibe `caminodeldharma.org` por **Cambiar dominio**. Tras el corte, WordPress es la SoT editorial. |
+| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML desplegable en **`static/`** (ADR 0014). Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2** en `wordpress/` (WU-00–WU-10 en Git). El WordPress de staging **existe** en `https://teal-woodpecker-284165.hostingersite.com` y es el que el corte convertirá en producción (ADR 0047 / OWN-036); el cambio de dominio **no** está hecho. `docker-compose.yml` y `.github/workflows/test.yml` existen. ZIP manual desde `static/` (ADR 0015). |
+| **FUTURE PLAN** | Terminar **este** staging (código, importación, medios, formularios, SEO, QA). El corte, en otra sesión (ADR 0047): el estático pasa a un dominio temporal y este WordPress recibe `caminodeldharma.org` por **Cambiar dominio**. Tras el corte, WordPress es la SoT editorial. |
 
 Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el **estado
 histórico** pre-WU-01. Producción publicada sigue estática **hasta el corte**; no se
@@ -233,7 +233,7 @@ No borrar el sitio estático el día del corte, ni borrar el WordPress de stagin
 reinstalarlo. Conservar:
 
 - el estático **en un dominio temporal de Hostinger**, con sus archivos (rollback del
-  sitio público; ADR 0046);
+  sitio público; ADR 0047);
 - artefacto estático versionado (tag Git + ZIP desplegado);
 - backup de BD y `uploads/` **de este** WordPress
   (`teal-woodpecker-284165.hostingersite.com`, el mismo que recibe el dominio);
@@ -254,7 +254,7 @@ Nombres que **sí** usa este repositorio:
 | Environment | Nombre en docs | Estado |
 | ----------- | -------------- | ------ |
 | **LOCAL** | Docker Compose, `WP_ENVIRONMENT_TYPE=local` (ADR 0023, `docker-wordpress-playbook.md`) | Planificado; `docker-compose.yml` aún no existe |
-| **STAGING** | `https://teal-woodpecker-284165.hostingersite.com` — este WordPress, `WP_ENVIRONMENT_TYPE=staging`, `blog_public=0`, hasta el corte (OWN-005, ADR 0046) | Existe. Noindex. No pisa el estático. **Es el sitio que recibirá `caminodeldharma.org`.** No se borra ni se crea otro. No se marca `production` todavía |
+| **STAGING** | `https://teal-woodpecker-284165.hostingersite.com` — este WordPress, `WP_ENVIRONMENT_TYPE=staging`, `blog_public=0`, hasta el corte (OWN-005, ADR 0047) | Existe. Noindex. No pisa el estático. **Es el sitio que recibirá `caminodeldharma.org`.** No se borra ni se crea otro. No se marca `production` todavía |
 | **PRODUCTION** | `https://caminodeldharma.org` en Hostinger | **Actual y hasta el corte:** sitio **estático**. Después: este mismo WordPress, por **Cambiar dominio**, con `WP_ENVIRONMENT_TYPE=production` y `blog_public=1` |
 
 No mezclar entre environments: credenciales, base de datos, uploads, política de indexación

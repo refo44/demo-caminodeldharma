@@ -1,8 +1,8 @@
-# ADR 0046: El WordPress de staging es el de producción
+# ADR 0047: El WordPress de staging es el de producción
 
 ## Estado
 
-Aceptada
+Aceptada. El número es **0047** porque [ADR 0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) ya registra el despliegue de código a staging por tag. Esta decisión no modifica ese contrato y no autoriza el corte.
 
 ## Fecha
 
@@ -112,4 +112,4 @@ Este ADR **no autoriza el corte**. La sesión vigente sigue siendo construir sta
 - [wordpress-manual-deployment.md](../operations/wordpress-manual-deployment.md)
 - [How to switch to a temporary domain in Hostinger](https://www.hostinger.com/support/how-to-switch-to-a-temporary-domain-in-hostinger-dashboard/)
 - [Cómo conectar un dominio diferente a un sitio existente en Hostinger](https://www.hostinger.com/es/support/6807580-como-conectar-un-dominio-diferente-a-tu-sitio-web-existente-en-hostinger/)
-- ADR 0013, ADR 0015, ADR 0032
+- ADR 0013, ADR 0015, ADR 0032, ADR 0046
