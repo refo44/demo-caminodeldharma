@@ -1106,6 +1106,46 @@ a:focus-visible {
   }
 }
 
+/*
+ * Native album galleries (core/gallery) as the published square-crop grid.
+ * Core lays them out with flex and sizes each tile from its image ratio, so
+ * mixed portrait/landscape photos came out at different widths and heights.
+ * Core's figure width rule carries `.columns-N` and `:not(#individual-image)`;
+ * the attribute selector keeps this one above it on specificity alone,
+ * whatever the order WordPress prints the block stylesheet in.
+ */
+main .wp-block-gallery.has-nested-images {
+  display: grid;
+  gap: var(--wp--custom--grid-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (width >= 768px) {
+  main .wp-block-gallery.has-nested-images {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1024px) {
+  main .wp-block-gallery.has-nested-images {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+main .wp-block-gallery.has-nested-images[class*="columns-"] figure.wp-block-image:not(#individual-image) {
+  width: 100%;
+  margin: 0;
+  flex: none;
+}
+
+main .wp-block-gallery.has-nested-images figure.wp-block-image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
 /* --- Linaje --- */
 .linaje-tradition-focus {
   margin: 0 0 var(--wp--preset--spacing--md);
