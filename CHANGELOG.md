@@ -14,7 +14,9 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ### WordPress Fase 3 — galería en cuadrícula uniforme (sin cambio del artefacto desplegado)
 
-Theme `camino-del-dharma` **0.5.4**. Las galerías nativas (`core/gallery`) de `/galeria`
+Theme `camino-del-dharma` **0.5.5**. (El tag `theme-v0.5.4` se creó por error sobre un commit
+anterior al merge, con el theme aún en 0.5.3: el workflow lo rechazó en `validate` y no
+desplegó nada. Un tag publicado no se mueve, así que el release es 0.5.5.) Las galerías nativas (`core/gallery`) de `/galeria`
 dimensionaban cada miniatura según la proporción de su imagen (flex), por lo que fotos
 verticales y horizontales salían con tamaños distintos. El theme las presenta ahora como
 la cuadrícula de producción: recortes cuadrados en 2/3/4 columnas. Prueba
