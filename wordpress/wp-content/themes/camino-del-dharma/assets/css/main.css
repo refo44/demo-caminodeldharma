@@ -1607,7 +1607,8 @@ main .wp-block-gallery.has-nested-images figure.wp-block-image img {
 }
 
 /* --- Buttons --- */
-.btn {
+.btn,
+.llamado-practica .wp-element-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1620,25 +1621,30 @@ main .wp-block-gallery.has-nested-images figure.wp-block-image img {
   text-decoration: none;
   border: none;
   border-radius: 4px;
+  box-shadow: none;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
 
-.btn:focus-visible {
+.btn:focus-visible,
+.llamado-practica .wp-element-button:focus-visible {
   outline: 2px solid var(--wp--custom--color--text);
   outline-offset: 2px;
 }
 
-.btn-primary {
+.btn-primary,
+.llamado-practica .wp-element-button {
   background-color: var(--wp--custom--color--primary);
   color: var(--wp--custom--color--text-on-dark);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.llamado-practica .wp-element-button:hover {
   background-color: var(--wp--custom--color--primary-hover);
 }
 
-.btn-primary:focus-visible {
+.btn-primary:focus-visible,
+.llamado-practica .wp-element-button:focus-visible {
   outline-color: var(--wp--custom--color--text-on-dark);
 }
 
@@ -2817,7 +2823,8 @@ select:focus-visible {
 }
 
 /* --- Pressed / active feedback (functional, not decorative) --- */
-.btn:active {
+.btn:active,
+.llamado-practica .wp-element-button:active {
   filter: brightness(0.92);
 }
 

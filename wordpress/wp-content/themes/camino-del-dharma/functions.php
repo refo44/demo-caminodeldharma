@@ -33,6 +33,23 @@ function camino_del_dharma_setup() {
 add_action( 'after_setup_theme', 'camino_del_dharma_setup' );
 
 /**
+ * Inserter category for the three editorial patterns.
+ *
+ * Theme patterns register on init at priority 9, so the category has to
+ * exist first. Header, footer, and the single-view nav stay uncategorized
+ * and out of the inserter.
+ */
+function camino_del_dharma_register_pattern_category() {
+	register_block_pattern_category(
+		'camino-del-dharma',
+		array(
+			'label' => __( 'Camino del Dharma', 'camino-del-dharma' ),
+		)
+	);
+}
+add_action( 'init', 'camino_del_dharma_register_pattern_category', 8 );
+
+/**
  * Cache-busting version for a theme asset. Uses mtime when the file is
  * readable; otherwise falls back to the theme Version header so enqueue
  * never calls filemtime() on a missing path or passes an empty version.
