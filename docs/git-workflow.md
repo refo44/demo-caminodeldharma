@@ -22,7 +22,8 @@ main (protected trunk)
 | Required status checks | `php`, `css` (`.github/workflows/test.yml`) |
 | Require branches up to date | Sí (`strict`) |
 | Resolve conversations | Sí |
-| Force push / delete branch | No |
+| Force push / delete branch | No (sobre `main`) |
+| Borrar rama del PR al fusionar | Sí, automático (ajuste del repo «Automatically delete head branches») |
 | Required approving reviews | 0 (maintainer único; el PR sigue obligatorio) |
 
 ## Nombres de rama — [Conventional Branch](https://conventionalbranch.org/)
@@ -113,7 +114,12 @@ git fetch origin main
 git merge origin/main     # nunca el `main` local, que puede estar viejo
 ```
 
-Tras merge: borrar la rama remota y local.
+Tras merge, GitHub borra la rama **remota** solo. Falta limpiar la **local**:
+
+```bash
+git switch main && git fetch origin --prune && git merge --ff-only origin/main
+git branch -D <type>/<description>   # -D: un squash merge no cuenta como «merged» para git
+```
 
 ## Etiquetas del Pull Request
 

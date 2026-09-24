@@ -53,7 +53,7 @@ Ejemplos: `feat(theme): add safe asset version helper`, `fix(migrate): exclude b
 4. Commits Conventional Commits; push de la rama.
 5. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (varias si aplica);
    esperar checks `php` y `css`; resolver conversaciones.
-6. Merge; borrar la rama.
+6. Merge; GitHub borra la rama remota solo; borrar la rama local (`git fetch --prune`, `git branch -D`).
 
 **Prohibido:** push directo a `main`.
 
