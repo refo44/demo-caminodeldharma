@@ -23,9 +23,11 @@ la cuadrícula de producción: recortes cuadrados en 2/3/4 columnas. Prueba
 ### WordPress Fase 3 — vista previa oficial del theme (sin cambio del artefacto desplegado)
 
 Theme `camino-del-dharma` **0.5.3**. El estático de producción no se toca. El plugin
-sigue en **0.7.5**. El WordPress de staging
-(`https://teal-woodpecker-284165.hostingersite.com`) **sigue en el theme 0.5.2**
-hasta el despliegue manual de este paquete.
+sigue en **0.7.5**. El 2026-09-24 el tag `theme-v0.5.3` (commit
+`ca351064f3697a764f9ca62285054809906cdd8b`, Actions run `36029070539`) desplegó solo
+ese theme al WordPress de staging
+(`https://teal-woodpecker-284165.hostingersite.com`). Producción no se tocó. No es
+una versión publicada del sitio estático.
 
 - **Apariencia ya tiene captura real.** `screenshot.png` (PNG, 1200×900) es la
   portada del theme en wp-admin. Sale de la portada pública de staging, en un

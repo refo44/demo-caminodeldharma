@@ -87,20 +87,25 @@ sin cambios; estado activo (aviso); HTTP 200–399 en `/`.
 
 ## 9. Configuración en GitHub
 
-**Environment `staging`** (no existe `production`): tags `theme-v*` y `plugin-v*` únicamente.
+**Environment `staging`**, ya configurado. Solo admite tags `theme-v*` y `plugin-v*`.
+No existe un Environment `production`. Un tag de componente autoriza **staging**, no
+producción. Fusionar a `main` no despliega ningún entorno.
 
-Variables (`Settings → Environments → staging → Variables`):
+Variables (no son secretos):
 
-| Nombre | Valor esperado |
+| Nombre | Valor |
 | --- | --- |
-| `STAGING_SSH_HOST` | host SSH de Hostinger |
+| `STAGING_SSH_HOST` | `82.29.157.100` |
 | `STAGING_SSH_PORT` | `65002` |
 | `STAGING_SSH_USER` | `u548735796` |
 | `STAGING_WP_ROOT` | `/home/u548735796/domains/teal-woodpecker-284165.hostingersite.com/public_html` |
 
-Secretos (solo nombres aquí; los valores los carga el propietario):
-`STAGING_SSH_PRIVATE_KEY` (clave dedicada, solo staging) y `STAGING_SSH_KNOWN_HOSTS`
-(salida de `ssh-keyscan -p 65002 <host>` verificada fuera de banda).
+Secretos del mismo entorno, solo nombres: `STAGING_SSH_PRIVATE_KEY` (clave dedicada de
+Actions, no una clave personal) y `STAGING_SSH_KNOWN_HOSTS` (huella del host comprobada
+fuera de banda antes de guardarla). La clave privada y `known_hosts` no van en Git.
+`StrictHostKeyChecking` permanece en `yes`. `StrictHostKeyChecking=no` no se usa.
+
+Si falta una variable o un secreto, el workflow falla cerrado y no escribe.
 
 **Rulesets de tags** (patrones `theme-v*`, `plugin-v*`, `v*`):
 
@@ -116,16 +121,60 @@ escribió nada. `deploy` fallido antes de `rsync`: nada cambió en remoto. Despu
 `rsync`: revisar el resumen del job y repetir con un tag de versión nueva; no se
 reutilizan ni mueven tags.
 
-## 11. Producción
+## 11. Producción: límite, no un cambio de variables
 
-Excluida por diseño: no hay entorno, secretos ni rutas de producción en este workflow.
-Producción sigue por ZIP manual desde `static/` (ADR 0015) y el corte WordPress tiene su
-propio checklist.
+Hoy producción es el estático `https://caminodeldharma.org`, document root
+`/home/u548735796/domains/caminodeldharma.org/public_html`. Este workflow no lo escribe.
+El ZIP estático sigue en ADR 0015. El corte de dominio es otra sesión (ADR 0047): no es
+desplegar un theme o un plugin.
 
-## 12. Riesgos aún sin comprobar (requieren un tag real)
+**No** se prepara producción sustituyendo los valores `STAGING_*` ni apuntando el
+entorno `staging` al sitio público. Aunque el día del corte el servidor, la cuenta o
+incluso el usuario SSH coincidieran, los dos destinos siguen siendo entornos lógicos
+distintos.
 
-- `wp` disponible en el PATH SSH no interactivo de Hostinger.
-- `home` coincide exactamente con la URL de staging.
-- Formato de `known_hosts` con puerto (`[host]:65002`).
-- Staging responde 2xx/3xx en `/`.
-- Concurrencia: GitHub conserva solo una ejecución pendiente por grupo.
+Diseño futuro, **no implementado** y sin valores inventados:
+
+| Entorno `staging` (existe) | Entorno `production` (no existe) |
+| --- | --- |
+| `STAGING_SSH_HOST` | `PRODUCTION_SSH_HOST` |
+| `STAGING_SSH_PORT` | `PRODUCTION_SSH_PORT` |
+| `STAGING_SSH_USER` | `PRODUCTION_SSH_USER` |
+| `STAGING_WP_ROOT` | `PRODUCTION_WP_ROOT` |
+| `STAGING_SSH_PRIVATE_KEY` | `PRODUCTION_SSH_PRIVATE_KEY` |
+| `STAGING_SSH_KNOWN_HOSTS` | `PRODUCTION_SSH_KNOWN_HOSTS` |
+
+Host, puerto, usuario y ruta, cuando se conozcan, serán variables. La clave privada y
+`known_hosts` serán secretos de ese entorno, nunca archivos del repositorio. No se
+asumen iguales a staging hasta verificarlos en el corte. La huella del host de
+producción se comprueba fuera de banda antes de guardarla. `StrictHostKeyChecking=yes`.
+Un workflow de producción incompleto falla cerrado, antes de cualquier escritura. El
+`.htaccess` de producción no se sustituye a ciegas. Migración, seed, convert y
+`--confirm-production` no forman parte del deploy de código; `--confirm-production`
+sigue prohibido salvo que un procedimiento de producción ya aprobado lo exija.
+
+El flujo previsto, todavía sin construir, es: un release ya validado en staging, luego
+una autorización explícita de corte, luego un mecanismo propio de producción, el
+entorno `production`, un preflight, el deploy del componente y del SHA ya aprobados, y
+la verificación posterior. **Qué dispara ese mecanismo** —el mismo tag, un workflow de
+promoción, otro namespace u otra aprobación— no está decidido. Hace falta un ADR antes
+de implementar CD de producción (D-B sigue diferida).
+
+## 12. Primer release de staging
+
+`theme-v0.5.3` fue el primer release tag-gated que llegó a staging con éxito
+(2026-09-24).
+
+| | |
+| --- | --- |
+| Commit | `ca351064f3697a764f9ca62285054809906cdd8b` |
+| Run | [36029070539](https://github.com/refo44/demo-caminodeldharma/actions/runs/36029070539) |
+| Resultado | SUCCESS |
+| Componente | theme `0.5.3` |
+| Entorno | `staging` |
+| Producción | no se tocó |
+
+Ese run comprobó `wp` en el SSH no interactivo, `home` igual a la URL de staging,
+`known_hosts` con puerto, preflight, rsync solo del theme, `.htaccess` raíz intacto y
+HTTP 200. GitHub sigue conservando una sola ejecución pendiente por grupo de
+concurrencia: un tag a la vez.

@@ -15,9 +15,10 @@ prohibición de instalar WordPress en ese `public_html` siguen en 0015.
 D-A y D-C están cerradas. D-B queda diferida a propósito: es la promoción a producción
 después del corte y no bloquea esta aceptación ni el contrato de staging.
 
-La arquitectura está aceptada. La implementación no está hecha: no hay rulesets, no
-hay entorno `staging`, no hay workflow de deploy y no existe el tag `theme-v0.5.3`.
-Staging sigue en el theme `0.5.2` hasta esa release, después de configurar los controles.
+La arquitectura de staging está aceptada y, desde el 2026-09-24, implementada: rulesets
+de tags, entorno `staging`, workflow `deploy-staging.yml` y el primer tag `theme-v0.5.3`
+(commit `ca351064f3697a764f9ca62285054809906cdd8b`, Actions run `36029070539`). Ese
+release desplegó solo el theme `0.5.3` a staging. No autoriza producción.
 
 ## Fecha
 
@@ -402,11 +403,17 @@ creación; el de inmutabilidad no tiene bypass; Actions no crea tags; el deploy 
 usa `contents: read`. **D-B queda diferida** al diseño futuro de la promoción a
 producción y no bloquea el alcance de staging de este ADR.
 
-**Arquitectura aceptada, implementación pendiente.** El orden es: esta aceptación, luego
-los rulesets de tags, el entorno `staging` y sus secretos, el workflow que escucha
-`theme-v*` y `plugin-v*`, y solo después la decisión de release que crea `theme-v0.5.3`.
-Hoy no hay `deploy.yml`. El CI de pull requests no cambia. Staging permanece en el
-theme `0.5.2`.
+**Staging implementado.** El orden previsto se cumplió para staging: rulesets, entorno
+`staging`, workflow de `theme-v*` y `plugin-v*`, y después el tag `theme-v0.5.3`. El CI
+de pull requests no despliega. No hay `deploy.yml` de producción.
+
+**Producción sigue fuera de este ADR.** No se crea un entorno `production` aquí. No se
+reescribe el entorno `staging` ni se sustituyen los nombres `STAGING_*` por valores de
+producción: eso borraría el límite entre entornos. Un deploy de producción, cuando exista,
+exigirá un ADR posterior. Ese ADR tendrá que elegir el disparador (el mismo tag, un
+workflow de promoción, otro namespace, u otro mecanismo). Este ADR no elige. Hasta
+entonces el workflow vigente solo escribe staging y falla cerrado si falta su
+configuración.
 
 **Esta aceptación no autoriza:** despliegue a producción, credenciales de producción en
 el workflow de staging, escribir el `public_html` de producción, el corte, que `v*`
