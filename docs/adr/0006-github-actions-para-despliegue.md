@@ -2,7 +2,11 @@
 
 ## Estado
 
-Aceptada
+Aceptada. El disparador «push a `main` y/o `workflow_dispatch` → deploy a producción»
+queda **sustituido** por [ADR 0046](0046-despliegue-solo-por-tag-de-version-aprobado.md):
+el deploy de staging WordPress lo inicia un tag de release aprobado. GitHub Actions como
+mecanismo, y SSH/rsync como transporte, siguen vigentes. 0046 no activa el deploy a
+producción.
 
 ## Fecha
 
