@@ -91,9 +91,8 @@ En PRs con squash merge, el mensaje del squash debe seguir Conventional Commits.
 ## Flujo diario
 
 ```bash
-git checkout main
-git pull origin main
-git checkout -b feature/short-description
+git fetch origin main                                   # siempre, antes de ramificar
+git checkout -b feature/short-description origin/main   # nunca desde un main local sin actualizar
 
 # … cambios + tests locales …
 npm run lint:css          # si tocaste CSS
@@ -105,6 +104,13 @@ git commit -m "fix(scope): describe the change"
 git push -u origin feature/short-description
 
 gh pr create --base main --title "fix(scope): describe the change" --body "…" --label bug
+```
+
+Si `main` avanzó mientras trabajabas (GitHub marca «out-of-date» por la regla `strict`):
+
+```bash
+git fetch origin main
+git merge origin/main     # nunca el `main` local, que puede estar viejo
 ```
 
 Tras merge: borrar la rama remota y local.
@@ -139,7 +145,9 @@ gh issue create --label enhancement --label documentation --title "…"
 ## Agentes (Cursor, Copilot, etc.)
 
 1. **Nunca** commitear ni pushear directamente a `main`.
-2. Crear rama con prefijo adecuado (`cursor/…` para Cursor).
+2. **Ejecutar siempre `git fetch origin main`** antes de crear la rama y antes de cualquier merge
+   o sincronización con `main`; ramificar desde `origin/main`. Crear rama con prefijo adecuado
+   (`cursor/…` para Cursor).
 3. Commits Conventional Commits en inglés.
 4. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (más de una si aplica).
 5. Esperar `php` + `css` verdes.
