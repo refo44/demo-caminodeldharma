@@ -12,6 +12,14 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — galería en cuadrícula uniforme (sin cambio del artefacto desplegado)
+
+Theme `camino-del-dharma` **0.5.4**. Las galerías nativas (`core/gallery`) de `/galeria`
+dimensionaban cada miniatura según la proporción de su imagen (flex), por lo que fotos
+verticales y horizontales salían con tamaños distintos. El theme las presenta ahora como
+la cuadrícula de producción: recortes cuadrados en 2/3/4 columnas. Prueba
+`tests/Unit/Theme_Gallery_GridTest.php`. El estático de producción no se toca.
+
 ### WordPress Fase 3 — vista previa oficial del theme (sin cambio del artefacto desplegado)
 
 Theme `camino-del-dharma` **0.5.3**. El estático de producción no se toca. El plugin
