@@ -30,12 +30,12 @@ como transacción) y cómo contactar (WhatsApp, correo, y en el futuro un formul
 | **Producción** | Sitio estático (HTML/CSS/JS) en `https://caminodeldharma.org`, Hostinger compartido |
 | **Versión en el repositorio** | **1.0.35** (`VERSION`) |
 | **Versión en Hostinger** | Paridad verificada 2026-08-31 (delta 0); no asumir paridad futura sin comparar (OWN-006/007) |
-| **Fase activa** | Fase 2 **en producción**. Fase 3 **implementada en Git** (WU-00–WU-10, BUG-001). Staging Hostinger **no** creado |
+| **Fase activa** | Fase 2 **en producción**. Fase 3 **implementada en Git** (WU-00–WU-10, BUG-001). Staging Hostinger **existe** (`teal-woodpecker-284165.hostingersite.com`) y es el WordPress del corte (ADR 0047) |
 | **Estructura del repo** | Monorepo: `static/` (HTML desplegable) + `wordpress/` (plugin `camino-del-dharma-core` 0.7.3, theme FSE `camino-del-dharma` 0.5.2) |
 | **Fuente editorial pre-corte** | Producción publicada (`https://caminodeldharma.org`). La carpeta legacy `content-source/` fue **eliminada permanentemente** (OWN-017, ADR 0040) |
 | **Despliegue estático** | Manual (ZIP → File Manager). CI/CD de **deploy** pospuesto (ADR 0016) |
 | **CI de calidad** | `.github/workflows/test.yml` (checks `php` y `css`); no despliega. `main` protegida (ADR 0043) |
-| **Pre-staging** | D-02/D-03/D-04 en `main` **antes** de crear Hostinger (OWN-035, issues #10–#12). D-08 (#5) puede ir después (A2) |
+| **Pre-staging** | Código de pre-staging en `main` (OWN-035). El sitio de Hostinger ya existe; el corte de dominio es posterior (ADR 0047). D-08 (#5) puede ir después (A2) |
 | **Backlog de dueño** | **Cerrado** (v1.28): OWN-001–OWN-035. CF7: elegibilidad ADR 0041; **entrega** ADR 0045. Feeds 404: ADR 0044 |
 | **Fases posteriores** | `POST-001`–`POST-007` (i18n) abiertas; `POST-008`–`POST-010` decididas. **No** se implementan en el corte |
 
@@ -174,8 +174,11 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 - **Hosting:** Hostinger, `caminodeldharma.org`.
 - **PHP / MariaDB objetivo:** 8.3 / 11.8 (ADR 0023).
 - **Local:** Docker Compose versionado en el repo (ADR 0023, WU-02).
-- **Staging (OWN-005):** otra instancia Hostinger **sin dominio custom**, noindex, en paralelo al
-  estático hasta el switch. No pisa `public_html` de producción.
+- **Staging (OWN-005 / ADR 0047):** `https://teal-woodpecker-284165.hostingersite.com`,
+  sin dominio custom, noindex, en paralelo al estático. **Es el WordPress que recibirá
+  `caminodeldharma.org`** por Cambiar dominio, en una sesión de corte posterior. No se
+  borra ni se crea otro. No pisa el estático mientras tanto. Antes del switch: inventario
+  de correo y subdominios.
 - **SSH:** disponible en la cuenta; no es el canal de deploy hoy.
 
 ---
@@ -231,8 +234,8 @@ convención de árbol; la forma canónica HTTP es `/comunidad`, no `/comunidad/`
 
 | Ítem | Estado |
 | --- | --- |
-| D-02 demo content, D-03 feeds 404, D-04 overflow `/practica` | Código pendiente (#10–#12); **antes** de Hostinger |
-| Crear staging Hostinger | OWN-035: después de esos merges + «go» del propietario |
+| D-02 demo content, D-03 feeds 404, D-04 overflow `/practica` | Implementados en `main` (#10–#12) |
+| Staging Hostinger | **Existe:** `teal-woodpecker-284165.hostingersite.com`. Es el WordPress del corte (ADR 0047). El cambio de dominio es posterior |
 | D-08 SEO fichas `/author/{slug}` | Decidido; código pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)); A2 |
 | Seed en Hostinger | OWN-032: SSH + `~/cdd-extract/` |
 | Formulario CF7 end-to-end | Elegible (ADR 0041); gate de entrega ADR 0045 |

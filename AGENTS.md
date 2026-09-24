@@ -76,8 +76,16 @@ session**, a date the file contains, and says the file holds them all. The publi
 `.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31). Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 **OWN-035:** D-02, D-03 and D-04
 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
-are on `main`, so the pre-staging code is complete; creating Hostinger staging now waits on the
-owner's explicit go, not on more code.
+are on `main`, so the pre-staging code is complete. The Hostinger website
+**already exists**: `https://teal-woodpecker-284165.hostingersite.com`. That site is the
+WordPress that will become `caminodeldharma.org` (ADR 0047 / OWN-036). Do not delete it
+and do not create a second one. The domain switch is a later cutover session: first move
+the static site to a temporary domain (files kept as rollback), then **Change domain** on
+this WordPress. Before that switch, inventory mailboxes and subdomains — Hostinger warns
+the change can affect them. While this site is still the temporary URL,
+`WP_ENVIRONMENT_TYPE` stays `staging` and `blog_public` stays `0`. At cutover, on this
+same install, set `WP_ENVIRONMENT_TYPE` to `production` and `blog_public` to `1`. Do not
+perform the switch while building staging.
 **OWN-020 / D-08** implementation pending
 ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)); may follow staging (A2).
 CF7 delivery is a cutover gate (ADR 0045). See `.audit/fase3-execution-state.md`.

@@ -59,7 +59,11 @@ on `main` before Hostinger (OWN-035). CF7 delivery: ADR 0045. Feeds: ADR 0044. `
 are later-phase except their stated gates. Binding later ADRs:
 0035 (event singles), 0036 (gallery album URLs), 0037 (blog author CPT / `/author/{slug}`),
 0038 (TDD, wp-phpunit, Sonar scope), 0041 (CF7 without legal-review wait),
-0042 (Gutenberg meta UI), 0044 (feeds 404), 0045 (CF7 mail cutover gate). Testing
+0042 (Gutenberg meta UI), 0044 (feeds 404), 0045 (CF7 mail cutover gate),
+0047 (the existing Hostinger site `teal-woodpecker-284165.hostingersite.com` becomes
+`caminodeldharma.org` by a later domain change; do not delete it or install a second
+WordPress). Until that cutover, `WP_ENVIRONMENT_TYPE` stays `staging` and `blog_public`
+stays `0`; then both become `production` and `1` on this same install. Testing
 guide: `docs/guia-pruebas-plugin-theme-fse.md`.
 Do not mock WordPress APIs. Do not write FSE production code before a failing test. Sonar is WordPress-only (not the static site).
 

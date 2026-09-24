@@ -30,8 +30,8 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Routing tested (incoming HTTP; archive+single; 404)
 - [ ] Redirects tested (ledger; sin cadenas)
 - [ ] SEO metadata preserved (title, description, canonical, OG, JSON-LD)
-- [ ] Backup verified (static files + WP DB + uploads)
-- [ ] Rollback defined (static artifact + document root + ventana)
+- [ ] Backup verificado (estático en su `public_html` + WP DB + uploads **de** `teal-woodpecker-284165.hostingersite.com`)
+- [ ] Rollback definido: el estático pasa a un dominio temporal **con sus archivos**; este WordPress se restaura por backup de su propia base. No se borra el sitio de Hostinger (ADR 0047)
 - [ ] No unresolved content loss
 - [ ] No important URL without KEEP/301
 - [ ] No broken navigation (header, footer, CTAs, cards)
@@ -65,7 +65,10 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] Feeds nativos **404** (ADR 0044 / OWN-025, [#11](https://github.com/refo44/demo-caminodeldharma/issues/11))
 - [ ] `/practica` a 320 px **sin** overflow (OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)) — gate **antes** de staging
 - [ ] Sin contenido demo del install (OWN-024, [#10](https://github.com/refo44/demo-caminodeldharma/issues/10))
-- [ ] Rollback definido (volver a estático versionado **o** restaurar BD+files WP; dueño y ventana)
+- [ ] Rollback definido: estático conservado en dominio temporal de Hostinger (archivos intactos) **y** backup restaurable de la BD y `uploads/` de este WordPress. Dueño y ventana. No reinstalar WordPress para volver atrás (ADR 0047)
+- [ ] Inventario de **buzones y subdominios** de `caminodeldharma.org` antes de «Cambiar dominio». Hostinger advierte que el cambio puede afectarlos. Backup de lo necesario. Sin inventario, no hay corte (ADR 0047 / OWN-036)
+- [ ] Identidad del sitio: el WordPress de `https://teal-woodpecker-284165.hostingersite.com` es el que recibe `caminodeldharma.org`. No se elimina ni se crea otro
+- [ ] Mientras se construye: `WP_ENVIRONMENT_TYPE` es `staging` y `blog_public` es `0`. No pasar a `production` ni a `blog_public 1` en esta fase (ADR 0047)
 - [ ] Indexing policy definida: staging no indexable; producción: `robots.txt` + sitemap nativo (ADR 0030); no dejar «Disuadir motores de búsqueda» en producción
 - [ ] Deploy scope auditado: theme + plugin propio solamente; no core, no `wp-config.php`, no uploads, no plugins de terceros sobrescritos
 - [ ] Flujo ZIP/HTML legacy **incapaz** de escribir sobre el document root WP tras el corte (README/CONTRIBUTING actualizados)
@@ -76,7 +79,15 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 
 ## CUTOVER
 
-- [ ] WordPress operativo en el hostname de producción
+El corte **no reinstala** WordPress. Mueve dominios del sitio que ya existe (ADR 0047).
+
+- [ ] Staging de `teal-woodpecker-284165.hostingersite.com` aprobado (theme, plugin, contenido, medios, formularios, SEO, QA)
+- [ ] Sitio estático de `caminodeldharma.org` pasado a un **dominio temporal** de Hostinger. Archivos conservados. Anotar esa URL: es el rollback
+- [ ] En este WordPress: **Sitios web → ⋮ → Cambiar dominio** → `caminodeldharma.org`. Sin reinstalación
+- [ ] WordPress operativo en `https://caminodeldharma.org` (el mismo sitio)
+- [ ] SSL, `home`, `siteurl` y canonical apuntan al hostname de producción
+- [ ] Con el dominio definitivo ya en esta instalación: `wp config set WP_ENVIRONMENT_TYPE production --type=constant`. `wp eval` imprime `production`. La importación ya está hecha: en `production` el pipeline exige `--confirm-production` y backup (ADR 0033)
+- [ ] `wp option update blog_public 1` en esa misma sesión de corte. El cambio de dominio no lo hace solo. No dejar «Disuadir motores de búsqueda» en producción
 - [ ] Theme `camino-del-dharma` desplegado y **activo**
 - [ ] Plugin `camino-del-dharma-core` desplegado y **activo**
 - [ ] Contact Form 7 activo (ADR 0026 / 0041 / **0045**) con `/privacidad` actualizada **y** entrega confirmada por el cliente en `caminodeldharma1@gmail.com`. No cortar con CF7 on sin esa prueba.
@@ -119,12 +130,13 @@ WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute
 - [ ] 301 del ledger
 - [ ] no unexpected 404
 - [ ] content counts still reconcile
-- [ ] Artefacto estático **aún disponible** para rollback (no borrado)
+- [ ] Artefacto estático **aún disponible** en su dominio temporal (rollback). No borrado el día del corte
+- [ ] Correo y subdominios inventariados antes del cambio: comprobados después, si el inventario decía que existían
 
 ---
 
 ## Referencias
 
 - `docs/17-orden-implementacion.md` § Transición (pasos históricos de corte; este checklist los detalla)
-- ADR 0013, 0015, 0020, 0026, 0029, 0032–0041
+- ADR 0013, 0015, 0020, 0026, 0029, 0032–0041, **0047**
 - `docs/backlog-decisiones-owner-migracion.md` (OWN + POST)

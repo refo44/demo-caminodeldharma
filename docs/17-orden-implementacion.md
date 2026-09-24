@@ -98,7 +98,7 @@ Este documento define el orden oficial de implementación, validación, migraci�
 ## Estado actual del proyecto (2026-08-29, snapshot)
 
 Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado vigente está en
-«Estado actual (2026-09-01)» más abajo y en `.audit/fase3-execution-state.md`.
+«Estado actual (2026-09-23)» más abajo y en `.audit/fase3-execution-state.md`.
 
 | Tiempo | Hecho |
 | ------ | ----- |
@@ -119,12 +119,25 @@ Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado 
 
 ### Estado actual (2026-09-01)
 
+Snapshot de esa fecha. El estado vigente es el bloque de 2026-09-23.
+
 Producción sigue **estática** en `https://caminodeldharma.org`. El repo es monorepo (`static/` +
 `wordpress/`). Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2**.
 WU-00–WU-10 y BUG-001 **cerrados** en Git. Staging Hostinger **no** creado: D-02/D-03/D-04 ya
 están en `main`, falta el `go` del owner (OWN-035). Continuidad: `.audit/fase3-execution-state.md`.
 
 La fila «versión desplegada `1.0.11`» del 2026-07-19 es **histórica**. La versión de código vigente está en `VERSION`.
+
+### Estado actual (2026-09-23)
+
+Producción sigue **estática** en `https://caminodeldharma.org`. El WordPress de Hostinger
+**existe** en `https://teal-woodpecker-284165.hostingersite.com`. Ese sitio es el que el
+corte convertirá en producción por **Cambiar dominio**, después de pasar el estático a un
+dominio temporal (ADR 0047 / OWN-036). Mientras tanto `WP_ENVIRONMENT_TYPE` queda en
+`staging` y `blog_public` en `0`. En el corte, la misma instalación pasa a `production`
+y `blog_public` `1`. No se borra ni se crea otro. El cambio de dominio
+**no** está autorizado en la sesión de staging: antes hace falta inventario de correo y
+subdominios. Continuidad: `.audit/fase3-execution-state.md`.
 
 La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). Pendientes de cierre operativo: formulario de contacto sin backend; aviso de privacidad publicado y provisional (ADR 0039). HSTS aplazado (ADR 0020). **ADR 0019** descarta la analítica con cookies.
 
@@ -600,7 +613,7 @@ Resumen (detalle en el checklist):
 5. Backup WordPress (BD + medios).
 6. Validar WordPress en staging (Fase 2.5 sobre el theme).
 7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché. **HSTS sigue aplazado** el día del corte (ADR 0020).
-8. Cambio controlado a producción. Retirar el deploy ZIP estático sobre `public_html`.
+8. Cambio de dominio, no reinstalación (ADR 0047): el estático de `caminodeldharma.org` pasa a un dominio temporal (archivos conservados) y **este** WordPress (`teal-woodpecker-284165.hostingersite.com`) recibe el dominio con **Cambiar dominio**. Antes: inventario de correo y subdominios. Retirar el deploy ZIP estático sobre el document root de WordPress.
 9. Smoke test anónimo del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
 11. **Tras ≥30 días estables:** revisar HSTS (ADR 0020 / 0018) y registrar en `CHANGELOG.md`.

@@ -125,6 +125,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0044](0044-feeds-nativos-404.md) | Feeds nativos de WordPress responden 404 | Aceptada |
 | [0045](0045-cf7-entrega-gate-corte.md) | Entrega de correo CF7 es gate del corte | Aceptada |
 | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) | El despliegue lo inicia solo un tag de versión aprobado | Aceptada |
+| [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) | El WordPress de staging es el de producción | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -166,6 +167,7 @@ Documentos, issues, commits o ADR relacionados.
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
 | Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
 | CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida a la promoción de producción. La implementación del workflow no está hecha |
+| Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
 
 ---
 
@@ -174,9 +176,10 @@ Documentos, issues, commits o ADR relacionados.
 - **`17-orden-implementacion`:** orden de fases y criterios de cierre; referencia este registro.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
-- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.28);
-  cierre WU-10 OWN-021–OWN-035; D-02/D-03/D-04/D-08 pendientes de código; `POST-*`; `META-*`
-  (ADR 0042); no son ADR.
+- **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.34);
+  OWN-036 / [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md): el sitio
+  `teal-woodpecker-284165.hostingersite.com` es el WordPress del corte. `POST-*`; `META-*`
+  (ADR 0042) no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.
 

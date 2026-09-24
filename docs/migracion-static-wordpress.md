@@ -11,15 +11,17 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 **CURRENT STATE:** Fase 3 **cerrada en Git** (2026-09-01, WU-00…WU-10 + BUG-001). Producción
 sigue estática en `https://caminodeldharma.org`. El sitio desplegable vive en `static/`
 (reorg ADR 0014). Plugin `camino-del-dharma-core` v0.7.3 y theme FSE `camino-del-dharma`
-v0.5.2. Contenido importado y convertido en el entorno local. Staging Hostinger **no**
-creado: D-02/D-03/D-04 ya están en `main`, falta el `go` del owner (OWN-035). Estado durable:
+v0.5.2. Contenido importado y convertido en el entorno local. El WordPress de staging
+**existe** en `https://teal-woodpecker-284165.hostingersite.com` y es el sitio del corte
+(ADR 0047 / OWN-036): no se borra ni se crea otro. El cambio de dominio es una sesión
+posterior. Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.
 
 Decisiones del propietario (**Fase 3 cerrada** v1.28; no reabrir OWN-* sin decisión nueva).
 OWN-020 / D-08 está decidido; el código de SEO de fichas de autor sigue **pendiente**
 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Pre-staging: D-02/D-03/D-04 ya
-están en `main`; Hostinger espera el `go` del owner (OWN-035). ADR 0044 (feeds 404), ADR 0045 (entrega CF7).
+están en `main`. El sitio de Hostinger ya existe y se conserva (ADR 0047 / OWN-036). ADR 0044 (feeds 404), ADR 0045 (entrega CF7), ADR 0047 (identidad del corte).
 OWN-021 / D-09: overflow Sangha **dejado** en el corte; wrap WP-only post-corte
 ([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
 OWN-022 / D-10: `sessionStorage` de `wp-emoji` **aceptado**.
