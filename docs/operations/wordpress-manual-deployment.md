@@ -12,8 +12,10 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 
 > **Canal por tag (ADR 0046):** el código first-party a staging puede subirse con el
 > workflow tag-gated descrito en [`wordpress-staging-cd.md`](wordpress-staging-cd.md).
-> Ese canal solo sincroniza el directorio del theme o del plugin; el `.htaccess` raíz, el
-> contenido y todo lo de este runbook fuera del código siguen siendo manuales.
+> Ese canal solo sincroniza el directorio del theme o del plugin en el entorno
+> `staging`. No se convierte en producción cambiando `STAGING_*`. El `.htaccess` raíz, el
+> contenido y todo lo de este runbook fuera del código siguen siendo manuales. El corte
+> de dominio no es un deploy de theme o plugin.
 
 ## Alcance
 
