@@ -195,6 +195,45 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
+	 * A deployed theme must reach visitors: LiteSpeed serves the cached HTML,
+	 * which still points at the previous `?ver=` of the stylesheet. The purge
+	 * runs after the sync and before the verification, and a failed purge is
+	 * loud but never fails a deploy that already reached staging.
+	 */
+	public function test_the_page_cache_is_purged_after_the_sync_and_before_verification() {
+		$workflow = $this->workflow();
+
+		$sync   = strpos( $workflow, 'name: Sync the component to staging' );
+		$purge  = strpos( $workflow, 'name: Purge the staging page cache' );
+		$verify = strpos( $workflow, 'name: Post-deploy verification' );
+
+		$this->assertNotFalse( $purge, 'The purge step is missing.' );
+		$this->assertLessThan( $purge, $sync );
+		$this->assertLessThan( $verify, $purge );
+		$this->assertStringContainsString( 'litespeed-purge all', $workflow );
+	}
+
+	public function test_a_failed_purge_warns_and_does_not_fail_the_deploy() {
+		$step = $this->step( 'Purge the staging page cache' );
+
+		$this->assertStringContainsString( '::warning::', $step );
+		$this->assertStringNotContainsString( 'exit 1', $step );
+	}
+
+	/**
+	 * Hostinger answers the GitHub runner with 403 while the site answers 200
+	 * everywhere else, so a 403 from the smoke probe is a warning. Server
+	 * errors, missing pages and unreachable hosts still fail the deploy.
+	 */
+	public function test_a_runner_side_403_only_warns_in_the_smoke_probe() {
+		$step = $this->step( 'Post-deploy verification' );
+
+		$this->assertMatchesRegularExpression( '/"\$\{code\}" (=|-eq) "?403"?/', $step );
+		$this->assertStringContainsString( '::warning::staging answered HTTP 403', $step );
+		$this->assertStringContainsString( '::error::staging answered HTTP ${code}', $step );
+	}
+
+	/**
 	 * A code deploy touches no content, no production and no tag.
 	 */
 	public function test_forbidden_operations_are_absent() {
@@ -244,6 +283,23 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 			),
 			$names
 		);
+	}
+
+	/**
+	 * Body of one workflow step, from its `name:` line to the next step.
+	 *
+	 * @param string $name Step name.
+	 * @return string
+	 */
+	private function step( $name ) {
+		$workflow = $this->workflow();
+		$start    = strpos( $workflow, 'name: ' . $name );
+		if ( false === $start ) {
+			return '';
+		}
+		$next = strpos( $workflow, "\n      - name:", $start );
+
+		return substr( $workflow, $start, false === $next ? null : $next - $start );
 	}
 
 	/**

@@ -264,6 +264,24 @@ jobs:
             -e "ssh -F ${SSH_CONFIG}" \
             "${STAGE_DIR}/" "${SSH_USER}@${SSH_HOST}:${target_dir}/"
 
+      # LiteSpeed serves the cached page, which still carries the previous `?ver=` of
+      # the theme stylesheet, so visitors would keep the old CSS after a deploy. A
+      # failed purge is a warning: the code already reached staging and the runbook
+      # has the manual purge.
+      - name: Purge the staging page cache
+        run: |
+          if ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" <<'REMOTE'
+          set -euo pipefail
+          # stdin is this script: keep wp from reading it. Themes stay skipped;
+          # the LiteSpeed Cache plugin must load for its purge command to exist.
+          wp --path="$1" --skip-themes litespeed-purge all < /dev/null
+          REMOTE
+          then
+            echo "Staging page cache purged."
+          else
+            echo "::warning::could not purge the LiteSpeed page cache; purge it in hPanel (docs/operations/wordpress-staging-cd.md)"
+          fi
+
       - name: Post-deploy verification
         env:
           HTACCESS_BEFORE: ${{ steps.preflight.outputs.htaccess_before }}
@@ -293,7 +311,13 @@ jobs:
           [ "$(field htaccess)" = "${HTACCESS_BEFORE}" ] || { echo "::error::root .htaccess changed"; exit 1; }
           [ "$(field active)" = "yes" ] || echo "::warning::the ${COMPONENT} ${SLUG} is not active on staging (not changed by this deploy)"
           code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 3 --retry-delay 5 "${STAGING_URL}/")
-          [ "${code}" -ge 200 ] && [ "${code}" -lt 400 ] || { echo "::error::staging answered HTTP ${code}"; exit 1; }
+          # Hostinger answers this runner with 403 while the site answers 200 elsewhere
+          # (the version and environment above were read over SSH), so a 403 only warns.
+          if [ "${code}" = "403" ]; then
+            echo "::warning::staging answered HTTP 403 to the runner; the site answers 200 from other networks"
+          else
+            [ "${code}" -ge 200 ] && [ "${code}" -lt 400 ] || { echo "::error::staging answered HTTP ${code}"; exit 1; }
+          fi
           echo "Verified ${COMPONENT} ${VERSION} on staging (HTTP ${code})."
 
       - name: Remove SSH material

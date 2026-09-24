@@ -80,6 +80,15 @@ hacia su directorio remoto. `--delete` no sale de ese directorio. Nunca se toca 
 No se ejecuta `migrate`, `seed`, `convert`, `demo purge`, aprovisionamiento de CF7 ni
 `--confirm-production`.
 
+## 7b. Purga de caché de páginas
+
+Tras el rsync, el workflow ejecuta `wp litespeed-purge all` por SSH (el plugin LiteSpeed Cache de
+staging debe estar activo; el tema queda omitido con `--skip-themes`). Sin esa purga LiteSpeed sirve
+HTML en caché que apunta al `?ver=` anterior de `main.css`, y como el CSS se cachea 7 días
+(`max-age=604800`) los visitantes conservan el estilo viejo (visto en el release `theme-v0.5.5`).
+Si la purga falla, el job **avisa** (`::warning::`) y no falla: el código ya está en staging. En ese caso,
+purgar a mano en hPanel (LiteSpeed Cache → «Purge all») y comprobar la página.
+
 ## 8. Verificación posterior
 
 Versión instalada == versión del tag; entorno sigue en `staging`; `.htaccess` raíz
@@ -178,3 +187,11 @@ Ese run comprobó `wp` en el SSH no interactivo, `home` igual a la URL de stagin
 `known_hosts` con puerto, preflight, rsync solo del theme, `.htaccess` raíz intacto y
 HTTP 200. GitHub sigue conservando una sola ejecución pendiente por grupo de
 concurrencia: un tag a la vez.
+
+### Sonda HTTP y 403 del runner
+
+Hostinger responde 403 a las IP de los runners de GitHub aunque el sitio responda 200 desde otras
+redes (visto en `theme-v0.5.5`). La versión instalada, el entorno y el `.htaccess` ya se verifican
+por SSH, así que un 403 en la sonda `/` es un **aviso**; 4xx/5xx distintos de 403 y los tiempos
+agotados siguen fallando el despliegue.
+
