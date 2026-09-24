@@ -2,7 +2,10 @@
 
 ## Estado
 
-Aceptada
+Aceptada. El aplazamiento de la automatización queda **sustituido** solo para el
+staging WordPress definido por
+[ADR 0046](0046-despliegue-solo-por-tag-de-version-aprobado.md). La automatización hacia
+producción sigue fuera. El texto de «Decisión» de 2026-07-19 se conserva como historia.
 
 ## Fecha
 

@@ -2,7 +2,11 @@
 
 ## Estado
 
-Aceptada
+Aceptada. Desde [ADR 0046](0046-despliegue-solo-por-tag-de-version-aprobado.md), el
+código WordPress de staging se despliega por tag de release aprobado, no por el ZIP
+manual de la sección «WordPress (staging)». Siguen vigentes el ZIP del estático de
+producción, la prohibición de instalar WordPress sobre ese `public_html` y la ausencia
+de autorización de corte. El texto de 2026-07-19 se conserva como historia.
 
 ## Fecha
 
