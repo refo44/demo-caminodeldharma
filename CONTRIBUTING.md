@@ -47,8 +47,8 @@ Ejemplos: `feat(theme): add safe asset version helper`, `fix(migrate): exclude b
 
 ### Flujo
 
-1. `git checkout main && git pull`
-2. `git checkout -b feature/short-description`
+1. `git fetch origin main` — **siempre**, antes de ramificar y antes de cualquier merge de `main`.
+2. `git checkout -b feature/short-description origin/main`
 3. Implementar; validaciones locales (abajo).
 4. Commits Conventional Commits; push de la rama.
 5. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (varias si aplica);

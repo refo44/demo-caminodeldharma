@@ -38,7 +38,9 @@ pipelines.
 ## Hard rules
 
 - **Git:** trunk-based on protected `main` (ADR 0043). Always branch first
-  ([Conventional Branch](https://conventionalbranch.org/)); commits
+  ([Conventional Branch](https://conventionalbranch.org/)) **from a fresh `origin/main`: run
+  `git fetch origin main` before creating a branch and before every merge or sync of `main`**
+  (a stale local `main` left PR #31 out of date); commits
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English; merge
   only via PR with green `php`/`css` and **at least one relevant PR label**. See
   `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.
