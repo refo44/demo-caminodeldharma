@@ -166,7 +166,7 @@ Documentos, issues, commits o ADR relacionados.
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
 | Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
-| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida a la promoción de producción. La implementación del workflow no está hecha |
+| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida: el disparador de producción no está elegido. El workflow de staging ya existe |
 | Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
 
 ---
