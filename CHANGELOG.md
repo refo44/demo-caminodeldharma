@@ -12,6 +12,23 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — patrones de editor (theme 0.6.0)
+
+Theme `camino-del-dharma` **0.6.0**. El estático de producción no se toca.
+El plugin sigue en **0.7.5**. Reúne la cuadrícula uniforme de galería ya
+presente en el árbol etiquetado 0.5.5 y los patrones de editor fusionados
+después:
+
+- Categoría de patrones **Camino del Dharma**.
+- **Sección con imagen**.
+- **Tres tarjetas**.
+- **Llamado a la práctica**, con el puente de estilo de `core/button` limitado
+  a `.llamado-practica`.
+
+El tag `theme-v0.5.5` no se mueve. Sus archivos llegaron a staging y el
+workflow falló en la sonda HTTP externa. 0.6.0 es una identidad de release
+nueva, no una corrección de ese tag.
+
 ### WordPress Fase 3 — galería en cuadrícula uniforme (sin cambio del artefacto desplegado)
 
 Theme `camino-del-dharma` **0.5.5**. (El tag `theme-v0.5.4` se creó por error sobre un commit
