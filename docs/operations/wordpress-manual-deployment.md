@@ -10,6 +10,11 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 | **Fecha** | 2026-09-02 |
 | **Estado** | Vigente — staging **no** se crea hasta D-02/D-03/D-04 en `main` (OWN-035) más «go» del propietario |
 
+> **Canal por tag (ADR 0046):** el código first-party a staging puede subirse con el
+> workflow tag-gated descrito en [`wordpress-staging-cd.md`](wordpress-staging-cd.md).
+> Ese canal solo sincroniza el directorio del theme o del plugin; el `.htaccess` raíz, el
+> contenido y todo lo de este runbook fuera del código siguen siendo manuales.
+
 ## Alcance
 
 - **Qué se despliega a WordPress:** únicamente código first-party versionado:
