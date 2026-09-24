@@ -87,19 +87,33 @@ base de datos. Ver `docs/contrato-migracion-static-wordpress.md`.
 | `parts/footer.html` | Pie, contacto, redes, donaciones |
 | `parts/navigation.html` | Menú principal (puede vivir dentro de `header.html` si no se reutiliza sola) |
 
-Los bloques repetibles que antes eran includes PHP (`meditation-block`, `recitation-block`,
-`mantra-block`) pasan a **patrones de bloques** (`patterns/*.php`, con cabecera de docblock — WordPress
-los autorregistra desde WP 6.0 sin llamada manual a `register_block_pattern()`):
+Los patrones viven en `patterns/*.php` (cabecera de docblock). WordPress
+los autorregistra desde WP 6.0, sin `register_block_pattern()`. La categoría
+`camino-del-dharma` («Camino del Dharma») se registra en `functions.php`,
+en `init` prioridad 8, antes de los patrones del theme (prioridad 9).
+
+**Estructura, fuera del inserter** (`Inserter: no`). Los usan las partes
+y las plantillas. No pertenecen a la categoría editorial:
 
 | Patrón | Uso |
 |--------|-----|
-| `patterns/meditation-block.php` | Bloque meditación semanal (reutilizable en Inicio y Práctica) |
-| `patterns/recitation-block.php` | Recitación práctica de la comida (opcional; solo si se repite) |
-| `patterns/mantra-block.php` | Mantra individual con audio (opcional; un patrón por mantra, cada instancia con su propio audio) |
+| `patterns/header.php` | Cabecera. La inserta `parts/header.html`. |
+| `patterns/footer.php` | Pie. Lo inserta `parts/footer.html`. |
+| `patterns/blog-single-nav.php` | Cierre de `templates/single.html`. |
+| `patterns/single-event-nav.php` | Cierre de `templates/single-event.html`. |
 
-Un patrón se usa cuando el contenido varía por instancia (p. ej. cada mantra tiene su propio audio) y
-un editor necesita poder ajustarlo tras insertarlo. Un template part se usa cuando el contenido es
-idéntico en todas las plantillas que lo incluyen (cabecera, pie).
+**Editor** (`Inserter: yes`): categoría `camino-del-dharma` y una de
+núcleo. El ejemplo se sustituye; no es la prosa publicada. Eventos,
+blog, álbumes y el formulario siguen siendo bloques dinámicos.
+
+- `patterns/seccion-con-imagen.php` — `text`. Título, imagen y párrafos.
+- `patterns/tres-tarjetas.php` — `columns`. Tres tarjetas editables.
+- `patterns/llamado-a-la-practica.php` — `call-to-action`. Botón a
+  `/contacto`.
+
+Un patrón sirve cuando el editor inserta una estructura y luego cambia
+esa instancia. Un template part sirve cuando el contenido es el mismo
+en cada plantilla que lo incluye (cabecera, pie).
 
 ---
 
@@ -144,9 +158,13 @@ camino-del-dharma/
 │   ├── footer.html
 │   └── navigation.html
 ├── patterns/
-│   ├── meditation-block.php
-│   ├── recitation-block.php   (opcional)
-│   └── mantra-block.php       (opcional)
+│   ├── header.php                 (Inserter: no)
+│   ├── footer.php                 (Inserter: no)
+│   ├── blog-single-nav.php        (Inserter: no)
+│   ├── single-event-nav.php       (Inserter: no)
+│   ├── seccion-con-imagen.php
+│   ├── tres-tarjetas.php
+│   └── llamado-a-la-practica.php
 └── assets/
     ├── css/
     │   └── main.css       ← hoja complementaria: layout, ritmo de lectura, componentes, estados/foco
@@ -255,7 +273,10 @@ Esta sección define criterios de implementación para que el theme siga prácti
 - **Plantillas limpias:** `templates/*.html` usan bloques núcleo (Query Loop, Post Content, Template Part, Group) sin markup ad hoc. Al ser HTML de bloques, no pueden contener lógica de negocio por diseño — eso es una propiedad a favor, no una limitación a rodear.
 - **Lógica fuera de las plantillas:** Cualquier lógica no trivial (cálculos, transformaciones, condiciones complejas, armado de data) vive en `functions.php`, en archivos cargados desde `functions.php` (ver §11.2), o en `camino-del-dharma-core` si es lógica de dominio.
 - **Una fuente de verdad por capa:** `theme.json` para tokens editables desde wp-admin; `assets/css/main.css` para todo lo demás (§7). No duplicar valores entre ambos ni en otros archivos.
-- **Reutilización por partes y patrones:** Template parts (`parts/`) para cabecera y pie; patrones de bloques (`patterns/`) para bloques repetibles con contenido variable (p. ej. meditación, mantras) — ver §4.
+- **Reutilización por partes y patrones:** Template parts (`parts/`)
+  para cabecera y pie. Patrones ocultos para la navegación de una
+  entrada o un evento. Patrones del inserter para una sección con
+  imagen, tres tarjetas y el llamado a la práctica. Ver §4.
 - **Seguridad por defecto:** Output escapado y entradas sanitizadas (ver §11.4). No imprimir datos sin escape en el PHP que sí existe (`functions.php`, `inc/`).
 - **Cero “builder lock-in”:** No introducir Elementor u otros builders de terceros. No introducir ACF Blocks salvo necesidad estructural repetida que Gutenberg nativo no cubra (ver §9). El Editor de sitio nativo (ADR 0029) no es un builder de terceros: es el mecanismo núcleo que WordPress ofrece para esto.
 - **Hooks básicos del theme:** Registrar `add_theme_support( 'post-thumbnails' )`, `add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) )`, `register_nav_menus()` (el menú resultante se asigna al bloque Navigation en `parts/header.html`). `add_theme_support( 'title-tag' )` no aplica a un theme de bloques (el título ya lo controla `theme.json`/el bloque de plantilla). Opcional: `add_theme_support( 'editor-styles' )` y `add_editor_style( 'assets/css/main.css' )` para que el editor Gutenberg se aproxime al front.
