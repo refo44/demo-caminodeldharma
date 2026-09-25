@@ -34,6 +34,17 @@ final class Plugin_BootstrapTest extends TestCase {
 	}
 
 	/**
+	 * Protects the wp-admin switch: the visibility screen is hooked where
+	 * WordPress builds Settings, not only defined.
+	 */
+	public function test_the_contact_form_setting_is_hooked_into_wp_admin() {
+		$plugin = file_get_contents( $this->plugin_main_file() ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+
+		$this->assertStringContainsString( "add_action( 'admin_menu', 'cdd_core_register_contact_form_settings_page' )", $plugin );
+		$this->assertStringContainsString( "add_action( 'admin_init', 'cdd_core_register_contact_form_setting' )", $plugin );
+	}
+
+	/**
 	 * Path of the production main file relative to the repo root.
 	 */
 	private function plugin_main_file(): string {

@@ -248,4 +248,135 @@ final class Contact_FormTest extends WP_UnitTestCase {
 			get_post( get_page_by_path( 'privacidad' )->ID )->post_content
 		);
 	}
+
+	/**
+	 * Protects the default: an environment that has never saved the
+	 * setting still shows the form. Hiding it is an explicit editor act.
+	 */
+	public function test_the_contact_form_stays_visible_until_an_editor_hides_it() {
+		$this->assertTrue( cdd_core_contact_form_visible() );
+
+		update_option( 'cdd_core_contact_form_visible', 0 );
+
+		$this->assertFalse( cdd_core_contact_form_visible() );
+		$this->assertSame( '', cdd_core_contact_form_html() );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/contacto-formulario /-->' );
+
+		$this->assertSame( '', trim( $html ) );
+		$this->assertStringNotContainsString( 'El formulario no está disponible', $html );
+		$this->assertStringNotContainsString( 'contact-form-unavailable', $html );
+	}
+
+	/**
+	 * Protects the published sentences: hiding the form leaves one
+	 * invitation above, with WhatsApp and email, and removes the sentence
+	 * under the form. Showing it again restores both stored sentences.
+	 */
+	public function test_hiding_the_form_leaves_one_channel_sentence_above() {
+		$stored  = '<p>Si deseas practicar con nosotros o recibir información sobre nuestras actividades, puedes escribirnos aquí.</p>'
+			. '<p>También puedes escribirnos por WhatsApp al <a href="https://wa.me/573206627608" target="_blank" rel="noopener noreferrer">+57 320 662 7608</a> o al correo <a href="mailto:caminodeldharma1@gmail.com">caminodeldharma1@gmail.com</a>.</p>';
+		$page_id = self::factory()->post->create(
+			array(
+				'post_type'    => 'page',
+				'post_name'    => 'contacto',
+				'post_title'   => 'Contacto',
+				'post_status'  => 'publish',
+				'post_content' => $stored,
+			)
+		);
+
+		$this->go_to( get_permalink( $page_id ) );
+		update_option( 'cdd_core_contact_form_visible', 0 );
+
+		$hidden = apply_filters( 'the_content', $stored );
+
+		$this->assertStringContainsString( 'Si deseas practicar con nosotros o recibir información sobre nuestras actividades, puedes escribirnos por WhatsApp al', $hidden );
+		$this->assertStringContainsString( 'wa.me/573206627608', $hidden );
+		$this->assertStringContainsString( 'caminodeldharma1@gmail.com', $hidden );
+		$this->assertStringNotContainsString( 'escribirnos aquí', $hidden );
+		$this->assertStringNotContainsString( 'También puedes escribirnos', $hidden );
+		$this->assertSame( 1, substr_count( $hidden, 'wa.me/573206627608' ) );
+		$this->assertSame( $stored, get_post( $page_id )->post_content );
+
+		update_option( 'cdd_core_contact_form_visible', 1 );
+
+		$shown = apply_filters( 'the_content', $stored );
+
+		$this->assertStringContainsString( 'puedes escribirnos aquí', $shown );
+		$this->assertStringContainsString( 'También puedes escribirnos por WhatsApp', $shown );
+	}
+
+	/**
+	 * Protects the way back: saving "show" again is enough. The setting
+	 * stores only on or off.
+	 */
+	public function test_showing_the_form_again_stores_only_on_or_off() {
+		update_option( 'cdd_core_contact_form_visible', 0 );
+		update_option( 'cdd_core_contact_form_visible', 1 );
+
+		$this->assertTrue( cdd_core_contact_form_visible() );
+		$this->assertSame( 1, cdd_core_sanitize_contact_form_visible( '1' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( '0' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( 'yes' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( null ) );
+	}
+
+	/**
+	 * Protects the Settings screen: an administrator gets one checkbox,
+	 * and the option is the one the Settings API will save.
+	 */
+	public function test_an_administrator_can_open_the_contact_form_setting() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		require_once ABSPATH . 'wp-admin/includes/template.php';
+
+		cdd_core_register_contact_form_setting();
+
+		global $wp_registered_settings;
+		$this->assertArrayHasKey( 'cdd_core_contact_form_visible', $wp_registered_settings );
+		$this->assertSame( 1, $wp_registered_settings['cdd_core_contact_form_visible']['default'] );
+
+		cdd_core_register_contact_form_settings_page();
+
+		global $submenu;
+		$slugs = array();
+		foreach ( $submenu['options-general.php'] ?? array() as $item ) {
+			$slugs[] = $item[2];
+		}
+
+		$this->assertContains( 'cdd-core-settings', $slugs );
+
+		$menu_title = '';
+		foreach ( $submenu['options-general.php'] as $item ) {
+			if ( 'cdd-core-settings' === $item[2] ) {
+				$menu_title = $item[0];
+			}
+		}
+
+		$this->assertSame( 'Camino del Dharma', $menu_title );
+
+		ob_start();
+		cdd_core_render_contact_form_settings_page();
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( '<h1>Camino del Dharma</h1>', $html );
+		$this->assertStringContainsString( 'name="cdd_core_contact_form_visible"', $html );
+		$this->assertStringContainsString( 'type="checkbox"', $html );
+		$this->assertStringContainsString( 'checked', $html );
+	}
+
+	/**
+	 * Protects the capability: a subscriber gets an empty screen.
+	 */
+	public function test_a_subscriber_cannot_open_the_contact_form_setting() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+
+		ob_start();
+		cdd_core_render_contact_form_settings_page();
+		$html = ob_get_clean();
+
+		$this->assertSame( '', $html );
+	}
 }

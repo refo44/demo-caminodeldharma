@@ -12,6 +12,18 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — mostrar u ocultar el formulario de contacto (plugin 0.7.9, theme 0.6.2)
+
+Plugin `camino-del-dharma-core` **0.7.9** y theme `camino-del-dharma` **0.6.2**.
+En **Ajustes → Camino del Dharma** un administrador puede mostrar u ocultar
+el formulario de `/contacto`. Si la opción no existe, el formulario sigue
+visible. Ocultarlo deja WhatsApp y el correo; no borra el formulario de
+Contact Form 7 ni cambia `/privacidad`. Ocultarlo no imprime el aviso «El
+formulario no está disponible». Arriba queda una sola frase, con
+WhatsApp y el correo, y se oculta la de debajo. Al mostrar el formulario
+vuelven las dos frases publicadas. La pantalla de `/llms.txt` se llama **Camino del
+Dharma llms**.
+
 ### WordPress Fase 3 — panel Compartir en el editor (plugin 0.7.8)
 
 Plugin `camino-del-dharma-core` **0.7.8**

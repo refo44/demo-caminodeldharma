@@ -13,7 +13,9 @@
  *   before CF7 is enabled in an environment (ADR 0041 point 3);
  * - nothing here may fatal when CF7 is absent: a site without it keeps
  *   working on WhatsApp and email, which is the operational fallback
- *   ADR 0041 point 5 allows at cutover.
+ *   ADR 0041 point 5 allows at cutover;
+ * - Settings → Camino del Dharma can hide the form. Absent means shown.
+ *   Hidden uses that same WhatsApp and email fallback.
  *
  * @package Camino_Del_Dharma_Core
  */
@@ -28,6 +30,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 const CDD_CORE_CONTACT_FORM_OPTION = 'cdd_core_contact_form_id';
 
 /**
+ * Whether /contacto shows the form. Absent stays shown.
+ */
+const CDD_CORE_CONTACT_FORM_VISIBLE_OPTION = 'cdd_core_contact_form_visible';
+
+/**
+ * Settings → Camino del Dharma. The contact form is one field on it.
+ */
+const CDD_CORE_SETTINGS_PAGE = 'cdd-core-settings';
+
+/**
+ * Settings API group for the Camino del Dharma screen.
+ */
+const CDD_CORE_SETTINGS_GROUP = 'cdd_core_settings';
+
+/**
  * The mailbox the contact form delivers to (ADR 0026).
  */
 function cdd_core_contact_form_recipient(): string {
@@ -39,6 +56,23 @@ function cdd_core_contact_form_recipient(): string {
  */
 function cdd_core_contact_form_id(): int {
 	return (int) get_option( CDD_CORE_CONTACT_FORM_OPTION, 0 );
+}
+
+/**
+ * Whether an editor has left the form on. An environment that has never
+ * saved the setting still shows it.
+ */
+function cdd_core_contact_form_visible(): bool {
+	return 1 === (int) get_option( CDD_CORE_CONTACT_FORM_VISIBLE_OPTION, 1 );
+}
+
+/**
+ * Stores the checkbox as 1 or 0. Anything else is off.
+ *
+ * @param mixed $value Submitted value.
+ */
+function cdd_core_sanitize_contact_form_visible( $value ): int {
+	return 1 === (int) $value ? 1 : 0;
 }
 
 /**
@@ -63,7 +97,7 @@ function cdd_core_contact_form_available(): bool {
  * has none. Never returns an unrendered shortcode.
  */
 function cdd_core_contact_form_html(): string {
-	if ( ! cdd_core_contact_form_available() ) {
+	if ( ! cdd_core_contact_form_visible() || ! cdd_core_contact_form_available() ) {
 		return '';
 	}
 
@@ -182,4 +216,79 @@ function cdd_core_contact_form_autop( $enabled, $options ) {
 		$current instanceof WPCF7_ContactForm ? (int) $current->id() : null,
 		cdd_core_contact_form_id()
 	);
+}
+
+/**
+ * Settings → Camino del Dharma.
+ */
+function cdd_core_register_contact_form_settings_page() {
+	add_options_page(
+		__( 'Camino del Dharma', 'camino-del-dharma-core' ),
+		__( 'Camino del Dharma', 'camino-del-dharma-core' ),
+		'manage_options',
+		CDD_CORE_SETTINGS_PAGE,
+		'cdd_core_render_contact_form_settings_page'
+	);
+}
+
+/**
+ * Registers the checkbox. Does not write the option.
+ */
+function cdd_core_register_contact_form_setting() {
+	register_setting(
+		CDD_CORE_SETTINGS_GROUP,
+		CDD_CORE_CONTACT_FORM_VISIBLE_OPTION,
+		array(
+			'type'              => 'integer',
+			'sanitize_callback' => 'cdd_core_sanitize_contact_form_visible',
+			'default'           => 1,
+			'show_in_rest'      => false,
+		)
+	);
+
+	add_settings_section(
+		CDD_CORE_SETTINGS_GROUP . '_section',
+		__( 'Formulario de contacto', 'camino-del-dharma-core' ),
+		'__return_false',
+		CDD_CORE_SETTINGS_PAGE
+	);
+	add_settings_field(
+		CDD_CORE_CONTACT_FORM_VISIBLE_OPTION,
+		__( 'Mostrar formulario', 'camino-del-dharma-core' ),
+		'cdd_core_render_contact_form_visible_field',
+		CDD_CORE_SETTINGS_PAGE,
+		CDD_CORE_SETTINGS_GROUP . '_section'
+	);
+}
+
+/**
+ * Checkbox with a hidden 0 so an unchecked box turns the form off.
+ */
+function cdd_core_render_contact_form_visible_field() {
+	printf( '<input type="hidden" name="%1$s" value="0">', esc_attr( CDD_CORE_CONTACT_FORM_VISIBLE_OPTION ) );
+	printf(
+		'<label><input type="checkbox" name="%1$s" value="1"%2$s> %3$s</label>',
+		esc_attr( CDD_CORE_CONTACT_FORM_VISIBLE_OPTION ),
+		checked( cdd_core_contact_form_visible(), true, false ),
+		esc_html__( 'Mostrar el formulario de contacto', 'camino-del-dharma-core' )
+	);
+	echo '<p class="description">' . esc_html__( 'Activado: la página de contacto muestra el formulario. Desactivado: los visitantes ven WhatsApp y el correo.', 'camino-del-dharma-core' ) . '</p>';
+}
+
+/**
+ * The settings screen. A user who cannot manage options gets nothing.
+ */
+function cdd_core_render_contact_form_settings_page() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	echo '<div class="wrap">';
+	echo '<h1>' . esc_html__( 'Camino del Dharma', 'camino-del-dharma-core' ) . '</h1>';
+	echo '<form action="options.php" method="post">';
+	settings_fields( CDD_CORE_SETTINGS_GROUP );
+	do_settings_sections( CDD_CORE_SETTINGS_PAGE );
+	submit_button();
+	echo '</form>';
+	echo '</div>';
 }

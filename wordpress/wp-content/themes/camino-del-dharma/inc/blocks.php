@@ -302,12 +302,19 @@ add_filter( 'render_block', 'camino_del_dharma_name_audio_blocks', 10, 2 );
  *
  * The form itself belongs to Contact Form 7, provisioned by
  * camino-del-dharma-core. The block exists so the page content carries no
- * third-party shortcode: with CF7 absent or disabled the visitor reads the
- * channels that do work instead of a raw shortcode string or an empty
- * hole. That degraded state is the operational fallback ADR 0041 point 5
- * allows at cutover, so it is a real state of this site, not an error.
+ * third-party shortcode: with CF7 absent or disabled the visitor reads
+ * the channels that do work instead of a raw shortcode string or an
+ * empty hole. That degraded state is the operational fallback ADR 0041
+ * point 5 allows at cutover, so it is a real state of this site, not an
+ * error. An administrator who hides the form from Settings gets neither
+ * the form nor that notice. The invitation above names WhatsApp and
+ * email, and the sentence under the form is omitted for that request.
  */
 function camino_del_dharma_render_contacto_formulario(): string {
+	if ( function_exists( 'cdd_core_contact_form_visible' ) && ! cdd_core_contact_form_visible() ) {
+		return '';
+	}
+
 	if ( function_exists( 'cdd_core_contact_form_available' ) && cdd_core_contact_form_available() ) {
 		return cdd_core_contact_form_html();
 	}
@@ -328,3 +335,41 @@ function camino_del_dharma_render_contacto_formulario(): string {
 		esc_html( $mailbox )
 	);
 }
+
+/**
+ * While the form is hidden, the invitation above is the only channel
+ * sentence and the paragraph under the form is omitted. The stored page
+ * is not rewritten, so showing the form again restores both sentences.
+ *
+ * @param string $content Rendered post content.
+ */
+function camino_del_dharma_contact_channels_sentence( $content ) {
+	if ( ! is_page( 'contacto' ) ) {
+		return $content;
+	}
+
+	if ( ! function_exists( 'cdd_core_contact_form_visible' ) || cdd_core_contact_form_visible() ) {
+		return $content;
+	}
+
+	$without_lower = preg_replace(
+		'#<p>\s*También puedes escribirnos por WhatsApp[\s\S]*?</p>#',
+		'',
+		$content,
+		1
+	);
+	if ( is_string( $without_lower ) ) {
+		$content = $without_lower;
+	}
+
+	$channels = sprintf(
+		'puedes escribirnos por WhatsApp al <a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a> o al correo <a href="%3$s">%4$s</a>.',
+		esc_url( 'https://wa.me/573206627608' ),
+		esc_html( '+57 320 662 7608' ),
+		esc_url( 'mailto:caminodeldharma1@gmail.com' ),
+		esc_html( 'caminodeldharma1@gmail.com' )
+	);
+
+	return str_replace( 'puedes escribirnos aquí.', $channels, $content );
+}
+add_filter( 'the_content', 'camino_del_dharma_contact_channels_sentence', 11 );
