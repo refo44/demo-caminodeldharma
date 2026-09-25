@@ -332,6 +332,86 @@ final class ConvertTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * OWN-020: profiles imported before bio, photo and head copy travelled
+	 * converge add-only. A short byline already stored is kept.
+	 */
+	public function test_convert_seeds_author_profiles_add_only() {
+		$comunidad = self::factory()->post->create(
+			array(
+				'post_type'    => 'blog_author',
+				'post_name'    => 'comunidad-camino-del-dharma',
+				'post_title'   => 'Comunidad Camino del Dharma',
+				'post_content' => '',
+				'post_excerpt' => '',
+				'meta_input'   => array( '_cdd_source_key' => 'blog_author:comunidad-camino-del-dharma' ),
+			)
+		);
+		delete_post_meta( $comunidad, 'seo_description' );
+		$zheng = self::factory()->post->create(
+			array(
+				'post_type'    => 'blog_author',
+				'post_name'    => 'zheng-gong',
+				'post_title'   => 'Zheng Gong',
+				'post_content' => 'Maestro budista de las tradiciones Chan y Tierra Pura.',
+				'meta_input'   => array(
+					'_cdd_source_key' => 'blog_author:zheng-gong',
+					'seo_description' => 'Descripción ya editada',
+				),
+			)
+		);
+		$photo = self::factory()->attachment->create_object(
+			array(
+				'file'           => '2026/09/comunidad-quienes-somos.jpg',
+				'post_mime_type' => 'image/jpeg',
+				'post_title'     => 'comunidad-quienes-somos',
+			)
+		);
+		update_post_meta( $photo, '_cdd_source_key', 'media:assets/images/comunidad-linaje/comunidad-quienes-somos.jpg' );
+
+		$service = new Cdd_Core_Convert_Service(
+			array(
+				'environment' => 'local',
+				'payload'     => array(
+					'blog_authors' => array(
+						array(
+							'_source_key'   => 'blog_author:comunidad-camino-del-dharma',
+							'bio'           => 'La Comunidad Buddhista Camino del Dharma es un espacio de aprendizaje.',
+							'thumbnail'     => 'assets/images/comunidad-linaje/comunidad-quienes-somos.jpg',
+							'thumbnail_alt' => 'Comunidad Buddhista Camino del Dharma',
+							'seo'           => array( 'description' => 'Conoce Camino del Dharma.' ),
+						),
+						array(
+							'_source_key' => 'blog_author:zheng-gong',
+							'bio'         => 'Biografía que no debe reemplazar el byline.',
+							'thumbnail'   => 'assets/images/fundador/foto-biografia-fundador.jpg',
+							'seo'         => array( 'description' => 'Descripción del payload' ),
+						),
+					),
+				),
+			)
+		);
+
+		$dry = $service->run( false );
+		$this->assertContains( 'bio:blog_author:comunidad-camino-del-dharma', $dry['pending'] );
+		$this->assertContains( 'thumb:blog_author:comunidad-camino-del-dharma', $dry['pending'] );
+		$this->assertContains( 'seo:blog_author:comunidad-camino-del-dharma', $dry['pending'] );
+		$this->assertNotContains( 'bio:blog_author:zheng-gong', $dry['pending'] );
+		$this->assertNotContains( 'seo:blog_author:zheng-gong', $dry['pending'] );
+
+		$applied = $service->run( true );
+		$this->assertContains( 'bio:blog_author:comunidad-camino-del-dharma', $applied['converted'] );
+		$this->assertSame( 'La Comunidad Buddhista Camino del Dharma es un espacio de aprendizaje.', get_post( $comunidad )->post_content );
+		$this->assertSame( $photo, (int) get_post_thumbnail_id( $comunidad ) );
+		$this->assertSame( 'Comunidad Buddhista Camino del Dharma', get_post_meta( $photo, '_wp_attachment_image_alt', true ) );
+		$this->assertSame( 'Conoce Camino del Dharma.', get_post_meta( $comunidad, 'seo_description', true ) );
+		$this->assertSame( 'Maestro budista de las tradiciones Chan y Tierra Pura.', get_post( $zheng )->post_content );
+		$this->assertSame( 'Descripción ya editada', get_post_meta( $zheng, 'seo_description', true ) );
+		$this->assertSame( 0, (int) get_post_thumbnail_id( $zheng ) );
+
+		$this->assertNotContains( 'bio:blog_author:comunidad-camino-del-dharma', $service->run( true )['converted'] );
+	}
+
+	/**
 	 * Regression (WU-08B): the meta API unslashes what it stores, so JSON
 	 * seeded without wp_slash() loses every backslash — `\u00ed` becomes
 	 * `u00ed` and «Círculos» reaches the page as «Cu00edrculos».

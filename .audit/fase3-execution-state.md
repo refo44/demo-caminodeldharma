@@ -630,8 +630,9 @@ crear un segundo WordPress. La siguiente acción es construir **este** staging (
 código, importación una vez en este sitio limpio). Mientras se construye,
 `WP_ENVIRONMENT_TYPE` queda en `staging` y `blog_public` en `0`. El cambio de dominio
 es otra sesión: entonces esta instalación pasa a `production` y `blog_public` `1`.
-Antes, inventario de correo y subdominios. No arrancar D-08 en su lugar: D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5))
-va **después** del staging.
+Antes, inventario de correo y subdominios. D-08 ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5))
+está implementado (plugin 0.7.7 / theme 0.6.1): el staging ya importado converge con
+`wp cdd-core migrate convert --payload=… --apply`, no con un segundo import.
 [#20](https://github.com/refo44/demo-caminodeldharma/issues/20) es un spike y **no** bloquea
 salvo que el owner lo diga.
 

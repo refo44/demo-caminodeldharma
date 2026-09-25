@@ -503,6 +503,8 @@ final class Camino_Del_Dharma_Renderers {
 			$html .= wp_kses_post( wpautop( do_blocks( $author->post_content ) ) ) . "\n";
 		}
 
+		$html .= '<p class="autor-ficha-link"><a href="' . esc_url( home_url( '/comunidad' ) ) . '">' . esc_html__( 'Conocer la comunidad', 'camino-del-dharma' ) . '</a></p>' . "\n";
+
 		if ( ! empty( $posts ) ) {
 			$html .= '<section class="autor-entradas" aria-labelledby="autor-entradas-heading">' . "\n" .
 				'<h2 id="autor-entradas-heading">' . esc_html(

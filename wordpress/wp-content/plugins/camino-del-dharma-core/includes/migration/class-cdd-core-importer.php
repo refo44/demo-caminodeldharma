@@ -55,6 +55,15 @@ final class Cdd_Core_Importer {
 	private $media_urls = array();
 
 	/**
+	 * Author IDs created in this run, mapped to their thumbnail file.
+	 * Media is imported after profiles, so the attachment happens once
+	 * those files exist. Skipped profiles are absent (create-missing-only).
+	 *
+	 * @var array
+	 */
+	private $author_thumbnails = array();
+
+	/**
 	 * Constructor.
 	 *
 	 * @param array  $payload     Decoded payload.
@@ -192,6 +201,10 @@ final class Cdd_Core_Importer {
 				'created' => $created,
 				'skipped' => $skipped,
 			);
+		}
+
+		if ( $apply ) {
+			$this->attach_author_thumbnails();
 		}
 
 		$report['collections']['gallery_images'] = array(
@@ -356,7 +369,7 @@ final class Cdd_Core_Importer {
 	private function create_object( string $collection, array $payload_object ) {
 		switch ( $collection ) {
 			case 'blog_authors':
-				$this->create_post(
+				$author_id                             = $this->create_post(
 					$payload_object,
 					array(
 						'post_type'    => 'blog_author',
@@ -364,8 +377,10 @@ final class Cdd_Core_Importer {
 						'post_name'    => $payload_object['slug'],
 						'post_content' => (string) $payload_object['bio'],
 						'post_status'  => 'publish',
+						'meta_input'   => self::seo_meta( $payload_object ),
 					)
 				);
+				$this->author_thumbnails[ $author_id ] = (string) ( $payload_object['thumbnail'] ?? '' );
 				break;
 
 			case 'media':
@@ -600,6 +615,11 @@ final class Cdd_Core_Importer {
 				return (string) $post['thumbnail_alt'];
 			}
 		}
+		foreach ( $this->collection( 'blog_authors' ) as $author ) {
+			if ( ( $author['thumbnail'] ?? '' ) === $file && '' !== (string) ( $author['thumbnail_alt'] ?? '' ) ) {
+				return (string) $author['thumbnail_alt'];
+			}
+		}
 
 		return '';
 	}
@@ -749,6 +769,15 @@ final class Cdd_Core_Importer {
 		}
 		if ( ! empty( $ids ) ) {
 			wp_set_object_terms( $post_id, $ids, $taxonomy, false );
+		}
+	}
+
+	/**
+	 * Attaches the photos queued while profiles were created, after media exists.
+	 */
+	private function attach_author_thumbnails() {
+		foreach ( $this->author_thumbnails as $author_id => $file ) {
+			$this->attach_thumbnail( (int) $author_id, (string) $file );
 		}
 	}
 

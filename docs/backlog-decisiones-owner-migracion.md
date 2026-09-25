@@ -7,7 +7,7 @@ Hay cinco bloques que no se mezclan:
 | Bloque | Alcance | Estado |
 | ------ | ------- | ------ |
 | **Fase 3** (auditoría 2026-08-19, ADR 0034) | Contenido, media, URLs y corte static → FSE | **Cerrado.** No reabrir OWN-001–OWN-019 ni OWN-021–OWN-035 sin decisión nueva (OWN-020 en Pre-staging). |
-| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01, ampliado 2026-09-02.** D-02, D-03 (plugin 0.7.3) y D-04 (theme 0.5.2) **implementados**. El propietario añadió al pre-staging la **UI de autores** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18), **implementada**, plugin 0.7.4) y los **paneles de SEO / datos del evento** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19), **implementados**, plugin 0.7.5). **Con #19 en `main` el código de pre-staging queda cerrado.** D-08 sigue **pendiente** ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)) y puede ir después del staging (A2). OWN-035 espera ahora solo el `go` del owner. |
+| **Pre-staging** (WU-10) | Código y ops antes de Hostinger | **Decidido 2026-09-01, ampliado 2026-09-02.** D-02, D-03 (plugin 0.7.3) y D-04 (theme 0.5.2) **implementados**. El propietario añadió al pre-staging la **UI de autores** ([#18](https://github.com/refo44/demo-caminodeldharma/issues/18), **implementada**, plugin 0.7.4) y los **paneles de SEO / datos del evento** ([#19](https://github.com/refo44/demo-caminodeldharma/issues/19), **implementados**, plugin 0.7.5). **Con #19 en `main` el código de pre-staging queda cerrado.** D-08 está **implementado** (plugin 0.7.7 / theme 0.6.1, [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). El staging ya importado converge con `migrate convert`. OWN-035 espera ahora solo el `go` del owner. |
 | **Fases posteriores** (`POST-*`) | Después del corte (i18n; wrap Sangha; conteo álbum admin; RSS) | i18n abiertas. **POST-008–010 decididos.** No implementan el corte. |
 | **Defectos conocidos** (`BUG-*`) | Fallos con sesión propia en el orden de implementación | **BUG-001 cerrado** (2026-08-31, antes de WU-10). Sin defectos abiertos. |
 | **Riesgos meta transport** (`META-*`) | Gutenberg + metabox clásico (auditoría 2026-09-01) | **Decididos 2026-09-01** (OWN-019 / ADR 0042): restricciones de diseño para UI futura, **no** defectos de corte. **`META-001` adelantada al pre-staging** el 2026-09-02 y **cumplida** en [#18](https://github.com/refo44/demo-caminodeldharma/issues/18); **`META-002`–`META-005` adelantadas** el 2026-09-02 (OWN-035) y **cumplidas** en [#19](https://github.com/refo44/demo-caminodeldharma/issues/19) (plugin 0.7.5). |
@@ -108,7 +108,7 @@ filas de UI wp-admin: la **UI de autores** (#18, `META-001`) y los **paneles de 
 evento** (#19, `META-002`–`META-005`). D-02, D-03, D-04, #18 y #19 están **implementados**; con
 #19 en `main` el **código de pre-staging queda cerrado**. **2026-09-23:** el sitio de
 Hostinger ya existe y es el WordPress del corte (OWN-036 / ADR 0047); no se crea otro. D-08
-sigue yendo **después** del staging (A2); no tratarlo como copy sin dueño ni como `noindex`.
+está **implementado** (plugin 0.7.7 / theme 0.6.1). El ensayo largo sigue en `/comunidad`. Singles `index,follow`.
 
 | ID | Decisión | Issue | Estado |
 | -- | -------- | ----- | ------ |
@@ -117,7 +117,7 @@ sigue yendo **después** del staging (A2); no tratarlo como copy sin dueño ni c
 | D-04 | OWN-026: `/practica` sin overflow a 320 px | [#12](https://github.com/refo44/demo-caminodeldharma/issues/12) | **Implementado** (theme 0.5.2): el theme levanta el suelo `min-width: 300px` que el núcleo pone al `core/audio` y topa el reproductor en su columna; mide 272 px y `/practica` da `scrollWidth` = `clientWidth` = 320. D-09 sin tocar. |
 | #18 | OWN-019 / `META-001`: un editor tiene que poder firmar una entrada desde Gutenberg antes del staging | [#18](https://github.com/refo44/demo-caminodeldharma/issues/18) | **Implementado** (plugin 0.7.4): panel nativo «Autores del blog» en `post.php` / `post-new.php`, buscador REST de fichas publicadas desde dos caracteres, escritura por `dispatch( 'core/editor' ).editPost( { meta } )` —`meta.authors` en el mismo cuerpo que Publicar— y control «Autor» del editor retirado. Guard sin relajar; `post_author` intacto. |
 | #19 | Paneles de SEO y datos del evento en Gutenberg (`META-002`–`META-005`) | [#19](https://github.com/refo44/demo-caminodeldharma/issues/19) | **Implementado** (plugin 0.7.5): «SEO y buscadores» (seis campos de cabeza) para `post`/`page`/`event`/`blog_author` y «Datos del evento (schema.org)» solo para `event`; escritura por `dispatch( 'core/editor' ).editPost( { meta } )`, sin `wp-api-fetch`, encolado solo en `post.php` / `post-new.php` de esos tipos. `blog_author` gana `custom-fields` + `seo_*` (JSON-LD sigue `Thing`). `seo_description` se rellena al publicar desde extracto/contenido si está vacío, add-only y nunca bajo WP-CLI. Round-trip REST real (META-005). Sin `add_meta_box`; guard sin relajar. `seo_jsonld_extra`, paneles `share_*` y catálogo JSON-LD global (#20) fuera. Última fila de código antes del `go` de OWN-035. |
-| D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | Pendiente de implementar (TDD, ADR 0038). **A2:** no bloquea el primer import de staging. |
+| D-08 | OWN-020: fichas de autor = páginas de entidad; copy corto + foto publicados; singles `index,follow` | [#5](https://github.com/refo44/demo-caminodeldharma/issues/5) | **Implementado** (plugin 0.7.7, theme 0.6.1). Payload `blog_authors` lleva bio corta, `seo.description` y thumbnail. `migrate convert` rellena bio vacía, foto ausente y `seo` add-only. El ensayo largo sigue en `/comunidad`. Staging ya importado converge con `convert`, no con un segundo `import`. |
 
 Copy y fotos a reutilizar (producción publicada, OWN-007):
 
@@ -273,7 +273,7 @@ en esta sesión.**
 
 **Versión:** 1.34 · **Fecha:** 2026-09-23 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
 Pre-staging: 4 decididas + 2 filas de UI wp-admin **implementadas** (D-02, D-03, D-04, #18, #19);
-código de pre-staging **cerrado**; solo D-08 va después del staging.
+código de pre-staging **cerrado**; D-08 **implementado** (plugin 0.7.7 / theme 0.6.1). Staging ya importado: `migrate convert`, no un segundo import.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).
 Defectos conocidos: 0 abiertos · 1 cerrado (`BUG-001`).
 Riesgos meta transport: 0 abiertos · 5 decididos como restricciones (`META-001`–`META-005`),
