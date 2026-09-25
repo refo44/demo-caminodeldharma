@@ -180,8 +180,8 @@ final class Llms_Txt_RoutingTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * The Settings menu names this screen llms. The public file stays
-	 * /llms.txt.
+	 * The Settings menu names this screen Camino del Dharma llms. The
+	 * public file stays /llms.txt.
 	 */
 	public function test_the_settings_menu_names_the_screen_llms() {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
@@ -199,13 +199,13 @@ final class Llms_Txt_RoutingTest extends WP_UnitTestCase {
 			}
 		}
 
-		$this->assertSame( 'llms', $menu_title );
+		$this->assertSame( 'Camino del Dharma llms', $menu_title );
 
 		ob_start();
 		Cdd_Core_Llms_Txt::render_settings_page();
 		$html = ob_get_clean();
 
-		$this->assertStringContainsString( '<h1>llms</h1>', $html );
+		$this->assertStringContainsString( '<h1>Camino del Dharma llms</h1>', $html );
 		$this->assertStringNotContainsString( 'Camino del Dharma — llms.txt', $html );
 	}
 }

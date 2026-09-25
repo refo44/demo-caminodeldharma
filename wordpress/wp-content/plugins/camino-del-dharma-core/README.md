@@ -137,6 +137,6 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
 - `/llms.txt` desde v0.7.6 ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)):
   `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
   No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
-  responde 404. **Ajustes → llms** solo enciende o apaga y vuelve a registrar la URL.
+  responde 404. **Ajustes → Camino del Dharma llms** solo enciende o apaga y vuelve a registrar la URL.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

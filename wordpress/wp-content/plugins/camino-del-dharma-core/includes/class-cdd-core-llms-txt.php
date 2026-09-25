@@ -172,12 +172,12 @@ class Cdd_Core_Llms_Txt {
 	}
 
 	/**
-	 * Settings → llms.
+	 * Settings → Camino del Dharma llms.
 	 */
 	public static function register_page() {
 		add_options_page(
-			__( 'llms', 'camino-del-dharma-core' ),
-			__( 'llms', 'camino-del-dharma-core' ),
+			__( 'Camino del Dharma llms', 'camino-del-dharma-core' ),
+			__( 'Camino del Dharma llms', 'camino-del-dharma-core' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( __CLASS__, 'render_settings_page' )
@@ -193,7 +193,7 @@ class Cdd_Core_Llms_Txt {
 		}
 
 		echo '<div class="wrap">';
-		echo '<h1>' . esc_html__( 'llms', 'camino-del-dharma-core' ) . '</h1>';
+		echo '<h1>' . esc_html__( 'Camino del Dharma llms', 'camino-del-dharma-core' ) . '</h1>';
 		echo '<form action="options.php" method="post">';
 		settings_fields( self::SETTINGS_GROUP );
 		do_settings_sections( self::PAGE_SLUG );
@@ -326,7 +326,7 @@ class Cdd_Core_Llms_Txt {
 	 */
 	public static function plugin_action_links( $links ) {
 		$links[] = sprintf(
-			'<a href="%s">llms</a>',
+			'<a href="%s">Camino del Dharma llms</a>',
 			esc_url( admin_url( 'options-general.php?page=' . self::PAGE_SLUG ) )
 		);
 
