@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const CDD_CORE_AUTHORS_PANEL_HANDLE = 'cdd-core-authors-panel';
+const CDD_CORE_AUTHORS_PANEL_STYLE  = 'cdd-core-authors-panel';
 const CDD_CORE_SEO_PANEL_HANDLE     = 'cdd-core-seo-panel';
 const CDD_CORE_SHARE_PANEL_HANDLE   = 'cdd-core-share-panel';
 
@@ -115,6 +116,15 @@ function cdd_core_register_editor_assets() {
 
 	wp_set_script_translations( CDD_CORE_AUTHORS_PANEL_HANDLE, 'camino-del-dharma-core' );
 
+	$authors_style = 'assets/css/authors-panel.css';
+
+	wp_register_style(
+		CDD_CORE_AUTHORS_PANEL_STYLE,
+		plugins_url( $authors_style, CDD_CORE_PLUGIN_FILE ),
+		array(),
+		cdd_core_asset_version( plugin_dir_path( CDD_CORE_PLUGIN_FILE ) . $authors_style )
+	);
+
 	$seo_relative = 'assets/js/seo-panel.js';
 
 	wp_register_script(
@@ -193,6 +203,7 @@ function cdd_core_enqueue_editor_assets() {
 
 	if ( cdd_core_is_post_editor_screen( $screen ) ) {
 		wp_enqueue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_enqueue_style( CDD_CORE_AUTHORS_PANEL_STYLE );
 	}
 
 	if ( cdd_core_is_seo_editor_screen( $screen ) ) {

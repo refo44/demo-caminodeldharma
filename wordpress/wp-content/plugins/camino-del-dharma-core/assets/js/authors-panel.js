@@ -385,13 +385,13 @@
 			PluginDocumentSettingPanel,
 			{
 				name: 'cdd-core-blog-authors',
-				title: __( 'Autores del blog', TEXT_DOMAIN ),
+				title: __( 'Autores del blog *', TEXT_DOMAIN ),
 				className: 'cdd-core-blog-authors'
 			},
 			el(
 				'p',
 				{ className: 'cdd-core-blog-authors__note' },
-				__( 'La firma pública de la entrada. Es una ficha de Autores del blog, no el usuario de WordPress con el que entraste.', TEXT_DOMAIN )
+				__( 'La firma pública de la entrada. Es una ficha de Autores del blog, no el usuario de WordPress con el que entraste. Un borrador puede guardarse sin ficha.', TEXT_DOMAIN )
 			),
 			selectedIds.length
 				? el(
@@ -407,7 +407,7 @@
 					__( 'Sin autores. Para publicar hace falta al menos una ficha publicada.', TEXT_DOMAIN )
 				),
 			el( TextControl, {
-				label: __( 'Buscar ficha de autor', TEXT_DOMAIN ),
+				label: __( 'Buscar ficha de autor *', TEXT_DOMAIN ),
 				help: __( 'Escribe al menos dos caracteres. Solo aparecen fichas publicadas.', TEXT_DOMAIN ),
 				value: term,
 				onChange: setTerm,
@@ -415,7 +415,12 @@
 				__next40pxDefaultSize: true
 			} ),
 			searching ? el( Spinner, null ) : null,
-			renderResults()
+			renderResults(),
+			el(
+				'p',
+				{ className: 'cdd-core-blog-authors__required' },
+				__( '* Obligatorio para publicar', TEXT_DOMAIN )
+			)
 		);
 	}
 

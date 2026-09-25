@@ -195,7 +195,7 @@
 			el(
 				'p',
 				{ className: 'cdd-core-share__note' },
-				__( 'Este es el texto que el visitante envía desde el botón Compartir. La ficha que aparece al pegar el enlace se edita en SEO y buscadores.', TEXT_DOMAIN )
+				__( 'Opcional. Este es el texto que el visitante envía desde el botón Compartir. Si lo dejas vacío se envía el título y la URL. La ficha que aparece al pegar el enlace se edita en SEO y buscadores.', TEXT_DOMAIN )
 			),
 			el(
 				'div',

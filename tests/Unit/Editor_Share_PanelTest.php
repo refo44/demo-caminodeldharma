@@ -65,6 +65,7 @@ final class Editor_Share_PanelTest extends TestCase {
 		$this->assertStringContainsString( 'Así se enviará', $script );
 		$this->assertStringContainsString( '{{SHARE_URL}}', $script );
 		$this->assertStringContainsString( 'Vacío: se usa el título y la URL.', $script );
+		$this->assertStringContainsString( 'Opcional.', $script );
 	}
 
 	/**
@@ -98,6 +99,8 @@ final class Editor_Share_PanelTest extends TestCase {
 
 		$this->assertStringContainsString( 'ficha del enlace', $seo );
 		$this->assertStringContainsString( 'panel Compartir', $seo );
+		$this->assertStringContainsString( 'Opcional.', $seo );
+		$this->assertStringContainsString( 'Puedes publicar el evento sin rellenar estos datos.', $seo );
 	}
 
 	/**

@@ -52,6 +52,10 @@ final class Editor_AuthorsPanelTest extends WP_UnitTestCase {
 		}
 
 		$this->assertTrue( $enqueued['post'] );
+		$this->enqueue_block_editor_assets_for( 'post' );
+		$this->assertTrue( wp_style_is( CDD_CORE_AUTHORS_PANEL_STYLE, 'enqueued' ) );
+		wp_dequeue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_dequeue_style( CDD_CORE_AUTHORS_PANEL_STYLE );
 		$this->assertFalse( $enqueued['event'] );
 		$this->assertFalse( $enqueued['page'] );
 		$this->assertFalse( $enqueued['blog_author'] );
@@ -64,6 +68,7 @@ final class Editor_AuthorsPanelTest extends WP_UnitTestCase {
 		do_action( 'wp_enqueue_scripts' );
 
 		$this->assertFalse( wp_script_is( CDD_CORE_AUTHORS_PANEL_HANDLE, 'enqueued' ) );
+		$this->assertFalse( wp_style_is( CDD_CORE_AUTHORS_PANEL_STYLE, 'enqueued' ) );
 	}
 
 	/**
@@ -107,6 +112,7 @@ final class Editor_AuthorsPanelTest extends WP_UnitTestCase {
 	 */
 	private function enqueue_block_editor_assets_for( string $post_type ): bool {
 		wp_dequeue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_dequeue_style( CDD_CORE_AUTHORS_PANEL_STYLE );
 		wp_dequeue_script( CDD_CORE_SHARE_PANEL_HANDLE );
 
 		set_current_screen( 'post' );

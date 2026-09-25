@@ -1,0 +1,8 @@
+/**
+ * The required «Autores del blog» section, set apart from the optional
+ * sidebar panels by a gray ground.
+ */
+.cdd-core-blog-authors,
+.cdd-core-blog-authors.components-panel__body {
+	background: #e6e6e6;
+}
