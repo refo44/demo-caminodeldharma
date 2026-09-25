@@ -271,7 +271,13 @@ En el corte, la misma instalación pasa a `production` y `blog_public=1`. El inv
 correo y subdominios es gate del corte. **Ni el dominio ni ese interruptor se cambian
 en esta sesión.**
 
-**Versión:** 1.34 · **Fecha:** 2026-09-23 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
+**v1.35 (2026-09-25):** panel **Compartir** **implementado** (plugin 0.7.8,
+[#39](https://github.com/refo44/demo-caminodeldharma/issues/39)). En la entrada y en el
+evento el editor ve una red a la vez, edita `share_whatsapp` / `share_x` / `share_threads`
+y una vista previa con la URL ya puesta. No hay claves nuevas. La ficha Open Graph sigue
+en «SEO y buscadores».
+
+**Versión:** 1.35 · **Fecha:** 2026-09-25 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
 Pre-staging: 4 decididas + 2 filas de UI wp-admin **implementadas** (D-02, D-03, D-04, #18, #19);
 código de pre-staging **cerrado**; D-08 **implementado** (plugin 0.7.7 / theme 0.6.1). Staging ya importado: `migrate convert`, no un segundo import.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).

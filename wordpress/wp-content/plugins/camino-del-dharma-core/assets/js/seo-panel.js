@@ -294,7 +294,7 @@
 			el(
 				'p',
 				{ className: 'cdd-core-seo-head__note' },
-				__( 'El texto publicado de esta página en buscadores y redes. Si lo dejas vacío se usa el contenido real de la página, nunca texto inventado.', TEXT_DOMAIN )
+				__( 'Opcional. El texto publicado de esta página en buscadores y redes. Si lo dejas vacío se usa el contenido real de la página, nunca texto inventado.', TEXT_DOMAIN )
 			),
 			metaText( meta, SEO_TITLE, __( 'Título SEO', TEXT_DOMAIN ), {
 				help: __( 'Si lo dejas vacío se usa el título de la página más el nombre del sitio.', TEXT_DOMAIN )
@@ -307,6 +307,11 @@
 				help: __( 'Si lo dejas vacío se usa el título SEO.', TEXT_DOMAIN )
 			} ),
 			metaTextarea( meta, OG_DESCRIPTION, __( 'Descripción para redes (Open Graph)', TEXT_DOMAIN ), __( 'Si lo dejas vacío se usa la descripción SEO.', TEXT_DOMAIN ) ),
+			el(
+				'p',
+				{ className: 'cdd-core-seo-head__note' },
+				__( 'El título y la descripción para redes son la ficha del enlace. El mensaje del botón Compartir se edita en el panel Compartir.', TEXT_DOMAIN )
+			),
 			metaText( meta, SEO_RELATED_URL, __( 'URL relacionada', TEXT_DOMAIN ), {
 				type: 'url',
 				inputMode: 'url',
@@ -405,6 +410,11 @@
 				title: __( 'Datos del evento (schema.org)', TEXT_DOMAIN ),
 				className: 'cdd-core-seo-event'
 			},
+			el(
+				'p',
+				{ className: 'cdd-core-seo-event__note' },
+				__( 'Opcional. Puedes publicar el evento sin rellenar estos datos.', TEXT_DOMAIN )
+			),
 			metaText( meta, EVENT_DATE, __( 'Fecha de inicio', TEXT_DOMAIN ), { type: 'date' } ),
 			metaText( meta, EVENT_END, __( 'Fecha de fin', TEXT_DOMAIN ), { type: 'date' } ),
 			metaText( meta, EVENT_PLACE, __( 'Lugar', TEXT_DOMAIN ), {

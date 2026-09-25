@@ -27,7 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const CDD_CORE_AUTHORS_PANEL_HANDLE = 'cdd-core-authors-panel';
+const CDD_CORE_AUTHORS_PANEL_STYLE  = 'cdd-core-authors-panel';
 const CDD_CORE_SEO_PANEL_HANDLE     = 'cdd-core-seo-panel';
+const CDD_CORE_SHARE_PANEL_HANDLE   = 'cdd-core-share-panel';
 
 /**
  * The public types whose head is editable copy (docs/15 §12, WU-08B): the
@@ -36,6 +38,14 @@ const CDD_CORE_SEO_PANEL_HANDLE     = 'cdd-core-seo-panel';
  */
 function cdd_core_seo_editor_post_types(): array {
 	return array( 'post', 'page', 'event', 'blog_author' );
+}
+
+/**
+ * The types whose «Compartir» message is editable copy: a blog entry and
+ * an event. Pages and author fichas have no share_* meta.
+ */
+function cdd_core_share_editor_post_types(): array {
+	return array( 'post', 'event' );
 }
 
 /**
@@ -106,6 +116,15 @@ function cdd_core_register_editor_assets() {
 
 	wp_set_script_translations( CDD_CORE_AUTHORS_PANEL_HANDLE, 'camino-del-dharma-core' );
 
+	$authors_style = 'assets/css/authors-panel.css';
+
+	wp_register_style(
+		CDD_CORE_AUTHORS_PANEL_STYLE,
+		plugins_url( $authors_style, CDD_CORE_PLUGIN_FILE ),
+		array(),
+		cdd_core_asset_version( plugin_dir_path( CDD_CORE_PLUGIN_FILE ) . $authors_style )
+	);
+
 	$seo_relative = 'assets/js/seo-panel.js';
 
 	wp_register_script(
@@ -117,6 +136,18 @@ function cdd_core_register_editor_assets() {
 	);
 
 	wp_set_script_translations( CDD_CORE_SEO_PANEL_HANDLE, 'camino-del-dharma-core' );
+
+	$share_relative = 'assets/js/share-panel.js';
+
+	wp_register_script(
+		CDD_CORE_SHARE_PANEL_HANDLE,
+		plugins_url( $share_relative, CDD_CORE_PLUGIN_FILE ),
+		cdd_core_seo_editor_script_dependencies(),
+		cdd_core_asset_version( plugin_dir_path( CDD_CORE_PLUGIN_FILE ) . $share_relative ),
+		true
+	);
+
+	wp_set_script_translations( CDD_CORE_SHARE_PANEL_HANDLE, 'camino-del-dharma-core' );
 }
 
 /**
@@ -146,9 +177,22 @@ function cdd_core_is_seo_editor_screen( $screen ): bool {
 }
 
 /**
+ * Whether a screen is the block editor of a post or an event: the
+ * «Compartir» panel loads only there.
+ *
+ * @param WP_Screen|null $screen Current admin screen.
+ */
+function cdd_core_is_share_editor_screen( $screen ): bool {
+	return $screen instanceof WP_Screen
+		&& 'post' === $screen->base
+		&& in_array( $screen->post_type, cdd_core_share_editor_post_types(), true );
+}
+
+/**
  * Enqueues the editor panels on post.php / post-new.php: the «Autores del
- * blog» panel for a blog entry, and the «SEO y buscadores» / «Datos del
- * evento» panels for every public editorial type.
+ * blog» panel for a blog entry, the «SEO y buscadores» / «Datos del
+ * evento» panels for every public editorial type, and the «Compartir»
+ * panel for a blog entry or an event.
  */
 function cdd_core_enqueue_editor_assets() {
 	if ( ! function_exists( 'get_current_screen' ) ) {
@@ -159,10 +203,15 @@ function cdd_core_enqueue_editor_assets() {
 
 	if ( cdd_core_is_post_editor_screen( $screen ) ) {
 		wp_enqueue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_enqueue_style( CDD_CORE_AUTHORS_PANEL_STYLE );
 	}
 
 	if ( cdd_core_is_seo_editor_screen( $screen ) ) {
 		wp_enqueue_script( CDD_CORE_SEO_PANEL_HANDLE );
+	}
+
+	if ( cdd_core_is_share_editor_screen( $screen ) ) {
+		wp_enqueue_script( CDD_CORE_SHARE_PANEL_HANDLE );
 	}
 }
 

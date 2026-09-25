@@ -12,6 +12,16 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — panel Compartir en el editor (plugin 0.7.8)
+
+Plugin `camino-del-dharma-core` **0.7.8**
+([#39](https://github.com/refo44/demo-caminodeldharma/issues/39)).
+Al crear o editar una entrada o un evento, el panel **Compartir** deja ver y
+cambiar el mensaje de WhatsApp, X y Threads. La vista previa sustituye
+`{{SHARE_URL}}`. Si el campo queda vacío, se envía el título y la URL. En un
+evento el título de ese respaldo es el tipo y el nombre. **SEO y buscadores**
+aclara que el título y la descripción para redes son la ficha del enlace.
+
 ### WordPress Fase 3 — SEO de fichas de autor (plugin 0.7.7, theme 0.6.1)
 
 Plugin `camino-del-dharma-core` **0.7.7** y theme `camino-del-dharma` **0.6.1**

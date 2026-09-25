@@ -38,6 +38,7 @@ final class Editor_SeoPanelTest extends WP_UnitTestCase {
 	public function tear_down() {
 		wp_dequeue_script( CDD_CORE_SEO_PANEL_HANDLE );
 		wp_dequeue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_dequeue_script( CDD_CORE_SHARE_PANEL_HANDLE );
 		parent::tear_down();
 	}
 
@@ -291,9 +292,10 @@ final class Editor_SeoPanelTest extends WP_UnitTestCase {
 	 */
 	private function enqueue_block_editor_assets_for( string $post_type ): bool {
 		wp_dequeue_script( CDD_CORE_SEO_PANEL_HANDLE );
-		// The `post` screen also enqueues the authors panel: clear it too so
-		// a scope check does not leak `wp-edit-post` into a later test.
+		// The `post` screen also enqueues the authors and share panels: clear
+		// them too so a scope check does not leak `wp-edit-post` into a later test.
 		wp_dequeue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_dequeue_script( CDD_CORE_SHARE_PANEL_HANDLE );
 
 		set_current_screen( 'post' );
 		get_current_screen()->post_type = $post_type;

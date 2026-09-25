@@ -5,7 +5,7 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-09-03 (`META-002`–`META-005` / OWN-035 implementadas: paneles de SEO y datos del evento en Gutenberg + backfill de `seo_description` al publicar, plugin 0.7.5, [#19](https://github.com/refo44/demo-caminodeldharma/issues/19); antes: `META-001` / #18, plugin 0.7.4) |
+| **Última actualización** | 2026-09-25 (panel **Compartir** en Gutenberg para `post` y `event`, plugin 0.7.8, [#39](https://github.com/refo44/demo-caminodeldharma/issues/39); antes: D-08 / plugin 0.7.7) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |

@@ -43,6 +43,8 @@ final class Editor_Authors_PanelTest extends TestCase {
 	public function test_the_panel_searches_published_profiles_from_two_characters() {
 		$script = $this->panel_script();
 
+		$this->assertStringContainsString( 'Autores del blog *', $script );
+		$this->assertStringContainsString( '* Obligatorio para publicar', $script );
 		$this->assertStringContainsString( '/wp/v2/blog_author', $script );
 		$this->assertStringContainsString( 'status=publish', $script );
 		$this->assertMatchesRegularExpression( '/MIN_SEARCH_LENGTH\s*=\s*2\b/', $script );
