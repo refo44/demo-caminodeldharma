@@ -230,6 +230,21 @@ final class Theme_BehaviorTest extends TestCase {
 	}
 
 	/**
+	 * Protects the wp-admin visibility switch: the block asks the plugin
+	 * before it prints the form, so hiding it from Settings still leaves
+	 * the published WhatsApp and email channels.
+	 */
+	public function test_the_contact_form_block_follows_the_visibility_setting() {
+		$blocks = $this->theme_file( 'inc/blocks.php' );
+
+		$at = strpos( $blocks, 'function camino_del_dharma_render_contacto_formulario' );
+		$this->assertNotFalse( $at );
+		$render = substr( $blocks, $at, 1600 );
+
+		$this->assertStringContainsString( 'cdd_core_contact_form_visible', $render );
+	}
+
+	/**
 	 * One theme file's content, relative to the theme root.
 	 *
 	 * @param string $relative Path inside the theme.

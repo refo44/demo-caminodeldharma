@@ -5,7 +5,7 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-09-25 (panel **Compartir** en Gutenberg para `post` y `event`, plugin 0.7.8, [#39](https://github.com/refo44/demo-caminodeldharma/issues/39); antes: D-08 / plugin 0.7.7) |
+| **Última actualización** | 2026-09-25 (ajuste **Ajustes → Formulario de contacto** para mostrar u ocultar el formulario, plugin 0.7.9 / theme 0.6.2; antes: panel Compartir, plugin 0.7.8, [#39](https://github.com/refo44/demo-caminodeldharma/issues/39)) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |

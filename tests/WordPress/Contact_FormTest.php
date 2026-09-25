@@ -248,4 +248,87 @@ final class Contact_FormTest extends WP_UnitTestCase {
 			get_post( get_page_by_path( 'privacidad' )->ID )->post_content
 		);
 	}
+
+	/**
+	 * Protects the default: an environment that has never saved the
+	 * setting still shows the form. Hiding it is an explicit editor act.
+	 */
+	public function test_the_contact_form_stays_visible_until_an_editor_hides_it() {
+		$this->assertTrue( cdd_core_contact_form_visible() );
+
+		update_option( 'cdd_core_contact_form_visible', 0 );
+
+		$this->assertFalse( cdd_core_contact_form_visible() );
+		$this->assertSame( '', cdd_core_contact_form_html() );
+
+		$html = do_blocks( '<!-- wp:camino-del-dharma/contacto-formulario /-->' );
+
+		$this->assertStringNotContainsString( '<form', $html );
+		$this->assertStringContainsString( 'contact-form-unavailable', $html );
+		$this->assertStringContainsString( 'wa.me/573206627608', $html );
+		$this->assertStringContainsString( 'caminodeldharma1@gmail.com', $html );
+	}
+
+	/**
+	 * Protects the way back: saving "show" again is enough. The setting
+	 * stores only on or off.
+	 */
+	public function test_showing_the_form_again_stores_only_on_or_off() {
+		update_option( 'cdd_core_contact_form_visible', 0 );
+		update_option( 'cdd_core_contact_form_visible', 1 );
+
+		$this->assertTrue( cdd_core_contact_form_visible() );
+		$this->assertSame( 1, cdd_core_sanitize_contact_form_visible( '1' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( '0' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( 'yes' ) );
+		$this->assertSame( 0, cdd_core_sanitize_contact_form_visible( null ) );
+	}
+
+	/**
+	 * Protects the Settings screen: an administrator gets one checkbox,
+	 * and the option is the one the Settings API will save.
+	 */
+	public function test_an_administrator_can_open_the_contact_form_setting() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		require_once ABSPATH . 'wp-admin/includes/template.php';
+
+		cdd_core_register_contact_form_setting();
+
+		global $wp_registered_settings;
+		$this->assertArrayHasKey( 'cdd_core_contact_form_visible', $wp_registered_settings );
+		$this->assertSame( 1, $wp_registered_settings['cdd_core_contact_form_visible']['default'] );
+
+		cdd_core_register_contact_form_settings_page();
+
+		global $submenu;
+		$slugs = array();
+		foreach ( $submenu['options-general.php'] ?? array() as $item ) {
+			$slugs[] = $item[2];
+		}
+
+		$this->assertContains( 'cdd-core-contact-form', $slugs );
+
+		ob_start();
+		cdd_core_render_contact_form_settings_page();
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( 'name="cdd_core_contact_form_visible"', $html );
+		$this->assertStringContainsString( 'type="checkbox"', $html );
+		$this->assertStringContainsString( 'checked', $html );
+	}
+
+	/**
+	 * Protects the capability: a subscriber gets an empty screen.
+	 */
+	public function test_a_subscriber_cannot_open_the_contact_form_setting() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+
+		ob_start();
+		cdd_core_render_contact_form_settings_page();
+		$html = ob_get_clean();
+
+		$this->assertSame( '', $html );
+	}
 }

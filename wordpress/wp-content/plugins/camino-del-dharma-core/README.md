@@ -63,7 +63,9 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   no describa un envío real (ADR 0041 punto 3). `migrate convert` gana dos pasos field-scoped,
   `privacidad` **antes** que `contacto`, para que el aviso sea cierto antes de que el formulario
   llegue a la página. Sin CF7 todo esto es inerte: nada fatal, y el theme rinde los canales
-  WhatsApp/correo.
+  WhatsApp/correo. Desde v0.7.9, **Ajustes → Formulario de contacto** muestra u oculta
+  el formulario (la opción ausente lo deja visible). Ocultarlo usa el mismo respaldo
+  de WhatsApp y correo; no borra la definición en Contact Form 7.
 - Sin contenido demo del instalador desde D-02 / OWN-024 (v0.7.2,
   [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)): un WordPress recién
   instalado publica «Hello world!» y «Sample Page» y deja un borrador «Privacy Policy», y esa
