@@ -263,10 +263,42 @@ final class Contact_FormTest extends WP_UnitTestCase {
 
 		$html = do_blocks( '<!-- wp:camino-del-dharma/contacto-formulario /-->' );
 
-		$this->assertStringNotContainsString( '<form', $html );
-		$this->assertStringContainsString( 'contact-form-unavailable', $html );
-		$this->assertStringContainsString( 'wa.me/573206627608', $html );
-		$this->assertStringContainsString( 'caminodeldharma1@gmail.com', $html );
+		$this->assertSame( '', trim( $html ) );
+		$this->assertStringNotContainsString( 'El formulario no está disponible', $html );
+		$this->assertStringNotContainsString( 'contact-form-unavailable', $html );
+	}
+
+	/**
+	 * Protects the published channel sentence: hiding the form drops
+	 * «También» for that request only. Showing it again leaves the stored
+	 * sentence untouched.
+	 */
+	public function test_hiding_the_form_drops_tambien_from_the_channel_sentence() {
+		$sentence = '<p>También puedes escribirnos por WhatsApp al <a href="https://wa.me/573206627608">+57 320 662 7608</a> o al correo <a href="mailto:caminodeldharma1@gmail.com">caminodeldharma1@gmail.com</a>.</p>';
+		$page_id  = self::factory()->post->create(
+			array(
+				'post_type'    => 'page',
+				'post_name'    => 'contacto',
+				'post_title'   => 'Contacto',
+				'post_status'  => 'publish',
+				'post_content' => $sentence,
+			)
+		);
+
+		$this->go_to( get_permalink( $page_id ) );
+		update_option( 'cdd_core_contact_form_visible', 0 );
+
+		$hidden = apply_filters( 'the_content', $sentence );
+
+		$this->assertStringContainsString( 'Puedes escribirnos por WhatsApp', $hidden );
+		$this->assertStringNotContainsString( 'También puedes escribirnos', $hidden );
+		$this->assertSame( $sentence, get_post( $page_id )->post_content );
+
+		update_option( 'cdd_core_contact_form_visible', 1 );
+
+		$shown = apply_filters( 'the_content', $sentence );
+
+		$this->assertStringContainsString( 'También puedes escribirnos por WhatsApp', $shown );
 	}
 
 	/**

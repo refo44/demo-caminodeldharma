@@ -18,8 +18,11 @@ Plugin `camino-del-dharma-core` **0.7.9** y theme `camino-del-dharma` **0.6.2**.
 En **Ajustes → Camino del Dharma** un administrador puede mostrar u ocultar
 el formulario de `/contacto`. Si la opción no existe, el formulario sigue
 visible. Ocultarlo deja WhatsApp y el correo; no borra el formulario de
-Contact Form 7 ni cambia `/privacidad`. La pantalla de `/llms.txt` se llama
-**Camino del Dharma llms**.
+Contact Form 7 ni cambia `/privacidad`. Ocultarlo no imprime el aviso «El
+formulario no está disponible»; la frase publicada pasa a «Puedes
+escribirnos…» y vuelve a «También puedes escribirnos…» cuando el
+formulario se muestra. La pantalla de `/llms.txt` se llama **Camino del
+Dharma llms**.
 
 ### WordPress Fase 3 — panel Compartir en el editor (plugin 0.7.8)
 

@@ -230,18 +230,17 @@ final class Theme_BehaviorTest extends TestCase {
 	}
 
 	/**
-	 * Protects the wp-admin visibility switch: the block asks the plugin
-	 * before it prints the form, so hiding it from Settings still leaves
-	 * the published WhatsApp and email channels.
+	 * Protects the wp-admin visibility switch: a hidden form prints nothing
+	 * in the block, and the published channel sentence loses «También»
+	 * for that request.
 	 */
 	public function test_the_contact_form_block_follows_the_visibility_setting() {
 		$blocks = $this->theme_file( 'inc/blocks.php' );
 
-		$at = strpos( $blocks, 'function camino_del_dharma_render_contacto_formulario' );
-		$this->assertNotFalse( $at );
-		$render = substr( $blocks, $at, 1600 );
-
-		$this->assertStringContainsString( 'cdd_core_contact_form_visible', $render );
+		$this->assertStringContainsString( 'cdd_core_contact_form_visible', $blocks );
+		$this->assertStringContainsString( 'También puedes escribirnos', $blocks );
+		$this->assertStringContainsString( 'Puedes escribirnos', $blocks );
+		$this->assertStringContainsString( "'the_content'", $blocks );
 	}
 
 	/**

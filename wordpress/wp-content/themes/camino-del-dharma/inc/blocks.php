@@ -302,16 +302,20 @@ add_filter( 'render_block', 'camino_del_dharma_name_audio_blocks', 10, 2 );
  *
  * The form itself belongs to Contact Form 7, provisioned by
  * camino-del-dharma-core. The block exists so the page content carries no
- * third-party shortcode: with CF7 absent, disabled, or hidden from
- * Settings the visitor reads the channels that do work instead of a raw
- * shortcode string or an empty hole. That degraded state is the
- * operational fallback ADR 0041 point 5 allows at cutover, so it is a
- * real state of this site, not an error.
+ * third-party shortcode: with CF7 absent or disabled the visitor reads
+ * the channels that do work instead of a raw shortcode string or an
+ * empty hole. That degraded state is the operational fallback ADR 0041
+ * point 5 allows at cutover, so it is a real state of this site, not an
+ * error. An administrator who hides the form from Settings gets neither
+ * the form nor that notice: the published sentence under it stays, and
+ * loses «También» for that request only.
  */
 function camino_del_dharma_render_contacto_formulario(): string {
-	$shown = ! function_exists( 'cdd_core_contact_form_visible' ) || cdd_core_contact_form_visible();
+	if ( function_exists( 'cdd_core_contact_form_visible' ) && ! cdd_core_contact_form_visible() ) {
+		return '';
+	}
 
-	if ( $shown && function_exists( 'cdd_core_contact_form_available' ) && cdd_core_contact_form_available() ) {
+	if ( function_exists( 'cdd_core_contact_form_available' ) && cdd_core_contact_form_available() ) {
 		return cdd_core_contact_form_html();
 	}
 
@@ -331,3 +335,27 @@ function camino_del_dharma_render_contacto_formulario(): string {
 		esc_html( $mailbox )
 	);
 }
+
+/**
+ * Drops «También» from the published contact sentence while the form is
+ * hidden. The stored page is not rewritten, so showing the form again
+ * restores the sentence on the next request.
+ *
+ * @param string $content Rendered post content.
+ */
+function camino_del_dharma_contact_channels_sentence( $content ) {
+	if ( ! is_page( 'contacto' ) ) {
+		return $content;
+	}
+
+	if ( ! function_exists( 'cdd_core_contact_form_visible' ) || cdd_core_contact_form_visible() ) {
+		return $content;
+	}
+
+	return str_replace(
+		'También puedes escribirnos',
+		'Puedes escribirnos',
+		$content
+	);
+}
+add_filter( 'the_content', 'camino_del_dharma_contact_channels_sentence', 11 );
