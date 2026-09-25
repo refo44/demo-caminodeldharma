@@ -107,6 +107,7 @@ final class Editor_AuthorsPanelTest extends WP_UnitTestCase {
 	 */
 	private function enqueue_block_editor_assets_for( string $post_type ): bool {
 		wp_dequeue_script( CDD_CORE_AUTHORS_PANEL_HANDLE );
+		wp_dequeue_script( CDD_CORE_SHARE_PANEL_HANDLE );
 
 		set_current_screen( 'post' );
 		get_current_screen()->post_type = $post_type;

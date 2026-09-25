@@ -307,6 +307,11 @@
 				help: __( 'Si lo dejas vacío se usa el título SEO.', TEXT_DOMAIN )
 			} ),
 			metaTextarea( meta, OG_DESCRIPTION, __( 'Descripción para redes (Open Graph)', TEXT_DOMAIN ), __( 'Si lo dejas vacío se usa la descripción SEO.', TEXT_DOMAIN ) ),
+			el(
+				'p',
+				{ className: 'cdd-core-seo-head__note' },
+				__( 'El título y la descripción para redes son la ficha del enlace. El mensaje del botón Compartir se edita en el panel Compartir.', TEXT_DOMAIN )
+			),
 			metaText( meta, SEO_RELATED_URL, __( 'URL relacionada', TEXT_DOMAIN ), {
 				type: 'url',
 				inputMode: 'url',

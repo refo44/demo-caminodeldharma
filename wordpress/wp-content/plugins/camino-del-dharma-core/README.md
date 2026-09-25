@@ -123,6 +123,15 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   editor lo dejó vacío; la copia importada por `migrate convert` o escrita por una persona no se
   toca (create-missing-only) y el front no la vuelve a derivar. `seo_jsonld_extra` se difiere del
   panel v1 (la meta y su sanitizador siguen editables por REST).
+- Panel «Compartir» en el editor de bloques desde [#39](https://github.com/refo44/demo-caminodeldharma/issues/39)
+  (v0.7.8): `includes/editor.php` registra `assets/js/share-panel.js` y lo encola **solo**
+  en `post.php` / `post-new.php` cuando el tipo es `post` o `event`. Un
+  `PluginDocumentSettingPanel` nativo (ADR 0042; sin metabox clásico) muestra una red a la
+  vez —WhatsApp, X, Threads— y escribe `share_whatsapp` / `share_x` / `share_threads` con
+  `dispatch( 'core/editor' ).editPost( { meta } )`. La vista previa sustituye `{{SHARE_URL}}`
+  por el enlace y, si el campo está vacío, muestra el mismo respaldo que el diálogo público
+  (en un evento, tipo + nombre). Pasar de 280 caracteres en X avisa y no bloquea el guardado.
+  La ficha Open Graph sigue en «SEO y buscadores», que ahora lo dice.
 - `/llms.txt` desde v0.7.6 ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)):
   `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
   No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
