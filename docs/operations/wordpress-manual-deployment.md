@@ -6,8 +6,8 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 
 | | |
 | --- | --- |
-| **Versión** | 2.4 |
-| **Fecha** | 2026-09-23 |
+| **Versión** | 2.5 |
+| **Fecha** | 2026-09-25 |
 | **Estado** | Vigente — el sitio de staging **existe** y es el futuro WordPress de producción (ADR 0047 / OWN-036). **Este runbook no autoriza el corte de dominio.** |
 
 > **Canal por tag (ADR 0046):** el código first-party a staging puede subirse con el
@@ -42,7 +42,8 @@ Son dos canales distintos y no deben mezclarse:
 
 | | Canal | Contenido |
 | --- | --- | --- |
-| **Código** | ZIP / File Manager / SFTP | theme, plugin, `.htaccess` |
+| **Código del theme o del plugin** | Tag `theme-v*` o `plugin-v*` (ADR 0046). Un ZIP no despliega staging. | solo ese directorio |
+| **`.htaccess` raíz** | Copia manual, conservando el bloque de WordPress | reglas del ledger |
 | **Contenido** | WP-CLI sobre `migration/payload.json` | páginas, eventos, entradas, fichas de autor, álbumes, medios, meta de compartir y SEO |
 
 **El contenido no viaja en un ZIP.** Se importa con el pipeline WP-CLI descrito en §4, que
@@ -134,10 +135,27 @@ reabrir OWN-032 (opción B: `wp --ssh` desde el portátil). Staging **nunca** us
 
 ## 3. Subida del código first-party
 
-1. Verificar rama/commit y QA local verde (niveles 1–3, `.audit/fase3-validation-matrix.md`).
-2. Empaquetar **solo** los dos directorios first-party (un ZIP por directorio).
-3. Subir a `wp-content/themes/` y `wp-content/plugins/` del staging.
-4. Activar **primero el plugin, después el theme**:
+El theme y el plugin de staging **no** se suben por ZIP ni por el administrador de archivos.
+Ese canal lo sustituye el tag (ADR 0046). El runbook del disparo es
+[`wordpress-staging-cd.md`](wordpress-staging-cd.md).
+
+1. La versión ya está en `main`, con `php` y `css` verdes. Theme: `Version` en `style.css`.
+   Plugin: la cabecera y `CDD_CORE_VERSION` coinciden.
+2. El Release Maintainer crea el tag anotado sobre ese commit de `origin/main`. La versión
+   del tag es la del componente, sin prerrelease:
+
+   ```bash
+   git fetch origin main
+   git tag -a plugin-vX.Y.Z <sha-en-origin/main> -m "Release plugin X.Y.Z to WordPress staging"
+   git push origin plugin-vX.Y.Z
+   ```
+
+   El theme usa `theme-vX.Y.Z`. Un tag `v*` no despliega WordPress. Empujar el tag arranca
+   el workflow; no hay disparo manual. Un tag publicado no se mueve ni se borra: la
+   corrección es una versión nueva.
+3. El workflow sincroniza **solo** ese directorio. No toca contenido, `.htaccess`,
+   `uploads` ni el core.
+4. Activar **primero el plugin, después el theme** si el sitio todavía no los tiene activos:
 
    ```bash
    wp plugin activate camino-del-dharma-core
