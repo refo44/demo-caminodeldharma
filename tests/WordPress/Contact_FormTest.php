@@ -308,12 +308,22 @@ final class Contact_FormTest extends WP_UnitTestCase {
 			$slugs[] = $item[2];
 		}
 
-		$this->assertContains( 'cdd-core-contact-form', $slugs );
+		$this->assertContains( 'cdd-core-settings', $slugs );
+
+		$menu_title = '';
+		foreach ( $submenu['options-general.php'] as $item ) {
+			if ( 'cdd-core-settings' === $item[2] ) {
+				$menu_title = $item[0];
+			}
+		}
+
+		$this->assertSame( 'Camino del Dharma', $menu_title );
 
 		ob_start();
 		cdd_core_render_contact_form_settings_page();
 		$html = ob_get_clean();
 
+		$this->assertStringContainsString( '<h1>Camino del Dharma</h1>', $html );
 		$this->assertStringContainsString( 'name="cdd_core_contact_form_visible"', $html );
 		$this->assertStringContainsString( 'type="checkbox"', $html );
 		$this->assertStringContainsString( 'checked', $html );

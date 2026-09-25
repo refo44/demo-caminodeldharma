@@ -178,4 +178,34 @@ final class Llms_Txt_RoutingTest extends WP_UnitTestCase {
 		$this->assertSame( 'invalid_nonce', $result->get_error_code() );
 		$this->assertSame( array( 'keep' => '1' ), get_option( 'rewrite_rules' ) );
 	}
+
+	/**
+	 * The Settings menu names this screen llms. The public file stays
+	 * /llms.txt.
+	 */
+	public function test_the_settings_menu_names_the_screen_llms() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		require_once ABSPATH . 'wp-admin/includes/template.php';
+
+		Cdd_Core_Llms_Txt::register_page();
+
+		global $submenu;
+		$menu_title = '';
+		foreach ( $submenu['options-general.php'] ?? array() as $item ) {
+			if ( Cdd_Core_Llms_Txt::PAGE_SLUG === $item[2] ) {
+				$menu_title = $item[0];
+			}
+		}
+
+		$this->assertSame( 'llms', $menu_title );
+
+		ob_start();
+		Cdd_Core_Llms_Txt::render_settings_page();
+		$html = ob_get_clean();
+
+		$this->assertStringContainsString( '<h1>llms</h1>', $html );
+		$this->assertStringNotContainsString( 'Camino del Dharma — llms.txt', $html );
+	}
 }

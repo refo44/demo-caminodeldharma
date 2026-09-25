@@ -87,6 +87,8 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_sitemaps_add_provider', 'cdd_core_seo_sitemap_provider', 10, 2 );
 	add_filter( 'wp_sitemaps_taxonomies', 'cdd_core_seo_sitemap_taxonomies' );
 	add_action( 'admin_menu', 'cdd_core_register_admin_pages' );
+	add_action( 'admin_menu', 'cdd_core_register_contact_form_settings_page' );
+	add_action( 'admin_init', 'cdd_core_register_contact_form_setting' );
 	Cdd_Core_Llms_Txt::register_hooks();
 
 	// Block editor of a blog entry (ADR 0037 §4/§6): the «Autores del
@@ -97,8 +99,6 @@ if ( function_exists( 'add_action' ) ) {
 
 	// Contact Form 7 wiring (WU-09, ADR 0026/0041). Inert without CF7.
 	add_filter( 'wpcf7_autop_or_not', 'cdd_core_contact_form_autop', 10, 2 );
-	add_action( 'admin_menu', 'cdd_core_register_contact_form_settings_page' );
-	add_action( 'admin_init', 'cdd_core_register_contact_form_setting' );
 
 	add_filter( 'wp_insert_post_data', 'cdd_core_guard_post_publish', 10, 2 );
 	add_filter( 'rest_pre_insert_post', 'cdd_core_rest_guard_post_publish', 10, 2 );
