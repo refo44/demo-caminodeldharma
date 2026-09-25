@@ -739,16 +739,36 @@
         {
             "slug": "comunidad-camino-del-dharma",
             "name": "Comunidad Camino del Dharma",
-            "bio": "",
+            "bio": "La Comunidad Buddhista Camino del Dharma es un espacio de aprendizaje, práctica y acompañamiento inspirado en la sabiduría buddhista. Fundada en Colombia en 2019, nace del deseo de ofrecer condiciones cuidadas para que las personas puedan comprender su mente, relacionarse de manera más amable con su experiencia interior y vivir con mayor libertad y sentido, y hoy acompaña a practicantes de distintas ciudades de Colombia.",
+            "thumbnail": "assets/images/comunidad-linaje/comunidad-quienes-somos.jpg",
+            "thumbnail_alt": "Comunidad Buddhista Camino del Dharma",
+            "seo": {
+                "title": "",
+                "description": "Conoce Camino del Dharma, una comunidad budista en Colombia dedicada a la práctica del budismo Chan y Tierra Pura.",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
             "_source_key": "blog_author:comunidad-camino-del-dharma",
-            "_source_hash": "03901085953a443d0054e52adbe1a825489ec22e89a565455e559bd7e10505fe"
+            "_source_hash": "a16cff35f2895bbb93c75bb7a8ccd0812b9e16391bb835896e5bbd660e1d104a"
         },
         {
             "slug": "zheng-gong",
             "name": "Zheng Gong",
             "bio": "Maestro budista de las tradiciones Chan y Tierra Pura. Abad y presidente de la Comunidad Buddhista Camino del Dharma.",
+            "thumbnail": "assets/images/fundador/foto-biografia-fundador.jpg",
+            "thumbnail_alt": "Venerable Maestro Zheng Gong",
+            "seo": {
+                "title": "",
+                "description": "Maestro buddhista contemporáneo, fundador de la Comunidad Buddhista Camino del Dharma. Su enseñanza integra la sabiduría del Buddhismo Chan y Tierra Pura con los desafíos de la vida moderna.",
+                "keywords": "",
+                "og_title": "",
+                "og_description": "",
+                "related": ""
+            },
             "_source_key": "blog_author:zheng-gong",
-            "_source_hash": "43af68b2b7808054103d585784349a5c0c66113f258cbc61121b52e5e8df579e"
+            "_source_hash": "d4a68c38d0b896f4c764e72eaf416c9ce7e6f96245038e848602465de5d35b61"
         }
     ],
     "gallery_albums": [

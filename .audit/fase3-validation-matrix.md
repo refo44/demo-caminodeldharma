@@ -757,8 +757,10 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    `gallery_albums` (0/2 y 0/3; páginas 11/11, eventos 10/10, entradas 2/2 sí lo traen). Es
    coherente con OWN-007 —el estático no publica fichas de autor, así que no hay meta propia que
    portar. **Cerrado 2026-09-01 (OWN-020):** no `noindex` en singles; reutilizar copy corto y
-   fotos publicados (JSON-LD del fundador / meta de `/comunidad`). Implementación **pendiente**
-   ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). Los álbumes siguen `noindex`
+   fotos publicados (JSON-LD del fundador / meta de `/comunidad`). Implementación **hecha**
+   (plugin 0.7.7, theme 0.6.1, [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):
+   el payload lleva `seo`, bio corta y thumbnail; `convert` los siembra add-only en fichas ya
+   importadas. Los álbumes siguen `noindex`
    y no entran en esa cola.
 9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
    320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.

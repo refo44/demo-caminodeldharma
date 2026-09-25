@@ -119,6 +119,7 @@ final class Cdd_Core_Convert_Service {
 
 		$this->seed_share_templates( $apply, $report );
 		$this->seed_head_seo( $apply, $report );
+		$this->seed_author_profiles( $apply, $report );
 
 		return $report;
 	}
@@ -136,7 +137,7 @@ final class Cdd_Core_Convert_Service {
 	private function seed_head_seo( bool $apply, array &$report ) {
 		$payload = (array) $this->options['payload'];
 
-		foreach ( array( 'pages', 'events', 'posts' ) as $collection ) {
+		foreach ( array( 'pages', 'events', 'posts', 'blog_authors' ) as $collection ) {
 			foreach ( (array) ( $payload[ $collection ] ?? array() ) as $object ) {
 				$seo = Cdd_Core_Importer::seo_meta( $object );
 				if ( 'events' === $collection ) {
@@ -176,6 +177,94 @@ final class Cdd_Core_Convert_Service {
 				$report['converted'][] = $item;
 			}
 		}
+	}
+
+	/**
+	 * Fills an empty author bio and a missing thumbnail from the payload
+	 * (OWN-020). Add-only: a bio or photo an editor already set is kept.
+	 * A fresh import writes both on create; this pass is for profiles
+	 * imported before those fields travelled.
+	 *
+	 * @param bool  $apply  Write the changes; false = dry run.
+	 * @param array $report Report to extend, by reference.
+	 */
+	private function seed_author_profiles( bool $apply, array &$report ) {
+		foreach ( (array) ( $this->options['payload']['blog_authors'] ?? array() ) as $payload_object ) {
+			$post_id = $this->post_by_source_key( (string) ( $payload_object['_source_key'] ?? '' ) );
+			if ( null === $post_id ) {
+				continue;
+			}
+
+			$author = get_post( $post_id );
+			if ( ! $author instanceof WP_Post ) {
+				continue;
+			}
+
+			$this->seed_author_bio( $apply, $report, $author, $payload_object );
+			$this->seed_author_thumbnail( $apply, $report, $author, $payload_object );
+		}
+	}
+
+	/**
+	 * Writes the payload bio when the profile content is still empty.
+	 *
+	 * @param bool    $apply  Write the content; false = dry run.
+	 * @param array   $report Report to extend, by reference.
+	 * @param WP_Post $author Imported profile.
+	 * @param array   $payload_object Payload object.
+	 */
+	private function seed_author_bio( bool $apply, array &$report, WP_Post $author, array $payload_object ) {
+		$bio = trim( (string) ( $payload_object['bio'] ?? '' ) );
+		if ( '' === $bio || '' !== trim( $author->post_content ) ) {
+			return;
+		}
+
+		$item = 'bio:' . $payload_object['_source_key'];
+		if ( ! $apply ) {
+			$report['pending'][] = $item;
+			return;
+		}
+
+		wp_update_post(
+			array(
+				'ID'           => $author->ID,
+				'post_content' => $bio,
+			)
+		);
+		$report['converted'][] = $item;
+	}
+
+	/**
+	 * Sets the published photo when the profile has no featured image.
+	 *
+	 * @param bool    $apply  Write the thumbnail; false = dry run.
+	 * @param array   $report Report to extend, by reference.
+	 * @param WP_Post $author Imported profile.
+	 * @param array   $payload_object Payload object.
+	 */
+	private function seed_author_thumbnail( bool $apply, array &$report, WP_Post $author, array $payload_object ) {
+		$file = (string) ( $payload_object['thumbnail'] ?? '' );
+		if ( '' === $file || has_post_thumbnail( $author ) ) {
+			return;
+		}
+
+		$attachment_id = $this->post_by_source_key( 'media:' . $file );
+		if ( null === $attachment_id ) {
+			return;
+		}
+
+		$item = 'thumb:' . $payload_object['_source_key'];
+		if ( ! $apply ) {
+			$report['pending'][] = $item;
+			return;
+		}
+
+		set_post_thumbnail( $author, $attachment_id );
+		$alt = (string) ( $payload_object['thumbnail_alt'] ?? '' );
+		if ( '' !== $alt && '' === (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) {
+			update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt );
+		}
+		$report['converted'][] = $item;
 	}
 
 	/**

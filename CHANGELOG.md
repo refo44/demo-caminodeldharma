@@ -12,6 +12,17 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — SEO de fichas de autor (plugin 0.7.7, theme 0.6.1)
+
+Plugin `camino-del-dharma-core` **0.7.7** y theme `camino-del-dharma` **0.6.1**
+([#5](https://github.com/refo44/demo-caminodeldharma/issues/5), OWN-020 / D-08).
+Las fichas `/author/{slug}` siguen indexables. El payload reutiliza el byline corto
+de Zheng Gong, el primer párrafo de «Quiénes somos», las dos fotos publicadas y las
+descripciones ya escritas (JSON-LD del fundador y meta de `/comunidad`). El ensayo
+largo permanece en `/comunidad`. Cada ficha enlaza allí. Un entorno ya importado
+converge con `migrate convert` (bio vacía, foto ausente y `seo` add-only); un
+segundo `import` no reescribe fichas existentes.
+
 ### WordPress Fase 3 — `/llms.txt` generado en cada petición (plugin 0.7.6)
 
 Plugin `camino-del-dharma-core` **0.7.6** ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)).

@@ -111,7 +111,10 @@ foreach ( $cdd_posts as $cdd_post ) {
 	}
 }
 ksort( $cdd_authors );
-$cdd_blog_authors = array_values( $cdd_authors );
+$cdd_blog_authors = ( new Cdd_Core_Author_Profile_Extractor() )->extract(
+	array_values( $cdd_authors ),
+	cdd_read( 'comunidad/index.html' )
+);
 
 // --- Gallery (inventory §4).
 $cdd_gallery = ( new Cdd_Core_Gallery_Extractor() )->extract( cdd_read( 'galeria/index.html' ) );

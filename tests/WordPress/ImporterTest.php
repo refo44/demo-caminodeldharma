@@ -479,6 +479,45 @@ final class ImporterTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * OWN-020: a fresh import writes the profile description and photo.
+	 * Empty SEO keys stay absent. A second import does not rewrite them.
+	 */
+	public function test_import_stores_author_seo_and_thumbnail() {
+		$payload = $this->payload(
+			array(
+				'blog_authors' => array(
+					array(
+						'slug'          => 'zheng-gong',
+						'name'          => 'Zheng Gong',
+						'bio'           => 'Maestro budista.',
+						'thumbnail'     => 'assets/images/galeria/galeria-01.jpg',
+						'thumbnail_alt' => 'Venerable Maestro Zheng Gong',
+						'seo'           => array(
+							'description' => 'Maestro buddhista contemporáneo.',
+						),
+					),
+				),
+				'media'        => array( $this->media_object( 'assets/images/galeria/galeria-01.jpg' ) ),
+			)
+		);
+
+		$this->importer( $payload )->import( true );
+
+		$author = $this->post_by_source_key( 'blog_author:zheng-gong' );
+		$image  = $this->post_by_source_key( 'media:assets/images/galeria/galeria-01.jpg' );
+
+		$this->assertSame( 'Maestro buddhista contemporáneo.', get_post_meta( $author->ID, 'seo_description', true ) );
+		$this->assertSame( '', get_post_meta( $author->ID, 'seo_title', true ) );
+		$this->assertSame( $image->ID, (int) get_post_thumbnail_id( $author->ID ) );
+		$this->assertSame( 'Venerable Maestro Zheng Gong', get_post_meta( $image->ID, '_wp_attachment_image_alt', true ) );
+
+		update_post_meta( $author->ID, 'seo_description', 'Texto del editor' );
+		$this->importer( $payload )->import( true );
+
+		$this->assertSame( 'Texto del editor', get_post_meta( $author->ID, 'seo_description', true ) );
+	}
+
+	/**
 	 * The site-wide SEO data becomes an option, and the published
 	 * addressRegion of each city becomes term metadata.
 	 */

@@ -66,8 +66,8 @@ issues ni rol Author de WP).
     o resumirlo es editorial, no un 301.
     *(OWN-016: en WordPress, la Page `/comunidad` **añade enlaces** a `/author/zheng-gong` y
     a la ficha de la Comunidad. El estático no se cambia ahora.)*
-    *(OWN-020 / D-08, 2026-09-01: la bio de corte **reutiliza** copy corto y fotos ya
-    publicados; no se inventa ni se pega el ensayo largo. Código pendiente
+    *(OWN-020 / D-08, 2026-09-01; código 2026-09-24, plugin 0.7.7: la bio de corte **reutiliza** copy corto y fotos ya
+    publicados; no se inventa ni se pega el ensayo largo.
     [#5](https://github.com/refo44/demo-caminodeldharma/issues/5).)*
 13. **SEO del archivo de fichas** (`/author`, listado): `noindex, follow` hasta volumen
     (mismo espíritu que ADR 0031 / 0036). Los **singles** `/author/{slug}` sí se indexan
@@ -117,8 +117,8 @@ las 2 entradas; templates `single-blog_author.html` / archivo; no implementar en
 sesión. La UI de asignación en Gutenberg queda acotada por ADR
 [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) (panel nativo o clásico **con**
 sync REST; el guard no se relaja). **OWN-020 / D-08:** payload `blog_authors` con `seo`, bio
-corta y thumbnail desde copy y fotos publicados — implementación pendiente
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5). No reabrir `noindex` en singles.
+corta y thumbnail desde copy y fotos publicados — implementado (plugin 0.7.7,
+[#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). No reabrir `noindex` en singles.
 
 ## Referencias
 

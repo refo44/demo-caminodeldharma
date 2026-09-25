@@ -324,6 +324,8 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 		$this->assertStringContainsString( 'Entradas de Zheng Gong', $html );
 		$this->assertStringContainsString( 'Entrada relacionada', $html );
 		$this->assertStringNotContainsString( 'Entrada ajena', $html );
+		$this->assertStringContainsString( 'href="' . esc_url( home_url( '/comunidad' ) ) . '"', $html );
+		$this->assertStringContainsString( 'Conocer la comunidad', $html );
 	}
 
 	/**
