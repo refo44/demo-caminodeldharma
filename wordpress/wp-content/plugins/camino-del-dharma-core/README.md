@@ -65,8 +65,9 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   llegue a la página. Sin CF7 todo esto es inerte: nada fatal, y el theme rinde los canales
   WhatsApp/correo. Desde v0.7.9, **Ajustes → Camino del Dharma** muestra u oculta
   el formulario (la opción ausente lo deja visible). Ocultarlo no imprime el aviso
-  de formulario no disponible: la frase publicada pasa a «Puedes escribirnos…» y
-  vuelve a «También puedes escribirnos…» al mostrarlo. No borra la definición en
+  de formulario no disponible: arriba queda una sola frase, con WhatsApp y el
+  correo, y se oculta la de debajo. Al mostrarlo vuelven las dos frases
+  publicadas. No borra la definición en
   Contact Form 7.
 - Sin contenido demo del instalador desde D-02 / OWN-024 (v0.7.2,
   [#10](https://github.com/refo44/demo-caminodeldharma/issues/10)): un WordPress recién

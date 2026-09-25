@@ -231,15 +231,16 @@ final class Theme_BehaviorTest extends TestCase {
 
 	/**
 	 * Protects the wp-admin visibility switch: a hidden form prints nothing
-	 * in the block, and the published channel sentence loses «También»
-	 * for that request.
+	 * in the block. The intro above names WhatsApp and email, and the
+	 * sentence under the form is omitted for that request.
 	 */
 	public function test_the_contact_form_block_follows_the_visibility_setting() {
 		$blocks = $this->theme_file( 'inc/blocks.php' );
 
 		$this->assertStringContainsString( 'cdd_core_contact_form_visible', $blocks );
-		$this->assertStringContainsString( 'También puedes escribirnos', $blocks );
-		$this->assertStringContainsString( 'Puedes escribirnos', $blocks );
+		$this->assertStringContainsString( 'También puedes escribirnos por WhatsApp', $blocks );
+		$this->assertStringContainsString( 'puedes escribirnos aquí.', $blocks );
+		$this->assertStringContainsString( 'puedes escribirnos por WhatsApp al', $blocks );
 		$this->assertStringContainsString( "'the_content'", $blocks );
 	}
 
