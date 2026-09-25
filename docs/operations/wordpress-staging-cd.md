@@ -37,7 +37,16 @@ Los tags `v*` son del sitio estático (ADR 0015) y nunca disparan este workflow.
 1. Subir la versión del componente en su PR (theme: `style.css`; plugin: cabecera y
    `CDD_CORE_VERSION`, que deben coincidir) y fusionar a `main` con `php` y `css` verdes.
 2. El Release Maintainer decide explícitamente el release y crea el tag anotado sobre
-   un commit ya presente en `origin/main`, con la versión **idéntica** a la del componente.
+   un commit ya presente en `origin/main`, con la versión **idéntica** a la del componente:
+
+   ```bash
+   git fetch origin main
+   git tag -a plugin-vX.Y.Z <sha-en-origin/main> -m "Release plugin X.Y.Z to WordPress staging"
+   git push origin plugin-vX.Y.Z
+   ```
+
+   Para el theme, el nombre es `theme-vX.Y.Z` y el mensaje nombra el theme. El SHA tiene
+   que ser ancestro de `origin/main`. Empujar el tag es el único disparo.
 3. El workflow corre solo. No hay disparo manual.
 
 ## 4. Compuertas (fallan cerradas)
