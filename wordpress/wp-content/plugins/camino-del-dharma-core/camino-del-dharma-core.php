@@ -3,7 +3,7 @@
  * Plugin Name: Camino del Dharma Core
  * Plugin URI: https://caminodeldharma.org
  * Description: Domain plugin for Comunidad Buddhista Camino del Dharma — content model, routing and migration tooling (ADR 0024).
- * Version: 0.7.5
+ * Version: 0.7.6
  * Requires at least: 7.1
  * Requires PHP: 8.3
  * Author: Comunidad Buddhista Camino del Dharma
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CDD_CORE_VERSION', '0.7.5' );
+define( 'CDD_CORE_VERSION', '0.7.6' );
 define( 'CDD_CORE_PLUGIN_FILE', __FILE__ );
 
 // Pure domain classes (no WordPress APIs; unit-testable without a boot).
@@ -28,6 +28,7 @@ require_once __DIR__ . '/includes/class-cdd-core-calendar-data.php';
 require_once __DIR__ . '/includes/class-cdd-core-featured-event-policy.php';
 require_once __DIR__ . '/includes/class-cdd-core-authors-list.php';
 require_once __DIR__ . '/includes/class-cdd-core-contact-form-template.php';
+require_once __DIR__ . '/includes/class-cdd-core-llms-txt.php';
 require_once __DIR__ . '/includes/class-cdd-core-installer-demo-content.php';
 require_once __DIR__ . '/includes/seo/class-cdd-core-json-ld.php';
 require_once __DIR__ . '/includes/seo/class-cdd-core-seo-document.php';
@@ -85,6 +86,7 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_sitemaps_add_provider', 'cdd_core_seo_sitemap_provider', 10, 2 );
 	add_filter( 'wp_sitemaps_taxonomies', 'cdd_core_seo_sitemap_taxonomies' );
 	add_action( 'admin_menu', 'cdd_core_register_admin_pages' );
+	Cdd_Core_Llms_Txt::register_hooks();
 
 	// Block editor of a blog entry (ADR 0037 §4/§6): the «Autores del
 	// blog» panel, and the core Author control out of the way.

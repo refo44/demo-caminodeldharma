@@ -123,5 +123,9 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   editor lo dejó vacío; la copia importada por `migrate convert` o escrita por una persona no se
   toca (create-missing-only) y el front no la vuelve a derivar. `seo_jsonld_extra` se difiere del
   panel v1 (la meta y su sanitizador siguen editables por REST).
+- `/llms.txt` desde v0.7.6 ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)):
+  `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
+  No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
+  responde 404. Ajustes solo enciende o apaga y vuelve a registrar la URL.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

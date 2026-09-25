@@ -12,6 +12,15 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### WordPress Fase 3 — `/llms.txt` generado en cada petición (plugin 0.7.6)
+
+Plugin `camino-del-dharma-core` **0.7.6** ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)).
+El estático de producción no se toca: `static/llms.txt` sigue siendo el archivo
+publicado hasta el corte. En WordPress la dirección `/llms.txt` la responde el
+plugin en cada petición (`text/plain`), sin archivo en disco. La opción ausente
+la deja publicada; desactivarla responde 404. El botón de ajustes solo vuelve a
+registrar la URL. No lista `.ics`, borradores ni el catálogo de una revista.
+
 ### WordPress Fase 3 — patrones de editor (theme 0.6.0)
 
 Theme `camino-del-dharma` **0.6.0**. El estático de producción no se toca.

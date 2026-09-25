@@ -188,7 +188,7 @@ Incluir en OPERATIONS/QA aunque no tengan fila de Page:
 | Favicon | `favicon.ico`, `favicon.svg`, `assets/favicon/` | Theme / Site Icon |
 | `robots.txt` | Allow / + sitemap manual | Alinear con `/wp-sitemap.xml` (ADR 0030) |
 | `sitemap.xml` | Manual | Nativo WP; retirar o redirigir el XML estático para no duplicar |
-| `llms.txt` | Raíz | Conservar o generar; no sustituye sitemap |
+| `llms.txt` | Raíz | El plugin lo genera en cada petición (`text/plain`); ausente = publicado; desactivado = 404. No es un archivo, no sustituye al sitemap. El estático sigue vigente hasta el corte |
 | `.htaccess` | Política completa Hostinger | Tratamiento explícito; no desplegar el estático encima |
 
 ---
