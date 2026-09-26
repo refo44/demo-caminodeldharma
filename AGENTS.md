@@ -34,12 +34,11 @@ Older docs may mention classic PHP templates (`*.php`) or a previous WordPress o
 Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
 `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.10.
-The old static site remains at
-`https://palegreen-cod-365706.hostingersite.com/` as rollback. Do not
-delete it, its `public_html`, or the private backups without a separate
-owner authorization. There is no purge date. Contact-form mail delivery
-is unverified and the form is hidden. `static/` remains the pre-cutover
-artifact (ADR 0014, ADR 0034), not the live site.
+The owner later authorized retiring `static/` from the working tree and
+the palegreen `public_html`. That root is no longer the served rollback.
+Git history and `static-pre-cutover-20260926-040601.tar.gz` keep the
+copy. Do not delete the private backups or the palegreen hPanel site
+entry. Contact-form mail delivery is unverified and the form is hidden.
 Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
@@ -108,10 +107,11 @@ Counts must reconcile.
 
 ## Static site
 
-`static/` remains the pre-cutover artifact and visual contract (ADR 0001,
-ADR 0002), unless an ADR records an exception (ADR 0021 gallery lightbox).
-It is not the live site. The rollback copy stays on the palegreen temporary
-domain until a separate purge authorization.
+`static/` is retired from the working tree. Git history keeps the
+maintained implementation (ADR 0001, ADR 0002; ADR 0021 remains the
+lightbox exception). The palegreen document root is no longer the served
+rollback. The verified tar keeps the deployed copy, including files Git
+does not have.
 
 ## WordPress migration rules (docs only until Fase 3 is explicitly started)
 

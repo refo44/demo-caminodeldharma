@@ -29,6 +29,10 @@ if ( '' === $cdd_commit ) {
 }
 
 $cdd_static = $cdd_root . '/static';
+if ( ! is_file( $cdd_static . '/index.html' ) ) {
+	fwrite( STDERR, "extract-payload: static/ is not in the working tree. Restore it from Git history before extracting.\n" );
+	exit( 1 );
+}
 
 /**
  * Reads one static file.

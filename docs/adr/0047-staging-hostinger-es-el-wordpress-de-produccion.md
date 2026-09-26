@@ -135,6 +135,17 @@ Esta sección registra el hecho. No reescribe la decisión de arriba.
 - La entrega de correo del formulario sigue sin verificar y el
   formulario está oculto. Ver ADR 0045.
 
+El propietario autorizó después el retiro del estático. `static/` sale
+del árbol vigente; el historial de este repositorio lo conserva. La
+raíz desplegada
+`/home/u548735796/domains/palegreen-cod-365706.hostingersite.com/public_html`
+deja de ser el rollback servido. El tar
+`static-pre-cutover-20260926-040601.tar.gz`
+(`ce9b08ae24716faea907787b8270d06eee687f8216890b19bc532ebb6dc3c107`)
+conserva esa copia, incluidos los archivos que no están en Git. La
+decisión de arriba no se reescribe. La entrada del sitio palegreen en
+hPanel no forma parte de este retiro.
+
 ## Referencias
 
 - OWN-005, OWN-036

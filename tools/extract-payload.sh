@@ -6,6 +6,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+if [ ! -f static/index.html ]; then
+  echo "extract-payload: static/ is not in the working tree. Restore the retired tree from Git history before extracting: git restore --source=282230c41589348722a80985046d16cb07d19a1c -- static" >&2
+  exit 1
+fi
+
 commit="$(git rev-list -1 HEAD -- static/ 2>/dev/null || true)"
 if [ -z "$commit" ]; then
   commit="$(git rev-parse HEAD)"

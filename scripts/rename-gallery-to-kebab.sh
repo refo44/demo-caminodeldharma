@@ -6,6 +6,10 @@
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GAL="${ROOT}/static/assets/images/galeria"
+if [ ! -d "$GAL" ]; then
+  echo "rename-gallery: static/ is retired. Restore it from Git history before renaming those files." >&2
+  exit 1
+fi
 cd "$GAL"
 
 # List files that are NOT already galeria-NN.(jpg|jpeg), sort by name

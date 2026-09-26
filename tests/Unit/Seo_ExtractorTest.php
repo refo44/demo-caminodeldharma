@@ -140,6 +140,6 @@ final class Seo_ExtractorTest extends TestCase {
 	 * @param string $path Path under static/.
 	 */
 	private function stat( string $path ): string {
-		return (string) file_get_contents( dirname( __DIR__, 2 ) . '/static/' . $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo files in a unit test without WordPress.
+		return (string) file_get_contents( dirname( __DIR__, 2 ) . '/tests/fixtures/published-static/' . $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- frozen oracle, not the retired static tree.
 	}
 }

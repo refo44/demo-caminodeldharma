@@ -153,10 +153,11 @@ robots `index,follow,max-image-preview:large`, sitemap
 cambió. Tras el corte, las rutas de eventos exigieron `wp rewrite flush`
 sin `--hard`; archivo y fichas responden 200.
 
-El estático anterior sigue en
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
-(HTTP 200, no es WordPress). No se ha purgado. La purga es una acción
-futura, con autorización aparte del propietario, y no tiene fecha. Los
+El propietario autorizó después retirar `static/` del árbol vigente y
+el `public_html` de
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
+Esa raíz deja de servir el rollback. El historial de Git y el tar
+`static-pre-cutover-20260926-040601.tar.gz` conservan la copia. Los
 backups privados del corte se conservan. La entrega de correo del
 formulario no está verificada y el formulario está oculto (ADR 0045).
 

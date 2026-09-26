@@ -335,11 +335,12 @@ abajo es el registro de ese corte, no una instrucción para repetirlo.
 Hecho: `https://caminodeldharma.org/` sirve este WordPress;
 `WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
 plugin 0.7.10; `.htaccess` sin cambios; `/eventos` requirió
-`wp rewrite flush` sin `--hard`. El estático sigue en
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
-No purgarlo ni borrar backups sin otra autorización, y sin fecha.
-La entrega de correo del formulario sigue sin verificar; el formulario
-está oculto.
+`wp rewrite flush` sin `--hard`. El propietario autorizó después
+retirar el `public_html` de
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+y `static/` del árbol vigente. Esa raíz deja de ser el rollback
+servido. Los backups no se borran. La entrega de correo del formulario
+sigue sin verificar; el formulario está oculto.
 
 **No repetir esta sección.** No autoriza otro cambio de dominio, ni
 SMTP, ni borrar el rollback.
@@ -365,8 +366,11 @@ caminodeldharma.org
     blog_public = 1
 
 palegreen-cod-365706.hostingersite.com
-    → antiguo sitio estático, conservado como rollback
+    → antiguo sitio estático, conservado como rollback en esa fecha
 ```
+
+El retiro posterior del `public_html` y de `static/` no reescribe este
+registro del día del corte.
 
 Orden, solo en la sesión de corte:
 

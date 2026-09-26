@@ -178,7 +178,7 @@ final class Theme_BehaviorTest extends TestCase {
 	 * now lives in the theme, split across the two scripts.
 	 */
 	public function test_the_static_calendar_script_is_fully_ported() {
-		$static  = file_get_contents( dirname( __DIR__, 2 ) . '/static/assets/js/calendar.js' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+		$static  = file_get_contents( dirname( __DIR__, 2 ) . '/tests/fixtures/published-static/assets/js/calendar.js' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- frozen oracle, not the retired static tree.
 		$ported  = $this->theme_file( 'assets/js/calendar-dialog.js' );
 		$ported .= $this->theme_file( 'assets/js/calendar-tooltips.js' );
 

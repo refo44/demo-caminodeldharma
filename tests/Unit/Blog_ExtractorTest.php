@@ -127,7 +127,7 @@ final class Blog_ExtractorTest extends TestCase {
 			return $posts;
 		}
 
-		$static_root = dirname( __DIR__, 2 ) . '/static';
+		$static_root = dirname( __DIR__, 2 ) . '/tests/fixtures/published-static';
 		$sources     = array();
 		foreach ( array( 'circulos-de-presencia-consciente', 'sangha-refugio-hiperconexion' ) as $slug ) {
 			$sources[ $slug ] = file_get_contents( $static_root . '/blog/' . $slug . '/index.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo files in a unit test without WordPress.

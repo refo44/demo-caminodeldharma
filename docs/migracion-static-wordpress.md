@@ -11,10 +11,12 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 **CURRENT STATE (2026-09-26):** `https://caminodeldharma.org/` es WordPress.
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme
 `camino-del-dharma` 0.6.3 y plugin `camino-del-dharma-core` 0.7.10.
-`static/` conserva el artefacto anterior; el sitio público ya no es ese
-HTML. El rollback estático sigue en
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
-y no se purga sin otra autorización. La entrega de correo del formulario
+`static/` ya no está en el árbol vigente. El historial de Git lo
+conserva. El propietario autorizó retirar el despliegue de
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/);
+esa raíz deja de ser el rollback servido. El tar
+`static-pre-cutover-20260926-040601.tar.gz` conserva la copia de
+servidor, incluidos los archivos que Git no tiene. La entrega de correo del formulario
 sigue sin verificar y el formulario está oculto. Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.

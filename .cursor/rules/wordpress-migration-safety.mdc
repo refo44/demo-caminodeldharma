@@ -5,7 +5,7 @@ alwaysApply: true
 
 # WordPress migration safety (this repo only)
 
-This project is **Camino del Dharma**. Production is a **live static site** with visitors. Independent of other WordPress repos.
+This project is **Camino del Dharma**. Production is WordPress on the canonical domain. Independent of other WordPress repos.
 
 ## Inspect before modify
 
@@ -13,7 +13,7 @@ Read `docs/inventario-contenido-produccion-static.md`, `docs/contrato-migracion-
 
 ## Current vs future
 
-- **Current:** live static production on Hostinger; deployable HTML in `static/` (ADR 0014); hardcoded events/posts/gallery JSON are production data (ADR 0034). First-party plugin `camino-del-dharma-core` and FSE theme `camino-del-dharma` are implemented in `wordpress/` (Fase 3 WU-00–WU-10; see `docs/17-orden-implementacion.md` and `.audit/fase3-execution-state.md`).
+- **Current:** WordPress on `https://caminodeldharma.org/` since 2026-09-26. `static/` is retired from the working tree; Git history and the pre-cutover tar keep it. Hardcoded events/posts/gallery in that history are production data of the pre-cutover site (ADR 0034). First-party plugin `camino-del-dharma-core` and FSE theme `camino-del-dharma` live in `wordpress/` (Fase 3 WU-00–WU-10; see `docs/17-orden-implementacion.md` and `.audit/fase3-execution-state.md`).
 - **Future:** cutover from static production to WordPress on Hostinger; post-cutover editorial content owned by WordPress. No classic PHP theme in between (ADR 0029).
 
 Distinguish HISTORICAL STATE, CURRENT STATE, and FUTURE PLAN. Do not rewrite history.

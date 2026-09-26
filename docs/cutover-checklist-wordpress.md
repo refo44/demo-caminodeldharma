@@ -16,10 +16,13 @@ environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
 Theme 0.6.3 y plugin 0.7.10. Indexación, canonical y sitemap nativo
 comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. El
-`.htaccess` no cambió. El estático de
-`palegreen-cod-365706.hostingersite.com` sigue en pie. Su purga no es
-este corte: otra autorización, sin fecha. La entrega de correo del
-formulario no está verificada y el formulario está oculto. Las casillas
+`.htaccess` no cambió. El propietario autorizó después retirar el
+`public_html` de `palegreen-cod-365706.hostingersite.com` y `static/`
+del árbol vigente. Esa raíz deja de ser el rollback servido. El
+historial de Git y el tar
+`static-pre-cutover-20260926-040601.tar.gz` conservan la copia. La
+entrega de correo del formulario no está verificada y el formulario
+está oculto. Las casillas
 de abajo no se marcan en bloque por este registro.
 
 ---

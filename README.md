@@ -1,6 +1,9 @@
 # demo-caminodeldharma
 
-Sitio **estático en producción** de la **Comunidad Buddhista Camino del Dharma** (Colombia). Recibe visitas en `https://caminodeldharma.org`. Incluye inicio, comunidad, linaje, práctica, eventos, galería, blog, contribuir, contacto y privacidad.
+Sitio de la **Comunidad Buddhista Camino del Dharma** (Colombia). Desde el
+2026-09-26 la producción canónica es WordPress en
+`https://caminodeldharma.org/`. El árbol `static/` ya no se mantiene en
+el commit vigente; el historial de Git lo conserva.
 
 El nombre histórico «maqueta» en ADRs antiguos (ADR 0001) significa **base definitiva**, no prototipo desechable. Eventos, posts y galería hardcodeados en HTML/JSON son **contenido de producción** (ADR 0034).
 
@@ -15,7 +18,8 @@ theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 - CSS3 (tokens, diseño responsivo)
 - JavaScript mínimo con `defer` (menú, galería, accesibilidad)
 - Stylelint como validación obligatoria del CSS
-- Un único paso de build: `npm run build:css` minifica `static/assets/css/main.css` → `static/assets/css/main.min.css` (lo que enlazan las páginas). El resto son archivos estáticos listos para servir; npm se usa solo para herramientas de desarrollo
+- `npm run lint:css` valida el CSS del theme. El build del CSS estático
+  (`npm run build:css`) está retirado con `static/`.
 
 ## Git y contribución
 
@@ -188,6 +192,12 @@ CI (`test.yml`) corre en pull requests y en `main` y no despliega. Un tag
 `theme-v*` o `plugin-v*` arranca el workflow de staging (ADR 0046). Esa
 raíz ya no existe: el job falla cerrado y no escribe producción. No hay
 workflow de producción.
+
+`static/` salió del árbol vigente. El sitio desplegado en
+`palegreen-cod-365706.hostingersite.com` deja de ser el rollback servido.
+El historial de Git y el tar
+`static-pre-cutover-20260926-040601.tar.gz` conservan la copia anterior.
+Git no reconstruye solo los archivos que solo existían en el servidor.
 
 ## Próximos pasos
 
