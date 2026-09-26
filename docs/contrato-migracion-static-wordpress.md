@@ -22,7 +22,7 @@ despliegue.
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
 | **CURRENT STATE** | Ver el párrafo siguiente. |
-| **FUTURE PLAN** | Entrada hPanel de palegreen y correo del formulario: fuera. |
+| **FUTURE PLAN** | Correo del formulario y CD de producción (ADR 0046 D-B): fuera. La entrada hPanel de palegreen ya se retiró. |
 
 **CURRENT STATE (2026-09-26).** `https://caminodeldharma.org/` es WordPress
 7.1.2, la misma instalación, sin reinstalación (ADR 0047).
@@ -31,11 +31,17 @@ despliegue.
 WordPress es la fuente editorial del dominio canónico. El propietario
 autorizó después retirar `static/` del árbol vigente y el `public_html`
 de
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
-Esa raíz deja de ser el rollback servido. El historial de Git y el tar
-`static-pre-cutover-20260926-040601.tar.gz` conservan la copia. La
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/),
+y más tarde la entrada de ese sitio en hPanel. `/domains/` conserva solo
+`caminodeldharma.org`. El hostname puede resolver y respondió 403; no
+sirve el sitio estático. No hubo cambio manual de DNS. No queda un
+rollback estático servido. El historial de Git
+(`282230c41589348722a80985046d16cb07d19a1c`) y el tar
+`static-pre-cutover-20260926-040601.tar.gz` conservan la copia. Staging
+sigue retirado. La
 entrega de correo del formulario no está verificada y el formulario
-está oculto (ADR 0045).
+está oculto (ADR 0045). El CD de producción (ADR 0046 D-B) sigue sin
+decidir.
 
 Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el
 **estado histórico** pre-WU-01. Que la producción publicada fuera estática
@@ -271,7 +277,10 @@ producción pasa a los backups de WordPress, de base de datos y de
 configuración, y al historial de Git. El tar
 `static-pre-cutover-20260926-040601.tar.gz` conserva el estático
 desplegado, incluidos archivos que Git no tiene. La entrada del sitio
-en hPanel no se elimina aquí.
+en hPanel no se elimina aquí. Esa entrada se retiró después, con otra
+autorización. El directorio palegreen ya no existe. El hostname puede
+resolver y respondió 403; no sirve el sitio antiguo. No hubo cambio
+manual de DNS.
 
 ---
 

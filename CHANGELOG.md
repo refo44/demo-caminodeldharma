@@ -12,6 +12,16 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Retiro final de la entrada Hostinger de palegreen
+
+El propietario quitó en hPanel la entrada
+`palegreen-cod-365706.hostingersite.com`. El WordPress canónico siguió
+sano. La infraestructura estática legada queda retirada. La copia
+histórica sigue en Git (`282230c`) y en
+`static-pre-cutover-20260926-040601.tar.gz`. Los backups privados siguen.
+El hostname puede resolver y respondió 403; no sirve el sitio antiguo.
+No hubo cambio de DNS.
+
 ### Reconciliación del `.htaccess` de producción (2026-09-26)
 
 Revisión forense de solo lectura. El archivo en vivo no se restauró ni se

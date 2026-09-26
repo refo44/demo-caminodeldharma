@@ -8,8 +8,9 @@ alwaysApply: true
 Before the 2026-09-26 cutover, the canonical domain governed visitor-facing
 copy, content, structure, media, styles, and behavior (OWN-007, ADR 0034,
 ADR 0040). That cutover is done: WordPress there is the editorial source.
-The static rollback site stays until a separate owner purge. Do not treat it
-as live.
+The static rollback site was later removed, including its Hostinger website
+entry. Do not treat that hostname as live. Historical recovery stays in Git
+and the pre-cutover tar.
 
 ## Rules
 

@@ -163,10 +163,16 @@ demostrado como causa de la regeneración posterior del marcador.
 El propietario autorizó después retirar `static/` del árbol vigente y
 el `public_html` de
 [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
-Esa raíz deja de servir el rollback. El historial de Git y el tar
+Después retiró también la entrada de ese sitio en hPanel.
+`/home/u548735796/domains/` contiene solo `caminodeldharma.org`. El
+hostname puede resolver y respondió 403; no sirve el sitio estático.
+No hubo cambio manual de DNS. No queda un rollback estático servido.
+El historial de Git (`282230c41589348722a80985046d16cb07d19a1c`) y el tar
 `static-pre-cutover-20260926-040601.tar.gz` conservan la copia. Los
-backups privados del corte se conservan. La entrega de correo del
-formulario no está verificada y el formulario está oculto (ADR 0045).
+backups privados del corte se conservan. Staging sigue retirado. La
+entrega de correo del formulario no está verificada y el formulario
+está oculto (ADR 0045). El CD de producción (ADR 0046 D-B) sigue sin
+decidir.
 
 Los bloques de 2026-09-01 y 2026-09-23 quedan como snapshot. No describen
 el sitio público de hoy.
@@ -649,9 +655,10 @@ Resumen (detalle en el checklist):
 7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché. **HSTS sigue aplazado** el día del corte (ADR 0020).
 8. Cambio de dominio, no reinstalación (ADR 0047): el estático pasa a un
    dominio temporal y este WordPress recibe el dominio. **Hecho el
-   2026-09-26.** El estático quedó en
-   `palegreen-cod-365706.hostingersite.com`. No se purgó. Un ZIP
-   estático no vuelve a ese document root.
+   2026-09-26.** El estático quedó entonces en
+   `palegreen-cod-365706.hostingersite.com`. La entrada de ese sitio en
+   hPanel se retiró después. Un ZIP estático no vuelve al document root
+   de WordPress.
 9. Smoke test anónimo del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
 11. **Tras ≥30 días estables:** revisar HSTS (ADR 0020 / 0018) y registrar en `CHANGELOG.md`.

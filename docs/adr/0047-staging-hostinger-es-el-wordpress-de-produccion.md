@@ -141,7 +141,7 @@ del árbol vigente; el historial de este repositorio lo conserva. La
 raíz desplegada
 `/home/u548735796/domains/palegreen-cod-365706.hostingersite.com/public_html`
 se eliminó. El hostname responde 404 y ya no sirve el sitio
-estático. La entrada en hPanel sigue. El tar
+estático. La entrada en hPanel sigue en ese momento. El tar
 `static-pre-cutover-20260926-040601.tar.gz`
 (`ce9b08ae24716faea907787b8270d06eee687f8216890b19bc532ebb6dc3c107`)
 conserva esa copia, incluidos los archivos que no están en Git. La
@@ -188,6 +188,37 @@ que deja desactivado el redirect canónico. Ese texto ya estaba en la
 evidencia del corte y no forma parte de este delta. `wordpress/.htaccess`
 sí lleva los redirects HTTPS y de host. Esta reconciliación no los activa
 en el servidor.
+
+### Retiro de la entrada de sitio palegreen en hPanel
+
+Orden ya registrado arriba: este staging pasó a ser la producción
+canónica; después, con otra autorización, se retiró el `public_html`
+estático. [PR #47](https://github.com/refo44/demo-caminodeldharma/pull/47)
+retiró `static/` de `main`. La revisión forense del `.htaccess` y la
+reconciliación de la instantánea
+([PR #48](https://github.com/refo44/demo-caminodeldharma/pull/48))
+dejaron la producción independiente de palegreen.
+
+El propietario autorizó entonces quitar solo la entrada de sitio
+`palegreen-cod-365706.hostingersite.com`. Se hizo en hPanel. No se tocó
+`caminodeldharma.org`.
+
+Después, `/home/u548735796/domains/` contiene solo
+`caminodeldharma.org`. El directorio palegreen ya no existe. El hostname
+puede seguir resolviendo y, en la verificación, respondió 403 Forbidden.
+No sirve el sitio estático. No hubo cambio manual de DNS.
+
+La producción canónica siguió sana: rutas públicas en 200, `/sitemap.xml`
+en 301 hacia `/wp-sitemap.xml`, las 11 URLs de eventos en 200, checksums
+del núcleo correctos y el `.htaccess` en
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`.
+
+No queda un sitio estático servido como rollback. La copia histórica
+sigue en `282230c41589348722a80985046d16cb07d19a1c` y en el tar ya citado.
+Los backups de base de datos, `wp-config`, `.htaccess` y rewrite rules
+siguen fuera de `public_html`. Staging sigue retirado. El correo del
+formulario sigue diferido. El CD de producción (ADR 0046 D-B) sigue sin
+decidir. La decisión original de este ADR no se reescribe.
 
 ## Referencias
 

@@ -330,10 +330,11 @@ Hostinger.
 
 ---
 
-## Producción estática (sin cambios)
+## Producción estática (canal retirado)
 
-El sitio estático sigue desplegándose por ZIP manual desde `static/` según README
-(«Despliegue en Hostinger»). Este runbook no lo modifica ni lo autoriza.
+Hasta el corte, el sitio estático se desplegaba por ZIP manual desde
+`static/` según README («Despliegue en Hostinger»). Ese árbol ya no está
+en el working tree y ese canal no escribe el document root de WordPress.
 
 ---
 
@@ -370,8 +371,11 @@ demostrado como causa de la regeneración posterior. El propietario autorizó de
 retirar el `public_html` de
 [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
 y `static/` del árbol vigente. Esa raíz deja de ser el rollback
-servido. Los backups no se borran. La entrega de correo del formulario
-sigue sin verificar; el formulario está oculto.
+servido. Los backups no se borran. Después se retiró también la entrada
+de ese sitio en hPanel. `/domains/` conserva solo
+`caminodeldharma.org`. El hostname puede resolver y respondió 403; no
+sirve el sitio estático. No hubo cambio manual de DNS. La entrega de
+correo del formulario sigue sin verificar; el formulario está oculto.
 
 **No repetir esta sección.** No autoriza otro cambio de dominio, ni
 SMTP, ni borrar el rollback.

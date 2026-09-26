@@ -19,9 +19,10 @@ No es un symlink y no hay `wp-config.php`. `readlink -f` no resuelve
 esa ruta. La raíz de producción es un directorio real, distinto:
 `/home/u548735796/domains/caminodeldharma.org/public_html`,
 con `wp-config.php`. El propietario autorizó después retirar el
-`public_html` de `palegreen-cod-365706.hostingersite.com`. Esa raíz
-deja de ser el rollback servido. La entrada del sitio en hPanel no se
-elimina aquí.
+`public_html` de `palegreen-cod-365706.hostingersite.com`, y después
+la entrada de ese sitio en hPanel. Esa raíz deja de existir. El
+hostname puede resolver y respondió 403; no sirve el sitio estático.
+No hubo cambio manual de DNS. No queda un rollback estático servido.
 
 El workflow se conserva solo como mecanismo histórico de recuperación
 con fallo cerrado. No está operativo. No se inventa otro servidor de

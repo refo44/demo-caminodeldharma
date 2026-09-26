@@ -13,11 +13,15 @@ Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutove
 `camino-del-dharma` 0.6.3 y plugin `camino-del-dharma-core` 0.7.10.
 `static/` ya no está en el árbol vigente. El historial de Git lo
 conserva. El propietario autorizó retirar el despliegue de
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/);
-esa raíz deja de ser el rollback servido. El tar
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+y, después, la entrada de ese sitio en hPanel. No queda un rollback
+estático servido. El tar
 `static-pre-cutover-20260926-040601.tar.gz` conserva la copia de
-servidor, incluidos los archivos que Git no tiene. La entrega de correo del formulario
-sigue sin verificar y el formulario está oculto. Estado durable:
+servidor, incluidos los archivos que Git no tiene. La recuperación
+histórica de Git es `282230c41589348722a80985046d16cb07d19a1c`. Staging
+sigue retirado. La entrega de correo del formulario
+sigue sin verificar y el formulario está oculto. El CD de producción
+(ADR 0046 D-B) sigue sin decidir. Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.
 
