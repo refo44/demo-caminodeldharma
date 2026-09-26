@@ -1,0 +1,6 @@
+{
+  "ignores": [
+    ".claude/skills/**/prompt.md",
+    ".cursor/skills/**/prompt.md"
+  ]
+}
