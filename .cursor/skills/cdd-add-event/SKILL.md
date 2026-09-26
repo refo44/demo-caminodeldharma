@@ -19,3 +19,8 @@ chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
 
 Stop conditions in the prompt are mandatory. If a required fact is missing,
 stop and ask. Do not invent it.
+
+Consecutive days with no gap are a range (`event_date` / `event_end`).
+Store `event_calendar_dates` only when the dates have interruptions
+between them. Do not ask the owner to choose sessions for an
+uninterrupted stay.
