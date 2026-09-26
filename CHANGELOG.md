@@ -12,6 +12,35 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Reconciliación del `.htaccess` de producción (2026-09-26)
+
+Revisión forense de solo lectura. El archivo en vivo no se restauró ni se
+editó. El disparador exacto no está confirmado. La procedencia probable es
+una regeneración del marcador de WordPress. LiteSpeed no escribió este
+delta. No hay evidencia de un `wp rewrite flush --hard`.
+
+- Evidencia histórica del corte, conservada:
+  `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`
+  (backup `htaccess-pre-cutover-20260926-040633`, 6636 bytes, 184 líneas).
+- Instantánea observada y aceptada después de la regeneración, mtime
+  `2026-09-26 17:05:55.249615305 +0000`, 6475 bytes, 176 líneas:
+  `c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+- Las reglas propias de Camino y el bloque LiteSpeed son idénticos byte a
+  byte con la evidencia del corte.
+- Dentro de `# BEGIN WordPress` … `# END WordPress`, WordPress sustituyó el
+  `mod_expires` que Hostinger había dejado ahí por los comentarios
+  generados en es_CO y por
+  `RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]`.
+- El front controller no cambió: `RewriteEngine On`, `RewriteBase /`,
+  omisión de `index.php`, `!-f` / `!-d` y `RewriteRule . /index.php [L]`.
+- La portada, el sitemap, `robots.txt` y las 11 URLs de eventos seguían
+  sanos. Sin redirección a otro hostname, sin teal, sin palegreen, sin
+  regresión de indexación ni de denegación de archivos sensibles.
+- El hash del archivo entero no es el invariante permanente. La
+  verificación distingue reglas propias, bloque LiteSpeed y bloque
+  WordPress. Un cambio fuera de los bloques gestionados sigue exigiendo
+  revisión. Ver ADR 0047 y `docs/redirect-ledger.md`.
+
 ### Retiro de la implementación estática
 
 El propietario autorizó quitar `static/` del árbol vigente y retirar el
@@ -40,7 +69,8 @@ instalación de Hostinger. No hubo reinstalación.
   `index,follow,max-image-preview:large`.
 - No queda el hostname temporal de WordPress en la portada.
 - `/sitemap.xml` responde 301 hacia `/wp-sitemap.xml` (200).
-- El `.htaccess` de producción no cambió. SHA256:
+- En el corte, el `.htaccess` no cambió. SHA256 de esa evidencia
+  histórica, no de la instantánea posterior:
   `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`
 - Un dry-run de search-replace del dominio temporal de WordPress
   hacia el canónico reportó 0 reemplazos. No hubo reemplazo real.
