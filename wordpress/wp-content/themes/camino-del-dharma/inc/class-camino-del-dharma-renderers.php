@@ -162,6 +162,78 @@ final class Camino_Del_Dharma_Renderers {
 	}
 
 	/**
+	 * The home column beside the community copy: the event note, then any
+	 * featured articles. Empty when there is nothing to show.
+	 *
+	 * @param WP_Post|null $event The event cdd_core_featured_home_event() chose.
+	 * @param array        $posts Featured articles (WP_Post[]), newest first.
+	 */
+	public static function home_featured_column( ?WP_Post $event, array $posts ): string {
+		$notes = self::featured_event( $event );
+		if ( '' !== $notes ) {
+			$notes .= "\n";
+		}
+
+		foreach ( $posts as $post ) {
+			if ( $post instanceof WP_Post ) {
+				$notes .= self::featured_post( $post );
+			}
+		}
+
+		if ( '' === $notes ) {
+			return '';
+		}
+
+		return '<div class="home-featured-column">' . "\n" . $notes . '</div>';
+	}
+
+	/**
+	 * One featured article in the home column. The visitor copy does not
+	 * say «destacado».
+	 *
+	 * @param WP_Post $post Published blog entry.
+	 */
+	public static function featured_post( WP_Post $post ): string {
+		$url      = get_permalink( $post );
+		$title_id = 'home-featured-post-title-' . $post->ID;
+		$excerpt  = self::featured_post_excerpt( $post );
+
+		$thumb = '';
+		if ( has_post_thumbnail( $post ) ) {
+			$thumb = '<a href="' . esc_url( $url ) . '" class="evento-figure-link" tabindex="-1" aria-hidden="true">' .
+				get_the_post_thumbnail( $post, 'medium', array( 'class' => 'home-featured-event-thumb' ) ) .
+				'</a>' . "\n";
+		}
+
+		$excerpt_html = '' === $excerpt
+			? ''
+			: '<p class="home-featured-event-meta">' . esc_html( $excerpt ) . '</p>' . "\n";
+
+		return '<article class="home-featured-post" aria-labelledby="' . esc_attr( $title_id ) . '">' . "\n" .
+			'<p class="home-featured-event-kicker">' . esc_html__( 'Artículo', 'camino-del-dharma' ) . '</p>' . "\n" .
+			$thumb .
+			'<h3 id="' . esc_attr( $title_id ) . '" class="home-featured-event-title"><a href="' . esc_url( $url ) . '">' . esc_html( get_the_title( $post ) ) . '</a></h3>' . "\n" .
+			$excerpt_html .
+			'<p class="home-featured-event-actions"><a href="' . esc_url( $url ) . '">' . esc_html__( 'Leer artículo', 'camino-del-dharma' ) . '</a></p>' . "\n" .
+			'</article>' . "\n";
+	}
+
+	/**
+	 * The short line under a featured article title: the editorial excerpt,
+	 * or a trimmed plain-text fallback from the content.
+	 *
+	 * @param WP_Post $post Blog entry.
+	 */
+	private static function featured_post_excerpt( WP_Post $post ): string {
+		$excerpt = trim( wp_strip_all_tags( $post->post_excerpt ) );
+		if ( '' !== $excerpt ) {
+			return $excerpt;
+		}
+
+		return wp_trim_words( wp_strip_all_tags( $post->post_content ), 18, '…' );
+	}
+
+	/**
 	 * The type label above an event title (taxonomy event_type, doc 03 §4).
 	 *
 	 * @param WP_Post $event Event post.

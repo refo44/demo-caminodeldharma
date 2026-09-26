@@ -74,6 +74,19 @@ final class Editor_Seo_PanelTest extends TestCase {
 	}
 
 	/**
+	 * Protects the home-column mark: a blog entry can be featured through
+	 * the editor store, and that panel is absent on every other type.
+	 */
+	public function test_the_post_panel_marks_an_article_for_the_home_column() {
+		$script = $this->panel_script();
+
+		$this->assertStringContainsString( "'post_featured'", $script );
+		$this->assertStringContainsString( 'Artículo destacado en el inicio', $script );
+		$this->assertMatchesRegularExpression( '/function PostFeaturedPanel\(\)[\s\S]*POST_TYPE !== postType/', $script );
+		$this->assertStringContainsString( "dispatch( 'core/editor' )", $script );
+	}
+
+	/**
 	 * Protects the scope: the head panel renders for the four public
 	 * editorial types and the event panel only for an event.
 	 */

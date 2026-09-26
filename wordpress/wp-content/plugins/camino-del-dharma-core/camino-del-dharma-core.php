@@ -3,7 +3,7 @@
  * Plugin Name: Camino del Dharma Core
  * Plugin URI: https://caminodeldharma.org
  * Description: Domain plugin for Comunidad Buddhista Camino del Dharma — content model, routing and migration tooling (ADR 0024).
- * Version: 0.7.9
+ * Version: 0.7.10
  * Requires at least: 7.1
  * Requires PHP: 8.3
  * Author: Comunidad Buddhista Camino del Dharma
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CDD_CORE_VERSION', '0.7.9' );
+define( 'CDD_CORE_VERSION', '0.7.10' );
 define( 'CDD_CORE_PLUGIN_FILE', __FILE__ );
 
 // Pure domain classes (no WordPress APIs; unit-testable without a boot).
@@ -26,6 +26,7 @@ require_once __DIR__ . '/includes/class-cdd-core-event-status.php';
 require_once __DIR__ . '/includes/class-cdd-core-ics-generator.php';
 require_once __DIR__ . '/includes/class-cdd-core-calendar-data.php';
 require_once __DIR__ . '/includes/class-cdd-core-featured-event-policy.php';
+require_once __DIR__ . '/includes/class-cdd-core-featured-post-policy.php';
 require_once __DIR__ . '/includes/class-cdd-core-authors-list.php';
 require_once __DIR__ . '/includes/class-cdd-core-contact-form-template.php';
 require_once __DIR__ . '/includes/class-cdd-core-llms-txt.php';
@@ -55,6 +56,7 @@ require_once __DIR__ . '/includes/taxonomies.php';
 require_once __DIR__ . '/includes/meta.php';
 require_once __DIR__ . '/includes/authors-guard.php';
 require_once __DIR__ . '/includes/events.php';
+require_once __DIR__ . '/includes/featured-home.php';
 require_once __DIR__ . '/includes/routing.php';
 require_once __DIR__ . '/includes/feeds.php';
 require_once __DIR__ . '/includes/seo.php';

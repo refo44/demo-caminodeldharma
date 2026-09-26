@@ -14,6 +14,8 @@
  *    schedule, attendance mode and sign-up data the JSON-LD `Event` node
  *    and the generated `/eventos/ical/{slug}.ics` already read. No new
  *    domain key is invented here.
+ * 3. «Inicio» — for a blog entry only: `post_featured`, the mark that
+ *    places that entry in the home column. Unmarked entries stay out.
  *
  * Every field is written with `dispatch( 'core/editor' ).editPost( { meta } )`,
  * so Publicar/Actualizar carries the edited keys in the same REST `meta`
@@ -55,6 +57,7 @@
 	// The public types whose head is editable copy (includes/seo.php).
 	var HEAD_TYPES = [ 'post', 'page', 'event', 'blog_author' ];
 	var EVENT_TYPE = 'event';
+	var POST_TYPE = 'post';
 
 	// Head meta keys — the exact set `cdd_core_register_seo_meta()` registers
 	// and `cdd_core_seo_singular_context()` reads.
@@ -76,6 +79,7 @@
 	var EVENT_SIGNUP_URL = 'event_signup_url';
 	var EVENT_SIGNUP_PAYMENT = 'event_signup_payment';
 	var EVENT_FEATURED = 'event_featured';
+	var POST_FEATURED = 'post_featured';
 	var EVENT_CALENDAR_DATES = 'event_calendar_dates';
 
 	var DESCRIPTION_LIMIT = 155;
@@ -447,12 +451,46 @@
 	}
 
 	/**
-	 * Both panels, so a single plugin registration covers head and event.
+	 * The «Inicio» panel: marks a published blog entry for the home column.
+	 * Pages, events and author profiles have no such mark.
+	 *
+	 * @return {Object|null} Element, or null outside a blog entry.
+	 */
+	function PostFeaturedPanel() {
+		var postType = useSelect( function ( select ) {
+			return select( 'core/editor' ).getCurrentPostType();
+		}, [] );
+		var meta = useSelect( function ( select ) {
+			return select( 'core/editor' ).getEditedPostAttribute( 'meta' ) || {};
+		}, [] );
+
+		if ( POST_TYPE !== postType ) {
+			return null;
+		}
+
+		return el(
+			PluginDocumentSettingPanel,
+			{
+				name: 'cdd-core-post-featured',
+				title: __( 'Inicio', TEXT_DOMAIN ),
+				className: 'cdd-core-post-featured'
+			},
+			metaToggle(
+				meta,
+				POST_FEATURED,
+				__( 'Artículo destacado en el inicio', TEXT_DOMAIN ),
+				__( 'Si está activo, el artículo aparece en la columna del inicio. Si no, no aparece ahí.', TEXT_DOMAIN )
+			)
+		);
+	}
+
+	/**
+	 * Head, event data, and the home-column mark, under one plugin registration.
 	 *
 	 * @return {Object} Element.
 	 */
 	function SeoPanels() {
-		return el( Fragment, null, el( HeadPanel, null ), el( EventPanel, null ) );
+		return el( Fragment, null, el( HeadPanel, null ), el( EventPanel, null ), el( PostFeaturedPanel, null ) );
 	}
 
 	wp.plugins.registerPlugin( 'cdd-core-seo-panels', { render: SeoPanels } );

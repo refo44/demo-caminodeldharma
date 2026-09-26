@@ -96,14 +96,17 @@ function camino_del_dharma_render_eventos_listado(): string {
 }
 
 /**
- * The home note of the selected current event, or nothing (doc 03 §3).
+ * The home column: the selected current event, plus any published article
+ * an editor marked featured. Nothing when both are absent (doc 03 §3).
  */
 function camino_del_dharma_render_evento_destacado(): string {
 	if ( ! function_exists( 'cdd_core_featured_home_event' ) ) {
 		return '';
 	}
 
-	return Camino_Del_Dharma_Renderers::featured_event( cdd_core_featured_home_event() );
+	$posts = function_exists( 'cdd_core_featured_home_posts' ) ? cdd_core_featured_home_posts() : array();
+
+	return Camino_Del_Dharma_Renderers::home_featured_column( cdd_core_featured_home_event(), $posts );
 }
 
 /**

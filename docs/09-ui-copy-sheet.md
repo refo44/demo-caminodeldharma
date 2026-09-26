@@ -59,6 +59,15 @@ Un solo evento **vigente**, junto al texto de comunidad en escritorio. No dice �
 
 Sin Preinscribirme, calendario ni compartir. Sin recuadro: en escritorio, filete izquierdo; en móvil, filete superior. Orden: rótulo → cartel `medium` → título → datos → Ver evento.
 
+### Artículo destacado en la misma columna
+
+Solo si la entrada está publicada y marcada (`post_featured`). No aparece por estar reciente. Va debajo de la nota del evento, en la misma columna. Si no hay evento vigente, la columna queda solo con el artículo. Varias entradas marcadas se apilan, la más reciente primero. La UI no dice «destacado».
+
+- **Rótulo:** Artículo
+- **Título:** nombre de la entrada (`h3`, enlace)
+- **Texto:** extracto editorial, o un recorte del contenido si no hay extracto
+- **Enlace:** Leer artículo
+
 ### Meditación semanal
 
 - **Título:** Meditación semanal en línea

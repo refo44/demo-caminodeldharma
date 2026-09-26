@@ -125,7 +125,9 @@ la misma limpieza de `.ics`; no toca imágenes.
 2. Si entre ellos hay uno con `event_featured = true`, se muestra ese.
 3. Si no hay ninguno marcado, se muestra el vigente con fecha de inicio más cercana.
 4. Si hay más de un destacado vigente, se muestra el de fecha de inicio más cercana. La guía editorial: marcar solo uno.
-5. Si no hay ningún vigente, **no se renderiza el módulo** (ni caja vacía ni mensaje). El texto de comunidad queda a ancho de lectura, sin columna derecha.
+5. Si no hay ningún vigente, **no se renderiza la nota del evento**. El texto de comunidad queda a ancho de lectura, sin columna derecha, salvo que haya un artículo marcado (ver abajo).
+
+**Artículos en la misma columna.** Una entrada aparece ahí solo si está publicada y el editor activa `post_featured` («Artículo destacado en el inicio», panel Inicio del editor de la entrada). Sin esa marca no aparece: la sección «Del blog» sigue mostrando las dos entradas más recientes y no consulta esta marca. Si hay varias marcadas, se apilan debajo del evento, la más reciente primero. El visitante ve «Artículo» y «Leer artículo». Si no hay evento vigente pero sí un artículo marcado, la columna muestra solo ese artículo. Si no hay evento vigente ni artículo marcado, la columna no se pinta.
 
 **Maqueta actual (2026-08-13):** `event_featured = true` en Círculos de Presencia Consciente. Un vigente con fecha de inicio más cercana no sustituye esta nota mientras esa marca siga activa.
 
