@@ -146,9 +146,11 @@ Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress (ADR 0047).
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3
 y plugin 0.7.10. No extraer un ZIP de `static/` sobre ese `public_html`.
 El `public_html` de
-`https://palegreen-cod-365706.hostingersite.com/` ya se eliminó. Ese
-hostname ya no sirve el sitio estático. La entrada del sitio en hPanel
-sigue. No borrar los backups.
+`https://palegreen-cod-365706.hostingersite.com/` ya se eliminó, y
+después también la entrada de ese sitio en hPanel. `/domains/` conserva
+solo `caminodeldharma.org`. El hostname puede resolver y respondió 403;
+no sirve el sitio estático. No hubo cambio manual de DNS. No borrar los
+backups.
 Activar el theme **no** crea Pages. La entrega de correo del formulario
 sigue sin verificar y el formulario está oculto.
 
@@ -194,17 +196,21 @@ CI (`test.yml`) corre en pull requests y en `main` y no despliega. Un tag
 raíz ya no existe: el job falla cerrado y no escribe producción. No hay
 workflow de producción.
 
-`static/` salió del árbol vigente. El sitio desplegado en
-`palegreen-cod-365706.hostingersite.com` deja de ser el rollback servido.
-El historial de Git y el tar
+`static/` salió del árbol vigente. La entrada Hostinger de
+`palegreen-cod-365706.hostingersite.com` también se retiró. No queda un
+sitio estático servido como rollback. El historial de Git
+(`282230c41589348722a80985046d16cb07d19a1c`) y el tar
 `static-pre-cutover-20260926-040601.tar.gz` conservan la copia anterior.
 Git no reconstruye solo los archivos que solo existían en el servidor.
 
 ## Próximos pasos
 
-Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`: el sitio de
-staging ya existe y se conserva (ADR 0047 / OWN-036). El corte de dominio no es esta
-sesión. Ledger:
+Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`:
+el corte ya está hecho y la infraestructura estática legada está retirada.
+Siguen abiertos el wrap de Sangha (#7), los conteos de álbum (#13), el
+spike de JSON-LD (#20) y el editor de `/llms.txt` (#22). El correo del
+formulario sigue diferido. El CD de producción (ADR 0046 D-B) sigue sin
+decidir. Staging sigue retirado. Ledger:
 [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR:
 [`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
 

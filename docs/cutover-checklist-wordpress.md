@@ -23,7 +23,10 @@ marcador; la instantánea aceptada es
 `c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
 (ADR 0047). El propietario autorizó después retirar el
 `public_html` de `palegreen-cod-365706.hostingersite.com` y `static/`
-del árbol vigente. Esa raíz deja de ser el rollback servido. El
+del árbol vigente, y más tarde la entrada de ese sitio en hPanel.
+`/domains/` conserva solo `caminodeldharma.org`. El hostname puede
+resolver y respondió 403; no sirve el sitio estático. No hubo cambio
+manual de DNS. No queda un rollback estático servido. El
 historial de Git y el tar
 `static-pre-cutover-20260926-040601.tar.gz` conservan la copia. La
 entrega de correo del formulario no está verificada y el formulario

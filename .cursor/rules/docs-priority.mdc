@@ -7,8 +7,9 @@ alwaysApply: true
 
 `docs/` contains the accepted architecture, migration contract, implementation order, and QA
 requirements. Since 2026-09-26, WordPress on the canonical domain owns editorial
-content. `static/` and the palegreen rollback site are the pre-cutover record,
-not the live site.
+content. `static/` is retired from the working tree. The palegreen Hostinger
+website entry is removed. Git history and the pre-cutover tar are the
+record, not a live rollback site.
 
 ## Rules
 

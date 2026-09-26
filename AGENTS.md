@@ -35,10 +35,14 @@ Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
 `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.10.
 The owner later authorized retiring `static/` from the working tree and
-the palegreen `public_html`. That root is no longer the served rollback.
-Git history and `static-pre-cutover-20260926-040601.tar.gz` keep the
-copy. Do not delete the private backups or the palegreen hPanel site
-entry. Contact-form mail delivery is unverified and the form is hidden.
+the palegreen `public_html`, then removed the palegreen Hostinger website
+entry. `/home/u548735796/domains/` contains only `caminodeldharma.org`.
+The hostname may still resolve and returned 403; it does not serve the old
+site. No manual DNS change was made. Git history
+(`282230c41589348722a80985046d16cb07d19a1c`) and
+`static-pre-cutover-20260926-040601.tar.gz` keep the copy. Do not delete
+the private backups. Contact-form mail delivery is unverified and the form
+is hidden.
 Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
@@ -55,9 +59,10 @@ with the theme active in the harness). Fase 3 durable state: `.audit/fase3-execu
 
 ### Future
 
-The domain cutover is done (2026-09-26). Remaining work is post-cutover
+The domain cutover is done (2026-09-26). The legacy static Hostinger
+website entry is removed. Remaining work is post-cutover
 (`#7`, `#13`, `#22`), the JSON-LD spike (`#20`), deferred contact-form
-mail, and a later static purge that is not authorized. The path here was
+mail, and the undecided production CD (ADR 0046 D-B). The path here was
 **live static production → FSE block theme** (ADR 0029). No classic PHP theme
 in between. The migration pipeline landed in WU-06 and WU-07 (plugin v0.4.0): pure extractors,
 deterministic `migration/payload.json` (source VERSION 1.0.35; live parity verified
@@ -88,8 +93,8 @@ are on `main`, so the pre-staging code is complete.
 The same Hostinger WordPress now serves `https://caminodeldharma.org/`
 (ADR 0047 / OWN-036, done 2026-09-26). `WP_ENVIRONMENT_TYPE` is
 `production` and `blog_public` is `1`. Do not create a second WordPress.
-The palegreen `public_html` has been deleted and no longer serves the
-old static site. Do not delete the hPanel site entry or the backups.
+The palegreen Hostinger website entry has been removed. It no longer
+serves the old static site. Do not delete the private backups.
 **OWN-020 / D-08** is implemented (plugin 0.7.7,
 [issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 Contact-form email delivery remains unverified and the form is hidden
@@ -109,9 +114,8 @@ Counts must reconcile.
 
 `static/` is retired from the working tree. Git history keeps the
 maintained implementation (ADR 0001, ADR 0002; ADR 0021 remains the
-lightbox exception). The palegreen document root is no longer the served
-rollback. The verified tar keeps the deployed copy, including files Git
-does not have.
+lightbox exception). There is no served static rollback site. The
+verified tar keeps the deployed copy, including files Git does not have.
 
 ## WordPress migration rules (docs only until Fase 3 is explicitly started)
 

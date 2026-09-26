@@ -618,9 +618,13 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 **Corte hecho el 2026-09-26.** `https://caminodeldharma.org/` es este
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
-Theme 0.6.3 y plugin 0.7.10. El estático de rollback sigue en
-`palegreen-cod-365706.hostingersite.com` y no se purga sin otra
-autorización, sin fecha. La entrega de correo del formulario sigue sin
+Theme 0.6.3 y plugin 0.7.10. El `public_html` de palegreen y, después,
+la entrada de ese sitio en hPanel ya se retiraron. `/domains/` conserva
+solo `caminodeldharma.org`. El hostname puede resolver y respondió 403;
+no sirve el sitio estático. No queda un rollback estático servido. Los
+backups privados y el tar
+`static-pre-cutover-20260926-040601.tar.gz` se conservan. La entrega de
+correo del formulario sigue sin
 verificar y el formulario está oculto. Lo que sigue en este archivo por
 debajo de este párrafo es el registro anterior a ese corte.
 

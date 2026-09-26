@@ -62,8 +62,9 @@ are later-phase except their stated gates. Binding later ADRs:
 0042 (Gutenberg meta UI), 0044 (feeds 404), 0045 (CF7 mail cutover gate),
 0047 (the existing Hostinger WordPress now serves `caminodeldharma.org` as of
 2026-09-26; do not delete it or install a second WordPress). `WP_ENVIRONMENT_TYPE`
-is `production` and `blog_public` is `1`. The old static site remains at
-`palegreen-cod-365706.hostingersite.com` until a separate purge authorization.
+is `production` and `blog_public` is `1`. The palegreen Hostinger website
+entry is removed. The hostname may still resolve and returned 403; it does
+not serve the old static site. No manual DNS change was made.
 Contact-form email stays unverified. Testing
 guide: `docs/guia-pruebas-plugin-theme-fse.md`.
 Do not mock WordPress APIs. Do not write FSE production code before a failing test. Sonar is WordPress-only (not the static site).
