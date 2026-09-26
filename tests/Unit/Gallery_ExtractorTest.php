@@ -60,7 +60,7 @@ final class Gallery_ExtractorTest extends TestCase {
 		static $gallery = null;
 		if ( null === $gallery ) {
 			$gallery = ( new Cdd_Core_Gallery_Extractor() )->extract(
-				file_get_contents( dirname( __DIR__, 2 ) . '/static/galeria/index.html' ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo file in a unit test without WordPress.
+				file_get_contents( dirname( __DIR__, 2 ) . '/tests/fixtures/published-static/galeria/index.html' ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- frozen oracle, not the retired static tree.
 			);
 		}
 

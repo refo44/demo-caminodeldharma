@@ -22,7 +22,7 @@ if ! command -v pyftsubset &>/dev/null; then
 fi
 
 if [ ! -f "${SOURCE}" ]; then
-  echo "No se encuentra la fuente completa: ${SOURCE}"
+  echo "build-fonts: static/ is retired or the source font is missing (${SOURCE}). Restore the tree from Git history before subsetting." >&2
   exit 1
 fi
 

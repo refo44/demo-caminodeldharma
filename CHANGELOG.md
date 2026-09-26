@@ -12,6 +12,16 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Retiro de la implementación estática
+
+El propietario autorizó quitar `static/` del árbol vigente y retirar el
+sitio estático desplegado. El historial de Git no se reescribe. La copia
+completa del servidor sigue en
+`static-pre-cutover-20260926-040601.tar.gz`
+(`ce9b08ae24716faea907787b8270d06eee687f8216890b19bc532ebb6dc3c107`).
+Ese tar incluye archivos que Git no tiene. `palegreen` deja de ser un
+rollback servido. El correo del formulario sigue sin verificar.
+
 ### Corte a producción — WordPress en el dominio canónico (2026-09-26)
 
 `https://caminodeldharma.org/` lo sirve WordPress 7.1.2. Es la misma

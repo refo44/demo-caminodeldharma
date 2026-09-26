@@ -4,7 +4,7 @@
  * (WU-04 visual baseline, ADR 0029).
  *
  * The expected values are extracted programmatically from the :root block
- * of static/assets/css/main.css — the live production tokens — so this
+ * of the frozen published-static CSS fixture — formerly the live tokens — so this
  * suite asserts reproduction, not a retyped copy
  * (docs/guia-pruebas-plugin-theme-fse.md §4).
  *
@@ -175,7 +175,7 @@ final class Theme_TokensTest extends TestCase {
 
 	/**
 	 * All custom properties of the static :root block, parsed from
-	 * static/assets/css/main.css with comments stripped.
+	 * the frozen published-static CSS fixture with comments stripped.
 	 *
 	 * @return array<string, string>
 	 */
@@ -184,7 +184,7 @@ final class Theme_TokensTest extends TestCase {
 			return self::$static_tokens;
 		}
 
-		$css = file_get_contents( dirname( __DIR__, 2 ) . '/static/assets/css/main.css' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local repo file in a unit test without WordPress loaded.
+		$css = file_get_contents( dirname( __DIR__, 2 ) . '/tests/fixtures/published-static/assets/css/main.css' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- frozen oracle, not the retired static tree.
 
 		$this->assertSame( 1, preg_match( '/^:root\s*\{(.*?)^\}/ms', $css, $root_block ), 'static main.css must contain a :root block.' );
 

@@ -6,6 +6,10 @@
 
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+if [ ! -d "${ROOT}/static/assets/images" ]; then
+  echo "optimize-images: static/ is retired. Restore it from Git history before optimizing those images." >&2
+  exit 1
+fi
 IMAGES_DIR="${ROOT}/static/assets/images"
 MAX_PX=1600
 JPEG_QUALITY=85

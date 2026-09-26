@@ -59,7 +59,7 @@ final class Author_Profile_ExtractorTest extends TestCase {
 			return $profiles;
 		}
 
-		$static = dirname( __DIR__, 2 ) . '/static';
+		$static = dirname( __DIR__, 2 ) . '/tests/fixtures/published-static';
 		$posts  = ( new Cdd_Core_Blog_Extractor() )->extract(
 			array(
 				'circulos-de-presencia-consciente' => file_get_contents( $static . '/blog/circulos-de-presencia-consciente/index.html' ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo files in a unit test without WordPress.

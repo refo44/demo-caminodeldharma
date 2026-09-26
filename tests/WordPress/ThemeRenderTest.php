@@ -63,7 +63,7 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 			'Meditación semanal en línea'
 		);
 
-		$static_html = file_get_contents( dirname( __DIR__, 2 ) . '/static/eventos/index.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repository fixture read inside the ephemeral harness.
+		$static_html = file_get_contents( dirname( __DIR__, 2 ) . '/tests/fixtures/published-static/eventos/index.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- frozen oracle, not the retired static tree.
 		preg_match( '#<section class="eventos-calendar.*?</section>#s', $static_html, $match );
 
 		$this->assertSame(

@@ -231,7 +231,7 @@ final class Event_ExtractorTest extends TestCase {
 			return $events;
 		}
 
-		$static_root = dirname( __DIR__, 2 ) . '/static';
+		$static_root = dirname( __DIR__, 2 ) . '/tests/fixtures/published-static';
 		$singles     = array();
 		foreach ( array( 'circulos-de-presencia-consciente', 'encuentro-nacional-2026', 'pausa-profunda-cali' ) as $slug ) {
 			$singles[ $slug ] = file_get_contents( $static_root . '/eventos/' . $slug . '/index.html' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo files in a unit test without WordPress.

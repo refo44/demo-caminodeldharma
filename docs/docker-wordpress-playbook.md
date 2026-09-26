@@ -192,8 +192,10 @@ entregando de verdad a caminodeldharma1@gmail.com se valida en staging, no solo 
 
 ## Anexo WU-06 — Entradas de migración en el entorno local
 
-Desde WU-06 el servicio `wpcli` monta en **solo lectura** las entradas del importador
-(ADR 0032/0033): `./migration:/repo/migration:ro` y `./static:/repo/static:ro`. Comandos:
+Desde WU-06 el servicio `wpcli` montaba `./static` en solo lectura. Ese
+montaje se retiró con `static/`. Sigue `./migration:/repo/migration:ro`.
+Para volver a extraer, restaurar antes el árbol desde el historial de
+Git. Comandos:
 
 ```bash
 ./tools/extract-payload.sh   # regenera migration/payload.json (determinista, solo lectura)

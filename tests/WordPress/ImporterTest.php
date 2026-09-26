@@ -43,14 +43,18 @@ final class ImporterTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Protects the real artifact: the committed payload validates cleanly
-	 * against the repo's static tree — the reconciliation baseline the
-	 * import will run from.
+	 * Protects the committed payload's schema, counts, and references.
+	 * Media bytes live in Git history and the pre-cutover tar, not in
+	 * the working tree, so disk misses are the expected remainder.
 	 */
-	public function test_committed_payload_validates_against_the_static_tree() {
+	public function test_committed_payload_stays_internally_consistent_without_the_retired_tree() {
 		$payload = json_decode( file_get_contents( '/repo/migration/payload.json' ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo artifact inside the ephemeral harness.
+		$issues  = $this->importer( $payload )->validate();
 
-		$this->assertSame( array(), $this->importer( $payload )->validate() );
+		foreach ( $issues as $issue ) {
+			$this->assertStringStartsWith( 'Media file missing on disk: ', $issue );
+		}
+		$this->assertNotEmpty( $issues );
 		$this->assertSame( 10, $payload['counts']['events'] );
 		$this->assertSame( 11, $payload['counts']['pages'] );
 		$this->assertSame( 35, $payload['counts']['gallery_images'] );
@@ -342,7 +346,7 @@ final class ImporterTest extends WP_UnitTestCase {
 			array(
 				'version' => '1.0.35',
 				'commit'  => 'test-commit',
-				'root'    => 'static',
+				'root'    => 'tests/fixtures/published-static',
 			)
 		);
 	}
@@ -589,7 +593,7 @@ final class ImporterTest extends WP_UnitTestCase {
 	private function import_fixture() {
 		$importer = new Cdd_Core_Importer(
 			$this->seo_payload(),
-			dirname( __DIR__, 2 ) . '/static',
+			dirname( __DIR__, 2 ),
 			array( 'environment' => 'local' )
 		);
 		$importer->import( true );
@@ -652,7 +656,7 @@ final class ImporterTest extends WP_UnitTestCase {
 			array(
 				'version' => '1.0.35',
 				'commit'  => 'abc1234',
-				'root'    => 'static',
+				'root'    => 'tests/fixtures/published-static',
 			),
 			array(
 				'seo'    => array(

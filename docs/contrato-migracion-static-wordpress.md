@@ -22,19 +22,20 @@ despliegue.
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
 | **CURRENT STATE** | Ver el párrafo siguiente. |
-| **FUTURE PLAN** | Purga del rollback y correo del formulario: fuera. |
+| **FUTURE PLAN** | Entrada hPanel de palegreen y correo del formulario: fuera. |
 
 **CURRENT STATE (2026-09-26).** `https://caminodeldharma.org/` es WordPress
 7.1.2, la misma instalación, sin reinstalación (ADR 0047).
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme
 `camino-del-dharma` 0.6.3 y plugin `camino-del-dharma-core` 0.7.10.
-`static/` conserva el artefacto anterior (ADR 0014); ya no es el sitio
-público. El estático vive en
-[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
-como rollback (HTTP 200, no es WordPress). No se ha purgado. Hace falta
-otra autorización del propietario, sin fecha. WordPress es la fuente
-editorial del dominio canónico. La entrega de correo del formulario no
-está verificada y el formulario está oculto (ADR 0045).
+WordPress es la fuente editorial del dominio canónico. El propietario
+autorizó después retirar `static/` del árbol vigente y el `public_html`
+de
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
+Esa raíz deja de ser el rollback servido. El historial de Git y el tar
+`static-pre-cutover-20260926-040601.tar.gz` conservan la copia. La
+entrega de correo del formulario no está verificada y el formulario
+está oculto (ADR 0045).
 
 Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el
 **estado histórico** pre-WU-01. Que la producción publicada fuera estática
@@ -263,6 +264,14 @@ y no forma parte del corte ya hecho. Conservar:
 La ventana la define el propietario. El rollback sigue siendo ejecutable
 mientras el estático temporal y los backups existan. Borrar ese sitio no
 es el paso siguiente de este corte.
+
+Esa autorización llegó después. `static/` sale del árbol vigente y el
+`public_html` de palegreen deja de servir el rollback. El rollback de
+producción pasa a los backups de WordPress, de base de datos y de
+configuración, y al historial de Git. El tar
+`static-pre-cutover-20260926-040601.tar.gz` conserva el estático
+desplegado, incluidos archivos que Git no tiene. La entrada del sitio
+en hPanel no se elimina aquí.
 
 ---
 

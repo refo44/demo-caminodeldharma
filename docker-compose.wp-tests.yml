@@ -13,5 +13,4 @@ services:
       - ./wordpress/wp-content/themes/camino-del-dharma:/var/www/html/wp-content/themes/camino-del-dharma
       - ./wordpress/wp-content/plugins/camino-del-dharma-core:/var/www/html/wp-content/plugins/camino-del-dharma-core
       - ./migration:/repo/migration:ro
-      - ./static:/repo/static:ro
       - .:/repo
