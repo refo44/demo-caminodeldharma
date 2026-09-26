@@ -173,6 +173,34 @@ Preinscribirme
 Do not create another CTA button in the body.
 
 ======================================================================
+DATE RANGE VERSUS SESSIONS
+======================================================================
+
+`event_date` and `event_end` are the stay.
+
+`event_calendar_dates` is a list of separate meetings.
+
+Use a range, and do not store sessions, when the event occupies one or
+more consecutive calendar days with no interruption. A two-day retreat,
+a three-day encuentro, or any continuous stay is one range. The public
+calendar still marks every day inside that range. The .ics file and the
+Google/Outlook links carry one all-day event covering the whole stay.
+
+Store `event_calendar_dates` only when the owner describes separate
+sessions with at least one calendar day between them, such as a weekly
+course. Then the .ics file carries one VEVENT per session, and Google
+and Outlook add only the next session.
+
+Do not ask the owner to choose sessions for an uninterrupted stay.
+
+If supplied session dates are consecutive, with no missing day between
+the first and the last, ignore the session list and store the range.
+
+If a session falls outside `event_date`..`event_end`, STOP and report it.
+
+Do not invent gaps.
+
+======================================================================
 EVENT RENDERING RULES
 ======================================================================
 
@@ -327,6 +355,11 @@ END_DATE >= START_DATE
 If SESSION_DATES exist:
 
 each date = YYYY-MM-DD
+
+Apply DATE RANGE VERSUS SESSIONS before writing.
+
+Consecutive dates are not sessions. Do not propose a session list for
+an uninterrupted stay.
 
 Check the owner did not accidentally supply incompatible facts.
 
@@ -657,9 +690,15 @@ Do NOT derive attendance from `event_modality`.
 
 Session dates:
 
-must be stored as a real PHP array using the existing supported mechanism.
+Store them only under DATE RANGE VERSUS SESSIONS.
+
+When stored, they must be a real PHP array using the existing supported
+mechanism.
 
 Do NOT store a JSON string or comma-separated string.
+
+When the event is a continuous range, delete `event_calendar_dates` if
+it exists. Do not store an empty array as a substitute schedule.
 
 ======================================================================
 PHASE 10 — ASSIGN TAXONOMIES
@@ -993,7 +1032,8 @@ END_DATE:
 [OPTIONAL — YYYY-MM-DD]
 
 SESSION_DATES:
-[OPTIONAL — one YYYY-MM-DD per line]
+[OPTIONAL — one YYYY-MM-DD per line. Only separate sessions with gaps.
+Consecutive days belong in START_DATE and END_DATE, not here.]
 
 EVENT_TYPE:
 [REQUIRED — existing event_type slug or explicitly requested new type]
