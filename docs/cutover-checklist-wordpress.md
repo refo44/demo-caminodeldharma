@@ -15,8 +15,13 @@ environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
 **Estado verificado el 2026-09-26.** `https://caminodeldharma.org/` es
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
 Theme 0.6.3 y plugin 0.7.10. Indexación, canonical y sitemap nativo
-comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. El
-`.htaccess` no cambió. El propietario autorizó después retirar el
+comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. En ese
+momento el `.htaccess` no cambió
+(`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,
+evidencia histórica). Después, WordPress regeneró el interior de su
+marcador; la instantánea aceptada es
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+(ADR 0047). El propietario autorizó después retirar el
 `public_html` de `palegreen-cod-365706.hostingersite.com` y `static/`
 del árbol vigente. Esa raíz deja de ser el rollback servido. El
 historial de Git y el tar

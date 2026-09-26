@@ -177,6 +177,31 @@ Ese canal lo sustituye el tag (ADR 0046). El runbook del disparo es
    encadenadas (no `[OR]`) precisamente para no crear un bucle cuando el TLS termina en el
    proxy.
 
+   El hash del archivo entero no es el invariante permanente. WordPress puede
+   regenerar lo que hay entre sus marcadores, y ese solo cambio altera el
+   SHA256. La verificación separa tres regiones:
+
+   1. reglas propias de Camino, encima de `# BEGIN WordPress`;
+   2. bloque gestionado por LiteSpeed (`# BEGIN LSCACHE` … `# END NON_LSCACHE`),
+      si el servidor lo tiene;
+   3. bloque gestionado por WordPress (`# BEGIN WordPress` … `# END WordPress`).
+
+   Una regeneración del interior de WordPress —comentarios del núcleo,
+   `HTTP_AUTHORIZATION`, desaparición de un `mod_expires` que Hostinger
+   hubiera insertado ahí— puede aceptarse tras revisión si las otras dos
+   regiones no cambian y el HTTP público sigue sano. Un cambio no explicado
+   fuera de los bloques gestionados no es aceptable por ser «del servidor»:
+   exige revisión antes de tratar el hash nuevo como instantánea aprobada.
+
+   Instantánea aprobada el 2026-09-26, después de esa regeneración:
+   `c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`.
+   La evidencia histórica del corte sigue siendo
+   `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`.
+   No se sustituye el archivo vivo por `wordpress/.htaccess` para igualar
+   hashes: el vivo conserva el redirect canónico comentado desde el corte,
+   y el artefacto del repositorio lo tiene activo. Activarlo en el servidor
+   es otro cambio, no esta reconciliación.
+
 7. Instalar Contact Form 7 desde WordPress.org y anotar la versión instalada en
    `docs/operations/third-party-plugins.md`. **CF7 debe estar activo antes de §5.**
 
@@ -334,8 +359,14 @@ abajo es el registro de ese corte, no una instrucción para repetirlo.
 
 Hecho: `https://caminodeldharma.org/` sirve este WordPress;
 `WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
-plugin 0.7.10; `.htaccess` sin cambios; `/eventos` requirió
-`wp rewrite flush` sin `--hard`. El propietario autorizó después
+plugin 0.7.10. En el corte el `.htaccess` no cambió
+(`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,
+evidencia histórica). Después WordPress regeneró solo el interior de su
+marcador; la instantánea aceptada es
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+(ADR 0047).
+`/eventos` requirió `wp rewrite flush` sin `--hard`. Ese flush no está
+demostrado como causa de la regeneración posterior. El propietario autorizó después
 retirar el `public_html` de
 [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
 y `static/` del árbol vigente. Esa raíz deja de ser el rollback

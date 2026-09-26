@@ -121,7 +121,8 @@ Esta sección registra el hecho. No reescribe la decisión de arriba.
 - Robots de la portada: `index,follow,max-image-preview:large`.
 - `robots.txt` anuncia `https://caminodeldharma.org/wp-sitemap.xml`.
 - `/sitemap.xml` redirige 301 a `/wp-sitemap.xml` (200).
-- El `.htaccess` no cambió. SHA256:
+- En el corte, el `.htaccess` no cambió. Ese SHA256 queda como evidencia
+  histórica del corte, no como invariante permanente del archivo entero:
   `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`
 - Tras el cambio de dominio, `/eventos` respondía 404: el CPT estaba
   registrado y las rewrite rules guardadas no tenían rutas `eventos`
@@ -146,6 +147,47 @@ estático. La entrada en hPanel sigue. El tar
 conserva esa copia, incluidos los archivos que no están en Git. La
 decisión de arriba no se reescribe. La entrada del sitio palegreen en
 hPanel no forma parte de este retiro.
+
+### Reconciliación del `.htaccess` (2026-09-26, posterior al corte)
+
+Revisión forense de solo lectura. No se modificó el archivo en vivo, no se
+restauró el backup y no se ejecutó `wp rewrite flush`. El disparador exacto
+no está confirmado. La procedencia probable es la regeneración del interior
+de `# BEGIN WordPress` … `# END WordPress`. LiteSpeed no escribió este
+delta.
+
+Instantánea observada y aceptada:
+
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+
+mtime `2026-09-26 17:05:55.249615305 +0000`, 6475 bytes, 176 líneas.
+Ruta: `/home/u548735796/domains/caminodeldharma.org/public_html/.htaccess`.
+
+- Las líneas anteriores al marcador de WordPress, incluido el bloque
+  LiteSpeed, son idénticas byte a byte a la evidencia del corte.
+- WordPress quitó, de dentro de su marcador, el `mod_expires` generado por
+  Hostinger. Añadió los comentarios habituales en es_CO y
+  `RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]`.
+- El front controller quedó igual.
+- `/`, `/eventos`, `/blog`, `/robots.txt`, `/wp-sitemap.xml` y las 11 URLs
+  del sitemap de eventos respondían 200 en el host canónico. Sin
+  redirección a otro hostname.
+
+Política a partir de aquí: el hash del archivo entero es una instantánea,
+no el invariante. Una regeneración legítima del interior del marcador de
+WordPress puede cambiar ese hash. La verificación separa tres regiones:
+reglas propias de Camino, bloque gestionado por LiteSpeed y bloque
+gestionado por WordPress. Un cambio no explicado fuera de los bloques
+gestionados sigue exigiendo revisión. No se copia el `.htaccess` vivo al
+repositorio: el interior del marcador es contenido generado en runtime.
+`wordpress/.htaccess` sigue siendo el artefacto de reglas propias; al
+copiarlo se conserva el bloque WordPress que el servidor ya tenga.
+
+El archivo vivo conserva, encima de ese marcador, el comentario de staging
+que deja desactivado el redirect canónico. Ese texto ya estaba en la
+evidencia del corte y no forma parte de este delta. `wordpress/.htaccess`
+sí lleva los redirects HTTPS y de host. Esta reconciliación no los activa
+en el servidor.
 
 ## Referencias
 

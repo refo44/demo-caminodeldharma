@@ -95,6 +95,25 @@ archivo:
 Añadido en WU-08B: `sitemap.xml` → `/wp-sitemap.xml` (301), porque el sitemap manual queda
 deprecado (ADR 0030) y la URL vieja sigue indexada.
 
+**Producción, 2026-09-26.** El hash del `.htaccess` entero no es el
+invariante. La evidencia histórica del corte es
+`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`.
+La instantánea observada y aceptada tras la regeneración del marcador de
+WordPress es
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+(ADR 0047). En esa revisión las reglas propias y el bloque LiteSpeed no
+cambiaron. WordPress sustituyó, dentro de su marcador, el `mod_expires` de
+Hostinger por sus comentarios generados y por la regla
+`HTTP_AUTHORIZATION`. El front controller no cambió. El archivo vivo no se
+editó. El disparador exacto queda sin confirmar.
+
+La verificación futura separa reglas propias, bloque LiteSpeed y bloque
+WordPress. Un cambio fuera de los bloques gestionados sigue exigiendo
+revisión. El comentario de staging que en el archivo vivo deja desactivado
+el redirect canónico ya estaba en la evidencia del corte; `wordpress/.htaccess`
+lleva ese redirect activo. Esta nota no autoriza copiar un archivo sobre el
+otro.
+
 ---
 
 ## Sitemap / robots
@@ -106,4 +125,4 @@ deprecado (ADR 0030) y la URL vieja sigue indexada.
 
 ---
 
-**Versión:** 1.3 — WU-08B: `.htaccess` de WordPress versionado y verificado; 301 del sitemap manual.
+**Versión:** 1.4 — 2026-09-26: la instantánea de producción distingue reglas propias, bloque LiteSpeed y bloque WordPress. El hash del archivo entero no es el invariante. 1.3 — WU-08B: `.htaccess` de WordPress versionado y verificado; 301 del sitemap manual.

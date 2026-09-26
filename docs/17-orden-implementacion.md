@@ -149,9 +149,16 @@ Theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651) y plugin
 `camino-del-dharma-core` 0.7.10 (`plugin-v0.7.10`, run 36214533614).
 La portada está indexable: canonical `https://caminodeldharma.org/`,
 robots `index,follow,max-image-preview:large`, sitemap
-`/wp-sitemap.xml`. `/sitemap.xml` redirige allí. El `.htaccess` no
-cambió. Tras el corte, las rutas de eventos exigieron `wp rewrite flush`
-sin `--hard`; archivo y fichas responden 200.
+`/wp-sitemap.xml`. `/sitemap.xml` redirige allí. La evidencia histórica
+del `.htaccess` en el corte es
+`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`.
+Después, WordPress regeneró solo el interior de su marcador. La
+instantánea aceptada es
+`c40e7e4440269d24920771e2ee92da32d894efda5a194f48395ae93f7f89013b`
+(ADR 0047). El hash del archivo entero no es el invariante permanente.
+Tras el corte, las rutas de eventos exigieron `wp rewrite flush`
+sin `--hard`; archivo y fichas responden 200. Ese flush no está
+demostrado como causa de la regeneración posterior del marcador.
 
 El propietario autorizó después retirar `static/` del árbol vigente y
 el `public_html` de
