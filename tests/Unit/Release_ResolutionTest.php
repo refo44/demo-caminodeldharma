@@ -234,12 +234,18 @@ final class Release_ResolutionTest extends TestCase {
 
 		$this->assertSame( 0, $theme['status'] );
 		$this->assertSame(
-			array( 'TARGET_DIR' => self::STAGING_ROOT . '/wp-content/themes/camino-del-dharma' ),
+			array(
+				'TARGET_DIR'          => self::STAGING_ROOT . '/wp-content/themes/camino-del-dharma',
+				'FORBIDDEN_REAL_ROOT' => self::PRODUCTION_ROOT,
+			),
 			$theme['fields']
 		);
 		$this->assertSame( 0, $plugin['status'] );
 		$this->assertSame(
-			array( 'TARGET_DIR' => self::STAGING_ROOT . '/wp-content/plugins/camino-del-dharma-core' ),
+			array(
+				'TARGET_DIR'          => self::STAGING_ROOT . '/wp-content/plugins/camino-del-dharma-core',
+				'FORBIDDEN_REAL_ROOT' => self::PRODUCTION_ROOT,
+			),
 			$plugin['fields']
 		);
 	}

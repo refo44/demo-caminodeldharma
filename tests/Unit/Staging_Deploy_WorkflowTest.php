@@ -234,6 +234,24 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
+	 * The production document root is refused by real path, and an empty
+	 * guard cannot fall through to rsync.
+	 */
+	public function test_preflight_and_sync_fail_closed_without_the_production_root_guard() {
+		foreach ( array( 'Staging preflight', 'Sync the component to staging' ) as $step_name ) {
+			$step = $this->step( $step_name );
+
+			$this->assertStringContainsString( 'FORBIDDEN_REAL_ROOT', $step, $step_name );
+			$this->assertStringContainsString( 'production root guard is empty', $step, $step_name );
+		}
+		$this->assertStringContainsString(
+			'resolved root is the canonical production document root',
+			$this->step( 'Staging preflight' )
+		);
+		$this->assertStringNotContainsString( 'caminodeldharma.org', $this->workflow() );
+	}
+
+	/**
 	 * A code deploy touches no content, no production and no tag.
 	 */
 	public function test_forbidden_operations_are_absent() {
