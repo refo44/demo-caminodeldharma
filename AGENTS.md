@@ -88,8 +88,8 @@ are on `main`, so the pre-staging code is complete.
 The same Hostinger WordPress now serves `https://caminodeldharma.org/`
 (ADR 0047 / OWN-036, done 2026-09-26). `WP_ENVIRONMENT_TYPE` is
 `production` and `blog_public` is `1`. Do not create a second WordPress.
-The static rollback site stays at
-`https://palegreen-cod-365706.hostingersite.com/`. Do not delete it.
+The palegreen `public_html` has been deleted and no longer serves the
+old static site. Do not delete the hPanel site entry or the backups.
 **OWN-020 / D-08** is implemented (plugin 0.7.7,
 [issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
 Contact-form email delivery remains unverified and the form is hidden

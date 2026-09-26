@@ -22,7 +22,7 @@ despliegue.
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
 | **CURRENT STATE** | Ver el párrafo siguiente. |
-| **FUTURE PLAN** | Purga del rollback y correo del formulario: fuera. |
+| **FUTURE PLAN** | Entrada hPanel de palegreen y correo del formulario: fuera. |
 
 **CURRENT STATE (2026-09-26).** `https://caminodeldharma.org/` es WordPress
 7.1.2, la misma instalación, sin reinstalación (ADR 0047).

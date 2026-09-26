@@ -139,7 +139,8 @@ El propietario autorizó después el retiro del estático. `static/` sale
 del árbol vigente; el historial de este repositorio lo conserva. La
 raíz desplegada
 `/home/u548735796/domains/palegreen-cod-365706.hostingersite.com/public_html`
-deja de ser el rollback servido. El tar
+se eliminó. El hostname responde 404 y ya no sirve el sitio
+estático. La entrada en hPanel sigue. El tar
 `static-pre-cutover-20260926-040601.tar.gz`
 (`ce9b08ae24716faea907787b8270d06eee687f8216890b19bc532ebb6dc3c107`)
 conserva esa copia, incluidos los archivos que no están en Git. La
