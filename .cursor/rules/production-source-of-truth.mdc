@@ -5,8 +5,11 @@ alwaysApply: true
 
 # Published Production Source of Truth
 
-Before WordPress cutover, `https://caminodeldharma.org` governs all visitor-facing copy, content,
-structure, media relationships, styles, and behavior (OWN-007, ADR 0034, ADR 0040).
+Before the 2026-09-26 cutover, the canonical domain governed visitor-facing
+copy, content, structure, media, styles, and behavior (OWN-007, ADR 0034,
+ADR 0040). That cutover is done: WordPress there is the editorial source.
+The static rollback site stays until a separate owner purge. Do not treat it
+as live.
 
 ## Rules
 

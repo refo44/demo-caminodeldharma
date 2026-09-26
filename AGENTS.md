@@ -31,10 +31,16 @@ Older docs may mention classic PHP templates (`*.php`) or a previous WordPress o
 
 ### Current
 
-Production is the **live static** site at `https://caminodeldharma.org` (real visitors). The
-monorepo reorg (ADR 0014) is done: deployable HTML lives in `static/` and is production data,
-not a disposable mockup (ADR 0001, ADR 0034). Hardcoded events/blog/gallery JSON are REAL
-PRODUCTION CONTENT. Local Docker environment exists (WU-02, ADR 0023). Plugin
+Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
+`WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
+`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.10.
+The old static site remains at
+`https://palegreen-cod-365706.hostingersite.com/` as rollback. Do not
+delete it, its `public_html`, or the private backups without a separate
+owner authorization. There is no purge date. Contact-form mail delivery
+is unverified and the form is hidden. `static/` remains the pre-cutover
+artifact (ADR 0014, ADR 0034), not the live site.
+Local Docker environment exists (WU-02, ADR 0023). Plugin
 `camino-del-dharma-core` is scaffolded with the TDD quality kit (WU-03, ADR 0038): root
 Composer, PHPUnit + wp-phpunit, PHPCS/WPCS, `tools/`, quality-only `test.yml`. The FSE theme
 `camino-del-dharma` (v0.5.3) has the real views since WU-07 (ADR 0029): 18 block templates,
@@ -50,7 +56,10 @@ with the theme active in the harness). Fase 3 durable state: `.audit/fase3-execu
 
 ### Future
 
-Rest of Fase 3: **live static production → FSE block theme** (ADR 0029). No classic PHP theme
+The domain cutover is done (2026-09-26). Remaining work is post-cutover
+(`#7`, `#13`, `#22`), the JSON-LD spike (`#20`), deferred contact-form
+mail, and a later static purge that is not authorized. The path here was
+**live static production → FSE block theme** (ADR 0029). No classic PHP theme
 in between. The migration pipeline landed in WU-06 and WU-07 (plugin v0.4.0): pure extractors,
 deterministic `migration/payload.json` (source VERSION 1.0.35; live parity verified
 byte-for-byte, delta 0), WP-CLI `wp cdd-core migrate validate|plan|import|verify|convert` +
@@ -76,35 +85,33 @@ session**, a date the file contains, and says the file holds them all. The publi
 `.ics` still carries only the welcome session and is untouched. **WU-10** closed (2026-08-31). Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 **OWN-035:** D-02, D-03 and D-04
 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
-are on `main`, so the pre-staging code is complete. The Hostinger website
-**already exists**: `https://teal-woodpecker-284165.hostingersite.com`. That site is the
-WordPress that will become `caminodeldharma.org` (ADR 0047 / OWN-036). Do not delete it
-and do not create a second one. The domain switch is a later cutover session: first move
-the static site to a temporary domain (files kept as rollback), then **Change domain** on
-this WordPress. Before that switch, inventory mailboxes and subdomains — Hostinger warns
-the change can affect them. While this site is still the temporary URL,
-`WP_ENVIRONMENT_TYPE` stays `staging` and `blog_public` stays `0`. At cutover, on this
-same install, set `WP_ENVIRONMENT_TYPE` to `production` and `blog_public` to `1`. Do not
-perform the switch while building staging.
-**OWN-020 / D-08** implementation pending
-([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)); may follow staging (A2).
-CF7 delivery is a cutover gate (ADR 0045). See `.audit/fase3-execution-state.md`.
+are on `main`, so the pre-staging code is complete.
+The same Hostinger WordPress now serves `https://caminodeldharma.org/`
+(ADR 0047 / OWN-036, done 2026-09-26). `WP_ENVIRONMENT_TYPE` is
+`production` and `blog_public` is `1`. Do not create a second WordPress.
+The static rollback site stays at
+`https://palegreen-cod-365706.hostingersite.com/`. Do not delete it.
+**OWN-020 / D-08** is implemented (plugin 0.7.7,
+[issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)).
+Contact-form email delivery remains unverified and the form is hidden
+(ADR 0045). See `.audit/fase3-execution-state.md`.
 
 ## Canonical content
 
-Until cutover, **live static HTML/JSON is the production content source** for events, posts, gallery,
-and institutional copy (ADR 0034, ADR 0040, OWN-007). After cutover, WordPress owns editorial
-content.
+The 2026-09-26 cutover is done. WordPress owns editorial content on
+`https://caminodeldharma.org/`. Until that date, live static HTML/JSON was
+the production content source (ADR 0034, ADR 0040, OWN-007).
 
-Do not recreate or restore the retired legacy source folder. Do not discard hardcoded HTML as dummy.
-Prefer deterministic extraction over retyping. Counts must reconcile. Before cutover, compare copy,
-content, and styles to the **published** site (`https://caminodeldharma.org`), not only the local
-repo.
+Do not recreate or restore the retired legacy source folder. Do not discard
+hardcoded HTML as dummy. Prefer deterministic extraction over retyping.
+Counts must reconcile.
 
-## Static site is production + visual contract
+## Static site
 
-The static HTML/CSS/JS is both **published content** and the visual/behavioral contract (ADR 0001,
-ADR 0002), unless an ADR records an exception (e.g. ADR 0021 gallery lightbox).
+`static/` remains the pre-cutover artifact and visual contract (ADR 0001,
+ADR 0002), unless an ADR records an exception (ADR 0021 gallery lightbox).
+It is not the live site. The rollback copy stays on the palegreen temporary
+domain until a separate purge authorization.
 
 ## WordPress migration rules (docs only until Fase 3 is explicitly started)
 

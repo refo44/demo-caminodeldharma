@@ -616,6 +616,14 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 ## Próxima acción exacta
 
+**Corte hecho el 2026-09-26.** `https://caminodeldharma.org/` es este
+WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
+Theme 0.6.3 y plugin 0.7.10. El estático de rollback sigue en
+`palegreen-cod-365706.hostingersite.com` y no se purga sin otra
+autorización, sin fecha. La entrega de correo del formulario sigue sin
+verificar y el formulario está oculto. Lo que sigue en este archivo por
+debajo de este párrafo es el registro anterior a ese corte.
+
 WU-10 está cerrado. Owner close-out 2026-09-01: OWN-021–OWN-035, ADR 0044/0045.
 
 **El propietario amplió el pre-staging de código el 2026-09-02** con dos filas de UI wp-admin que

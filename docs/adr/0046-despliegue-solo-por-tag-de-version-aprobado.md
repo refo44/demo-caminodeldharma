@@ -422,6 +422,16 @@ migración, seed, convert, demo purge, aprovisionamiento de CF7, `--confirm-prod
 sustituir el `.htaccess` del entorno, ni promover la base de datos o `uploads/` de
 staging.
 
+## Implementación
+
+2026-09-26. El dominio canónico ya apunta a este WordPress
+(`WP_ENVIRONMENT_TYPE=production`, `blog_public=1`). Ese corte no creó
+un workflow de producción ni cerró D-B. Este ADR sigue sin autorizar
+despliegue de código a producción. El workflow de staging no debe
+escribir
+`/home/u548735796/domains/caminodeldharma.org/public_html`.
+No se cambia este contrato sustituyendo variables `STAGING_*`.
+
 ## Referencias
 
 - [Semantic Versioning 2.0.0](https://semver.org/)

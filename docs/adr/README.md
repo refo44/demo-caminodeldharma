@@ -165,9 +165,9 @@ Documentos, issues, commits o ADR relacionados.
 | Meta wp-admin / Gutenberg | [0042](0042-gutenberg-meta-sin-metabox-clasico-sin-sync.md) — restricciones META-*; no blocker de corte |
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
-| Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate del corte; prueba técnica ≠ buzón de la comunidad |
-| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida: el disparador de producción no está elegido. El workflow de staging ya existe |
-| Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — `teal-woodpecker-284165.hostingersite.com` es el WordPress que recibirá `caminodeldharma.org`; no se reinstala (OWN-036) |
+| Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate de entrega; prueba técnica ≠ buzón de la comunidad. Tras el corte de 2026-09-26 la entrega sigue sin verificar y el formulario está oculto |
+| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida: no hay CD de producción. El corte de dominio de 2026-09-26 no es ese workflow |
+| Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — la misma instalación, sin reinstalar (OWN-036). Desde 2026-09-26 sirve `https://caminodeldharma.org/` en `production` con `blog_public` `1` |
 
 ---
 
@@ -177,8 +177,9 @@ Documentos, issues, commits o ADR relacionados.
 - **Pruebas:** `docs/guia-pruebas-plugin-theme-fse.md` (ADR 0038). Alcance Sonar: `.sonarcloud.properties`.
 - **Contrato de migración:** `docs/contrato-migracion-static-wordpress.md`, matriz y cutover checklist (ADR 0032).
 - **Decisiones de dueño:** `docs/backlog-decisiones-owner-migracion.md` — Fase 3 cerrada (v1.34);
-  OWN-036 / [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md): el sitio
-  `teal-woodpecker-284165.hostingersite.com` es el WordPress del corte. `POST-*`; `META-*`
+  OWN-036 / [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md): esa
+  instalación ya sirve `https://caminodeldharma.org/` (2026-09-26). El estático
+  anterior sigue en el dominio temporal, sin purgar. `POST-*`; `META-*`
   (ADR 0042) no son ADR.
 - **`docs/` numerados:** guías de implementación; deben respetar los ADR vigentes.
 - **`CHANGELOG.md`:** historial de despliegues; no sustituye a los ADR.

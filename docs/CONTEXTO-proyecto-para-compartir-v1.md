@@ -4,6 +4,12 @@ Documento de contexto autocontenido, pensado para compartir con otra IA (ChatGPT
 tiene acceso al repositorio. Resume el proyecto, su estado actual, sus decisiones arquitectónicas y
 lo que está en curso, a fecha **2026-09-01**.
 
+**Posterior a este texto:** el 2026-09-26 `https://caminodeldharma.org/` pasó a
+ser WordPress (`production`, `blog_public` `1`). El estático quedó en
+`palegreen-cod-365706.hostingersite.com` y no se ha purgado. La entrega de
+correo del formulario sigue sin verificar. Las tablas de abajo son el
+snapshot del 2026-09-01.
+
 ---
 
 ## 1. Qué es el proyecto

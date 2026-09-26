@@ -8,7 +8,7 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 | --- | --- |
 | **Versión** | 2.5 |
 | **Fecha** | 2026-09-25 |
-| **Estado** | Vigente — el sitio de staging **existe** y es el futuro WordPress de producción (ADR 0047 / OWN-036). **Este runbook no autoriza el corte de dominio.** |
+| **Estado** | Corte de dominio ya hecho. No autoriza otra escritura. |
 
 > **Canal por tag (ADR 0046):** el código first-party a staging puede subirse con el
 > workflow tag-gated descrito en [`wordpress-staging-cd.md`](wordpress-staging-cd.md).
@@ -29,10 +29,11 @@ propietario en la sesión vigente (OWN-005, ADR 0015).
 - **Contact Form 7 no se despliega desde Git.** El repositorio posee la *definición* del
   formulario, no el código del plugin (WU-09). CF7 se instala desde WordPress.org en cada
   entorno y su versión se anota en `docs/operations/third-party-plugins.md`.
-- **Destino durante la transición:** la instancia Hostinger ya creada,
-  `https://teal-woodpecker-284165.hostingersite.com`, **sin dominio custom y no indexable**
-  (OWN-005). Es el mismo sitio que el corte convertirá en `caminodeldharma.org` (ADR 0047).
-  No se borra ni se crea otra. Nunca el `public_html` del estático antes del corte.
+- **Destino del código:** la misma instalación de Hostinger. Desde
+  2026-09-26 su URL canónica es `https://caminodeldharma.org/`
+  (`production`, `blog_public` `1`). No se borra ni se crea otra
+  (ADR 0047). Un ZIP de `static/` no se extrae sobre ese
+  `public_html`.
 
 ---
 
@@ -326,16 +327,28 @@ El sitio estático sigue desplegándose por ZIP manual desde `static/` según RE
 
 ---
 
-## 9. Corte futuro: este sitio pasa a `caminodeldharma.org`
+## 9. Corte: este sitio pasa a `caminodeldharma.org`
 
-**No ejecutar esta sección en la sesión de staging.** El propietario la dejó para cuando
-staging esté terminado y aprobado (ADR 0047 / OWN-036).
+**Ejecutado el 2026-09-26**, con autorización del propietario. El orden de
+abajo es el registro de ese corte, no una instrucción para repetirlo.
+
+Hecho: `https://caminodeldharma.org/` sirve este WordPress;
+`WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
+plugin 0.7.10; `.htaccess` sin cambios; `/eventos` requirió
+`wp rewrite flush` sin `--hard`. El estático sigue en
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/).
+No purgarlo ni borrar backups sin otra autorización, y sin fecha.
+La entrega de correo del formulario sigue sin verificar; el formulario
+está oculto.
+
+**No repetir esta sección.** No autoriza otro cambio de dominio, ni
+SMTP, ni borrar el rollback.
 
 ```text
-AHORA
+ANTES DEL CORTE
 
 caminodeldharma.org
-    → sitio estático actual
+    → sitio estático
 
 teal-woodpecker-284165.hostingersite.com
     → este WordPress
@@ -344,14 +357,14 @@ teal-woodpecker-284165.hostingersite.com
 ```
 
 ```text
-DESPUÉS DEL CORTE
+DESPUÉS DEL CORTE (2026-09-26)
 
 caminodeldharma.org
     → este mismo WordPress
     WP_ENVIRONMENT_TYPE = production
     blog_public = 1
 
-dominio-temporal-del-estático.hostingersite.com
+palegreen-cod-365706.hostingersite.com
     → antiguo sitio estático, conservado como rollback
 ```
 
