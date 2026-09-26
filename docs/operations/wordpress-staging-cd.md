@@ -11,6 +11,21 @@ explica cómo se opera. Si difieren, manda el ADR.
 | **Destino** | `https://teal-woodpecker-284165.hostingersite.com` (SSH `u548735796`, puerto `65002`) |
 | **Fuera de alcance** | Producción, contenido, D-B (deferido) |
 
+## Estado verificado (2026-09-26)
+
+Lectura SSH, sin cambios en el servidor. No existe el directorio
+`teal-woodpecker-284165.hostingersite.com` ni su `public_html`.
+No es un symlink y no hay `wp-config.php`. `readlink -f` no resuelve
+esa ruta. La raíz de producción es un directorio real, distinto:
+`/home/u548735796/domains/caminodeldharma.org/public_html`,
+con `wp-config.php`. El estático de rollback sigue en
+`palegreen-cod-365706.hostingersite.com`.
+
+El workflow se conserva solo como mecanismo histórico de recuperación
+con fallo cerrado. No está operativo. No se inventa otro servidor de
+staging. Quitar el disparador por tag cambiaría el contrato aceptado
+de ADR 0046; este documento no lo quita.
+
 ## 1. Modelo: MERGE ≠ RELEASE
 
 Fusionar a `main` **no** despliega nada. Solo un tag `theme-v<SemVer>` o
@@ -19,8 +34,8 @@ Fusionar a `main` **no** despliega nada. Solo un tag `theme-v<SemVer>` o
 | Evento | ¿Despliega? |
 | --- | --- |
 | push a `main`, pull request, `workflow_dispatch`, tag `v*` | No |
-| tag `theme-v<SemVer>` | Sí, solo el theme |
-| tag `plugin-v<SemVer>` | Sí, solo el plugin |
+| tag `theme-v<SemVer>` | Arranca; falla cerrado (raíz ausente) |
+| tag `plugin-v<SemVer>` | Arranca; falla cerrado (raíz ausente) |
 
 Los tags `v*` son del sitio estático (ADR 0015) y nunca disparan este workflow.
 
@@ -78,6 +93,12 @@ staging (`check-staging-target.sh`); no es el `public_html` de producción; Word
 instalado; `wp_get_environment_type()` == `staging`; `home` == URL de staging; ABSPATH
 == raíz configurada; el destino cuelga de `wp-content`. Se registra el SHA256 del
 `.htaccess` raíz.
+
+El mismo script imprime `FORBIDDEN_REAL_ROOT` (la raíz canónica de producción).
+El preflight y el `rsync` fallan si ese valor está vacío, si el destino
+configurado es esa raíz, o si `pwd -P` del directorio remoto (symlink incluido)
+es esa raíz o cuelga de ella. No hay valor de reserva (`/`, `$HOME` ni un
+`public_html` genérico). Un tag de componente no despliega producción.
 
 ## 7. Transporte
 
@@ -147,6 +168,11 @@ Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress. La raíz es
 y plugin 0.7.10. Este workflow no escribe esa raíz. El corte de dominio
 no fue un deploy de theme o plugin (ADR 0047). El ZIP estático no debe
 volver a caer sobre ese document root (ADR 0015, ADR 0013).
+
+La raíz allowlist de staging ya no está en el disco. El siguiente tag
+`theme-v*` o `plugin-v*` arranca este workflow y el preflight remoto
+falla porque el directorio no existe, antes de `rsync`. No escribe la
+raíz canónica.
 
 **No** se prepara producción sustituyendo los valores `STAGING_*` ni apuntando el
 entorno `staging` al sitio público. Aunque el día del corte el servidor, la cuenta o

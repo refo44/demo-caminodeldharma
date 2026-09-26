@@ -5,7 +5,9 @@
 #
 # Not a trigger: a merge, a push to the trunk, a green CI or a version bump. The
 # static line v* never reaches this file. Nothing here creates, moves or deletes a
-# tag, publishes a release, touches content, or knows a production target.
+# tag, publishes a release, touches content, or writes the canonical production
+# document root. That root is refused by tools/release/check-staging-target.sh;
+# this file does not name it.
 # Operator runbook: docs/operations/wordpress-staging-cd.md
 name: deploy-staging
 
@@ -102,7 +104,15 @@ jobs:
         with:
           php-version: '8.3'
           coverage: none
-      - run: composer install --prefer-dist --no-progress
+      - name: Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - run: composer install --prefer-dist --no-progress --no-interaction
       - run: composer test
       - run: composer lint:phpcs
 
@@ -118,6 +128,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '20'
+          cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run lint:css
 
@@ -226,15 +237,29 @@ jobs:
       - name: Staging preflight
         id: preflight
         run: |
-          target_dir=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}" | sed -n 's/^TARGET_DIR=//p')
-          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${target_dir}" "${STAGING_URL}" <<'REMOTE'
+          guard=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}")
+          target_dir=$(printf '%s\n' "${guard}" | sed -n 's/^TARGET_DIR=//p')
+          forbidden=$(printf '%s\n' "${guard}" | sed -n 's/^FORBIDDEN_REAL_ROOT=//p')
+          [ -n "${target_dir}" ] || { echo "::error::staging target is empty"; exit 1; }
+          [ -n "${forbidden}" ] || { echo "::error::production root guard is empty"; exit 1; }
+          case "${target_dir}" in
+            "${forbidden}" | "${forbidden}"/*) echo "::error::staging target is the canonical production document root"; exit 1 ;;
+          esac
+          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${target_dir}" "${STAGING_URL}" "${forbidden}" <<'REMOTE'
           set -euo pipefail
-          root=$1; target=$2; url=$3
+          root=$1; target=$2; url=$3; forbidden=$4
           fail() { echo "preflight: $*" >&2; exit 1; }
+          [ -n "${forbidden}" ] || fail "production root guard is empty"
           [ -d "${root}" ] || fail "WordPress root is missing"
           [ -d "${target}" ] || fail "component directory is missing"
           real_root=$(cd "${root}" && pwd -P)
           real_target=$(cd "${target}" && pwd -P)
+          case "${real_root}" in
+            "${forbidden}" | "${forbidden}"/*) fail "resolved root is the canonical production document root" ;;
+          esac
+          case "${real_target}" in
+            "${forbidden}" | "${forbidden}"/*) fail "resolved component directory is under the canonical production document root" ;;
+          esac
           case "${real_target}" in
             "${real_root}"/wp-content/themes/* | "${real_root}"/wp-content/plugins/*) ;;
             *) fail "component directory is outside wp-content of the root" ;;
@@ -258,8 +283,25 @@ jobs:
       # are outside the source and the destination.
       - name: Sync the component to staging
         run: |
-          target_dir=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}" | sed -n 's/^TARGET_DIR=//p')
+          guard=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}")
+          target_dir=$(printf '%s\n' "${guard}" | sed -n 's/^TARGET_DIR=//p')
+          forbidden=$(printf '%s\n' "${guard}" | sed -n 's/^FORBIDDEN_REAL_ROOT=//p')
           [ -n "${target_dir}" ] && [ -n "${STAGE_DIR}" ] && [ -d "${STAGE_DIR}" ] || { echo "::error::empty sync path"; exit 1; }
+          [ -n "${forbidden}" ] || { echo "::error::production root guard is empty"; exit 1; }
+          case "${target_dir}" in
+            "${forbidden}" | "${forbidden}"/*) echo "::error::staging target is the canonical production document root"; exit 1 ;;
+          esac
+          ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${target_dir}" "${forbidden}" <<'REMOTE'
+          set -euo pipefail
+          target=$1; forbidden=$2
+          fail() { echo "sync: $*" >&2; exit 1; }
+          [ -n "${forbidden}" ] || fail "production root guard is empty"
+          [ -d "${target}" ] || fail "component directory is missing"
+          real_target=$(cd "${target}" && pwd -P)
+          case "${real_target}" in
+            "${forbidden}" | "${forbidden}"/*) fail "resolved component directory is under the canonical production document root" ;;
+          esac
+          REMOTE
           rsync --recursive --times --delete --chmod=D755,F644 --itemize-changes \
             -e "ssh -F ${SSH_CONFIG}" \
             "${STAGE_DIR}/" "${SSH_USER}@${SSH_HOST}:${target_dir}/"

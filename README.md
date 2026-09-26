@@ -184,6 +184,11 @@ La migración no está completa porque un theme esté desplegado. Contrato: [`do
 
 **Tras el corte:** un ZIP de HTML estático **no** debe escribir sobre el document root de WordPress (`STATIC DEPLOY ≠ WORDPRESS CODE DEPLOY ≠ WORDPRESS CONTENT`, ADR 0013).
 
+CI (`test.yml`) corre en pull requests y en `main` y no despliega. Un tag
+`theme-v*` o `plugin-v*` arranca el workflow de staging (ADR 0046). Esa
+raíz ya no existe: el job falla cerrado y no escribe producción. No hay
+workflow de producción.
+
 ## Próximos pasos
 
 Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`: el sitio de

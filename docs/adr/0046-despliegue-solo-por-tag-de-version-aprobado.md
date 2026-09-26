@@ -432,6 +432,19 @@ escribir
 `/home/u548735796/domains/caminodeldharma.org/public_html`.
 No se cambia este contrato sustituyendo variables `STAGING_*`.
 
+El preflight de staging compara la ruta resuelta (`pwd -P`) con esa raíz,
+que `check-staging-target.sh` imprime como `FORBIDDEN_REAL_ROOT`. Un
+symlink hacia esa raíz falla antes del `rsync`. Sigue sin haber workflow
+de producción. D-B sigue abierta. Este ADR no está cerrado.
+
+El mismo día, una lectura SSH sin cambios comprobó que no existe
+`/home/u548735796/domains/teal-woodpecker-284165.hostingersite.com`
+ni su `public_html`. No es un symlink hacia la raíz canónica. El
+workflow de staging se deja como está: un tag sigue arrancándolo y
+el preflight falla cerrado antes de escribir. Desactivar ese
+disparador cambiaría esta decisión aceptada. El CD de staging no
+está operativo. No se crea otro destino ni CD de producción.
+
 ## Referencias
 
 - [Semantic Versioning 2.0.0](https://semver.org/)
