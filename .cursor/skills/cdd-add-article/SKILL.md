@@ -11,8 +11,12 @@ disable-model-invocation: true
 
 # Add a production blog article
 
-Execute [prompt.md](prompt.md) verbatim. Do not paraphrase it, skip a phase, or rediscover the migration history.
+Execute [prompt.md](prompt.md) verbatim. Do not paraphrase it, skip a phase,
+or rediscover the migration history.
 
-The owner replaces the `ARTICLE INPUT` block at the end of that file in the chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
+The owner replaces the `ARTICLE INPUT` block at the end of that file in the
+chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
 
-Stop conditions in the prompt are mandatory. If a required fact is missing, stop and ask. Do not invent it. Do not create a new `blog_author` unless a separate author-profile workflow was authorized.
+Stop conditions in the prompt are mandatory. If a required fact is missing,
+stop and ask. Do not invent it. Do not create a new `blog_author` unless a
+separate author-profile workflow was authorized.

@@ -10,8 +10,11 @@ description: >-
 
 # Add a production event
 
-Execute [prompt.md](prompt.md) verbatim. Do not paraphrase it, skip a phase, or rediscover the migration history.
+Execute [prompt.md](prompt.md) verbatim. Do not paraphrase it, skip a phase,
+or rediscover the migration history.
 
-The owner replaces the `EVENT INPUT` block at the end of that file in the chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
+The owner replaces the `EVENT INPUT` block at the end of that file in the
+chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
 
-Stop conditions in the prompt are mandatory. If a required fact is missing, stop and ask. Do not invent it.
+Stop conditions in the prompt are mandatory. If a required fact is missing,
+stop and ask. Do not invent it.
