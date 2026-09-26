@@ -12,7 +12,15 @@ DEPLOY SUCCESS ≠ APPLICATION SUCCESS
 No marcar un ítem por un ZIP, FTP o File Manager en verde. Cada casilla exige evidencia del
 environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
 
-WordPress **no está en producción** hoy. Usar este checklist cuando se ejecute el corte, no antes.
+**Estado verificado el 2026-09-26.** `https://caminodeldharma.org/` es
+WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
+Theme 0.6.3 y plugin 0.7.10. Indexación, canonical y sitemap nativo
+comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. El
+`.htaccess` no cambió. El estático de
+`palegreen-cod-365706.hostingersite.com` sigue en pie. Su purga no es
+este corte: otra autorización, sin fecha. La entrega de correo del
+formulario no está verificada y el formulario está oculto. Las casillas
+de abajo no se marcan en bloque por este registro.
 
 ---
 

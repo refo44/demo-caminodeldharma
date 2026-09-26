@@ -51,8 +51,11 @@ riesgo desde la fase de desarrollo, no solo en el staging final.
 *(Nota 2026-08-29, OWN-005: el staging remoto es **otra instancia Hostinger sin dominio custom**,
 hasta el switch. Producción sigue siendo el estático en `caminodeldharma.org`. Docker local no
 cambia: no sustituye esa instancia. Staging noindex; no instalar WP sobre el `public_html` del live.
-Nota 2026-09-23, ADR 0047: esa instancia es `teal-woodpecker-284165.hostingersite.com` y es la
-que recibirá el dominio; no se reinstala.)*
+Nota 2026-09-23, ADR 0047: esa instancia es
+`teal-woodpecker-284165.hostingersite.com`
+y es la que recibirá el dominio; no se reinstala.
+Nota 2026-09-26: el dominio canónico ya apunta a esa instalación.
+Docker local no cambia.)*
 6. **Arquitectura de 3 servicios** (`db` con healthcheck, `wordpress`, `wpcli`), con bind-mount
    limitado al theme propio (`camino-del-dharma`, y al plugin propio si llega a crearse) — el core y la
    base de datos quedan en volúmenes Docker, nunca en Git. Detalle completo, gotchas y checklist en

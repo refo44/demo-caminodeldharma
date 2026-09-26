@@ -12,6 +12,48 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Corte a producción — WordPress en el dominio canónico (2026-09-26)
+
+`https://caminodeldharma.org/` lo sirve WordPress 7.1.2. Es la misma
+instalación de Hostinger. No hubo reinstalación.
+
+- `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
+- `home` y `siteurl` son `https://caminodeldharma.org`.
+- Theme `camino-del-dharma` 0.6.3, tag `theme-v0.6.3`,
+  run 36214533651 (success).
+- Plugin `camino-del-dharma-core` 0.7.10, tag `plugin-v0.7.10`,
+  run 36214533614 (success).
+- `robots.txt` permite el sitio salvo `/wp-admin/` (con la excepción
+  de `admin-ajax.php`) y anuncia `/wp-sitemap.xml`.
+- La portada responde 200, con canonical
+  `https://caminodeldharma.org/` y
+  `index,follow,max-image-preview:large`.
+- No queda el hostname temporal de WordPress en la portada.
+- `/sitemap.xml` responde 301 hacia `/wp-sitemap.xml` (200).
+- El `.htaccess` de producción no cambió. SHA256:
+  `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`
+- Un dry-run de search-replace del dominio temporal de WordPress
+  hacia el canónico reportó 0 reemplazos. No hubo reemplazo real.
+
+Tras el corte, `/eventos` y las fichas respondían 404. Había 10 eventos
+publicados y el CPT estaba bien registrado (`has_archive` y slug
+`eventos`), pero de 95 rewrite rules ninguna era de eventos. Se guardó
+esa opción y se ejecutó `wp rewrite flush`. No se usó `--hard` y no se
+editó `.htaccess`. Quedaron 143 reglas, entre ellas `eventos/?$` y la
+ficha `eventos/([^/]+)`. El archivo y las 10 fichas del sitemap de
+eventos responden 200. `/`, `/comunidad`, `/linaje`, `/practica`,
+`/galeria` y `/blog` siguen en 200.
+
+El estático anterior sigue en
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+(HTTP 200; no es WordPress). Los backups privados siguen en
+`/home/u548735796/cdd-extract/backups/`. La purga de ese sitio no forma
+parte de este corte. Exige otra autorización del propietario y no tiene
+fecha.
+
+La entrega de correo del formulario de contacto no está verificada. El
+formulario está oculto. Queda diferido. No está resuelto.
+
 ### WordPress Fase 3 — mostrar u ocultar el formulario de contacto (plugin 0.7.9, theme 0.6.2)
 
 Plugin `camino-del-dharma-core` **0.7.9** y theme `camino-del-dharma` **0.6.2**.

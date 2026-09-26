@@ -98,7 +98,7 @@ Este documento define el orden oficial de implementación, validación, migraci�
 ## Estado actual del proyecto (2026-08-29, snapshot)
 
 Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado vigente está en
-«Estado actual (2026-09-23)» más abajo y en `.audit/fase3-execution-state.md`.
+«Estado actual (2026-09-26)» más abajo y en `.audit/fase3-execution-state.md`.
 
 | Tiempo | Hecho |
 | ------ | ----- |
@@ -119,7 +119,7 @@ Tres tiempos (no mezclar). Este bloque es **histórico** a esa fecha. El estado 
 
 ### Estado actual (2026-09-01)
 
-Snapshot de esa fecha. El estado vigente es el bloque de 2026-09-23.
+Snapshot de esa fecha. El estado vigente es el bloque de 2026-09-26.
 
 Producción sigue **estática** en `https://caminodeldharma.org`. El repo es monorepo (`static/` +
 `wordpress/`). Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2**.
@@ -141,11 +141,37 @@ subdominios. Continuidad: `.audit/fase3-execution-state.md`.
 
 La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). Pendientes de cierre operativo: formulario de contacto sin backend; aviso de privacidad publicado y provisional (ADR 0039). HSTS aplazado (ADR 0020). **ADR 0019** descarta la analítica con cookies.
 
+### Estado actual (2026-09-26)
+
+`https://caminodeldharma.org/` es WordPress 7.1.2. Es la misma instalación
+(ADR 0047). `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
+Theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651) y plugin
+`camino-del-dharma-core` 0.7.10 (`plugin-v0.7.10`, run 36214533614).
+La portada está indexable: canonical `https://caminodeldharma.org/`,
+robots `index,follow,max-image-preview:large`, sitemap
+`/wp-sitemap.xml`. `/sitemap.xml` redirige allí. El `.htaccess` no
+cambió. Tras el corte, las rutas de eventos exigieron `wp rewrite flush`
+sin `--hard`; archivo y fichas responden 200.
+
+El estático anterior sigue en
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+(HTTP 200, no es WordPress). No se ha purgado. La purga es una acción
+futura, con autorización aparte del propietario, y no tiene fecha. Los
+backups privados del corte se conservan. La entrega de correo del
+formulario no está verificada y el formulario está oculto (ADR 0045).
+
+Los bloques de 2026-09-01 y 2026-09-23 quedan como snapshot. No describen
+el sitio público de hoy.
+
 ---
 
 ## Principios transversales
 
 ### Fuentes de verdad durante producción estática
+
+Desde 2026-09-26 el dominio canónico es WordPress: el contenido editorial
+lo gobierna WordPress y el código first-party sigue en Git. Los puntos de
+abajo describen la regla que rigió **hasta** ese corte (OWN-007).
 
 **Git gobierna el código y los artefactos de despliegue; el sitio publicado gobierna el contenido
 visible hasta el corte (OWN-007).**
@@ -613,7 +639,11 @@ Resumen (detalle en el checklist):
 5. Backup WordPress (BD + medios).
 6. Validar WordPress en staging (Fase 2.5 sobre el theme).
 7. Verificar: navegación, formularios, eventos, blog, SEO, a11y, redirects, HTTPS, caché. **HSTS sigue aplazado** el día del corte (ADR 0020).
-8. Cambio de dominio, no reinstalación (ADR 0047): el estático de `caminodeldharma.org` pasa a un dominio temporal (archivos conservados) y **este** WordPress (`teal-woodpecker-284165.hostingersite.com`) recibe el dominio con **Cambiar dominio**. Antes: inventario de correo y subdominios. Retirar el deploy ZIP estático sobre el document root de WordPress.
+8. Cambio de dominio, no reinstalación (ADR 0047): el estático pasa a un
+   dominio temporal y este WordPress recibe el dominio. **Hecho el
+   2026-09-26.** El estático quedó en
+   `palegreen-cod-365706.hostingersite.com`. No se purgó. Un ZIP
+   estático no vuelve a ese document root.
 9. Smoke test anónimo del sitio público.
 10. Static deja de recibir mantenimiento; **conservar** en tag/rama de archivo (no borrar de inmediato).
 11. **Tras ≥30 días estables:** revisar HSTS (ADR 0020 / 0018) y registrar en `CHANGELOG.md`.

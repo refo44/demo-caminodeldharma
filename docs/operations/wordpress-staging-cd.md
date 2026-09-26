@@ -141,10 +141,12 @@ reutilizan ni mueven tags.
 
 ## 11. Producción: límite, no un cambio de variables
 
-Hoy producción es el estático `https://caminodeldharma.org`, document root
-`/home/u548735796/domains/caminodeldharma.org/public_html`. Este workflow no lo escribe.
-El ZIP estático sigue en ADR 0015. El corte de dominio es otra sesión (ADR 0047): no es
-desplegar un theme o un plugin.
+Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress. La raíz es
+`/home/u548735796/domains/caminodeldharma.org/public_html`.
+`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3
+y plugin 0.7.10. Este workflow no escribe esa raíz. El corte de dominio
+no fue un deploy de theme o plugin (ADR 0047). El ZIP estático no debe
+volver a caer sobre ese document root (ADR 0015, ADR 0013).
 
 **No** se prepara producción sustituyendo los valores `STAGING_*` ni apuntando el
 entorno `staging` al sitio público. Aunque el día del corte el servidor, la cuenta o

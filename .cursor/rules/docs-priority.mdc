@@ -6,7 +6,9 @@ alwaysApply: true
 # Docs and Production Priority
 
 `docs/` contains the accepted architecture, migration contract, implementation order, and QA
-requirements. The published static site contains current production content and presentation.
+requirements. Since 2026-09-26, WordPress on the canonical domain owns editorial
+content. `static/` and the palegreen rollback site are the pre-cutover record,
+not the live site.
 
 ## Rules
 

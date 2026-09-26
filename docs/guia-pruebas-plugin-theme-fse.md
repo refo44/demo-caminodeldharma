@@ -11,9 +11,13 @@ FSE solo ensambla · Sonar no sustituye PHPUnit.
 
 | Tiempo | Qué hay que probar | Gate |
 | --- | --- | --- |
-| **Hoy (pre-corte)** | Producción sigue en el estático publicado (`static/` en el monorepo; ADR 0034). Plugin `camino-del-dharma-core` + theme FSE `camino-del-dharma` en `wordpress/` (Fase 3 activa). CSS con Stylelint. | `composer test` + `composer lint:phpcs` + `npm run lint:css`. `composer test:wp` y `qa-*.sh` en local. Sonar **no** mira el estático. |
-| **Fase 3 (en curso)** | Plugin + block theme con **TDD desde la primera línea**. Contratos wp-phpunit y harness Docker aislado. | Mismo gate; ver `.audit/fase3-execution-state.md`. |
-| **Después del corte** | WordPress es la implementación activa. El estático queda archivo. Sonar sigue siendo solo plugin + theme. | El mismo gate. Deploy sigue manual (ADR 0015) hasta otra decisión. |
+| **Antes del corte** | Estático publicado. | Mismo gate de código. |
+| **Fase 3 (código)** | Plugin y theme con TDD. | Mismo gate. |
+| **Hoy** | WordPress canónico. Rollback vivo. | Mismo gate. |
+
+El gate de código no cambia: `composer test`, `composer lint:phpcs`
+y `npm run lint:css`. `composer test:wp` y `qa-*.sh` siguen en local.
+Sonar no mira `static/`.
 
 Git **`main` protegida** (ADR 0043): PR obligatorio desde ramas
 [Conventional Branch](https://conventionalbranch.org/); commits

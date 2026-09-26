@@ -105,6 +105,36 @@ Este ADR **no autoriza el corte**. La sesión vigente sigue siendo construir sta
 - Ejecutar el corte solo con el checklist y con autorización expresa del propietario.
 - No retirar el estático del dominio temporal hasta evaluar la ventana de rollback.
 
+## Implementación
+
+2026-09-26. El propietario autorizó el corte en una sesión posterior.
+Esta sección registra el hecho. No reescribe la decisión de arriba.
+
+- `https://caminodeldharma.org/` sirve este mismo WordPress (7.1.2).
+- Raíz: `/home/u548735796/domains/caminodeldharma.org/public_html`.
+- `WP_ENVIRONMENT_TYPE` es `production`. `blog_public` es `1`.
+- `home` y `siteurl` son `https://caminodeldharma.org`.
+- Theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651).
+- Plugin `camino-del-dharma-core` 0.7.10 (`plugin-v0.7.10`,
+  run 36214533614).
+- Canonical de la portada: `https://caminodeldharma.org/`.
+- Robots de la portada: `index,follow,max-image-preview:large`.
+- `robots.txt` anuncia `https://caminodeldharma.org/wp-sitemap.xml`.
+- `/sitemap.xml` redirige 301 a `/wp-sitemap.xml` (200).
+- El `.htaccess` no cambió. SHA256:
+  `a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`
+- Tras el cambio de dominio, `/eventos` respondía 404: el CPT estaba
+  registrado y las rewrite rules guardadas no tenían rutas `eventos`
+  (95 reglas, 0 de eventos). Reparación: `wp rewrite flush`, sin
+  `--hard`. Quedaron 143 reglas. Archivo y 10 fichas responden 200.
+- El estático sigue en
+  [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+  (HTTP 200, no es WordPress). No se ha purgado. La purga no es parte
+  del corte hecho: exige otra autorización del propietario, sin fecha.
+- Los backups privados del corte siguen fuera de `public_html`.
+- La entrega de correo del formulario sigue sin verificar y el
+  formulario está oculto. Ver ADR 0045.
+
 ## Referencias
 
 - OWN-005, OWN-036

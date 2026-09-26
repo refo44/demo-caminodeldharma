@@ -49,6 +49,14 @@ La elegibilidad legal de CF7 (0041 puntos 1–4, 6) **no** cambia.
 Checklists y matriz: el gate de release de correo es **cliente + buzón comunitario**, no solo
 el Gmail del implementador. ADR 0041 se marca con esta sustitución parcial.
 
+## Implementación
+
+2026-09-26. El corte del dominio ya ocurrió. La entrega a
+`caminodeldharma1@gmail.com` **no** está verificada. El formulario de
+contacto está oculto. El propietario difirió el correo para ese corte.
+Eso no cierra este ADR: no afirma que el correo funcione, no configura
+SMTP y no da por resuelta la entrega.
+
 ## Referencias
 
 - OWN-018 · OWN-033

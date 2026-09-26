@@ -21,12 +21,25 @@ despliegue.
 | Tiempo | Qué es cierto |
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
-| **CURRENT STATE** | Producción = sitio **estático live** en Hostinger, `https://caminodeldharma.org` (visitas reales). HTML desplegable en **`static/`** (ADR 0014). Eventos/blog/galería hardcodeados = contenido de producción (ADR 0034), no demo. Plugin `camino-del-dharma-core` **0.7.3** y theme FSE `camino-del-dharma` **0.5.2** en `wordpress/` (WU-00–WU-10 en Git). El WordPress de staging **existe** en `https://teal-woodpecker-284165.hostingersite.com` y es el que el corte convertirá en producción (ADR 0047 / OWN-036); el cambio de dominio **no** está hecho. `docker-compose.yml` y `.github/workflows/test.yml` existen. ZIP manual desde `static/` (ADR 0015). |
-| **FUTURE PLAN** | Terminar **este** staging (código, importación, medios, formularios, SEO, QA). El corte, en otra sesión (ADR 0047): el estático pasa a un dominio temporal y este WordPress recibe `caminodeldharma.org` por **Cambiar dominio**. Tras el corte, WordPress es la SoT editorial. |
+| **CURRENT STATE** | Ver el párrafo siguiente. |
+| **FUTURE PLAN** | Purga del rollback y correo del formulario: fuera. |
 
-Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el **estado
-histórico** pre-WU-01. Producción publicada sigue estática **hasta el corte**; no se
-reescriben como si nunca hubieran sido ciertas.
+**CURRENT STATE (2026-09-26).** `https://caminodeldharma.org/` es WordPress
+7.1.2, la misma instalación, sin reinstalación (ADR 0047).
+`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme
+`camino-del-dharma` 0.6.3 y plugin `camino-del-dharma-core` 0.7.10.
+`static/` conserva el artefacto anterior (ADR 0014); ya no es el sitio
+público. El estático vive en
+[palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
+como rollback (HTTP 200, no es WordPress). No se ha purgado. Hace falta
+otra autorización del propietario, sin fecha. WordPress es la fuente
+editorial del dominio canónico. La entrega de correo del formulario no
+está verificada y el formulario está oculto (ADR 0045).
+
+Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el
+**estado histórico** pre-WU-01. Que la producción publicada fuera estática
+describe el tiempo anterior al 2026-09-26; no se reescribe como si nunca
+hubiera sido cierto.
 
 ---
 
@@ -216,7 +229,7 @@ STATIC DEPLOY  ≠  WORDPRESS CODE DEPLOY  ≠  WORDPRESS CONTENT
 
 | Operación | Qué mueve | Qué no mueve |
 | --------- | --------- | ------------ |
-| Static deploy (CURRENT) | HTML, CSS, JS, assets, `.htaccess`, `robots.txt`, `sitemap.xml` → `public_html` | `docs/`, `scripts/` |
+| Static deploy | No escribe el document root canónico | `docs/`, `scripts/` |
 | WP code deploy (FUTURE) | Solo `wordpress/wp-content/themes/camino-del-dharma/` y `plugins/camino-del-dharma-core/` | core, `wp-config.php`, uploads, plugins de terceros, BD |
 | WP content | Importador WP-CLI / edición wp-admin | Código del theme |
 
@@ -225,25 +238,31 @@ En el cutover:
 - El workflow/ZIP legacy de HTML **no** puede sobrescribir el document root de WordPress.
 - Sin `--delete` / mirror sobre `wp-content` compartido (ADR 0013).
 - `.htaccess` de la raíz del servidor: tratamiento explícito (diff, backup, reglas de permalinks WP + redirects legacy de este dominio).
-- Hostinger File Manager / FTP: si se usa FTP/FTPS, cuenta dedicada, alcance mínimo, directorios remotos explícitos, secretos por environment, producción separada. Hoy el estático se sube por File Manager (README); no hay workflow FTPS en este repo.
+- Hostinger File Manager / FTP: cuenta dedicada, alcance mínimo, directorios
+  remotos explícitos, secretos por environment, producción separada.
+  Un ZIP de `static/` no se extrae sobre el document root de WordPress.
+  No hay workflow FTPS en este repo.
 
 ### Rollback window
 
-No borrar el sitio estático el día del corte, ni borrar el WordPress de staging para
-reinstalarlo. Conservar:
+No borrar el sitio estático el día del corte, ni borrar el WordPress para
+reinstalarlo. El corte de 2026-09-26 **no** purgó el estático. Conservar
+hasta una autorización distinta del propietario. Esa purga no tiene fecha
+y no forma parte del corte ya hecho. Conservar:
 
-- el estático **en un dominio temporal de Hostinger**, con sus archivos (rollback del
-  sitio público; ADR 0047);
+- el estático en
+  [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/),
+  con sus archivos (rollback del sitio público; ADR 0047);
 - artefacto estático versionado (tag Git + ZIP desplegado);
-- backup de BD y `uploads/` **de este** WordPress
-  (`teal-woodpecker-284165.hostingersite.com`, el mismo que recibe el dominio);
-- plan para devolver `caminodeldharma.org` al estático temporal **o** restaurar este
-  WordPress si el dominio ya se cambió;
+- backup de BD de este WordPress, tomado antes del corte, y el
+  backup de `wp-config.php` y de `.htaccess`;
+- plan para devolver `caminodeldharma.org` al estático temporal **o**
+  restaurar este WordPress; el dominio ya está cambiado;
 - media y `.htaccess` respaldados.
 
-La ventana la define el propietario. El corte no está cerrado si el rollback no es ejecutable.
-Antes de **Cambiar dominio**, inventariar buzones y subdominios: Hostinger advierte que
-el cambio puede afectarlos.
+La ventana la define el propietario. El rollback sigue siendo ejecutable
+mientras el estático temporal y los backups existan. Borrar ese sitio no
+es el paso siguiente de este corte.
 
 ---
 
@@ -254,8 +273,8 @@ Nombres que **sí** usa este repositorio:
 | Environment | Nombre en docs | Estado |
 | ----------- | -------------- | ------ |
 | **LOCAL** | Docker Compose, `WP_ENVIRONMENT_TYPE=local` (ADR 0023, `docker-wordpress-playbook.md`) | Planificado; `docker-compose.yml` aún no existe |
-| **STAGING** | `https://teal-woodpecker-284165.hostingersite.com` — este WordPress, `WP_ENVIRONMENT_TYPE=staging`, `blog_public=0`, hasta el corte (OWN-005, ADR 0047) | Existe. Noindex. No pisa el estático. **Es el sitio que recibirá `caminodeldharma.org`.** No se borra ni se crea otro. No se marca `production` todavía |
-| **PRODUCTION** | `https://caminodeldharma.org` en Hostinger | **Actual y hasta el corte:** sitio **estático**. Después: este mismo WordPress, por **Cambiar dominio**, con `WP_ENVIRONMENT_TYPE=production` y `blog_public=1` |
+| **STAGING** | Ya no es canónico | Corte hecho |
+| **PRODUCTION** | Dominio canónico | `production` y `blog_public` `1` |
 
 No mezclar entre environments: credenciales, base de datos, uploads, política de indexación
 (staging no debe indexarse), fixtures, dominios.
