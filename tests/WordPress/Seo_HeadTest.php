@@ -220,6 +220,32 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects issue #52: a current event with signup closed stays
+	 * scheduled and keeps its calendar link, and the form URL leaves
+	 * the JSON-LD offer.
+	 */
+	public function test_closed_signup_drops_the_offer_and_keeps_the_calendar() {
+		$event = $this->create_event(
+			'evento-inscripcion-cerrada',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url'    => 'https://forms.example/x',
+				'event_signup_closed' => true,
+			)
+		);
+
+		$this->go_to( get_permalink( $event ) );
+		$context = cdd_core_seo_context();
+		$graph   = array_column( $context['jsonld'], null, '@type' );
+
+		$this->assertSame( home_url( '/eventos/ical/evento-inscripcion-cerrada.ics' ), $context['alternate']['href'] );
+		$this->assertSame( 'https://schema.org/EventScheduled', $graph['Event']['eventStatus'] );
+		$this->assertArrayNotHasKey( 'offers', $graph['Event'] );
+		$this->assertSame( 'https://forms.example/x', get_post_meta( $event, 'event_signup_url', true ) );
+	}
+
+	/**
 	 * ADR 0037: the entry's authors come from the `authors` relationship,
 	 * never from the WP user, and the publisher is the site Organization.
 	 */

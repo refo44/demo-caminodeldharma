@@ -48,9 +48,9 @@ final class Editor_Seo_PanelTest extends TestCase {
 	}
 
 	/**
-	 * Protects META-003: the event panel edits exactly the structured-data
-	 * keys the JSON-LD `Event` node and the generated `.ics` already read —
-	 * no invented domain key.
+	 * Protects META-003 and issue #52: the event panel edits the
+	 * structured-data keys the JSON-LD `Event` node and the generated
+	 * `.ics` already read, plus the signup close controls.
 	 */
 	public function test_the_event_panel_covers_the_event_structured_data_keys() {
 		$script = $this->panel_script();
@@ -64,6 +64,8 @@ final class Editor_Seo_PanelTest extends TestCase {
 				'event_attendance_mode',
 				'event_status',
 				'event_signup_url',
+				'event_signup_closed',
+				'event_signup_closes_at',
 				'event_signup_payment',
 				'event_featured',
 				'event_calendar_dates',
@@ -71,6 +73,10 @@ final class Editor_Seo_PanelTest extends TestCase {
 		) {
 			$this->assertStringContainsString( "'" . $key . "'", $script, $key );
 		}
+
+		$this->assertStringContainsString( 'Cerrar inscripción', $script );
+		$this->assertStringContainsString( 'Cierre de inscripción', $script );
+		$this->assertStringContainsString( 'America/Bogotá', $script );
 	}
 
 	/**

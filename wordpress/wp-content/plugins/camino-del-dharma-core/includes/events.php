@@ -53,6 +53,31 @@ function cdd_core_event_is_current( $event, ?DateTimeImmutable $now = null ): bo
 }
 
 /**
+ * Whether the public signup control may be shown. Current status, a
+ * stored URL, the manual close, and the optional close instant all
+ * have to allow it (issue #52). Evaluation is request-time; closing
+ * signup does not change the event's status, calendar, or share.
+ *
+ * @param int|WP_Post            $event      Event post or ID.
+ * @param bool                   $is_current Whether the event is current at the caller's instant.
+ * @param DateTimeImmutable|null $now        Instant for the close schedule. Defaults to now.
+ */
+function cdd_core_event_signup_is_open( $event, bool $is_current, ?DateTimeImmutable $now = null ): bool {
+	$event = get_post( $event );
+	if ( ! $event instanceof WP_Post ) {
+		return false;
+	}
+
+	return Cdd_Core_Event_Signup::is_open(
+		$is_current,
+		(string) get_post_meta( $event->ID, 'event_signup_url', true ),
+		wp_validate_boolean( get_post_meta( $event->ID, 'event_signup_closed', true ) ),
+		(string) get_post_meta( $event->ID, 'event_signup_closes_at', true ),
+		$now ?? cdd_core_now()
+	);
+}
+
+/**
  * All published events (the whole catalog is small by design; visibility
  * splits happen in PHP with the request-time rule).
  */

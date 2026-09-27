@@ -268,15 +268,17 @@ final class Camino_Del_Dharma_Renderers {
 	}
 
 	/**
-	 * The signup CTA — only while the event is current and has a real
-	 * signup URL (OWN-012 / ADR 0035: completed events never invite).
+	 * The signup CTA — only while the event is current, has a real
+	 * signup URL, the manual control is open, and any close instant is
+	 * still ahead (OWN-012 / ADR 0035 / issue #52). A closed signup
+	 * omits the control; it does not render a disabled button.
 	 *
 	 * @param WP_Post $event   Event post.
 	 * @param bool    $current Whether the event is current at request time.
 	 */
 	public static function event_cta( WP_Post $event, bool $current ): string {
 		$signup_url = (string) get_post_meta( $event->ID, 'event_signup_url', true );
-		if ( ! $current || '' === $signup_url ) {
+		if ( ! function_exists( 'cdd_core_event_signup_is_open' ) || ! cdd_core_event_signup_is_open( $event, $current ) ) {
 			return '';
 		}
 

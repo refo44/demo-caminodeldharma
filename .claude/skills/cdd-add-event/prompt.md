@@ -34,7 +34,7 @@ Known researched application versions at the time the content model was mapped:
 
 WordPress 7.1.2
 theme camino-del-dharma 0.6.3
-plugin camino-del-dharma-core 0.7.10
+plugin camino-del-dharma-core 0.7.11
 
 Known approved observed .htaccess snapshot at research time:
 
@@ -123,6 +123,8 @@ event_modality
 event_attendance_mode
 event_signup_url
 event_signup_payment
+event_signup_closed
+event_signup_closes_at
 event_status
 event_featured
 event_calendar_dates
@@ -682,6 +684,8 @@ event_modality
 event_attendance_mode
 event_signup_url
 event_signup_payment
+event_signup_closed
+event_signup_closes_at
 event_featured
 seo_title
 seo_description
@@ -723,6 +727,22 @@ FEATURED_ON_HOME: yes
 Signup payment:
 
 default 0 unless the owner explicitly states it involves payment.
+
+Signup close (plugin 0.7.11):
+
+event_signup_closed defaults open (false / absent).
+event_signup_closes_at defaults empty.
+
+Set event_signup_closed only when the owner explicitly asks to hide
+Preinscribirme now.
+
+Set event_signup_closes_at only when the owner supplies a close instant.
+Store a calendar day as Y-m-d, or a Bogotá wall clock as
+Y-m-dTHH:mm:ss. A date without a time closes at 00:00 America/Bogota.
+
+Do not delete event_signup_url to hide the button.
+Do not cancel the event or shorten its dates to hide the button.
+Links written inside the event body are content. Leave them.
 
 Attendance:
 

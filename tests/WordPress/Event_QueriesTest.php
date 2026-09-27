@@ -46,6 +46,37 @@ final class Event_QueriesTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects issue #52: the close instant is read from meta in
+	 * America/Bogota, a manual close wins even before that instant, and
+	 * closing signup leaves the event in the current list.
+	 */
+	public function test_signup_stays_open_until_the_bogota_close_instant() {
+		$event_id = $this->create_event(
+			'retiro-santo-tomas',
+			'2026-11-21',
+			'2026-11-22',
+			array(
+				'event_signup_url'       => 'https://forms.example/retiro',
+				'event_signup_closes_at' => '2026-10-01T15:30:00',
+			)
+		);
+		$before   = $this->bogota( '2026-10-01 15:29:59' );
+		$at       = $this->bogota( '2026-10-01 15:30:00' );
+
+		$this->assertTrue( cdd_core_event_signup_is_open( $event_id, true, $before ) );
+		$this->assertFalse( cdd_core_event_signup_is_open( $event_id, true, $at ) );
+
+		update_post_meta( $event_id, 'event_signup_closed', '1' );
+		$this->assertFalse( cdd_core_event_signup_is_open( $event_id, true, $before ) );
+		$this->assertContains( $event_id, wp_list_pluck( cdd_core_current_events( $before ), 'ID' ) );
+
+		update_post_meta( $event_id, 'event_signup_closed', '' );
+		update_post_meta( $event_id, 'event_signup_closes_at', '' );
+		$this->assertTrue( cdd_core_event_signup_is_open( $event_id, true, $at ) );
+		$this->assertFalse( cdd_core_event_signup_is_open( $event_id, false, $before ) );
+	}
+
+	/**
 	 * Protects the archive split: current events and completed events are
 	 * separated by the request-time rule, never by the stored flag alone
 	 * (a stale 'vigente' on a past event must not leak into current).

@@ -14,7 +14,10 @@ environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
 
 **Estado verificado el 2026-09-26.** `https://caminodeldharma.org/` es
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
-Theme 0.6.3 y plugin 0.7.10. Indexación, canonical y sitemap nativo
+Theme 0.6.3 y plugin 0.7.10 en ese corte. El árbol siguiente es plugin
+0.7.11 (tag `plugin-v0.7.11`, cierre de inscripción,
+[#52](https://github.com/refo44/demo-caminodeldharma/issues/52)).
+Indexación, canonical y sitemap nativo
 comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. En ese
 momento el `.htaccess` no cambió
 (`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,

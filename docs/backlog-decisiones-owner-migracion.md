@@ -271,13 +271,19 @@ En el corte, la misma instalación pasa a `production` y `blog_public=1`. El inv
 correo y subdominios es gate del corte. **Ni el dominio ni ese interruptor se cambian
 en esta sesión.**
 
+**v1.36 (2026-09-26):** cierre de inscripción **implementado** (plugin 0.7.11,
+[#52](https://github.com/refo44/demo-caminodeldharma/issues/52)). Un evento vigente
+oculta **Preinscribirme** con `event_signup_closed` o al llegar
+`event_signup_closes_at` (`America/Bogota`). No cambia el estado, el calendario,
+«Compartir» ni el `.ics`. Tag de release: `plugin-v0.7.11`.
+
 **v1.35 (2026-09-25):** panel **Compartir** **implementado** (plugin 0.7.8,
 [#39](https://github.com/refo44/demo-caminodeldharma/issues/39)). En la entrada y en el
 evento el editor ve una red a la vez, edita `share_whatsapp` / `share_x` / `share_threads`
 y una vista previa con la URL ya puesta. No hay claves nuevas. La ficha Open Graph sigue
 en «SEO y buscadores».
 
-**Versión:** 1.35 · **Fecha:** 2026-09-25 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
+**Versión:** 1.36 · **Fecha:** 2026-09-26 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
 Pre-staging: 4 decididas + 2 filas de UI wp-admin **implementadas** (D-02, D-03, D-04, #18, #19);
 código de pre-staging **cerrado**; D-08 **implementado** (plugin 0.7.7 / theme 0.6.1). Staging ya importado: `migrate convert`, no un segundo import.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).

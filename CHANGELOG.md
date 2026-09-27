@@ -12,6 +12,29 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Plugin 0.7.11 — cierre de inscripción
+
+Release del plugin, lista para etiquetar después del merge en `main`:
+
+```bash
+git fetch origin main
+git tag -a plugin-v0.7.11 <sha-en-origin/main> -m "Release plugin 0.7.11"
+git push origin plugin-v0.7.11
+```
+
+La cabecera `Version` y `CDD_CORE_VERSION` son `0.7.11`. El theme sigue
+en `0.6.3` y no lleva tag en esta release. El corte del 2026-09-26 sigue
+registrado con `plugin-v0.7.10`.
+
+Un evento vigente puede dejar de mostrar **Preinscribirme** sin cancelarse,
+sin acortar fechas y sin borrar `event_signup_url`. El panel **Datos del
+evento** añade **Cerrar inscripción** (`event_signup_closed`) y, opcional,
+**Cierre de inscripción** (`event_signup_closes_at`, reloj de
+`America/Bogota`; una fecha sin hora cierra a las 00:00). Calendario,
+«Compartir» y el `.ics` siguen. La oferta JSON-LD omite la URL mientras
+la inscripción está cerrada. Issue
+[#52](https://github.com/refo44/demo-caminodeldharma/issues/52).
+
 ### Retiro final de la entrada Hostinger de palegreen
 
 El propietario quitó en hPanel la entrada

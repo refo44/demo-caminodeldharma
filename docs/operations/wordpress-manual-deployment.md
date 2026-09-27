@@ -360,7 +360,9 @@ abajo es el registro de ese corte, no una instrucción para repetirlo.
 
 Hecho: `https://caminodeldharma.org/` sirve este WordPress;
 `WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
-plugin 0.7.10. En el corte el `.htaccess` no cambió
+plugin 0.7.10. La release siguiente del plugin es 0.7.11
+(`plugin-v0.7.11`): cierre de inscripción. El theme no cambia en ese tag.
+En el corte el `.htaccess` no cambió
 (`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,
 evidencia histórica). Después WordPress regeneró solo el interior de su
 marcador; la instantánea aceptada es

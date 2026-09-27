@@ -144,7 +144,8 @@ Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni 
 
 Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress (ADR 0047).
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3
-y plugin 0.7.10. No extraer un ZIP de `static/` sobre ese `public_html`.
+y plugin 0.7.11 (tag de release `plugin-v0.7.11`; el corte desplegó
+`plugin-v0.7.10`). No extraer un ZIP de `static/` sobre ese `public_html`.
 El `public_html` de
 `https://palegreen-cod-365706.hostingersite.com/` ya se eliminó, y
 después también la entrada de ese sitio en hPanel. `/domains/` conserva

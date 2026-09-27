@@ -12,8 +12,8 @@
  *    `includes/seo.php` prints at request time.
  * 2. «Datos del evento (schema.org)» — for an event only: the dates, place,
  *    schedule, attendance mode and sign-up data the JSON-LD `Event` node
- *    and the generated `/eventos/ical/{slug}.ics` already read. No new
- *    domain key is invented here.
+ *    and the generated `/eventos/ical/{slug}.ics` already read, plus the
+ *    manual and scheduled signup close (issue #52).
  * 3. «Inicio» — for a blog entry only: `post_featured`, the mark that
  *    places that entry in the home column. Unmarked entries stay out.
  *
@@ -77,6 +77,8 @@
 	var EVENT_ATTENDANCE_MODE = 'event_attendance_mode';
 	var EVENT_STATUS = 'event_status';
 	var EVENT_SIGNUP_URL = 'event_signup_url';
+	var EVENT_SIGNUP_CLOSED = 'event_signup_closed';
+	var EVENT_SIGNUP_CLOSES_AT = 'event_signup_closes_at';
 	var EVENT_SIGNUP_PAYMENT = 'event_signup_payment';
 	var EVENT_FEATURED = 'event_featured';
 	var POST_FEATURED = 'post_featured';
@@ -443,6 +445,16 @@
 			metaText( meta, EVENT_SIGNUP_URL, __( 'URL de inscripción', TEXT_DOMAIN ), {
 				type: 'url',
 				inputMode: 'url'
+			} ),
+			metaToggle(
+				meta,
+				EVENT_SIGNUP_CLOSED,
+				__( 'Cerrar inscripción', TEXT_DOMAIN ),
+				__( 'Oculta el botón Preinscribirme de inmediato. El evento sigue vigente y la URL se conserva.', TEXT_DOMAIN )
+			),
+			metaText( meta, EVENT_SIGNUP_CLOSES_AT, __( 'Cierre de inscripción', TEXT_DOMAIN ), {
+				type: 'datetime-local',
+				help: __( 'Cuando llega esta fecha y hora (America/Bogotá), el botón deja de mostrarse. Si lo dejas vacío, la inscripción sigue abierta hasta que la cierres a mano o termine el evento.', TEXT_DOMAIN )
 			} ),
 			metaToggle( meta, EVENT_SIGNUP_PAYMENT, __( 'La inscripción tiene un pago', TEXT_DOMAIN ) ),
 			metaToggle( meta, EVENT_FEATURED, __( 'Evento destacado en el inicio', TEXT_DOMAIN ) ),
