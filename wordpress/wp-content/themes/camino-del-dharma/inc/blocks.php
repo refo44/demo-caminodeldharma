@@ -128,7 +128,7 @@ function camino_del_dharma_render_evento_meta(): string {
 }
 
 /**
- * The signup CTA of the current single — only while current (OWN-012).
+ * The signup CTA of the current single — only while current and signup is open (OWN-012 / issue #52).
  */
 function camino_del_dharma_render_evento_cta(): string {
 	$event = get_post();

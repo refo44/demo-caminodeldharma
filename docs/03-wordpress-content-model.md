@@ -76,7 +76,7 @@ Camino del Dharma. El contenido pre-corte se extrae del HTML/JSON publicado y se
 - **Estructura por evento:** tipo/categoría (event_type, ver §4), nombre, imagen, fecha, lugar, modalidad, descripción, enlace a la ficha si existe («Ver evento →»), botón Inscribirme / Preinscribirme. En la maqueta: etiqueta de tipo encima del título (Curso, Taller, Retiro, Conferencia, Encuentro); título y cartel enlazan a `/eventos/{slug}/` cuando hay página propia; separación visual entre eventos (card + hr); enlaces «Práctica · Contacto» una sola vez en la página
 - Campos: event_type (taxonomía), nombre, fecha, lugar, modalidad, descripción, botón Inscribirme (o Preinscribirme), URL de la ficha cuando el evento tiene `single-event`
 
-*(Nota 2026-08-28, ADR 0035 / OWN-004: **todo** evento tiene `single` `/eventos/{slug}`. Inscribirme / Preinscribirme **solo** si está vigente y hay inscripción real. Los finalizados no muestran ese CTA. OWN-012 / OWN-013: finalizados **sin** calendario ni `.ics`; el paso a finalizado es automático al vencer la fecha de fin.)*
+*(Nota 2026-08-28, ADR 0035 / OWN-004: **todo** evento tiene `single` `/eventos/{slug}`. Inscribirme / Preinscribirme **solo** si está vigente, hay inscripción real, el cierre manual está abierto y no llegó `event_signup_closes_at` ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52)). Los finalizados no muestran ese CTA. OWN-012 / OWN-013: finalizados **sin** calendario ni `.ics`; el paso a finalizado es automático al vencer la fecha de fin. Cerrar la inscripción no quita calendario, «Compartir» ni `.ics`.)*
 
 ### Contacto (page)
 
@@ -97,7 +97,9 @@ Camino del Dharma. El contenido pre-corte se extrae del HTML/JSON publicado y se
 | event_modality | select | presencial / virtual / híbrido |
 | event_description | WYSIWYG | Descripción, sentido, a quién va dirigido |
 | featured_image | image | Imagen del evento (listados, portada del evento) |
-| event_signup_url | url | Enlace a inscripción (formulario externo, WhatsApp, plataforma o pasarela externa) |
+| event_signup_url | url | Enlace a inscripción (formulario externo, WhatsApp, plataforma o pasarela externa). Se conserva aunque la inscripción esté cerrada. |
+| event_signup_closed | boolean | Cierre manual ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52)). Vacío o falso = abierta. No cambia vigente / finalizado / cancelado, ni el calendario, ni «Compartir». |
+| event_signup_closes_at | datetime | Cierre programado, opcional. Vacío = sin horario. Fecha y hora de pared en `America/Bogota`. Una fecha sin hora cierra a las 00:00 de ese día (el día entero queda cerrado). Desde ese instante el botón no se muestra. |
 | event_status | select | vigente / finalizado / cancelado |
 | event_signup_payment | boolean o url | Indica si hay pago/contribución; el pago siempre es externo (redirección vía event_signup_url) |
 | event_featured | boolean | Candidato para el Inicio. **Solo cuenta si el evento está vigente.** Un destacado finalizado se ignora. Marcar como máximo uno. |
@@ -118,6 +120,8 @@ persistir `event_status` para el listado de wp-admin, pero no es lo que ve el p�
 alarga `event_end`, vuelve a vigente y el `.ics` generado (OWN-009) responde otra vez. La
 meditación semanal no es `event`. En wp-admin, **Eliminar huérfanos** (OWN-015) fuerza a mano
 la misma limpieza de `.ics`; no toca imágenes.
+
+**Cierre de inscripción ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52), 2026-09-26):** en un evento vigente con `event_signup_url`, el botón **Preinscribirme** (listado y ficha) y la oferta del JSON-LD se muestran solo si `event_signup_closed` está abierto y, si hay `event_signup_closes_at`, la visita es anterior a ese instante en `America/Bogota`. Si se cierra, el control se omite: no hay botón deshabilitado ni texto de «inscripciones cerradas». El evento sigue en el bloque de vigentes. Calendario, «Compartir» y `/eventos/ical/{slug}.ics` no cambian. La URL guardada tampoco. Se evalúa en cada visita; no hay cron. En el editor, el panel **Datos del evento (schema.org)** tiene **Cerrar inscripción** y **Cierre de inscripción**, junto a la URL.
 
 **Un evento en el Inicio:** la portada muestra **como máximo un** evento **vigente**, en nota junto al texto de «Un poco de nuestra comunidad» (no es un segundo listado). Un evento **finalizado nunca aparece aquí**, aunque tenga `event_featured = true`: la marca de destacado se ignora si el evento ya terminó. Selección:
 
@@ -357,7 +361,7 @@ Todo en este modelo existe para: **orientar, inspirar confianza y facilitar el p
 | Videos conferencias / YouTube | §6 Videos (embed) |
 | Testimonios | §3.2 (bloque por defecto; CPT opcional) |
 | Botón donaciones | §7 Integraciones |
-| Gestión eventos (inscripción, pagos) | event_signup_url, event_signup_payment |
+| Gestión eventos (inscripción, pagos) | event_signup_url, event_signup_payment, event_signup_closed, event_signup_closes_at |
 | Sanghas con contacto | CPT sangha |
 | Contenido formación / cómo hacer parte | Página o sección en Práctica o dedicada |
 | Manual de marca | `02-identidad-corporativa` |

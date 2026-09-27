@@ -141,5 +141,11 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
   No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
   responde 404. **Ajustes → Camino del Dharma llms** solo enciende o apaga y vuelve a registrar la URL.
+- Cierre de inscripción desde v0.7.11
+  ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52)):
+  `event_signup_closed` y `event_signup_closes_at` en el panel **Datos del
+  evento**. `cdd_core_event_signup_is_open()` decide en cada visita si el
+  botón y la oferta JSON-LD se muestran. Un cierre no cambia el estado del
+  evento ni el calendario.
 - Tooling de calidad en la raíz del monorepo: `composer test` (gate barato),
   `composer test:wp` (wp-phpunit en harness Docker efímero), `composer lint:phpcs`.

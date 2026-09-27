@@ -402,7 +402,9 @@ function cdd_core_seo_event_node( WP_Post $post, string $permalink, string $imag
 			'state'          => $state,
 			'attendance'     => (string) get_post_meta( $post->ID, 'event_attendance_mode', true ),
 			'places'         => $places,
-			'signup_url'     => (string) get_post_meta( $post->ID, 'event_signup_url', true ),
+			'signup_url'     => cdd_core_event_signup_is_open( $post, 'vigente' === $status )
+				? (string) get_post_meta( $post->ID, 'event_signup_url', true )
+				: '',
 			'signup_payment' => (bool) get_post_meta( $post->ID, 'event_signup_payment', true ),
 			'organizer'      => cdd_core_seo_organization_ref(),
 			'extra'          => is_array( $extra ) ? cdd_core_seo_rebase( $extra ) : array(),

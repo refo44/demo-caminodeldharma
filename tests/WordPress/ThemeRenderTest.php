@@ -217,6 +217,51 @@ final class ThemeRenderTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects issue #52: closing signup omits Preinscribirme on the
+	 * listing and the ficha, keeps the event current, and leaves
+	 * calendar, share, and the stored URL in place.
+	 */
+	public function test_closed_signup_omits_the_button_and_keeps_calendar_share_and_url() {
+		$now = new DateTimeImmutable( '2026-09-10 09:00:00', new DateTimeZone( 'America/Bogota' ) );
+
+		$event_id = $this->create_event(
+			'circulos-de-presencia-consciente',
+			'2026-09-03',
+			'2026-10-24',
+			array(
+				'event_signup_url'    => 'https://example.test/preinscripcion',
+				'event_signup_closed' => '1',
+			)
+		);
+		$event    = get_post( $event_id );
+
+		$html = Camino_Del_Dharma_Renderers::events_listing(
+			cdd_core_current_events( $now ),
+			cdd_core_past_events( $now )
+		);
+
+		$this->assertStringContainsString( 'data-event-status="vigente"', $html );
+		$this->assertStringContainsString( 'Añadir al calendario', $html );
+		$this->assertStringContainsString( 'Compartir', $html );
+		$this->assertStringNotContainsString( 'Preinscribirme', $html );
+		$this->assertSame( '', Camino_Del_Dharma_Renderers::event_cta( $event, true ) );
+		$this->assertSame( 'https://example.test/preinscripcion', get_post_meta( $event_id, 'event_signup_url', true ) );
+
+		update_post_meta( $event_id, 'event_signup_closed', '' );
+		$reopened = Camino_Del_Dharma_Renderers::event_cta( get_post( $event_id ), true );
+		$this->assertStringContainsString( 'Preinscribirme', $reopened );
+		$this->assertStringContainsString( 'https://example.test/preinscripcion', $reopened );
+
+		update_post_meta( $event_id, 'event_signup_closes_at', '2000-01-01' );
+		$this->assertSame( '', Camino_Del_Dharma_Renderers::event_cta( get_post( $event_id ), true ) );
+
+		update_post_meta( $event_id, 'event_signup_closes_at', '2099-01-01T18:00:00' );
+		$this->assertStringContainsString( 'Preinscribirme', Camino_Del_Dharma_Renderers::event_cta( get_post( $event_id ), true ) );
+
+		$this->assertSame( '', Camino_Del_Dharma_Renderers::event_cta( get_post( $event_id ), false ) );
+	}
+
+	/**
 	 * Protects ADR 0037 rendering: the entry header carries the deck, the
 	 * «Por …» byline linked to the published blog_author profiles, each
 	 * bio, and the reading time.

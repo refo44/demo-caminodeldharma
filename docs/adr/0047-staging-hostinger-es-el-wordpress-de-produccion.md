@@ -220,6 +220,16 @@ siguen fuera de `public_html`. Staging sigue retirado. El correo del
 formulario sigue diferido. El CD de producción (ADR 0046 D-B) sigue sin
 decidir. La decisión original de este ADR no se reescribe.
 
+### Plugin 0.7.11
+
+El corte queda registrado con plugin 0.7.10 (`plugin-v0.7.10`,
+run 36214533614) y theme 0.6.3. El código posterior añade el cierre
+manual y programado de la inscripción
+([#52](https://github.com/refo44/demo-caminodeldharma/issues/52)).
+Cabecera y `CDD_CORE_VERSION` son `0.7.11`. El tag de esa release, sobre
+el commit de `main` después del merge, es `plugin-v0.7.11`. El theme no
+cambia. Ese tag no reescribe esta decisión ni el CD de producción (D-B).
+
 ## Referencias
 
 - OWN-005, OWN-036

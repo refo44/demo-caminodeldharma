@@ -177,6 +177,51 @@ final class Editor_SeoPanelTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects issue #52: the manual close and the close instant survive
+	 * the REST round-trip, and an update that does not send them leaves
+	 * both — and the signup URL — in place.
+	 */
+	public function test_rest_persists_signup_close_and_an_omitted_update_keeps_it() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$create = new WP_REST_Request( 'POST', '/wp/v2/event' );
+		$create->set_body_params(
+			array(
+				'title'  => 'Retiro con inscripción',
+				'status' => 'draft',
+				'meta'   => array(
+					'event_signup_url'       => 'https://forms.example/retiro',
+					'event_signup_closed'    => true,
+					'event_signup_closes_at' => '2026-10-01T15:30',
+				),
+			)
+		);
+		$created = rest_do_request( $create );
+
+		$this->assertSame( 201, $created->get_status() );
+		$id = $created->get_data()['id'];
+		$this->assertTrue( wp_validate_boolean( get_post_meta( $id, 'event_signup_closed', true ) ) );
+		$this->assertSame( '2026-10-01T15:30:00', get_post_meta( $id, 'event_signup_closes_at', true ) );
+		$this->assertSame( 'https://forms.example/retiro', get_post_meta( $id, 'event_signup_url', true ) );
+
+		$update = new WP_REST_Request( 'PUT', '/wp/v2/event/' . $id );
+		$update->set_body_params(
+			array(
+				'meta' => array(
+					'event_place' => 'Santo Tomás',
+				),
+			)
+		);
+		$updated = rest_do_request( $update );
+
+		$this->assertSame( 200, $updated->get_status() );
+		$this->assertSame( 'Santo Tomás', get_post_meta( $id, 'event_place', true ) );
+		$this->assertTrue( wp_validate_boolean( get_post_meta( $id, 'event_signup_closed', true ) ) );
+		$this->assertSame( '2026-10-01T15:30:00', get_post_meta( $id, 'event_signup_closes_at', true ) );
+		$this->assertSame( 'https://forms.example/retiro', get_post_meta( $id, 'event_signup_url', true ) );
+	}
+
+	/**
 	 * Protects binding rule #1: publishing with no stored head copy
 	 * backfills `seo_description` from the object's own excerpt, so the
 	 * panel and the front agree without WP-CLI.

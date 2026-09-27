@@ -52,7 +52,7 @@ function cdd_core_register_meta() {
 		)
 	);
 
-	foreach ( array( 'event_featured', 'event_signup_payment' ) as $boolean_key ) {
+	foreach ( array( 'event_featured', 'event_signup_payment', 'event_signup_closed' ) as $boolean_key ) {
 		register_post_meta(
 			'event',
 			$boolean_key,
@@ -65,6 +65,19 @@ function cdd_core_register_meta() {
 			)
 		);
 	}
+
+	register_post_meta(
+		'event',
+		'event_signup_closes_at',
+		array(
+			'type'              => 'string',
+			'single'            => true,
+			'default'           => '',
+			'sanitize_callback' => 'cdd_core_sanitize_event_signup_closes_at',
+			'auth_callback'     => 'cdd_core_meta_auth',
+			'show_in_rest'      => true,
+		)
+	);
 
 	register_post_meta(
 		'event',
@@ -163,6 +176,16 @@ function cdd_core_is_ymd( $value ): bool {
  */
 function cdd_core_sanitize_event_date( $value ): string {
 	return cdd_core_is_ymd( $value ) ? $value : '';
+}
+
+/**
+ * Sanitizes the optional signup close instant: a calendar day, or a
+ * Bogotá wall clock. Empty means no schedule (issue #52).
+ *
+ * @param mixed $value Raw meta value.
+ */
+function cdd_core_sanitize_event_signup_closes_at( $value ): string {
+	return Cdd_Core_Event_Signup::normalize( $value );
 }
 
 /**
