@@ -493,6 +493,20 @@ Do not add sources.
 
 Do not add a references section unless supplied.
 
+Apply emphasis when the approved text has a name, a time, a role, or one
+short fact the reader must not miss. Do not decorate a sentence that has
+nothing to scan. Do not bold a whole paragraph.
+
+Bold is only:
+
+<strong style="font-weight:600">[TEXT]</strong>
+
+The theme Inter face has no weight 700, so a bare <strong> does not look
+bold.
+
+Italic is <em>[TEXT]</em>. Use it for a role or a short qualifier, not for
+the person's name.
+
 Ensure:
 
 - no H1

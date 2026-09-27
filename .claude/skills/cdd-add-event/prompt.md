@@ -240,7 +240,7 @@ Recommended body structure:
 <!-- optional facilitator line -->
 
 <!-- wp:paragraph -->
-<p><strong>[FACILITATOR]</strong></p>
+<p><strong style="font-weight:600">[FACILITATOR]</strong></p>
 <!-- /wp:paragraph -->
 
 <!-- optional section -->
@@ -260,6 +260,51 @@ Recommended body structure:
 <li>[FACT]</li>
 </ul>
 <!-- /wp:list -->
+
+======================================================================
+EMPHASIS
+======================================================================
+
+Apply bold and italic whenever the copy has a fact a visitor must scan.
+Do not ask the owner to choose the markup. Do not bold a whole paragraph.
+Do not emphasize a closing slogan.
+
+The theme body face is Inter. It loads weight 400, weight 600, and
+400 italic. It does not load 700. A bare <strong> computes to
+font-weight:bolder (700) and does not look bold.
+
+Bold, always:
+
+<strong style="font-weight:600">[TEXT]</strong>
+
+Italic, always:
+
+<em>[TEXT]</em>
+
+Bold:
+
+- a clock time
+- a person's name
+- one practical fact the visitor must not miss (open to the public,
+  what to bring, a price that lives in the body)
+
+Italic:
+
+- a role or credential (Maestro Budista, Profesora, Doctor, Directora)
+- a short label such as Dirige
+
+A schedule is not one flat list line. Put logistics (hours, what to
+bring) before the program. Give each activity its own paragraph block:
+
+<!-- wp:paragraph -->
+<p><strong style="font-weight:600">[TIME]</strong><br>[TITLE]<br><em>[ROLE]</em> <strong style="font-weight:600">[NAME]</strong></p>
+<!-- /wp:paragraph -->
+
+Do not store a multi-person schedule as one wp:list. The editor
+flattens that list, and a later save drops the line breaks.
+
+If the owner has the editor open, tell them to reload without saving.
+Saving the open tab overwrites this body.
 
 Only include blocks supported by the owner's actual copy.
 
@@ -496,6 +541,7 @@ Allowed mechanical edits:
 - heading markup
 - list markup
 - required external-link attributes/accessibility markup
+- emphasis markup required by EMPHASIS
 
 Required editorial behavior:
 
@@ -516,6 +562,8 @@ Body must NOT manually repeat structured Fecha, Lugar or Modalidad.
 
 If clock times are supplied, keep them in prose and use the owner's facts.
 Where appropriate, make clear they are hora de Colombia.
+
+Apply EMPHASIS. Do not leave a schedule as unmarked running text.
 
 Write the prepared body to a temporary server file such as:
 

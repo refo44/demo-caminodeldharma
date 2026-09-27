@@ -19,3 +19,7 @@ chat. Keep `PUBLISH_MODE: draft` unless they set `publish`.
 Stop conditions in the prompt are mandatory. If a required fact is missing,
 stop and ask. Do not invent it. Do not create a new `blog_author` unless a
 separate author-profile workflow was authorized.
+
+Mark scannable facts in the body. Bold is
+`<strong style="font-weight:600">`. Italic is `<em>`. A bare `<strong>`
+does not look bold on this site.

@@ -24,3 +24,7 @@ Consecutive days with no gap are a range (`event_date` / `event_end`).
 Store `event_calendar_dates` only when the dates have interruptions
 between them. Do not ask the owner to choose sessions for an
 uninterrupted stay.
+
+Mark scannable facts in the body. Bold is
+`<strong style="font-weight:600">`. Italic is `<em>`. A bare `<strong>`
+does not look bold on this site.
