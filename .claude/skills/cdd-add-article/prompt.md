@@ -651,9 +651,23 @@ Use:
 - prepared temporary body file
 - chosen comment_status
 
+SHELL ARGUMENTS
+
+Do not place approved text inside single quotes. An apostrophe, such as O'Connor, breaks that command.
+
+Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
+
+cat > /tmp/cdd-article-title.txt <<'EOF'
+APPROVED_TITLE
+EOF
+
+Pass the file as one argument. The quotes around the substitution keep spaces and apostrophes in the stored value:
+
+"$(cat /tmp/cdd-article-title.txt)"
+
 Create the draft with this command. If it exits non-zero, STOP.
 
-wp post create /tmp/cdd-article-body-<unique>.html --post_type=post --post_status=draft --post_title='APPROVED_TITLE' --post_name='APPROVED_SLUG' --post_excerpt='APPROVED_EXCERPT' --comment_status=<COMMENTS> --ping_status=closed --porcelain
+wp post create /tmp/cdd-article-body-<unique>.html --post_type=post --post_status=draft --post_title="$(cat /tmp/cdd-article-title.txt)" --post_name="$(cat /tmp/cdd-article-slug.txt)" --post_excerpt="$(cat /tmp/cdd-article-excerpt.txt)" --comment_status=<COMMENTS> --ping_status=closed --porcelain
 
 `<COMMENTS>` is the approved value, `closed` or `open`. `--ping_status=closed` is always set, including when comments stay open.
 
@@ -690,14 +704,14 @@ Write `/tmp/cdd-article-authors-<unique>.php` containing only:
 
 <?php
 if ( count( $args ) < 2 ) {
-    fwrite( STDERR, "POST_ID and at least one author id are required\n" );
-    exit( 1 );
+    WP_CLI::error( 'POST_ID and at least one author id are required' );
 }
-update_post_meta(
-    (int) $args[0],
-    'authors',
-    array_map( 'intval', array_slice( $args, 1 ) )
-);
+$author_ids = array_map( 'intval', array_slice( $args, 1 ) );
+update_post_meta( (int) $args[0], 'authors', $author_ids );
+$stored = get_post_meta( (int) $args[0], 'authors', true );
+if ( $stored !== $author_ids ) {
+    WP_CLI::error( 'authors was not stored' );
+}
 
 Then run:
 
@@ -948,7 +962,7 @@ Verify no unrelated post was modified.
 PHASE 19 — TEMP CLEANUP
 ======================================================================
 
-Remove only temporary files created by this operation under `/tmp`, including `/tmp/cdd-article-authors-<unique>.php` and the body file.
+Remove only temporary files created by this operation under `/tmp`, including `/tmp/cdd-article-authors-<unique>.php`, the body file, and the title, slug, and excerpt text files.
 
 Keep:
 

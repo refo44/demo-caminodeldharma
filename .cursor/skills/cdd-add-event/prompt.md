@@ -517,13 +517,27 @@ copy the file through SSH/SCP to a unique temporary file under the account
 
 Do NOT stage it inside public_html.
 
-Then import. If either command exits non-zero, STOP.
+SHELL ARGUMENTS
+
+Do not place approved text inside single quotes. An apostrophe, such as O'Connor, breaks that command.
+
+Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
+
+cat > /tmp/cdd-poster-alt.txt <<'EOF'
+APPROVED_POSTER_ALT
+EOF
+
+Pass the file as one argument:
+
+"$(cat /tmp/cdd-poster-alt.txt)"
+
+Then import. If a command exits non-zero, STOP.
 
 wp media import /tmp/cdd-event-poster-<unique>.<ext> --porcelain
 
 Capture ATTACHMENT_ID from the porcelain output.
 
-wp post meta update ATTACHMENT_ID _wp_attachment_image_alt 'APPROVED_POSTER_ALT'
+wp post meta update ATTACHMENT_ID _wp_attachment_image_alt -- "$(cat /tmp/cdd-poster-alt.txt)"
 
 Do not invent a caption.
 
@@ -662,7 +676,9 @@ ping_status = closed
 
 Use the temporary Gutenberg body file. If the command exits non-zero, STOP.
 
-wp post create /tmp/cdd-event-body-<unique>.html --post_type=event --post_status=draft --post_title='OWNER_TITLE' --post_name='APPROVED_SLUG' --post_excerpt='APPROVED_EXCERPT' --comment_status=closed --ping_status=closed --porcelain
+Write the title, slug, and excerpt with SHELL ARGUMENTS, then:
+
+wp post create /tmp/cdd-event-body-<unique>.html --post_type=event --post_status=draft --post_title="$(cat /tmp/cdd-event-title.txt)" --post_name="$(cat /tmp/cdd-event-slug.txt)" --post_excerpt="$(cat /tmp/cdd-event-excerpt.txt)" --comment_status=closed --ping_status=closed --porcelain
 
 Capture EVENT_ID from the porcelain output.
 
@@ -674,7 +690,9 @@ PHASE 9 — APPLY STRUCTURED DATA
 
 Set exact owner-approved values only. For each scalar field the owner supplied, run one update. Skip a field the owner did not supply. If a command exits non-zero, STOP. Do not invent a value to make the command succeed.
 
-wp post meta update EVENT_ID <key> '<approved value>'
+Write the approved value with SHELL ARGUMENTS, then:
+
+wp post meta update EVENT_ID <key> -- "$(cat /tmp/cdd-event-<key>.txt)"
 
 Required:
 
@@ -776,14 +794,14 @@ When stored, they must be a real PHP array. `wp eval` does not receive trailing 
 
 <?php
 if ( count( $args ) < 2 ) {
-    fwrite( STDERR, "EVENT_ID and at least one session date are required\n" );
-    exit( 1 );
+    WP_CLI::error( 'EVENT_ID and at least one session date are required' );
 }
-update_post_meta(
-    (int) $args[0],
-    'event_calendar_dates',
-    array_slice( $args, 1 )
-);
+$dates = array_slice( $args, 1 );
+update_post_meta( (int) $args[0], 'event_calendar_dates', $dates );
+$stored = get_post_meta( (int) $args[0], 'event_calendar_dates', true );
+if ( $stored !== $dates ) {
+    WP_CLI::error( 'event_calendar_dates was not stored' );
+}
 
 Then run:
 
@@ -996,7 +1014,7 @@ Confirm no unrelated post was modified.
 PHASE 16 — TEMP CLEANUP
 ======================================================================
 
-Remove ONLY temporary files created for this operation under /tmp, including the body file, the poster file, and `/tmp/cdd-event-sessions-<unique>.php`.
+Remove ONLY temporary files created for this operation under /tmp, including the body file, the poster file, `/tmp/cdd-event-sessions-<unique>.php`, and the text files used for shell arguments.
 
 Do not delete:
 
