@@ -322,6 +322,10 @@ Run:
 
 cd /home/u548735796/domains/caminodeldharma.org/public_html
 
+Create a private directory for this run. Do not reuse a fixed path under /tmp.
+
+CDD_TMP=$(mktemp -d /tmp/cdd-event-XXXXXX)
+
 Verify:
 
 pwd -P
@@ -513,7 +517,7 @@ reuse its attachment ID.
 Otherwise:
 
 copy the file through SSH/SCP to a unique temporary file under the account
-/tmp directory, such as `/tmp/cdd-event-poster-<unique>.<ext>`.
+/tmp directory, inside `"$CDD_TMP"`, such as `"$CDD_TMP/poster.<ext>"`.
 
 Do NOT stage it inside public_html.
 
@@ -523,21 +527,21 @@ Do not place approved text inside single quotes. An apostrophe, such as O'Connor
 
 Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
 
-cat > /tmp/cdd-poster-alt.txt <<'EOF'
+cat > "$CDD_TMP/poster-alt.txt" <<'EOF'
 APPROVED_POSTER_ALT
 EOF
 
-Pass the file as one argument:
+Pass the file as one argument. Do not insert a bare `--` before it. WP-CLI 2.12 treats that as another positional argument.
 
-"$(cat /tmp/cdd-poster-alt.txt)"
+"$(cat "$CDD_TMP/poster-alt.txt")"
 
 Then import. If a command exits non-zero, STOP.
 
-wp media import /tmp/cdd-event-poster-<unique>.<ext> --porcelain
+wp media import "$CDD_TMP/poster.<ext>" --porcelain
 
 Capture ATTACHMENT_ID from the porcelain output.
 
-wp post meta update ATTACHMENT_ID _wp_attachment_image_alt -- "$(cat /tmp/cdd-poster-alt.txt)"
+wp post meta update ATTACHMENT_ID _wp_attachment_image_alt "$(cat "$CDD_TMP/poster-alt.txt")"
 
 Do not invent a caption.
 
@@ -583,7 +587,7 @@ Apply EMPHASIS. Do not leave a schedule as unmarked running text.
 
 Write the prepared body to a temporary server file such as:
 
-/tmp/cdd-event-body-<unique>.html
+"$CDD_TMP/body.html"
 
 ======================================================================
 PHASE 7 — PREPARE SEO / SHARE DATA
@@ -678,7 +682,7 @@ Use the temporary Gutenberg body file. If the command exits non-zero, STOP.
 
 Write the title, slug, and excerpt with SHELL ARGUMENTS, then:
 
-wp post create /tmp/cdd-event-body-<unique>.html --post_type=event --post_status=draft --post_title="$(cat /tmp/cdd-event-title.txt)" --post_name="$(cat /tmp/cdd-event-slug.txt)" --post_excerpt="$(cat /tmp/cdd-event-excerpt.txt)" --comment_status=closed --ping_status=closed --porcelain
+wp post create "$CDD_TMP/body.html" --post_type=event --post_status=draft --post_title="$(cat "$CDD_TMP/title.txt")" --post_name="$(cat "$CDD_TMP/slug.txt")" --post_excerpt="$(cat "$CDD_TMP/excerpt.txt")" --comment_status=closed --ping_status=closed --porcelain
 
 Capture EVENT_ID from the porcelain output.
 
@@ -692,7 +696,7 @@ Set exact owner-approved values only. For each scalar field the owner supplied, 
 
 Write the approved value with SHELL ARGUMENTS, then:
 
-wp post meta update EVENT_ID <key> -- "$(cat /tmp/cdd-event-<key>.txt)"
+wp post meta update EVENT_ID <key> "$(cat "$CDD_TMP/<key>.txt")"
 
 Required:
 
@@ -790,7 +794,7 @@ Session dates:
 
 Store them only under DATE RANGE VERSUS SESSIONS.
 
-When stored, they must be a real PHP array. `wp eval` does not receive trailing arguments in `$args`. Write `/tmp/cdd-event-sessions-<unique>.php` containing only:
+When stored, they must be a real PHP array. `wp eval` does not receive trailing arguments in `$args`. Write `"$CDD_TMP/sessions.php"` containing only:
 
 <?php
 if ( count( $args ) < 2 ) {
@@ -805,7 +809,7 @@ if ( $stored !== $dates ) {
 
 Then run:
 
-wp eval-file /tmp/cdd-event-sessions-<unique>.php EVENT_ID YYYY-MM-DD [YYYY-MM-DD...]
+wp eval-file "$CDD_TMP/sessions.php" EVENT_ID YYYY-MM-DD [YYYY-MM-DD...]
 
 If that command exits non-zero, STOP. Do not store a JSON string or a comma-separated string.
 
@@ -1014,7 +1018,11 @@ Confirm no unrelated post was modified.
 PHASE 16 — TEMP CLEANUP
 ======================================================================
 
-Remove ONLY temporary files created for this operation under /tmp, including the body file, the poster file, `/tmp/cdd-event-sessions-<unique>.php`, and the text files used for shell arguments.
+Remove only this run's private directory:
+
+rm -rf "$CDD_TMP"
+
+Do not delete any other path under /tmp.
 
 Do not delete:
 

@@ -283,6 +283,10 @@ Run:
 
 cd /home/u548735796/domains/caminodeldharma.org/public_html
 
+Create a private directory for this run. Do not reuse a fixed path under /tmp.
+
+CDD_TMP=$(mktemp -d /tmp/cdd-article-XXXXXX)
+
 Verify:
 
 pwd -P
@@ -530,7 +534,7 @@ Do not invent a CTA.
 
 Write to a temporary file such as:
 
-/tmp/cdd-article-body-<unique>.html
+"$CDD_TMP/body.html"
 
 ======================================================================
 PHASE 8 — PREPARE EXCERPT / SEO
@@ -657,17 +661,17 @@ Do not place approved text inside single quotes. An apostrophe, such as O'Connor
 
 Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
 
-cat > /tmp/cdd-article-title.txt <<'EOF'
+cat > "$CDD_TMP/title.txt" <<'EOF'
 APPROVED_TITLE
 EOF
 
-Pass the file as one argument. The quotes around the substitution keep spaces and apostrophes in the stored value:
+Pass the file as one argument. The quotes around the substitution keep spaces and apostrophes in the stored value. Do not insert a bare `--` before it. WP-CLI 2.12 treats that as another positional argument.
 
-"$(cat /tmp/cdd-article-title.txt)"
+"$(cat "$CDD_TMP/title.txt")"
 
 Create the draft with this command. If it exits non-zero, STOP.
 
-wp post create /tmp/cdd-article-body-<unique>.html --post_type=post --post_status=draft --post_title="$(cat /tmp/cdd-article-title.txt)" --post_name="$(cat /tmp/cdd-article-slug.txt)" --post_excerpt="$(cat /tmp/cdd-article-excerpt.txt)" --comment_status=<COMMENTS> --ping_status=closed --porcelain
+wp post create "$CDD_TMP/body.html" --post_type=post --post_status=draft --post_title="$(cat "$CDD_TMP/title.txt")" --post_name="$(cat "$CDD_TMP/slug.txt")" --post_excerpt="$(cat "$CDD_TMP/excerpt.txt")" --comment_status=<COMMENTS> --ping_status=closed --porcelain
 
 `<COMMENTS>` is the approved value, `closed` or `open`. `--ping_status=closed` is always set, including when comments stay open.
 
@@ -700,7 +704,7 @@ JSON
 
 `wp eval` does not receive trailing arguments in `$args`. Write a temporary script and run it with `wp eval-file`, which does.
 
-Write `/tmp/cdd-article-authors-<unique>.php` containing only:
+Write `"$CDD_TMP/authors.php"` containing only:
 
 <?php
 if ( count( $args ) < 2 ) {
@@ -715,7 +719,7 @@ if ( $stored !== $author_ids ) {
 
 Then run:
 
-wp eval-file /tmp/cdd-article-authors-<unique>.php POST_ID AUTHOR_ID [AUTHOR_ID...]
+wp eval-file "$CDD_TMP/authors.php" POST_ID AUTHOR_ID [AUTHOR_ID...]
 
 If that command exits non-zero, STOP. Do not store authors with `wp post meta update`.
 
@@ -962,7 +966,11 @@ Verify no unrelated post was modified.
 PHASE 19 — TEMP CLEANUP
 ======================================================================
 
-Remove only temporary files created by this operation under `/tmp`, including `/tmp/cdd-article-authors-<unique>.php`, the body file, and the title, slug, and excerpt text files.
+Remove only this run's private directory:
+
+rm -rf "$CDD_TMP"
+
+Do not delete any other path under /tmp.
 
 Keep:
 
