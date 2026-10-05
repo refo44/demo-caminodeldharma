@@ -258,7 +258,15 @@ final class Production_Deploy_WorkflowTest extends TestCase {
 			'resolved root is not the canonical production document root',
 			$this->step( 'Production preflight' )
 		);
+		$this->assertStringContainsString( 'refs/heads/main', $this->job( 'validate' ) );
 		$this->assertStringContainsString( 'https://caminodeldharma.org', $this->workflow() );
+		foreach ( array( 'Production preflight', 'Sync the component to production' ) as $step_name ) {
+			$this->assertStringContainsString(
+				'resolved component directory is not the tagged component',
+				$this->step( $step_name ),
+				$step_name
+			);
+		}
 		$this->assertStringContainsString( '= "production"', $this->step( 'Production preflight' ) );
 		$this->assertStringContainsString( '= "production"', $this->step( 'Post-deploy verification' ) );
 	}

@@ -59,6 +59,10 @@ jobs:
         id: commit
         run: |
           if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            [ "${GITHUB_REF}" = "refs/heads/main" ] || {
+              echo "::error::manual deploy runs only from main"
+              exit 1
+            }
             [[ "${TAG}" =~ ^(theme|plugin)-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
               echo "::error::dispatch tag is not a component tag"
               exit 1
@@ -250,20 +254,21 @@ jobs:
           required=$(printf '%s\n' "${guard}" | sed -n 's/^REQUIRED_REAL_ROOT=//p')
           [ -n "${target_dir}" ] || { echo "::error::production target is empty"; exit 1; }
           [ -n "${required}" ] || { echo "::error::production root guard is empty"; exit 1; }
-          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${PRODUCTION_WP_ROOT}" "${target_dir}" "${PRODUCTION_URL}" "${required}" <<'REMOTE'
+          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${PRODUCTION_WP_ROOT}" "${target_dir}" "${PRODUCTION_URL}" "${required}" "${TARGET_REL}" <<'REMOTE'
           set -euo pipefail
-          root=$1; target=$2; url=$3; required=$4
+          root=$1; target=$2; url=$3; required=$4; rel=$5
           fail() { echo "preflight: $*" >&2; exit 1; }
           [ -n "${required}" ] || fail "production root guard is empty"
+          case "${rel}" in
+            wp-content/themes/camino-del-dharma | wp-content/plugins/camino-del-dharma-core) ;;
+            *) fail "component target is not an allowed first-party directory" ;;
+          esac
           [ -d "${root}" ] || fail "WordPress root is missing"
           [ -d "${target}" ] || fail "component directory is missing"
           real_root=$(cd "${root}" && pwd -P)
           real_target=$(cd "${target}" && pwd -P)
           [ "${real_root}" = "${required}" ] || fail "resolved root is not the canonical production document root"
-          case "${real_target}" in
-            "${required}"/wp-content/themes/camino-del-dharma | "${required}"/wp-content/plugins/camino-del-dharma-core) ;;
-            *) fail "resolved component directory is not a first-party component" ;;
-          esac
+          [ "${real_target}" = "${required}/${rel}" ] || fail "resolved component directory is not the tagged component"
           wp_cli() { wp --path="${root}" --skip-plugins --skip-themes "$@" < /dev/null; }
           wp_cli core is-installed || fail "no WordPress installation at the root"
           [ "$(wp_cli eval 'echo wp_get_environment_type();')" = "production" ] || fail "environment type is not production"
@@ -284,17 +289,18 @@ jobs:
           required=$(printf '%s\n' "${guard}" | sed -n 's/^REQUIRED_REAL_ROOT=//p')
           [ -n "${target_dir}" ] && [ -n "${STAGE_DIR}" ] && [ -d "${STAGE_DIR}" ] || { echo "::error::empty sync path"; exit 1; }
           [ -n "${required}" ] || { echo "::error::production root guard is empty"; exit 1; }
-          ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${target_dir}" "${required}" <<'REMOTE'
+          ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${target_dir}" "${required}" "${TARGET_REL}" <<'REMOTE'
           set -euo pipefail
-          target=$1; required=$2
+          target=$1; required=$2; rel=$3
           fail() { echo "sync: $*" >&2; exit 1; }
           [ -n "${required}" ] || fail "production root guard is empty"
+          case "${rel}" in
+            wp-content/themes/camino-del-dharma | wp-content/plugins/camino-del-dharma-core) ;;
+            *) fail "component target is not an allowed first-party directory" ;;
+          esac
           [ -d "${target}" ] || fail "component directory is missing"
           real_target=$(cd "${target}" && pwd -P)
-          case "${real_target}" in
-            "${required}"/wp-content/themes/camino-del-dharma | "${required}"/wp-content/plugins/camino-del-dharma-core) ;;
-            *) fail "resolved component directory is not a first-party component" ;;
-          esac
+          [ "${real_target}" = "${required}/${rel}" ] || fail "resolved component directory is not the tagged component"
           REMOTE
           rsync --recursive --times --delete --chmod=D755,F644 --itemize-changes \
             -e "ssh -F ${SSH_CONFIG}" \
