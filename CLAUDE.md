@@ -9,9 +9,10 @@ pipelines.
 
 - Production: WordPress on the canonical domain since 2026-09-26.
   `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`.
-  Theme `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.12.
-  Release tag after merge: `plugin-v0.7.12`. The 2026-09-26 cutover deployed
-  `plugin-v0.7.10`. Signup on a current event can be closed by hand or at a
+  Theme `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.13.
+  Release tag after merge: `plugin-v0.7.13`. `plugin-v0.7.12` already
+  exists. The 2026-09-26 cutover deployed `plugin-v0.7.10`. Signup on a
+  current event can be closed by hand or at a
   Bogotá instant (`event_signup_closed`, `event_signup_closes_at`, issue #52)
   without cancelling the event or deleting the form URL.
   The owner later authorized retiring `static/` from the working tree and

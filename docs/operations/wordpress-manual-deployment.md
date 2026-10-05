@@ -361,8 +361,10 @@ abajo es el registro de ese corte, no una instrucción para repetirlo.
 Hecho: `https://caminodeldharma.org/` sirve este WordPress;
 `WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
 plugin 0.7.10. La release siguiente del plugin fue 0.7.11
-(`plugin-v0.7.11`): cierre de inscripción. Este árbol es 0.7.12
-(`plugin-v0.7.12`): `offers.validFrom`. El theme no cambia en esos tags.
+(`plugin-v0.7.11`): cierre de inscripción. La 0.7.12
+(`plugin-v0.7.12`) publica `offers.validFrom`. Este árbol es 0.7.13
+(`plugin-v0.7.13`): rechaza una zona fuera de ±23:59. El theme no
+cambia en esos tags.
 En el corte el `.htaccess` no cambió
 (`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,
 evidencia histórica). Después WordPress regeneró solo el interior de su

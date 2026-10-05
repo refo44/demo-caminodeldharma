@@ -34,9 +34,9 @@ Older docs may mention classic PHP templates (`*.php`) or a previous WordPress o
 
 Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
-`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.12
-(release tag `plugin-v0.7.12`; the 2026-09-26 cutover deployed
-`plugin-v0.7.10`). A current event can hide signup by hand or at a
+`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.13
+(release tag `plugin-v0.7.13` after merge; `plugin-v0.7.12` already
+exists; the 2026-09-26 cutover deployed `plugin-v0.7.10`). A current event can hide signup by hand or at a
 Bogotá close instant without dropping calendar, share, or `.ics`.
 The owner later authorized retiring `static/` from the working tree and
 the palegreen `public_html`, then removed the palegreen Hostinger website

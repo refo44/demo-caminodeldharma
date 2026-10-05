@@ -271,6 +271,10 @@ En el corte, la misma instalación pasa a `production` y `blog_public=1`. El inv
 correo y subdominios es gate del corte. **Ni el dominio ni ese interruptor se cambian
 en esta sesión.**
 
+**v1.38 (2026-10-05):** una zona de `offers.validFrom` fuera de ±23:59
+se rechaza (plugin 0.7.13). Tag de release, después del merge:
+`plugin-v0.7.13`. `plugin-v0.7.12` ya existe.
+
 **v1.37 (2026-10-05):** `offers.validFrom` **implementado** (plugin 0.7.12,
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54)). El panel
 guarda `event_offer_valid_from`. Vacío no inventa la fecha. Una fecha
@@ -290,7 +294,7 @@ evento el editor ve una red a la vez, edita `share_whatsapp` / `share_x` / `shar
 y una vista previa con la URL ya puesta. No hay claves nuevas. La ficha Open Graph sigue
 en «SEO y buscadores».
 
-**Versión:** 1.37 · **Fecha:** 2026-10-05 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
+**Versión:** 1.38 · **Fecha:** 2026-10-05 · **Estado:** Fase 3: 0 abiertas · 37 decididas.
 Pre-staging: 4 decididas + 2 filas de UI wp-admin **implementadas** (D-02, D-03, D-04, #18, #19);
 código de pre-staging **cerrado**; D-08 **implementado** (plugin 0.7.7 / theme 0.6.1). Staging ya importado: `migrate convert`, no un segundo import.
 Fases posteriores: 7 abiertas (`POST-001`–`POST-007`) · 3 decididas (`POST-008`–`POST-010`).

@@ -239,6 +239,14 @@ Cabecera y `CDD_CORE_VERSION` son `0.7.12`. El tag de esa release, sobre
 el commit de `main` después del merge, es `plugin-v0.7.12`. El theme no
 cambia.
 
+### Plugin 0.7.13
+
+El código posterior rechaza una zona de `offers.validFrom` fuera de
+±23:59. Cabecera y `CDD_CORE_VERSION` son `0.7.13`. El tag de esa
+release, sobre el commit de `main` después del merge, es
+`plugin-v0.7.13`. El theme no cambia. Ese tag no escribe la raíz de
+producción.
+
 ## Referencias
 
 - OWN-005, OWN-036

@@ -5,7 +5,7 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-10-05 (`offers.validFrom`, plugin 0.7.12, tag `plugin-v0.7.12`, [#54](https://github.com/refo44/demo-caminodeldharma/issues/54); el corte desplegó plugin 0.7.10 / theme 0.6.3) |
+| **Última actualización** | 2026-10-05 (plugin 0.7.13; tag `plugin-v0.7.13` después del merge; el corte desplegó plugin 0.7.10 / theme 0.6.3) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |
@@ -619,8 +619,9 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 **Corte hecho el 2026-09-26.** `https://caminodeldharma.org/` es este
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
 Theme 0.6.3. El corte desplegó plugin 0.7.10. El código de este árbol es
-plugin 0.7.12 (`offers.validFrom`, [#54](https://github.com/refo44/demo-caminodeldharma/issues/54);
-tag `plugin-v0.7.12` después del merge). El `public_html` de palegreen y, después,
+plugin 0.7.13 (rechaza una zona de `offers.validFrom` fuera de
+±23:59; tag `plugin-v0.7.13` después del merge).
+El `public_html` de palegreen y, después,
 la entrada de ese sitio en hPanel ya se retiraron. `/domains/` conserva
 solo `caminodeldharma.org`. El hostname puede resolver y respondió 403;
 no sirve el sitio estático. No queda un rollback estático servido. Los

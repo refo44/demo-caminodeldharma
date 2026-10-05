@@ -141,6 +141,7 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
   `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
   No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
   responde 404. **Ajustes → Camino del Dharma llms** solo enciende o apaga y vuelve a registrar la URL.
+- Rechazo de una zona fuera de ±23:59 desde v0.7.13.
 - Apertura de inscripción en el JSON-LD desde v0.7.12
   ([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)):
   `event_offer_valid_from` en el panel **Datos del evento**. Si hay fecha,
