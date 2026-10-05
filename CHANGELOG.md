@@ -29,10 +29,11 @@ El panel **Datos del evento** añade **Apertura de inscripción**
 (`event_offer_valid_from`). Si el editor guarda una fecha, la oferta
 JSON-LD publica `offers.validFrom` en `America/Bogota`. Si la deja vacía,
 el campo no se inventa. Una fecha ya importada se conserva hasta que el
-editor guarde otra; vaciar el campo después no la restaura. Un valor que
-no es un instante ISO completo se rechaza. Un evento finalizado o con la
-inscripción cerrada
-sigue sin `offers`. Issue
+editor guarde otra; vaciar el campo después no la restaura. Se acepta
+un día (`2026-08-13`, medianoche en Bogotá), un reloj de pared sin zona
+(`2026-08-13T12:00`) y un instante ISO con zona. Una palabra o un día
+imposible, como el 30 de febrero, se rechaza. Un evento finalizado o
+con la inscripción cerrada sigue sin `offers`. Issue
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54).
 
 ### Plugin 0.7.11 — cierre de inscripción
