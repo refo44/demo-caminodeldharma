@@ -104,6 +104,10 @@ final class Cdd_Core_Event_Offer {
 			return '';
 		}
 
+		if ( ! self::is_utc_offset( $matches[5] ) ) {
+			return '';
+		}
+
 		$offset     = 'Z' === $matches[5] ? '+00:00' : $matches[5];
 		$normalized = sprintf( '%sT%02d:%02d:%02d%s', $matches[1], $hour, $minute, $second, $offset );
 		$instant    = DateTimeImmutable::createFromFormat( '!Y-m-d\TH:i:sP', $normalized );
@@ -114,6 +118,24 @@ final class Cdd_Core_Event_Offer {
 		$zone = new DateTimeZone( Cdd_Core_Event_Status::TIMEZONE );
 
 		return $instant->setTimezone( $zone )->format( 'Y-m-d\TH:i:s' );
+	}
+
+	/**
+	 * An ISO offset is Z or ±HH:MM with the hour in 00–23 and the
+	 * minute in 00–59. PHP otherwise accepts +24:00 and shifts the day.
+	 *
+	 * @param string $offset Captured offset, including Z.
+	 */
+	private static function is_utc_offset( string $offset ): bool {
+		if ( 'Z' === $offset ) {
+			return true;
+		}
+
+		if ( 1 !== preg_match( '/^[+-](\d{2}):(\d{2})$/', $offset, $parts ) ) {
+			return false;
+		}
+
+		return (int) $parts[1] <= 23 && (int) $parts[2] <= 59;
 	}
 
 	/**

@@ -35,6 +35,7 @@ final class Event_OfferTest extends TestCase {
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( 'mañana' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( 'tomorrow-05:00' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( '2026-02-30T12:00:00-05:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( '2026-08-13T12:00:00+24:00' ) );
 	}
 
 	/**
@@ -48,5 +49,8 @@ final class Event_OfferTest extends TestCase {
 		$this->assertSame( '', Cdd_Core_Event_Offer::stored( 'mañana' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::stored( 'tomorrow-05:00' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::stored( '2026-02-30T12:00:00-05:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::stored( '2026-08-13T12:00:00+24:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::stored( '2026-08-13T12:00:00-24:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::stored( '2026-08-13T12:00:00+05:60' ) );
 	}
 }

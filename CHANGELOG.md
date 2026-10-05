@@ -32,7 +32,7 @@ el campo no se inventa. Una fecha ya importada se conserva hasta que el
 editor guarde otra; vaciar el campo después no la restaura. Se acepta
 un día (`2026-08-13`, medianoche en Bogotá), un reloj de pared sin zona
 (`2026-08-13T12:00`) y un instante ISO con zona. Una palabra o un día
-imposible, como el 30 de febrero, se rechaza. Un evento finalizado o
+imposible, como el 30 de febrero, o una zona fuera de ±23:59, se rechaza. Un evento finalizado o
 con la inscripción cerrada sigue sin `offers`. Issue
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54).
 
