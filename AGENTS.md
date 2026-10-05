@@ -15,8 +15,9 @@ plans, or adding tests.
 
 - **`main` is protected.** Never push directly to `main`. Always create a short-lived branch
   and open a PR.
-- **Branch names:** [Conventional Branch](https://conventionalbranch.org/) —
-  `feature/…`, `fix/…`, `chore/…`, `cursor/…` (for Cursor agent work), etc.
+- **Branch names:** [Conventional Branch](https://conventionalbranch.org/) purpose prefixes only —
+  `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  Do not use any AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, or a later one).
 - **Commit messages:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   in **English**.
 - **PR labels:** at least one relevant GitHub label per PR; multiple when applicable.
@@ -33,8 +34,8 @@ Older docs may mention classic PHP templates (`*.php`) or a previous WordPress o
 
 Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
-`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.11
-(release tag `plugin-v0.7.11`; the 2026-09-26 cutover deployed
+`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.12
+(release tag `plugin-v0.7.12`; the 2026-09-26 cutover deployed
 `plugin-v0.7.10`). A current event can hide signup by hand or at a
 Bogotá close instant without dropping calendar, share, or `.ics`.
 The owner later authorized retiring `static/` from the working tree and

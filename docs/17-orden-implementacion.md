@@ -147,10 +147,13 @@ La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). 
 (ADR 0047). `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
 Theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651). El
 corte desplegó el plugin `camino-del-dharma-core` 0.7.10
-(`plugin-v0.7.10`, run 36214533614). El código de este árbol es plugin
-0.7.11: cierre manual y programado de la inscripción
-([#52](https://github.com/refo44/demo-caminodeldharma/issues/52)). El tag
-de esa release, después del merge, es `plugin-v0.7.11`. El theme no cambia.
+(`plugin-v0.7.10`, run 36214533614). El código de este árbol es plugin 0.7.12: `offers.validFrom` cuando el
+editor guardó la apertura
+([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)). El tag
+de esa release, después del merge, es `plugin-v0.7.12`. La 0.7.11 cerró
+la inscripción a mano o por fecha
+([#52](https://github.com/refo44/demo-caminodeldharma/issues/52), tag
+`plugin-v0.7.11`). El theme no cambia.
 La portada está indexable: canonical `https://caminodeldharma.org/`,
 robots `index,follow,max-image-preview:large`, sitemap
 `/wp-sitemap.xml`. `/sitemap.xml` redirige allí. La evidencia histórica
@@ -219,7 +222,7 @@ publicado, bugs de accesibilidad y ajustes de performance que no alteren la arqu
 
 | Aspecto | Regla |
 | -------- | ------ |
-| **Ramas** | [Conventional Branch](https://conventionalbranch.org/) en ramas cortas (`feature/…`, `fix/…`, `chore/…`, `cursor/…`). Ver `docs/git-workflow.md`. |
+| **Ramas** | Solo prefijos de propósito de [Conventional Branch](https://conventionalbranch.org/): `feature/` o `feat/`, `fix/` o `bugfix/`, `hotfix/`, `release/`, `chore/`. Prohibido cualquier AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y los posteriores). Ver `docs/git-workflow.md`. |
 | **Integración** | **`main` protegida** (ADR 0043): solo Pull Request; checks `php` + `css` obligatorios. CI en push a `main` y en PR (ADR 0038). |
 | **Etiquetas** | Releases etiquetados (`v1.0.0`, `v1.1.0`, …) al desplegar a producción. |
 | **Versión en repo** | Archivo `VERSION` y entrada en `CHANGELOG.md` (ver README). |

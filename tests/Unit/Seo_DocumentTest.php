@@ -247,6 +247,117 @@ final class Seo_DocumentTest extends TestCase {
 	}
 
 	/**
+	 * Issue #54: a known opening date is the offer's validFrom, in
+	 * America/Bogota. An unknown date is omitted, not copied from the
+	 * event start.
+	 */
+	public function test_offer_valid_from_is_published_only_when_the_editor_set_it() {
+		$known   = Cdd_Core_Json_Ld::event(
+			array(
+				'name'             => 'Retiro',
+				'url'              => 'https://example.test/eventos/retiro',
+				'start'            => '2026-11-21',
+				'state'            => 'current',
+				'signup_url'       => 'https://forms.example/retiro',
+				'offer_valid_from' => '2026-08-13T12:00',
+			)
+		);
+		$unknown = Cdd_Core_Json_Ld::event(
+			array(
+				'name'       => 'Retiro',
+				'url'        => 'https://example.test/eventos/retiro',
+				'start'      => '2026-11-21',
+				'state'      => 'current',
+				'signup_url' => 'https://forms.example/retiro',
+			)
+		);
+
+		$this->assertSame( '2026-08-13T12:00:00-05:00', $known['offers']['validFrom'] );
+		$this->assertArrayNotHasKey( 'validFrom', $unknown['offers'] );
+	}
+
+	/**
+	 * A stored opening date stays until the editor saves a replacement.
+	 * The replacement wins. A current event that is not advertising
+	 * signup does not keep the stored offer.
+	 */
+	public function test_stored_opening_date_stays_until_the_editor_replaces_it() {
+		$extra    = array(
+			'offers' => array(
+				'@type'         => 'Offer',
+				'price'         => '0',
+				'priceCurrency' => 'COP',
+				'validFrom'     => '2026-08-13T00:00:00-05:00',
+			),
+		);
+		$kept     = Cdd_Core_Json_Ld::event(
+			array(
+				'name'       => 'Círculos',
+				'url'        => 'https://example.test/eventos/circulos',
+				'start'      => '2026-09-03',
+				'state'      => 'current',
+				'signup_url' => 'https://forms.example/circulos',
+				'extra'      => $extra,
+			)
+		);
+		$replaced = Cdd_Core_Json_Ld::event(
+			array(
+				'name'             => 'Círculos',
+				'url'              => 'https://example.test/eventos/circulos',
+				'start'            => '2026-09-03',
+				'state'            => 'current',
+				'signup_url'       => 'https://forms.example/circulos',
+				'offer_valid_from' => '2026-09-01T09:30',
+				'extra'            => $extra,
+			)
+		);
+		$closed   = Cdd_Core_Json_Ld::event(
+			array(
+				'name'             => 'Círculos',
+				'url'              => 'https://example.test/eventos/circulos',
+				'start'            => '2026-09-03',
+				'state'            => 'current',
+				'offer_valid_from' => '2026-09-01T09:30',
+				'extra'            => $extra,
+			)
+		);
+
+		$this->assertSame( '2026-08-13T00:00:00-05:00', $kept['offers']['validFrom'] );
+		$this->assertSame( 'https://forms.example/circulos', $kept['offers']['url'] );
+		$this->assertSame( '2026-09-01T09:30:00-05:00', $replaced['offers']['validFrom'] );
+		$this->assertArrayNotHasKey( 'offers', $closed );
+	}
+
+	/**
+	 * Clearing a date the editor already saved omits validFrom. The
+	 * imported opening date does not come back.
+	 */
+	public function test_clearing_a_saved_opening_date_omits_the_imported_one() {
+		$cleared = Cdd_Core_Json_Ld::event(
+			array(
+				'name'                => 'Círculos',
+				'url'                 => 'https://example.test/eventos/circulos',
+				'start'               => '2026-09-03',
+				'state'               => 'current',
+				'signup_url'          => 'https://forms.example/circulos',
+				'offer_valid_from'    => '',
+				'offer_opening_owned' => true,
+				'extra'               => array(
+					'offers' => array(
+						'@type'         => 'Offer',
+						'price'         => '0',
+						'priceCurrency' => 'COP',
+						'validFrom'     => '2026-08-13T00:00:00-05:00',
+					),
+				),
+			)
+		);
+
+		$this->assertArrayNotHasKey( 'validFrom', $cleared['offers'] );
+		$this->assertSame( 'https://forms.example/circulos', $cleared['offers']['url'] );
+	}
+
+	/**
 	 * ADR 0037 / §9.5: every author is a `Thing` pointing at its profile,
 	 * and the publisher stays the site Organization.
 	 */

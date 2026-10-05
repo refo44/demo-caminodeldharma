@@ -105,10 +105,26 @@ final class Cdd_Core_Json_Ld {
 				$offer['price']         = '0';
 				$offer['priceCurrency'] = 'COP';
 			}
+			// Issue #54: publish the opening date only when the editor
+			// stored one. An empty value leaves an imported validFrom
+			// in place until the editor has saved a replacement.
+			$valid_from = Cdd_Core_Event_Offer::valid_from( $event['offer_valid_from'] ?? '' );
+			if ( '' !== $valid_from ) {
+				$offer['validFrom'] = $valid_from;
+			}
 			$node['offers'] = $offer;
 		}
 
-		return self::merge_extra( $node, $event['extra'] ?? array(), 'current' === $state );
+		$extra = is_array( $event['extra'] ?? null ) ? $event['extra'] : array();
+		// A cleared field must not resurrect the date the editor replaced.
+		if ( ! empty( $event['offer_opening_owned'] ) && isset( $extra['offers'] ) && is_array( $extra['offers'] ) ) {
+			$opening = Cdd_Core_Event_Offer::valid_from( $event['offer_valid_from'] ?? '' );
+			if ( '' === $opening ) {
+				unset( $extra['offers']['validFrom'] );
+			}
+		}
+
+		return self::merge_extra( $node, $extra, 'current' === $state );
 	}
 
 	/**
@@ -227,7 +243,9 @@ final class Cdd_Core_Json_Ld {
 	 * @param bool  $is_current Whether the event is still current.
 	 */
 	private static function merge_extra( array $node, array $extra, bool $is_current ): array {
-		if ( ! $is_current ) {
+		// No live signup offer: drop a stored one too. A closed or
+		// completed event must not keep advertising validFrom.
+		if ( ! $is_current || ! isset( $node['offers'] ) ) {
 			unset( $extra['offers'] );
 		}
 

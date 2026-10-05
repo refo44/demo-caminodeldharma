@@ -9,8 +9,8 @@ pipelines.
 
 - Production: WordPress on the canonical domain since 2026-09-26.
   `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`.
-  Theme `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.11.
-  Release tag after merge: `plugin-v0.7.11`. The 2026-09-26 cutover deployed
+  Theme `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.12.
+  Release tag after merge: `plugin-v0.7.12`. The 2026-09-26 cutover deployed
   `plugin-v0.7.10`. Signup on a current event can be closed by hand or at a
   Bogotá instant (`event_signup_closed`, `event_signup_closes_at`, issue #52)
   without cancelling the event or deleting the form URL.
@@ -83,7 +83,9 @@ pipelines.
 - **Git:** trunk-based on protected `main` (ADR 0043). Always branch first
   ([Conventional Branch](https://conventionalbranch.org/)) **from a fresh `origin/main`: run
   `git fetch origin main` before creating a branch and before every merge or sync of `main`**
-  (a stale local `main` left PR #31 out of date); commits
+  (a stale local `main` left PR #31 out of date). Purpose prefixes only:
+  `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  Never any AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, or a later one). Commits
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English; merge
   only via PR with green `php`/`css` and **at least one relevant PR label**. See
   `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.

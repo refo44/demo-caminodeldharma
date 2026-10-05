@@ -230,6 +230,15 @@ Cabecera y `CDD_CORE_VERSION` son `0.7.11`. El tag de esa release, sobre
 el commit de `main` después del merge, es `plugin-v0.7.11`. El theme no
 cambia. Ese tag no reescribe esta decisión ni el CD de producción (D-B).
 
+### Plugin 0.7.12
+
+El código posterior publica `offers.validFrom` cuando el editor guardó
+la apertura de la inscripción
+([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)).
+Cabecera y `CDD_CORE_VERSION` son `0.7.12`. El tag de esa release, sobre
+el commit de `main` después del merge, es `plugin-v0.7.12`. El theme no
+cambia.
+
 ## Referencias
 
 - OWN-005, OWN-036

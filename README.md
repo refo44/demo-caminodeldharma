@@ -25,7 +25,7 @@ theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 
 **Trunk-based development** (ADR 0043): `main` está **protegida**; no hay push directo. Todo cambio entra por **Pull Request** desde una rama corta.
 
-- **Ramas:** [Conventional Branch](https://conventionalbranch.org/) — `feature/…`, `fix/…`, `chore/…`, `cursor/…`, etc.
+- **Ramas:** solo prefijos de propósito de [Conventional Branch](https://conventionalbranch.org/) — `feature/` o `feat/`, `fix/` o `bugfix/`, `hotfix/`, `release/`, `chore/`. Prohibido cualquier AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y los que se añadan después).
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés — `feat(scope): summary`
 - **CI obligatorio en merge:** jobs `php` y `css` de `.github/workflows/test.yml`
 - **Etiquetas del PR:** al menos una relevante por PR; varias si el cambio abarca más de un ámbito
@@ -144,7 +144,7 @@ Los archivos `camino-del-dharma-v*.zip` están en `.gitignore`; no copiarlos ni 
 
 Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress (ADR 0047).
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3
-y plugin 0.7.11 (tag de release `plugin-v0.7.11`; el corte desplegó
+y plugin 0.7.12 (tag de release `plugin-v0.7.12`; el corte desplegó
 `plugin-v0.7.10`). No extraer un ZIP de `static/` sobre ese `public_html`.
 El `public_html` de
 `https://palegreen-cod-365706.hostingersite.com/` ya se eliminó, y

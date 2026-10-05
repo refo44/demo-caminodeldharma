@@ -34,7 +34,7 @@ Known researched application versions at the time the content model was mapped:
 
 WordPress 7.1.2
 theme camino-del-dharma 0.6.3
-plugin camino-del-dharma-core 0.7.11
+plugin camino-del-dharma-core 0.7.12
 
 Known approved observed .htaccess snapshot at research time:
 
@@ -727,6 +727,14 @@ FEATURED_ON_HOME: yes
 Signup payment:
 
 default 0 unless the owner explicitly states it involves payment.
+
+Offer opening date (plugin 0.7.12):
+
+event_offer_valid_from defaults empty.
+
+Set it only when the owner supplies the datetime the inscription opened.
+Store a Bogotá wall clock as Y-m-dTHH:mm:ss. A date without a time is
+midnight. Do not copy event_date or the current time into this field.
 
 Signup close (plugin 0.7.11):
 

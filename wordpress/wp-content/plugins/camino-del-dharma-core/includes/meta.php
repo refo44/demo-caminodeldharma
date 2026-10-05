@@ -68,6 +68,32 @@ function cdd_core_register_meta() {
 
 	register_post_meta(
 		'event',
+		'event_offer_valid_from',
+		array(
+			'type'              => 'string',
+			'single'            => true,
+			'default'           => '',
+			'sanitize_callback' => 'cdd_core_sanitize_event_offer_valid_from',
+			'auth_callback'     => 'cdd_core_meta_auth',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_post_meta(
+		'event',
+		'event_offer_opening_owned',
+		array(
+			'type'              => 'string',
+			'single'            => true,
+			'default'           => '',
+			'sanitize_callback' => 'cdd_core_sanitize_offer_opening_owned',
+			'auth_callback'     => 'cdd_core_meta_auth',
+			'show_in_rest'      => false,
+		)
+	);
+
+	register_post_meta(
+		'event',
 		'event_signup_closes_at',
 		array(
 			'type'              => 'string',
@@ -186,6 +212,48 @@ function cdd_core_sanitize_event_date( $value ): string {
  */
 function cdd_core_sanitize_event_signup_closes_at( $value ): string {
 	return Cdd_Core_Event_Signup::normalize( $value );
+}
+
+/**
+ * Sanitizes the optional inscription opening date (issue #54). Empty
+ * means unknown: the graph omits validFrom rather than inventing one.
+ *
+ * @param mixed $value Raw meta value.
+ */
+function cdd_core_sanitize_event_offer_valid_from( $value ): string {
+	return Cdd_Core_Event_Offer::stored( $value );
+}
+
+/**
+ * The ownership flag is only "1" after the editor saved a real opening
+ * date. Anything else stays empty.
+ *
+ * @param mixed $value Raw meta value.
+ */
+function cdd_core_sanitize_offer_opening_owned( $value ): string {
+	return '1' === (string) $value ? '1' : '';
+}
+
+/**
+ * Remember that the editor saved an opening date, so a later clear does
+ * not restore an imported offers.validFrom.
+ *
+ * @param int    $meta_id    Unused meta row id.
+ * @param int    $post_id    Post ID.
+ * @param string $meta_key   Meta key.
+ * @param mixed  $meta_value Stored value.
+ */
+function cdd_core_mark_offer_opening_owned( $meta_id, $post_id, $meta_key, $meta_value ) {
+	unset( $meta_id );
+
+	if ( 'event_offer_valid_from' !== $meta_key || '' === (string) $meta_value ) {
+		return;
+	}
+	if ( '1' === (string) get_post_meta( $post_id, 'event_offer_opening_owned', true ) ) {
+		return;
+	}
+
+	update_post_meta( $post_id, 'event_offer_opening_owned', '1' );
 }
 
 /**

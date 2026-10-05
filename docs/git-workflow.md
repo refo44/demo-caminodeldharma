@@ -37,7 +37,13 @@ Forma: `<type>/<description>`
 | `hotfix/` | Fix urgente |
 | `release/` | Preparar versión (`release/v1.2.0`) |
 | `chore/` | Docs, CI, deps, tooling |
-| `cursor/`, `copilot/`, `claude/`, `codex/`, `ai/` | Trabajo iniciado por un agente IA |
+
+**Prohibido en este repositorio (2026-10-05):** todos los
+[AI Agent Source Prefixes](https://conventionalbranch.org/) de Conventional Branch
+1.1.0 — hoy `cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y cualquiera que esa
+sección añada después — y cualquier otro prefijo. Una rama de Cursor, Claude o
+cualquier otro agente usa el prefijo de **propósito** del cambio (`feature/`, `fix/`,
+`hotfix/`, `release/`, `chore/`). No se abre un Pull Request desde un prefijo de agente.
 
 **Reglas:** minúsculas; solo `a-z`, `0-9`, guiones; sin espacios, `_` ni guiones consecutivos. En
 `release/` se permiten puntos en la versión.
@@ -48,12 +54,11 @@ Forma: `<type>/<description>`
 feature/fse-contact-form-block
 fix/payload-hash-bookkeeping-keys
 chore/bump-docker-image-tags
-cursor/pr3-copilot-review-fixes
 release/v1.0.36
 ```
 
-**Ejemplos inválidos:** `Feature/Foo`, `feature/new--login`, `fase3-wordpress` (legacy;
-no usar en ramas nuevas).
+**Ejemplos inválidos:** `Feature/Foo`, `feature/new--login`, `cursor/event-offer-valid-from`,
+`fase3-wordpress` (legacy; no usar en ramas nuevas).
 
 ## Commits — [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
@@ -152,8 +157,9 @@ gh issue create --label enhancement --label documentation --title "…"
 
 1. **Nunca** commitear ni pushear directamente a `main`.
 2. **Ejecutar siempre `git fetch origin main`** antes de crear la rama y antes de cualquier merge
-   o sincronización con `main`; ramificar desde `origin/main`. Crear rama con prefijo adecuado
-   (`cursor/…` para Cursor).
+   o sincronización con `main`; ramificar desde `origin/main`. El prefijo es el del propósito
+   (`feature/`, `fix/`, `hotfix/`, `release/`, `chore/`). **Prohibido** cualquier
+   AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, o uno posterior).
 3. Commits Conventional Commits en inglés.
 4. Abrir PR hacia `main`; **añadir al menos una etiqueta relevante** (más de una si aplica).
 5. Esperar `php` + `css` verdes.

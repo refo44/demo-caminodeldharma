@@ -70,7 +70,7 @@ final class Event_ModelTest extends WP_UnitTestCase {
 	public function test_event_meta_fields_are_registered() {
 		$registered_meta = get_registered_meta_keys( 'post', 'event' );
 
-		foreach ( array( 'event_date', 'event_end', 'event_place', 'event_modality', 'event_status', 'event_featured', 'event_signup_url', 'event_signup_closed', 'event_signup_closes_at', 'event_signup_payment', 'event_calendar_dates' ) as $meta_key ) {
+		foreach ( array( 'event_date', 'event_end', 'event_place', 'event_modality', 'event_status', 'event_featured', 'event_signup_url', 'event_offer_valid_from', 'event_signup_closed', 'event_signup_closes_at', 'event_signup_payment', 'event_calendar_dates' ) as $meta_key ) {
 			$this->assertArrayHasKey( $meta_key, $registered_meta, "Meta {$meta_key} must be registered for events." );
 		}
 	}
@@ -92,6 +92,7 @@ final class Event_ModelTest extends WP_UnitTestCase {
 		update_post_meta( $event_id, 'event_status', 'archivado' );
 		update_post_meta( $event_id, 'event_signup_url', 'javascript:alert(1)' );
 		update_post_meta( $event_id, 'event_signup_closes_at', '2026-10-01T25:00' );
+		update_post_meta( $event_id, 'event_offer_valid_from', '2026-13-40' );
 		update_post_meta( $event_id, 'event_calendar_dates', array( '2026-09-03', 'bad', '2026-09-10' ) );
 
 		$this->assertSame( '', get_post_meta( $event_id, 'event_date', true ) );
@@ -100,6 +101,7 @@ final class Event_ModelTest extends WP_UnitTestCase {
 		$this->assertSame( 'vigente', get_post_meta( $event_id, 'event_status', true ) );
 		$this->assertStringNotContainsString( 'javascript:', get_post_meta( $event_id, 'event_signup_url', true ) );
 		$this->assertSame( '', get_post_meta( $event_id, 'event_signup_closes_at', true ) );
+		$this->assertSame( '', get_post_meta( $event_id, 'event_offer_valid_from', true ) );
 		$this->assertSame( array( '2026-09-03', '2026-09-10' ), get_post_meta( $event_id, 'event_calendar_dates', true ) );
 	}
 

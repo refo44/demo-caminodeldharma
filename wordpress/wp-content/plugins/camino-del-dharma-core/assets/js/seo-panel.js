@@ -77,6 +77,7 @@
 	var EVENT_ATTENDANCE_MODE = 'event_attendance_mode';
 	var EVENT_STATUS = 'event_status';
 	var EVENT_SIGNUP_URL = 'event_signup_url';
+	var EVENT_OFFER_VALID_FROM = 'event_offer_valid_from';
 	var EVENT_SIGNUP_CLOSED = 'event_signup_closed';
 	var EVENT_SIGNUP_CLOSES_AT = 'event_signup_closes_at';
 	var EVENT_SIGNUP_PAYMENT = 'event_signup_payment';
@@ -445,6 +446,10 @@
 			metaText( meta, EVENT_SIGNUP_URL, __( 'URL de inscripción', TEXT_DOMAIN ), {
 				type: 'url',
 				inputMode: 'url'
+			} ),
+			metaText( meta, EVENT_OFFER_VALID_FROM, __( 'Apertura de inscripción', TEXT_DOMAIN ), {
+				type: 'datetime-local',
+				help: __( 'Fecha y hora en que empezó la inscripción (America/Bogotá). Si lo dejas vacío, no se inventa una fecha.', TEXT_DOMAIN )
 			} ),
 			metaToggle(
 				meta,
