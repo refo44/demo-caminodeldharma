@@ -283,6 +283,10 @@ Run:
 
 cd /home/u548735796/domains/caminodeldharma.org/public_html
 
+Create a private directory for this run. Do not reuse a fixed path under /tmp.
+
+CDD_TMP=$(mktemp -d /tmp/cdd-article-XXXXXX)
+
 Verify:
 
 pwd -P
@@ -530,7 +534,7 @@ Do not invent a CTA.
 
 Write to a temporary file such as:
 
-/tmp/cdd-article-body-<unique>.html
+"$CDD_TMP/body.html"
 
 ======================================================================
 PHASE 8 — PREPARE EXCERPT / SEO
@@ -651,7 +655,25 @@ Use:
 - prepared temporary body file
 - chosen comment_status
 
-Ping status should not create unnecessary pingback behavior.
+SHELL ARGUMENTS
+
+Do not place approved text inside single quotes. An apostrophe, such as O'Connor, breaks that command.
+
+Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
+
+cat > "$CDD_TMP/title.txt" <<'EOF'
+APPROVED_TITLE
+EOF
+
+Pass the file as one argument. The quotes around the substitution keep spaces and apostrophes in the stored value. Do not insert a bare `--` before it. WP-CLI 2.12 treats that as another positional argument.
+
+"$(cat "$CDD_TMP/title.txt")"
+
+Create the draft with this command. If it exits non-zero, STOP.
+
+wp post create "$CDD_TMP/body.html" --post_type=post --post_status=draft --post_title="$(cat "$CDD_TMP/title.txt")" --post_name="$(cat "$CDD_TMP/slug.txt")" --post_excerpt="$(cat "$CDD_TMP/excerpt.txt")" --comment_status=<COMMENTS> --ping_status=closed --porcelain
+
+`<COMMENTS>` is the approved value, `closed` or `open`. `--ping_status=closed` is always set, including when comments stay open.
 
 Use an existing authorized WordPress user/context.
 
@@ -680,15 +702,26 @@ Do NOT store:
 "[6,7]"
 JSON
 
-Use the supported PHP-array mechanism, equivalent to:
+`wp eval` does not receive trailing arguments in `$args`. Write a temporary script and run it with `wp eval-file`, which does.
 
-wp eval '
-update_post_meta(
-    (int) $args[0],
-    "authors",
-    array_map("intval", array_slice($args, 1))
-);
-' POST_ID AUTHOR_ID [AUTHOR_ID...]
+Write `"$CDD_TMP/authors.php"` containing only:
+
+<?php
+if ( count( $args ) < 2 ) {
+    WP_CLI::error( 'POST_ID and at least one author id are required' );
+}
+$author_ids = array_map( 'intval', array_slice( $args, 1 ) );
+update_post_meta( (int) $args[0], 'authors', $author_ids );
+$stored = get_post_meta( (int) $args[0], 'authors', true );
+if ( $stored !== $author_ids ) {
+    WP_CLI::error( 'authors was not stored' );
+}
+
+Then run:
+
+wp eval-file "$CDD_TMP/authors.php" POST_ID AUTHOR_ID [AUTHOR_ID...]
+
+If that command exits non-zero, STOP. Do not store authors with `wp post meta update`.
 
 Preserve owner-specified order.
 
@@ -748,7 +781,8 @@ Verify:
 - post_featured
 - SEO
 - share
-- comments
+- comment_status equals the approved COMMENTS value
+- ping_status = closed
 - publication intent
 
 Verify the author profile URL(s):
@@ -771,6 +805,22 @@ Read:
 
 PUBLISH_MODE
 PUBLICATION
+
+Before interpreting PUBLICATION, read:
+
+wp option get timezone_string
+
+Require:
+
+America/Bogota
+
+If the value is anything else, including empty or a numeric offset:
+
+STOP.
+
+Do not change the site timezone during this operation.
+Do not schedule or publish until this check passes.
+`post_date` is parsed in the site timezone.
 
 If:
 
@@ -916,7 +966,11 @@ Verify no unrelated post was modified.
 PHASE 19 — TEMP CLEANUP
 ======================================================================
 
-Remove only temporary files created by this operation under `/tmp`.
+Remove only this run's private directory:
+
+rm -rf "$CDD_TMP"
+
+Do not delete any other path under /tmp.
 
 Keep:
 

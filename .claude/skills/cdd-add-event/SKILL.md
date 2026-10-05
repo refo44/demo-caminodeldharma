@@ -6,6 +6,7 @@ description: >-
   explicitly asks to add, create, or publish a production event and supplies
   EVENT INPUT (title, slug, dates, poster). Do not use for research, code
   changes, local fixtures, or migration.
+disable-model-invocation: true
 ---
 
 # Add a production event

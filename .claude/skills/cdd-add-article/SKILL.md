@@ -6,6 +6,7 @@ description: >-
   explicitly asks to add, create, schedule, or publish a production article
   and supplies ARTICLE INPUT (title, slug, body, editorial authors, image).
   Do not use for research, code changes, local fixtures, or migration.
+disable-model-invocation: true
 ---
 
 # Add a production blog article

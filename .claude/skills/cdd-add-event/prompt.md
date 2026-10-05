@@ -322,6 +322,10 @@ Run:
 
 cd /home/u548735796/domains/caminodeldharma.org/public_html
 
+Create a private directory for this run. Do not reuse a fixed path under /tmp.
+
+CDD_TMP=$(mktemp -d /tmp/cdd-event-XXXXXX)
+
 Verify:
 
 pwd -P
@@ -513,17 +517,31 @@ reuse its attachment ID.
 Otherwise:
 
 copy the file through SSH/SCP to a unique temporary file under the account
-/tmp directory.
+/tmp directory, inside `"$CDD_TMP"`, such as `"$CDD_TMP/poster.<ext>"`.
 
 Do NOT stage it inside public_html.
 
-Then import using WP-CLI.
+SHELL ARGUMENTS
 
-Capture ATTACHMENT_ID.
+Do not place approved text inside single quotes. An apostrophe, such as O'Connor, breaks that command.
 
-Store:
+Write each approved string to its own file with a quoted heredoc. The closing line must not occur inside the text. Do not escape or rewrite the approved text.
 
-_wp_attachment_image_alt = exact approved POSTER_ALT
+cat > "$CDD_TMP/poster-alt.txt" <<'EOF'
+APPROVED_POSTER_ALT
+EOF
+
+Pass the file as one argument. Do not insert a bare `--` before it. WP-CLI 2.12 treats that as another positional argument.
+
+"$(cat "$CDD_TMP/poster-alt.txt")"
+
+Then import. If a command exits non-zero, STOP.
+
+wp media import "$CDD_TMP/poster.<ext>" --porcelain
+
+Capture ATTACHMENT_ID from the porcelain output.
+
+wp post meta update ATTACHMENT_ID _wp_attachment_image_alt "$(cat "$CDD_TMP/poster-alt.txt")"
 
 Do not invent a caption.
 
@@ -569,7 +587,7 @@ Apply EMPHASIS. Do not leave a schedule as unmarked running text.
 
 Write the prepared body to a temporary server file such as:
 
-/tmp/cdd-event-body-<unique>.html
+"$CDD_TMP/body.html"
 
 ======================================================================
 PHASE 7 — PREPARE SEO / SHARE DATA
@@ -660,9 +678,13 @@ post_excerpt = approved excerpt
 comment_status = closed
 ping_status = closed
 
-Use the temporary Gutenberg body file.
+Use the temporary Gutenberg body file. If the command exits non-zero, STOP.
 
-Capture EVENT_ID.
+Write the title, slug, and excerpt with SHELL ARGUMENTS, then:
+
+wp post create "$CDD_TMP/body.html" --post_type=event --post_status=draft --post_title="$(cat "$CDD_TMP/title.txt")" --post_name="$(cat "$CDD_TMP/slug.txt")" --post_excerpt="$(cat "$CDD_TMP/excerpt.txt")" --comment_status=closed --ping_status=closed --porcelain
+
+Capture EVENT_ID from the porcelain output.
 
 Do not publish in the create command.
 
@@ -670,7 +692,11 @@ Do not publish in the create command.
 PHASE 9 — APPLY STRUCTURED DATA
 ======================================================================
 
-Set exact owner-approved values only.
+Set exact owner-approved values only. For each scalar field the owner supplied, run one update. Skip a field the owner did not supply. If a command exits non-zero, STOP. Do not invent a value to make the command succeed.
+
+Write the approved value with SHELL ARGUMENTS, then:
+
+wp post meta update EVENT_ID <key> "$(cat "$CDD_TMP/<key>.txt")"
 
 Required:
 
@@ -768,21 +794,41 @@ Session dates:
 
 Store them only under DATE RANGE VERSUS SESSIONS.
 
-When stored, they must be a real PHP array using the existing supported
-mechanism.
+When stored, they must be a real PHP array. `wp eval` does not receive trailing arguments in `$args`. Write `"$CDD_TMP/sessions.php"` containing only:
 
-Do NOT store a JSON string or comma-separated string.
+<?php
+if ( count( $args ) < 2 ) {
+    WP_CLI::error( 'EVENT_ID and at least one session date are required' );
+}
+$dates = array_slice( $args, 1 );
+update_post_meta( (int) $args[0], 'event_calendar_dates', $dates );
+$stored = get_post_meta( (int) $args[0], 'event_calendar_dates', true );
+if ( $stored !== $dates ) {
+    WP_CLI::error( 'event_calendar_dates was not stored' );
+}
+
+Then run:
+
+wp eval-file "$CDD_TMP/sessions.php" EVENT_ID YYYY-MM-DD [YYYY-MM-DD...]
+
+If that command exits non-zero, STOP. Do not store a JSON string or a comma-separated string.
 
 When the event is a continuous range, delete `event_calendar_dates` if
 it exists. Do not store an empty array as a substitute schedule.
+
+wp post meta delete EVENT_ID event_calendar_dates
 
 ======================================================================
 PHASE 10 — ASSIGN TAXONOMIES
 ======================================================================
 
-Assign exactly one approved event_type.
+Assign exactly one approved event_type. If the command exits non-zero, STOP. Do not create a term from this command.
 
-Assign event_city only if supplied.
+wp post term set EVENT_ID event_type <approved-type-slug>
+
+Assign event_city only if supplied. If that command exits non-zero, STOP.
+
+wp post term set EVENT_ID event_city <approved-city-slug>
 
 Do not create public city/type URLs.
 
@@ -792,11 +838,12 @@ Do not assign categories/tags/gallery albums.
 PHASE 11 — ATTACH POSTER
 ======================================================================
 
-Set:
+Set the featured image. If either command exits non-zero, STOP.
 
-_thumbnail_id = ATTACHMENT_ID
+wp post meta update EVENT_ID _thumbnail_id ATTACHMENT_ID
+wp post meta get ATTACHMENT_ID _wp_attachment_image_alt
 
-Verify attachment ALT again.
+The ALT read back must equal the approved POSTER_ALT.
 
 Do not create a separate social image.
 
@@ -971,7 +1018,11 @@ Confirm no unrelated post was modified.
 PHASE 16 — TEMP CLEANUP
 ======================================================================
 
-Remove ONLY temporary files created for this operation under /tmp.
+Remove only this run's private directory:
+
+rm -rf "$CDD_TMP"
+
+Do not delete any other path under /tmp.
 
 Do not delete:
 
