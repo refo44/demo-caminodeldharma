@@ -513,17 +513,17 @@ reuse its attachment ID.
 Otherwise:
 
 copy the file through SSH/SCP to a unique temporary file under the account
-/tmp directory.
+/tmp directory, such as `/tmp/cdd-event-poster-<unique>.<ext>`.
 
 Do NOT stage it inside public_html.
 
-Then import using WP-CLI.
+Then import. If either command exits non-zero, STOP.
 
-Capture ATTACHMENT_ID.
+wp media import /tmp/cdd-event-poster-<unique>.<ext> --porcelain
 
-Store:
+Capture ATTACHMENT_ID from the porcelain output.
 
-_wp_attachment_image_alt = exact approved POSTER_ALT
+wp post meta update ATTACHMENT_ID _wp_attachment_image_alt 'APPROVED_POSTER_ALT'
 
 Do not invent a caption.
 
@@ -660,9 +660,11 @@ post_excerpt = approved excerpt
 comment_status = closed
 ping_status = closed
 
-Use the temporary Gutenberg body file.
+Use the temporary Gutenberg body file. If the command exits non-zero, STOP.
 
-Capture EVENT_ID.
+wp post create /tmp/cdd-event-body-<unique>.html --post_type=event --post_status=draft --post_title='OWNER_TITLE' --post_name='APPROVED_SLUG' --post_excerpt='APPROVED_EXCERPT' --comment_status=closed --ping_status=closed --porcelain
+
+Capture EVENT_ID from the porcelain output.
 
 Do not publish in the create command.
 
@@ -670,7 +672,9 @@ Do not publish in the create command.
 PHASE 9 — APPLY STRUCTURED DATA
 ======================================================================
 
-Set exact owner-approved values only.
+Set exact owner-approved values only. For each scalar field the owner supplied, run one update. Skip a field the owner did not supply. If a command exits non-zero, STOP. Do not invent a value to make the command succeed.
+
+wp post meta update EVENT_ID <key> '<approved value>'
 
 Required:
 
@@ -768,21 +772,41 @@ Session dates:
 
 Store them only under DATE RANGE VERSUS SESSIONS.
 
-When stored, they must be a real PHP array using the existing supported
-mechanism.
+When stored, they must be a real PHP array. `wp eval` does not receive trailing arguments in `$args`. Write `/tmp/cdd-event-sessions-<unique>.php` containing only:
 
-Do NOT store a JSON string or comma-separated string.
+<?php
+if ( count( $args ) < 2 ) {
+    fwrite( STDERR, "EVENT_ID and at least one session date are required\n" );
+    exit( 1 );
+}
+update_post_meta(
+    (int) $args[0],
+    'event_calendar_dates',
+    array_slice( $args, 1 )
+);
+
+Then run:
+
+wp eval-file /tmp/cdd-event-sessions-<unique>.php EVENT_ID YYYY-MM-DD [YYYY-MM-DD...]
+
+If that command exits non-zero, STOP. Do not store a JSON string or a comma-separated string.
 
 When the event is a continuous range, delete `event_calendar_dates` if
 it exists. Do not store an empty array as a substitute schedule.
+
+wp post meta delete EVENT_ID event_calendar_dates
 
 ======================================================================
 PHASE 10 — ASSIGN TAXONOMIES
 ======================================================================
 
-Assign exactly one approved event_type.
+Assign exactly one approved event_type. If the command exits non-zero, STOP. Do not create a term from this command.
 
-Assign event_city only if supplied.
+wp post term set EVENT_ID event_type <approved-type-slug>
+
+Assign event_city only if supplied. If that command exits non-zero, STOP.
+
+wp post term set EVENT_ID event_city <approved-city-slug>
 
 Do not create public city/type URLs.
 
@@ -792,11 +816,12 @@ Do not assign categories/tags/gallery albums.
 PHASE 11 — ATTACH POSTER
 ======================================================================
 
-Set:
+Set the featured image. If either command exits non-zero, STOP.
 
-_thumbnail_id = ATTACHMENT_ID
+wp post meta update EVENT_ID _thumbnail_id ATTACHMENT_ID
+wp post meta get ATTACHMENT_ID _wp_attachment_image_alt
 
-Verify attachment ALT again.
+The ALT read back must equal the approved POSTER_ALT.
 
 Do not create a separate social image.
 
@@ -971,7 +996,7 @@ Confirm no unrelated post was modified.
 PHASE 16 — TEMP CLEANUP
 ======================================================================
 
-Remove ONLY temporary files created for this operation under /tmp.
+Remove ONLY temporary files created for this operation under /tmp, including the body file, the poster file, and `/tmp/cdd-event-sessions-<unique>.php`.
 
 Do not delete:
 

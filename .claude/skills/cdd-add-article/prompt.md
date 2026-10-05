@@ -651,7 +651,11 @@ Use:
 - prepared temporary body file
 - chosen comment_status
 
-Ping status should not create unnecessary pingback behavior.
+Create the draft with this command. If it exits non-zero, STOP.
+
+wp post create /tmp/cdd-article-body-<unique>.html --post_type=post --post_status=draft --post_title='APPROVED_TITLE' --post_name='APPROVED_SLUG' --post_excerpt='APPROVED_EXCERPT' --comment_status=<COMMENTS> --ping_status=closed --porcelain
+
+`<COMMENTS>` is the approved value, `closed` or `open`. `--ping_status=closed` is always set, including when comments stay open.
 
 Use an existing authorized WordPress user/context.
 
@@ -680,15 +684,26 @@ Do NOT store:
 "[6,7]"
 JSON
 
-Use the supported PHP-array mechanism, equivalent to:
+`wp eval` does not receive trailing arguments in `$args`. Write a temporary script and run it with `wp eval-file`, which does.
 
-wp eval '
+Write `/tmp/cdd-article-authors-<unique>.php` containing only:
+
+<?php
+if ( count( $args ) < 2 ) {
+    fwrite( STDERR, "POST_ID and at least one author id are required\n" );
+    exit( 1 );
+}
 update_post_meta(
     (int) $args[0],
-    "authors",
-    array_map("intval", array_slice($args, 1))
+    'authors',
+    array_map( 'intval', array_slice( $args, 1 ) )
 );
-' POST_ID AUTHOR_ID [AUTHOR_ID...]
+
+Then run:
+
+wp eval-file /tmp/cdd-article-authors-<unique>.php POST_ID AUTHOR_ID [AUTHOR_ID...]
+
+If that command exits non-zero, STOP. Do not store authors with `wp post meta update`.
 
 Preserve owner-specified order.
 
@@ -748,7 +763,8 @@ Verify:
 - post_featured
 - SEO
 - share
-- comments
+- comment_status equals the approved COMMENTS value
+- ping_status = closed
 - publication intent
 
 Verify the author profile URL(s):
@@ -771,6 +787,22 @@ Read:
 
 PUBLISH_MODE
 PUBLICATION
+
+Before interpreting PUBLICATION, read:
+
+wp option get timezone_string
+
+Require:
+
+America/Bogota
+
+If the value is anything else, including empty or a numeric offset:
+
+STOP.
+
+Do not change the site timezone during this operation.
+Do not schedule or publish until this check passes.
+`post_date` is parsed in the site timezone.
 
 If:
 
@@ -916,7 +948,7 @@ Verify no unrelated post was modified.
 PHASE 19 — TEMP CLEANUP
 ======================================================================
 
-Remove only temporary files created by this operation under `/tmp`.
+Remove only temporary files created by this operation under `/tmp`, including `/tmp/cdd-article-authors-<unique>.php` and the body file.
 
 Keep:
 
