@@ -217,8 +217,8 @@ No queda un sitio estático servido como rollback. La copia histórica
 sigue en `282230c41589348722a80985046d16cb07d19a1c` y en el tar ya citado.
 Los backups de base de datos, `wp-config`, `.htaccess` y rewrite rules
 siguen fuera de `public_html`. Staging sigue retirado. El correo del
-formulario sigue diferido. El CD de producción (ADR 0046 D-B) sigue sin
-decidir. La decisión original de este ADR no se reescribe.
+formulario sigue diferido. Un tag de componente despliega ese código a
+la raíz canónica (ADR 0048). La decisión original de este ADR no se reescribe.
 
 ### Plugin 0.7.11
 

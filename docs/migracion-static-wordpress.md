@@ -22,8 +22,8 @@ estático servido. El tar
 servidor, incluidos los archivos que Git no tiene. La recuperación
 histórica de Git es `282230c41589348722a80985046d16cb07d19a1c`. Staging
 sigue retirado. La entrega de correo del formulario
-sigue sin verificar y el formulario está oculto. El CD de producción
-(ADR 0046 D-B) sigue sin decidir. Estado durable:
+sigue sin verificar y el formulario está oculto. Un tag de componente
+despliega ese código a producción (ADR 0048). Estado durable:
 `.audit/fase3-execution-state.md`.
 Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.
 

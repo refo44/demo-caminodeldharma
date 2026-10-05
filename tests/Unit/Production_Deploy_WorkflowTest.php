@@ -1,12 +1,11 @@
 <?php
 /**
- * Level 1: the WordPress staging deploy workflow contract (ADR 0046).
+ * Level 1: the WordPress production deploy workflow contract (ADR 0048).
  *
- * Written RED-first. The workflow is the only thing that may write to
- * staging, so its trigger matrix, permissions, target and forbidden
- * operations are pinned here as text invariants. This cannot prove the
- * remote behavior (that needs a real tag and the staging secrets); it stops
- * the contract from drifting silently in review.
+ * Written RED-first. A component tag deploys that component to the canonical
+ * production WordPress. The workflow is the only thing that may write there,
+ * so its trigger, permissions, target and forbidden operations are pinned
+ * here as text invariants.
  *
  * @package Camino_Del_Dharma_Core
  */
@@ -14,18 +13,21 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * Release cluster: `.github/workflows/deploy-staging.yml`.
+ * Release cluster: `.github/workflows/deploy-production.yml`.
  */
-final class Staging_Deploy_WorkflowTest extends TestCase {
+final class Production_Deploy_WorkflowTest extends TestCase {
 
 	/**
-	 * Only component tags start a run: no branch, PR, manual or static tag.
+	 * Component tags start a run. A manual run may repeat an existing
+	 * component tag. A branch, pull request, schedule or static `v*` tag does not.
 	 */
-	public function test_it_triggers_only_on_theme_and_plugin_tags() {
+	public function test_it_triggers_on_component_tags_or_a_tag_dispatch() {
 		$on = $this->section( 'on' );
 
-		$this->assertMatchesRegularExpression( '/^  push:\n    tags:\n      - \'theme-v\*\'\n      - \'plugin-v\*\'\n?$/', $on );
-		$this->assertDoesNotMatchRegularExpression( '/branches|pull_request|workflow_dispatch|schedule|repository_dispatch|workflow_run/', $on );
+		$this->assertStringContainsString( "  push:\n    tags:\n      - 'theme-v*'\n      - 'plugin-v*'\n", $on );
+		$this->assertStringContainsString( "  workflow_dispatch:\n    inputs:\n      tag:\n", $on );
+		$this->assertStringContainsString( 'required: true', $on );
+		$this->assertDoesNotMatchRegularExpression( '/branches|pull_request|schedule|repository_dispatch|workflow_run/', $on );
 		$this->assertStringNotContainsString( "'v*'", $on );
 	}
 
@@ -41,14 +43,13 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
-	 * Only the deploy job holds the staging environment, and there is no
-	 * other environment.
+	 * Only the deploy job holds the production environment.
 	 */
-	public function test_only_the_deploy_job_uses_the_staging_environment() {
+	public function test_only_the_deploy_job_uses_the_production_environment() {
 		$workflow = $this->workflow();
 
 		$this->assertSame( 1, preg_match_all( '/^\s+environment:/m', $workflow ) );
-		$this->assertStringContainsString( "    environment:\n      name: staging\n", $workflow );
+		$this->assertStringContainsString( "    environment:\n      name: production\n", $workflow );
 
 		$deploy = $this->job( 'deploy' );
 		$this->assertStringContainsString( 'environment:', $deploy );
@@ -61,10 +62,10 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	/**
 	 * Deployments are serialized and never cancelled halfway through a sync.
 	 */
-	public function test_staging_deploys_are_serialized_and_not_cancelled() {
+	public function test_production_deploys_are_serialized_and_not_cancelled() {
 		$deploy = $this->job( 'deploy' );
 
-		$this->assertStringContainsString( "concurrency:\n      group: staging-wordpress-deploy\n      cancel-in-progress: false\n", $deploy );
+		$this->assertStringContainsString( "concurrency:\n      group: production-wordpress-deploy\n      cancel-in-progress: false\n", $deploy );
 	}
 
 	/**
@@ -97,26 +98,42 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
-	 * The gate runs on the commit the tag resolves to (annotated tags are
-	 * peeled with `^{commit}`), and every later job reuses that one value.
+	 * Quality jobs test the tagged commit. The deploy job keeps the workflow
+	 * commit so a manual run of an older tag still uses the current guard.
 	 */
-	public function test_every_job_checks_out_the_commit_the_tag_resolves_to() {
+	public function test_quality_jobs_use_the_tag_and_deploy_keeps_the_workflow_commit() {
 		$workflow = $this->workflow();
 
 		$this->assertSame( 4, substr_count( $workflow, 'actions/checkout@v5' ) );
 		$this->assertStringContainsString( 'refs/tags/${TAG}^{commit}', $workflow );
 		$this->assertStringContainsString( 'sha: ${{ steps.commit.outputs.sha }}', $this->job( 'validate' ) );
+		$this->assertStringContainsString( 'tag: ${{ steps.commit.outputs.tag }}', $this->job( 'validate' ) );
 		$this->assertStringContainsString( 'ref: ${{ github.sha }}', $this->job( 'validate' ) );
-		foreach ( array( 'php', 'css', 'deploy' ) as $job ) {
+		$this->assertStringContainsString( 'ref: ${{ github.sha }}', $this->job( 'deploy' ) );
+		foreach ( array( 'php', 'css' ) as $job ) {
 			$this->assertStringContainsString( 'ref: ${{ needs.validate.outputs.sha }}', $this->job( $job ), $job );
-			$this->assertStringNotContainsString( 'github.sha', $this->job( $job ), $job );
 		}
 		$this->assertStringContainsString( 'TAGGED_SHA: ${{ needs.validate.outputs.sha }}', $this->job( 'deploy' ) );
+		$this->assertStringContainsString( 'TAG: ${{ needs.validate.outputs.tag }}', $this->job( 'deploy' ) );
 	}
 
 	/**
-	 * Main is fetched explicitly (read-only, no tags) and verified before the
-	 * ancestry check, which fails closed and never demands tag == main head.
+	 * The version check reads the tagged tree, not whatever branch started a
+	 * manual run.
+	 */
+	public function test_version_resolution_reads_an_archive_of_the_tag() {
+		$validate = $this->job( 'validate' );
+
+		$archive = strpos( $validate, 'git archive "${sha}"' );
+		$resolve = strpos( $validate, 'tools/release/resolve-release.sh "${TAG}"' );
+
+		$this->assertNotFalse( $archive );
+		$this->assertNotFalse( $resolve );
+		$this->assertLessThan( $resolve, $archive );
+	}
+
+	/**
+	 * Main is fetched explicitly and the tagged commit must belong to it.
 	 */
 	public function test_main_ancestry_is_explicit_and_fail_closed() {
 		$validate = $this->job( 'validate' );
@@ -131,19 +148,17 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 		$this->assertLessThan( $verify, $fetch );
 		$this->assertLessThan( $ancestor, $verify );
 		$this->assertStringContainsString( 'exit 1', substr( $validate, $ancestor, 200 ) );
-		$this->assertStringNotContainsString( 'origin/main^{commit}', $validate );
-		$this->assertStringNotContainsString( '--depth', $validate );
 	}
 
 	/**
-	 * Validation order inside the gate job: tag -> SemVer/component -> main
-	 * ancestry -> symlinks. The deploy job needs all of it.
+	 * Validation order: tag commit, version from that tree, ancestry, symlinks.
 	 */
 	public function test_validation_steps_run_in_the_documented_order() {
 		$validate = $this->job( 'validate' );
 
 		$order = array(
 			'refs/tags/${TAG}^{commit}',
+			'git archive "${sha}"',
 			'tools/release/resolve-release.sh',
 			'git merge-base --is-ancestor',
 			'tools/release/check-no-symlinks.sh',
@@ -158,30 +173,30 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
-	 * Symlinks are refused before any artifact, key or server exists, and the
-	 * transport no longer copies links.
+	 * Symlinks are refused before any artifact, key or server exists.
 	 */
 	public function test_symlinks_are_refused_and_not_synced() {
 		$workflow = $this->workflow();
 
 		$this->assertStringContainsString( 'bash tools/release/check-no-symlinks.sh "${TAGGED_SHA}" "${SOURCE_DIR}"', $this->job( 'validate' ) );
 		$this->assertStringNotContainsString( '--links', $workflow );
-		$this->assertStringNotContainsString( 'tools/release/check-no-symlinks.sh', $this->job( 'deploy' ) );
 	}
 
 	/**
-	 * Validation is delegated to the tested scripts, never re-implemented.
+	 * Validation is delegated to the tested scripts.
 	 */
-	public function test_it_uses_the_release_scripts() {
+	public function test_it_uses_the_production_release_scripts() {
 		$workflow = $this->workflow();
 
 		$this->assertStringContainsString( 'tools/release/resolve-release.sh', $workflow );
-		$this->assertStringContainsString( 'tools/release/check-staging-target.sh', $workflow );
+		$this->assertStringContainsString( 'tools/release/check-production-target.sh', $workflow );
+		$this->assertStringNotContainsString( 'check-staging-target.sh', $workflow );
+		$this->assertStringNotContainsString( 'teal-woodpecker', $workflow );
+		$this->assertStringNotContainsString( 'STAGING_', $workflow );
 	}
 
 	/**
-	 * Host keys are verified, and the transport is the two first-party
-	 * directories only: never the document root, never a broad sync.
+	 * Host keys are verified, and rsync is limited to the component directory.
 	 */
 	public function test_transport_is_verified_and_component_scoped() {
 		$workflow = $this->workflow();
@@ -195,16 +210,13 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
-	 * A deployed theme must reach visitors: LiteSpeed serves the cached HTML,
-	 * which still points at the previous `?ver=` of the stylesheet. The purge
-	 * runs after the sync and before the verification, and a failed purge is
-	 * loud but never fails a deploy that already reached staging.
+	 * LiteSpeed cache is purged after the sync and before verification.
 	 */
 	public function test_the_page_cache_is_purged_after_the_sync_and_before_verification() {
 		$workflow = $this->workflow();
 
-		$sync   = strpos( $workflow, 'name: Sync the component to staging' );
-		$purge  = strpos( $workflow, 'name: Purge the staging page cache' );
+		$sync   = strpos( $workflow, 'name: Sync the component to production' );
+		$purge  = strpos( $workflow, 'name: Purge the production page cache' );
 		$verify = strpos( $workflow, 'name: Post-deploy verification' );
 
 		$this->assertNotFalse( $purge, 'The purge step is missing.' );
@@ -214,45 +226,53 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	public function test_a_failed_purge_warns_and_does_not_fail_the_deploy() {
-		$step = $this->step( 'Purge the staging page cache' );
+		$step = $this->step( 'Purge the production page cache' );
 
 		$this->assertStringContainsString( '::warning::', $step );
 		$this->assertStringNotContainsString( 'exit 1', $step );
 	}
 
 	/**
-	 * Hostinger answers the GitHub runner with 403 while the site answers 200
-	 * everywhere else, so a 403 from the smoke probe is a warning. Server
-	 * errors, missing pages and unreachable hosts still fail the deploy.
+	 * A runner-side 403 warns. Any other HTTP failure still fails the deploy.
 	 */
 	public function test_a_runner_side_403_only_warns_in_the_smoke_probe() {
 		$step = $this->step( 'Post-deploy verification' );
 
 		$this->assertMatchesRegularExpression( '/"\$\{code\}" (=|-eq) "?403"?/', $step );
-		$this->assertStringContainsString( '::warning::staging answered HTTP 403', $step );
-		$this->assertStringContainsString( '::error::staging answered HTTP ${code}', $step );
+		$this->assertStringContainsString( '::warning::production answered HTTP 403', $step );
+		$this->assertStringContainsString( '::error::production answered HTTP ${code}', $step );
 	}
 
 	/**
-	 * The production document root is refused by real path, and an empty
-	 * guard cannot fall through to rsync.
+	 * The remote root must be the canonical production path. An empty guard
+	 * cannot fall through to rsync.
 	 */
-	public function test_preflight_and_sync_fail_closed_without_the_production_root_guard() {
-		foreach ( array( 'Staging preflight', 'Sync the component to staging' ) as $step_name ) {
+	public function test_preflight_and_sync_require_the_canonical_production_root() {
+		foreach ( array( 'Production preflight', 'Sync the component to production' ) as $step_name ) {
 			$step = $this->step( $step_name );
 
-			$this->assertStringContainsString( 'FORBIDDEN_REAL_ROOT', $step, $step_name );
+			$this->assertStringContainsString( 'REQUIRED_REAL_ROOT', $step, $step_name );
 			$this->assertStringContainsString( 'production root guard is empty', $step, $step_name );
 		}
 		$this->assertStringContainsString(
-			'resolved root is the canonical production document root',
-			$this->step( 'Staging preflight' )
+			'resolved root is not the canonical production document root',
+			$this->step( 'Production preflight' )
 		);
-		$this->assertStringNotContainsString( 'caminodeldharma.org', $this->workflow() );
+		$this->assertStringContainsString( 'refs/heads/main', $this->job( 'validate' ) );
+		$this->assertStringContainsString( 'https://caminodeldharma.org', $this->workflow() );
+		foreach ( array( 'Production preflight', 'Sync the component to production' ) as $step_name ) {
+			$this->assertStringContainsString(
+				'resolved component directory is not the tagged component',
+				$this->step( $step_name ),
+				$step_name
+			);
+		}
+		$this->assertStringContainsString( '= "production"', $this->step( 'Production preflight' ) );
+		$this->assertStringContainsString( '= "production"', $this->step( 'Post-deploy verification' ) );
 	}
 
 	/**
-	 * A code deploy touches no content, no production and no tag.
+	 * A code deploy touches no content and creates no tag.
 	 */
 	public function test_forbidden_operations_are_absent() {
 		$workflow = $this->workflow();
@@ -269,12 +289,6 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 			'git push',
 			'gh release',
 			'gh api',
-			'caminodeldharma.org',
-			'environment: production',
-			'name: production',
-			'PRODUCTION_',
-			'workflow_dispatch',
-			'pull_request',
 		);
 		foreach ( $forbidden as $needle ) {
 			$this->assertStringNotContainsString( $needle, $workflow, $needle );
@@ -282,9 +296,9 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	}
 
 	/**
-	 * Secrets and variables come from the staging environment only.
+	 * Secrets and variables come from the production environment only.
 	 */
-	public function test_connection_settings_are_staging_named() {
+	public function test_connection_settings_are_production_named() {
 		preg_match_all( '/(?:secrets|vars)\.([A-Z0-9_]+)/', $this->workflow(), $names );
 
 		$names = array_values( array_unique( $names[1] ) );
@@ -292,12 +306,12 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 
 		$this->assertSame(
 			array(
-				'STAGING_SSH_HOST',
-				'STAGING_SSH_KNOWN_HOSTS',
-				'STAGING_SSH_PORT',
-				'STAGING_SSH_PRIVATE_KEY',
-				'STAGING_SSH_USER',
-				'STAGING_WP_ROOT',
+				'PRODUCTION_SSH_HOST',
+				'PRODUCTION_SSH_KNOWN_HOSTS',
+				'PRODUCTION_SSH_PORT',
+				'PRODUCTION_SSH_PRIVATE_KEY',
+				'PRODUCTION_SSH_USER',
+				'PRODUCTION_WP_ROOT',
 			),
 			$names
 		);
@@ -326,7 +340,7 @@ final class Staging_Deploy_WorkflowTest extends TestCase {
 	 * @return string
 	 */
 	private function workflow() {
-		return $this->read( '.github/workflows/deploy-staging.yml' );
+		return $this->read( '.github/workflows/deploy-production.yml' );
 	}
 
 	/**

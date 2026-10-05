@@ -126,6 +126,7 @@ Documentos, issues, commits o ADR relacionados.
 | [0045](0045-cf7-entrega-gate-corte.md) | Entrega de correo CF7 es gate del corte | Aceptada |
 | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) | El despliegue lo inicia solo un tag de versión aprobado | Aceptada |
 | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) | El WordPress de staging es el de producción | Aceptada |
+| [0048](0048-tag-despliega-al-wordpress-canonico.md) | Un tag de componente despliega a producción | Aceptada |
 
 ### Correspondencia con decisiones consolidadas
 
@@ -138,7 +139,7 @@ Documentos, issues, commits o ADR relacionados.
 | Git como fuente de verdad del código | [0004](0004-git-como-fuente-unica-de-verdad.md), [0013](0013-fuentes-de-verdad-duales-y-alcance-despliegue.md) |
 | Producción no se edita directamente | [0005](0005-produccion-sin-edicion-manual.md) |
 | Despliegue manual temporal | [0015](0015-despliegue-manual-temporal.md) — ZIP estático y `public_html` de producción. Staging WordPress: [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) |
-| CI/CD de staging por tag | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — sustituye el disparador de [0006](0006-github-actions-para-despliegue.md) y el aplazamiento de staging de [0016](0016-automatizacion-ci-cd-pospuesta.md). Producción automatizada sigue fuera |
+| CI/CD de staging por tag | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — sustituye el disparador de [0006](0006-github-actions-para-despliegue.md) y el aplazamiento de staging de [0016](0016-automatizacion-ci-cd-pospuesta.md). El destino de producción quedó decidido en [0048](0048-tag-despliega-al-wordpress-canonico.md) |
 | HSTS / transporte | [0010](0010-hsts-desactivado-hasta-auditoria.md) y [0018](0018-hsts-despliegue-escalonado.md) (históricos), [0020](0020-hsts-aplazado-hasta-wordpress.md) (vigente) |
 | Privacidad / medición | [0019](0019-sin-analitica-con-cookies.md) — sin cookies de analítica; medición vía Search Console |
 | Lightbox de la galería | [0021](0021-lightbox-galeria-nativo-wordpress.md) — visor nativo de Gutenberg; no se implementa uno propio en la maqueta |
@@ -166,7 +167,7 @@ Documentos, issues, commits o ADR relacionados.
 | Git / trunk-based | [0043](0043-trunk-based-conventional-branch-commits.md) — `main` protegida; PR; [Conventional Branch](https://conventionalbranch.org/); [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) |
 | Feeds nativos | [0044](0044-feeds-nativos-404.md) — `/feed` y alias 404 en el corte; RSS futuro POST-010 |
 | Entrega CF7 | [0045](0045-cf7-entrega-gate-corte.md) — gate de entrega; prueba técnica ≠ buzón de la comunidad. Tras el corte de 2026-09-26 la entrega sigue sin verificar y el formulario está oculto |
-| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) — aceptada para staging WordPress. D-A y D-C cerradas. D-B diferida: no hay CD de producción. El corte de dominio de 2026-09-26 no es ese workflow |
+| CD por tag de versión | [0046](0046-despliegue-solo-por-tag-de-version-aprobado.md) conserva el contrato de staging. [0048](0048-tag-despliega-al-wordpress-canonico.md) cierra D-B: el tag despliega ese componente a la raíz canónica |
 | Identidad del WordPress de corte | [0047](0047-staging-hostinger-es-el-wordpress-de-produccion.md) — la misma instalación, sin reinstalar (OWN-036). Desde 2026-09-26 sirve `https://caminodeldharma.org/` en `production` con `blog_public` `1` |
 
 ---

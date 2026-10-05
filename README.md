@@ -211,8 +211,8 @@ Según `docs/17-orden-implementacion.md` y `.audit/fase3-execution-state.md`:
 el corte ya está hecho y la infraestructura estática legada está retirada.
 Siguen abiertos el wrap de Sangha (#7), los conteos de álbum (#13), el
 spike de JSON-LD (#20) y el editor de `/llms.txt` (#22). El correo del
-formulario sigue diferido. El CD de producción (ADR 0046 D-B) sigue sin
-decidir. Staging sigue retirado. Ledger:
+formulario sigue diferido. Un tag de componente despliega ese código a
+producción (ADR 0048). Staging sigue retirado. Ledger:
 [`docs/migracion-static-wordpress.md`](docs/migracion-static-wordpress.md). ADR:
 [`docs/adr/README.md`](docs/adr/README.md). Agentes: [`AGENTS.md`](AGENTS.md).
 
