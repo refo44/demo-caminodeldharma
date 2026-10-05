@@ -246,6 +246,81 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Issue #54: a saved opening date is offers.validFrom in Bogota.
+	 * An event with no opening date omits the field.
+	 */
+	public function test_current_event_publishes_a_saved_opening_date_and_omits_an_unknown_one() {
+		$known   = $this->create_event(
+			'evento-con-apertura',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url'       => 'https://forms.example/x',
+				'event_offer_valid_from' => '2026-08-13T12:00:00',
+			)
+		);
+		$unknown = $this->create_event(
+			'evento-sin-apertura',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url' => 'https://forms.example/y',
+			)
+		);
+
+		$this->go_to( get_permalink( $known ) );
+		$known_graph = array_column( cdd_core_seo_context()['jsonld'], null, '@type' );
+		$this->assertSame( '2026-08-13T12:00:00-05:00', $known_graph['Event']['offers']['validFrom'] );
+
+		$this->go_to( get_permalink( $unknown ) );
+		$unknown_graph = array_column( cdd_core_seo_context()['jsonld'], null, '@type' );
+		$this->assertArrayNotHasKey( 'validFrom', $unknown_graph['Event']['offers'] );
+	}
+
+	/**
+	 * An imported opening date stays when the editor has not saved a
+	 * replacement. A completed event still publishes no offer.
+	 */
+	public function test_imported_opening_date_stays_until_replaced_and_completed_events_drop_offers() {
+		$imported = $this->create_event(
+			'evento-importado',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url' => 'https://forms.example/x',
+				'seo_jsonld_extra' => wp_json_encode(
+					array(
+						'offers' => array(
+							'@type'         => 'Offer',
+							'price'         => '0',
+							'priceCurrency' => 'COP',
+							'validFrom'     => '2026-08-13T00:00:00-05:00',
+						),
+					)
+				),
+			)
+		);
+
+		$this->go_to( get_permalink( $imported ) );
+		$graph = array_column( cdd_core_seo_context()['jsonld'], null, '@type' );
+		$this->assertSame( '2026-08-13T00:00:00-05:00', $graph['Event']['offers']['validFrom'] );
+
+		$completed = $this->create_event(
+			'evento-pasado-con-apertura',
+			'-20 days',
+			'-18 days',
+			array(
+				'event_signup_url'       => 'https://forms.example/x',
+				'event_offer_valid_from' => '2026-08-13T12:00:00',
+			)
+		);
+
+		$this->go_to( get_permalink( $completed ) );
+		$completed_graph = array_column( cdd_core_seo_context()['jsonld'], null, '@type' );
+		$this->assertArrayNotHasKey( 'offers', $completed_graph['Event'] );
+	}
+
+	/**
 	 * ADR 0037: the entry's authors come from the `authors` relationship,
 	 * never from the WP user, and the publisher is the site Organization.
 	 */

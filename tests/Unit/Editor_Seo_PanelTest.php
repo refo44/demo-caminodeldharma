@@ -64,6 +64,7 @@ final class Editor_Seo_PanelTest extends TestCase {
 				'event_attendance_mode',
 				'event_status',
 				'event_signup_url',
+				'event_offer_valid_from',
 				'event_signup_closed',
 				'event_signup_closes_at',
 				'event_signup_payment',
@@ -74,6 +75,7 @@ final class Editor_Seo_PanelTest extends TestCase {
 			$this->assertStringContainsString( "'" . $key . "'", $script, $key );
 		}
 
+		$this->assertStringContainsString( 'Apertura de inscripción', $script );
 		$this->assertStringContainsString( 'Cerrar inscripción', $script );
 		$this->assertStringContainsString( 'Cierre de inscripción', $script );
 		$this->assertStringContainsString( 'America/Bogotá', $script );

@@ -168,8 +168,8 @@ reutilizan ni mueven tags.
 Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress. La raíz es
 `/home/u548735796/domains/caminodeldharma.org/public_html`.
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3.
-El corte desplegó el plugin 0.7.10. Este árbol es plugin 0.7.11; el tag
-`plugin-v0.7.11` es la release. Este workflow no escribe esa raíz. El corte de dominio
+El corte desplegó el plugin 0.7.10. Este árbol es plugin 0.7.12; el tag
+`plugin-v0.7.12` es la release. Este workflow no escribe esa raíz. El corte de dominio
 no fue un deploy de theme o plugin (ADR 0047). El ZIP estático no debe
 volver a caer sobre ese document root (ADR 0015, ADR 0013).
 

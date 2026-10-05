@@ -12,6 +12,27 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Plugin 0.7.12 — apertura de inscripción en el JSON-LD
+
+Release del plugin, lista para etiquetar después del merge en `main`:
+
+```bash
+git fetch origin main
+git tag -a plugin-v0.7.12 <sha-en-origin/main> -m "Release plugin 0.7.12"
+git push origin plugin-v0.7.12
+```
+
+La cabecera `Version` y `CDD_CORE_VERSION` son `0.7.12`. El theme sigue
+en `0.6.3`. El cierre de inscripción sigue en `0.7.11`.
+
+El panel **Datos del evento** añade **Apertura de inscripción**
+(`event_offer_valid_from`). Si el editor guarda una fecha, la oferta
+JSON-LD publica `offers.validFrom` en `America/Bogota`. Si la deja vacía,
+el campo no se inventa. Una fecha ya importada se conserva hasta que el
+editor guarde otra. Un evento finalizado o con la inscripción cerrada
+sigue sin `offers`. Issue
+[#54](https://github.com/refo44/demo-caminodeldharma/issues/54).
+
 ### Plugin 0.7.11 — cierre de inscripción
 
 Release del plugin, lista para etiquetar después del merge en `main`:

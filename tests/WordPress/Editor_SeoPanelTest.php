@@ -222,6 +222,47 @@ final class Editor_SeoPanelTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Protects issue #54: the opening date survives the REST round-trip
+	 * as a Bogota wall clock, and an update that does not send it leaves
+	 * the stored value in place.
+	 */
+	public function test_rest_persists_offer_valid_from_and_an_omitted_update_keeps_it() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$create = new WP_REST_Request( 'POST', '/wp/v2/event' );
+		$create->set_body_params(
+			array(
+				'title'  => 'Retiro con apertura',
+				'status' => 'draft',
+				'meta'   => array(
+					'event_signup_url'       => 'https://forms.example/retiro',
+					'event_offer_valid_from' => '2026-08-13T12:00',
+				),
+			)
+		);
+		$created = rest_do_request( $create );
+
+		$this->assertSame( 201, $created->get_status() );
+		$id = $created->get_data()['id'];
+		$this->assertSame( '2026-08-13T12:00:00', get_post_meta( $id, 'event_offer_valid_from', true ) );
+
+		$update = new WP_REST_Request( 'PUT', '/wp/v2/event/' . $id );
+		$update->set_body_params(
+			array(
+				'meta' => array(
+					'event_place' => 'Santo Tomás',
+				),
+			)
+		);
+		$updated = rest_do_request( $update );
+
+		$this->assertSame( 200, $updated->get_status() );
+		$this->assertSame( 'Santo Tomás', get_post_meta( $id, 'event_place', true ) );
+		$this->assertSame( '2026-08-13T12:00:00', get_post_meta( $id, 'event_offer_valid_from', true ) );
+		$this->assertSame( 'https://forms.example/retiro', get_post_meta( $id, 'event_signup_url', true ) );
+	}
+
+	/**
 	 * Protects binding rule #1: publishing with no stored head copy
 	 * backfills `seo_description` from the object's own excerpt, so the
 	 * panel and the front agree without WP-CLI.

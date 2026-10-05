@@ -68,6 +68,19 @@ function cdd_core_register_meta() {
 
 	register_post_meta(
 		'event',
+		'event_offer_valid_from',
+		array(
+			'type'              => 'string',
+			'single'            => true,
+			'default'           => '',
+			'sanitize_callback' => 'cdd_core_sanitize_event_offer_valid_from',
+			'auth_callback'     => 'cdd_core_meta_auth',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_post_meta(
+		'event',
 		'event_signup_closes_at',
 		array(
 			'type'              => 'string',
@@ -186,6 +199,16 @@ function cdd_core_sanitize_event_date( $value ): string {
  */
 function cdd_core_sanitize_event_signup_closes_at( $value ): string {
 	return Cdd_Core_Event_Signup::normalize( $value );
+}
+
+/**
+ * Sanitizes the optional inscription opening date (issue #54). Empty
+ * means unknown: the graph omits validFrom rather than inventing one.
+ *
+ * @param mixed $value Raw meta value.
+ */
+function cdd_core_sanitize_event_offer_valid_from( $value ): string {
+	return Cdd_Core_Event_Offer::stored( $value );
 }
 
 /**
