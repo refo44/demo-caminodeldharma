@@ -66,14 +66,8 @@ final class Cdd_Core_Event_Offer {
 			return $day->format( 'Y-m-d\T00:00:00' );
 		}
 
-		if ( 1 === preg_match( '/(?:Z|[+-]\d{2}:\d{2})$/', $value ) ) {
-			try {
-				$instant = new DateTimeImmutable( $value );
-			} catch ( Exception ) {
-				return '';
-			}
-
-			return $instant->setTimezone( $zone )->format( 'Y-m-d\TH:i:s' );
+		if ( 1 === preg_match( '/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2}):(\d{2})(Z|[+-]\d{2}:\d{2})$/', $value, $matches ) ) {
+			return self::stored_from_offset( $matches );
 		}
 
 		if ( 1 !== preg_match( '/^(\d{4}-\d{2}-\d{2})[T ](\d{2}):(\d{2})(?::(\d{2}))?$/', $value, $matches ) ) {
@@ -93,5 +87,44 @@ final class Cdd_Core_Event_Offer {
 		}
 
 		return $day->setTime( $hour, $minute, $second )->format( 'Y-m-d\TH:i:s' );
+	}
+
+	/**
+	 * A complete ISO instant, converted to the Bogota wall clock.
+	 * The shape is checked before parsing, and a rolled-over calendar
+	 * day is rejected.
+	 *
+	 * @param array $matches Date, time and offset captured from the value.
+	 */
+	private static function stored_from_offset( array $matches ): string {
+		$hour   = (int) $matches[2];
+		$minute = (int) $matches[3];
+		$second = (int) $matches[4];
+		if ( $hour > 23 || $minute > 59 || $second > 59 ) {
+			return '';
+		}
+
+		$offset     = 'Z' === $matches[5] ? '+00:00' : $matches[5];
+		$normalized = sprintf( '%sT%02d:%02d:%02d%s', $matches[1], $hour, $minute, $second, $offset );
+		$instant    = DateTimeImmutable::createFromFormat( '!Y-m-d\TH:i:sP', $normalized );
+		if ( false === $instant || self::has_date_errors() || $instant->format( 'Y-m-d\TH:i:sP' ) !== $normalized ) {
+			return '';
+		}
+
+		$zone = new DateTimeZone( Cdd_Core_Event_Status::TIMEZONE );
+
+		return $instant->setTimezone( $zone )->format( 'Y-m-d\TH:i:s' );
+	}
+
+	/**
+	 * Whether the last DateTime parse warned or failed.
+	 */
+	private static function has_date_errors(): bool {
+		$errors = DateTimeImmutable::getLastErrors();
+		if ( ! is_array( $errors ) ) {
+			return false;
+		}
+
+		return ( $errors['warning_count'] ?? 0 ) > 0 || ( $errors['error_count'] ?? 0 ) > 0;
 	}
 }

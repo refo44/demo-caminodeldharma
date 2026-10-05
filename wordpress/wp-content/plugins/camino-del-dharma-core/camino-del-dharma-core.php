@@ -107,6 +107,8 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'wp_insert_post_data', 'cdd_core_guard_post_publish', 10, 2 );
 	add_filter( 'rest_pre_insert_post', 'cdd_core_rest_guard_post_publish', 10, 2 );
 	add_action( 'wp_after_insert_post', 'cdd_core_clear_requested_authors' );
+	add_action( 'added_post_meta', 'cdd_core_mark_offer_opening_owned', 10, 4 );
+	add_action( 'updated_post_meta', 'cdd_core_mark_offer_opening_owned', 10, 4 );
 	add_filter( 'update_post_metadata', 'cdd_core_protect_published_authors_update', 10, 4 );
 	add_filter( 'delete_post_metadata', 'cdd_core_protect_published_authors_delete', 10, 3 );
 

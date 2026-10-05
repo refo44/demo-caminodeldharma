@@ -329,6 +329,35 @@ final class Seo_DocumentTest extends TestCase {
 	}
 
 	/**
+	 * Clearing a date the editor already saved omits validFrom. The
+	 * imported opening date does not come back.
+	 */
+	public function test_clearing_a_saved_opening_date_omits_the_imported_one() {
+		$cleared = Cdd_Core_Json_Ld::event(
+			array(
+				'name'                => 'Círculos',
+				'url'                 => 'https://example.test/eventos/circulos',
+				'start'               => '2026-09-03',
+				'state'               => 'current',
+				'signup_url'          => 'https://forms.example/circulos',
+				'offer_valid_from'    => '',
+				'offer_opening_owned' => true,
+				'extra'               => array(
+					'offers' => array(
+						'@type'         => 'Offer',
+						'price'         => '0',
+						'priceCurrency' => 'COP',
+						'validFrom'     => '2026-08-13T00:00:00-05:00',
+					),
+				),
+			)
+		);
+
+		$this->assertArrayNotHasKey( 'validFrom', $cleared['offers'] );
+		$this->assertSame( 'https://forms.example/circulos', $cleared['offers']['url'] );
+	}
+
+	/**
 	 * ADR 0037 / §9.5: every author is a `Thing` pointing at its profile,
 	 * and the publisher stays the site Organization.
 	 */

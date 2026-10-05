@@ -33,6 +33,8 @@ final class Event_OfferTest extends TestCase {
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( '' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( '2026-13-40' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( 'mañana' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( 'tomorrow-05:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::valid_from( '2026-02-30T12:00:00-05:00' ) );
 	}
 
 	/**
@@ -42,6 +44,9 @@ final class Event_OfferTest extends TestCase {
 	public function test_stored_opening_date_is_a_bogota_wall_clock() {
 		$this->assertSame( '2026-08-13T00:00:00', Cdd_Core_Event_Offer::stored( '2026-08-13' ) );
 		$this->assertSame( '2026-08-13T12:00:00', Cdd_Core_Event_Offer::stored( '2026-08-13T12:00' ) );
+		$this->assertSame( '2026-08-13T12:00:00', Cdd_Core_Event_Offer::stored( '2026-08-13T17:00:00Z' ) );
 		$this->assertSame( '', Cdd_Core_Event_Offer::stored( 'mañana' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::stored( 'tomorrow-05:00' ) );
+		$this->assertSame( '', Cdd_Core_Event_Offer::stored( '2026-02-30T12:00:00-05:00' ) );
 	}
 }

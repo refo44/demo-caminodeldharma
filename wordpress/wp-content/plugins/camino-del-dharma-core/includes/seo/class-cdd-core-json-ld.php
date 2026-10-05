@@ -106,8 +106,8 @@ final class Cdd_Core_Json_Ld {
 				$offer['priceCurrency'] = 'COP';
 			}
 			// Issue #54: publish the opening date only when the editor
-			// stored one. An empty value leaves a previously imported
-			// validFrom in place via merge_extra().
+			// stored one. An empty value leaves an imported validFrom
+			// in place until the editor has saved a replacement.
 			$valid_from = Cdd_Core_Event_Offer::valid_from( $event['offer_valid_from'] ?? '' );
 			if ( '' !== $valid_from ) {
 				$offer['validFrom'] = $valid_from;
@@ -115,7 +115,16 @@ final class Cdd_Core_Json_Ld {
 			$node['offers'] = $offer;
 		}
 
-		return self::merge_extra( $node, $event['extra'] ?? array(), 'current' === $state );
+		$extra = is_array( $event['extra'] ?? null ) ? $event['extra'] : array();
+		// A cleared field must not resurrect the date the editor replaced.
+		if ( ! empty( $event['offer_opening_owned'] ) && isset( $extra['offers'] ) && is_array( $extra['offers'] ) ) {
+			$opening = Cdd_Core_Event_Offer::valid_from( $event['offer_valid_from'] ?? '' );
+			if ( '' === $opening ) {
+				unset( $extra['offers']['validFrom'] );
+			}
+		}
+
+		return self::merge_extra( $node, $extra, 'current' === $state );
 	}
 
 	/**

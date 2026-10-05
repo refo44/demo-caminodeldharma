@@ -29,7 +29,9 @@ El panel **Datos del evento** añade **Apertura de inscripción**
 (`event_offer_valid_from`). Si el editor guarda una fecha, la oferta
 JSON-LD publica `offers.validFrom` en `America/Bogota`. Si la deja vacía,
 el campo no se inventa. Una fecha ya importada se conserva hasta que el
-editor guarde otra. Un evento finalizado o con la inscripción cerrada
+editor guarde otra; vaciar el campo después no la restaura. Un valor que
+no es un instante ISO completo se rechaza. Un evento finalizado o con la
+inscripción cerrada
 sigue sin `offers`. Issue
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54).
 

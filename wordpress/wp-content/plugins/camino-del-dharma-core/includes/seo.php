@@ -390,25 +390,26 @@ function cdd_core_seo_event_node( WP_Post $post, string $permalink, string $imag
 
 	return Cdd_Core_Json_Ld::event(
 		array(
-			'name'             => get_the_title( $post ),
+			'name'                => get_the_title( $post ),
 			// The published meta description is the event's own editorial
 			// summary; the excerpt is the calendar description (WU-06) and
 			// only stands in when no head copy was written.
-			'description'      => cdd_core_seo_meta( $post, 'seo_description', wp_strip_all_tags( (string) $post->post_excerpt ) ),
-			'url'              => $permalink,
-			'image'            => $image,
-			'start'            => (string) get_post_meta( $post->ID, 'event_date', true ),
-			'end'              => (string) get_post_meta( $post->ID, 'event_end', true ),
-			'state'            => $state,
-			'attendance'       => (string) get_post_meta( $post->ID, 'event_attendance_mode', true ),
-			'places'           => $places,
-			'signup_url'       => cdd_core_event_signup_is_open( $post, 'vigente' === $status )
+			'description'         => cdd_core_seo_meta( $post, 'seo_description', wp_strip_all_tags( (string) $post->post_excerpt ) ),
+			'url'                 => $permalink,
+			'image'               => $image,
+			'start'               => (string) get_post_meta( $post->ID, 'event_date', true ),
+			'end'                 => (string) get_post_meta( $post->ID, 'event_end', true ),
+			'state'               => $state,
+			'attendance'          => (string) get_post_meta( $post->ID, 'event_attendance_mode', true ),
+			'places'              => $places,
+			'signup_url'          => cdd_core_event_signup_is_open( $post, 'vigente' === $status )
 				? (string) get_post_meta( $post->ID, 'event_signup_url', true )
 				: '',
-			'signup_payment'   => (bool) get_post_meta( $post->ID, 'event_signup_payment', true ),
-			'offer_valid_from' => (string) get_post_meta( $post->ID, 'event_offer_valid_from', true ),
-			'organizer'        => cdd_core_seo_organization_ref(),
-			'extra'            => is_array( $extra ) ? cdd_core_seo_rebase( $extra ) : array(),
+			'signup_payment'      => (bool) get_post_meta( $post->ID, 'event_signup_payment', true ),
+			'offer_valid_from'    => (string) get_post_meta( $post->ID, 'event_offer_valid_from', true ),
+			'offer_opening_owned' => '1' === (string) get_post_meta( $post->ID, 'event_offer_opening_owned', true ),
+			'organizer'           => cdd_core_seo_organization_ref(),
+			'extra'               => is_array( $extra ) ? cdd_core_seo_rebase( $extra ) : array(),
 		)
 	);
 }

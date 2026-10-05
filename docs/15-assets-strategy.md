@@ -321,7 +321,7 @@ Detalle en `.audit/fase3-validation-matrix.md` § WU-08B; lo esencial:
 | `location` + `address` | Solo eventos presenciales; `PostalAddress` con localidad y país (`CO`) |
 | `organizer` | **Comunidad:** `{ "@type": "Organization", "name": "Camino del Dharma", "url": "https://caminodeldharma.org" }` — no confundir con el maestro |
 | `performer` | Solo si una persona **dirige o imparte** el evento (p. ej. retiro con Maestro Zheng Gong): `"Venerable Maestro Zheng Gong"`. Omitir en práctica comunitaria sin facilitador nombrado |
-| `offers` | **Solo** si existe inscripción o aporte documentado (precio o gratuita con formulario). `validFrom` solo con la fecha de apertura que el editor guardó en `event_offer_valid_from` ([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)), en `America/Bogota`. Vacío = omitir; no copiar `event_date` ni «ahora». Una fecha ya importada en `seo_jsonld_extra` se conserva hasta que el editor la reemplace. Eventos pasados o con inscripción cerrada: sin `offers`. |
+| `offers` | **Solo** si existe inscripción o aporte documentado (precio o gratuita con formulario). `validFrom` solo con la fecha de apertura que el editor guardó en `event_offer_valid_from` ([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)), en `America/Bogota`. Vacío = omitir; no copiar `event_date` ni «ahora». Una fecha ya importada en `seo_jsonld_extra` se conserva hasta que el editor la reemplace; vaciar el campo después no la restaura. Eventos pasados o con inscripción cerrada: sin `offers`. |
 | `url`, `image` | URL canónica del evento e imagen del cartel |
 
 **Eventos históricos sin página propia** (solo tarjeta en `/eventos/`): sin JSON-LD hasta que exista URL dedicada.

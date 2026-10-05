@@ -321,6 +321,40 @@ final class Seo_HeadTest extends WP_UnitTestCase {
 	}
 
 	/**
+	 * After the editor saves an opening date, clearing the field omits
+	 * validFrom. The imported date does not return.
+	 */
+	public function test_clearing_a_saved_opening_date_does_not_restore_the_imported_one() {
+		$event = $this->create_event(
+			'evento-apertura-borrada',
+			'+10 days',
+			'+12 days',
+			array(
+				'event_signup_url' => 'https://forms.example/x',
+				'seo_jsonld_extra' => wp_json_encode(
+					array(
+						'offers' => array(
+							'@type'         => 'Offer',
+							'price'         => '0',
+							'priceCurrency' => 'COP',
+							'validFrom'     => '2026-08-13T00:00:00-05:00',
+						),
+					)
+				),
+			)
+		);
+
+		update_post_meta( $event, 'event_offer_valid_from', '2026-09-01T09:30' );
+		update_post_meta( $event, 'event_offer_valid_from', '' );
+
+		$this->go_to( get_permalink( $event ) );
+		$graph = array_column( cdd_core_seo_context()['jsonld'], null, '@type' );
+
+		$this->assertArrayNotHasKey( 'validFrom', $graph['Event']['offers'] );
+		$this->assertSame( 'https://forms.example/x', $graph['Event']['offers']['url'] );
+	}
+
+	/**
 	 * ADR 0037: the entry's authors come from the `authors` relationship,
 	 * never from the WP user, and the publisher is the site Organization.
 	 */

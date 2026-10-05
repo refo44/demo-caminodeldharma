@@ -274,7 +274,8 @@ en esta sesión.**
 **v1.37 (2026-10-05):** `offers.validFrom` **implementado** (plugin 0.7.12,
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54)). El panel
 guarda `event_offer_valid_from`. Vacío no inventa la fecha. Una fecha
-importada sigue hasta que el editor guarde otra. Tag de release:
+importada sigue hasta que el editor guarde otra; vaciarla después no
+la restaura. Tag de release:
 `plugin-v0.7.12`.
 
 **v1.36 (2026-09-26):** cierre de inscripción **implementado** (plugin 0.7.11,
