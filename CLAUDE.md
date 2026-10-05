@@ -83,7 +83,9 @@ pipelines.
 - **Git:** trunk-based on protected `main` (ADR 0043). Always branch first
   ([Conventional Branch](https://conventionalbranch.org/)) **from a fresh `origin/main`: run
   `git fetch origin main` before creating a branch and before every merge or sync of `main`**
-  (a stale local `main` left PR #31 out of date); commits
+  (a stale local `main` left PR #31 out of date). Purpose prefixes only:
+  `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  Never any AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, or a later one). Commits
   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in English; merge
   only via PR with green `php`/`css` and **at least one relevant PR label**. See
   `docs/git-workflow.md` and `.cursor/rules/git-workflow.mdc`.

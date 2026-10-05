@@ -25,7 +25,7 @@ theme), sin etapa de theme clásico PHP (ADR 0029, ADR 0032).
 
 **Trunk-based development** (ADR 0043): `main` está **protegida**; no hay push directo. Todo cambio entra por **Pull Request** desde una rama corta.
 
-- **Ramas:** [Conventional Branch](https://conventionalbranch.org/) — `feature/…`, `fix/…`, `chore/…`, `cursor/…`, etc.
+- **Ramas:** solo prefijos de propósito de [Conventional Branch](https://conventionalbranch.org/) — `feature/` o `feat/`, `fix/` o `bugfix/`, `hotfix/`, `release/`, `chore/`. Prohibido cualquier AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y los que se añadan después).
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) en inglés — `feat(scope): summary`
 - **CI obligatorio en merge:** jobs `php` y `css` de `.github/workflows/test.yml`
 - **Etiquetas del PR:** al menos una relevante por PR; varias si el cambio abarca más de un ámbito

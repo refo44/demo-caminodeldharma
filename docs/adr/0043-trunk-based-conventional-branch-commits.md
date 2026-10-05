@@ -35,8 +35,11 @@ Para que humanos, agentes y CI lean la intención del cambio, los nombres de ram
    - `hotfix/` — urgente sobre producción
    - `release/` — preparación de versión (p. ej. `release/v1.2.0`)
    - `chore/` — docs, CI, dependencias, tooling
-   - Prefijos de agente IA cuando aplique: `cursor/`, `copilot/`, `claude/`, `codex/`,
-     `ai/` ([Conventional Branch § AI Agent Source Prefixes](https://conventionalbranch.org/))
+   - **Prohibido aquí** (decisión del propietario, 2026-10-05): todos los
+     AI Agent Source Prefixes de Conventional Branch 1.1.0. El spec los lista
+     (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y los que añada después);
+     este repositorio no acepta ninguno. Cursor, Claude y el resto usan el
+     prefijo de propósito del cambio.
 4. **Conventional Commits** — mensajes en **inglés** (regla del repo para Git):
 
    ```text

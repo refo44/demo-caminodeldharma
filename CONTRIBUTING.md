@@ -31,7 +31,10 @@ Forma `<type>/<description>` en minúsculas, con guiones:
 | `hotfix/` | Urgente |
 | `release/` | Versión (`release/v1.2.0`) |
 | `chore/` | Docs, CI, deps |
-| `cursor/`, `copilot/`, `claude/`, `codex/`, `ai/` | Trabajo de agente IA |
+
+Prohibido: todos los AI Agent Source Prefixes (`cursor/`, `copilot/`, `claude/`,
+`codex/`, `ai/`, y cualquiera que Conventional Branch añada después) y cualquier
+otro prefijo. Un agente usa el prefijo de propósito del cambio.
 
 Ejemplo: `git checkout -b feature/add-login-page`
 

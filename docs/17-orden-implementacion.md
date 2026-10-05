@@ -222,7 +222,7 @@ publicado, bugs de accesibilidad y ajustes de performance que no alteren la arqu
 
 | Aspecto | Regla |
 | -------- | ------ |
-| **Ramas** | [Conventional Branch](https://conventionalbranch.org/) en ramas cortas (`feature/…`, `fix/…`, `chore/…`, `cursor/…`). Ver `docs/git-workflow.md`. |
+| **Ramas** | Solo prefijos de propósito de [Conventional Branch](https://conventionalbranch.org/): `feature/` o `feat/`, `fix/` o `bugfix/`, `hotfix/`, `release/`, `chore/`. Prohibido cualquier AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, y los posteriores). Ver `docs/git-workflow.md`. |
 | **Integración** | **`main` protegida** (ADR 0043): solo Pull Request; checks `php` + `css` obligatorios. CI en push a `main` y en PR (ADR 0038). |
 | **Etiquetas** | Releases etiquetados (`v1.0.0`, `v1.1.0`, …) al desplegar a producción. |
 | **Versión en repo** | Archivo `VERSION` y entrada en `CHANGELOG.md` (ver README). |

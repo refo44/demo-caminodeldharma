@@ -12,9 +12,9 @@ Canonical guide: `docs/git-workflow.md`. Decision: ADR 0043.
 - **`main` is protected.** Never commit, push, or merge directly to `main`. All integration goes through a Pull Request from a short-lived branch.
 - **Create a feature branch first** before any code, docs, CI, or config change intended for `main`.
 - **Always run `git fetch origin main` first** — before creating a branch and before every merge or sync of `main` into a branch. Branch from `origin/main`, never from a local `main` you have not just fetched, and merge `origin/main`, not local `main`. Protected `main` requires up-to-date branches, so a stale base blocks the PR.
-- **Branch names** follow [Conventional Branch](https://conventionalbranch.org/): `<type>/<description>` in lowercase with hyphens only.
-  - Use `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
-  - Agent work from Cursor: prefer `cursor/<description>`. Other agents: `copilot/`, `claude/`, `codex/`, or generic `ai/`.
+- **Branch names** follow [Conventional Branch](https://conventionalbranch.org/) purpose prefixes only: `<type>/<description>` in lowercase with hyphens only.
+  - Allowed: `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  - Forbidden: every [AI Agent Source Prefix](https://conventionalbranch.org/) (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, and any prefix that section adds later) and any other prefix. Cursor, Claude, and every other agent use the purpose prefix that matches the change.
   - Do not invent unprefixed names (e.g. `fase3-wordpress`) for new branches.
 - **Commit messages** follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in **English**: `type(scope): imperative summary`.
 - **Before opening a PR:** run the relevant local gates (`npm run lint:css` for CSS; `composer test` + `composer lint:phpcs` for PHP).
@@ -35,4 +35,5 @@ gh pr create --base main --label bug
 - Do not push to `main`, even for “small” or docs-only fixes.
 - Do not open a PR without at least one relevant label.
 - Do not use branch names with uppercase, underscores, spaces, or consecutive hyphens.
+- Do not use any AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, or a later one). Those names are rejected in this repository.
 - Do not use non-conventional commit subjects (`updated stuff`, `WIP`, `fix bug`).

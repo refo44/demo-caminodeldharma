@@ -15,8 +15,9 @@ plans, or adding tests.
 
 - **`main` is protected.** Never push directly to `main`. Always create a short-lived branch
   and open a PR.
-- **Branch names:** [Conventional Branch](https://conventionalbranch.org/) —
-  `feature/…`, `fix/…`, `chore/…`, `cursor/…` (for Cursor agent work), etc.
+- **Branch names:** [Conventional Branch](https://conventionalbranch.org/) purpose prefixes only —
+  `feature/` or `feat/`, `fix/` or `bugfix/`, `hotfix/`, `release/`, `chore/`.
+  Do not use any AI Agent Source Prefix (`cursor/`, `copilot/`, `claude/`, `codex/`, `ai/`, or a later one).
 - **Commit messages:** [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
   in **English**.
 - **PR labels:** at least one relevant GitHub label per PR; multiple when applicable.
