@@ -2,8 +2,12 @@
 
 ## Estado
 
-Aceptada el 2026-09-23. Alcance: contrato de release y despliegue de **staging
-WordPress anterior al corte**. No autoriza producción.
+Aceptada el 2026-09-23. Alcance original: contrato de release y despliegue de
+**staging WordPress anterior al corte**.
+
+**Actualización 2026-10-05.** [ADR 0048](0048-tag-despliega-al-wordpress-canonico.md)
+decide D-B. Un tag de componente despliega a la raíz canónica. El texto de
+abajo conserva la decisión de staging; no se reescribe.
 
 Sustituye el disparador de [ADR 0006](0006-github-actions-para-despliegue.md) (push a
 `main` o `workflow_dispatch` hacia producción) y el aplazamiento de

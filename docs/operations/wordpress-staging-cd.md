@@ -1,12 +1,18 @@
 # Operaciones — CD de staging WordPress por tag (ADR 0046)
 
-Runbook del canal de código a **staging** (no producción). La decisión vive en
-[ADR 0046](../adr/0046-despliegue-solo-por-tag-de-version-aprobado.md) (aceptado); este documento solo
-explica cómo se opera. Si difieren, manda el ADR.
+**Retirado el 2026-10-05.** El directorio del dominio temporal ya no está.
+[ADR 0048](../adr/0048-tag-despliega-al-wordpress-canonico.md) despliega el
+tag a la raíz canónica. Runbook vigente:
+[wordpress-production-cd.md](wordpress-production-cd.md). Lo que sigue es el
+registro de cómo operaba staging.
+
+Runbook histórico del canal de código a **staging**. La decisión vive en
+[ADR 0046](../adr/0046-despliegue-solo-por-tag-de-version-aprobado.md). Si
+difieren, manda el ADR.
 
 | | |
 | --- | --- |
-| **Workflow** | [`.github/workflows/deploy-staging.yml`](../../.github/workflows/deploy-staging.yml) |
+| **Workflow** | retirado; el vigente es [deploy-production.yml](../../.github/workflows/deploy-production.yml) |
 | **Scripts** | [`tools/release/`](../../tools/release/) (probados en `tests/Unit/Release_ResolutionTest.php`) |
 | **Destino** | `https://teal-woodpecker-284165.hostingersite.com` (SSH `u548735796`, puerto `65002`) |
 | **Fuera de alcance** | Producción, contenido, D-B (deferido) |
@@ -80,7 +86,7 @@ Los tags `v*` son del sitio estático (ADR 0015) y nunca disparan este workflow.
    rechaza cualquier entrada de modo `120000` dentro del componente elegido (los de fuera no
    cuentan). Falla antes del artefacto, de SSH y de rsync.
 4. **Calidad:** los jobs `php` y `css` de `test.yml` se repiten sobre el SHA exacto
-   (`tests/Unit/Staging_Deploy_WorkflowTest.php` evita que las copias diverjan).
+   (`tests/Unit/Production_Deploy_WorkflowTest.php` evita que las copias diverjan).
 5. **Entorno `staging`** con política de despliegue solo para tags `theme-v*` y `plugin-v*`.
 
 ## 5. Artefacto y checksum

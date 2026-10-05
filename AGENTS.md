@@ -66,7 +66,7 @@ with the theme active in the harness). Fase 3 durable state: `.audit/fase3-execu
 The domain cutover is done (2026-09-26). The legacy static Hostinger
 website entry is removed. Remaining work is post-cutover
 (`#7`, `#13`, `#22`), the JSON-LD spike (`#20`), deferred contact-form
-mail, and the undecided production CD (ADR 0046 D-B). The path here was
+mail. A component tag deploys that component to production (ADR 0048). The path here was
 **live static production → FSE block theme** (ADR 0029). No classic PHP theme
 in between. The migration pipeline landed in WU-06 and WU-07 (plugin v0.4.0): pure extractors,
 deterministic `migration/payload.json` (source VERSION 1.0.35; live parity verified

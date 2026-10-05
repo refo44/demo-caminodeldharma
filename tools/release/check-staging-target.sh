@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Refuse any deployment target that is not the WordPress staging contract (ADR 0046).
+# Refuse any deployment target that is not the retired staging contract (ADR 0046).
+# The production workflow does not call this script (ADR 0048).
 #
 # usage: check-staging-target.sh <configured-wp-root> <component-target-rel>
 #

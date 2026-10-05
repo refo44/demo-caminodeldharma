@@ -334,6 +334,77 @@ final class Release_ResolutionTest extends TestCase {
 	}
 
 	/**
+	 * The production guard accepts only the canonical root and one component.
+	 */
+	public function test_production_target_accepts_only_the_canonical_root_and_component_dirs() {
+		$theme  = $this->check_production_target( self::PRODUCTION_ROOT, 'wp-content/themes/camino-del-dharma' );
+		$plugin = $this->check_production_target( self::PRODUCTION_ROOT, 'wp-content/plugins/camino-del-dharma-core' );
+
+		$this->assertSame( 0, $theme['status'] );
+		$this->assertSame(
+			array(
+				'TARGET_DIR'         => self::PRODUCTION_ROOT . '/wp-content/themes/camino-del-dharma',
+				'REQUIRED_REAL_ROOT' => self::PRODUCTION_ROOT,
+			),
+			$theme['fields']
+		);
+		$this->assertSame( 0, $plugin['status'] );
+		$this->assertSame(
+			array(
+				'TARGET_DIR'         => self::PRODUCTION_ROOT . '/wp-content/plugins/camino-del-dharma-core',
+				'REQUIRED_REAL_ROOT' => self::PRODUCTION_ROOT,
+			),
+			$plugin['fields']
+		);
+	}
+
+	/**
+	 * The retired temporary domain and every other root are refused.
+	 *
+	 * @dataProvider rejected_production_roots
+	 *
+	 * @param string $root Configured root that must be refused.
+	 */
+	public function test_production_target_rejects_every_other_root( $root ) {
+		$result = $this->check_production_target( $root, 'wp-content/themes/camino-del-dharma' );
+
+		$this->assertNotSame( 0, $result['status'], $root );
+		$this->assertSame( array(), $result['fields'], $root );
+	}
+
+	/**
+	 * Roots outside the canonical production contract.
+	 *
+	 * @return array<string, array<int, string>>
+	 */
+	public function rejected_production_roots() {
+		return array(
+			'empty'                   => array( '' ),
+			'retired staging'         => array( self::STAGING_ROOT ),
+			'production trailing'     => array( self::PRODUCTION_ROOT . '/' ),
+			'production parent'       => array( dirname( self::PRODUCTION_ROOT ) ),
+			'production subdirectory' => array( self::PRODUCTION_ROOT . '/wp-content' ),
+			'relative'                => array( 'public_html' ),
+			'home'                    => array( '/home/u548735796' ),
+			'filesystem root'         => array( '/' ),
+		);
+	}
+
+	/**
+	 * Only the two first-party directories may be synced on production.
+	 *
+	 * @dataProvider rejected_targets
+	 *
+	 * @param string $target Component target that must be refused.
+	 */
+	public function test_production_target_rejects_every_other_component_dir( $target ) {
+		$result = $this->check_production_target( self::PRODUCTION_ROOT, $target );
+
+		$this->assertNotSame( 0, $result['status'], $target );
+		$this->assertSame( array(), $result['fields'], $target );
+	}
+
+	/**
 	 * Run the staging target guard.
 	 *
 	 * @param string $root   Configured WordPress root.
@@ -342,6 +413,17 @@ final class Release_ResolutionTest extends TestCase {
 	 */
 	private function check_target( $root, $target ) {
 		return $this->run_script( 'check-staging-target.sh', array( $root, $target ) );
+	}
+
+	/**
+	 * Run the production target guard.
+	 *
+	 * @param string $root   Configured WordPress root.
+	 * @param string $target Component path relative to the root.
+	 * @return array{status:int, fields:array<string,string>}
+	 */
+	private function check_production_target( $root, $target ) {
+		return $this->run_script( 'check-production-target.sh', array( $root, $target ) );
 	}
 
 	/**

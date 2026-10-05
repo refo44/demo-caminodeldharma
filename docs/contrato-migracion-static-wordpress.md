@@ -22,7 +22,7 @@ despliegue.
 | ------ | ------------- |
 | **HISTORICAL STATE** | Hubo restos de un WordPress anterior en este dominio (redirects de `/category`, `?page_id=`, `/prueba` en `.htaccess`). Algunos docs numerados describen plantillas PHP clásicas (`front-page.php`, `page-*.php`) porque se escribieron antes de ADR 0029. Hasta WU-01 el HTML vivía en la **raíz** del repo; `wordpress/` era placeholder; aún no había `docker-compose.yml` ni `.github/workflows/test.yml`. |
 | **CURRENT STATE** | Ver el párrafo siguiente. |
-| **FUTURE PLAN** | Correo del formulario y CD de producción (ADR 0046 D-B): fuera. La entrada hPanel de palegreen ya se retiró. |
+| **FUTURE PLAN** | Correo del formulario: fuera. El código de un tag de componente se despliega a producción (ADR 0048). La entrada hPanel de palegreen ya se retiró. |
 
 **CURRENT STATE (2026-09-26).** `https://caminodeldharma.org/` es WordPress
 7.1.2, la misma instalación, sin reinstalación (ADR 0047).
@@ -42,8 +42,8 @@ rollback estático servido. El historial de Git
 `static-pre-cutover-20260926-040601.tar.gz` conservan la copia. Staging
 sigue retirado. La
 entrega de correo del formulario no está verificada y el formulario
-está oculto (ADR 0045). El CD de producción (ADR 0046 D-B) sigue sin
-decidir.
+está oculto (ADR 0045). Un tag de componente despliega ese código a
+producción (ADR 0048).
 
 Afirmaciones como «WordPress not started» y «HTML en la raíz» describen el
 **estado histórico** pre-WU-01. Que la producción publicada fuera estática

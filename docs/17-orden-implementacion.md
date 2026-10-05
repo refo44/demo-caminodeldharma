@@ -181,8 +181,8 @@ El historial de Git (`282230c41589348722a80985046d16cb07d19a1c`) y el tar
 `static-pre-cutover-20260926-040601.tar.gz` conservan la copia. Los
 backups privados del corte se conservan. Staging sigue retirado. La
 entrega de correo del formulario no está verificada y el formulario
-está oculto (ADR 0045). El CD de producción (ADR 0046 D-B) sigue sin
-decidir.
+está oculto (ADR 0045). Un tag de componente despliega ese código a
+producción (ADR 0048).
 
 Los bloques de 2026-09-01 y 2026-09-23 quedan como snapshot. No describen
 el sitio público de hoy.

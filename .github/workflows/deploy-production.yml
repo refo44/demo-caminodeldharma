@@ -1,21 +1,27 @@
-# WordPress STAGING code deploy, started only by an approved component tag (ADR 0046).
+# WordPress production code deploy, started by an approved component tag (ADR 0048).
 #
 #   theme-vX.Y.Z   -> deploys only the theme
 #   plugin-vX.Y.Z  -> deploys only the plugin
 #
-# Not a trigger: a merge, a push to the trunk, a green CI or a version bump. The
-# static line v* never reaches this file. Nothing here creates, moves or deletes a
-# tag, publishes a release, touches content, or writes the canonical production
-# document root. That root is refused by tools/release/check-staging-target.sh;
-# this file does not name it.
-# Operator runbook: docs/operations/wordpress-staging-cd.md
-name: deploy-staging
+# A workflow_dispatch run repeats an existing component tag. It uses the guards
+# in this workflow and the component files from that tag. It does not deploy a
+# branch. Nothing here creates, moves or deletes a tag, publishes a release, or
+# touches content. The destination must be the canonical production document
+# root; tools/release/check-production-target.sh refuses every other path.
+# Operator runbook: docs/operations/wordpress-production-cd.md
+name: deploy-production
 
 on:
   push:
     tags:
       - 'theme-v*'
       - 'plugin-v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Component tag already on main
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -25,50 +31,61 @@ defaults:
     shell: bash
 
 jobs:
-  # The trigger glob only narrows the namespace. Everything else is checked here,
-  # against the exact tagged commit, before any gate or secret is involved.
+  # The trigger only narrows the event. The tag, its SemVer and its place in
+  # main history are checked here, before any gate or secret is involved.
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
+      tag: ${{ steps.commit.outputs.tag }}
       component: ${{ steps.resolve.outputs.component }}
       version: ${{ steps.resolve.outputs.version }}
       source_dir: ${{ steps.resolve.outputs.source_dir }}
       target_rel: ${{ steps.resolve.outputs.target_rel }}
       slug: ${{ steps.resolve.outputs.slug }}
+    env:
+      TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
-      # TAGGED_SHA is the commit the tag resolves to: `^{commit}` peels an annotated
-      # tag object to its commit and leaves a lightweight tag (already a commit)
-      # alone. Every later job checks out this value, not the event payload.
-      - name: The tag resolves to the checked-out commit
+      # TAGGED_SHA is the commit the tag resolves to. A tag push must have
+      # checked out that commit. A manual run checks out this workflow and
+      # reads the component from the tag.
+      - name: The tag resolves to a commit
         id: commit
-        env:
-          TAG: ${{ github.ref_name }}
         run: |
-          [ "${GITHUB_REF_TYPE}" = "tag" ] || { echo "::error::not a tag event"; exit 1; }
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            [[ "${TAG}" =~ ^(theme|plugin)-v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || {
+              echo "::error::dispatch tag is not a component tag"
+              exit 1
+            }
+          else
+            [ "${GITHUB_REF_TYPE}" = "tag" ] || { echo "::error::not a tag event"; exit 1; }
+          fi
           git fetch --no-tags origin "+refs/tags/${TAG}:refs/tags/${TAG}"
           sha=$(git rev-parse --verify "refs/tags/${TAG}^{commit}")
-          [ "$(git rev-parse HEAD)" = "${sha}" ] || {
-            echo "::error::tag ${TAG} resolves to ${sha}, not the checked-out commit"
-            exit 1
-          }
+          if [ "${GITHUB_EVENT_NAME}" != "workflow_dispatch" ]; then
+            [ "$(git rev-parse HEAD)" = "${sha}" ] || {
+              echo "::error::tag ${TAG} resolves to ${sha}, not the checked-out commit"
+              exit 1
+            }
+          fi
           echo "sha=${sha}" >> "${GITHUB_OUTPUT}"
+          echo "tag=${TAG}" >> "${GITHUB_OUTPUT}"
       - name: Tag namespace, SemVer and component version
         id: resolve
-        env:
-          TAG: ${{ github.ref_name }}
         run: |
-          resolved=$(bash tools/release/resolve-release.sh "${TAG}" "${GITHUB_WORKSPACE}")
+          sha="${{ steps.commit.outputs.sha }}"
+          tree=$(mktemp -d)
+          git archive "${sha}" | tar -x -C "${tree}"
+          resolved=$(bash tools/release/resolve-release.sh "${TAG}" "${tree}")
+          rm -rf "${tree}"
           printf '%s\n' "${resolved}" | sed -E 's/^([A-Z_]+)=/\L\1=/' >> "${GITHUB_OUTPUT}"
           printf '%s\n' "${resolved}"
-      # Read-only and explicit: main is fetched here, not assumed from the checkout.
-      # Ancestry means "contained in main history", not "equal to main's head".
       - name: The tagged commit belongs to main history
         env:
           TAGGED_SHA: ${{ steps.commit.outputs.sha }}
@@ -82,15 +99,12 @@ jobs:
             echo "::error::${TAGGED_SHA} is not contained in main history"
             exit 1
           }
-      # Git tree metadata of the exact commit, selected component only.
       - name: The component holds no symlinks
         env:
           TAGGED_SHA: ${{ steps.commit.outputs.sha }}
           SOURCE_DIR: ${{ steps.resolve.outputs.source_dir }}
         run: bash tools/release/check-no-symlinks.sh "${TAGGED_SHA}" "${SOURCE_DIR}"
 
-  # Same contract as test.yml (ADR 0038): the tagged commit itself must pass,
-  # an earlier PR result is not evidence. composer test:wp is not a gate here.
   php:
     needs: validate
     runs-on: ubuntu-latest
@@ -132,53 +146,48 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run lint:css
 
-  # Runs only with validation and both gates green. The staging environment holds
-  # the SSH secrets; no other job can read them. Runs are serialized and never
-  # cancelled mid-sync (a cancelled rsync would leave a half-updated component).
-  # GitHub keeps one pending run per group, so a third tag pushed while one runs
-  # and one waits replaces the waiting run: release one tag at a time.
+  # Runs only with validation and both gates green. The production environment
+  # holds the SSH secrets. Runs are serialized and never cancelled mid-sync.
   deploy:
     needs: [validate, php, css]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
-      name: staging
+      name: production
     concurrency:
-      group: staging-wordpress-deploy
+      group: production-wordpress-deploy
       cancel-in-progress: false
     env:
-      TAG: ${{ github.ref_name }}
+      TAG: ${{ needs.validate.outputs.tag }}
       TAGGED_SHA: ${{ needs.validate.outputs.sha }}
       COMPONENT: ${{ needs.validate.outputs.component }}
       VERSION: ${{ needs.validate.outputs.version }}
       SOURCE_DIR: ${{ needs.validate.outputs.source_dir }}
       TARGET_REL: ${{ needs.validate.outputs.target_rel }}
       SLUG: ${{ needs.validate.outputs.slug }}
-      STAGING_URL: https://teal-woodpecker-284165.hostingersite.com
-      SSH_HOST: ${{ vars.STAGING_SSH_HOST }}
-      SSH_PORT: ${{ vars.STAGING_SSH_PORT }}
-      SSH_USER: ${{ vars.STAGING_SSH_USER }}
-      STAGING_WP_ROOT: ${{ vars.STAGING_WP_ROOT }}
-      SSH_CONFIG: ${{ github.workspace }}/../staging_ssh/config
+      PRODUCTION_URL: https://caminodeldharma.org
+      SSH_HOST: ${{ vars.PRODUCTION_SSH_HOST }}
+      SSH_PORT: ${{ vars.PRODUCTION_SSH_PORT }}
+      SSH_USER: ${{ vars.PRODUCTION_SSH_USER }}
+      PRODUCTION_WP_ROOT: ${{ vars.PRODUCTION_WP_ROOT }}
+      SSH_CONFIG: ${{ github.workspace }}/../production_ssh/config
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ needs.validate.outputs.sha }}
+          ref: ${{ github.sha }}
+          fetch-depth: 0
           persist-credentials: false
 
-      # Local, no network: refuse before touching a key or a server.
-      - name: Staging configuration and target guard
+      - name: Production configuration and target guard
         run: |
-          for name in SSH_HOST SSH_PORT SSH_USER STAGING_WP_ROOT COMPONENT VERSION SOURCE_DIR TARGET_REL SLUG; do
+          for name in SSH_HOST SSH_PORT SSH_USER PRODUCTION_WP_ROOT COMPONENT VERSION SOURCE_DIR TARGET_REL SLUG; do
             [ -n "${!name}" ] || { echo "::error::${name} is empty"; exit 1; }
           done
           [[ "${SSH_PORT}" =~ ^[0-9]{1,5}$ ]] || { echo "::error::SSH port is not numeric"; exit 1; }
           [[ "${SSH_HOST}" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]] || { echo "::error::SSH host is not a plain host name"; exit 1; }
           [[ "${SSH_USER}" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]] || { echo "::error::SSH user is not a plain user name"; exit 1; }
-          bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}"
+          bash tools/release/check-production-target.sh "${PRODUCTION_WP_ROOT}" "${TARGET_REL}"
 
-      # Only the tagged component, exactly as committed at the tagged SHA. The
-      # tarball is what is checksummed, and what is synced is extracted from it.
       - name: Component artifact and checksum
         run: |
           artifact="${RUNNER_TEMP}/cdd-${COMPONENT}-${VERSION}.tar.gz"
@@ -195,7 +204,7 @@ jobs:
           sha256=$(sha256sum "${artifact}" | awk '{print $1}')
           echo "STAGE_DIR=${stage}" >> "${GITHUB_ENV}"
           {
-            echo "### Staging deploy artifact"
+            echo "### Production deploy artifact"
             echo "- component: ${COMPONENT}"
             echo "- version: ${VERSION}"
             echo "- tag: ${TAG}"
@@ -206,11 +215,11 @@ jobs:
 
       - name: SSH with verified host key
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
+          SSH_PRIVATE_KEY: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.PRODUCTION_SSH_KNOWN_HOSTS }}
         run: |
-          [ -n "${SSH_PRIVATE_KEY}" ] || { echo "::error::STAGING_SSH_PRIVATE_KEY is empty"; exit 1; }
-          [ -n "${SSH_KNOWN_HOSTS}" ] || { echo "::error::STAGING_SSH_KNOWN_HOSTS is empty"; exit 1; }
+          [ -n "${SSH_PRIVATE_KEY}" ] || { echo "::error::PRODUCTION_SSH_PRIVATE_KEY is empty"; exit 1; }
+          [ -n "${SSH_KNOWN_HOSTS}" ] || { echo "::error::PRODUCTION_SSH_KNOWN_HOSTS is empty"; exit 1; }
           dir=$(dirname "${SSH_CONFIG}")
           umask 077
           mkdir -p "${dir}"
@@ -233,105 +242,83 @@ jobs:
             echo "  ServerAliveInterval 30"
           } > "${SSH_CONFIG}"
 
-      # Read-only. No remote write happens before this step passes.
-      - name: Staging preflight
+      - name: Production preflight
         id: preflight
         run: |
-          guard=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}")
+          guard=$(bash tools/release/check-production-target.sh "${PRODUCTION_WP_ROOT}" "${TARGET_REL}")
           target_dir=$(printf '%s\n' "${guard}" | sed -n 's/^TARGET_DIR=//p')
-          forbidden=$(printf '%s\n' "${guard}" | sed -n 's/^FORBIDDEN_REAL_ROOT=//p')
-          [ -n "${target_dir}" ] || { echo "::error::staging target is empty"; exit 1; }
-          [ -n "${forbidden}" ] || { echo "::error::production root guard is empty"; exit 1; }
-          case "${target_dir}" in
-            "${forbidden}" | "${forbidden}"/*) echo "::error::staging target is the canonical production document root"; exit 1 ;;
-          esac
-          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${target_dir}" "${STAGING_URL}" "${forbidden}" <<'REMOTE'
+          required=$(printf '%s\n' "${guard}" | sed -n 's/^REQUIRED_REAL_ROOT=//p')
+          [ -n "${target_dir}" ] || { echo "::error::production target is empty"; exit 1; }
+          [ -n "${required}" ] || { echo "::error::production root guard is empty"; exit 1; }
+          before=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${PRODUCTION_WP_ROOT}" "${target_dir}" "${PRODUCTION_URL}" "${required}" <<'REMOTE'
           set -euo pipefail
-          root=$1; target=$2; url=$3; forbidden=$4
+          root=$1; target=$2; url=$3; required=$4
           fail() { echo "preflight: $*" >&2; exit 1; }
-          [ -n "${forbidden}" ] || fail "production root guard is empty"
+          [ -n "${required}" ] || fail "production root guard is empty"
           [ -d "${root}" ] || fail "WordPress root is missing"
           [ -d "${target}" ] || fail "component directory is missing"
           real_root=$(cd "${root}" && pwd -P)
           real_target=$(cd "${target}" && pwd -P)
-          case "${real_root}" in
-            "${forbidden}" | "${forbidden}"/*) fail "resolved root is the canonical production document root" ;;
-          esac
+          [ "${real_root}" = "${required}" ] || fail "resolved root is not the canonical production document root"
           case "${real_target}" in
-            "${forbidden}" | "${forbidden}"/*) fail "resolved component directory is under the canonical production document root" ;;
+            "${required}"/wp-content/themes/camino-del-dharma | "${required}"/wp-content/plugins/camino-del-dharma-core) ;;
+            *) fail "resolved component directory is not a first-party component" ;;
           esac
-          case "${real_target}" in
-            "${real_root}"/wp-content/themes/* | "${real_root}"/wp-content/plugins/*) ;;
-            *) fail "component directory is outside wp-content of the root" ;;
-          esac
-          # stdin is this script: keep wp from reading it.
           wp_cli() { wp --path="${root}" --skip-plugins --skip-themes "$@" < /dev/null; }
           wp_cli core is-installed || fail "no WordPress installation at the root"
-          [ "$(wp_cli eval 'echo wp_get_environment_type();')" = "staging" ] || fail "environment type is not staging"
+          [ "$(wp_cli eval 'echo wp_get_environment_type();')" = "production" ] || fail "environment type is not production"
           home=$(wp_cli option get home)
-          [ "${home%/}" = "${url}" ] || fail "home URL is not the staging URL"
+          [ "${home%/}" = "${url}" ] || fail "home URL is not the canonical URL"
           abspath=$(wp_cli eval 'echo ABSPATH;')
           [ "$(cd "${abspath}" && pwd -P)" = "${real_root}" ] || fail "ABSPATH is not the configured root"
           if [ -f "${root}/.htaccess" ]; then sha256sum "${root}/.htaccess" | cut -d' ' -f1; else echo absent; fi
           REMOTE
           )
           echo "htaccess_before=${before}" >> "${GITHUB_OUTPUT}"
-          echo "Staging target identified; root .htaccess fingerprint recorded."
+          echo "Production target identified; root .htaccess fingerprint recorded."
 
-      # rsync's --delete boundary is the component directory only. The document
-      # root, its .htaccess, wp-config.php, uploads and every other theme or plugin
-      # are outside the source and the destination.
-      - name: Sync the component to staging
+      - name: Sync the component to production
         run: |
-          guard=$(bash tools/release/check-staging-target.sh "${STAGING_WP_ROOT}" "${TARGET_REL}")
+          guard=$(bash tools/release/check-production-target.sh "${PRODUCTION_WP_ROOT}" "${TARGET_REL}")
           target_dir=$(printf '%s\n' "${guard}" | sed -n 's/^TARGET_DIR=//p')
-          forbidden=$(printf '%s\n' "${guard}" | sed -n 's/^FORBIDDEN_REAL_ROOT=//p')
+          required=$(printf '%s\n' "${guard}" | sed -n 's/^REQUIRED_REAL_ROOT=//p')
           [ -n "${target_dir}" ] && [ -n "${STAGE_DIR}" ] && [ -d "${STAGE_DIR}" ] || { echo "::error::empty sync path"; exit 1; }
-          [ -n "${forbidden}" ] || { echo "::error::production root guard is empty"; exit 1; }
-          case "${target_dir}" in
-            "${forbidden}" | "${forbidden}"/*) echo "::error::staging target is the canonical production document root"; exit 1 ;;
-          esac
-          ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${target_dir}" "${forbidden}" <<'REMOTE'
+          [ -n "${required}" ] || { echo "::error::production root guard is empty"; exit 1; }
+          ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${target_dir}" "${required}" <<'REMOTE'
           set -euo pipefail
-          target=$1; forbidden=$2
+          target=$1; required=$2
           fail() { echo "sync: $*" >&2; exit 1; }
-          [ -n "${forbidden}" ] || fail "production root guard is empty"
+          [ -n "${required}" ] || fail "production root guard is empty"
           [ -d "${target}" ] || fail "component directory is missing"
           real_target=$(cd "${target}" && pwd -P)
           case "${real_target}" in
-            "${forbidden}" | "${forbidden}"/*) fail "resolved component directory is under the canonical production document root" ;;
+            "${required}"/wp-content/themes/camino-del-dharma | "${required}"/wp-content/plugins/camino-del-dharma-core) ;;
+            *) fail "resolved component directory is not a first-party component" ;;
           esac
           REMOTE
           rsync --recursive --times --delete --chmod=D755,F644 --itemize-changes \
             -e "ssh -F ${SSH_CONFIG}" \
             "${STAGE_DIR}/" "${SSH_USER}@${SSH_HOST}:${target_dir}/"
 
-      # LiteSpeed serves the cached page, which still carries the previous `?ver=` of
-      # the theme stylesheet, so visitors would keep the old CSS after a deploy. A
-      # failed purge is a warning: the code already reached staging and the runbook
-      # has the manual purge.
-      - name: Purge the staging page cache
+      - name: Purge the production page cache
         run: |
-          if ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" <<'REMOTE'
+          if ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${PRODUCTION_WP_ROOT}" <<'REMOTE'
           set -euo pipefail
-          # stdin is this script: keep wp from reading it. Themes stay skipped;
-          # the LiteSpeed Cache plugin must load for its purge command to exist.
           wp --path="$1" --skip-themes litespeed-purge all < /dev/null
           REMOTE
           then
-            echo "Staging page cache purged."
+            echo "Production page cache purged."
           else
-            echo "::warning::could not purge the LiteSpeed page cache; purge it in hPanel (docs/operations/wordpress-staging-cd.md)"
+            echo "::warning::could not purge the LiteSpeed page cache; purge it in hPanel (docs/operations/wordpress-production-cd.md)"
           fi
 
       - name: Post-deploy verification
         env:
           HTACCESS_BEFORE: ${{ steps.preflight.outputs.htaccess_before }}
         run: |
-          result=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${STAGING_WP_ROOT}" "${COMPONENT}" "${SLUG}" <<'REMOTE'
+          result=$(ssh -F "${SSH_CONFIG}" "${SSH_USER}@${SSH_HOST}" bash -s -- "${PRODUCTION_WP_ROOT}" "${COMPONENT}" "${SLUG}" <<'REMOTE'
           set -euo pipefail
           root=$1; component=$2; slug=$3
-          # stdin is this script: keep wp from reading it.
           wp_cli() { wp --path="${root}" --skip-plugins --skip-themes "$@" < /dev/null; }
           echo "environment=$(wp_cli eval 'echo wp_get_environment_type();')"
           if [ "${component}" = "theme" ]; then
@@ -348,19 +335,17 @@ jobs:
           )
           echo "${result}"
           field() { sed -n "s/^$1=//p" <<< "${result}"; }
-          [ "$(field environment)" = "staging" ] || { echo "::error::environment is no longer staging"; exit 1; }
+          [ "$(field environment)" = "production" ] || { echo "::error::environment is no longer production"; exit 1; }
           [ "$(field installed)" = "${VERSION}" ] || { echo "::error::installed ${COMPONENT} version $(field installed) is not ${VERSION}"; exit 1; }
           [ "$(field htaccess)" = "${HTACCESS_BEFORE}" ] || { echo "::error::root .htaccess changed"; exit 1; }
-          [ "$(field active)" = "yes" ] || echo "::warning::the ${COMPONENT} ${SLUG} is not active on staging (not changed by this deploy)"
-          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 3 --retry-delay 5 "${STAGING_URL}/")
-          # Hostinger answers this runner with 403 while the site answers 200 elsewhere
-          # (the version and environment above were read over SSH), so a 403 only warns.
+          [ "$(field active)" = "yes" ] || echo "::warning::the ${COMPONENT} ${SLUG} is not active on production (not changed by this deploy)"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 30 --retry 3 --retry-delay 5 "${PRODUCTION_URL}/")
           if [ "${code}" = "403" ]; then
-            echo "::warning::staging answered HTTP 403 to the runner; the site answers 200 from other networks"
+            echo "::warning::production answered HTTP 403"
           else
-            [ "${code}" -ge 200 ] && [ "${code}" -lt 400 ] || { echo "::error::staging answered HTTP ${code}"; exit 1; }
+            [ "${code}" -ge 200 ] && [ "${code}" -lt 400 ] || { echo "::error::production answered HTTP ${code}"; exit 1; }
           fi
-          echo "Verified ${COMPONENT} ${VERSION} on staging (HTTP ${code})."
+          echo "Verified ${COMPONENT} ${VERSION} on production (HTTP ${code})."
 
       - name: Remove SSH material
         if: always()
