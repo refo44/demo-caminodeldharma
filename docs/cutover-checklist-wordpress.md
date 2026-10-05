@@ -15,7 +15,8 @@ environment bajo prueba (`Pass (local)` vs `Pass` en Hostinger).
 **Estado verificado el 2026-09-26.** `https://caminodeldharma.org/` es
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
 Theme 0.6.3 y plugin 0.7.10 en ese corte. El árbol siguiente es plugin
-0.7.12 (tag `plugin-v0.7.12`, `offers.validFrom`,
+0.7.13 (tag `plugin-v0.7.13` después del merge; 0.7.12, tag
+`plugin-v0.7.12`, `offers.validFrom`,
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54); 0.7.11 fue el cierre de inscripción,
 [#52](https://github.com/refo44/demo-caminodeldharma/issues/52)).
 Indexación, canonical y sitemap nativo

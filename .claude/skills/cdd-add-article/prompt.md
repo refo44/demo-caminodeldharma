@@ -32,7 +32,7 @@ Known researched versions:
 
 WordPress 7.1.2
 theme camino-del-dharma 0.6.3
-plugin camino-del-dharma-core 0.7.12
+plugin camino-del-dharma-core 0.7.13
 
 Known approved observed .htaccess snapshot at research time:
 

@@ -12,9 +12,23 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
-### Plugin 0.7.12 — apertura de inscripción en el JSON-LD
+### Plugin 0.7.13 — zona horaria de la apertura
 
 Release del plugin, lista para etiquetar después del merge en `main`:
+
+```bash
+git fetch origin main
+git tag -a plugin-v0.7.13 <sha-en-origin/main> -m "Release plugin 0.7.13"
+git push origin plugin-v0.7.13
+```
+
+La cabecera `Version` y `CDD_CORE_VERSION` son `0.7.13`. El theme sigue
+en `0.6.3`. Una zona fuera de ±23:59, como `+24:00`, no se publica.
+`plugin-v0.7.12` ya existe y no se reutiliza.
+
+### Plugin 0.7.12 — apertura de inscripción en el JSON-LD
+
+Release del plugin. El tag `plugin-v0.7.12` ya está en `main`:
 
 ```bash
 git fetch origin main
@@ -32,7 +46,7 @@ el campo no se inventa. Una fecha ya importada se conserva hasta que el
 editor guarde otra; vaciar el campo después no la restaura. Se acepta
 un día (`2026-08-13`, medianoche en Bogotá), un reloj de pared sin zona
 (`2026-08-13T12:00`) y un instante ISO con zona. Una palabra o un día
-imposible, como el 30 de febrero, se rechaza. Un evento finalizado o
+imposible, como el 30 de febrero, o una zona fuera de ±23:59, se rechaza. Un evento finalizado o
 con la inscripción cerrada sigue sin `offers`. Issue
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54).
 
