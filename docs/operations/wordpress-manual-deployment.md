@@ -359,12 +359,13 @@ en el working tree y ese canal no escribe el document root de WordPress.
 abajo es el registro de ese corte, no una instrucción para repetirlo.
 
 Hecho: `https://caminodeldharma.org/` sirve este WordPress;
-`WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3;
+`WP_ENVIRONMENT_TYPE` es `production`; `blog_public` es `1`; theme 0.6.3
+en el corte;
 plugin 0.7.10. La release siguiente del plugin fue 0.7.11
 (`plugin-v0.7.11`): cierre de inscripción. La 0.7.12
-(`plugin-v0.7.12`) publica `offers.validFrom`. Este árbol es 0.7.13
-(`plugin-v0.7.13`): rechaza una zona fuera de ±23:59. El theme no
-cambia en esos tags.
+(`plugin-v0.7.12`) publica `offers.validFrom`. Este árbol es plugin 0.7.13
+(`plugin-v0.7.13`): rechaza una zona fuera de ±23:59. El theme de este
+árbol es 0.6.4 (`theme-v0.6.4`): envuelve la URL larga de Sangha.
 En el corte el `.htaccess` no cambió
 (`a03537dae616a03b9f009c7c8d9979edc273561ac41db187613db9f4ecc88940`,
 evidencia histórica). Después WordPress regeneró solo el interior de su

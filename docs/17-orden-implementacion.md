@@ -145,8 +145,8 @@ La maqueta cumple la estructura §2.1 (URLs indexables en `sitemap.xml` + 404). 
 
 `https://caminodeldharma.org/` es WordPress 7.1.2. Es la misma instalación
 (ADR 0047). `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
-Theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651). El
-corte desplegó el plugin `camino-del-dharma-core` 0.7.10
+El corte desplegó theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run
+36214533651) y plugin `camino-del-dharma-core` 0.7.10
 (`plugin-v0.7.10`, run 36214533614). El código de este árbol es plugin
 0.7.13: rechaza una zona de `offers.validFrom` fuera de ±23:59. La
 0.7.12 publica esa fecha cuando el
@@ -156,7 +156,10 @@ es `plugin-v0.7.12`. El tag de la 0.7.13, después del merge, es
 `plugin-v0.7.13`. La 0.7.11 cerró
 la inscripción a mano o por fecha
 ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52), tag
-`plugin-v0.7.11`). El theme no cambia.
+`plugin-v0.7.11`). El theme de este árbol es 0.6.4: envuelve la URL larga
+de Sangha
+([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). El tag,
+después del merge, es `theme-v0.6.4`.
 La portada está indexable: canonical `https://caminodeldharma.org/`,
 robots `index,follow,max-image-preview:large`, sitemap
 `/wp-sitemap.xml`. `/sitemap.xml` redirige allí. La evidencia histórica
@@ -709,8 +712,8 @@ WordPress pasa a ser la **única implementación activa**. Activar el theme **no
     fotos publicados en el payload. `migrate convert` siembra add-only en fichas ya importadas.
 9c. **D-09 / OWN-021:** overflow 339 vs 320 px en `/blog/sangha-refugio-hiperconexion` **dejado**
     en el corte (paridad live). Wrap WordPress-only **post-corte** (POST-008,
-    [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) cuando WP ya sirva
-    `caminodeldharma.org`.
+    [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)) **implementado** en theme 0.6.4:
+    `.wp-block-post-content` usa `overflow-wrap: anywhere`.
 9d. **D-10 / OWN-022:** `sessionStorage` de `wp-emoji` **aceptado** (A). No desactivar. No issue.
 9e. **Pre-staging (OWN-035):** D-02 [#10](https://github.com/refo44/demo-caminodeldharma/issues/10),
     D-03 [#11](https://github.com/refo44/demo-caminodeldharma/issues/11) (ADR 0044), D-04

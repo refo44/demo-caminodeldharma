@@ -17,7 +17,7 @@ Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **ST
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.28) queda
 como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
 pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09:
-overflow Sangha dejado al corte. OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado.
+overflow Sangha dejado al corte; wrap post-corte en theme 0.6.4. OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado.
 Pre-staging: D-02/D-03/D-04 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
 antes de Hostinger (OWN-035). `POST-008`–`010` son posteriores al corte.
 

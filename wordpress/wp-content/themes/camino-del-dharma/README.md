@@ -52,7 +52,8 @@ Reglas:
   columna conservando el `width: min(100%, 32rem)` publicado. El selector lleva las dos
   clases a propósito: gana **por especificidad**, no por el orden en que WordPress imprime
   `wp-block-audio-inline-css`. No añadir `overflow: hidden` en `html`/`body` para esto:
-  escondería el desbordamiento heredado de D-09, que el owner dejó en el corte (OWN-021).
+  recortaría el documento. La URL larga de D-09 se parte dentro de
+  `.wp-block-post-content` (`overflow-wrap: anywhere`, theme 0.6.4, POST-008).
 - Diálogo de calendario de un curso desde BUG-001 (v0.5.1): en un evento con
   cronograma el disparador enlaza la **próxima sesión** en vez del rango del
   curso, e imprime `data-calendar-sessions` y `data-calendar-note`;

@@ -173,9 +173,10 @@ reutilizan ni mueven tags.
 
 Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress. La raíz es
 `/home/u548735796/domains/caminodeldharma.org/public_html`.
-`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme 0.6.3.
-El corte desplegó el plugin 0.7.10. Este árbol es plugin 0.7.13; el tag
-`plugin-v0.7.13` es la release siguiente. `plugin-v0.7.12` ya existe.
+`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. El corte
+desplegó theme 0.6.3 y plugin 0.7.10. Este árbol es theme 0.6.4 (tag
+`theme-v0.6.4`) y plugin 0.7.13 (tag `plugin-v0.7.13`).
+`plugin-v0.7.12` ya existe.
 Este workflow no escribe esa raíz. El corte de dominio
 no fue un deploy de theme o plugin (ADR 0047). El ZIP estático no debe
 volver a caer sobre ese document root (ADR 0015, ADR 0013).

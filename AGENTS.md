@@ -34,8 +34,9 @@ Older docs may mention classic PHP templates (`*.php`) or a previous WordPress o
 
 Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
-`camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.13
-(release tag `plugin-v0.7.13` after merge; `plugin-v0.7.12` already
+`camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.13
+(release tag `plugin-v0.7.13` after merge; theme tag `theme-v0.6.4`
+after merge, cutover deployed theme 0.6.3; `plugin-v0.7.12` already
 exists; the 2026-09-26 cutover deployed `plugin-v0.7.10`). A current event can hide signup by hand or at a
 Bogotá close instant without dropping calendar, share, or `.ics`.
 The owner later authorized retiring `static/` from the working tree and
@@ -158,8 +159,8 @@ verified tar keeps the deployed copy, including files Git does not have.
   v1.30). Do not reopen A/B/C for authors, gallery, ICS, or pagination without a new owner
   decision. **OWN-020 / D-08** is decided (author entity SEO); implementation is pending
   ([issue #5](https://github.com/refo44/demo-caminodeldharma/issues/5)) — do not `noindex`
-  singles and do not invent copy. **OWN-021 / D-09:** leave the Sangha 320px overflow at
-  cutover; WordPress-only wrap **after** WP is production on the canonical domain
+  singles and do not invent copy. **OWN-021 / D-09:** the Sangha 320px overflow stayed
+  through cutover; theme 0.6.4 wraps that URL inside post content
   ([issue #7](https://github.com/refo44/demo-caminodeldharma/issues/7)). **OWN-022 / D-10:**
   accept core `wp-emoji` `sessionStorage`; do not disable it. Pre-staging code:
   D-02/D-03/D-04 (issues #10–#12) are done; Hostinger waits on the owner (OWN-035). Later-phase rows (`POST-*`)

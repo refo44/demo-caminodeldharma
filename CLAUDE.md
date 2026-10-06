@@ -9,9 +9,10 @@ pipelines.
 
 - Production: WordPress on the canonical domain since 2026-09-26.
   `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`.
-  Theme `camino-del-dharma` 0.6.3 and plugin `camino-del-dharma-core` 0.7.13.
-  Release tag after merge: `plugin-v0.7.13`. `plugin-v0.7.12` already
-  exists. The 2026-09-26 cutover deployed `plugin-v0.7.10`. Signup on a
+  Theme `camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.13.
+  Release tag after merge: `plugin-v0.7.13`. Theme tag after merge:
+  `theme-v0.6.4` (the 2026-09-26 cutover deployed theme 0.6.3).
+  `plugin-v0.7.12` already exists. The cutover deployed `plugin-v0.7.10`. Signup on a
   current event can be closed by hand or at a
   Bogotá instant (`event_signup_closed`, `event_signup_closes_at`, issue #52)
   without cancelling the event or deleting the form URL.
@@ -31,7 +32,8 @@ pipelines.
   cdd-core demo purge` deletes it) **D-03 done** (plugin 0.7.3: native feeds and
   their aliases answer a real 404, ADR 0044) and **D-04 done** (theme 0.5.2: the
   theme lifts core's `min-width: 300px` floor on `core/audio`, so `/practica` no
-  longer overflows at 320px; D-09's Sangha overflow stays). **META-001 done**
+  longer overflows at 320px). **D-09 done** (theme 0.6.4, issue #7: the Sangha
+  reference URL wraps inside post content; the overflow stayed through cutover). **META-001 done**
   (plugin 0.7.4, [issue
   #18](https://github.com/refo44/demo-caminodeldharma/issues/18), OWN-019: the
   block editor can assign Autores del blog; the guard is not relaxed and there

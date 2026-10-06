@@ -33,7 +33,7 @@ event
 Known researched application versions at the time the content model was mapped:
 
 WordPress 7.1.2
-theme camino-del-dharma 0.6.3
+theme camino-del-dharma 0.6.4
 plugin camino-del-dharma-core 0.7.13
 
 Known approved observed .htaccess snapshot at research time:

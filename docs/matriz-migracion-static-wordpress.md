@@ -214,9 +214,9 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 | Superficie | Local | Staging | Producción |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 18/19 rutas limpias — Pass (local). `/practica` corregido en el theme **0.5.2** (D-04 / OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)): el suelo `min-width: 300px` del `core/audio` del núcleo se levanta y el reproductor mide 272 px, `scrollWidth` = `clientWidth` = 320. La ruta 19 es D-09, ver abajo | OWN-035: volver a medir en staging | no desborda |
+| 320 px sin scroll horizontal | 19/19 rutas limpias — Pass (local). `/practica` sigue en 320 = 320 y el reproductor en 272 px (D-04, theme 0.5.2). D-09 queda en 320 = 320 (theme 0.6.4), ver abajo | OWN-035: volver a medir en staging | no desborda, salvo Sangha hasta desplegar theme 0.6.4 |
 | 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
-| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | OWN-021: dejar en el corte; wrap POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) | **también 339 px** |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | `scrollWidth` = `clientWidth` = 320 — Pass (local), theme **0.6.4**. La URL de la OMS parte en dos líneas dentro de la columna | POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) implementado | 339 px mientras siga el theme 0.6.3 del corte; el tag `theme-v0.6.4` publica el wrap |
 | Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | OWN-027: staging `es_CO` + lightbox en español; local puede quedar en inglés | no aplica |
 | Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | OWN-028: aceptar | comillas rectas |
 | Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |

@@ -247,6 +247,15 @@ release, sobre el commit de `main` después del merge, es
 `plugin-v0.7.13`. El theme no cambia. Ese tag no escribe la raíz de
 producción.
 
+### Theme 0.6.4
+
+El corte queda registrado con theme 0.6.3 (`theme-v0.6.3`, run
+36214533651). El código posterior envuelve la URL larga de
+`/blog/sangha-refugio-hiperconexion` dentro de la columna
+([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). La
+cabecera `Version` es `0.6.4`. El tag de esa release, sobre el commit de
+`main` después del merge, es `theme-v0.6.4`. El plugin no cambia.
+
 ## Referencias
 
 - OWN-005, OWN-036

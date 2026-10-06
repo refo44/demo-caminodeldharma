@@ -2931,9 +2931,19 @@ p:last-child {
   display: contents;
 }
 
-/* Post Content wrapper behaves like the transparent container it is. */
+/*
+ * Post Content wrapper behaves like the transparent container it is.
+ * POST-008 / OWN-021 / issue #7: the Sangha article prints the WHO
+ * commission URL as the text of a link. At 320 px that string is wider
+ * than the column (measured 339 vs 320) because it has no ordinary wrap
+ * point. `anywhere` breaks it inside the column and lets the content's
+ * min-content shrink, so the page does not scroll sideways. The property
+ * inherits to the link. It does not clip the URL and it does not hide
+ * overflow on the document.
+ */
 .wp-block-post-content {
   display: block;
+  overflow-wrap: anywhere;
 }
 
 /* Core featured-image figure reuses the static figure rhythm via its

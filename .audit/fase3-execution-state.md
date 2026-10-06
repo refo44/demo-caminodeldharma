@@ -5,7 +5,7 @@ verificándolo contra Git, sin historial de chat. Los prompts FABLE5 se retiraro
 
 | | |
 | --- | --- |
-| **Última actualización** | 2026-10-05 (plugin 0.7.13; tag `plugin-v0.7.13` después del merge; el corte desplegó plugin 0.7.10 / theme 0.6.3) |
+| **Última actualización** | 2026-10-06 (theme 0.6.4, POST-008 / #7; tag `theme-v0.6.4` después del merge; el corte desplegó plugin 0.7.10 / theme 0.6.3) |
 | **Fase** | Fase 3 — WordPress (iniciada) |
 | **Work unit activo** | Ninguno — WU-00…**WU-10 cerrados** (WU-09 y BUG-001 incluidos); checkpoint de WU-10 alcanzado |
 | **Rama** | `fase3-wordpress` — al abrir WU-10, `HEAD` = `origin/fase3-wordpress` = `e377c46`, **0 ahead / 0 behind**: los commits de BUG-001 **ya estaban publicados**, al contrario de lo que decía esta tabla. Los 4 commits de WU-10 quedan **solo en local**, sin push, por instrucción |
@@ -618,9 +618,10 @@ efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 
 **Corte hecho el 2026-09-26.** `https://caminodeldharma.org/` es este
 WordPress. `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`.
-Theme 0.6.3. El corte desplegó plugin 0.7.10. El código de este árbol es
-plugin 0.7.13 (rechaza una zona de `offers.validFrom` fuera de
-±23:59; tag `plugin-v0.7.13` después del merge).
+El corte desplegó theme 0.6.3 y plugin 0.7.10. El código de este árbol es
+theme 0.6.4 (tag `theme-v0.6.4` después del merge) y plugin 0.7.13
+(rechaza una zona de `offers.validFrom` fuera de ±23:59; tag
+`plugin-v0.7.13` después del merge).
 El `public_html` de palegreen y, después,
 la entrada de ese sitio en hPanel ya se retiraron. `/domains/` conserva
 solo `caminodeldharma.org`. El hostname puede resolver y respondió 403;
@@ -663,8 +664,8 @@ Pre-staging de código (PRs separados, TDD):
 3. ~~D-04 — [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)~~ **hecho**
    (2026-09-02, theme **0.5.2**): `/practica` ya no desborda a 320 px. El suelo
    `min-width: 300px` que el núcleo pone al `core/audio` se levanta desde el theme y el
-   reproductor mide 272 px, el mismo ancho que publica producción. D-09 sigue como lo dejó
-   OWN-021.
+   reproductor mide 272 px, el mismo ancho que publica producción. D-09 se dejó en el
+   corte (OWN-021) y quedó envuelto después, en theme 0.6.4 (POST-008).
 4. ~~#18 — UI de autores (`META-001` / OWN-019, ADR 0037 §4/§6, ADR 0042)~~ **hecho**
    (2026-09-03, plugin **0.7.4**): panel nativo «Autores del blog» en `post.php` /
    `post-new.php`, buscador REST de fichas publicadas desde dos caracteres sin precargar el

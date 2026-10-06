@@ -18,7 +18,9 @@ Theme 0.6.3 y plugin 0.7.10 en ese corte. El árbol siguiente es plugin
 0.7.13 (tag `plugin-v0.7.13` después del merge; 0.7.12, tag
 `plugin-v0.7.12`, `offers.validFrom`,
 [#54](https://github.com/refo44/demo-caminodeldharma/issues/54); 0.7.11 fue el cierre de inscripción,
-[#52](https://github.com/refo44/demo-caminodeldharma/issues/52)).
+[#52](https://github.com/refo44/demo-caminodeldharma/issues/52)) y theme
+0.6.4 (tag `theme-v0.6.4` después del merge,
+[#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
 Indexación, canonical y sitemap nativo
 comprobados. `/eventos` exigió `wp rewrite flush` sin `--hard`. En ese
 momento el `.htaccess` no cambió
@@ -79,7 +81,7 @@ de abajo no se marcan en bloque por este registro.
 - [ ] Autores (ADR 0037): `/author/zheng-gong` **200** (CPT, no user); `query_var === 'blog_author'`; users `/author/{login}` **404**; byline ≠ usuario WP; publicar post exige ficha; archivo `/author` noindex
 - [ ] Autores SEO/AEO (OWN-020 / D-08, [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)): singles **index,follow** con `seo.description` y foto reutilizados de producción (no copy inventado; no noindex; bio larga sigue en `/comunidad`)
 - [ ] `/comunidad` (WP): enlaces a `/author/zheng-gong` y a la ficha Comunidad (OWN-016); copy live no pisado; estático no cambiado por esto
-- [ ] `/blog/sangha-refugio-hiperconexion` a 320 px: **sigue desbordando como producción** (OWN-021). No wrap en el corte. POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) solo **después** de WP en `caminodeldharma.org`
+- [x] `/blog/sangha-refugio-hiperconexion` a 320 px: en el corte **seguía desbordando como producción** (OWN-021). POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) **implementado** después, theme 0.6.4: la URL se parte dentro de la columna.
 - [ ] Núcleo `wp-emoji` intacto: **no** desactivar el script; `sessionStorage` `wpEmojiSettingsSupports` es delta aceptado (OWN-022). No es cookie ni analítica (ADR 0019)
 - [ ] Sin Page slug `eventos` si el CPT usa ese rewrite
 - [ ] Contact Form 7: Page `/privacidad` en WordPress con los párrafos del formulario según ADR 0041 / OWN-018; **entrega** según ADR 0045 / OWN-033. La revisión legal **no** es prerrequisito (ADR 0041).

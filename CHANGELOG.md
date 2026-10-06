@@ -12,6 +12,28 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Theme 0.6.4 — la URL de Sangha cabe a 320 px
+
+Release del theme, lista para etiquetar después del merge en `main`:
+
+```bash
+git fetch origin main
+git tag -a theme-v0.6.4 <sha-en-origin/main> -m "Release theme 0.6.4"
+git push origin theme-v0.6.4
+```
+
+La cabecera `Version` es `0.6.4`. El plugin sigue en `0.7.13`. El corte
+del 2026-09-26 sigue registrado con theme `0.6.3`.
+
+`/blog/sangha-refugio-hiperconexion` imprime la URL de la comisión de la
+OMS como texto del enlace. A 320 px el documento medía 339 px. El corte
+dejó ese desbordamiento (OWN-021) porque el estático publicado hacía lo
+mismo. WordPress ya sirve `caminodeldharma.org`, así que
+`.wp-block-post-content` usa `overflow-wrap: anywhere`: la cadena se parte
+dentro de la columna y el mínimo del contenido puede encogerse. No se
+recorta el enlace y no se oculta el scroll en `html`/`body`. Issue
+[#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
+
 ### Plugin 0.7.13 — zona horaria de la apertura
 
 Release del plugin, lista para etiquetar después del merge en `main`:

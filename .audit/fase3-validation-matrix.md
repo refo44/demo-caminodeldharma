@@ -656,7 +656,7 @@ manda sobre el archivo.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 18 limpias tras el arreglo de D-04 (theme 0.5.2): `/practica` mide 320 = 320 y el reproductor 272 px. Queda 1 desbordamiento, D-09, que el owner dejó en el corte | Pass (local) *(D-09 aceptado)* |
+| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 19 limpias: D-04 (theme 0.5.2) dejó `/practica` en 320 = 320; D-09 (theme 0.6.4) parte la URL de Sangha dentro de la columna | Pass (local) |
 | 640 px (= zoom 200 % sobre 1280) | las mismas 19 rutas | **0 desbordamientos** | Pass (local) |
 | Foco visible | 21 reglas `:focus-visible` en las hojas del theme | presentes | Pass (local) |
 | Navegación por teclado | single de evento | 32 elementos enfocables, **todos con nombre accesible**; primer tabulable = «Saltar al contenido» | Pass (local) |
@@ -764,8 +764,10 @@ triggers) — decisión del propietario, no una limpieza silenciosa.
    y no entran en esa cola.
 9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
    320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.
-   **Producción desborda exactamente igual (339 vs 320)**. **Cerrado 2026-09-01 (OWN-021):**
-   dejar en el corte. Wrap post-corte POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
+   **El estático publicado desbordaba igual (339 vs 320)**. **Cerrado 2026-09-01 (OWN-021):**
+   dejar en el corte. **Implementado 2026-10-06** (theme 0.6.4, POST-008 /
+   [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)):
+   `.wp-block-post-content` usa `overflow-wrap: anywhere`.
 10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
     `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
     alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no
