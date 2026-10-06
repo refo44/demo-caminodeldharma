@@ -150,24 +150,15 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	}
 
 	/**
-	 * True when the compound is exactly the post body or the references
-	 * section, with no extra element, class, or attribute.
+	 * True when the compound is one container, not both classes on the
+	 * same element. The published markup nests them:
+	 * `.wp-block-post-content .article-references`.
 	 *
 	 * @param string $compound One compound selector.
 	 */
 	private function compound_is_container( string $compound ): bool {
-		$rest = str_replace(
-			array( '.wp-block-post-content', '.article-references' ),
-			'',
-			$compound
-		);
-
-		if ( '' !== $rest ) {
-			return false;
-		}
-
-		return false !== strpos( $compound, '.wp-block-post-content' )
-			|| false !== strpos( $compound, '.article-references' );
+		return '.wp-block-post-content' === $compound
+			|| '.article-references' === $compound;
 	}
 
 	/**
