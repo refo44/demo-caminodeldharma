@@ -111,23 +111,93 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	}
 
 	/**
-	 * True when the selector styles the reference link or an ancestor
-	 * inside the post body. A bare `a` or `html`/`body` rule does not
-	 * count: that would restyle navigation and hide the symptom.
+	 * True when the selector's subject is the post-content or references
+	 * container (the property inherits to the link) or the reference
+	 * anchor itself. A descendant that merely shares the container class,
+	 * such as `.wp-block-post-content img`, does not count.
 	 *
 	 * @param string $selector One selector of a rule.
 	 */
 	private function reaches_reference_link( string $selector ): bool {
-		if ( preg_match( '/^(html|body)$/', $selector ) ) {
-			return false;
-		}
+		$subject = $this->subject_compound( $selector );
 
-		if ( '.wp-block-post-content' === $selector ) {
+		if ( $this->compound_is_container( $subject ) ) {
 			return true;
 		}
 
-		return false !== strpos( $selector, '.wp-block-post-content' )
-			|| false !== strpos( $selector, '.article-references' );
+		if ( ! $this->compound_is_anchor( $subject ) ) {
+			return false;
+		}
+
+		return $this->selector_includes_container( $selector );
+	}
+
+	/**
+	 * The rightmost compound, with pseudo-classes removed.
+	 *
+	 * @param string $selector One selector of a rule.
+	 */
+	private function subject_compound( string $selector ): string {
+		$plain = preg_replace( '/::?[a-zA-Z0-9_-]+(\([^)]*\))?/', '', $selector );
+		$parts = preg_split( '/\s*[>+~]\s*|\s+/', trim( (string) $plain ) );
+		$parts = array_values( array_filter( $parts, 'strlen' ) );
+
+		if ( array() === $parts ) {
+			return '';
+		}
+
+		return (string) $parts[ count( $parts ) - 1 ];
+	}
+
+	/**
+	 * True when the compound is exactly the post body or the references
+	 * section, with no extra element, class, or attribute.
+	 *
+	 * @param string $compound One compound selector.
+	 */
+	private function compound_is_container( string $compound ): bool {
+		$rest = str_replace(
+			array( '.wp-block-post-content', '.article-references' ),
+			'',
+			$compound
+		);
+
+		if ( '' !== $rest ) {
+			return false;
+		}
+
+		return false !== strpos( $compound, '.wp-block-post-content' )
+			|| false !== strpos( $compound, '.article-references' );
+	}
+
+	/**
+	 * True when the compound is an `a`, ignoring classes and attributes.
+	 *
+	 * @param string $compound One compound selector.
+	 */
+	private function compound_is_anchor( string $compound ): bool {
+		$rest = preg_replace( '/\.[a-zA-Z0-9_-]+|\[[^\]]+\]/', '', $compound );
+
+		return 'a' === $rest;
+	}
+
+	/**
+	 * True when some compound in the selector is the post body or the
+	 * references section.
+	 *
+	 * @param string $selector One selector of a rule.
+	 */
+	private function selector_includes_container( string $selector ): bool {
+		$plain = preg_replace( '/::?[a-zA-Z0-9_-]+(\([^)]*\))?/', '', $selector );
+		$parts = preg_split( '/\s*[>+~]\s*|\s+/', trim( (string) $plain ) );
+
+		foreach ( $parts as $part ) {
+			if ( $this->compound_is_container( $part ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
