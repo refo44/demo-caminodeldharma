@@ -1,8 +1,8 @@
 # Operaciones — CD de staging WordPress por tag (ADR 0046)
 
 **Retirado el 2026-10-05.** El directorio del dominio temporal ya no está.
-[ADR 0048](../adr/0048-tag-despliega-al-wordpress-canonico.md) despliega el
-tag a la raíz canónica. Runbook vigente:
+[ADR 0048](../adr/0048-tag-despliega-al-wordpress-canonico.md) despliega el tag
+a la raíz canónica. Runbook vigente:
 [wordpress-production-cd.md](wordpress-production-cd.md). Lo que sigue es el
 registro de cómo operaba staging.
 
@@ -20,25 +20,26 @@ difieren, manda el ADR.
 ## Estado verificado (2026-09-26)
 
 Lectura SSH, sin cambios en el servidor. No existe el directorio
-`teal-woodpecker-284165.hostingersite.com` ni su `public_html`.
-No es un symlink y no hay `wp-config.php`. `readlink -f` no resuelve
-esa ruta. La raíz de producción es un directorio real, distinto:
-`/home/u548735796/domains/caminodeldharma.org/public_html`,
-con `wp-config.php`. El propietario autorizó después retirar el
-`public_html` de `palegreen-cod-365706.hostingersite.com`, y después
-la entrada de ese sitio en hPanel. Esa raíz deja de existir. El
-hostname puede resolver y respondió 403; no sirve el sitio estático.
-No hubo cambio manual de DNS. No queda un rollback estático servido.
+`teal-woodpecker-284165.hostingersite.com` ni su `public_html`. No es un symlink
+y no hay `wp-config.php`. `readlink -f` no resuelve esa ruta. La raíz de
+producción es un directorio real, distinto:
+`/home/u548735796/domains/caminodeldharma.org/public_html`, con `wp-config.php`.
+El propietario autorizó después retirar el `public_html` de
+`palegreen-cod-365706.hostingersite.com`, y después la entrada de ese sitio en
+hPanel. Esa raíz deja de existir. El hostname puede resolver y respondió 403; no
+sirve el sitio estático. No hubo cambio manual de DNS. No queda un rollback
+estático servido.
 
-El workflow se conserva solo como mecanismo histórico de recuperación
-con fallo cerrado. No está operativo. No se inventa otro servidor de
-staging. Quitar el disparador por tag cambiaría el contrato aceptado
-de ADR 0046; este documento no lo quita.
+El workflow se conserva solo como mecanismo histórico de recuperación con fallo
+cerrado. No está operativo. No se inventa otro servidor de staging. Quitar el
+disparador por tag cambiaría el contrato aceptado de ADR 0046; este documento no
+lo quita.
 
 ## 1. Modelo: MERGE ≠ RELEASE
 
 Fusionar a `main` **no** despliega nada. Solo un tag `theme-v<SemVer>` o
-`plugin-v<SemVer>` arranca el workflow. Theme y plugin son unidades independientes.
+`plugin-v<SemVer>` arranca el workflow. Theme y plugin son unidades
+independientes.
 
 | Evento | ¿Despliega? |
 | --- | --- |
@@ -50,18 +51,21 @@ Los tags `v*` son del sitio estático (ADR 0015) y nunca disparan este workflow.
 
 ## 2. Roles
 
-- **Release Maintainer:** única persona autorizada a crear tags `theme-v*`/`plugin-v*`
-  (Ruleset A). Lo designa el propietario de forma explícita.
+- **Release Maintainer:** única persona autorizada a crear tags
+  `theme-v*`/`plugin-v*` (Ruleset A). Lo designa el propietario de forma
+  explícita.
 - **Actions:** ejecuta el workflow; **no** crea tags ni figura en ningún bypass.
 - Nadie puede mover ni borrar un tag publicado (Ruleset B, bypass vacío). Una
   corrección es un tag nuevo con versión nueva.
 
 ## 3. Cómo se prepara un release (sin ejecutarlo)
 
-1. Subir la versión del componente en su PR (theme: `style.css`; plugin: cabecera y
-   `CDD_CORE_VERSION`, que deben coincidir) y fusionar a `main` con `php` y `css` verdes.
-2. El Release Maintainer decide explícitamente el release y crea el tag anotado sobre
-   un commit ya presente en `origin/main`, con la versión **idéntica** a la del componente:
+1. Subir la versión del componente en su PR (theme: `style.css`; plugin:
+   cabecera y `CDD_CORE_VERSION`, que deben coincidir) y fusionar a `main` con
+   `php` y `css` verdes.
+2. El Release Maintainer decide explícitamente el release y crea el tag anotado
+   sobre un commit ya presente en `origin/main`, con la versión **idéntica** a
+   la del componente:
 
    ```bash
    git fetch origin main
@@ -69,39 +73,46 @@ Los tags `v*` son del sitio estático (ADR 0015) y nunca disparan este workflow.
    git push origin plugin-vX.Y.Z
    ```
 
-   Para el theme, el nombre es `theme-vX.Y.Z` y el mensaje nombra el theme. El SHA tiene
-   que ser ancestro de `origin/main`. Empujar el tag es el único disparo.
+   Para el theme, el nombre es `theme-vX.Y.Z` y el mensaje nombra el theme. El
+   SHA tiene que ser ancestro de `origin/main`. Empujar el tag es el único
+   disparo.
+
 3. El workflow corre solo. No hay disparo manual.
 
 ## 4. Compuertas (fallan cerradas)
 
-1. **Validación de tag** (`resolve-release.sh`): SemVer estricto, sin prerrelease ni
-   metadata de build, sin ceros a la izquierda; un solo componente por namespace; versión
-   del tag == versión del componente.
-2. **Ancestría:** `main` se obtiene explícitamente (`git fetch --no-tags origin main:refs/remotes/origin/main`),
-   se verifica y el commit etiquetado debe ser ancestro de `origin/main` (contenido en su
-   historia, no necesariamente su punta). El «commit etiquetado» es lo que resuelve
-   `refs/tags/<tag>^{commit}`: un tag anotado se pela a su commit y uno ligero ya lo es.
-3. **Sin symlinks:** `check-no-symlinks.sh` lee los metadatos del árbol Git del commit exacto y
-   rechaza cualquier entrada de modo `120000` dentro del componente elegido (los de fuera no
-   cuentan). Falla antes del artefacto, de SSH y de rsync.
-4. **Calidad:** los jobs `php` y `css` de `test.yml` se repiten sobre el SHA exacto
-   (`tests/Unit/Production_Deploy_WorkflowTest.php` evita que las copias diverjan).
-5. **Entorno `staging`** con política de despliegue solo para tags `theme-v*` y `plugin-v*`.
+1. **Validación de tag** (`resolve-release.sh`): SemVer estricto, sin
+   prerrelease ni metadata de build, sin ceros a la izquierda; un solo
+   componente por namespace; versión del tag == versión del componente.
+2. **Ancestría:** `main` se obtiene explícitamente
+   (`git fetch --no-tags origin main:refs/remotes/origin/main`), se verifica y
+   el commit etiquetado debe ser ancestro de `origin/main` (contenido en su
+   historia, no necesariamente su punta). El «commit etiquetado» es lo que
+   resuelve `refs/tags/<tag>^{commit}`: un tag anotado se pela a su commit y uno
+   ligero ya lo es.
+3. **Sin symlinks:** `check-no-symlinks.sh` lee los metadatos del árbol Git del
+   commit exacto y rechaza cualquier entrada de modo `120000` dentro del
+   componente elegido (los de fuera no cuentan). Falla antes del artefacto, de
+   SSH y de rsync.
+4. **Calidad:** los jobs `php` y `css` de `test.yml` se repiten sobre el SHA
+   exacto (`tests/Unit/Production_Deploy_WorkflowTest.php` evita que las copias
+   diverjan).
+5. **Entorno `staging`** con política de despliegue solo para tags `theme-v*` y
+   `plugin-v*`.
 
 ## 5. Artefacto y checksum
 
-Se construye solo el directorio del componente con `git archive` del SHA etiquetado. El
-resumen del job registra tag, SHA y SHA256 del tarball. Este flujo **no** decide D-B
-(qué es «el artefacto de producción»); queda diferido.
+Se construye solo el directorio del componente con `git archive` del SHA
+etiquetado. El resumen del job registra tag, SHA y SHA256 del tarball. Este
+flujo **no** decide D-B (qué es «el artefacto de producción»); queda diferido.
 
 ## 6. Preflight remoto (solo lectura)
 
-Antes de cualquier escritura se comprueba: `STAGING_WP_ROOT` igual al contrato de
-staging (`check-staging-target.sh`); no es el `public_html` de producción; WordPress
-instalado; `wp_get_environment_type()` == `staging`; `home` == URL de staging; ABSPATH
-== raíz configurada; el destino cuelga de `wp-content`. Se registra el SHA256 del
-`.htaccess` raíz.
+Antes de cualquier escritura se comprueba: `STAGING_WP_ROOT` igual al contrato
+de staging (`check-staging-target.sh`); no es el `public_html` de producción;
+WordPress instalado; `wp_get_environment_type()` == `staging`; `home` == URL de
+staging; ABSPATH == raíz configurada; el destino cuelga de `wp-content`. Se
+registra el SHA256 del `.htaccess` raíz.
 
 El mismo script imprime `FORBIDDEN_REAL_ROOT` (la raíz canónica de producción).
 El preflight y el `rsync` fallan si ese valor está vacío, si el destino
@@ -111,33 +122,37 @@ es esa raíz o cuelga de ella. No hay valor de reserva (`/`, `$HOME` ni un
 
 ## 7. Transporte
 
-`rsync --recursive --times --delete` (sin `--links`: no hay symlinks que copiar) **solo** del directorio del componente
-hacia su directorio remoto. `--delete` no sale de ese directorio. Nunca se toca el
-`.htaccess` raíz, `wp-config.php`, `uploads` ni el core de WordPress. SSH usa
-`StrictHostKeyChecking yes` con `known_hosts` dedicado; nunca se desactiva la verificación.
+`rsync --recursive --times --delete` (sin `--links`: no hay symlinks que copiar)
+**solo** del directorio del componente hacia su directorio remoto. `--delete` no
+sale de ese directorio. Nunca se toca el `.htaccess` raíz, `wp-config.php`,
+`uploads` ni el core de WordPress. SSH usa `StrictHostKeyChecking yes` con
+`known_hosts` dedicado; nunca se desactiva la verificación.
 
-No se ejecuta `migrate`, `seed`, `convert`, `demo purge`, aprovisionamiento de CF7 ni
-`--confirm-production`.
+No se ejecuta `migrate`, `seed`, `convert`, `demo purge`, aprovisionamiento de
+CF7 ni `--confirm-production`.
 
 ## 7b. Purga de caché de páginas
 
-Tras el rsync, el workflow ejecuta `wp litespeed-purge all` por SSH (el plugin LiteSpeed Cache de
-staging debe estar activo; el tema queda omitido con `--skip-themes`). Sin esa purga LiteSpeed sirve
-HTML en caché que apunta al `?ver=` anterior de `main.css`, y como el CSS se cachea 7 días
-(`max-age=604800`) los visitantes conservan el estilo viejo (visto en el release `theme-v0.5.5`).
-Si la purga falla, el job **avisa** (`::warning::`) y no falla: el código ya está en staging. En ese caso,
-purgar a mano en hPanel (LiteSpeed Cache → «Purge all») y comprobar la página.
+Tras el rsync, el workflow ejecuta `wp litespeed-purge all` por SSH (el plugin
+LiteSpeed Cache de staging debe estar activo; el tema queda omitido con
+`--skip-themes`). Sin esa purga LiteSpeed sirve HTML en caché que apunta al
+`?ver=` anterior de `main.css`, y como el CSS se cachea 7 días
+(`max-age=604800`) los visitantes conservan el estilo viejo (visto en el release
+`theme-v0.5.5`). Si la purga falla, el job **avisa** (`::warning::`) y no falla:
+el código ya está en staging. En ese caso, purgar a mano en hPanel (LiteSpeed
+Cache → «Purge all») y comprobar la página.
 
 ## 8. Verificación posterior
 
-Versión instalada == versión del tag; entorno sigue en `staging`; `.htaccess` raíz
-sin cambios; estado activo (aviso); HTTP 200–399 en `/`.
+Versión instalada == versión del tag; entorno sigue en `staging`; `.htaccess`
+raíz sin cambios; estado activo (aviso); HTTP 200–399 en `/`.
 
 ## 9. Configuración en GitHub
 
-**Environment `staging`**, ya configurado. Solo admite tags `theme-v*` y `plugin-v*`.
-No existe un Environment `production`. Un tag de componente autoriza **staging**, no
-producción. Fusionar a `main` no despliega ningún entorno.
+**Environment `staging`**, ya configurado. Solo admite tags `theme-v*` y
+`plugin-v*`. No existe un Environment `production`. Un tag de componente
+autoriza **staging**, no producción. Fusionar a `main` no despliega ningún
+entorno.
 
 Variables (no son secretos):
 
@@ -148,48 +163,49 @@ Variables (no son secretos):
 | `STAGING_SSH_USER` | `u548735796` |
 | `STAGING_WP_ROOT` | `/home/u548735796/domains/teal-woodpecker-284165.hostingersite.com/public_html` |
 
-Secretos del mismo entorno, solo nombres: `STAGING_SSH_PRIVATE_KEY` (clave dedicada de
-Actions, no una clave personal) y `STAGING_SSH_KNOWN_HOSTS` (huella del host comprobada
-fuera de banda antes de guardarla). La clave privada y `known_hosts` no van en Git.
-`StrictHostKeyChecking` permanece en `yes`. `StrictHostKeyChecking=no` no se usa.
+Secretos del mismo entorno, solo nombres: `STAGING_SSH_PRIVATE_KEY` (clave
+dedicada de Actions, no una clave personal) y `STAGING_SSH_KNOWN_HOSTS` (huella
+del host comprobada fuera de banda antes de guardarla). La clave privada y
+`known_hosts` no van en Git. `StrictHostKeyChecking` permanece en `yes`.
+`StrictHostKeyChecking=no` no se usa.
 
 Si falta una variable o un secreto, el workflow falla cerrado y no escribe.
 
 **Rulesets de tags** (patrones `theme-v*`, `plugin-v*`, `v*`):
 
-- **A — creación:** restringe la creación; bypass solo para el Release Maintainer
-  autorizado, nunca Actions. En un repo de usuario el bypass se define por rol, no por
-  persona: elegirlo es decisión explícita del propietario.
-- **B — inmutabilidad:** restringe update, delete y force push; lista de bypass **vacía**.
+- **A — creación:** restringe la creación; bypass solo para el Release
+  Maintainer autorizado, nunca Actions. En un repo de usuario el bypass se
+  define por rol, no por persona: elegirlo es decisión explícita del
+  propietario.
+- **B — inmutabilidad:** restringe update, delete y force push; lista de bypass
+  **vacía**.
 
 ## 10. Inspeccionar un fallo
 
-Pestaña *Actions* → run del tag → job que falló. `validate`/`php`/`css` fallidos: no se
-escribió nada. `deploy` fallido antes de `rsync`: nada cambió en remoto. Después de
-`rsync`: revisar el resumen del job y repetir con un tag de versión nueva; no se
-reutilizan ni mueven tags.
+Pestaña _Actions_ → run del tag → job que falló. `validate`/`php`/`css`
+fallidos: no se escribió nada. `deploy` fallido antes de `rsync`: nada cambió en
+remoto. Después de `rsync`: revisar el resumen del job y repetir con un tag de
+versión nueva; no se reutilizan ni mueven tags.
 
 ## 11. Producción: límite, no un cambio de variables
 
 Desde 2026-09-26, `https://caminodeldharma.org/` es WordPress. La raíz es
 `/home/u548735796/domains/caminodeldharma.org/public_html`.
-`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. El corte
-desplegó theme 0.6.3 y plugin 0.7.10. Este árbol es theme 0.6.4 (tag
-`theme-v0.6.4`) y plugin 0.7.13 (tag `plugin-v0.7.13`).
-`plugin-v0.7.12` ya existe.
-Este workflow no escribe esa raíz. El corte de dominio
-no fue un deploy de theme o plugin (ADR 0047). El ZIP estático no debe
-volver a caer sobre ese document root (ADR 0015, ADR 0013).
+`WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. El corte desplegó
+theme 0.6.3 y plugin 0.7.10. Este árbol es theme 0.6.4 (tag `theme-v0.6.4`) y
+plugin 0.7.13 (tag `plugin-v0.7.13`). `plugin-v0.7.12` ya existe. Este workflow
+no escribe esa raíz. El corte de dominio no fue un deploy de theme o plugin (ADR
+0047). El ZIP estático no debe volver a caer sobre ese document root (ADR 0015,
+ADR 0013).
 
-La raíz allowlist de staging ya no está en el disco. El siguiente tag
-`theme-v*` o `plugin-v*` arranca este workflow y el preflight remoto
-falla porque el directorio no existe, antes de `rsync`. No escribe la
-raíz canónica.
+La raíz allowlist de staging ya no está en el disco. El siguiente tag `theme-v*`
+o `plugin-v*` arranca este workflow y el preflight remoto falla porque el
+directorio no existe, antes de `rsync`. No escribe la raíz canónica.
 
-**No** se prepara producción sustituyendo los valores `STAGING_*` ni apuntando el
-entorno `staging` al sitio público. Aunque el día del corte el servidor, la cuenta o
-incluso el usuario SSH coincidieran, los dos destinos siguen siendo entornos lógicos
-distintos.
+**No** se prepara producción sustituyendo los valores `STAGING_*` ni apuntando
+el entorno `staging` al sitio público. Aunque el día del corte el servidor, la
+cuenta o incluso el usuario SSH coincidieran, los dos destinos siguen siendo
+entornos lógicos distintos.
 
 Diseño futuro, **no implementado** y sin valores inventados:
 
@@ -202,21 +218,23 @@ Diseño futuro, **no implementado** y sin valores inventados:
 | `STAGING_SSH_PRIVATE_KEY` | `PRODUCTION_SSH_PRIVATE_KEY` |
 | `STAGING_SSH_KNOWN_HOSTS` | `PRODUCTION_SSH_KNOWN_HOSTS` |
 
-Host, puerto, usuario y ruta, cuando se conozcan, serán variables. La clave privada y
-`known_hosts` serán secretos de ese entorno, nunca archivos del repositorio. No se
-asumen iguales a staging hasta verificarlos en el corte. La huella del host de
-producción se comprueba fuera de banda antes de guardarla. `StrictHostKeyChecking=yes`.
-Un workflow de producción incompleto falla cerrado, antes de cualquier escritura. El
-`.htaccess` de producción no se sustituye a ciegas. Migración, seed, convert y
-`--confirm-production` no forman parte del deploy de código; `--confirm-production`
-sigue prohibido salvo que un procedimiento de producción ya aprobado lo exija.
+Host, puerto, usuario y ruta, cuando se conozcan, serán variables. La clave
+privada y `known_hosts` serán secretos de ese entorno, nunca archivos del
+repositorio. No se asumen iguales a staging hasta verificarlos en el corte. La
+huella del host de producción se comprueba fuera de banda antes de guardarla.
+`StrictHostKeyChecking=yes`. Un workflow de producción incompleto falla cerrado,
+antes de cualquier escritura. El `.htaccess` de producción no se sustituye a
+ciegas. Migración, seed, convert y `--confirm-production` no forman parte del
+deploy de código; `--confirm-production` sigue prohibido salvo que un
+procedimiento de producción ya aprobado lo exija.
 
-El flujo previsto, todavía sin construir, es: un release ya validado en staging, luego
-una autorización explícita de corte, luego un mecanismo propio de producción, el
-entorno `production`, un preflight, el deploy del componente y del SHA ya aprobados, y
-la verificación posterior. **Qué dispara ese mecanismo** —el mismo tag, un workflow de
-promoción, otro namespace u otra aprobación— no está decidido. Hace falta un ADR antes
-de implementar CD de producción (D-B sigue diferida).
+El flujo previsto, todavía sin construir, es: un release ya validado en staging,
+luego una autorización explícita de corte, luego un mecanismo propio de
+producción, el entorno `production`, un preflight, el deploy del componente y
+del SHA ya aprobados, y la verificación posterior. **Qué dispara ese mecanismo**
+—el mismo tag, un workflow de promoción, otro namespace u otra aprobación— no
+está decidido. Hace falta un ADR antes de implementar CD de producción (D-B
+sigue diferida).
 
 ## 12. Primer release de staging
 
@@ -232,15 +250,15 @@ de implementar CD de producción (D-B sigue diferida).
 | Entorno | `staging` |
 | Producción | no se tocó |
 
-Ese run comprobó `wp` en el SSH no interactivo, `home` igual a la URL de staging,
-`known_hosts` con puerto, preflight, rsync solo del theme, `.htaccess` raíz intacto y
-HTTP 200. GitHub sigue conservando una sola ejecución pendiente por grupo de
-concurrencia: un tag a la vez.
+Ese run comprobó `wp` en el SSH no interactivo, `home` igual a la URL de
+staging, `known_hosts` con puerto, preflight, rsync solo del theme, `.htaccess`
+raíz intacto y HTTP 200. GitHub sigue conservando una sola ejecución pendiente
+por grupo de concurrencia: un tag a la vez.
 
 ### Sonda HTTP y 403 del runner
 
-Hostinger responde 403 a las IP de los runners de GitHub aunque el sitio responda 200 desde otras
-redes (visto en `theme-v0.5.5`). La versión instalada, el entorno y el `.htaccess` ya se verifican
-por SSH, así que un 403 en la sonda `/` es un **aviso**; 4xx/5xx distintos de 403 y los tiempos
-agotados siguen fallando el despliegue.
-
+Hostinger responde 403 a las IP de los runners de GitHub aunque el sitio
+responda 200 desde otras redes (visto en `theme-v0.5.5`). La versión instalada,
+el entorno y el `.htaccess` ya se verifican por SSH, así que un 403 en la sonda
+`/` es un **aviso**; 4xx/5xx distintos de 403 y los tiempos agotados siguen
+fallando el despliegue.

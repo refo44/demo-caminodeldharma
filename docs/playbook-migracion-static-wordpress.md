@@ -1,23 +1,27 @@
 # Playbook — Migración static → WordPress (Camino del Dharma)
 
-Playbook operativo de **este** repositorio para Fase 3. Complementa —no sustituye— los ADR,
-`docs/17-orden-implementacion.md` y el contrato
-[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md) (ADR 0032).
+Playbook operativo de **este** repositorio para Fase 3. Complementa —no
+sustituye— los ADR, `docs/17-orden-implementacion.md` y el contrato
+[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md)
+(ADR 0032).
 
 **No implementar WordPress** en una sesión que solo actualice documentación.
 
-Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio con forma parecida
-(estático → CMS, hosting compartido). Este playbook **no copia** nombres, slugs, CPTs, hosts ni
-pipelines de otros proyectos. El backlog de dueño de la auditoría 2026-08-19 está **cerrado**
-(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.28; D-02/D-03/D-04/D-08 código
-pendiente; OWN-021 / D-09 overflow dejado al corte y envuelto después (theme 0.6.4); OWN-022 / D-10 `wp-emoji` aceptado;
+Nota histórica (2026-07-31): el propietario aportó aprendizajes de otro sitio
+con forma parecida (estático → CMS, hosting compartido). Este playbook **no
+copia** nombres, slugs, CPTs, hosts ni pipelines de otros proyectos. El backlog
+de dueño de la auditoría 2026-08-19 está **cerrado**
+(`backlog-decisiones-owner-migracion.md`: Fase 3 cerrada v1.28;
+D-02/D-03/D-04/D-08 código pendiente; OWN-021 / D-09 overflow dejado al corte y
+envuelto después (theme 0.6.4); OWN-022 / D-10 `wp-emoji` aceptado;
 `POST-008`–`010` decididos, no se implementan en el corte). No reabrir
-autores/galería/ICS sin decisión nueva. CF7: ADR 0041 (elegibilidad) + ADR 0045 (entrega).
-Staging Hostinger solo después de D-02/D-03/D-04 en `main` (OWN-035).
+autores/galería/ICS sin decisión nueva. CF7: ADR 0041 (elegibilidad) + ADR 0045
+(entrega). Staging Hostinger solo después de D-02/D-03/D-04 en `main` (OWN-035).
 
-**Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción → FSE** (sin theme PHP clásico).
-Theme activado ≠ migración completa. Template ≠ Page. Deploy success ≠ application success.
-El HTML live es fuente de contenido de producción hasta el corte (ADR 0034).
+**Contrato (ADR 0032):** cinco entregables. Ruta **estático de producción →
+FSE** (sin theme PHP clásico). Theme activado ≠ migración completa. Template ≠
+Page. Deploy success ≠ application success. El HTML live es fuente de contenido
+de producción hasta el corte (ADR 0034).
 
 ---
 
@@ -40,19 +44,22 @@ El HTML live es fuente de contenido de producción hasta el corte (ADR 0034).
 | 13 | Checklist portable | **Nuevo — recomendado usar como checklist de arranque de Fase 3** (§13 abajo) |
 | 14 | Anti-patrones | **Nuevo — recomendado como referencia** (§14 abajo) |
 
-Las secciones "ya cubiertas" no se repiten en detalle aquí — sus ADR y documentos son la fuente de
-verdad. Las secciones nuevas o parcialmente nuevas se desarrollan abajo.
+Las secciones "ya cubiertas" no se repiten en detalle aquí — sus ADR y
+documentos son la fuente de verdad. Las secciones nuevas o parcialmente nuevas
+se desarrollan abajo.
 
 ---
 
 ## 3. Unidades de trabajo (WU) con estado durable
 
-**Aprendizaje:** una migración larga no debe vivir solo en el historial de conversación; vive en
-artefactos versionados que permiten reanudar el trabajo entre sesiones sin releer todo el contexto.
+**Aprendizaje:** una migración larga no debe vivir solo en el historial de
+conversación; vive en artefactos versionados que permiten reanudar el trabajo
+entre sesiones sin releer todo el contexto.
 
-Camino del Dharma ya practica esto parcialmente (`TASK-NNNN.md`, `waves.md`, `.audit/decisions.md`),
-pero esos artefactos nacieron de la auditoría (Fase 2.75), no de la implementación de Fase 3. Al iniciar
-Fase 3, recomendado crear el equivalente:
+Camino del Dharma ya practica esto parcialmente (`TASK-NNNN.md`, `waves.md`,
+`.audit/decisions.md`), pero esos artefactos nacieron de la auditoría (Fase
+2.75), no de la implementación de Fase 3. Al iniciar Fase 3, recomendado crear
+el equivalente:
 
 | Artefacto propuesto | Propósito |
 | -------------------- | --------- |
@@ -60,14 +67,15 @@ Fase 3, recomendado crear el equivalente:
 | `.audit/fase3-validation-matrix.md` | Evidencia de QA con estados honestos (`Unverified` / `Pass (local)` / `Pass`) |
 | `docs/migracion-static-wordpress.md` | Ya existe — sigue siendo el ledger de correcciones aprobadas |
 
-**Protocolo de reanudación sugerido** (funciona igual con una persona o con un agente):
-`git status` → leer `fase3-execution-state.md` → re-ejecutar la última QA registrada → continuar desde
-"Next exact action".
+**Protocolo de reanudación sugerido** (funciona igual con una persona o con un
+agente): `git status` → leer `fase3-execution-state.md` → re-ejecutar la última
+QA registrada → continuar desde "Next exact action".
 
-**Cómo dividir el trabajo:** WU pequeñas con commits atómicos — p. ej. scaffold del plugin → modelo de
-datos (CPT `sangha`/`event`) → theme → plantillas → migración de contenido → fixtures de prueba →
-Contact Form 7 → despliegue a staging. Cada WU define: fuentes vinculantes (qué doc/ADR la rige),
-criterios de aceptación, plan de QA, rollback.
+**Cómo dividir el trabajo:** WU pequeñas con commits atómicos — p. ej. scaffold
+del plugin → modelo de datos (CPT `sangha`/`event`) → theme → plantillas →
+migración de contenido → fixtures de prueba → Contact Form 7 → despliegue a
+staging. Cada WU define: fuentes vinculantes (qué doc/ADR la rige), criterios de
+aceptación, plan de QA, rollback.
 
 ---
 
@@ -83,15 +91,16 @@ No hay un único árbol para todo (ADR 0034).
 | CSS servido | `assets/css/main.css` | `main.min.css` |
 | URLs | `sitemap.xml` + ADR 0008 | — |
 
-**Regla:** si repo y producción divergen, **registrar** (UNCLEAR o ledger) — no resolver en
-silencio. El HTML/JSON publicado es la base temporal de contenido pre-corte (ADR 0034/0040).
+**Regla:** si repo y producción divergen, **registrar** (UNCLEAR o ledger) — no
+resolver en silencio. El HTML/JSON publicado es la base temporal de contenido
+pre-corte (ADR 0034/0040).
 
 ---
 
 ## 6. Migración de contenido: extractor + importador
 
-**Decisión:** ADR 0033. No implementado. CPT `sangha` sigue fuera del alcance inicial de Fase 3
-(ADR 0024). Arquitectura prevista, de dos pasos:
+**Decisión:** ADR 0033. No implementado. CPT `sangha` sigue fuera del alcance
+inicial de Fase 3 (ADR 0024). Arquitectura prevista, de dos pasos:
 
 ```text
 HTML / JSON live         →  extractor read-only (Pages, eventos, posts, galería, media refs)
@@ -106,12 +115,14 @@ HTML / JSON live         →  extractor read-only (Pages, eventos, posts, galer�
                    WordPress (BD + Media Library)
 ```
 
-El extractor **no está implementado**. Preferir parseo determinista a reescribir a mano.
-Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
+El extractor **no está implementado**. Preferir parseo determinista a reescribir
+a mano. Conteos:
+[`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
 
-**Seed de imágenes:** sube attachments reales (galería, carteles, fotos de página **y huérfanas**).
-Huérfanas: en la biblioteca, **ocultas** (OWN-003) — no álbum, no Page. No es `seed/teardown` de
-fixtures. No marcar `_cdd_fixture`. No borrar media de producción al re-ejecutar.
+**Seed de imágenes:** sube attachments reales (galería, carteles, fotos de
+página **y huérfanas**). Huérfanas: en la biblioteca, **ocultas** (OWN-003) — no
+álbum, no Page. No es `seed/teardown` de fixtures. No marcar `_cdd_fixture`. No
+borrar media de producción al re-ejecutar.
 
 Reglas de este proyecto (ADR 0033):
 
@@ -125,27 +136,31 @@ Reglas de este proyecto (ADR 0033):
 | Guard de producción (`--confirm-production` + evidencia de backup) | Coherente con ADR 0005 (producción sin edición manual) |
 | Texto publicado verbatim | La validación falla si el payload diverge del HTML publicado sin una diferencia aprobada en el ledger; protege contra errores editoriales silenciosos |
 
-**Separar fixtures de datos reales:** si se usan datos de prueba para desarrollar el theme/plugin,
-marcarlos (`_cdd_fixture = 1`) y usar comandos `seed/verify/teardown` **solo de esos fixtures**.
-El seed de **imágenes de producción** (OWN-009-img) no entra en ese teardown. Nunca mezclar demo
-con contenido institucional real.
+**Separar fixtures de datos reales:** si se usan datos de prueba para
+desarrollar el theme/plugin, marcarlos (`_cdd_fixture = 1`) y usar comandos
+`seed/verify/teardown` **solo de esos fixtures**. El seed de **imágenes de
+producción** (OWN-009-img) no entra en ese teardown. Nunca mezclar demo con
+contenido institucional real.
 
 ---
 
 ## 7. Matriz de cobertura static → WordPress
 
-La matriz vive en [`docs/matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md)
-(ADR 0032). Plantillas vigentes: `templates/*.html` (ADR 0029), no `front-page.php`.
+La matriz vive en
+[`docs/matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md)
+(ADR 0032). Plantillas vigentes: `templates/*.html` (ADR 0029), no
+`front-page.php`.
 
-No considerar una URL migrada hasta que su fila tenga estrategia de contenido, presentación,
-routing, comportamiento y QA. `sangha` no entra en el corte inicial salvo decisión nueva.
+No considerar una URL migrada hasta que su fila tenga estrategia de contenido,
+presentación, routing, comportamiento y QA. `sangha` no entra en el corte
+inicial salvo decisión nueva.
 
 ---
 
 ## 8. QA en cuatro niveles con honestidad probatoria
 
-Generaliza la distinción `Pass (local)` vs `Pass` ya adoptada para Docker (ADR 0023) a las cuatro capas
-completas:
+Generaliza la distinción `Pass (local)` vs `Pass` ya adoptada para Docker
+(ADR 0023) a las cuatro capas completas:
 
 | Nivel | Qué valida | Requiere runtime |
 | ----- | ---------- | ------------------ |
@@ -155,11 +170,14 @@ completas:
 | 4 — Regresión UX | Paridad de **copy, contenido y estilos** contra `https://caminodeldharma.org` (OWN-007), no solo el repo local; teclado; sin cookies (ADR 0019) | Sí — Docker + staging; evidencia frente al live |
 
 **Reglas de honestidad que ya aplican en este proyecto y se mantienen:**
-- `Pass (local)` **no** sustituye a `Pass` para nada que dependa del hosting real de Hostinger:
-  versión de PHP real, `.htaccess`/Apache real, HTTPS, cabeceras, entrega efectiva de correo (Contact
-  Form 7 a caminodeldharma1@gmail.com).
-- Nada se marca `Pass` sin evidencia ejecutada y registrada; lo no probado queda `Unverified` — mismo
-  estándar que ya usa `.audit/` para los hallazgos de la auditoría.
+
+- `Pass (local)` **no** sustituye a `Pass` para nada que dependa del hosting
+  real de Hostinger: versión de PHP real, `.htaccess`/Apache real, HTTPS,
+  cabeceras, entrega efectiva de correo (Contact Form 7 a
+  `caminodeldharma1@gmail.com`).
+- Nada se marca `Pass` sin evidencia ejecutada y registrada; lo no probado queda
+  `Unverified` — mismo estándar que ya usa `.audit/` para los hallazgos de la
+  auditoría.
 - Pasar el nivel 1 no certifica una WU completa.
 
 ---
@@ -184,30 +202,41 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 ## 13. Checklist portable — arranque de Fase 3
 
 **Antes de escribir código WordPress:**
+
 - [x] ADR: monorepo `static/` + `wordpress/` (ADR 0014)
 - [x] ADR: plugin dueño del dominio vs. theme presentación (ADR 0024)
 - [x] ADR: theme de bloques / FSE (ADR 0029)
-- [x] ADR: contrato de migración (ADR 0032), import vs fixtures (ADR 0033), estático live = producción (ADR 0034)
+- [x] ADR: contrato de migración (ADR 0032), import vs fixtures (ADR 0033),
+      estático live = producción (ADR 0034)
 - [x] Inventario + conteos + redirect ledger (docs de ADR 0034)
-- [x] Alcance de fase — criterios de aceptación ya en `docs/17-orden-implementacion.md`
-- [x] Matriz de cobertura — `docs/matriz-migracion-static-wordpress.md` (completar estrategias al implementar)
-- [ ] Harness: `fase3-execution-state.md` + `fase3-validation-matrix.md` (§3 arriba)
-- [ ] Baseline visual / tokens del estático actual (ADR 0029: `theme.json` inicial)
+- [x] Alcance de fase — criterios de aceptación ya en
+      `docs/17-orden-implementacion.md`
+- [x] Matriz de cobertura — `docs/matriz-migracion-static-wordpress.md`
+      (completar estrategias al implementar)
+- [ ] Harness: `fase3-execution-state.md` + `fase3-validation-matrix.md` (§3
+      arriba)
+- [ ] Baseline visual / tokens del estático actual (ADR 0029: `theme.json`
+      inicial)
 
 **Durante la implementación:**
+
 - [ ] WU con commits pequeños y QA por unidad (§3)
-- [ ] Plantillas FSE 1:1 con la maqueta (`templates/` + parts/patterns); **no** hay `page-*.php` clásicos; template ≠ Page
+- [ ] Plantillas FSE 1:1 con la maqueta (`templates/` + parts/patterns); **no**
+      hay `page-*.php` clásicos; template ≠ Page
 - [ ] Migración de contenido WP-CLI (ADR 0033)
 - [ ] Fixtures de desarrollo aisladas con teardown **solo** de objetos fixture
 - [ ] `docker-compose.yml` para QA local (ADR 0023, ya listo el playbook)
 - [ ] Despliegue del theme/plugin solo manual y acotado (ADR 0015/0016)
 
-**Antes del gate de lanzamiento (Fase 2.5 sobre el theme, `docs/17` § Transición):**
+**Antes del gate de lanzamiento (Fase 2.5 sobre el theme, `docs/17` §
+Transición):**
+
 - [ ] Nivel 1 de QA completo en verde (§8)
 - [ ] Niveles 2-3 en `Pass (local)` documentado
 - [ ] Staging con los mismos pasos, registrado en la matriz de validación
 - [ ] Paridad visual (nivel 4) verificada en hosting real
-- [ ] Inventario de plugins de terceros (Contact Form 7, ADR 0026) configurado y verificado en staging
+- [ ] Inventario de plugins de terceros (Contact Form 7, ADR 0026) configurado y
+      verificado en staging
 
 ---
 
@@ -227,20 +256,34 @@ Controles a verificar durante todo el desarrollo de Fase 3, no solo al final:
 
 ## Síntesis
 
-Tratar el estático como contrato visual y de comportamiento, separar dominio (plugin) de
-presentación (theme FSE), migrar contenido con un pipeline idempotente (ADR 0033), validar los
-cinco entregables (ADR 0032) con evidencia honesta, y desplegar solo código acotado de forma
-manual. Un transfer verde no cierra el corte.
+Tratar el estático como contrato visual y de comportamiento, separar dominio
+(plugin) de presentación (theme FSE), migrar contenido con un pipeline
+idempotente (ADR 0033), validar los cinco entregables (ADR 0032) con evidencia
+honesta, y desplegar solo código acotado de forma manual. Un transfer verde no
+cierra el corte.
 
 ## Referencias
 
-- [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md), [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md), [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md), [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
-- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md), [0029](adr/0029-theme-bloques-full-site-editing.md), [0032](adr/0032-contrato-migracion-static-wordpress.md), [0033](adr/0033-importador-contenido-vs-fixtures.md), [0034](adr/0034-static-live-como-fuente-contenido-produccion.md), [0040](adr/0040-retirar-content-source-produccion-como-fuente.md)
-- ADR [0014](adr/0014-monorepo-static-wordpress.md), [0024](adr/0024-plugin-dominio-theme-presentacion.md)
-- ADR [0038](adr/0038-pruebas-tdd-phpunit-sonar.md) y `docs/guia-pruebas-plugin-theme-fse.md`
-- ADR [0015](adr/0015-despliegue-manual-temporal.md), [0016](adr/0016-automatizacion-ci-cd-pospuesta.md)
-- ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y `docker-wordpress-playbook.md`
-- ADR [0025](adr/0025-politica-plugins-terceros.md), [0026](adr/0026-contact-form-7.md)
+- [`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md),
+  [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md),
+  [`matriz-migracion-static-wordpress.md`](matriz-migracion-static-wordpress.md),
+  [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md)
+- ADR [0001](adr/0001-maqueta-estatica-como-base-definitiva.md),
+  [0029](adr/0029-theme-bloques-full-site-editing.md),
+  [0032](adr/0032-contrato-migracion-static-wordpress.md),
+  [0033](adr/0033-importador-contenido-vs-fixtures.md),
+  [0034](adr/0034-static-live-como-fuente-contenido-produccion.md),
+  [0040](adr/0040-retirar-content-source-produccion-como-fuente.md)
+- ADR [0014](adr/0014-monorepo-static-wordpress.md),
+  [0024](adr/0024-plugin-dominio-theme-presentacion.md)
+- ADR [0038](adr/0038-pruebas-tdd-phpunit-sonar.md) y
+  `docs/guia-pruebas-plugin-theme-fse.md`
+- ADR [0015](adr/0015-despliegue-manual-temporal.md),
+  [0016](adr/0016-automatizacion-ci-cd-pospuesta.md)
+- ADR [0023](adr/0023-entorno-local-wordpress-docker.md) y
+  `docker-wordpress-playbook.md`
+- ADR [0025](adr/0025-politica-plugins-terceros.md),
+  [0026](adr/0026-contact-form-7.md)
 - `docs/17-orden-implementacion.md` § Transición
 - `docs/migracion-static-wordpress.md` — ledger, no contrato
 - `.audit/decisions.md`
