@@ -41,6 +41,28 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	}
 
 	/**
+	 * A desktop-only query must not satisfy the 320 px contract. The
+	 * measured overflow is at that width.
+	 */
+	public function test_a_media_query_that_excludes_320px_does_not_wrap_the_url() {
+		$css = '@media (width >= 768px) { .wp-block-post-content { overflow-wrap: anywhere; } }';
+
+		$this->assertSame( array(), $this->wrapping_selectors_in( $css ) );
+	}
+
+	/**
+	 * A query that still matches 320 px keeps the wrap. An unconditional
+	 * rule does too.
+	 */
+	public function test_a_media_query_that_includes_320px_still_wraps_the_url() {
+		$narrow = '@media (width <= 767px) { .wp-block-post-content { overflow-wrap: anywhere; } }';
+		$plain  = '.wp-block-post-content { overflow-wrap: anywhere; }';
+
+		$this->assertSame( array( '.wp-block-post-content' ), $this->wrapping_selectors_in( $narrow ) );
+		$this->assertSame( array( '.wp-block-post-content' ), $this->wrapping_selectors_in( $plain ) );
+	}
+
+	/**
 	 * `anywhere` is the value that both wraps the URL and lets the
 	 * content's min-content shrink. `break-word` leaves the min-content
 	 * at the full URL, so a flex ancestor can still widen the page.
@@ -49,6 +71,10 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	 */
 	public function test_the_wrap_uses_anywhere_rather_than_clipping_the_url() {
 		foreach ( $this->rules() as $rule ) {
+			if ( ! $this->applies_at_320( $rule ) ) {
+				continue;
+			}
+
 			foreach ( $rule['selectors'] as $selector ) {
 				if ( ! $this->reaches_reference_link( $selector ) ) {
 					continue;
@@ -68,6 +94,10 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 		}
 
 		foreach ( $this->rules() as $rule ) {
+			if ( ! $this->applies_at_320( $rule ) ) {
+				continue;
+			}
+
 			$matched = false;
 			foreach ( $rule['selectors'] as $selector ) {
 				if ( in_array( $selector, $this->wrapping_selectors(), true ) ) {
@@ -94,8 +124,22 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	 * @return string[]
 	 */
 	private function wrapping_selectors(): array {
+		return $this->wrapping_selectors_in( $this->stylesheet() );
+	}
+
+	/**
+	 * Selectors whose wrap applies at 320 px.
+	 *
+	 * @param string $css Stylesheet text.
+	 * @return string[]
+	 */
+	private function wrapping_selectors_in( string $css ): array {
 		$found = array();
-		foreach ( $this->rules() as $rule ) {
+		foreach ( $this->parse_rules( $css ) as $rule ) {
+			if ( ! $this->applies_at_320( $rule ) ) {
+				continue;
+			}
+
 			if ( 'anywhere' !== ( $rule['declarations']['overflow-wrap'] ?? null ) ) {
 				continue;
 			}
@@ -108,6 +152,161 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 		}
 
 		return $found;
+	}
+
+	/**
+	 * True when every enclosing media query matches a 320 px viewport.
+	 * No query means the rule always applies.
+	 *
+	 * @param array{media: string[]} $rule One parsed rule.
+	 */
+	private function applies_at_320( array $rule ): bool {
+		foreach ( $rule['media'] as $condition ) {
+			if ( ! $this->media_matches_320( $condition ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * True when a 320 px viewport matches the media condition. Comma
+	 * lists are OR. `and` lists are AND. Width features use the CSS
+	 * initial font size (16 px per rem/em). Any other feature, such as
+	 * `forced-colors`, does not describe that viewport.
+	 *
+	 * @param string $condition Text after `@media`.
+	 */
+	private function media_matches_320( string $condition ): bool {
+		foreach ( $this->split_top_level( $condition, ',' ) as $query ) {
+			if ( $this->query_matches_320( $query ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * True when one media query, without a top-level comma, matches 320 px.
+	 *
+	 * @param string $query One comma-separated query.
+	 */
+	private function query_matches_320( string $query ): bool {
+		$query   = trim( $query );
+		$negated = 1 === preg_match( '/^not\s+/i', $query );
+		if ( $negated ) {
+			$query = (string) preg_replace( '/^not\s+/i', '', $query );
+		}
+
+		$query = (string) preg_replace( '/^(only\s+)?(all|screen)\s+and\s+/i', '', $query );
+		$query = (string) preg_replace( '/^(only\s+)?(all|screen)\s*$/i', '', trim( $query ) );
+
+		if ( 1 === preg_match( '/^(only\s+)?print\b/i', $query ) ) {
+			return $negated;
+		}
+
+		$matches = true;
+		foreach ( $this->split_top_level( $query, 'and' ) as $part ) {
+			$part = trim( $part );
+			if ( '' === $part ) {
+				continue;
+			}
+
+			if ( ! $this->width_feature_matches_320( $part ) ) {
+				$matches = false;
+				break;
+			}
+		}
+
+		return $negated ? ! $matches : $matches;
+	}
+
+	/**
+	 * True when one width feature matches 320 px.
+	 *
+	 * @param string $feature One `and` operand, parentheses optional.
+	 */
+	private function width_feature_matches_320( string $feature ): bool {
+		$feature = trim( $feature, " \t()" );
+		if ( 1 !== preg_match( '/^(width|min-width|max-width)\s*(<=|>=|<|>|:)\s*([0-9.]+)\s*(px|rem|em)$/i', $feature, $matches ) ) {
+			return false;
+		}
+
+		$pixels = (float) $matches[3];
+		if ( 'px' !== strtolower( $matches[4] ) ) {
+			$pixels *= 16;
+		}
+
+		$name = strtolower( $matches[1] );
+		$op   = $matches[2];
+		if ( 'min-width' === $name ) {
+			return 320 >= $pixels;
+		}
+		if ( 'max-width' === $name ) {
+			return 320 <= $pixels;
+		}
+		if ( '<=' === $op ) {
+			return 320 <= $pixels;
+		}
+		if ( '>=' === $op ) {
+			return 320 >= $pixels;
+		}
+		if ( '<' === $op ) {
+			return 320 < $pixels;
+		}
+
+		return 320 > $pixels;
+	}
+
+	/**
+	 * Split on a top-level separator. Parentheses stay intact.
+	 *
+	 * @param string $value     Media condition text.
+	 * @param string $separator `,` or `and`.
+	 * @return string[]
+	 */
+	private function split_top_level( string $value, string $separator ): array {
+		$parts   = array();
+		$current = '';
+		$depth   = 0;
+		$length  = strlen( $value );
+		$sep_len = strlen( $separator );
+
+		for ( $i = 0; $i < $length; $i++ ) {
+			$char = $value[ $i ];
+			if ( '(' === $char ) {
+				++$depth;
+				$current .= $char;
+				continue;
+			}
+			if ( ')' === $char ) {
+				$depth    = max( 0, $depth - 1 );
+				$current .= $char;
+				continue;
+			}
+
+			$at_separator = 0 === $depth && substr( $value, $i, $sep_len ) === $separator;
+			if ( $at_separator && 'and' === $separator ) {
+				$before       = $i > 0 ? $value[ $i - 1 ] : ' ';
+				$after        = ( $i + $sep_len ) < $length ? $value[ $i + $sep_len ] : ' ';
+				$at_separator = 1 === preg_match( '/\s/', $before ) && 1 === preg_match( '/\s/', $after );
+			}
+
+			if ( $at_separator ) {
+				$parts[] = $current;
+				$current = '';
+				$i      += $sep_len - 1;
+				continue;
+			}
+
+			$current .= $char;
+		}
+
+		$parts[] = $current;
+
+		return $parts;
 	}
 
 	/**
@@ -192,48 +391,112 @@ final class Theme_Long_Url_ContainmentTest extends TestCase {
 	}
 
 	/**
-	 * The complementary stylesheet parsed into flat rules. At-rule
-	 * bodies are flattened: a media query does not change which
-	 * declarations exist, only when they apply.
+	 * Theme stylesheet text.
+	 */
+	private function stylesheet(): string {
+		return (string) file_get_contents( dirname( __DIR__, 2 ) . '/wordpress/wp-content/themes/camino-del-dharma/assets/css/main.css' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo file in a unit test without WordPress loaded.
+	}
+
+	/**
+	 * Parsed theme rules. Each rule keeps the `@media` conditions that
+	 * enclose it so a desktop-only query cannot satisfy the 320 px wrap.
 	 *
-	 * @return array<int, array{selectors: string[], declarations: array<string, string>}>
+	 * @return array<int, array{selectors: string[], declarations: array<string, string>, media: string[]}>
 	 */
 	private function rules(): array {
 		static $rules = null;
-		if ( null !== $rules ) {
-			return $rules;
-		}
-
-		$css = (string) file_get_contents( dirname( __DIR__, 2 ) . '/wordpress/wp-content/themes/camino-del-dharma/assets/css/main.css' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- repo file in a unit test without WordPress loaded.
-		$css = (string) preg_replace( '#/\*.*?\*/#s', '', $css );
-
-		$rules = array();
-		if ( ! preg_match_all( '/([^{}]+)\{([^{}]*)\}/s', $css, $matches, PREG_SET_ORDER ) ) {
-			return $rules;
-		}
-
-		foreach ( $matches as $match ) {
-			$prelude = trim( $match[1] );
-			if ( '' === $prelude || '@' === $prelude[0] ) {
-				continue;
-			}
-
-			$declarations = array();
-			foreach ( explode( ';', $match[2] ) as $declaration ) {
-				if ( false === strpos( $declaration, ':' ) ) {
-					continue;
-				}
-				list( $property, $value ) = explode( ':', $declaration, 2 );
-
-				$declarations[ strtolower( trim( $property ) ) ] = trim( $value );
-			}
-
-			$rules[] = array(
-				'selectors'    => array_map( 'trim', explode( ',', $prelude ) ),
-				'declarations' => $declarations,
-			);
+		if ( null === $rules ) {
+			$rules = $this->parse_rules( $this->stylesheet() );
 		}
 
 		return $rules;
+	}
+
+	/**
+	 * Parse style rules, keeping a stack of `@media` conditions.
+	 *
+	 * @param string   $css   Stylesheet or at-rule body.
+	 * @param string[] $media Enclosing `@media` conditions, outer first.
+	 * @return array<int, array{selectors: string[], declarations: array<string, string>, media: string[]}>
+	 */
+	private function parse_rules( string $css, array $media = array() ): array {
+		$css    = (string) preg_replace( '#/\*.*?\*/#s', '', $css );
+		$rules  = array();
+		$length = strlen( $css );
+		$offset = 0;
+
+		while ( $offset < $length ) {
+			$open = strpos( $css, '{', $offset );
+			if ( false === $open ) {
+				break;
+			}
+
+			$close   = $this->matching_brace( $css, $open );
+			$prelude = trim( substr( $css, $offset, $open - $offset ) );
+			$body    = substr( $css, $open + 1, $close - $open - 1 );
+
+			if ( '' !== $prelude && '@' === $prelude[0] ) {
+				if ( 0 === stripos( $prelude, '@media' ) ) {
+					$condition = trim( substr( $prelude, strlen( '@media' ) ) );
+					foreach ( $this->parse_rules( $body, array_merge( $media, array( $condition ) ) ) as $rule ) {
+						$rules[] = $rule;
+					}
+				}
+			} elseif ( '' !== $prelude ) {
+				$rules[] = array(
+					'selectors'    => array_map( 'trim', explode( ',', $prelude ) ),
+					'declarations' => $this->declarations( $body ),
+					'media'        => $media,
+				);
+			}
+
+			$offset = $close + 1;
+		}
+
+		return $rules;
+	}
+
+	/**
+	 * Index of the `}` that closes the `{` at $open.
+	 *
+	 * @param string $css  Stylesheet text.
+	 * @param int    $open Index of an opening brace.
+	 */
+	private function matching_brace( string $css, int $open ): int {
+		$depth  = 0;
+		$length = strlen( $css );
+
+		for ( $i = $open; $i < $length; $i++ ) {
+			if ( '{' === $css[ $i ] ) {
+				++$depth;
+			} elseif ( '}' === $css[ $i ] ) {
+				--$depth;
+				if ( 0 === $depth ) {
+					return $i;
+				}
+			}
+		}
+
+		return $length - 1;
+	}
+
+	/**
+	 * Declaration block as a property map.
+	 *
+	 * @param string $body Text between braces.
+	 * @return array<string, string>
+	 */
+	private function declarations( string $body ): array {
+		$declarations = array();
+		foreach ( explode( ';', $body ) as $declaration ) {
+			if ( false === strpos( $declaration, ':' ) ) {
+				continue;
+			}
+
+			list( $property, $value )                        = explode( ':', $declaration, 2 );
+			$declarations[ strtolower( trim( $property ) ) ] = trim( $value );
+		}
+
+		return $declarations;
 	}
 }
