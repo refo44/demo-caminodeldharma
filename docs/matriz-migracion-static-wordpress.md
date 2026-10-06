@@ -1,25 +1,33 @@
 # Matriz de migración static → WordPress
 
-Obligación fijada en [ADR 0032](adr/0032-contrato-migracion-static-wordpress.md).
-Geografía: [11-arbol-urls-final.md](11-arbol-urls-final.md). Contrato:
+Obligación fijada en
+[ADR 0032](adr/0032-contrato-migracion-static-wordpress.md). Geografía:
+[11-arbol-urls-final.md](11-arbol-urls-final.md). Contrato:
 [contrato-migracion-static-wordpress.md](contrato-migracion-static-wordpress.md).
 
-**Regla:** una URL no se considera migrada hasta que su fila tenga estrategia para
-**contenido + presentación + routing + comportamiento + QA**.
+**Regla:** una URL no se considera migrada hasta que su fila tenga estrategia
+para **contenido + presentación + routing + comportamiento + QA**.
 
-Una **entidad** hardcodeada (card de evento, ítem de galería) tampoco está migrada hasta tener fila
-propia o estar contada en [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
-Inventario: [`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md) (ADR 0034).
+Una **entidad** hardcodeada (card de evento, ítem de galería) tampoco está
+migrada hasta tener fila propia o estar contada en
+[`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
+Inventario:
+[`inventario-contenido-produccion-static.md`](inventario-contenido-produccion-static.md)
+(ADR 0034).
 
-Columnas ampliadas cuando el ítem no es una URL: Current URL, Static source, **Content item**, Current type, Future WP object, Future route, Template/FSE, Media, JS, Migration status, QA.
+Columnas ampliadas cuando el ítem no es una URL: Current URL, Static source,
+**Content item**, Current type, Future WP object, Future route, Template/FSE,
+Media, JS, Migration status, QA.
 
-Las columnas WP (objeto, ruta, plantilla, import, QA) se completan al implementar Fase 3. Hoy
-registran el inventario estático y el mapeo **previsto** según docs vigentes (ADR 0029, doc 12).
-No es implementación.
+Las columnas WP (objeto, ruta, plantilla, import, QA) se completan al
+implementar Fase 3. Hoy registran el inventario estático y el mapeo **previsto**
+según docs vigentes (ADR 0029, doc 12). No es implementación.
 
-Plantillas: **FSE** (`templates/*.html`) mapeadas **desde el HTML estático**, no desde un theme PHP clásico.
+Plantillas: **FSE** (`templates/*.html`) mapeadas **desde el HTML estático**, no
+desde un theme PHP clásico.
 
-Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escribe la forma canónica.
+Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se
+escribe la forma canónica.
 
 ---
 
@@ -38,7 +46,8 @@ Política de URL pública: **sin barra final** (ADR 0008). En esta tabla se escr
 | Import strategy | Implementada en WU-06 (ADR 0033): payload `migration/payload.json` + `wp cdd-core migrate` (`validate` / `plan` / `import` / `verify`) y `seed` de medios; create-missing-only, dry-run por defecto |
 | QA | Qué prueba cierra la fila |
 
-Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada` | `No aplica` | `Excepción ADR`.
+Estados de fila (al implementar): `Inventario` → `En migración` → `Migrada` |
+`No aplica` | `Excepción ADR`.
 
 ---
 
@@ -75,11 +84,13 @@ No crear Page con slug `eventos`.
 | `/eventos/encuentro-nacional-2026` | `eventos/encuentro-nacional-2026/index.html` | Ficha; `.ics` en disco **RETIRE** (OWN-012) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share; **sin** calendario; **sin** `.ics`; JSON-LD `EventCompleted` |
 | `/eventos/pausa-profunda-cali` | `eventos/pausa-profunda-cali/index.html` | Ficha (sin `.ics` en repo al auditar) | `event` single | mismo slug | `templates/single-event.html` | `main.js`, `share.js` | Cartel | CPT | 200; share |
 
-Singles futuros: misma fila-patrón `/eventos/{slug}`. Sin archivos `/eventos/{ciudad}` (ADR 0022).
+Singles futuros: misma fila-patrón `/eventos/{slug}`. Sin archivos
+`/eventos/{ciudad}` (ADR 0022).
 
 ### Entidades en el listado (una fila por card — ADR 0034)
 
-SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT. No son demo.
+SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT.
+No son demo.
 
 | Current URL | Static source | Content item | Current type | Future WP object | Future route | Template/FSE | Media | JS | Migration status | QA |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -95,7 +106,9 @@ SoT = `eventos/index.html`. Las 7 sin URL propia **igual se importan** como CPT.
 | *(nueva en WP)* | listado | 6.º Encuentro Nacional 2025 | card → single | CPT `event` | `/eventos/6-encuentro-nacional-2025` | `single-event.html` | cartel | — | Inventario | 200; sin inscripción |
 | `/` aside | `index.html` | nota featured = evento #1 | duplicado de presentación | **no** CPT extra | — | `front-page.html` Query | mismo cartel | — | Inventario | conteo eventos sigue en 10 |
 
-Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas ya arriba. Conteos: [`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
+Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas ya
+arriba. Conteos:
+[`conteos-reconciliacion-migracion.md`](conteos-reconciliacion-migracion.md).
 
 ---
 
@@ -124,8 +137,9 @@ Galería: 35 media + 3 álbumes (filas de datos, no URLs extra). Posts: 2 filas 
 
 ## Estado de implementación WU-08A (2026-08-31)
 
-Las filas de arriba conservan el inventario; este bloque registra el avance por dimensión
-tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08A):
+Las filas de arriba conservan el inventario; este bloque registra el avance por
+dimensión tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` §
+WU-06/WU-07/WU-08A):
 
 | Dimensión | Estado | Detalle |
 | --- | --- | --- |
@@ -135,21 +149,27 @@ tras WU-08A (evidencia: `.audit/fase3-validation-matrix.md` § WU-06/WU-07/WU-08
 | BEHAVIOR | **Parcial** | Nav móvil, tooltips del calendario, **diálogo Compartir, diálogo Añadir al calendario y audio de mantras nativo** portados (WU-08A); formulario CF7 → WU-09 (elegible en el corte, ADR 0041; no espera legal) |
 | OPERATIONS | **Pass (local)** | Pipeline documentado import → seed → convert (idempotente, guard de producción). El sitio de staging existe (`teal-woodpecker-284165.hostingersite.com`, ADR 0047); su QA en Hostinger aún no es `Pass` |
 
-Sustituciones static→WordPress registradas en WU-07 (detalle y
-remedios en `.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
+Sustituciones static→WordPress registradas en WU-07 (detalle y remedios en
+`.audit/fase3-validation-matrix.md` § WU-07, «Decisiones»):
 
-1. Eventos finalizados en tarjeta compacta (doc 03 §3 «Densidad») en vez de la card completa.
-2. Fecha de evento generada desde `event_date`/`event_end` (reglas calibradas; filas `Hora`
-   y `Aporte` de la maqueta no viven en el modelo — remedio: contenido del evento wp-admin).
-3. Card vigente del listado = intro del single + meta + CTA (label «Preinscribirme»).
-4. Excerpt del listado del blog = deck editorial; tiempo de lectura calculado (round /200).
+1. Eventos finalizados en tarjeta compacta (doc 03 §3 «Densidad») en vez de la
+   card completa.
+2. Fecha de evento generada desde `event_date`/`event_end` (reglas calibradas;
+   filas `Hora` y `Aporte` de la maqueta no viven en el modelo — remedio:
+   contenido del evento wp-admin).
+3. Card vigente del listado = intro del single + meta + CTA (label
+   «Preinscribirme»).
+4. Excerpt del listado del blog = deck editorial; tiempo de lectura calculado
+   (round /200).
 5. Byline «Por …» enlazada a `/author/{slug}` (ADR 0037; el estático no enlaza).
-6. `<picture>`/WebP/miniaturas hechas a mano no migran: la biblioteca sirve JPG + derivados.
-7. `event_modality` es texto libre (copy publicado descriptivo; sustituye el select doc 03).
-8. Galería: bloque Gutenberg nativo + lightbox, sin paginación (ADR 0021/0036, OWN-011);
-   headings de álbum enlazan al término (opcional ADR 0036).
-9. Copy nuevo mínimo OWN-016 en `/comunidad`: «Entradas del Maestro Zheng Gong en el blog» /
-   «Entradas de la Comunidad en el blog».
+6. `<picture>`/WebP/miniaturas hechas a mano no migran: la biblioteca sirve
+   JPG + derivados.
+7. `event_modality` es texto libre (copy publicado descriptivo; sustituye el
+   select doc 03).
+8. Galería: bloque Gutenberg nativo + lightbox, sin paginación (ADR 0021/0036,
+   OWN-011); headings de álbum enlazan al término (opcional ADR 0036).
+9. Copy nuevo mínimo OWN-016 en `/comunidad`: «Entradas del Maestro Zheng Gong
+   en el blog» / «Entradas de la Comunidad en el blog».
 
 ---
 
@@ -171,8 +191,9 @@ Portar desde `.htaccess` actual; no son Pages.
 | barra final (excepto `/`) | sin barra | ADR 0008 |
 | `*/index.html` | URL limpia | — |
 
-Tras el corte, estas reglas deben vivir donde WordPress no las borre al regenerar permalinks (plugin
-de dominio, `redirect_canonical`, o bloque `.htaccess` documentado y respaldado).
+Tras el corte, estas reglas deben vivir donde WordPress no las borre al
+regenerar permalinks (plugin de dominio, `redirect_canonical`, o bloque
+`.htaccess` documentado y respaldado).
 
 ---
 
@@ -214,9 +235,9 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 | Superficie | Local | Staging | Producción |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 18/19 rutas limpias — Pass (local). `/practica` corregido en el theme **0.5.2** (D-04 / OWN-026, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)): el suelo `min-width: 300px` del `core/audio` del núcleo se levanta y el reproductor mide 272 px, `scrollWidth` = `clientWidth` = 320. La ruta 19 es D-09, ver abajo | OWN-035: volver a medir en staging | no desborda |
+| 320 px sin scroll horizontal | 19/19 rutas limpias — Pass (local). `/practica` sigue en 320 = 320 y el reproductor en 272 px (D-04, theme 0.5.2). D-09 queda en 320 = 320 (theme 0.6.4), ver abajo | OWN-035: volver a medir en staging | no desborda, salvo Sangha hasta desplegar theme 0.6.4 |
 | 640 px / zoom 200 % | 19/19 limpias — Pass (local) | Unverified | — |
-| `/blog/sangha-refugio-hiperconexion` a 320 px | 339 px — Pass (local) *(porte fiel)* | OWN-021: dejar en el corte; wrap POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) | **también 339 px** |
+| `/blog/sangha-refugio-hiperconexion` a 320 px | `scrollWidth` = `clientWidth` = 320 — Pass (local), theme **0.6.4**. La URL de la OMS parte en dos líneas dentro de la columna | POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7) implementado | 339 px mientras siga el theme 0.6.3 del corte; el tag `theme-v0.6.4` publica el wrap |
 | Lightbox nativo | «Close/Previous/Next» en inglés por falta del paquete `es_CO` — Fail (local) | OWN-027: staging `es_CO` + lightbox en español; local puede quedar en inglés | no aplica |
 | Comillas tipográficas (`wptexturize`) | delta menor en `/practica` — Pass (local) *(delta)* | OWN-028: aceptar | comillas rectas |
 | Foco visible y teclado | 32 enfocables con nombre, 21 reglas `:focus-visible`, diálogo modal con foco devuelto — Pass (local) | Unverified | — |
@@ -263,4 +284,7 @@ QA local completa. Ninguna escritura en Hostinger; el runbook de staging vive en
 
 ---
 
-**Versión:** 1.7 · **Fecha:** 2026-09-02 · **Estado de filas:** inventario + WU-10 QA local; cierre dueño D-01–D-12 (OWN-021–OWN-035). D-02 y D-03 **implementados** (plugin 0.7.3). Staging Hostinger **después** de D-02/D-03/D-04 en `main`. Entrega CF7: ADR 0045.
+**Versión:** 1.7 · **Fecha:** 2026-09-02 · **Estado de filas:** inventario +
+WU-10 QA local; cierre dueño D-01–D-12 (OWN-021–OWN-035). D-02 y D-03
+**implementados** (plugin 0.7.3). Staging Hostinger **después** de
+D-02/D-03/D-04 en `main`. Entrega CF7: ADR 0045.

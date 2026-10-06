@@ -1,14 +1,15 @@
 # camino-del-dharma
 
-Block theme / Full Site Editing (ADR 0029). Scaffold en WU-04; **vistas reales en
-WU-07**; **comportamiento portado en WU-08A** (v0.3.0), siempre con RED documentado
-antes del primer archivo:
+Block theme / Full Site Editing (ADR 0029). Scaffold en WU-04; **vistas reales
+en WU-07**; **comportamiento portado en WU-08A** (v0.3.0), siempre con RED
+documentado antes del primer archivo:
 
 - `templates/` — 16 plantillas de bloques (docs/12 §5–§6): front-page, `page-*`
   institucionales, `page.html`, home/single del blog, archive/single de evento,
   ficha de autor, término de álbum, 404 e index (fallback).
-- `parts/header|footer.html` → patterns PHP (`patterns/header|footer.php`) con el
-  markup publicado y URLs generadas (`home_url()`, logo como asset del theme).
+- `parts/header|footer.html` → patterns PHP (`patterns/header|footer.php`) con
+  el markup publicado y URLs generadas (`home_url()`, logo como asset del
+  theme).
 - `inc/blocks.php` — 13 bloques dinámicos `camino-del-dharma/*` (calendario de
   eventos con paridad byte a byte contra el grid publicado, listado
   vigentes/finalizados, destacado del Inicio, tipo/meta/CTA/acciones de evento,
@@ -33,26 +34,28 @@ Reglas:
 - `theme.json` es la fuente de verdad de tokens; sin hex directos en CSS.
 - No crear plantillas PHP clásicas (`front-page.php`, `page-*.php`…): hay un
   test que lo prohíbe (`Theme_ScaffoldTest`).
-- Cabeza del documento desde WU-08B (v0.4.0): `inc/seo.php` **imprime y escapa** el
-  documento que resuelve `cdd_core_seo_document()`; ninguna política de SEO vive
-  aquí (ADR 0024). Retira el `<title>`, el `canonical` y el `robots` del núcleo —y
-  el segundo skip link que WordPress inyecta en los block themes— para que la
-  página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
+- Cabeza del documento desde WU-08B (v0.4.0): `inc/seo.php` **imprime y escapa**
+  el documento que resuelve `cdd_core_seo_document()`; ninguna política de SEO
+  vive aquí (ADR 0024). Retira el `<title>`, el `canonical` y el `robots` del
+  núcleo —y el segundo skip link que WordPress inyecta en los block themes— para
+  que la página no lleve dos de cada uno. Plantillas nuevas: `archive.html` y
   `archive-blog_author.html`, que dan su `h1` a `/blog/tag/{slug}` y a `/author`
   (docs/19 §9).
 - Vista previa de Apariencia desde v0.5.3: `screenshot.png` (PNG 1200×900) es la
   portada del theme. Es la portada pública de staging
-  (`https://teal-woodpecker-284165.hostingersite.com`) a 1440×1080, reducida
-  en proporción, sin cromo de navegador. El sitio de staging sigue en **0.5.2**
+  (`https://teal-woodpecker-284165.hostingersite.com`) a 1440×1080, reducida en
+  proporción, sin cromo de navegador. El sitio de staging sigue en **0.5.2**
   hasta el despliegue manual.
 - Reproductores de mantra desde D-04 (v0.5.2): el núcleo sirve
-  `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo** gana sobre un
-  ancho preferido, así que a 320 px el reproductor estiraba la columna de `/practica`.
-  `.wp-block-audio.mantra-audio audio` levanta el suelo y topa el reproductor en su
-  columna conservando el `width: min(100%, 32rem)` publicado. El selector lleva las dos
-  clases a propósito: gana **por especificidad**, no por el orden en que WordPress imprime
-  `wp-block-audio-inline-css`. No añadir `overflow: hidden` en `html`/`body` para esto:
-  escondería el desbordamiento heredado de D-09, que el owner dejó en el corte (OWN-021).
+  `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo**
+  gana sobre un ancho preferido, así que a 320 px el reproductor estiraba la
+  columna de `/practica`. `.wp-block-audio.mantra-audio audio` levanta el suelo
+  y topa el reproductor en su columna conservando el `width: min(100%, 32rem)`
+  publicado. El selector lleva las dos clases a propósito: gana **por
+  especificidad**, no por el orden en que WordPress imprime
+  `wp-block-audio-inline-css`. No añadir `overflow: hidden` en `html`/`body`
+  para esto: recortaría el documento. La URL larga de D-09 se parte dentro de
+  `.wp-block-post-content` (`overflow-wrap: anywhere`, theme 0.6.4, POST-008).
 - Diálogo de calendario de un curso desde BUG-001 (v0.5.1): en un evento con
   cronograma el disparador enlaza la **próxima sesión** en vez del rango del
   curso, e imprime `data-calendar-sessions` y `data-calendar-note`;

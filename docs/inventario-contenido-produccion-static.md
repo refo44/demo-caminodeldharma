@@ -1,31 +1,38 @@
 # Inventario de contenido de producción (sitio estático live)
 
-Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**, actualizado a **1.0.35** (`/privacidad`,
-ADR 0039). No es un extracto ejecutado: es el baseline documental. ADR
+Auditoría 2026-08-19 sobre el repo en `VERSION` **1.0.34**, actualizado a
+**1.0.35** (`/privacidad`, ADR 0039). No es un extracto ejecutado: es el
+baseline documental. ADR
 [0034](adr/0034-static-live-como-fuente-contenido-produccion.md) y
 [0040](adr/0040-retirar-content-source-produccion-como-fuente.md).
 
-**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática en el repo:** `static/`
-(monorepo ADR 0014). **Deploy:** ZIP manual del contenido de `static/` (ADR 0015). Extraer **lo más
-reciente del repo** (`VERSION` vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP anterior,
-eso es deuda de deploy, no la fuente del extracto.
+**Live actual:** `https://caminodeldharma.org` (Hostinger). **Raíz estática en
+el repo:** `static/` (monorepo ADR 0014). **Deploy:** ZIP manual del contenido
+de `static/` (ADR 0015). Extraer **lo más reciente del repo** (`VERSION`
+vigente; OWN-006, 2026-08-28), indicando tag/commit. Si Hostinger tiene un ZIP
+anterior, eso es deuda de deploy, no la fuente del extracto.
 
-Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) · **STRUCTURAL COPY** ·
-**DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER REVIEW**.
+Clases: **REAL PRODUCTION** · **HISTORICAL** (sigue siendo producción) ·
+**STRUCTURAL COPY** · **DESIGN / DEMO** · **OBSOLETE** · **UNCLEAR — OWNER
+REVIEW**.
 
-Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El archivo
-[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md) (v1.28) queda
-como registro de decisiones (no ADR). OWN-020 / D-08 está **decidido**, implementación
-pendiente ([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09:
-overflow Sangha dejado al corte. OWN-022 / D-10: `wp-emoji` `sessionStorage` aceptado.
-Pre-staging: D-02/D-03/D-04 ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
+Ítems UNCLEAR de esa auditoría: **cerrados** (backlog Fase 3, 0 abiertas). El
+archivo
+[`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md)
+(v1.28) queda como registro de decisiones (no ADR). OWN-020 / D-08 está
+**decidido**, implementación pendiente
+([#5](https://github.com/refo44/demo-caminodeldharma/issues/5)). OWN-021 / D-09:
+overflow Sangha dejado al corte; wrap post-corte en theme 0.6.4. OWN-022 / D-10:
+`wp-emoji` `sessionStorage` aceptado. Pre-staging: D-02/D-03/D-04
+([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)–[#12](https://github.com/refo44/demo-caminodeldharma/issues/12))
 antes de Hostinger (OWN-035). `POST-008`–`010` son posteriores al corte.
 
 ---
 
 ## 1. URLs públicas (sitemap)
 
-17 URLs en `sitemap.xml`. Todas **KEEP** salvo decisión nueva. Ver [`redirect-ledger.md`](redirect-ledger.md).
+17 URLs en `sitemap.xml`. Todas **KEEP** salvo decisión nueva. Ver
+[`redirect-ledger.md`](redirect-ledger.md).
 
 | URL | Archivo | Tipo | Clase |
 | --- | ------- | ---- | ----- |
@@ -47,7 +54,10 @@ antes de Hostinger (OWN-035). `POST-008`–`010` son posteriores al corte.
 | `/blog/circulos-de-presencia-consciente` | ficha | Post | REAL PRODUCTION |
 | `/blog/sangha-refugio-hiperconexion` | ficha | Post | REAL PRODUCTION |
 
-`404.html` no es URL pública. `/privacidad` está publicada (ADR 0039, provisional). El importer trae el HTML live. En WordPress, WU-09 aplica el delta del formulario (ADR 0041 / OWN-018); no reescribir el resto. La revisión legal no bloquea el corte.
+`404.html` no es URL pública. `/privacidad` está publicada (ADR 0039,
+provisional). El importer trae el HTML live. En WordPress, WU-09 aplica el delta
+del formulario (ADR 0041 / OWN-018); no reescribir el resto. La revisión legal
+no bloquea el corte.
 
 Búsqueda: **no existe** (doc 04). No crear.
 
@@ -55,7 +65,8 @@ Búsqueda: **no existe** (doc 04). No crear.
 
 ## 2. Eventos (hardcodeados en HTML)
 
-Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = este HTML.
+Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT =
+este HTML.
 
 | # | Título en listado | Single | Estado UI | Poster (disco) | Clase | WP previsto |
 | - | ----------------- | ------ | --------- | -------------- | ----- | ----------- |
@@ -70,13 +81,17 @@ Fuente: `eventos/index.html` (`article.evento-card`). **10 entidades.** SoT = es
 | 9 | Buddhismo para tiempos de cansancio | PLANNED `/eventos/buddhismo-tiempos-cansancio` | finalizado | `evento-buddhismo-tiempos-cansancio.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 | 10 | 6.º Encuentro Nacional Buddhista – 2025 | PLANNED `/eventos/6-encuentro-nacional-2025` | finalizado | `evento-6-encuentro-nacional.jpeg` | HISTORICAL | CPT + single; sin inscripción |
 
-Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una entidad extra: es la
-misma fila `#1` (`event_featured`). Extraer una sola vez.
+Home: nota de **un** evento vigente (Círculos) en `index.html`. No es una
+entidad extra: es la misma fila `#1` (`event_featured`). Extraer una sola vez.
 
-Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a meditación semanal.
-La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
+Calendario de septiembre 2026: celdas hardcodeadas que apuntan al #1 y a
+meditación semanal. La meditación semanal **no** es un `event` (`docs/03`).
+STRUCTURAL + Page `/practica/meditacion-semanal-en-linea`.
 
-`.ics`: 2 archivos en disco. Destino WP: **generados**, no Media Library (OWN-009). Encuentro 2026 **RETIRE** (OWN-012). Círculos KEEP hasta que `hoy >` su fecha de fin; entonces 410 y se borra el huérfano (OWN-013). Pausa Cali **sin** `.ics`.
+`.ics`: 2 archivos en disco. Destino WP: **generados**, no Media Library
+(OWN-009). Encuentro 2026 **RETIRE** (OWN-012). Círculos KEEP hasta que `hoy >`
+su fecha de fin; entonces 410 y se borra el huérfano (OWN-013). Pausa Cali
+**sin** `.ics`.
 
 ---
 
@@ -87,19 +102,20 @@ La meditación semanal **no** es un `event` (`docs/03`). STRUCTURAL + Page `/pra
 | `circulos-de-presencia-consciente` | Círculos de Presencia Consciente | Comunidad Camino del Dharma | REAL PRODUCTION | `post` |
 | `sangha-refugio-hiperconexion` | Estamos conectados, pero seguimos solos | Zheng Gong | REAL PRODUCTION | `post` |
 
-Autores en el **estático:** copy (no hay `/author/`). **Destino WP (ADR 0037):** CPT
-`blog_author`; semilla Zheng Gong + Comunidad Camino del Dharma; las 2 entradas se asignan
-por meta. No Users, no copy hardcodeado. **OWN-020 / D-08 (pendiente
-[#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):** bio corta, `seo` y foto de
-cada ficha salen de copy y assets ya publicados (JSON-LD del fundador; meta / «Quiénes somos»
-de `/comunidad`); no se inventa el ensayo largo.
-Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
+Autores en el **estático:** copy (no hay `/author/`). **Destino WP (ADR 0037):**
+CPT `blog_author`; semilla Zheng Gong + Comunidad Camino del Dharma; las 2
+entradas se asignan por meta. No Users, no copy hardcodeado. **OWN-020 / D-08
+(pendiente [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):** bio
+corta, `seo` y foto de cada ficha salen de copy y assets ya publicados (JSON-LD
+del fundador; meta / «Quiénes somos» de `/comunidad`); no se inventa el ensayo
+largo. Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 
 ---
 
 ## 4. Galería
 
-- `#gallery-data`: **35** objetos `{src, alt}` (salta `galeria-04.jpg` en el JSON).
+- `#gallery-data`: **35** objetos `{src, alt}` (salta `galeria-04.jpg` en el
+  JSON).
 - `#gallery-albums-data`: **3** álbumes (General 0–25, 2023 25–30, 2021 30–35).
 - Disco: **36** archivos en `assets/images/galeria/` + **108** thumbs.
 
@@ -110,10 +126,12 @@ Tags: no hay en el estático; ADR 0031 aplica en WordPress cuando existan.
 | `galeria-04.jpg` (ilustración de `/practica`) | REAL PRODUCTION (página, **no** galería) | Media de la Page Práctica. **OWN-001:** no añadir al álbum. |
 | thumbs | GENERATED/derivados | regenerar o importar según estrategia media |
 
-Regla (OWN-001, 2026-08-28): ilustración de otra página ≠ ítem de `/galeria`. El preview del inicio
-de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importan al álbum.
+Regla (OWN-001, 2026-08-28): ilustración de otra página ≠ ítem de `/galeria`. El
+preview del inicio de `galeria-01`–`03` es teaser de la propia galería; esas
+tres sí se importan al álbum.
 
-`gallery.js` es comportamiento; en WP se sustituye (ADR 0021). Los **datos** JSON sí se migran.
+`gallery.js` es comportamiento; en WP se sustituye (ADR 0021). Los **datos**
+JSON sí se migran.
 
 ---
 
@@ -128,8 +146,8 @@ de `galeria-01`–`03` es teaser de la propia galería; esas tres sí se importa
 | Language switcher (solo UI, sitio en español) | `main.js` | header | STRUCTURAL COPY (no i18n real; `POST-001`–`POST-004`) |
 | Formulario contacto | markup live; envío no opera | `/contacto` | REAL PRODUCTION (campos); backend = ADR 0026 |
 
-Si un material legacy externo y el HTML divergen, **gana el HTML live** (OWN-007/017). No restaurar
-fuentes retiradas sobre producción.
+Si un material legacy externo y el HTML divergen, **gana el HTML live**
+(OWN-007/017). No restaurar fuentes retiradas sobre producción.
 
 ---
 
@@ -152,9 +170,12 @@ fuentes retiradas sobre producción.
 | `eventos/ical/*.ics` | 2 en disco | Círculos generado mientras vigente; Encuentro RETIRE | OWN-009 + OWN-013: no seed a Media Library |
 | favicon / OG default | varios | SEO | KEEP o Site Icon |
 
-**Imágenes (OWN-009-img + OWN-003, 2026-08-28):** seed → Media Library (contenido real, no fixture).
-Referenciadas: visibles según uso (álbum, Page, featured). **Huérfanas:** mismo seed, **ocultas**
-(no álbum, no Page, no teaser). Thumbs: regenerar. Audio → Media Library (OWN-009). `.ics` generado, no biblioteca; pasados 410 + borrar huérfano (OWN-012, OWN-013). **PDF (OWN-002):** RETIRE.
+**Imágenes (OWN-009-img + OWN-003, 2026-08-28):** seed → Media Library
+(contenido real, no fixture). Referenciadas: visibles según uso (álbum, Page,
+featured). **Huérfanas:** mismo seed, **ocultas** (no álbum, no Page, no
+teaser). Thumbs: regenerar. Audio → Media Library (OWN-009). `.ics` generado, no
+biblioteca; pasados 410 + borrar huérfano (OWN-012, OWN-013). **PDF (OWN-002):**
+RETIRE.
 
 ---
 
@@ -169,8 +190,9 @@ Referenciadas: visibles según uso (álbum, Page, featured). **Huérfanas:** mis
 
 ## 8. SEO / ops estáticas
 
-Presentes en páginas HTML: `<title>`, description, canonical (sin barra), OG, JSON-LD.
-`robots.txt` → sitemap manual. `llms.txt`. `.htaccess` (HTTPS, host, legacy 301/410).
+Presentes en páginas HTML: `<title>`, description, canonical (sin barra), OG,
+JSON-LD. `robots.txt` → sitemap manual. `llms.txt`. `.htaccess` (HTTPS, host,
+legacy 301/410).
 
 Tras corte: sitemap nativo (ADR 0030); portar redirects (ledger).
 
@@ -189,27 +211,35 @@ Tras corte: sitemap nativo (ADR 0030); portar redirects (ledger).
 | `/contacto` | form |
 | `/practica` | `<audio>`, ruby de mantras, iframes |
 
-Contrato: static DOM → FSE template/parts/patterns/blocks → JS. Una Page 200 sin este comportamiento **no** está migrada (ADR 0032).
+Contrato: static DOM → FSE template/parts/patterns/blocks → JS. Una Page 200 sin
+este comportamiento **no** está migrada (ADR 0032).
 
 ---
 
 ## 10. Navegación (no cutover con destinos rotos)
 
-**Header (home y patrón global):** Inicio, Comunidad, Linaje, Práctica, Eventos, Galería, Blog, Contribuir, Contacto.
+**Header (home y patrón global):** Inicio, Comunidad, Linaje, Práctica, Eventos,
+Galería, Blog, Contribuir, Contacto.
 
-**Home CTAs / cards:** comunidad, contacto, evento destacado, WhatsApp meditación, página meditación, 2 posts, blog, videos, galería.
+**Home CTAs / cards:** comunidad, contacto, evento destacado, WhatsApp
+meditación, página meditación, 2 posts, blog, videos, galería.
 
-**Footer:** contacto, Facebook, Instagram, mailto, WhatsApp, donaciones, créditos, **Privacidad** (`/privacidad`, ADR 0039).
+**Footer:** contacto, Facebook, Instagram, mailto, WhatsApp, donaciones,
+créditos, **Privacidad** (`/privacidad`, ADR 0039).
 
-**Eventos:** título/cartel/«Ver evento» hacia singles cuando existen; anclas `#id` en la misma página; lunes → meditación.
+**Eventos:** título/cartel/«Ver evento» hacia singles cuando existen; anclas
+`#id` en la misma página; lunes → meditación.
 
-Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER WITH BROKEN NAVIGATION.**
+Cada destino interno debe estar en la matriz o el redirect ledger. **NO CUTOVER
+WITH BROKEN NAVIGATION.**
 
 ---
 
 ## 11. Qué no hay (no inventar)
 
-- Buscador, área privada, CPT `sangha` en el estático, tags, archivo de **usuario** WP, page builder, fixtures públicos. (Perfil CPT `/author/{slug}` es destino WP, ADR 0037; no está en el estático.)
+- Buscador, área privada, CPT `sangha` en el estático, tags, archivo de
+  **usuario** WP, page builder, fixtures públicos. (Perfil CPT `/author/{slug}`
+  es destino WP, ADR 0037; no está en el estático.)
 
 ---
 

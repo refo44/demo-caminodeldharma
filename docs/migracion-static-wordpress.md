@@ -1,48 +1,51 @@
 # Migración static/ → WordPress
 
-**Ledger operativo** de diferencias entre la implementación estática y el theme WordPress **durante la Fase 3**.
+**Ledger operativo** de diferencias entre la implementación estática y el theme
+WordPress **durante la Fase 3**.
 
-**No es el contrato de aceptación.** Completitud, Pages vs templates, matriz y QA:
-[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md) (ADR 0032).
-Import vs fixtures: ADR 0033. Cutover: [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md).
+**No es el contrato de aceptación.** Completitud, Pages vs templates, matriz y
+QA:
+[`contrato-migracion-static-wordpress.md`](contrato-migracion-static-wordpress.md)
+(ADR 0032). Import vs fixtures: ADR 0033. Cutover:
+[`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md).
 
-**No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el seguimiento día a día.
+**No sustituye** a los ADR ni a `17-orden-implementacion`. Complementa el
+seguimiento día a día.
 
 **CURRENT STATE (2026-09-26):** `https://caminodeldharma.org/` es WordPress.
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme
-`camino-del-dharma` 0.6.3 y plugin `camino-del-dharma-core` 0.7.13
-(tag `plugin-v0.7.13` después del merge; `plugin-v0.7.12` ya existe;
-el corte desplegó `plugin-v0.7.10`).
-`static/` ya no está en el árbol vigente. El historial de Git lo
-conserva. El propietario autorizó retirar el despliegue de
+`camino-del-dharma` 0.6.4 (tag `theme-v0.6.4` después del merge; el corte
+desplegó theme 0.6.3) y plugin `camino-del-dharma-core` 0.7.13 (tag
+`plugin-v0.7.13` después del merge; `plugin-v0.7.12` ya existe; el corte
+desplegó `plugin-v0.7.10`). `static/` ya no está en el árbol vigente. El
+historial de Git lo conserva. El propietario autorizó retirar el despliegue de
 [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)
-y, después, la entrada de ese sitio en hPanel. No queda un rollback
-estático servido. El tar
-`static-pre-cutover-20260926-040601.tar.gz` conserva la copia de
-servidor, incluidos los archivos que Git no tiene. La recuperación
-histórica de Git es `282230c41589348722a80985046d16cb07d19a1c`. Staging
-sigue retirado. La entrega de correo del formulario
-sigue sin verificar y el formulario está oculto. Un tag de componente
-despliega ese código a producción (ADR 0048). Estado durable:
-`.audit/fase3-execution-state.md`.
-Las filas de abajo registran cambios del estático en producción y deudas hacia el theme.
+y, después, la entrada de ese sitio en hPanel. No queda un rollback estático
+servido. El tar `static-pre-cutover-20260926-040601.tar.gz` conserva la copia de
+servidor, incluidos los archivos que Git no tiene. La recuperación histórica de
+Git es `282230c41589348722a80985046d16cb07d19a1c`. Staging sigue retirado. La
+entrega de correo del formulario sigue sin verificar y el formulario está
+oculto. Un tag de componente despliega ese código a producción (ADR 0048).
+Estado durable: `.audit/fase3-execution-state.md`. Las filas de abajo registran
+cambios del estático en producción y deudas hacia el theme.
 
-Decisiones del propietario (**Fase 3 cerrada** v1.28; no reabrir OWN-* sin decisión nueva).
-OWN-020 / D-08 está implementado (plugin 0.7.7). Pre-staging: D-02/D-03/D-04
-ya están en `main`. La misma instalación sirve el dominio canónico
-(ADR 0047). ADR 0044 (feeds 404). ADR 0045: la entrega de correo sigue
-sin verificar.
-OWN-021 / D-09: overflow Sangha **dejado** en el corte; wrap WP-only post-corte
-([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)).
-OWN-022 / D-10: `sessionStorage` de `wp-emoji` **aceptado**.
-Fases posteriores (`POST-*`, incl. POST-008–010) no entran en el corte:
+Decisiones del propietario (**Fase 3 cerrada** v1.28; no reabrir OWN-* sin
+decisión nueva). OWN-020 / D-08 está implementado (plugin 0.7.7). Pre-staging:
+D-02/D-03/D-04 ya están en `main`. La misma instalación sirve el dominio
+canónico (ADR 0047). ADR 0044 (feeds 404). ADR 0045: la entrega de correo sigue
+sin verificar. OWN-021 / D-09: overflow Sangha **dejado** en el corte; wrap
+WP-only **implementado** post-corte en theme 0.6.4
+([#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). OWN-022 / D-10:
+`sessionStorage` de `wp-emoji` **aceptado**. Fases posteriores (`POST-*`, incl.
+POST-008–010) no entran en el corte:
 [`backlog-decisiones-owner-migracion.md`](backlog-decisiones-owner-migracion.md).
 
 ---
 
 ## Cuándo actualizar este documento
 
-Registrar cada cambio que afecte una sola implementación o que esté en curso de portarse al theme.
+Registrar cada cambio que afecte una sola implementación o que esté en curso de
+portarse al theme.
 
 | Tipo de cambio | Static | WordPress |
 | ---------------- | ------ | --------- |
@@ -69,7 +72,8 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 | 2026-08-31 | **Conversión de contenido importado (WU-07):** `wp cdd-core migrate convert` (dry-run por defecto, `--apply`, idempotente, guard de producción) — inicio (aside destacado y cards del blog → bloques dinámicos; `<picture>`/thumbs hechas a mano → biblioteca), galeria (mount JS → galerías Gutenberg por álbum, ADR 0021/0036, sin paginación OWN-011), comunidad (enlaces a fichas de autor, OWN-016). En staging: `import --apply` → `seed` → `convert --apply` | No aplica | Sí — plugin 0.4.0; aplicado en el entorno local | Completo (local) |
 | 2026-08-31 | **BUG-001 (cerrado):** el `.ics` de Círculos incluye **todas las sesiones**. `Cdd_Core_Ics_Generator` emite un VEVENT por fecha de `event_calendar_dates`, con UID propio (`slug-Ymd@host`) y fin exclusivo de día completo; sin cronograma se conserva el rango `event_date`/`event_end` y el UID publicado. Como un enlace profundo lleva una sola entrada, el diálogo nombra la próxima sesión —fecha que el archivo contiene— y una nota dice que el `.ics` trae todas. OWN-012 intacto | No — el estático sigue publicando su VEVENT único de la bienvenida hasta el corte | Sí — plugin 0.7.1, theme 0.5.1 | Completo (repo/local) |
 
-**Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`, `Cerrado`.
+**Estados sugeridos:** `Pendiente`, `En migración`, `Completo`, `No aplica`,
+`Cerrado`.
 
 ---
 
@@ -77,8 +81,10 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 
 ### Solo static (permitido)
 
-- Eventos u ofertas temporales vigentes solo hasta la fecha de lanzamiento de WordPress.
-- Hotfixes urgentes de producción mientras el theme aún no refleja el fix (debe registrarse aquí y planificarse porte).
+- Eventos u ofertas temporales vigentes solo hasta la fecha de lanzamiento de
+  WordPress.
+- Hotfixes urgentes de producción mientras el theme aún no refleja el fix (debe
+  registrarse aquí y planificarse porte).
 
 ### Ambas implementaciones (obligatorio)
 
@@ -91,12 +97,17 @@ Registrar cada cambio que afecte una sola implementación o que esté en curso d
 
 ## Antes del corte final
 
-1. Revisar que no queden filas en `En migración` o `Pendiente` (salvo `No aplica`).
-2. [Matriz](matriz-migracion-static-wordpress.md) con estrategia en las cinco columnas de entregable.
+1. Revisar que no queden filas en `En migración` o `Pendiente` (salvo
+   `No aplica`).
+2. [Matriz](matriz-migracion-static-wordpress.md) con estrategia en las cinco
+   columnas de entregable.
 3. Importación de contenido (ADR 0033); Pages institucionales reales en BD.
-4. Validación en staging (Fase 2.5 sobre theme). Theme activado ≠ corte completo.
+4. Validación en staging (Fase 2.5 sobre theme). Theme activado ≠ corte
+   completo.
 5. Backup estático + backup WordPress (BD + uploads).
-6. Corte según [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md). Retirar el ZIP estático del document root WP.
+6. Corte según
+   [`cutover-checklist-wordpress.md`](cutover-checklist-wordpress.md). Retirar
+   el ZIP estático del document root WP.
 
 ---
 

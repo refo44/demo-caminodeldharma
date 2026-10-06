@@ -1,11 +1,11 @@
 # Fase 3 — Matriz de validación
 
-Evidencia QA por work unit (niveles 1–4; histórico FABLE5 §11). Estados permitidos: `Unverified`,
-`Pass (local)`, `Pass`, `Fail`. `Pass (local)` nunca prueba comportamiento
-PHP/Apache/HTTPS/mail de Hostinger.
+Evidencia QA por work unit (niveles 1–4; histórico FABLE5 §11). Estados
+permitidos: `Unverified`, `Pass (local)`, `Pass`, `Fail`. `Pass (local)` nunca
+prueba comportamiento PHP/Apache/HTTPS/mail de Hostinger.
 
-Mapa de niveles: QA 1 = gate barato estático · QA 2 = unit + wp-phpunit ·
-QA 3 = integración local · QA 4 = manual + staging (ver
+Mapa de niveles: QA 1 = gate barato estático · QA 2 = unit + wp-phpunit · QA 3 =
+integración local · QA 4 = manual + staging (ver
 `docs/guia-pruebas-plugin-theme-fse.md`, ADR 0038).
 
 ## WU-00 — Preflight y harness durable
@@ -54,20 +54,22 @@ Ejecutado 2026-08-31 sobre `fase3-wordpress` (Docker 29.6.2, Compose v5.3.1).
 | Sin cookies en front anónimo | `curl -sI /` sin `Set-Cookie` | OK | Pass (local) |
 | Comportamiento PHP/Apache/HTTPS/mail Hostinger | requiere staging real | — | Unverified |
 
-Observación (no fallo de WU-02): `GET /ruta-inexistente` → 301 a la forma con barra final
-(redirect canónico por defecto de WordPress con permalinks *plain*). La política canónica sin
-barra final (ADR 0008) y las rutas reales se implementan y prueban en WU-05/WU-08.
+Observación (no fallo de WU-02): `GET /ruta-inexistente` → 301 a la forma con
+barra final (redirect canónico por defecto de WordPress con permalinks _plain_).
+La política canónica sin barra final (ADR 0008) y las rutas reales se
+implementan y prueban en WU-05/WU-08.
 
-Gotcha documentado: `define('WP_DEBUG', …)` dentro de `WORDPRESS_CONFIG_EXTRA` es no-op
-(la plantilla de la imagen lo define antes desde `WORDPRESS_DEBUG`). Evidencia del primer
-intento: warning «Constant WP_DEBUG already defined» + `WP_DEBUG=false`. Corregido con
-`WORDPRESS_DEBUG: 1` en ambos servicios PHP; ver `docs/docker-wordpress-playbook.md`.
+Gotcha documentado: `define('WP_DEBUG', …)` dentro de `WORDPRESS_CONFIG_EXTRA`
+es no-op (la plantilla de la imagen lo define antes desde `WORDPRESS_DEBUG`).
+Evidencia del primer intento: warning «Constant WP_DEBUG already defined» +
+`WP_DEBUG=false`. Corregido con `WORDPRESS_DEBUG: 1` en ambos servicios PHP; ver
+`docs/docker-wordpress-playbook.md`.
 
 ## WU-03 — Scaffold del plugin y kit de calidad TDD (sesión separada tras WU-02, ADR 0023)
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress`. Sin PHP/Composer nativos en el host: todos los
-comandos PHP corren vía Docker (`composer:2` para resolver, `wordpress:cli-php8.3` para
-ejecutar), como prevé la guía (ADR 0038).
+Ejecutado 2026-08-31 sobre `fase3-wordpress`. Sin PHP/Composer nativos en el
+host: todos los comandos PHP corren vía Docker (`composer:2` para resolver,
+`wordpress:cli-php8.3` para ejecutar), como prevé la guía (ADR 0038).
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -86,18 +88,21 @@ ejecutar), como prevé la guía (ADR 0038).
 | `test.yml` corre en GitHub Actions | Requiere push (esta rama es local, sin push) | — | Unverified |
 | Sonar analiza el plugin nuevo | Automatic Analysis lee alcance desde el default branch; sin push no hay análisis | — | Unverified |
 
-Decisión registrada: el prefijo corto `cdd` (ADR 0027 daba `cdd_` o `camino_del_dharma_`)
-lo rechaza el sniff de WPCS por tener 3 caracteres; el plugin usa `cdd_core`
-(`CDD_CORE_*`) y el theme usará `camino_del_dharma`. Ver `phpcs.xml.dist`.
+Decisión registrada: el prefijo corto `cdd` (ADR 0027 daba `cdd_` o
+`camino_del_dharma_`) lo rechaza el sniff de WPCS por tener 3 caracteres; el
+plugin usa `cdd_core` (`CDD_CORE_*`) y el theme usará `camino_del_dharma`. Ver
+`phpcs.xml.dist`.
 
-Gotcha documentado: con `working_dir: /repo` en el override, `wp core version` debe
-invocarse con `--path=/var/www/html` (WP-CLI busca la instalación desde el cwd); el primer
-intento del harness falló por eso y quedó corregido en `tools/run-phpunit-wp.sh`.
+Gotcha documentado: con `working_dir: /repo` en el override, `wp core version`
+debe invocarse con `--path=/var/www/html` (WP-CLI busca la instalación desde el
+cwd); el primer intento del harness falló por eso y quedó corregido en
+`tools/run-phpunit-wp.sh`.
 
 ## WU-04 — Scaffold del theme FSE y baseline de tokens visuales (sesión separada tras WU-03)
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-02 y WU-03
-rerun en esta sesión antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates
+WU-02 y WU-03 rerun en esta sesión antes de tocar nada). Sin PHP/Composer
+nativos: comandos PHP vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -116,23 +121,25 @@ rerun en esta sesión antes de tocar nada). Sin PHP/Composer nativos: comandos P
 | QA 1: `git diff --check` | Limpio | OK | Pass (local) |
 | QA 3: theme activa sin warnings/fatals | `wp theme activate camino-del-dharma` → Success, activo v0.1.0; `wp_is_block_theme()` = true en el entorno local | OK | Pass (local) |
 | QA 3: navegación representativa limpia | GET `/` 200 (presets `--wp--preset--color--brand-1: #8c2b3d`, familia body y `main.css` encolado presentes), `/?p=1` 200, `/wp-login.php` 200; `debug.log` no existe; sin `Set-Cookie` anónimo | OK | Pass (local) |
-| Ruta inexistente | 301 canónico de permalinks *plain* (observación heredada de WU-02; rutas reales y 404 se implementan en WU-05/WU-08) | — | Unverified |
+| Ruta inexistente | 301 canónico de permalinks _plain_ (observación heredada de WU-02; rutas reales y 404 se implementan en WU-05/WU-08) | — | Unverified |
 | Paridad visual con el estático (QA 4) | El scaffold no renderiza aún las vistas reales; comparación visual llega con plantillas (WU-07+) | — | Unverified |
 | `test.yml` / Sonar sobre el theme | Requiere push (rama local por diseño) | — | Unverified |
 
-Decisiones registradas: (1) `fontSizes` no se definen en el baseline — el `:root` del
-estático no tiene tokens de tamaño tipográfico; se añadirán cuando las plantillas los
-necesiten, sin inventar escala. (2) Los woff2 (MarloweEscapade/Fjalla One/Inter) no se
-copian aún al theme: los tokens son las pilas de familia; `fontFace` llega con las
-plantillas reales (WU-07+). (3) `parts/header|footer.html` son placeholders mínimos
-(bloque site-title) para registrar `templateParts`; el markup real es de WU-07+.
-(4) `register_nav_menus()` (docs/12 §11.1) se pospone: un block theme gestiona menús con
-el bloque Navigation; se revisará al construir `parts/header.html` real.
+Decisiones registradas: (1) `fontSizes` no se definen en el baseline — el
+`:root` del estático no tiene tokens de tamaño tipográfico; se añadirán cuando
+las plantillas los necesiten, sin inventar escala. (2) Los woff2
+(MarloweEscapade/Fjalla One/Inter) no se copian aún al theme: los tokens son las
+pilas de familia; `fontFace` llega con las plantillas reales (WU-07+). (3)
+`parts/header|footer.html` son placeholders mínimos (bloque site-title) para
+registrar `templateParts`; el markup real es de WU-07+. (4)
+`register_nav_menus()` (docs/12 §11.1) se pospone: un block theme gestiona menús
+con el bloque Navigation; se revisará al construir `parts/header.html` real.
 
 ## WU-05 — Modelos de dominio, routing y datos de calendario/ICS (sesión separada tras WU-04)
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-03 y WU-04
-rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates
+WU-03 y WU-04 rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP
+vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -158,44 +165,53 @@ rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 | QA 1: audit de dependencias | `composer audit --locked` → sin advisories | OK | Pass (local) |
 | QA 1: `git diff --check` | Limpio | OK | Pass (local) |
 | QA 3: plugin 0.2.0 en el entorno local | Upgrade versionado (`cdd_core_maybe_upgrade`): `cdd_core_version` = 0.2.0, flush en upgrade (no por request); `wp post-type list` → `event`/`blog_author` públicos; `event_type`/`event_city` no públicos; `gallery_album` público; GET `/` 200 sin warnings; `debug.log` inexistente | OK | Pass (local) |
-| QA 3: HTTP real de rutas bonitas (curl 200/404/410, redirects) | El entorno local sigue con permalinks *plain* (la estructura `/blog/%postname%` es ajuste de sitio de WU-06/07); verificación HTTP entrante completa = harness nivel 3 / staging | — | Unverified |
+| QA 3: HTTP real de rutas bonitas (curl 200/404/410, redirects) | El entorno local sigue con permalinks _plain_ (la estructura `/blog/%postname%` es ajuste de sitio de WU-06/07); verificación HTTP entrante completa = harness nivel 3 / staging | — | Unverified |
 | noindex de `/author`, álbumes y tags; JSON-LD; sitemap | Superficie SEO de WU-08 (los inputs de dominio ya existen) | — | Unverified |
 | `test.yml` / Sonar sobre `includes/` | Requiere push (rama local por diseño) | — | Unverified |
 
 Decisiones registradas (WU-05):
 
-1. **Nombres de meta = doc 03** (`event_date`, `event_end`, `event_place`, `event_modality`,
-   `event_status`, `event_featured`, `event_signup_url`, `event_signup_payment`) y meta del
-   post `authors` **sin prefijo** — es el contrato literal de ADR 0037 §6 y del modelo de
-   contenido; el prefijo `cdd_core` aplica a funciones/clases/hooks/opciones (la opción es
-   `cdd_core_version`). `event_name`/`event_description` no existen como meta: título y
-   contenido nativos (doc 03 §3).
-2. **`event_signup_payment` es boolean** (doc 03 lo dejaba «boolean o url»): el pago siempre
-   redirige vía `event_signup_url`; una segunda URL sería redundante.
-3. **`event_calendar_dates` (array Y-m-d, opcional)**: el calendario publicado marca días de
-   sesión sueltos (Círculos: 3, 10, 15, 17, 22, 24, 29 sep), no un rango contiguo — el rango
-   `event_date..event_end` solo es el fallback. Campo derivado del contrato de producción
-   (ADR 0034); el extractor de WU-06 debe poblarlo para Círculos.
-4. **DESCRIPTION del `.ics` = excerpt editorial** (omitida si no hay): los `.ics` vivos llevan
-   copy editorial por evento; el extractor WU-06 trae ese copy, el plugin no lo inventa.
-   ORGANIZER = comunidad + `caminodeldharma1@gmail.com` (paridad con producción).
-5. **Guard REST del publish** (`rest_pre_insert_post` + stash por request): REST aplica el
-   meta después del insert; sin el stash, publicar con autores en el mismo request fallaría.
-   Path programático: demote a draft; path REST: error 400 explícito.
-6. **Archivos de usuario WP**: filtro `author_rewrite_rules` → vacío + filtro `request`
-   (`author`/`author_name` → `error=404`). Sin tocar el query var `blog_author`.
-7. **Herramienta «Eliminar huérfanos» (OWN-015) pospuesta a WU-08**: el `.ics` de WordPress
-   se genera bajo demanda y no escribe archivos — el único huérfano posible es el legado del
-   estático, que se resuelve en el corte; la pantalla wp-admin llega con la capa de admin.
-8. Gotcha wp-phpunit documentado en los tests: `tear_down` desregistra **todo** el meta
-   registrado (solo sobreviven los hooks de sanitización por el backup de hooks) y
-   `register_post_type` solo añade permastructs si hay estructura de permalinks al
-   registrarse — los tests de rutas re-registran los objetos tras `set_permalink_structure`.
+1. **Nombres de meta = doc 03** (`event_date`, `event_end`, `event_place`,
+   `event_modality`, `event_status`, `event_featured`, `event_signup_url`,
+   `event_signup_payment`) y meta del post `authors` **sin prefijo** — es el
+   contrato literal de ADR 0037 §6 y del modelo de contenido; el prefijo
+   `cdd_core` aplica a funciones/clases/hooks/opciones (la opción es
+   `cdd_core_version`). `event_name`/`event_description` no existen como meta:
+   título y contenido nativos (doc 03 §3).
+2. **`event_signup_payment` es boolean** (doc 03 lo dejaba «boolean o url»): el
+   pago siempre redirige vía `event_signup_url`; una segunda URL sería
+   redundante.
+3. **`event_calendar_dates` (array Y-m-d, opcional)**: el calendario publicado
+   marca días de sesión sueltos (Círculos: 3, 10, 15, 17, 22, 24, 29 sep), no un
+   rango contiguo — el rango `event_date..event_end` solo es el fallback. Campo
+   derivado del contrato de producción (ADR 0034); el extractor de WU-06 debe
+   poblarlo para Círculos.
+4. **DESCRIPTION del `.ics` = excerpt editorial** (omitida si no hay): los
+   `.ics` vivos llevan copy editorial por evento; el extractor WU-06 trae ese
+   copy, el plugin no lo inventa. ORGANIZER = comunidad +
+   `caminodeldharma1@gmail.com` (paridad con producción).
+5. **Guard REST del publish** (`rest_pre_insert_post` + stash por request): REST
+   aplica el meta después del insert; sin el stash, publicar con autores en el
+   mismo request fallaría. Path programático: demote a draft; path REST: error
+   400 explícito.
+6. **Archivos de usuario WP**: filtro `author_rewrite_rules` → vacío + filtro
+   `request` (`author`/`author_name` → `error=404`). Sin tocar el query var
+   `blog_author`.
+7. **Herramienta «Eliminar huérfanos» (OWN-015) pospuesta a WU-08**: el `.ics`
+   de WordPress se genera bajo demanda y no escribe archivos — el único huérfano
+   posible es el legado del estático, que se resuelve en el corte; la pantalla
+   wp-admin llega con la capa de admin.
+8. Gotcha wp-phpunit documentado en los tests: `tear_down` desregistra **todo**
+   el meta registrado (solo sobreviven los hooks de sanitización por el backup
+   de hooks) y `register_post_type` solo añade permastructs si hay estructura de
+   permalinks al registrarse — los tests de rutas re-registran los objetos tras
+   `set_permalink_structure`.
 
 ## WU-06 — Extractor, payload, importador WP-CLI y reconciliación (sesión separada tras WU-05)
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates WU-03/04/05
-rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + gates
+WU-03/04/05 rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP
+vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -208,7 +224,7 @@ rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 | Nivel 2 verde (importador) | `run-phpunit-wp.sh` → OK (**43 tests, 313 assertions**): validate rechaza archivos ausentes/autores desconocidos; payload real valida limpio contra `static/`; dry-run no escribe; apply crea fichas/medios (alt de producción, término de álbum, posición)/eventos (meta, términos no públicos, cartel como featured)/posts (relación `authors` ordenada)/páginas (jerarquía + URLs de medios reescritas a la biblioteca); idempotente (2.º apply crea 0); una edición wp-admin sobrevive re-import; evento con fecha futura importa `publish` (no `future`); settings (front page, posts page, permalinks ADR 0008) con flush **con** permastructs re-registrados; guard de producción exige `--confirm-production` + `--backup-evidence`; verify reconcilia | OK | Pass (local) |
 | QA 1 | `php -l` OK; PHPCS **0 errores / 0 warnings**; `composer audit --locked` sin advisories; `git diff --check` limpio | OK | Pass (local) |
 | QA 2/3: pipeline real contra el entorno local | Mounts RO `migration/` + `static/` en wpcli. `wp cdd-core migrate validate` → válido; `import` (dry) → plan 109 create; `import --apply` → 2+81+3+10+2+11 creados, 35 asignaciones de álbum, settings aplicados; `verify` → 0 missing, 6/6 colecciones reconcilian; 2.º `--apply` → 0 created / 109 skipped | OK | Pass (local) |
-| Bugs cazados por el QA (test de regresión + fix) | (1) Evento vigente con `event_date` futura quedaba `future` (invisible) — fix: sin `post_date` de evento; recreado vía create-missing-only (borrado puntual + re-import → created 1/skipped 9). (2) El flush del importador corría sin permastructs de CPT (proceso CLI arrancado con permalinks *plain*) → rutas CPT 404 — fix: re-registro de dominio antes del flush; el env se corrigió con `wp rewrite flush --hard` único (semántica de upgrade) | OK | Pass (local) |
+| Bugs cazados por el QA (test de regresión + fix) | (1) Evento vigente con `event_date` futura quedaba `future` (invisible) — fix: sin `post_date` de evento; recreado vía create-missing-only (borrado puntual + re-import → created 1/skipped 9). (2) El flush del importador corría sin permastructs de CPT (proceso CLI arrancado con permalinks _plain_) → rutas CPT 404 — fix: re-registro de dominio antes del flush; el env se corrigió con `wp rewrite flush --hard` único (semántica de upgrade) | OK | Pass (local) |
 | QA 3: conteos reconcilian (baseline `docs/conteos-reconciliacion-migracion.md`) | pages 12 = 11 + «Sample Page» preexistente del install; events 10/10 (todas publish); posts 3 = 2 + «Hello world!» preexistente; blog_authors 2/2; attachments 81/81; álbumes 3/3; event_type 7 términos / event_city 5 (no públicos). Mismatches explicados = contenido demo del install local, no del payload; no existirá en el staging limpio | OK | Pass (local) |
 | QA 3: rutas HTTP entrantes (curl) | 200: `/`, 9 pages, `/eventos`, 10 singles probados (3+2 muestreados), `/galeria/{general,2023,2021}`, `/author` + 2 fichas, `/blog` + 2 posts, `.ics` vigente. **410**: `.ics` finalizado. **404 real**: ruta inexistente y `/?author=1`. **301** `/eventos/` → `/eventos` (sin barra final, ADR 0008) | OK | Pass (local) |
 | QA 3: `.ics` generado con paridad | Cabeceras `text/calendar` + `Content-Disposition` + `X-Robots-Tag: noindex, nofollow`; PRODID de producción; DTEND exclusivo (fin 2026-10-24 → 20261025); DESCRIPTION = copy editorial extraído (excerpt); host del UID/URL = entorno local (correcto: URLs del sitio que responde) | OK | Pass (local) |
@@ -219,34 +235,41 @@ rerun antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 
 Decisiones registradas (WU-06):
 
-1. **Fuente de fechas por precedencia**: JSON-LD ya publicado (single > listado) → texto español
-   de la card (`Cdd_Core_Spanish_Date`). Los slugs de cards sin enlace se resuelven por tabla
-   cartel→slug (constante del extractor, valores = ADR 0035; nunca se inventan).
-2. **`event_calendar_dates` de Círculos = cronograma del single** (10 sesiones sep–oct); el test
-   asegura que el subset de septiembre coincide exactamente con el calendario publicado.
-3. **Excerpt del evento** = descripción del control de calendario (con `{{EVENT_URL}}` resuelto)
-   cuando existe (paridad `.ics`), si no el lead de la card. **Hero del blog → featured image**
-   (fuera del contenido). **Contenido**: single filtrado > card filtrada (sin chrome).
-4. **Contenido importado como bloque `wp:html`** con URLs de medios reescritas a la biblioteca:
-   fiel al copy publicado, editable, y la conversión a bloques reales queda para WU-07 (si exige
-   tocar contenido importado, será update con force explícito de campo o edición wp-admin —
-   el hash `_cdd_source_hash` delata qué sigue intacto).
-5. **Página `blog` se importa con contenido vacío** (es la posts page; el listado lo hace la query).
-6. **`seed`**: `wp cdd-core seed` = solo colección media (nombre aprobado OWN-009-img); `migrate
-   import` incluye el mismo paso. Sin marcador de fixture, sin teardown. Huérfanas = attachments
-   sin adjuntar ni referenciar (OWN-003). Favicons/OG quedan fuera del seed (Site Icon es ajuste
-   de WU-07/08); `og-default.jpg` sí se siembra (referenciada vía meta).
-7. **Settings del import**: front page `inicio`, posts page `blog`, permalinks `/blog/%postname%`
-   (árbol docs/11, sin barra final). Solo en `--apply`.
-8. **Mounts RO** `./migration` y `./static` en el servicio wpcli (docker-compose.yml): el
-   importador lee, nunca escribe, la fuente.
-9. La sonda de paridad live usó red de solo lectura (GET públicos a `caminodeldharma.org`);
-   ninguna suite de tests depende de red.
+1. **Fuente de fechas por precedencia**: JSON-LD ya publicado (single > listado)
+   → texto español de la card (`Cdd_Core_Spanish_Date`). Los slugs de cards sin
+   enlace se resuelven por tabla cartel→slug (constante del extractor, valores =
+   ADR 0035; nunca se inventan).
+2. **`event_calendar_dates` de Círculos = cronograma del single** (10 sesiones
+   sep–oct); el test asegura que el subset de septiembre coincide exactamente
+   con el calendario publicado.
+3. **Excerpt del evento** = descripción del control de calendario (con
+   `{{EVENT_URL}}` resuelto) cuando existe (paridad `.ics`), si no el lead de la
+   card. **Hero del blog → featured image** (fuera del contenido).
+   **Contenido**: single filtrado > card filtrada (sin chrome).
+4. **Contenido importado como bloque `wp:html`** con URLs de medios reescritas a
+   la biblioteca: fiel al copy publicado, editable, y la conversión a bloques
+   reales queda para WU-07 (si exige tocar contenido importado, será update con
+   force explícito de campo o edición wp-admin — el hash `_cdd_source_hash`
+   delata qué sigue intacto).
+5. **Página `blog` se importa con contenido vacío** (es la posts page; el
+   listado lo hace la query).
+6. **`seed`**: `wp cdd-core seed` = solo colección media (nombre aprobado
+   OWN-009-img); `migrate import` incluye el mismo paso. Sin marcador de
+   fixture, sin teardown. Huérfanas = attachments sin adjuntar ni referenciar
+   (OWN-003). Favicons/OG quedan fuera del seed (Site Icon es ajuste de
+   WU-07/08); `og-default.jpg` sí se siembra (referenciada vía meta).
+7. **Settings del import**: front page `inicio`, posts page `blog`, permalinks
+   `/blog/%postname%` (árbol docs/11, sin barra final). Solo en `--apply`.
+8. **Mounts RO** `./migration` y `./static` en el servicio wpcli
+   (docker-compose.yml): el importador lee, nunca escribe, la fuente.
+9. La sonda de paridad live usó red de solo lectura (GET públicos a
+   `caminodeldharma.org`); ninguna suite de tests depende de red.
 
 ## WU-07 — Pages, posts, autores, media, plantillas FSE y galería (sesión separada tras WU-06)
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + rerun de todos los
-gates WU-02…WU-06 antes de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (reanudación: preflight + rerun de
+todos los gates WU-02…WU-06 antes de tocar nada). Sin PHP/Composer nativos:
+comandos PHP vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -268,43 +291,55 @@ gates WU-02…WU-06 antes de tocar nada). Sin PHP/Composer nativos: comandos PHP
 | Share / añadir al calendario / audio (diálogos JS) | Alcance WU-08 (mitad de `calendar.js` + `share.js`) | — | Unverified |
 | CI/Sonar | Requiere push (rama local por diseño) | — | Unverified |
 
-Decisiones y sustituciones registradas (WU-07) — ver también la matriz de migración:
+Decisiones y sustituciones registradas (WU-07) — ver también la matriz de
+migración:
 
-1. **Tarjeta compacta para finalizados** (doc 03 §3 «Densidad»): sustitución deliberada de las
-   cards completas del estático (miniatura, tipo, título, ciudad · fecha, «Ver evento →», badge).
-2. **Fechas de evento generadas** desde `event_date`/`event_end` con reglas calibradas contra
-   el copy publicado (7 de 10 idénticas; enumeración `07, 08 y 09` con cero a la izquierda).
-   Las filas `Hora` y `Aporte` de algunas cards estáticas no viven en el modelo doc 03 y no se
-   renderizan — remedio editorial: añadirlas al contenido del evento vía wp-admin si se desean.
-3. **Card vigente del listado** = intro del single (contenido hasta el primer `h2`) + dl + CTA;
-   el resumen manual de la card estática no existe como campo.
-4. **CTA de inscripción** con label fijo «Preinscribirme» (coincide con el único evento vigente
-   publicado); revisar en WU-08 si un evento futuro necesita «Inscribirme».
-5. **Excerpt del listado del blog** = deck editorial (post_excerpt), no el recorte manual del
-   primer párrafo del estático. Tiempo de lectura = round(palabras/200): Círculos 5′ = publicado;
-   Sangha 6′ vs 8′ publicado (delta registrado, valor manual no derivable).
-6. **Byline enlazada** a `/author/{slug}` (ADR 0037; el estático la publica sin enlace).
-7. **`<picture>`/WebP/thumbs hechos a mano no migran** (doc 03 §5.1): la biblioteca sirve JPG
-   y derivados; conversión documentada.
-8. **Encabezados de álbum enlazan al término** (opcional permitido por ADR 0036) y el término
-   pinta galería nativa con h1 «Galería · {título}» y volver al hub.
-9. **Discrepancia doc 03 resuelta a favor de producción**: `event_modality` pasa de select
-   (presencial/virtual/híbrido) a texto libre saneado — el copy publicado es descriptivo.
-10. **Copy nuevo mínimo con OWN-016**: «Entradas del Maestro Zheng Gong en el blog» y
-    «Entradas de la Comunidad en el blog» (ajustable en wp-admin; conversión reversible).
-11. **Header/footer como patterns PHP** referenciados desde las parts (URLs generadas con
-    `home_url()`; logo como asset del theme); bloque Navigation nativo reevaluable después del
-    corte sin tocar contenido.
-12. **Strings estructurales de listados** («Blog», intro, «Eventos», copy 404 de docs/08-09) viven
-    en las plantillas/bloques: la posts page y el archive no leen contenido de una Page.
-13. Harness wp-phpunit con `WP_DEFAULT_THEME=camino-del-dharma` + `register_theme_directory`
-    en el bootstrap: los 60 tests corren con el theme real activo.
+1. **Tarjeta compacta para finalizados** (doc 03 §3 «Densidad»): sustitución
+   deliberada de las cards completas del estático (miniatura, tipo, título,
+   ciudad · fecha, «Ver evento →», badge).
+2. **Fechas de evento generadas** desde `event_date`/`event_end` con reglas
+   calibradas contra el copy publicado (7 de 10 idénticas; enumeración
+   `07, 08 y 09` con cero a la izquierda). Las filas `Hora` y `Aporte` de
+   algunas cards estáticas no viven en el modelo doc 03 y no se renderizan —
+   remedio editorial: añadirlas al contenido del evento vía wp-admin si se
+   desean.
+3. **Card vigente del listado** = intro del single (contenido hasta el primer
+   `h2`) + dl + CTA; el resumen manual de la card estática no existe como campo.
+4. **CTA de inscripción** con label fijo «Preinscribirme» (coincide con el único
+   evento vigente publicado); revisar en WU-08 si un evento futuro necesita
+   «Inscribirme».
+5. **Excerpt del listado del blog** = deck editorial (post_excerpt), no el
+   recorte manual del primer párrafo del estático. Tiempo de lectura =
+   round(palabras/200): Círculos 5′ = publicado; Sangha 6′ vs 8′ publicado
+   (delta registrado, valor manual no derivable).
+6. **Byline enlazada** a `/author/{slug}` (ADR 0037; el estático la publica sin
+   enlace).
+7. **`<picture>`/WebP/thumbs hechos a mano no migran** (doc 03 §5.1): la
+   biblioteca sirve JPG y derivados; conversión documentada.
+8. **Encabezados de álbum enlazan al término** (opcional permitido por ADR 0036)
+   y el término pinta galería nativa con h1 «Galería · {título}» y volver al
+   hub.
+9. **Discrepancia doc 03 resuelta a favor de producción**: `event_modality` pasa
+   de select (presencial/virtual/híbrido) a texto libre saneado — el copy
+   publicado es descriptivo.
+10. **Copy nuevo mínimo con OWN-016**: «Entradas del Maestro Zheng Gong en el
+    blog» y «Entradas de la Comunidad en el blog» (ajustable en wp-admin;
+    conversión reversible).
+11. **Header/footer como patterns PHP** referenciados desde las parts (URLs
+    generadas con `home_url()`; logo como asset del theme); bloque Navigation
+    nativo reevaluable después del corte sin tocar contenido.
+12. **Strings estructurales de listados** («Blog», intro, «Eventos», copy 404 de
+    docs/08-09) viven en las plantillas/bloques: la posts page y el archive no
+    leen contenido de una Page.
+13. Harness wp-phpunit con `WP_DEFAULT_THEME=camino-del-dharma` +
+    `register_theme_directory` en el bootstrap: los 60 tests corren con el theme
+    real activo.
 
 ## WU-08A — Comportamiento front: compartir, añadir al calendario, audio de mantras
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, sin FABLE5 pegado; reanudación:
-preflight + rerun de los gates WU-03…WU-07 antes de tocar nada). Sin PHP/Composer nativos:
-comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, sin FABLE5
+pegado; reanudación: preflight + rerun de los gates WU-03…WU-07 antes de tocar
+nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -328,47 +363,56 @@ comandos PHP vía Docker.
 
 Decisiones y deltas registrados (WU-08A):
 
-1. **El copy de compartir es contenido de producción, no texto generado** (ADR 0034): las 9
-   plantillas `<template>` hand-written viajan por el payload (`share.whatsapp|x|threads`) y
-   viven como meta editable `share_whatsapp`/`share_x`/`share_threads` en `event` y `post`.
-   Nada se regenera desde el título: un objeto sin copy publicado no imprime `<template>`
-   alguno y `share.js` cae a su fallback (título + URL).
-2. **Ruta de datos doble**: el importador escribe la meta al crear (staging parte con ella) y
-   `wp cdd-core migrate convert --payload=<path>` la siembra en objetos ya importados. La
-   siembra es **add-only**: una clave existente —incluida una que la editora vació a
-   propósito— nunca se reescribe (ADR 0033).
-3. **Diálogo de calendario y `.ics` comparten fuente** (`cdd_core_event_calendar_payload`): el
-   enlace de Google/Outlook y el archivo descargado no pueden divergir. Consecuencia: el
-   diálogo hereda los deltas ya aceptados en WU-06 del `.ics` de WordPress frente al `.ics`
-   publicado — `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida») y
-   `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)»). El tercer delta (`DTEND`
-   = fin del rango, 20261025) era **BUG-001**, cerrado en su sesión propia justo antes de WU-10:
-   el `.ics` exportado incluye ahora **todas las sesiones**. Ver § BUG-001.
-4. **`data-share-description` no se emite**: `share.js` lo lee pero no lo usa en ningún punto
-   del diálogo. Su contenido (para el blog) coincide con la meta description, que es superficie
-   de **WU-08B**; migrarlo ahora sería duplicar ese trabajo.
-5. **Diálogos solo en vigentes** (contrato §4 / OWN-012), como publica producción: el single
-   finalizado no ofrece compartir ni calendario. El blog siempre ofrece compartir.
-6. **Los mantras pasan a `core/audio` nativo** (mismo criterio que ADR 0021 con la galería). Se
-   pierden el texto de respaldo («Tu navegador no permite reproducir este audio.») y el
-   `aria-label` del markup guardado; el nombre accesible se restaura en presentación con un
-   filtro `render_block` del theme a partir del `figcaption`. Efecto colateral saneado: el
-   artefacto `</source>` que dejaba DOMDocument desaparece del contenido.
-7. **`calendar.js` queda partido en dos archivos del theme** (`calendar-dialog.js` +
-   `calendar-tooltips.js`), encolados por separado y solo cuando el bloque correspondiente
-   renderiza. Un test protege que el tooltip no se duplique y que ningún comportamiento del
-   original se haya perdido.
-8. **Fixture de `/practica` con kses levantado**: el importador corre bajo WP-CLI, donde los
-   filtros kses no están activos y el `<source>` publicado sobrevive; `source` no es tag
-   permitido por kses, así que el test debe reproducir la ruta real y no una empobrecida.
+1. **El copy de compartir es contenido de producción, no texto generado** (ADR
+   0034): las 9 plantillas `<template>` hand-written viajan por el payload
+   (`share.whatsapp|x|threads`) y viven como meta editable
+   `share_whatsapp`/`share_x`/`share_threads` en `event` y `post`. Nada se
+   regenera desde el título: un objeto sin copy publicado no imprime
+   `<template>` alguno y `share.js` cae a su fallback (título + URL).
+2. **Ruta de datos doble**: el importador escribe la meta al crear (staging
+   parte con ella) y `wp cdd-core migrate convert --payload=<path>` la siembra
+   en objetos ya importados. La siembra es **add-only**: una clave existente
+   —incluida una que la editora vació a propósito— nunca se reescribe (ADR
+   0033).
+3. **Diálogo de calendario y `.ics` comparten fuente**
+   (`cdd_core_event_calendar_payload`): el enlace de Google/Outlook y el archivo
+   descargado no pueden divergir. Consecuencia: el diálogo hereda los deltas ya
+   aceptados en WU-06 del `.ics` de WordPress frente al `.ics` publicado —
+   `SUMMARY` = título del evento (publicado: «Curso … — sesión de bienvenida») y
+   `LOCATION` = `event_place` (publicado: «Virtual (hora de Colombia)»). El
+   tercer delta (`DTEND` = fin del rango, 20261025) era **BUG-001**, cerrado en
+   su sesión propia justo antes de WU-10: el `.ics` exportado incluye ahora
+   **todas las sesiones**. Ver § BUG-001.
+4. **`data-share-description` no se emite**: `share.js` lo lee pero no lo usa en
+   ningún punto del diálogo. Su contenido (para el blog) coincide con la meta
+   description, que es superficie de **WU-08B**; migrarlo ahora sería duplicar
+   ese trabajo.
+5. **Diálogos solo en vigentes** (contrato §4 / OWN-012), como publica
+   producción: el single finalizado no ofrece compartir ni calendario. El blog
+   siempre ofrece compartir.
+6. **Los mantras pasan a `core/audio` nativo** (mismo criterio que ADR 0021 con
+   la galería). Se pierden el texto de respaldo («Tu navegador no permite
+   reproducir este audio.») y el `aria-label` del markup guardado; el nombre
+   accesible se restaura en presentación con un filtro `render_block` del theme
+   a partir del `figcaption`. Efecto colateral saneado: el artefacto `</source>`
+   que dejaba DOMDocument desaparece del contenido.
+7. **`calendar.js` queda partido en dos archivos del theme**
+   (`calendar-dialog.js` + `calendar-tooltips.js`), encolados por separado y
+   solo cuando el bloque correspondiente renderiza. Un test protege que el
+   tooltip no se duplique y que ningún comportamiento del original se haya
+   perdido.
+8. **Fixture de `/practica` con kses levantado**: el importador corre bajo
+   WP-CLI, donde los filtros kses no están activos y el `<source>` publicado
+   sobrevive; `source` no es tag permitido por kses, así que el test debe
+   reproducir la ruta real y no una empobrecida.
 
 ---
 
 ## WU-08B — SEO first-party, noindex, redirects, OWN-015 y a11y
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §9.5 + §10 únicamente;
-reanudación: preflight + rerun de los gates WU-03…WU-08A antes de tocar nada). Sin PHP/Composer
-nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §9.5 + §10
+únicamente; reanudación: preflight + rerun de los gates WU-03…WU-08A antes de
+tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -395,65 +439,76 @@ nativos: comandos PHP vía Docker.
 
 Decisiones y deltas registrados (WU-08B):
 
-1. **La cabeza publicada es contenido, no texto generado** (ADR 0034, OWN-007): título,
-   description, keywords y copy de Open Graph viajan en el payload (`seo`) y viven como meta
-   editable `seo_title`/`seo_description`/`seo_keywords`/`og_title`/`og_description` en `page`,
-   `post` y `event`. Un objeto sin copy publicado —los 7 eventos ADR 0035 que solo existen como
-   tarjeta— no imprime una cabeza inventada: cae al título real y omite la description.
-2. **`/eventos` no es una Page**: su cabeza publicada, los defaults sociales y el `@graph` del
-   Inicio viajan en una sección **`site` no contada** del payload y se siembran como la opción
-   `cdd_core_seo_site` (add-only). Los `counts` de reconciliación no cambian. La sección no tiene
-   UI propia todavía: se edita por WP-CLI hasta que exista una pantalla (fase posterior).
-3. **Todo URL almacenado se rebasa a `home_url()`** al renderizar. El payload guarda las URL de
-   producción; un staging jamás publica `caminodeldharma.org` como identidad propia. La imagen
-   social por defecto además se resuelve contra la biblioteca al sembrar la opción, para no
-   hotlinkear producción.
-4. **Nunca se inventa un campo opcional**: sin ciudades no hay `location`, sin fin no hay
-   `endDate`, sin cartel no hay `image`. La modalidad publicada es texto libre (OWN-007) y no se
-   parsea: el `eventAttendanceMode` sale de un campo propio `event_attendance_mode` extraído del
-   JSON-LD publicado, y queda vacío —campo omitido— en los eventos sin single.
-5. **La riqueza publicada que WordPress no puede re-derivar** (`additionalType`, `alternateName`,
-   `audience`, `performer`, `subjectOf`, precio y `validFrom` de la oferta) viaja como
-   `seo_jsonld_extra` y se fusiona **por debajo** del nodo generado: un campo generado siempre
-   gana, así que nada se queda obsoleto, y un evento finalizado descarta la oferta guardada
-   (§10.2). El `addressRegion` de cada ciudad es meta del término `event_city`.
-6. **Deltas aceptados frente al JSON-LD publicado**: `startDate`/`endDate` son fechas sin hora ni
-   offset (el modelo WU-05 guarda `Y-m-d`); la `description` del Event es la meta description
-   publicada (el estático publica una tercera cadena propia que ningún campo del modelo carga);
-   `/comunidad` emite BreadcrumbList en vez del `WebPage`+`Organization`+`Person` que publica el
+1. **La cabeza publicada es contenido, no texto generado** (ADR 0034, OWN-007):
+   título, description, keywords y copy de Open Graph viajan en el payload
+   (`seo`) y viven como meta editable
+   `seo_title`/`seo_description`/`seo_keywords`/`og_title`/`og_description` en
+   `page`, `post` y `event`. Un objeto sin copy publicado —los 7 eventos ADR
+   0035 que solo existen como tarjeta— no imprime una cabeza inventada: cae al
+   título real y omite la description.
+2. **`/eventos` no es una Page**: su cabeza publicada, los defaults sociales y
+   el `@graph` del Inicio viajan en una sección **`site` no contada** del
+   payload y se siembran como la opción `cdd_core_seo_site` (add-only). Los
+   `counts` de reconciliación no cambian. La sección no tiene UI propia todavía:
+   se edita por WP-CLI hasta que exista una pantalla (fase posterior).
+3. **Todo URL almacenado se rebasa a `home_url()`** al renderizar. El payload
+   guarda las URL de producción; un staging jamás publica `caminodeldharma.org`
+   como identidad propia. La imagen social por defecto además se resuelve contra
+   la biblioteca al sembrar la opción, para no hotlinkear producción.
+4. **Nunca se inventa un campo opcional**: sin ciudades no hay `location`, sin
+   fin no hay `endDate`, sin cartel no hay `image`. La modalidad publicada es
+   texto libre (OWN-007) y no se parsea: el `eventAttendanceMode` sale de un
+   campo propio `event_attendance_mode` extraído del JSON-LD publicado, y queda
+   vacío —campo omitido— en los eventos sin single.
+5. **La riqueza publicada que WordPress no puede re-derivar** (`additionalType`,
+   `alternateName`, `audience`, `performer`, `subjectOf`, precio y `validFrom`
+   de la oferta) viaja como `seo_jsonld_extra` y se fusiona **por debajo** del
+   nodo generado: un campo generado siempre gana, así que nada se queda
+   obsoleto, y un evento finalizado descarta la oferta guardada (§10.2). El
+   `addressRegion` de cada ciudad es meta del término `event_city`.
+6. **Deltas aceptados frente al JSON-LD publicado**: `startDate`/`endDate` son
+   fechas sin hora ni offset (el modelo WU-05 guarda `Y-m-d`); la `description`
+   del Event es la meta description publicada (el estático publica una tercera
+   cadena propia que ningún campo del modelo carga); `/comunidad` emite
+   BreadcrumbList en vez del `WebPage`+`Organization`+`Person` que publica el
    estático (doc 15 §12.5 pide BreadcrumbList en subpáginas).
-7. **`rel="alternate" type="text/calendar"`** usa el título del evento; el estático publica un
-   título hand-written («… — sesión de bienvenida») que ningún campo carga. Se emite solo
-   mientras el evento es vigente (OWN-014).
-8. **`tag_base` = `blog/tag`** (docs/11 §3.2): sin ese ajuste WordPress publicaría `/tag/{slug}`,
-   una URL que el árbol no contiene. Lo aplica el importador, como el resto de los settings.
-9. **El idioma del documento es un filtro, no un ajuste**: WordPress rechaza guardar en `WPLANG`
-   un locale cuyos archivos de traducción no están instalados, así que un entorno recién creado
-   servía `<html lang="en-US">` (fallo WCAG 3.1.1). `cdd_core_default_locale()` declara `es_CO`
-   y se aparta en cuanto una administradora elige idioma en Ajustes.
-10. **El `.htaccess` de WordPress corrige un bucle latente del estático**: la condición HTTPS
-    publicada usa `[OR]`, que tras un proxy con TLS terminado (HTTPS != on, `X-Forwarded-Proto` =
-    https) redirige una petición que ya es segura a una URL que vuelve a cumplir la condición. En
-    producción no se dispara porque Hostinger fija las dos señales. No se porta el bucle (§10.1)
+7. **`rel="alternate" type="text/calendar"`** usa el título del evento; el
+   estático publica un título hand-written («… — sesión de bienvenida») que
+   ningún campo carga. Se emite solo mientras el evento es vigente (OWN-014).
+8. **`tag_base` = `blog/tag`** (docs/11 §3.2): sin ese ajuste WordPress
+   publicaría `/tag/{slug}`, una URL que el árbol no contiene. Lo aplica el
+   importador, como el resto de los settings.
+9. **El idioma del documento es un filtro, no un ajuste**: WordPress rechaza
+   guardar en `WPLANG` un locale cuyos archivos de traducción no están
+   instalados, así que un entorno recién creado servía `<html lang="en-US">`
+   (fallo WCAG 3.1.1). `cdd_core_default_locale()` declara `es_CO` y se aparta
+   en cuanto una administradora elige idioma en Ajustes.
+10. **El `.htaccess` de WordPress corrige un bucle latente del estático**: la
+    condición HTTPS publicada usa `[OR]`, que tras un proxy con TLS terminado
+    (HTTPS != on, `X-Forwarded-Proto` = https) redirige una petición que ya es
+    segura a una URL que vuelve a cumplir la condición. En producción no se
+    dispara porque Hostinger fija las dos señales. No se porta el bucle (§10.1)
     y **no se toca el estático**.
-11. **Reglas solo-estáticas que no viajan**: `DirectoryIndex`, la reescritura de `index.html` y
-    `ErrorDocument 404` sombrearían el front controller de WordPress y fabricarían 404 blandos.
-    El ledger lo registra.
-12. **El sitemap pierde proveedores enteros**: usuarios (los archivos de autor de WP son 404,
-    ADR 0037 §5) y **todas** las taxonomías (categorías fuera del árbol; tags y álbumes
-    `noindex`). `/eventos` se añade subclasificando el proveedor de entradas, porque el núcleo no
-    expone filtro sobre la lista terminada.
-13. **Defectos de accesibilidad heredados del estático y corregidos solo en WordPress**: cuatro
-    SVG decorativos sin `focusable="false"`, y los archivos `/author` y `/blog/tag/{slug}` sin
-    `h1` (caían a `index.html`). Se añade `templates/archive.html` y
-    `templates/archive-blog_author.html`. Además se retira el skip link que el núcleo inyecta en
-    los block themes, duplicado del publicado y en el idioma del admin.
+11. **Reglas solo-estáticas que no viajan**: `DirectoryIndex`, la reescritura de
+    `index.html` y `ErrorDocument 404` sombrearían el front controller de
+    WordPress y fabricarían 404 blandos. El ledger lo registra.
+12. **El sitemap pierde proveedores enteros**: usuarios (los archivos de autor
+    de WP son 404, ADR 0037 §5) y **todas** las taxonomías (categorías fuera del
+    árbol; tags y álbumes `noindex`). `/eventos` se añade subclasificando el
+    proveedor de entradas, porque el núcleo no expone filtro sobre la lista
+    terminada.
+13. **Defectos de accesibilidad heredados del estático y corregidos solo en
+    WordPress**: cuatro SVG decorativos sin `focusable="false"`, y los archivos
+    `/author` y `/blog/tag/{slug}` sin `h1` (caían a `index.html`). Se añade
+    `templates/archive.html` y `templates/archive-blog_author.html`. Además se
+    retira el skip link que el núcleo inyecta en los block themes, duplicado del
+    publicado y en el idioma del admin.
 
 ## WU-09 — Contact Form 7 y los párrafos del formulario en `/privacidad`
 
-Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §10.3 + §10.4 únicamente;
-reanudación: preflight + rerun de los gates WU-03…WU-08B antes de tocar nada). Sin PHP/Composer
-nativos: comandos PHP vía Docker.
+Ejecutado 2026-08-31 sobre `fase3-wordpress` (sesión separada, FABLE5 §10.3 +
+§10.4 únicamente; reanudación: preflight + rerun de los gates WU-03…WU-08B antes
+de tocar nada). Sin PHP/Composer nativos: comandos PHP vía Docker.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -482,69 +537,82 @@ nativos: comandos PHP vía Docker.
 
 Decisiones y deltas registrados (WU-09):
 
-1. **El repositorio posee la *definición*, no el plugin.** CF7 6.1.7 se instala por entorno y su
-   código nunca viaja en Git (ADR 0025). Lo versionado es
-   `Cdd_Core_Contact_Form_Template`: la plantilla del formulario, la del correo y los mensajes.
-   `wp cdd-core contact provision` los escribe una vez, create-missing-only: lo que un editor
-   cambie después en wp-admin no se pisa (misma semántica que el importador, ADR 0033).
-2. **El botón publicado sobrevive.** `[submit]` de CF7 solo sabe imprimir un `<input>`, y
-   producción publica un `<button>` con el icono de envío. CF7 escucha el evento `submit` del
-   formulario, así que el `<button>` publicado lo acciona igual y conserva su icono. Coste: sin
-   el spinner de CF7 — que el DOM publicado tampoco tenía.
-3. **Deltas de DOM aceptados frente al formulario publicado** (inevitables, los imprime CF7):
-   `action="#"` pasa a la URL real; el `<form>` gana `novalidate`, `data-status` y las clases
-   `wpcf7-form init`; cada control queda envuelto en `<span class="wpcf7-form-control-wrap">` y
-   gana `size`, `maxlength` y `aria-required` en lugar del `required` nativo (CF7 valida en
-   servidor y en JS); aparecen el contenedor `.wpcf7` y `.screen-reader-response`. Todo lo demás
-   —clases, ids, `name`, `autocomplete`, etiquetas, iconos, botón— es el copy publicado.
-4. **El formulario es un bloque del theme, no un shortcode en el contenido.** Así la Page no
-   guarda un identificador de un plugin de terceros, y con CF7 apagado el visitante lee los
-   canales que sí funcionan en vez de la cadena `[contact-form-7 …]` en crudo. Es el fallback
-   operativo de ADR 0041 punto 5, implementado, no solo documentado. Efecto lateral útil: tras la
-   conversión `/contacto` ya no guarda `<form>`, así que KSES no puede mutilarla si la edita un
-   perfil sin `unfiltered_html`.
-5. **Los mensajes que lee un visitante son propios.** El locale del sitio lo fija
-   `cdd_core_default_locale()`, no `WPLANG`, así que WordPress nunca instala el paquete de
-   traducción de CF7 y sus cadenas saldrían en inglés. Se poseen los 8 mensajes que un formulario
-   de tres campos de texto puede producir; el resto (ficheros, fechas, números, quiz, captcha)
-   conserva los de CF7 porque ningún campo de este formulario puede provocarlos.
-   «Spam» y «fallo de envío» comparten texto a propósito: a un falso positivo no se le dice que
+1. **El repositorio posee la _definición_, no el plugin.** CF7 6.1.7 se instala
+   por entorno y su código nunca viaja en Git (ADR 0025). Lo versionado es
+   `Cdd_Core_Contact_Form_Template`: la plantilla del formulario, la del correo
+   y los mensajes. `wp cdd-core contact provision` los escribe una vez,
+   create-missing-only: lo que un editor cambie después en wp-admin no se pisa
+   (misma semántica que el importador, ADR 0033).
+2. **El botón publicado sobrevive.** `[submit]` de CF7 solo sabe imprimir un
+   `<input>`, y producción publica un `<button>` con el icono de envío. CF7
+   escucha el evento `submit` del formulario, así que el `<button>` publicado lo
+   acciona igual y conserva su icono. Coste: sin el spinner de CF7 — que el DOM
+   publicado tampoco tenía.
+3. **Deltas de DOM aceptados frente al formulario publicado** (inevitables, los
+   imprime CF7): `action="#"` pasa a la URL real; el `<form>` gana `novalidate`,
+   `data-status` y las clases `wpcf7-form init`; cada control queda envuelto en
+   `<span class="wpcf7-form-control-wrap">` y gana `size`, `maxlength` y
+   `aria-required` en lugar del `required` nativo (CF7 valida en servidor y en
+   JS); aparecen el contenedor `.wpcf7` y `.screen-reader-response`. Todo lo
+   demás —clases, ids, `name`, `autocomplete`, etiquetas, iconos, botón— es el
+   copy publicado.
+4. **El formulario es un bloque del theme, no un shortcode en el contenido.**
+   Así la Page no guarda un identificador de un plugin de terceros, y con CF7
+   apagado el visitante lee los canales que sí funcionan en vez de la cadena
+   `[contact-form-7 …]` en crudo. Es el fallback operativo de ADR 0041 punto 5,
+   implementado, no solo documentado. Efecto lateral útil: tras la conversión
+   `/contacto` ya no guarda `<form>`, así que KSES no puede mutilarla si la
+   edita un perfil sin `unfiltered_html`.
+5. **Los mensajes que lee un visitante son propios.** El locale del sitio lo
+   fija `cdd_core_default_locale()`, no `WPLANG`, así que WordPress nunca
+   instala el paquete de traducción de CF7 y sus cadenas saldrían en inglés. Se
+   poseen los 8 mensajes que un formulario de tres campos de texto puede
+   producir; el resto (ficheros, fechas, números, quiz, captcha) conserva los de
+   CF7 porque ningún campo de este formulario puede provocarlos. «Spam» y «fallo
+   de envío» comparten texto a propósito: a un falso positivo no se le dice que
    parecía spam.
-6. **Sin token de error en el sistema visual.** El maquetado estático nunca tuvo un formulario que
-   enviara, así que no hay color publicado para un estado de error. Se alinea el ritmo (márgenes,
-   radio) al resto de la página y se dejan los colores de estado de CF7 en vez de inventar una
-   pareja error/éxito que producción no especifica.
-7. **`autop` desactivado solo para este formulario.** CF7 autoformatea la plantilla y envolvería
-   las etiquetas, los `div` y el botón escritos a mano en `<p>` sueltos. El filtro compara con el
-   id provisionado: un formulario que un editor cree más adelante conserva el comportamiento por
-   defecto de CF7.
-8. **El gate de ADR 0041 punto 3 es código, no una nota.** `contact provision` lee la Page
-   `/privacidad` publicada y rehúsa mientras el §2.2 no describa un envío real, señalando
-   `wp cdd-core migrate convert --apply`. Y `convert` recorre `privacidad` **antes** que
-   `contacto`, de modo que el aviso es cierto antes de que el formulario llegue a la página.
-9. **La cláusula del recuadro se retira, no se reescribe.** ADR 0041 aprueba quitar «cuando el
-   formulario de contacto pase a enviarse a un servidor»; la frase publicada se conserva íntegra
-   menos esa cláusula («Su redacción podrá cambiar tras esa revisión.»), que es la lectura más
-   fiel de «no reescribir el resto del aviso».
-10. **El correo de §2.2 va en texto plano**, sin `mailto:`, porque el copy aprobado es texto: el
-    enlace sería marcado añadido, no copy aprobado. §6 sigue enlazándolo como ya lo publicaba.
-11. **El harness hermético no ejecuta CF7 y así se declara.** El código de terceros no viaja en
-    Git, así que la rama «CF7 presente» no se prueba en la suite: se prueba lo propio en ambos
-    estados y la integración real se verifica contra un entorno real. En el harness, además, KSES
-    borra `<form>` de cualquier fixture, así que el test de WU-09 retira esos filtros para
-    almacenar el contenido publicado tal cual (WP-CLI, que es por donde importan los entornos
-    reales, no los instala).
-12. **`Pass (local)` ≠ entrega.** La validación del formulario está probada de extremo a extremo;
-    `wp_mail()` falla en Docker por falta de MTA. La entrega a `caminodeldharma1@gmail.com` se
-    verifica en staging Hostinger antes del release; si allí falla, el corte puede seguir con CF7
-    deshabilitado y WhatsApp/correo — fallo operativo, no gate jurídico.
+6. **Sin token de error en el sistema visual.** El maquetado estático nunca tuvo
+   un formulario que enviara, así que no hay color publicado para un estado de
+   error. Se alinea el ritmo (márgenes, radio) al resto de la página y se dejan
+   los colores de estado de CF7 en vez de inventar una pareja error/éxito que
+   producción no especifica.
+7. **`autop` desactivado solo para este formulario.** CF7 autoformatea la
+   plantilla y envolvería las etiquetas, los `div` y el botón escritos a mano en
+   `<p>` sueltos. El filtro compara con el id provisionado: un formulario que un
+   editor cree más adelante conserva el comportamiento por defecto de CF7.
+8. **El gate de ADR 0041 punto 3 es código, no una nota.** `contact provision`
+   lee la Page `/privacidad` publicada y rehúsa mientras el §2.2 no describa un
+   envío real, señalando `wp cdd-core migrate convert --apply`. Y `convert`
+   recorre `privacidad` **antes** que `contacto`, de modo que el aviso es cierto
+   antes de que el formulario llegue a la página.
+9. **La cláusula del recuadro se retira, no se reescribe.** ADR 0041 aprueba
+   quitar «cuando el formulario de contacto pase a enviarse a un servidor»; la
+   frase publicada se conserva íntegra menos esa cláusula («Su redacción podrá
+   cambiar tras esa revisión.»), que es la lectura más fiel de «no reescribir el
+   resto del aviso».
+10. **El correo de §2.2 va en texto plano**, sin `mailto:`, porque el copy
+    aprobado es texto: el enlace sería marcado añadido, no copy aprobado. §6
+    sigue enlazándolo como ya lo publicaba.
+11. **El harness hermético no ejecuta CF7 y así se declara.** El código de
+    terceros no viaja en Git, así que la rama «CF7 presente» no se prueba en la
+    suite: se prueba lo propio en ambos estados y la integración real se
+    verifica contra un entorno real. En el harness, además, KSES borra `<form>`
+    de cualquier fixture, así que el test de WU-09 retira esos filtros para
+    almacenar el contenido publicado tal cual (WP-CLI, que es por donde importan
+    los entornos reales, no los instala).
+12. **`Pass (local)` ≠ entrega.** La validación del formulario está probada de
+    extremo a extremo; `wp_mail()` falla en Docker por falta de MTA. La entrega
+    a `caminodeldharma1@gmail.com` se verifica en staging Hostinger antes del
+    release; si allí falla, el corte puede seguir con CF7 deshabilitado y
+    WhatsApp/correo — fallo operativo, no gate jurídico.
 
 ## BUG-001 — El `.ics` de Círculos incluye todas las sesiones
 
-Sesión propia entre WU-09 y WU-10 (backlog de dueño v1.23). Decisión del dueño (2026-08-31): ni
-el estático publicado (un VEVENT de la bienvenida, 3–4 sep) ni la salida de WordPress hasta hoy
-(un VEVENT del rango 3 sep → 25 oct) son el contrato; el exportado debe incluir **todas** las
-sesiones ya extraídas en `event_calendar_dates` / `calendar_dates` del payload.
+Sesión propia entre WU-09 y WU-10 (backlog de dueño v1.23). Decisión del dueño
+(2026-08-31): ni el estático publicado (un VEVENT de la bienvenida, 3–4 sep) ni
+la salida de WordPress hasta hoy (un VEVENT del rango 3 sep → 25 oct) son el
+contrato; el exportado debe incluir **todas** las sesiones ya extraídas en
+`event_calendar_dates` / `calendar_dates` del payload.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -562,46 +630,53 @@ sesiones ya extraídas en `event_calendar_dates` / `calendar_dates` del payload.
 
 Decisiones y deltas registrados (BUG-001):
 
-1. **Un VEVENT por sesión, no una regla de repetición.** El cronograma de Círculos es irregular
-   (3, 10, 15, 17, 22, 24, 29 sep; 1, 17, 24 oct): no hay `RRULE` que lo describa sin `RDATE`
-   sueltas. Diez VEVENT con UID propio es la forma RFC 5545 que cualquier cliente almacena como
-   diez entradas separadas.
-2. **El UID solo se sufija cuando hay cronograma.** Un evento sin sesiones conserva
-   `slug@host`, el UID que producción ya publicó: un visitante que añadió el Encuentro Nacional
-   no ve un duplicado. Las sesiones usan `slug-Ymd@host`.
-3. **El archivo es el cronograma completo, también hacia atrás.** Se exportan las sesiones ya
-   celebradas mientras el curso siga vigente; un cliente que lo abra a mitad de curso ve el
-   proceso entero, no solo lo que queda. Cuando el curso termina manda OWN-012: 410 y nada.
-4. **Un enlace profundo lleva una sola entrada.** Google Calendar y Outlook no aceptan diez
-   fechas en una URL, así que el diálogo pasa de describir un rango que no existe en ningún
-   VEVENT a nombrar **la próxima sesión**, una fecha que el archivo sí contiene. Apple Calendar
-   y «Descargar archivo .ics» siguen entregando las diez.
-5. **La nota es copy nuevo, no copy publicado.** El estático nunca tuvo esta situación, así que
-   no hay frase publicada que respetar (OWN-007 no aplica). Se añade una sola línea, en la voz
-   del sitio, y solo cuando hay más de una sesión: «El archivo .ics incluye las 10 sesiones del
-   curso. Google Calendar y Outlook añaden la próxima: Jueves 3 de septiembre de 2026.» Se
-   expone como `aria-describedby` del diálogo (docs/19): quien usa lector de pantalla la oye al
-   abrirlo, no después de elegir.
-6. **La pareja compacta y las fechas del archivo tienen forma distinta a propósito.** El payload
-   lleva las ocurrencias en forma inclusiva (`start_date`/`end_date`, lo que consume el
-   generador) y la pareja compacta con fin exclusivo (`start`/`end`, lo que consumen los enlaces
-   profundos). Mezclarlas empujaba cada `DTEND` un día de más; lo detectó el test de nivel 2
-   antes que ningún cliente de calendario, y `cdd_core_ics_occurrence()` es hoy el único punto
-   de traducción entre ambas.
+1. **Un VEVENT por sesión, no una regla de repetición.** El cronograma de
+   Círculos es irregular (3, 10, 15, 17, 22, 24, 29 sep; 1, 17, 24 oct): no hay
+   `RRULE` que lo describa sin `RDATE` sueltas. Diez VEVENT con UID propio es la
+   forma RFC 5545 que cualquier cliente almacena como diez entradas separadas.
+2. **El UID solo se sufija cuando hay cronograma.** Un evento sin sesiones
+   conserva `slug@host`, el UID que producción ya publicó: un visitante que
+   añadió el Encuentro Nacional no ve un duplicado. Las sesiones usan
+   `slug-Ymd@host`.
+3. **El archivo es el cronograma completo, también hacia atrás.** Se exportan
+   las sesiones ya celebradas mientras el curso siga vigente; un cliente que lo
+   abra a mitad de curso ve el proceso entero, no solo lo que queda. Cuando el
+   curso termina manda OWN-012: 410 y nada.
+4. **Un enlace profundo lleva una sola entrada.** Google Calendar y Outlook no
+   aceptan diez fechas en una URL, así que el diálogo pasa de describir un rango
+   que no existe en ningún VEVENT a nombrar **la próxima sesión**, una fecha que
+   el archivo sí contiene. Apple Calendar y «Descargar archivo .ics» siguen
+   entregando las diez.
+5. **La nota es copy nuevo, no copy publicado.** El estático nunca tuvo esta
+   situación, así que no hay frase publicada que respetar (OWN-007 no aplica).
+   Se añade una sola línea, en la voz del sitio, y solo cuando hay más de una
+   sesión: «El archivo .ics incluye las 10 sesiones del curso. Google Calendar y
+   Outlook añaden la próxima: Jueves 3 de septiembre de 2026.» Se expone como
+   `aria-describedby` del diálogo (docs/19): quien usa lector de pantalla la oye
+   al abrirlo, no después de elegir.
+6. **La pareja compacta y las fechas del archivo tienen forma distinta a
+   propósito.** El payload lleva las ocurrencias en forma inclusiva
+   (`start_date`/`end_date`, lo que consume el generador) y la pareja compacta
+   con fin exclusivo (`start`/`end`, lo que consumen los enlaces profundos).
+   Mezclarlas empujaba cada `DTEND` un día de más; lo detectó el test de nivel 2
+   antes que ningún cliente de calendario, y `cdd_core_ics_occurrence()` es hoy
+   el único punto de traducción entre ambas.
 7. **El estático no se toca** (memoria del proyecto + decisión del dueño):
-   `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue publicando su VEVENT único
-   de la bienvenida hasta el corte. El delta queda registrado aquí, no arreglado allí.
+   `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue publicando
+   su VEVENT único de la bienvenida hasta el corte. El delta queda registrado
+   aquí, no arreglado allí.
 
 ## WU-10 — QA local completa y runbook de staging
 
-Sesión propia tras BUG-001. **No es una escritura en Hostinger**: WU-10 produce evidencia y un
-runbook; no crea, despliega ni importa en ninguna instancia (OWN-005). Los niveles 1–3 se
-re-ejecutaron **contra el árbol actual** (`e377c46`), no heredados de sesiones anteriores.
+Sesión propia tras BUG-001. **No es una escritura en Hostinger**: WU-10 produce
+evidencia y un runbook; no crea, despliega ni importa en ninguna instancia
+(OWN-005). Los niveles 1–3 se re-ejecutaron **contra el árbol actual**
+(`e377c46`), no heredados de sesiones anteriores.
 
-Verificación de reanudación: `HEAD` = `origin/fase3-wordpress` = `e377c46`, árbol limpio,
-**0 ahead / 0 behind**. Esto **corrige** el encabezado del estado durable, que describía la rama
-en `78db8f7` con los commits de BUG-001 «solo en local»: ya estaban publicados. El repositorio
-manda sobre el archivo.
+Verificación de reanudación: `HEAD` = `origin/fase3-wordpress` = `e377c46`,
+árbol limpio, **0 ahead / 0 behind**. Esto **corrige** el encabezado del estado
+durable, que describía la rama en `78db8f7` con los commits de BUG-001 «solo en
+local»: ya estaban publicados. El repositorio manda sobre el archivo.
 
 ### Nivel 1 — Comprobaciones estáticas
 
@@ -656,14 +731,14 @@ manda sobre el archivo.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
-| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 18 limpias tras el arreglo de D-04 (theme 0.5.2): `/practica` mide 320 = 320 y el reproductor 272 px. Queda 1 desbordamiento, D-09, que el owner dejó en el corte | Pass (local) *(D-09 aceptado)* |
+| 320 px sin scroll horizontal | 19 rutas medidas (`scrollWidth` vs `clientWidth`) | 19 limpias: D-04 (theme 0.5.2) dejó `/practica` en 320 = 320; D-09 (theme 0.6.4) parte la URL de Sangha dentro de la columna | Pass (local) |
 | 640 px (= zoom 200 % sobre 1280) | las mismas 19 rutas | **0 desbordamientos** | Pass (local) |
 | Foco visible | 21 reglas `:focus-visible` en las hojas del theme | presentes | Pass (local) |
 | Navegación por teclado | single de evento | 32 elementos enfocables, **todos con nombre accesible**; primer tabulable = «Saltar al contenido» | Pass (local) |
 | Diálogo de calendario (a11y) | apertura real en el navegador | `<dialog>` **modal** (`:modal`), `aria-labelledby` + `aria-describedby="calendar-dialog-note"`, foco entra al diálogo y `close()` lo devuelve al disparador; el evento `cancel` **no** se previene (la ruta nativa de Escape queda intacta) | Pass (local) |
 | Escape cierra el diálogo | pulsación real de Escape | **inconcluso**: el panel de automatización consume la tecla. Por código no hay `preventDefault` sobre `cancel` | Unverified |
 | BUG-001 en el diálogo | enlaces del diálogo abierto | Google `dates=20260903/20260904` = **próxima sesión** (jueves 3 sep 2026, verificado); Apple y descarga apuntan al `.ics` de las 10 | Pass (local) |
-| Paridad de copy vs producción publicada (OWN-007) | diff de texto visible local ↔ `https://caminodeldharma.org` | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` = **1.000**; el resto explicado en D-01…D-10 | Pass (local) *(con deltas)* |
+| Paridad de copy vs producción publicada (OWN-007) | diff de texto visible local ↔ `https://caminodeldharma.org` | `/linaje`, `/donaciones`, `/contacto`, `/practica/videos`, `/practica/meditacion-semanal-en-linea` = **1.000**; el resto explicado en D-01…D-10 | Pass (local) _(con deltas)_ |
 | Lector de pantalla real | no ejecutable en esta sesión | — | Unverified |
 | PHP/Apache/HTTPS de staging | no existe instancia | — | Unverified |
 | No indexabilidad del staging | no existe instancia | — | Unverified |
@@ -677,138 +752,171 @@ manda sobre el archivo.
 | Motivo (corregido) | `.github/workflows/test.yml` | dispara solo en `push: branches: [main]` y `pull_request`. La rama **sí está publicada**, pero un push de rama no la dispara y **no existe PR** | — |
 | Sonar de plugin + theme | Automatic Analysis vía GitHub App | no revisado en esta sesión | Unverified |
 
-**Corrección de sesiones anteriores:** las filas «CI/Sonar — Requiere push (rama local por
-diseño)» de WU-03…BUG-001 son **inexactas**. La rama está publicada desde WU-09; lo que falta es
-un disparador, no un push. Para obtener evidencia de CI hace falta un PR (o ampliar los
-triggers) — decisión del propietario, no una limpieza silenciosa.
+**Corrección de sesiones anteriores:** las filas «CI/Sonar — Requiere push (rama
+local por diseño)» de WU-03…BUG-001 son **inexactas**. La rama está publicada
+desde WU-09; lo que falta es un disparador, no un push. Para obtener evidencia
+de CI hace falta un PR (o ampliar los triggers) — decisión del propietario, no
+una limpieza silenciosa.
 
 ### Deltas y hallazgos registrados (WU-10)
 
-1. **D-01 — `event_modality` vacío en los 9 eventos que tienen modalidad (entorno local).**
-   Producción publica una fila «Modalidad» («Híbrida — bienvenida, orientación, seis sesiones
-   virtuales y un encuentro presencial», «En línea (Zoom y YouTube)», …); el WordPress local no
-   muestra ninguna. **No es un defecto de código:** el payload trae `modality` en 9/10 eventos,
-   el extractor la extrae, el importador la escribe (`class-cdd-core-importer.php:399`) y el
-   renderizador la pinta — verificado inyectando el valor en una sola petición, la fila
-   «Modalidad» aparece correctamente. Lo que falla es el **entorno local**: su contenido se
-   importó con un payload anterior a ese campo, y el importador es **create-missing-only**, así
-   que `import --apply` **no lo rellena** (dry-run: `created: 0`, todo `skipped`). Comprobado
-   además que `event_date` y el `alt` de los carteles **sí** coinciden con el payload en los 10
-   eventos: `event_modality` es el único campo desalineado. Consecuencia operativa en el
-   runbook §4b: **staging se importa una sola vez, desde cero**. **Cerrado 2026-09-01 (OWN-023).**
-2. **D-02 — El contenido demo del install desplaza contenido real.** «Hello world!» (post 1)
-   aparece en la sección «Del blog» del Inicio y en `/blog`, y **empuja fuera** a la entrada real
-   «Estamos conectados, pero seguimos solos». Es la única diferencia de copy del Inicio frente a
-   producción (similitud 0.987). También siguen presentes «Sample Page» (publicada) y «Privacy
-   Policy» (borrador). Runbook §2.2 lo convierte en requisito duro de provisión.
-   **Cerrado 2026-09-01 (OWN-024).** **Implementado 2026-09-02** en el plugin **0.7.2**
-   ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)):
-   `Cdd_Core_Installer_Demo_Content` reconoce los defaults del instalador por tipo + slug +
-   estado (no por ID 1/2/3, que no es estable en un sitio con contenido importado) e ignora
-   todo objeto con `_cdd_source_key`; `cdd_core_activate()` y `cdd_core_maybe_upgrade()` los
-   **despublican**, y `wp cdd-core demo purge [--apply]` los **borra** (dry-run por defecto,
-   guard de producción, y limpia `wp_page_for_privacy_policy` si apuntaba al borrador
-   borrado). Cubierto por `tests/Unit/Installer_Demo_ContentTest.php` (11 tests) y
-   `tests/WordPress/Demo_Content_RemovalTest.php` (8). `Pass (local)`: unit 201/201,
-   wp-phpunit 130/130, PHPCS limpio. El **volumen local ya importado** no queda limpio hasta
-   que ese WordPress cargue el plugin 0.7.2 (`init` → `maybe_upgrade`).
-3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed` respondían **200**
-   en WordPress y **404** en producción publicada. No están en `docs/11-arbol-urls-final.md`, que
-   dice «si una URL no está aquí, no existe». **Cerrado 2026-09-01 (OWN-025 / ADR 0044):** 404
-   real. **Implementado 2026-09-02** en el plugin **0.7.3**
-   ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)): `cdd_core_block_feed_requests()`
-   convierte cualquier petición con `feed` en la query en un 404 **real** antes de la consulta
-   principal —una sola guarda cubre `feed`/`rdf`/`rss`/`rss2`/`atom`, bonita o `?feed=`, del
-   sitio, de `/blog`, de comentarios, de archivo y de CPT—, y
-   `cdd_core_disable_feed_autodiscovery()` retira `feed_links` (prioridad 2) y `feed_links_extra`
-   (prioridad 3) del `head`. Sin 301 a `/blog`, sin 200 con `noindex`, sin cuerpo RSS con estado
-   404. El `rel=alternate` `text/calendar` del evento vigente (OWN-014) se mantiene. Cubierto por
-   `tests/WordPress/Feed_RoutingTest.php` (6 tests). `Pass (local)`: unit 201/201,
-   wp-phpunit 137/137, PHPCS limpio. RSS futuro: POST-010.
-4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320. **Producción no
-   desborda** (272 px de ancho, `scrollWidth` = `clientWidth` = 320). Era la única regresión
-   visual encontrada. **Cerrado 2026-09-01 (OWN-026):** arreglar **antes** de staging.
-   **Implementado 2026-09-02 (theme 0.5.2, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).**
-   La causa no era el relleno del contenedor sino el núcleo: `wp-block-audio-inline-css` sirve
-   `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo** gana sobre el ancho
-   preferido `min(100%, 32rem)` del theme, así que el reproductor estiraba la columna entera.
-   `.wp-block-audio.mantra-audio audio` levanta el suelo (`min-width: 0`) y lo topa en su columna
-   (`max-width: 100%`, `box-sizing: border-box`) conservando el tope publicado; el selector lleva
-   las dos clases para ganar **por especificidad**, no por el orden en que WordPress imprime la
-   hoja del bloque. Sin tocar el conversor, sin sustituir `core/audio`, sin `overflow: hidden` en
-   `html`/`body`. Cubierto por `tests/Unit/Theme_Audio_ContainmentTest.php` (5 tests, contrato de
-   CSS; sin píxeles en CI). Medido en el navegador contra el Docker local: `scrollWidth` =
-   `clientWidth` = 320, cero elementos fuera del viewport, reproductor a **272 px** — el mismo
-   ancho que publica producción. `Pass (local)`: unit 206/206, PHPCS limpio, Stylelint limpio.
-5. **D-05 — Lightbox nativo en inglés.** `/galeria` rotula «Close / Previous / Next» y
-   `aria-label="Enlarged images"` sobre una página `lang="es-CO"`. **Causa ambiental, no de
-   código:** `get_locale()` ya devuelve `es_CO`, pero el contenedor no alcanza WordPress.org y
-   solo tiene instalado `en_US`. Runbook §2.4 añade `wp language core install es_CO --activate`
-   y exige volver a verificar estas cadenas. **Cerrado 2026-09-01 (OWN-027, A):** staging
+1. **D-01 — `event_modality` vacío en los 9 eventos que tienen modalidad
+   (entorno local).** Producción publica una fila «Modalidad» («Híbrida —
+   bienvenida, orientación, seis sesiones virtuales y un encuentro presencial»,
+   «En línea (Zoom y YouTube)», …); el WordPress local no muestra ninguna. **No
+   es un defecto de código:** el payload trae `modality` en 9/10 eventos, el
+   extractor la extrae, el importador la escribe
+   (`class-cdd-core-importer.php:399`) y el renderizador la pinta — verificado
+   inyectando el valor en una sola petición, la fila «Modalidad» aparece
+   correctamente. Lo que falla es el **entorno local**: su contenido se importó
+   con un payload anterior a ese campo, y el importador es
+   **create-missing-only**, así que `import --apply` **no lo rellena** (dry-run:
+   `created: 0`, todo `skipped`). Comprobado además que `event_date` y el `alt`
+   de los carteles **sí** coinciden con el payload en los 10 eventos:
+   `event_modality` es el único campo desalineado. Consecuencia operativa en el
+   runbook §4b: **staging se importa una sola vez, desde cero**. **Cerrado
+   2026-09-01 (OWN-023).**
+2. **D-02 — El contenido demo del install desplaza contenido real.** «Hello
+   world!» (post 1) aparece en la sección «Del blog» del Inicio y en `/blog`, y
+   **empuja fuera** a la entrada real «Estamos conectados, pero seguimos solos».
+   Es la única diferencia de copy del Inicio frente a producción (similitud
+   0.987). También siguen presentes «Sample Page» (publicada) y «Privacy Policy»
+   (borrador). Runbook §2.2 lo convierte en requisito duro de provisión.
+   **Cerrado 2026-09-01 (OWN-024).** **Implementado 2026-09-02** en el plugin
+   **0.7.2** ([#10](https://github.com/refo44/demo-caminodeldharma/issues/10)):
+   `Cdd_Core_Installer_Demo_Content` reconoce los defaults del instalador por
+   tipo + slug + estado (no por ID 1/2/3, que no es estable en un sitio con
+   contenido importado) e ignora todo objeto con `_cdd_source_key`;
+   `cdd_core_activate()` y `cdd_core_maybe_upgrade()` los **despublican**, y
+   `wp cdd-core demo purge [--apply]` los **borra** (dry-run por defecto, guard
+   de producción, y limpia `wp_page_for_privacy_policy` si apuntaba al borrador
+   borrado). Cubierto por `tests/Unit/Installer_Demo_ContentTest.php` (11 tests)
+   y `tests/WordPress/Demo_Content_RemovalTest.php` (8). `Pass (local)`: unit
+   201/201, wp-phpunit 130/130, PHPCS limpio. El **volumen local ya importado**
+   no queda limpio hasta que ese WordPress cargue el plugin 0.7.2 (`init` →
+   `maybe_upgrade`).
+3. **D-03 — Feeds nativos abiertos.** `/feed`, `/blog/feed` y `/comments/feed`
+   respondían **200** en WordPress y **404** en producción publicada. No están
+   en `docs/11-arbol-urls-final.md`, que dice «si una URL no está aquí, no
+   existe». **Cerrado 2026-09-01 (OWN-025 / ADR 0044):** 404 real.
+   **Implementado 2026-09-02** en el plugin **0.7.3**
+   ([#11](https://github.com/refo44/demo-caminodeldharma/issues/11)):
+   `cdd_core_block_feed_requests()` convierte cualquier petición con `feed` en
+   la query en un 404 **real** antes de la consulta principal —una sola guarda
+   cubre `feed`/`rdf`/`rss`/`rss2`/`atom`, bonita o `?feed=`, del sitio, de
+   `/blog`, de comentarios, de archivo y de CPT—, y
+   `cdd_core_disable_feed_autodiscovery()` retira `feed_links` (prioridad 2) y
+   `feed_links_extra` (prioridad 3) del `head`. Sin 301 a `/blog`, sin 200 con
+   `noindex`, sin cuerpo RSS con estado 404. El `rel=alternate` `text/calendar`
+   del evento vigente (OWN-014) se mantiene. Cubierto por
+   `tests/WordPress/Feed_RoutingTest.php` (6 tests). `Pass (local)`: unit
+   201/201, wp-phpunit 137/137, PHPCS limpio. RSS futuro: POST-010.
+4. **D-04 — Regresión a 320 px en `/practica`.** `scrollWidth` 324 vs 320.
+   **Producción no desborda** (272 px de ancho, `scrollWidth` = `clientWidth` =
+   320). Era la única regresión visual encontrada. **Cerrado 2026-09-01
+   (OWN-026):** arreglar **antes** de staging. **Implementado 2026-09-02 (theme
+   0.5.2, [#12](https://github.com/refo44/demo-caminodeldharma/issues/12)).** La
+   causa no era el relleno del contenedor sino el núcleo:
+   `wp-block-audio-inline-css` sirve
+   `.wp-block-audio audio { width: 100%; min-width: 300px }`, y ese **suelo**
+   gana sobre el ancho preferido `min(100%, 32rem)` del theme, así que el
+   reproductor estiraba la columna entera. `.wp-block-audio.mantra-audio audio`
+   levanta el suelo (`min-width: 0`) y lo topa en su columna (`max-width: 100%`,
+   `box-sizing: border-box`) conservando el tope publicado; el selector lleva
+   las dos clases para ganar **por especificidad**, no por el orden en que
+   WordPress imprime la hoja del bloque. Sin tocar el conversor, sin sustituir
+   `core/audio`, sin `overflow: hidden` en `html`/`body`. Cubierto por
+   `tests/Unit/Theme_Audio_ContainmentTest.php` (5 tests, contrato de CSS; sin
+   píxeles en CI). Medido en el navegador contra el Docker local: `scrollWidth`
+   = `clientWidth` = 320, cero elementos fuera del viewport, reproductor a **272
+   px** — el mismo ancho que publica producción. `Pass (local)`: unit 206/206,
+   PHPCS limpio, Stylelint limpio.
+5. **D-05 — Lightbox nativo en inglés.** `/galeria` rotula «Close / Previous /
+   Next» y `aria-label="Enlarged images"` sobre una página `lang="es-CO"`.
+   **Causa ambiental, no de código:** `get_locale()` ya devuelve `es_CO`, pero
+   el contenedor no alcanza WordPress.org y solo tiene instalado `en_US`.
+   Runbook §2.4 añade `wp language core install es_CO --activate` y exige volver
+   a verificar estas cadenas. **Cerrado 2026-09-01 (OWN-027, A):** staging
    `es_CO`; Docker local puede seguir en inglés.
-6. **D-06 — `wptexturize` cambia las comillas.** En `/practica`, producción publica
-   `"Homenaje al Bodhisattva Guān Shì Yīn"` (comillas rectas) y WordPress rinde `«…»`
-   tipográficas. **Cerrado 2026-09-01 (OWN-028, A):** delta aceptado.
-7. **D-07 — El bloque nativo de audio no rinde texto alternativo.** Producción incluye «Tu
-   navegador no permite reproducir este audio.» dentro de cada `<audio>`; `core/audio` no lo
-   emite. Dos ocurrencias en `/practica`. **Cerrado 2026-09-01 (OWN-029, A):** se acepta.
-8. **D-08 — Fichas de autor indexables sin `meta description`.** `/author/{slug}` sirve
-   `index,follow` (ADR 0037) pero el payload no trae objeto `seo` para `blog_authors` ni para
-   `gallery_albums` (0/2 y 0/3; páginas 11/11, eventos 10/10, entradas 2/2 sí lo traen). Es
-   coherente con OWN-007 —el estático no publica fichas de autor, así que no hay meta propia que
-   portar. **Cerrado 2026-09-01 (OWN-020):** no `noindex` en singles; reutilizar copy corto y
-   fotos publicados (JSON-LD del fundador / meta de `/comunidad`). Implementación **hecha**
-   (plugin 0.7.7, theme 0.6.1, [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)):
-   el payload lleva `seo`, bio corta y thumbnail; `convert` los siembra add-only en fichas ya
-   importadas. Los álbumes siguen `noindex`
-   y no entran en esa cola.
-9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.** 339 vs 320 px a
-   320 px de ancho, por una URL larga sin puntos de corte en el cuerpo del artículo.
-   **Producción desborda exactamente igual (339 vs 320)**. **Cerrado 2026-09-01 (OWN-021):**
-   dejar en el corte. Wrap post-corte POST-008 / [#7](https://github.com/refo44/demo-caminodeldharma/issues/7).
-10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del núcleo guarda
-    `wpEmojiSettingsSupports` en visitantes anónimos; el estático no usaba almacenamiento
-    alguno. **No hay petición a `s.w.org`** en navegadores modernos (el script sale antes) y no
-    hay cookies. **Cerrado 2026-09-01 (OWN-022, A):** delta aceptado. No desactivar `wp-emoji`.
-    ADR 0019 (sin cookies de analítica) no cambia.
-11. **D-11 — `wp term list gallery_album` muestra `count = 0`.** Cosmético: la taxonomía vive
-    sobre adjuntos (`post_status = inherit`) y el contador del núcleo solo cuenta `publish`. Las
-    asignaciones reales son 35 y el theme consulta los adjuntos directamente. Se verá un 0 junto
-    a cada álbum en wp-admin. **Cerrado 2026-09-01 (OWN-030, B):** dejar el 0 en el corte;
-    higiene post-corte POST-009 / [#13](https://github.com/refo44/demo-caminodeldharma/issues/13).
-12. **D-12 — `<html lang>`:** WordPress sirve `es-CO`, producción `es`. Delta deliberado (locale
-    más específico). **Cerrado 2026-09-01 (OWN-031, A):** conservar `es-CO`.
+6. **D-06 — `wptexturize` cambia las comillas.** En `/practica`, producción
+   publica `"Homenaje al Bodhisattva Guān Shì Yīn"` (comillas rectas) y
+   WordPress rinde `«…»` tipográficas. **Cerrado 2026-09-01 (OWN-028, A):**
+   delta aceptado.
+7. **D-07 — El bloque nativo de audio no rinde texto alternativo.** Producción
+   incluye «Tu navegador no permite reproducir este audio.» dentro de cada
+   `<audio>`; `core/audio` no lo emite. Dos ocurrencias en `/practica`.
+   **Cerrado 2026-09-01 (OWN-029, A):** se acepta.
+8. **D-08 — Fichas de autor indexables sin `meta description`.**
+   `/author/{slug}` sirve `index,follow` (ADR 0037) pero el payload no trae
+   objeto `seo` para `blog_authors` ni para `gallery_albums` (0/2 y 0/3; páginas
+   11/11, eventos 10/10, entradas 2/2 sí lo traen). Es coherente con OWN-007 —el
+   estático no publica fichas de autor, así que no hay meta propia que portar.
+   **Cerrado 2026-09-01 (OWN-020):** no `noindex` en singles; reutilizar copy
+   corto y fotos publicados (JSON-LD del fundador / meta de `/comunidad`).
+   Implementación **hecha** (plugin 0.7.7, theme 0.6.1,
+   [#5](https://github.com/refo44/demo-caminodeldharma/issues/5)): el payload
+   lleva `seo`, bio corta y thumbnail; `convert` los siembra add-only en fichas
+   ya importadas. Los álbumes siguen `noindex` y no entran en esa cola.
+9. **D-09 — Desbordamiento heredado en `/blog/sangha-refugio-hiperconexion`.**
+   339 vs 320 px a 320 px de ancho, por una URL larga sin puntos de corte en el
+   cuerpo del artículo. **El estático publicado desbordaba igual (339 vs 320)**.
+   **Cerrado 2026-09-01 (OWN-021):** dejar en el corte. **Implementado
+   2026-10-06** (theme 0.6.4, POST-008 /
+   [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)):
+   `.wp-block-post-content` usa `overflow-wrap: anywhere`.
+10. **D-10 — `wp-emoji` escribe en `sessionStorage`.** El cargador de emoji del
+    núcleo guarda `wpEmojiSettingsSupports` en visitantes anónimos; el estático
+    no usaba almacenamiento alguno. **No hay petición a `s.w.org`** en
+    navegadores modernos (el script sale antes) y no hay cookies. **Cerrado
+    2026-09-01 (OWN-022, A):** delta aceptado. No desactivar `wp-emoji`. ADR
+    0019 (sin cookies de analítica) no cambia.
+11. **D-11 — `wp term list gallery_album` muestra `count = 0`.** Cosmético: la
+    taxonomía vive sobre adjuntos (`post_status = inherit`) y el contador del
+    núcleo solo cuenta `publish`. Las asignaciones reales son 35 y el theme
+    consulta los adjuntos directamente. Se verá un 0 junto a cada álbum en
+    wp-admin. **Cerrado 2026-09-01 (OWN-030, B):** dejar el 0 en el corte;
+    higiene post-corte POST-009 /
+    [#13](https://github.com/refo44/demo-caminodeldharma/issues/13).
+12. **D-12 — `<html lang>`:** WordPress sirve `es-CO`, producción `es`. Delta
+    deliberado (locale más específico). **Cerrado 2026-09-01 (OWN-031, A):**
+    conservar `es-CO`.
 
 ### Deltas aceptados que WU-10 vuelve a confirmar, no a corregir
 
-- **`.ics` publicado solo con la bienvenida.** `static/eventos/ical/circulos-de-presencia-consciente.ics`
-  sigue con **1 VEVENT** (UID `circulos-de-presencia-consciente@caminodeldharma.org`) frente a
-  los **10** de WordPress. Confirmado con `curl` contra producción. No se arregla en `static/`
-  (BUG-001 §7).
-- **Párrafos del formulario en `/privacidad` (ADR 0041).** El diff local↔producción muestra
-  exactamente el delta autorizado: WordPress dice que el formulario se procesa con CF7 y entrega
-  al correo de la comunidad; el estático mantiene que no envía nada. Fecha de actualización
-  31 ago (WP) vs 29 ago (producción). Correcto.
-- **Nota del diálogo de calendario (BUG-001).** Copy nuevo sin equivalente estático, presente y
-  correcto: «El archivo .ics incluye las 10 sesiones del curso. Google Calendar y Outlook añaden
-  la próxima: Jueves 3 de septiembre de 2026.»
-- **Tarjeta compacta de eventos pasados (WU-07, doc 03 §3).** `/eventos` mide similitud 0.663
-  frente a producción: WordPress rinde `Ciudad · Fecha` + «Ver evento →» donde producción publica
-  descripción completa y filas Fecha/Hora/Lugar/Modalidad. Son **134 líneas menos de copy** en
-  esa página. Sustitución aceptada en WU-07; se deja constancia de la magnitud medida.
-- **Byline enlazada (ADR 0037)** en `/comunidad` y en las entradas, y **tiempo de lectura 6′ vs
-  8′** en `sangha-refugio-hiperconexion`: deltas ya registrados en WU-07.
+- **`.ics` publicado solo con la bienvenida.**
+  `static/eventos/ical/circulos-de-presencia-consciente.ics` sigue con **1
+  VEVENT** (UID `circulos-de-presencia-consciente@caminodeldharma.org`) frente a
+  los **10** de WordPress. Confirmado con `curl` contra producción. No se
+  arregla en `static/` (BUG-001 §7).
+- **Párrafos del formulario en `/privacidad` (ADR 0041).** El diff
+  local↔producción muestra exactamente el delta autorizado: WordPress dice que
+  el formulario se procesa con CF7 y entrega al correo de la comunidad; el
+  estático mantiene que no envía nada. Fecha de actualización 31 ago (WP) vs 29
+  ago (producción). Correcto.
+- **Nota del diálogo de calendario (BUG-001).** Copy nuevo sin equivalente
+  estático, presente y correcto: «El archivo .ics incluye las 10 sesiones del
+  curso. Google Calendar y Outlook añaden la próxima: Jueves 3 de septiembre de
+  2026.»
+- **Tarjeta compacta de eventos pasados (WU-07, doc 03 §3).** `/eventos` mide
+  similitud 0.663 frente a producción: WordPress rinde `Ciudad · Fecha` + «Ver
+  evento →» donde producción publica descripción completa y filas
+  Fecha/Hora/Lugar/Modalidad. Son **134 líneas menos de copy** en esa página.
+  Sustitución aceptada en WU-07; se deja constancia de la magnitud medida.
+- **Byline enlazada (ADR 0037)** en `/comunidad` y en las entradas, y **tiempo
+  de lectura 6′ vs 8′** en `sangha-refugio-hiperconexion`: deltas ya registrados
+  en WU-07.
 - **Deck como excerpt** en `/blog`: delta ya registrado en WU-07.
 
 ## #18 — Panel «Autores del blog» en Gutenberg (`META-001` / OWN-019)
 
-Sesión propia de pre-staging, ampliación del propietario del 2026-09-02: un editor tiene que
-poder firmar una entrada **antes** de Hostinger. Plugin **0.7.4**; el theme no cambia. **No es
-una escritura en Hostinger** (OWN-005): el `go` de OWN-035 ahora espera #18 **y**
-[#19](https://github.com/refo44/demo-caminodeldharma/issues/19) en `main`, no un staging
-silencioso.
+Sesión propia de pre-staging, ampliación del propietario del 2026-09-02: un
+editor tiene que poder firmar una entrada **antes** de Hostinger. Plugin
+**0.7.4**; el theme no cambia. **No es una escritura en Hostinger** (OWN-005):
+el `go` de OWN-035 ahora espera #18 **y**
+[#19](https://github.com/refo44/demo-caminodeldharma/issues/19) en `main`, no un
+staging silencioso.
 
-### Nivel 1 — Comprobaciones estáticas
+### Nivel 1 — Comprobaciones estáticas (#18)
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -818,10 +926,10 @@ silencioso.
 | Advisories de dependencias | `composer audit --locked` | `No security vulnerability advisories found` | Pass (local) |
 | Lint CSS de ambos árboles | `npm run lint:css` (sin CSS tocado en esta unidad) | exit 0 | Pass (local) |
 
-### Nivel 2 — Comprobaciones de componente
+### Nivel 2 — Comprobaciones de componente (#18)
 
-Escritas **RED primero**: el archivo del panel no existía, el handle no estaba registrado y el
-enlace `wp:action-assign-author` seguía presente.
+Escritas **RED primero**: el archivo del panel no existía, el handle no estaba
+registrado y el enlace `wp:action-assign-author` seguía presente.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -840,8 +948,8 @@ enlace `wp:action-assign-author` seguía presente.
 
 ### Nivel 4 — Manual en el editor (Docker local, `http://localhost:8081`)
 
-No hay runner de JS en el repositorio (ADR 0038), así que el render del panel es una comprobación
-manual documentada, no CI.
+No hay runner de JS en el repositorio (ADR 0038), así que el render del panel es
+una comprobación manual documentada, no CI.
 
 | Check | Método | Resultado | Estado |
 | --- | --- | --- | --- |
@@ -850,7 +958,7 @@ manual documentada, no CI.
 | Sync a `core/editor` | asignar y leer el store | `getEditedPostAttribute( 'meta' ).authors` = `[6]`, documento sucio | Pass (local) |
 | Publicar a la primera | botón Publicar | `status = publish`, sin `400`, `authors` = `[6]` en la base | Pass (local) |
 | Varias fichas y reorden | añadir «Comunidad Camino del Dharma» y «Subir» | `[6,5]` → `[5,6]`, orden reflejado en la lista numerada | Pass (local) |
-| Byline del front | `curl /blog/test` | «Por <a href="…/author/zheng-gong">Zheng Gong» | Pass (local) |
+| Byline del front | `curl /blog/test` | `«Por <a href="…/author/zheng-gong">Zheng Gong»` | Pass (local) |
 | JSON-LD | `curl /blog/test` | `BlogPosting.author` = `Thing` con `url` = `/author/zheng-gong`; no el usuario | Pass (local) |
 | Control «Autor» del núcleo | panel Resumen en `post.php` y `post-new.php` | ausente; `post_author` sigue siendo `1` (`cdd_admin`) en la base | Pass (local) |
 | Guard visible en el editor | publicar una entrada nueva sin ficha | «Publishing failed. Para publicar una entrada asigna al menos una ficha de autor publicada.» | Pass (local) |

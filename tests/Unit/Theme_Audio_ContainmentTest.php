@@ -124,10 +124,10 @@ final class Theme_Audio_ContainmentTest extends TestCase {
 	}
 
 	/**
-	 * Protects D-09 and every other page from a blanket cure: hiding the
-	 * overflow on the document would mask the Sangha long-URL overflow
-	 * the owner decided to keep (OWN-021) and would silently kill
-	 * horizontal scrolling everywhere.
+	 * Protects every page from a blanket cure: hiding the overflow on the
+	 * document would mask a long URL (the Sangha article wraps inside
+	 * post content, POST-008) and would silently kill horizontal
+	 * scrolling everywhere.
 	 */
 	public function test_the_theme_does_not_hide_overflow_on_the_document() {
 		foreach ( $this->rules() as $rule ) {
