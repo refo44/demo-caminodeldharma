@@ -41,9 +41,9 @@ never true.
 
 Production is WordPress at `https://caminodeldharma.org/` (2026-09-26).
 `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
-`camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.13 (release
-tag `plugin-v0.7.13` after merge; theme tag `theme-v0.6.4` after merge, cutover
-deployed theme 0.6.3; `plugin-v0.7.12` already exists; the 2026-09-26 cutover
+`camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.14 (release
+tag `plugin-v0.7.14` after merge; theme tag `theme-v0.6.4` after merge, cutover
+deployed theme 0.6.3; `plugin-v0.7.13` already exists; the 2026-09-26 cutover
 deployed `plugin-v0.7.10`). A current event can hide signup by hand or at a
 Bogotá close instant without dropping calendar, share, or `.ics`. The owner
 later authorized retiring `static/` from the working tree and the palegreen

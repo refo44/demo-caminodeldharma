@@ -15,8 +15,8 @@ seguimiento día a día.
 **CURRENT STATE (2026-09-26):** `https://caminodeldharma.org/` es WordPress.
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. Theme
 `camino-del-dharma` 0.6.4 (tag `theme-v0.6.4` después del merge; el corte
-desplegó theme 0.6.3) y plugin `camino-del-dharma-core` 0.7.13 (tag
-`plugin-v0.7.13` después del merge; `plugin-v0.7.12` ya existe; el corte
+desplegó theme 0.6.3) y plugin `camino-del-dharma-core` 0.7.14 (tag
+`plugin-v0.7.14` después del merge; `plugin-v0.7.13` ya existe; el corte
 desplegó `plugin-v0.7.10`). `static/` ya no está en el árbol vigente. El
 historial de Git lo conserva. El propietario autorizó retirar el despliegue de
 [palegreen-cod-365706.hostingersite.com](https://palegreen-cod-365706.hostingersite.com/)

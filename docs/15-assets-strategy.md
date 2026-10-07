@@ -272,14 +272,21 @@ núcleo de WordPress (`/wp-sitemap.xml`) como única fuente de verdad; `robots.t
 `sitemap.xml` propio en el theme ni en `camino-del-dharma-core`. Antes de publicar, verificar que
 `/wp-sitemap.xml` no incluya `event_city`/`event_type` (ADR 0022) ni ninguna URL fuera de
 `docs/11-arbol-urls-final.md`. `.htaccess` sigue aplicando igual en ambas
-implementaciones. `llms.txt` en el estático sigue siendo el archivo publicado
-hasta el corte. En WordPress (plugin 0.7.6) `camino-del-dharma-core` lo responde
-en cada petición en `/llms.txt`: `text/plain; charset=utf-8`, sin archivo en
-disco y sin `llms-full.txt`. La opción ausente lo deja publicado; desactivarla
-responde 404. El cuerpo conserva la guía de `static/llms.txt` y enlaza solo
-páginas publicadas de esa lista, el archivo de eventos y, si existe, el evento
-vigente de la portada. No lista `.ics` (OWN-014), borradores, fichas de autor,
-álbumes ni etiquetas, y no sustituye a `/wp-sitemap.xml`.
+implementaciones. Hasta el corte, `llms.txt` publicado era el archivo estático.
+En WordPress, `camino-del-dharma-core` lo responde en cada petición en
+`/llms.txt`: `text/plain; charset=utf-8`, sin archivo en disco y sin
+`llms-full.txt`. La arquitectura no cambia respecto de 0.7.6: la misma ruta
+imprime el cuerpo; no hace falta otro ADR. La opción de publicación ausente lo
+deja publicado; desactivarla responde 404. Sin un texto guardado, el cuerpo
+conserva la guía de `static/llms.txt` y enlaza solo páginas publicadas de esa
+lista, el archivo de eventos y, si existe, el evento vigente de la portada.
+Desde el plugin 0.7.14, **Ajustes → Camino del Dharma llms** edita ese texto,
+muestra el que está publicado y lo guarda en una opción. El texto público
+anterior queda como respaldo y se puede restaurar. A partir de ese guardado,
+`/llms.txt` responde con el texto del editor: no se añaden páginas ni eventos
+nuevos por su cuenta. Un texto vacío o con una descarga `.ics` no se publica
+(OWN-014). No lista borradores, fichas de autor, álbumes ni etiquetas, y no
+sustituye a `/wp-sitemap.xml`.
 
 **Implementación en WordPress (WU-08B, 2026-08-31).** Sin suite de SEO (§10.2 del prompt maestro):
 el plugin `camino-del-dharma-core` resuelve la cabeza de cada petición y el theme la imprime.

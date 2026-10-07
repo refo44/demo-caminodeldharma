@@ -758,8 +758,8 @@ harness efímero `cdd-wp-phpunit` no deja contenedores ni volúmenes.
 **Corte hecho el 2026-09-26.** `https://caminodeldharma.org/` es este WordPress.
 `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. El corte desplegó
 theme 0.6.3 y plugin 0.7.10. El código de este árbol es theme 0.6.4 (tag
-`theme-v0.6.4` después del merge) y plugin 0.7.13 (rechaza una zona de
-`offers.validFrom` fuera de ±23:59; tag `plugin-v0.7.13` después del merge). El
+`theme-v0.6.4` después del merge) y plugin 0.7.14 (editor de `/llms.txt` en
+Ajustes; tag `plugin-v0.7.14` después del merge). El
 `public_html` de palegreen y, después, la entrada de ese sitio en hPanel ya se
 retiraron. `/domains/` conserva solo `caminodeldharma.org`. El hostname puede
 resolver y respondió 403; no sirve el sitio estático. No queda un rollback
