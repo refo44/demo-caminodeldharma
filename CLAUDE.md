@@ -10,9 +10,9 @@ CPTs, hosts, or deploy pipelines.
 
 - Production: WordPress on the canonical domain since 2026-09-26.
   `WP_ENVIRONMENT_TYPE` is `production` and `blog_public` is `1`. Theme
-  `camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.13. Release
-  tag after merge: `plugin-v0.7.13`. Theme tag after merge: `theme-v0.6.4` (the
-  2026-09-26 cutover deployed theme 0.6.3). `plugin-v0.7.12` already exists. The
+  `camino-del-dharma` 0.6.4 and plugin `camino-del-dharma-core` 0.7.14. Release
+  tag after merge: `plugin-v0.7.14`. Theme tag after merge: `theme-v0.6.4` (the
+  2026-09-26 cutover deployed theme 0.6.3). `plugin-v0.7.13` already exists. The
   cutover deployed `plugin-v0.7.10`. Signup on a current event can be closed by
   hand or at a Bogotá instant (`event_signup_closed`, `event_signup_closes_at`,
   issue #52) without cancelling the event or deleting the form URL. The owner

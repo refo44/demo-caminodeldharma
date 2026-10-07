@@ -122,4 +122,17 @@ final class Llms_Txt_DocumentTest extends TestCase {
 		);
 		$this->assertStringNotContainsString( '## Actividades', $without_event );
 	}
+
+	/**
+	 * An editor may replace the curated text. A blank document and a
+	 * calendar download are not a publishable llms.txt (OWN-014).
+	 */
+	public function test_blank_text_and_calendar_downloads_are_not_publishable() {
+		$this->assertSame( 'empty', Cdd_Core_Llms_Txt::body_violation( "  \n" ) );
+		$this->assertSame(
+			'calendar_download',
+			Cdd_Core_Llms_Txt::body_violation( "Guía\nhttps://example.org/eventos/ical/circulos.ics\n" )
+		);
+		$this->assertNull( Cdd_Core_Llms_Txt::body_violation( "# Camino del Dharma\n\n## Guidance for AI Agents\n" ) );
+	}
 }

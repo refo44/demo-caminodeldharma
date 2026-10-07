@@ -184,10 +184,14 @@ privacidad publicado y provisional (ADR 0039). HSTS aplazado (ADR 0020). **ADR
 0047). `WP_ENVIRONMENT_TYPE` es `production` y `blog_public` es `1`. El corte
 desplegó theme `camino-del-dharma` 0.6.3 (`theme-v0.6.3`, run 36214533651) y
 plugin `camino-del-dharma-core` 0.7.10 (`plugin-v0.7.10`, run 36214533614). El
-código de este árbol es plugin 0.7.13: rechaza una zona de `offers.validFrom`
-fuera de ±23:59. La 0.7.12 publica esa fecha cuando el editor guardó la apertura
+código de este árbol es plugin 0.7.14: **Ajustes → Camino del Dharma llms**
+guarda el texto de `/llms.txt`
+([#22](https://github.com/refo44/demo-caminodeldharma/issues/22)). El tag,
+después del merge, es `plugin-v0.7.14`. La 0.7.13 rechaza una zona de
+`offers.validFrom` fuera de ±23:59; su tag, después del merge, es
+`plugin-v0.7.13`. La 0.7.12 publica esa fecha cuando el editor guardó la apertura
 ([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)); su tag es
-`plugin-v0.7.12`. El tag de la 0.7.13, después del merge, es `plugin-v0.7.13`.
+`plugin-v0.7.12`.
 La 0.7.11 cerró la inscripción a mano o por fecha
 ([#52](https://github.com/refo44/demo-caminodeldharma/issues/52), tag
 `plugin-v0.7.11`). El theme de este árbol es 0.6.4: envuelve la URL larga de

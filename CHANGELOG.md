@@ -16,6 +16,28 @@ Formato de paquete de despliegue: `camino-del-dharma-vX.Y.Z.zip`
 
 ## [Unreleased]
 
+### Plugin 0.7.14 — editor de llms.txt
+
+Release del plugin, lista para etiquetar después del merge en `main`:
+
+```bash
+git fetch origin main
+git tag -a plugin-v0.7.14 <sha-en-origin/main> -m "Release plugin 0.7.14"
+git push origin plugin-v0.7.14
+```
+
+La cabecera `Version` y `CDD_CORE_VERSION` son `0.7.14`. El theme sigue en
+`0.6.4`. `plugin-v0.7.13` ya existe y no se reutiliza.
+
+**Ajustes → Camino del Dharma llms** deja editar el texto de `/llms.txt`,
+ver el que está publicado y guardarlo. El guardado anterior queda para
+restaurarlo. Hasta el primer guardado, la dirección sigue generándose como en
+0.7.6. Después, el texto guardado es el que responde la URL: las páginas y
+los eventos nuevos no se añaden solos. Un texto vacío o con una descarga
+`.ics` no sustituye al publicado. Nada se escribe en disco. La ruta sigue
+siendo `/llms.txt`, `text/plain; charset=utf-8`. Issue
+[#22](https://github.com/refo44/demo-caminodeldharma/issues/22).
+
 ### Theme 0.6.4 — la URL de Sangha cabe a 320 px
 
 Release del theme, lista para etiquetar después del merge en `main`:
@@ -26,7 +48,7 @@ git tag -a theme-v0.6.4 <sha-en-origin/main> -m "Release theme 0.6.4"
 git push origin theme-v0.6.4
 ```
 
-La cabecera `Version` es `0.6.4`. El plugin sigue en `0.7.13`. El corte del
+La cabecera `Version` es `0.6.4`. El plugin sigue en `0.7.14`. El corte del
 2026-09-26 sigue registrado con theme `0.6.3`.
 
 `/blog/sangha-refugio-hiperconexion` imprime la URL de la comisión de la OMS

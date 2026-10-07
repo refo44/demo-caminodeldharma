@@ -2,10 +2,11 @@
 /**
  * Serves /llms.txt as text/plain on each request.
  *
- * Nothing is written to disk. An absent option means the URL is public.
- * Disabled means HTTP 404. The body follows static/llms.txt: fixed guidance
- * plus published pages and, when one exists, the home featured event.
- * Calendar downloads stay out (OWN-014).
+ * Nothing is written to disk. An absent publishing option means the URL is
+ * public. Disabled means HTTP 404. With no saved text, the body follows
+ * static/llms.txt: fixed guidance plus published pages and, when one exists,
+ * the home featured event. A saved text replaces that body and does not gain
+ * pages on its own. Calendar downloads stay out (OWN-014).
  *
  * @package Camino_Del_Dharma_Core
  */
@@ -15,19 +16,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Request-time llms.txt route, toggle, and document.
+ * Request-time llms.txt route, publishing switch, and curated text.
  */
 class Cdd_Core_Llms_Txt {
 
 	const QUERY_VAR      = 'cdd_core_llms';
 	const PAGE_SLUG      = 'cdd-core-llms-txt';
 	const OPTION_NAME    = 'cdd_core_llms_txt_enabled';
+	const BODY_OPTION    = 'cdd_core_llms_txt_body';
+	const BACKUP_OPTION  = 'cdd_core_llms_txt_body_backup';
 	const SETTINGS_GROUP = 'cdd_core_llms_txt';
 	const REFRESH_ACTION = 'cdd_core_refresh_llms_txt';
 	const REFRESH_NONCE  = 'cdd_core_refresh_llms_txt';
+	const SAVE_ACTION    = 'cdd_core_save_llms_txt';
+	const SAVE_NONCE     = 'cdd_core_save_llms_txt';
+	const RESTORE_ACTION = 'cdd_core_restore_llms_txt';
+	const RESTORE_NONCE  = 'cdd_core_restore_llms_txt';
 
 	/**
-	 * Registers the public route, the settings screen, and the refresh action.
+	 * Registers the public route, the settings screen, and the editor actions.
 	 */
 	public static function register_hooks() {
 		add_action( 'init', array( __CLASS__, 'register_rewrite' ) );
@@ -38,6 +45,8 @@ class Cdd_Core_Llms_Txt {
 		add_action( 'update_option_' . self::OPTION_NAME, array( __CLASS__, 'flush_after_toggle' ) );
 		add_action( 'add_option_' . self::OPTION_NAME, array( __CLASS__, 'flush_after_toggle' ) );
 		add_action( 'admin_post_' . self::REFRESH_ACTION, array( __CLASS__, 'handle_refresh' ) );
+		add_action( 'admin_post_' . self::SAVE_ACTION, array( __CLASS__, 'handle_save' ) );
+		add_action( 'admin_post_' . self::RESTORE_ACTION, array( __CLASS__, 'handle_restore' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'render_refresh_notice' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( CDD_CORE_PLUGIN_FILE ), array( __CLASS__, 'plugin_action_links' ) );
 		register_deactivation_hook( CDD_CORE_PLUGIN_FILE, array( __CLASS__, 'deactivate' ) );
@@ -137,9 +146,14 @@ class Cdd_Core_Llms_Txt {
 	}
 
 	/**
-	 * The current document.
+	 * The current document. A saved text wins over the generated catalog.
 	 */
 	public static function render() {
+		$stored = get_option( self::BODY_OPTION, '' );
+		if ( is_string( $stored ) && '' !== $stored ) {
+			return $stored;
+		}
+
 		return self::format_document( self::catalog() );
 	}
 
@@ -169,6 +183,63 @@ class Cdd_Core_Llms_Txt {
 		}
 
 		return self::refresh();
+	}
+
+	/**
+	 * Publishes the editor text for an administrator with a valid nonce.
+	 * The text that was public becomes the restore copy. A blank document
+	 * or a calendar download is refused and does not replace anything.
+	 *
+	 * @param string $nonce Request nonce.
+	 * @param string $body  Submitted document.
+	 * @return string|WP_Error Published document, or an error that must not write.
+	 */
+	public static function save_body_if_authorized( $nonce, $body ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return new WP_Error( 'forbidden', __( 'No tiene permiso para editar llms.txt.', 'camino-del-dharma-core' ) );
+		}
+
+		if ( ! wp_verify_nonce( $nonce, self::SAVE_NONCE ) ) {
+			return new WP_Error( 'invalid_nonce', __( 'La solicitud para editar llms.txt no es válida.', 'camino-del-dharma-core' ) );
+		}
+
+		$violation = self::body_violation( $body );
+		if ( null !== $violation ) {
+			return new WP_Error( $violation, self::violation_message( $violation ) );
+		}
+
+		$published = self::normalize_body( $body ) . "\n";
+		update_option( self::BACKUP_OPTION, self::render(), false );
+		update_option( self::BODY_OPTION, $published, false );
+
+		return $published;
+	}
+
+	/**
+	 * Publishes the previous text and keeps the replaced one as the new backup.
+	 *
+	 * @param string $nonce Request nonce.
+	 * @return string|WP_Error Restored document, or an error that must not write.
+	 */
+	public static function restore_body_if_authorized( $nonce ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return new WP_Error( 'forbidden', __( 'No tiene permiso para editar llms.txt.', 'camino-del-dharma-core' ) );
+		}
+
+		if ( ! wp_verify_nonce( $nonce, self::RESTORE_NONCE ) ) {
+			return new WP_Error( 'invalid_nonce', __( 'La solicitud para restaurar llms.txt no es válida.', 'camino-del-dharma-core' ) );
+		}
+
+		$backup = get_option( self::BACKUP_OPTION, '' );
+		if ( ! is_string( $backup ) || '' === $backup ) {
+			return new WP_Error( 'no_backup', __( 'No hay una versión anterior de llms.txt para restaurar.', 'camino-del-dharma-core' ) );
+		}
+
+		$current = self::render();
+		update_option( self::BODY_OPTION, $backup, false );
+		update_option( self::BACKUP_OPTION, $current, false );
+
+		return $backup;
 	}
 
 	/**
@@ -262,20 +333,32 @@ class Cdd_Core_Llms_Txt {
 			wp_die( esc_html( $result->get_error_message() ), '', array( 'response' => 403 ) );
 		}
 
-		wp_safe_redirect(
-			add_query_arg(
-				array(
-					'page'           => self::PAGE_SLUG,
-					'llms_refreshed' => '1',
-				),
-				admin_url( 'options-general.php' )
-			)
-		);
-		exit;
+		self::redirect_to_screen( array( 'llms_refreshed' => '1' ) );
 	}
 
 	/**
-	 * Public URL, refresh button, and a preview of the current document.
+	 * Save action. A failed permission check is HTTP 403 and does not write.
+	 */
+	public static function handle_save() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- verified in save_body_if_authorized(); failure is HTTP 403.
+		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in save_body_if_authorized(); failure is HTTP 403.
+		$posted = isset( $_POST[ self::BODY_OPTION ] ) ? wp_unslash( $_POST[ self::BODY_OPTION ] ) : '';
+		$body   = is_string( $posted ) ? sanitize_textarea_field( $posted ) : '';
+		self::finish_editor_action( self::save_body_if_authorized( $nonce, $body ), 'llms_saved' );
+	}
+
+	/**
+	 * Restore action. A failed permission check is HTTP 403 and does not write.
+	 */
+	public static function handle_restore() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- verified in restore_body_if_authorized(); failure is HTTP 403.
+		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
+		self::finish_editor_action( self::restore_body_if_authorized( $nonce ), 'llms_restored' );
+	}
+
+	/**
+	 * Public URL, editor, refresh button, and a preview of the published document.
 	 */
 	public static function render_admin_panel() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -283,21 +366,49 @@ class Cdd_Core_Llms_Txt {
 		}
 
 		$public_url = home_url( '/llms.txt' );
+		$stored     = get_option( self::BODY_OPTION, '' );
+		$has_saved  = is_string( $stored ) && '' !== $stored;
+		$backup     = get_option( self::BACKUP_OPTION, '' );
+		$has_backup = is_string( $backup ) && '' !== $backup;
 
 		echo '<div class="card" style="max-width:800px;margin-top:1.5em;padding:1em 1.5em">';
-		echo '<p>' . esc_html__( 'Reúne las páginas institucionales publicadas y el evento vigente de la portada. La dirección pública es /llms.txt.', 'camino-del-dharma-core' ) . '</p>';
+		if ( $has_saved ) {
+			echo '<p>' . esc_html__( 'La dirección pública responde con el texto guardado. Las páginas nuevas no se añaden solas.', 'camino-del-dharma-core' ) . '</p>';
+		} else {
+			echo '<p>' . esc_html__( 'Reúne las páginas institucionales publicadas y el evento vigente de la portada. La dirección pública es /llms.txt.', 'camino-del-dharma-core' ) . '</p>';
+		}
 		echo '<p><a href="' . esc_url( $public_url ) . '">' . esc_html( $public_url ) . '</a></p>';
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
+		echo '<input type="hidden" name="action" value="' . esc_attr( self::SAVE_ACTION ) . '">';
+		wp_nonce_field( self::SAVE_NONCE );
+		echo '<p><label for="cdd-core-llms-txt-body"><strong>' . esc_html__( 'Texto de llms.txt', 'camino-del-dharma-core' ) . '</strong></label></p>';
+		printf(
+			'<textarea id="cdd-core-llms-txt-body" name="%1$s" rows="18" class="large-text code">%2$s</textarea>',
+			esc_attr( self::BODY_OPTION ),
+			esc_textarea( self::render() )
+		);
+		echo '<p class="description">' . esc_html__( 'Guardarlo sustituye la lista generada. Una descarga .ics no se publica.', 'camino-del-dharma-core' ) . '</p>';
+		submit_button( __( 'Guardar llms.txt', 'camino-del-dharma-core' ), 'primary', 'submit', false );
+		echo '</form>';
+		if ( $has_backup ) {
+			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" style="margin-top:1em">';
+			echo '<input type="hidden" name="action" value="' . esc_attr( self::RESTORE_ACTION ) . '">';
+			wp_nonce_field( self::RESTORE_NONCE );
+			submit_button( __( 'Restaurar la versión anterior', 'camino-del-dharma-core' ), 'secondary', 'submit', false );
+			echo '</form>';
+		}
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" style="margin-top:1em">';
 		echo '<input type="hidden" name="action" value="' . esc_attr( self::REFRESH_ACTION ) . '">';
 		wp_nonce_field( self::REFRESH_NONCE );
 		submit_button( __( 'Actualizar llms.txt', 'camino-del-dharma-core' ), 'secondary', 'submit', false );
 		echo '</form>';
+		echo '<h2>' . esc_html__( 'Texto publicado ahora', 'camino-del-dharma-core' ) . '</h2>';
 		echo '<pre style="white-space:pre-wrap;max-height:22em;overflow:auto;background:#f6f7f7;padding:1em">' . esc_html( self::render() ) . '</pre>';
 		echo '</div>';
 	}
 
 	/**
-	 * Success notice after the refresh redirect.
+	 * Notices after a redirect back to this screen.
 	 */
 	public static function render_refresh_notice() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -310,13 +421,89 @@ class Cdd_Core_Llms_Txt {
 			return;
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only notice after a redirect.
-		$refreshed = isset( $_GET['llms_refreshed'] ) ? sanitize_text_field( wp_unslash( $_GET['llms_refreshed'] ) ) : '';
-		if ( '1' !== $refreshed ) {
+		$message = self::admin_notice_message();
+		if ( null === $message ) {
 			return;
 		}
 
-		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'llms.txt se actualizó. La dirección pública vuelve a estar registrada.', 'camino-del-dharma-core' ) . '</p></div>';
+		echo '<div class="notice notice-' . esc_attr( $message['class'] ) . ' is-dismissible"><p>' . esc_html( $message['text'] ) . '</p></div>';
+	}
+
+	/**
+	 * Sends a permission failure as HTTP 403 and every other result back to the screen.
+	 *
+	 * @param string|WP_Error $result        Editor result.
+	 * @param string          $success_flag  Query flag set when the result is the document.
+	 */
+	private static function finish_editor_action( $result, $success_flag ) {
+		if ( is_wp_error( $result ) ) {
+			$code = $result->get_error_code();
+			if ( 'forbidden' === $code || 'invalid_nonce' === $code ) {
+				wp_die( esc_html( $result->get_error_message() ), '', array( 'response' => 403 ) );
+			}
+
+			self::redirect_to_screen( array( 'llms_error' => $code ) );
+		}
+
+		self::redirect_to_screen( array( $success_flag => '1' ) );
+	}
+
+	/**
+	 * @param array<string,string> $args Query arguments. `page` is always this screen.
+	 */
+	private static function redirect_to_screen( array $args ) {
+		wp_safe_redirect(
+			add_query_arg(
+				array_merge( array( 'page' => self::PAGE_SLUG ), $args ),
+				admin_url( 'options-general.php' )
+			)
+		);
+		exit;
+	}
+
+	/**
+	 * The notice for this redirect, or null when the screen has nothing to say.
+	 *
+	 * @return array{class:string,text:string}|null
+	 */
+	private static function admin_notice_message() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only notice after a redirect.
+		$refreshed = isset( $_GET['llms_refreshed'] ) ? sanitize_text_field( wp_unslash( $_GET['llms_refreshed'] ) ) : '';
+		if ( '1' === $refreshed ) {
+			return array(
+				'class' => 'success',
+				'text'  => __( 'llms.txt se actualizó. La dirección pública vuelve a estar registrada.', 'camino-del-dharma-core' ),
+			);
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only notice after a redirect.
+		$saved = isset( $_GET['llms_saved'] ) ? sanitize_text_field( wp_unslash( $_GET['llms_saved'] ) ) : '';
+		if ( '1' === $saved ) {
+			return array(
+				'class' => 'success',
+				'text'  => __( 'llms.txt se publicó. La dirección pública ya responde con este texto.', 'camino-del-dharma-core' ),
+			);
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only notice after a redirect.
+		$restored = isset( $_GET['llms_restored'] ) ? sanitize_text_field( wp_unslash( $_GET['llms_restored'] ) ) : '';
+		if ( '1' === $restored ) {
+			return array(
+				'class' => 'success',
+				'text'  => __( 'llms.txt volvió a la versión anterior.', 'camino-del-dharma-core' ),
+			);
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only notice after a redirect.
+		$error = isset( $_GET['llms_error'] ) ? sanitize_key( wp_unslash( $_GET['llms_error'] ) ) : '';
+		if ( '' === $error ) {
+			return null;
+		}
+
+		return array(
+			'class' => 'error',
+			'text'  => self::violation_message( $error ),
+		);
 	}
 
 	/**
@@ -331,6 +518,62 @@ class Cdd_Core_Llms_Txt {
 		);
 
 		return $links;
+	}
+
+	/**
+	 * Blank text and a calendar download cannot replace the public file.
+	 *
+	 * @param string $body Submitted document.
+	 * @return string|null `empty`, `calendar_download`, or null when it may be published.
+	 */
+	public static function body_violation( $body ) {
+		$text = self::normalize_body( $body );
+		if ( '' === $text ) {
+			return 'empty';
+		}
+
+		if ( 1 === preg_match( '/\.ics\b/i', $text ) ) {
+			return 'calendar_download';
+		}
+
+		return null;
+	}
+
+	/**
+	 * One leading-and-trailing trim, with line endings folded to LF.
+	 *
+	 * @param string $body Submitted document.
+	 */
+	public static function normalize_body( $body ) {
+		if ( ! is_string( $body ) ) {
+			return '';
+		}
+
+		$text = str_replace( "\0", '', $body );
+		$text = str_replace( array( "\r\n", "\r" ), "\n", $text );
+
+		return trim( $text );
+	}
+
+	/**
+	 * Spanish reason for a refused save. Unknown codes stay generic.
+	 *
+	 * @param string $code Violation code.
+	 */
+	private static function violation_message( $code ) {
+		if ( 'empty' === $code ) {
+			return __( 'El texto de llms.txt no puede quedar vacío.', 'camino-del-dharma-core' );
+		}
+
+		if ( 'calendar_download' === $code ) {
+			return __( 'llms.txt no puede incluir una descarga .ics.', 'camino-del-dharma-core' );
+		}
+
+		if ( 'no_backup' === $code ) {
+			return __( 'No hay una versión anterior de llms.txt para restaurar.', 'camino-del-dharma-core' );
+		}
+
+		return __( 'llms.txt no se pudo publicar.', 'camino-del-dharma-core' );
 	}
 
 	/**

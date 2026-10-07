@@ -295,6 +295,11 @@ instalación pasa a `production` y `blog_public=1`. El inventario de correo y
 subdominios es gate del corte. **Ni el dominio ni ese interruptor se cambian en
 esta sesión.**
 
+**v1.40 (2026-10-06):** editor de `/llms.txt` **implementado** (plugin 0.7.14,
+[#22](https://github.com/refo44/demo-caminodeldharma/issues/22)). **Ajustes →
+Camino del Dharma llms** guarda el texto curado y puede restaurar el anterior.
+Tag de release, después del merge: `plugin-v0.7.14`.
+
 **v1.39 (2026-10-06):** POST-008 **implementado** (theme 0.6.4,
 [#7](https://github.com/refo44/demo-caminodeldharma/issues/7)). La URL larga de
 `/blog/sangha-refugio-hiperconexion` se parte dentro de la columna. El corte la

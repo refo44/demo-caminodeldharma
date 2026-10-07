@@ -140,7 +140,13 @@ línea (ADR 0038): `camino-del-dharma-core.php` nació después de un test en ro
 - `/llms.txt` desde v0.7.6 ([#37](https://github.com/refo44/demo-caminodeldharma/issues/37)):
   `includes/class-cdd-core-llms-txt.php` lo responde en cada petición como `text/plain`.
   No hay archivo en disco ni `llms-full.txt`. La opción ausente lo publica; desactivarla
-  responde 404. **Ajustes → Camino del Dharma llms** solo enciende o apaga y vuelve a registrar la URL.
+  responde 404. Desde v0.7.14 ([#22](https://github.com/refo44/demo-caminodeldharma/issues/22)),
+  **Ajustes → Camino del Dharma llms** edita ese texto, lo previsualiza y lo
+  guarda.
+  El guardado anterior se puede restaurar. Hasta el primer guardado el cuerpo
+  se genera;
+  después, el texto guardado es el público y no gana páginas nuevas por su cuenta.
+  Un texto vacío o con una descarga `.ics` no se publica.
 - Rechazo de una zona fuera de ±23:59 desde v0.7.13.
 - Apertura de inscripción en el JSON-LD desde v0.7.12
   ([#54](https://github.com/refo44/demo-caminodeldharma/issues/54)):
